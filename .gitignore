@@ -1,0 +1,32 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Experiment outputs and logs are large and should be tracked via summaries/docs.
+outputs_clean/
+logs/
+model_generalization_runs/
+
+# Local editor / agent state
+.agents/
+.codex/
+.vscode/
+
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+
+# Large model/checkpoint artifacts
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.gguf
+*.ckpt

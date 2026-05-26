@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import os
+import sys
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+from expvision_dllm_clean.config import ExperimentConfig
+from expvision_dllm_clean.runner import run_experiment
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run clean oracle-length vanilla infilling diagnostic.")
+    parser.add_argument("--model-path", type=str, default="GSAI-ML/LLaDA-8B-Base")
+    parser.add_argument("--split", type=str, default="test")
+    parser.add_argument("--dataset-subset", type=str, default="HumanEval-SingleLineInfilling")
+    parser.add_argument("--max-samples", type=int, default=None)
+    parser.add_argument("--total-steps", type=int, default=64)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--output-dir", type=str, default="outputs_clean")
+    parser.add_argument("--experiment-name", type=str, default="vanilla_oracle_clean")
+    parser.add_argument("--save-step-traces", action="store_true")
+    parser.add_argument("--save-full-text-per-step", action="store_true")
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    cfg = ExperimentConfig()
+    cfg.model.model_path = args.model_path
+    cfg.data.split = args.split
+    cfg.data.dataset_subset = args.dataset_subset
+    cfg.data.max_samples = args.max_samples
+    cfg.decode.mask_length_source = "oracle"
+    cfg.decode.total_steps = args.total_steps
+    cfg.decode.seed = args.seed
+    cfg.decode.save_step_traces = args.save_step_traces
+    cfg.decode.save_full_text_per_step = args.save_full_text_per_step
+    cfg.logging.output_dir = args.output_dir
+    cfg.logging.experiment_name = args.experiment_name
+
+    output = run_experiment(cfg)
+    print("===== Oracle-Length Summary =====")
+    for key, value in output["summary"].items():
+        print(f"{key}: {value}")
+    print(f"\nRun directory: {output['run_dir']}")
+
+
+if __name__ == "__main__":
+    main()
