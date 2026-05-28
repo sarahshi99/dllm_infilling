@@ -3,7 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-export CUDA_VISIBLE_DEVICES=0,1
+GPU_IDS=${GPU_IDS:-0,1}
+export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-$GPU_IDS}
 export TOKENIZERS_PARALLELISM=false
 export HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com}
 
