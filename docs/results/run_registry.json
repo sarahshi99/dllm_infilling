@@ -18,7 +18,13 @@
       "strong_correction": 95,
       "weak_correction": 8
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.6111111111111112,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7758620689655172,
+      "<=8": 0.8896321070234113
+    }
   },
   {
     "run_id": "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_gpus01_20260520_201658",
@@ -39,7 +45,13 @@
       "strong_correction": 95,
       "weak_correction": 8
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5888888888888889,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7844827586206896,
+      "<=8": 0.8929765886287625
+    }
   },
   {
     "run_id": "full_cal_lite_sl_20260414_164141",
@@ -114,7 +126,13 @@
       "strong_correction": 93,
       "weak_correction": 10
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.1951219512195122,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7844827586206896,
+      "<=8": 0.8896321070234113
+    }
   },
   {
     "run_id": "full_lcal_official_bounded_repair_v2_s3_off6_9_delta1_8_gpus23_20260519_175123",
@@ -133,7 +151,13 @@
       "strong_correction": 93,
       "weak_correction": 10
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.18292682926829268,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8963210702341137
+    }
   },
   {
     "run_id": "full_official_cal_lcas_v3b_gpus23_20260512_181310",
@@ -147,7 +171,13 @@
     "pass_rate": 0.7492739593417231,
     "mask_length_source": "official_cal",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5666666666666667,
+      "17-24": 0.1951219512195122,
+      "25+": 0.0967741935483871,
+      "9-12": 0.8103448275862069,
+      "<=8": 0.862876254180602
+    }
   },
   {
     "run_id": "full_oracle_sl_20260410_145452",
@@ -195,7 +225,39 @@
       "strong_correction": 95,
       "weak_correction": 8
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7758620689655172,
+      "<=8": 0.8929765886287625
+    }
+  },
+  {
+    "run_id": "full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529",
+    "experiment_name": "full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control",
+    "status": "env_control",
+    "raw_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "sample_count": 1033,
+    "pass_count": 787,
+    "pass_rate": 0.7618586640851888,
+    "mask_length_source": "lcal_official_bounded_repair",
+    "final_source_histogram": {
+      "base": 851,
+      "official_bounded_repair": 68,
+      "official_long_suspicion": 11,
+      "strong_correction": 93,
+      "weak_correction": 10
+    },
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8979933110367893
+    }
   },
   {
     "run_id": "full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus01_control_20260521_174051",
@@ -215,7 +277,13 @@
       "strong_correction": 95,
       "weak_correction": 8
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7758620689655172,
+      "<=8": 0.8929765886287625
+    }
   },
   {
     "run_id": "full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus23_20260519_175826",
@@ -235,7 +303,13 @@
       "strong_correction": 93,
       "weak_correction": 10
     },
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8979933110367893
+    }
   },
   {
     "run_id": "full_cal_lite_v2_alpha_002_sl_20260416_152210",
@@ -333,7 +407,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_rescue_policy",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.17073170731707318,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7672413793103449,
+      "<=8": 0.8779264214046822
+    }
   },
   {
     "run_id": "full_lcal_short_safe_s2_alpha010_compact_sl_20260509_180758",
@@ -375,7 +455,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_v3",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5333333333333333,
+      "17-24": 0.17073170731707318,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8779264214046822
+    }
   },
   {
     "run_id": "full_lcal_v3_alpha012_compact_sl_gpus0123_20260508_135313",
@@ -389,7 +475,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_v3",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5333333333333333,
+      "17-24": 0.17073170731707318,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8779264214046822
+    }
   },
   {
     "run_id": "full_lcal_v3_short_safe_s1_alpha010_compact_sl_gpus23_20260512_114104",
@@ -403,7 +495,13 @@
     "pass_rate": 0.7473378509196515,
     "mask_length_source": "lcal_v3_short_safe",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5666666666666667,
+      "17-24": 0.18292682926829268,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7629310344827587,
+      "<=8": 0.8762541806020067
+    }
   },
   {
     "run_id": "full_lcal_v3_short_safe_s2_alpha010_compact_sl_gpus23_20260512_115502",
@@ -417,7 +515,13 @@
     "pass_rate": 0.7473378509196515,
     "mask_length_source": "lcal_v3_short_safe",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5666666666666667,
+      "17-24": 0.18292682926829268,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7629310344827587,
+      "<=8": 0.8762541806020067
+    }
   },
   {
     "run_id": "full_lcal_v3_short_safe_s3_alpha010_compact_sl_gpus23_20260512_135752",
@@ -431,7 +535,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_v3_short_safe",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.17073170731707318,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7672413793103449,
+      "<=8": 0.8779264214046822
+    }
   },
   {
     "run_id": "full_lcal_v3_short_safe_s4_alpha010_compact_sl_gpus23_20260512_135757",
@@ -445,7 +555,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_v3_short_safe",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5333333333333333,
+      "17-24": 0.17073170731707318,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8779264214046822
+    }
   },
   {
     "run_id": "full_lcal_v3_t2_ratio_alpha010_compact_sl_gpus23_20260509_151134",
@@ -459,7 +575,13 @@
     "pass_rate": 0.7463697967086157,
     "mask_length_source": "lcal_v3_t2_ratio",
     "final_source_histogram": {},
-    "oracle_bucket_pass_rates": {}
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5777777777777777,
+      "17-24": 0.1951219512195122,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7672413793103449,
+      "<=8": 0.8695652173913043
+    }
   },
   {
     "run_id": "full_lcas_v1_alpha006_compact_sl_20260428_170606",

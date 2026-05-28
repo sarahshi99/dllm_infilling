@@ -173,6 +173,7 @@ def summarize_run(run_dir: Path) -> Dict[str, Any]:
         or summary.get("official_repair_source_histogram")
         or {},
         "oracle_bucket_pass_rates": summary.get("oracle_bucket_pass_rates")
+        or summary.get("oracle_bucket_pass_rate")
         or summary.get("bucket_pass_rates")
         or {},
     }
