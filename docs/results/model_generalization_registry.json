@@ -1,0 +1,130 @@
+[
+  {
+    "run_id": "full_lcas_v3_dream-coder-base_20260512_154355",
+    "family": "20260512_114917_lcas_v3_full",
+    "experiment_name": "full_lcas_v3_dream-coder-base",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260512_114917_lcas_v3_full/full_lcas_v3_dream-coder-base_20260512_154355",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Base-7B",
+    "sample_count": 1033,
+    "pass_count": 0,
+    "pass_rate": 0.0,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [],
+    "decode_backends": [],
+    "exact_length_match_rate": 0.5072604065827686,
+    "avg_abs_selected_minus_oracle_length": 2.808325266214908
+  },
+  {
+    "run_id": "full_cal_lite_base_alpha010_cap24_official_canvas_20260513_232721",
+    "family": "20260513_dreamcoder_official_full",
+    "experiment_name": "full_cal_lite_base_alpha010_cap24_official_canvas",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260513_dreamcoder_official_full/full_cal_lite_base_alpha010_cap24_official_canvas_20260513_232721",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Base-7B",
+    "sample_count": 1033,
+    "pass_count": 825,
+    "pass_rate": 0.7986447241045499,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [
+      "bos_prefix_masks_suffix_eos"
+    ],
+    "decode_backends": [
+      "dreamcoder_native_diffusion_generate_fixed_canvas"
+    ],
+    "exact_length_match_rate": 0.505324298160697,
+    "avg_abs_selected_minus_oracle_length": 2.7812197483059053
+  },
+  {
+    "run_id": "full_cal_lite_base_alpha020_official_canvas_20260513_213936",
+    "family": "20260513_dreamcoder_official_full",
+    "experiment_name": "full_cal_lite_base_alpha020_official_canvas",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260513_dreamcoder_official_full/full_cal_lite_base_alpha020_official_canvas_20260513_213936",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Base-7B",
+    "sample_count": 1033,
+    "pass_count": 818,
+    "pass_rate": 0.7918683446272992,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [
+      "bos_prefix_masks_suffix_eos"
+    ],
+    "decode_backends": [
+      "dreamcoder_native_diffusion_generate_fixed_canvas"
+    ],
+    "exact_length_match_rate": 0.40561471442400776,
+    "avg_abs_selected_minus_oracle_length": 5.5237173281703775
+  },
+  {
+    "run_id": "full_lcas_v3_dream-coder-instruct_20260512_162945",
+    "family": "20260512_114917_lcas_v3_full",
+    "experiment_name": "full_lcas_v3_dream-coder-instruct",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260512_114917_lcas_v3_full/full_lcas_v3_dream-coder-instruct_20260512_162945",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Instruct-7B",
+    "sample_count": 1033,
+    "pass_count": 1,
+    "pass_rate": 0.000968054211035818,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [],
+    "decode_backends": [],
+    "exact_length_match_rate": 0.40077444336882867,
+    "avg_abs_selected_minus_oracle_length": 3.229428848015489
+  },
+  {
+    "run_id": "full_cal_lite_instruct_alpha010_cap24_official_canvas_20260513_232724",
+    "family": "20260513_dreamcoder_official_full",
+    "experiment_name": "full_cal_lite_instruct_alpha010_cap24_official_canvas",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260513_dreamcoder_official_full/full_cal_lite_instruct_alpha010_cap24_official_canvas_20260513_232724",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Instruct-7B",
+    "sample_count": 1033,
+    "pass_count": 848,
+    "pass_rate": 0.8209099709583737,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [
+      "bos_prefix_masks_suffix_eos"
+    ],
+    "decode_backends": [
+      "dreamcoder_native_diffusion_generate_fixed_canvas"
+    ],
+    "exact_length_match_rate": 0.3465634075508228,
+    "avg_abs_selected_minus_oracle_length": 4.489835430784124
+  },
+  {
+    "run_id": "full_cal_lite_instruct_alpha020_official_canvas_20260513_213934",
+    "family": "20260513_dreamcoder_official_full",
+    "experiment_name": "full_cal_lite_instruct_alpha020_official_canvas",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260513_dreamcoder_official_full/full_cal_lite_instruct_alpha020_official_canvas_20260513_213934",
+    "has_summary": true,
+    "model": "Dream-org/Dream-Coder-v0-Instruct-7B",
+    "sample_count": 1033,
+    "pass_count": 785,
+    "pass_rate": 0.7599225556631172,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [
+      "bos_prefix_masks_suffix_eos"
+    ],
+    "decode_backends": [
+      "dreamcoder_native_diffusion_generate_fixed_canvas"
+    ],
+    "exact_length_match_rate": 0.18973862536302033,
+    "avg_abs_selected_minus_oracle_length": 13.572120038722169
+  },
+  {
+    "run_id": "full_lcas_v3_llada-instruct_resume_20260512_141851",
+    "family": "20260512_114917_lcas_v3_full",
+    "experiment_name": "full_lcas_v3_llada-instruct_resume",
+    "raw_path": "/home/shx/projects/dllm_infilling/model_generalization_runs/20260512_114917_lcas_v3_full/full_lcas_v3_llada-instruct_resume_20260512_141851",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Instruct",
+    "sample_count": 1033,
+    "pass_count": 817,
+    "pass_rate": 0.7909002904162633,
+    "mask_length_source": "cal_lite",
+    "prompt_formats": [],
+    "decode_backends": [],
+    "exact_length_match_rate": 0.5392061955469506,
+    "avg_abs_selected_minus_oracle_length": 2.8160696999031947
+  }
+]
