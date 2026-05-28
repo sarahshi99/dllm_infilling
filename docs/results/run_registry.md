@@ -1,14 +1,51 @@
 # Run Registry
 
-This file will track meaningful experiment runs and point to local raw outputs without committing all raw `results.jsonl` files to normal git.
+This registry records meaningful local experiment outputs without committing raw `results.jsonl` files to normal git.
 
-Status values:
-
-- `global_best`
-- `env_control`
-- `candidate`
-- `diagnostic`
-- `superseded`
-- `obsolete`
-
-Initial entries will be generated from `analysis_outputs/experiment_scoreboard.md` and the local `outputs_clean/` directory.
+| Run | Status | Samples | Pass | Rate | Model | Raw Path |
+|---|---|---:|---:|---:|---|---|
+| `full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` | `candidate` | 1033 | 789 | 76.38% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` |
+| `full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_gpus01_20260520_201658` | `candidate` | 1033 | 791 | 76.57% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_gpus01_20260520_201658` |
+| `full_cal_lite_sl_20260414_164141` | `diagnostic` | 1033 | 550 | 53.24% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_sl_20260414_164141` |
+| `full_cal_lite_sl_20260414_184322` | `diagnostic` | 1033 | 550 | 53.24% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_sl_20260414_184322` |
+| `full_cal_lite_v1_sl_20260415_194824` | `diagnostic` | 1033 | 718 | 69.51% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v1_sl_20260415_194824` |
+| `full_fixed_sl_20260410_161152` | `diagnostic` | 1033 | 478 | 46.27% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_fixed_sl_20260410_161152` |
+| `full_lcal_official_bounded_repair_s3_off6_11_delta1_8_gpus01_20260515_163902` | `diagnostic` | 1033 | 784 | 75.90% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_s3_off6_11_delta1_8_gpus01_20260515_163902` |
+| `full_lcal_official_bounded_repair_v2_s3_off6_9_delta1_8_gpus23_20260519_175123` | `diagnostic` | 1033 | 784 | 75.90% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_v2_s3_off6_9_delta1_8_gpus23_20260519_175123` |
+| `full_official_cal_lcas_v3b_gpus23_20260512_181310` | `diagnostic` | 1033 | 774 | 74.93% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_gpus23_20260512_181310` |
+| `full_oracle_sl_20260410_145452` | `diagnostic` | 1033 | 900 | 87.12% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_oracle_sl_20260410_145452` |
+| `full_stop_safe_conservative_fixed64_sl_20260423_184359` | `diagnostic` | 1033 | 440 | 42.59% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_fixed64_sl_20260423_184359` |
+| `full_lcal_official_bounded_repair_union_eval12_nomiddle_s3_off6_9_delta1_8_susp16_gpus01_control_20260521_182208` | `env_control` | 1033 | 785 | 75.99% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_eval12_nomiddle_s3_off6_9_delta1_8_susp16_gpus01_control_20260521_182208` |
+| `full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus01_control_20260521_174051` | `env_control` | 1033 | 785 | 75.99% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus01_control_20260521_174051` |
+| `full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus23_20260519_175826` | `global_best` | 1033 | 787 | 76.19% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus23_20260519_175826` |
+| `full_cal_lite_v2_alpha_002_sl_20260416_152210` | `superseded` | 1033 | 752 | 72.80% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_002_sl_20260416_152210` |
+| `full_cal_lite_v2_alpha_004_sl_20260416_152319` | `superseded` | 1033 | 761 | 73.67% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_004_sl_20260416_152319` |
+| `full_cal_lite_v2_alpha_006_compact_sl_20260420_185612` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_006_compact_sl_20260420_185612` |
+| `full_cal_lite_v2_alpha_006_compact_sl_20260421_115931` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_006_compact_sl_20260421_115931` |
+| `full_cal_lite_v2_alpha_006_sl_20260417_101742` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_006_sl_20260417_101742` |
+| `full_cal_lite_v2_alpha_008_sl_20260417_131256` | `superseded` | 1033 | 770 | 74.54% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_cal_lite_v2_alpha_008_sl_20260417_131256` |
+| `full_lcal_rescue_s3_shortest_alpha010_compact_sl_gpus23_20260513_212631` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_rescue_s3_shortest_alpha010_compact_sl_gpus23_20260513_212631` |
+| `full_lcal_short_safe_s2_alpha010_compact_sl_20260509_180758` | `superseded` | 1033 | unknown | unknown | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_short_safe_s2_alpha010_compact_sl_20260509_180758` |
+| `full_lcal_short_safe_s3_alpha010_compact_sl_20260509_181056` | `superseded` | 1033 | unknown | unknown | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_short_safe_s3_alpha010_compact_sl_20260509_181056` |
+| `full_lcal_v3_alpha010_compact_sl_20260507_200429` | `superseded` | 77 | unknown | unknown | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcal_v3_alpha010_compact_sl_20260507_200429` |
+| `full_lcal_v3_alpha010_compact_sl_gpus23_20260507_200840` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_alpha010_compact_sl_gpus23_20260507_200840` |
+| `full_lcal_v3_alpha012_compact_sl_gpus0123_20260508_135313` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_alpha012_compact_sl_gpus0123_20260508_135313` |
+| `full_lcal_v3_short_safe_s1_alpha010_compact_sl_gpus23_20260512_114104` | `superseded` | 1033 | 772 | 74.73% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_short_safe_s1_alpha010_compact_sl_gpus23_20260512_114104` |
+| `full_lcal_v3_short_safe_s2_alpha010_compact_sl_gpus23_20260512_115502` | `superseded` | 1033 | 772 | 74.73% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_short_safe_s2_alpha010_compact_sl_gpus23_20260512_115502` |
+| `full_lcal_v3_short_safe_s3_alpha010_compact_sl_gpus23_20260512_135752` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_short_safe_s3_alpha010_compact_sl_gpus23_20260512_135752` |
+| `full_lcal_v3_short_safe_s4_alpha010_compact_sl_gpus23_20260512_135757` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_short_safe_s4_alpha010_compact_sl_gpus23_20260512_135757` |
+| `full_lcal_v3_t2_ratio_alpha010_compact_sl_gpus23_20260509_151134` | `superseded` | 1033 | 771 | 74.64% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_v3_t2_ratio_alpha010_compact_sl_gpus23_20260509_151134` |
+| `full_lcas_v1_alpha006_compact_sl_20260428_170606` | `superseded` | 1033 | 765 | 74.06% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v1_alpha006_compact_sl_20260428_170606` |
+| `full_lcas_v1b_alpha006_compact_sl_20260428_174550` | `superseded` | 1033 | 765 | 74.06% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v1b_alpha006_compact_sl_20260428_174550` |
+| `full_lcas_v2_alpha006_compact_sl_20260428_170624` | `superseded` | 1033 | 763 | 73.86% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v2_alpha006_compact_sl_20260428_170624` |
+| `full_lcas_v2b_alpha006_compact_sl_20260428_174706` | `superseded` | 1033 | 763 | 73.86% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v2b_alpha006_compact_sl_20260428_174706` |
+| `full_lcas_v3a_alpha006_compact_sl_20260429_180919` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v3a_alpha006_compact_sl_20260429_180919` |
+| `full_lcas_v3b_alpha006_compact_sl_20260429_180958` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_lcas_v3b_alpha006_compact_sl_20260429_180958` |
+| `full_stop_aggressive_alpha006_compact_sl_20260421_172513` | `superseded` | 1033 | 758 | 73.38% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_aggressive_alpha006_compact_sl_20260421_172513` |
+| `full_stop_conservative_alpha006_compact_sl_20260422_082214` | `superseded` | 1033 | 768 | 74.35% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_conservative_alpha006_compact_sl_20260422_082214` |
+| `full_stop_default_alpha006_compact_sl_20260422_082146` | `superseded` | 1033 | 765 | 74.06% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_default_alpha006_compact_sl_20260422_082146` |
+| `full_stop_relaxed_alpha006_compact_sl_20260421_204639` | `superseded` | 1033 | 764 | 73.96% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_relaxed_alpha006_compact_sl_20260421_204639` |
+| `full_stop_relaxed_alpha006_compact_sl_20260421_204845` | `superseded` | 1033 | 764 | 73.96% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_relaxed_alpha006_compact_sl_20260421_204845` |
+| `full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` | `superseded` | 1033 | 762 | 73.77% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` |
+| `full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` |
+| `full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` |

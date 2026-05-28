@@ -10,6 +10,7 @@ env/
 
 # Experiment outputs and logs are large and should be tracked via summaries/docs.
 outputs_clean/
+outputs_clean
 logs/
 model_generalization_runs/
 .worktrees/
