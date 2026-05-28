@@ -12,6 +12,7 @@ env/
 outputs_clean/
 logs/
 model_generalization_runs/
+.worktrees/
 
 # Local editor / agent state
 .agents/
