@@ -22,3 +22,4 @@ Artifact policy:
 - Do not commit raw full `outputs_clean/` to normal git.
 - Use Git LFS or external storage only for selected raw files that must be preserved verbatim.
 - Never delete local raw outputs during archive work without explicit user approval.
+- Registry generation excludes smoke runs and incomplete no-summary runs by default. Use `analysis/build_run_registry.py --include-smoke` or `--include-incomplete` only for audits.
