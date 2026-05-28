@@ -133,9 +133,9 @@ def format_pass(summary: Dict[str, Any]) -> str:
     return f"`{passed}/{total}` `{format_rate(rate)}`"
 
 
-def format_delta(comparison_summary: Optional[Dict[str, Any]]) -> str:
+def format_delta(comparison_summary: Optional[Dict[str, Any]], *, is_control: bool = False) -> str:
     if comparison_summary is None:
-        return "baseline"
+        return "baseline" if is_control else "comparison missing"
     net = int(comparison_summary.get("net", 0))
     wins = int(comparison_summary.get("wins", 0))
     losses = int(comparison_summary.get("losses", 0))
@@ -163,7 +163,7 @@ def iter_rows(outputs_dir: Path, analysis_dir: Path) -> Iterable[Dict[str, str]]
             "label": spec.label,
             "method": spec.method,
             "pass": format_pass(summary),
-            "delta": format_delta(comparison_summary),
+            "delta": format_delta(comparison_summary, is_control=spec.comparison_dir is None),
             "status": spec.status,
             "run_dir": str(run_dir),
         }

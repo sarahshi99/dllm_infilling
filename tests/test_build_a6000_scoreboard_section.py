@@ -66,6 +66,31 @@ class BuildA6000ScoreboardSectionTest(unittest.TestCase):
         self.assertIn("`+16`", section)
         self.assertIn("`81.00%`", section)
 
+    def test_build_section_marks_missing_non_control_comparison(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            outputs_dir = tmp_path / "outputs_clean"
+            analysis_dir = tmp_path / "analysis_outputs" / "a6000_midcons_longrescue"
+
+            write_json(
+                outputs_dir
+                / "full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_111111"
+                / "summary.json",
+                {"num_samples": 1033, "pass_rate": 724 / 1033},
+            )
+            write_json(
+                outputs_dir
+                / "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_222222"
+                / "summary.json",
+                {"num_samples": 1033, "pass_rate": 739 / 1033},
+            )
+
+            section = build_section(outputs_dir=outputs_dir, analysis_dir=analysis_dir)
+
+        midcons_line = next(line for line in section.splitlines() if "`midcons`" in line)
+        self.assertIn("| comparison missing |", midcons_line)
+        self.assertNotIn("| baseline |", midcons_line)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -47,7 +47,7 @@ while true; do
 
   if (( stable_count >= STABLE_POLLS )); then
     echo "GPUs ${GPU_IDS} are ready. Starting A6000 baseline runs."
-    exec clean_scripts/run_lcal_a6000_baselines.sh
+    CUDA_VISIBLE_DEVICES="$GPU_IDS" exec clean_scripts/run_lcal_a6000_baselines.sh
   fi
 
   sleep "$POLL_SEC"
