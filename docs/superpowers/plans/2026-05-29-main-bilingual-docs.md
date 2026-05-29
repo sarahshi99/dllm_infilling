@@ -49,4 +49,4 @@
 - [x] Verify every English `.md` has a same-path `.zh.md`.
 - [x] Run unit tests.
 - [x] Run `git diff --check`.
-- [ ] Commit and push `main`.
+- [x] Commit and push `main`.
