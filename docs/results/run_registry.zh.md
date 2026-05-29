@@ -1,0 +1,17 @@
+# Run Registry
+
+该 registry 记录有意义的本地实验输出，同时避免把原始 `results.jsonl` 提交到普通 git。
+
+完整机器可读版本见 `docs/results/run_registry.json`，英文表格见 `run_registry.md`。当前人类阅读时应重点关注以下 canonical runs：
+
+| 运行 | 状态 | 样本数 | Pass | Rate | 模型 | 作用 |
+|---|---|---:|---:|---:|---|---|
+| `full_oracle_sl_20260410_145452` | `diagnostic` | 1033 | 900 | 87.12% | `GSAI-ML/LLaDA-8B-Base` | Oracle-length 上界参考，说明长度选择是核心瓶颈。 |
+| `full_fixed_sl_20260410_161152` | `diagnostic` | 1033 | 478 | 46.27% | `GSAI-ML/LLaDA-8B-Base` | Fixed-length 下界 baseline。 |
+| `full_cal_lite_v1_sl_20260415_194824` | `diagnostic` | 1033 | 718 | 69.51% | `GSAI-ML/LLaDA-8B-Base` | 早期 CAL-lite 大幅提升。 |
+| `full_cal_lite_v2_alpha_008_sl_20260417_131256` | `superseded` | 1033 | 770 | 74.54% | `GSAI-ML/LLaDA-8B-Base` | 早期 alpha sweep 的强点。 |
+| `full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_gpus23_20260519_175826` | `global_best` | 1033 | 787 | 76.19% | `GSAI-ML/LLaDA-8B-Base` | A6000 前的 union checkpoint。 |
+| `full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529` | `env_control` | 1033 | 787 | 76.19% | `GSAI-ML/LLaDA-8B-Base` | A6000 control。 |
+| `full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626` | `candidate` | 1033 | 795 | 76.96% | `GSAI-ML/LLaDA-8B-Base` | 当前 A6000 最佳 checkpoint。 |
+
+Registry 的完整条目包括 49 个 runs。除 canonical runs 外，其他 runs 主要用于记录失败方向、参数敏感性和被 superseded 的实验路线，避免重复消耗 GPU。

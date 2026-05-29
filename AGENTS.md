@@ -21,12 +21,21 @@
 - Prefer project-local worktrees under `.worktrees/`; this directory must stay ignored.
 - Keep `main` stable as the synchronization point with GitHub.
 - Use focused commits: one logical code, analysis, or documentation change per commit.
+- For documentation that should be easy to read on GitHub, land the compact reviewed records on `main` after branch validation. A pull request is a GitHub review checkpoint before merging; a direct merge writes the validated branch into `main` immediately. Use the safer PR path when there is unresolved review, broad code risk, or unclear ownership; direct merge is acceptable for user-approved documentation consolidation after local verification.
 - After each meaningful change, summarize:
   - files changed
   - why the change was made
   - verification command and result
   - experiment command, if applicable
   - output directory, manifest, or scoreboard entry
+
+## Bilingual Markdown Policy
+
+- Keep English as the first-written source for Markdown documentation.
+- After the English version is committed or uploaded, add a Chinese counterpart for every human-facing Markdown file.
+- Use the same path and filename stem with `.zh.md`, for example `docs/results/report.md` and `docs/results/report.zh.md`.
+- Preserve technical terms, commands, paths, model names, metrics, and citations exactly when translating.
+- Chinese translations should be academically precise and readable, not loose summaries. If a file is an executable plan with long code blocks, the Chinese version may preserve code/commands by reference while translating the research intent, task structure, expected outputs, and verification logic.
 
 ## Experiment Results
 
