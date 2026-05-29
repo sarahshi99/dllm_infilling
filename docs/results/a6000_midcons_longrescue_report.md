@@ -77,3 +77,10 @@ That means relaxing the support guard would mostly add false positives, not solv
 ## Next Decision
 
 Use `midcons` as the current A6000 checkpoint for short/medium lengths. For the long bucket, stop iterating on the current official-CAL true-long trigger and design a separate long-underestimation detector that uses long-curve evidence and failure signatures without sacrificing `<=8` and `9-12`.
+
+Follow-up diagnostic:
+
+- `analysis_outputs/long_underestimate_detector/a6000_midcons/sweep.md`
+- `docs/results/long_underestimate_detector_report.md`
+
+The offline sweep found no safe heuristic long-underestimation rule from the current result fields. This strengthens the decision to move toward trajectory features, learned length classification, or literature-style length regularization for the true-long branch.
