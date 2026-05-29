@@ -30,6 +30,17 @@ The paper's Table 1 reports:
 | DreamCoder-7B | 55.5 | 43.2 | 59.3 |
 | DreamCoder-7B + DreamOn | 92.1 | 63.8 | 79.0 |
 
+## Direct CAL Anchor
+
+CAL is the closest methodological ancestor of the current local project:
+
+- Paper: "Diffusion LMs Can Approximate Optimal Infilling Lengths Implicitly"
+- arXiv: https://arxiv.org/abs/2602.00476
+- Core idea: infer infilling length from denoising confidence rather than requiring oracle length or a fixed canvas.
+- Reported abstract-level result: CAL improves Pass@1 over fixed-length baselines by up to `47.7%` in code infilling.
+
+This is directly relevant because the local LCAS/LCAL stack extends the same broad idea: length choice is inferred from confidence/probe behavior, then made safer through bounded repair and bucket-specific controls.
+
 ## How To Compare Our Runs
 
 Our current LCAL/LCAS experiments should not be called SOTA until we confirm the exact benchmark split, prompt format, decoding budget, model base, and metric match the literature setting.
@@ -61,6 +72,18 @@ Notable local records:
 - `GSAI-ML/LLaDA-8B-Instruct`, LCAS v3 resume: `817/1033 = 79.09%`.
 
 These should be re-run under a unified A6000 protocol before being compared to new A6000 LCAL candidates.
+
+## Current Local A6000 Anchor
+
+The current best same-hardware LLaDA-Base run is:
+
+- `full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626`
+- model: `GSAI-ML/LLaDA-8B-Base`
+- local protocol: `HumanEval-SingleLineInfilling`, `1033` tasks
+- result: `795/1033 = 76.96%`
+- pairwise control: `+8` wins, `0` losses vs A6000 union control
+
+This is a strong internal checkpoint but not an external SOTA claim. DreamOn's reported single-line numbers are much higher for DreamCoder/DiffuCoder after dynamic canvas control, while LR-DLLM addresses unknown-length generation more directly. The useful comparison is therefore methodological: our results support the need for explicit length modeling, but the next paper-level experiment must match prompt/canvas/evaluation settings before claiming competitive status.
 
 ## Additional 2026 Anchor: LR-DLLM
 

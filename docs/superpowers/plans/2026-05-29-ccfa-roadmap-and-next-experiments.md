@@ -190,6 +190,25 @@ Why:
 - Cross-model gains may not transfer if model confidence curves differ.
 - Literature numbers may not be apples-to-apples because prompt format, model family, and unknown-length assumptions differ.
 
+## Execution Update, 2026-05-29
+
+Current user constraint: do not start new GPU experiments because the cards are needed by other users. The GPU-dependent cross-model task is therefore paused, not canceled.
+
+Completed from this plan:
+
+- Task 1 result archival: A6000 pairwise summaries, scoreboard, and compact reports are present under `analysis_outputs/a6000_midcons_longrescue/` and `docs/results/`.
+- Task 2 A6000 checkpoint decision: `midcons` is the current A6000 best checkpoint, `795/1033 = 76.96%`, `+8` wins and `0` losses vs control.
+- Task 3 diagnostic design: the long-underestimate offline sweep is complete and recorded in `docs/results/long_underestimate_detector_report.md`.
+- Review follow-up: P2 issues around missing comparison labels, bucket registry keys, and GPU launcher overrides have regression tests.
+
+New CPU-only report:
+
+- `docs/results/2026-05-29_completed_experiment_analysis.md`
+
+Paused until GPUs are available:
+
+- fresh cross-model runs on Dream-Coder/DiffuCoder/Dream/LLaDA.
+
 ## Immediate Recommendation
 
 Ship the A6000 `midcons` result as the current best checkpoint and start the long-underestimation detector as a diagnostic-first experiment. Do not spend more GPU on the current official-CAL true-long trigger unless the analysis identifies a new discriminative signal.
