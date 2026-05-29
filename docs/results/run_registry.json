@@ -27,6 +27,33 @@
     }
   },
   {
+    "run_id": "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626",
+    "experiment_name": "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000",
+    "status": "candidate",
+    "raw_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "sample_count": 1033,
+    "pass_count": 795,
+    "pass_rate": 0.7696030977734754,
+    "mask_length_source": "lcal_official_bounded_repair",
+    "final_source_histogram": {
+      "base": 828,
+      "official_bounded_repair": 68,
+      "official_long_suspicion": 11,
+      "official_mid_rescue": 23,
+      "strong_correction": 93,
+      "weak_correction": 10
+    },
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5888888888888889,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.7844827586206896,
+      "<=8": 0.8996655518394648
+    }
+  },
+  {
     "run_id": "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_gpus01_20260520_201658",
     "experiment_name": "full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_gpus01",
     "status": "candidate",
@@ -110,6 +137,58 @@
     "oracle_bucket_pass_rates": {}
   },
   {
+    "run_id": "full_lcal_official_bounded_repair_mid_precision_plus_true_long_a6000_20260528_221756",
+    "experiment_name": "full_lcal_official_bounded_repair_mid_precision_plus_true_long_a6000",
+    "status": "diagnostic",
+    "raw_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_mid_precision_plus_true_long_a6000_20260528_221756",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "sample_count": 1033,
+    "pass_count": 787,
+    "pass_rate": 0.7618586640851888,
+    "mask_length_source": "lcal_official_bounded_repair",
+    "final_source_histogram": {
+      "base": 851,
+      "official_bounded_repair": 68,
+      "official_long_suspicion": 11,
+      "strong_correction": 93,
+      "weak_correction": 10
+    },
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8979933110367893
+    }
+  },
+  {
+    "run_id": "full_lcal_official_bounded_repair_mid_precision_supp2_best13_16_veto13_a6000_20260528_221517",
+    "experiment_name": "full_lcal_official_bounded_repair_mid_precision_supp2_best13_16_veto13_a6000",
+    "status": "diagnostic",
+    "raw_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_mid_precision_supp2_best13_16_veto13_a6000_20260528_221517",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "sample_count": 1033,
+    "pass_count": 787,
+    "pass_rate": 0.7618586640851888,
+    "mask_length_source": "lcal_official_bounded_repair",
+    "final_source_histogram": {
+      "base": 851,
+      "official_bounded_repair": 68,
+      "official_long_suspicion": 11,
+      "strong_correction": 93,
+      "weak_correction": 10
+    },
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8979933110367893
+    }
+  },
+  {
     "run_id": "full_lcal_official_bounded_repair_s3_off6_11_delta1_8_gpus01_20260515_163902",
     "experiment_name": "full_lcal_official_bounded_repair_s3_off6_11_delta1_8_gpus01",
     "status": "diagnostic",
@@ -132,6 +211,32 @@
       "25+": 0.16129032258064516,
       "9-12": 0.7844827586206896,
       "<=8": 0.8896321070234113
+    }
+  },
+  {
+    "run_id": "full_lcal_official_bounded_repair_true_long_off17_d8_r085_supp2_a6000_20260528_221755",
+    "experiment_name": "full_lcal_official_bounded_repair_true_long_off17_d8_r085_supp2_a6000",
+    "status": "diagnostic",
+    "raw_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_true_long_off17_d8_r085_supp2_a6000_20260528_221755",
+    "has_summary": true,
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "sample_count": 1033,
+    "pass_count": 787,
+    "pass_rate": 0.7618586640851888,
+    "mask_length_source": "lcal_official_bounded_repair",
+    "final_source_histogram": {
+      "base": 851,
+      "official_bounded_repair": 68,
+      "official_long_suspicion": 11,
+      "strong_correction": 93,
+      "weak_correction": 10
+    },
+    "oracle_bucket_pass_rates": {
+      "13-16": 0.5444444444444444,
+      "17-24": 0.2073170731707317,
+      "25+": 0.16129032258064516,
+      "9-12": 0.771551724137931,
+      "<=8": 0.8979933110367893
     }
   },
   {
