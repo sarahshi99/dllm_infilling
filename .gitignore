@@ -10,8 +10,11 @@ env/
 
 # Experiment outputs and logs are large and should be tracked via summaries/docs.
 outputs_clean/
+outputs_clean
 logs/
 model_generalization_runs/
+analysis_outputs/long_underestimate_detector/**/sweep.csv
+analysis_outputs/long_underestimate_detector/**/sweep.json
 .worktrees/
 
 # Local editor / agent state

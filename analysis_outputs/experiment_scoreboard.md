@@ -1,10 +1,16 @@
 # LCAL Infilling Experiment Scoreboard
 
-Updated: 2026-05-21 Asia/Shanghai
+Updated: 2026-05-29 Asia/Shanghai
 
 ## Current Decision
 
-`midcons` is the best strategy in the new RTX 5090 / torch 2.11 cu128 environment, but it is not yet a clean global best checkpoint against the old-server union checkpoint because the environment change itself introduces a small short-bucket regression.
+`midcons` is now also the best strategy in the A6000 rerun. It improves the A6000 control by `+8` wins and `0` losses, reaching `795/1033 = 76.96%`.
+
+The current long-tail branch is negative evidence: `true_long` and `combined` remain exactly tied with the A6000 control because the official-CAL true-long trigger fires zero times after safety guards. The next long experiment should use a separate long-underestimation detector rather than loosening the same official-CAL trigger.
+
+Historical 5090 decision:
+
+`midcons` was the best strategy in the RTX 5090 / torch 2.11 cu128 environment, but it was not yet a clean global best checkpoint against the old-server union checkpoint because the environment change itself introduced a small short-bucket regression.
 
 Use this terminology:
 
@@ -21,6 +27,16 @@ Use this terminology:
 | `eval12_nomiddle_gpus01_control` | new 5090 / torch cu128 | old union, but official probing allowed for S3<=12; no mid rescue | `785/1033` `75.99%` | `-2` | `0` | `89.30%` | `77.59%` | `54.44%` | `20.73%` | `16.13%` | gate-control only |
 | `midcons` | new 5090 / torch cu128 | union + conservative mid rescue off11..13, delta3..7, ratio>=0.8 | `791/1033` `76.57%` | `+4` | `+6` | `89.30%` | `78.45%` | `58.89%` | `20.73%` | `16.13%` | strategy-best in gpus01 env |
 | `midaggr` | new 5090 / torch cu128 | union + aggressive mid rescue off11..15, delta3..8, ratio>=0.8 | `789/1033` `76.38%` | `+2` | `+4` | `88.96%` | `77.59%` | `61.11%` | `20.73%` | `16.13%` | record only; hurts short |
+
+## A6000 Controlled Runs
+
+| Run | Method | Pass | Delta vs A6000 control | <=8 | 9-12 | 13-16 | 17-24 | 25+ | Status |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| `a6000_control` | union control: S3 short-safe + bounded repair + long suspicion | `787/1033` `76.19%` | baseline | `89.80%` | `77.16%` | `54.44%` | `20.73%` | `16.13%` | A6000 baseline |
+| `midcons` | union + conservative mid rescue off11..13, delta3..7, ratio>=0.8 | `795/1033` `76.96%` | `+8` (8W/0L) | `89.97%` | `78.45%` | `58.89%` | `20.73%` | `16.13%` | A6000 best |
+| `mid_precision` | mid rescue + support/best-len/short-jump guards | `787/1033` `76.19%` | `0` (0W/0L) | `89.80%` | `77.16%` | `54.44%` | `20.73%` | `16.13%` | negative evidence |
+| `true_long` | true-long rescue off>=17, delta>=8, ratio>=0.85, support>=2 | `787/1033` `76.19%` | `0` (0W/0L) | `89.80%` | `77.16%` | `54.44%` | `20.73%` | `16.13%` | negative evidence |
+| `combined` | mid precision + true-long rescue | `787/1033` `76.19%` | `0` (0W/0L) | `89.80%` | `77.16%` | `54.44%` | `20.73%` | `16.13%` | negative evidence |
 
 ## Controlled Comparisons
 

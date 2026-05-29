@@ -1,0 +1,47 @@
+[
+  {
+    "oracle_bucket": "<=8",
+    "count": 598,
+    "wins": 0,
+    "losses": 0,
+    "net": 0,
+    "base_pass_rate": 0.8979933110367893,
+    "candidate_pass_rate": 0.8979933110367893
+  },
+  {
+    "oracle_bucket": "9-12",
+    "count": 232,
+    "wins": 0,
+    "losses": 0,
+    "net": 0,
+    "base_pass_rate": 0.771551724137931,
+    "candidate_pass_rate": 0.771551724137931
+  },
+  {
+    "oracle_bucket": "13-16",
+    "count": 90,
+    "wins": 0,
+    "losses": 0,
+    "net": 0,
+    "base_pass_rate": 0.5444444444444444,
+    "candidate_pass_rate": 0.5444444444444444
+  },
+  {
+    "oracle_bucket": "17-24",
+    "count": 82,
+    "wins": 0,
+    "losses": 0,
+    "net": 0,
+    "base_pass_rate": 0.2073170731707317,
+    "candidate_pass_rate": 0.2073170731707317
+  },
+  {
+    "oracle_bucket": "25+",
+    "count": 31,
+    "wins": 0,
+    "losses": 0,
+    "net": 0,
+    "base_pass_rate": 0.16129032258064516,
+    "candidate_pass_rate": 0.16129032258064516
+  }
+]

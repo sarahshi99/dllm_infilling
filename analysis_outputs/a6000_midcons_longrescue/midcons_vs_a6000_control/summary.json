@@ -1,0 +1,20 @@
+{
+  "common": 1033,
+  "base_only": 0,
+  "candidate_only": 0,
+  "wins": 8,
+  "losses": 0,
+  "net": 8,
+  "both_pass": 787,
+  "both_fail": 238,
+  "base_pass_rate": 0.7618586640851888,
+  "candidate_pass_rate": 0.7696030977734754,
+  "candidate_source_histogram": {
+    "base": 828,
+    "strong_correction": 93,
+    "official_bounded_repair": 68,
+    "official_long_suspicion": 11,
+    "weak_correction": 10,
+    "official_mid_rescue": 23
+  }
+}
