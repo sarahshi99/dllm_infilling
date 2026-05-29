@@ -6,6 +6,7 @@ Normal git stores compact records:
 
 - `docs/results/run_registry.md`
 - `docs/results/run_registry.json`
+- `docs/results/historical_result_analysis.md`
 - `docs/results/model_generalization_registry.md`
 - `docs/results/model_generalization_registry.json`
 - `analysis_outputs/experiment_scoreboard.md`
@@ -23,6 +24,10 @@ Cross-model local records:
 
 - `model_generalization_runs/20260512_114917_lcas_v3_full`: LCAS v3 runs for LLaDA and Dream-Coder.
 - `model_generalization_runs/20260513_dreamcoder_official_full`: Dream-Coder official-canvas full runs.
+
+Interpretation:
+
+- `docs/results/historical_result_analysis.md` explains which runs are canonical, which directions were superseded, and why the current A6000 `midcons` run is the best same-hardware checkpoint.
 
 Artifact policy:
 
