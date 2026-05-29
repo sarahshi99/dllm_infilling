@@ -1,6 +1,6 @@
 # Literature And SOTA Notes
 
-Updated: 2026-05-28
+Updated: 2026-05-29
 
 This note records source-checked comparison anchors for future SOTA claims. It is not a SOTA claim for this project yet.
 
@@ -61,3 +61,14 @@ Notable local records:
 - `GSAI-ML/LLaDA-8B-Instruct`, LCAS v3 resume: `817/1033 = 79.09%`.
 
 These should be re-run under a unified A6000 protocol before being compared to new A6000 LCAL candidates.
+
+## Additional 2026 Anchor: LR-DLLM
+
+LR-DLLM is another relevant variable-length inference paper:
+
+- Paper: "Improving Variable-Length Generation in Diffusion Language Models via Length Regularization"
+- arXiv: https://arxiv.org/abs/2602.07546
+- Reported setting in the abstract: fully unknown-length HumanEvalInfilling and four-language McEval.
+- Reported headline result in the abstract: `51.3%` Pass@1 on HumanEvalInfilling under fully unknown lengths, `+13.4%` over DreamOn in that setting.
+
+This is relevant because it frames length selection as an inference-time confidence-bias problem, close to our project. It is not directly comparable to our current `HumanEval-SingleLineInfilling` local protocol until we match dataset split, prompt/canvas format, and unknown-length assumptions.
