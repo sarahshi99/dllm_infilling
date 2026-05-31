@@ -38,6 +38,7 @@ Same-hardware A6000 evidence 支持以下较窄 claim：
 - Long buckets 没有变化：`17-24 = 20.73%`，`25+ = 16.13%`。
 - 在 A6000 `midcons` run 中，多数 failed `oracle >= 17` cases 是 under-selected；已有报告记录 `90/91` failed long cases 为 under-selected，且 `71/91` 仍从 `base` 结束。
 - Offline long-underestimate sweep 评估了 `16776` 条 rules，没有找到同时满足 true-long precision、short-risk 与 recall criteria 的安全 rule。
+- Probe-curve single-feature audit 评估了 `4106` 个 thresholds，发现 `0` 个 strict viable thresholds。当前 full run 的所有 rows 都有 probe-curve features，但没有保存 stopping traces。
 - 文献记录指出 DreamOn 和 LR-DLLM 是更强的 length-control anchors；在 protocol matching 前，当前本地结果不能称为 SOTA。
 
 ## Novelty Hypothesis
@@ -46,7 +47,7 @@ Same-hardware A6000 evidence 支持以下较窄 claim：
 
 - 当存在 short-safe confidence agreement 时，medium under-selection 可以被纠正；
 - true-long under-selection 不能由同一批 confidence fields 捕获；
-- denoising trajectories、learned length classification、dynamic canvas resizing 或 length regularization 可能提供缺失 signal。
+- multivariate probe-curve scoring、denoising trajectories、learned length classification、dynamic canvas resizing 或 length regularization 可能提供缺失 signal。
 
 在新实验验证前，这仍是 hypothesis。
 

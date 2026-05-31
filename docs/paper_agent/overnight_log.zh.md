@@ -49,3 +49,63 @@
 - decision made：将重新计算得到的 snapshot 作为当前 milestone 的 paper-agent evidence anchor。
 - uncertainty/risk：Snapshot 依赖本地 raw outputs；如果这些 outputs 被移动，未来运行必须使用明确的 `--run NAME=PATH` 参数。
 - next action：验证文档集合、运行测试，并准备一个 focused commit，排除无关 `AGENTS.*` changes。
+
+## Entry 2026-05-31 12:58 CST
+
+- timestamp：2026-05-31 12:58 CST
+- current phase：probe-curve signal audit
+- what was done：实现并运行 CPU-only probe-curve signal audit，分析 A6000 `midcons` result。该 audit 在已有 probe-curve fields 上评估 single-feature thresholds。
+- evidence or files inspected：`analysis/analyze_probe_curve_long_signals.py`、`tests/test_analyze_probe_curve_long_signals.py`、`docs/paper_agent/probe_curve_signal_audit.md`、`docs/paper_agent/probe_curve_signal_audit.json`，以及 raw `results.jsonl` key inspection。
+- decision made：将 current experiment plan 从 `v1` 更新为 `v2`：优先从现有 outputs 做 probe-curve multivariate/learned scoring，并将 trajectory diagnostics 推迟到存在 trace-enabled smoke run 后。
+- uncertainty/risk：最佳 single-feature threshold 仍有 `8.70%` short-risk，高于 `5%` gate；multivariate scoring 仍可能失败。
+- next action：验证、commit 并 push probe-curve audit milestone；然后设计 learned-score diagnostic。
+
+## Entry 2026-05-31 15:24 CST
+
+- timestamp：2026-05-31 15:24 CST
+- current phase：plan alignment 与 GPU allocation 更新
+- what was done：纳入用户明确补充的 hardware constraint：未来实验应使用 GPU 卡 `2,3`，而不是 `0,1,2,3`。
+- evidence or files inspected：`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/research_design.current.en.md`、`docs/paper_agent/experiment_plan.current.en.md`、`docs/paper_agent/experiment_plan.history.en.md`、`docs/paper_agent/open_questions.en.md`，以及本会话中的用户直接指令。
+- decision made：将 experiment plan 从 `v2` 更新为 `v3`；除非用户更改 allocation，未来 GPU commands 必须使用 `CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false`，并且必须等待而不是中断已有 jobs。
+- uncertainty/risk：两张卡运行可能比此前四张卡草案更慢；所有未来 comparison 都必须显式标注 GPU set。
+- next action：重新运行 verification，commit 并 push probe-curve audit 与 GPU-allocation plan update，然后继续 CPU-only multivariate probe-curve scoring。
+
+## Entry 2026-05-31 15:56 CST
+
+- timestamp：2026-05-31 15:56 CST
+- current phase：pre-commit verification alignment
+- what was done：重新读取 required current plan context，审查 probe-curve audit diff，并将生成的英文 probe-audit interpretation 与中文报告同步。
+- evidence or files inspected：`AGENTS.md`、`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/research_design.current.en.md`、`docs/paper_agent/experiment_plan.current.en.md`、`docs/paper_agent/experiment_plan.history.en.md`、`docs/paper_agent/open_questions.en.md`、`analysis/analyze_probe_curve_long_signals.py` 和 `docs/paper_agent/probe_curve_signal_audit.*`。
+- decision made：保持本 milestone scope 聚焦于 CPU-only probe-curve diagnostics、双语 paper-agent documentation，以及 GPU `2,3` operational constraint。
+- uncertainty/risk：当前环境中 independent subagent review 可能不可用；如果不可用，将记录并使用本地 diff review 与 fresh tests 替代。
+- next action：重新生成 probe-curve audit，运行 tests 和 compile checks，请求或模拟 code review，然后只暂存 paper-agent 文件和 analysis/test 改动用于 commit。
+
+## Entry 2026-05-31 21:47 CST
+
+- timestamp：2026-05-31 21:47 CST
+- current phase：恢复后的 pre-commit verification 与本地 code review
+- what was done：在 context handoff 后，重新阅读项目规则、Superpowers verification 与 code-review 指南、必需的当前 paper-agent context、当前日志和 worktree state。
+- evidence or files inspected：`AGENTS.md`、`git status --short --branch`、`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/research_design.current.en.md`、`docs/paper_agent/experiment_plan.current.en.md`、`docs/paper_agent/experiment_plan.history.en.md`、`docs/paper_agent/open_questions.en.md`、`docs/paper_agent/overnight_log.*.md`，以及 Superpowers `verification-before-completion` 和 `requesting-code-review` skills。
+- decision made：继续在 `paper-agent-overnight` 上工作；不 stage 与本 milestone 无关的用户变更 `AGENTS.md` 或 `AGENTS.zh.md`；由于当前环境中看不到 independent Task/subagent reviewer tool，使用本地 diff review 加 fresh tests 与 regeneration 作为 code-review fallback。
+- uncertainty/risk：该 fallback review 弱于独立 reviewer。通过重新阅读计划、检查 diffs、重新生成 derived artifacts，并在 commit 前运行 focused tests 来缓解风险。
+- next action：运行 fresh verification suite，重新生成 probe-curve audit，断言关键 JSON facts，检查 diff hygiene；如果所有 gates 通过，则只 commit 并 push 预期 milestone files。
+
+## Entry 2026-05-31 22:11 CST
+
+- timestamp：2026-05-31 22:11 CST
+- current phase：commit 前的 probe-curve audit verification
+- what was done：运行 focused tests、compile checks，从本地 raw results 重新生成 probe-curve audit，断言关键 JSON facts，执行 diff hygiene checks，并本地审查新增 analysis script、tests 和双语报告。
+- evidence or files inspected：`/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_analyze_probe_curve_long_signals.py tests/test_build_paper_agent_evidence_snapshot.py tests/test_diagnose_long_underestimate_policy.py` 报告 `Ran 8 tests` 和 `OK`；`/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile analysis/analyze_probe_curve_long_signals.py analysis/build_paper_agent_evidence_snapshot.py` 成功退出；`/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_long_signals.py` 重新生成 `docs/paper_agent/probe_curve_signal_audit.json` 与 `.md`，输出 `thresholds=4106 strict_viable=0`；JSON assertion 确认 `strict_viable_thresholds == 0`、`rows_with_stopping_trace == 0`、`rows_with_probe_curve_features == 1033`；`git diff --check -- analysis/analyze_probe_curve_long_signals.py tests/test_analyze_probe_curve_long_signals.py docs/paper_agent` 未返回问题。
+- decision made：probe-curve audit milestone 已足以作为 negative diagnostic result commit：single-feature probe-curve thresholds 有信息量，但不应提升为 GPU policy。下一步 research step 保持为 strict-split multivariate 或 learned probe scoring。
+- uncertainty/risk：该证据只排除了当前 gates 下的直接 single-feature thresholds；它没有排除 learned probe scoring、trajectory features、dynamic canvas control 或 length regularization。
+- next action：只 stage 预期的 analysis、test 和 `docs/paper_agent/` files，排除无关 `AGENTS.md` 与 `AGENTS.zh.md`，然后 commit 并 push 本 milestone。
+
+## Entry 2026-05-31 22:26 CST
+
+- timestamp：2026-05-31 22:26 CST
+- current phase：优雅暂停 checkpoint
+- what was done：停止新增探索，捕获 `git status --short --branch`，用 pause-state summaries 更新 dashboard 和 evidence snapshot，并写入 `docs/paper_agent/pause_checkpoint.current.md`。
+- evidence or files inspected：`git status --short --branch`、`docs/paper_agent/paper_agent_dashboard.en.md`、`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/evidence_snapshot.md`，以及已验证 probe-curve audit milestone 的当前上下文。
+- decision made：暂停时不改变 experiment plan version；当前计划仍为 `v3`。只 commit 预期的 analysis/test/paper-agent files，并继续排除无关的用户变更 `AGENTS.md` 与 `AGENTS.zh.md`。
+- uncertainty/risk：由于当前看不到 Task/subagent reviewer tool，independent code-review workflow 仍处于 blocked。Checkpoint 的 Workflow / Skill Status 表格已显式记录这一点。
+- next action：stage 预期文件，使用 `docs: save paper agent pause checkpoint` commit；如果 remote 可用则 push `paper-agent-overnight`，然后停止。

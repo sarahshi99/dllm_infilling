@@ -38,6 +38,7 @@ This is not yet a CCF-A central claim. It is a credible empirical foothold and a
 - Long buckets remain unchanged: `17-24 = 20.73%`, `25+ = 16.13%`.
 - In the A6000 `midcons` run, most failed `oracle >= 17` cases are under-selected; prior reports record `90/91` failed long cases as under-selected and `71/91` still ending from `base`.
 - The offline long-underestimate sweep evaluated `16776` rules and found no safe rule satisfying true-long precision, short-risk, and recall criteria.
+- The probe-curve single-feature audit evaluated `4106` thresholds and found `0` strict viable thresholds. The current full run has probe-curve features for all rows but no saved stopping traces.
 - Literature notes identify DreamOn and LR-DLLM as stronger length-control anchors; current local results must not be called SOTA before protocol matching.
 
 ## Novelty Hypothesis
@@ -46,7 +47,7 @@ The strongest novelty path is not the current `midcons` rule by itself. The nove
 
 - medium under-selection can be corrected when short-safe confidence agreement exists;
 - true-long under-selection is not captured by the same confidence fields;
-- denoising trajectories, learned length classification, dynamic canvas resizing, or length regularization may provide the missing signal.
+- multivariate probe-curve scoring, denoising trajectories, learned length classification, dynamic canvas resizing, or length regularization may provide the missing signal.
 
 This is a hypothesis until validated by new experiments.
 

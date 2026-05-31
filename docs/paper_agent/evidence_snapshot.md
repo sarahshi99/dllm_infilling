@@ -2,6 +2,8 @@
 
 Generated from existing local `results.jsonl` files. Raw outputs are not copied here.
 
+Pause update: 2026-05-31 22:26 CST. This snapshot remains the compact evidence anchor for the current A6000 checkpoint; the later probe-curve audit is tracked separately in `docs/paper_agent/probe_curve_signal_audit.md` and `docs/paper_agent/probe_curve_signal_audit.json`.
+
 ## Runs
 
 | Run | Rows | Pass | Rate | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
@@ -38,3 +40,15 @@ Generated from existing local `results.jsonl` files. Raw outputs are not copied 
 - best_failed_long_recall: `36.26%`
 - best_short_risk_rate: `40.86%`
 - best_current_pass_risk_rate: `27.96%`
+
+## Probe-Curve Audit Pointer
+
+- audit file: `docs/paper_agent/probe_curve_signal_audit.md`
+- rows_with_probe_curve_features: `1033/1033`
+- rows_with_stopping_trace: `0/1033`
+- evaluated single-feature thresholds: `4106`
+- strict_viable_thresholds: `0`
+- best threshold: `long_score_max <= 0.229253`
+- best threshold risk: `8.70%` short-risk, above the `5%` GPU gate
+
+Interpretation: the current evidence supports using `midcons` as a short/medium checkpoint and rejects single-feature probe-curve thresholds as a direct GPU policy. The next offline step should be strict-split multivariate or learned probe scoring.

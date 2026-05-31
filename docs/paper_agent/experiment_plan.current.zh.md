@@ -1,6 +1,6 @@
-# Experiment Plan v1：Diagnostic-First Length Modeling
+# Experiment Plan v3：Probe-Curve-First Length Modeling
 
-创建时间：2026-05-31 12:36 CST
+更新时间：2026-05-31 15:24 CST
 
 ## Objective
 
@@ -12,7 +12,7 @@
 - Current model：`GSAI-ML/LLaDA-8B-Base`。
 - Same-hardware baseline：A6000 union control，`787/1033 = 76.19%`。
 - Current checkpoint：A6000 `midcons`，`795/1033 = 76.96%`。
-- GPU policy：只在安全时使用 GPU `0,1,2,3`；不要 kill 或中断已有进程。创建本计划时四张卡均被其他 Python jobs 占用，因此本计划从 CPU-only analysis 开始。
+- GPU policy：除非用户显式更改分配，未来实验必须只使用 GPU `2,3`。不要 kill、抢占或中断已有进程；如果卡 `2,3` 被占用，应等待或排队。本计划继续从 CPU-only analysis 推进，直到 offline gates 证明值得启动 smoke run。
 
 ## Engineering Review Summary
 
@@ -23,7 +23,7 @@ Data flow：
 ```text
 existing results.jsonl
   -> compact evidence builder / diagnostic script
-  -> analysis_outputs or docs/paper_agent snapshot
+  -> paper-agent evidence snapshot and probe-curve audit
   -> experiment_results and dashboard
   -> GPU runner only if offline criteria pass
 ```
@@ -87,33 +87,44 @@ Success：生成 summary 与已有报告一致，并作为 compact documentation
 
 ### E1：Long-Signal Diagnostic Expansion
 
-将 CPU-only diagnostics 扩展到现有 scalar result fields 之外。候选 features 包括：
+将 CPU-only diagnostics 扩展到现有 scalar result fields 之外，并从 probe-curve shape features 开始，因为当前 A6000 full-run outputs 没有保存 `stopping_trace` 或 `step_traces`。
 
-- 可用时从 `stopping_trace` 或 step traces 提取 denoising trajectory summaries；
+当前可用：
+
 - length-probe curve shape features；
 - base、official-CAL 和 long probe selections 之间的不一致；
 - 不需要 inference-time oracle 的 failure signatures。
 
-Success：找到 low short-risk 且有足够 failed-long recall 的 candidate signal，值得启动 smoke GPU run。
+当前 full run 不可用：
+
+- 从 `stopping_trace` 或 step traces 提取的 denoising trajectory summaries。
+
+最新 CPU audit result：
+
+- `analysis/analyze_probe_curve_long_signals.py` 评估了 `4106` 个 single-feature probe-curve thresholds。
+- `strict_viable_thresholds = 0`。
+- 最佳 threshold 有 `63.04%` true-long precision 和 `31.87%` failed-long recall，但 `8.70%` short-risk，高于 `5%` safety gate。
+
+Success：找到 low short-risk 且有足够 failed-long recall 的 candidate signal 或 learned score，值得启动 smoke GPU run。
 
 Kill：没有 candidate 同时满足 short-risk `<=5%` 和至少 `10` 个 failed-long triggers，除非有清晰记录的 lower-precision/high-recall tradeoff。
 
 ### E2：Learned Length Classifier Or Scorer
 
-如果 E1 scalar rules 失败，在已有 diagnostic fields 上训练或拟合 lightweight length-risk classifier，并使用严格 split discipline 验证。Inference time 不能使用 oracle。
+如果 E1 single-feature rules 失败，在已有 diagnostic fields 上训练或拟合 lightweight length-risk classifier，并使用严格 split discipline 验证。Inference time 不能使用 oracle。
 
 Success：held-out diagnostic precision/recall 超过 hand rules，并保持 short safety。
 
 Kill：classifier 依赖不能跨 model family 或 environment transfer 的 run-specific artifacts。
 
-### E3：GPU Smoke Then Full Run
+### E3：Trace-Enabled GPU Smoke Then Full Run
 
-只有在 E1 或 E2 通过 offline gates 后，才在 GPU `0,1,2,3` 可用时运行 smoke experiment。只有 smoke results 未显示 short regression 时，才运行 full `1033`。
+只有在 E1 或 E2 通过 offline gates 后，才在 GPU `2,3` 可用或可以安全等待时运行 smoke experiment。如果下一项 hypothesis 依赖 trajectory information，则 smoke run 必须启用 `--save-step-traces`，确保实际捕获缺失的 trajectory signal。只有 smoke results 未显示 short regression 时，才运行 full `1033`。
 
 Command pattern：
 
 ```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 TOKENIZERS_PARALLELISM=false <runner command>
+CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false <runner command>
 ```
 
 Success：full candidate 改善 total pass rate 和 long buckets，且无 short-bucket regression。
@@ -150,11 +161,11 @@ CPU-only diagnostics 应先运行，并且现在可以继续。GPU runs 应等�
 ## Priority
 
 1. Evidence snapshot 和 paper-agent docs。
-2. Long under-selection 的 diagnostic feature expansion。
-3. 只有 diagnostic gates 通过后，才启动 GPU-safe smoke experiment。
+2. Long under-selection 的 probe-curve multivariate 或 learned diagnostic scoring。
+3. 只有 diagnostic gates 通过后，才启动 trace-enabled GPU smoke experiment。
 4. Full A6000 candidate。
 5. Cross-model protocol-matched validation。
 
 ## Current Decision
 
-使用 `midcons` 作为当前 checkpoint。不要从已有 official-CAL gate family 启动另一个 full true-long GPU run。
+使用 `midcons` 作为当前 checkpoint。不要从已有 official-CAL gate family 或 single-feature probe-curve threshold 启动另一个 full true-long GPU run。

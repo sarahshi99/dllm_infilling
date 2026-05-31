@@ -49,3 +49,63 @@
 - decision made: Treat the recomputed snapshot as the paper-agent evidence anchor for the current milestone.
 - uncertainty/risk: The snapshot reuses local raw outputs; if those outputs are moved, future runs must use explicit `--run NAME=PATH` arguments.
 - next action: Verify the document set, run tests, and prepare a focused commit that excludes unrelated `AGENTS.*` changes.
+
+## Entry 2026-05-31 12:58 CST
+
+- timestamp: 2026-05-31 12:58 CST
+- current phase: probe-curve signal audit
+- what was done: Implemented and ran a CPU-only probe-curve signal audit over the A6000 `midcons` result. The audit evaluated single-feature thresholds over existing probe-curve fields.
+- evidence or files inspected: `analysis/analyze_probe_curve_long_signals.py`, `tests/test_analyze_probe_curve_long_signals.py`, `docs/paper_agent/probe_curve_signal_audit.md`, `docs/paper_agent/probe_curve_signal_audit.json`, and raw `results.jsonl` key inspection.
+- decision made: Update the current experiment plan from `v1` to `v2`: prioritize probe-curve multivariate/learned scoring from existing outputs, and defer trajectory diagnostics until a trace-enabled smoke run exists.
+- uncertainty/risk: The best single-feature threshold still has `8.70%` short-risk, above the `5%` gate; multivariate scoring may still fail.
+- next action: Verify, commit, and push the probe-curve audit milestone; then design the learned-score diagnostic.
+
+## Entry 2026-05-31 15:24 CST
+
+- timestamp: 2026-05-31 15:24 CST
+- current phase: plan alignment and GPU allocation update
+- what was done: Incorporated the user's clarified hardware constraint that future experiments should use GPU cards `2,3`, not `0,1,2,3`.
+- evidence or files inspected: `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/research_design.current.en.md`, `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/open_questions.en.md`, and direct user instruction in the current session.
+- decision made: Update the experiment plan from `v2` to `v3`; future GPU commands must use `CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false` unless the user changes the allocation, and they must wait rather than interrupt existing jobs.
+- uncertainty/risk: Two-card runs may be slower than the previous four-card draft plan; all future comparisons must explicitly label the GPU set.
+- next action: Re-run verification, commit and push the probe-curve audit plus GPU-allocation plan update, then continue with CPU-only multivariate probe-curve scoring.
+
+## Entry 2026-05-31 15:56 CST
+
+- timestamp: 2026-05-31 15:56 CST
+- current phase: pre-commit verification alignment
+- what was done: Re-read the required current plan context, reviewed the probe-curve audit diff, and synchronized the generated English probe-audit interpretation with the Chinese report.
+- evidence or files inspected: `AGENTS.md`, `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/research_design.current.en.md`, `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/open_questions.en.md`, `analysis/analyze_probe_curve_long_signals.py`, and `docs/paper_agent/probe_curve_signal_audit.*`.
+- decision made: Keep the milestone scope focused on CPU-only probe-curve diagnostics, bilingual paper-agent documentation, and the GPU `2,3` operational constraint.
+- uncertainty/risk: Independent subagent review may be unavailable in this environment; if so, local diff review plus fresh tests will be used and recorded.
+- next action: Regenerate the probe-curve audit, run tests and compile checks, request or emulate code review, then stage only paper-agent files and analysis/test changes for commit.
+
+## Entry 2026-05-31 21:47 CST
+
+- timestamp: 2026-05-31 21:47 CST
+- current phase: resumed pre-commit verification and local code review
+- what was done: Re-read the project rules, Superpowers verification and code-review guidance, the required current paper-agent context, current logs, and the worktree state after context handoff.
+- evidence or files inspected: `AGENTS.md`, `git status --short --branch`, `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/research_design.current.en.md`, `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/open_questions.en.md`, `docs/paper_agent/overnight_log.*.md`, and the Superpowers `verification-before-completion` and `requesting-code-review` skills.
+- decision made: Continue on `paper-agent-overnight`; do not stage unrelated user changes to `AGENTS.md` or `AGENTS.zh.md`; use local diff review plus fresh tests and regeneration as the code-review fallback because no independent Task/subagent reviewer tool is visible in this environment.
+- uncertainty/risk: The fallback review is weaker than an independent reviewer. The risk is mitigated by re-reading the plan, inspecting diffs, regenerating derived artifacts, and running focused tests before commit.
+- next action: Run the fresh verification suite, regenerate the probe-curve audit, assert the key JSON facts, check diff hygiene, then commit and push only the intended milestone files if all gates pass.
+
+## Entry 2026-05-31 22:11 CST
+
+- timestamp: 2026-05-31 22:11 CST
+- current phase: probe-curve audit verification before commit
+- what was done: Ran focused tests, compile checks, regenerated the probe-curve audit from raw local results, asserted key JSON facts, performed diff hygiene checks, and locally reviewed the new analysis script, tests, and bilingual reports.
+- evidence or files inspected: `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_analyze_probe_curve_long_signals.py tests/test_build_paper_agent_evidence_snapshot.py tests/test_diagnose_long_underestimate_policy.py` reported `Ran 8 tests` and `OK`; `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile analysis/analyze_probe_curve_long_signals.py analysis/build_paper_agent_evidence_snapshot.py` exited successfully; `/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_long_signals.py` regenerated `docs/paper_agent/probe_curve_signal_audit.json` and `.md` with `thresholds=4106 strict_viable=0`; the JSON assertion confirmed `strict_viable_thresholds == 0`, `rows_with_stopping_trace == 0`, and `rows_with_probe_curve_features == 1033`; `git diff --check -- analysis/analyze_probe_curve_long_signals.py tests/test_analyze_probe_curve_long_signals.py docs/paper_agent` returned no issues.
+- decision made: The probe-curve audit milestone is verified enough to commit as a negative diagnostic result: single-feature probe-curve thresholds are informative but should not be promoted to a GPU policy. Keep the next research step as strict-split multivariate or learned probe scoring.
+- uncertainty/risk: This evidence only rules out direct single-feature thresholds under the current gates; it does not rule out learned probe scoring, trajectory features, dynamic canvas control, or length regularization.
+- next action: Stage only the intended analysis, test, and `docs/paper_agent/` files, excluding unrelated `AGENTS.md` and `AGENTS.zh.md`, then commit and push the milestone.
+
+## Entry 2026-05-31 22:26 CST
+
+- timestamp: 2026-05-31 22:26 CST
+- current phase: graceful pause checkpoint
+- what was done: Stopped new exploration, captured `git status --short --branch`, updated the dashboard and evidence snapshot with pause-state summaries, and wrote `docs/paper_agent/pause_checkpoint.current.md`.
+- evidence or files inspected: `git status --short --branch`, `docs/paper_agent/paper_agent_dashboard.en.md`, `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/evidence_snapshot.md`, and current context from the verified probe-curve audit milestone.
+- decision made: Do not change the experiment plan version during pause; the current plan remains `v3`. Commit only the intended analysis/test/paper-agent files and continue excluding unrelated user changes to `AGENTS.md` and `AGENTS.zh.md`.
+- uncertainty/risk: The independent code-review workflow remains blocked because no Task/subagent reviewer tool is visible. The checkpoint records this explicitly in the Workflow / Skill Status table.
+- next action: Stage intended files, commit with `docs: save paper agent pause checkpoint`, push `paper-agent-overnight` if remote access is available, then stop.

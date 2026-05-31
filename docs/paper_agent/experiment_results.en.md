@@ -1,6 +1,6 @@
 # Experiment Results
 
-Updated: 2026-05-31 12:36 CST
+Updated: 2026-05-31 15:56 CST
 
 ## Current A6000 Checkpoint
 
@@ -8,7 +8,7 @@ Baseline: A6000 union control.
 
 Environment: local A6000 environment recorded in prior result reports.
 
-GPU set: A6000 control and candidate runs were reported as A6000 runs; future reports must name exact `CUDA_VISIBLE_DEVICES`.
+GPU set: A6000 control and candidate runs were reported as A6000 runs; future reports must name exact `CUDA_VISIBLE_DEVICES`. Future GPU experiments in this agent plan should use `CUDA_VISIBLE_DEVICES=2,3` unless the user changes the allocation.
 
 Model: `GSAI-ML/LLaDA-8B-Base`.
 
@@ -57,6 +57,30 @@ It confirms:
 - Under-selected failed long rows: `90/91 = 98.90%`.
 - Failed long rows still ending from `base`: `71`.
 - Long-underestimate sweep: `16776` evaluated rules, `0` strict viable rules.
+
+## Probe-Curve Signal Audit
+
+Command:
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_long_signals.py
+```
+
+Tracked outputs:
+
+- `docs/paper_agent/probe_curve_signal_audit.json`
+- `docs/paper_agent/probe_curve_signal_audit.md`
+- `docs/paper_agent/probe_curve_signal_audit.zh.md`
+
+Result:
+
+- rows with probe-curve features: `1033/1033`.
+- rows with stopping traces: `0/1033`.
+- evaluated single-feature thresholds: `4106`.
+- strict viable thresholds: `0`.
+- best threshold: `long_score_max <= 0.229253`, with `63.04%` true-long precision, `31.87%` failed-long recall, `8.70%` short-risk, and `2.17%` current-pass risk.
+
+Interpretation: existing probe-curve scalar features are informative but not safe enough as a direct GPU policy. The next CPU step should be multivariate or learned scoring; trajectory analysis requires a trace-enabled smoke run.
 
 ## Paper Relevance
 

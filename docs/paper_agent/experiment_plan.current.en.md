@@ -1,6 +1,6 @@
-# Experiment Plan v1: Diagnostic-First Length Modeling
+# Experiment Plan v3: Probe-Curve-First Length Modeling
 
-Created: 2026-05-31 12:36 CST
+Updated: 2026-05-31 15:24 CST
 
 ## Objective
 
@@ -12,7 +12,7 @@ Advance from the current `midcons` A6000 checkpoint toward a CCF-A-grade length-
 - Current model: `GSAI-ML/LLaDA-8B-Base`.
 - Same-hardware baseline: A6000 union control, `787/1033 = 76.19%`.
 - Current checkpoint: A6000 `midcons`, `795/1033 = 76.96%`.
-- GPU policy: use GPU `0,1,2,3` only when safe; do not kill or interrupt existing processes. At creation time all four cards were occupied by other Python jobs, so this plan begins with CPU-only analysis.
+- GPU policy: future experiments must use GPU `2,3` only, unless the user explicitly changes the allocation. Do not kill, preempt, or interrupt existing processes; wait or queue if cards `2,3` are occupied. This plan continues with CPU-only analysis until offline gates justify a smoke run.
 
 ## Engineering Review Summary
 
@@ -23,7 +23,7 @@ Data flow:
 ```text
 existing results.jsonl
   -> compact evidence builder / diagnostic script
-  -> analysis_outputs or docs/paper_agent snapshot
+  -> paper-agent evidence snapshot and probe-curve audit
   -> experiment_results and dashboard
   -> GPU runner only if offline criteria pass
 ```
@@ -87,33 +87,44 @@ Success: generated summary matches existing reports and is tracked as compact do
 
 ### E1: Long-Signal Diagnostic Expansion
 
-Extend CPU-only diagnostics beyond existing scalar result fields. Candidate features include:
+Extend CPU-only diagnostics beyond existing scalar result fields, starting with probe-curve shape features because current A6000 full-run outputs do not contain saved `stopping_trace` or `step_traces`.
 
-- denoising trajectory summaries from `stopping_trace` or step traces where available;
+Available now:
+
 - length-probe curve shape features;
 - disagreement between base, official-CAL, and long probe selections;
 - failure signatures that do not require oracle at inference time.
 
-Success: find a candidate signal with low short-risk and enough failed-long recall to justify a smoke GPU run.
+Not available from the current full run:
+
+- denoising trajectory summaries from `stopping_trace` or step traces.
+
+Fresh CPU audit result:
+
+- `analysis/analyze_probe_curve_long_signals.py` evaluated `4106` single-feature probe-curve thresholds.
+- `strict_viable_thresholds = 0`.
+- The best threshold had `63.04%` true-long precision and `31.87%` failed-long recall, but `8.70%` short-risk, above the `5%` safety gate.
+
+Success: find a candidate signal or learned score with low short-risk and enough failed-long recall to justify a smoke GPU run.
 
 Kill: no candidate with short-risk `<=5%` and at least `10` failed-long triggers, unless a clearly argued lower-precision/high-recall tradeoff is documented.
 
 ### E2: Learned Length Classifier Or Scorer
 
-If E1 scalar rules fail, train or fit a lightweight length-risk classifier on existing diagnostic fields and validate with strict split discipline. This must not use oracle at inference time.
+If E1 single-feature rules fail, train or fit a lightweight length-risk classifier on existing diagnostic fields and validate with strict split discipline. This must not use oracle at inference time.
 
 Success: held-out diagnostic precision/recall beats hand rules and preserves short safety.
 
 Kill: classifier relies on run-specific artifacts that do not transfer across model family or environment.
 
-### E3: GPU Smoke Then Full Run
+### E3: Trace-Enabled GPU Smoke Then Full Run
 
-Only after E1 or E2 passes offline gates, run a smoke experiment on GPU `0,1,2,3` when available. Then run full `1033` only if smoke results do not show short regression.
+Only after E1 or E2 passes offline gates, run a smoke experiment on GPU `2,3` when those cards are available or can be waited for safely. If the next hypothesis depends on trajectory information, the smoke run must enable `--save-step-traces` so the missing trajectory signal is actually captured. Then run full `1033` only if smoke results do not show short regression.
 
 Command pattern:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 TOKENIZERS_PARALLELISM=false <runner command>
+CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false <runner command>
 ```
 
 Success: full candidate improves total pass rate and long buckets without short-bucket regression.
@@ -150,11 +161,11 @@ Every reported experiment must include:
 ## Priority
 
 1. Evidence snapshot and paper-agent docs.
-2. Diagnostic feature expansion for long under-selection.
-3. GPU-safe smoke experiment only after diagnostic gates.
+2. Probe-curve multivariate or learned diagnostic scoring for long under-selection.
+3. Trace-enabled GPU smoke experiment only after diagnostic gates.
 4. Full A6000 candidate.
 5. Cross-model protocol-matched validation.
 
 ## Current Decision
 
-Use `midcons` as the current checkpoint. Do not launch another full true-long GPU run from the existing official-CAL gate family.
+Use `midcons` as the current checkpoint. Do not launch another full true-long GPU run from the existing official-CAL gate family or from a single-feature probe-curve threshold.

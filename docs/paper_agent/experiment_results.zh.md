@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-05-31 12:36 CST
+更新时间：2026-05-31 15:56 CST
 
 ## 当前 A6000 Checkpoint
 
@@ -8,7 +8,7 @@ Baseline：A6000 union control。
 
 Environment：prior result reports 中记录的本地 A6000 environment。
 
-GPU set：A6000 control 与 candidate runs 已报告为 A6000 runs；未来报告必须写明精确 `CUDA_VISIBLE_DEVICES`。
+GPU set：A6000 control 与 candidate runs 已报告为 A6000 runs；未来报告必须写明精确 `CUDA_VISIBLE_DEVICES`。除非用户更改 allocation，本 agent plan 的未来 GPU experiments 应使用 `CUDA_VISIBLE_DEVICES=2,3`。
 
 Model：`GSAI-ML/LLaDA-8B-Base`。
 
@@ -57,6 +57,30 @@ True-long 结果是 negative evidence。现有 true-long gates 在 safety constr
 - Under-selected failed long rows：`90/91 = 98.90%`。
 - 仍从 `base` 结束的 failed long rows：`71`。
 - Long-underestimate sweep：评估 `16776` 条 rules，`0` 条 strict viable rules。
+
+## Probe-Curve Signal Audit
+
+Command：
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_long_signals.py
+```
+
+Tracked outputs：
+
+- `docs/paper_agent/probe_curve_signal_audit.json`
+- `docs/paper_agent/probe_curve_signal_audit.md`
+- `docs/paper_agent/probe_curve_signal_audit.zh.md`
+
+Result：
+
+- rows with probe-curve features：`1033/1033`。
+- rows with stopping traces：`0/1033`。
+- evaluated single-feature thresholds：`4106`。
+- strict viable thresholds：`0`。
+- best threshold：`long_score_max <= 0.229253`，对应 `63.04%` true-long precision、`31.87%` failed-long recall、`8.70%` short-risk 和 `2.17%` current-pass risk。
+
+Interpretation：现有 probe-curve scalar features 有信息量，但作为直接 GPU policy 仍不够安全。下一步 CPU 工作应转向 multivariate 或 learned scoring；trajectory analysis 需要 trace-enabled smoke run。
 
 ## Paper Relevance
 
