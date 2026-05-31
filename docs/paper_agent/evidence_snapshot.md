@@ -52,3 +52,5 @@ Pause update: 2026-05-31 22:26 CST. This snapshot remains the compact evidence a
 - best threshold risk: `8.70%` short-risk, above the `5%` GPU gate
 
 Interpretation: the current evidence supports using `midcons` as a short/medium checkpoint and rejects single-feature probe-curve thresholds as a direct GPU policy. The next offline step should be strict-split multivariate or learned probe scoring.
+
+Paused by user request; no further autonomous work should continue until explicitly resumed.

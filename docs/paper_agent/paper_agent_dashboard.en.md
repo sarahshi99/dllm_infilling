@@ -70,3 +70,5 @@ The current improvement is too small and too heuristic for a CCF-A contribution 
 ## User Decisions Needed
 
 None right now. A user decision is needed only if the next phase shifts from inference-time rescue to training-time or fine-tuning-based length regularization.
+
+Paused by user request; no further autonomous work should continue until explicitly resumed.

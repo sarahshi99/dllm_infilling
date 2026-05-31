@@ -70,3 +70,5 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 ## 需要用户决策的问题
 
 目前没有。只有当下一阶段从 inference-time rescue 转向 training-time 或 fine-tuning-based length regularization 时，才需要用户决策。
+
+Paused by user request; no further autonomous work should continue until explicitly resumed.

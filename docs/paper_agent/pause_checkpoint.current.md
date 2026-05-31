@@ -163,3 +163,5 @@ User/unrelated dirty files to preserve and not stage:
 ```text
 Continue the paper-agent work in /home/shx/projects/dllm_infilling/git_workspace on branch paper-agent-overnight. First read AGENTS.md and docs/paper_agent/pause_checkpoint.current.md, then follow the required context review files. Preserve unrelated AGENTS.md / AGENTS.zh.md user changes. Resume from the verified probe-curve audit milestone: design and implement a CPU-only strict-split multivariate or learned probe-curve diagnostic for long under-selection. Do not start GPU experiments until offline gates pass; future GPU commands must use CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false and must not interrupt other jobs.
 ```
+
+Paused by user request; no further autonomous work should continue until explicitly resumed.
