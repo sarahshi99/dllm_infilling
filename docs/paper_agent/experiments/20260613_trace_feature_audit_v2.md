@@ -55,3 +55,11 @@ This is CPU-only offline analysis. Labels derived from oracle/pass/fail are allo
 - Candidate search uses oracle/pass labels as policy inputs.
 - The only positive signal is opaque and cannot be distilled.
 - Any command attempts to launch GPU work.
+
+## Expected Documentation Outputs
+
+- `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/summary.json`
+- `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/candidates.csv`
+- `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/pareto.csv`
+- `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/report.md`
+- Updated paper-agent results/dashboard/checkpoint only after the audit command has run.
