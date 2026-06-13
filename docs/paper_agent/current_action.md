@@ -1,48 +1,42 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-06-12 19:31 CST
+Timestamp: 2026-06-13 CST
 
 ## Action Name
 
-Serial full LLaDA-Base trace collection and trace-long-rescue offline route analysis.
+Design `trace_feature_audit_v2`, a smarter CPU-only trace feature discovery audit.
 
 ## Current Phase
 
-Trace-long-rescue Task 1/2/3/4/5 are complete. Both full trace runs passed fresh verification, and offline Route 1/2/3 analysis produced negative evidence. No route-specific GPU policy runner should be created from this trace batch.
+Post trace-long-rescue negative result. The two full trace runs are complete, but Route 1/2 triggered `0` rows and Route 3 is not a default fallback. The next safe step is design-only: improve the offline discovery method before any GPU policy run.
 
-## Completed Trace Runs
+## Reviewer Motivation
 
-- previous local method trace:
-  - log: `logs/paper_agent/20260612_full_trace_llada_base_cal_lite_lcas_v3b_gpu2.log`
-  - output: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_cal_lite_lcas_v3b_gpu2_20260612_170552`
-  - verification: `1033` valid rows, `35257` trace rows linked to `1033` task ids, `summary.json`, log exit `0`, pass count `769/1033 = 74.44%`.
-- current `midcons` trace:
-  - log: `logs/paper_agent/20260612_full_trace_llada_base_midcons_gpu3.log`
-  - output: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`
-  - verification: `1033` valid rows, `35768` trace rows linked to `1033` task ids, `summary.json`, log exit `0`, pass count `795/1033 = 76.96%`.
+A reviewer will not accept "trace features failed" unless we show that the failure is not merely a bad hand-written formula. The v2 design explicitly tests nonlinear combinations, time-series shape features, stop-reason-conditioned rules, and risk-controlled selection.
 
-## Previous Trace Verification
+## Hypothesis
 
-- previous output: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_cal_lite_lcas_v3b_gpu2_20260612_170552`
-- previous log: `logs/paper_agent/20260612_full_trace_llada_base_cal_lite_lcas_v3b_gpu2.log`
-- verification: log ended with `COMMAND_EXIT_CODE="0"`; `results.jsonl` has `1033` valid rows; `step_traces.jsonl` has `35257` rows linked to `1033` task ids; `summary.json` exists; pass count is `769/1033 = 74.44%`.
+Existing trace features may contain useful true-long under-selection signal, but v1 missed it because the formula family was too narrow. Model-assisted discovery can reveal interactions, while the final candidate policy must remain explainable and training-free unless the paper scope changes.
 
-## Offline Route Decision
+## Baseline And Data
 
-- Previous local method analysis: `analysis_outputs/trace_long_rescue_llada_base_prev_20260612_192611`
-- Current `midcons` analysis: `analysis_outputs/trace_long_rescue_llada_base_midcons_20260612_192611`
-- Report: `analysis_outputs/trace_long_rescue_report_20260612`
-- Route 1 trace-only detector: `0` triggers on both trace sources; Gate A/B failed.
-- Route 2 risk-controlled rescue: `0` triggers on both trace sources; Gate A/B failed.
-- Route 3 multi-canvas trace rerank: stopped because single-canvas traces plus no Route 1/2 signal do not justify extra GPU policy cost.
+- Previous trace source: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_cal_lite_lcas_v3b_gpu2_20260612_170552`
+- Current `midcons` trace source: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`
+- Dataset: HumanEval-SingleLineInfilling, `1033` tasks.
+- Comparison type: CPU-only offline diagnostic, not a new pass-rate claim.
 
-## Fresh Local Verification Completed
+## Design Output
 
-- `git diff --check -- docs/paper_agent/experiments/20260611_trace_long_rescue_full_plan.md docs/paper_agent/current_action.md` passed.
-- `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_trace_long_rescue_features.py` passed with `Ran 6 tests` / `OK`.
-- `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile analysis/trace_long_rescue_features.py analysis/analyze_trace_long_rescue_routes.py analysis/print_trace_long_rescue_report.py` passed.
-- `git diff --check -- analysis/trace_long_rescue_features.py analysis/analyze_trace_long_rescue_routes.py analysis/print_trace_long_rescue_report.py tests/test_trace_long_rescue_features.py docs/paper_agent/experiments/20260611_trace_long_rescue_full_plan.md docs/paper_agent/current_action.md` passed.
+Design spec: `docs/superpowers/specs/2026-06-13-trace-feature-audit-v2-design.md`
 
-## Next Required Step
+## Success Criteria
 
-Do not launch a route-specific GPU policy full run from the current trace batch. If continuing, first design a stronger trace feature family or write a new action brief.
+- Explain why learned discovery models are not automatically the main training-free method.
+- Define richer trace/probe feature families.
+- Define a model-assisted discovery layer.
+- Define risk-controlled held-out gates.
+- Keep Route 3 non-default unless a stable trace quality score is first discovered.
+
+## Kill Criteria
+
+Do not launch GPU experiments from this action. Do not create `trace_feature_audit_v2.py` until the spec is reviewed and an implementation plan is approved.
