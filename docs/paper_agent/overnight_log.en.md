@@ -109,3 +109,34 @@
 - decision made: Do not change the experiment plan version during pause; the current plan remains `v3`. Commit only the intended analysis/test/paper-agent files and continue excluding unrelated user changes to `AGENTS.md` and `AGENTS.zh.md`.
 - uncertainty/risk: The independent code-review workflow remains blocked because no Task/subagent reviewer tool is visible. The checkpoint records this explicitly in the Workflow / Skill Status table.
 - next action: Stage intended files, commit with `docs: save paper agent pause checkpoint`, push `paper-agent-overnight` if remote access is available, then stop.
+
+## Entry 2026-05-31 22:33 CST
+
+- timestamp: 2026-05-31 22:33 CST
+- current phase: resumed CPU-only learned probe diagnostic planning
+- what was done: Re-read `AGENTS.md`, the pause checkpoint, required current paper-agent context, current git status, and the relevant Superpowers skills. Inspected the existing probe-curve audit script and tests only enough to plan a narrow follow-up diagnostic.
+- evidence or files inspected: `AGENTS.md`, `docs/paper_agent/pause_checkpoint.current.md`, `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/research_design.current.en.md`, `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/open_questions.en.md`, `analysis/analyze_probe_curve_long_signals.py`, `tests/test_analyze_probe_curve_long_signals.py`, and `git status --short --branch`.
+- decision made: Continue on `paper-agent-overnight` and preserve unrelated dirty user changes to `AGENTS.md` and `AGENTS.zh.md`. Adapt Superpowers brainstorming to the autonomous-research setting: treat the pause checkpoint and current experiment plan as the approved spec, then write an implementation plan before code. The next diagnostic will be CPU-only, deterministic, dependency-free, and strict-split.
+- uncertainty/risk: A learned score trained and evaluated on the same 1033-task benchmark may still overfit even with deterministic held-out folds; this diagnostic is evidence for whether a GPU policy is worth considering, not a deployment policy by itself.
+- next action: Write a focused implementation plan, add failing tests first, then implement the strict-split probe diagnostic and regenerate compact evidence.
+
+## Entry 2026-06-01 01:52 CST
+
+- timestamp: 2026-06-01 01:52 CST
+- current phase: CPU-only strict-split probe-score diagnostic
+- what was done: Resumed in low-token mode, reconciled the stale pause checkpoint with the current dirty files, ran the new strict-split probe-score unit test, and generated the CPU-only held-out audit from the existing A6000 `midcons` result.
+- evidence or files inspected: `AGENTS.md`, `git status --short --branch`, `docs/paper_agent/pause_checkpoint.current.md`, `docs/paper_agent/paper_agent_dashboard.zh.md`, `docs/paper_agent/evidence_snapshot.md`, `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/open_questions.en.md`, the tail of `overnight_log.*.md`, `analysis/analyze_probe_curve_split_score.py`, `tests/test_analyze_probe_curve_split_score.py`, `docs/paper_agent/probe_curve_split_score_audit.json`, and `docs/paper_agent/probe_curve_split_score_audit.md`.
+- decision made: Treat the simple dependency-free multivariate probe-curve score as negative evidence, not as a candidate GPU policy.
+- uncertainty/risk: The diagnostic only tests one simple linear scoring family over current probe-curve fields; it does not rule out constrained high-precision rules, trace-enabled trajectory features, dynamic canvas control, or length regularization.
+- next action: Run focused verification, update the dashboard and compact docs, then commit and push only the intended analysis/test/documentation files while preserving unrelated `AGENTS.*` changes.
+
+Result summary:
+
+- split discipline: `5` deterministic SHA256 task-id folds with train-thresholds only.
+- rows: `1033`; feature_count: `24`.
+- aggregate held-out trigger_count: `63`.
+- true_long_precision: `47.62%`.
+- failed_long_recall: `32.97%`.
+- short_risk_rate: `22.22%`.
+- current_pass_risk_rate: `7.94%`.
+- strict_heldout_pass: `False`.

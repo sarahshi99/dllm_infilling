@@ -1,6 +1,6 @@
 # Open Questions
 
-更新时间：2026-05-31 15:24 CST
+更新时间：2026-06-01 01:52 CST
 
 ## Research Direction
 
@@ -10,8 +10,8 @@
 
 ## Experimental Design
 
-1. 什么 multivariate probe-curve score 能把最佳 single-feature 的 short-risk 从 `8.70%` 降到至多 `5%`，同时保留至少 `10` 个 failed-long triggers？
-2. Learned length classifier 应使用什么 split discipline，才能避免对 `1033` HumanEval tasks 过拟合？
+1. 是否存在 constrained、nonlinear、trace-aware 或 cross-run probe-curve score，能把 short-risk 降到至多 `5%`，同时保留至少 `10` 个 failed-long triggers？第一个 simple strict-split linear score 已失败，held-out short-risk 为 `22.22%`。
+2. Deterministic task-id folding 对 learned length classifier 是否足够，还是必须使用 cross-run/cross-model validation 后才能把该 signal 视为 paper-grade evidence？
 3. Trace-enabled smoke size 应多大，才足以收集 trajectory features 并在 full run 前检测 short-bucket regression？
 4. 第一个 apples-to-apples cross-model comparison 应选择哪个目标：Dream-Coder official canvas、LLaDA Instruct、Dream，还是 DiffuCoder？
 
@@ -23,7 +23,7 @@
 
 ## Engineering And Reproducibility
 
-1. 下一项 diagnostic script 应写入 `analysis_outputs/paper_agent/`，还是直接写入 `docs/paper_agent/`？
+1. 下一项 diagnostic 应从当前 probe-curve fields 转向 trace-enabled features，还是先在现有 fields 上尝试更保守的 high-precision score？
 2. 在卡 `2,3` 上排队的 GPU experiments 应使用已有 wait script，还是新增支持 `--save-step-traces` 的 manifest-driven launcher？
 3. 如果未来某个 run 成为 paper-critical，raw result files 应如何保存：Git LFS、external artifact store，还是只保存 compact reproduction script？
 

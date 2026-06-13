@@ -109,3 +109,34 @@
 - decision made：暂停时不改变 experiment plan version；当前计划仍为 `v3`。只 commit 预期的 analysis/test/paper-agent files，并继续排除无关的用户变更 `AGENTS.md` 与 `AGENTS.zh.md`。
 - uncertainty/risk：由于当前看不到 Task/subagent reviewer tool，independent code-review workflow 仍处于 blocked。Checkpoint 的 Workflow / Skill Status 表格已显式记录这一点。
 - next action：stage 预期文件，使用 `docs: save paper agent pause checkpoint` commit；如果 remote 可用则 push `paper-agent-overnight`，然后停止。
+
+## Entry 2026-05-31 22:33 CST
+
+- timestamp：2026-05-31 22:33 CST
+- current phase：恢复后的 CPU-only learned probe diagnostic planning
+- what was done：重新阅读 `AGENTS.md`、pause checkpoint、必需的 current paper-agent context、当前 git status，以及相关 Superpowers skills。只为规划一个窄范围后续 diagnostic，检查了已有 probe-curve audit script 和 tests。
+- evidence or files inspected：`AGENTS.md`、`docs/paper_agent/pause_checkpoint.current.md`、`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/research_design.current.en.md`、`docs/paper_agent/experiment_plan.current.en.md`、`docs/paper_agent/experiment_plan.history.en.md`、`docs/paper_agent/open_questions.en.md`、`analysis/analyze_probe_curve_long_signals.py`、`tests/test_analyze_probe_curve_long_signals.py` 和 `git status --short --branch`。
+- decision made：继续在 `paper-agent-overnight` 上工作，并保留与本任务无关的用户 dirty changes：`AGENTS.md` 与 `AGENTS.zh.md`。将 Superpowers brainstorming 适配为 autonomous-research setting：把 pause checkpoint 和 current experiment plan 视为已批准 spec，然后先写 implementation plan，再改代码。下一项 diagnostic 必须是 CPU-only、deterministic、dependency-free 且 strict-split。
+- uncertainty/risk：即使使用 deterministic held-out folds，在同一个 1033-task benchmark 上训练和评估 learned score 仍可能 overfit；该 diagnostic 只能说明是否值得考虑 GPU policy，而不是 deployment policy 本身。
+- next action：写 focused implementation plan，先添加 failing tests，再实现 strict-split probe diagnostic，并重新生成 compact evidence。
+
+## Entry 2026-06-01 01:52 CST
+
+- timestamp：2026-06-01 01:52 CST
+- current phase：CPU-only strict-split probe-score diagnostic
+- what was done：以低 token 模式恢复，将已过期的 pause checkpoint 与当前 dirty files 对齐，运行新的 strict-split probe-score unit test，并从已有 A6000 `midcons` result 生成 CPU-only held-out audit。
+- evidence or files inspected：`AGENTS.md`、`git status --short --branch`、`docs/paper_agent/pause_checkpoint.current.md`、`docs/paper_agent/paper_agent_dashboard.zh.md`、`docs/paper_agent/evidence_snapshot.md`、`docs/paper_agent/experiment_plan.current.en.md`、`docs/paper_agent/open_questions.en.md`、`overnight_log.*.md` 尾部、`analysis/analyze_probe_curve_split_score.py`、`tests/test_analyze_probe_curve_split_score.py`、`docs/paper_agent/probe_curve_split_score_audit.json` 和 `docs/paper_agent/probe_curve_split_score_audit.md`。
+- decision made：将 simple dependency-free multivariate probe-curve score 视为 negative evidence，而不是 candidate GPU policy。
+- uncertainty/risk：该 diagnostic 只测试了当前 probe-curve fields 上的一类简单 linear scoring family；它没有排除 constrained high-precision rules、trace-enabled trajectory features、dynamic canvas control 或 length regularization。
+- next action：运行 focused verification，更新 dashboard 和 compact docs，然后只 commit 并 push 预期的 analysis/test/documentation files，同时保留无关 `AGENTS.*` changes。
+
+Result summary：
+
+- split discipline：`5` 个 deterministic SHA256 task-id folds，且 thresholds 只在 train folds 上选择。
+- rows：`1033`；feature_count：`24`。
+- aggregate held-out trigger_count：`63`。
+- true_long_precision：`47.62%`。
+- failed_long_recall：`32.97%`。
+- short_risk_rate：`22.22%`。
+- current_pass_risk_rate：`7.94%`。
+- strict_heldout_pass：`False`。

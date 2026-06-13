@@ -1,0 +1,386 @@
+{
+  "audit_version": 1,
+  "split_discipline": "deterministic_sha256_task_id_folds_train_thresholds_only",
+  "rows": 1033,
+  "feature_count": 24,
+  "features": [
+    "best_len",
+    "best_minus_selected_raw",
+    "best_minus_selected_score",
+    "best_raw_score",
+    "best_score",
+    "long_gap_max",
+    "long_minus_medium_raw",
+    "long_minus_medium_score",
+    "long_minus_short_raw",
+    "long_minus_short_score",
+    "long_raw_max",
+    "long_score_avg",
+    "long_score_max",
+    "long_to_medium_score_ratio",
+    "long_to_short_score_ratio",
+    "medium_raw_max",
+    "medium_score_max",
+    "selected_len",
+    "selected_raw_score",
+    "selected_score",
+    "selected_to_best_gap",
+    "short_raw_max",
+    "short_score_avg",
+    "short_score_max"
+  ],
+  "label_counts": {
+    "true_long": 113,
+    "failed_long": 91,
+    "short": 598,
+    "passed": 795
+  },
+  "cross_validation": {
+    "folds": 5,
+    "aggregate_heldout": {
+      "trigger_count": 63,
+      "true_long_count": 30,
+      "failed_long_trigger_count": 30,
+      "short_risk_count": 14,
+      "current_pass_risk_count": 5,
+      "true_long_precision": 0.47619047619047616,
+      "failed_long_recall": 0.32967032967032966,
+      "short_risk_rate": 0.2222222222222222,
+      "current_pass_risk_rate": 0.07936507936507936,
+      "score": 0.11240963621916003,
+      "strict_heldout_pass": false
+    },
+    "fold_results": [
+      {
+        "fold": 0,
+        "train_size": 824,
+        "heldout_size": 209,
+        "feature_count": 24,
+        "threshold": 32.170249036712015,
+        "strict_train_pass": false,
+        "train_eval": {
+          "trigger_count": 57,
+          "true_long_count": 27,
+          "failed_long_trigger_count": 27,
+          "short_risk_count": 13,
+          "current_pass_risk_count": 4,
+          "true_long_precision": 0.47368421052631576,
+          "failed_long_recall": 0.375,
+          "short_risk_rate": 0.22807017543859648,
+          "current_pass_risk_rate": 0.07017543859649122,
+          "score": 0.12749671963843126
+        },
+        "heldout_eval": {
+          "trigger_count": 17,
+          "true_long_count": 10,
+          "failed_long_trigger_count": 10,
+          "short_risk_count": 4,
+          "current_pass_risk_count": 1,
+          "true_long_precision": 0.5882352941176471,
+          "failed_long_recall": 0.5263157894736842,
+          "short_risk_rate": 0.23529411764705882,
+          "current_pass_risk_rate": 0.058823529411764705,
+          "score": 0.22282451498173478
+        },
+        "top_weights": [
+          {
+            "feature": "best_raw_score",
+            "weight": -1.6128382827280034
+          },
+          {
+            "feature": "short_raw_max",
+            "weight": -1.6069438031962484
+          },
+          {
+            "feature": "short_score_max",
+            "weight": -1.6033246712261908
+          },
+          {
+            "feature": "best_score",
+            "weight": -1.553087490516607
+          },
+          {
+            "feature": "short_score_avg",
+            "weight": -1.5472742390099194
+          },
+          {
+            "feature": "selected_raw_score",
+            "weight": -1.5294365927143843
+          },
+          {
+            "feature": "selected_score",
+            "weight": -1.4874756018476465
+          },
+          {
+            "feature": "medium_raw_max",
+            "weight": -0.9924308146739296
+          }
+        ]
+      },
+      {
+        "fold": 1,
+        "train_size": 824,
+        "heldout_size": 209,
+        "feature_count": 24,
+        "threshold": 38.39042339344675,
+        "strict_train_pass": false,
+        "train_eval": {
+          "trigger_count": 51,
+          "true_long_count": 30,
+          "failed_long_trigger_count": 30,
+          "short_risk_count": 11,
+          "current_pass_risk_count": 3,
+          "true_long_precision": 0.5882352941176471,
+          "failed_long_recall": 0.4,
+          "short_risk_rate": 0.21568627450980393,
+          "current_pass_risk_rate": 0.058823529411764705,
+          "score": 0.17368885270371123
+        },
+        "heldout_eval": {
+          "trigger_count": 17,
+          "true_long_count": 5,
+          "failed_long_trigger_count": 5,
+          "short_risk_count": 3,
+          "current_pass_risk_count": 2,
+          "true_long_precision": 0.29411764705882354,
+          "failed_long_recall": 0.3125,
+          "short_risk_rate": 0.17647058823529413,
+          "current_pass_risk_rate": 0.11764705882352941,
+          "score": 0.06678709546102178
+        },
+        "top_weights": [
+          {
+            "feature": "best_raw_score",
+            "weight": -1.7027813952985311
+          },
+          {
+            "feature": "short_raw_max",
+            "weight": -1.6872929516726933
+          },
+          {
+            "feature": "short_score_max",
+            "weight": -1.6814977115472494
+          },
+          {
+            "feature": "best_score",
+            "weight": -1.6456594348592621
+          },
+          {
+            "feature": "selected_raw_score",
+            "weight": -1.6455415981688009
+          },
+          {
+            "feature": "short_score_avg",
+            "weight": -1.6270265806271613
+          },
+          {
+            "feature": "selected_score",
+            "weight": -1.6108759448229104
+          },
+          {
+            "feature": "medium_raw_max",
+            "weight": -1.0911099789482448
+          }
+        ]
+      },
+      {
+        "fold": 2,
+        "train_size": 835,
+        "heldout_size": 198,
+        "feature_count": 24,
+        "threshold": 53.71296163387129,
+        "strict_train_pass": true,
+        "train_eval": {
+          "trigger_count": 13,
+          "true_long_count": 8,
+          "failed_long_trigger_count": 8,
+          "short_risk_count": 0,
+          "current_pass_risk_count": 0,
+          "true_long_precision": 0.6153846153846154,
+          "failed_long_recall": 0.1111111111111111,
+          "short_risk_rate": 0.0,
+          "current_pass_risk_rate": 0.0,
+          "score": 0.06837606837606838
+        },
+        "heldout_eval": {
+          "trigger_count": 1,
+          "true_long_count": 0,
+          "failed_long_trigger_count": 0,
+          "short_risk_count": 1,
+          "current_pass_risk_count": 1,
+          "true_long_precision": 0.0,
+          "failed_long_recall": 0.0,
+          "short_risk_rate": 1.0,
+          "current_pass_risk_rate": 1.0,
+          "score": 0.0
+        },
+        "top_weights": [
+          {
+            "feature": "best_raw_score",
+            "weight": -1.7582444341547658
+          },
+          {
+            "feature": "best_score",
+            "weight": -1.7372080845544997
+          },
+          {
+            "feature": "selected_raw_score",
+            "weight": -1.6858516428051642
+          },
+          {
+            "feature": "selected_score",
+            "weight": -1.6786826727455488
+          },
+          {
+            "feature": "short_raw_max",
+            "weight": -1.670267521462716
+          },
+          {
+            "feature": "short_score_max",
+            "weight": -1.6641280596488928
+          },
+          {
+            "feature": "short_score_avg",
+            "weight": -1.6467425571052439
+          },
+          {
+            "feature": "medium_raw_max",
+            "weight": -1.2078316428219598
+          }
+        ]
+      },
+      {
+        "fold": 3,
+        "train_size": 827,
+        "heldout_size": 206,
+        "feature_count": 24,
+        "threshold": 32.21201227483315,
+        "strict_train_pass": false,
+        "train_eval": {
+          "trigger_count": 55,
+          "true_long_count": 28,
+          "failed_long_trigger_count": 28,
+          "short_risk_count": 13,
+          "current_pass_risk_count": 5,
+          "true_long_precision": 0.509090909090909,
+          "failed_long_recall": 0.37333333333333335,
+          "short_risk_rate": 0.23636363636363636,
+          "current_pass_risk_rate": 0.09090909090909091,
+          "score": 0.13194290007513146
+        },
+        "heldout_eval": {
+          "trigger_count": 19,
+          "true_long_count": 9,
+          "failed_long_trigger_count": 9,
+          "short_risk_count": 4,
+          "current_pass_risk_count": 0,
+          "true_long_precision": 0.47368421052631576,
+          "failed_long_recall": 0.5625,
+          "short_risk_rate": 0.21052631578947367,
+          "current_pass_risk_rate": 0.0,
+          "score": 0.21035318559556784
+        },
+        "top_weights": [
+          {
+            "feature": "best_raw_score",
+            "weight": -1.562153915316775
+          },
+          {
+            "feature": "short_score_max",
+            "weight": -1.5470350354554159
+          },
+          {
+            "feature": "short_raw_max",
+            "weight": -1.5426181289378045
+          },
+          {
+            "feature": "best_score",
+            "weight": -1.5133920931228317
+          },
+          {
+            "feature": "short_score_avg",
+            "weight": -1.5089817522136384
+          },
+          {
+            "feature": "selected_raw_score",
+            "weight": -1.4910389007798726
+          },
+          {
+            "feature": "selected_score",
+            "weight": -1.4561544225819631
+          },
+          {
+            "feature": "medium_raw_max",
+            "weight": -0.988603847651683
+          }
+        ]
+      },
+      {
+        "fold": 4,
+        "train_size": 822,
+        "heldout_size": 211,
+        "feature_count": 24,
+        "threshold": 35.68705093758336,
+        "strict_train_pass": false,
+        "train_eval": {
+          "trigger_count": 59,
+          "true_long_count": 29,
+          "failed_long_trigger_count": 29,
+          "short_risk_count": 12,
+          "current_pass_risk_count": 4,
+          "true_long_precision": 0.4915254237288136,
+          "failed_long_recall": 0.4142857142857143,
+          "short_risk_rate": 0.2033898305084746,
+          "current_pass_risk_rate": 0.06779661016949153,
+          "score": 0.1512176443133357
+        },
+        "heldout_eval": {
+          "trigger_count": 9,
+          "true_long_count": 6,
+          "failed_long_trigger_count": 6,
+          "short_risk_count": 2,
+          "current_pass_risk_count": 1,
+          "true_long_precision": 0.6666666666666666,
+          "failed_long_recall": 0.2857142857142857,
+          "short_risk_rate": 0.2222222222222222,
+          "current_pass_risk_rate": 0.1111111111111111,
+          "score": 0.1316872427983539
+        },
+        "top_weights": [
+          {
+            "feature": "best_raw_score",
+            "weight": -1.6918747920353774
+          },
+          {
+            "feature": "best_score",
+            "weight": -1.642595894862117
+          },
+          {
+            "feature": "short_raw_max",
+            "weight": -1.6398625490402925
+          },
+          {
+            "feature": "short_score_max",
+            "weight": -1.637101777375135
+          },
+          {
+            "feature": "selected_raw_score",
+            "weight": -1.621830565040613
+          },
+          {
+            "feature": "selected_score",
+            "weight": -1.5836154916345773
+          },
+          {
+            "feature": "short_score_avg",
+            "weight": -1.5387089526452453
+          },
+          {
+            "feature": "medium_raw_max",
+            "weight": -1.0733994458556726
+          }
+        ]
+      }
+    ]
+  }
+}

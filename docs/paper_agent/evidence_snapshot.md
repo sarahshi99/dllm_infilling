@@ -2,7 +2,7 @@
 
 Generated from existing local `results.jsonl` files. Raw outputs are not copied here.
 
-Pause update: 2026-05-31 22:26 CST. This snapshot remains the compact evidence anchor for the current A6000 checkpoint; the later probe-curve audit is tracked separately in `docs/paper_agent/probe_curve_signal_audit.md` and `docs/paper_agent/probe_curve_signal_audit.json`.
+Update: 2026-06-01 01:52 CST. This snapshot remains the compact evidence anchor for the current A6000 checkpoint; the later probe-curve audits are tracked separately in `docs/paper_agent/probe_curve_signal_audit.md`, `docs/paper_agent/probe_curve_signal_audit.json`, `docs/paper_agent/probe_curve_split_score_audit.md`, and `docs/paper_agent/probe_curve_split_score_audit.json`.
 
 ## Runs
 
@@ -53,4 +53,17 @@ Pause update: 2026-05-31 22:26 CST. This snapshot remains the compact evidence a
 
 Interpretation: the current evidence supports using `midcons` as a short/medium checkpoint and rejects single-feature probe-curve thresholds as a direct GPU policy. The next offline step should be strict-split multivariate or learned probe scoring.
 
-Paused by user request; no further autonomous work should continue until explicitly resumed.
+## Strict-Split Probe-Score Audit Pointer
+
+- audit file: `docs/paper_agent/probe_curve_split_score_audit.md`
+- split discipline: `5` deterministic SHA256 task-id folds, train-thresholds only
+- rows: `1033`
+- feature_count: `24`
+- aggregate held-out trigger_count: `63`
+- aggregate held-out true_long_precision: `47.62%`
+- aggregate held-out failed_long_recall: `32.97%`
+- aggregate held-out short_risk_rate: `22.22%`
+- aggregate held-out current_pass_risk_rate: `7.94%`
+- strict_heldout_pass: `False`
+
+Interpretation: the simple dependency-free multivariate score does not pass the offline GPU gate. GPU work remains blocked until a safer signal, trace-enabled evidence, dynamic canvas control, or length-regularized modeling plan is justified.

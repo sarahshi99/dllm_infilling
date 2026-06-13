@@ -1,0 +1,143 @@
+{
+  "rows": 1033,
+  "trace_rows": 35257,
+  "rows_with_traces": 1033,
+  "totals": {
+    "passed": 769,
+    "failed_long": 96,
+    "true_long": 113,
+    "short": 598
+  },
+  "routes": {
+    "route1_trace_only": {
+      "route_key": "route1_trace_only",
+      "route_name": "Route 1 trace-only detector",
+      "trigger_count": 0,
+      "true_long_trigger_count": 0,
+      "failed_long_trigger_count": 0,
+      "short_risk_count": 0,
+      "current_pass_risk_count": 0,
+      "true_long_precision": null,
+      "failed_long_precision": null,
+      "failed_long_recall": 0.0,
+      "short_risk_rate": null,
+      "current_pass_risk_rate": null,
+      "gate_a_pessimistic_passed": false,
+      "gate_b_pessimistic_exploratory": false,
+      "gate_summary_pessimistic": {
+        "common": 1033,
+        "overall_delta": 0,
+        "short_delta": 0,
+        "short_net_loss": 0,
+        "long_delta": 0,
+        "long_net_gain": 0,
+        "bucket_delta": {},
+        "bucket_total": {
+          "9-12": 232,
+          "13-16": 90,
+          "<=8": 598,
+          "17-24": 82,
+          "25+": 31
+        },
+        "gate_a_passed": false,
+        "gate_b_exploratory": false
+      },
+      "continuation_rule": {
+        "min_failed_long": 10,
+        "max_short": 5,
+        "passed": false
+      },
+      "decision": "stop"
+    },
+    "route2_risk_controlled": {
+      "route_key": "route2_risk_controlled",
+      "route_name": "Route 2 risk-controlled rescue",
+      "trigger_count": 0,
+      "true_long_trigger_count": 0,
+      "failed_long_trigger_count": 0,
+      "short_risk_count": 0,
+      "current_pass_risk_count": 0,
+      "true_long_precision": null,
+      "failed_long_precision": null,
+      "failed_long_recall": 0.0,
+      "short_risk_rate": null,
+      "current_pass_risk_rate": null,
+      "gate_a_pessimistic_passed": false,
+      "gate_b_pessimistic_exploratory": false,
+      "gate_summary_pessimistic": {
+        "common": 1033,
+        "overall_delta": 0,
+        "short_delta": 0,
+        "short_net_loss": 0,
+        "long_delta": 0,
+        "long_net_gain": 0,
+        "bucket_delta": {},
+        "bucket_total": {
+          "9-12": 232,
+          "13-16": 90,
+          "<=8": 598,
+          "17-24": 82,
+          "25+": 31
+        },
+        "gate_a_passed": false,
+        "gate_b_exploratory": false
+      },
+      "continuation_rule": {
+        "min_failed_long": 5,
+        "max_short": 2,
+        "passed": false
+      },
+      "decision": "stop"
+    },
+    "route3_multi_canvas_rerank": {
+      "route_key": "route3_multi_canvas_rerank",
+      "route_name": "Route 3 multi-canvas trace rerank",
+      "trigger_count": 0,
+      "true_long_trigger_count": 0,
+      "failed_long_trigger_count": 0,
+      "short_risk_count": 0,
+      "current_pass_risk_count": 0,
+      "true_long_precision": null,
+      "failed_long_precision": null,
+      "failed_long_recall": null,
+      "short_risk_rate": null,
+      "current_pass_risk_rate": null,
+      "gate_a_pessimistic_passed": false,
+      "gate_b_pessimistic_exploratory": false,
+      "gate_summary_pessimistic": {
+        "common": 1033,
+        "overall_delta": 0,
+        "short_delta": 0,
+        "short_net_loss": 0,
+        "long_delta": 0,
+        "long_net_gain": 0,
+        "bucket_delta": {},
+        "bucket_total": {
+          "9-12": 232,
+          "13-16": 90,
+          "<=8": 598,
+          "17-24": 82,
+          "25+": 31
+        },
+        "gate_a_passed": false,
+        "gate_b_exploratory": false
+      },
+      "continuation_rule": {
+        "requires_route1_or_route2_signal": true,
+        "passed": false
+      },
+      "decision": "stop_no_trace_signal",
+      "note": "Single-canvas traces cannot evaluate multi-canvas reranking without another trace collection run."
+    }
+  },
+  "route1_trigger_count": 0,
+  "route1_failed_long_count": 0,
+  "route1_short_count": 0,
+  "route2_trigger_count": 0,
+  "route2_failed_long_count": 0,
+  "route2_short_count": 0,
+  "route3_trigger_count": 0,
+  "route3_failed_long_count": 0,
+  "route3_short_count": 0,
+  "any_route_continues": false
+}

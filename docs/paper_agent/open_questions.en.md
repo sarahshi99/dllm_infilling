@@ -1,6 +1,6 @@
 # Open Questions
 
-Updated: 2026-05-31 15:24 CST
+Updated: 2026-06-01 01:52 CST
 
 ## Research Direction
 
@@ -10,8 +10,8 @@ Updated: 2026-05-31 15:24 CST
 
 ## Experimental Design
 
-1. What multivariate probe-curve score can reduce the best single-feature short-risk from `8.70%` to at most `5%` while keeping at least `10` failed-long triggers?
-2. What split discipline should be used for a learned length classifier so that it does not overfit the `1033` HumanEval tasks?
+1. Can any constrained, nonlinear, trace-aware, or cross-run probe-curve score reduce short-risk to at most `5%` while keeping at least `10` failed-long triggers? The first simple strict-split linear score failed with `22.22%` held-out short-risk.
+2. Is deterministic task-id folding sufficient for a learned length classifier, or is cross-run/cross-model validation required before treating the signal as paper-grade evidence?
 3. What trace-enabled smoke size is enough to collect trajectory features and detect short-bucket regression before a full run?
 4. Which cross-model comparison is the first apples-to-apples target: Dream-Coder official canvas, LLaDA Instruct, Dream, or DiffuCoder?
 
@@ -23,7 +23,7 @@ Updated: 2026-05-31 15:24 CST
 
 ## Engineering And Reproducibility
 
-1. Should the next diagnostic script write to `analysis_outputs/paper_agent/` or directly into `docs/paper_agent/`?
+1. Should the next diagnostic move beyond current probe-curve fields to trace-enabled features, or first try a more conservative high-precision score on the existing fields?
 2. Should queued GPU experiments on cards `2,3` use an existing wait script or a new manifest-driven launcher with `--save-step-traces` support?
 3. How should raw result files be stored if one future run becomes paper-critical: Git LFS, external artifact store, or compact reproduction script only?
 

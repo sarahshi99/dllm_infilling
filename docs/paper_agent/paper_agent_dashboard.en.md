@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-Updated: 2026-05-31 22:26 CST
+Updated: 2026-06-12 19:26 CST
 
 ## Current Research Goal
 
@@ -10,9 +10,11 @@ Turn the current DLLM code-infilling project into a competitive CCF-A paper by c
 
 Inference-time length control for DLLM code infilling can safely recover medium-length under-selection by separating medium rescue from true-long detection; however, true-long infilling remains dominated by length underestimation and likely requires a stronger length-modeling signal than the current official-CAL gate family.
 
+Terminology correction: previous/local baseline or local control rows in these docs are the user's earlier local methods or control versions from this project, not local reproductions of CAL, LR-DLLM, or DreamOn. Paper-reported numbers should be compared in the same table, but they must be labeled separately from previous local methods and the current method.
+
 ## Current Experiment Plan Version
 
-`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation `2,3`. The current A6000 checkpoint is `midcons`; the next GPU work is blocked on a better long-tail signal, not another loose official-CAL heuristic or single-feature probe threshold.
+`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation `2,3`, now extended with full trace-long-rescue diagnostics. The current A6000 LLaDA-Base checkpoint is `midcons`; trace-long-rescue Task 1/2/3/4/5 are complete. Offline Route 1/2/3 analysis produced negative evidence, so no route-specific GPU policy runner should be created from this trace batch.
 
 ## Completed This Session
 
@@ -24,6 +26,20 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - Added a tested probe-curve signal audit; it found no strict viable single-feature threshold and confirmed current outputs have no saved stopping traces.
 - Verified the probe-curve milestone with `8` focused tests, compile checks, audit regeneration, JSON assertions, and `git diff --check`.
 - Entered graceful pause mode; added `docs/paper_agent/pause_checkpoint.current.md`; no new research or GPU experiment was started.
+- Resumed in low-token mode and reconciled the stale checkpoint with the current strict-split probe diagnostic files.
+- Added and ran a CPU-only strict-split probe-score diagnostic. It failed the held-out safety gate, so no GPU smoke run is justified from the current probe-curve fields alone.
+- After resuming, reconciled dashboard/checkpoint verification status and completed fresh focused verification for the strict-split diagnostic: unit test, py_compile, audit regeneration, JSON assertions, and `git diff --check` all passed.
+- Completed the user-approved `GSAI-ML/LLaDA-8B-Instruct + midcons` full cross-model run. The first direct HuggingFace launch was interrupted because the network was unreachable; the successful run used `HF_ENDPOINT=https://hf-mirror.com`.
+- Inspected CAL, LR-DLLM, and DreamOn source PDFs and wrote the literature-backbone rerun matrix to `docs/paper_agent/experiments/20260609_cross_model_literature_backbone_plan.md`.
+- After user approval for sandbox-outside execution, both DreamCoder Base and DreamCoder Instruct 2-sample smokes passed. Then completed two full `1033` sample runs: Base on GPU2 and Instruct on GPU3.
+- Downloaded/probed `Dream-org/Dream-v0-Base-7B` through a local Git/LFS checkout under `/tmp`, passed a 2-sample smoke, then completed a full local same-backbone Dream-7B pair: cal_lite baseline on GPU2 and LCAL official bounded-repair candidate on GPU3.
+- Downloaded/probed `apple/DiffuCoder-7B-Base` through the proxy-enabled Git/LFS path under `/tmp`, passed a 2-sample smoke, then completed a full local same-backbone DiffuCoder-Base pair: cal_lite baseline on GPU2 and LCAL official bounded-repair candidate on GPU3.
+- Completed the `GSAI-ML/LLaDA-1.5` metadata/API/local-weight probe through the configured proxy path. Direct HuggingFace worked better than `hf-mirror.com` for this repo; all six weight shards were downloaded to `/tmp/llada15_probe_20260609` and byte-size checked.
+- Completed the `GSAI-ML/LLaDA-1.5` 2-sample smoke pair and full local same-backbone pair on shared GPUs `2/3`. Baseline completed on GPU2 and candidate completed on GPU3; both logs exited `0` and both outputs have `1033` valid rows plus `summary.json`.
+- Completed the `inclusionAI/LLaDA-MoE-7B-A1B-Base` download recovery, local API/weight validation, flash-attn environment root-cause investigation, 2-sample smoke gate, and full local same-backbone pair. Candidate is `801/1033 = 77.54%`; local `cal_lite` baseline is `777/1033 = 75.22%`; pairwise is `31` wins / `7` losses.
+- Completed trace-long-rescue Task 1/2/3 without Superpowers skills, subagents, reviewer discovery, or Goal tools. The action brief/current action passed markdown hygiene; trace feature extraction and route analysis/report scripts were implemented; focused verification passed with `Ran 6 tests` / `OK`, py_compile, and `git diff --check`.
+- Completed serial Task 4 full trace collection: previous local method trace run on GPU `2` produced `769/1033 = 74.44%` with `35257` trace rows; current `midcons` trace run on GPU `3` reproduced `795/1033 = 76.96%` with `35768` trace rows. Both logs ended with `COMMAND_EXIT_CODE="0"` and both trace files cover `1033` task ids.
+- Completed Task 5 offline Route 1/2/3 analysis. Route 1 and Route 2 triggered `0` rows on both trace sources, and Route 3 stopped because single-canvas traces plus no Route 1/2 signal do not justify multi-canvas policy cost.
 
 ## Workflow / Skill Status
 
@@ -34,8 +50,8 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 | gstack `/plan-eng-review` | completed | `experiment_plan.current.en.md` includes engineering review, datasets, baselines, metrics, compute budget, reproducibility, failure modes, and kill criteria | `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.current.zh.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/experiment_plan.history.zh.md` | Current version is `v3` |
 | Superpowers `brainstorming` | not_started | no evidence found | none | The current direction was carried by the gstack-style design docs; run before any future creative spec change |
 | Superpowers `writing-plans` | completed | Current context records the skill was read; `experiment_plan.current.*.md` and history provide the executable plan | `docs/paper_agent/experiment_plan.current.en.md`, `docs/paper_agent/experiment_plan.current.zh.md`, `docs/paper_agent/experiment_plan.history.en.md`, `docs/paper_agent/experiment_plan.history.zh.md` | No separate Superpowers plan file was created |
-| Superpowers `systematic-debugging` | not_needed_yet | no evidence found | none | No code bug required root-cause debugging in this pause window |
-| Superpowers `verification-before-completion` | completed | Log entries `2026-05-31 21:47 CST` and `2026-05-31 22:11 CST` record tests, compile checks, audit regeneration, JSON assertions, and `git diff --check` | `docs/paper_agent/overnight_log.en.md`, `docs/paper_agent/overnight_log.zh.md`, `docs/paper_agent/paper_agent_dashboard.en.md` | Key verification: `Ran 8 tests` / `OK`, `thresholds=4106 strict_viable=0` |
+| Superpowers `systematic-debugging` | completed | During 2026-06-04 verification, the first JSON assertion used the wrong schema path; inspecting the audit JSON and script showed the real path is `cross_validation.aggregate_heldout` | `docs/paper_agent/current_action.md` | Root cause was the assertion command, not changed audit metrics |
+| Superpowers `verification-before-completion` | completed | Log entries `2026-05-31 21:47 CST` and `2026-05-31 22:11 CST` record earlier probe-curve audit verification; 2026-06-04 fresh strict-split verification records unit test, py_compile, audit regeneration, JSON assertions, and `git diff --check` | `docs/paper_agent/current_action.md`, `docs/paper_agent/paper_agent_dashboard.en.md`, `docs/paper_agent/probe_curve_split_score_audit.md` | Key verification: probe-curve audit `Ran 8 tests` / `OK`; strict-split diagnostic `Ran 3 tests` / `OK` with `strict_heldout_pass=False` |
 | Superpowers `requesting-code-review` | blocked | Log entry `2026-05-31 21:47 CST` records that no independent Task/subagent reviewer tool was visible; local diff review plus fresh tests were used as fallback | `docs/paper_agent/overnight_log.en.md`, `docs/paper_agent/overnight_log.zh.md` | Independent reviewer was not completed; residual risk is documented |
 
 ## Latest Result Summary
@@ -46,13 +62,31 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - Offline long-underestimate sweep found no safe heuristic rule from current result fields.
 - Fresh snapshot: `docs/paper_agent/evidence_snapshot.md`, generated by `analysis/build_paper_agent_evidence_snapshot.py`.
 - Probe-curve audit: `4106` thresholds, `0` strict viable; best short-risk is `8.70%`, above the `5%` GPU gate.
-- Verification: `tests/test_analyze_probe_curve_long_signals.py`, `tests/test_build_paper_agent_evidence_snapshot.py`, and `tests/test_diagnose_long_underestimate_policy.py` passed together.
+- Strict-split probe-score audit: `5` deterministic task-id folds, `24` features, `63` aggregate held-out triggers, `47.62%` true-long precision, `32.97%` failed-long recall, `22.22%` short-risk, `7.94%` current-pass risk; `strict_heldout_pass=False`.
+- Verification: the earlier probe-curve audit's `8` focused tests passed; the strict-split diagnostic passed fresh verification on 2026-06-04 with `Ran 3 tests` / `OK`, py_compile, audit regeneration, JSON assertions, and `git diff --check`.
+- LLaDA-Instruct cross-model run: `815/1033 = 78.90%`, below the same-backbone historical LCAS-v3 baseline `817/1033 = 79.09%`. Pairwise: `17` wins, `19` losses, `798` tie-pass, `199` tie-fail. Runtime improved from `6.8661s` to `4.1766s` per sample including probe, but this is negative transfer evidence rather than a claim upgrade.
+- Literature-backbone plan: `docs/paper_agent/experiments/20260609_cross_model_literature_backbone_plan.md`.
+- DreamCoder Base smoke: valid sandbox-outside smoke passed, `2/2`, first two tasks were `2` tie-pass versus the same-backbone baseline, avg total sec including probe `3.1439`.
+- DreamCoder Instruct smoke: valid sandbox-outside smoke passed, `2/2`, first two tasks were `2` tie-pass versus the same-backbone baseline, avg total sec including probe `3.0555`.
+- DreamCoder Base full run: `832/1033 = 80.54%` versus local same-backbone official-canvas cal_lite baseline `825/1033 = 79.86%`; pairwise `27` wins, `20` losses, `805` tie-pass, `181` tie-fail; avg total sec including probe `3.7763` versus `3.7847`. This is a small local positive result, not yet a strong claim.
+- DreamCoder Instruct full run: `834/1033 = 80.74%` versus local same-backbone official-canvas cal_lite baseline `848/1033 = 82.09%`; pairwise `21` wins, `35` losses, `813` tie-pass, `164` tie-fail; avg total sec including probe `3.8472` versus `3.8657`. This is negative transfer evidence.
+- DreamCoder literature positioning: Base is above CAL DreamCoder-Base anchors (`70.2` average, `76.2` best shown) and below LR-DLLM DreamCoder-7B `81.6`; DreamOn DreamCoder `92.1` is training-based. These are anchors, not protocol-matched claims.
+- Dream-7B local pair: candidate `803/1033 = 77.73%` versus local same-backbone cal_lite baseline `802/1033 = 77.64%`; pairwise `28` wins, `27` losses, `775` tie-pass, `203` tie-fail; avg total sec including probe `3.7337` versus `3.6494`. This is a near-tie/slight local positive, not a strong claim.
+- Dream-7B literature positioning: candidate is above the LR-DLLM Dream-7B single-line anchor `76.7`, but DreamOn Dream-7B `88.6` is training-based and much higher. These are anchors, not protocol-matched claims.
+- DiffuCoder-Base local pair: candidate `839/1033 = 81.22%` versus local same-backbone cal_lite baseline `838/1033 = 81.12%`; pairwise `25` wins, `24` losses, `814` tie-pass, `170` tie-fail; avg total sec including probe `3.7538` versus `3.6562`. This is a near-tie/slight local positive, not a strong bounded-repair improvement claim.
+- DiffuCoder literature positioning: both local rows are above CAL DiffuCoder-Base anchors (`68.0` average, `74.8` best shown), but DreamOn DiffuCoder-7B `92.2` is training-based and much higher. These are anchors, not protocol-matched claims.
+- LLaDA-1.5 probe: local path `/tmp/llada15_probe_20260609`; architecture `LLaDAModelLM`; `model_type=llada`; config `mask_token_id=126336`; tokenizer `<|mdm_mask|>` resolves to `126336` while `tokenizer.mask_token` is `None`; all six shards match expected byte sizes with total `16,031,197,144` bytes. This is an API/download result only, not a pass-rate result.
+- LLaDA-1.5 local pair: candidate `818/1033 = 79.19%` versus local same-backbone `cal_lite` LCAS-v3b baseline `817/1033 = 79.09%`; pairwise `18` wins, `17` losses, `800` tie-pass, `198` tie-fail; avg total sec including probe `6.6453` versus `5.4224`. This is a near-tie/slight local positive, not a strong claim. It loses `6` net tasks in oracle `<=8`, gains `+7` total across oracle `>=13`, and official-repair true-long precision is only `10.91%`.
+- LLaDA-MoE local pair: candidate `801/1033 = 77.54%` versus local same-backbone `cal_lite` LCAS-v3b baseline `777/1033 = 75.22%`; pairwise `31` wins, `7` losses, `770` tie-pass, `225` tie-fail; avg total sec including probe `10.6107` versus `8.7025`. All oracle buckets are positive or neutral: `<=8 +9`, `9-12 +5`, `13-16 +4`, `17-24 +6`, `25+ 0`. This is the strongest current local transfer result, but still not an external SOTA claim.
+- LLaDA-Base full trace diagnostics: previous local method trace `769/1033 = 74.44%`, `35257` trace rows; current `midcons` trace `795/1033 = 76.96%`, `35768` trace rows. Route 1/2/3 all fail Gate A and Gate B under offline accounting; no route-specific GPU policy runner is justified.
 
 ## Key Plan Adjustments
 
-- Treat `midcons` as a real short/medium checkpoint, not a full solution.
+- Treat LLaDA-Base `midcons` as a real short/medium checkpoint, not a full solution.
+- Treat LLaDA-Instruct `midcons` as negative transfer evidence.
 - Stop spending GPU on the current official-CAL true-long trigger family until a stronger signal is defined.
 - Prioritize probe-curve multivariate/learned scoring from current outputs; trajectory diagnostics require a trace-enabled smoke run.
+- Treat the first simple strict-split linear probe score as negative evidence, not as a candidate GPU policy.
 - Restrict future GPU experiments to cards `2,3`, waiting rather than interrupting existing jobs.
 - Promote trajectory features, learned length classification, DreamOn-style dynamic canvas control, or LR-DLLM-style length regularization as the next paper-level direction.
 
@@ -62,13 +96,11 @@ The current improvement is too small and too heuristic for a CCF-A contribution 
 
 ## Next Actions
 
-1. Design a multivariate or learned probe-curve score under strict split discipline.
-2. Run CPU-only held-out diagnostics before any GPU smoke run.
-3. Re-check literature/protocol alignment before making any SOTA or competitive claim.
-4. Prepare a trace-enabled smoke plan for GPU `2,3` that waits rather than interrupting existing jobs.
+1. Do not create a route-specific GPU policy runner from the current trace batch; offline gates failed.
+2. Record the trace diagnostics as negative evidence for this specific trace-only/risk-controlled route family.
+3. If continuing this research direction later, design a stronger trace feature family or a separate action brief before any new GPU work.
+4. Keep literature anchors, previous local methods, current methods, and trace diagnostics in separate columns/sections.
 
 ## User Decisions Needed
 
-None right now. A user decision is needed only if the next phase shifts from inference-time rescue to training-time or fine-tuning-based length regularization.
-
-Paused by user request; no further autonomous work should continue until explicitly resumed.
+No GPU experiment is currently running. The current trace batch does not justify a route-specific policy full run.

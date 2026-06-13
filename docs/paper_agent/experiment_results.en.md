@@ -1,6 +1,226 @@
 # Experiment Results
 
-Updated: 2026-05-31 15:56 CST
+Updated: 2026-06-12 19:26 CST
+
+## Three-Way Comparison: Paper-Reported Numbers vs Our Previous Methods vs Current Method
+
+Important terminology correction: the "our previous/local method" column below is not a local reproduction of the corresponding paper method. It is the earlier local method or local control version from this project. Paper-reported numbers are placed in the same table only to show external positioning; they are not the local protocol-matched control.
+
+| Backbone / checkpoint | Relevant paper-reported numbers | Our previous/local method | Current method | Current vs previous | Current relative to paper reports |
+|---|---|---:|---:|---:|---|
+| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | `midcons` `795/1033 = 76.96%` | `+8` tasks / `+0.77pp` | Above CAL best `73.6` and LR-DLLM `69.4` |
+| `GSAI-ML/LLaDA-8B-Instruct` | CAL: avg `69.9`, best shown `76.9` | historical LCAS-v3 `817/1033 = 79.09%` | `midcons` `815/1033 = 78.90%` | `-2` tasks / `-0.19pp` | Above CAL best `76.9`, but below our previous method |
+| `Dream-org/Dream-Coder-v0-Base-7B` | CAL: avg `70.2`, best shown `76.2`; LR-DLLM DreamCoder: `81.6`; DreamOn DreamCoder: `92.1` | official-canvas `cal_lite` `825/1033 = 79.86%` | bounded repair `832/1033 = 80.54%` | `+7` tasks / `+0.68pp` | Above CAL best `76.2`, below LR-DLLM `81.6` and DreamOn `92.1` |
+| `Dream-org/Dream-Coder-v0-Instruct-7B` | No exact matching paper-reported row | official-canvas `cal_lite` `848/1033 = 82.09%` | bounded repair `834/1033 = 80.74%` | `-14` tasks / `-1.36pp` | No direct paper-number comparison; local negative transfer |
+| `Dream-org/Dream-v0-Base-7B` | LR-DLLM Dream-7B: `76.7`; DreamOn Dream-7B: `88.6` | `cal_lite` `802/1033 = 77.64%` | bounded repair `803/1033 = 77.73%` | `+1` task / `+0.10pp` | Slightly above LR-DLLM `76.7`, below DreamOn `88.6` |
+| `apple/DiffuCoder-7B-Base` | CAL: avg `68.0`, best shown `74.8`; DreamOn DiffuCoder: `92.2` | `cal_lite` `838/1033 = 81.12%` | bounded repair `839/1033 = 81.22%` | `+1` task / `+0.10pp` | Above CAL best `74.8`, below DreamOn `92.2` |
+| `GSAI-ML/LLaDA-1.5` | LR-DLLM LLaDA-1.5: `68.9` | `cal_lite` LCAS-v3b `817/1033 = 79.09%` | bounded repair `818/1033 = 79.19%` | `+1` task / `+0.10pp` | Above LR-DLLM `68.9` |
+| `inclusionAI/LLaDA-MoE-7B-A1B-Base` | LR-DLLM LLaDA-MoE: `71.3` | `cal_lite` LCAS-v3b `777/1033 = 75.22%` | bounded repair `801/1033 = 77.54%` | `+24` tasks / `+2.32pp` | Above LR-DLLM `71.3`; strongest current local gain |
+
+Use this table as follows: paper claims can report both the current method's position relative to paper-reported numbers and the local gain over our previous method. The writing must still state that the paper-reported numbers are not local controls under our exact protocol.
+
+## LLaDA-Base Full Trace Long-Rescue Diagnostics
+
+Full trace collection completed for the previous local method and the current `midcons` method. These diagnostics use trace/decode dynamics for triggers and labels only for offline Gate A/B accounting; they are not a new SOTA claim.
+
+| Run | Output | Rows | Trace rows | Pass rate |
+| --- | --- | --- | --- | --- |
+| previous local method trace | /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_cal_lite_lcas_v3b_gpu2_20260612_170552 | 1033 | 35257 | 769/1033 = 74.44% |
+| current midcons trace | /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846 | 1033 | 35768 | 795/1033 = 76.96% |
+
+Offline route analysis:
+
+| Trace source | Route | Triggers | Failed-long | Short | Current-pass risk | Gate A | Gate B | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| previous local method | Route 1 trace-only detector | 0 | 0 | 0 | 0 | no | no | stop |
+| previous local method | Route 2 risk-controlled rescue | 0 | 0 | 0 | 0 | no | no | stop |
+| previous local method | Route 3 multi-canvas trace rerank | 0 | 0 | 0 | 0 | no | no | stop_no_trace_signal |
+| current midcons | Route 1 trace-only detector | 0 | 0 | 0 | 0 | no | no | stop |
+| current midcons | Route 2 risk-controlled rescue | 0 | 0 | 0 | 0 | no | no | stop |
+| current midcons | Route 3 multi-canvas trace rerank | 0 | 0 | 0 | 0 | no | no | stop_no_trace_signal |
+
+Interpretation: no route met the offline continuation rule. This is diagnostic negative evidence; no route-specific GPU policy full run should be launched from these traces.
+
+## LLaDA-MoE Local Same-Backbone Pair
+
+The full `inclusionAI/LLaDA-MoE-7B-A1B-Base` local baseline/candidate pair completed on GPUs `2` and `3`.
+
+Outputs:
+
+- Baseline: `/home/shx/projects/dllm_infilling/outputs_clean/full_lladamoe_cal_lite_lcas_v3b_gpu2_nofa_shared_20260611_112719`
+- Candidate: `/home/shx/projects/dllm_infilling/outputs_clean/full_lladamoe_lcal_official_bounded_repair_gpu3_nofa_shared_20260611_112740`
+- Pairwise analysis: `analysis_outputs/lladamoe_full_pair_20260611_1438`
+
+Verification:
+
+- Baseline log ended with `COMMAND_EXIT_CODE="0"`.
+- Candidate log ended with `COMMAND_EXIT_CODE="0"`.
+- Both `results.jsonl` files have `1033` valid rows and `0` malformed rows.
+- Both output directories contain `summary.json`.
+
+| Model | Run | Pass | Rate | Delta vs local baseline | Avg sec/sample incl. probe | Pairwise W/L/TP/TF |
+|---|---|---:|---:|---:|---:|---:|
+| `inclusionAI/LLaDA-MoE-7B-A1B-Base` | `cal_lite` LCAS-v3b local baseline | `777/1033` | `75.22%` | baseline | `8.7025` | n/a |
+| `inclusionAI/LLaDA-MoE-7B-A1B-Base` | LCAL official bounded repair | `801/1033` | `77.54%` | `+24` tasks / `+2.32pp` | `10.6107` | `31/7/770/225` |
+
+Bucket pairwise by oracle length:
+
+| Oracle bucket | Count | Wins | Losses | Net | Baseline pass | Candidate pass |
+|---|---:|---:|---:|---:|---:|---:|
+| `<=8` | `598` | `16` | `7` | `+9` | `88.46%` | `89.97%` |
+| `9-12` | `232` | `5` | `0` | `+5` | `77.59%` | `79.74%` |
+| `13-16` | `90` | `4` | `0` | `+4` | `57.78%` | `62.22%` |
+| `17-24` | `82` | `6` | `0` | `+6` | `14.63%` | `21.95%` |
+| `25+` | `31` | `0` | `0` | `0` | `12.90%` | `12.90%` |
+
+Repair diagnostics: candidate triggered official repair on `104/1033 = 10.07%` rows, `official_long_suspicion` on `15/1033 = 1.45%`, and `official_mid_rescue` on `23/1033 = 2.23%`. Trigger precision remains weak for true-long detection: `official_repair_true_long_precision = 11.54%`, `official_long_suspicion_true_long_precision = 40.00%`, and `official_mid_rescue_true_long_precision = 13.04%`. The candidate remains strongly under-selective on true-long rows: `under_select_rate_17plus = 91.15%`.
+
+Interpretation: this is the strongest current local transfer result. Unlike the near-tie results on Dream-7B, DiffuCoder-Base, and LLaDA-1.5, LLaDA-MoE gains `+24` tasks with only `7` losses, and gains are positive or neutral in every oracle bucket. The cost is higher runtime: `10.6107s` versus `8.7025s` per sample including probe. This supports a local protocol-matched improvement claim for LLaDA-MoE, but it is still not an external SOTA claim because DreamOn is training-based and much higher on Dream/DiffuCoder/DreamCoder, and LR-DLLM/CAL are not local protocol-matched controls.
+
+Literature positioning: the candidate `77.54%` is above the LR-DLLM LLaDA-MoE single-line anchor `71.3` and its reported baseline anchor `48.8`, but this remains a suggestive anchor rather than a protocol-matched comparison.
+
+Detailed brief: `docs/paper_agent/experiments/20260611_1126_lladamoe_full_pair.md`.
+
+## LLaDA-1.5 Local Same-Backbone Pair
+
+The full `GSAI-ML/LLaDA-1.5` local baseline/candidate pair completed on shared GPUs `2` and `3`.
+
+Outputs:
+
+- Baseline: `/home/shx/projects/dllm_infilling/outputs_clean/full_llada15_cal_lite_lcas_v3b_gpu2_shared_20260610_172705`
+- Candidate: `/home/shx/projects/dllm_infilling/outputs_clean/full_llada15_lcal_official_bounded_repair_gpu3_shared_20260610_172720`
+
+| Model | Run | Pass | Rate | Delta vs local baseline | Avg sec/sample incl. probe | Pairwise W/L/TP/TF |
+|---|---|---:|---:|---:|---:|---:|
+| `GSAI-ML/LLaDA-1.5` | `cal_lite` LCAS-v3b local baseline | `817/1033` | `79.09%` | baseline | `5.4224` | n/a |
+| `GSAI-ML/LLaDA-1.5` | LCAL official bounded repair | `818/1033` | `79.19%` | `+1` task / `+0.10pp` | `6.6453` | `18/17/800/198` |
+
+Bucket summary:
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| LLaDA-1.5 candidate | `90.47%` | `83.19%` | `67.78%` | `21.95%` | `16.13%` |
+| LLaDA-1.5 baseline | `91.47%` | `83.19%` | `64.44%` | `18.29%` | `12.90%` |
+
+Bucket pairwise: candidate loses `6` net tasks in oracle `<=8`, ties `9-12`, and gains `+3`, `+3`, and `+1` in `13-16`, `17-24`, and `25+`.
+
+Repair diagnostics: candidate triggered official repair on `110/1033 = 10.65%` rows. Triggered-row true-long precision is only `12/110 = 10.91%`; `82/110` triggers are oracle `<=8`. `official_long_suspicion` is especially noisy: `29/33` of its triggers are oracle `<=8`.
+
+Interpretation: this is a near-tie/slight local positive result, not a strong claim upgrade. The candidate recovers a few medium/long tasks but pays with short-bucket regressions and higher cost: `6.6453s` versus `5.4224s` per sample including probe. The result supports the broader diagnosis that true-long recovery remains weak and the current official-CAL trigger family is not a precise true-long detector.
+
+Literature positioning: the local LLaDA-1.5 rows are above LR-DLLM's LLaDA-1.5 single-line anchor `68.9` and its reported LLaDA-1.5 baseline anchor `48.8`, but those are literature anchors, not protocol-matched local comparisons.
+
+Detailed brief: `docs/paper_agent/experiments/20260610_1735_full_llada15_parallel_baseline_candidate.md`.
+
+## LLaDA-Instruct Cross-Model Result
+
+The user-approved `GSAI-ML/LLaDA-8B-Instruct + midcons` full run completed on GPUs `2,3`.
+
+Output:
+
+`/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midcons_llada_instruct_off11_13_d3_7_r08_gpus23_20260604_202834`
+
+| Model | Run | Pass | Rate | Avg sec/sample incl. probe | Comparison |
+|---|---|---:|---:|---:|---|
+| `GSAI-ML/LLaDA-8B-Instruct` | historical LCAS-v3 | `817/1033` | `79.09%` | `6.8661` | same-backbone baseline |
+| `GSAI-ML/LLaDA-8B-Instruct` | current `midcons` bounded repair | `815/1033` | `78.90%` | `4.1766` | `-2` tasks vs baseline |
+
+Pairwise comparison: `17` wins, `19` losses, `798` tie-pass, `199` tie-fail. The losses are concentrated in short buckets: `17` in oracle `<=8` and `2` in `9-12`, while the candidate has `4` long-bucket wins among oracle `>=17`.
+
+Interpretation: this is negative transfer evidence. `midcons` remains a useful LLaDA-Base checkpoint, but it does not transfer cleanly to LLaDA-Instruct and should not be used to upgrade the claim. The next experiment phase must compare each literature backbone against its own baseline.
+
+Planning doc: `docs/paper_agent/experiments/20260609_cross_model_literature_backbone_plan.md`.
+
+## DreamCoder Official-Canvas Cross-Backbone Result
+
+The sandbox-outside DreamCoder Base/Instruct full runs completed on GPU `2` and GPU `3`.
+
+Outputs:
+
+- Base: `/home/shx/projects/dllm_infilling/outputs_clean/full_dreamcoder_base_lcal_official_bounded_repair_gpu2_unsandboxed_20260609_123327`
+- Instruct: `/home/shx/projects/dllm_infilling/outputs_clean/full_dreamcoder_instruct_lcal_official_bounded_repair_gpu3_unsandboxed_20260609_123359`
+
+| Model | Run | Pass | Rate | Delta vs local baseline | Avg sec/sample incl. probe | Pairwise W/L/TP/TF |
+|---|---|---:|---:|---:|---:|---:|
+| `Dream-org/Dream-Coder-v0-Base-7B` | official-canvas cal_lite baseline | `825/1033` | `79.86%` | baseline | `3.7847` | n/a |
+| `Dream-org/Dream-Coder-v0-Base-7B` | LCAL official bounded repair | `832/1033` | `80.54%` | `+7` tasks / `+0.68pp` | `3.7763` | `27/20/805/181` |
+| `Dream-org/Dream-Coder-v0-Instruct-7B` | official-canvas cal_lite baseline | `848/1033` | `82.09%` | baseline | `3.8657` | n/a |
+| `Dream-org/Dream-Coder-v0-Instruct-7B` | LCAL official bounded repair | `834/1033` | `80.74%` | `-14` tasks / `-1.36pp` | `3.8472` | `21/35/813/164` |
+
+Bucket summary:
+
+| Model | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| DreamCoder-Base candidate | `91.22%` | `78.46%` | `53.75%` | `32.20%` | `14.81%` |
+| DreamCoder-Base baseline | `90.18%` | `80.51%` | `48.75%` | `32.20%` | `14.81%` |
+| DreamCoder-Instruct candidate | `88.24%` | `86.15%` | `60.00%` | `30.51%` | `25.93%` |
+| DreamCoder-Instruct baseline | `89.58%` | `86.67%` | `66.25%` | `32.20%` | `18.52%` |
+
+Repair diagnostics: Base triggered repair on `115/1033 = 11.13%` rows with only `7.83%` true-long precision among triggers; Instruct triggered on `126/1033 = 12.20%` rows with `7.94%` true-long precision. This confirms that the current trigger family is still mostly not a precise true-long detector.
+
+Interpretation: DreamCoder-Base is a small local same-backbone positive result, but not a strong claim upgrade because the effect is only `+7` tasks, pairwise losses remain (`20`), and long buckets do not improve. DreamCoder-Instruct is negative transfer evidence and should not be used to claim cross-backbone robustness.
+
+Literature positioning: the Base result is above CAL's DreamCoder-Base anchors (`70.2` average, `76.2` best shown) and below LR-DLLM DreamCoder-7B `81.6`; DreamOn DreamCoder `92.1` is training-based. These are suggestive anchors, not protocol-matched evidence. There is no clean literature row for this exact local DreamCoder-Instruct checkpoint.
+
+Detailed brief: `docs/paper_agent/experiments/20260609_1231_full_dreamcoder_parallel_lcal_official_bounded_repair.md`.
+
+## Dream-7B Official-Canvas Local Pair
+
+The sandbox-outside Dream-7B local same-backbone pair completed on GPU `2` and GPU `3`.
+
+Outputs:
+
+- Baseline: `/home/shx/projects/dllm_infilling/outputs_clean/full_dream_base_cal_lite_alpha010_official_canvas_gpu2_unsandboxed_20260609_170219`
+- Candidate: `/home/shx/projects/dllm_infilling/outputs_clean/full_dream_base_lcal_official_bounded_repair_gpu3_unsandboxed_20260609_170219`
+
+| Model | Run | Pass | Rate | Delta vs local baseline | Avg sec/sample incl. probe | Pairwise W/L/TP/TF |
+|---|---|---:|---:|---:|---:|---:|
+| `Dream-org/Dream-v0-Base-7B` | official-canvas cal_lite baseline | `802/1033` | `77.64%` | baseline | `3.6494` | n/a |
+| `Dream-org/Dream-v0-Base-7B` | LCAL official bounded repair | `803/1033` | `77.73%` | `+1` task / `+0.10pp` | `3.7337` | `28/27/775/203` |
+
+Bucket summary:
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| Dream-7B candidate | `88.39%` | `77.44%` | `47.50%` | `25.42%` | `18.52%` |
+| Dream-7B baseline | `87.95%` | `79.49%` | `48.75%` | `23.73%` | `11.11%` |
+
+Repair diagnostics: the candidate triggered repair on `101/1033 = 9.78%` rows, with `60/101 = 59.41%` triggered-row pass rate and only `13/101 = 12.87%` true-long precision among triggers. Triggered rows were mostly short: `75` of `101` triggers were in oracle `<=8`.
+
+Interpretation: Dream-7B is a near-tie/slight local positive result. The candidate gains only `+1` task, has nearly balanced pairwise wins/losses, and is slightly slower than the local baseline. Long buckets improve by `+3` total tasks across oracle `>=17`, but `9-12` and `13-16` regress by `-5` total tasks. This is useful protocol-matched evidence, but not a strong claim.
+
+Literature positioning: candidate `77.73%` is above the LR-DLLM Dream-7B single-line anchor `76.7`, while DreamOn Dream-7B `88.6` is training-based and much higher. These are literature anchors, not protocol-matched local comparisons.
+
+Detailed brief: `docs/paper_agent/experiments/20260609_1700_full_dream_base_parallel_baseline_candidate.md`.
+
+## DiffuCoder-Base Official-Canvas Local Pair
+
+The sandbox-outside DiffuCoder-Base local same-backbone pair completed on GPU `2` and GPU `3`.
+
+Outputs:
+
+- Baseline: `/home/shx/projects/dllm_infilling/outputs_clean/full_diffucoder_base_cal_lite_alpha010_official_canvas_gpu2_unsandboxed_20260609_192508`
+- Candidate: `/home/shx/projects/dllm_infilling/outputs_clean/full_diffucoder_base_lcal_official_bounded_repair_gpu3_unsandboxed_20260609_192533`
+
+| Model | Run | Pass | Rate | Delta vs local baseline | Avg sec/sample incl. probe | Pairwise W/L/TP/TF |
+|---|---|---:|---:|---:|---:|---:|
+| `apple/DiffuCoder-7B-Base` | official-canvas cal_lite baseline | `838/1033` | `81.12%` | baseline | `3.6562` | n/a |
+| `apple/DiffuCoder-7B-Base` | LCAL official bounded repair | `839/1033` | `81.22%` | `+1` task / `+0.10pp` | `3.7538` | `25/24/814/170` |
+
+Bucket summary:
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| DiffuCoder-Base candidate | `90.48%` | `83.08%` | `51.25%` | `37.29%` | `22.22%` |
+| DiffuCoder-Base baseline | `89.73%` | `82.05%` | `56.25%` | `38.98%` | `25.93%` |
+
+Repair diagnostics: candidate triggered repair on `113/1033 = 10.94%` rows, with `86/113 = 76.11%` triggered-row pass rate but only `9/113 = 7.96%` true-long precision among triggers. Triggered rows are mostly short: `89` of `113` triggers are in oracle `<=8`.
+
+Interpretation: DiffuCoder-Base is a strong local backbone, but the bounded-repair candidate is only a near-tie/slight local positive over its own baseline. Gains are in `<=8` and `9-12`; `13-16`, `17-24`, and `25+` regress. This is useful protocol-matched evidence, but not a strong improvement claim.
+
+Literature positioning: both local DiffuCoder rows are above CAL's DiffuCoder-Base anchors (`68.0` average, `74.8` best shown), while DreamOn DiffuCoder-7B `92.2` is training-based and much higher. These are literature anchors, not protocol-matched local comparisons.
+
+Detailed brief: `docs/paper_agent/experiments/20260609_1925_full_diffucoder_base_parallel_baseline_candidate.md`.
 
 ## Current A6000 Checkpoint
 
@@ -82,6 +302,42 @@ Result:
 
 Interpretation: existing probe-curve scalar features are informative but not safe enough as a direct GPU policy. The next CPU step should be multivariate or learned scoring; trajectory analysis requires a trace-enabled smoke run.
 
+## Probe-Curve Strict-Split Score Audit
+
+Command:
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_split_score.py
+```
+
+Tracked outputs:
+
+- `docs/paper_agent/probe_curve_split_score_audit.json`
+- `docs/paper_agent/probe_curve_split_score_audit.md`
+- `docs/paper_agent/probe_curve_split_score_audit.zh.md`
+
+Result:
+
+- split discipline: `5` deterministic SHA256 task-id folds with train-thresholds only.
+- rows: `1033`.
+- feature_count: `24`.
+- aggregate held-out trigger_count: `63`.
+- true_long_precision: `47.62%`.
+- failed_long_recall: `32.97%`.
+- short_risk_rate: `22.22%`.
+- current_pass_risk_rate: `7.94%`.
+- strict_heldout_pass: `False`.
+
+Fresh verification (2026-06-04):
+
+- unit test: `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_analyze_probe_curve_split_score.py` -> `Ran 3 tests` / `OK`.
+- compile: `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile analysis/analyze_probe_curve_split_score.py` -> exit `0`.
+- audit regeneration: `/home/shx/miniconda3/envs/dllm_env/bin/python analysis/analyze_probe_curve_split_score.py` -> `strict_heldout_pass=False heldout_triggers=63 short_risk=22.22%`.
+- JSON assertions: confirmed `trigger_count=63`, `short_risk_rate=0.2222`, `current_pass_risk_rate=0.0794`, `true_long_precision=0.4762`, `failed_long_recall=0.3297`, and `strict_heldout_pass=False` under `cross_validation.aggregate_heldout`.
+- diff hygiene: `git diff --check` passed for the intended files.
+
+Interpretation: the simple dependency-free multivariate probe-curve score fails the offline GPU gate. It has much higher short-risk than both the required `5%` gate and the single-feature best threshold's `8.70%` short-risk. This is negative evidence against launching a GPU smoke run from the current probe-curve fields alone.
+
 ## Paper Relevance
 
 This supports a narrow but honest paper claim: medium-length under-selection can be repaired safely by confidence-curve agreement. It does not yet support a broad CCF-A claim or a SOTA claim.
@@ -91,6 +347,6 @@ This supports a narrow but honest paper claim: medium-length under-selection can
 The next result should be one of:
 
 - a diagnostic feature snapshot proving a stronger long-tail signal exists;
-- a smoke GPU run showing no short-bucket regression;
+- a safer diagnostic signal, trace-enabled evidence, or a smoke GPU run showing no short-bucket regression;
 - a full same-hardware run improving long buckets;
 - or a rigorous negative result that justifies pivoting toward dynamic canvas or length regularization.
