@@ -140,3 +140,13 @@ Result summary：
 - short_risk_rate：`22.22%`。
 - current_pass_risk_rate：`7.94%`。
 - strict_heldout_pass：`False`。
+
+## Entry 2026-06-13 23:14 CST
+
+- timestamp：2026-06-13 23:14 CST
+- current phase：Route2 full follow-up 收口与下一步 error analysis 准备
+- what was done：监控两条 LLaDA-Base Route2 trace-gated long-rescue full runs 到结束，验证日志退出码、row count、summary 和 step traces，并将主表、bucket 表、pairwise、trigger diagnostics 和 failed-long coverage 写入 `experiment_results.*.md`、dashboard、checkpoint 和 current action。
+- evidence or files inspected：Broad 输出 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`，Precision 输出 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`，baseline `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`，日志 `logs/paper_agent/20260613_full_route2_broad_gpu2.log` 和 `logs/paper_agent/20260613_full_route2_precision_gpu3.log`。
+- decision made：将 Route2 full follow-up 记录为小幅正收益和诊断证据，而不是 true-long problem 已解决。Precision policy 更干净，Broad policy 净增更高但有 short-loss 风险。
+- uncertainty/risk：这轮 full run 仍然很 heuristic；`25+` bucket 不提升，且 failed-long triggered rows 大多救不回来，说明 fixed `len=24` rescue 不是充分方案。
+- next action：先做 CPU-only Route2 error analysis，比较 triggered-but-still-failed 与 missed failed-long rows，再决定是否设计 adaptive rescue length、更强 generation-side rescue 或新 length signal。

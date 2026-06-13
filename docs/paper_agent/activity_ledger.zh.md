@@ -1,5 +1,14 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-13 23:14 CST
+
+- action：收口用户批准后的两条 LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs，并将结果写回恢复入口。
+- evidence：broad plateau 日志 `logs/paper_agent/20260613_full_route2_broad_gpu2.log`、输出 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`；precision top1/conf 日志 `logs/paper_agent/20260613_full_route2_precision_gpu3.log`、输出 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`。两条日志均以 `COMMAND_EXIT_CODE=0` 结束，两个输出均有 `1033` valid rows、`0` malformed rows 和 `summary.json`。
+- result：对照 current `midcons` baseline `795/1033 = 76.96%`，broad plateau 得到 `801/1033 = 77.54%`，pairwise `7` wins / `1` loss / `794` tie-pass / `231` tie-fail；precision top1/conf 得到 `800/1033 = 77.44%`，pairwise `5` wins / `0` losses / `795` tie-pass / `233` tie-fail。
+- diagnostics：broad 触发 `73` 行，trigger true-long precision `53.42%`，bucket net 为 `<=8 0`、`9-12 +2`、`13-16 +2`、`17-24 +2`、`25+ 0`。Precision 触发 `57` 行，trigger true-long precision `61.40%`，bucket net 为 `<=8 +1`、`9-12 +1`、`13-16 +2`、`17-24 +1`、`25+ 0`。`91` 个 baseline failed-long rows 中，Broad 触发 `39` 但只救回 `2`，Precision 触发 `35` 但只救回 `1`。
+- interpretation：Route 2 trace gate 有真实但温和的 full-run 正信号。Precision policy 更干净：无 losses、无 short loss；broad 净增更大但有 `1` 个 short loss。两者都没有解决 true-long，尤其 `25+` 不变；当前瓶颈更像 fixed `len=24` rescue 质量/长度选择，而不只是 gate 召回。
+- next：把 precision policy 当作 paper-cleaner incremental evidence；不要继续无设计地调阈值跑 full。下一步先做 triggered-but-still-failed / missed failed-long error analysis；若追求更强 CCF-A claim，需要设计 adaptive rescue length、更强 generation-side rescue 或更强 length signal。
+
 ## 2026-06-13 20:55 CST
 
 - action：实现并运行 CPU-only `trace_feature_audit_v2`，用于检查 v1 Route 1/2 公式零触发后是否仍存在更复杂的 trace signal。

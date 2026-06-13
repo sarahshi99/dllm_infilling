@@ -1,5 +1,14 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-13 23:14 CST
+
+- action: closed out the two user-approved LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs and updated the recovery path.
+- evidence: broad plateau log `logs/paper_agent/20260613_full_route2_broad_gpu2.log`, output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`; precision top1/conf log `logs/paper_agent/20260613_full_route2_precision_gpu3.log`, output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`. Both logs ended with `COMMAND_EXIT_CODE=0`, and both outputs have `1033` valid rows, `0` malformed rows, and `summary.json`.
+- result: against the current `midcons` baseline `795/1033 = 76.96%`, broad plateau reaches `801/1033 = 77.54%`, pairwise `7` wins / `1` loss / `794` tie-pass / `231` tie-fail; precision top1/conf reaches `800/1033 = 77.44%`, pairwise `5` wins / `0` losses / `795` tie-pass / `233` tie-fail.
+- diagnostics: broad triggers `73` rows with `53.42%` trigger true-long precision, and bucket net `<=8 0`, `9-12 +2`, `13-16 +2`, `17-24 +2`, `25+ 0`. Precision triggers `57` rows with `61.40%` trigger true-long precision, and bucket net `<=8 +1`, `9-12 +1`, `13-16 +2`, `17-24 +1`, `25+ 0`. Among `91` baseline failed-long rows, Broad triggers `39` and rescues only `2`; Precision triggers `35` and rescues only `1`.
+- interpretation: the Route 2 trace gate has a real but modest positive full-run signal. The precision policy is cleaner, with no losses and no short loss; broad has a larger net gain but `1` short loss. Neither solves true-long, especially because `25+` is unchanged. The current bottleneck looks more like fixed `len=24` rescue quality/length choice than only gate recall.
+- next: treat the precision policy as paper-cleaner incremental evidence. Do not keep threshold-tuning full runs without a new design. First run triggered-but-still-failed / missed failed-long error analysis; a stronger CCF-A claim needs adaptive rescue length, stronger generation-side rescue, or a stronger length signal.
+
 ## 2026-06-13 20:55 CST
 
 - action: implemented and ran CPU-only `trace_feature_audit_v2` to test whether richer trace signals exist after the v1 Route 1/2 formulas produced zero triggers.

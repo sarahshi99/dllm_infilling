@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-06-13 20:55 CST
+更新时间：2026-06-13 23:14 CST
 
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
@@ -8,7 +8,7 @@
 
 | Backbone / checkpoint | 相关论文报告值 | 我们之前的方法或本地旧方法 | 当前方法 | 当前 vs 之前 | 当前相对论文报告值的位置 |
 |---|---|---:|---:|---:|---|
-| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | `midcons` `795/1033 = 76.96%` | `+8` tasks / `+0.77pp` | 高于 CAL best `73.6` 和 LR-DLLM `69.4` |
+| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | 主线 `midcons` `795/1033 = 76.96%`; Route2 precision `800/1033 = 77.44%`, broad `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision `+13` tasks / `+1.26pp`; Route2 broad `+14` tasks / `+1.36pp` vs A6000 control | 高于 CAL best `73.6` 和 LR-DLLM `69.4`；Route2 是小幅 follow-up evidence，不是 external SOTA claim |
 | `GSAI-ML/LLaDA-8B-Instruct` | CAL: avg `69.9`, best shown `76.9` | historical LCAS-v3 `817/1033 = 79.09%` | `midcons` `815/1033 = 78.90%` | `-2` tasks / `-0.19pp` | 高于 CAL best `76.9`，但低于我们之前方法 |
 | `Dream-org/Dream-Coder-v0-Base-7B` | CAL: avg `70.2`, best shown `76.2`; LR-DLLM DreamCoder: `81.6`; DreamOn DreamCoder: `92.1` | official-canvas `cal_lite` `825/1033 = 79.86%` | bounded repair `832/1033 = 80.54%` | `+7` tasks / `+0.68pp` | 高于 CAL best `76.2`，低于 LR-DLLM `81.6` 和 DreamOn `92.1` |
 | `Dream-org/Dream-Coder-v0-Instruct-7B` | 无精确匹配的论文 reported row | official-canvas `cal_lite` `848/1033 = 82.09%` | bounded repair `834/1033 = 80.74%` | `-14` tasks / `-1.36pp` | 不能做直接论文数值比较；本地为 negative transfer |
@@ -43,7 +43,7 @@ Interpretation：没有任何 route 满足 offline continuation rule。这是 di
 
 ## Trace Feature Audit V2
 
-`trace_feature_audit_v2` 是 CPU-only offline diagnostic，不报告新的 pass rate，也没有启动 GPU 工作。它复用上面的两个 full trace outputs，尝试用更丰富的 trace-shape、stop-reason、motif 和 model-assisted discovery family 找到可读的 long-rescue gate。最终有效输出目录为 `analysis_outputs/trace_feature_audit_v2_20260613_204721`。
+`trace_feature_audit_v2` 是 CPU-only offline diagnostic，不报告新的 pass rate；该 audit 本身没有启动 GPU 工作。它复用上面的两个 full trace outputs，尝试用更丰富的 trace-shape、stop-reason、motif 和 model-assisted discovery family 找到可读的 long-rescue gate。最终有效输出目录为 `analysis_outputs/trace_feature_audit_v2_20260613_204721`。
 
 Decision：`diagnostic_only`。原因是 previous trace source 出现 policy-level 候选，但 current `midcons` trace source 只达到 diagnostic-only；跨源稳定性不足以直接启动 Route 2 GPU policy runner。
 
@@ -63,7 +63,56 @@ Top held-out train-selected candidates：
 | midcons | `top1_last_le_0p667969_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 4 | 1 | 18 | 9 | 2 | 0 | 0.500 |
 | midcons | `top1_last_le_0p625_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 3 | 1 | 12 | 8 | 2 | 0 | 0.667 |
 
-Interpretation：v2 说明 trace features 并非完全无信号，特别是 low `top1_last`、low confidence/gap、late plateau 这类候选能抓到 failed-long rows。但固定规则做跨源/全量 transfer 时 short-risk 仍偏高，因此当前证据应作为下一轮更严格 gate/smoke 设计的依据，而不是直接启动 full GPU policy run。
+Interpretation：v2 说明 trace features 并非完全无信号，特别是 low `top1_last`、low confidence/gap、late plateau 这类候选能抓到 failed-long rows。但固定规则做跨源/全量 transfer 时 short-risk 仍偏高，因此该 audit 的原始结论是：证据应作为下一轮更严格 gate/smoke 设计依据，而不是自动启动 full GPU policy run。后续在用户明确要求继续推进后，额外完成了两条 Route 2 full follow-up runs，见下一节。
+
+## LLaDA-Base Route2 Trace-Gated Long Rescue Full Runs
+
+用户明确偏好 full run 后，已在 GPU `2/3` 上完成两条 Route2 trace-gated long-rescue full policy runs。策略只用 inference-time trace/decode features 触发固定 `len=24` rescue；oracle/verifier labels 只用于离线统计，不参与选择 primary 或 rescue output。
+
+输出目录：
+
+- Broad：`/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`
+- Precision：`/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`
+- 对照 baseline：current `midcons` trace run `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`
+
+验证：两条日志均以 `COMMAND_EXIT_CODE=0` 结束；两条 `results.jsonl` 均有 `1033` 行；Broad 有 `39740` 条 step traces，Precision 有 `38872` 条 step traces；两个输出目录均有 `summary.json`。
+
+| Run | Pass | Rate | Delta vs current `midcons` | Avg sec incl. probe |
+|---|---:|---:|---:|---:|
+| current `midcons` baseline | `795/1033` | `76.96%` | baseline | n/a |
+| Route2 broad len24 | `801/1033` | `77.54%` | `+6` tasks / `+0.58pp` | `5.0852` |
+| Route2 precision len24 | `800/1033` | `77.44%` | `+5` tasks / `+0.48pp` | `5.0945` |
+
+Trigger / pairwise：
+
+| Policy | Triggers | Trigger pass | True-long precision | Pairwise W/L/TP/TF vs `midcons` | Short triggers | Primary-pass risk |
+|---|---:|---:|---:|---:|---:|---:|
+| Route2 broad len24 | `73` (`7.07%`) | `9.59%` | `53.42%` | `7/1/794/231` | `10` | `1` |
+| Route2 precision len24 | `57` (`5.52%`) | `8.77%` | `61.40%` | `5/0/795/233` | `6` | `0` |
+
+Oracle bucket pass rates：
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| current `midcons` baseline | `89.97%` | `78.45%` | `58.89%` | `20.73%` | `16.13%` |
+| Route2 broad len24 | `89.97%` | `79.31%` | `61.11%` | `23.17%` | `16.13%` |
+| Route2 precision len24 | `90.13%` | `78.88%` | `61.11%` | `21.95%` | `16.13%` |
+
+Bucket pairwise vs current `midcons`：
+
+| Policy | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| Route2 broad len24 | `W1/L1/net+0` | `W2/L0/net+2` | `W2/L0/net+2` | `W2/L0/net+2` | `W0/L0/net+0` |
+| Route2 precision len24 | `W1/L0/net+1` | `W1/L0/net+1` | `W2/L0/net+2` | `W1/L0/net+1` | `W0/L0/net+0` |
+
+Long-failure coverage：
+
+| Policy | Failed-long total | Failed-long triggered | Rescue wins in failed-long | Triggered but still fail | Failed-long not triggered |
+|---|---:|---:|---:|---:|---:|
+| Route2 broad len24 | `91` | `39` | `2` | `37` | `52` |
+| Route2 precision len24 | `91` | `35` | `1` | `34` | `56` |
+
+Interpretation：Route2 full run 是小幅正收益，而不是长长度瓶颈被解决。Broad 相比 current `midcons` 净增 `+6` tasks，但有 `1` 个 primary-pass loss 和更多 short triggers；Precision 净增 `+5` tasks 且本次没有 observed primary-pass loss，更安全但覆盖更少。最关键诊断是：gate 能抓到一部分 failed-long rows，但固定 `len=24` rescue 大多救不回来。`91` 个 baseline failed-long rows 中，Broad 触发 `39` 个但只救回 `2` 个，Precision 触发 `35` 个但只救回 `1` 个。下一步应分析 triggered-but-still-failed 和 missed failed-long rows，再决定是否设计 training-free adaptive rescue length 或更强 generation-side rescue。
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

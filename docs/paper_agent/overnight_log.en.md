@@ -140,3 +140,13 @@ Result summary:
 - short_risk_rate: `22.22%`.
 - current_pass_risk_rate: `7.94%`.
 - strict_heldout_pass: `False`.
+
+## Entry 2026-06-13 23:14 CST
+
+- timestamp: 2026-06-13 23:14 CST
+- current phase: Route2 full follow-up closeout and next error-analysis setup
+- what was done: Monitored the two LLaDA-Base Route2 trace-gated long-rescue full runs to completion, verified log exit codes, row counts, summaries, and step traces, then wrote the main table, bucket table, pairwise accounting, trigger diagnostics, and failed-long coverage into `experiment_results.*.md`, the dashboards, the checkpoint, and current action.
+- evidence or files inspected: Broad output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`, Precision output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`, baseline `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`, logs `logs/paper_agent/20260613_full_route2_broad_gpu2.log` and `logs/paper_agent/20260613_full_route2_precision_gpu3.log`.
+- decision made: Record the Route2 full follow-up as a small positive result and useful diagnostic evidence, not as a solved true-long problem. The precision policy is cleaner; the broad policy gains slightly more but has short-loss risk.
+- uncertainty/risk: The result remains heuristic; the `25+` bucket does not improve, and most triggered failed-long rows still fail after fixed `len=24` rescue, so this fixed rescue is not sufficient.
+- next action: Run CPU-only Route2 error analysis comparing triggered-but-still-failed rows with missed failed-long rows, then decide whether to design adaptive rescue length, stronger generation-side rescue, or a new length signal.
