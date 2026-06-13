@@ -1,6 +1,6 @@
 # Paper Agent Pause Checkpoint
 
-Timestamp: 2026-06-12 19:31 CST
+Timestamp: 2026-06-13 20:55 CST
 
 ## Current Branch
 
@@ -8,7 +8,7 @@ Timestamp: 2026-06-12 19:31 CST
 
 ## Current Phase
 
-The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue Task 1/2/3/4/5 are complete and freshly verified. Both full trace runs completed successfully, and offline Route 1/2/3 analysis produced negative evidence. Do not create a route-specific GPU policy runner from this trace batch.
+The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` also completed and produced `diagnostic_only`: there is partial trace signal, but not enough cross-source stability for a direct full GPU policy runner.
 
 ## Completed Items
 
@@ -53,6 +53,7 @@ The literature-backbone local same-backbone matrix has completed through `inclus
 - Implemented `analysis/analyze_trace_long_rescue_routes.py` and `analysis/print_trace_long_rescue_report.py`; verified the expanded Task 3 test set with `Ran 6 tests` / `OK`, py_compile for all three trace-long-rescue analysis scripts, and `git diff --check`.
 - Completed serial Task 4 full trace collection. Previous local method trace run on GPU `2` verified at `769/1033 = 74.44%` with `35257` trace rows; current `midcons` trace run on GPU `3` verified at `795/1033 = 76.96%` with `35768` trace rows.
 - Completed Task 5 offline Route 1/2/3 analysis on both full trace outputs. All routes failed Gate A/B; Route 1/2 had `0` triggers and Route 3 stopped without route signal, so no policy runner is justified.
+- Implemented and ran CPU-only `trace_feature_audit_v2` under `superpowers:executing-plans`. Final output is `analysis_outputs/trace_feature_audit_v2_20260613_204721`; decision is `diagnostic_only`. Previous source has policy-level candidates, but current `midcons` source is diagnostic-only, so no direct full GPU policy runner is justified.
 
 ## Current Central Claim
 
@@ -88,10 +89,18 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - LLaDA-1.5 probe: local path `/tmp/llada15_probe_20260609`; architecture `LLaDAModelLM`; `model_type=llada`; config `mask_token_id=126336`; tokenizer `<|mdm_mask|>` resolves to `126336` while `tokenizer.mask_token` is `None`; six shards match expected byte sizes with total `16,031,197,144` bytes. Interpretation: runner family is likely compatible, but this is not a GPU/verifier result and gives no pass rate.
 - LLaDA-1.5 full local pair: candidate `818/1033 = 79.19%`; local same-backbone `cal_lite` LCAS-v3b baseline `817/1033 = 79.09%`; pairwise `18` wins, `17` losses, `800` tie-pass, `198` tie-fail; avg total sec including probe `6.6453` versus `5.4224`. Interpretation: near-tie/slight local positive, with short-bucket regression and low official-repair true-long precision (`10.91%`).
 - LLaDA-MoE full local pair: candidate `801/1033 = 77.54%`; local same-backbone `cal_lite` LCAS-v3b baseline `777/1033 = 75.22%`; pairwise `31` wins, `7` losses, `770` tie-pass, `225` tie-fail; avg total sec including probe `10.6107` versus `8.7025`. Bucket deltas are nonnegative in every oracle bucket: `<=8 +9`, `9-12 +5`, `13-16 +4`, `17-24 +6`, `25+ 0`. Interpretation: strongest current local transfer result, but slower and still not external SOTA.
+- Trace feature audit v2: output `analysis_outputs/trace_feature_audit_v2_20260613_204721`; decision `diagnostic_only`; previous source `policy_candidate`; midcons source `diagnostic_only`. Strongest midcons held-out candidate: `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, with `18` triggers, `9` failed-long, `2` short-risk, `0` current-pass risk, and `0.500` true-long precision. This is useful diagnostic signal but not enough for full GPU policy execution.
 
 ## Running Or Just-Ended Commands
 
-No trace-long-rescue GPU command is running as of 2026-06-12 19:31 CST. Completed current `midcons` trace run:
+No trace-long-rescue or Route 2 GPU command is running as of 2026-06-13 20:55 CST. The latest action was CPU-only audit v2:
+
+- command: `/home/shx/miniconda3/envs/dllm_env/bin/python analysis/trace_feature_audit_v2.py ... --output-dir analysis_outputs/trace_feature_audit_v2_20260613_204721 --folds 5`
+- output: `analysis_outputs/trace_feature_audit_v2_20260613_204721`
+- result: compact JSON printed `decision=diagnostic_only`, `previous=policy_candidate`, `midcons=diagnostic_only`
+- decision: do not start a full GPU policy runner without a new small-smoke action brief.
+
+Completed current `midcons` trace run:
 
 - tmux session: `trace_llada_base_midcons_20260612` exited.
 - log: `/home/shx/projects/dllm_infilling/git_workspace/logs/paper_agent/20260612_full_trace_llada_base_midcons_gpu3.log`

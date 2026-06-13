@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-13 20:55 CST
+
+- action: implemented and ran CPU-only `trace_feature_audit_v2` to test whether richer trace signals exist after the v1 Route 1/2 formulas produced zero triggers.
+- evidence: implementation `analysis/trace_feature_audit_v2.py`, tests `tests/test_trace_feature_audit_v2.py`, final output directory `analysis_outputs/trace_feature_audit_v2_20260613_204721`, and report `analysis_outputs/trace_feature_audit_v2_20260613_204721/report.md`.
+- result: overall decision is `diagnostic_only`. The previous source has `1033` rows, `113` true-long rows, `96` failed-long rows, and source decision `policy_candidate`; the current `midcons` source has `1033` rows, `113` true-long rows, `91` failed-long rows, and source decision `diagnostic_only`.
+- diagnostics: the strongest midcons candidate, `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, has `18` held-out triggers, `9` failed-long, `2` short-risk, `0` current-pass risk, and `0.500` true-long precision. This shows trace features carry signal, but cross-source stability and fixed-rule risk are still insufficient.
+- next: do not launch a full GPU policy runner directly. If Route 2 continues, first write a small GPU smoke action brief around the low-top1 / late-plateau / low-confidence family.
+
 ## 2026-06-12 19:31 CST
 
 - action: completed Task 4/5 full trace collection and offline route analysis for trace-long-rescue.

@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-06-12 19:26 CST
+更新时间：2026-06-13 20:55 CST
 
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
@@ -40,6 +40,30 @@ Offline route analysis：
 | current midcons | Route 3 multi-canvas trace rerank | 0 | 0 | 0 | 0 | no | no | stop_no_trace_signal |
 
 Interpretation：没有任何 route 满足 offline continuation rule。这是 diagnostic negative evidence；不应基于这批 traces 启动 route-specific GPU policy full run。
+
+## Trace Feature Audit V2
+
+`trace_feature_audit_v2` 是 CPU-only offline diagnostic，不报告新的 pass rate，也没有启动 GPU 工作。它复用上面的两个 full trace outputs，尝试用更丰富的 trace-shape、stop-reason、motif 和 model-assisted discovery family 找到可读的 long-rescue gate。最终有效输出目录为 `analysis_outputs/trace_feature_audit_v2_20260613_204721`。
+
+Decision：`diagnostic_only`。原因是 previous trace source 出现 policy-level 候选，但 current `midcons` trace source 只达到 diagnostic-only；跨源稳定性不足以直接启动 Route 2 GPU policy runner。
+
+| Source | Rows | True-long | Failed-long | Short | Decision |
+|---|---:|---:|---:|---:|---|
+| previous | 1033 | 113 | 96 | 598 | policy_candidate |
+| midcons | 1033 | 113 | 91 | 598 | diagnostic_only |
+
+Top held-out train-selected candidates：
+
+| Source | Candidate | Decision | Fold | Train rank | Triggers | Failed-long | Short risk | Current-pass risk | Precision |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| previous | `confidence_first_le_0p875_AND_gap_last_le_0p84375` | policy_candidate | 1 | 2 | 21 | 10 | 4 | 4 | 0.476 |
+| previous | `confidence_first_le_0p882812_AND_gap_last_le_0p84375` | policy_candidate | 4 | 3 | 25 | 11 | 5 | 3 | 0.440 |
+| previous | `top1_last_le_0p859375_AND_confidence_first_le_0p875` | policy_candidate | 1 | 3 | 20 | 10 | 3 | 4 | 0.500 |
+| previous | `top1_last_le_0p605469_AND_confidence_min_le_0p730469` | policy_candidate | 3 | 4 | 15 | 10 | 3 | 0 | 0.667 |
+| midcons | `top1_last_le_0p667969_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 4 | 1 | 18 | 9 | 2 | 0 | 0.500 |
+| midcons | `top1_last_le_0p625_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 3 | 1 | 12 | 8 | 2 | 0 | 0.667 |
+
+Interpretation：v2 说明 trace features 并非完全无信号，特别是 low `top1_last`、low confidence/gap、late plateau 这类候选能抓到 failed-long rows。但固定规则做跨源/全量 transfer 时 short-risk 仍偏高，因此当前证据应作为下一轮更严格 gate/smoke 设计的依据，而不是直接启动 full GPU policy run。
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-13 20:55 CST
+
+- action：实现并运行 CPU-only `trace_feature_audit_v2`，用于检查 v1 Route 1/2 公式零触发后是否仍存在更复杂的 trace signal。
+- evidence：实现文件 `analysis/trace_feature_audit_v2.py`，测试 `tests/test_trace_feature_audit_v2.py`，最终输出目录 `analysis_outputs/trace_feature_audit_v2_20260613_204721`，报告 `analysis_outputs/trace_feature_audit_v2_20260613_204721/report.md`。
+- result：overall decision 为 `diagnostic_only`。Previous source 有 `1033` rows、`113` true-long、`96` failed-long，source decision 为 `policy_candidate`；current `midcons` source 有 `1033` rows、`113` true-long、`91` failed-long，source decision 为 `diagnostic_only`。
+- diagnostics：最有希望的 midcons 候选 `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16` 在 held-out 上触发 `18` 行，包含 `9` 个 failed-long、`2` 个 short-risk、`0` 个 current-pass risk，true-long precision 为 `0.500`。这说明 trace features 有信号，但跨源稳定性和固定规则风险仍不足。
+- next：不要直接启动 full GPU policy runner。若继续 Route 2，应先写 small GPU smoke action brief，围绕 low top1 / late plateau / low confidence family 做更严格验证。
+
 ## 2026-06-12 19:31 CST
 
 - action：完成 trace-long-rescue 的 Task 4/5 full trace collection 和 offline route analysis。

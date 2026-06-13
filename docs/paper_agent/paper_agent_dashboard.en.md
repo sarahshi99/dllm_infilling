@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-Updated: 2026-06-12 19:26 CST
+Updated: 2026-06-13 20:55 CST
 
 ## Current Research Goal
 
@@ -14,7 +14,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 
 ## Current Experiment Plan Version
 
-`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation `2,3`, now extended with full trace-long-rescue diagnostics. The current A6000 LLaDA-Base checkpoint is `midcons`; trace-long-rescue Task 1/2/3/4/5 are complete. Offline Route 1/2/3 analysis produced negative evidence, so no route-specific GPU policy runner should be created from this trace batch.
+`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation `2,3`, now extended with full trace-long-rescue diagnostics and CPU-only `trace_feature_audit_v2`. The current A6000 LLaDA-Base checkpoint is `midcons`; v1 Route 1/2/3 analysis produced negative evidence, while v2 found partial trace signal. The final decision is `diagnostic_only`, so no full GPU policy runner should be created directly.
 
 ## Completed This Session
 
@@ -40,6 +40,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - Completed trace-long-rescue Task 1/2/3 without Superpowers skills, subagents, reviewer discovery, or Goal tools. The action brief/current action passed markdown hygiene; trace feature extraction and route analysis/report scripts were implemented; focused verification passed with `Ran 6 tests` / `OK`, py_compile, and `git diff --check`.
 - Completed serial Task 4 full trace collection: previous local method trace run on GPU `2` produced `769/1033 = 74.44%` with `35257` trace rows; current `midcons` trace run on GPU `3` reproduced `795/1033 = 76.96%` with `35768` trace rows. Both logs ended with `COMMAND_EXIT_CODE="0"` and both trace files cover `1033` task ids.
 - Completed Task 5 offline Route 1/2/3 analysis. Route 1 and Route 2 triggered `0` rows on both trace sources, and Route 3 stopped because single-canvas traces plus no Route 1/2 signal do not justify multi-canvas policy cost.
+- Implemented and ran CPU-only `trace_feature_audit_v2` serially under `superpowers:executing-plans`. Final output: `analysis_outputs/trace_feature_audit_v2_20260613_204721`. Decision: `diagnostic_only`; the previous source has policy-level candidates, but the midcons source is diagnostic-only, so cross-source stability is insufficient.
 
 ## Workflow / Skill Status
 
@@ -79,6 +80,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - LLaDA-1.5 local pair: candidate `818/1033 = 79.19%` versus local same-backbone `cal_lite` LCAS-v3b baseline `817/1033 = 79.09%`; pairwise `18` wins, `17` losses, `800` tie-pass, `198` tie-fail; avg total sec including probe `6.6453` versus `5.4224`. This is a near-tie/slight local positive, not a strong claim. It loses `6` net tasks in oracle `<=8`, gains `+7` total across oracle `>=13`, and official-repair true-long precision is only `10.91%`.
 - LLaDA-MoE local pair: candidate `801/1033 = 77.54%` versus local same-backbone `cal_lite` LCAS-v3b baseline `777/1033 = 75.22%`; pairwise `31` wins, `7` losses, `770` tie-pass, `225` tie-fail; avg total sec including probe `10.6107` versus `8.7025`. All oracle buckets are positive or neutral: `<=8 +9`, `9-12 +5`, `13-16 +4`, `17-24 +6`, `25+ 0`. This is the strongest current local transfer result, but still not an external SOTA claim.
 - LLaDA-Base full trace diagnostics: previous local method trace `769/1033 = 74.44%`, `35257` trace rows; current `midcons` trace `795/1033 = 76.96%`, `35768` trace rows. Route 1/2/3 all fail Gate A and Gate B under offline accounting; no route-specific GPU policy runner is justified.
+- Trace feature audit v2: final output `analysis_outputs/trace_feature_audit_v2_20260613_204721`, decision `diagnostic_only`. Previous source: `1033` rows, `113` true-long, `96` failed-long, source decision `policy_candidate`; midcons source: `1033` rows, `113` true-long, `91` failed-long, source decision `diagnostic_only`. The strongest midcons candidate is `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, with `18` held-out triggers, `9` failed-long, `2` short-risk, and `0` current-pass risk, but this is still not enough to justify a full GPU policy run.
 
 ## Key Plan Adjustments
 
@@ -96,11 +98,11 @@ The current improvement is too small and too heuristic for a CCF-A contribution 
 
 ## Next Actions
 
-1. Do not create a route-specific GPU policy runner from the current trace batch; offline gates failed.
-2. Record the trace diagnostics as negative evidence for this specific trace-only/risk-controlled route family.
-3. If continuing this research direction later, design a stronger trace feature family or a separate action brief before any new GPU work.
+1. Do not launch a full GPU policy runner directly from the current v2 audit; the cross-source gate did not pass.
+2. Record v1 routes as negative evidence and v2 as partial-signal / diagnostic-only evidence.
+3. If continuing Route 2, first write a stricter small GPU smoke action brief around the low `top1_last` plus late plateau / low-confidence family, rather than going straight to a full run.
 4. Keep literature anchors, previous local methods, current methods, and trace diagnostics in separate columns/sections.
 
 ## User Decisions Needed
 
-No GPU experiment is currently running. The current trace batch does not justify a route-specific policy full run.
+No GPU experiment is currently running. The current v2 audit does not justify a direct full policy run; using GPUs `2/3` should require approval of a small Route 2 smoke plan first.

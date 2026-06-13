@@ -1,6 +1,6 @@
 # Experiment Results
 
-Updated: 2026-06-12 19:26 CST
+Updated: 2026-06-13 20:55 CST
 
 ## Three-Way Comparison: Paper-Reported Numbers vs Our Previous Methods vs Current Method
 
@@ -40,6 +40,30 @@ Offline route analysis:
 | current midcons | Route 3 multi-canvas trace rerank | 0 | 0 | 0 | 0 | no | no | stop_no_trace_signal |
 
 Interpretation: no route met the offline continuation rule. This is diagnostic negative evidence; no route-specific GPU policy full run should be launched from these traces.
+
+## Trace Feature Audit V2
+
+`trace_feature_audit_v2` is a CPU-only offline diagnostic. It does not report a new pass rate and did not launch GPU work. It reuses the two full trace outputs above and searches richer trace-shape, stop-reason, motif, and model-assisted discovery families for a readable long-rescue gate. The final valid output directory is `analysis_outputs/trace_feature_audit_v2_20260613_204721`.
+
+Decision: `diagnostic_only`. The reason is that the previous trace source produced policy-level candidates, but the current `midcons` trace source reached only diagnostic-only; the signal is not stable enough across sources to launch a Route 2 GPU policy runner directly.
+
+| Source | Rows | True-long | Failed-long | Short | Decision |
+|---|---:|---:|---:|---:|---|
+| previous | 1033 | 113 | 96 | 598 | policy_candidate |
+| midcons | 1033 | 113 | 91 | 598 | diagnostic_only |
+
+Top held-out train-selected candidates:
+
+| Source | Candidate | Decision | Fold | Train rank | Triggers | Failed-long | Short risk | Current-pass risk | Precision |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| previous | `confidence_first_le_0p875_AND_gap_last_le_0p84375` | policy_candidate | 1 | 2 | 21 | 10 | 4 | 4 | 0.476 |
+| previous | `confidence_first_le_0p882812_AND_gap_last_le_0p84375` | policy_candidate | 4 | 3 | 25 | 11 | 5 | 3 | 0.440 |
+| previous | `top1_last_le_0p859375_AND_confidence_first_le_0p875` | policy_candidate | 1 | 3 | 20 | 10 | 3 | 4 | 0.500 |
+| previous | `top1_last_le_0p605469_AND_confidence_min_le_0p730469` | policy_candidate | 3 | 4 | 15 | 10 | 3 | 0 | 0.667 |
+| midcons | `top1_last_le_0p667969_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 4 | 1 | 18 | 9 | 2 | 0 | 0.500 |
+| midcons | `top1_last_le_0p625_AND_max_remaining_plateau_steps_ge_16` | diagnostic_only | 3 | 1 | 12 | 8 | 2 | 0 | 0.667 |
+
+Interpretation: v2 shows that trace features are not signal-free. Low `top1_last`, low confidence/gap, and late plateau candidates can capture failed-long rows. However, fixed-rule cross-source/full-data transfer still has too much short-risk, so the result should guide the next stricter gate or smoke design rather than trigger a full GPU policy run.
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

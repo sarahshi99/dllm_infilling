@@ -63,3 +63,18 @@ This is CPU-only offline analysis. Labels derived from oracle/pass/fail are allo
 - `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/pareto.csv`
 - `analysis_outputs/trace_feature_audit_v2_YYYYMMDD_HHMMSS/report.md`
 - Updated paper-agent results/dashboard/checkpoint only after the audit command has run.
+
+## Observed Result
+
+Final valid output directory: `analysis_outputs/trace_feature_audit_v2_20260613_204721`.
+
+Decision: `diagnostic_only`.
+
+| Source | Rows | True-long | Failed-long | Short | Decision |
+|---|---:|---:|---:|---:|---|
+| previous | 1033 | 113 | 96 | 598 | policy_candidate |
+| midcons | 1033 | 113 | 91 | 598 | diagnostic_only |
+
+The audit found partial trace signal. The strongest midcons candidate was `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, with `18` held-out triggers, `9` failed-long, `2` short-risk, `0` current-pass risk, and `0.500` precision. This is useful diagnostic evidence, but the signal is not stable enough across trace sources to justify a direct full GPU policy run.
+
+No GPU command was launched by this action.

@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-更新时间：2026-06-12 19:26 CST
+更新时间：2026-06-13 20:55 CST
 
 ## 当前研究目标
 
@@ -14,7 +14,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 当前实验方案版本
 
-`v3`：probe-curve-first long-length modeling 方案，并采用用户确认的 GPU allocation `2,3`，现在扩展到 full trace-long-rescue diagnostics。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；trace-long-rescue Task 1/2/3/4/5 已完成。Offline Route 1/2/3 analysis 产出 negative evidence，因此不能从这批 traces 创建 route-specific GPU policy runner。
+`v3`：probe-curve-first long-length modeling 方案，并采用用户确认的 GPU allocation `2,3`，现在扩展到 full trace-long-rescue diagnostics 和 CPU-only `trace_feature_audit_v2`。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；v1 Route 1/2/3 analysis 产出 negative evidence，v2 找到了部分 trace signal，但 final decision 为 `diagnostic_only`，仍不能直接创建 full GPU policy runner。
 
 ## 本次会话已完成
 
@@ -40,6 +40,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - 在不使用 Superpowers skills、subagents、reviewer discovery 或 Goal tools 的约束下完成 trace-long-rescue Task 1/2/3。Action brief/current action 通过 markdown hygiene；已实现 trace feature extraction、route analysis 和 report renderer；focused verification 通过 `Ran 6 tests` / `OK`、py_compile 和 `git diff --check`。
 - 完成串行 Task 4 full trace collection：previous local method trace run 在 GPU `2` 上得到 `769/1033 = 74.44%` 和 `35257` trace rows；current `midcons` trace run 在 GPU `3` 上复现 `795/1033 = 76.96%`，并得到 `35768` trace rows。两条日志均以 `COMMAND_EXIT_CODE="0"` 结束，两个 trace files 均覆盖 `1033` 个 task ids。
 - 完成 Task 5 offline Route 1/2/3 analysis。Route 1 和 Route 2 在两个 trace sources 上均触发 `0` 行；Route 3 因 single-canvas traces 且 Route 1/2 没有信号，不足以支持 multi-canvas policy cost。
+- 按 `superpowers:executing-plans` 串行实现并运行 CPU-only `trace_feature_audit_v2`。最终输出 `analysis_outputs/trace_feature_audit_v2_20260613_204721`；decision 为 `diagnostic_only`：previous source 有 policy-level 候选，midcons source 只有 diagnostic-only，跨源稳定性不足。
 
 ## 最新结果摘要
 
@@ -66,6 +67,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - LLaDA-1.5 local pair：candidate `818/1033 = 79.19%`，本地同 backbone `cal_lite` LCAS-v3b baseline `817/1033 = 79.09%`；pairwise 为 `18` wins、`17` losses、`800` tie-pass、`198` tie-fail；avg total sec including probe 为 `6.6453`，baseline 为 `5.4224`。这是 near-tie / slight local positive，不是强 claim。Candidate 在 oracle `<=8` 净损失 `6` 个任务，在 oracle `>=13` 合计净增 `+7`，official-repair true-long precision 只有 `10.91%`。
 - LLaDA-MoE local pair：candidate `801/1033 = 77.54%`，本地同 backbone `cal_lite` LCAS-v3b baseline `777/1033 = 75.22%`；pairwise 为 `31` wins、`7` losses、`770` tie-pass、`225` tie-fail；avg total sec including probe 为 `10.6107`，baseline 为 `8.7025`。所有 oracle buckets 均为正增益或持平：`<=8 +9`、`9-12 +5`、`13-16 +4`、`17-24 +6`、`25+ 0`。这是当前最强 local transfer result，但仍不是 external SOTA。
 - LLaDA-Base full trace diagnostics：previous local method trace `769/1033 = 74.44%`、`35257` trace rows；current `midcons` trace `795/1033 = 76.96%`、`35768` trace rows。Route 1/2/3 在 offline accounting 下均未通过 Gate A 或 Gate B；不应创建 route-specific GPU policy runner。
+- Trace feature audit v2：final output `analysis_outputs/trace_feature_audit_v2_20260613_204721`，decision `diagnostic_only`。Previous source：`1033` rows、`113` true-long、`96` failed-long、source decision `policy_candidate`；midcons source：`1033` rows、`113` true-long、`91` failed-long、source decision `diagnostic_only`。最有希望的 midcons 候选是 `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`，held-out 上 `18` triggers、`9` failed-long、`2` short-risk、`0` current-pass risk，但仍不足以支持 full GPU policy run。
 
 ## 关键方案调整
 
@@ -96,11 +98,11 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 下一步计划
 
-1. 不要从当前 trace batch 创建 route-specific GPU policy runner；offline gates 已失败。
-2. 将 trace diagnostics 记录为该 trace-only / risk-controlled route family 的 negative evidence。
-3. 如果后续继续该方向，必须先设计更强 trace feature family 或另写 action brief，再启动任何新 GPU 工作。
+1. 不要从当前 v2 audit 直接启动 full GPU policy runner；跨源 gate 仍未通过。
+2. 将 v1 route 结果记录为 negative evidence，将 v2 结果记录为 partial signal / diagnostic-only evidence。
+3. 如果继续 Route 2，下一步应先写更严格的 small GPU smoke action brief，优先围绕 low `top1_last` + late plateau / low confidence family，而不是直接 full run。
 4. 继续把 literature anchors、previous local methods、current methods 和 trace diagnostics 分列/分节记录。
 
 ## 需要用户决策的问题
 
-目前没有正在运行的 GPU 实验需要接管。当前 trace batch 不支持 route-specific policy full run。
+目前没有正在运行的 GPU 实验需要接管。当前 v2 audit 不支持直接 full policy run；如要使用 GPU `2/3`，需要先批准一个小规模 Route 2 smoke 计划。
