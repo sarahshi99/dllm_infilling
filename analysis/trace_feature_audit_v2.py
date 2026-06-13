@@ -396,6 +396,10 @@ def candidate_decision(summary: Mapping[str, Any]) -> str:
     return "reject"
 
 
+def decision_priority(decision: Any) -> int:
+    return {"policy_candidate": 2, "diagnostic_only": 1, "reject": 0}.get(str(decision), 0)
+
+
 def evaluate_candidates(candidates: Sequence[CandidateRule], records: Sequence[Mapping[str, Any]]) -> List[JsonDict]:
     summaries = [evaluate_rule(candidate, records) for candidate in candidates]
     for summary in summaries:
@@ -499,8 +503,7 @@ def discover_for_source(records: Sequence[Mapping[str, Any]], *, folds: int) -> 
     ranked = sorted(
         all_heldout,
         key=lambda item: (
-            item.get("decision") == "policy_candidate",
-            item.get("decision") == "diagnostic_only",
+            decision_priority(item.get("decision")),
             -int(item.get("selection_rank") or 9999),
             item.get("score", -1e9),
             item.get("failed_long_count", 0),
@@ -631,6 +634,8 @@ def write_report_outputs(output_dir: str | Path, summary: Mapping[str, Any], *, 
         "",
         f"Decision: `{summary.get('decision')}`",
         "",
+        f"Decision reason: {summary.get('decision_reason', 'not recorded')}",
+        "",
         "## Source Summary",
         "",
         "| Source | Rows | True-long | Failed-long | Short | Decision |",
@@ -691,27 +696,37 @@ def run_audit(args: argparse.Namespace) -> JsonDict:
             item["source"] = source_name
         for item in source_summary["top_candidates"]:
             item["source"] = source_name
-        source_summary["top_motif_candidates"] = motif_ranked[:30]
+        source_summary["top_full_source_motif_diagnostics"] = motif_ranked[:30]
         source_summaries[source_name] = source_summary
         all_candidates.extend(source_summary["top_candidates"][:50])
-        all_candidates.extend(motif_ranked[:30])
         diagnostics[source_name] = {
             "sklearn_sparse_logistic": optional_sklearn_diagnostic(records),
         }
 
     all_candidates = sorted(
         all_candidates,
-        key=lambda item: (item.get("score", -1e9), item.get("failed_long_count", 0)),
+        key=lambda item: (
+            decision_priority(item.get("decision")),
+            -int(item.get("selection_rank") or 9999),
+            item.get("score", -1e9),
+            item.get("failed_long_count", 0),
+        ),
         reverse=True,
     )
-    decision = "reject"
-    if any(item.get("decision") == "policy_candidate" for item in all_candidates[:30]):
+    source_decisions = {key: value["decision"] for key, value in source_summaries.items()}
+    if source_decisions and all(value == "policy_candidate" for value in source_decisions.values()):
         decision = "policy_candidate"
-    elif any(item.get("decision") == "diagnostic_only" for item in all_candidates[:30]):
+        decision_reason = "All trace sources produced held-out train-selected policy candidates."
+    elif any(value in {"policy_candidate", "diagnostic_only"} for value in source_decisions.values()):
         decision = "diagnostic_only"
+        decision_reason = "At least one source has signal, but the policy-candidate gate is not stable across both trace sources."
+    else:
+        decision = "reject"
+        decision_reason = "No source produced a held-out train-selected diagnostic or policy candidate."
 
     summary = {
         "decision": decision,
+        "decision_reason": decision_reason,
         "sources": source_summaries,
         "diagnostics": diagnostics,
         "top_candidates": all_candidates[:100],
