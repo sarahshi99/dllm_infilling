@@ -1,61 +1,61 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-06-13 23:14 CST
+Timestamp: 2026-06-14 02:40 CST
 
 ## Action Name
 
-Close out Route2 trace-gated long-rescue full runs and prepare next error analysis.
-
-## Superpowers Mode
-
-Use local serial workflow only. Do not use `superpowers:subagent-driven-development`, Task/Spawn, reviewer subagents, parallel-agent dispatch, `tool_search`, or Goal.
+Close Route2 precision `len32` GPU3 full run and analyze result.
 
 ## Current Phase
 
-The two Route2 full runs requested by the user are complete. No Route2 GPU job is currently running.
+The user urgently requested that the active experiment be moved off GPU0/GPU1 and run only on GPU3. The earlier GPU1 `len32` partial run was interrupted at about `405/1033` rows and is not used as final evidence.
 
-## Completed Full Runs
+A clean GPU3-only full run has completed successfully.
 
-### GPU2: Broad Plateau
+## Completed Full Run
 
-- log: `logs/paper_agent/20260613_full_route2_broad_gpu2.log`
-- output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`
-- policy: `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`
-- status: log ended with `COMMAND_EXIT_CODE=0`
-- rows: `1033` valid `results.jsonl` rows, `summary.json` present, `39740` step-trace rows
-- result: `801/1033 = 77.54%`
-- pairwise vs current `midcons`: `7/1/794/231`
-
-### GPU3: Precision Top1/Confidence
-
-- log: `logs/paper_agent/20260613_full_route2_precision_gpu3.log`
-- output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`
+- tmux session: `route2_precision_len32_gpu3_20260614`
+- log: `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`
+- output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`
+- GPU: `CUDA_VISIBLE_DEVICES=3`
 - policy: `top1_median <= 0.464844 AND confidence_max <= 0.84375`
-- status: log ended with `COMMAND_EXIT_CODE=0`
-- rows: `1033` valid `results.jsonl` rows, `summary.json` present, `38872` step-trace rows
-- result: `800/1033 = 77.44%`
-- pairwise vs current `midcons`: `5/0/795/233`
+- rescue length: `32`
+- baseline: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl`
 
-## Summary
+Verification:
 
-The comparison baseline is current LLaDA-Base `midcons`: `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`, `795/1033 = 76.96%`.
+- log ended with `COMMAND_EXIT_CODE=0`
+- `results.jsonl` has `1033` valid rows
+- `summary.json` exists
+- `step_traces.jsonl` exists and is nonempty
+- final pass count: `801/1033 = 77.54%`
 
-| Run | Pass | Delta vs `midcons` | Trigger count | Trigger true-long precision | Avg sec incl. probe |
-|---|---:|---:|---:|---:|---:|
-| Route2 broad len24 | `801/1033 = 77.54%` | `+6` tasks / `+0.58pp` | `73` | `53.42%` | `5.0852` |
-| Route2 precision len24 | `800/1033 = 77.44%` | `+5` tasks / `+0.48pp` | `57` | `61.40%` | `5.0945` |
+## Result Summary
 
-Long-failure diagnostic:
+| Run | Pass | Rate | Delta vs `midcons` | Pairwise W/L/TP/TF | Triggers | Trigger true-long precision | Avg sec incl. probe |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| current `midcons` baseline | `795/1033` | `76.96%` | baseline | baseline | n/a | n/a | `4.311` |
+| Route2 broad len24 | `801/1033` | `77.54%` | `+6` | `7/1/794/231` | `73` | `53.42%` | `5.085` |
+| Route2 precision len24 | `800/1033` | `77.44%` | `+5` | `5/0/795/233` | `57` | `61.40%` | `5.094` |
+| Route2 precision len32 | `801/1033` | `77.54%` | `+6` | `6/0/795/232` | `57` | `61.40%` | `5.462` |
 
-- There are `91` baseline failed-long rows.
-- Broad triggers `39` of them but rescues only `2`.
-- Precision triggers `35` of them but rescues only `1`.
-- Therefore the current bottleneck is not just detecting failed-long rows; fixed `len=24` rescue usually does not make them pass.
+## Interpretation
+
+The GPU3-only `len32` run is a clean low-risk positive result, but not a true-long breakthrough.
+
+Compared with current `midcons`, it gains `+6` tasks with `0` observed losses. Compared with precision `len24`, it gains `+1` task. The longer rescue length does recover `2` oracle `17-24` tasks, but it does not improve the oracle `25+` bucket.
+
+Main diagnostic:
+
+- Risk control remains strong: `0` losses vs `midcons`.
+- The precision gate still has good true-long trigger precision: `57` triggers, `61.40%` true-long.
+- Rescue generation remains weak on hard long rows: triggered oracle `25+` rows are `0/11` pass.
+- Missed failed-long rows remain common, so both gate recall and rescue quality matter.
 
 ## Next Required Step
 
-Do a CPU-only Route2 error analysis before launching more GPU work:
+Update experiment docs and dashboards, then do a Route2 error analysis:
 
-1. List triggered-but-still-failed rows and their oracle lengths, selected lengths, trace features, and rescue lengths.
-2. List missed failed-long rows and compare their trace feature ranges against triggered rows.
-3. Decide whether the next training-free direction should be adaptive rescue length, stronger rescue generation, a different Route1 detector, or a Route3-style multi-canvas design.
+1. triggered-but-still-failed true-long rows,
+2. missed failed-long rows,
+3. whether the next training-free direction should be adaptive rescue length, better rescue decoding, or a stronger trace/probe fusion gate.

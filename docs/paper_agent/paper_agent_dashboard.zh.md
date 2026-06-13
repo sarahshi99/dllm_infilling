@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-更新时间：2026-06-13 23:14 CST
+更新时间：2026-06-14 02:40 CST
 
 ## 当前研究目标
 
@@ -14,7 +14,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 当前实验方案版本
 
-`v3`：probe-curve-first long-length modeling 方案，并采用用户确认的 GPU allocation `2,3`，现在扩展到 full trace-long-rescue diagnostics、CPU-only `trace_feature_audit_v2` 和用户批准后的 Route 2 full follow-up。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；v1 Route 1/2/3 analysis 产出 negative evidence，v2 找到了部分 trace signal 但 final decision 为 `diagnostic_only`。后续两条 Route 2 full runs 给出小幅正信号，其中 precision policy 更安全，但 true-long bucket 仍未解决。
+`v3`：probe-curve-first long-length modeling 方案，并采用用户确认的 GPU allocation。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；v1 Route 1/2/3 analysis 产出 negative evidence，v2 找到了部分 trace signal 但 final decision 为 `diagnostic_only`。后续 Route 2 full runs 给出小幅正信号，其中 precision policy 更安全。2026-06-14 的 GPU3-only precision `len32` follow-up 得到 `801/1033 = 77.54%`、pairwise `6/0/795/232`，但 oracle `25+` bucket 仍未解决。
 
 ## 本次会话已完成
 
@@ -42,6 +42,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - 完成 Task 5 offline Route 1/2/3 analysis。Route 1 和 Route 2 在两个 trace sources 上均触发 `0` 行；Route 3 因 single-canvas traces 且 Route 1/2 没有信号，不足以支持 multi-canvas policy cost。
 - 按 `superpowers:executing-plans` 串行实现并运行 CPU-only `trace_feature_audit_v2`。最终输出 `analysis_outputs/trace_feature_audit_v2_20260613_204721`；decision 为 `diagnostic_only`：previous source 有 policy-level 候选，midcons source 只有 diagnostic-only，跨源稳定性不足。
 - 在用户确认继续后，用现有 tracked runner `clean_scripts/run_route2_trace_rescue.py` 完成两条 LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs。Broad plateau 为 `801/1033 = 77.54%`，pairwise `7/1/794/231`；precision top1/conf 为 `800/1033 = 77.44%`，pairwise `5/0/795/233`。两条日志均 exit `0`，两个输出均有 `1033` valid rows 和 `summary.json`。
+- 按用户紧急要求将 precision `len32` follow-up 切换为 GPU3-only clean full run；GPU1 partial run 在约 `405/1033` 被中断且不作为证据。GPU3-only run 成功完成：`801/1033 = 77.54%`，pairwise `6/0/795/232`，trigger `57`，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。
 
 ## 最新结果摘要
 
@@ -70,6 +71,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - LLaDA-Base full trace diagnostics：previous local method trace `769/1033 = 74.44%`、`35257` trace rows；current `midcons` trace `795/1033 = 76.96%`、`35768` trace rows。Route 1/2/3 在 offline accounting 下均未通过 Gate A 或 Gate B；不应创建 route-specific GPU policy runner。
 - Trace feature audit v2：final output `analysis_outputs/trace_feature_audit_v2_20260613_204721`，decision `diagnostic_only`。Previous source：`1033` rows、`113` true-long、`96` failed-long、source decision `policy_candidate`；midcons source：`1033` rows、`113` true-long、`91` failed-long、source decision `diagnostic_only`。最有希望的 midcons 候选是 `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`，held-out 上 `18` triggers、`9` failed-long、`2` short-risk、`0` current-pass risk，但仍不足以支持 full GPU policy run。
 - Route 2 trace-gated full follow-up：baseline `midcons` 为 `795/1033 = 76.96%`。Broad plateau 得到 `801/1033 = 77.54%`，净增 `+6`，但有 `1` 个 loss / short loss；触发 `73` 行，trigger true-long precision `53.42%`。Precision top1/conf 得到 `800/1033 = 77.44%`，净增 `+5`，`0` losses；触发 `57` 行，trigger true-long precision `61.40%`。Precision policy 是更干净的候选，但 oracle `17-24` 仅 `+1`，`25+` 不变，不能宣称 true-long 已解决。核心诊断：`91` 个 baseline failed-long rows 中，Broad 触发 `39` 但只救回 `2`，Precision 触发 `35` 但只救回 `1`。
+- Route 2 precision len32 GPU3-only follow-up：output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`；`801/1033 = 77.54%`，净增 `+6`，pairwise `6/0/795/232`，trigger `57`，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。Bucket net 为 `<=8 +2`、`9-12 +2`、`13-16 0`、`17-24 +2`、`25+ 0`；triggered `25+` 为 `0/11` pass。解释：低风险小幅正收益，但仍没有解决 `25+` true-long。
 
 ## 关键方案调整
 
@@ -109,4 +111,4 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 需要用户决策的问题
 
-目前没有正在运行的 Route 2 GPU 实验需要接管。建议下一步先做 Route2 error analysis，再决定是继续 precision policy 的低风险证据线，还是转向 adaptive rescue / 新 length-signal 设计。
+目前没有正在运行的 Route 2 GPU 实验需要接管。建议下一步先做 Route2 error analysis，再决定是继续 precision policy 的低风险证据线，还是转向 adaptive rescue / better rescue decoding / 新 length-signal 设计。

@@ -1,5 +1,14 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-14 02:40 CST
+
+- action：按用户紧急要求将 Route2 precision `len32` full run 从 GPU1 partial 改为 GPU3-only clean full run，并持续监督到完成。
+- evidence：GPU1 partial run 在约 `405/1033` 被中断，不作为最终证据；clean run 使用 tmux session `route2_precision_len32_gpu3_20260614`，日志 `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`，输出 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`。命令使用 `CUDA_VISIBLE_DEVICES=3`；日志以 `COMMAND_EXIT_CODE=0` 结束；`results.jsonl` 有 `1033` valid rows；`summary.json` 存在；`step_traces.jsonl` 非空。
+- result：Route2 precision `len32` 得到 `801/1033 = 77.54%`，相对 current `midcons` baseline `795/1033 = 76.96%` 净增 `+6` tasks；pairwise `6` wins / `0` losses / `795` tie-pass / `232` tie-fail。触发 `57` 行，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。
+- diagnostics：bucket net 为 `<=8 +2`、`9-12 +2`、`13-16 0`、`17-24 +2`、`25+ 0`。Triggered oracle `17-24` 为 `2/24` pass；triggered oracle `25+` 为 `0/11` pass。与 precision `len24` 相比，总 pass 多 `+1`，但 `25+` 仍无提升。
+- interpretation：这是低风险小幅正收益，且比 precision `len24` 稍好；但它没有解决 true-long，尤其没有解决 `25+`。当前瓶颈不是单纯 rescue length 不够，而是 gate recall 和 rescue generation/selection 同时存在问题。
+- next：先做 Route2 error analysis，分开列 triggered-but-still-failed true-long rows、missed failed-long rows、short/medium wins，再决定是否设计 adaptive rescue length、better rescue decoding 或 trace/probe fusion gate。
+
 ## 2026-06-13 23:14 CST
 
 - action：收口用户批准后的两条 LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs，并将结果写回恢复入口。

@@ -99,3 +99,17 @@ This full run gives a small positive result, not a breakthrough long-length resu
 The core failure mode is now clearer: Route2's trace gate is not completely useless, but fixed-length `24` rescue is weak on the rows it was meant to rescue. In oracle `17-24`, broad gains only `+2` tasks and precision gains only `+1`; in oracle `25+`, both are flat. Among `91` baseline failed-long rows, broad triggers `39` but rescues only `2`, while precision triggers `35` and rescues only `1`.
 
 Research decision: keep this as positive diagnostic evidence and a small pass-rate improvement over `midcons`, but do not frame it as solving true-long infilling. The next useful step is to analyze triggered-but-still-failed and missed failed-long rows, then decide whether a training-free adaptive rescue length or stronger generation-side rescue is justified.
+
+## Follow-Up: Precision Len32
+
+On 2026-06-14, after the user requested GPU3-only execution and excluded the interrupted GPU1 partial run, a clean Route2 precision `len32` full run completed:
+
+- output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`
+- log: `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`
+- result: `801/1033 = 77.54%`
+- pairwise vs `midcons`: `6/0/795/232`
+- trigger count: `57`
+- trigger true-long precision: `61.40%`
+- avg sec including probe: `5.4622`
+
+The follow-up matches broad len24's total pass count while preserving the precision policy's zero-loss behavior. It improves oracle `17-24` by `+2` tasks, but oracle `25+` remains unchanged. See `docs/paper_agent/experiments/20260614_route2_precision_len32_full.md` for the detailed table.

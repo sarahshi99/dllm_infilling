@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-Updated: 2026-06-13 23:14 CST
+Updated: 2026-06-14 02:40 CST
 
 ## Current Research Goal
 
@@ -14,7 +14,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 
 ## Current Experiment Plan Version
 
-`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation `2,3`, now extended with full trace-long-rescue diagnostics, CPU-only `trace_feature_audit_v2`, and user-approved Route 2 full follow-up runs. The current A6000 LLaDA-Base checkpoint is `midcons`; v1 Route 1/2/3 analysis produced negative evidence, while v2 found partial trace signal but ended with `diagnostic_only`. The later Route 2 full runs show a small positive signal, with the precision policy safer, but the true-long bucket is still not solved.
+`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation, now extended with full trace-long-rescue diagnostics, CPU-only `trace_feature_audit_v2`, and user-approved Route 2 full follow-up runs. The current A6000 LLaDA-Base checkpoint is `midcons`; v1 Route 1/2/3 analysis produced negative evidence, while v2 found partial trace signal but ended with `diagnostic_only`. The later Route 2 full runs show a small positive signal. The 2026-06-14 GPU3-only precision `len32` follow-up reaches `801/1033 = 77.54%`, pairwise `6/0/795/232`, but the oracle `25+` bucket is still not solved.
 
 ## Completed This Session
 
@@ -42,6 +42,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - Completed Task 5 offline Route 1/2/3 analysis. Route 1 and Route 2 triggered `0` rows on both trace sources, and Route 3 stopped because single-canvas traces plus no Route 1/2 signal do not justify multi-canvas policy cost.
 - Implemented and ran CPU-only `trace_feature_audit_v2` serially under `superpowers:executing-plans`. Final output: `analysis_outputs/trace_feature_audit_v2_20260613_204721`. Decision: `diagnostic_only`; the previous source has policy-level candidates, but the midcons source is diagnostic-only, so cross-source stability is insufficient.
 - After the user confirmed continuing, completed two LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs using the existing tracked runner `clean_scripts/run_route2_trace_rescue.py`. Broad plateau is `801/1033 = 77.54%`, pairwise `7/1/794/231`; precision top1/conf is `800/1033 = 77.44%`, pairwise `5/0/795/233`. Both logs exited `0`, and both outputs have `1033` valid rows plus `summary.json`.
+- Per the user's urgent request, moved the precision `len32` follow-up to a clean GPU3-only full run; the earlier GPU1 partial run stopped around `405/1033` and is excluded from evidence. The GPU3-only run completed successfully: `801/1033 = 77.54%`, pairwise `6/0/795/232`, `57` triggers, `61.40%` trigger true-long precision, and `5.4622` seconds/sample including probe.
 
 ## Workflow / Skill Status
 
@@ -83,6 +84,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - LLaDA-Base full trace diagnostics: previous local method trace `769/1033 = 74.44%`, `35257` trace rows; current `midcons` trace `795/1033 = 76.96%`, `35768` trace rows. Route 1/2/3 all fail Gate A and Gate B under offline accounting; no route-specific GPU policy runner is justified.
 - Trace feature audit v2: final output `analysis_outputs/trace_feature_audit_v2_20260613_204721`, decision `diagnostic_only`. Previous source: `1033` rows, `113` true-long, `96` failed-long, source decision `policy_candidate`; midcons source: `1033` rows, `113` true-long, `91` failed-long, source decision `diagnostic_only`. The strongest midcons candidate is `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, with `18` held-out triggers, `9` failed-long, `2` short-risk, and `0` current-pass risk, but this is still not enough to justify a full GPU policy run.
 - Route 2 trace-gated full follow-up: the `midcons` baseline is `795/1033 = 76.96%`. Broad plateau reaches `801/1033 = 77.54%`, net `+6`, but has `1` loss / short loss; it triggers `73` rows with `53.42%` trigger true-long precision. Precision top1/conf reaches `800/1033 = 77.44%`, net `+5`, with `0` losses; it triggers `57` rows with `61.40%` trigger true-long precision. The precision policy is the cleaner candidate, but oracle `17-24` improves by only `+1` and `25+` is unchanged, so true-long is not solved. Core diagnostic: among `91` baseline failed-long rows, Broad triggers `39` and rescues only `2`, while Precision triggers `35` and rescues only `1`.
+- Route 2 precision len32 GPU3-only follow-up: output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`; `801/1033 = 77.54%`, net `+6`, pairwise `6/0/795/232`, `57` triggers, `61.40%` trigger true-long precision, and `5.4622` seconds/sample including probe. Bucket net is `<=8 +2`, `9-12 +2`, `13-16 0`, `17-24 +2`, `25+ 0`; triggered oracle `25+` rows are `0/11` pass. Interpretation: clean low-risk incremental gain, but still no `25+` true-long solution.
 
 ## Key Plan Adjustments
 
@@ -93,7 +95,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - Treat the first simple strict-split linear probe score as negative evidence, not as a candidate GPU policy.
 - Restrict future GPU experiments to cards `2,3`, waiting rather than interrupting existing jobs.
 - Promote trajectory features, learned length classification, DreamOn-style dynamic canvas control, or LR-DLLM-style length regularization as the next paper-level direction.
-- Record the Route 2 precision policy as paper-cleaner incremental positive evidence, not as the final main method. Keep the broad policy as a more aggressive comparison with short-loss risk. The current Route2 result mainly shows that fixed `len=24` rescue quality/length choice remains weak, not merely that gate recall is insufficient.
+- Record the Route 2 precision policy as paper-cleaner incremental positive evidence, not as the final main method. Keep the broad policy as a more aggressive comparison with short-loss risk. The current Route2 result mainly shows that fixed rescue generation/selection remains weak, not merely that gate recall or rescue length is insufficient.
 
 ## Biggest Risk
 
@@ -101,12 +103,12 @@ The current improvement is too small and too heuristic for a CCF-A contribution 
 
 ## Next Actions
 
-1. Write the Route 2 full follow-up as a small positive result: the precision policy is safer, while the broad policy has a larger net gain but short-loss risk.
-2. Analyze triggered-but-still-failed and missed failed-long rows before launching more GPU work; determine whether the failure comes from gate recall, fixed `len=24`, or rescue generation quality.
+1. Write the Route 2 full follow-up as a small positive result: precision len32 is the cleanest current Route2 follow-up, while broad len24 is the more aggressive comparison with short-loss risk.
+2. Analyze triggered-but-still-failed and missed failed-long rows before launching more GPU work; determine whether the failure comes from gate recall, fixed rescue length, or rescue generation quality.
 3. Do not launch another full run from the current fixed trace gates without a new action brief and explicit success/kill criteria.
 4. If the goal is a stronger CCF-A claim, redesign adaptive rescue length, generation-side rescue, Route 1/3, or a stronger length signal because the current `25+` bucket does not improve.
 5. Keep literature anchors, previous local methods, current methods, and trace diagnostics in separate columns/sections.
 
 ## User Decisions Needed
 
-No Route 2 GPU experiment is currently running. The recommended next step is Route2 error analysis, then deciding whether to polish precision as a low-risk evidence point or pivot to adaptive rescue / a new length-signal design.
+No Route 2 GPU experiment is currently running. The recommended next step is Route2 error analysis, then deciding whether to polish precision as a low-risk evidence point or pivot to adaptive rescue / better rescue decoding / a new length-signal design.

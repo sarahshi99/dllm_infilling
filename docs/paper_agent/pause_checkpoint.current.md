@@ -1,6 +1,6 @@
 # Paper Agent Pause Checkpoint
 
-Timestamp: 2026-06-13 23:14 CST
+Timestamp: 2026-06-14 02:40 CST
 
 ## Current Branch
 
@@ -8,7 +8,7 @@ Timestamp: 2026-06-13 23:14 CST
 
 ## Current Phase
 
-The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` completed with `diagnostic_only`; after user approval to continue, two Route 2 trace-gated long-rescue full follow-up runs also completed. The full-run signal is modestly positive, with precision top1/conf safer than broad plateau, but true-long recovery remains weak.
+The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` completed with `diagnostic_only`; after user approval to continue, Route 2 trace-gated long-rescue full follow-up runs completed. The latest GPU3-only precision `len32` run is `801/1033 = 77.54%`, pairwise `6/0/795/232`. The full-run signal is modestly positive and low-risk, but true-long recovery remains weak, especially oracle `25+`.
 
 ## Completed Items
 
@@ -55,6 +55,7 @@ The literature-backbone local same-backbone matrix has completed through `inclus
 - Completed Task 5 offline Route 1/2/3 analysis on both full trace outputs. All routes failed Gate A/B; Route 1/2 had `0` triggers and Route 3 stopped without route signal, so no policy runner is justified.
 - Implemented and ran CPU-only `trace_feature_audit_v2` under `superpowers:executing-plans`. Final output is `analysis_outputs/trace_feature_audit_v2_20260613_204721`; decision is `diagnostic_only`. Previous source has policy-level candidates, but current `midcons` source is diagnostic-only, so no direct full GPU policy runner is justified.
 - Completed two user-approved Route 2 trace-gated long-rescue full follow-up runs using `clean_scripts/run_route2_trace_rescue.py`. Broad plateau output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958` is `801/1033 = 77.54%`, pairwise `7/1/794/231`; precision top1/conf output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958` is `800/1033 = 77.44%`, pairwise `5/0/795/233`.
+- Completed the user-requested GPU3-only Route2 precision `len32` full run. The earlier GPU1 partial run was interrupted at about `405/1033` and is excluded. Clean output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516` is `801/1033 = 77.54%`, pairwise `6/0/795/232`; log `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log` ended with `COMMAND_EXIT_CODE=0`.
 
 ## Current Central Claim
 
@@ -93,11 +94,18 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - Trace feature audit v2: output `analysis_outputs/trace_feature_audit_v2_20260613_204721`; decision `diagnostic_only`; previous source `policy_candidate`; midcons source `diagnostic_only`. Strongest midcons held-out candidate: `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`, with `18` triggers, `9` failed-long, `2` short-risk, `0` current-pass risk, and `0.500` true-long precision. This was useful diagnostic signal, but not enough by itself for automatic full GPU policy execution.
 - Route 2 broad plateau full follow-up: output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`; log `logs/paper_agent/20260613_full_route2_broad_gpu2.log`; `801/1033 = 77.54%` versus `midcons` `795/1033 = 76.96%`; pairwise `7` wins / `1` loss / `794` tie-pass / `231` tie-fail; triggers `73`; trigger true-long precision `53.42%`; avg sec including probe `5.0852`.
 - Route 2 precision top1/conf full follow-up: output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`; log `logs/paper_agent/20260613_full_route2_precision_gpu3.log`; `800/1033 = 77.44%` versus `midcons` `795/1033 = 76.96%`; pairwise `5` wins / `0` losses / `795` tie-pass / `233` tie-fail; triggers `57`; trigger true-long precision `61.40%`; avg sec including probe `5.0945`.
+- Route 2 precision len32 GPU3-only follow-up: output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`; log `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`; `801/1033 = 77.54%` versus `midcons` `795/1033 = 76.96%`; pairwise `6` wins / `0` losses / `795` tie-pass / `232` tie-fail; triggers `57`; trigger true-long precision `61.40%`; avg sec including probe `5.4622`. Bucket net: `<=8 +2`, `9-12 +2`, `13-16 0`, `17-24 +2`, `25+ 0`.
 - Interpretation: precision is the cleaner paper-safe incremental result because it has no losses; broad has slightly larger net gain but one short loss. Neither resolves true-long: `17-24` gains only `+1/+2`, and `25+` is unchanged. Among `91` baseline failed-long rows, broad triggers `39` and rescues only `2`; precision triggers `35` and rescues only `1`, so fixed `len=24` rescue quality/length choice remains the key bottleneck.
 
 ## Running Or Just-Ended Commands
 
-No trace-long-rescue or Route 2 GPU command is running as of 2026-06-13 23:14 CST. The latest GPU actions were the two completed Route 2 full follow-up runs:
+No trace-long-rescue or Route 2 GPU command is running as of 2026-06-14 02:40 CST. The latest GPU action was the completed GPU3-only Route2 precision len32 follow-up:
+
+- precision len32 log: `/home/shx/projects/dllm_infilling/git_workspace/logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`
+- precision len32 output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`
+- precision len32 final sanity: log ended with `COMMAND_EXIT_CODE=0`; `results.jsonl` has `1033` valid rows; `summary.json` exists; `step_traces.jsonl` is nonempty; result is `801/1033 = 77.54%`, pairwise `6/0/795/232`.
+
+Previous Route 2 full follow-up runs:
 
 - broad log: `/home/shx/projects/dllm_infilling/git_workspace/logs/paper_agent/20260613_full_route2_broad_gpu2.log`
 - broad output: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`

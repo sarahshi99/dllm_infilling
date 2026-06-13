@@ -1,6 +1,6 @@
 # Experiment Results
 
-Updated: 2026-06-13 23:14 CST
+Updated: 2026-06-14 02:40 CST
 
 ## Three-Way Comparison: Paper-Reported Numbers vs Our Previous Methods vs Current Method
 
@@ -8,7 +8,7 @@ Important terminology correction: the "our previous/local method" column below i
 
 | Backbone / checkpoint | Relevant paper-reported numbers | Our previous/local method | Current method | Current vs previous | Current relative to paper reports |
 |---|---|---:|---:|---:|---|
-| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | Mainline `midcons` `795/1033 = 76.96%`; Route2 precision `800/1033 = 77.44%`, broad `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision `+13` tasks / `+1.26pp`; Route2 broad `+14` tasks / `+1.36pp` vs A6000 control | Above CAL best `73.6` and LR-DLLM `69.4`; Route2 is small follow-up evidence, not an external SOTA claim |
+| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | Mainline `midcons` `795/1033 = 76.96%`; Route2 precision len24 `800/1033 = 77.44%`; Route2 broad len24 `801/1033 = 77.54%`; Route2 precision len32 `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision len24 `+13` tasks / `+1.26pp`; Route2 broad len24 and precision len32 are both `+14` tasks / `+1.36pp` vs A6000 control | Above CAL best `73.6` and LR-DLLM `69.4`; Route2 is small follow-up evidence, not an external SOTA claim |
 | `GSAI-ML/LLaDA-8B-Instruct` | CAL: avg `69.9`, best shown `76.9` | historical LCAS-v3 `817/1033 = 79.09%` | `midcons` `815/1033 = 78.90%` | `-2` tasks / `-0.19pp` | Above CAL best `76.9`, but below our previous method |
 | `Dream-org/Dream-Coder-v0-Base-7B` | CAL: avg `70.2`, best shown `76.2`; LR-DLLM DreamCoder: `81.6`; DreamOn DreamCoder: `92.1` | official-canvas `cal_lite` `825/1033 = 79.86%` | bounded repair `832/1033 = 80.54%` | `+7` tasks / `+0.68pp` | Above CAL best `76.2`, below LR-DLLM `81.6` and DreamOn `92.1` |
 | `Dream-org/Dream-Coder-v0-Instruct-7B` | No exact matching paper-reported row | official-canvas `cal_lite` `848/1033 = 82.09%` | bounded repair `834/1033 = 80.74%` | `-14` tasks / `-1.36pp` | No direct paper-number comparison; local negative transfer |
@@ -67,21 +67,23 @@ Interpretation: v2 shows that trace features are not signal-free. Low `top1_last
 
 ## LLaDA-Base Route2 Trace-Gated Long Rescue Full Runs
 
-After the user explicitly preferred full runs, two Route2 trace-gated long-rescue full policy runs completed on GPUs `2/3`. The policy uses only inference-time trace/decode features to trigger a fixed `len=24` rescue. Oracle/verifier labels are used only for offline accounting and are not used to choose between primary and rescue outputs.
+After the user explicitly preferred full runs, two Route2 trace-gated long-rescue full policy runs completed on GPUs `2/3`. The user then required a `len32` follow-up to avoid GPU0/GPU1 and use GPU3 only; that clean GPU3-only full run also completed. The policy uses only inference-time trace/decode features to trigger fixed rescue. Oracle/verifier labels are used only for offline accounting and are not used to choose between primary and rescue outputs.
 
 Outputs:
 
 - Broad: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958`
 - Precision: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958`
+- Precision len32: `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`
 - Comparison baseline: current `midcons` trace run `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846`
 
-Verification: both logs ended with `COMMAND_EXIT_CODE=0`; both `results.jsonl` files have `1033` rows; Broad has `39740` step-trace rows and Precision has `38872`; both output directories contain `summary.json`.
+Verification: all three logs ended with `COMMAND_EXIT_CODE=0`; all three `results.jsonl` files have `1033` rows; Broad has `39740` step-trace rows, Precision len24 has `38872`, and Precision len32 has a nonempty `step_traces.jsonl`; all three output directories contain `summary.json`.
 
 | Run | Pass | Rate | Delta vs current `midcons` | Avg sec incl. probe |
 |---|---:|---:|---:|---:|
 | current `midcons` baseline | `795/1033` | `76.96%` | baseline | n/a |
 | Route2 broad len24 | `801/1033` | `77.54%` | `+6` tasks / `+0.58pp` | `5.0852` |
 | Route2 precision len24 | `800/1033` | `77.44%` | `+5` tasks / `+0.48pp` | `5.0945` |
+| Route2 precision len32 | `801/1033` | `77.54%` | `+6` tasks / `+0.58pp` | `5.4622` |
 
 Trigger / pairwise:
 
@@ -89,6 +91,7 @@ Trigger / pairwise:
 |---|---:|---:|---:|---:|---:|---:|
 | Route2 broad len24 | `73` (`7.07%`) | `9.59%` | `53.42%` | `7/1/794/231` | `10` | `1` |
 | Route2 precision len24 | `57` (`5.52%`) | `8.77%` | `61.40%` | `5/0/795/233` | `6` | `0` |
+| Route2 precision len32 | `57` (`5.52%`) | `10.53%` | `61.40%` | `6/0/795/232` | `6` | `0` |
 
 Oracle bucket pass rates:
 
@@ -97,6 +100,7 @@ Oracle bucket pass rates:
 | current `midcons` baseline | `89.97%` | `78.45%` | `58.89%` | `20.73%` | `16.13%` |
 | Route2 broad len24 | `89.97%` | `79.31%` | `61.11%` | `23.17%` | `16.13%` |
 | Route2 precision len24 | `90.13%` | `78.88%` | `61.11%` | `21.95%` | `16.13%` |
+| Route2 precision len32 | `90.30%` | `79.31%` | `58.89%` | `23.17%` | `16.13%` |
 
 Bucket pairwise vs current `midcons`:
 
@@ -104,6 +108,7 @@ Bucket pairwise vs current `midcons`:
 |---|---:|---:|---:|---:|---:|
 | Route2 broad len24 | `W1/L1/net+0` | `W2/L0/net+2` | `W2/L0/net+2` | `W2/L0/net+2` | `W0/L0/net+0` |
 | Route2 precision len24 | `W1/L0/net+1` | `W1/L0/net+1` | `W2/L0/net+2` | `W1/L0/net+1` | `W0/L0/net+0` |
+| Route2 precision len32 | `W2/L0/net+2` | `W2/L0/net+2` | `W0/L0/net+0` | `W2/L0/net+2` | `W0/L0/net+0` |
 
 Long-failure coverage:
 
@@ -111,8 +116,9 @@ Long-failure coverage:
 |---|---:|---:|---:|---:|---:|
 | Route2 broad len24 | `91` | `39` | `2` | `37` | `52` |
 | Route2 precision len24 | `91` | `35` | `1` | `34` | `56` |
+| Route2 precision len32 | `91` | `35` | `2` | `33` | `56` |
 
-Interpretation: the Route2 full run is a small positive result, not a solution to the long-length bottleneck. Broad gains `+6` tasks over current `midcons`, but has `1` primary-pass loss and more short triggers. Precision gains `+5` tasks with no observed primary-pass loss in this run, so it is safer but lower-coverage. The key diagnostic is that the gate finds some failed-long rows, but fixed `len=24` rescue usually cannot recover them. Among `91` baseline failed-long rows, Broad triggers `39` but rescues only `2`, while Precision triggers `35` and rescues only `1`. The next step should analyze triggered-but-still-failed and missed failed-long rows before deciding whether a training-free adaptive rescue length or stronger generation-side rescue is justified.
+Interpretation: the Route2 full runs are small positive results, not a solution to the long-length bottleneck. Broad len24 gains `+6` tasks over current `midcons`, but has `1` primary-pass loss and more short triggers. Precision len24 gains `+5` tasks with no observed primary-pass loss. Precision len32 gains `+6` tasks with no observed primary-pass loss, making it the cleaner follow-up so far. The key diagnostic is that the gate finds some failed-long rows, but fixed rescue usually cannot recover them. Precision len32 gains `+2` in oracle `17-24`, but `25+` is unchanged and triggered oracle `25+` rows are `0/11` pass. The next step should analyze triggered-but-still-failed and missed failed-long rows before deciding whether training-free adaptive rescue length, better rescue decoding, or trace/probe fusion is justified.
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

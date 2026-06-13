@@ -1,5 +1,14 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-14 02:40 CST
+
+- action: per the user's urgent request, moved the Route2 precision `len32` full run away from GPU0/GPU1 and completed a clean GPU3-only run; the earlier GPU1 partial run stopped at about `405/1033` rows and is excluded from final evidence.
+- evidence: tmux session `route2_precision_len32_gpu3_20260614`; log `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log`; output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`. The command used `CUDA_VISIBLE_DEVICES=3`; the log ended with `COMMAND_EXIT_CODE=0`; `results.jsonl` has `1033` valid rows; `summary.json` exists; `step_traces.jsonl` is nonempty.
+- result: Route2 precision `len32` reaches `801/1033 = 77.54%`, a net `+6` tasks over the current `midcons` baseline `795/1033 = 76.96%`; pairwise is `6` wins / `0` losses / `795` tie-pass / `232` tie-fail. It triggers `57` rows, with `61.40%` trigger true-long precision and `5.4622` seconds/sample including probe.
+- diagnostics: bucket net is `<=8 +2`, `9-12 +2`, `13-16 0`, `17-24 +2`, `25+ 0`. Triggered oracle `17-24` rows are `2/24` pass; triggered oracle `25+` rows are `0/11` pass. Compared with precision `len24`, total pass improves by `+1`, but `25+` is still unchanged.
+- interpretation: this is a clean low-risk incremental positive result, not a true-long breakthrough. The current bottleneck is not only rescue canvas length; both gate recall and rescue generation/selection quality remain limiting.
+- next: run Route2 error analysis before more full GPU trials: separate triggered-but-still-failed true-long rows, missed failed-long rows, and short/medium wins, then decide between adaptive rescue length, better rescue decoding, or trace/probe fusion.
+
 ## 2026-06-13 23:14 CST
 
 - action: closed out the two user-approved LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs and updated the recovery path.
