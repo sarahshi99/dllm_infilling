@@ -4,6 +4,8 @@
 
 **Goal:** Implement a CPU-only Route2 error analysis that turns the precision `len32` full-run outcomes into a stronger Discovery-layer V3 design. The aim is to continue searching for useful signals, not to abandon true-long rescue prematurely.
 
+**Status:** Completed on 2026-06-17. Final output is `analysis_outputs/route2_error_analysis_20260617_165806`; the diagnostic reproduced `1033` joined rows, pairwise `6/0/795/232`, `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length at least oracle. Decision: `mixed_rescue_quality_and_gate_recall`; recommended next path: `rescue_generation_quality+gate_recall`.
+
 **Worktree gate:** Current status is a clean dedicated branch `paper-agent-overnight`. This planning commit can stay in place. Before code implementation, re-check `git status`; if unrelated work appears or runner changes become broad, create an isolated worktree. If the implementation only adds one analysis script, one test file, and paper-agent docs, it may proceed in this branch after confirming cleanliness.
 
 ## File Structure
@@ -27,6 +29,8 @@ Planned documentation files:
 - Update `docs/paper_agent/pause_checkpoint.current.md`
 
 ## Task 1: Write Action Brief
+
+Status: completed.
 
 **Files:**
 
@@ -57,6 +61,8 @@ git diff --check -- docs/paper_agent/current_action.md docs/paper_agent/experime
 
 ## Task 2: Write Tests First
 
+Status: completed. The focused test file is `tests/test_route2_error_analysis.py`.
+
 **Files:**
 
 - Create `tests/test_route2_error_analysis.py`
@@ -81,6 +87,8 @@ git diff --check -- docs/paper_agent/current_action.md docs/paper_agent/experime
 ```
 
 ## Task 3: Implement CPU Diagnostic
+
+Status: completed. The implementation file is `analysis/route2_error_analysis.py`.
 
 **Files:**
 
@@ -116,6 +124,8 @@ git diff --check -- docs/paper_agent/current_action.md docs/paper_agent/experime
 
 ## Task 4: Run Diagnostic
 
+Status: completed. Final output directory: `analysis_outputs/route2_error_analysis_20260617_165806`.
+
 **Command:**
 
 Use the CLI in Task 3 with a timestamped output directory.
@@ -130,6 +140,8 @@ Use the CLI in Task 3 with a timestamped output directory.
 - next recommended path.
 
 ## Task 5: Update Paper-Agent Docs
+
+Status: in progress during documentation sync; final verification and commit are handled by Task 6/7.
 
 **Files:**
 
@@ -146,6 +158,8 @@ Use the CLI in Task 3 with a timestamped output directory.
 
 ## Task 6: Verification And Local Review
 
+Status: completed for focused verification. `tests/test_route2_error_analysis.py` passed with `Ran 8 tests / OK`; `analysis/route2_error_analysis.py` passed `py_compile`; `git diff --check` passed. Independent reviewer/subagent remains unavailable, so local diff review is the fallback.
+
 **Commands:**
 
 ```bash
@@ -159,6 +173,8 @@ git diff --check
 Independent reviewer/subagent is disabled by project policy. Perform local diff review and record residual risk.
 
 ## Task 7: Commit Boundary
+
+Status: ready. Commit after staging only the V3 analysis script, focused tests, final `analysis_outputs/route2_error_analysis_20260617_165806` artifacts, and paper-agent documentation updates.
 
 Commit only after:
 

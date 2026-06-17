@@ -1,70 +1,71 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-06-17 CST
+Timestamp: 2026-06-17 17:10 CST
 
 ## Action Name
 
-Brainstorm and plan Route2 error analysis as Discovery-layer V3, not abandonment of true-long signal search.
+Complete CPU-only Route2 error analysis as Discovery-layer V3 evidence.
 
 ## Current Phase
 
-The latest implemented Superpowers-style spec, `trace_feature_audit_v2`, has completed and produced `diagnostic_only`. The later user-approved Route2 full runs produced a clean but small gain, with precision `len32` at `801/1033 = 77.54%`, pairwise `6/0/795/232` against `midcons`.
+The Route2 precision `len32` full run remains the cleanest follow-up result: `801/1033 = 77.54%`, pairwise `6/0/795/232` against current `midcons`, with `0` losses. This is a small positive result, not a true-long breakthrough.
 
-The next step is not to give up on finding useful signals. It is to use Route2's wins, missed failed-long rows, and triggered-but-still-failed rows to improve the v2 Discovery layer.
+The new CPU-only diagnostic has now completed:
+
+- script: `analysis/route2_error_analysis.py`
+- tests: `tests/test_route2_error_analysis.py`
+- output: `analysis_outputs/route2_error_analysis_20260617_165806`
+- report: `analysis_outputs/route2_error_analysis_20260617_165806/report.md`
+
+No GPU experiment was launched by this action.
+
+Verification-time GPU note: `nvidia-smi` shows GPU2 and GPU3 are already occupied at roughly `40GB` used each, so no new experiment should be launched there without a later fresh check and explicit action brief.
 
 ## Superpowers Alignment
 
-- `superpowers:brainstorming`: active in this action. The brainstorming output is the new design spec and experiment brief.
-- `superpowers:using-git-worktrees`: checked. The current workspace is already the dedicated `paper-agent-overnight` branch with a clean worktree. This planning-only action does not create a new worktree. If the next implementation modifies analysis scripts or runners, the implementation plan must re-run this gate.
-- `superpowers:writing-plans`: active in this action. The executable plan is written to `docs/superpowers/plans/2026-06-17-route2-error-analysis-discovery-v3.md`.
+- `superpowers:brainstorming`: used as local protocol fallback to decide whether to continue signal search after `trace_feature_audit_v2`.
+- `superpowers:using-git-worktrees`: checked. Work stayed on the dedicated `paper-agent-overnight` branch because this action only adds one CPU analysis script, one focused test file, output artifacts, and paper-agent docs.
+- `superpowers:writing-plans`: used as local protocol fallback. The executable plan is `docs/superpowers/plans/2026-06-17-route2-error-analysis-discovery-v3.md`.
 
-The current tool environment does not expose callable `superpowers:*` skill files, so this action follows the local project protocol as the fallback.
+The current tool environment does not expose callable `superpowers:*` skill files, so this action follows the local project protocol as fallback.
 
-## Reviewer Motivation
+## Completed Diagnostic Result
 
-A CCF-A reviewer would not accept either of these shortcuts:
+Input baseline:
 
-1. "v2 did not find a stable policy, therefore trace/probe signals are useless."
-2. "Route2 gained `+6`, therefore true-long is solved."
+- `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl`
+- baseline result: `795/1033 = 76.96%`
 
-The right reviewer-facing move is to explain why Route2 wins, where it fails, and which missing signal family should be added to Discovery-layer V3.
+Input Route2 result:
 
-## Key Evidence To Explain
+- `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl`
+- Route2 result: `801/1033 = 77.54%`
 
-- Precision `len32` gains `+6` tasks over `midcons` with `0` losses.
-- All six wins are triggered rescue cases.
-- Triggered-but-still-failed true-long rows: `33`.
-- Among those, `31/33` already have rescue length greater than or equal to oracle length.
-- Missed baseline failed-long rows: `56`.
-- Oracle `25+` remains unchanged at `16.13%`.
+Reproduced CPU accounting:
 
-This points away from blind length increases and toward two linked questions:
+| Metric | Value |
+|---|---:|
+| Joined rows | `1033` |
+| Pairwise W/L/TP/TF | `6/0/795/232` |
+| Route2 triggers | `57` |
+| Triggered failed-long rows | `33` |
+| Missed failed-long rows | `56` |
+| Triggered failed-long with rescue length >= oracle | `31/33` |
+| Dominant bottleneck | `mixed_rescue_quality_and_gate_recall` |
+| Recommended next path | `rescue_generation_quality+gate_recall` |
 
-1. Why does rescue generation fail even when length is apparently enough?
-2. Why does the gate miss many failed-long rows whose trace confidence looks high?
+## Interpretation
 
-## Proposed Next Diagnostic
+This supports the user's concern that signal search should not be abandoned. Route2 did find real signal: all six wins are triggered rescue cases and the policy has no losses in the clean `len32` run.
 
-Create a CPU-only `route2_error_analysis` diagnostic that classifies every row into:
+But the diagnostic also shows that blind canvas-length increases are not the default next mechanism. Among `33` triggered failed-long rows, `31` already have rescue length at least oracle length. That points to rescue generation/selection quality. At the same time, `56` failed-long rows are missed entirely, so gate recall and probe-trace fusion still matter.
 
-- Route2 wins,
-- losses,
-- triggered true-long still failed,
-- missed failed-long,
-- short/medium wins,
-- no-change failures.
+## Next Research Move
 
-The diagnostic should output reviewer-readable tables and recommend one of:
+Do not launch another full GPU run from the current fixed trace gate. The next design should be one of:
 
-- improve rescue decoding/selection,
-- improve trace/probe fusion gate recall,
-- test adaptive rescue length only where length insufficiency is actually supported,
-- stop true-long rescue under current signals.
+1. rescue-generation-quality audit: inspect why triggered long rows fail despite enough length;
+2. probe-trace fusion gate: search inference-visible signals for the `56` missed failed-long rows;
+3. a combined Discovery V3 model that ranks both rescue-success predictors and missed-long predictors, then distills readable training-free rules.
 
-## Expected Documentation Outputs
-
-- `docs/superpowers/specs/2026-06-17-route2-error-analysis-discovery-v3-design.md`
-- `docs/superpowers/plans/2026-06-17-route2-error-analysis-discovery-v3.md`
-- `docs/paper_agent/experiments/20260617_route2_error_analysis_discovery_v3.md`
-
-No GPU command is launched by this planning action.
+GPU `2/3` must not be used while other users' tasks are present. Before any future GPU action, check `nvidia-smi`, write a new action brief with success/kill criteria, and only launch if the allocation is clear or explicitly approved.

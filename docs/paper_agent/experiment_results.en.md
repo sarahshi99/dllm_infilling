@@ -1,6 +1,6 @@
 # Experiment Results
 
-Updated: 2026-06-14 02:40 CST
+Updated: 2026-06-17 17:10 CST
 
 ## Three-Way Comparison: Paper-Reported Numbers vs Our Previous Methods vs Current Method
 
@@ -119,6 +119,25 @@ Long-failure coverage:
 | Route2 precision len32 | `91` | `35` | `2` | `33` | `56` |
 
 Interpretation: the Route2 full runs are small positive results, not a solution to the long-length bottleneck. Broad len24 gains `+6` tasks over current `midcons`, but has `1` primary-pass loss and more short triggers. Precision len24 gains `+5` tasks with no observed primary-pass loss. Precision len32 gains `+6` tasks with no observed primary-pass loss, making it the cleaner follow-up so far. The key diagnostic is that the gate finds some failed-long rows, but fixed rescue usually cannot recover them. Precision len32 gains `+2` in oracle `17-24`, but `25+` is unchanged and triggered oracle `25+` rows are `0/11` pass. The next step should analyze triggered-but-still-failed and missed failed-long rows before deciding whether training-free adaptive rescue length, better rescue decoding, or trace/probe fusion is justified.
+
+## Route2 Error Analysis Discovery V3
+
+`route2_error_analysis` is a CPU-only diagnostic that explains why Route2 precision `len32` produces only a small gain and whether the next Discovery layer should optimize gate recall, rescue generation/selection, or adaptive length. It launches no GPU work and adds no new pass-rate claim.
+
+Output directory: `analysis_outputs/route2_error_analysis_20260617_165806`; report: `analysis_outputs/route2_error_analysis_20260617_165806/report.md`.
+
+| Metric | Value |
+|---|---:|
+| Joined rows | `1033` |
+| Pairwise W/L/TP/TF | `6/0/795/232` |
+| Route2 triggers | `57` |
+| Triggered failed-long rows | `33` |
+| Missed failed-long rows | `56` |
+| Triggered failed-long with rescue length >= oracle | `31/33` |
+| Dominant bottleneck | `mixed_rescue_quality_and_gate_recall` |
+| Recommended next path | `rescue_generation_quality+gate_recall` |
+
+Interpretation: the result supports continued signal search rather than abandoning true-long rescue. All `6` Route2 wins come from triggered rescue, so the gate has real signal. However, `31/33` triggered failed-long rows already have rescue length at least oracle length, so blind canvas-length increases are not the default answer. At the same time, `56` failed-long rows are missed entirely, so gate recall is still insufficient. The next CPU-first designs should inspect rescue generation/selection failures and expand probe-trace fusion for missed failed-long recall.
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

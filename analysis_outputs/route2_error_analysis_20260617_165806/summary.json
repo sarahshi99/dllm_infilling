@@ -1,0 +1,68 @@
+{
+  "baseline_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl",
+  "baseline_rows": 1033,
+  "bucket_pairwise": {
+    "13-16": {
+      "loss": 0,
+      "tie_fail": 37,
+      "tie_pass": 53,
+      "win": 0
+    },
+    "17-24": {
+      "loss": 0,
+      "tie_fail": 63,
+      "tie_pass": 17,
+      "win": 2
+    },
+    "25+": {
+      "loss": 0,
+      "tie_fail": 26,
+      "tie_pass": 5,
+      "win": 0
+    },
+    "9-12": {
+      "loss": 0,
+      "tie_fail": 48,
+      "tie_pass": 182,
+      "win": 2
+    },
+    "<=8": {
+      "loss": 0,
+      "tie_fail": 58,
+      "tie_pass": 538,
+      "win": 2
+    }
+  },
+  "class_counts": {
+    "missed_failed_long": 56,
+    "route2_win": 6,
+    "short_or_medium_win": 4,
+    "tie_fail": 232,
+    "tie_pass": 795,
+    "triggered_failed_long": 33,
+    "triggered_rescued_long": 2,
+    "unchanged_fail": 232
+  },
+  "dominant_bottleneck": "mixed_rescue_quality_and_gate_recall",
+  "joined_rows": 1033,
+  "pairwise_counts": {
+    "loss": 0,
+    "tie_fail": 232,
+    "tie_pass": 795,
+    "win": 6
+  },
+  "recommended_next_path": "rescue_generation_quality+gate_recall",
+  "route2_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl",
+  "route2_rows": 1033,
+  "triggered_by_bucket": {
+    "13-16": 10,
+    "17-24": 24,
+    "25+": 11,
+    "9-12": 6,
+    "<=8": 6
+  },
+  "triggered_count": 57,
+  "triggered_failed_long_rescue_ge_oracle": 31,
+  "triggered_failed_long_rescue_lt_oracle": 2,
+  "triggered_failed_long_rescue_unknown": 0
+}

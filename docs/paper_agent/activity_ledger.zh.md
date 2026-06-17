@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-17 17:10 CST
+
+- action：完成 CPU-only Route2 error analysis Discovery V3，用来解释 Route2 precision `len32` 小幅正收益背后的失败形态，并为下一轮 Discovery layer 定方向。没有启动 GPU 实验。
+- evidence：实现 `analysis/route2_error_analysis.py`；测试 `tests/test_route2_error_analysis.py`；输出目录 `analysis_outputs/route2_error_analysis_20260617_165806`；报告 `analysis_outputs/route2_error_analysis_20260617_165806/report.md`。输入 baseline 为 `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl`；输入 Route2 为 `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl`。
+- result：诊断复现 `1033` joined rows、pairwise `6/0/795/232`、Route2 triggers `57`、triggered failed-long `33`、missed failed-long `56`、triggered failed-long 中 rescue length >= oracle 为 `31/33`。Dominant bottleneck 为 `mixed_rescue_quality_and_gate_recall`，recommended next path 为 `rescue_generation_quality+gate_recall`。
+- interpretation：Route2 的 `6` 个 wins 都来自 triggered rescue，说明 gate 有真实信号；但大多数 triggered failed-long 已经长度足够却仍失败，说明盲目加长不是默认解。与此同时，`56` 个 failed-long 没触发，说明 gate recall 仍不足。
+- next：先做 CPU-first 的 rescue generation/selection audit 和 probe-trace fusion gate 设计。除非有新 action brief、success/kill criteria，并确认 GPU `2/3` 没有他人任务，否则不启动新的 GPU full run。
+
 ## 2026-06-14 02:40 CST
 
 - action：按用户紧急要求将 Route2 precision `len32` full run 从 GPU1 partial 改为 GPU3-only clean full run，并持续监督到完成。

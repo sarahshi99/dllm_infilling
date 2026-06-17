@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-06-14 02:40 CST
+更新时间：2026-06-17 17:10 CST
 
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
@@ -119,6 +119,25 @@ Long-failure coverage：
 | Route2 precision len32 | `91` | `35` | `2` | `33` | `56` |
 
 Interpretation：Route2 full run 是小幅正收益，而不是长长度瓶颈被解决。Broad len24 相比 current `midcons` 净增 `+6` tasks，但有 `1` 个 primary-pass loss 和更多 short triggers；Precision len24 净增 `+5` tasks 且没有 observed primary-pass loss；Precision len32 净增 `+6` tasks 且没有 observed primary-pass loss，是当前更干净的 Route2 follow-up。最关键诊断是：gate 能抓到一部分 failed-long rows，但 fixed rescue 大多救不回来。Precision len32 在 oracle `17-24` 净增 `+2`，但 oracle `25+` 仍为 `0` 增益；triggered oracle `25+` 行为 `0/11` pass。下一步应分析 triggered-but-still-failed 和 missed failed-long rows，再决定是否设计 training-free adaptive rescue length、better rescue decoding 或更强 trace/probe fusion gate。
+
+## Route2 Error Analysis Discovery V3
+
+`route2_error_analysis` 是 CPU-only 诊断，用来解释 Route2 precision `len32` 为什么只有小幅增益，以及下一轮 Discovery layer 应该优化 gate recall、rescue generation/selection，还是 adaptive length。它不启动 GPU，也不报告新的 pass-rate claim。
+
+输出目录：`analysis_outputs/route2_error_analysis_20260617_165806`；报告：`analysis_outputs/route2_error_analysis_20260617_165806/report.md`。
+
+| Metric | Value |
+|---|---:|
+| Joined rows | `1033` |
+| Pairwise W/L/TP/TF | `6/0/795/232` |
+| Route2 triggers | `57` |
+| Triggered failed-long rows | `33` |
+| Missed failed-long rows | `56` |
+| Triggered failed-long with rescue length >= oracle | `31/33` |
+| Dominant bottleneck | `mixed_rescue_quality_and_gate_recall` |
+| Recommended next path | `rescue_generation_quality+gate_recall` |
+
+Interpretation：这支持继续找信号，而不是放弃 true-long rescue。Route2 的 `6` 个 wins 都来自 triggered rescue，说明 gate 有真实信号；但 `33` 个 triggered failed-long 中有 `31` 个 rescue length 已经不小于 oracle length，说明盲目继续加长 canvas 不是默认解。与此同时，还有 `56` 个 failed-long rows 完全没被 trigger，说明 gate recall 仍然不足。因此下一步应做两条 CPU-first 设计：一是分析 rescue generation/selection 为什么在长度足够时失败，二是用 probe-trace fusion 扩展 missed failed-long 的召回。
 
 ## LLaDA-MoE Local Same-Backbone Pair
 

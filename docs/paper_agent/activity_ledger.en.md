@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-17 17:10 CST
+
+- action: completed the CPU-only Route2 error analysis Discovery V3 to explain the failure shape behind the Route2 precision `len32` small positive result and choose the next Discovery-layer direction. No GPU experiment was launched.
+- evidence: implementation `analysis/route2_error_analysis.py`; tests `tests/test_route2_error_analysis.py`; output directory `analysis_outputs/route2_error_analysis_20260617_165806`; report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`. Input baseline is `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl`; input Route2 result is `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl`.
+- result: the diagnostic reproduces `1033` joined rows, pairwise `6/0/795/232`, `57` Route2 triggers, `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length >= oracle. Dominant bottleneck is `mixed_rescue_quality_and_gate_recall`; recommended next path is `rescue_generation_quality+gate_recall`.
+- interpretation: all `6` Route2 wins are triggered rescue cases, so the gate has real signal. But most triggered failed-long rows already have enough length and still fail, so blind length increases are not the default answer. Meanwhile, `56` failed-long rows are missed entirely, so gate recall remains insufficient.
+- next: run CPU-first rescue generation/selection audit and probe-trace fusion gate design. Do not launch another GPU full run unless there is a new action brief, success/kill criteria, and GPUs `2/3` are confirmed free of other users' jobs.
+
 ## 2026-06-14 02:40 CST
 
 - action: per the user's urgent request, moved the Route2 precision `len32` full run away from GPU0/GPU1 and completed a clean GPU3-only run; the earlier GPU1 partial run stopped at about `405/1033` rows and is excluded from final evidence.
