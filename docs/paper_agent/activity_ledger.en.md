@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-17 18:20 CST
+
+- action: continued the true-long signal search per the user's request and completed the Discovery V4 literature-inspired brainstorm and executable plan under the Superpowers local fallback. No GPU experiment was launched.
+- evidence: added `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`, `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`, and `docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`; updated `docs/paper_agent/current_action.md`.
+- result: V4 redefines the three layers as Error/Action Anatomy, Discovery Model Layer, and Policy Distillation Layer. The core design has two discovery heads: `MissedLongHead` searches probe-trace fusion signals for the `56` missed failed-long rows, while `RescueQualityHead` explains why `31/33` triggered failed-long rows still fail despite rescue length >= oracle.
+- literature: incorporated risk-controlled selection, slice/subgroup discovery, RuleFit/rule lists, time-series shapelets/ROCKET/catch22, calibration/OOD residuals, weak supervision, and counterfactual/uplift diagnostics.
+- next: implement CPU-only `analysis/discovery_v4_signal_audit.py` and `tests/test_discovery_v4_signal_audit.py`. Do not launch GPU work before a CPU candidate passes held-out risk gates; never launch on GPU `2/3` while other users' tasks are present.
+
 ## 2026-06-17 17:10 CST
 
 - action: completed the CPU-only Route2 error analysis Discovery V3 to explain the failure shape behind the Route2 precision `len32` small positive result and choose the next Discovery-layer direction. No GPU experiment was launched.

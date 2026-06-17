@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-Updated: 2026-06-17 17:10 CST
+Updated: 2026-06-17 18:20 CST
 
 ## Current Research Goal
 
@@ -14,7 +14,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 
 ## Current Experiment Plan Version
 
-`v3`: probe-curve-first long-length modeling plan with the user-confirmed GPU allocation, now extended with full trace-long-rescue diagnostics, CPU-only `trace_feature_audit_v2`, user-approved Route 2 full follow-up runs, and CPU-only Route2 error analysis. The current A6000 LLaDA-Base checkpoint is `midcons`; v1 Route 1/2/3 analysis produced negative evidence, while v2 found partial trace signal but ended with `diagnostic_only`. The later Route 2 full runs show a small positive signal. The 2026-06-14 GPU3-only precision `len32` follow-up reaches `801/1033 = 77.54%`, pairwise `6/0/795/232`, but the oracle `25+` bucket is still not solved. The 2026-06-17 CPU-only Route2 error analysis classifies the bottleneck as `mixed_rescue_quality_and_gate_recall`.
+`v4`: CPU-first Discovery signal-model design built on the `v3` Route2 error analysis. The current A6000 LLaDA-Base checkpoint is `midcons`; Route2 precision `len32` gives a clean low-risk signal at `801/1033 = 77.54%`, pairwise `6/0/795/232`, but the oracle `25+` bucket is still not solved. The 2026-06-17 CPU-only Route2 error analysis classifies the bottleneck as `mixed_rescue_quality_and_gate_recall`; V4 splits the next search into `MissedLongHead` and `RescueQualityHead`, using slice/rule/trace-shape/calibration/uplift diagnostics to find signals.
 
 ## Completed This Session
 
@@ -44,6 +44,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - After the user confirmed continuing, completed two LLaDA-Base Route 2 trace-gated long-rescue full follow-up runs using the existing tracked runner `clean_scripts/run_route2_trace_rescue.py`. Broad plateau is `801/1033 = 77.54%`, pairwise `7/1/794/231`; precision top1/conf is `800/1033 = 77.44%`, pairwise `5/0/795/233`. Both logs exited `0`, and both outputs have `1033` valid rows plus `summary.json`.
 - Per the user's urgent request, moved the precision `len32` follow-up to a clean GPU3-only full run; the earlier GPU1 partial run stopped around `405/1033` and is excluded from evidence. The GPU3-only run completed successfully: `801/1033 = 77.54%`, pairwise `6/0/795/232`, `57` triggers, `61.40%` trigger true-long precision, and `5.4622` seconds/sample including probe.
 - Completed the CPU-only Route2 error analysis Discovery V3 under the Superpowers local fallback. Added `analysis/route2_error_analysis.py` and `tests/test_route2_error_analysis.py`; output is `analysis_outputs/route2_error_analysis_20260617_165806`. The diagnostic reproduces `1033` joined rows, pairwise `6/0/795/232`, `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length >= oracle; decision is `mixed_rescue_quality_and_gate_recall`. No GPU action was launched.
+- Per the user's request, continued the true-long signal search and completed the Discovery V4 literature brainstorm plus executable plan. Added `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`, `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`, and `docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`. No GPU action was launched.
 
 ## Workflow / Skill Status
 
@@ -87,6 +88,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - Route 2 trace-gated full follow-up: the `midcons` baseline is `795/1033 = 76.96%`. Broad plateau reaches `801/1033 = 77.54%`, net `+6`, but has `1` loss / short loss; it triggers `73` rows with `53.42%` trigger true-long precision. Precision top1/conf reaches `800/1033 = 77.44%`, net `+5`, with `0` losses; it triggers `57` rows with `61.40%` trigger true-long precision. The precision policy is the cleaner candidate, but oracle `17-24` improves by only `+1` and `25+` is unchanged, so true-long is not solved. Core diagnostic: among `91` baseline failed-long rows, Broad triggers `39` and rescues only `2`, while Precision triggers `35` and rescues only `1`.
 - Route 2 precision len32 GPU3-only follow-up: output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`; `801/1033 = 77.54%`, net `+6`, pairwise `6/0/795/232`, `57` triggers, `61.40%` trigger true-long precision, and `5.4622` seconds/sample including probe. Bucket net is `<=8 +2`, `9-12 +2`, `13-16 0`, `17-24 +2`, `25+ 0`; triggered oracle `25+` rows are `0/11` pass. Interpretation: clean low-risk incremental gain, but still no `25+` true-long solution.
 - Route2 error analysis Discovery V3: output `analysis_outputs/route2_error_analysis_20260617_165806`; report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`. It confirms that all `6` Route2 wins are triggered rescue cases, but `31/33` triggered failed-long rows already have rescue length >= oracle while `56` failed-long rows are missed entirely. Conclusion: do not blindly lengthen the rescue canvas; the next mechanism should jointly inspect rescue generation/selection quality and probe-trace fusion gate recall.
+- Discovery V4 design: spec `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`; plan `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`. V4 treats the problem as risk-controlled action selection rather than single-feature enumeration: `MissedLongHead` searches probe-trace fusion signals for missed failed-long rows, `RescueQualityHead` explains triggered rows that still fail despite enough length, and Policy Distillation converts stable signals into reviewer-readable training-free rules/actions.
 
 ## Key Plan Adjustments
 
@@ -97,7 +99,7 @@ Terminology correction: previous/local baseline or local control rows in these d
 - Treat the first simple strict-split linear probe score as negative evidence, not as a candidate GPU policy.
 - Restrict future GPU experiments to cards `2,3`, waiting rather than interrupting existing jobs.
 - Promote trajectory features, learned length classification, DreamOn-style dynamic canvas control, or LR-DLLM-style length regularization as the next paper-level direction.
-- Record the Route 2 precision policy as paper-cleaner incremental positive evidence, not as the final main method. Keep the broad policy as a more aggressive comparison with short-loss risk. Route2 error analysis V3 further shows a mixed bottleneck: rescue generation/selection quality plus gate recall, not just rescue length.
+- Record the Route 2 precision policy as paper-cleaner incremental positive evidence, not as the final main method. Keep the broad policy as a more aggressive comparison with short-loss risk. Route2 error analysis V3 further shows a mixed bottleneck: rescue generation/selection quality plus gate recall, not just rescue length. V4 upgrades the next step from "find one feature" to "find stable slice/action signals and distill them into rules."
 
 ## Biggest Risk
 
@@ -105,12 +107,12 @@ The current improvement is too small and too heuristic for a CCF-A contribution 
 
 ## Next Actions
 
-1. Use `analysis_outputs/route2_error_analysis_20260617_165806` for the next CPU-first Discovery V3 step: separate rescue generation/selection quality from missed failed-long gate recall.
-2. Design a probe-trace fusion gate for the `56` missed failed-long rows while preserving short/current-pass risk limits.
-3. Audit the `33` triggered failed-long rows at the rescue-output/failure-mode level; if most already have enough length but still fail, prioritize better rescue decoding/selection over blind length increases.
-4. Do not launch another full run from the current fixed trace gates without a new action brief, explicit success/kill criteria, and confirmation that GPUs `2/3` are not occupied by other users' jobs.
-5. Keep literature anchors, previous local methods, current methods, and trace diagnostics in separate columns/sections.
+1. Implement CPU-only `analysis/discovery_v4_signal_audit.py` and `tests/test_discovery_v4_signal_audit.py`.
+2. Build a row-action table joining `midcons`, Route2 precision `len32/len24`, Route2 broad `len24`, and trace/probe fields.
+3. Search constrained slices, rule candidates, trace-shape motifs, calibration residuals, weak-signal votes, and partial uplift diagnostics.
+4. Output `policy_shortlist.md`; write a GPU action brief only if held-out risk gates pass.
+5. Do not launch GPU work while GPUs `2/3` have other users' jobs; keep literature anchors, previous local methods, current methods, and trace diagnostics separate.
 
 ## User Decisions Needed
 
-No Route 2 GPU experiment is currently running. Route2 error analysis is complete; the recommended next step is CPU-first design, not GPU execution while GPUs `2/3` have other users' tasks. Priority: probe-trace fusion gate recall plus rescue generation/selection audit.
+No Route 2 GPU experiment is currently running. Discovery V4 design is complete; the recommended next step is CPU-only audit implementation, not GPU execution while GPUs `2/3` have other users' tasks.

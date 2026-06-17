@@ -1,71 +1,82 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-06-17 17:10 CST
+Timestamp: 2026-06-17 18:20 CST
 
 ## Action Name
 
-Complete CPU-only Route2 error analysis as Discovery-layer V3 evidence.
+Discovery V4 signal-model literature brainstorming and executable plan.
 
 ## Current Phase
 
-The Route2 precision `len32` full run remains the cleanest follow-up result: `801/1033 = 77.54%`, pairwise `6/0/795/232` against current `midcons`, with `0` losses. This is a small positive result, not a true-long breakthrough.
+Route2 error analysis Discovery V3 is complete:
 
-The new CPU-only diagnostic has now completed:
-
-- script: `analysis/route2_error_analysis.py`
-- tests: `tests/test_route2_error_analysis.py`
 - output: `analysis_outputs/route2_error_analysis_20260617_165806`
-- report: `analysis_outputs/route2_error_analysis_20260617_165806/report.md`
+- result: `1033` joined rows, pairwise `6/0/795/232`, `33` triggered failed-long rows, `56` missed failed-long rows, `31/33` triggered failed-long rows with rescue length >= oracle
+- decision: `mixed_rescue_quality_and_gate_recall`
 
-No GPU experiment was launched by this action.
+The next step is not a GPU experiment. It is a CPU-first Discovery V4 design that searches for useful signals and mechanisms in the three-layer stack:
 
-Verification-time GPU note: `nvidia-smi` shows GPU2 and GPU3 are already occupied at roughly `40GB` used each, so no new experiment should be launched there without a later fresh check and explicit action brief.
+1. Error and action anatomy.
+2. Discovery model layer.
+3. Policy distillation layer.
 
 ## Superpowers Alignment
 
-- `superpowers:brainstorming`: used as local protocol fallback to decide whether to continue signal search after `trace_feature_audit_v2`.
-- `superpowers:using-git-worktrees`: checked. Work stayed on the dedicated `paper-agent-overnight` branch because this action only adds one CPU analysis script, one focused test file, output artifacts, and paper-agent docs.
-- `superpowers:writing-plans`: used as local protocol fallback. The executable plan is `docs/superpowers/plans/2026-06-17-route2-error-analysis-discovery-v3.md`.
+- `superpowers:brainstorming`: used as local protocol fallback. The brainstorm compares risk-controlled selection, slice discovery, rule mining, trace-shape discovery, calibration/OOD signals, weak supervision, and counterfactual/uplift diagnostics.
+- `superpowers:using-git-worktrees`: checked. Current branch is the dedicated `paper-agent-overnight`; this planning action is narrow documentation and does not require a new worktree.
+- `superpowers:writing-plans`: used as local protocol fallback. The executable plan is `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`.
 
 The current tool environment does not expose callable `superpowers:*` skill files, so this action follows the local project protocol as fallback.
 
-## Completed Diagnostic Result
+## New Planning Outputs
 
-Input baseline:
+- Design spec: `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`
+- Executable plan: `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`
+- Literature brainstorm brief: `docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`
 
-- `/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl`
-- baseline result: `795/1033 = 76.96%`
+## Key Design Decision
 
-Input Route2 result:
+V4 should not treat "find a feature" as single-feature enumeration. It should treat the problem as risk-controlled action selection:
 
-- `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl`
-- Route2 result: `801/1033 = 77.54%`
+- `MissedLongHead`: find inference-visible signals for the `56` missed failed-long rows.
+- `RescueQualityHead`: explain the `33` triggered failed-long rows, especially because `31/33` already have rescue length >= oracle.
+- `PolicyDistillation`: convert any useful discovery model into a small, reviewer-readable, training-free gate/action rule.
 
-Reproduced CPU accounting:
+## Literature-Inspired Method Families
 
-| Metric | Value |
-|---|---:|
-| Joined rows | `1033` |
-| Pairwise W/L/TP/TF | `6/0/795/232` |
-| Route2 triggers | `57` |
-| Triggered failed-long rows | `33` |
-| Missed failed-long rows | `56` |
-| Triggered failed-long with rescue length >= oracle | `31/33` |
-| Dominant bottleneck | `mixed_rescue_quality_and_gate_recall` |
-| Recommended next path | `rescue_generation_quality+gate_recall` |
+- Risk-controlled selection: optimize coverage under short/current-pass risk constraints.
+- Slice/subgroup discovery: find local regions of model failure or rescue success.
+- Rule extraction: use shallow trees, sparse scores, and rule ensembles as microscopes.
+- Time-series trace shape: search late plateau, high-confidence stagnation, early collapse, progress-then-stall.
+- Calibration/OOD residuals: normalize trace confidence by selected length, stop reason, and probe disagreement.
+- Weak supervision: combine noisy heuristics before distilling a rule.
+- Counterfactual/uplift diagnostics: treat rescue as an action, but keep causal claims conservative because current action logs are biased.
 
-## Interpretation
+## GPU Policy
 
-This supports the user's concern that signal search should not be abandoned. Route2 did find real signal: all six wins are triggered rescue cases and the policy has no losses in the clean `len32` run.
+No GPU experiment is running or should be launched by this action. Before any future GPU work:
 
-But the diagnostic also shows that blind canvas-length increases are not the default next mechanism. Among `33` triggered failed-long rows, `31` already have rescue length at least oracle length. That points to rescue generation/selection quality. At the same time, `56` failed-long rows are missed entirely, so gate recall and probe-trace fusion still matter.
+- write a new action brief with success/kill criteria;
+- check `nvidia-smi`;
+- do not use GPU `2/3` while other users' tasks are present;
+- require a CPU candidate that passes held-out risk gates.
 
-## Next Research Move
+Recent check showed GPU2 and GPU3 occupied at roughly `40GB` used each.
 
-Do not launch another full GPU run from the current fixed trace gate. The next design should be one of:
+## Next Implementation Target
 
-1. rescue-generation-quality audit: inspect why triggered long rows fail despite enough length;
-2. probe-trace fusion gate: search inference-visible signals for the `56` missed failed-long rows;
-3. a combined Discovery V3 model that ranks both rescue-success predictors and missed-long predictors, then distills readable training-free rules.
+Implement CPU-only:
 
-GPU `2/3` must not be used while other users' tasks are present. Before any future GPU action, check `nvidia-smi`, write a new action brief with success/kill criteria, and only launch if the allocation is clear or explicitly approved.
+- `analysis/discovery_v4_signal_audit.py`
+- `tests/test_discovery_v4_signal_audit.py`
+
+Expected output:
+
+- `analysis_outputs/discovery_v4_signal_audit_TIMESTAMP/row_action_table.csv`
+- `slice_candidates.csv`
+- `rule_candidates.csv`
+- `trace_shape_candidates.csv`
+- `calibration_residuals.csv`
+- `uplift_diagnostics.csv`
+- `policy_shortlist.md`
+- `report.md`

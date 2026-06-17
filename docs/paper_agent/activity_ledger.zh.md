@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-17 18:20 CST
+
+- action：按用户要求继续 true-long 信号搜索，使用 Superpowers local fallback 完成 Discovery V4 的文献启发 brainstorm 和 executable plan。没有启动 GPU。
+- evidence：新增 `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`、`docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`、`docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`，并更新 `docs/paper_agent/current_action.md`。
+- result：V4 将三层 layer 重新定义为：Error/Action Anatomy、Discovery Model Layer、Policy Distillation Layer。核心设计是两个 discovery heads：`MissedLongHead` 找 `56` 个 missed failed-long 的 probe-trace fusion signal，`RescueQualityHead` 解释 `33` 个 triggered failed-long 中为什么 `31/33` 长度够仍失败。
+- literature：吸收 risk-controlled selection、slice/subgroup discovery、RuleFit/rule lists、time-series shapelets/ROCKET/catch22、calibration/OOD residuals、weak supervision、counterfactual/uplift diagnostics。
+- next：实现 CPU-only `analysis/discovery_v4_signal_audit.py` 和 `tests/test_discovery_v4_signal_audit.py`。没有新的 CPU candidate 通过 held-out risk gate 前，不启动 GPU；GPU `2/3` 有他人任务时不得启动实验。
+
 ## 2026-06-17 17:10 CST
 
 - action：完成 CPU-only Route2 error analysis Discovery V3，用来解释 Route2 precision `len32` 小幅正收益背后的失败形态，并为下一轮 Discovery layer 定方向。没有启动 GPU 实验。
