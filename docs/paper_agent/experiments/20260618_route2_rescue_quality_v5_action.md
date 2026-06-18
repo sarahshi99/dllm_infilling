@@ -135,4 +135,28 @@ Stop if:
 
 ## Current Status
 
-Design/spec/planning only. No GPU experiment has been launched by this action.
+Implementation status at 2026-06-18 12:37 CST:
+
+- V5 runner implemented: `clean_scripts/run_route2_rescue_quality_v5.py`.
+- Focused tests implemented: `tests/test_route2_rescue_quality_v5.py`.
+- Selector A now scores only a whitelisted policy view. Hidden pass/fail, oracle length, verification outcomes, and pairwise labels are not passed into the deployed selector.
+- Oracle upper bound is logged only as `offline_only`.
+- CPU verification passed:
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_route2_rescue_quality_v5.py tests/test_route2_trace_rescue.py`
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile clean_scripts/run_route2_rescue_quality_v5.py`
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --help`
+  - `git diff --check`
+- No GPU experiment has been launched from this action.
+
+GPU smoke is currently blocked because `nvidia-smi` shows GPU `2` and `3` are occupied by user `xy` training jobs:
+
+```text
+GPU 2 PID 3410485 /home/xy/anaconda3/envs/cgsa/bin/python3.9 ... elapsed 17:57
+GPU 3 PID 3410486 /home/xy/anaconda3/envs/cgsa/bin/python3.9 ... elapsed 17:57
+```
+
+Recommended smoke command when GPU `3` is free:
+
+```bash
+HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/tmp/hf_route2_v5_20260618 CUDA_VISIBLE_DEVICES=3 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --max-samples 10 --candidate-set cheap --selector consensus_confidence --route2-policy precision_top1_conf --baseline-results /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl --route2-reference-results /home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl --experiment-name smoke_route2_rescue_quality_v5_cheap_consensus_gpu3
+```
