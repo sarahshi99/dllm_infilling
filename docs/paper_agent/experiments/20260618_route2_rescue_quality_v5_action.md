@@ -167,7 +167,21 @@ Smoke 2, targeted triggered branch:
 - selector chose `len24_s64` on all three targeted rows.
 - interpretation: V5 candidate logging/selection works. For the two targeted true-long failures, no candidate passed, so those examples are generation failures rather than selector mistakes. The short/medium win was preserved.
 
-Current GPU state after smoke: GPU `2/3` are again occupied by other users' jobs, so no further GPU run was started.
+Smoke 3, targeted historical Route2 wins:
+
+- first attempt hit GPU OOM during model load because another process occupied the physical card during loading; this is a resource collision, not a V5 code error.
+- retry output: `outputs_clean/smoke_route2_rescue_quality_v5_wins_gpu3_retry_20260618_130028`
+- targeted task ids: `SingleLineInfilling/HumanEval/66/L1`, `SingleLineInfilling/HumanEval/116/L0`, `SingleLineInfilling/HumanEval/60/L0`.
+- result: `2/3` pass, `route2_trigger_count = 3`, candidate-count histogram `{3: 3}`.
+- pairwise vs `midcons`: `2/0/0/1`.
+- pairwise vs Route2 precision `len32`: `0/1/2/0`.
+- oracle upper bound on triggered rows: `3/3`.
+- important failure: on `SingleLineInfilling/HumanEval/60/L0`, `len32_s64` and `len32_s96` passed, but `consensus_confidence` selected `len24_s64`, which failed.
+
+Current decision:
+
+- Do not launch a full V5 run with the current `consensus_confidence` selector.
+- The next safe design is an anchor-protected selector that defaults to the existing clean Route2 precision action `len32_s64` and only switches to another candidate when the score margin is large enough. An even simpler fallback is to remove `len24_s64` from the selectable policy candidates while keeping it only as a diagnostic candidate.
 
 Recommended full/smoke command when GPU `2` or `3` is free:
 

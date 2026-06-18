@@ -122,6 +122,52 @@ Interpretation:
 
 The V5 candidate branch is functional and logs the needed metadata. On the two targeted true-long failed rows, the candidate set itself has no passing candidate, so these examples are generation failures rather than selector mistakes. The short/medium Route2 win is preserved.
 
+### Smoke 3: Targeted Historical Route2 Wins
+
+The first attempt failed during model loading with CUDA OOM because another process occupied the physical GPU during loading. The retry succeeded.
+
+Targeted task ids:
+
+- `SingleLineInfilling/HumanEval/66/L1`
+- `SingleLineInfilling/HumanEval/116/L0`
+- `SingleLineInfilling/HumanEval/60/L0`
+
+Output:
+
+- failed OOM attempt: `logs/paper_agent/20260618_route2_v5_wins_gpu3.log`
+- successful retry: `outputs_clean/smoke_route2_rescue_quality_v5_wins_gpu3_retry_20260618_130028`
+
+Result:
+
+- `3` rows;
+- `route2_trigger_count = 3`;
+- candidate-count histogram `{3: 3}`;
+- pass rate `2/3`;
+- pairwise vs `midcons`: `2/0/0/1`;
+- pairwise vs Route2 precision `len32`: `0/1/2/0`;
+- oracle upper bound on triggered rows: `3/3`.
+
+Candidate detail:
+
+| task_id | oracle | selected | final pass | passing candidates | selector diagnosis |
+|---|---:|---|---|---|---|
+| `SingleLineInfilling/HumanEval/66/L1` | `21` | `len32_s64` | true | `len32_s64,len32_s96` | good |
+| `SingleLineInfilling/HumanEval/116/L0` | `21` | `len32_s96` | true | `len32_s64,len32_s96` | good |
+| `SingleLineInfilling/HumanEval/60/L0` | `10` | `len24_s64` | false | `len32_s64,len32_s96` | bad shorter-candidate switch |
+
+Interpretation:
+
+This is the strongest smoke-level evidence so far. V5 can preserve true-long Route2 wins, but the current `consensus_confidence` selector is not safe enough relative to the existing Route2 precision `len32` policy because it can switch to `len24_s64` and lose a known Route2 win.
+
+Therefore, a full run with the current selector is not justified.
+
+Next selector design should be conservative:
+
+- use `len32_s64` as an anchor because it is the existing clean Route2 precision action;
+- select `len32_s96` only if it exceeds the anchor under inference-visible score;
+- either remove `len24_s64` from policy selection or allow it only when it exceeds the anchor by a large margin and the selected length is not below a safety floor;
+- keep `len24_s64` in logs as a diagnostic candidate if needed.
+
 ## GPU Gate
 
 The first `/tmp` cache attempt was stopped because it re-downloaded model shards too slowly. Successful smoke runs used:
@@ -129,9 +175,9 @@ The first `/tmp` cache attempt was stopped because it re-downloaded model shards
 - `HF_ENDPOINT=https://hf-mirror.com`
 - `HF_HOME=/home/shx/.cache/huggingface`
 
-After smoke, GPU `2/3` became occupied by other users' jobs, so no full run was launched.
+No full run was launched because the smoke found a selector-safety issue, not because of runner failure.
 
-When GPU `2` or `3` is free and the user approves a full run, the recommended command is:
+When GPU `2` or `3` is free and the selector is revised, the full-run command should be regenerated for the revised selector. Do not use the current command as a paper-level full run without changing the selector.
 
 ```bash
 HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface CUDA_VISIBLE_DEVICES=3 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --candidate-set cheap --selector consensus_confidence --route2-policy precision_top1_conf --baseline-results /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl --route2-reference-results /home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl --experiment-name full_route2_rescue_quality_v5_cheap_consensus_gpu3
