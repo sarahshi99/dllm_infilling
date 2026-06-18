@@ -146,17 +146,31 @@ Implementation status at 2026-06-18 12:37 CST:
   - `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile clean_scripts/run_route2_rescue_quality_v5.py`
   - `/home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --help`
   - `git diff --check`
-- No GPU experiment has been launched from this action.
+- Added targeted smoke support: `--task-ids-csv`.
+- GPU smoke launched only after GPU `2/3` were observed free. The first `/tmp` cache attempt was stopped because it began re-downloading the full model too slowly; the successful runs used the existing local HF cache plus `HF_ENDPOINT=https://hf-mirror.com`.
 
-GPU smoke is currently blocked because `nvidia-smi` shows GPU `2` and `3` are occupied by user `xy` training jobs:
+Smoke 1, primary fallback schema:
 
-```text
-GPU 2 PID 3410485 /home/xy/anaconda3/envs/cgsa/bin/python3.9 ... elapsed 17:57
-GPU 3 PID 3410486 /home/xy/anaconda3/envs/cgsa/bin/python3.9 ... elapsed 17:57
-```
+- command: `max-samples 10`, GPU `3`, existing HF cache.
+- output: `outputs_clean/smoke_route2_rescue_quality_v5_cheap_consensus_gpu3_cache_20260618_124827`
+- result: `10/10` pass, `route2_trigger_count = 0`.
+- interpretation: basic runner, logging, summaries, and pairwise references work, but this did not exercise the candidate branch.
 
-Recommended smoke command when GPU `3` is free:
+Smoke 2, targeted triggered branch:
+
+- command: targeted task ids `SingleLineInfilling/HumanEval/4/L1`, `SingleLineInfilling/HumanEval/6/L12`, `SingleLineInfilling/HumanEval/16/L0`, GPU `3`.
+- output: `outputs_clean/smoke_route2_rescue_quality_v5_targeted_gpu3_20260618_125123`
+- result: `1/3` pass, `route2_trigger_count = 3`, candidate-count histogram `{3: 3}`.
+- pairwise vs `midcons`: `1/0/0/2`.
+- pairwise vs Route2 precision `len32`: `0/0/1/2`.
+- oracle upper bound on triggered rows: `1/3`.
+- selector chose `len24_s64` on all three targeted rows.
+- interpretation: V5 candidate logging/selection works. For the two targeted true-long failures, no candidate passed, so those examples are generation failures rather than selector mistakes. The short/medium win was preserved.
+
+Current GPU state after smoke: GPU `2/3` are again occupied by other users' jobs, so no further GPU run was started.
+
+Recommended full/smoke command when GPU `2` or `3` is free:
 
 ```bash
-HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/tmp/hf_route2_v5_20260618 CUDA_VISIBLE_DEVICES=3 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --max-samples 10 --candidate-set cheap --selector consensus_confidence --route2-policy precision_top1_conf --baseline-results /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl --route2-reference-results /home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl --experiment-name smoke_route2_rescue_quality_v5_cheap_consensus_gpu3
+HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface CUDA_VISIBLE_DEVICES=3 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --candidate-set cheap --selector consensus_confidence --route2-policy precision_top1_conf --baseline-results /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl --route2-reference-results /home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl --experiment-name full_route2_rescue_quality_v5_cheap_consensus_gpu3
 ```

@@ -83,6 +83,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--selector", type=str, default="consensus_confidence", choices=["consensus_confidence", "syntax_aware"])
     parser.add_argument("--baseline-results", type=str, default=None)
     parser.add_argument("--route2-reference-results", type=str, default=None)
+    parser.add_argument(
+        "--task-ids-csv",
+        type=str,
+        default=None,
+        help="Optional exact task ids for targeted smoke; when set, max-samples is ignored.",
+    )
     parser.add_argument("--output-dir", type=str, default="outputs_clean")
     parser.add_argument("--experiment-name", type=str, default="route2_rescue_quality_v5")
     parser.add_argument("--save-step-traces", action="store_true")
@@ -96,6 +102,23 @@ def candidate_specs(name: str) -> List[CandidateSpec]:
     if name == "full":
         return list(FULL_CANDIDATE_SPECS)
     raise ValueError(f"unknown candidate set: {name}")
+
+
+def parse_task_ids_csv(value: Optional[str]) -> Optional[List[str]]:
+    if value is None:
+        return None
+    task_ids = [item.strip() for item in value.split(",") if item.strip()]
+    return task_ids or None
+
+
+def filter_tasks_by_ids(tasks: Sequence[CodeTask], task_ids: Optional[Sequence[str]]) -> List[CodeTask]:
+    if not task_ids:
+        return list(tasks)
+    by_id = {str(task.task_id): task for task in tasks}
+    missing = [task_id for task_id in task_ids if task_id not in by_id]
+    if missing:
+        raise ValueError(f"requested task ids not found: {missing}")
+    return [by_id[task_id] for task_id in task_ids]
 
 
 def make_cfg(args: argparse.Namespace) -> ExperimentConfig:
@@ -513,6 +536,7 @@ def run_experiment(
     route2_policy_name: str,
     specs: Sequence[CandidateSpec],
     selector_name: str,
+    task_ids: Optional[Sequence[str]],
     baseline_results_path: Optional[str],
     route2_reference_results_path: Optional[str],
 ) -> JsonDict:
@@ -527,6 +551,7 @@ def run_experiment(
         "selector": selector_metadata(selector_name),
         "primary_method": "lcal_official_bounded_repair_midcons",
         "oracle_upper_bound_boundary": "offline_only_not_deployable",
+        "task_ids": list(task_ids) if task_ids else None,
     }
     config_payload["baseline_results"] = baseline_results_path
     config_payload["route2_reference_results"] = route2_reference_results_path
@@ -538,6 +563,7 @@ def run_experiment(
     print(f"route2_policy         = {route2_policy_name}", flush=True)
     print(f"selector              = {selector_name}", flush=True)
     print(f"candidate_specs       = {[asdict(spec) for spec in specs]}", flush=True)
+    print(f"task_ids              = {list(task_ids) if task_ids else None}", flush=True)
     print(f"model_path            = {cfg.model.model_path}", flush=True)
     print(f"max_samples           = {cfg.data.max_samples}", flush=True)
     print(f"baseline              = {baseline_results_path}", flush=True)
@@ -546,11 +572,12 @@ def run_experiment(
     print("=" * 80, flush=True)
 
     tokenizer, model = load_model_and_tokenizer(cfg.model)
-    tasks = load_humaneval_infilling(
+    loaded_tasks = load_humaneval_infilling(
         split=cfg.data.split,
-        max_samples=cfg.data.max_samples,
+        max_samples=None if task_ids else cfg.data.max_samples,
         dataset_subset=cfg.data.dataset_subset,
     )
+    tasks = filter_tasks_by_ids(loaded_tasks, task_ids)
 
     results: List[JsonDict] = []
     total_tasks = len(tasks)
@@ -668,6 +695,7 @@ def main() -> None:
         route2_policy_name=args.route2_policy,
         specs=candidate_specs(args.candidate_set),
         selector_name=args.selector,
+        task_ids=parse_task_ids_csv(args.task_ids_csv),
         baseline_results_path=args.baseline_results,
         route2_reference_results_path=args.route2_reference_results,
     )

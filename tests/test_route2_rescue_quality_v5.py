@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import unittest
+from types import SimpleNamespace
 
 from clean_scripts.run_route2_rescue_quality_v5 import (
     CandidateSpec,
     add_route2_rescue_quality_v5_metadata,
     build_candidate_record,
+    filter_tasks_by_ids,
     oracle_upper_bound_summary,
     pairwise_vs_references,
+    parse_task_ids_csv,
     selector_metadata,
     select_candidate,
 )
@@ -180,6 +183,21 @@ class Route2RescueQualityV5SummaryTest(unittest.TestCase):
             summary["route2_precision_len32"]["counts"],
             {"win": 0, "loss": 0, "tie_pass": 2, "tie_fail": 1},
         )
+
+
+class Route2RescueQualityV5TaskSelectionTest(unittest.TestCase):
+    def test_parse_task_ids_csv_strips_empty_items(self) -> None:
+        self.assertEqual(parse_task_ids_csv(" a, ,b ,, c "), ["a", "b", "c"])
+        self.assertIsNone(parse_task_ids_csv(None))
+
+    def test_filter_tasks_by_ids_uses_requested_order_and_rejects_missing(self) -> None:
+        tasks = [SimpleNamespace(task_id="a"), SimpleNamespace(task_id="b"), SimpleNamespace(task_id="c")]
+
+        selected = filter_tasks_by_ids(tasks, ["c", "a"])
+
+        self.assertEqual([task.task_id for task in selected], ["c", "a"])
+        with self.assertRaises(ValueError):
+            filter_tasks_by_ids(tasks, ["missing"])
 
 
 if __name__ == "__main__":
