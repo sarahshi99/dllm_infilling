@@ -1,0 +1,10 @@
+policy,slice,rows,wins,losses,missed_failed_long,triggered_rescue_failure,short_risk,current_pass_risk,left_policy,right_policy,both_triggered,left_only_triggered,right_only_triggered,both_win,left_win_right_not,right_win_left_not
+precision_len32,triggered_False,976,0,0,56,0,592,795,,,,,,,,
+precision_len32,triggered_True,57,6,0,0,33,6,0,,,,,,,,
+precision_len24,triggered_False,976,0,0,56,0,592,795,,,,,,,,
+precision_len24,triggered_True,57,5,0,0,34,6,0,,,,,,,,
+broad_len24,triggered_False,960,0,0,52,0,588,794,,,,,,,,
+broad_len24,triggered_True,73,7,1,0,37,10,1,,,,,,,,
+,,,,,,,,,precision_len32,precision_len24,57,0,0,2,4,3
+,,,,,,,,,precision_len32,broad_len24,57,0,16,2,4,5
+,,,,,,,,,precision_len24,broad_len24,57,0,16,5,0,2

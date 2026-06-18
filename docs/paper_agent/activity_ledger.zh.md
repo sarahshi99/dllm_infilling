@@ -1,5 +1,15 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-18 00:00 CST
+
+- action：实现并运行 CPU-only Discovery V4 signal audit。没有启动 GPU。
+- evidence：新增 `analysis/discovery_v4_signal_audit.py`、`tests/test_discovery_v4_signal_audit.py`；输出 `analysis_outputs/discovery_v4_signal_audit_20260618_000000`；记录文档 `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`；更新 `docs/paper_agent/current_action.md`。
+- verification：`/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_discovery_v4_signal_audit.py` 通过，`Ran 5 tests` / `OK`；`py_compile` 通过。
+- hygiene：真实数据 dry run 先后暴露 `true_long` 和 `triggered_rescue_failure_*` 两类泄漏 candidate；均已加入 forbidden feature 过滤，最终结果不使用 oracle/pass/outcome-derived policy features。
+- result：final decision 为 `route2_polish_only`。joined rows `1033`，true-long `113`，baseline failed-long `91`。precision len32 为 `6/0/795/232`、trigger `57`；precision len24 为 `5/0/795/233`、trigger `57`；broad len24 为 `7/1/794/231`、trigger `73`。
+- diagnostics：最佳非泄漏 candidate 是 `broad_len24_triggered >= 1`，触发 `73` 行，missed failed-long `4`，triggered rescue-failure `33`，short risk `10`，current-pass risk `1`，true-long precision `0.534`，stable folds `3/5`，因此 reject。
+- next：不要从 V4 audit 直接启动 GPU full run。保留 Route2 precision len32 作为 conservative polish；若继续 true-long recovery，应设计 rescue generation/selection quality 机制，并在 GPU 前写新的 action brief 和 success/kill criteria。
+
 ## 2026-06-17 18:20 CST
 
 - action：按用户要求继续 true-long 信号搜索，使用 Superpowers local fallback 完成 Discovery V4 的文献启发 brainstorm 和 executable plan。没有启动 GPU。

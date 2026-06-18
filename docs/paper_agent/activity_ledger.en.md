@@ -1,5 +1,15 @@
 # Paper-Agent Activity Ledger
 
+## 2026-06-18 00:00 CST
+
+- action: implemented and ran the CPU-only Discovery V4 signal audit. No GPU job was launched.
+- evidence: added `analysis/discovery_v4_signal_audit.py` and `tests/test_discovery_v4_signal_audit.py`; output directory `analysis_outputs/discovery_v4_signal_audit_20260618_000000`; result brief `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`; updated `docs/paper_agent/current_action.md`.
+- verification: `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_discovery_v4_signal_audit.py` passed with `Ran 5 tests` / `OK`; `py_compile` passed.
+- hygiene: two real-data dry runs exposed leaked candidates, first `true_long` and then `triggered_rescue_failure_*`; both were added to forbidden feature filtering. The final result excludes oracle/pass/outcome-derived policy features.
+- result: final decision is `route2_polish_only`. Joined rows `1033`, true-long `113`, baseline failed-long `91`. Precision len32 is `6/0/795/232` with `57` triggers; precision len24 is `5/0/795/233` with `57` triggers; broad len24 is `7/1/794/231` with `73` triggers.
+- diagnostics: the best non-leaking candidate is `broad_len24_triggered >= 1`: `73` triggers, `4` missed failed-long, `33` triggered rescue-failure, `10` short risk, `1` current-pass risk, `0.534` true-long precision, `3/5` stable folds, so it is rejected.
+- next: do not launch a GPU full run from the V4 audit alone. Keep Route2 precision len32 as conservative polish; if true-long recovery continues, design a rescue generation/selection quality mechanism and write a fresh action brief plus success/kill criteria before any GPU run.
+
 ## 2026-06-17 18:20 CST
 
 - action: continued the true-long signal search per the user's request and completed the Discovery V4 literature-inspired brainstorm and executable plan under the Superpowers local fallback. No GPU experiment was launched.

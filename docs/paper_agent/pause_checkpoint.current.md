@@ -1,6 +1,6 @@
 # Paper Agent Pause Checkpoint
 
-Timestamp: 2026-06-17 17:10 CST
+Timestamp: 2026-06-18 00:00 CST
 
 ## Current Branch
 
@@ -8,7 +8,7 @@ Timestamp: 2026-06-17 17:10 CST
 
 ## Current Phase
 
-The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` completed with `diagnostic_only`; after user approval to continue, Route 2 trace-gated long-rescue full follow-up runs completed. The latest GPU3-only precision `len32` run is `801/1033 = 77.54%`, pairwise `6/0/795/232`. CPU-only Route2 error analysis Discovery V3 is now complete and classifies the bottleneck as `mixed_rescue_quality_and_gate_recall`. The full-run signal is modestly positive and low-risk, but true-long recovery remains weak, especially oracle `25+`.
+The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` completed with `diagnostic_only`; after user approval to continue, Route 2 trace-gated long-rescue full follow-up runs completed. The latest GPU3-only precision `len32` run is `801/1033 = 77.54%`, pairwise `6/0/795/232`. CPU-only Route2 error analysis Discovery V3 classified the bottleneck as `mixed_rescue_quality_and_gate_recall`. Discovery V4 CPU audit is now complete and did not find a GPU-ready low-risk signal after leakage filtering; decision is `route2_polish_only`.
 
 ## Completed Items
 
@@ -57,6 +57,7 @@ The literature-backbone local same-backbone matrix has completed through `inclus
 - Completed two user-approved Route 2 trace-gated long-rescue full follow-up runs using `clean_scripts/run_route2_trace_rescue.py`. Broad plateau output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_broad_plateau_len24_gpu2_20260613_213958` is `801/1033 = 77.54%`, pairwise `7/1/794/231`; precision top1/conf output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len24_gpu3_20260613_213958` is `800/1033 = 77.44%`, pairwise `5/0/795/233`.
 - Completed the user-requested GPU3-only Route2 precision `len32` full run. The earlier GPU1 partial run was interrupted at about `405/1033` and is excluded. Clean output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516` is `801/1033 = 77.54%`, pairwise `6/0/795/232`; log `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log` ended with `COMMAND_EXIT_CODE=0`.
 - Completed CPU-only Route2 error analysis Discovery V3 under the Superpowers local fallback. Added `analysis/route2_error_analysis.py` and `tests/test_route2_error_analysis.py`; output `analysis_outputs/route2_error_analysis_20260617_165806` reproduces `1033` joined rows, pairwise `6/0/795/232`, `57` triggers, `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length >= oracle. No GPU command was launched.
+- Completed Discovery V4 method lineage audit, CPU-only implementation, and full-log run. Added `analysis/discovery_v4_signal_audit.py`, `tests/test_discovery_v4_signal_audit.py`, and `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`; output `analysis_outputs/discovery_v4_signal_audit_20260618_000000` has decision `route2_polish_only`. Focused tests passed with `Ran 5 tests` / `OK`; `py_compile` passed. Two leaked real-data candidates (`true_long`, `triggered_rescue_failure_*`) were caught and filtered before the final result.
 
 ## Current Central Claim
 
@@ -64,7 +65,7 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 
 ## Current Experiment Plan Version
 
-`v3`: probe-curve-first long-length modeling with future GPU experiments restricted to `CUDA_VISIBLE_DEVICES=2,3 TOKENIZERS_PARALLELISM=false` unless the user changes the allocation, now extended by the literature-backbone rerun matrix, Route 2 trace-gated follow-up evidence, and CPU-only Route2 error analysis. Do not launch on GPU `2/3` while other users' tasks are present.
+`v4`: CPU-first Discovery signal-model audit is complete. The result is diagnostic/negative for new GPU action: no non-leaking low-risk candidate passed the policy gate. Do not launch on GPU `2/3` while other users' tasks are present.
 
 ## Latest Evidence And Results
 
@@ -99,14 +100,16 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - Interpretation: precision is the cleaner paper-safe incremental result because it has no losses; broad has slightly larger net gain but one short loss. Neither resolves true-long: `17-24` gains only `+1/+2`, and `25+` is unchanged. Among `91` baseline failed-long rows, broad triggers `39` and rescues only `2`; precision triggers `35` and rescues only `1`, so fixed `len=24` rescue quality/length choice remains the key bottleneck.
 - Route2 error analysis Discovery V3: output `analysis_outputs/route2_error_analysis_20260617_165806`; report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`; joined rows `1033`; pairwise `6/0/795/232`; triggers `57`; triggered failed-long `33`; missed failed-long `56`; triggered failed-long with rescue length >= oracle `31/33`; dominant bottleneck `mixed_rescue_quality_and_gate_recall`; recommended next path `rescue_generation_quality+gate_recall`.
 - Interpretation: continue signal search, but not by blindly increasing rescue length. Next CPU-first work should combine rescue generation/selection audit for triggered long failures and probe-trace fusion for missed failed-long recall.
+- Discovery V4 signal audit: output `analysis_outputs/discovery_v4_signal_audit_20260618_000000`; report `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`; joined rows `1033`; true-long `113`; baseline failed-long `91`; decision `route2_polish_only`. Best non-leaking candidate `broad_len24_triggered >= 1` triggers `73` rows, with `4` missed failed-long, `33` triggered rescue-failure, `10` short risk, `1` current-pass risk, `0.534` true-long precision, and `3/5` stable folds; it is rejected.
+- Interpretation: no GPU full run should be launched from V4 alone. Keep Route2 precision len32 as conservative polish unless a new rescue generation/selection mechanism is designed.
 
 ## Running Or Just-Ended Commands
 
-No trace-long-rescue or Route 2 GPU command is running as of 2026-06-17 17:10 CST. The latest action was CPU-only Route2 error analysis, not a GPU run:
+No trace-long-rescue or Route 2 GPU command is running as of 2026-06-18 00:00 CST. The latest action was CPU-only Discovery V4 signal audit, not a GPU run:
 
-- Route2 error analysis output: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/route2_error_analysis_20260617_165806`
-- Route2 error analysis report: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/route2_error_analysis_20260617_165806/report.md`
-- Route2 error analysis final sanity: joined rows `1033`, pairwise `6/0/795/232`, triggered failed-long `33`, missed failed-long `56`, decision `mixed_rescue_quality_and_gate_recall`.
+- Discovery V4 output: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/discovery_v4_signal_audit_20260618_000000`
+- Discovery V4 report: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`
+- Discovery V4 final sanity: joined rows `1033`, decision `route2_polish_only`, best non-leaking candidate rejected due to `10` short-risk rows.
 
 The latest GPU action remains the completed GPU3-only Route2 precision len32 follow-up:
 

@@ -6,6 +6,18 @@
 
 **Current evidence:** Route2 precision `len32` is `801/1033 = 77.54%`, pairwise `6/0/795/232`; Route2 error analysis reports `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length at least oracle. Dominant bottleneck is `mixed_rescue_quality_and_gate_recall`.
 
+## Execution Status
+
+Status as of 2026-06-18 00:00 CST: completed.
+
+- implementation: `analysis/discovery_v4_signal_audit.py`
+- tests: `tests/test_discovery_v4_signal_audit.py`
+- output: `analysis_outputs/discovery_v4_signal_audit_20260618_000000`
+- result brief: `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`
+- final decision: `route2_polish_only`
+
+The audit did not find a non-leaking low-risk policy candidate. The best final candidate, `broad_len24_triggered >= 1`, is rejected because it triggers `10` short-risk rows while covering only `4` missed failed-long rows. No GPU action is justified from this plan alone.
+
 ## Task 0: Method Lineage Audit
 
 Before implementing the CPU audit, verify that every discovery component has a clear methodological role:

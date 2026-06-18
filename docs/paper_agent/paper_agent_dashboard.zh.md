@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-更新时间：2026-06-17 18:20 CST
+更新时间：2026-06-18 00:00 CST
 
 ## 当前研究目标
 
@@ -14,7 +14,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 当前实验方案版本
 
-`v4`：在 `v3` Route2 error analysis 基础上继续做 CPU-first Discovery signal model。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；Route2 precision `len32` 给出低风险小幅正信号 `801/1033 = 77.54%`、pairwise `6/0/795/232`，但 oracle `25+` bucket 未解决。2026-06-17 的 CPU-only Route2 error analysis 将瓶颈判为 `mixed_rescue_quality_and_gate_recall`；V4 将下一步拆成 `MissedLongHead` 和 `RescueQualityHead`，用 slice/rule/trace-shape/calibration/uplift diagnostics 找信号。
+`v4`：CPU-first Discovery signal model 已实现并完成 full-log audit。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；Route2 precision `len32` 给出低风险小幅正信号 `801/1033 = 77.54%`、pairwise `6/0/795/232`，但 oracle `25+` bucket 未解决。2026-06-18 的 Discovery V4 CPU audit 在过滤 oracle/pass/outcome leakage 后，未找到 GPU-ready 低风险规则，final decision 为 `route2_polish_only`。
 
 ## 本次会话已完成
 
@@ -45,6 +45,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - 按用户紧急要求将 precision `len32` follow-up 切换为 GPU3-only clean full run；GPU1 partial run 在约 `405/1033` 被中断且不作为证据。GPU3-only run 成功完成：`801/1033 = 77.54%`，pairwise `6/0/795/232`，trigger `57`，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。
 - 按 Superpowers local fallback 完成 Route2 error analysis Discovery V3 的 CPU-only 诊断。实现 `analysis/route2_error_analysis.py` 和 `tests/test_route2_error_analysis.py`，输出 `analysis_outputs/route2_error_analysis_20260617_165806`。诊断复现 `1033` joined rows、pairwise `6/0/795/232`、`33` triggered failed-long、`56` missed failed-long、`31/33` triggered failed-long rescue length >= oracle；decision 为 `mixed_rescue_quality_and_gate_recall`。本动作未启动 GPU。
 - 按用户要求继续 true-long signal search，完成 Discovery V4 literature brainstorm 和 executable plan。新增 `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`、`docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`、`docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`。本动作未启动 GPU。
+- 实现并运行 CPU-only `analysis/discovery_v4_signal_audit.py`，测试 `tests/test_discovery_v4_signal_audit.py` 通过 `Ran 5 tests` / `OK`。输出 `analysis_outputs/discovery_v4_signal_audit_20260618_000000`，记录文档 `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`。真实数据 dry run 暴露并修复 `true_long` 和 `triggered_rescue_failure_*` 两类泄漏 candidate；最终 V4 decision 为 `route2_polish_only`，不启动 GPU。
 
 ## 最新结果摘要
 
@@ -76,6 +77,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - Route 2 precision len32 GPU3-only follow-up：output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`；`801/1033 = 77.54%`，净增 `+6`，pairwise `6/0/795/232`，trigger `57`，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。Bucket net 为 `<=8 +2`、`9-12 +2`、`13-16 0`、`17-24 +2`、`25+ 0`；triggered `25+` 为 `0/11` pass。解释：低风险小幅正收益，但仍没有解决 `25+` true-long。
 - Route2 error analysis Discovery V3：output `analysis_outputs/route2_error_analysis_20260617_165806`；report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`。它确认 Route2 的 `6` 个 wins 均来自 triggered rescue，但 `33` 个 triggered failed-long 中 `31` 个 rescue length 已经 >= oracle，同时还有 `56` 个 failed-long rows 未触发。结论：不要盲目加长 canvas；下一步应同时查 rescue generation/selection quality 和 probe-trace fusion gate recall。
 - Discovery V4 design：spec `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`；plan `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`。V4 不再把问题看成单 feature 枚举，而是 risk-controlled action selection：`MissedLongHead` 找 missed failed-long 的 probe-trace fusion signal，`RescueQualityHead` 解释长度足够仍失败的 triggered rows，最后由 Policy Distillation 生成可审稿的 training-free rule/action。
+- Discovery V4 signal audit：output `analysis_outputs/discovery_v4_signal_audit_20260618_000000`；report `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`；decision `route2_polish_only`。Joined rows `1033`，true-long `113`，baseline failed-long `91`。Best non-leaking candidate `broad_len24_triggered >= 1` 触发 `73` 行、missed failed-long `4`、triggered rescue-failure `33`、short risk `10`、current-pass risk `1`、true-long precision `0.534`、stable folds `3/5`，因此 reject。结论：不要从 V4 audit 直接启动 GPU full run。
 
 ## 关键方案调整
 
@@ -107,12 +109,12 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 下一步计划
 
-1. 实现 CPU-only `analysis/discovery_v4_signal_audit.py` 和 `tests/test_discovery_v4_signal_audit.py`。
-2. 构建 row-action table，合并 `midcons`、Route2 precision `len32/len24`、Route2 broad `len24`、trace/probe fields。
-3. 搜索 constrained slice、rule candidates、trace-shape motifs、calibration residuals、weak-signal votes 和 partial uplift diagnostics。
-4. 输出 `policy_shortlist.md`，只有 held-out risk gate 通过时才写 GPU action brief。
-5. 不要在 GPU `2/3` 有他人任务时启动实验；继续把 literature anchors、previous local methods、current methods 和 trace diagnostics 分列/分节记录。
+1. 不从 Discovery V4 audit 直接启动 GPU full run。
+2. 保留 Route2 precision len32 作为 conservative polish：`801/1033 = 77.54%`、pairwise `6/0/795/232`。
+3. 若继续 true-long recovery，下一步应设计 rescue generation/selection quality 机制，而不是继续盲目加长 canvas。
+4. 任何 GPU 前必须写新 action brief、success/kill criteria，并确认 GPU `2/3` 没有他人任务。
+5. 继续把 literature anchors、previous local methods、current methods 和 trace diagnostics 分列/分节记录。
 
 ## 需要用户决策的问题
 
-目前没有正在运行的 Route 2 GPU 实验需要接管。Discovery V4 已完成设计，建议下一步实现 CPU-only audit；不在 GPU `2/3` 有他人任务时启动实验。
+目前没有正在运行的 Route 2 GPU 实验需要接管。Discovery V4 CPU audit 已完成，未通过 GPU gate；下一步需要用户决定是否进入新的 rescue generation/selection 机制设计。
