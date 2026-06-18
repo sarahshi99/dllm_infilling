@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-06-17 17:10 CST
+更新时间：2026-06-19 00:45 CST
 
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
@@ -8,7 +8,7 @@
 
 | Backbone / checkpoint | 相关论文报告值 | 我们之前的方法或本地旧方法 | 当前方法 | 当前 vs 之前 | 当前相对论文报告值的位置 |
 |---|---|---:|---:|---:|---|
-| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | 主线 `midcons` `795/1033 = 76.96%`; Route2 precision len24 `800/1033 = 77.44%`; Route2 broad len24 `801/1033 = 77.54%`; Route2 precision len32 `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision len24 `+13` tasks / `+1.26pp`; Route2 broad len24 和 precision len32 均为 `+14` tasks / `+1.36pp` vs A6000 control | 高于 CAL best `73.6` 和 LR-DLLM `69.4`；Route2 是小幅 follow-up evidence，不是 external SOTA claim |
+| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | 主线 `midcons` `795/1033 = 76.96%`; Route2 precision len24 `800/1033 = 77.44%`; Route2 broad len24 `801/1033 = 77.54%`; Route2 precision len32 `801/1033 = 77.54%`; V5.1 anchor m002/m010 `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision len24 `+13` tasks / `+1.26pp`; Route2 broad len24、precision len32、V5.1 anchor 均为 `+14` tasks / `+1.36pp` vs A6000 control；V5.1 vs Route2 precision len32 为 `0/0/801/232` | 高于 CAL best `73.6` 和 LR-DLLM `69.4`；Route2/V5.1 是小幅 follow-up evidence，不是 external SOTA claim |
 | `GSAI-ML/LLaDA-8B-Instruct` | CAL: avg `69.9`, best shown `76.9` | historical LCAS-v3 `817/1033 = 79.09%` | `midcons` `815/1033 = 78.90%` | `-2` tasks / `-0.19pp` | 高于 CAL best `76.9`，但低于我们之前方法 |
 | `Dream-org/Dream-Coder-v0-Base-7B` | CAL: avg `70.2`, best shown `76.2`; LR-DLLM DreamCoder: `81.6`; DreamOn DreamCoder: `92.1` | official-canvas `cal_lite` `825/1033 = 79.86%` | bounded repair `832/1033 = 80.54%` | `+7` tasks / `+0.68pp` | 高于 CAL best `76.2`，低于 LR-DLLM `81.6` 和 DreamOn `92.1` |
 | `Dream-org/Dream-Coder-v0-Instruct-7B` | 无精确匹配的论文 reported row | official-canvas `cal_lite` `848/1033 = 82.09%` | bounded repair `834/1033 = 80.74%` | `-14` tasks / `-1.36pp` | 不能做直接论文数值比较；本地为 negative transfer |
@@ -119,6 +119,41 @@ Long-failure coverage：
 | Route2 precision len32 | `91` | `35` | `2` | `33` | `56` |
 
 Interpretation：Route2 full run 是小幅正收益，而不是长长度瓶颈被解决。Broad len24 相比 current `midcons` 净增 `+6` tasks，但有 `1` 个 primary-pass loss 和更多 short triggers；Precision len24 净增 `+5` tasks 且没有 observed primary-pass loss；Precision len32 净增 `+6` tasks 且没有 observed primary-pass loss，是当前更干净的 Route2 follow-up。最关键诊断是：gate 能抓到一部分 failed-long rows，但 fixed rescue 大多救不回来。Precision len32 在 oracle `17-24` 净增 `+2`，但 oracle `25+` 仍为 `0` 增益；triggered oracle `25+` 行为 `0/11` pass。下一步应分析 triggered-but-still-failed 和 missed failed-long rows，再决定是否设计 training-free adaptive rescue length、better rescue decoding 或更强 trace/probe fusion gate。
+
+## LLaDA-Base Route2 V5.1 Rescue-Quality Full Runs
+
+V5.1 是 Route2 precision `len32` 之后的 rescue-quality follow-up。它不重新挖 trigger，而是在 Route2 已触发的 `57` 行上生成多个 deterministic candidates：`len24_s64`、`len32_s64`、`len32_s96`。策略边界是 training-free / inference-time / verifier-free；oracle/pass labels 只用于离线统计。V5.1 的 `anchor_len32_confidence` selector 默认保护 `len32_s64`，只允许 `len32_s96` 在 inference-visible score 超过 margin 时替换；`len24_s64` 保留为 diagnostic-only，避免重现 smoke 中较短候选误伤已知 Route2 win 的问题。
+
+输出目录：
+
+- margin `0.02`：`outputs_clean/full_route2_rescue_quality_v5_anchor_m002_gpu2_20260618_175641`
+- margin `0.10`：`outputs_clean/full_route2_rescue_quality_v5_anchor_m010_gpu3_20260618_175642`
+
+验证：两条 GPU jobs exit code 均为 `0`；两条 `results.jsonl` 均为 `1033` 行；两条均生成 `summary.json`、`step_traces.jsonl`、`candidate_upper_bound.csv`。
+
+| Run | Pass | Rate | Avg sec incl. probe | Triggered | Selected candidates | Candidate upper-bound on triggered | Pairwise vs `midcons` | Pairwise vs Route2 precision `len32` |
+|---|---:|---:|---:|---:|---|---:|---:|---:|
+| V5.1 anchor margin `0.02` | `801/1033` | `77.54%` | `4.9208` | `57` | `primary=976`, `len32_s64=56`, `len32_s96=1` | `9/57 = 15.79%` | `6/0/795/232` | `0/0/801/232` |
+| V5.1 anchor margin `0.10` | `801/1033` | `77.54%` | `4.9618` | `57` | `primary=976`, `len32_s64=57` | `9/57 = 15.79%` | `6/0/795/232` | `0/0/801/232` |
+
+Oracle bucket pass rates：
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| V5.1 anchor margin `0.02` | `540/598 = 90.30%` | `184/232 = 79.31%` | `53/90 = 58.89%` | `19/82 = 23.17%` | `5/31 = 16.13%` |
+| V5.1 anchor margin `0.10` | `540/598 = 90.30%` | `184/232 = 79.31%` | `53/90 = 58.89%` | `19/82 = 23.17%` | `5/31 = 16.13%` |
+
+Triggered-row diagnostic：
+
+| Oracle bucket | Triggered | Selected pass | Oracle upper-bound pass |
+|---|---:|---:|---:|
+| `<=8` | `6` | `2` | `2` |
+| `9-12` | `6` | `2` | `2` |
+| `13-16` | `10` | `0` | `2` |
+| `17-24` | `24` | `2` | `3` |
+| `25+` | `11` | `0` | `0` |
+
+Interpretation：V5.1 没有超过 Route2 precision `len32`，因此不是新的 pass-rate claim。它的价值是诊断性的：anchor selector 成功保护了已知 Route2 len32 行为，`0` losses vs Route2 precision `len32`；但 candidate upper-bound 只有 `9/57`，selected policy 只有 `6/57` triggered pass，说明主要瓶颈仍是 rescue candidate 生成质量。唯一一次 `len32_s96` 替换发生在 `SingleLineInfilling/HumanEval/122/L0`，但所有候选均失败。另有三行 upper-bound-only rows 需要 `len24_s64` 才能通过：`HumanEval/7/L0`、`HumanEval/11/L6`、`HumanEval/128/L2`。这提示短候选 override 有潜力，但必须先设计严格保护规则，不能直接全量放开 `len24_s64`。下一步不应盲目继续 GPU full run，而应 CPU-first 设计一个 reviewer-readable shorter-candidate override 或更强 rescue-generation candidate family。
 
 ## Route2 Error Analysis Discovery V3
 

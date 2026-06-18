@@ -195,23 +195,55 @@ Implemented CPU-only follow-up:
 - default: `len32_s64`;
 - switch candidate: `len32_s96`, only with score margin;
 - diagnostic-only: `len24_s64`;
-- no GPU run launched yet.
+- full GPU runs completed for switch margins `0.02` and `0.10`.
 
-## GPU Gate
+## Full V5.1 GPU Results
+
+Full anchor-selector runs completed on GPU `2` and GPU `3` with exit code `0`.
+
+Outputs:
+
+- margin `0.02`: `outputs_clean/full_route2_rescue_quality_v5_anchor_m002_gpu2_20260618_175641`
+- margin `0.10`: `outputs_clean/full_route2_rescue_quality_v5_anchor_m010_gpu3_20260618_175642`
+
+| Run | Pass | Rate | Avg sec incl. probe | Triggered | Selected candidates | Pairwise vs `midcons` | Pairwise vs Route2 precision `len32` |
+|---|---:|---:|---:|---:|---|---:|---:|
+| V5.1 anchor margin `0.02` | `801/1033` | `77.54%` | `4.9208` | `57` | `primary=976`, `len32_s64=56`, `len32_s96=1` | `6/0/795/232` | `0/0/801/232` |
+| V5.1 anchor margin `0.10` | `801/1033` | `77.54%` | `4.9618` | `57` | `primary=976`, `len32_s64=57` | `6/0/795/232` | `0/0/801/232` |
+
+The full results exactly match Route2 precision `len32`. They preserve the known `len32` wins but do not improve on them.
+
+Candidate oracle upper bound on triggered rows:
+
+- `9/57 = 15.79%` candidate upper-bound pass rate;
+- selected policy pass on triggered rows: `6/57`;
+- `25+` oracle bucket remains `0/11` on triggered rows.
+
+The only selection difference between the two margins was `SingleLineInfilling/HumanEval/122/L0`: margin `0.02` switched from `len32_s64` to `len32_s96`, but both candidates failed and no candidate passed.
+
+There are three rows where a non-selected `len24_s64` candidate passed while the anchor failed:
+
+- `SingleLineInfilling/HumanEval/7/L0`, oracle `14`;
+- `SingleLineInfilling/HumanEval/11/L6`, oracle `22`;
+- `SingleLineInfilling/HumanEval/128/L2`, oracle `15`.
+
+This means the remaining selector upside is real but unsafe to exploit naively. A global or weakly guarded `len24_s64` override conflicts with the earlier smoke finding that `len24_s64` can lose a known Route2 precision `len32` win.
+
+## GPU Gate / Current Decision
 
 The first `/tmp` cache attempt was stopped because it re-downloaded model shards too slowly. Successful smoke runs used:
 
 - `HF_ENDPOINT=https://hf-mirror.com`
 - `HF_HOME=/home/shx/.cache/huggingface`
 
-No full run was launched because the smoke found a selector-safety issue, not because of runner failure.
+The revised anchor selector was run full. It is safe relative to Route2 precision `len32`, but it is not a new pass-rate improvement.
 
-When GPU `2` or `3` is free and the selector is revised, the full-run command should be regenerated for the revised selector. Do not use the current command as a paper-level full run without changing the selector.
+Do not launch another GPU full run from V5.1 alone. The next GPU run should require a new CPU-first action brief with one of these clearly justified changes:
 
-```bash
-HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface CUDA_VISIBLE_DEVICES=3 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --candidate-set cheap --selector consensus_confidence --route2-policy precision_top1_conf --baseline-results /home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl --route2-reference-results /home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl --experiment-name full_route2_rescue_quality_v5_cheap_consensus_gpu3
-```
+- a conservative, reviewer-readable `len24_s64` override that protects known `len32` wins;
+- a stronger rescue-generation candidate family that improves the candidate upper bound;
+- an explicit switch to a learned or compiler-assisted selector claim, with separate protocol and baselines.
 
 ## Next Step
 
-Do not treat the smoke as a performance claim. It justifies that a full run is technically possible. The research decision is still open because the targeted true-long examples showed generation failure, not selector upside.
+Treat V5.1 as a negative/diagnostic full result, not as a new performance claim. It confirms that anchor protection can safely reproduce Route2 precision `len32`, and it narrows the next problem: the candidate set itself only has `9/57` triggered-row oracle upper-bound passes. The next research step should target rescue quality or a tightly constrained shorter-candidate override, not another blind full run.
