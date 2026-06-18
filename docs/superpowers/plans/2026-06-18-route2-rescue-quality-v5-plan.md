@@ -130,6 +130,22 @@ Update docs only after smoke/full results are available:
 
 Do not overwrite unrelated advisor/PPT dirty files.
 
+## Task 7b: Anchor-Protected Selector
+
+Triggered by smoke evidence:
+
+- `consensus_confidence` can select `len24_s64`;
+- this lost `SingleLineInfilling/HumanEval/60/L0` even though `len32_s64` and `len32_s96` passed;
+- therefore current V5 selector is not full-run ready.
+
+CPU-only follow-up:
+
+- add selector `anchor_len32_confidence`;
+- default to `len32_s64`;
+- allow `len32_s96` only when it beats the anchor by a margin;
+- keep `len24_s64` as diagnostic-only;
+- verify with focused unit tests and no GPU launch.
+
 ## Task 8: Commit Boundary
 
 Commit design-only files separately from implementation/results if useful.

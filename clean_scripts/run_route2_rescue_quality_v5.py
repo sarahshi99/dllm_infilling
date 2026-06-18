@@ -49,6 +49,13 @@ SYNTAX_AWARE_ALLOWED_FIELDS = CONSENSUS_CONFIDENCE_ALLOWED_FIELDS + [
     "compile_passed",
 ]
 
+ANCHOR_LEN32_SELECTOR_FIELDS = CONSENSUS_CONFIDENCE_ALLOWED_FIELDS + [
+    "anchor_candidate_id=len32_s64",
+    "switch_margin",
+]
+
+DEFAULT_ANCHOR_SWITCH_MARGIN = 0.02
+
 
 @dataclass(frozen=True)
 class CandidateSpec:
@@ -80,7 +87,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lcas-policy", type=str, default="lcas_v3b", choices=["lcas_v3a", "lcas_v3b"])
     parser.add_argument("--route2-policy", type=str, default="precision_top1_conf", choices=sorted(route2_runner.POLICIES))
     parser.add_argument("--candidate-set", type=str, default="cheap", choices=["cheap", "full"])
-    parser.add_argument("--selector", type=str, default="consensus_confidence", choices=["consensus_confidence", "syntax_aware"])
+    parser.add_argument(
+        "--selector",
+        type=str,
+        default="consensus_confidence",
+        choices=["consensus_confidence", "syntax_aware", "anchor_len32_confidence"],
+    )
+    parser.add_argument(
+        "--anchor-switch-margin",
+        type=float,
+        default=DEFAULT_ANCHOR_SWITCH_MARGIN,
+        help="Minimum score margin required to switch from len32_s64 to a non-anchor len32 candidate.",
+    )
     parser.add_argument("--baseline-results", type=str, default=None)
     parser.add_argument("--route2-reference-results", type=str, default=None)
     parser.add_argument(
@@ -212,6 +230,13 @@ def selector_metadata(selector_name: str) -> JsonDict:
             "claim_boundary": "compiler_assisted_inference_time",
             "used_policy_fields": list(SYNTAX_AWARE_ALLOWED_FIELDS),
         }
+    if selector_name == "anchor_len32_confidence":
+        return {
+            "selector": selector_name,
+            "claim_boundary": "pure_inference_time_verifier_free_anchor_protected",
+            "used_policy_fields": list(ANCHOR_LEN32_SELECTOR_FIELDS),
+            "anchor_candidate_id": "len32_s64",
+        }
     if selector_name == "oracle_upper_bound":
         return {
             "selector": selector_name,
@@ -303,7 +328,82 @@ def score_syntax_aware(candidate: Mapping[str, Any], candidates: Sequence[Mappin
     return score, parts
 
 
-def select_candidate(candidates: Sequence[Mapping[str, Any]], *, selector_name: str) -> Tuple[JsonDict, JsonDict]:
+def _score_policy_views(
+    policy_views: Sequence[Mapping[str, Any]],
+    *,
+    score_fn,
+) -> List[Tuple[float, int, str, JsonDict]]:
+    scored: List[Tuple[float, int, str, JsonDict]] = []
+    for candidate in policy_views:
+        score, parts = score_fn(candidate, policy_views)
+        selected_len = int(candidate.get("selected_mask_length") or 999999)
+        candidate_id = str(candidate.get("candidate_id"))
+        scored.append((float(score), -selected_len, candidate_id, parts))
+    scored.sort(key=lambda item: (item[0], item[1], item[2]), reverse=True)
+    return scored
+
+
+def _select_anchor_len32_candidate(
+    candidates: Sequence[Mapping[str, Any]],
+    policy_views: Sequence[Mapping[str, Any]],
+    *,
+    anchor_switch_margin: float,
+) -> Tuple[JsonDict, JsonDict]:
+    metadata = selector_metadata("anchor_len32_confidence")
+    originals_by_id = {str(candidate.get("candidate_id")): dict(candidate) for candidate in candidates}
+    by_id = {str(candidate.get("candidate_id")): dict(candidate) for candidate in policy_views}
+    anchor_id = str(metadata["anchor_candidate_id"])
+    if anchor_id not in by_id:
+        raise ValueError(f"anchor selector requires candidate {anchor_id}")
+
+    scored = _score_policy_views(policy_views, score_fn=score_consensus_confidence)
+    score_by_id = {candidate_id: score for score, _len_key, candidate_id, _parts in scored}
+    parts_by_id = {candidate_id: parts for score, _len_key, candidate_id, parts in scored}
+    anchor_score = float(score_by_id[anchor_id])
+    anchor_len = int(by_id[anchor_id].get("selected_mask_length") or 32)
+
+    selectable_ids = [
+        candidate_id
+        for candidate_id, candidate in by_id.items()
+        if candidate_id == anchor_id
+        or (
+            int(candidate.get("selected_mask_length") or 0) >= anchor_len
+            and candidate_id.startswith("len32_")
+        )
+    ]
+    switch_candidates = [
+        candidate_id
+        for candidate_id in selectable_ids
+        if candidate_id != anchor_id and float(score_by_id[candidate_id]) >= anchor_score + float(anchor_switch_margin)
+    ]
+    if switch_candidates:
+        selected_id = max(switch_candidates, key=lambda candidate_id: (score_by_id[candidate_id], candidate_id))
+        selection_reason = "non_anchor_len32_score_margin"
+    else:
+        selected_id = anchor_id
+        selection_reason = "anchor_default"
+
+    return originals_by_id[selected_id], {
+        **metadata,
+        "selected_candidate_id": selected_id,
+        "selected_score": float(score_by_id[selected_id]),
+        "selected_score_parts": parts_by_id[selected_id],
+        "candidate_scores": {candidate_id: score for score, _len_key, candidate_id, _parts in scored},
+        "anchor_candidate_id": anchor_id,
+        "anchor_score": anchor_score,
+        "switch_margin": float(anchor_switch_margin),
+        "selectable_candidate_ids": sorted(selectable_ids),
+        "diagnostic_only_candidate_ids": sorted(set(by_id) - set(selectable_ids)),
+        "selection_reason": selection_reason,
+    }
+
+
+def select_candidate(
+    candidates: Sequence[Mapping[str, Any]],
+    *,
+    selector_name: str,
+    anchor_switch_margin: float = DEFAULT_ANCHOR_SWITCH_MARGIN,
+) -> Tuple[JsonDict, JsonDict]:
     if not candidates:
         raise ValueError("select_candidate requires at least one candidate")
     metadata = selector_metadata(selector_name)
@@ -311,15 +411,17 @@ def select_candidate(candidates: Sequence[Mapping[str, Any]], *, selector_name: 
     include_syntax = selector_name == "syntax_aware"
     policy_views = [policy_candidate_view(candidate, include_syntax=include_syntax) for candidate in candidates]
     originals_by_id = {str(candidate.get("candidate_id")): dict(candidate) for candidate in candidates}
-    scored: List[Tuple[float, int, str, JsonDict, JsonDict]] = []
-    for candidate in policy_views:
-        score, parts = score_fn(candidate, policy_views)
-        selected_len = int(candidate.get("selected_mask_length") or 999999)
-        candidate_id = str(candidate.get("candidate_id"))
-        scored.append((float(score), -selected_len, candidate_id, originals_by_id[candidate_id], parts))
-    scored.sort(key=lambda item: (item[0], item[1], item[2]), reverse=True)
-    best_score, _neg_len, best_id, best_candidate, best_parts = scored[0]
-    candidate_scores = {candidate_id: score for score, _len_key, candidate_id, _candidate, _parts in scored}
+    if selector_name == "anchor_len32_confidence":
+        return _select_anchor_len32_candidate(
+            candidates,
+            policy_views,
+            anchor_switch_margin=anchor_switch_margin,
+        )
+
+    scored = _score_policy_views(policy_views, score_fn=score_fn)
+    best_score, _neg_len, best_id, best_parts = scored[0]
+    best_candidate = originals_by_id[best_id]
+    candidate_scores = {candidate_id: score for score, _len_key, candidate_id, _parts in scored}
     return best_candidate, {
         **metadata,
         "selected_candidate_id": best_id,
@@ -536,6 +638,7 @@ def run_experiment(
     route2_policy_name: str,
     specs: Sequence[CandidateSpec],
     selector_name: str,
+    anchor_switch_margin: float,
     task_ids: Optional[Sequence[str]],
     baseline_results_path: Optional[str],
     route2_reference_results_path: Optional[str],
@@ -549,6 +652,7 @@ def run_experiment(
         "clauses": route2_runner.POLICIES[route2_policy_name],
         "candidate_specs": [asdict(spec) for spec in specs],
         "selector": selector_metadata(selector_name),
+        "anchor_switch_margin": float(anchor_switch_margin),
         "primary_method": "lcal_official_bounded_repair_midcons",
         "oracle_upper_bound_boundary": "offline_only_not_deployable",
         "task_ids": list(task_ids) if task_ids else None,
@@ -562,6 +666,7 @@ def run_experiment(
     print(f"experiment_name       = {cfg.logging.experiment_name}", flush=True)
     print(f"route2_policy         = {route2_policy_name}", flush=True)
     print(f"selector              = {selector_name}", flush=True)
+    print(f"anchor_switch_margin  = {anchor_switch_margin}", flush=True)
     print(f"candidate_specs       = {[asdict(spec) for spec in specs]}", flush=True)
     print(f"task_ids              = {list(task_ids) if task_ids else None}", flush=True)
     print(f"model_path            = {cfg.model.model_path}", flush=True)
@@ -613,7 +718,11 @@ def run_experiment(
                 )
                 candidates.append(candidate)
                 candidate_results[str(candidate["candidate_id"])] = rescue_result
-            selected_candidate, selector_scores = select_candidate(candidates, selector_name=selector_name)
+            selected_candidate, selector_scores = select_candidate(
+                candidates,
+                selector_name=selector_name,
+                anchor_switch_margin=anchor_switch_margin,
+            )
             selected_id = str(selected_candidate["candidate_id"])
             final_result = candidate_results[selected_id]
             print(
@@ -695,6 +804,7 @@ def main() -> None:
         route2_policy_name=args.route2_policy,
         specs=candidate_specs(args.candidate_set),
         selector_name=args.selector,
+        anchor_switch_margin=args.anchor_switch_margin,
         task_ids=parse_task_ids_csv(args.task_ids_csv),
         baseline_results_path=args.baseline_results,
         route2_reference_results_path=args.route2_reference_results,

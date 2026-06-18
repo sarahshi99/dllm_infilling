@@ -42,6 +42,51 @@ new V5:
 - runner: `clean_scripts/run_route2_rescue_quality_v5.py`
 - tests: `tests/test_route2_rescue_quality_v5.py`
 
+## Plain Explanation
+
+V5 is not a new length predictor. It is a new action after the existing Route2 trigger.
+
+Before V5, the best Route2 policy did this:
+
+```text
+primary midcons output
+if Route2 precision trigger fires:
+  run one fixed rescue with length at least 32
+  always use that rescue
+else:
+  keep primary output
+```
+
+That policy already improved `LLaDA-8B-Base` from `795/1033 = 76.96%` to `801/1033 = 77.54%`.
+
+V5 asks a narrower question:
+
+```text
+When Route2 already says "this row is risky enough to rescue",
+can we generate several rescue candidates and choose a better one
+without using hidden tests or oracle labels?
+```
+
+So V5 is based on both positive and negative evidence:
+
+- Positive evidence: Route2 precision `len32` was clean and useful, with `6` wins and `0` losses against `midcons`.
+- Negative evidence: V3/V4 showed that simply finding more long-risk rows or blindly increasing length did not solve true-long failures.
+- Diagnostic evidence: many triggered failed-long rows already had rescue length at least as large as the oracle length, so failure was often rescue generation/selection quality, not just length underestimation.
+
+The candidate name `len32_s64` means:
+
+- `len32`: force the rescue canvas to have at least `32` mask positions, i.e. `max(primary_len, 32)`;
+- `s64`: decode using `64` denoising/generation steps.
+
+Likewise:
+
+- `len24_s64` means at least length `24`, `64` steps;
+- `len32_s96` means at least length `32`, `96` steps.
+
+The initial V5 selector `consensus_confidence` tried to choose among these candidates using only inference-visible signals. Smoke showed that this selector can wrongly choose the shorter `len24_s64` candidate and lose a known Route2 `len32` win. Therefore, the current next step is a safer V5.1 selector: `anchor_len32_confidence`.
+
+V5.1 uses `len32_s64` as the anchor because it reproduces the already successful Route2 precision `len32` action. It keeps `len24_s64` as a diagnostic candidate but does not allow it to override the anchor by default.
+
 ## Candidate Set
 
 Initial cheap candidate set:
@@ -182,6 +227,13 @@ Current decision:
 
 - Do not launch a full V5 run with the current `consensus_confidence` selector.
 - The next safe design is an anchor-protected selector that defaults to the existing clean Route2 precision action `len32_s64` and only switches to another candidate when the score margin is large enough. An even simpler fallback is to remove `len24_s64` from the selectable policy candidates while keeping it only as a diagnostic candidate.
+- CPU-only V5.1 implementation status: `anchor_len32_confidence` has been added to `clean_scripts/run_route2_rescue_quality_v5.py`.
+- CPU verification for V5.1 passed:
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_route2_rescue_quality_v5.py tests/test_route2_trace_rescue.py`
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile clean_scripts/run_route2_rescue_quality_v5.py`
+  - `/home/shx/miniconda3/envs/dllm_env/bin/python clean_scripts/run_route2_rescue_quality_v5.py --help`
+  - `git diff --check`
+- No GPU run has been launched for V5.1.
 
 Recommended full/smoke command when GPU `2` or `3` is free:
 

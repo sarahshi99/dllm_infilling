@@ -15,6 +15,7 @@ Additional implementation update:
 
 - added `--task-ids-csv` so smoke can target known triggered rows instead of hoping early dataset rows trigger Route2;
 - verified task-id filtering with focused unit tests.
+- added CPU-only selector `anchor_len32_confidence` after smoke showed that `consensus_confidence` can lose a known Route2 win by selecting `len24_s64`.
 
 This implementation adds a new triggered action:
 
@@ -49,6 +50,26 @@ Oracle selector: `oracle_upper_bound`.
 
 It is offline-only and never deployable.
 
+V5.1 selector: `anchor_len32_confidence`.
+
+It is still pure inference-time and verifier-free. Its purpose is to protect the already successful Route2 precision `len32` action:
+
+```text
+anchor candidate = len32_s64
+diagnostic candidate = len24_s64
+optional switch candidate = len32_s96
+
+select len32_s64 by default
+switch to len32_s96 only if inference-visible score exceeds anchor by margin
+do not let len24_s64 override the anchor
+```
+
+This design came directly from smoke evidence:
+
+- `len32_s64` is the old Route2 precision `len32` behavior.
+- `len24_s64` caused a loss on `SingleLineInfilling/HumanEval/60/L0`.
+- `len32_s96` may preserve the length-safe behavior while testing whether extra denoising steps help.
+
 ## Verification
 
 Passed:
@@ -63,7 +84,7 @@ git diff --check
 Result:
 
 ```text
-Ran 10 tests in 0.001s
+Ran 12 tests in 0.002s
 OK
 ```
 
@@ -167,6 +188,14 @@ Next selector design should be conservative:
 - select `len32_s96` only if it exceeds the anchor under inference-visible score;
 - either remove `len24_s64` from policy selection or allow it only when it exceeds the anchor by a large margin and the selected length is not below a safety floor;
 - keep `len24_s64` in logs as a diagnostic candidate if needed.
+
+Implemented CPU-only follow-up:
+
+- selector: `anchor_len32_confidence`;
+- default: `len32_s64`;
+- switch candidate: `len32_s96`, only with score margin;
+- diagnostic-only: `len24_s64`;
+- no GPU run launched yet.
 
 ## GPU Gate
 

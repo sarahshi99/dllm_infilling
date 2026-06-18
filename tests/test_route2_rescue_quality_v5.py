@@ -112,6 +112,95 @@ class Route2RescueQualityV5SelectorTest(unittest.TestCase):
         self.assertIn("compile_passed", metadata["used_policy_fields"])
         self.assertNotIn("passed", metadata["used_policy_fields"])
 
+    def test_anchor_len32_selector_keeps_anchor_over_high_scoring_short_candidate(self) -> None:
+        short = build_candidate_record(
+            CandidateSpec("len24_s64", min_length=24, steps=64),
+            make_result(
+                "t",
+                passed=False,
+                selected=24,
+                middle_text="    return short",
+                confidence=0.99,
+                top1=0.99,
+                gap=0.80,
+                remaining=0,
+            ),
+        )
+        anchor = build_candidate_record(
+            CandidateSpec("len32_s64", min_length=32, steps=64),
+            make_result(
+                "t",
+                passed=True,
+                selected=32,
+                middle_text="    return anchor",
+                confidence=0.30,
+                top1=0.30,
+                gap=0.05,
+                remaining=4,
+            ),
+        )
+        slow = build_candidate_record(
+            CandidateSpec("len32_s96", min_length=32, steps=96),
+            make_result(
+                "t",
+                passed=False,
+                selected=32,
+                middle_text="    return slow",
+                confidence=0.29,
+                top1=0.29,
+                gap=0.05,
+                remaining=4,
+            ),
+        )
+
+        selected, scores = select_candidate(
+            [short, anchor, slow],
+            selector_name="anchor_len32_confidence",
+        )
+
+        self.assertEqual(selected["candidate_id"], "len32_s64")
+        self.assertEqual(scores["selection_reason"], "anchor_default")
+        self.assertIn("len24_s64", scores["diagnostic_only_candidate_ids"])
+        self.assertNotIn("passed", scores["used_policy_fields"])
+
+    def test_anchor_len32_selector_switches_to_slow_len32_on_margin(self) -> None:
+        anchor = build_candidate_record(
+            CandidateSpec("len32_s64", min_length=32, steps=64),
+            make_result(
+                "t",
+                passed=True,
+                selected=32,
+                middle_text="    return anchor",
+                confidence=0.30,
+                top1=0.30,
+                gap=0.05,
+                remaining=4,
+            ),
+        )
+        slow = build_candidate_record(
+            CandidateSpec("len32_s96", min_length=32, steps=96),
+            make_result(
+                "t",
+                passed=False,
+                selected=32,
+                middle_text="    return slow",
+                confidence=0.95,
+                top1=0.95,
+                gap=0.40,
+                remaining=0,
+            ),
+        )
+
+        selected, scores = select_candidate(
+            [anchor, slow],
+            selector_name="anchor_len32_confidence",
+            anchor_switch_margin=0.02,
+        )
+
+        self.assertEqual(selected["candidate_id"], "len32_s96")
+        self.assertEqual(scores["selection_reason"], "non_anchor_len32_score_margin")
+        self.assertEqual(scores["anchor_candidate_id"], "len32_s64")
+
     def test_oracle_upper_bound_is_offline_only(self) -> None:
         candidates = [
             build_candidate_record(

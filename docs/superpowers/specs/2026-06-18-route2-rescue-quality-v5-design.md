@@ -96,6 +96,12 @@ Rationale:
 - Different total steps change the mask reveal schedule and directly target generation quality.
 - This is still training-free and uses no verifier feedback during generation.
 
+Name convention:
+
+- `len32_s64` means `max(primary_len, 32)` rescue length and `64` decode steps.
+- `len32_s96` means `max(primary_len, 32)` rescue length and `96` decode steps.
+- `len24_s64` means `max(primary_len, 24)` rescue length and `64` decode steps.
+
 ## Candidate Selection
 
 V5 should report three selectors separately.
@@ -148,6 +154,19 @@ It is not a deployable policy. It is useful because it separates two failure mod
 - candidate set upper bound improves but Selector A fails: selection problem;
 - candidate set upper bound does not improve: generation problem;
 - both improve: full policy path is justified.
+
+### V5.1 Selector: Anchor-Protected Len32
+
+Smoke showed that `consensus_confidence` can pick `len24_s64` and lose a known Route2 precision `len32` win. V5.1 therefore adds a conservative selector:
+
+```text
+anchor = len32_s64
+default = anchor
+allow switch only to len32_s96 when its inference-visible score clears a margin
+keep len24_s64 as diagnostic-only by default
+```
+
+This selector is still training-free and verifier-free. It is intended to preserve the already observed Route2 precision `len32` gains before testing whether slower same-length decoding can add wins.
 
 ## Reporting Metrics
 
