@@ -6,6 +6,31 @@
 
 **Current evidence:** Route2 precision `len32` is `801/1033 = 77.54%`, pairwise `6/0/795/232`; Route2 error analysis reports `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length at least oracle. Dominant bottleneck is `mixed_rescue_quality_and_gate_recall`.
 
+## Task 0: Method Lineage Audit
+
+Before implementing the CPU audit, verify that every discovery component has a clear methodological role:
+
+- directly borrowed control framework:
+  - risk-controlled selection;
+  - held-out fold stability;
+  - slice/subgroup coverage-risk reporting;
+- discovery microscope only:
+  - time-series shape probes;
+  - weak-signal fusion;
+  - partial uplift/logged-policy diagnostics;
+  - MBR/self-consistency quality ideas;
+- project-specific fusion:
+  - row-action taxonomy for DLLM code infilling;
+  - `MissedLongHead` and `RescueQualityHead`;
+  - Route2 variants as partial action evidence;
+  - distilled inference-visible training-free gates.
+
+Implementation rule:
+
+- no model score may become a policy by default;
+- every policy candidate must be traced back to readable clauses or a named low-complexity score;
+- if the strongest result is opaque, the decision is `learned_controller_future_direction`, not a training-free claim.
+
 ## File Structure
 
 Design files already written:

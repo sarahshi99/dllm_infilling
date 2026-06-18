@@ -30,6 +30,27 @@ The current environment does not expose callable `superpowers:*` skill files, so
 
 ## Literature-Inspired Principles
 
+### Reviewer Audit: Method Lineage
+
+The V4 design is not a brand-new learning algorithm from nowhere. It is a project-specific fusion whose individual control and discovery components should be recognizable to reviewers.
+
+| Method family | What can be borrowed directly | Project adaptation | Why it is reasonable | Main limitation |
+|---|---|---|---|---|
+| Risk-controlled selection | risk-coverage accounting, false-positive constraints, held-out thresholding | optimize failed-long coverage under short-risk and current-pass-risk constraints | the experiment objective is constrained rescue, not ordinary classification | CPU audit can justify a GPU run but cannot prove pass-rate gain |
+| Slice / subgroup discovery | readable conjunction search, slice quality functions, coverage/precision tradeoff | mine missed-long, rescued-long, rescue-failure, and risk slices | the current failure is local and rare; global AUC can hide it | multiple testing and hindsight bias must be controlled |
+| Rule lists / rule extraction | shallow trees, rule lists, RuleFit-style extracted clauses | distill microscope outputs into at most three inference-visible clauses | CCF-A reviewers can inspect and falsify small rules | tiny gains can overfit without fold stability |
+| Time-series feature discovery | trajectory summaries, shapelets, random-kernel probes | summarize decode traces as plateau, collapse, stagnation, and disagreement motifs | v1 failed partly because it used one rigid Boolean shape | random-kernel scores are not final-policy material unless distilled |
+| Calibration / OOD / failure detection | confidence residuals, max-probability baselines, disagreement signals | condition confidence on selected length, stop reason, and probe curve | raw trace confidence can be misleading for high-confidence under-length rows | calibration may be backbone-specific |
+| Weak supervision | labeling functions, heuristic overlap/conflict analysis | treat probe bumps, trace motifs, stop reasons, and policy disagreement as noisy weak signals | avoids forcing a brittle hand-written AND formula too early | label model itself is not training-free if deployed |
+| Uplift / logged-policy diagnostics | action/outcome tables, treatment-effect caution, off-policy caveats | compare primary, precision len24/len32, and broad len24 as partial action evidence | rescue is an action-choice problem, not only a label problem | logs are deterministic and non-random, so causal claims are not allowed |
+| MBR / self-consistency style generation | multi-candidate agreement as a verifier-free quality proxy | use only as a possible rescue-quality action if CPU evidence identifies a slice | directly addresses length-sufficient failures where "make it longer" is wrong | extra compute must be justified by a precise gate |
+
+Boundary of novelty:
+
+- Not novel: constrained risk reporting, slice mining, rule extraction, time-series summaries, calibration residuals, and weak-signal fusion as general techniques.
+- Novel for this project: the row-action taxonomy for diffusion-code infilling; the split into `MissedLongHead` and `RescueQualityHead`; the use of Route2 variants as partial action evidence; and the distillation of decode/probe dynamics into training-free long-rescue gates.
+- Claim discipline: if V4 produces a learned predictor that cannot be distilled, it becomes a separate learned-controller direction rather than evidence for the current training-free method.
+
 ### 1. Treat This As Risk-Controlled Selection, Not Accuracy
 
 Selective classification, Neyman-Pearson classification, and conformal risk control all point to the same lesson: the policy should maximize useful coverage subject to explicit false-positive/risk constraints.
@@ -361,14 +382,21 @@ Do not launch GPU experiments from V4 unless all are true:
 - Angelino et al., "Learning Certifiably Optimal Rule Lists for Categorical Data", 2017. https://arxiv.org/abs/1704.01701
 - Lakkaraju, Bach, and Leskovec, "Interpretable Decision Sets", 2016. https://dl.acm.org/doi/10.1145/2939672.2939874
 - Chung et al., "Slice Finder: Automated Data Slicing for Model Validation", 2019. https://arxiv.org/abs/1807.06068
+- Ribeiro, Singh, and Guestrin, "Nothing Else Matters: Model-Agnostic Explanations By Identifying Prediction Invariance", 2016. https://arxiv.org/abs/1611.05817
+- Liu, Rosen, and G.C., "AutoSlicer: Scalable Automated Data Slicing for ML Model Analysis", 2022. https://arxiv.org/abs/2212.09032
+- Christ, Kempa-Liehr, and Feindt, "Time Series FeatuRe Extraction on basis of Scalable Hypothesis tests", 2016. https://arxiv.org/abs/1610.07717
 - Guo et al., "On Calibration of Modern Neural Networks", 2017. https://arxiv.org/abs/1706.04599
 - Hendrycks and Gimpel, "A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks", 2016. https://arxiv.org/abs/1610.02136
 - Lakshminarayanan, Pritzel, and Blundell, "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles", 2017. https://arxiv.org/abs/1612.01474
 - Athey and Imbens, "Recursive Partitioning for Heterogeneous Causal Effects", 2016. https://www.pnas.org/doi/10.1073/pnas.1510489113
 - Dudik, Langford, and Li, "Doubly Robust Policy Evaluation and Learning", 2011. https://arxiv.org/abs/1103.4601
+- Swaminathan and Joachims, "Counterfactual Risk Minimization: Learning from Logged Bandit Feedback", 2015. https://arxiv.org/abs/1502.02362
 - Ratner et al., "Snorkel: Rapid Training Data Creation with Weak Supervision", 2017. https://arxiv.org/abs/1711.10160
 - Benjamini and Hochberg, "Controlling the False Discovery Rate", 1995. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x
 - Meinshausen and Buhlmann, "Stability Selection", 2010. https://doi.org/10.1111/j.1467-9868.2010.00740.x
+- Eikema and Aziz, "Sampling-Based Approximations to Minimum Bayes Risk Decoding for Neural Machine Translation", 2021. https://arxiv.org/abs/2108.04718
+- Wang et al., "Self-Consistency Improves Chain of Thought Reasoning in Language Models", 2022. https://arxiv.org/abs/2203.11171
+- Manakul, Liusie, and Gales, "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models", 2023. https://arxiv.org/abs/2303.08896
 
 ## Self-Review
 

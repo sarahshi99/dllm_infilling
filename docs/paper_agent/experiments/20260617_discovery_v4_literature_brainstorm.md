@@ -28,6 +28,41 @@ Route2 precision `len32`：
 
 ## 文献启发总结
 
+## 审稿人视角的方法谱系
+
+你的质疑是合理的：如果只说“借鉴很多方向”，很容易变成经验拼盘。V4 应该明确回答三个问题：
+
+1. 哪些部分是成熟方法，可以直接复用？
+2. 哪些部分只是帮助发现信号的 microscope，不能直接写成最终方法？
+3. 哪些部分才是这个项目自己的新融合？
+
+结论：
+
+- V4 不是从零发明一个全新算法。
+- V4 的骨架来自成熟的 constrained selection、slice discovery、rule distillation。
+- V4 的 discovery layer 融合 time-series shape、calibration/OOD、weak supervision、partial uplift、MBR/self-consistency 等思路，用来找非线性组合和时序形状。
+- V4 的项目特异性创新在于：把 DLLM code infilling 的一次输出拆成 row-action taxonomy，并把问题拆成 `MissedLongHead` 和 `RescueQualityHead` 两个头，然后只接受 inference-visible、training-free、可审稿的小规则或小 score。
+
+| 方向 | 可直接借用 | 在本项目中的改造 | 是否是最终方法 |
+|---|---|---|---|
+| Risk-controlled selection | risk-coverage、false-positive constraint、held-out threshold | failed-long coverage 受 short/current-pass risk 约束 | 是，作为评估和 gate 框架 |
+| Slice/subgroup discovery | 找可解释的异常/失败数据切片 | 找 missed-long、rescued-long、triggered-failure、risk slices | 是，作为候选规则来源 |
+| Rule list / RuleFit / Anchors | 小规则、rule precision/coverage、规则蒸馏 | 限制到最多三条 inference-visible clauses | 是，若规则稳定 |
+| Time-series feature discovery | catch22/tsfresh/shapelet/ROCKET 风格的轨迹摘要 | decode trace 的 plateau、collapse、stagnation、disagreement | 主要是 microscope，需蒸馏 |
+| Calibration / OOD | confidence residual、misclassification detection | stop reason / selected length 条件下的置信残差 | 可成为规则特征 |
+| Weak supervision | labeling functions 和弱信号冲突/重叠分析 | 将 probe、trace、stop reason、policy disagreement 当作 noisy signals | 主要是 microscope |
+| Uplift / logged-policy learning | action-outcome 思维、反事实风险警告 | primary/len24/len32/broad 的 partial action evidence | 诊断工具，不做因果 claim |
+| MBR / self-consistency | 多候选一致性作为无 verifier 的质量 proxy | 只在 rescue quality slice 明确时作为备选 action | 可能成为后续 GPU action |
+
+这意味着 V4 的“新”不是某个通用 ML 模型，而是任务结构化和决策协议：
+
+- 先构造 `row_action_table`，把每个任务在不同 policy 下的行为摆平；
+- 用 `MissedLongHead` 寻找该触发而没触发的 true-long；
+- 用 `RescueQualityHead` 分析触发后为什么仍失败，尤其是长度足够但生成/选择失败；
+- 所有 learned/discovery 模型只能提出候选，最终必须回到 training-free 或明确转向 learned-controller 论文方向。
+
+如果这样仍找不到稳定信号，负结果也是可信的：我们可以说已经用 risk-control、slice discovery、trajectory shape、calibration residual、weak signal fusion、partial action diagnostics 多条路线做过 CPU audit，而不是只扫了几个手写阈值。
+
 ### 1. Risk-Controlled Selection
 
 代表方向：
@@ -286,3 +321,10 @@ GPU 只有在以下条件满足时才能考虑：
 - Ratner et al., "Snorkel: Rapid Training Data Creation with Weak Supervision", 2017. https://arxiv.org/abs/1711.10160
 - Benjamini and Hochberg, "Controlling the False Discovery Rate", 1995. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x
 - Meinshausen and Buhlmann, "Stability Selection", 2010. https://doi.org/10.1111/j.1467-9868.2010.00740.x
+- Ribeiro, Singh, and Guestrin, "Nothing Else Matters: Model-Agnostic Explanations By Identifying Prediction Invariance", 2016. https://arxiv.org/abs/1611.05817
+- Liu, Rosen, and G.C., "AutoSlicer: Scalable Automated Data Slicing for ML Model Analysis", 2022. https://arxiv.org/abs/2212.09032
+- Christ, Kempa-Liehr, and Feindt, "Time Series FeatuRe Extraction on basis of Scalable Hypothesis tests", 2016. https://arxiv.org/abs/1610.07717
+- Swaminathan and Joachims, "Counterfactual Risk Minimization: Learning from Logged Bandit Feedback", 2015. https://arxiv.org/abs/1502.02362
+- Eikema and Aziz, "Sampling-Based Approximations to Minimum Bayes Risk Decoding for Neural Machine Translation", 2021. https://arxiv.org/abs/2108.04718
+- Wang et al., "Self-Consistency Improves Chain of Thought Reasoning in Language Models", 2022. https://arxiv.org/abs/2203.11171
+- Manakul, Liusie, and Gales, "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models", 2023. https://arxiv.org/abs/2303.08896
