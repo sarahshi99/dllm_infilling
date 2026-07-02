@@ -1,0 +1,52 @@
+{
+  "action_budget": {
+    "g_sanity_actions": 4,
+    "max": 600,
+    "multiseed_actions": 180,
+    "seed0_actions": 285,
+    "total_actions": 469
+  },
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/long_failure_generation_screen.py --timestamp 20260702_accel95",
+  "commit": "89e30c13879d1197ef5588ef5da4582d6d1e44b4",
+  "coverage": {
+    "hard_cases_executed": 89,
+    "hard_cases_expected": 89,
+    "positive_controls_executed": 6
+  },
+  "dataset": {
+    "split": "test",
+    "subset": "HumanEval-SingleLineInfilling"
+  },
+  "env_command_prefix": {
+    "CUDA_VISIBLE_DEVICES": "2",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "2",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA RTX A6000"
+    ],
+    "hostname": "amax",
+    "platform": "Linux-5.15.0-67-generic-x86_64-with-glibc2.31",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121"
+  },
+  "execution_status": "completed",
+  "final_verdict": "mixed_generation_signal",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 2]\n M experiments/action_ceiling/cal_same_protocol_sanity.py\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10/\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2/\n?? analysis_outputs/grouped_split_20260702_accel2/\n?? analysis_outputs/long_failure_generation_screen_20260702_accel95/\n?? docs/paper_agent/grouped_split_protocol.zh.md",
+  "output_dir": "analysis_outputs/long_failure_generation_screen_20260702_accel95",
+  "repro_command": "CUDA_VISIBLE_DEVICES=2 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/long_failure_generation_screen.py --timestamp 20260702_accel95",
+  "route2_error_analysis_dir": "analysis_outputs/route2_error_analysis_20260617_165806",
+  "started_at": "2026-07-02T17:57:12",
+  "timestamp": "20260702_accel95",
+  "wall_clock_sec": 2081.0800400719745
+}

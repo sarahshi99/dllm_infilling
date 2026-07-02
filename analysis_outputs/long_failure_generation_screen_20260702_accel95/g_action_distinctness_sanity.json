@@ -1,0 +1,27 @@
+{
+  "cases": {
+    "SingleLineInfilling/HumanEval/113/L3": {
+      "c_hash": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+      "f_hash": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+      "g_effective_update_steps": 8,
+      "g_hash": "7f835d0008b6dec3b1be2ede02ed8ec350629c04ba9169da7934ee85886b5a2f",
+      "g_hash_distinct_from_c_or_f": true,
+      "g_mechanism_real_executed": true,
+      "g_remasked_span_width": 8,
+      "g_remasked_token_count": 8,
+      "g_span_refinement_executed": true
+    },
+    "SingleLineInfilling/HumanEval/85/L0": {
+      "c_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+      "f_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+      "g_effective_update_steps": 7,
+      "g_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+      "g_hash_distinct_from_c_or_f": false,
+      "g_mechanism_real_executed": true,
+      "g_remasked_span_width": 7,
+      "g_remasked_token_count": 7,
+      "g_span_refinement_executed": true
+    }
+  },
+  "passed": true
+}

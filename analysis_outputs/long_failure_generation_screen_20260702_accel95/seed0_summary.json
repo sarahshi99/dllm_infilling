@@ -1,0 +1,1577 @@
+{
+  "action_summary": {
+    "E_oracle_sufficient_no_early_commit": {
+      "action_count": 95,
+      "avg_effective_update_steps": 26.842105263157894,
+      "avg_remasked_span_width": 0.0,
+      "avg_remasked_token_count": 0.0,
+      "compile_success": 73,
+      "hard_passed_cases": 31,
+      "mean_cost_sec": 4.0420679154523995,
+      "output_changed_vs_C": 13,
+      "p50_cost_sec": 4.054437231039628,
+      "p95_cost_sec": 6.207841829047538,
+      "passed_cases": 37
+    },
+    "F_oracle_sufficient_trace_remask": {
+      "action_count": 95,
+      "avg_effective_update_steps": 3.1789473684210527,
+      "avg_remasked_span_width": 0.0,
+      "avg_remasked_token_count": 3.1789473684210527,
+      "compile_success": 71,
+      "hard_passed_cases": 30,
+      "mean_cost_sec": 4.229249477377897,
+      "output_changed_vs_C": 7,
+      "p50_cost_sec": 4.133168158936314,
+      "p95_cost_sec": 5.8962856160942465,
+      "passed_cases": 36
+    },
+    "G_oracle_sufficient_trace_span_remask": {
+      "action_count": 95,
+      "avg_effective_update_steps": 5.7894736842105265,
+      "avg_remasked_span_width": 5.7894736842105265,
+      "avg_remasked_token_count": 5.7894736842105265,
+      "compile_success": 71,
+      "hard_passed_cases": 30,
+      "mean_cost_sec": 4.724954156714834,
+      "output_changed_vs_C": 7,
+      "p50_cost_sec": 4.6290295261424035,
+      "p95_cost_sec": 6.667712563998066,
+      "passed_cases": 35
+    }
+  },
+  "all_actions_unchanged_count": 76,
+  "case_count": 95,
+  "case_summary": {
+    "SingleLineInfilling/HumanEval/10/L5": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/104/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/107/L7": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/107/L9": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/108/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 2,
+        "UnitTestFailure": 1
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 3
+    },
+    "SingleLineInfilling/HumanEval/108/L6": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/109/L7": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/11/L6": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/112/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 19,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/113/L3": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 44,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/115/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/116/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/117/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 21,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/118/L4": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/118/L6": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 24,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/119/L13": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 21,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/121/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/122/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/124/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 19,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/125/L5": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/126/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 19,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/126/L3": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/126/L5": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 26,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/128/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 29,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/130/L7": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 31,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/134/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/136/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/137/L4": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/141/L10": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/145/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/146/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 27,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/147/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 22,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/148/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 36,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/148/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/148/L8": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/15/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/151/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/152/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/153/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 48,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/153/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 41,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/156/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 23,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/157/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/158/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/16/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/160/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/162/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/163/L3": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/17/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/19/L12": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/21/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/26/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/32/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/32/L6": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/34/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 2,
+        "UnitTestFailure": 1
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/39/L5": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 24,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/4/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/40/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/47/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 29,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/48/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/50/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 35,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/51/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": true,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 34,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 3
+    },
+    "SingleLineInfilling/HumanEval/57/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/6/L12": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/60/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/62/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/63/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 26,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/64/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 20,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/65/L4": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 19,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/66/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": true,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/67/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "positive_control_rescued",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/69/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/71/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 21,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/71/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 29,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/77/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/78/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 22,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/79/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "SyntaxError": 2,
+        "UnitTestFailure": 1
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/80/L5": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 34,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/83/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/84/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/85/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/86/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/87/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 2,
+        "UnitTestFailure": 1
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 35,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/87/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/88/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 34,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/89/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": false,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 2,
+        "UnitTestFailure": 1
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 19,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/90/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/91/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/91/L2": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/92/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": true,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 17,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/92/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 23,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/93/L1": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 24,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/93/L3": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "SyntaxError": 3
+      },
+      "historical_error_type": "SyntaxError",
+      "max_trace_instability": 24,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/94/L9": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": true,
+      "compile_repaired": false,
+      "error_types": {
+        "None": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 18,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/95/L16": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 29,
+      "pool": "missed_failed_long",
+      "unique_candidate_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/97/L0": {
+      "actions_passed": [],
+      "all_actions_distinct_but_wrong": false,
+      "all_actions_unchanged": true,
+      "any_correct": false,
+      "compile_repaired": false,
+      "error_types": {
+        "UnitTestFailure": 3
+      },
+      "historical_error_type": "UnitTestFailure",
+      "max_trace_instability": 32,
+      "pool": "triggered_failed_long",
+      "unique_candidate_hash_count": 1
+    }
+  },
+  "diversity_without_correctness_count": 6,
+  "final_verdict": "mixed_generation_signal",
+  "final_verdict_seed0_only": "mixed_generation_signal",
+  "hard_case_count": 89,
+  "hard_new_correct_candidate_count": 31,
+  "mode": "long_failure_generation_screen_seed0",
+  "pool_summary": {
+    "missed_failed_long": {
+      "action_count": 168,
+      "all_actions_distinct_but_wrong": 0,
+      "case_count": 56,
+      "compile_repair_cases": 6,
+      "compile_success_actions": 154,
+      "mean_cost_sec": 4.711926371049014,
+      "new_correct_candidate_cases": 31,
+      "p50_cost_sec": 4.825111621059477,
+      "p95_cost_sec": 6.448778680991381,
+      "unchanged_by_all_actions": 46,
+      "unique_candidate_case_count": 7
+    },
+    "positive_control_rescued": {
+      "action_count": 18,
+      "all_actions_distinct_but_wrong": 0,
+      "case_count": 6,
+      "compile_repair_cases": 4,
+      "compile_success_actions": 18,
+      "mean_cost_sec": 3.8014470853894533,
+      "new_correct_candidate_cases": 6,
+      "p50_cost_sec": 3.2028928509680554,
+      "p95_cost_sec": 6.481613404932432,
+      "unchanged_by_all_actions": 5,
+      "unique_candidate_case_count": 1
+    },
+    "triggered_failed_long": {
+      "action_count": 99,
+      "all_actions_distinct_but_wrong": 1,
+      "case_count": 33,
+      "compile_repair_cases": 3,
+      "compile_success_actions": 43,
+      "mean_cost_sec": 3.784001205389322,
+      "new_correct_candidate_cases": 0,
+      "p50_cost_sec": 3.58494349301327,
+      "p95_cost_sec": 5.542257436085492,
+      "unchanged_by_all_actions": 30,
+      "unique_candidate_case_count": 3
+    }
+  },
+  "positive_control_count": 6,
+  "seed0_action_count": 285,
+  "seed0_generation_actions_expected": 285
+}

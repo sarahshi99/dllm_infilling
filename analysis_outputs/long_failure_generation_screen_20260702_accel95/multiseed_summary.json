@@ -1,0 +1,459 @@
+{
+  "case_summary": {
+    "SingleLineInfilling/HumanEval/108/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 4,
+        "UnitTestFailure": 2
+      },
+      "unique_hash_count": 3
+    },
+    "SingleLineInfilling/HumanEval/112/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/116/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/117/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/124/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/126/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/145/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/146/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/148/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/148/L8": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/153/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/153/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/156/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/16/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/160/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/32/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/34/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 4,
+        "UnitTestFailure": 2
+      },
+      "unique_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/39/L5": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/47/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/50/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/60/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/63/L6": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/66/L1": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/67/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/71/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/71/L3": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/78/L0": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/80/L5": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    },
+    "SingleLineInfilling/HumanEval/89/L4": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 4,
+        "UnitTestFailure": 2
+      },
+      "unique_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/92/L2": {
+      "actions_passed": [
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask",
+        "E_oracle_sufficient_no_early_commit",
+        "F_oracle_sufficient_trace_remask",
+        "G_oracle_sufficient_trace_span_remask"
+      ],
+      "any_correct": true,
+      "error_types": {
+        "None": 6
+      },
+      "unique_hash_count": 1
+    }
+  },
+  "mode": "conditional_multiseed_diagnostic",
+  "multiseed_action_count": 180,
+  "seeds": [
+    1,
+    2
+  ],
+  "selected_case_count": 30,
+  "selection_note": "Conditional diagnostic only; do not interpret selected-case Pass@3 as an unbiased benchmark metric."
+}
