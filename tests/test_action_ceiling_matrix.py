@@ -23,6 +23,7 @@ from experiments.action_ceiling.action_ceiling_matrix import (
 from experiments.action_ceiling.distinct_candidate_ceiling import (
     choose_verdict as choose_distinct_candidate_verdict,
     cluster_hashes,
+    has_multi_seed_diversity,
     remask_count_for_canvas,
     select_trace_remask_positions,
     smoke_gate,
@@ -396,6 +397,13 @@ class ActionCeilingManifestTest(unittest.TestCase):
         self.assertEqual(summary["case_summary"]["hard"]["unique_candidate_hash_count"], 3)
         self.assertTrue(summary["case_summary"]["hard"]["candidate_existence_pass_at_3_by_seed"]["0"])
         self.assertEqual(len(clusters), 3)
+        self.assertFalse(has_multi_seed_diversity(rows))
+
+        multi_seed_rows = [
+            {"task_id": "hard", "action_id": "C_oracle_sufficient", "experimental_seed": 0, "generated_text_sha256": "a", "passed": False},
+            {"task_id": "hard", "action_id": "C_oracle_sufficient", "experimental_seed": 1, "generated_text_sha256": "b", "passed": False},
+        ]
+        self.assertTrue(has_multi_seed_diversity(multi_seed_rows))
 
     def test_action_distinctness_stop_rule(self) -> None:
         rows = [

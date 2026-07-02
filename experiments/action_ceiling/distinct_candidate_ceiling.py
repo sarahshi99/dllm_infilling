@@ -627,10 +627,22 @@ def result_record(
         "action_was_executed": bool(action_was_executed),
         "execution_note": execution_note,
         "source_commit": source_commit,
-        "trajectory": result.get("trajectory"),
+        "trajectory": sanitize_trajectory(result.get("trajectory")),
         "verification": result.get("verification"),
         "diagnostics": result.get("diagnostics"),
     }
+
+
+def sanitize_trajectory(trajectory: Any) -> Any:
+    if not isinstance(trajectory, Mapping):
+        return trajectory
+    blocked = {"top1_history", "top1_prob_history"}
+    cleaned: JsonDict = {}
+    for key, value in trajectory.items():
+        if key in blocked:
+            continue
+        cleaned[key] = value
+    return cleaned
 
 
 def compact_result_record(row: Mapping[str, Any]) -> JsonDict:
@@ -1028,10 +1040,7 @@ def build_pilot_summary(rows: Sequence[Mapping[str, Any]], gate: Mapping[str, An
         "verdict": verdict,
         "action_distinctness_gate": gate,
         "new_actions_distinct": bool(gate.get("passed")),
-        "multi_seed_diversity": any(
-            info.get("unique_candidate_hash_count", 0) > 1
-            for info in (diversity.get("case_summary") or {}).values()
-        ),
+        "multi_seed_diversity": has_multi_seed_diversity(rows),
         "hard_case_candidate_exists": hard_case_candidate_exists,
         "case_85_error_evolution": [
             {"action": row.get("action_id"), "seed": row.get("experimental_seed"), "error": row.get("error_type"), "passed": row.get("passed")}
@@ -1048,6 +1057,19 @@ def build_pilot_summary(rows: Sequence[Mapping[str, Any]], gate: Mapping[str, An
         "action_costs": action_cost_summary,
         "candidate_diversity_summary": diversity,
     }
+
+
+def has_multi_seed_diversity(rows: Sequence[Mapping[str, Any]]) -> bool:
+    by_task_action: Dict[Tuple[str, str], set[str]] = defaultdict(set)
+    seed_counts: Dict[Tuple[str, str], set[int]] = defaultdict(set)
+    for row in rows:
+        if row.get("action_id") not in DIAGNOSTIC_ACTIONS:
+            continue
+        key = (str(row.get("task_id")), str(row.get("action_id")))
+        if row.get("generated_text_sha256"):
+            by_task_action[key].add(str(row.get("generated_text_sha256")))
+        seed_counts[key].add(int(row.get("experimental_seed") or 0))
+    return any(len(seed_counts[key]) > 1 and len(hashes) > 1 for key, hashes in by_task_action.items())
 
 
 def execute(args: argparse.Namespace) -> None:
