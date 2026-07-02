@@ -9,9 +9,14 @@ from experiments.action_ceiling.action_ceiling_matrix import (
     ACTION_IDS,
     build_action_manifest,
     build_case_manifest,
+    canvas_is_oracle_sufficient,
+    compact_result_record,
+    summarize_pilot,
     oracle_sufficient_length,
     parse_task_id_group,
     summarize_manifest,
+    write_csv,
+    write_jsonl,
     write_dry_run_outputs,
 )
 
@@ -36,18 +41,19 @@ def row(
 
 
 class ActionCeilingManifestTest(unittest.TestCase):
-    def test_oracle_sufficient_length_caps_at_max_length(self) -> None:
+    def test_oracle_sufficient_length_rejects_oracle_above_max_length(self) -> None:
         self.assertEqual(
             oracle_sufficient_length(primary_len=3, route2_len=32, oracle_len=40, max_length=64),
             40,
         )
-        self.assertEqual(
+        self.assertIsNone(
             oracle_sufficient_length(primary_len=3, route2_len=32, oracle_len=80, max_length=64),
-            64,
         )
         self.assertIsNone(
             oracle_sufficient_length(primary_len=None, route2_len=None, oracle_len=None, max_length=64)
         )
+        self.assertTrue(canvas_is_oracle_sufficient(40, 40))
+        self.assertFalse(canvas_is_oracle_sufficient(32, 40))
 
     def test_parse_task_id_group_extracts_humaneval_id(self) -> None:
         self.assertEqual(parse_task_id_group("SingleLineInfilling/HumanEval/116/L0"), "HumanEval/116")
@@ -78,6 +84,25 @@ class ActionCeilingManifestTest(unittest.TestCase):
             next(item for item in manifest if item["task_id"].endswith("2/L0"))["oracle_sufficient_length"],
             32,
         )
+        self.assertTrue(
+            next(item for item in manifest if item["task_id"].endswith("2/L0"))["canvas_is_oracle_sufficient"]
+        )
+
+    def test_case_manifest_marks_oracle_above_max_canvas(self) -> None:
+        baseline = [row("too-long", passed=False, oracle=80, selected=3)]
+        route2 = [row("too-long", passed=False, oracle=80, selected=32, triggered=True, rescue_len=32)]
+
+        manifest = build_case_manifest(
+            baseline,
+            route2,
+            max_cases_per_pool=1,
+            task_ids=["too-long"],
+            max_canvas_length=64,
+        )
+
+        self.assertIsNone(manifest[0]["oracle_sufficient_length"])
+        self.assertTrue(manifest[0]["oracle_exceeds_max_canvas"])
+        self.assertIsNone(manifest[0]["canvas_is_oracle_sufficient"])
 
     def test_automatic_selection_prioritizes_true_long_positive_controls(self) -> None:
         baseline = [
@@ -114,14 +139,17 @@ class ActionCeilingManifestTest(unittest.TestCase):
                 "primary_selected_length": 3,
                 "route2_rescue_length": 32,
                 "oracle_sufficient_length": 40,
+                "oracle_length": 40,
             }
         ]
 
         actions = build_action_manifest(case_manifest)
 
         self.assertEqual([row["action_id"] for row in actions], list(ACTION_IDS))
+        self.assertEqual(actions[3]["action_id"], "D_oracle_sufficient_steps96")
         self.assertEqual(actions[2]["planned_canvas_length"], 40)
         self.assertEqual(actions[3]["planned_total_steps"], 96)
+        self.assertTrue(actions[2]["canvas_is_oracle_sufficient"])
 
     def test_summary_and_outputs_are_machine_readable(self) -> None:
         case_manifest = [
@@ -140,6 +168,7 @@ class ActionCeilingManifestTest(unittest.TestCase):
                     "primary_selected_length": 3,
                     "route2_rescue_length": 32,
                     "oracle_sufficient_length": 40,
+                    "oracle_length": 40,
                 }
             ]
         )
@@ -162,6 +191,85 @@ class ActionCeilingManifestTest(unittest.TestCase):
             self.assertTrue((output_dir / "report.md").exists())
             loaded = json.loads((output_dir / "summary.json").read_text(encoding="utf-8"))
             self.assertEqual(loaded["case_count"], 1)
+
+    def test_summarize_pilot_reports_schedule_ceiling_signal(self) -> None:
+        case_manifest = [
+            {
+                "task_id": "SingleLineInfilling/HumanEval/85/L0",
+                "task_group": "HumanEval/85",
+                "case_pool": "triggered_failed_long",
+            }
+        ]
+        rows = [
+            {
+                "task_id": "SingleLineInfilling/HumanEval/85/L0",
+                "case_pool": "triggered_failed_long",
+                "action_id": "A_primary",
+                "experimental_seed": 0,
+                "passed": False,
+                "replay_matches_historical": True,
+            },
+            {
+                "task_id": "SingleLineInfilling/HumanEval/85/L0",
+                "case_pool": "triggered_failed_long",
+                "action_id": "B_route2_len32",
+                "experimental_seed": 0,
+                "passed": False,
+                "replay_matches_historical": True,
+            },
+            {
+                "task_id": "SingleLineInfilling/HumanEval/85/L0",
+                "case_pool": "triggered_failed_long",
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 0,
+                "passed": False,
+                "replay_matches_historical": None,
+            },
+            {
+                "task_id": "SingleLineInfilling/HumanEval/85/L0",
+                "case_pool": "triggered_failed_long",
+                "action_id": "D_oracle_sufficient_steps96",
+                "experimental_seed": 0,
+                "passed": True,
+                "replay_matches_historical": None,
+            },
+        ]
+
+        summary = summarize_pilot(
+            rows,
+            case_manifest=case_manifest,
+            determinism_check={"deterministic": True},
+            experimental_seeds=[0],
+        )
+
+        self.assertEqual(summary["verdict"], "schedule_ceiling_signal")
+        self.assertEqual(
+            summary["steps96_effects"],
+            [{"task_id": "SingleLineInfilling/HumanEval/85/L0", "experimental_seed": 0}],
+        )
+
+    def test_jsonl_keeps_diagnostics_but_csv_record_is_compact(self) -> None:
+        row_data = {
+            "task_id": "a",
+            "action_id": "A_primary",
+            "experimental_seed": 0,
+            "passed": False,
+            "generated_text": "completion",
+            "verification": {"tier3_unit_tests": {"passed": False}},
+            "diagnostics": {"decoded_middle_text": "completion"},
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir)
+            write_jsonl(output_dir / "pilot_results.jsonl", [row_data])
+            write_csv(output_dir / "pilot_results.csv", [compact_result_record(row_data)])
+
+            jsonl_row = json.loads((output_dir / "pilot_results.jsonl").read_text(encoding="utf-8"))
+            csv_text = (output_dir / "pilot_results.csv").read_text(encoding="utf-8")
+
+        self.assertIn("generated_text", jsonl_row)
+        self.assertNotIn("generated_text", csv_text.splitlines()[0])
+        self.assertNotIn("verification", csv_text.splitlines()[0])
 
 
 if __name__ == "__main__":
