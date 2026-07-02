@@ -1,0 +1,11 @@
+task_id,passed,error_type,selected_mask_length,oracle_mask_length,selected_minus_oracle_length,total_sec_including_probe,official_cal_search_steps,score_mode,stop_reason,effective_steps,control_passed,route2_passed,control_selected_mask_length,route2_selected_mask_length
+SingleLineInfilling/HumanEval/0/L0,True,,11,11,0,2.856337010860443,12,official_cal_bias,global_gap_early_commit,41,True,True,11,11
+SingleLineInfilling/HumanEval/0/L1,True,,13,13,0,2.898794756270945,14,official_cal_bias,global_gap_early_commit,43,True,True,13,13
+SingleLineInfilling/HumanEval/60/L0,False,UnitTestFailure,1,10,-9,1.5502049559727311,12,official_cal_bias,no_remaining_masks,64,False,True,3,32
+SingleLineInfilling/HumanEval/116/L0,False,UnitTestFailure,1,21,-20,2.1122967498376966,12,official_cal_bias,no_remaining_masks,64,False,True,3,32
+SingleLineInfilling/HumanEval/85/L0,False,UnitTestFailure,1,32,-31,1.4403352035442367,12,official_cal_bias,no_remaining_masks,64,False,False,3,32
+SingleLineInfilling/HumanEval/113/L3,False,UnitTestFailure,6,44,-38,2.5739910760894418,11,official_cal_bias,global_gap_early_commit,29,False,False,6,6
+SingleLineInfilling/HumanEval/108/L6,False,UnitTestFailure,2,26,-24,3.7430610680021346,12,official_cal_bias,no_remaining_masks,64,False,False,3,32
+SingleLineInfilling/HumanEval/104/L2,False,UnitTestFailure,6,20,-14,1.7835896098986268,11,official_cal_bias,global_gap_early_commit,29,False,False,6,6
+SingleLineInfilling/HumanEval/34/L0,False,UnitTestFailure,1,8,-7,3.435051432810724,64,official_cal_bias,no_remaining_masks,64,False,True,3,32
+SingleLineInfilling/HumanEval/90/L1,False,UnitTestFailure,16,17,-1,2.511866848100908,17,official_cal_bias,global_gap_early_commit,41,False,False,13,13

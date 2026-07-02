@@ -98,6 +98,25 @@ def compact_result(result: Mapping[str, Any], baseline_by_task: Mapping[str, Map
     }
 
 
+def json_safe(value: Any) -> Any:
+    try:
+        json.dumps(value)
+        return value
+    except TypeError:
+        pass
+    if isinstance(value, Mapping):
+        return {str(key): json_safe(item) for key, item in value.items() if str(key) not in {"task"}}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(item) for item in value]
+    return repr(value)
+
+
+def safe_result_jsonl(path: Path, results: Sequence[Mapping[str, Any]]) -> None:
+    with path.open("w", encoding="utf-8") as handle:
+        for result in results:
+            handle.write(json.dumps(json_safe(result), ensure_ascii=False, sort_keys=True) + "\n")
+
+
 def protocol_checks(args: argparse.Namespace, config_payload: Mapping[str, Any], results: Sequence[Mapping[str, Any]]) -> JsonDict:
     metrics = [row.get("metrics") or {} for row in results]
     official_meta = [row.get("official_cal") or {} for row in results]
@@ -253,7 +272,7 @@ def execute(args: argparse.Namespace) -> None:
         summary["pass_count"] = sum(1 for row in results if (row.get("metrics") or {}).get("passed"))
         summary["case_count"] = len(results)
         summary["error_type_histogram"] = dict(Counter(str(row.get("error_type")) for row in compact_rows))
-        write_jsonl(output_dir / "results.jsonl", results)
+        safe_result_jsonl(output_dir / "results.jsonl", results)
         write_csv(output_dir / "results.csv", compact_rows)
         (output_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
         (output_dir / "protocol_comparison.md").write_text(render_protocol_comparison(protocol, results, output_dir), encoding="utf-8")

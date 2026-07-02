@@ -1,0 +1,149 @@
+{
+  "avg_abs_selected_minus_oracle_length": 14.4,
+  "avg_cal_search_steps": 17.7,
+  "avg_decode_sec": 1.6537420368986204,
+  "avg_effective_steps": 50.3,
+  "avg_length_probe_sec": 0.7458625635597855,
+  "avg_mask_length": 5.8,
+  "avg_mean_gap_at_stop_or_final": 0.8453125,
+  "avg_mean_top1_at_stop_or_final": 0.89296875,
+  "avg_oracle_mask_length": 20.2,
+  "avg_remaining_mask_ratio_at_stop_or_final": 0.20463286713286713,
+  "avg_remaining_masks_at_stop_or_final": 2.0,
+  "avg_selected_adjusted_score": 1.2487231794269928,
+  "avg_selected_mask_length": 5.8,
+  "avg_selected_minus_oracle_length": -14.4,
+  "avg_selected_raw_score": 0.846875,
+  "avg_selected_score": 1.2487231794269928,
+  "avg_stop_step_stopped_only": 35.6,
+  "avg_total_sec": 1.7446903075790032,
+  "avg_total_sec_including_probe": 2.4905528711387888,
+  "avg_verification_sec": 0.09094827068038285,
+  "case_count": 10,
+  "error_type_histogram": {
+    "None": 2,
+    "UnitTestFailure": 8
+  },
+  "exact_length_match_rate": 0.2,
+  "lcas_v3_bucket_avg_effective_steps": {
+    "medium_selected_13_20": 42.0,
+    "transition_selected_9_12": 41.0,
+    "very_short_selected_<=8": 54.0
+  },
+  "lcas_v3_bucket_histogram": {
+    "medium_selected_13_20": 2,
+    "transition_selected_9_12": 1,
+    "very_short_selected_<=8": 7
+  },
+  "lcas_v3_bucket_pass_rate": {
+    "medium_selected_13_20": 0.5,
+    "transition_selected_9_12": 1.0,
+    "very_short_selected_<=8": 0.0
+  },
+  "lcas_v3_bucket_stop_rate": {
+    "medium_selected_13_20": 1.0,
+    "transition_selected_9_12": 1.0,
+    "very_short_selected_<=8": 0.2857142857142857
+  },
+  "length_alphas": [],
+  "mask_length_source": "official_cal",
+  "num_samples": 10,
+  "oracle_bucket_avg_selected_minus_oracle_length": {
+    "13-16": 0.0,
+    "17-24": -11.666666666666666,
+    "25+": -31.0,
+    "9-12": -4.5,
+    "<=8": -7.0
+  },
+  "oracle_bucket_histogram": {
+    "13-16": 1,
+    "17-24": 3,
+    "25+": 3,
+    "9-12": 2,
+    "<=8": 1
+  },
+  "oracle_bucket_pass_rate": {
+    "13-16": 1.0,
+    "17-24": 0.0,
+    "25+": 0.0,
+    "9-12": 0.5,
+    "<=8": 0.0
+  },
+  "oracle_length_available_rate": 1.0,
+  "oracle_length_histogram": {
+    "10": 1,
+    "11": 1,
+    "13": 1,
+    "17": 1,
+    "20": 1,
+    "21": 1,
+    "26": 1,
+    "32": 1,
+    "44": 1,
+    "8": 1
+  },
+  "over_select_by3_rate_le8": 0.0,
+  "over_select_rate": 0.0,
+  "over_select_rate_le8": 0.0,
+  "pass_count": 2,
+  "pass_rate": 0.2,
+  "protocol": {
+    "checks": {
+      "checkpoint_same": true,
+      "dataset_subset_same": true,
+      "denoising_budget_comparable": true,
+      "evaluation_harness_same": true,
+      "fixed_case_filter_wrapper": true,
+      "mask_initialization_same": true,
+      "no_oracle_length_used_for_generation": true,
+      "no_test_result_used_for_generation": true,
+      "official_cal_metadata_present": true,
+      "output_schema_paired_compare": true,
+      "prompt_format_same": true,
+      "seed_protocol_explicit": true,
+      "split_same": true
+    },
+    "mismatches": [],
+    "verdict": "protocol_matched_cal"
+  },
+  "required_metrics": {
+    "13-16_bucket_pass_rate": 1.0,
+    "17-24_bucket_pass_rate": 0.0,
+    "25+_bucket_pass_rate": 0.0,
+    "9-12_bucket_pass_rate": 0.5,
+    "<=8_bucket_pass_rate": 0.0,
+    "avg_selected_minus_oracle_length": -14.4,
+    "over_select_by3_rate_le8": 0.0,
+    "over_select_rate_le8": 0.0,
+    "overall_pass_rate": 0.2,
+    "under_select_by3_rate_17plus": 0.8333333333333334,
+    "under_select_rate_17plus": 1.0
+  },
+  "same_as_fixed_length_rate": 0.0,
+  "score_modes": [
+    "official_cal_bias"
+  ],
+  "selected_length_bucket_histogram": {
+    "13-16": 2,
+    "9-12": 1,
+    "<=8": 7
+  },
+  "selected_length_histogram": {
+    "1": 4,
+    "11": 1,
+    "13": 1,
+    "16": 1,
+    "2": 1,
+    "6": 2
+  },
+  "stop_rate": 0.5,
+  "stop_reason_histogram": {
+    "global_gap_early_commit": 5,
+    "no_remaining_masks": 5
+  },
+  "under_select_by3_rate_17plus": 0.8333333333333334,
+  "under_select_rate": 0.8,
+  "under_select_rate_17plus": 1.0,
+  "within_1_length_rate": 0.3,
+  "within_2_length_rate": 0.3
+}

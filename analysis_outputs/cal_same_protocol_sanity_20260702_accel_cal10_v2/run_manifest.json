@@ -1,0 +1,46 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/cal_same_protocol_sanity.py --timestamp 20260702_accel_cal10_v2",
+  "commit": "89e30c13879d1197ef5588ef5da4582d6d1e44b4",
+  "env_command_prefix": {
+    "CUDA_VISIBLE_DEVICES": "3",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "3",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA RTX A6000"
+    ],
+    "hostname": "amax",
+    "platform": "Linux-5.15.0-67-generic-x86_64-with-glibc2.31",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121"
+  },
+  "execution_status": "completed",
+  "fixed_case_ids": [
+    "SingleLineInfilling/HumanEval/0/L0",
+    "SingleLineInfilling/HumanEval/0/L1",
+    "SingleLineInfilling/HumanEval/60/L0",
+    "SingleLineInfilling/HumanEval/116/L0",
+    "SingleLineInfilling/HumanEval/85/L0",
+    "SingleLineInfilling/HumanEval/113/L3",
+    "SingleLineInfilling/HumanEval/108/L6",
+    "SingleLineInfilling/HumanEval/104/L2",
+    "SingleLineInfilling/HumanEval/34/L0",
+    "SingleLineInfilling/HumanEval/90/L1"
+  ],
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 2]\n M experiments/action_ceiling/cal_same_protocol_sanity.py\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10/\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2/\n?? analysis_outputs/grouped_split_20260702_accel2/\n?? analysis_outputs/long_failure_generation_screen_20260702_accel95/\n?? docs/paper_agent/grouped_split_protocol.zh.md",
+  "output_dir": "analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2",
+  "repro_command": "CUDA_VISIBLE_DEVICES=3 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/cal_same_protocol_sanity.py --timestamp 20260702_accel_cal10_v2",
+  "started_at": "2026-07-02T18:29:41",
+  "verdict": "protocol_matched_cal",
+  "wall_clock_sec": 30.423520170035772
+}
