@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-更新时间：2026-06-18 00:00 CST
+更新时间：2026-07-01 15:40 CST
 
 ## 当前研究目标
 
@@ -14,7 +14,7 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 当前实验方案版本
 
-`v4`：CPU-first Discovery signal model 已实现并完成 full-log audit。当前 A6000 LLaDA-Base checkpoint 是 `midcons`；Route2 precision `len32` 给出低风险小幅正信号 `801/1033 = 77.54%`、pairwise `6/0/795/232`，但 oracle `25+` bucket 未解决。2026-06-18 的 Discovery V4 CPU audit 在过滤 oracle/pass/outcome leakage 后，未找到 GPU-ready 低风险规则，final decision 为 `route2_polish_only`。
+`v8`：用户提出的“直接改 CAL-like 公式、让长长度按比例获得更大 reward”已完成 GPU1 sequential full runs。结果为 negative：V8a `786/1033 = 76.09%`，V8b `781/1033 = 75.61%`，V8c `782/1033 = 75.70%`，均低于 current `midcons` `795/1033 = 76.96%`、Route2 precision `len32` `801/1033 = 77.54%` 和 V6 short override `802/1033 = 77.64%`。当前 best LLaDA-Base follow-up 仍是 V6 short override。比例思想不能作为全局 scoring reward 继续；若保留，只能作为 under-selection detector / risk guard 下的局部机制。
 
 ## 本次会话已完成
 
@@ -46,6 +46,9 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - 按 Superpowers local fallback 完成 Route2 error analysis Discovery V3 的 CPU-only 诊断。实现 `analysis/route2_error_analysis.py` 和 `tests/test_route2_error_analysis.py`，输出 `analysis_outputs/route2_error_analysis_20260617_165806`。诊断复现 `1033` joined rows、pairwise `6/0/795/232`、`33` triggered failed-long、`56` missed failed-long、`31/33` triggered failed-long rescue length >= oracle；decision 为 `mixed_rescue_quality_and_gate_recall`。本动作未启动 GPU。
 - 按用户要求继续 true-long signal search，完成 Discovery V4 literature brainstorm 和 executable plan。新增 `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`、`docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`、`docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`。本动作未启动 GPU。
 - 实现并运行 CPU-only `analysis/discovery_v4_signal_audit.py`，测试 `tests/test_discovery_v4_signal_audit.py` 通过 `Ran 5 tests` / `OK`。输出 `analysis_outputs/discovery_v4_signal_audit_20260618_000000`，记录文档 `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`。真实数据 dry run 暴露并修复 `true_long` 和 `triggered_rescue_failure_*` 两类泄漏 candidate；最终 V4 decision 为 `route2_polish_only`，不启动 GPU。
+- 按用户要求完成导师汇报材料和 CCF-A readiness 评估。输出 `docs/paper_agent/presentations/20260618_advisor_project_report.pptx`、同名 Markdown/HTML 讲稿，以及 `ccfa_readiness_assessment.zh.md`。结论为 `weak_candidate`：项目有清晰问题和局部正结果，但还未达到 CCF-A submission-ready。
+- 完成比例式长度放宽 V7 的 CPU audit、expanded-grid GPU smoke、runner 边界修复、guard smoke 和 clean full run。Clean full 输出为 `outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`，结果 `792/1033 = 76.67%`，相对 current `midcons` 净损 `-3` tasks；比例 promotion `10` 行但 true-long promotion `0` 行。
+- 完成 V8 proportional CAL score 公式级 full runs。三条均在 GPU1 串行完成并写出 `1033` 行和 `summary.json`：V8a `786/1033 = 76.09%`，pairwise vs `midcons` `3/12/783/235`；V8b `781/1033 = 75.61%`，pairwise `7/21/774/231`；V8c `782/1033 = 75.70%`，pairwise `6/19/776/232`。V8c 的 cap 是 reward cap，不是候选长度 hard cap。
 
 ## 最新结果摘要
 
@@ -75,6 +78,9 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - Trace feature audit v2：final output `analysis_outputs/trace_feature_audit_v2_20260613_204721`，decision `diagnostic_only`。Previous source：`1033` rows、`113` true-long、`96` failed-long、source decision `policy_candidate`；midcons source：`1033` rows、`113` true-long、`91` failed-long、source decision `diagnostic_only`。最有希望的 midcons 候选是 `top1_last <= 0.667969 AND max_remaining_plateau_steps >= 16`，held-out 上 `18` triggers、`9` failed-long、`2` short-risk、`0` current-pass risk，但仍不足以支持 full GPU policy run。
 - Route 2 trace-gated full follow-up：baseline `midcons` 为 `795/1033 = 76.96%`。Broad plateau 得到 `801/1033 = 77.54%`，净增 `+6`，但有 `1` 个 loss / short loss；触发 `73` 行，trigger true-long precision `53.42%`。Precision top1/conf 得到 `800/1033 = 77.44%`，净增 `+5`，`0` losses；触发 `57` 行，trigger true-long precision `61.40%`。Precision policy 是更干净的候选，但 oracle `17-24` 仅 `+1`，`25+` 不变，不能宣称 true-long 已解决。核心诊断：`91` 个 baseline failed-long rows 中，Broad 触发 `39` 但只救回 `2`，Precision 触发 `35` 但只救回 `1`。
 - Route 2 precision len32 GPU3-only follow-up：output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516`；`801/1033 = 77.54%`，净增 `+6`，pairwise `6/0/795/232`，trigger `57`，trigger true-long precision `61.40%`，avg sec including probe `5.4622`。Bucket net 为 `<=8 +2`、`9-12 +2`、`13-16 0`、`17-24 +2`、`25+ 0`；triggered `25+` 为 `0/11` pass。解释：低风险小幅正收益，但仍没有解决 `25+` true-long。
+- V6 short override：`802/1033 = 77.64%`，是当前 LLaDA-Base follow-up 中最高 full-run pass count；相对 Route2 precision len32 为 `1` win / `0` losses / `801` tie-pass / `231` tie-fail。解释：这是小幅 selector polish，不是 long-length 根本解决。
+- V7 proportional widening：output `/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`；`792/1033 = 76.67%`，相对 current `midcons` `795/1033 = 76.96%` 为 `-3` tasks，pairwise `1/4/791/237`。比例放宽 promotion `10` 行，true-long promotion `0`，short promotion `1`，long-bucket win `0`，short-bucket loss `2`；promoted rows 平均长度绝对误差从 `1.1` 恶化到 `6.9`。解释：当前比例放宽参数不成立，不能作为主线。
+- V8 proportional CAL score：outputs `outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`、`outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`、`outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`；三条 full 结果分别为 `786/1033 = 76.09%`、`781/1033 = 75.61%`、`782/1033 = 75.70%`。Pairwise vs `midcons` 分别为 `3/12/783/235`、`7/21/774/231`、`6/19/776/232`；short losses 分别为 `7/13/11`，long wins 分别为 `2/3/2`。解释：公式内比例奖励确实会增加少量 long wins，但伤害 short/medium 更明显；V8 是全局比例放长路线的负结果。
 - Route2 error analysis Discovery V3：output `analysis_outputs/route2_error_analysis_20260617_165806`；report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`。它确认 Route2 的 `6` 个 wins 均来自 triggered rescue，但 `33` 个 triggered failed-long 中 `31` 个 rescue length 已经 >= oracle，同时还有 `56` 个 failed-long rows 未触发。结论：不要盲目加长 canvas；下一步应同时查 rescue generation/selection quality 和 probe-trace fusion gate recall。
 - Discovery V4 design：spec `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`；plan `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`。V4 不再把问题看成单 feature 枚举，而是 risk-controlled action selection：`MissedLongHead` 找 missed failed-long 的 probe-trace fusion signal，`RescueQualityHead` 解释长度足够仍失败的 triggered rows，最后由 Policy Distillation 生成可审稿的 training-free rule/action。
 - Discovery V4 signal audit：output `analysis_outputs/discovery_v4_signal_audit_20260618_000000`；report `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`；decision `route2_polish_only`。Joined rows `1033`，true-long `113`，baseline failed-long `91`。Best non-leaking candidate `broad_len24_triggered >= 1` 触发 `73` 行、missed failed-long `4`、triggered rescue-failure `33`、short risk `10`、current-pass risk `1`、true-long precision `0.534`、stable folds `3/5`，因此 reject。结论：不要从 V4 audit 直接启动 GPU full run。
@@ -109,12 +115,12 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 下一步计划
 
-1. 不从 Discovery V4 audit 直接启动 GPU full run。
-2. 保留 Route2 precision len32 作为 conservative polish：`801/1033 = 77.54%`、pairwise `6/0/795/232`。
-3. 若继续 true-long recovery，下一步应设计 rescue generation/selection quality 机制，而不是继续盲目加长 canvas。
-4. 任何 GPU 前必须写新 action brief、success/kill criteria，并确认 GPU `2/3` 没有他人任务。
-5. 继续把 literature anchors、previous local methods、current methods 和 trace diagnostics 分列/分节记录。
+1. 不继续当前 V7/V8 proportional length reward 路线作为主线；V7 和 V8 都已经 full-run negative。
+2. 保留 V6 short override 作为当前 LLaDA-Base best full-run follow-up：`802/1033 = 77.64%`。
+3. 若继续比例思想，必须从全局 reward 改为局部 guarded policy：strict under-selection detector、raw-confirm、trace/probe risk guard，并限制候选空间。
+4. 若继续 true-long recovery，更有希望的方向仍是 rescue generation/selection quality 或 principled length modeling，而不是无保护加长 canvas。
+5. 任何 GPU 前必须写新 action brief、success/kill criteria，并确认不会干扰他人任务。
 
 ## 需要用户决策的问题
 
-目前没有正在运行的 Route 2 GPU 实验需要接管。Discovery V4 CPU audit 已完成，未通过 GPU gate；下一步需要用户决定是否进入新的 rescue generation/selection 机制设计。
+目前没有正在运行的 Route 2 GPU 实验需要接管。Discovery V4 CPU audit 已完成，未通过 GPU gate；导师汇报材料已生成。下一步需要用户决定是否进入新的 rescue generation/selection 机制设计，以及汇报后是否按导师反馈调整 paper framing。

@@ -1,6 +1,6 @@
 # Paper Agent Pause Checkpoint
 
-Timestamp: 2026-06-18 00:00 CST
+Timestamp: 2026-07-01 15:40 CST
 
 ## Current Branch
 
@@ -8,7 +8,7 @@ Timestamp: 2026-06-18 00:00 CST
 
 ## Current Phase
 
-The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1 Task 1/2/3/4/5 completed with negative Route 1/2/3 evidence. CPU-only `trace_feature_audit_v2` completed with `diagnostic_only`; after user approval to continue, Route 2 trace-gated long-rescue full follow-up runs completed. The latest GPU3-only precision `len32` run is `801/1033 = 77.54%`, pairwise `6/0/795/232`. CPU-only Route2 error analysis Discovery V3 classified the bottleneck as `mixed_rescue_quality_and_gate_recall`. Discovery V4 CPU audit is now complete and did not find a GPU-ready low-risk signal after leakage filtering; decision is `route2_polish_only`.
+The literature-backbone local same-backbone matrix has completed through `inclusionAI/LLaDA-MoE-7B-A1B-Base`. Trace-long-rescue v1, trace feature audit v2, Route2 full follow-ups, Discovery V3/V4, V5/V6 selector polish, V7 proportional widening, and V8 proportional CAL score full runs have all completed. Current LLaDA-Base best follow-up is still V6 short override `802/1033 = 77.64%`. V7 is negative: `792/1033 = 76.67%`, pairwise vs `midcons` `1/4/791/237`. V8 directly changed the CAL-like formula and is also negative: V8a `786/1033 = 76.09%`, V8b `781/1033 = 75.61%`, V8c `782/1033 = 75.70%`. The latest decision is not to continue global proportional length reward as the main policy; any further ratio idea must be local and guarded by an under-selection/risk detector.
 
 ## Completed Items
 
@@ -58,6 +58,10 @@ The literature-backbone local same-backbone matrix has completed through `inclus
 - Completed the user-requested GPU3-only Route2 precision `len32` full run. The earlier GPU1 partial run was interrupted at about `405/1033` and is excluded. Clean output `/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516` is `801/1033 = 77.54%`, pairwise `6/0/795/232`; log `logs/paper_agent/20260614_full_route2_precision_len32_gpu3.log` ended with `COMMAND_EXIT_CODE=0`.
 - Completed CPU-only Route2 error analysis Discovery V3 under the Superpowers local fallback. Added `analysis/route2_error_analysis.py` and `tests/test_route2_error_analysis.py`; output `analysis_outputs/route2_error_analysis_20260617_165806` reproduces `1033` joined rows, pairwise `6/0/795/232`, `57` triggers, `33` triggered failed-long rows, `56` missed failed-long rows, and `31/33` triggered failed-long rows with rescue length >= oracle. No GPU command was launched.
 - Completed Discovery V4 method lineage audit, CPU-only implementation, and full-log run. Added `analysis/discovery_v4_signal_audit.py`, `tests/test_discovery_v4_signal_audit.py`, and `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`; output `analysis_outputs/discovery_v4_signal_audit_20260618_000000` has decision `route2_polish_only`. Focused tests passed with `Ran 5 tests` / `OK`; `py_compile` passed. Two leaked real-data candidates (`true_long`, `triggered_rescue_failure_*`) were caught and filtered before the final result.
+- Generated the advisor-facing project summary deck and CCF-A readiness memo requested by the user. Outputs are `docs/paper_agent/presentations/20260618_advisor_project_report.pptx`, `docs/paper_agent/presentations/20260618_advisor_project_report.md`, `docs/paper_agent/presentations/20260618_advisor_project_report.html`, and `ccfa_readiness_assessment.zh.md`. The deck has `22` slides and the memo verdict is `weak_candidate`.
+- Completed Route2 V6 short override full run: `802/1033 = 77.64%`, pairwise vs Route2 precision len32 `1/0/801/231`. This is the current LLaDA-Base best follow-up, but only a small selector-polish result.
+- Completed proportional length widening V7 CPU audit, expanded-grid GPU smoke, runner grid-boundary fix, guard smoke, and clean full run. Clean full output is `outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`; result is `792/1033 = 76.67%`, pairwise vs `midcons` `1` win / `4` losses / `791` tie-pass / `237` tie-fail. Proportional promotion count is `10`, true-long promotion count is `0`, long-bucket win is `0`, and short-bucket loss is `2`.
+- Completed V8 proportional CAL score formula-level full runs on GPU1. V8a `outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654` is `786/1033 = 76.09%`, pairwise vs `midcons` `3/12/783/235`; V8b `outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525` is `781/1033 = 75.61%`, pairwise `7/21/774/231`; V8c `outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849` is `782/1033 = 75.70%`, pairwise `6/19/776/232`. V8c cap is a reward cap, not a hard candidate-length cap.
 
 ## Current Central Claim
 
@@ -65,7 +69,7 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 
 ## Current Experiment Plan Version
 
-`v4`: CPU-first Discovery signal-model audit is complete. The result is diagnostic/negative for new GPU action: no non-leaking low-risk candidate passed the policy gate. Do not launch on GPU `2/3` while other users' tasks are present.
+`v8`: proportional CAL score full runs are complete and negative. Do not launch another GPU full run from the global proportional reward family. If continuing the ratio idea, redesign it as a local guarded policy with under-selection detection, raw-confirm/trace/probe risk guards, and explicit success/kill criteria.
 
 ## Latest Evidence And Results
 
@@ -102,10 +106,33 @@ Inference-time length control for DLLM code infilling can safely recover medium-
 - Interpretation: continue signal search, but not by blindly increasing rescue length. Next CPU-first work should combine rescue generation/selection audit for triggered long failures and probe-trace fusion for missed failed-long recall.
 - Discovery V4 signal audit: output `analysis_outputs/discovery_v4_signal_audit_20260618_000000`; report `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`; joined rows `1033`; true-long `113`; baseline failed-long `91`; decision `route2_polish_only`. Best non-leaking candidate `broad_len24_triggered >= 1` triggers `73` rows, with `4` missed failed-long, `33` triggered rescue-failure, `10` short risk, `1` current-pass risk, `0.534` true-long precision, and `3/5` stable folds; it is rejected.
 - Interpretation: no GPU full run should be launched from V4 alone. Keep Route2 precision len32 as conservative polish unless a new rescue generation/selection mechanism is designed.
+- V6 short override: output recorded in `docs/paper_agent/experiment_results.zh.md`; `802/1033 = 77.64%`; pairwise vs Route2 precision len32 `1/0/801/231`. Interpretation: current best LLaDA-Base follow-up, but not a true-long solution.
+- V7 proportional widening: output `outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`; log `logs/paper_agent/20260701_v7_prop_widen_full_gridfix_gpu2.log`; `792/1033 = 76.67%`; pairwise vs `midcons` `1/4/791/237`; proportional promoted rows `10`; true-long promoted rows `0`; short promoted rows `1`; long-bucket wins `0`; short-bucket losses `2`; promoted-row avg abs length error worsened from `1.1` to `6.9`. Interpretation: simple ratio widening under current parameters is negative.
+- V8 proportional CAL score: outputs `outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`, `outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`, and `outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`; results are `786/1033 = 76.09%`, `781/1033 = 75.61%`, and `782/1033 = 75.70%`; pairwise vs `midcons` are `3/12/783/235`, `7/21/774/231`, and `6/19/776/232`. Interpretation: direct formula-level proportional reward creates a long/short tradeoff, but the losses dominate.
 
 ## Running Or Just-Ended Commands
 
-No trace-long-rescue or Route 2 GPU command is running as of 2026-06-18 00:00 CST. The latest action was CPU-only Discovery V4 signal audit, not a GPU run:
+No V8 proportional CAL score GPU command is running as of 2026-07-01 15:40 CST. The latest completed GPU action was:
+
+- V8a output: `/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`
+- V8b output: `/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`
+- V8c output: `/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`
+- result: V8a `786/1033 = 76.09%`; V8b `781/1033 = 75.61%`; V8c `782/1033 = 75.70%`
+- decision: stop global proportional scoring reward; do not launch another GPU full run without a new action brief.
+
+There is a separate older project process still using GPUs `2/3` (`run_lcal_official_bounded_repair_a6000_v2.py` with experiment name `full_length_score_formula_P04_midconsparams_20260701`). It is unrelated to V7 and should not be interrupted.
+
+Historical note from 2026-06-18: the prior action before later V5/V6/V7 work was documentation synthesis for the advisor report and CCF-A readiness memo:
+
+- PPTX: `/home/shx/projects/dllm_infilling/git_workspace/docs/paper_agent/presentations/20260618_advisor_project_report.pptx`
+- Markdown speaker draft: `/home/shx/projects/dllm_infilling/git_workspace/docs/paper_agent/presentations/20260618_advisor_project_report.md`
+- HTML speaker draft: `/home/shx/projects/dllm_infilling/git_workspace/docs/paper_agent/presentations/20260618_advisor_project_report.html`
+- CCF-A readiness memo: `/home/shx/projects/dllm_infilling/git_workspace/ccfa_readiness_assessment.zh.md`
+- Verification: PPTX zip test passed, slide count is `22`, generator `py_compile` passed, and relevant markdown/html/memo files passed `git diff --check`.
+
+Non-research cleanup note: an earlier LibreOffice format-conversion probe for `/tmp/lo_ppt_probe.html` remained stuck under PIDs `2717315`, `2717325`, `2717326`, `2717331`, `2717350`, and defunct child `2717378`. It is unrelated to the generated PPTX because the final deck was created directly by the local Python generator. A host-level kill was attempted but could not be approved because the escalation review service returned `503`; do not treat this as a project experiment.
+
+The latest CPU-only research action before the deck was Discovery V4 signal audit:
 
 - Discovery V4 output: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/discovery_v4_signal_audit_20260618_000000`
 - Discovery V4 report: `/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`
@@ -308,6 +335,16 @@ Intended paper-agent milestone files:
 - `docs/paper_agent/probe_curve_split_score_audit.md`
 - `docs/paper_agent/probe_curve_split_score_audit.zh.md`
 - `docs/superpowers/plans/2026-05-31-probe-curve-learned-diagnostic.md`
+- `analysis/discovery_v4_signal_audit.py`
+- `tests/test_discovery_v4_signal_audit.py`
+- `analysis_outputs/discovery_v4_signal_audit_20260618_000000/`
+- `docs/paper_agent/experiments/20260618_discovery_v4_signal_audit.md`
+- `docs/paper_agent/experiments/20260618_advisor_report_ppt_action.md`
+- `docs/paper_agent/presentations/make_20260618_advisor_project_report.py`
+- `docs/paper_agent/presentations/20260618_advisor_project_report.md`
+- `docs/paper_agent/presentations/20260618_advisor_project_report.html`
+- `docs/paper_agent/presentations/20260618_advisor_project_report.pptx`
+- `ccfa_readiness_assessment.zh.md`
 
 User/unrelated dirty files to preserve and not stage:
 
@@ -402,12 +439,12 @@ Captured older pause-state status for the prior probe-curve audit milestone:
 
 ## Next Resume: First 3 Actions
 
-1. Preserve unrelated `AGENTS.md` / `AGENTS.zh.md` user changes and do not stage them with paper-agent docs.
-2. Recheck GPU `2/3` availability with `nvidia-smi`; do not interrupt the currently observed external GPU jobs.
-3. If GPU `2` or `3` is free and sandbox-outside CUDA/verifier execution is permitted, run tiny verifier smokes for both LLaDA-1.5 candidate and same-backbone `cal_lite` baseline before any full run.
+1. Preserve unrelated user changes and do not stage unrelated dirty files with paper-agent docs.
+2. If preparing a commit, stage only the advisor report files, Discovery V4 files, and updated paper-agent docs that belong to this milestone.
+3. Do not launch a GPU full run from Discovery V4; the next research step needs a new action brief around rescue generation/selection quality or principled length modeling.
 
 ## Recommended Resume Prompt
 
 ```text
-Continue the paper-agent work in /home/shx/projects/dllm_infilling/git_workspace on branch paper-agent-overnight in low-token mode. Do not call create_goal/update_goal/get_goal. First read AGENTS.md, git status, docs/paper_agent/pause_checkpoint.current.md, docs/paper_agent/current_action.md, paper_agent_dashboard.zh.md, activity_ledger.zh.md tail, and docs/paper_agent/experiments/20260609_2105_llada15_download_api_probe.md. Preserve unrelated AGENTS.md / AGENTS.zh.md user changes and do not recreate AGENTS.zh.md. LLaDA-1.5 metadata/API/local-weight probe has completed at `/tmp/llada15_probe_20260609`; do not repeat the full download unless files are missing. Recheck GPU 2/3 availability. If GPU 2 or 3 is free and sandbox-outside CUDA/verifier execution is permitted, run tiny verifier smokes for candidate and same-backbone `cal_lite` baseline, analyze outputs, update GitHub-readable docs, and only then consider full local same-backbone runs. Do not claim SOTA; keep literature anchors separate from local protocol-matched evidence.
+Continue the paper-agent work in /home/shx/projects/dllm_infilling/git_workspace on branch paper-agent-overnight in low-token mode. Do not call create_goal/update_goal/get_goal. First read AGENTS.md, git status, docs/paper_agent/pause_checkpoint.current.md, docs/paper_agent/current_action.md, paper_agent_dashboard.zh.md, and the tail of activity_ledger.zh.md. The advisor report deck is at `docs/paper_agent/presentations/20260618_advisor_project_report.pptx`, with speaker Markdown/HTML beside it, and the CCF-A memo is `ccfa_readiness_assessment.zh.md`. Discovery V4 final decision is `route2_polish_only`; do not launch a GPU full run from it. Preserve unrelated user changes. If continuing research after the advisor report, write a new action brief for rescue generation/selection quality or principled length modeling before any GPU work. Do not claim SOTA; keep literature anchors separate from local protocol-matched evidence.
 ```

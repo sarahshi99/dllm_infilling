@@ -34,8 +34,11 @@ class DecodeConfig:
     # CAL-lite diagnostic / v2 settings
     cal_lite_probe_lengths_csv: str = "3,4,5,6,7,8,9,10,11,12,13,14,15,16,20,24,32,48,64"
     cal_lite_tie_break: str = "shorter"  # shorter | longer
-    cal_lite_score_mode: str = "raw"  # raw | length_power
+    cal_lite_score_mode: str = "raw"  # raw | length_power | length_power_proportional
     cal_lite_length_alpha: float = 0.0
+    cal_lite_length_prop_beta: float = 0.0
+    cal_lite_length_prop_ref_length: float = 12.0
+    cal_lite_length_prop_cap_length: Optional[float] = None
 
 
 @dataclass

@@ -4,11 +4,12 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import os
 import sys
 from collections import Counter
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Sequence
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
@@ -60,6 +61,15 @@ class BoundedRepairSettings:
     mid_rescue_max_delta: int = 7
     mid_rescue_min_long_ratio: Optional[float] = None
     mid_rescue_source: str = "base"
+    proportional_widening: bool = False
+    prop_base_threshold: float = 0.985
+    prop_slope: float = 0.02
+    prop_min_threshold: float = 0.85
+    prop_min_base_length: int = 12
+    prop_max_expansion: float = 3.0
+    prop_require_raw_confirm: bool = False
+    prop_raw_margin: float = 0.05
+    prop_min_raw_threshold: float = 0.75
 
 
 def parse_args() -> argparse.Namespace:
@@ -89,7 +99,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cap-base-9-12", type=int, default=16)
     parser.add_argument("--short-safe-policy", type=str, default="s3", choices=["s1", "s2", "s3", "s4"])
     parser.add_argument("--tie-break", type=str, default="shorter", choices=["shorter", "longer"])
-    parser.add_argument("--score-mode", type=str, default="length_power", choices=["raw", "length_power"])
+    parser.add_argument("--score-mode", type=str, default="length_power", choices=["raw", "length_power", "length_power_proportional"])
+    parser.add_argument("--length-prop-beta", type=float, default=0.0)
+    parser.add_argument("--length-prop-ref-length", type=float, default=12.0)
+    parser.add_argument("--length-prop-cap-length", type=float, default=None)
     parser.add_argument(
         "--correction-selection-rule",
         type=str,
@@ -123,8 +136,28 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mid-rescue-min-long-ratio", type=float, default=None)
     parser.add_argument("--mid-rescue-source", type=str, default="base")
 
+    parser.add_argument(
+        "--proportional-widening",
+        action="store_true",
+        help="Allow base length selection to widen to longer near-best probe candidates before LCAL triggers.",
+    )
+    parser.add_argument("--prop-base-threshold", type=float, default=0.985)
+    parser.add_argument("--prop-slope", type=float, default=0.02)
+    parser.add_argument("--prop-min-threshold", type=float, default=0.85)
+    parser.add_argument("--prop-min-base-length", type=int, default=12)
+    parser.add_argument("--prop-max-expansion", type=float, default=3.0)
+    parser.add_argument("--prop-require-raw-confirm", action="store_true")
+    parser.add_argument("--prop-raw-margin", type=float, default=0.05)
+    parser.add_argument("--prop-min-raw-threshold", type=float, default=0.75)
+
     parser.add_argument("--lcas-policy", type=str, default="lcas_v3b", choices=["lcas_v3a", "lcas_v3b"])
     parser.add_argument("--baseline-results", type=str, default=None)
+    parser.add_argument(
+        "--task-ids-csv",
+        type=str,
+        default=None,
+        help="Optional exact task ids for targeted smoke; when set, max-samples is ignored.",
+    )
     parser.add_argument("--output-dir", type=str, default="outputs_clean")
     parser.add_argument("--experiment-name", type=str, default="lcal_official_bounded_repair")
     parser.add_argument("--save-step-traces", action="store_true")
@@ -149,6 +182,138 @@ def _hist(values: Iterable[Any]) -> Dict[str, int]:
     for value in values:
         counter[str(value)] += 1
     return dict(sorted(counter.items()))
+
+
+def parse_task_ids_csv(value: Optional[str]) -> Optional[List[str]]:
+    if value is None:
+        return None
+    task_ids = [item.strip() for item in value.split(",") if item.strip()]
+    return task_ids or None
+
+
+def filter_tasks_by_ids(tasks: Sequence[CodeTask], task_ids: Optional[Sequence[str]]) -> List[CodeTask]:
+    if not task_ids:
+        return list(tasks)
+    by_id = {str(task.task_id): task for task in tasks}
+    missing = [task_id for task_id in task_ids if task_id not in by_id]
+    if missing:
+        raise ValueError(f"requested task ids not found: {missing}")
+    return [by_id[task_id] for task_id in task_ids]
+
+
+def _candidate_length(candidate: Dict[str, Any]) -> int:
+    return int(candidate["mask_length"])
+
+
+def _candidate_score(candidate: Dict[str, Any]) -> float:
+    return float(candidate.get("score", candidate.get("adjusted_score", candidate.get("raw_score", 0.0))))
+
+
+def _candidate_raw_score(candidate: Dict[str, Any]) -> float:
+    return float(candidate.get("raw_score", candidate.get("mean_top1_prob", _candidate_score(candidate))))
+
+
+def _proportional_threshold(
+    settings: BoundedRepairSettings,
+    *,
+    base_length: int,
+    candidate_length: int,
+) -> float:
+    if int(candidate_length) <= int(base_length):
+        return float(settings.prop_base_threshold)
+    ratio = float(candidate_length) / float(max(int(base_length), 1))
+    return max(
+        float(settings.prop_min_threshold),
+        float(settings.prop_base_threshold) - float(settings.prop_slope) * math.log(ratio),
+    )
+
+
+def _best_base_candidate(candidates: Sequence[Dict[str, Any]], tie_break: str) -> Dict[str, Any]:
+    if not candidates:
+        raise ValueError("Cannot select from empty candidates")
+    if tie_break == "longer":
+        return max(candidates, key=lambda item: (_candidate_score(item), _candidate_length(item)))
+    return max(candidates, key=lambda item: (_candidate_score(item), -_candidate_length(item)))
+
+
+def _select_proportional_candidate(
+    base_selection: Dict[str, Any],
+    settings: BoundedRepairSettings,
+) -> Dict[str, Any]:
+    candidates = list(base_selection.get("candidate_scores") or [])
+    best = _best_base_candidate(candidates, str(base_selection.get("tie_break", "shorter")))
+    base_len = _candidate_length(best)
+    if base_len < int(settings.prop_min_base_length):
+        return best
+
+    best_score = _candidate_score(best)
+    best_raw = max((_candidate_raw_score(candidate) for candidate in candidates), default=0.0)
+    max_len = int(math.ceil(float(base_len) * float(settings.prop_max_expansion)))
+    selected = best
+
+    for candidate in candidates:
+        cand_len = _candidate_length(candidate)
+        if cand_len < base_len or cand_len > max_len:
+            continue
+        threshold = _proportional_threshold(settings, base_length=base_len, candidate_length=cand_len)
+        if _candidate_score(candidate) < threshold * best_score:
+            continue
+        if bool(settings.prop_require_raw_confirm):
+            raw_threshold = max(float(settings.prop_min_raw_threshold), threshold - float(settings.prop_raw_margin))
+            if _candidate_raw_score(candidate) < raw_threshold * best_raw:
+                continue
+        if cand_len > _candidate_length(selected):
+            selected = candidate
+
+    return selected
+
+
+def apply_proportional_widening(
+    base_selection: Dict[str, Any],
+    settings: BoundedRepairSettings,
+) -> Dict[str, Any]:
+    original_selected = int(base_selection["selected_mask_length"])
+    selected_candidate = _select_proportional_candidate(base_selection, settings)
+    widened_selected = max(original_selected, _candidate_length(selected_candidate))
+    selected_for_meta = selected_candidate
+    if widened_selected == original_selected:
+        selected_for_meta = next(
+            (
+                candidate
+                for candidate in base_selection.get("candidate_scores", [])
+                if _candidate_length(candidate) == original_selected
+            ),
+            selected_candidate,
+        )
+
+    adjusted = copy.deepcopy(base_selection)
+    adjusted["selected_mask_length"] = int(widened_selected)
+    adjusted["selected_score"] = float(_candidate_score(selected_for_meta))
+    adjusted["selected_raw_score"] = float(_candidate_raw_score(selected_for_meta))
+    adjusted["selected_adjusted_score"] = float(_candidate_score(selected_for_meta))
+    adjusted["proportional_widening"] = {
+        "enabled": True,
+        "original_selected_length": int(original_selected),
+        "proportional_selected_length": int(_candidate_length(selected_candidate)),
+        "final_base_selected_length": int(widened_selected),
+        "promoted": bool(widened_selected > original_selected),
+        "base_threshold": float(settings.prop_base_threshold),
+        "slope": float(settings.prop_slope),
+        "min_threshold": float(settings.prop_min_threshold),
+        "min_base_length": int(settings.prop_min_base_length),
+        "max_expansion": float(settings.prop_max_expansion),
+        "require_raw_confirm": bool(settings.prop_require_raw_confirm),
+        "raw_margin": float(settings.prop_raw_margin),
+        "min_raw_threshold": float(settings.prop_min_raw_threshold),
+    }
+    return adjusted
+
+
+def correction_grid_has_usable_candidate(correction_probe_lengths_csv: Optional[str], base_selected_length: int) -> bool:
+    if correction_probe_lengths_csv is None:
+        return False
+    correction_lengths = parse_probe_lengths(str(correction_probe_lengths_csv))
+    return max(correction_lengths) >= int(base_selected_length)
 
 
 def _source_matches(source: Optional[str], allowed: str) -> bool:
@@ -307,7 +472,26 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
         settings=lcal,
     )
     base_selection = select_mask_length_cal_lite(task, tokenizer, model, base_cfg)
+    original_base_selection = copy.deepcopy(base_selection)
+    if bool(settings.proportional_widening):
+        base_selection = apply_proportional_widening(base_selection, settings)
+    prop_meta = base_selection.get("proportional_widening") or {
+        "enabled": False,
+        "original_selected_length": int(original_base_selection["selected_mask_length"]),
+        "proportional_selected_length": int(original_base_selection["selected_mask_length"]),
+        "final_base_selected_length": int(base_selection["selected_mask_length"]),
+        "promoted": False,
+        "base_threshold": float(settings.prop_base_threshold),
+        "slope": float(settings.prop_slope),
+        "min_threshold": float(settings.prop_min_threshold),
+        "min_base_length": int(settings.prop_min_base_length),
+        "max_expansion": float(settings.prop_max_expansion),
+        "require_raw_confirm": bool(settings.prop_require_raw_confirm),
+        "raw_margin": float(settings.prop_raw_margin),
+        "min_raw_threshold": float(settings.prop_min_raw_threshold),
+    }
     base_selected = int(base_selection["selected_mask_length"])
+    original_base_selected = int(original_base_selection["selected_mask_length"])
     best_info = rescue._base_best_info(base_selection)
     trigger = rescue._trigger_decision(base_selected, best_info, lcal)
 
@@ -315,8 +499,12 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
     final_source = "base"
     final_selection = base_selection
     total_probe_sec = float(base_selection["length_probe_sec"])
+    correction_grid_too_short = False
 
-    if bool(trigger["triggered"]):
+    if bool(trigger["triggered"]) and correction_grid_has_usable_candidate(
+        trigger["correction_probe_lengths_csv"],
+        base_selected,
+    ):
         long_cfg = rescue._clone_probe_cfg(
             cfg=cfg,
             probe_lengths_csv=str(trigger["correction_probe_lengths_csv"]),
@@ -336,12 +524,18 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
             final_selection = base_selection
             final_source = "base_max_after_long"
         total_probe_sec += float(long_selection["length_probe_sec"])
+    elif bool(trigger["triggered"]):
+        correction_grid_too_short = True
 
     s3_selected = int(final_selection["selected_mask_length"])
     if long_selection is not None:
         s3_selected = max(base_selected, int(long_selection["selected_mask_length"]))
     diff = rescue._length_diff(s3_selected, None if oracle_mask_length is None else int(oracle_mask_length))
     base_diff = rescue._length_diff(base_selected, None if oracle_mask_length is None else int(oracle_mask_length))
+    original_base_diff = rescue._length_diff(
+        original_base_selected,
+        None if oracle_mask_length is None else int(oracle_mask_length),
+    )
 
     meta: Dict[str, Any] = {
         "version": "lcal_official_bounded_repair",
@@ -354,11 +548,14 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
         "correction_kind": trigger["correction_kind"],
         "correction_selection_rule": lcal.correction_selection_rule,
         "shortest_supported_ratio": float(lcal.shortest_supported_ratio),
+        "correction_grid_too_short": bool(correction_grid_too_short),
         "correction_probe_lengths": (
             None if trigger["correction_probe_lengths_csv"] is None else parse_probe_lengths(str(trigger["correction_probe_lengths_csv"]))
         ),
         "long_trigger_reasons": [trigger["trigger_reason"]] if trigger["triggered"] else [],
-        "trigger_reason": str(trigger["trigger_reason"]),
+        "trigger_reason": "base_correction_grid_too_short"
+        if correction_grid_too_short
+        else str(trigger["trigger_reason"]),
         "best_score": float(best_info["best_score"]),
         "best_len": int(best_info["best_len"]),
         "best_long_score": float(best_info["best_long_score"]),
@@ -386,6 +583,19 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
         "cap_base_9_12": int(lcal.cap_base_9_12),
         "base_probe_lengths": parse_probe_lengths(lcal.base_probe_lengths_csv),
         "base_alpha": float(lcal.base_alpha),
+        "proportional_widening_enabled": bool(prop_meta["enabled"]),
+        "proportional_widening_promoted": bool(prop_meta["promoted"]),
+        "proportional_original_base_selected_length": int(prop_meta["original_selected_length"]),
+        "proportional_selected_length": int(prop_meta["proportional_selected_length"]),
+        "proportional_final_base_selected_length": int(prop_meta["final_base_selected_length"]),
+        "proportional_base_threshold": float(prop_meta["base_threshold"]),
+        "proportional_slope": float(prop_meta["slope"]),
+        "proportional_min_threshold": float(prop_meta["min_threshold"]),
+        "proportional_min_base_length": int(prop_meta["min_base_length"]),
+        "proportional_max_expansion": float(prop_meta["max_expansion"]),
+        "proportional_require_raw_confirm": bool(prop_meta["require_raw_confirm"]),
+        "proportional_raw_margin": float(prop_meta["raw_margin"]),
+        "proportional_min_raw_threshold": float(prop_meta["min_raw_threshold"]),
         "base_selected_length": base_selected,
         "base_selected_mask_length": base_selected,
         "base_selected_score": float(base_selection["selected_score"]),
@@ -394,6 +604,8 @@ def _run_s3_selection(task: CodeTask, tokenizer, model, cfg: ExperimentConfig, s
         "base_length_probe_sec": float(base_selection["length_probe_sec"]),
         "base_selected_minus_oracle_length": base_diff["selected_minus_oracle_length"],
         "base_abs_selected_minus_oracle_length": base_diff["abs_selected_minus_oracle_length"],
+        "original_base_selected_minus_oracle_length": original_base_diff["selected_minus_oracle_length"],
+        "original_base_abs_selected_minus_oracle_length": original_base_diff["abs_selected_minus_oracle_length"],
         "base_candidate_scores": base_selection["candidate_scores"],
         "weak_probe_lengths": parse_probe_lengths(lcal.weak_probe_lengths_csv),
         "strong_probe_lengths": parse_probe_lengths(lcal.strong_probe_lengths_csv),
@@ -633,6 +845,7 @@ def annotate_result(result: Dict[str, Any]) -> None:
             "final_source": lcal_meta["final_source"],
             "correction_kind": lcal_meta["correction_kind"],
             "correction_selection_rule": lcal_meta["correction_selection_rule"],
+            "correction_grid_too_short": lcal_meta["correction_grid_too_short"],
             "shortest_supported_ratio": lcal_meta["shortest_supported_ratio"],
             "long_argmax_selected_length": lcal_meta["long_argmax_selected_length"],
             "short_safe_policy": lcal_meta["short_safe_policy"],
@@ -642,12 +855,26 @@ def annotate_result(result: Dict[str, Any]) -> None:
             "lcal_v3_weak_triggered": lcal_meta["weak_triggered"],
             "lcal_v3_correction_kind": lcal_meta["correction_kind"],
             "lcal_v3_correction_selection_rule": lcal_meta["correction_selection_rule"],
+            "lcal_v3_correction_grid_too_short": lcal_meta["correction_grid_too_short"],
             "lcal_v3_long_argmax_selected_length": lcal_meta["long_argmax_selected_length"],
             "lcal_v3_short_safe_policy": lcal_meta["short_safe_policy"],
             "lcal_v3_base_selected_mask_length": lcal_meta["base_selected_mask_length"],
             "lcal_v3_base_selected_score": lcal_meta["base_selected_score"],
             "lcal_v3_base_selected_minus_oracle_length": lcal_meta["base_selected_minus_oracle_length"],
             "lcal_v3_base_abs_selected_minus_oracle_length": lcal_meta["base_abs_selected_minus_oracle_length"],
+            "proportional_widening_enabled": lcal_meta["proportional_widening_enabled"],
+            "proportional_widening_promoted": lcal_meta["proportional_widening_promoted"],
+            "proportional_original_base_selected_length": lcal_meta["proportional_original_base_selected_length"],
+            "proportional_selected_length": lcal_meta["proportional_selected_length"],
+            "proportional_final_base_selected_length": lcal_meta["proportional_final_base_selected_length"],
+            "proportional_base_threshold": lcal_meta["proportional_base_threshold"],
+            "proportional_slope": lcal_meta["proportional_slope"],
+            "proportional_min_threshold": lcal_meta["proportional_min_threshold"],
+            "proportional_min_base_length": lcal_meta["proportional_min_base_length"],
+            "proportional_max_expansion": lcal_meta["proportional_max_expansion"],
+            "proportional_require_raw_confirm": lcal_meta["proportional_require_raw_confirm"],
+            "original_base_selected_minus_oracle_length": lcal_meta["original_base_selected_minus_oracle_length"],
+            "original_base_abs_selected_minus_oracle_length": lcal_meta["original_base_abs_selected_minus_oracle_length"],
             "lcal_v3_long_selected_mask_length": lcal_meta["long_selected_mask_length"],
             "lcal_v3_final_minus_base_length": lcal_meta["final_minus_base_length"],
             "pre_repair_selected_length": lcal_meta["pre_repair_selected_length"],
@@ -712,6 +939,19 @@ def summarize_bounded_repair_results(
     metrics = [item["metrics"] for item in results]
     repair_considered = [m for m in metrics if bool(m.get("official_repair_considered", False))]
     repair_triggered = [m for m in metrics if bool(m.get("official_repair_triggered", False))]
+    correction_grid_too_short = [m for m in metrics if bool(m.get("correction_grid_too_short", False))]
+    prop_promoted = [m for m in metrics if bool(m.get("proportional_widening_promoted", False))]
+    prop_true_long_promoted = [
+        m
+        for m in prop_promoted
+        if m.get("oracle_mask_length") is not None and int(m.get("oracle_mask_length")) >= 17
+    ]
+    prop_short_promoted = [
+        m
+        for m in prop_promoted
+        if m.get("oracle_mask_length") is not None and int(m.get("oracle_mask_length")) <= 8
+    ]
+    prop_current_pass_promoted = [m for m in prop_promoted if bool(m.get("passed", False))]
     suspicion_triggered = [
         m for m in repair_triggered if str(m.get("official_repair_reason")) == "official_long_suspicion"
     ]
@@ -725,6 +965,35 @@ def summarize_bounded_repair_results(
             "official_repair_considered_rate": len(repair_considered) / len(metrics) if metrics else None,
             "official_repair_trigger_count": len(repair_triggered),
             "official_repair_trigger_rate": len(repair_triggered) / len(metrics) if metrics else None,
+            "correction_grid_too_short_count": len(correction_grid_too_short),
+            "correction_grid_too_short_rate": len(correction_grid_too_short) / len(metrics) if metrics else None,
+            "correction_grid_too_short_oracle_bucket_histogram": _hist(
+                rescue._oracle_bucket(m.get("oracle_mask_length")) for m in correction_grid_too_short
+            ),
+            "proportional_widening_enabled": any(
+                bool(m.get("proportional_widening_enabled", False)) for m in metrics
+            ),
+            "proportional_widening_promoted_count": len(prop_promoted),
+            "proportional_widening_promoted_rate": len(prop_promoted) / len(metrics) if metrics else None,
+            "proportional_widening_true_long_promoted_count": len(prop_true_long_promoted),
+            "proportional_widening_short_promoted_count": len(prop_short_promoted),
+            "proportional_widening_current_pass_promoted_count": len(prop_current_pass_promoted),
+            "proportional_widening_oracle_bucket_histogram": _hist(
+                rescue._oracle_bucket(m.get("oracle_mask_length")) for m in prop_promoted
+            ),
+            "proportional_widening_avg_delta_length": _avg(
+                int(m.get("proportional_final_base_selected_length"))
+                - int(m.get("proportional_original_base_selected_length"))
+                for m in prop_promoted
+                if m.get("proportional_final_base_selected_length") is not None
+                and m.get("proportional_original_base_selected_length") is not None
+            ),
+            "proportional_widening_avg_original_base_abs_error": _avg(
+                m.get("original_base_abs_selected_minus_oracle_length") for m in prop_promoted
+            ),
+            "proportional_widening_avg_new_base_abs_error": _avg(
+                m.get("lcal_v3_base_abs_selected_minus_oracle_length") for m in prop_promoted
+            ),
             "official_long_suspicion_trigger_count": len(suspicion_triggered),
             "official_long_suspicion_trigger_rate": len(suspicion_triggered) / len(metrics) if metrics else None,
             "official_mid_rescue_trigger_count": len(mid_rescue_triggered),
@@ -774,6 +1043,18 @@ def summarize_bounded_repair_results(
         }
     )
     summary["required_metrics"]["official_repair_trigger_rate"] = summary["official_repair_trigger_rate"]
+    summary["required_metrics"]["correction_grid_too_short_count"] = summary[
+        "correction_grid_too_short_count"
+    ]
+    summary["required_metrics"]["proportional_widening_promoted_count"] = summary[
+        "proportional_widening_promoted_count"
+    ]
+    summary["required_metrics"]["proportional_widening_true_long_promoted_count"] = summary[
+        "proportional_widening_true_long_promoted_count"
+    ]
+    summary["required_metrics"]["proportional_widening_short_promoted_count"] = summary[
+        "proportional_widening_short_promoted_count"
+    ]
     summary["required_metrics"]["official_long_suspicion_trigger_rate"] = summary[
         "official_long_suspicion_trigger_rate"
     ]
@@ -799,6 +1080,7 @@ def run_experiment(
     cfg: ExperimentConfig,
     settings: BoundedRepairSettings,
     baseline_results_path: Optional[str] = None,
+    task_ids: Optional[Sequence[str]] = None,
 ) -> Dict[str, Any]:
     patch_decode(settings)
     set_global_seed(cfg.decode.seed)
@@ -832,8 +1114,20 @@ def run_experiment(
             "mid_rescue_min_long_ratio": settings.mid_rescue_min_long_ratio,
             "mid_rescue_source": settings.mid_rescue_source,
         },
+        "proportional_widening": {
+            "enabled": settings.proportional_widening,
+            "base_threshold": settings.prop_base_threshold,
+            "slope": settings.prop_slope,
+            "min_threshold": settings.prop_min_threshold,
+            "min_base_length": settings.prop_min_base_length,
+            "max_expansion": settings.prop_max_expansion,
+            "require_raw_confirm": settings.prop_require_raw_confirm,
+            "raw_margin": settings.prop_raw_margin,
+            "min_raw_threshold": settings.prop_min_raw_threshold,
+        },
     }
     config_payload["baseline_results"] = baseline_results_path
+    config_payload["task_ids"] = list(task_ids) if task_ids else None
     logger.save_config(config_payload)
 
     print("=" * 80, flush=True)
@@ -849,6 +1143,12 @@ def run_experiment(
     print(f"base_grid             = {settings.lcal.base_probe_lengths_csv}", flush=True)
     print(f"base_alpha            = {settings.lcal.base_alpha}", flush=True)
     print(f"long_alpha            = {settings.lcal.long_alpha}", flush=True)
+    print(
+        "length_prop           = "
+        f"mode={settings.lcal.score_mode}, beta={settings.lcal.length_prop_beta}, "
+        f"ref={settings.lcal.length_prop_ref_length}, cap={settings.lcal.length_prop_cap_length}",
+        flush=True,
+    )
     print(f"official_eval_s3_len  <= {settings.official_eval_max_s3_len}", flush=True)
     print(f"repair_s3_len         <= {settings.repair_max_s3_len}", flush=True)
     print(f"repair_official_len   = {settings.repair_min_official_len}..{settings.repair_max_official_len}", flush=True)
@@ -862,6 +1162,14 @@ def run_experiment(
     print(f"mid_rescue_delta      = {settings.mid_rescue_min_delta}..{settings.mid_rescue_max_delta}", flush=True)
     print(f"mid_rescue_ratio_min  = {settings.mid_rescue_min_long_ratio}", flush=True)
     print(f"mid_rescue_source     = {settings.mid_rescue_source}", flush=True)
+    print(f"proportional_widening = {settings.proportional_widening}", flush=True)
+    print(
+        "prop_thresholds       = "
+        f"base={settings.prop_base_threshold}, slope={settings.prop_slope}, "
+        f"min={settings.prop_min_threshold}, min_base={settings.prop_min_base_length}, "
+        f"maxx={settings.prop_max_expansion}, raw_confirm={settings.prop_require_raw_confirm}",
+        flush=True,
+    )
     print(f"official_initial_len  = {settings.official.initial_length}", flush=True)
     print(f"official_dstep        = {settings.official.dstep}", flush=True)
     print(f"official_use_bias     = {settings.official.use_bias}", flush=True)
@@ -869,14 +1177,16 @@ def run_experiment(
     print(f"total_steps           = {cfg.decode.total_steps}", flush=True)
     print(f"seed                  = {cfg.decode.seed}", flush=True)
     print(f"baseline_results      = {baseline_results_path}", flush=True)
+    print(f"task_ids              = {list(task_ids) if task_ids else None}", flush=True)
     print("=" * 80, flush=True)
 
     tokenizer, model = load_model_and_tokenizer(cfg.model)
-    tasks = load_humaneval_infilling(
+    loaded_tasks = load_humaneval_infilling(
         split=cfg.data.split,
-        max_samples=cfg.data.max_samples,
+        max_samples=None if task_ids else cfg.data.max_samples,
         dataset_subset=cfg.data.dataset_subset,
     )
+    tasks = filter_tasks_by_ids(loaded_tasks, task_ids)
 
     total_tasks = len(tasks)
     print(f"Loaded {total_tasks} tasks", flush=True)
@@ -915,6 +1225,8 @@ def run_experiment(
             f"{'PASS' if m['passed'] else 'FAIL'} | "
             f"total_sec={m['total_sec']:.3f} | "
             f"total_sec_including_probe={m['total_sec_including_probe']:.3f} | "
+            f"prop={m['proportional_widening_promoted']} | "
+            f"base_orig={m['proportional_original_base_selected_length']} | "
             f"s3_len={m['s3_selected_length']} | "
             f"official_len={m['official_selected_length']} | "
             f"final_len={m['selected_mask_length']} | "
@@ -970,6 +1282,9 @@ def main() -> None:
         shortest_supported_ratio=args.shortest_supported_ratio,
         tie_break=args.tie_break,
         score_mode=args.score_mode,
+        length_prop_beta=args.length_prop_beta,
+        length_prop_ref_length=args.length_prop_ref_length,
+        length_prop_cap_length=args.length_prop_cap_length,
     )
     official_settings = official_cal.OfficialCalSettings(
         initial_length=args.official_initial_length,
@@ -999,6 +1314,15 @@ def main() -> None:
         mid_rescue_max_delta=args.mid_rescue_max_delta,
         mid_rescue_min_long_ratio=args.mid_rescue_min_long_ratio,
         mid_rescue_source=args.mid_rescue_source,
+        proportional_widening=args.proportional_widening,
+        prop_base_threshold=args.prop_base_threshold,
+        prop_slope=args.prop_slope,
+        prop_min_threshold=args.prop_min_threshold,
+        prop_min_base_length=args.prop_min_base_length,
+        prop_max_expansion=args.prop_max_expansion,
+        prop_require_raw_confirm=args.prop_require_raw_confirm,
+        prop_raw_margin=args.prop_raw_margin,
+        prop_min_raw_threshold=args.prop_min_raw_threshold,
     )
 
     cfg = ExperimentConfig()
@@ -1015,11 +1339,15 @@ def main() -> None:
     cfg.decode.cal_lite_tie_break = args.tie_break
     cfg.decode.cal_lite_score_mode = args.score_mode
     cfg.decode.cal_lite_length_alpha = args.base_alpha
+    cfg.decode.cal_lite_length_prop_beta = args.length_prop_beta
+    cfg.decode.cal_lite_length_prop_ref_length = args.length_prop_ref_length
+    cfg.decode.cal_lite_length_prop_cap_length = args.length_prop_cap_length
     cfg.decode.lcas_policy = args.lcas_policy
     cfg.logging.output_dir = args.output_dir
     cfg.logging.experiment_name = args.experiment_name
 
-    output = run_experiment(cfg, settings, args.baseline_results)
+    task_ids = parse_task_ids_csv(args.task_ids_csv)
+    output = run_experiment(cfg, settings, args.baseline_results, task_ids=task_ids)
 
     print("===== LCAL Official Bounded Repair Summary =====")
     for key, value in output["summary"].items():

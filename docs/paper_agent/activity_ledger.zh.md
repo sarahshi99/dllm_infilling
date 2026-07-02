@@ -1,5 +1,49 @@
 # Paper-Agent Activity Ledger
 
+## 2026-07-02 00:00 CST
+
+- action：继续上一轮 `superpowers:brainstorming` 后的下一阶段，使用 `superpowers:writing-plans` local fallback 写出 post-V8 CPU-only 执行计划。没有启动 GPU。
+- evidence：新增计划 `docs/superpowers/plans/2026-07-02-post-v8-rescue-quality-and-local-guard-plan.md`；更新 `docs/paper_agent/current_action.md`。
+- result：计划将下一步拆成两个 CPU audit：一是 rescue failure anatomy，解释 Route2-triggered rows 为什么在长度够时仍失败；二是 local proportional guard audit，检查 V8 少量 long wins 是否能通过 inference-visible guard 与 short/medium losses 分离。
+- success criteria：产出 `new_rescue_action_candidate`、`local_prop_guard_candidate`、`diagnostic_only` 或 `stop_true_long_route_for_now` 之一。没有 CPU-positive evidence 前不启动 GPU。
+- next：进入 `superpowers:executing-plans` local fallback：先写 CPU audit action brief，再 tests-first 实现 `analysis/post_v8_rescue_quality_audit.py` 和 `tests/test_post_v8_rescue_quality_audit.py`。
+
+## 2026-07-01 16:20 CST
+
+- action：按用户要求使用 `superpowers:brainstorming` 思考下一步。当前环境没有可读取的 `superpowers:brainstorming` skill 文件，因此按项目 protocol 使用 Superpowers local fallback：系统比较多条研究路线，筛掉低价值路线，并形成下一步 `writing-plans` 候选。没有启动 GPU。
+- evidence：新增 brainstorm 文档 `docs/paper_agent/experiments/20260701_next_step_brainstorm_after_v8.md`。
+- result：推荐主路线是 rescue-quality anatomy + one targeted rescue action，因为 Route2/V3 诊断显示 `31/33` triggered failed-long rows 已经 rescue length >= oracle，继续盲目加长不合理。比例思想保留为伴随 CPU audit：只分析 V8 changed rows，寻找能保留 V8 少量 long wins 且过滤 short/medium losses 的 local guard。
+- rejected：不继续扫 V8 beta；不盲目增加 rescue length；不把 selector-only tweak 作为主线；不默认做全局 multi-canvas reranking。
+- next：进入 `superpowers:writing-plans` 阶段时，建议写一个 CPU-only plan：Candidate 1 为 rescue failure anatomy audit，Candidate 2 为 local proportional guard audit；没有 CPU-positive 证据前不启动 GPU。
+
+## 2026-07-01 15:40 CST
+
+- action：按用户要求实现并串行运行 V8 proportional CAL score full runs；只使用 GPU1。V8 是对“直接修改 CAL-like 长度评分公式，让长长度获得比例式额外 reward”的忠实实验，而不是 V7 那种 post-hoc near-best 长候选覆盖。
+- evidence：action brief `docs/paper_agent/experiments/20260701_v8_proportional_cal_score_full_gpu1_action.md`；V8a 输出 `outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`，日志 `logs/paper_agent/20260701_v8a_propcal_beta002_gpu1.log`；V8b 输出 `outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`，日志 `logs/paper_agent/20260701_v8b_propcal_beta004_gpu1.log`；V8c 输出 `outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`，日志 `logs/paper_agent/20260701_v8c_propcal_beta004_cap32_gpu1.log`。
+- verification：V8 implementation focused tests 通过 `Ran 8 tests` / `OK`；`expvision_dllm_clean/length_probe.py`、`expvision_dllm_clean/config.py`、两个 runner `py_compile` 通过；runner `--help` 通过；相关 code/test `git diff --check` 通过。三条 full runs 均写出 `1033` 行和 `summary.json`，runner 进程正常退出。
+- result：V8a beta `0.02` no cap 得到 `786/1033 = 76.09%`，pairwise vs `midcons` 为 `3/12/783/235`；V8b beta `0.04` no cap 得到 `781/1033 = 75.61%`，pairwise `7/21/774/231`；V8c beta `0.04` reward cap `32` 得到 `782/1033 = 75.70%`，pairwise `6/19/776/232`。
+- diagnostics：V8a/b/c 的 short-bucket losses 分别为 `7/13/11`，long-bucket wins 分别为 `2/3/2`。更强 beta 会增加少量 long wins，但 short/medium regressions 更大。V8c 的 `cap=32` 是 proportional reward cap，不是 hard candidate-length cap，因此结果里仍可能出现 `40/48` 候选。
+- interpretation：这不是实现失败，而是全局比例式长度 reward 的 policy tradeoff 失败。V8 是用户原始想法的忠实 full-run 检验；结论是当前全局公式不应作为主线。
+- next：保留 V6 short override `802/1033 = 77.64%` 作为当前 LLaDA-Base best follow-up。若继续比例思想，必须改成局部 guarded policy：先判断 under-selection，再在 risk guard 下加长，而不是全局给长长度加分。
+
+## 2026-07-01 02:20 CST
+
+- action：完成用户提出的比例式长度放宽 V7 方案的 GPU smoke、bug fix、guard smoke 和 clean full run；使用 GPU2，不启动新的后续 GPU 实验。
+- evidence：action brief `docs/paper_agent/experiments/20260630_proportional_length_widening_v7_gpu_action.md`；clean full 输出 `outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`；clean full 日志 `logs/paper_agent/20260701_v7_prop_widen_full_gridfix_gpu2.log`。
+- verification：targeted smoke 正常退出；第一条 full run 在 `761/1033` 处暴露 correction-grid 边界 bug；修复后 `tests/test_lcal_official_bounded_repair_proportional.py` 和 `tests/test_proportional_length_widening_audit.py` 通过 `Ran 10 tests` / `OK`，runner 和 audit `py_compile` 通过，`--help` 和 `git diff --check` 通过；guard smoke 正常退出；clean full 有 `1033` 行和 `summary.json`。
+- result：V7 proportional widening 得到 `792/1033 = 76.67%`，低于 current `midcons` `795/1033 = 76.96%`，也低于 V6 short override `802/1033 = 77.64%`。Pairwise vs `midcons` 为 `1` win / `4` losses / `791` tie-pass / `237` tie-fail。
+- diagnostics：比例放宽只 promotion `10/1033` 行，其中 true-long `0` 行、short `1` 行、current-pass `8` 行；long-bucket win 为 `0`，short-bucket loss 为 `2`。Promoted rows 的平均长度绝对误差从 `1.1` 变成 `6.9`，说明当前参数会把本来接近正确的 short/medium 估计推宽。
+- interpretation：这不是 GPU 或实现失败，而是方法信号失败。简单按比例把 near-best 长长度候选放宽，在当前参数下没有解决 true-long，通过率反而下降。
+- next：不要继续这个 V7 参数做主线。若保留比例思想，应先做 CPU-first V7b/V8：严格 cap 到 `24/32`、加入 raw-confirm / trace-risk guard、只在明确 under-selection slice 中启用；在新 action brief 前不要启动新 GPU full run。
+
+## 2026-06-18 11:25 CST
+
+- action：按用户要求梳理当前项目进展，生成导师汇报 PPT、讲稿版 Markdown/HTML，以及 CCF-A readiness assessment。没有启动 GPU。
+- evidence：输出 `docs/paper_agent/presentations/20260618_advisor_project_report.pptx`、`docs/paper_agent/presentations/20260618_advisor_project_report.md`、`docs/paper_agent/presentations/20260618_advisor_project_report.html`、`ccfa_readiness_assessment.zh.md`；生成脚本为 `docs/paper_agent/presentations/make_20260618_advisor_project_report.py`；action brief 为 `docs/paper_agent/experiments/20260618_advisor_report_ppt_action.md`。
+- verification：Discovery V4 最新结果在整理前 fresh check 通过：`tests/test_discovery_v4_signal_audit.py` 为 `Ran 5 tests` / `OK`，`analysis/discovery_v4_signal_audit.py` 的 `py_compile` 通过。PPTX 通过 `python3 -m zipfile -t`，包含 `22` 个 slide XML；生成脚本 `py_compile` 通过；相关 Markdown/HTML/memo 通过 `git diff --check`。
+- result：汇报材料的核心 verdict 为 `weak_candidate`。当前项目有清晰研究问题、局部正结果和系统负证据，但 true-long `25+` 未解决、跨 backbone 效果混合、protocol-matched external baselines 和完整 ablations 不足，因此不是 CCF-A submission-ready。
+- next：先向导师汇报并确认 paper framing；若继续推进，应从 rescue generation/selection quality 或 principled length modeling 开始，而不是从 Discovery V4 audit 直接启动 GPU full run。
+
 ## 2026-06-18 00:00 CST
 
 - action：实现并运行 CPU-only Discovery V4 signal audit。没有启动 GPU。

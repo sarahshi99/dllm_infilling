@@ -201,6 +201,84 @@ class Route2RescueQualityV5SelectorTest(unittest.TestCase):
         self.assertEqual(scores["selection_reason"], "non_anchor_len32_score_margin")
         self.assertEqual(scores["anchor_candidate_id"], "len32_s64")
 
+    def test_anchor_len32_short_trace_override_selects_len24_only_on_strong_trace_delta(self) -> None:
+        short = build_candidate_record(
+            CandidateSpec("len24_s64", min_length=24, steps=64),
+            make_result(
+                "t",
+                passed=True,
+                selected=24,
+                middle_text="    return short",
+                confidence=0.95,
+                top1=0.80,
+                gap=0.70,
+                remaining=0,
+            ),
+        )
+        anchor = build_candidate_record(
+            CandidateSpec("len32_s64", min_length=32, steps=64),
+            make_result(
+                "t",
+                passed=False,
+                selected=32,
+                middle_text="    return anchor",
+                confidence=0.95,
+                top1=0.40,
+                gap=0.30,
+                remaining=0,
+            ),
+        )
+
+        selected, scores = select_candidate(
+            [short, anchor],
+            selector_name="anchor_len32_short_trace_override",
+            short_override_gap_margin=0.28,
+            short_override_top1_margin=0.28,
+        )
+
+        self.assertEqual(selected["candidate_id"], "len24_s64")
+        self.assertEqual(scores["selection_reason"], "short_trace_gap_top1_override")
+        self.assertEqual(scores["claim_boundary"], "pure_inference_time_verifier_free_anchor_protected_short_trace_override")
+        self.assertNotIn("passed", scores["used_policy_fields"])
+
+    def test_anchor_len32_short_trace_override_keeps_anchor_without_strong_delta(self) -> None:
+        short = build_candidate_record(
+            CandidateSpec("len24_s64", min_length=24, steps=64),
+            make_result(
+                "t",
+                passed=True,
+                selected=24,
+                middle_text="    return short",
+                confidence=0.99,
+                top1=0.50,
+                gap=0.40,
+                remaining=0,
+            ),
+        )
+        anchor = build_candidate_record(
+            CandidateSpec("len32_s64", min_length=32, steps=64),
+            make_result(
+                "t",
+                passed=False,
+                selected=32,
+                middle_text="    return anchor",
+                confidence=0.30,
+                top1=0.40,
+                gap=0.30,
+                remaining=4,
+            ),
+        )
+
+        selected, scores = select_candidate(
+            [short, anchor],
+            selector_name="anchor_len32_short_trace_override",
+            short_override_gap_margin=0.28,
+            short_override_top1_margin=0.28,
+        )
+
+        self.assertEqual(selected["candidate_id"], "len32_s64")
+        self.assertEqual(scores["selection_reason"], "anchor_default")
+
     def test_oracle_upper_bound_is_offline_only(self) -> None:
         candidates = [
             build_candidate_record(

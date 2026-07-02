@@ -1,82 +1,63 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-06-17 18:20 CST
+Timestamp: 2026-07-02 00:00 CST
 
 ## Action Name
 
-Discovery V4 signal-model literature brainstorming and executable plan.
+Post-V8 rescue-quality and local-guard writing plan.
 
 ## Current Phase
 
-Route2 error analysis Discovery V3 is complete:
+`superpowers:writing-plans` local fallback completed. No GPU experiment is running or launched by this action.
 
-- output: `analysis_outputs/route2_error_analysis_20260617_165806`
-- result: `1033` joined rows, pairwise `6/0/795/232`, `33` triggered failed-long rows, `56` missed failed-long rows, `31/33` triggered failed-long rows with rescue length >= oracle
-- decision: `mixed_rescue_quality_and_gate_recall`
+Plan output:
 
-The next step is not a GPU experiment. It is a CPU-first Discovery V4 design that searches for useful signals and mechanisms in the three-layer stack:
+- `docs/superpowers/plans/2026-07-02-post-v8-rescue-quality-and-local-guard-plan.md`
 
-1. Error and action anatomy.
-2. Discovery model layer.
-3. Policy distillation layer.
+Preceding brainstorm:
 
-## Superpowers Alignment
+- `docs/paper_agent/experiments/20260701_next_step_brainstorm_after_v8.md`
 
-- `superpowers:brainstorming`: used as local protocol fallback. The brainstorm compares risk-controlled selection, slice discovery, rule mining, trace-shape discovery, calibration/OOD signals, weak supervision, and counterfactual/uplift diagnostics.
-- `superpowers:using-git-worktrees`: checked. Current branch is the dedicated `paper-agent-overnight`; this planning action is narrow documentation and does not require a new worktree.
-- `superpowers:writing-plans`: used as local protocol fallback. The executable plan is `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`.
+## Plan Summary
 
-The current tool environment does not expose callable `superpowers:*` skill files, so this action follows the local project protocol as fallback.
+The next work should be CPU-only and answer two questions before any new GPU command:
 
-## New Planning Outputs
+1. **Rescue quality:** why do Route2-triggered rows still fail even when rescue length is already enough?
+2. **Local proportional guard:** can V8's few long wins be isolated from its many short/medium losses by an inference-visible guard?
 
-- Design spec: `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`
-- Executable plan: `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`
-- Literature brainstorm brief: `docs/paper_agent/experiments/20260617_discovery_v4_literature_brainstorm.md`
+## Evidence Behind The Plan
 
-## Key Design Decision
+- Current best LLaDA-Base follow-up remains V6 short override: `802/1033 = 77.64%`.
+- V8 global proportional reward is negative:
+  - V8a: `786/1033 = 76.09%`;
+  - V8b: `781/1033 = 75.61%`;
+  - V8c: `782/1033 = 75.70%`.
+- Route2/V3 diagnosis:
+  - `56` failed-long rows are missed by Route2;
+  - `33` triggered failed-long rows remain failures;
+  - `31/33` triggered failed-long rows already have rescue length at least oracle.
 
-V4 should not treat "find a feature" as single-feature enumeration. It should treat the problem as risk-controlled action selection:
+## Planned Implementation Files
 
-- `MissedLongHead`: find inference-visible signals for the `56` missed failed-long rows.
-- `RescueQualityHead`: explain the `33` triggered failed-long rows, especially because `31/33` already have rescue length >= oracle.
-- `PolicyDistillation`: convert any useful discovery model into a small, reviewer-readable, training-free gate/action rule.
+- `analysis/post_v8_rescue_quality_audit.py`
+- `tests/test_post_v8_rescue_quality_audit.py`
 
-## Literature-Inspired Method Families
+Planned outputs:
 
-- Risk-controlled selection: optimize coverage under short/current-pass risk constraints.
-- Slice/subgroup discovery: find local regions of model failure or rescue success.
-- Rule extraction: use shallow trees, sparse scores, and rule ensembles as microscopes.
-- Time-series trace shape: search late plateau, high-confidence stagnation, early collapse, progress-then-stall.
-- Calibration/OOD residuals: normalize trace confidence by selected length, stop reason, and probe disagreement.
-- Weak supervision: combine noisy heuristics before distilling a rule.
-- Counterfactual/uplift diagnostics: treat rescue as an action, but keep causal claims conservative because current action logs are biased.
+- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/summary.json`
+- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/report.md`
+- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/row_action_table.csv`
+- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/triggered_failure_taxonomy.csv`
+- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/v8_changed_row_taxonomy.csv`
 
-## GPU Policy
+## Next Stage
 
-No GPU experiment is running or should be launched by this action. Before any future GPU work:
+Use `superpowers:executing-plans` local fallback next:
 
-- write a new action brief with success/kill criteria;
-- check `nvidia-smi`;
-- do not use GPU `2/3` while other users' tasks are present;
-- require a CPU candidate that passes held-out risk gates.
+1. Write a short action brief for the CPU audit.
+2. Create tests first.
+3. Implement the CPU audit.
+4. Run verification.
+5. Run the audit and report a decision.
 
-Recent check showed GPU2 and GPU3 occupied at roughly `40GB` used each.
-
-## Next Implementation Target
-
-Implement CPU-only:
-
-- `analysis/discovery_v4_signal_audit.py`
-- `tests/test_discovery_v4_signal_audit.py`
-
-Expected output:
-
-- `analysis_outputs/discovery_v4_signal_audit_TIMESTAMP/row_action_table.csv`
-- `slice_candidates.csv`
-- `rule_candidates.csv`
-- `trace_shape_candidates.csv`
-- `calibration_residuals.csv`
-- `uplift_diagnostics.csv`
-- `policy_shortlist.md`
-- `report.md`
+Do not launch GPU until CPU evidence produces a credible new action brief with success/kill criteria.

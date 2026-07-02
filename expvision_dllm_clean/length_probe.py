@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+import math
 from typing import Any, Dict, List
 
 import torch
@@ -70,6 +71,17 @@ def adjust_length_probe_score(raw_score: float, mask_length: int, cfg: Experimen
     if score_mode == "length_power":
         return float(raw_score) * (float(mask_length) ** alpha)
 
+    if score_mode == "length_power_proportional":
+        ref_length = max(float(getattr(cfg.decode, "cal_lite_length_prop_ref_length", 12.0)), 1.0)
+        cap_length = getattr(cfg.decode, "cal_lite_length_prop_cap_length", None)
+        effective_length = float(mask_length)
+        if cap_length is not None:
+            effective_length = min(effective_length, max(float(cap_length), 1.0))
+        ratio = max(effective_length / ref_length, 1.0)
+        beta = float(getattr(cfg.decode, "cal_lite_length_prop_beta", 0.0))
+        effective_alpha = alpha + beta * math.log(ratio)
+        return float(raw_score) * (float(mask_length) ** effective_alpha)
+
     raise ValueError(f"Unsupported cal_lite_score_mode: {score_mode}")
 
 
@@ -108,6 +120,9 @@ def probe_mask_length_score(task: CodeTask, tokenizer, model, cfg: ExperimentCon
         "mean_top2_gap": mean_top2_gap,
         "score_mode": cfg.decode.cal_lite_score_mode,
         "length_alpha": float(cfg.decode.cal_lite_length_alpha),
+        "length_prop_beta": float(getattr(cfg.decode, "cal_lite_length_prop_beta", 0.0)),
+        "length_prop_ref_length": float(getattr(cfg.decode, "cal_lite_length_prop_ref_length", 12.0)),
+        "length_prop_cap_length": getattr(cfg.decode, "cal_lite_length_prop_cap_length", None),
         "probe_sec": probe_sec,
     }
 

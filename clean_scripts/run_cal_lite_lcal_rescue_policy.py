@@ -66,6 +66,9 @@ class LcalV3Settings:
     shortest_supported_ratio: float
     tie_break: str
     score_mode: str
+    length_prop_beta: float = 0.0
+    length_prop_ref_length: float = 12.0
+    length_prop_cap_length: Optional[float] = None
 
 
 def parse_args() -> argparse.Namespace:
@@ -101,7 +104,10 @@ def parse_args() -> argparse.Namespace:
         help="S1=weak ratio, S2=weak ratio with jump cap, S3=raw-confirmed S2, S4=support-count S2.",
     )
     parser.add_argument("--tie-break", type=str, default="shorter", choices=["shorter", "longer"])
-    parser.add_argument("--score-mode", type=str, default="length_power", choices=["raw", "length_power"])
+    parser.add_argument("--score-mode", type=str, default="length_power", choices=["raw", "length_power", "length_power_proportional"])
+    parser.add_argument("--length-prop-beta", type=float, default=0.0)
+    parser.add_argument("--length-prop-ref-length", type=float, default=12.0)
+    parser.add_argument("--length-prop-cap-length", type=float, default=None)
     parser.add_argument(
         "--correction-selection-rule",
         type=str,
@@ -190,6 +196,9 @@ def _clone_probe_cfg(
     probe_cfg.decode.cal_lite_length_alpha = float(alpha)
     probe_cfg.decode.cal_lite_tie_break = settings.tie_break
     probe_cfg.decode.cal_lite_score_mode = settings.score_mode
+    probe_cfg.decode.cal_lite_length_prop_beta = float(settings.length_prop_beta)
+    probe_cfg.decode.cal_lite_length_prop_ref_length = float(settings.length_prop_ref_length)
+    probe_cfg.decode.cal_lite_length_prop_cap_length = settings.length_prop_cap_length
     return probe_cfg
 
 
@@ -965,6 +974,9 @@ def main() -> None:
         shortest_supported_ratio=args.shortest_supported_ratio,
         tie_break=args.tie_break,
         score_mode=args.score_mode,
+        length_prop_beta=args.length_prop_beta,
+        length_prop_ref_length=args.length_prop_ref_length,
+        length_prop_cap_length=args.length_prop_cap_length,
     )
 
     cfg = ExperimentConfig()
@@ -982,6 +994,9 @@ def main() -> None:
     cfg.decode.cal_lite_tie_break = args.tie_break
     cfg.decode.cal_lite_score_mode = args.score_mode
     cfg.decode.cal_lite_length_alpha = args.base_alpha
+    cfg.decode.cal_lite_length_prop_beta = args.length_prop_beta
+    cfg.decode.cal_lite_length_prop_ref_length = args.length_prop_ref_length
+    cfg.decode.cal_lite_length_prop_cap_length = args.length_prop_cap_length
     cfg.decode.lcas_policy = args.lcas_policy
 
     cfg.logging.output_dir = args.output_dir

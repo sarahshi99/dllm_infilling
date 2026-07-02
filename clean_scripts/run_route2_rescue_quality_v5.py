@@ -53,8 +53,17 @@ ANCHOR_LEN32_SELECTOR_FIELDS = CONSENSUS_CONFIDENCE_ALLOWED_FIELDS + [
     "anchor_candidate_id=len32_s64",
     "switch_margin",
 ]
+ANCHOR_LEN32_SHORT_OVERRIDE_FIELDS = ANCHOR_LEN32_SELECTOR_FIELDS + [
+    "short_candidate_id=len24_s64",
+    "short_gap_median_minus_anchor_gap_median",
+    "short_top1_median_minus_anchor_top1_median",
+    "short_override_gap_margin",
+    "short_override_top1_margin",
+]
 
 DEFAULT_ANCHOR_SWITCH_MARGIN = 0.02
+DEFAULT_SHORT_OVERRIDE_GAP_MARGIN = 0.285156
+DEFAULT_SHORT_OVERRIDE_TOP1_MARGIN = 0.283203
 
 
 @dataclass(frozen=True)
@@ -91,13 +100,30 @@ def parse_args() -> argparse.Namespace:
         "--selector",
         type=str,
         default="consensus_confidence",
-        choices=["consensus_confidence", "syntax_aware", "anchor_len32_confidence"],
+        choices=[
+            "consensus_confidence",
+            "syntax_aware",
+            "anchor_len32_confidence",
+            "anchor_len32_short_trace_override",
+        ],
     )
     parser.add_argument(
         "--anchor-switch-margin",
         type=float,
         default=DEFAULT_ANCHOR_SWITCH_MARGIN,
         help="Minimum score margin required to switch from len32_s64 to a non-anchor len32 candidate.",
+    )
+    parser.add_argument(
+        "--short-override-gap-margin",
+        type=float,
+        default=DEFAULT_SHORT_OVERRIDE_GAP_MARGIN,
+        help="Minimum len24-vs-len32 median-gap advantage required for the conservative short override.",
+    )
+    parser.add_argument(
+        "--short-override-top1-margin",
+        type=float,
+        default=DEFAULT_SHORT_OVERRIDE_TOP1_MARGIN,
+        help="Minimum len24-vs-len32 median-top1 advantage required for the conservative short override.",
     )
     parser.add_argument("--baseline-results", type=str, default=None)
     parser.add_argument("--route2-reference-results", type=str, default=None)
@@ -236,6 +262,14 @@ def selector_metadata(selector_name: str) -> JsonDict:
             "claim_boundary": "pure_inference_time_verifier_free_anchor_protected",
             "used_policy_fields": list(ANCHOR_LEN32_SELECTOR_FIELDS),
             "anchor_candidate_id": "len32_s64",
+        }
+    if selector_name == "anchor_len32_short_trace_override":
+        return {
+            "selector": selector_name,
+            "claim_boundary": "pure_inference_time_verifier_free_anchor_protected_short_trace_override",
+            "used_policy_fields": list(ANCHOR_LEN32_SHORT_OVERRIDE_FIELDS),
+            "anchor_candidate_id": "len32_s64",
+            "short_candidate_id": "len24_s64",
         }
     if selector_name == "oracle_upper_bound":
         return {
@@ -398,11 +432,75 @@ def _select_anchor_len32_candidate(
     }
 
 
+def _select_anchor_len32_short_trace_override_candidate(
+    candidates: Sequence[Mapping[str, Any]],
+    policy_views: Sequence[Mapping[str, Any]],
+    *,
+    anchor_switch_margin: float,
+    short_override_gap_margin: float,
+    short_override_top1_margin: float,
+) -> Tuple[JsonDict, JsonDict]:
+    anchor_candidate, anchor_scores = _select_anchor_len32_candidate(
+        candidates,
+        policy_views,
+        anchor_switch_margin=anchor_switch_margin,
+    )
+    metadata = selector_metadata("anchor_len32_short_trace_override")
+    originals_by_id = {str(candidate.get("candidate_id")): dict(candidate) for candidate in candidates}
+    by_id = {str(candidate.get("candidate_id")): dict(candidate) for candidate in policy_views}
+    anchor_id = str(metadata["anchor_candidate_id"])
+    short_id = str(metadata["short_candidate_id"])
+    if anchor_id not in by_id:
+        raise ValueError(f"short-override selector requires anchor candidate {anchor_id}")
+
+    selected_id = str(anchor_scores["selected_candidate_id"])
+    selection_reason = str(anchor_scores["selection_reason"])
+    short_delta_gap = None
+    short_delta_top1 = None
+    if short_id in by_id:
+        short_trace = by_id[short_id].get("trace_features") or {}
+        anchor_trace = by_id[anchor_id].get("trace_features") or {}
+        short_gap = _num(short_trace.get("gap_median"))
+        anchor_gap = _num(anchor_trace.get("gap_median"))
+        short_top1 = _num(short_trace.get("top1_median"))
+        anchor_top1 = _num(anchor_trace.get("top1_median"))
+        short_delta_gap = short_gap - anchor_gap
+        short_delta_top1 = short_top1 - anchor_top1
+        if (
+            short_delta_gap >= float(short_override_gap_margin)
+            and short_delta_top1 >= float(short_override_top1_margin)
+        ):
+            selected_id = short_id
+            selection_reason = "short_trace_gap_top1_override"
+
+    return originals_by_id[selected_id], {
+        **metadata,
+        "selected_candidate_id": selected_id,
+        "selected_score": anchor_scores.get("candidate_scores", {}).get(selected_id),
+        "selected_score_parts": anchor_scores.get("selected_score_parts"),
+        "candidate_scores": anchor_scores.get("candidate_scores", {}),
+        "anchor_candidate_id": anchor_id,
+        "short_candidate_id": short_id,
+        "anchor_score": anchor_scores.get("anchor_score"),
+        "switch_margin": float(anchor_switch_margin),
+        "short_override_gap_margin": float(short_override_gap_margin),
+        "short_override_top1_margin": float(short_override_top1_margin),
+        "short_delta_gap_median": short_delta_gap,
+        "short_delta_top1_median": short_delta_top1,
+        "selectable_candidate_ids": anchor_scores.get("selectable_candidate_ids", []),
+        "diagnostic_only_candidate_ids": anchor_scores.get("diagnostic_only_candidate_ids", []),
+        "selection_reason": selection_reason,
+        "anchor_selection_reason": anchor_scores.get("selection_reason"),
+    }
+
+
 def select_candidate(
     candidates: Sequence[Mapping[str, Any]],
     *,
     selector_name: str,
     anchor_switch_margin: float = DEFAULT_ANCHOR_SWITCH_MARGIN,
+    short_override_gap_margin: float = DEFAULT_SHORT_OVERRIDE_GAP_MARGIN,
+    short_override_top1_margin: float = DEFAULT_SHORT_OVERRIDE_TOP1_MARGIN,
 ) -> Tuple[JsonDict, JsonDict]:
     if not candidates:
         raise ValueError("select_candidate requires at least one candidate")
@@ -416,6 +514,14 @@ def select_candidate(
             candidates,
             policy_views,
             anchor_switch_margin=anchor_switch_margin,
+        )
+    if selector_name == "anchor_len32_short_trace_override":
+        return _select_anchor_len32_short_trace_override_candidate(
+            candidates,
+            policy_views,
+            anchor_switch_margin=anchor_switch_margin,
+            short_override_gap_margin=short_override_gap_margin,
+            short_override_top1_margin=short_override_top1_margin,
         )
 
     scored = _score_policy_views(policy_views, score_fn=score_fn)
@@ -639,6 +745,8 @@ def run_experiment(
     specs: Sequence[CandidateSpec],
     selector_name: str,
     anchor_switch_margin: float,
+    short_override_gap_margin: float,
+    short_override_top1_margin: float,
     task_ids: Optional[Sequence[str]],
     baseline_results_path: Optional[str],
     route2_reference_results_path: Optional[str],
@@ -653,6 +761,8 @@ def run_experiment(
         "candidate_specs": [asdict(spec) for spec in specs],
         "selector": selector_metadata(selector_name),
         "anchor_switch_margin": float(anchor_switch_margin),
+        "short_override_gap_margin": float(short_override_gap_margin),
+        "short_override_top1_margin": float(short_override_top1_margin),
         "primary_method": "lcal_official_bounded_repair_midcons",
         "oracle_upper_bound_boundary": "offline_only_not_deployable",
         "task_ids": list(task_ids) if task_ids else None,
@@ -722,6 +832,8 @@ def run_experiment(
                 candidates,
                 selector_name=selector_name,
                 anchor_switch_margin=anchor_switch_margin,
+                short_override_gap_margin=short_override_gap_margin,
+                short_override_top1_margin=short_override_top1_margin,
             )
             selected_id = str(selected_candidate["candidate_id"])
             final_result = candidate_results[selected_id]
@@ -805,6 +917,8 @@ def main() -> None:
         specs=candidate_specs(args.candidate_set),
         selector_name=args.selector,
         anchor_switch_margin=args.anchor_switch_margin,
+        short_override_gap_margin=args.short_override_gap_margin,
+        short_override_top1_margin=args.short_override_top1_margin,
         task_ids=parse_task_ids_csv(args.task_ids_csv),
         baseline_results_path=args.baseline_results,
         route2_reference_results_path=args.route2_reference_results,

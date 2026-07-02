@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-06-19 00:45 CST
+更新时间：2026-07-01 15:40 CST
 
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
@@ -8,7 +8,7 @@
 
 | Backbone / checkpoint | 相关论文报告值 | 我们之前的方法或本地旧方法 | 当前方法 | 当前 vs 之前 | 当前相对论文报告值的位置 |
 |---|---|---:|---:|---:|---|
-| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | 主线 `midcons` `795/1033 = 76.96%`; Route2 precision len24 `800/1033 = 77.44%`; Route2 broad len24 `801/1033 = 77.54%`; Route2 precision len32 `801/1033 = 77.54%`; V5.1 anchor m002/m010 `801/1033 = 77.54%` | `midcons +8` tasks / `+0.77pp`; Route2 precision len24 `+13` tasks / `+1.26pp`; Route2 broad len24、precision len32、V5.1 anchor 均为 `+14` tasks / `+1.36pp` vs A6000 control；V5.1 vs Route2 precision len32 为 `0/0/801/232` | 高于 CAL best `73.6` 和 LR-DLLM `69.4`；Route2/V5.1 是小幅 follow-up evidence，不是 external SOTA claim |
+| `GSAI-ML/LLaDA-8B-Base` | CAL: avg `65.5`, best shown `73.6`; LR-DLLM LLaDA-8B: `69.4` | A6000 control `787/1033 = 76.19%` | 主线 `midcons` `795/1033 = 76.96%`; Route2 precision len24 `800/1033 = 77.44%`; Route2 broad len24 `801/1033 = 77.54%`; Route2 precision len32 `801/1033 = 77.54%`; V5.1 anchor m002/m010 `801/1033 = 77.54%`; V6 short override `802/1033 = 77.64%`; V7 proportional widening `792/1033 = 76.67%`，negative；V8 proportional CAL score `786/781/782`，均 negative | `midcons +8` tasks / `+0.77pp`; Route2 precision len24 `+13` tasks / `+1.26pp`; Route2 broad len24、precision len32、V5.1 anchor 均为 `+14` tasks / `+1.36pp` vs A6000 control；V6 为 `+15` tasks / `+1.45pp` vs A6000 control，且 vs Route2 precision len32 为 `1/0/801/231`；V7 相对 `midcons` 为 `-3` tasks，pairwise `1/4/791/237`；V8a/b/c 相对 `midcons` 分别为 `-9/-14/-13` tasks | 高于 CAL best `73.6` 和 LR-DLLM `69.4`；Route2/V5/V6 是小幅 follow-up evidence，不是 external SOTA claim；V7/V8 是比例放长路线的负结果 |
 | `GSAI-ML/LLaDA-8B-Instruct` | CAL: avg `69.9`, best shown `76.9` | historical LCAS-v3 `817/1033 = 79.09%` | `midcons` `815/1033 = 78.90%` | `-2` tasks / `-0.19pp` | 高于 CAL best `76.9`，但低于我们之前方法 |
 | `Dream-org/Dream-Coder-v0-Base-7B` | CAL: avg `70.2`, best shown `76.2`; LR-DLLM DreamCoder: `81.6`; DreamOn DreamCoder: `92.1` | official-canvas `cal_lite` `825/1033 = 79.86%` | bounded repair `832/1033 = 80.54%` | `+7` tasks / `+0.68pp` | 高于 CAL best `76.2`，低于 LR-DLLM `81.6` 和 DreamOn `92.1` |
 | `Dream-org/Dream-Coder-v0-Instruct-7B` | 无精确匹配的论文 reported row | official-canvas `cal_lite` `848/1033 = 82.09%` | bounded repair `834/1033 = 80.74%` | `-14` tasks / `-1.36pp` | 不能做直接论文数值比较；本地为 negative transfer |
@@ -154,6 +154,76 @@ Triggered-row diagnostic：
 | `25+` | `11` | `0` | `0` |
 
 Interpretation：V5.1 没有超过 Route2 precision `len32`，因此不是新的 pass-rate claim。它的价值是诊断性的：anchor selector 成功保护了已知 Route2 len32 行为，`0` losses vs Route2 precision `len32`；但 candidate upper-bound 只有 `9/57`，selected policy 只有 `6/57` triggered pass，说明主要瓶颈仍是 rescue candidate 生成质量。唯一一次 `len32_s96` 替换发生在 `SingleLineInfilling/HumanEval/122/L0`，但所有候选均失败。另有三行 upper-bound-only rows 需要 `len24_s64` 才能通过：`HumanEval/7/L0`、`HumanEval/11/L6`、`HumanEval/128/L2`。这提示短候选 override 有潜力，但必须先设计严格保护规则，不能直接全量放开 `len24_s64`。下一步不应盲目继续 GPU full run，而应 CPU-first 设计一个 reviewer-readable shorter-candidate override 或更强 rescue-generation candidate family。
+
+## LLaDA-Base Route2 V6 Short-Override Full Run
+
+V6 是 V5.1 之后的 conservative selector polish：默认保持 `len32_s64` anchor，只在 trace gap/top1 同时强烈支持 `len24_s64` 时允许短候选 override。它仍是 training-free / inference-time / verifier-free；oracle/pass labels 只用于离线统计。
+
+输出目录：
+
+- `outputs_clean/full_route2_v6_short_override_gpu2_20260620_124754`
+
+验证：
+
+- full run exit code 为 `0`。
+- `results.jsonl` 为完整 `1033` 行。
+- 生成 `summary.json`、`step_traces.jsonl`、`candidate_upper_bound.csv`。
+
+| Run | Pass | Rate | Avg sec incl. probe | Triggered | Selected candidates | Pairwise vs `midcons` | Pairwise vs Route2 precision `len32` |
+|---|---:|---:|---:|---:|---|---:|---:|
+| V6 short override | `802/1033` | `77.64%` | `4.8768` | `57` | `primary=976`, `len32_s64=56`, `len24_s64=1` | `7/0/795/231` | `1/0/801/231` |
+
+Oracle bucket pass rates：
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| V6 short override | `540/598 = 90.30%` | `184/232 = 79.31%` | `53/90 = 58.89%` | `20/82 = 24.39%` | `5/31 = 16.13%` |
+
+唯一的 `len24_s64` override：
+
+| task_id | oracle length | selected length | pass | role |
+|---|---:|---:|---|---|
+| `SingleLineInfilling/HumanEval/11/L6` | `22` | `24` | true | V6 相对 Route2 precision `len32` 的唯一 win |
+
+Interpretation：V6 满足 full-run success criteria：相对 Route2 precision `len32` 为 `+1` task、`0` losses，相对 `midcons` 为 `+7` tasks、`0` losses。这个结果可以作为 reviewer-readable 的小幅 selector polish evidence，但不是长长度问题的根本解决。最关键的诊断没有变：candidate upper-bound 仍只有 `9/57`，oracle `25+` bucket 仍为 `5/31 = 16.13%`，说明 selector-only 方向的剩余收益很小。下一步应该转向更强的 rescue candidate generation / rescue decoding，而不是继续做类似阈值选择器 sweep。
+
+## LLaDA-Base V8 Proportional CAL Score Full Runs
+
+V8 是对用户“按比例放长长度估计”想法的忠实公式级实验。不同于 V7 的 post-hoc near-best 长候选覆盖，V8 直接修改 CAL-like length score：
+
+```text
+score(L) = raw_score(L) * L^(alpha + beta * log(max(min(L, cap) / ref, 1)))
+```
+
+这意味着长度越长，额外指数奖励越大；`cap` 只限制额外奖励的计算，不是禁止候选长度超过该值。
+
+输出目录：
+
+- V8a：`outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`
+- V8b：`outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`
+- V8c：`outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`
+
+所有 V8 full runs 均在 GPU `1` 串行完成，均写出完整 `1033` 行和 `summary.json`。
+
+| Run | Setting | Pass | Rate | Pairwise vs `midcons` | Short losses | Long wins |
+|---|---|---:|---:|---:|---:|---:|
+| current `midcons` | baseline | `795/1033` | `76.96%` | baseline | n/a | n/a |
+| Route2 precision `len32` | trace-gated rescue | `801/1033` | `77.54%` | `6/0/795/232` | `0` | `2` |
+| V6 short override | selector polish | `802/1033` | `77.64%` | `7/0/795/231` | `0` | `2` |
+| V7 proportional widening | post-hoc widening | `792/1033` | `76.67%` | `1/4/791/237` | `2` | `0` |
+| V8a proportional score | beta `0.02`, no cap | `786/1033` | `76.09%` | `3/12/783/235` | `7` | `2` |
+| V8b proportional score | beta `0.04`, no cap | `781/1033` | `75.61%` | `7/21/774/231` | `13` | `3` |
+| V8c proportional score | beta `0.04`, reward cap `32` | `782/1033` | `75.70%` | `6/19/776/232` | `11` | `2` |
+
+Oracle bucket pass rates：
+
+| Run | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |
+|---|---:|---:|---:|---:|---:|
+| V8a | `88.80%` | `77.16%` | `57.78%` | `21.95%` | `19.35%` |
+| V8b | `87.79%` | `76.72%` | `58.89%` | `21.95%` | `22.58%` |
+| V8c | `88.13%` | `76.72%` | `58.89%` | `21.95%` | `19.35%` |
+
+Interpretation：V8 说明“全局比例式放长”确实能带来少量 long wins，V8b 的 long wins 到 `3`；但 short/medium regressions 更大，导致三条 full runs 全部低于 `midcons`、Route2、V6 和 V7。V8c 的 reward cap 没有救回整体结果，而且由于 cap 不是 hard candidate cap，结果里仍会出现 `40/48` 候选。结论是：直接把比例奖励放进 CAL-like score 不是当前主线；如果继续比例思想，必须先有 under-selection detector 或风险 guard，而不是全局加长。
 
 ## Route2 Error Analysis Discovery V3
 
