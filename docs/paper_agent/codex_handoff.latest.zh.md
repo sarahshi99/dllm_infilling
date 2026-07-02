@@ -10,7 +10,7 @@
 - 基线分支：`paper-agent-overnight`
 - 基线 commit：`e2b20ae630f05c7d33a549252232b9a5c9db9045`
 - 本轮 Phase 0 审计内容 commit：`7ee7224 docs: add codex phase 0 repository audit`
-- 本轮 Phase 1 scaffold commit：待提交
+- 本轮 Phase 1 scaffold 内容 commit：`c578bca experiments: scaffold true-long action ceiling matrix`
 - 默认远端分支：`origin/main @ 2209463`
 - 最新活跃远端分支：`origin/paper-agent-overnight @ e2b20ae`，领先 `origin/main` 26 commits
 - 审计前 working tree：clean
