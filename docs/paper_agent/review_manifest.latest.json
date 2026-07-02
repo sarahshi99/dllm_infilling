@@ -1,0 +1,61 @@
+{
+  "updated_at_cst": "2026-07-02",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "base_commit": "5c4e79ab4592d660d20c6876d13005afcd3c6583",
+  "new_commits": [
+    {
+      "commit": "a9ba687e4158bee93799ab76f61f9c1be782454b",
+      "message": "fix: harden action ceiling pilot reproducibility"
+    },
+    {
+      "commit": "8c2e1b7",
+      "message": "fix: record action ceiling repro command"
+    },
+    {
+      "commit": "27b96be",
+      "message": "results: add three-case action ceiling pilot"
+    }
+  ],
+  "pilot": {
+    "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
+    "report": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md",
+    "summary": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
+    "manifest": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
+    "task_ids": [
+      "SingleLineInfilling/HumanEval/116/L0",
+      "SingleLineInfilling/HumanEval/85/L0",
+      "SingleLineInfilling/HumanEval/113/L3"
+    ],
+    "verdict": "positive_control_only",
+    "determinism_status": "deterministic",
+    "historical_replay_mismatches": [],
+    "gpu_used": {
+      "cuda_visible_devices": "1",
+      "model": "NVIDIA RTX A6000"
+    },
+    "recommended_9_case_expansion": false,
+    "researcher_decision_needed": true,
+    "decision_needed": "Decide whether positive_control_only is sufficient to stop the current action family or whether to approve a redesigned action family before any 9-case expansion."
+  },
+  "tests": [
+    "/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py",
+    "/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_action_ceiling_matrix.py",
+    "/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
+    "/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
+    "git diff --check"
+  ],
+  "recommended_read_order": [
+    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md",
+    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
+    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
+    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_results.csv",
+    "docs/paper_agent/codex_handoff.latest.zh.md",
+    "docs/paper_agent/codex_repository_audit.zh.md",
+    "analysis_outputs/action_ceiling_20260702_dryrun/report.md"
+  ],
+  "non_goals": [
+    "Do not treat this as a full benchmark pass-rate result.",
+    "Do not claim true-long unknown-length infilling is solved.",
+    "Do not expand automatically to 9 cases or full run."
+  ]
+}

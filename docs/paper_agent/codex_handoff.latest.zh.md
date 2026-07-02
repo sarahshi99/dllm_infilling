@@ -1,208 +1,157 @@
 # Codex Handoff Latest
 
 更新日期：2026-07-02 CST
-当前阶段：Phase 0 repository/evidence audit completed; Phase 1 action-ceiling dry-run scaffold completed; pilot not yet run.
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
-- 本轮分支：`codex/risk-controlled-dynamic-rescue`
-- 基线分支：`paper-agent-overnight`
-- 基线 commit：`e2b20ae630f05c7d33a549252232b9a5c9db9045`
-- 本轮 Phase 0 审计内容 commit：`7ee7224 docs: add codex phase 0 repository audit`
-- 本轮 Phase 1 scaffold 内容 commit：`c578bca experiments: scaffold true-long action ceiling matrix`
-- 默认远端分支：`origin/main @ 2209463`
-- 最新活跃远端分支：`origin/paper-agent-overnight @ e2b20ae`，领先 `origin/main` 26 commits
-- 审计前 working tree：clean
-- 本轮是否运行 GPU：否
+- 分支：`codex/risk-controlled-dynamic-rescue`
+- 本轮基线 commit：`5c4e79ab4592d660d20c6876d13005afcd3c6583`
+- 本轮代码硬化 commit：`a9ba687e4158bee93799ab76f61f9c1be782454b`
+- 本轮 repro command 补丁 commit：`8c2e1b7`
+- 本轮 3-case pilot compact 结果 commit：`27b96be`
+- working tree：文档更新前仅有待提交文档修改；push 后应为 clean
+- 当前阶段：Phase 1 true-long action-ceiling strict 3-case GPU pilot completed
+- GPU：`CUDA_VISIBLE_DEVICES=1`，NVIDIA RTX A6000
 
 当前最可信结论：
 
-> 保守推理时长度控制和 selective rescue 可以低风险修复部分 medium/near-long under-selection；但 true-long 剩余失败同时受 trigger recall、rescue generation quality 和 candidate selection 限制。更长 canvas 必要但经常不充分。
+> 这次 3-case pilot 只支持 `positive_control_only`：positive control 可稳定复现 Route2 win，且 oracle-sufficient C/D 也能通过；但一个 triggered failed-long case 和一个 missed failed-long case 在 oracle-sufficient canvas 与 steps96 下均未恢复。三例结果不支持自动扩大到 9 cases，也不能外推为 true-long 已解决。
 
 ## 2. 本轮完成内容
 
 代码修改：
 
-- 新增 `experiments/action_ceiling/action_ceiling_matrix.py`
-- 新增 `experiments/action_ceiling/__init__.py`
-- 新增 `tests/test_action_ceiling_matrix.py`
+- `experiments/action_ceiling/action_ceiling_matrix.py`
+  - 将 `D_oracle_sufficient_conservative` 改名为 `D_oracle_sufficient_steps96`。
+  - 修正 oracle canvas cap：`oracle_len > max_canvas_length` 时不再静默标记 sufficient。
+  - 增加 per-task stable seed、每个 action 前 reset Python/NumPy/torch/CUDA RNG。
+  - 增加 one-case determinism check。
+  - 增加 `pilot_results.csv`、`pilot_results.jsonl`、`pilot_summary.json`、`pilot_report.md`、`run_manifest.json`。
+  - `run_manifest.json` 记录 branch/commit/command/repro_command/env/GPU/checkpoint/dataset/task IDs/seed protocol/action definitions/status/traceback。
+- `tests/test_action_ceiling_matrix.py`
+  - 覆盖 oracle cap、D action 命名、summary verdict、CSV/JSONL compact 输出。
 
-文档修改：
+实验输出：
 
-- 新增 `docs/paper_agent/codex_repository_audit.zh.md`
-- 新增本文件 `docs/paper_agent/codex_handoff.latest.zh.md`
-- 在 dashboard/results/registry/snapshot 中添加本轮审计索引和 no-new-run 说明
-- 新增 `docs/paper_agent/experiments/20260702_action_ceiling_matrix_action.md`
-- 新增 compact dry-run 输出 `analysis_outputs/action_ceiling_20260702_dryrun/`
-
-已完成审计：
-
-- 确认 `paper-agent-overnight` 是最新研究分支，不是 `main`。
-- 梳理 control、midcons、Route2、V4-V8 结果关系。
-- 审计关键 runner 的 gate/action/selector。
-- 识别可复现性缺口：缺少统一 manifest、commit、command、env、VRAM/P95/forward accounting。
-- 识别 benchmark leakage 风险：现有多轮 V4-V8 都基于同一 `HumanEval-SingleLineInfilling/test`，且 fold 按 full task_id 而非 original HumanEval task group。
-- 实现 action-ceiling dry-run scaffold，默认只读已有 result paths，生成 case/action manifest；只有显式 `--execute-pilot` 才会加载模型。
+- 成功 pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/`
+- 无效尝试：第一次沙箱内 GPU run 因 HuggingFace dataset cache lock 只读失败，未产生 `pilot_results.*`，未提交。
 
 ## 3. 精确运行方式
 
-本轮审计命令核心如下：
+代码验证：
 
 ```bash
 cd /home/shx/projects/dllm_infilling/git_workspace
-git fetch --all --prune
-git status --short --branch
-git branch -avv --sort=-committerdate
-git log --all --date=iso --pretty=format:'%h %cd %d %s' -n 20
-```
-
-读取文档和 compact reports：
-
-```bash
-sed -n '1,260p' ccfa_readiness_assessment.zh.md
-sed -n '1,180p' docs/paper_agent/paper_agent_dashboard.zh.md
-sed -n '1,220p' docs/paper_agent/experiment_plan.current.zh.md
-sed -n '1,620p' docs/paper_agent/experiment_results.zh.md
-sed -n '1,180p' analysis_outputs/route2_error_analysis_20260617_165806/report.md
-sed -n '1,180p' analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md
-```
-
-读取 runner 结构：
-
-```bash
-rg -n "POLICIES|add_argument|trigger|selector|rescue|summary|seed|task_ids" clean_scripts/run_route2_trace_rescue.py
-rg -n "selector|candidate|oracle_upper_bound|add_argument|task_ids" clean_scripts/run_route2_rescue_quality_v5.py
-rg -n "official|repair|proportional|add_argument|task_ids" clean_scripts/run_lcal_official_bounded_repair.py
-```
-
-本轮未运行 GPU/pilot 实验，因此没有新 checkpoint；已生成一个 compact dry-run 输出目录用于预注册 case/action manifest。
-
-Phase 1 dry-run 命令：
-
-```bash
-python experiments/action_ceiling/action_ceiling_matrix.py \
-  --timestamp 20260702_dryrun \
-  --max-cases-per-pool 3
-```
-
-Dry-run 输出目录：
-
-```text
-analysis_outputs/action_ceiling_20260702_dryrun
-```
-
-验证命令：
-
-```bash
-python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py tests/test_action_ceiling_matrix.py
-python -m unittest tests/test_action_ceiling_matrix.py
+/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py
+/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_action_ceiling_matrix.py
 git diff --check
+```
+
+正式 3-case pilot：
+
+```bash
+CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/action_ceiling_matrix.py \
+  --timestamp 20260702_3case_pilot_gpu \
+  --task-ids-csv SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3 \
+  --max-pilot-cases 3 \
+  --execute-pilot
+```
+
+验证 pilot artifacts：
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json
 ```
 
 ## 4. 结果
 
-本轮结果是审计结论，不是新 pass-rate。
+- verdict：`positive_control_only`
+- determinism：`deterministic`
+- row_count：`12`，只含指定 3 tasks，每个 task 有 A/B/C/D。
+- historical replay mismatches：`[]`
+- cost：sum `55.49s`，avg `4.624s`，P95 `6.724s`；run wall-clock `68.24s`
 
-关键指标复核：
+| Task | Pool | A primary | B Route2 | C oracle canvas | D oracle canvas steps96 |
+|---|---|---|---|---|---|
+| `SingleLineInfilling/HumanEval/116/L0` | `positive_control_rescued` | FAIL | PASS | PASS | PASS |
+| `SingleLineInfilling/HumanEval/85/L0` | `triggered_failed_long` | FAIL | FAIL | FAIL | FAIL |
+| `SingleLineInfilling/HumanEval/113/L3` | `missed_failed_long` | FAIL | FAIL | FAIL | FAIL |
 
-- A6000 control：`787/1033 = 76.19%`
-- `midcons`：`795/1033 = 76.96%`，vs control `+8/0`
-- Route2 precision len32：`801/1033 = 77.54%`，vs `midcons` `+6/0`
-- V6 short override：`802/1033 = 77.64%`，vs Route2 `+1/0`
-- V7：`792/1033 = 76.67%`，negative
-- V8a/b/c：`786/781/782`，均 negative
-- Route2 triggered failed-long：`33`
-- Triggered failed-long with rescue length `>= oracle`：`31/33`
-- Missed failed-long：`56`
+Key summary:
 
-Action-ceiling dry-run:
-
-- case_count: `9`
-- action_count: `36`
-- case_pool_counts: `{'missed_failed_long': 3, 'positive_control_rescued': 3, 'triggered_failed_long': 3}`
-- oracle_bucket_counts: `{'17-24': 2, '25+': 6, '9-12': 1}`
-- planned actions: A primary, B Route2 len32, C oracle-sufficient canvas, D oracle-sufficient canvas + 96-step schedule
-- pilot status: not run
-
-成本信息现状：
-
-- Route2 precision len32 记录 `avg_total_sec_including_probe = 5.4622`
-- V6 记录 `avg_total_sec_including_probe = 4.8768`
-- 多数 summary 有平均时间，但缺少统一 forward calls、P95 wall-clock 和 VRAM。
+- candidate existence：只在 positive control 的 C/D 中出现正确候选。
+- canvas effect：`[]`
+- steps96 effect：`[]`
+- trigger opportunity：`[]`
+- negative cases：`85/L0`、`113/L3` 的 C/D 均失败。
 
 ## 5. 研究解释
 
 数据直接支持的事实：
 
-- 当前 LLaDA-Base 最好 full result 是 V6 `802/1033`。
-- Route2/V6 是低风险小幅正收益，且没有观察到 pairwise loss。
-- V7/V8 的全局比例放长路线失败。
-- Route2 的 true-long 失败不能只归因于 rescue length 不足。
+- `116/L0` 的 A/B replay 与历史一致，positive control sanity 通过。
+- `85/L0` 中 B 与 C 均为 oracle-sufficient canvas `32`，64 steps 仍失败；D steps96 也失败。
+- `113/L3` 是 missed failed-long，B 按历史未触发复用 primary；C/D 使用 oracle-sufficient canvas `44` 仍失败。
+- 当前 pilot 没有发现非 positive-control 的新正确候选。
 
 合理推断：
 
-- 下一阶段应做 action-ceiling matrix，而不是继续 V8 beta/threshold sweep。
-- Phase 1 应把 canvas adequacy、generation adequacy、selector gap 和 trigger gap 分开测。
+- 这三例中，失败不能归因于简单 canvas 不足；至少这两个 true-long代表例更像 rescue generation/backbone limitation。
+- 不应自动扩大到 9 cases；应先由研究者判断是否需要补一个更能区分 generation vs selector 的 action family。
 
 尚未验证：
 
-- oracle-sufficient canvas 是否能在 true-long failed rows 上产生正确候选。
-- conservative schedule 或 local refinement 是否改善 rescue generation。
-- deployable selector 是否能识别已有正确候选。
+- 其他 triggered/missed failed-long rows 是否存在 canvas ceiling signal。
+- local refinement、不同 fixed schedule、或更强 candidate generator 是否能恢复 `85/L0` 或 `113/L3`。
+- 任何 deployable controller 的 held-out improvement。
 
 与原假设冲突：
 
-- “更强比例长度奖励会系统改善 true-long”目前被 V7/V8 full runs 反驳。
+- “oracle-sufficient canvas + steps96 会在 true-long pilot 中产生新候选”的弱期待未被这三例支持；只有 positive control 成立。
 
 ## 6. 阻塞和风险
 
-- 现有 1033 rows 被反复用于 error analysis 和 rule selection，存在测试集调参风险。
-- 当前 strict-split 是 full task_id folds，不是 original HumanEval task grouped split。
-- 旧 run 缺少统一 command/commit/env manifest。
-- 部分 checkpoint 下载和缓存路径位于 `/tmp` 或依赖 HF mirror，不保证长期可复现。
-- 外部 CAL/LR-DLLM/DreamOn 仍未做同协议本地 baseline。
-- 不应把文献 reported number 与本地 results 混成 protocol-matched SOTA 表。
+- 这只是 3-case pilot，不是统计结论。
+- C/D 使用 oracle length，只能作为 offline ceiling，不能称为 deployable。
+- 当前仍存在 HumanEval test-set 多轮探索风险；未建立 grouped held-out split。
+- 首次沙箱内 run 因 `/home/shx/.cache/huggingface/...lock` 只读失败；复现 GPU run 需要可写 HF cache 或授权沙箱外执行。
+- 旧 full runs 仍缺少统一 manifest、forward accounting、VRAM/P95。
 
 ## 7. 下一步建议
 
-1. 研究者确认是否运行 Phase 1 small pilot。
-   - 科学问题：true-long 剩余失败到底受 canvas、generation、selector 还是 trigger 限制？
-   - 所需代码：已新增 `experiments/action_ceiling/action_ceiling_matrix.py`。
-   - 预计输出：pilot 会新增 `pilot_results.csv`，并保留 dry-run manifests。
-   - 改变方向的结果：如果 oracle-sufficient C/D 仍不能产生正确候选，应停止 true-long length-control 主线。
+1. 暂停 9-case expansion，先由研究者决定是否接受 `positive_control_only` 作为 stop signal。
+   - 科学问题：当前 action family 是否已足够说明 true-long pilot 缺少 candidate existence？
+   - 所需代码：无新增；阅读 `pilot_report.md` 和 `pilot_results.jsonl`。
+   - 改变方向的结果：若研究者认为三例代表性不足，可批准 9-case pilot；否则转向新 candidate generator。
 
-2. 建立 grouped split 文件。
-   - 科学问题：后续 controller 是否存在 benchmark leakage？
-   - 所需代码：按 `HumanEval/<id>` group 划分 train/calibration/validation/test。
-   - 预计输出：`docs/paper_agent/grouped_split_protocol.zh.md` 和 machine-readable split JSON。
-   - 改变方向的结果：若 held-out 效果显著低于当前 test-set探索结果，应降级方法 claim。
+2. 若继续 Phase 1，应先设计一个不只是 steps96 的 D action。
+   - 科学问题：失败是 backbone capability 还是当前 denoising action 太弱？
+   - 所需代码：新增一个预注册 local refinement 或 finite schedule action。
+   - 预计输出：同样的 action matrix report。
+   - 改变方向的结果：若新 action 仍无候选，应停止 true-long length-control 主线。
 
-3. 补 run manifest 机制。
-   - 科学问题：结果能否由后续研究者/agent 复现？
-   - 所需代码：logger 保存 `manifest.json`，包含 command、commit、env、checkpoint、GPU、seed。
-   - 预计输出：新 run 都带完整 manifest。
-   - 改变方向的结果：旧关键结果若无法复现，需要作为 historical evidence 而非 main table evidence。
+3. 建立 grouped split 与 controller calibration protocol。
+   - 科学问题：后续 risk-controlled controller 是否可避免 benchmark leakage？
+   - 所需代码：按 `HumanEval/<id>` group 划分 train/calibration/frozen validation/test。
+   - 预计输出：machine-readable split JSON 和 protocol doc。
 
 ## 8. 文件索引
 
-后续最应优先阅读：
+优先读：
 
+- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md`
+- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json`
+- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json`
+- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_results.csv`
+- `docs/paper_agent/review_manifest.latest.json`
 - `docs/paper_agent/codex_repository_audit.zh.md`
 - `analysis_outputs/action_ceiling_20260702_dryrun/report.md`
-- `docs/paper_agent/experiments/20260702_action_ceiling_matrix_action.md`
-- `docs/paper_agent/paper_agent_dashboard.zh.md`
-- `docs/paper_agent/experiment_results.zh.md`
-- `docs/paper_agent/evidence_snapshot.md`
-- `analysis_outputs/route2_error_analysis_20260617_165806/report.md`
-- `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`
-- `analysis_outputs/route2_v6_short_override_audit_20260620/report.md`
-- `analysis_outputs/proportional_length_widening_v7_midcons_20260630/report.md`
-- `docs/paper_agent/experiments/20260701_next_step_brainstorm_after_v8.md`
-- `docs/superpowers/plans/2026-07-02-post-v8-rescue-quality-and-local-guard-plan.md`
 
-暂时不建议读取：
+暂时不建议读：
 
 - 全量 `outputs_clean/*/results.jsonl`
-- 大量 raw traces
+- 大 raw traces
 - checkpoint/cache 目录

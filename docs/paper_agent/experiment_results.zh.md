@@ -10,6 +10,39 @@
 
 Phase 1 action-ceiling dry-run 已生成 compact artifacts：`analysis_outputs/action_ceiling_20260702_dryrun/`。这不是新 pass-rate 结果；它只预注册 `9` 个 small-pilot cases 和 A/B/C/D 四类 actions，用于后续区分 canvas ceiling、generation ceiling、selector gap 和 trigger gap。
 
+## Codex Phase 1 3-case action-ceiling pilot（2026-07-02）
+
+输出目录：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/`。
+
+运行口径：只运行用户指定的 3 个 task IDs；未扩展到 9 cases 或 full run。C/D 使用 oracle/reference length，只能作为 offline ceiling，不能视为 deployable controller。
+
+复现命令：
+
+```bash
+CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/action_ceiling_matrix.py \
+  --timestamp 20260702_3case_pilot_gpu \
+  --task-ids-csv SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3 \
+  --max-pilot-cases 3 \
+  --execute-pilot
+```
+
+Sanity：
+
+- one-case determinism check：`deterministic`，`116/L0` 的 A primary 两次 hash/pass 一致。
+- historical replay mismatches：`[]`。
+- row_count：`12`，每个 task 含 A/B/C/D。
+- cost：sum `55.49s`，avg `4.624s`，P95 `6.724s`；run wall-clock `68.24s`。
+- verdict：`positive_control_only`。
+
+| Task | Pool | A primary | B Route2 | C oracle canvas | D oracle canvas steps96 |
+|---|---|---|---|---|---|
+| `SingleLineInfilling/HumanEval/116/L0` | `positive_control_rescued` | FAIL | PASS | PASS | PASS |
+| `SingleLineInfilling/HumanEval/85/L0` | `triggered_failed_long` | FAIL | FAIL | FAIL | FAIL |
+| `SingleLineInfilling/HumanEval/113/L3` | `missed_failed_long` | FAIL | FAIL | FAIL | FAIL |
+
+Interpretation：pilot 只确认 positive control pipeline 有效；没有在 triggered failed-long 或 missed failed-long 代表例中发现新的 correct candidate。`85/L0` 的 Route2 len32 已等于 oracle 32，C 与 B 都失败，D steps96 也失败；`113/L3` 使用 oracle-sufficient canvas 44 后仍失败。因此这三例更支持 rescue generation/backbone limitation 的风险，而不是“单纯加足 canvas 就能救回”。这不是统计结论，但足以触发 stop rule：不要自动扩大到 9 cases，需研究者先决定是否换 action family 或接受 negative pilot。
+
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
 重要口径修正：下表中的“我们之前的方法 / previous local method”不是对应论文方法的本地复现，而是本项目早前已经跑出的本地方法或本地控制版本。论文报告值只作为外部 reported numbers 放在同一张表里，便于判断相对位置；它们不等同于本地同协议 baseline。

@@ -2,13 +2,15 @@
 
 更新时间：2026-07-01 15:40 CST
 
-## Codex Phase 0 审计更新（2026-07-02）
+## Codex Phase 1 action-ceiling pilot 更新（2026-07-02）
 
-Codex 已从 `paper-agent-overnight @ e2b20ae` 切出 `codex/risk-controlled-dynamic-rescue`，完成只读 repository/evidence/runner 审计，未启动 GPU。审计记录见 `docs/paper_agent/codex_repository_audit.zh.md`，最新交接见 `docs/paper_agent/codex_handoff.latest.zh.md`。
+Codex 已在 `codex/risk-controlled-dynamic-rescue` 完成 Phase 0 审计、Phase 1 action-ceiling dry-run scaffold，并运行严格限定的 3-case GPU pilot。审计记录见 `docs/paper_agent/codex_repository_audit.zh.md`，最新交接见 `docs/paper_agent/codex_handoff.latest.zh.md`。
 
 审计结论：`paper-agent-overnight` 是当前最新研究分支，领先默认 `main` 26 个 commits；V6 `802/1033` 是当前 LLaDA-Base 最高 full result，但只是 selector polish；V7/V8 是全局比例放长路线负结果；下一步最有决策价值的是 small, pre-registered true-long action-ceiling matrix，而不是继续参数 sweep。
 
-已新增 Phase 1 dry-run scaffold：`experiments/action_ceiling/action_ceiling_matrix.py`，输出 `analysis_outputs/action_ceiling_20260702_dryrun/report.md`。Dry-run 覆盖 `9` 个 cases、`36` 个 planned actions，case pool 为 positive controls / triggered failed-long / missed failed-long；其中 `25+` cases 为 `6` 个。尚未运行 pilot/GPU。
+Phase 1 dry-run scaffold：`experiments/action_ceiling/action_ceiling_matrix.py`，dry-run 输出 `analysis_outputs/action_ceiling_20260702_dryrun/report.md`。Dry-run 覆盖 `9` 个 cases、`36` 个 planned actions，case pool 为 positive controls / triggered failed-long / missed failed-long；其中 `25+` cases 为 `6` 个。
+
+Strict 3-case GPU pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md`。Verdict 为 `positive_control_only`：`116/L0` replay A=fail/B=pass 且 C/D pass；`85/L0` 与 `113/L3` 在 A/B/C/D 下均 fail。Determinism check 通过，historical replay mismatch 为 `[]`。当前不建议自动扩大到 9 cases；需要研究者先决定是否换 action family 或接受该 negative pilot 作为 stop signal。
 
 ## 当前研究目标
 
