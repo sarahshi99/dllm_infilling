@@ -1,0 +1,73 @@
+{
+  "action_definitions": [
+    "A_primary",
+    "B_route2_len32",
+    "C_oracle_sufficient",
+    "E_oracle_sufficient_no_early_commit",
+    "F_oracle_sufficient_trace_remask"
+  ],
+  "action_distinctness_gate": {
+    "auditable_distinct_trajectory": true,
+    "c_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "e_early_commit_disabled": true,
+    "e_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "e_more_actual_forwards_than_c": true,
+    "f_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "f_refinement_executed": true,
+    "f_remasked_token_count": 4,
+    "hash_distinct_from_c": false,
+    "passed": true,
+    "task_id": "SingleLineInfilling/HumanEval/85/L0"
+  },
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/distinct_candidate_ceiling.py --timestamp 20260702_phase1b_distinct_pilot",
+  "commit": "ca67f8343b0c2c9c1eda38ec283d771293af0a2c",
+  "dataset": {
+    "split": "test",
+    "subset": "HumanEval-SingleLineInfilling"
+  },
+  "env_command_prefix": {
+    "CUDA_VISIBLE_DEVICES": "2",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "2",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA RTX A6000"
+    ],
+    "hostname": "amax",
+    "platform": "Linux-5.15.0-67-generic-x86_64-with-glibc2.31",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121"
+  },
+  "execution_status": "completed",
+  "experimental_seeds": [
+    0,
+    1,
+    2
+  ],
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 2]\n?? analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/",
+  "historical_results": {
+    "baseline": "/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl",
+    "route2": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl"
+  },
+  "output_dir": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot",
+  "repro_command": "CUDA_VISIBLE_DEVICES=2 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/distinct_candidate_ceiling.py --timestamp 20260702_phase1b_distinct_pilot",
+  "started_at": "2026-07-02T14:48:53",
+  "task_ids": [
+    "SingleLineInfilling/HumanEval/116/L0",
+    "SingleLineInfilling/HumanEval/85/L0",
+    "SingleLineInfilling/HumanEval/113/L3"
+  ],
+  "timestamp": "20260702_phase1b_distinct_pilot",
+  "verdict": "candidate_diversity_without_correctness",
+  "wall_clock_sec": 152.25284617498983
+}

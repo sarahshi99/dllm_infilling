@@ -1,0 +1,508 @@
+{
+  "action_costs": {
+    "C_oracle_sufficient": {
+      "avg_sec": 4.1340609761731075,
+      "count": 9
+    },
+    "E_oracle_sufficient_no_early_commit": {
+      "avg_sec": 4.708774369559251,
+      "count": 9
+    },
+    "F_oracle_sufficient_trace_remask": {
+      "avg_sec": 5.229656641901885,
+      "count": 9
+    }
+  },
+  "action_distinctness_gate": {
+    "auditable_distinct_trajectory": true,
+    "c_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "e_early_commit_disabled": true,
+    "e_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "e_more_actual_forwards_than_c": true,
+    "f_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+    "f_refinement_executed": true,
+    "f_remasked_token_count": 4,
+    "hash_distinct_from_c": false,
+    "passed": true,
+    "task_id": "SingleLineInfilling/HumanEval/85/L0"
+  },
+  "candidate_diversity_summary": {
+    "action_summary": {
+      "C_oracle_sufficient": {
+        "avg_total_sec_including_probe": 4.1340609761731075,
+        "compile_rate": 0.6666666666666666,
+        "error_type_distribution": {
+          "None": 3,
+          "SyntaxError": 3,
+          "UnitTestFailure": 3
+        },
+        "pass_count": 3,
+        "unique_candidate_hash_count": 3
+      },
+      "E_oracle_sufficient_no_early_commit": {
+        "avg_total_sec_including_probe": 4.708774369559251,
+        "compile_rate": 0.6666666666666666,
+        "error_type_distribution": {
+          "None": 3,
+          "SyntaxError": 3,
+          "UnitTestFailure": 3
+        },
+        "pass_count": 3,
+        "unique_candidate_hash_count": 3
+      },
+      "F_oracle_sufficient_trace_remask": {
+        "avg_total_sec_including_probe": 5.229656641901885,
+        "compile_rate": 0.6666666666666666,
+        "error_type_distribution": {
+          "None": 3,
+          "SyntaxError": 3,
+          "UnitTestFailure": 3
+        },
+        "pass_count": 3,
+        "unique_candidate_hash_count": 3
+      }
+    },
+    "case_summary": {
+      "SingleLineInfilling/HumanEval/113/L3": {
+        "candidate_existence_pass_any": false,
+        "candidate_existence_pass_at_3_any_seed": false,
+        "candidate_existence_pass_at_3_by_seed": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "candidate_length_values": [
+          159,
+          159,
+          159,
+          159,
+          159,
+          159,
+          159,
+          159,
+          159
+        ],
+        "compile_rate": 1.0,
+        "error_type_distribution": {
+          "UnitTestFailure": 9
+        },
+        "hash_clusters": [
+          {
+            "count": 6,
+            "generated_text_sha256": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+            "members": [
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              }
+            ]
+          },
+          {
+            "count": 3,
+            "generated_text_sha256": "7f835d0008b6dec3b1be2ede02ed8ec350629c04ba9169da7934ee85886b5a2f",
+            "members": [
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/113/L3"
+              }
+            ]
+          }
+        ],
+        "pass_at_1_by_seed": {
+          "0": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          },
+          "1": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          },
+          "2": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          }
+        },
+        "unique_candidate_hash_count": 2
+      },
+      "SingleLineInfilling/HumanEval/116/L0": {
+        "candidate_existence_pass_any": true,
+        "candidate_existence_pass_at_3_any_seed": true,
+        "candidate_existence_pass_at_3_by_seed": {
+          "0": true,
+          "1": true,
+          "2": true
+        },
+        "candidate_length_values": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "compile_rate": 1.0,
+        "error_type_distribution": {
+          "None": 9
+        },
+        "hash_clusters": [
+          {
+            "count": 9,
+            "generated_text_sha256": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c",
+            "members": [
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 0,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 0,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 0,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 1,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 1,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 1,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 2,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 2,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 2,
+                "passed": true,
+                "task_id": "SingleLineInfilling/HumanEval/116/L0"
+              }
+            ]
+          }
+        ],
+        "pass_at_1_by_seed": {
+          "0": {
+            "C_oracle_sufficient": true,
+            "E_oracle_sufficient_no_early_commit": true,
+            "F_oracle_sufficient_trace_remask": true
+          },
+          "1": {
+            "C_oracle_sufficient": true,
+            "E_oracle_sufficient_no_early_commit": true,
+            "F_oracle_sufficient_trace_remask": true
+          },
+          "2": {
+            "C_oracle_sufficient": true,
+            "E_oracle_sufficient_no_early_commit": true,
+            "F_oracle_sufficient_trace_remask": true
+          }
+        },
+        "unique_candidate_hash_count": 1
+      },
+      "SingleLineInfilling/HumanEval/85/L0": {
+        "candidate_existence_pass_any": false,
+        "candidate_existence_pass_at_3_any_seed": false,
+        "candidate_existence_pass_at_3_by_seed": {
+          "0": false,
+          "1": false,
+          "2": false
+        },
+        "candidate_length_values": [
+          85,
+          85,
+          85,
+          85,
+          85,
+          85,
+          85,
+          85,
+          85
+        ],
+        "compile_rate": 0.0,
+        "error_type_distribution": {
+          "SyntaxError": 9
+        },
+        "hash_clusters": [
+          {
+            "count": 9,
+            "generated_text_sha256": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+            "members": [
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 0,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 1,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "C_oracle_sufficient",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "E_oracle_sufficient_no_early_commit",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              },
+              {
+                "action_id": "F_oracle_sufficient_trace_remask",
+                "experimental_seed": 2,
+                "passed": false,
+                "task_id": "SingleLineInfilling/HumanEval/85/L0"
+              }
+            ]
+          }
+        ],
+        "pass_at_1_by_seed": {
+          "0": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          },
+          "1": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          },
+          "2": {
+            "C_oracle_sufficient": false,
+            "E_oracle_sufficient_no_early_commit": false,
+            "F_oracle_sufficient_trace_remask": false
+          }
+        },
+        "unique_candidate_hash_count": 1
+      }
+    },
+    "mode": "distinct_candidate_diversity_summary"
+  },
+  "case_113_error_evolution": [
+    {
+      "action": "C_oracle_sufficient",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "C_oracle_sufficient",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "C_oracle_sufficient",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 2
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 2
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "UnitTestFailure",
+      "passed": false,
+      "seed": 2
+    }
+  ],
+  "case_85_error_evolution": [
+    {
+      "action": "C_oracle_sufficient",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "action": "C_oracle_sufficient",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "action": "C_oracle_sufficient",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 2
+    },
+    {
+      "action": "E_oracle_sufficient_no_early_commit",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 2
+    },
+    {
+      "action": "F_oracle_sufficient_trace_remask",
+      "error": "SyntaxError",
+      "passed": false,
+      "seed": 2
+    }
+  ],
+  "change_type_note": "hash-level and verifier-level differences are reported separately; no unit-test label was used to choose remask positions.",
+  "changed_mechanisms": [
+    "E_oracle_sufficient_no_early_commit"
+  ],
+  "hard_case_candidate_exists": false,
+  "mode": "distinct_candidate_generation_ceiling",
+  "multi_seed_diversity": false,
+  "new_actions_distinct": true,
+  "verdict": "candidate_diversity_without_correctness"
+}

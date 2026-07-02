@@ -1,0 +1,16 @@
+task_id,case_pool,action_id,deployability,planned_canvas_length,planned_total_steps,experimental_seeds,description
+SingleLineInfilling/HumanEval/116/L0,positive_control_rescued,A_primary,deployable_sanity_replay,3,64,0,current primary
+SingleLineInfilling/HumanEval/116/L0,positive_control_rescued,B_route2_len32,deployable_sanity_replay,32,64,0,current Route2 when historically triggered
+SingleLineInfilling/HumanEval/116/L0,positive_control_rescued,C_oracle_sufficient,offline_ceiling_oracle_canvas,32,64,"0,1,2",oracle-sufficient canvas with early commit
+SingleLineInfilling/HumanEval/116/L0,positive_control_rescued,E_oracle_sufficient_no_early_commit,offline_ceiling_oracle_canvas,32,64,"0,1,2",oracle-sufficient canvas with early commit disabled
+SingleLineInfilling/HumanEval/116/L0,positive_control_rescued,F_oracle_sufficient_trace_remask,offline_ceiling_trace_remask,32,80,"0,1,2",oracle-sufficient C candidate plus fixed internal-trace remask refinement
+SingleLineInfilling/HumanEval/85/L0,triggered_failed_long,A_primary,deployable_sanity_replay,3,64,0,current primary
+SingleLineInfilling/HumanEval/85/L0,triggered_failed_long,B_route2_len32,deployable_sanity_replay,32,64,0,current Route2 when historically triggered
+SingleLineInfilling/HumanEval/85/L0,triggered_failed_long,C_oracle_sufficient,offline_ceiling_oracle_canvas,32,64,"0,1,2",oracle-sufficient canvas with early commit
+SingleLineInfilling/HumanEval/85/L0,triggered_failed_long,E_oracle_sufficient_no_early_commit,offline_ceiling_oracle_canvas,32,64,"0,1,2",oracle-sufficient canvas with early commit disabled
+SingleLineInfilling/HumanEval/85/L0,triggered_failed_long,F_oracle_sufficient_trace_remask,offline_ceiling_trace_remask,32,80,"0,1,2",oracle-sufficient C candidate plus fixed internal-trace remask refinement
+SingleLineInfilling/HumanEval/113/L3,missed_failed_long,A_primary,deployable_sanity_replay,6,64,0,current primary
+SingleLineInfilling/HumanEval/113/L3,missed_failed_long,B_route2_len32,deployable_sanity_replay,6,64,0,current Route2 when historically triggered
+SingleLineInfilling/HumanEval/113/L3,missed_failed_long,C_oracle_sufficient,offline_ceiling_oracle_canvas,44,64,"0,1,2",oracle-sufficient canvas with early commit
+SingleLineInfilling/HumanEval/113/L3,missed_failed_long,E_oracle_sufficient_no_early_commit,offline_ceiling_oracle_canvas,44,64,"0,1,2",oracle-sufficient canvas with early commit disabled
+SingleLineInfilling/HumanEval/113/L3,missed_failed_long,F_oracle_sufficient_trace_remask,offline_ceiling_trace_remask,44,80,"0,1,2",oracle-sufficient C candidate plus fixed internal-trace remask refinement

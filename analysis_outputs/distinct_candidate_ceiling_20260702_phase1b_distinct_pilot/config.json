@@ -1,0 +1,20 @@
+{
+  "baseline_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl",
+  "dataset_subset": "HumanEval-SingleLineInfilling",
+  "experimental_seeds": [
+    0,
+    1,
+    2
+  ],
+  "lcas_policy": "lcas_v3b",
+  "max_canvas_length": 64,
+  "model_path": "GSAI-ML/LLaDA-8B-Base",
+  "route2_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl",
+  "split": "test",
+  "task_ids": [
+    "SingleLineInfilling/HumanEval/116/L0",
+    "SingleLineInfilling/HumanEval/85/L0",
+    "SingleLineInfilling/HumanEval/113/L3"
+  ],
+  "trace_remask_rule": "token_flip_count desc, final_confidence asc, index asc; k=max(1,min(4,ceil(0.10*canvas_len)))"
+}
