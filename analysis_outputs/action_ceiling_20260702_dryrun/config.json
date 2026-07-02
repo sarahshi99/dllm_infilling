@@ -1,0 +1,43 @@
+{
+  "baseline_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl",
+  "route2_results": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl",
+  "max_cases_per_pool": 3,
+  "task_ids": null,
+  "max_canvas_length": 64,
+  "execute_pilot": false,
+  "model_path": "GSAI-ML/LLaDA-8B-Base",
+  "split": "test",
+  "dataset_subset": "HumanEval-SingleLineInfilling",
+  "seed": 42,
+  "lcas_policy": "lcas_v3b",
+  "actions": [
+    {
+      "action_id": "A_primary",
+      "deployability": "deployable_current_primary",
+      "canvas_rule": "use_midcons_selected_length",
+      "steps": 64,
+      "description": "Current midcons primary output from the baseline run."
+    },
+    {
+      "action_id": "B_route2_len32",
+      "deployability": "deployable_current_route2",
+      "canvas_rule": "use_existing_route2_precision_len32_output",
+      "steps": 64,
+      "description": "Current Route2 precision_top1_conf rescue len32 output when triggered; otherwise primary."
+    },
+    {
+      "action_id": "C_oracle_sufficient",
+      "deployability": "offline_ceiling_only_oracle_canvas",
+      "canvas_rule": "max(primary_len, route2_len, oracle_len)",
+      "steps": 64,
+      "description": "Offline ceiling action: use a canvas guaranteed not shorter than oracle/reference length."
+    },
+    {
+      "action_id": "D_oracle_sufficient_conservative",
+      "deployability": "offline_ceiling_only_oracle_canvas",
+      "canvas_rule": "max(primary_len, route2_len, oracle_len)",
+      "steps": 96,
+      "description": "Same oracle-sufficient canvas as C, but with a fixed conservative 96-step schedule."
+    }
+  ]
+}

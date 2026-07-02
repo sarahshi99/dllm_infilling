@@ -8,6 +8,8 @@ Codex 已从 `paper-agent-overnight @ e2b20ae` 切出 `codex/risk-controlled-dyn
 
 审计结论：`paper-agent-overnight` 是当前最新研究分支，领先默认 `main` 26 个 commits；V6 `802/1033` 是当前 LLaDA-Base 最高 full result，但只是 selector polish；V7/V8 是全局比例放长路线负结果；下一步最有决策价值的是 small, pre-registered true-long action-ceiling matrix，而不是继续参数 sweep。
 
+已新增 Phase 1 dry-run scaffold：`experiments/action_ceiling/action_ceiling_matrix.py`，输出 `analysis_outputs/action_ceiling_20260702_dryrun/report.md`。Dry-run 覆盖 `9` 个 cases、`36` 个 planned actions，case pool 为 positive controls / triggered failed-long / missed failed-long；其中 `25+` cases 为 `6` 个。尚未运行 pilot/GPU。
+
 ## 当前研究目标
 
 将当前 DLLM 代码 infilling 项目推进为有竞争力的 CCF-A 论文：把已有 LCAL/LCAS 经验进展转化为有原则的 length-control 贡献，并配套可复现实验证据。

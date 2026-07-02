@@ -6,6 +6,8 @@
 
 V7/V8 full runs 已将“全局比例放长 reward”路线降级为负结果。Codex 审计后建议把下一阶段优先级从继续 probe/threshold sweep 转为 `True-long action-ceiling matrix`：用小规模、预注册、可 dry-run 的 action matrix 区分 canvas adequacy、rescue generation、candidate selection 和 trigger recall。该实验仍必须先写 action brief 和 dry-run manifest，不应直接启动 full GPU。
 
+Phase 1 scaffold 已新增：`experiments/action_ceiling/action_ceiling_matrix.py` 和 `docs/paper_agent/experiments/20260702_action_ceiling_matrix_action.md`。首个 dry-run 输出为 `analysis_outputs/action_ceiling_20260702_dryrun/`，覆盖 `9` 个 cases 和 `36` 个 planned actions；pilot/GPU 尚未运行。
+
 ## Objective
 
 从当前 `midcons` A6000 checkpoint 出发，推进到 CCF-A 级别的 DLLM code infilling length-control method。本计划优先进行可复现 diagnostics，再启动昂贵 GPU runs。

@@ -1,7 +1,7 @@
 # Codex Handoff Latest
 
 更新日期：2026-07-02 CST
-当前阶段：Phase 0 repository/evidence audit completed; Phase 1 action-ceiling matrix not yet run.
+当前阶段：Phase 0 repository/evidence audit completed; Phase 1 action-ceiling dry-run scaffold completed; pilot not yet run.
 
 ## 1. 当前状态
 
@@ -10,6 +10,7 @@
 - 基线分支：`paper-agent-overnight`
 - 基线 commit：`e2b20ae630f05c7d33a549252232b9a5c9db9045`
 - 本轮 Phase 0 审计内容 commit：`7ee7224 docs: add codex phase 0 repository audit`
+- 本轮 Phase 1 scaffold commit：待提交
 - 默认远端分支：`origin/main @ 2209463`
 - 最新活跃远端分支：`origin/paper-agent-overnight @ e2b20ae`，领先 `origin/main` 26 commits
 - 审计前 working tree：clean
@@ -21,13 +22,19 @@
 
 ## 2. 本轮完成内容
 
-代码修改：无 runner 或实验代码修改。
+代码修改：
+
+- 新增 `experiments/action_ceiling/action_ceiling_matrix.py`
+- 新增 `experiments/action_ceiling/__init__.py`
+- 新增 `tests/test_action_ceiling_matrix.py`
 
 文档修改：
 
 - 新增 `docs/paper_agent/codex_repository_audit.zh.md`
 - 新增本文件 `docs/paper_agent/codex_handoff.latest.zh.md`
 - 在 dashboard/results/registry/snapshot 中添加本轮审计索引和 no-new-run 说明
+- 新增 `docs/paper_agent/experiments/20260702_action_ceiling_matrix_action.md`
+- 新增 compact dry-run 输出 `analysis_outputs/action_ceiling_20260702_dryrun/`
 
 已完成审计：
 
@@ -36,6 +43,7 @@
 - 审计关键 runner 的 gate/action/selector。
 - 识别可复现性缺口：缺少统一 manifest、commit、command、env、VRAM/P95/forward accounting。
 - 识别 benchmark leakage 风险：现有多轮 V4-V8 都基于同一 `HumanEval-SingleLineInfilling/test`，且 fold 按 full task_id 而非 original HumanEval task group。
+- 实现 action-ceiling dry-run scaffold，默认只读已有 result paths，生成 case/action manifest；只有显式 `--execute-pilot` 才会加载模型。
 
 ## 3. 精确运行方式
 
@@ -68,7 +76,29 @@ rg -n "selector|candidate|oracle_upper_bound|add_argument|task_ids" clean_script
 rg -n "official|repair|proportional|add_argument|task_ids" clean_scripts/run_lcal_official_bounded_repair.py
 ```
 
-本轮未运行新实验，因此没有 checkpoint、case subset 或新输出目录。
+本轮未运行 GPU/pilot 实验，因此没有新 checkpoint；已生成一个 compact dry-run 输出目录用于预注册 case/action manifest。
+
+Phase 1 dry-run 命令：
+
+```bash
+python experiments/action_ceiling/action_ceiling_matrix.py \
+  --timestamp 20260702_dryrun \
+  --max-cases-per-pool 3
+```
+
+Dry-run 输出目录：
+
+```text
+analysis_outputs/action_ceiling_20260702_dryrun
+```
+
+验证命令：
+
+```bash
+python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py tests/test_action_ceiling_matrix.py
+python -m unittest tests/test_action_ceiling_matrix.py
+git diff --check
+```
 
 ## 4. 结果
 
@@ -85,6 +115,15 @@ rg -n "official|repair|proportional|add_argument|task_ids" clean_scripts/run_lca
 - Route2 triggered failed-long：`33`
 - Triggered failed-long with rescue length `>= oracle`：`31/33`
 - Missed failed-long：`56`
+
+Action-ceiling dry-run:
+
+- case_count: `9`
+- action_count: `36`
+- case_pool_counts: `{'missed_failed_long': 3, 'positive_control_rescued': 3, 'triggered_failed_long': 3}`
+- oracle_bucket_counts: `{'17-24': 2, '25+': 6, '9-12': 1}`
+- planned actions: A primary, B Route2 len32, C oracle-sufficient canvas, D oracle-sufficient canvas + 96-step schedule
+- pilot status: not run
 
 成本信息现状：
 
@@ -127,10 +166,10 @@ rg -n "official|repair|proportional|add_argument|task_ids" clean_scripts/run_lca
 
 ## 7. 下一步建议
 
-1. 实现 Phase 1 action-ceiling dry-run/pilot runner。
+1. 研究者确认是否运行 Phase 1 small pilot。
    - 科学问题：true-long 剩余失败到底受 canvas、generation、selector 还是 trigger 限制？
-   - 所需代码：`experiments/action_ceiling/` 或 `analysis/action_ceiling_matrix.py`，支持 `--dry-run`、`--task-ids-csv`、small pilot。
-   - 预计输出：`analysis_outputs/action_ceiling_<timestamp>/case_manifest.csv`、`summary.csv`、`report.md`。
+   - 所需代码：已新增 `experiments/action_ceiling/action_ceiling_matrix.py`。
+   - 预计输出：pilot 会新增 `pilot_results.csv`，并保留 dry-run manifests。
    - 改变方向的结果：如果 oracle-sufficient C/D 仍不能产生正确候选，应停止 true-long length-control 主线。
 
 2. 建立 grouped split 文件。
@@ -150,6 +189,8 @@ rg -n "official|repair|proportional|add_argument|task_ids" clean_scripts/run_lca
 后续最应优先阅读：
 
 - `docs/paper_agent/codex_repository_audit.zh.md`
+- `analysis_outputs/action_ceiling_20260702_dryrun/report.md`
+- `docs/paper_agent/experiments/20260702_action_ceiling_matrix_action.md`
 - `docs/paper_agent/paper_agent_dashboard.zh.md`
 - `docs/paper_agent/experiment_results.zh.md`
 - `docs/paper_agent/evidence_snapshot.md`

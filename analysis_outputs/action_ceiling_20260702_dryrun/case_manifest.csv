@@ -1,0 +1,10 @@
+task_id,task_group,case_pool,oracle_length,oracle_bucket,primary_selected_length,route2_triggered,route2_rescue_length,oracle_sufficient_length,baseline_passed,route2_passed,route2_pairwise_vs_primary,route2_rescue_len_ge_oracle
+SingleLineInfilling/HumanEval/116/L0,HumanEval/116,positive_control_rescued,21,17-24,3,True,32,32,False,True,win,True
+SingleLineInfilling/HumanEval/66/L1,HumanEval/66,positive_control_rescued,21,17-24,3,True,32,32,False,True,win,True
+SingleLineInfilling/HumanEval/60/L0,HumanEval/60,positive_control_rescued,10,9-12,3,True,32,32,False,True,win,True
+SingleLineInfilling/HumanEval/51/L0,HumanEval/51,triggered_failed_long,34,25+,3,True,32,34,False,False,tie_fail,False
+SingleLineInfilling/HumanEval/88/L0,HumanEval/88,triggered_failed_long,34,25+,3,True,32,34,False,False,tie_fail,False
+SingleLineInfilling/HumanEval/85/L0,HumanEval/85,triggered_failed_long,32,25+,3,True,32,32,False,False,tie_fail,True
+SingleLineInfilling/HumanEval/153/L1,HumanEval/153,missed_failed_long,48,25+,7,False,,48,False,False,tie_fail,
+SingleLineInfilling/HumanEval/113/L3,HumanEval/113,missed_failed_long,44,25+,6,False,,44,False,False,tie_fail,
+SingleLineInfilling/HumanEval/153/L3,HumanEval/153,missed_failed_long,41,25+,7,False,,41,False,False,tie_fail,

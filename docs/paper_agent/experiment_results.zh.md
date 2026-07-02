@@ -8,6 +8,8 @@
 
 审计后结果口径不变：V6 short override `802/1033 = 77.64%` 是当前 LLaDA-Base 最高 full result；Route2 precision len32 `801/1033 = 77.54%` 是更干净的低风险 rescue 证据；V7/V8 是比例放长负结果；这些仍然都来自同一 `HumanEval-SingleLineInfilling/test` 1033 rows 上的多轮探索，不能替代 held-out controller evaluation。
 
+Phase 1 action-ceiling dry-run 已生成 compact artifacts：`analysis_outputs/action_ceiling_20260702_dryrun/`。这不是新 pass-rate 结果；它只预注册 `9` 个 small-pilot cases 和 A/B/C/D 四类 actions，用于后续区分 canvas ceiling、generation ceiling、selector gap 和 trigger gap。
+
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
 重要口径修正：下表中的“我们之前的方法 / previous local method”不是对应论文方法的本地复现，而是本项目早前已经跑出的本地方法或本地控制版本。论文报告值只作为外部 reported numbers 放在同一张表里，便于判断相对位置；它们不等同于本地同协议 baseline。

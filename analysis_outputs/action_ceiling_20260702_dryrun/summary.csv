@@ -1,0 +1,13 @@
+key,value
+mode,"""dry_run_manifest"""
+case_count,9
+action_count,36
+case_pool_counts,"{""missed_failed_long"": 3, ""positive_control_rescued"": 3, ""triggered_failed_long"": 3}"
+oracle_bucket_counts,"{""17-24"": 2, ""25+"": 6, ""9-12"": 1}"
+action_counts,"{""A_primary"": 9, ""B_route2_len32"": 9, ""C_oracle_sufficient"": 9, ""D_oracle_sufficient_conservative"": 9}"
+route2_triggered_case_count,6
+route2_rescue_len_ge_oracle_rate_in_manifest,0.6666666666666666
+planned_decode_step_units,2592
+oracle_used_for_actions,"[""C_oracle_sufficient"", ""D_oracle_sufficient_conservative""]"
+deployable_actions,"[""A_primary"", ""B_route2_len32""]"
+not_deployable_ceiling_actions,"[""C_oracle_sufficient"", ""D_oracle_sufficient_conservative""]"
