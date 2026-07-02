@@ -1,0 +1,116 @@
+{
+  "action_definitions": [
+    {
+      "action_id": "A_primary",
+      "canvas_rule": "use_midcons_selected_length",
+      "deployability": "deployable_current_primary",
+      "description": "Current midcons primary output from the baseline run.",
+      "steps": 64
+    },
+    {
+      "action_id": "B_route2_len32",
+      "canvas_rule": "use_existing_route2_precision_len32_output",
+      "deployability": "deployable_current_route2",
+      "description": "Current Route2 precision_top1_conf rescue len32 output when triggered; otherwise primary.",
+      "steps": 64
+    },
+    {
+      "action_id": "C_oracle_sufficient",
+      "canvas_rule": "max(primary_len, route2_len, oracle_len)",
+      "deployability": "offline_ceiling_only_oracle_canvas",
+      "description": "Offline ceiling action: use a canvas guaranteed not shorter than oracle/reference length.",
+      "steps": 64
+    },
+    {
+      "action_id": "D_oracle_sufficient_steps96",
+      "canvas_rule": "max(primary_len, route2_len, oracle_len)",
+      "deployability": "offline_ceiling_only_oracle_canvas",
+      "description": "Same oracle-sufficient canvas as C, but with a fixed 96-step schedule.",
+      "steps": 96
+    }
+  ],
+  "argv": [
+    "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "experiments/action_ceiling/action_ceiling_matrix.py",
+    "--timestamp",
+    "20260702_3case_pilot_gpu",
+    "--task-ids-csv",
+    "SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3",
+    "--max-pilot-cases",
+    "3",
+    "--execute-pilot"
+  ],
+    "branch": "codex/risk-controlled-dynamic-rescue",
+    "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/action_ceiling_matrix.py --timestamp 20260702_3case_pilot_gpu --task-ids-csv SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3 --max-pilot-cases 3 --execute-pilot",
+    "commit": "a9ba687e4158bee93799ab76f61f9c1be782454b",
+  "dataset": {
+    "name": "loubnabnl/humaneval_infilling",
+        "split": "test",
+        "subset": "HumanEval-SingleLineInfilling"
+    },
+  "determinism_check": {
+    "action_id": "A_primary",
+    "deterministic": true,
+    "first_generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+    "first_passed": false,
+    "second_generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+    "second_passed": false,
+    "seed": 1070938084,
+    "task_id": "SingleLineInfilling/HumanEval/116/L0"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "1",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA RTX A6000"
+    ],
+    "hostname": "amax",
+    "platform": "Linux-5.15.0-67-generic-x86_64-with-glibc2.31",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+        "torch_version": "2.5.1+cu121"
+    },
+    "env_command_prefix": {
+        "CUDA_VISIBLE_DEVICES": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "TRANSFORMERS_OFFLINE": "1"
+    },
+    "execution_status": "completed",
+  "failure_traceback": null,
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 1]\n?? analysis_outputs/action_ceiling_20260702_3case_pilot/\n?? analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/",
+  "historical_results": {
+    "baseline_midcons": "/home/shx/projects/dllm_infilling/outputs_clean/full_trace_llada_base_midcons_gpu3_20260612_180846/results.jsonl",
+    "route2": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516/results.jsonl"
+    },
+    "max_pilot_cases": 3,
+    "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
+    "repro_command": "CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/action_ceiling_matrix.py --timestamp 20260702_3case_pilot_gpu --task-ids-csv SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3 --max-pilot-cases 3 --execute-pilot",
+    "seed_protocol": {
+    "experimental_seeds": [
+      0
+    ],
+    "global_seed": 42,
+    "reset_before_each_action": [
+      "python.random",
+      "numpy",
+      "torch",
+      "torch.cuda"
+    ],
+    "same_task_seed_for_actions": true,
+    "stable_seed_formula": "sha256(global_seed, experimental_seed, task_id) mod 2^31-1"
+  },
+  "started_at": "2026-07-02T13:00:36",
+  "task_ids": [
+    "SingleLineInfilling/HumanEval/116/L0",
+    "SingleLineInfilling/HumanEval/85/L0",
+    "SingleLineInfilling/HumanEval/113/L3"
+  ],
+  "timestamp": "20260702_3case_pilot_gpu",
+  "verdict": "positive_control_only",
+  "wall_clock_sec": 68.24282028502785
+}

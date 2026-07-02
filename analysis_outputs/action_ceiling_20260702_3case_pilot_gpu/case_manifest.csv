@@ -1,0 +1,4 @@
+task_id,task_group,case_pool,oracle_length,oracle_bucket,primary_selected_length,route2_triggered,route2_rescue_length,oracle_sufficient_length,max_canvas_length,oracle_exceeds_max_canvas,canvas_is_oracle_sufficient,baseline_passed,route2_passed,route2_pairwise_vs_primary,route2_rescue_len_ge_oracle
+SingleLineInfilling/HumanEval/116/L0,HumanEval/116,positive_control_rescued,21,17-24,3,True,32,32,64,False,True,False,True,win,True
+SingleLineInfilling/HumanEval/85/L0,HumanEval/85,triggered_failed_long,32,25+,3,True,32,32,64,False,True,False,False,tie_fail,True
+SingleLineInfilling/HumanEval/113/L3,HumanEval/113,missed_failed_long,44,25+,6,False,,44,64,False,True,False,False,tie_fail,

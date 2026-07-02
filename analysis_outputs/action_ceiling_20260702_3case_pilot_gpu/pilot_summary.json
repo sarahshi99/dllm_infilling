@@ -1,0 +1,129 @@
+{
+  "action_ids": [
+    "A_primary",
+    "B_route2_len32",
+    "C_oracle_sufficient",
+    "D_oracle_sufficient_steps96"
+  ],
+  "action_pass_counts": {
+    "A_primary": {
+      "False": 3
+    },
+    "B_route2_len32": {
+      "False": 2,
+      "True": 1
+    },
+    "C_oracle_sufficient": {
+      "False": 2,
+      "True": 1
+    },
+    "D_oracle_sufficient_steps96": {
+      "False": 2,
+      "True": 1
+    }
+  },
+  "canvas_effects": [],
+  "case_count": 3,
+  "ceiling_candidates": [
+    {
+      "action_id": "C_oracle_sufficient",
+      "case_pool": "positive_control_rescued",
+      "experimental_seed": 0,
+      "task_id": "SingleLineInfilling/HumanEval/116/L0"
+    },
+    {
+      "action_id": "D_oracle_sufficient_steps96",
+      "case_pool": "positive_control_rescued",
+      "experimental_seed": 0,
+      "task_id": "SingleLineInfilling/HumanEval/116/L0"
+    }
+  ],
+  "cost": {
+    "avg_total_sec_including_probe": 4.6242462588804,
+    "p95_total_sec_including_probe": 6.723802521824837,
+    "sum_total_sec_including_probe": 55.4909551065648
+  },
+  "determinism_check": {
+    "action_id": "A_primary",
+    "deterministic": true,
+    "first_generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+    "first_passed": false,
+    "second_generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+    "second_passed": false,
+    "seed": 1070938084,
+    "task_id": "SingleLineInfilling/HumanEval/116/L0"
+  },
+  "determinism_status": "deterministic",
+  "experimental_seeds": [
+    0
+  ],
+  "historical_replay_mismatches": [],
+  "mode": "three_case_action_ceiling_pilot",
+  "negative_cases_no_c_or_d_pass": [
+    {
+      "experimental_seed": 0,
+      "task_id": "SingleLineInfilling/HumanEval/85/L0"
+    },
+    {
+      "experimental_seed": 0,
+      "task_id": "SingleLineInfilling/HumanEval/113/L3"
+    }
+  ],
+  "paired_vs_primary_counts": {
+    "tie_fail": 6,
+    "win": 3
+  },
+  "row_count": 12,
+  "steps96_effects": [],
+  "task_action_pass_table": {
+    "SingleLineInfilling/HumanEval/113/L3": {
+      "A_primary": [
+        false
+      ],
+      "B_route2_len32": [
+        false
+      ],
+      "C_oracle_sufficient": [
+        false
+      ],
+      "D_oracle_sufficient_steps96": [
+        false
+      ]
+    },
+    "SingleLineInfilling/HumanEval/116/L0": {
+      "A_primary": [
+        false
+      ],
+      "B_route2_len32": [
+        true
+      ],
+      "C_oracle_sufficient": [
+        true
+      ],
+      "D_oracle_sufficient_steps96": [
+        true
+      ]
+    },
+    "SingleLineInfilling/HumanEval/85/L0": {
+      "A_primary": [
+        false
+      ],
+      "B_route2_len32": [
+        false
+      ],
+      "C_oracle_sufficient": [
+        false
+      ],
+      "D_oracle_sufficient_steps96": [
+        false
+      ]
+    }
+  },
+  "task_ids": [
+    "SingleLineInfilling/HumanEval/116/L0",
+    "SingleLineInfilling/HumanEval/85/L0",
+    "SingleLineInfilling/HumanEval/113/L3"
+  ],
+  "trigger_opportunities": [],
+  "verdict": "positive_control_only"
+}
