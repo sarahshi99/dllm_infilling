@@ -2,6 +2,8 @@
 
 This registry records meaningful local experiment outputs without committing raw `results.jsonl` files to normal git.
 
+Codex audit note, 2026-07-02: no new run was added in this pass. The audit found that newer runs generally have `config.json` and `summary.json`, but the registry still does not uniformly capture command, commit, environment, checkpoint checksum, GPU, seed, forward budget, P95 wall-clock, or VRAM. See `docs/paper_agent/codex_repository_audit.zh.md`.
+
 | Run | Status | Samples | Pass | Rate | Model | Raw Path |
 |---|---|---:|---:|---:|---|---|
 | `full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` | `candidate` | 1033 | 789 | 76.38% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` |

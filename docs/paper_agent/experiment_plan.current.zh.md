@@ -2,6 +2,10 @@
 
 更新时间：2026-05-31 15:24 CST
 
+## Codex Phase 0 更新（2026-07-02）
+
+V7/V8 full runs 已将“全局比例放长 reward”路线降级为负结果。Codex 审计后建议把下一阶段优先级从继续 probe/threshold sweep 转为 `True-long action-ceiling matrix`：用小规模、预注册、可 dry-run 的 action matrix 区分 canvas adequacy、rescue generation、candidate selection 和 trigger recall。该实验仍必须先写 action brief 和 dry-run manifest，不应直接启动 full GPU。
+
 ## Objective
 
 从当前 `midcons` A6000 checkpoint 出发，推进到 CCF-A 级别的 DLLM code infilling length-control method。本计划优先进行可复现 diagnostics，再启动昂贵 GPU runs。

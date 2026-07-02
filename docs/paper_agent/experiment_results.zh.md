@@ -2,6 +2,12 @@
 
 更新时间：2026-07-01 15:40 CST
 
+## Codex Phase 0 审计说明（2026-07-02）
+
+本轮未新增 pass-rate 结果，也未启动 GPU。Codex 已审计当前结果链、关键 runner 的 gate/action/selector 和可复现性缺口；详见 `docs/paper_agent/codex_repository_audit.zh.md`。
+
+审计后结果口径不变：V6 short override `802/1033 = 77.64%` 是当前 LLaDA-Base 最高 full result；Route2 precision len32 `801/1033 = 77.54%` 是更干净的低风险 rescue 证据；V7/V8 是比例放长负结果；这些仍然都来自同一 `HumanEval-SingleLineInfilling/test` 1033 rows 上的多轮探索，不能替代 held-out controller evaluation。
+
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
 重要口径修正：下表中的“我们之前的方法 / previous local method”不是对应论文方法的本地复现，而是本项目早前已经跑出的本地方法或本地控制版本。论文报告值只作为外部 reported numbers 放在同一张表里，便于判断相对位置；它们不等同于本地同协议 baseline。

@@ -2,6 +2,12 @@
 
 更新时间：2026-07-01 15:40 CST
 
+## Codex Phase 0 审计更新（2026-07-02）
+
+Codex 已从 `paper-agent-overnight @ e2b20ae` 切出 `codex/risk-controlled-dynamic-rescue`，完成只读 repository/evidence/runner 审计，未启动 GPU。审计记录见 `docs/paper_agent/codex_repository_audit.zh.md`，最新交接见 `docs/paper_agent/codex_handoff.latest.zh.md`。
+
+审计结论：`paper-agent-overnight` 是当前最新研究分支，领先默认 `main` 26 个 commits；V6 `802/1033` 是当前 LLaDA-Base 最高 full result，但只是 selector polish；V7/V8 是全局比例放长路线负结果；下一步最有决策价值的是 small, pre-registered true-long action-ceiling matrix，而不是继续参数 sweep。
+
 ## 当前研究目标
 
 将当前 DLLM 代码 infilling 项目推进为有竞争力的 CCF-A 论文：把已有 LCAL/LCAS 经验进展转化为有原则的 length-control 贡献，并配套可复现实验证据。
