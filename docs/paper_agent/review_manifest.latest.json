@@ -19,6 +19,10 @@
     {
       "commit": "af9e709",
       "message": "results: add distinct candidate ceiling pilot"
+    },
+    {
+      "commit": "e8b935e",
+      "message": "docs: record candidate generation ceiling verdict"
     }
   ],
   "predecessor_verdict": {

@@ -7,9 +7,9 @@
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
 - 本轮起点 commit：`40d17e41ce04f4078bb2728f08449905a8defb2c`
-- 本轮已提交 commits：`a938e9b`、`ca67f83`、`d6c7ce8`、`af9e709`
-- 文档闭环 commit：写入本文件时待提交；push 后以 `origin/codex/risk-controlled-dynamic-rescue` 为准。
-- working tree：写入本文件时为文档更新阶段；最终 push 后应为 clean。
+- 本轮已提交 commits：`a938e9b`、`ca67f83`、`d6c7ce8`、`af9e709`、`e8b935e`
+- 文档闭环 commit：`e8b935e`；最终 push 后以 `origin/codex/risk-controlled-dynamic-rescue` 的 HEAD 为准。
+- working tree：最终 push 前应仅有必要的 handoff metadata refresh；push 后应为 clean。
 - 当前阶段：Phase 1b `Distinct-Candidate Generation Ceiling` strict 3-case GPU pilot completed
 - GPU：`CUDA_VISIBLE_DEVICES=2`，NVIDIA RTX A6000
 
