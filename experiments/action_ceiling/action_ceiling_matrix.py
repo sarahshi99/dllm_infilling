@@ -45,6 +45,8 @@ PILOT_VERDICTS = {
     "needs_more_cases",
 }
 
+PILOT_ACTION_ORDER = ("A_primary", "B_route2_len32", "C_oracle_sufficient", "D_oracle_sufficient_steps96")
+
 
 @dataclass(frozen=True)
 class ActionSpec:
@@ -342,6 +344,275 @@ def write_jsonl(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     with path.open("w", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def load_csv_rows(path: Path) -> List[JsonDict]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return [dict(row) for row in csv.DictReader(handle)]
+
+
+def _csv_bool(value: Any) -> Optional[bool]:
+    if value is None or value == "":
+        return None
+    if isinstance(value, bool):
+        return value
+    text = str(value).strip().lower()
+    if text == "true":
+        return True
+    if text == "false":
+        return False
+    return None
+
+
+def _maybe_number(value: Any) -> Any:
+    if value is None or value == "":
+        return None
+    try:
+        if "." in str(value):
+            return float(value)
+        return int(value)
+    except (TypeError, ValueError):
+        return value
+
+
+def build_action_equivalence(rows: Sequence[Mapping[str, Any]]) -> JsonDict:
+    by_task: Dict[str, List[Mapping[str, Any]]] = defaultdict(list)
+    for row in rows:
+        by_task[str(row["task_id"])].append(row)
+
+    tasks: Dict[str, JsonDict] = {}
+    aggregate = {
+        "task_count": len(by_task),
+        "candidate_level_canvas_effect_count": 0,
+        "pass_level_canvas_effect_count": 0,
+        "output_changed_without_correctness_change_count": 0,
+        "config_different_but_output_equivalent_count": 0,
+    }
+
+    for task_id, task_rows in sorted(by_task.items()):
+        action_rows = {str(row["action_id"]): row for row in task_rows}
+        hashes: Dict[str, Optional[str]] = {
+            action_id: (action_rows.get(action_id) or {}).get("generated_text_sha256") or None
+            for action_id in PILOT_ACTION_ORDER
+            if action_id in action_rows
+        }
+        classes_by_hash: Dict[str, List[str]] = defaultdict(list)
+        for action_id, digest in hashes.items():
+            classes_by_hash[str(digest)].append(action_id)
+        equivalence_classes = [
+            {"generated_text_sha256": digest, "actions": actions}
+            for digest, actions in sorted(classes_by_hash.items(), key=lambda item: item[1][0])
+        ]
+        primary = action_rows.get("A_primary")
+        c_row = action_rows.get("C_oracle_sufficient")
+        primary_hash = None if primary is None else primary.get("generated_text_sha256")
+        c_hash = None if c_row is None else c_row.get("generated_text_sha256")
+        primary_pass = None if primary is None else _csv_bool(primary.get("passed"))
+        c_pass = None if c_row is None else _csv_bool(c_row.get("passed"))
+        c_compile = None if c_row is None else _csv_bool(c_row.get("compile_passed"))
+        c_error = None if c_row is None else c_row.get("error_type")
+
+        action_details: Dict[str, JsonDict] = {}
+        output_changed_vs_primary: Dict[str, Optional[bool]] = {}
+        output_changed_vs_c: Dict[str, Optional[bool]] = {}
+        correctness_changed: Dict[str, Optional[bool]] = {}
+        compile_status_changed: Dict[str, Optional[bool]] = {}
+        error_type_changed: Dict[str, Optional[bool]] = {}
+        for action_id in PILOT_ACTION_ORDER:
+            row = action_rows.get(action_id)
+            if row is None:
+                continue
+            action_hash = row.get("generated_text_sha256") or None
+            action_pass = _csv_bool(row.get("passed"))
+            action_compile = _csv_bool(row.get("compile_passed"))
+            action_error = row.get("error_type")
+            output_changed_vs_primary[action_id] = None if primary_hash is None else action_hash != primary_hash
+            output_changed_vs_c[action_id] = None if c_hash is None else action_hash != c_hash
+            correctness_changed[action_id] = None if primary_pass is None or action_pass is None else action_pass != primary_pass
+            compile_status_changed[action_id] = None if c_compile is None or action_compile is None else action_compile != c_compile
+            error_type_changed[action_id] = None if c_error is None else action_error != c_error
+            action_details[action_id] = {
+                "generated_text_sha256": action_hash,
+                "passed": action_pass,
+                "compile_passed": action_compile,
+                "error_type": action_error or None,
+                "actual_steps": _maybe_number(row.get("decode_steps")),
+                "effective_steps": _maybe_number(row.get("effective_steps")),
+                "early_commit_triggered": row.get("stop_reason") == "global_gap_early_commit",
+                "stop_reason": row.get("stop_reason") or None,
+                "selected_mask_length": _maybe_number(row.get("selected_mask_length")),
+                "actual_canvas_length": _maybe_number(row.get("actual_canvas_length")),
+            }
+
+        candidate_level_canvas_effects = [
+            action_id
+            for action_id in ("B_route2_len32", "C_oracle_sufficient", "D_oracle_sufficient_steps96")
+            if output_changed_vs_primary.get(action_id) is True
+        ]
+        pass_level_canvas_effects = [
+            action_id
+            for action_id in ("B_route2_len32", "C_oracle_sufficient", "D_oracle_sufficient_steps96")
+            if correctness_changed.get(action_id) is True and _csv_bool((action_rows.get(action_id) or {}).get("passed")) is True
+        ]
+        output_changed_without_correctness_change = [
+            action_id
+            for action_id in PILOT_ACTION_ORDER
+            if output_changed_vs_primary.get(action_id) is True and correctness_changed.get(action_id) is False
+        ]
+        config_different_but_output_equivalent = []
+        for left in PILOT_ACTION_ORDER:
+            for right in PILOT_ACTION_ORDER:
+                if PILOT_ACTION_ORDER.index(left) >= PILOT_ACTION_ORDER.index(right):
+                    continue
+                left_row = action_rows.get(left)
+                right_row = action_rows.get(right)
+                if not left_row or not right_row:
+                    continue
+                if left_row.get("generated_text_sha256") != right_row.get("generated_text_sha256"):
+                    continue
+                if left_row.get("decode_steps") != right_row.get("decode_steps") or left_row.get("actual_canvas_length") != right_row.get("actual_canvas_length"):
+                    config_different_but_output_equivalent.append([left, right])
+
+        if candidate_level_canvas_effects:
+            aggregate["candidate_level_canvas_effect_count"] += 1
+        if pass_level_canvas_effects:
+            aggregate["pass_level_canvas_effect_count"] += 1
+        aggregate["output_changed_without_correctness_change_count"] += len(output_changed_without_correctness_change)
+        aggregate["config_different_but_output_equivalent_count"] += len(config_different_but_output_equivalent)
+
+        tasks[task_id] = {
+            "unique_candidate_hash_count": len(set(digest for digest in hashes.values() if digest)),
+            "action_equivalence_classes": equivalence_classes,
+            "action_details": action_details,
+            "output_changed_vs_primary": output_changed_vs_primary,
+            "output_changed_vs_C": output_changed_vs_c,
+            "correctness_changed": correctness_changed,
+            "compile_status_changed": compile_status_changed,
+            "error_type_changed": error_type_changed,
+            "candidate_level_canvas_effects": candidate_level_canvas_effects,
+            "pass_level_canvas_effects": pass_level_canvas_effects,
+            "output_changed_without_correctness_change": output_changed_without_correctness_change,
+            "config_different_but_output_equivalent": config_different_but_output_equivalent,
+        }
+
+    return {
+        "mode": "action_equivalence_audit",
+        "actions": list(PILOT_ACTION_ORDER),
+        "aggregate": aggregate,
+        "tasks": tasks,
+    }
+
+
+def render_action_equivalence_report(equivalence: Mapping[str, Any]) -> str:
+    lines = [
+        "# Action Equivalence Audit",
+        "",
+        "This audit separates pass-level effects from candidate-level output changes.",
+        "",
+        "## Aggregate",
+        "",
+    ]
+    for key, value in (equivalence.get("aggregate") or {}).items():
+        lines.append(f"- {key}: `{value}`")
+    lines.extend(
+        [
+            "",
+            "## Per Task",
+            "",
+            "| Task | Unique Hashes | Equivalence Classes | Candidate-Level Canvas Effects | Pass-Level Canvas Effects | Output Changed But Correctness Same | Config Different But Output Equivalent |",
+            "|---|---:|---|---|---|---|---|",
+        ]
+    )
+    for task_id, info in (equivalence.get("tasks") or {}).items():
+        classes = [
+            "+".join(item.get("actions", []))
+            for item in info.get("action_equivalence_classes", [])
+        ]
+        lines.append(
+            "| `{}` | {} | `{}` | `{}` | `{}` | `{}` | `{}` |".format(
+                task_id,
+                info.get("unique_candidate_hash_count"),
+                classes,
+                info.get("candidate_level_canvas_effects"),
+                info.get("pass_level_canvas_effects"),
+                info.get("output_changed_without_correctness_change"),
+                info.get("config_different_but_output_equivalent"),
+            )
+        )
+
+    lines.extend(["", "## Required Checks", ""])
+    for task_id in (
+        "SingleLineInfilling/HumanEval/116/L0",
+        "SingleLineInfilling/HumanEval/85/L0",
+        "SingleLineInfilling/HumanEval/113/L3",
+    ):
+        info = (equivalence.get("tasks") or {}).get(task_id, {})
+        details = info.get("action_details", {})
+        lines.append(f"### `{task_id}`")
+        for action_id in PILOT_ACTION_ORDER:
+            if action_id not in details:
+                continue
+            row = details[action_id]
+            lines.append(
+                "- `{}`: hash `{}`, steps `{}`, effective_steps `{}`, early_commit `{}`, stop_reason `{}`, compile `{}`, error `{}`".format(
+                    action_id,
+                    row.get("generated_text_sha256"),
+                    row.get("actual_steps"),
+                    row.get("effective_steps"),
+                    row.get("early_commit_triggered"),
+                    row.get("stop_reason"),
+                    row.get("compile_passed"),
+                    row.get("error_type"),
+                )
+            )
+        lines.append(f"- equivalence_classes: `{info.get('action_equivalence_classes')}`")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def write_action_equivalence_outputs(output_dir: Path) -> JsonDict:
+    rows = load_csv_rows(output_dir / "pilot_results.csv")
+    equivalence = build_action_equivalence(rows)
+    (output_dir / "action_equivalence.json").write_text(
+        json.dumps(equivalence, ensure_ascii=False, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    (output_dir / "action_equivalence.md").write_text(
+        render_action_equivalence_report(equivalence),
+        encoding="utf-8",
+    )
+    return equivalence
+
+
+def refresh_existing_pilot_outputs(output_dir: Path) -> JsonDict:
+    equivalence = write_action_equivalence_outputs(output_dir)
+    jsonl_path = output_dir / "pilot_results.jsonl"
+    case_manifest_path = output_dir / "case_manifest.csv"
+    manifest_path = output_dir / "run_manifest.json"
+    summary_path = output_dir / "pilot_summary.json"
+    if jsonl_path.exists() and case_manifest_path.exists() and manifest_path.exists():
+        pilot_rows = load_jsonl(jsonl_path)
+        case_manifest = load_csv_rows(case_manifest_path)
+        previous_summary: JsonDict = {}
+        if summary_path.exists():
+            previous_summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        experimental_seeds = previous_summary.get("experimental_seeds")
+        if not experimental_seeds:
+            experimental_seeds = sorted({int(row.get("experimental_seed", 0)) for row in pilot_rows})
+        determinism_check = previous_summary.get("determinism_check") or {"deterministic": True}
+        summary = summarize_pilot(
+            pilot_rows,
+            case_manifest=case_manifest,
+            determinism_check=determinism_check,
+            experimental_seeds=[int(seed) for seed in experimental_seeds],
+        )
+        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        (output_dir / "pilot_report.md").write_text(
+            render_pilot_report(summary, pilot_rows, case_manifest, manifest),
+            encoding="utf-8",
+        )
+    return equivalence
 
 
 def render_report(summary: Mapping[str, Any], case_manifest: Sequence[Mapping[str, Any]]) -> str:
@@ -1038,15 +1309,27 @@ def summarize_pilot(
     by_task_seed = defaultdict(dict)
     for row in rows:
         by_task_seed[(row.get("task_id"), row.get("experimental_seed"))][row.get("action_id")] = row
-    canvas_effects = []
+    pass_level_canvas_effects = []
+    candidate_level_canvas_effects = []
     steps96_effects = []
     negative_cases = []
     for (task_id, seed), action_rows in by_task_seed.items():
+        a = action_rows.get("A_primary")
         b = action_rows.get("B_route2_len32")
         c = action_rows.get("C_oracle_sufficient")
         d = action_rows.get("D_oracle_sufficient_steps96")
         if c and b and c.get("passed") is True and b.get("passed") is not True:
-            canvas_effects.append({"task_id": task_id, "experimental_seed": seed})
+            pass_level_canvas_effects.append({"task_id": task_id, "experimental_seed": seed})
+        if a and c and c.get("generated_text_sha256") != a.get("generated_text_sha256"):
+            candidate_level_canvas_effects.append(
+                {
+                    "task_id": task_id,
+                    "experimental_seed": seed,
+                    "action_id": "C_oracle_sufficient",
+                    "primary_hash": a.get("generated_text_sha256"),
+                    "candidate_hash": c.get("generated_text_sha256"),
+                }
+            )
         if d and c and d.get("passed") is True and c.get("passed") is not True:
             steps96_effects.append({"task_id": task_id, "experimental_seed": seed})
         if c and d and c.get("passed") is not True and d.get("passed") is not True:
@@ -1070,7 +1353,9 @@ def summarize_pilot(
         "paired_vs_primary_counts": dict(paired_counts),
         "historical_replay_mismatches": replay_mismatches,
         "ceiling_candidates": ceiling_candidates,
-        "canvas_effects": canvas_effects,
+        "pass_level_canvas_effects": pass_level_canvas_effects,
+        "candidate_level_canvas_effects": candidate_level_canvas_effects,
+        "canvas_effects": pass_level_canvas_effects,
         "steps96_effects": steps96_effects,
         "trigger_opportunities": trigger_opportunities,
         "negative_cases_no_c_or_d_pass": negative_cases,
@@ -1151,9 +1436,13 @@ def render_pilot_report(
             "",
             f"- ceiling_candidates: `{summary.get('ceiling_candidates')}`",
             "",
-            "## Canvas Effect",
+            "## Pass-Level Canvas Effect",
             "",
-            f"- canvas_effects: `{summary.get('canvas_effects')}`",
+            f"- pass_level_canvas_effects: `{summary.get('pass_level_canvas_effects')}`",
+            "",
+            "## Candidate-Level Canvas Effect",
+            "",
+            f"- candidate_level_canvas_effects: `{summary.get('candidate_level_canvas_effects')}`",
             "",
             "## Steps96 Effect",
             "",
@@ -1350,6 +1639,7 @@ def execute_pilot(args: argparse.Namespace, case_manifest: Sequence[Mapping[str,
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Prepare or run a small true-long action-ceiling matrix.")
+    parser.add_argument("--audit-existing-pilot-dir", default=None)
     parser.add_argument("--baseline-results", default=DEFAULT_BASELINE)
     parser.add_argument("--route2-results", default=DEFAULT_ROUTE2)
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR)
@@ -1372,6 +1662,12 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if args.audit_existing_pilot_dir:
+        output_dir = Path(args.audit_existing_pilot_dir)
+        equivalence = refresh_existing_pilot_outputs(output_dir)
+        print(f"Action-equivalence audit written to {output_dir}")
+        print(json.dumps(equivalence.get("aggregate", {}), ensure_ascii=False, indent=2))
+        return
     task_ids = parse_task_ids_csv(args.task_ids_csv)
     output_dir = make_output_dir(args.output_dir, args.timestamp)
     config = {

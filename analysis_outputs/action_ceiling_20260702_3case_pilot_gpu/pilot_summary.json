@@ -22,6 +22,29 @@
       "True": 1
     }
   },
+  "candidate_level_canvas_effects": [
+    {
+      "action_id": "C_oracle_sufficient",
+      "candidate_hash": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c",
+      "experimental_seed": 0,
+      "primary_hash": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+      "task_id": "SingleLineInfilling/HumanEval/116/L0"
+    },
+    {
+      "action_id": "C_oracle_sufficient",
+      "candidate_hash": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+      "experimental_seed": 0,
+      "primary_hash": "cc0e41f32b21606bed32aca9ec81fa6a472ee89b35412d2d30d0f6304b942afe",
+      "task_id": "SingleLineInfilling/HumanEval/85/L0"
+    },
+    {
+      "action_id": "C_oracle_sufficient",
+      "candidate_hash": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+      "experimental_seed": 0,
+      "primary_hash": "b1c9952d0408f69d6e80ebf718b350a5f87e2b406d5382112a4265634fdff27e",
+      "task_id": "SingleLineInfilling/HumanEval/113/L3"
+    }
+  ],
   "canvas_effects": [],
   "case_count": 3,
   "ceiling_candidates": [
@@ -73,6 +96,7 @@
     "tie_fail": 6,
     "win": 3
   },
+  "pass_level_canvas_effects": [],
   "row_count": 12,
   "steps96_effects": [],
   "task_action_pass_table": {

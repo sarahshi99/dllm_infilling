@@ -1,0 +1,372 @@
+{
+  "actions": [
+    "A_primary",
+    "B_route2_len32",
+    "C_oracle_sufficient",
+    "D_oracle_sufficient_steps96"
+  ],
+  "aggregate": {
+    "candidate_level_canvas_effect_count": 3,
+    "config_different_but_output_equivalent_count": 5,
+    "output_changed_without_correctness_change_count": 5,
+    "pass_level_canvas_effect_count": 1,
+    "task_count": 3
+  },
+  "mode": "action_equivalence_audit",
+  "tasks": {
+    "SingleLineInfilling/HumanEval/113/L3": {
+      "action_details": {
+        "A_primary": {
+          "actual_canvas_length": 6,
+          "actual_steps": 64,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 29,
+          "error_type": "UnitTestFailure",
+          "generated_text_sha256": "b1c9952d0408f69d6e80ebf718b350a5f87e2b406d5382112a4265634fdff27e",
+          "passed": false,
+          "selected_mask_length": 6,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "B_route2_len32": {
+          "actual_canvas_length": 6,
+          "actual_steps": 64,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 29,
+          "error_type": "UnitTestFailure",
+          "generated_text_sha256": "b1c9952d0408f69d6e80ebf718b350a5f87e2b406d5382112a4265634fdff27e",
+          "passed": false,
+          "selected_mask_length": 6,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "C_oracle_sufficient": {
+          "actual_canvas_length": 44,
+          "actual_steps": 64,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 46,
+          "error_type": "UnitTestFailure",
+          "generated_text_sha256": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+          "passed": false,
+          "selected_mask_length": 44,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "D_oracle_sufficient_steps96": {
+          "actual_canvas_length": 44,
+          "actual_steps": 96,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 68,
+          "error_type": "UnitTestFailure",
+          "generated_text_sha256": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda",
+          "passed": false,
+          "selected_mask_length": 44,
+          "stop_reason": "global_gap_early_commit"
+        }
+      },
+      "action_equivalence_classes": [
+        {
+          "actions": [
+            "A_primary",
+            "B_route2_len32"
+          ],
+          "generated_text_sha256": "b1c9952d0408f69d6e80ebf718b350a5f87e2b406d5382112a4265634fdff27e"
+        },
+        {
+          "actions": [
+            "C_oracle_sufficient",
+            "D_oracle_sufficient_steps96"
+          ],
+          "generated_text_sha256": "9cb32a957675503e43d748232733ad1ba7989ccd78b69e4ac20287ad94015bda"
+        }
+      ],
+      "candidate_level_canvas_effects": [
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "compile_status_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "config_different_but_output_equivalent": [
+        [
+          "C_oracle_sufficient",
+          "D_oracle_sufficient_steps96"
+        ]
+      ],
+      "correctness_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "error_type_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_C": {
+        "A_primary": true,
+        "B_route2_len32": true,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_primary": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": true,
+        "D_oracle_sufficient_steps96": true
+      },
+      "output_changed_without_correctness_change": [
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "pass_level_canvas_effects": [],
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/116/L0": {
+      "action_details": {
+        "A_primary": {
+          "actual_canvas_length": 3,
+          "actual_steps": 64,
+          "compile_passed": false,
+          "early_commit_triggered": false,
+          "effective_steps": 64,
+          "error_type": "SyntaxError",
+          "generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d",
+          "passed": false,
+          "selected_mask_length": 3,
+          "stop_reason": "no_remaining_masks"
+        },
+        "B_route2_len32": {
+          "actual_canvas_length": 32,
+          "actual_steps": 64,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 60,
+          "error_type": null,
+          "generated_text_sha256": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c",
+          "passed": true,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "C_oracle_sufficient": {
+          "actual_canvas_length": 32,
+          "actual_steps": 64,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 60,
+          "error_type": null,
+          "generated_text_sha256": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c",
+          "passed": true,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "D_oracle_sufficient_steps96": {
+          "actual_canvas_length": 32,
+          "actual_steps": 96,
+          "compile_passed": true,
+          "early_commit_triggered": true,
+          "effective_steps": 90,
+          "error_type": null,
+          "generated_text_sha256": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c",
+          "passed": true,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        }
+      },
+      "action_equivalence_classes": [
+        {
+          "actions": [
+            "A_primary"
+          ],
+          "generated_text_sha256": "1a26b0bfb1ab1ffa166dd00d968cc8533bb72db54c8ea09fa5eb6accee35f43d"
+        },
+        {
+          "actions": [
+            "B_route2_len32",
+            "C_oracle_sufficient",
+            "D_oracle_sufficient_steps96"
+          ],
+          "generated_text_sha256": "94d3d9067fb51db3a18f5893eac2fc25f3ae0f54999c46939685b31c7cbe403c"
+        }
+      ],
+      "candidate_level_canvas_effects": [
+        "B_route2_len32",
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "compile_status_changed": {
+        "A_primary": true,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "config_different_but_output_equivalent": [
+        [
+          "B_route2_len32",
+          "D_oracle_sufficient_steps96"
+        ],
+        [
+          "C_oracle_sufficient",
+          "D_oracle_sufficient_steps96"
+        ]
+      ],
+      "correctness_changed": {
+        "A_primary": false,
+        "B_route2_len32": true,
+        "C_oracle_sufficient": true,
+        "D_oracle_sufficient_steps96": true
+      },
+      "error_type_changed": {
+        "A_primary": true,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_C": {
+        "A_primary": true,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_primary": {
+        "A_primary": false,
+        "B_route2_len32": true,
+        "C_oracle_sufficient": true,
+        "D_oracle_sufficient_steps96": true
+      },
+      "output_changed_without_correctness_change": [],
+      "pass_level_canvas_effects": [
+        "B_route2_len32",
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "unique_candidate_hash_count": 2
+    },
+    "SingleLineInfilling/HumanEval/85/L0": {
+      "action_details": {
+        "A_primary": {
+          "actual_canvas_length": 3,
+          "actual_steps": 64,
+          "compile_passed": false,
+          "early_commit_triggered": false,
+          "effective_steps": 64,
+          "error_type": "SyntaxError",
+          "generated_text_sha256": "cc0e41f32b21606bed32aca9ec81fa6a472ee89b35412d2d30d0f6304b942afe",
+          "passed": false,
+          "selected_mask_length": 3,
+          "stop_reason": "no_remaining_masks"
+        },
+        "B_route2_len32": {
+          "actual_canvas_length": 32,
+          "actual_steps": 64,
+          "compile_passed": false,
+          "early_commit_triggered": true,
+          "effective_steps": 63,
+          "error_type": "SyntaxError",
+          "generated_text_sha256": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+          "passed": false,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "C_oracle_sufficient": {
+          "actual_canvas_length": 32,
+          "actual_steps": 64,
+          "compile_passed": false,
+          "early_commit_triggered": true,
+          "effective_steps": 63,
+          "error_type": "SyntaxError",
+          "generated_text_sha256": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+          "passed": false,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        },
+        "D_oracle_sufficient_steps96": {
+          "actual_canvas_length": 32,
+          "actual_steps": 96,
+          "compile_passed": false,
+          "early_commit_triggered": true,
+          "effective_steps": 93,
+          "error_type": "SyntaxError",
+          "generated_text_sha256": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0",
+          "passed": false,
+          "selected_mask_length": 32,
+          "stop_reason": "global_gap_early_commit"
+        }
+      },
+      "action_equivalence_classes": [
+        {
+          "actions": [
+            "A_primary"
+          ],
+          "generated_text_sha256": "cc0e41f32b21606bed32aca9ec81fa6a472ee89b35412d2d30d0f6304b942afe"
+        },
+        {
+          "actions": [
+            "B_route2_len32",
+            "C_oracle_sufficient",
+            "D_oracle_sufficient_steps96"
+          ],
+          "generated_text_sha256": "ff82f09561d32c7f5c790a0f7dd3028043ede4ca0269f6d3fc4bee7e663668d0"
+        }
+      ],
+      "candidate_level_canvas_effects": [
+        "B_route2_len32",
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "compile_status_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "config_different_but_output_equivalent": [
+        [
+          "B_route2_len32",
+          "D_oracle_sufficient_steps96"
+        ],
+        [
+          "C_oracle_sufficient",
+          "D_oracle_sufficient_steps96"
+        ]
+      ],
+      "correctness_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "error_type_changed": {
+        "A_primary": false,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_C": {
+        "A_primary": true,
+        "B_route2_len32": false,
+        "C_oracle_sufficient": false,
+        "D_oracle_sufficient_steps96": false
+      },
+      "output_changed_vs_primary": {
+        "A_primary": false,
+        "B_route2_len32": true,
+        "C_oracle_sufficient": true,
+        "D_oracle_sufficient_steps96": true
+      },
+      "output_changed_without_correctness_change": [
+        "B_route2_len32",
+        "C_oracle_sufficient",
+        "D_oracle_sufficient_steps96"
+      ],
+      "pass_level_canvas_effects": [],
+      "unique_candidate_hash_count": 2
+    }
+  }
+}
