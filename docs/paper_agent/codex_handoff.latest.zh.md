@@ -6,149 +6,169 @@
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
-- 本轮基线 commit：`5c4e79ab4592d660d20c6876d13005afcd3c6583`
-- 本轮代码硬化 commit：`a9ba687e4158bee93799ab76f61f9c1be782454b`
-- 本轮 repro command 补丁 commit：`8c2e1b7`
-- 本轮 3-case pilot compact 结果 commit：`27b96be`
-- working tree：文档更新前仅有待提交文档修改；push 后应为 clean
-- 当前阶段：Phase 1 true-long action-ceiling strict 3-case GPU pilot completed
-- GPU：`CUDA_VISIBLE_DEVICES=1`，NVIDIA RTX A6000
+- 本轮起点 commit：`40d17e41ce04f4078bb2728f08449905a8defb2c`
+- 本轮已提交 commits：`a938e9b`、`ca67f83`、`d6c7ce8`、`af9e709`
+- 文档闭环 commit：写入本文件时待提交；push 后以 `origin/codex/risk-controlled-dynamic-rescue` 为准。
+- working tree：写入本文件时为文档更新阶段；最终 push 后应为 clean。
+- 当前阶段：Phase 1b `Distinct-Candidate Generation Ceiling` strict 3-case GPU pilot completed
+- GPU：`CUDA_VISIBLE_DEVICES=2`，NVIDIA RTX A6000
 
 当前最可信结论：
 
-> 这次 3-case pilot 只支持 `positive_control_only`：positive control 可稳定复现 Route2 win，且 oracle-sufficient C/D 也能通过；但一个 triggered failed-long case 和一个 missed failed-long case 在 oracle-sufficient canvas 与 steps96 下均未恢复。三例结果不支持自动扩大到 9 cases，也不能外推为 true-long 已解决。
+> 接受上一轮 `positive_control_only` 后，本轮 Phase 1b 只支持 `candidate_diversity_without_correctness`：no-early-commit 在 `113/L3` 产生了不同候选 hash，但 hard cases `85/L0` 与 `113/L3` 没有出现正确候选；multi-seed 没有带来额外候选多样性；trace-remask 执行了真实 remask/refinement，但最终 hash 与 C 相同。当前不建议扩展到 9 cases 或 full benchmark。
 
 ## 2. 本轮完成内容
 
-代码修改：
+代码与测试：
 
 - `experiments/action_ceiling/action_ceiling_matrix.py`
-  - 将 `D_oracle_sufficient_conservative` 改名为 `D_oracle_sufficient_steps96`。
-  - 修正 oracle canvas cap：`oracle_len > max_canvas_length` 时不再静默标记 sufficient。
-  - 增加 per-task stable seed、每个 action 前 reset Python/NumPy/torch/CUDA RNG。
-  - 增加 one-case determinism check。
-  - 增加 `pilot_results.csv`、`pilot_results.jsonl`、`pilot_summary.json`、`pilot_report.md`、`run_manifest.json`。
-  - `run_manifest.json` 记录 branch/commit/command/repro_command/env/GPU/checkpoint/dataset/task IDs/seed protocol/action definitions/status/traceback。
+  - 增加旧 3-case A/B/C/D pilot 的 action-equivalence audit。
+  - 报告中将 `canvas_effects` 明确拆分为 `pass_level_canvas_effects` 和 `candidate_level_canvas_effects`。
+- `experiments/action_ceiling/distinct_candidate_ceiling.py`
+  - 新增 Phase 1b runner：C oracle-sufficient、E no-early-commit、F trace-remask。
+  - 支持 action-distinctness smoke gate、固定 seeds `0,1,2`、case/action manifests、run manifest、candidate diversity summary、action equivalence summary。
+  - 压缩 JSONL trajectory，避免保存 top1/prob raw histories。
 - `tests/test_action_ceiling_matrix.py`
-  - 覆盖 oracle cap、D action 命名、summary verdict、CSV/JSONL compact 输出。
+  - 覆盖 early commit 可关闭、F remask/refinement、remask rule 不依赖 verifier label、seed 顺序、candidate hash clustering、Pass@3、output-change 与 correctness-change 分离、action-distinctness stop rule。
 
-实验输出：
+结果与文档：
 
-- 成功 pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/`
-- 无效尝试：第一次沙箱内 GPU run 因 HuggingFace dataset cache lock 只读失败，未产生 `pilot_results.*`，未提交。
+- 旧 pilot 等价性审计：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.{json,md}`。
+- Phase 1b 预注册：`docs/paper_agent/20260702_distinct_candidate_ceiling_action.md`。
+- Phase 1b compact pilot：`analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/`。
+- 文献/novelty 边界更新：`docs/paper_agent/literature_sota_notes.zh.md` 与 `docs/results/literature_sota_notes.zh.md`。
 
 ## 3. 精确运行方式
 
-代码验证：
+旧 action-equivalence 审计：
 
 ```bash
 cd /home/shx/projects/dllm_infilling/git_workspace
-/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py
-/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_action_ceiling_matrix.py
-git diff --check
-```
-
-正式 3-case pilot：
-
-```bash
-CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 \
 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/action_ceiling_matrix.py \
   --timestamp 20260702_3case_pilot_gpu \
-  --task-ids-csv SingleLineInfilling/HumanEval/116/L0,SingleLineInfilling/HumanEval/85/L0,SingleLineInfilling/HumanEval/113/L3 \
-  --max-pilot-cases 3 \
-  --execute-pilot
+  --audit-existing-pilot-dir analysis_outputs/action_ceiling_20260702_3case_pilot_gpu
 ```
 
-验证 pilot artifacts：
+Phase 1b GPU pilot：
 
 ```bash
-/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json
-/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json
+CUDA_VISIBLE_DEVICES=2 TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/distinct_candidate_ceiling.py \
+  --timestamp 20260702_phase1b_distinct_pilot
+```
+
+必要验证：
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py experiments/action_ceiling/distinct_candidate_ceiling.py
+/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_action_ceiling_matrix.py
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/run_manifest.json
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json
+/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool docs/paper_agent/review_manifest.latest.json
+git diff --check
 ```
 
 ## 4. 结果
 
-- verdict：`positive_control_only`
-- determinism：`deterministic`
-- row_count：`12`，只含指定 3 tasks，每个 task 有 A/B/C/D。
-- historical replay mismatches：`[]`
-- cost：sum `55.49s`，avg `4.624s`，P95 `6.724s`；run wall-clock `68.24s`
+旧 A/B/C/D action-equivalence：
 
-| Task | Pool | A primary | B Route2 | C oracle canvas | D oracle canvas steps96 |
-|---|---|---|---|---|---|
-| `SingleLineInfilling/HumanEval/116/L0` | `positive_control_rescued` | FAIL | PASS | PASS | PASS |
-| `SingleLineInfilling/HumanEval/85/L0` | `triggered_failed_long` | FAIL | FAIL | FAIL | FAIL |
-| `SingleLineInfilling/HumanEval/113/L3` | `missed_failed_long` | FAIL | FAIL | FAIL | FAIL |
+- `116/L0`：B/C/D 同 hash；A 不同。
+- `85/L0`：B/C/D 同 hash；A 不同。
+- `113/L3`：A/B 同 hash；C/D 同 hash。
+- D `steps96` 与 C 配置不同，但在三例中输出完全等价；不能再把单纯加 steps 当作有效 action。
 
-Key summary:
+Phase 1b action-distinctness gate：
 
-- candidate existence：只在 positive control 的 C/D 中出现正确候选。
-- canvas effect：`[]`
-- steps96 effect：`[]`
-- trigger opportunity：`[]`
-- negative cases：`85/L0`、`113/L3` 的 C/D 均失败。
+- task：`SingleLineInfilling/HumanEval/85/L0`
+- gate：passed
+- hash distinct from C：`false`
+- auditable distinct trajectory：`true`
+- E early commit disabled：`true`
+- E more actual forwards than C：`true`
+- F remasked token count：`4`
+- F refinement executed：`true`
+
+正式 pilot：
+
+| Task | Role | Unique hashes | C seeds 0/1/2 | E seeds 0/1/2 | F seeds 0/1/2 | Error |
+|---|---|---:|---|---|---|---|
+| `SingleLineInfilling/HumanEval/116/L0` | positive control | 1 | PASS/PASS/PASS | PASS/PASS/PASS | PASS/PASS/PASS | `None` |
+| `SingleLineInfilling/HumanEval/85/L0` | triggered failed-long syntax failure | 1 | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | `SyntaxError` |
+| `SingleLineInfilling/HumanEval/113/L3` | missed failed-long semantic failure | 2 | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | `UnitTestFailure` |
+
+Action cost, avg seconds including probe:
+
+- C oracle-sufficient：`4.134`
+- E no-early-commit：`4.709`
+- F trace-remask：`5.230`
+
+Verdict：`candidate_diversity_without_correctness`。
 
 ## 5. 研究解释
 
 数据直接支持的事实：
 
-- `116/L0` 的 A/B replay 与历史一致，positive control sanity 通过。
-- `85/L0` 中 B 与 C 均为 oracle-sufficient canvas `32`，64 steps 仍失败；D steps96 也失败。
-- `113/L3` 是 missed failed-long，B 按历史未触发复用 primary；C/D 使用 oracle-sufficient canvas `44` 仍失败。
-- 当前 pilot 没有发现非 positive-control 的新正确候选。
+- `116/L0` positive control 仍然稳定通过，说明 pipeline/replay sanity 成立。
+- `85/L0` 在 C/E/F、三个 seed 下均为同一 hash，均 `SyntaxError`；E/F 的轨迹操作没有改变最终候选。
+- `113/L3` 中 E 产生了与 C/F 不同的候选 hash，但仍为 `UnitTestFailure`；F 与 C hash-equivalent。
+- 没有 non-positive-control correct candidate；offline candidate-existence Pass@3 只在 positive control 成立。
 
 合理推断：
 
-- 这三例中，失败不能归因于简单 canvas 不足；至少这两个 true-long代表例更像 rescue generation/backbone limitation。
-- 不应自动扩大到 9 cases；应先由研究者判断是否需要补一个更能区分 generation vs selector 的 action family。
+- 当前模型/runner 存在有限 trajectory exploration 空间，因为 E 能改变 `113/L3` 候选。
+- 当前 E/F action 不足以修复 hard true-long cases；不能把这写成 deployable controller 失败，也不能写成 backbone 最终无能力。
+- 由于 multi-seed 未产生多样性，当前 decoder 更接近 deterministic trajectory lock-in，而非简单 seed exploration 不足。
 
 尚未验证：
 
-- 其他 triggered/missed failed-long rows 是否存在 canvas ceiling signal。
-- local refinement、不同 fixed schedule、或更强 candidate generator 是否能恢复 `85/L0` 或 `113/L3`。
-- 任何 deployable controller 的 held-out improvement。
+- 更强的 pre-registered candidate generator、局部代码结构 refinement 或不同 backbone 是否能产生 hard-case 正确候选。
+- 按 grouped split 拟合的 deployable trigger/selector 是否有效。
+- 当前三例是否统计代表全体 true-long failure。
 
 与原假设冲突：
 
-- “oracle-sufficient canvas + steps96 会在 true-long pilot 中产生新候选”的弱期待未被这三例支持；只有 positive control 成立。
+- “oracle-sufficient canvas + no-early-commit/trace-remask 会在 hard true-long 上产生正确候选”的期待未被支持。
 
 ## 6. 阻塞和风险
 
-- 这只是 3-case pilot，不是统计结论。
-- C/D 使用 oracle length，只能作为 offline ceiling，不能称为 deployable。
-- 当前仍存在 HumanEval test-set 多轮探索风险；未建立 grouped held-out split。
-- 首次沙箱内 run 因 `/home/shx/.cache/huggingface/...lock` 只读失败；复现 GPU run 需要可写 HF cache 或授权沙箱外执行。
-- 旧 full runs 仍缺少统一 manifest、forward accounting、VRAM/P95。
+- Phase 1b 仍是 3-case diagnostic，不是 full benchmark。
+- C/E/F 使用 oracle/reference length，只能作为 offline ceiling。
+- HumanEval 已被多轮探索使用，仍有 benchmark leakage 风险；后续 controller 必须建立 grouped calibration/test split。
+- F remasking 与外部 T2M/RemeDi 方向重合，不能作为原创点。
+- 文献边界显示 CAL/LR-DLLM 已覆盖 length calibration/variable-length inference，DreamOn 已覆盖 dynamic canvas；本项目潜在原创性应收敛到 canvas adequacy、rescue adequacy 和 risk-controlled selective action 的联合建模。
 
 ## 7. 下一步建议
 
-1. 暂停 9-case expansion，先由研究者决定是否接受 `positive_control_only` 作为 stop signal。
-   - 科学问题：当前 action family 是否已足够说明 true-long pilot 缺少 candidate existence？
-   - 所需代码：无新增；阅读 `pilot_report.md` 和 `pilot_results.jsonl`。
-   - 改变方向的结果：若研究者认为三例代表性不足，可批准 9-case pilot；否则转向新 candidate generator。
+1. 停止扩展当前 Route2-based generation family 到 9 cases。
+   - 科学问题：当前 E/F 的候选探索是否只产生错误变体？
+   - 所需代码：无。
+   - 预计输出：对 `113/L3` 的两个 hash 做 compact diff/error analysis；对 `85/L0` 的 SyntaxError 做结构定位。
+   - 改变方向的结果：若错误显示是局部可修复 syntax pattern，可设计一个新的预注册 code-aware refinement。
 
-2. 若继续 Phase 1，应先设计一个不只是 steps96 的 D action。
-   - 科学问题：失败是 backbone capability 还是当前 denoising action 太弱？
-   - 所需代码：新增一个预注册 local refinement 或 finite schedule action。
-   - 预计输出：同样的 action matrix report。
-   - 改变方向的结果：若新 action 仍无候选，应停止 true-long length-control 主线。
+2. 若继续 Phase 1，先设计更强但仍小规模的 candidate generator，而不是增加 seeds/steps。
+   - 科学问题：失败是 candidate exploration failure 还是 backbone capability limitation？
+   - 所需代码：新的有限 action family，运行前写 brief 和 kill criteria。
+   - 预计输出：仍限定 3 cases 的 candidate-existence report。
+   - 改变方向的结果：hard cases 出现正确候选才进入 trigger/selector 研究。
 
-3. 建立 grouped split 与 controller calibration protocol。
-   - 科学问题：后续 risk-controlled controller 是否可避免 benchmark leakage？
-   - 所需代码：按 `HumanEval/<id>` group 划分 train/calibration/frozen validation/test。
-   - 预计输出：machine-readable split JSON 和 protocol doc。
+3. 启动 grouped split protocol。
+   - 科学问题：后续 risk-controlled controller 是否能避免 HumanEval leakage？
+   - 所需代码：按 `HumanEval/<id>` 分组生成 train/calibration/frozen validation/test split。
+   - 预计输出：split JSON、protocol doc、held-out-only evaluation script。
 
 ## 8. 文件索引
 
 优先读：
 
-- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md`
-- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json`
-- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json`
-- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_results.csv`
+- `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md`
+- `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json`
+- `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json`
+- `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/action_equivalence.json`
+- `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md`
+- `docs/paper_agent/20260702_distinct_candidate_ceiling_action.md`
 - `docs/paper_agent/review_manifest.latest.json`
-- `docs/paper_agent/codex_repository_audit.zh.md`
-- `analysis_outputs/action_ceiling_20260702_dryrun/report.md`
+- `docs/paper_agent/literature_sota_notes.zh.md`
 
 暂时不建议读：
 

@@ -1,61 +1,141 @@
 {
   "updated_at_cst": "2026-07-02",
+  "phase": "distinct_candidate_ceiling",
   "branch": "codex/risk-controlled-dynamic-rescue",
-  "base_commit": "5c4e79ab4592d660d20c6876d13005afcd3c6583",
-  "new_commits": [
+  "starting_commit": "40d17e41ce04f4078bb2728f08449905a8defb2c",
+  "relevant_commits": [
     {
-      "commit": "a9ba687e4158bee93799ab76f61f9c1be782454b",
-      "message": "fix: harden action ceiling pilot reproducibility"
+      "commit": "a938e9b",
+      "message": "analysis: audit pilot action equivalence"
     },
     {
-      "commit": "8c2e1b7",
-      "message": "fix: record action ceiling repro command"
+      "commit": "ca67f83",
+      "message": "feat: add distinct candidate ceiling actions"
     },
     {
-      "commit": "27b96be",
-      "message": "results: add three-case action ceiling pilot"
+      "commit": "d6c7ce8",
+      "message": "test: cover trajectory diversity and compact traces"
+    },
+    {
+      "commit": "af9e709",
+      "message": "results: add distinct candidate ceiling pilot"
     }
   ],
-  "pilot": {
+  "predecessor_verdict": {
+    "phase": "action_ceiling_3case",
     "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
-    "report": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md",
-    "summary": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
-    "manifest": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
+    "verdict": "positive_control_only",
+    "accepted": true,
+    "old_matrix_expansion_recommended": false
+  },
+  "action_equivalence_audit": {
+    "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
+    "artifacts": [
+      "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.json",
+      "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md"
+    ],
+    "key_findings": [
+      "116/L0: B, C, and D were output-equivalent by hash.",
+      "85/L0: B, C, and D were output-equivalent by hash.",
+      "113/L3: A and B were output-equivalent; C and D were output-equivalent.",
+      "The old D steps96 action changed configuration and effective-step budget but did not create distinct final candidates in the 3-case pilot."
+    ]
+  },
+  "phase_1b": {
+    "scientific_question": "Under oracle-sufficient offline canvas, can genuinely distinct generation trajectories produce new candidates, and can any such candidate be correct for hard true-long cases?",
+    "non_goals": [
+      "Do not evaluate deployable controller quality.",
+      "Do not claim true-long infilling is solved.",
+      "Do not compare against external baselines.",
+      "Do not claim remasking novelty."
+    ],
+    "output_dir": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot",
+    "report": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md",
+    "summary": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json",
+    "manifest": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/run_manifest.json",
+    "candidate_diversity_summary": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json",
+    "experimental_seeds": [
+      0,
+      1,
+      2
+    ],
     "task_ids": [
       "SingleLineInfilling/HumanEval/116/L0",
       "SingleLineInfilling/HumanEval/85/L0",
       "SingleLineInfilling/HumanEval/113/L3"
     ],
-    "verdict": "positive_control_only",
-    "determinism_status": "deterministic",
-    "historical_replay_mismatches": [],
-    "gpu_used": {
-      "cuda_visible_devices": "1",
-      "model": "NVIDIA RTX A6000"
+    "action_definitions": {
+      "A_primary": "Current primary replay, seed 0 only, sanity use only.",
+      "B_route2_len32": "Current Route2 len32 replay when historically triggered; otherwise primary replay, seed 0 only.",
+      "C_oracle_sufficient": "Oracle-sufficient offline canvas with current early-commit behavior.",
+      "E_oracle_sufficient_no_early_commit": "Same oracle-sufficient canvas as C, but disables global_gap_early_commit and records whether additional effective updates occur.",
+      "F_oracle_sufficient_trace_remask": "Runs C, ranks suspicious positions using token flip count and final confidence from internal trace only, remasks at least one position, then runs a fixed 16-step refinement."
     },
-    "recommended_9_case_expansion": false,
-    "researcher_decision_needed": true,
-    "decision_needed": "Decide whether positive_control_only is sufficient to stop the current action family or whether to approve a redesigned action family before any 9-case expansion."
+    "action_distinctness_result": {
+      "passed": true,
+      "task_id": "SingleLineInfilling/HumanEval/85/L0",
+      "hash_distinct_from_c": false,
+      "auditable_distinct_trajectory": true,
+      "e_early_commit_disabled": true,
+      "e_more_actual_forwards_than_c": true,
+      "f_refinement_executed": true,
+      "f_remasked_token_count": 4,
+      "interpretation": "The gate passed because E/F changed the audited trajectory, even though the 85/L0 final candidate hash stayed identical to C."
+    },
+    "unique_candidate_counts": {
+      "SingleLineInfilling/HumanEval/116/L0": 1,
+      "SingleLineInfilling/HumanEval/85/L0": 1,
+      "SingleLineInfilling/HumanEval/113/L3": 2
+    },
+    "hard_case_candidate_existence": {
+      "SingleLineInfilling/HumanEval/85/L0": false,
+      "SingleLineInfilling/HumanEval/113/L3": false,
+      "non_positive_control_correct_candidate": false
+    },
+    "case_outcomes": {
+      "SingleLineInfilling/HumanEval/116/L0": {
+        "role": "positive_control_rescued",
+        "unique_candidate_hash_count": 1,
+        "pass_fail": "C/E/F all pass for seeds 0,1,2",
+        "error_type_distribution": {
+          "None": 9
+        }
+      },
+      "SingleLineInfilling/HumanEval/85/L0": {
+        "role": "triggered_failed_long_syntax_failure",
+        "unique_candidate_hash_count": 1,
+        "pass_fail": "C/E/F all fail for seeds 0,1,2",
+        "error_type_distribution": {
+          "SyntaxError": 9
+        }
+      },
+      "SingleLineInfilling/HumanEval/113/L3": {
+        "role": "missed_failed_long_semantic_failure",
+        "unique_candidate_hash_count": 2,
+        "pass_fail": "C/E/F all fail for seeds 0,1,2",
+        "error_type_distribution": {
+          "UnitTestFailure": 9
+        },
+        "changed_mechanism": "E_no_early_commit produced a distinct hash; F_trace_remask stayed hash-equivalent to C."
+      }
+    },
+    "action_costs_avg_sec": {
+      "C_oracle_sufficient": 4.1340609761731075,
+      "E_oracle_sufficient_no_early_commit": 4.708774369559251,
+      "F_oracle_sufficient_trace_remask": 5.229656641901885
+    },
+    "verdict": "candidate_diversity_without_correctness",
+    "expansion_recommended": false,
+    "recommended_decision": "Do not expand the current Route2-based generation family to 9 HumanEval cases or a full benchmark. First analyze the changed 113/L3 E candidate and the persistent 85/L0 SyntaxError, or design a stronger pre-registered candidate generator."
   },
-  "tests": [
-    "/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/action_ceiling/action_ceiling_matrix.py",
-    "/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_action_ceiling_matrix.py",
-    "/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
-    "/home/shx/miniconda3/envs/dllm_env/bin/python -m json.tool analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
-    "git diff --check"
-  ],
   "recommended_read_order": [
-    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md",
-    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_summary.json",
-    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/run_manifest.json",
-    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_results.csv",
+    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md",
+    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json",
+    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json",
+    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/action_equivalence.json",
+    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md",
+    "docs/paper_agent/20260702_distinct_candidate_ceiling_action.md",
     "docs/paper_agent/codex_handoff.latest.zh.md",
-    "docs/paper_agent/codex_repository_audit.zh.md",
-    "analysis_outputs/action_ceiling_20260702_dryrun/report.md"
-  ],
-  "non_goals": [
-    "Do not treat this as a full benchmark pass-rate result.",
-    "Do not claim true-long unknown-length infilling is solved.",
-    "Do not expand automatically to 9 cases or full run."
+    "docs/paper_agent/literature_sota_notes.zh.md"
   ]
 }

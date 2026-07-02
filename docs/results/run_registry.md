@@ -8,6 +8,10 @@ Dry-run artifact note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_dry
 
 Pilot artifact note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/` is a strict 3-case action-ceiling diagnostic, not a full benchmark run. It records `12` action rows, verdict `positive_control_only`, deterministic one-case replay, and no historical replay mismatch. It is intentionally excluded from the 1033-row pass-rate table below.
 
+Action-equivalence note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.{json,md}` audits the same 3-case pilot. It shows old D `steps96` was output-equivalent to C for all three cases, so larger nominal step budget alone is not treated as a valid new action family.
+
+Distinct-candidate ceiling note, 2026-07-02: `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/` is a compact Phase 1b diagnostic, not a 1033-row run. It records fixed seeds `0,1,2` for C/E/F on three cases, action-distinctness gate `passed`, unique candidate counts `{116/L0: 1, 85/L0: 1, 113/L3: 2}`, no non-positive-control correct candidate, and verdict `candidate_diversity_without_correctness`. It is intentionally excluded from the pass-rate table below.
+
 | Run | Status | Samples | Pass | Rate | Model | Raw Path |
 |---|---|---:|---:|---:|---|---|
 | `full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` | `candidate` | 1033 | 789 | 76.38% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midaggr_off11_15_d3_8_r08_gpus01_20260520_210248` |

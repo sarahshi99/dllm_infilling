@@ -1,16 +1,18 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-01 15:40 CST
+更新时间：2026-07-02 CST
 
-## Codex Phase 1 action-ceiling pilot 更新（2026-07-02）
+## Codex Phase 1b distinct-candidate ceiling 更新（2026-07-02）
 
-Codex 已在 `codex/risk-controlled-dynamic-rescue` 完成 Phase 0 审计、Phase 1 action-ceiling dry-run scaffold，并运行严格限定的 3-case GPU pilot。审计记录见 `docs/paper_agent/codex_repository_audit.zh.md`，最新交接见 `docs/paper_agent/codex_handoff.latest.zh.md`。
+Codex 已在 `codex/risk-controlled-dynamic-rescue` 完成 Phase 0 审计、Phase 1 action-ceiling dry-run scaffold、严格限定的 3-case A/B/C/D GPU pilot、旧 pilot action-equivalence 审计，以及 Phase 1b distinct-candidate generation ceiling pilot。审计记录见 `docs/paper_agent/codex_repository_audit.zh.md`，最新交接见 `docs/paper_agent/codex_handoff.latest.zh.md`。
 
 审计结论：`paper-agent-overnight` 是当前最新研究分支，领先默认 `main` 26 个 commits；V6 `802/1033` 是当前 LLaDA-Base 最高 full result，但只是 selector polish；V7/V8 是全局比例放长路线负结果；下一步最有决策价值的是 small, pre-registered true-long action-ceiling matrix，而不是继续参数 sweep。
 
 Phase 1 dry-run scaffold：`experiments/action_ceiling/action_ceiling_matrix.py`，dry-run 输出 `analysis_outputs/action_ceiling_20260702_dryrun/report.md`。Dry-run 覆盖 `9` 个 cases、`36` 个 planned actions，case pool 为 positive controls / triggered failed-long / missed failed-long；其中 `25+` cases 为 `6` 个。
 
-Strict 3-case GPU pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md`。Verdict 为 `positive_control_only`：`116/L0` replay A=fail/B=pass 且 C/D pass；`85/L0` 与 `113/L3` 在 A/B/C/D 下均 fail。Determinism check 通过，historical replay mismatch 为 `[]`。当前不建议自动扩大到 9 cases；需要研究者先决定是否换 action family 或接受该 negative pilot 作为 stop signal。
+Strict 3-case GPU pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/pilot_report.md`。Verdict 为 `positive_control_only`：`116/L0` replay A=fail/B=pass 且 C/D pass；`85/L0` 与 `113/L3` 在 A/B/C/D 下均 fail。Determinism check 通过，historical replay mismatch 为 `[]`。后续 action-equivalence 审计 `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md` 显示旧 D `steps96` 与 C 在三例中输出等价，因此不再把单纯增加 step budget 当作有效新 action。
+
+Phase 1b distinct-candidate pilot：`analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md`。Verdict 为 `candidate_diversity_without_correctness`。Action-distinctness gate 在 `85/L0` 通过，因为 E 禁用 early commit 后确实执行更多 forward、F remasked `4` 个 token 并执行 refinement；但 `85/L0` 最终 hash 仍与 C 相同并保持 `SyntaxError`。正式三例中，`116/L0` C/E/F 三个 seeds 全 pass 且只有一个 hash；`85/L0` C/E/F 三个 seeds 全 fail 且只有一个 hash；`113/L3` 的 E 产生第二个 hash，但 C/E/F 三个 seeds 全为 `UnitTestFailure`。没有 non-positive-control correct candidate，不建议扩展当前 generation family 到 9 cases 或 full benchmark。
 
 ## 当前研究目标
 
@@ -18,11 +20,13 @@ Strict 3-case GPU pilot：`analysis_outputs/action_ceiling_20260702_3case_pilot_
 
 ## 当前 central claim
 
-DLLM 代码 infilling 的 inference-time length control 可以通过区分 medium rescue 与 true-long detection，安全恢复 medium-length under-selection；但是 true-long infilling 仍主要受 length underestimation 支配，可能需要比当前 official-CAL gate family 更强的 length-modeling signal。
+DLLM 代码 infilling 的 inference-time length control 不能简化为单一长度预测问题。当前最可信的主张是：保守长度控制与 selective rescue 可以低风险修复一部分 medium/near-long under-selection；但对 true-long cases，length sufficiency is necessary but often not sufficient，剩余失败同时受 trigger recall、rescue generation quality、candidate selection 和 backbone capability 约束。
 
 术语口径：文档中的 previous/local baseline 或 local control 是本项目早前跑出的用户自有方法/控制版本，不是 CAL、LR-DLLM 或 DreamOn 方法的本地复现。论文报告值应与“我们之前的方法”和“当前方法”放在同表比较，但列名必须区分。
 
 ## 当前实验方案版本
+
+当前处于 Phase 1b：`Distinct-Candidate Generation Ceiling`。上一轮 `positive_control_only` 已被接受；旧 A/B/C/D matrix 不扩展到 9 cases；`96/128` 等单纯增加 step budget 停止作为新 action。Phase 1b 结果为 `candidate_diversity_without_correctness`：当前 E/F 可以产生可审计轨迹变化或个别新 hash，但未在 hard cases 中产生正确候选。下一步不应是 full benchmark，而应分析错误类型或设计更强、预注册、有限的 candidate generator。
 
 `v8`：用户提出的“直接改 CAL-like 公式、让长长度按比例获得更大 reward”已完成 GPU1 sequential full runs。结果为 negative：V8a `786/1033 = 76.09%`，V8b `781/1033 = 75.61%`，V8c `782/1033 = 75.70%`，均低于 current `midcons` `795/1033 = 76.96%`、Route2 precision `len32` `801/1033 = 77.54%` 和 V6 short override `802/1033 = 77.64%`。当前 best LLaDA-Base follow-up 仍是 V6 short override。比例思想不能作为全局 scoring reward 继续；若保留，只能作为 under-selection detector / risk guard 下的局部机制。
 
@@ -91,6 +95,8 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 - V6 short override：`802/1033 = 77.64%`，是当前 LLaDA-Base follow-up 中最高 full-run pass count；相对 Route2 precision len32 为 `1` win / `0` losses / `801` tie-pass / `231` tie-fail。解释：这是小幅 selector polish，不是 long-length 根本解决。
 - V7 proportional widening：output `/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_v7_prop_widen_expgrid_gridfix_gpu2_20260701_001430`；`792/1033 = 76.67%`，相对 current `midcons` `795/1033 = 76.96%` 为 `-3` tasks，pairwise `1/4/791/237`。比例放宽 promotion `10` 行，true-long promotion `0`，short promotion `1`，long-bucket win `0`，short-bucket loss `2`；promoted rows 平均长度绝对误差从 `1.1` 恶化到 `6.9`。解释：当前比例放宽参数不成立，不能作为主线。
 - V8 proportional CAL score：outputs `outputs_clean/full_v8a_propcal_beta002_gpu1_20260701_102654`、`outputs_clean/full_v8b_propcal_beta004_gpu1_20260701_120525`、`outputs_clean/full_v8c_propcal_beta004_cap32_gpu1_20260701_134849`；三条 full 结果分别为 `786/1033 = 76.09%`、`781/1033 = 75.61%`、`782/1033 = 75.70%`。Pairwise vs `midcons` 分别为 `3/12/783/235`、`7/21/774/231`、`6/19/776/232`；short losses 分别为 `7/13/11`，long wins 分别为 `2/3/2`。解释：公式内比例奖励确实会增加少量 long wins，但伤害 short/medium 更明显；V8 是全局比例放长路线的负结果。
+- Phase 1 action-equivalence audit：output `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md`；`116/L0` 与 `85/L0` 的 B/C/D hash-equivalent，`113/L3` 的 A/B hash-equivalent、C/D hash-equivalent。解释：旧 D `steps96` 配置上不同但输出等价；必须区分 `candidate_level_canvas_effects` 与 `pass_level_canvas_effects`，不能把“无 pass improvement”写成“canvas 没改变生成”。
+- Phase 1b distinct-candidate ceiling：output `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot`；verdict `candidate_diversity_without_correctness`。Unique hashes：`116/L0 = 1`、`85/L0 = 1`、`113/L3 = 2`。C/E/F seeds `0,1,2` 只在 positive control pass；`85/L0` 保持 `SyntaxError`，`113/L3` 保持 `UnitTestFailure`。解释：当前 runner 有有限 trajectory exploration space，但 hard cases 无正确候选；不建议扩展当前 generation family。
 - Route2 error analysis Discovery V3：output `analysis_outputs/route2_error_analysis_20260617_165806`；report `analysis_outputs/route2_error_analysis_20260617_165806/report.md`。它确认 Route2 的 `6` 个 wins 均来自 triggered rescue，但 `33` 个 triggered failed-long 中 `31` 个 rescue length 已经 >= oracle，同时还有 `56` 个 failed-long rows 未触发。结论：不要盲目加长 canvas；下一步应同时查 rescue generation/selection quality 和 probe-trace fusion gate recall。
 - Discovery V4 design：spec `docs/superpowers/specs/2026-06-17-discovery-v4-signal-model-design.md`；plan `docs/superpowers/plans/2026-06-17-discovery-v4-signal-model-plan.md`。V4 不再把问题看成单 feature 枚举，而是 risk-controlled action selection：`MissedLongHead` 找 missed failed-long 的 probe-trace fusion signal，`RescueQualityHead` 解释长度足够仍失败的 triggered rows，最后由 Policy Distillation 生成可审稿的 training-free rule/action。
 - Discovery V4 signal audit：output `analysis_outputs/discovery_v4_signal_audit_20260618_000000`；report `analysis_outputs/discovery_v4_signal_audit_20260618_000000/report.md`；decision `route2_polish_only`。Joined rows `1033`，true-long `113`，baseline failed-long `91`。Best non-leaking candidate `broad_len24_triggered >= 1` 触发 `73` 行、missed failed-long `4`、triggered rescue-failure `33`、short risk `10`、current-pass risk `1`、true-long precision `0.534`、stable folds `3/5`，因此 reject。结论：不要从 V4 audit 直接启动 GPU full run。
@@ -125,12 +131,12 @@ DLLM 代码 infilling 的 inference-time length control 可以通过区分 mediu
 
 ## 下一步计划
 
-1. 不继续当前 V7/V8 proportional length reward 路线作为主线；V7 和 V8 都已经 full-run negative。
-2. 保留 V6 short override 作为当前 LLaDA-Base best full-run follow-up：`802/1033 = 77.64%`。
-3. 若继续比例思想，必须从全局 reward 改为局部 guarded policy：strict under-selection detector、raw-confirm、trace/probe risk guard，并限制候选空间。
-4. 若继续 true-long recovery，更有希望的方向仍是 rescue generation/selection quality 或 principled length modeling，而不是无保护加长 canvas。
+1. 不扩展当前 Route2-based generation family 到 9 cases 或 full benchmark。
+2. 对 `113/L3` 的 C/F hash 与 E hash 做 compact diff/error analysis，并定位 `85/L0` 固定 `SyntaxError`；负结果也要记录。
+3. 若继续 true-long recovery，必须先设计更强但有限、预注册的 candidate generator；不能继续只加 steps、seeds 或局部 if-rule。
+4. 启动 grouped split protocol，为后续 risk-controlled controller 留出 calibration/frozen validation/final held-out evaluation。
 5. 任何 GPU 前必须写新 action brief、success/kill criteria，并确认不会干扰他人任务。
 
 ## 需要用户决策的问题
 
-目前没有正在运行的 Route 2 GPU 实验需要接管。Discovery V4 CPU audit 已完成，未通过 GPU gate；导师汇报材料已生成。下一步需要用户决定是否进入新的 rescue generation/selection 机制设计，以及汇报后是否按导师反馈调整 paper framing。
+目前没有正在运行的 GPU 实验需要接管。Phase 1b 不支持继续当前 generation family 的 9-case expansion。下一步需要研究者决定：是先做 hard-case error analysis，还是批准一个新的、预注册的 candidate generator；同时建议尽快建立 grouped split protocol。

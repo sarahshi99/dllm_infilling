@@ -1,6 +1,6 @@
 # 文献与 SOTA 笔记
 
-更新时间：2026-05-29
+更新时间：2026-07-02
 
 本文记录经过 source-check 的比较锚点，用于未来 SOTA 主张。当前项目尚不声称 SOTA。
 
@@ -40,6 +40,30 @@ CAL 是当前本地项目最接近的方法学前身：
 - 摘要层面报告结果：CAL 在 code infilling 中相对 fixed-length baselines 最高提升 `47.7%` Pass@1。
 
 这与本地 LCAS/LCAL stack 直接相关：两者都从 confidence/probe behavior 推断 length choice，然后通过 bounded repair 和 bucket-specific controls 提高安全性。
+
+## Remasking / Candidate Exploration 锚点（2026-07-02 source-check）
+
+这些文献直接约束本项目的 novelty 边界：不能把“把 token 重新置回 mask 再 refine”本身写成本项目原创。
+
+- Token-to-Mask / T2M remasking:
+  - "Remask, Don't Replace: Token-to-Mask Refinement in Masked Diffusion Language Models"
+  - arXiv: https://arxiv.org/abs/2604.18738
+  - 核心相关性：将可疑 committed token reset 到 mask state，再让 diffusion process 重新预测；训练外、修改 decoding/editing rule 的方向。
+- Targeted Remasking:
+  - "Targeted Remasking: Replacing Token Editing with Token-to-Mask Refinement in Discrete Diffusion Language Models"
+  - arXiv: https://arxiv.org/abs/2605.26436
+  - 核心相关性：把 T2M 做成 targeted remasking，并讨论 probability-based、trigger-mirrored、temporal-difference-based 等 error detection strategies。
+- Self-reflective remasking / RemeDi:
+  - "Don't Settle Too Early: Self-Reflective Remasking for Diffusion Language Models"
+  - arXiv: https://arxiv.org/abs/2509.23653
+  - HF model card: https://huggingface.co/maple-research-lab/RemeDi-Instruct
+  - 核心相关性：把 remasking 作为 mask-based DLM 的机制之一，并通过 per-token confidence / remask-aware pipeline 支持 iterative refinement。
+- Candidate quality-exploration tradeoff:
+  - "Locally Confident, Globally Stuck: The Quality-Exploration Dilemma in Diffusion Language Models"
+  - arXiv: https://arxiv.org/abs/2604.00375
+  - 核心相关性：指出 low-confidence / confidence-prioritized remasking 可提升 single-sample quality，但可能压制 exploration 和 Pass@k；这与本项目 Phase 1b 的 multi-seed/candidate-diversity ceiling 直接相关。
+
+本项目 2026-07-02 的 `F_oracle_sufficient_trace_remask` 只能定位为 diagnostic baseline：它用内部 trace 中的 token flip count 和 final confidence 做固定 remask rule，以测试 hard cases 是否存在 candidate exploration ceiling；不能宣称 remasking 是本项目原创贡献。
 
 ## 如何比较我们的 Runs
 
@@ -95,3 +119,13 @@ LR-DLLM 是另一个相关的 variable-length inference 论文：
 - 摘要 headline result：在 fully unknown lengths 的 HumanEvalInfilling 上 `51.3%` Pass@1，相对 DreamOn `+13.4%`。
 
 这篇论文相关性很高，因为它把 length selection 视为 inference-time confidence-bias problem，接近本项目核心问题。但在匹配 dataset split、prompt/canvas format 和 unknown-length assumptions 前，不能直接与当前 `HumanEval-SingleLineInfilling` 本地 protocol 比较。
+
+## Novelty Boundary After Phase 1b
+
+截至 2026-07-02，source-checked 文献边界如下：
+
+- Remasking / token-to-mask refinement 已有 T2M、Targeted Remasking 和 RemeDi 等明确先例；本项目不能把 remasking 本身作为原创点。
+- Length calibration / variable-length inference 已有 CAL 与 LR-DLLM；本项目不能把“用 confidence/probe 做长度校准”单独作为原创点。
+- Dynamic canvas / beyond fixed-size canvas 已有 DreamOn，并且直接面向 code infilling；本项目不能简单声称“动态 canvas”本身新颖。
+- 本项目潜在原创性应集中在：joint modeling of canvas adequacy and rescue adequacy，以及 risk-controlled selective action under bounded inference cost。
+- Phase 1b negative/diagnostic evidence 支持把论文问题从“选更长长度”转为“何时需要 canvas、何时 rescue 真的会产生可选正确候选、何时 intervention risk 可控”。

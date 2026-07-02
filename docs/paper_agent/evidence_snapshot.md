@@ -10,6 +10,10 @@ Action-ceiling dry-run note, 2026-07-02: `analysis_outputs/action_ceiling_202607
 
 Action-ceiling 3-case pilot note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/` contains the strict 3-case GPU pilot requested after the dry-run scaffold. Verdict is `positive_control_only`: `116/L0` replayed A=fail/B=pass and C/D also pass, while `85/L0` and `113/L3` fail under A/B/C/D. This is a compact diagnostic result, not a new full-run pass-rate claim, and it does not justify automatic expansion to 9 cases.
 
+Action-equivalence audit note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.{json,md}` shows that the old D `steps96` action was output-equivalent to C in all three pilot cases. The audit distinguishes `pass_level_canvas_effects` from `candidate_level_canvas_effects`; absence of pass improvement must not be written as absence of generation change.
+
+Distinct-candidate ceiling pilot note, 2026-07-02: `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/` contains the Phase 1b strict 3-case diagnostic. Verdict is `candidate_diversity_without_correctness`: action-distinctness gate passed via auditable trajectory differences, `113/L3` produced a distinct no-early-commit hash, but no hard-case correct candidate appeared. `85/L0` remained a single-hash `SyntaxError`; `113/L3` remained `UnitTestFailure`; only the positive control passed. This is candidate-existence evidence, not a deployable Pass@1 claim.
+
 ## Runs
 
 | Run | Rows | Pass | Rate | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |

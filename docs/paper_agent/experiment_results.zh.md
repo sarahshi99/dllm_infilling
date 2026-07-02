@@ -43,6 +43,53 @@ Sanity：
 
 Interpretation：pilot 只确认 positive control pipeline 有效；没有在 triggered failed-long 或 missed failed-long 代表例中发现新的 correct candidate。`85/L0` 的 Route2 len32 已等于 oracle 32，C 与 B 都失败，D steps96 也失败；`113/L3` 使用 oracle-sufficient canvas 44 后仍失败。因此这三例更支持 rescue generation/backbone limitation 的风险，而不是“单纯加足 canvas 就能救回”。这不是统计结论，但足以触发 stop rule：不要自动扩大到 9 cases，需研究者先决定是否换 action family 或接受 negative pilot。
 
+## Codex Phase 1b distinct-candidate generation ceiling（2026-07-02）
+
+输出目录：`analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/`。
+
+本轮研究决策：接受上一轮 `positive_control_only`；不扩展旧 A/B/C/D matrix 到 9 cases；停止把 `96/128` 等单纯增加 step budget 作为新 action；改为检查 oracle-sufficient canvas 下，真正不同的生成轨迹是否能产生新候选或正确候选。
+
+预注册文档：`docs/paper_agent/20260702_distinct_candidate_ceiling_action.md`。本轮 F trace-remask 只作为 diagnostic baseline，不是原创性 claim。
+
+复现命令：
+
+```bash
+CUDA_VISIBLE_DEVICES=2 TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/distinct_candidate_ceiling.py \
+  --timestamp 20260702_phase1b_distinct_pilot
+```
+
+Action-distinctness gate：
+
+- smoke case：`SingleLineInfilling/HumanEval/85/L0`
+- gate：passed
+- E early commit disabled：`true`
+- E more actual forwards than C：`true`
+- F remasked token count：`4`
+- F refinement executed：`true`
+- hash distinct from C：`false`
+- interpretation：gate 通过是因为轨迹可审计地区分，而不是因为 `85/L0` 产生不同最终 hash。
+
+正式 pilot 仍只覆盖三例：`116/L0` positive control、`85/L0` triggered failed-long syntax failure、`113/L3` missed failed-long semantic/unit-test failure。C/E/F 使用固定 seeds `0,1,2`。
+
+| Task | Role | Unique hashes | C seeds 0/1/2 | E seeds 0/1/2 | F seeds 0/1/2 | Error |
+|---|---|---:|---|---|---|---|
+| `SingleLineInfilling/HumanEval/116/L0` | positive control | `1` | PASS/PASS/PASS | PASS/PASS/PASS | PASS/PASS/PASS | `None` |
+| `SingleLineInfilling/HumanEval/85/L0` | triggered failed-long syntax failure | `1` | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | `SyntaxError` |
+| `SingleLineInfilling/HumanEval/113/L3` | missed failed-long semantic failure | `2` | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | FAIL/FAIL/FAIL | `UnitTestFailure` |
+
+Action cost，avg seconds including probe：
+
+| Action | Avg sec |
+|---|---:|
+| `C_oracle_sufficient` | `4.134` |
+| `E_oracle_sufficient_no_early_commit` | `4.709` |
+| `F_oracle_sufficient_trace_remask` | `5.230` |
+
+Verdict：`candidate_diversity_without_correctness`。
+
+Interpretation：`113/L3` 的 E action 证明当前 runner 不是完全 hash-locked，存在有限 candidate exploration；但 hard cases 没有正确候选，multi-seed 没有额外多样性，F trace-remask 真实执行但未改变最终 hash。因此当前证据不支持扩展到 9 HumanEval cases 或 full benchmark。下一步应先分析 `113/L3` 的不同错误候选和 `85/L0` 的固定 SyntaxError，或预注册更强 candidate generator；不要把这轮结果写成 backbone final ceiling。
+
 ## 三方对比总表：论文报告值 vs 我们之前的方法 vs 当前方法
 
 重要口径修正：下表中的“我们之前的方法 / previous local method”不是对应论文方法的本地复现，而是本项目早前已经跑出的本地方法或本地控制版本。论文报告值只作为外部 reported numbers 放在同一张表里，便于判断相对位置；它们不等同于本地同协议 baseline。
