@@ -73,6 +73,7 @@ DIAGNOSTIC_ACTIONS = (
     "C_oracle_sufficient",
     "E_oracle_sufficient_no_early_commit",
     "F_oracle_sufficient_trace_remask",
+    "G_oracle_sufficient_trace_span_remask",
 )
 ALL_ACTIONS = SANITY_ACTIONS + DIAGNOSTIC_ACTIONS
 VERDICTS = {
@@ -81,6 +82,7 @@ VERDICTS = {
     "candidate_diversity_without_correctness",
     "no_early_commit_signal",
     "trace_remask_signal",
+    "trace_span_remask_signal",
     "multi_seed_candidate_signal",
     "mixed_distinct_candidate_signal",
     "positive_control_only",
@@ -189,6 +191,12 @@ def build_action_manifest(case_manifest: Sequence[Mapping[str, Any]]) -> List[Js
             "offline_ceiling_trace_remask",
             "oracle-sufficient C candidate plus fixed internal-trace remask refinement",
             80,
+            list(EXPERIMENTAL_SEEDS),
+        ),
+        "G_oracle_sufficient_trace_span_remask": (
+            "offline_ceiling_trace_span_remask",
+            "oracle-sufficient C candidate plus fixed internal-trace contiguous-span remask refinement",
+            88,
             list(EXPERIMENTAL_SEEDS),
         ),
     }
@@ -457,7 +465,13 @@ def remask_count_for_canvas(canvas_len: int) -> int:
     return max(1, min(4, int(math.ceil(0.10 * int(canvas_len)))))
 
 
-def select_trace_remask_positions(stage1: Mapping[str, Any], *, canvas_len: int) -> List[JsonDict]:
+def span_remask_width_for_canvas(canvas_len: int) -> int:
+    if int(canvas_len) <= 0:
+        return 0
+    return min(int(canvas_len), max(2, min(8, int(math.ceil(0.20 * int(canvas_len))))))
+
+
+def trace_position_scores(stage1: Mapping[str, Any], *, canvas_len: int) -> List[JsonDict]:
     trajectory = stage1.get("trajectory") or {}
     top1_history = trajectory.get("top1_history") or []
     top1_prob_history = trajectory.get("top1_prob_history") or []
@@ -476,7 +490,45 @@ def select_trace_remask_positions(stage1: Mapping[str, Any], *, canvas_len: int)
             }
         )
     rows.sort(key=lambda row: (-int(row["token_flip_count"]), float(row["final_confidence"]), int(row["index"])))
+    return rows
+
+
+def select_trace_remask_positions(stage1: Mapping[str, Any], *, canvas_len: int) -> List[JsonDict]:
+    rows = trace_position_scores(stage1, canvas_len=canvas_len)
     return rows[: remask_count_for_canvas(int(canvas_len))]
+
+
+def select_trace_span_remask(stage1: Mapping[str, Any], *, canvas_len: int) -> JsonDict:
+    all_scores = trace_position_scores(stage1, canvas_len=canvas_len)
+    ranked = all_scores[:1]
+    center = int(ranked[0]["index"]) if ranked else 0
+    width = span_remask_width_for_canvas(int(canvas_len))
+    half_left = width // 2
+    start = max(0, center - half_left)
+    end = start + width
+    if end > int(canvas_len):
+        end = int(canvas_len)
+        start = max(0, end - width)
+    indices = list(range(start, end))
+    score_by_index = {
+        int(row["index"]): {
+            "index": int(row["index"]),
+            "token_flip_count": int(row["token_flip_count"]),
+            "final_confidence": float(row["final_confidence"]),
+            "score_tuple": row.get("score_tuple"),
+        }
+        for row in all_scores
+    }
+    return {
+        "center_index": center,
+        "span_start": start,
+        "span_end_exclusive": end,
+        "span_width": width,
+        "remasked_token_indices": indices,
+        "center_score": ranked[0] if ranked else None,
+        "span_scores": [score_by_index.get(idx, {"index": idx}) for idx in indices],
+        "remask_rule_uses_test_result": False,
+    }
 
 
 def run_trace_remask(
@@ -566,6 +618,98 @@ def run_trace_remask(
     return combined
 
 
+def run_trace_span_remask(
+    *,
+    task: CodeTask,
+    tokenizer: Any,
+    model: Any,
+    cfg: ExperimentConfig,
+    canvas_len: int,
+    total_steps: int,
+    refinement_steps: int,
+) -> JsonDict:
+    stage1 = decode_fixed_canvas(
+        task=task,
+        tokenizer=tokenizer,
+        model=model,
+        cfg=cfg,
+        canvas_len=canvas_len,
+        total_steps=total_steps,
+        early_commit_enabled=True,
+        phase_name="stage1_c_oracle_sufficient",
+    )
+    span = select_trace_span_remask(stage1, canvas_len=canvas_len)
+    remask_indices = [int(idx) for idx in span["remasked_token_indices"]]
+    refine = decode_fixed_canvas(
+        task=task,
+        tokenizer=tokenizer,
+        model=model,
+        cfg=cfg,
+        canvas_len=canvas_len,
+        total_steps=refinement_steps,
+        early_commit_enabled=False,
+        initial_middle_ids=stage1["final_middle_ids"],
+        initial_mask_indices=remask_indices,
+        schedule_length=len(remask_indices),
+        phase_name="stage2_trace_span_remask_refinement",
+    )
+    combined = copy.deepcopy(refine)
+    stage1_metrics = stage1.get("metrics") or {}
+    refine_metrics = refine.get("metrics") or {}
+    combined["metrics"] = {
+        **refine_metrics,
+        "total_steps": int(total_steps) + int(refinement_steps),
+        "stage1_steps": int(total_steps),
+        "refinement_steps": int(refinement_steps),
+        "actual_forward_steps": int(stage1_metrics.get("actual_forward_steps") or 0)
+        + int(refine_metrics.get("actual_forward_steps") or 0),
+        "total_sec_including_probe": float(stage1_metrics.get("total_sec_including_probe") or 0.0)
+        + float(refine_metrics.get("total_sec_including_probe") or 0.0),
+        "decode_sec": float(stage1_metrics.get("decode_sec") or 0.0) + float(refine_metrics.get("decode_sec") or 0.0),
+        "verification_sec": float(stage1_metrics.get("verification_sec") or 0.0)
+        + float(refine_metrics.get("verification_sec") or 0.0),
+        "remasked_token_count": len(remask_indices),
+        "remasked_span_start": span["span_start"],
+        "remasked_span_end_exclusive": span["span_end_exclusive"],
+        "remasked_span_width": span["span_width"],
+        "remasked_span_center_index": span["center_index"],
+        "refinement_executed": True,
+        "span_refinement_executed": True,
+        "stage1_hash": sha256_text(stage1.get("middle_text")),
+    }
+    combined["trajectory"] = {
+        "stage1_summary": {
+            key: stage1_metrics.get(key)
+            for key in [
+                "actual_forward_steps",
+                "effective_update_steps",
+                "total_token_changes",
+                "stopped",
+                "stop_reason",
+                "no_remaining_masks_first_step",
+            ]
+        },
+        "stage2_summary": {
+            key: refine_metrics.get(key)
+            for key in [
+                "actual_forward_steps",
+                "effective_update_steps",
+                "total_token_changes",
+                "stopped",
+                "stop_reason",
+                "no_remaining_masks_first_step",
+            ]
+        },
+        "stage1_step_trace": (stage1.get("trajectory") or {}).get("step_trace"),
+        "stage2_step_trace": (refine.get("trajectory") or {}).get("step_trace"),
+        "remask_rule": "center highest token_flip_count desc/final_confidence asc/index asc; span=max(2,min(8,ceil(0.20*canvas_len))); refinement_steps=24",
+        "remasked_token_indices": remask_indices,
+        "remask_span": span,
+        "remask_rule_uses_test_result": False,
+    }
+    return combined
+
+
 def result_error_type(result: Mapping[str, Any]) -> Optional[str]:
     return verification_error_type(result)
 
@@ -616,8 +760,13 @@ def result_record(
         "stop_reason": metrics.get("stop_reason"),
         "no_remaining_masks_first_step": metrics.get("no_remaining_masks_first_step"),
         "remasked_token_count": metrics.get("remasked_token_count"),
+        "remasked_span_start": metrics.get("remasked_span_start"),
+        "remasked_span_end_exclusive": metrics.get("remasked_span_end_exclusive"),
+        "remasked_span_width": metrics.get("remasked_span_width"),
+        "remasked_span_center_index": metrics.get("remasked_span_center_index"),
         "refinement_steps": metrics.get("refinement_steps"),
         "refinement_executed": metrics.get("refinement_executed"),
+        "span_refinement_executed": metrics.get("span_refinement_executed"),
         "stage1_hash": metrics.get("stage1_hash"),
         "output_changed_vs_C": None if c_hash is None else generated_hash != c_hash,
         "total_sec_including_probe": metrics.get("total_sec_including_probe"),
@@ -744,26 +893,43 @@ def smoke_gate(rows: Sequence[Mapping[str, Any]]) -> JsonDict:
     c = by_action.get("C_oracle_sufficient")
     e = by_action.get("E_oracle_sufficient_no_early_commit")
     f = by_action.get("F_oracle_sufficient_trace_remask")
+    g = by_action.get("G_oracle_sufficient_trace_span_remask")
     c_hash = None if c is None else c.get("generated_text_sha256")
     e_hash = None if e is None else e.get("generated_text_sha256")
     f_hash = None if f is None else f.get("generated_text_sha256")
+    g_hash = None if g is None else g.get("generated_text_sha256")
     e_disabled = bool(e and e.get("early_commit_enabled") is False)
     e_more_forwards = bool(e and c and int(e.get("actual_forward_steps") or 0) > int(c.get("actual_forward_steps") or 0))
     f_remasked = bool(f and int(f.get("remasked_token_count") or 0) > 0)
     f_refined = bool(f and f.get("refinement_executed") is True)
-    hash_distinct = (e_hash is not None and e_hash != c_hash) or (f_hash is not None and f_hash != c_hash)
-    auditable_distinct = e_more_forwards or (f_remasked and f_refined)
-    passed = e_disabled and f_remasked and f_refined and (hash_distinct or auditable_distinct)
+    g_remasked = bool(g and int(g.get("remasked_token_count") or 0) > 0)
+    g_span_width = 0 if g is None else int(g.get("remasked_span_width") or 0)
+    g_refined = bool(g and g.get("span_refinement_executed") is True)
+    g_effective_updates = bool(g and int(g.get("effective_update_steps") or 0) > 0)
+    hash_distinct = (
+        (e_hash is not None and e_hash != c_hash)
+        or (f_hash is not None and f_hash != c_hash)
+        or (g_hash is not None and g_hash != c_hash and g_hash != f_hash)
+    )
+    auditable_distinct = e_more_forwards or (f_remasked and f_refined) or (g_remasked and g_refined and g_span_width > 0)
+    g_real = g_remasked and g_refined and (g_span_width > 0 or g_effective_updates)
+    passed = e_disabled and f_remasked and f_refined and g_real and (hash_distinct or auditable_distinct)
     return {
         "task_id": SMOKE_TASK_ID,
         "passed": passed,
         "c_hash": c_hash,
         "e_hash": e_hash,
         "f_hash": f_hash,
+        "g_hash": g_hash,
         "e_early_commit_disabled": e_disabled,
         "e_more_actual_forwards_than_c": e_more_forwards,
         "f_remasked_token_count": None if f is None else f.get("remasked_token_count"),
         "f_refinement_executed": None if f is None else f.get("refinement_executed"),
+        "g_remasked_token_count": None if g is None else g.get("remasked_token_count"),
+        "g_remasked_span_width": None if g is None else g.get("remasked_span_width"),
+        "g_span_refinement_executed": None if g is None else g.get("span_refinement_executed"),
+        "g_effective_update_steps": None if g is None else g.get("effective_update_steps"),
+        "g_mechanism_real_executed": g_real,
         "hash_distinct_from_c": hash_distinct,
         "auditable_distinct_trajectory": auditable_distinct,
     }
@@ -789,6 +955,8 @@ def choose_verdict(rows: Sequence[Mapping[str, Any]], gate: Mapping[str, Any]) -
             return "no_early_commit_signal"
         if "F_oracle_sufficient_trace_remask" in mechanisms:
             return "trace_remask_signal"
+        if "G_oracle_sufficient_trace_span_remask" in mechanisms:
+            return "trace_span_remask_signal"
         return "multi_seed_candidate_signal"
     hard_hashes_by_task: Dict[str, set[str]] = defaultdict(set)
     for row in hard_rows:
@@ -989,6 +1157,17 @@ def run_diagnostic_actions(
                 refinement_steps=16,
             )
             note = "executed_trace_remask_refinement"
+        elif action_id == "G_oracle_sufficient_trace_span_remask":
+            result = run_trace_span_remask(
+                task=task,
+                tokenizer=tokenizer,
+                model=model,
+                cfg=cfg,
+                canvas_len=canvas_len,
+                total_steps=64,
+                refinement_steps=24,
+            )
+            note = "executed_trace_span_remask_refinement"
         else:
             raise ValueError(f"unknown diagnostic action: {action_id}")
         rows.append(
@@ -1020,7 +1199,12 @@ def build_pilot_summary(rows: Sequence[Mapping[str, Any]], gate: Mapping[str, An
         {
             str(row.get("action_id"))
             for row in rows
-            if row.get("action_id") in {"E_oracle_sufficient_no_early_commit", "F_oracle_sufficient_trace_remask"}
+            if row.get("action_id")
+            in {
+                "E_oracle_sufficient_no_early_commit",
+                "F_oracle_sufficient_trace_remask",
+                "G_oracle_sufficient_trace_span_remask",
+            }
             and row.get("output_changed_vs_C") is True
         }
     )
@@ -1103,6 +1287,7 @@ def execute(args: argparse.Namespace) -> None:
             "dataset_subset": args.dataset_subset,
             "lcas_policy": args.lcas_policy,
             "trace_remask_rule": "token_flip_count desc, final_confidence asc, index asc; k=max(1,min(4,ceil(0.10*canvas_len)))",
+            "trace_span_remask_rule": "center highest token_flip_count desc/final_confidence asc/index asc; width=max(2,min(8,ceil(0.20*canvas_len))); refinement_steps=24",
         }
         (output_dir / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
 

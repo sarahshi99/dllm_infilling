@@ -25,8 +25,10 @@ from experiments.action_ceiling.distinct_candidate_ceiling import (
     cluster_hashes,
     has_multi_seed_diversity,
     remask_count_for_canvas,
+    select_trace_span_remask,
     select_trace_remask_positions,
     smoke_gate,
+    span_remask_width_for_canvas,
     stable_task_seed,
     summarize_diversity,
 )
@@ -376,6 +378,34 @@ class ActionCeilingManifestTest(unittest.TestCase):
         self.assertNotIn("passed", selected[0])
         self.assertNotIn("verification", selected[0])
 
+    def test_trace_span_remask_uses_fixed_contiguous_span_without_test_result(self) -> None:
+        stage1 = {
+            "trajectory": {
+                "top1_history": [
+                    [10, 20, 30, 40, 50, 60],
+                    [10, 21, 31, 40, 50, 60],
+                    [11, 21, 32, 40, 50, 60],
+                ],
+                "top1_prob_history": [
+                    [0.9, 0.8, 0.7, 0.6, 0.5, 0.4],
+                    [0.8, 0.7, 0.6, 0.5, 0.4, 0.3],
+                    [0.7, 0.4, 0.9, 0.3, 0.2, 0.1],
+                ],
+            },
+            "passed": True,
+            "verification": {"tier3_unit_tests": {"passed": True}},
+        }
+
+        span = select_trace_span_remask(stage1, canvas_len=6)
+
+        self.assertEqual(span_remask_width_for_canvas(6), 2)
+        self.assertEqual(span["center_index"], 2)
+        self.assertEqual(span["remasked_token_indices"], [1, 2])
+        self.assertEqual(span["span_end_exclusive"] - span["span_start"], 2)
+        self.assertFalse(span["remask_rule_uses_test_result"])
+        self.assertNotIn("passed", span)
+        self.assertNotIn("verification", span)
+
     def test_experimental_seed_order_does_not_change_stable_seed(self) -> None:
         task_id = "SingleLineInfilling/HumanEval/85/L0"
         forward = [stable_task_seed(42, task_id, seed) for seed in [0, 1, 2]]
@@ -410,6 +440,7 @@ class ActionCeilingManifestTest(unittest.TestCase):
             {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "C_oracle_sufficient", "generated_text_sha256": "same", "passed": False},
             {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "E_oracle_sufficient_no_early_commit", "generated_text_sha256": "same", "passed": False, "early_commit_enabled": False, "actual_forward_steps": 64},
             {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "F_oracle_sufficient_trace_remask", "generated_text_sha256": "same", "passed": False, "remasked_token_count": 0, "refinement_executed": False},
+            {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "G_oracle_sufficient_trace_span_remask", "generated_text_sha256": "same", "passed": False, "remasked_token_count": 0, "remasked_span_width": 0, "span_refinement_executed": False},
         ]
 
         gate = smoke_gate(rows)
@@ -417,6 +448,20 @@ class ActionCeilingManifestTest(unittest.TestCase):
 
         self.assertFalse(gate["passed"])
         self.assertEqual(verdict, "invalid_action_not_distinct")
+
+    def test_g_action_distinctness_accepts_real_span_mechanism(self) -> None:
+        rows = [
+            {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "C_oracle_sufficient", "generated_text_sha256": "same", "passed": False, "actual_forward_steps": 40},
+            {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "E_oracle_sufficient_no_early_commit", "generated_text_sha256": "same", "passed": False, "early_commit_enabled": False, "actual_forward_steps": 64},
+            {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "F_oracle_sufficient_trace_remask", "generated_text_sha256": "same", "passed": False, "remasked_token_count": 4, "refinement_executed": True},
+            {"task_id": "SingleLineInfilling/HumanEval/85/L0", "action_id": "G_oracle_sufficient_trace_span_remask", "generated_text_sha256": "same", "passed": False, "remasked_token_count": 6, "remasked_span_width": 6, "span_refinement_executed": True, "effective_update_steps": 3},
+        ]
+
+        gate = smoke_gate(rows)
+
+        self.assertTrue(gate["passed"])
+        self.assertTrue(gate["g_mechanism_real_executed"])
+        self.assertEqual(gate["g_remasked_span_width"], 6)
 
     def test_output_change_and_correctness_change_are_separate_in_phase1b(self) -> None:
         rows = [
