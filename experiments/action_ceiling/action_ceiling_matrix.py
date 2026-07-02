@@ -580,10 +580,24 @@ def build_run_manifest(
     verdict: Optional[str] = None,
     failure_traceback: Optional[str] = None,
 ) -> JsonDict:
+    command = shlex.join([sys.executable, *sys.argv])
+    env_prefix = {
+        key: os.environ[key]
+        for key in (
+            "CUDA_VISIBLE_DEVICES",
+            "TOKENIZERS_PARALLELISM",
+            "HF_HUB_OFFLINE",
+            "TRANSFORMERS_OFFLINE",
+        )
+        if key in os.environ
+    }
+    env_text = " ".join(f"{key}={shlex.quote(value)}" for key, value in sorted(env_prefix.items()))
     return {
         "branch": current_branch(),
         "commit": current_commit(),
-        "command": shlex.join([sys.executable, *sys.argv]),
+        "command": command,
+        "env_command_prefix": env_prefix,
+        "repro_command": f"{env_text} {command}".strip(),
         "argv": [sys.executable, *sys.argv],
         "timestamp": args.timestamp,
         "started_at": started_at,
@@ -1092,7 +1106,7 @@ def render_pilot_report(
         "",
         f"- branch: `{manifest.get('branch')}`",
         f"- commit: `{manifest.get('commit')}`",
-        f"- command: `{manifest.get('command')}`",
+        f"- command: `{manifest.get('repro_command') or manifest.get('command')}`",
         f"- output_dir: `{manifest.get('output_dir')}`",
         f"- task_ids: `{summary.get('task_ids')}`",
         f"- experimental_seeds: `{summary.get('experimental_seeds')}`",
