@@ -1,0 +1,28 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "commit": "89e30c13879d1197ef5588ef5da4582d6d1e44b4",
+  "dataset_subset": "HumanEval-SingleLineInfilling",
+  "group_unit": "HumanEval/<id>",
+  "non_goal": "Current oracle action-ceiling results are diagnostic and must not be reported as held-out method results.",
+  "row_count": 1033,
+  "seed": 20260702,
+  "source_split": "test",
+  "split_group_counts": {
+    "calibration": 25,
+    "test": 16,
+    "train": 98,
+    "validation": 25
+  },
+  "split_row_counts": {
+    "calibration": 155,
+    "test": 106,
+    "train": 645,
+    "validation": 127
+  },
+  "task_group_count": 164,
+  "updated_at_cst": "2026-07-02",
+  "verification": {
+    "overlaps": [],
+    "passed": true
+  }
+}
