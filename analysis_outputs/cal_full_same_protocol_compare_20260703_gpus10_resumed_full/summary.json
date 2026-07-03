@@ -1,0 +1,101 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "cal_full_status": "completed",
+  "cal_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
+  "cal_summary": {
+    "avg_total_sec_including_probe": 3.569845807120801,
+    "num_samples": 1033,
+    "pass_rate": 0.7492739593417231,
+    "required_metrics": {
+      "13-16_bucket_pass_rate": 0.5666666666666667,
+      "17-24_bucket_pass_rate": 0.1951219512195122,
+      "25+_bucket_pass_rate": 0.0967741935483871,
+      "9-12_bucket_pass_rate": 0.8103448275862069,
+      "<=8_bucket_pass_rate": 0.862876254180602,
+      "avg_selected_minus_oracle_length": -1.0706679574056148,
+      "over_select_by3_rate_le8": 0.2608695652173913,
+      "over_select_rate_le8": 0.4096989966555184,
+      "overall_pass_rate": 0.7492739593417231,
+      "under_select_by3_rate_17plus": 0.8761061946902655,
+      "under_select_rate_17plus": 0.8849557522123894
+    }
+  },
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/cal_full_compare.py --cal-run-dir /home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615 --timestamp 20260703_gpus10_resumed_full",
+  "commit": "2738b9bfd38dc8388f716a021357b354f8f690af",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 6]\n?? analysis_outputs/cal_full_resume_20260703_gpus10/\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10/\n?? experiments/action_ceiling/cal_official_lcas_v3_resume.py",
+  "paired_against_cal": [
+    {
+      "baseline": "control",
+      "cal_losses": 38,
+      "cal_wins": 25,
+      "candidate": "cal_full",
+      "common": 1033,
+      "tie_fail": 221,
+      "tie_pass": 749
+    },
+    {
+      "baseline": "midcons",
+      "cal_losses": 38,
+      "cal_wins": 17,
+      "candidate": "cal_full",
+      "common": 1033,
+      "tie_fail": 221,
+      "tie_pass": 757
+    },
+    {
+      "baseline": "route2_len32",
+      "cal_losses": 44,
+      "cal_wins": 17,
+      "candidate": "cal_full",
+      "common": 1033,
+      "tie_fail": 215,
+      "tie_pass": 757
+    },
+    {
+      "baseline": "v6_short_override",
+      "cal_losses": 45,
+      "cal_wins": 17,
+      "candidate": "cal_full",
+      "common": 1033,
+      "tie_fail": 214,
+      "tie_pass": 757
+    }
+  ],
+  "runs": [
+    {
+      "name": "cal_full",
+      "pass_count": 774,
+      "pass_rate": 0.7492739593417231,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
+      "rows": 1033
+    },
+    {
+      "name": "control",
+      "pass_count": 787,
+      "pass_rate": 0.7618586640851888,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529",
+      "rows": 1033
+    },
+    {
+      "name": "midcons",
+      "pass_count": 795,
+      "pass_rate": 0.7696030977734754,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626",
+      "rows": 1033
+    },
+    {
+      "name": "route2_len32",
+      "pass_count": 801,
+      "pass_rate": 0.7754114230396902,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516",
+      "rows": 1033
+    },
+    {
+      "name": "v6_short_override",
+      "pass_count": 802,
+      "pass_rate": 0.7763794772507261,
+      "path": "/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_route2_v6_short_override_gpu2_20260620_124754",
+      "rows": 1033
+    }
+  ]
+}

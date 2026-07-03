@@ -1,0 +1,5 @@
+candidate,baseline,common,cal_wins,cal_losses,tie_pass,tie_fail
+cal_full,control,1033,25,38,749,221
+cal_full,midcons,1033,17,38,757,221
+cal_full,route2_len32,1033,17,44,757,215
+cal_full,v6_short_override,1033,17,45,757,214

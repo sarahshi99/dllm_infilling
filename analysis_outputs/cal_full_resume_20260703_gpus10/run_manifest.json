@@ -1,0 +1,41 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/cal_official_lcas_v3_resume.py --partial-run-dir /home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_20260702_230148 --manifest-output-dir analysis_outputs/cal_full_resume_20260703_gpus10 --supplement-experiment-name full_official_cal_lcas_v3b_accel_gpus10_20260702_supplement --merged-experiment-name full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full",
+  "commit": "2738b9bfd38dc8388f716a021357b354f8f690af",
+  "env_command_prefix": {
+    "CUDA_VISIBLE_DEVICES": "1,0",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 2,
+    "cuda_visible_devices": "1,0",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA RTX A6000",
+      "NVIDIA RTX A6000"
+    ],
+    "hostname": "amax",
+    "platform": "Linux-5.15.0-67-generic-x86_64-with-glibc2.31",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121"
+  },
+  "execution_status": "completed",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue [ahead 6]\n?? analysis_outputs/cal_full_resume_20260703_gpus10/\n?? analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10/\n?? experiments/action_ceiling/cal_official_lcas_v3_resume.py",
+  "merged_count": 1033,
+  "merged_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
+  "partial_count": 741,
+  "partial_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_20260702_230148",
+  "repro_command": "CUDA_VISIBLE_DEVICES=1,0 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/cal_official_lcas_v3_resume.py --partial-run-dir /home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_20260702_230148 --manifest-output-dir analysis_outputs/cal_full_resume_20260703_gpus10 --supplement-experiment-name full_official_cal_lcas_v3b_accel_gpus10_20260702_supplement --merged-experiment-name full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full",
+  "started_at": "2026-07-03T10:58:33",
+  "summary_path": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615/summary.json",
+  "supplement_count": 292,
+  "supplement_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_supplement_20260703_105834",
+  "total_expected": 1033,
+  "wall_clock_sec": 1062.7326012279373
+}
