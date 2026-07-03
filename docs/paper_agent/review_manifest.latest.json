@@ -1,145 +1,204 @@
 {
-  "updated_at_cst": "2026-07-02",
-  "phase": "distinct_candidate_ceiling",
+  "updated_at_cst": "2026-07-03",
+  "task_type": "accelerated_execution_correction",
+  "phase": "long_failure_generation_screen_and_baseline_sanity",
   "branch": "codex/risk-controlled-dynamic-rescue",
-  "starting_commit": "40d17e41ce04f4078bb2728f08449905a8defb2c",
+  "starting_commit": "467734de306bedd81c217ea512d370e8cec3cf51",
   "relevant_commits": [
     {
-      "commit": "a938e9b",
-      "message": "analysis: audit pilot action equivalence"
+      "commit": "4e5c0fc",
+      "message": "feat: add third distinct generation action"
     },
     {
-      "commit": "ca67f83",
-      "message": "feat: add distinct candidate ceiling actions"
+      "commit": "89e30c1",
+      "message": "analysis: add accelerated execution screen runners"
     },
     {
-      "commit": "d6c7ce8",
-      "message": "test: cover trajectory diversity and compact traces"
+      "commit": "e11c18e",
+      "message": "analysis: add grouped task split"
     },
     {
-      "commit": "af9e709",
-      "message": "results: add distinct candidate ceiling pilot"
+      "commit": "9eca940",
+      "message": "baseline: add cal protocol sanity"
     },
     {
-      "commit": "e8b935e",
-      "message": "docs: record candidate generation ceiling verdict"
+      "commit": "7def5f7",
+      "message": "results: add 95-case generation screen"
+    },
+    {
+      "commit": "2738b9b",
+      "message": "baseline: add cal full comparison tooling"
     }
   ],
-  "predecessor_verdict": {
-    "phase": "action_ceiling_3case",
-    "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
-    "verdict": "positive_control_only",
-    "accepted": true,
-    "old_matrix_expansion_recommended": false
+  "minimum_acceptance_met": true,
+  "hard_cases_expected": 89,
+  "hard_cases_executed": 89,
+  "positive_controls_executed": 6,
+  "seed0_generation_actions_expected": 285,
+  "seed0_generation_actions_executed": 285,
+  "multiseed_actions_executed": 180,
+  "grouped_split_status": "completed",
+  "cal_sanity_status": "protocol_matched_cal",
+  "cal_full_status": "completed_resumed_full",
+  "final_verdict": "mixed_generation_signal",
+  "action_definitions": {
+    "E_oracle_sufficient_no_early_commit": "Oracle-sufficient offline canvas with global early commit disabled; records effective updates and stop reason.",
+    "F_oracle_sufficient_trace_remask": "Oracle-sufficient candidate followed by internal-trace-guided individual-token remask/refinement; does not use unit-test labels or reference tokens.",
+    "G_oracle_sufficient_trace_span_remask": "Oracle-sufficient C trajectory followed by internal-trace-guided contiguous-span remask centered on the highest-instability token; span width fixed to max(2, min(8, ceil(0.20 * canvas_len))); fixed 24-step refinement with early commit disabled."
   },
-  "action_equivalence_audit": {
-    "output_dir": "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu",
-    "artifacts": [
-      "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.json",
-      "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md"
-    ],
-    "key_findings": [
-      "116/L0: B, C, and D were output-equivalent by hash.",
-      "85/L0: B, C, and D were output-equivalent by hash.",
-      "113/L3: A and B were output-equivalent; C and D were output-equivalent.",
-      "The old D steps96 action changed configuration and effective-step budget but did not create distinct final candidates in the 3-case pilot."
-    ]
-  },
-  "phase_1b": {
-    "scientific_question": "Under oracle-sufficient offline canvas, can genuinely distinct generation trajectories produce new candidates, and can any such candidate be correct for hard true-long cases?",
-    "non_goals": [
-      "Do not evaluate deployable controller quality.",
-      "Do not claim true-long infilling is solved.",
-      "Do not compare against external baselines.",
-      "Do not claim remasking novelty."
-    ],
-    "output_dir": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot",
-    "report": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md",
-    "summary": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json",
-    "manifest": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/run_manifest.json",
-    "candidate_diversity_summary": "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json",
-    "experimental_seeds": [
-      0,
-      1,
-      2
-    ],
-    "task_ids": [
-      "SingleLineInfilling/HumanEval/116/L0",
-      "SingleLineInfilling/HumanEval/85/L0",
-      "SingleLineInfilling/HumanEval/113/L3"
-    ],
-    "action_definitions": {
-      "A_primary": "Current primary replay, seed 0 only, sanity use only.",
-      "B_route2_len32": "Current Route2 len32 replay when historically triggered; otherwise primary replay, seed 0 only.",
-      "C_oracle_sufficient": "Oracle-sufficient offline canvas with current early-commit behavior.",
-      "E_oracle_sufficient_no_early_commit": "Same oracle-sufficient canvas as C, but disables global_gap_early_commit and records whether additional effective updates occur.",
-      "F_oracle_sufficient_trace_remask": "Runs C, ranks suspicious positions using token flip count and final confidence from internal trace only, remasks at least one position, then runs a fixed 16-step refinement."
+  "screen_95case": {
+    "output_dir": "analysis_outputs/long_failure_generation_screen_20260702_accel95",
+    "report": "analysis_outputs/long_failure_generation_screen_20260702_accel95/report.md",
+    "case_manifest": "analysis_outputs/long_failure_generation_screen_20260702_accel95/case_manifest.csv",
+    "seed0_results": "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_results.csv",
+    "seed0_summary": "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_summary.json",
+    "multiseed_manifest": "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_case_manifest.csv",
+    "multiseed_summary": "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_summary.json",
+    "coverage": {
+      "case_count": 95,
+      "hard_case_count": 89,
+      "positive_control_count": 6,
+      "triggered_failed_long": 33,
+      "missed_failed_long": 56,
+      "seed0_action_count": 285
     },
-    "action_distinctness_result": {
-      "passed": true,
-      "task_id": "SingleLineInfilling/HumanEval/85/L0",
-      "hash_distinct_from_c": false,
-      "auditable_distinct_trajectory": true,
-      "e_early_commit_disabled": true,
-      "e_more_actual_forwards_than_c": true,
-      "f_refinement_executed": true,
-      "f_remasked_token_count": 4,
-      "interpretation": "The gate passed because E/F changed the audited trajectory, even though the 85/L0 final candidate hash stayed identical to C."
-    },
-    "unique_candidate_counts": {
-      "SingleLineInfilling/HumanEval/116/L0": 1,
-      "SingleLineInfilling/HumanEval/85/L0": 1,
-      "SingleLineInfilling/HumanEval/113/L3": 2
-    },
-    "hard_case_candidate_existence": {
-      "SingleLineInfilling/HumanEval/85/L0": false,
-      "SingleLineInfilling/HumanEval/113/L3": false,
-      "non_positive_control_correct_candidate": false
-    },
-    "case_outcomes": {
-      "SingleLineInfilling/HumanEval/116/L0": {
-        "role": "positive_control_rescued",
-        "unique_candidate_hash_count": 1,
-        "pass_fail": "C/E/F all pass for seeds 0,1,2",
-        "error_type_distribution": {
-          "None": 9
-        }
+    "pool_summary": {
+      "triggered_failed_long": {
+        "case_count": 33,
+        "new_correct_candidate_cases": 0,
+        "unique_candidate_case_count": 3,
+        "compile_repair_cases": 3,
+        "unchanged_by_all_actions": 30
       },
-      "SingleLineInfilling/HumanEval/85/L0": {
-        "role": "triggered_failed_long_syntax_failure",
-        "unique_candidate_hash_count": 1,
-        "pass_fail": "C/E/F all fail for seeds 0,1,2",
-        "error_type_distribution": {
-          "SyntaxError": 9
-        }
+      "missed_failed_long": {
+        "case_count": 56,
+        "new_correct_candidate_cases": 31,
+        "unique_candidate_case_count": 7,
+        "compile_repair_cases": 6,
+        "unchanged_by_all_actions": 46
       },
-      "SingleLineInfilling/HumanEval/113/L3": {
-        "role": "missed_failed_long_semantic_failure",
-        "unique_candidate_hash_count": 2,
-        "pass_fail": "C/E/F all fail for seeds 0,1,2",
-        "error_type_distribution": {
-          "UnitTestFailure": 9
-        },
-        "changed_mechanism": "E_no_early_commit produced a distinct hash; F_trace_remask stayed hash-equivalent to C."
+      "positive_control_rescued": {
+        "case_count": 6,
+        "new_correct_candidate_cases": 6,
+        "unique_candidate_case_count": 1,
+        "compile_repair_cases": 4,
+        "unchanged_by_all_actions": 5
       }
     },
-    "action_costs_avg_sec": {
-      "C_oracle_sufficient": 4.1340609761731075,
-      "E_oracle_sufficient_no_early_commit": 4.708774369559251,
-      "F_oracle_sufficient_trace_remask": 5.229656641901885
+    "action_summary": {
+      "E_oracle_sufficient_no_early_commit": {
+        "rows": 95,
+        "hard_correct_cases": 31,
+        "compile_success_actions": 73,
+        "output_changed_vs_C": 13,
+        "mean_cost_sec": 4.042,
+        "p95_cost_sec": 6.208
+      },
+      "F_oracle_sufficient_trace_remask": {
+        "rows": 95,
+        "hard_correct_cases": 30,
+        "compile_success_actions": 71,
+        "output_changed_vs_C": 7,
+        "avg_remasked_token_count": 3.18,
+        "mean_cost_sec": 4.229,
+        "p95_cost_sec": 5.896
+      },
+      "G_oracle_sufficient_trace_span_remask": {
+        "rows": 95,
+        "hard_correct_cases": 30,
+        "compile_success_actions": 71,
+        "output_changed_vs_C": 7,
+        "avg_remasked_token_count": 5.79,
+        "avg_remasked_span_width": 5.79,
+        "mean_cost_sec": 4.725,
+        "p95_cost_sec": 6.668
+      }
     },
-    "verdict": "candidate_diversity_without_correctness",
-    "expansion_recommended": false,
-    "recommended_decision": "Do not expand the current Route2-based generation family to 9 HumanEval cases or a full benchmark. First analyze the changed 113/L3 E candidate and the persistent 85/L0 SyntaxError, or design a stronger pre-registered candidate generator."
+    "hard_case_totals": {
+      "new_correct_candidate_count": 31,
+      "compile_repair_count": 9,
+      "diversity_without_correctness_count": 6,
+      "all_actions_unchanged_count": 76,
+      "all_actions_distinct_but_wrong_count": 1
+    },
+    "multiseed": {
+      "selected_case_count": 30,
+      "seeds": [
+        1,
+        2
+      ],
+      "actions_executed": 180,
+      "hard_selected_cases_with_any_correct_candidate": 24,
+      "multiseed_only_correct_cases": 0,
+      "interpretation": "Conditional diagnostic only; do not report selected-case Pass@3 as an unbiased benchmark metric."
+    }
   },
+  "grouped_split": {
+    "output_dir": "analysis_outputs/grouped_split_20260702_accel2",
+    "protocol_doc": "docs/paper_agent/grouped_split_protocol.zh.md",
+    "split_manifest": "analysis_outputs/grouped_split_20260702_accel2/split_manifest.json",
+    "group_unit": "HumanEval/<id>",
+    "seed": 20260702,
+    "verification_passed": true,
+    "task_group_counts": {
+      "train": 98,
+      "calibration": 25,
+      "validation": 25,
+      "test": 16
+    },
+    "row_counts": {
+      "train": 645,
+      "calibration": 155,
+      "validation": 127,
+      "test": 106
+    }
+  },
+  "cal_sanity": {
+    "output_dir": "analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2",
+    "verdict": "protocol_matched_cal",
+    "protocol_boundary": "Same-repository same-protocol local CAL sanity, not an external official-code reproduction claim.",
+    "checks_all_passed": true
+  },
+  "cal_full": {
+    "resume_manifest_dir": "analysis_outputs/cal_full_resume_20260703_gpus10",
+    "raw_merged_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
+    "compact_compare_dir": "analysis_outputs/cal_full_same_protocol_compare_20260703_gpus10_resumed_full",
+    "rows": 1033,
+    "pass_count": 774,
+    "pass_rate": 0.7492739593417231,
+    "paired_against_cal": {
+      "control": {
+        "common": 1033,
+        "cal_wins": 25,
+        "cal_losses": 38
+      },
+      "midcons": {
+        "common": 1033,
+        "cal_wins": 17,
+        "cal_losses": 38
+      },
+      "route2_len32": {
+        "common": 1033,
+        "cal_wins": 17,
+        "cal_losses": 44
+      },
+      "v6_short_override": {
+        "common": 1033,
+        "cal_wins": 17,
+        "cal_losses": 45
+      }
+    }
+  },
+  "expansion_recommended": false,
+  "recommended_decision": "Do not expand the current oracle action family further before separating deployable trigger/selector work on the grouped split and diagnosing the triggered failed-long zero-recovery subset.",
   "recommended_read_order": [
-    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_report.md",
-    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/pilot_summary.json",
-    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/candidate_diversity_summary.json",
-    "analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/action_equivalence.json",
-    "analysis_outputs/action_ceiling_20260702_3case_pilot_gpu/action_equivalence.md",
-    "docs/paper_agent/20260702_distinct_candidate_ceiling_action.md",
-    "docs/paper_agent/codex_handoff.latest.zh.md",
-    "docs/paper_agent/literature_sota_notes.zh.md"
+    "analysis_outputs/long_failure_generation_screen_20260702_accel95/report.md",
+    "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_summary.json",
+    "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_summary.json",
+    "analysis_outputs/grouped_split_20260702_accel2/split_manifest.json",
+    "docs/paper_agent/grouped_split_protocol.zh.md",
+    "analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2/protocol_comparison.md",
+    "analysis_outputs/cal_full_same_protocol_compare_20260703_gpus10_resumed_full/report.md",
+    "docs/paper_agent/codex_handoff.latest.zh.md"
   ]
 }
