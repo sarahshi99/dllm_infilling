@@ -1,0 +1,7 @@
+criterion,local_status,evidence,risk
+official_source,blocked,"The repository contains literature anchors and the arXiv paper metadata, but no official LR-DLLM code or adapter.",Cannot claim official reproduction.
+checkpoint_backbone_compatibility,unknown,Paper reports several backbones including LLaDA-family anchors; no local Stage I/II implementation is available for GSAI-ML/LLaDA-8B-Base.,A local approximation would mix method and implementation differences.
+stage_i_length_regularization,not_implemented,No code path for LR-DLLM semantic compatibility / length-induced uncertainty correction was found in this repository.,Cannot run Stage I same-protocol sanity.
+stage_ii_dynamic_span_adjustment,not_implemented,No code path for LR-DLLM expansion/contraction policy or Stage II adapter was found.,Cannot run Stage I+II full comparison.
+prompt_dataset_evaluator,available_for_future_adapter,"The local HumanEval-SingleLineInfilling dataset, prompt, checkpoint, and verifier are available through existing runners.",Adapter is feasible only after official algorithm/code is available.
+oracle_use,not_run,No LR-DLLM generation was executed; the sanity manifest intentionally contains no pass/fail output for LR-DLLM.,Avoids misleading protocol-mismatched numbers.

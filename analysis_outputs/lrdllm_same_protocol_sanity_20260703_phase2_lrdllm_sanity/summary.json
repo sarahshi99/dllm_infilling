@@ -1,0 +1,21 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "case_count": 10,
+  "case_strata": {
+    "medium_control_fail": 1,
+    "medium_control_pass": 2,
+    "short_control_fail": 1,
+    "short_control_pass": 2,
+    "true_long_control_fail": 3,
+    "true_long_control_pass": 1
+  },
+  "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "full_run_status": "not_run_protocol_mismatch_blocked",
+  "generation_executed": false,
+  "mode": "lrdllm_same_protocol_sanity",
+  "official_paper": {
+    "arxiv": "https://arxiv.org/abs/2602.07546",
+    "title": "Improving Variable-Length Generation in Diffusion Language Models via Length Regularization"
+  },
+  "verdict": "protocol_mismatch_blocked"
+}

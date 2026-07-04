@@ -1,0 +1,9 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/lrdllm_protocol_sanity.py --timestamp 20260703_phase2_lrdllm_sanity",
+  "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "execution_status": "completed_protocol_blocked",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_pilot/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1/\n?? analysis_outputs/frozen_controller_20260703_phase2_freeze/\n?? analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/\n?? docs/paper_agent/frozen_controller_protocol.zh.md\n?? experiments/action_ceiling/frozen_canvas_controller.py\n?? experiments/action_ceiling/lrdllm_protocol_sanity.py\n?? experiments/action_ceiling/oracle_canvas_attribution.py",
+  "output_dir": "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity",
+  "verdict": "protocol_mismatch_blocked"
+}

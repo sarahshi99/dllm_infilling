@@ -1,0 +1,11 @@
+task_id,task_group,split,oracle_length,oracle_bucket,length_class,primary_selected_length,primary_passed,primary_error_type,sanity_stratum,lrdllm_stage,lrdllm_passed,lrdllm_output_hash,blocked_reason
+SingleLineInfilling/HumanEval/120/L1,HumanEval/120,calibration,4,<=8,short,16,True,,short_control_pass,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/120/L2,HumanEval/120,calibration,5,<=8,short,5,True,,short_control_pass,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/120/L0,HumanEval/120,calibration,8,<=8,short,6,False,primary_failed,short_control_fail,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/127/L10,HumanEval/127,calibration,16,13-16,medium,16,True,,medium_control_pass,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/127/L11,HumanEval/127,calibration,16,13-16,medium,16,True,,medium_control_pass,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/127/L1,HumanEval/127,calibration,13,13-16,medium,6,False,primary_failed,medium_control_fail,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/146/L4,HumanEval/146,calibration,21,17-24,true_long,24,True,,true_long_control_pass,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/121/L0,HumanEval/121,calibration,28,25+,true_long,3,False,primary_failed,true_long_control_fail,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/146/L6,HumanEval/146,calibration,27,25+,true_long,11,False,primary_failed,true_long_control_fail,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
+SingleLineInfilling/HumanEval/17/L1,HumanEval/17,calibration,19,17-24,true_long,3,False,primary_failed,true_long_control_fail,not_run,,,official/local LR-DLLM Stage I/II implementation unavailable
