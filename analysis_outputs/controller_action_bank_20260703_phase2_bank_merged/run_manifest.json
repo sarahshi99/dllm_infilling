@@ -1,0 +1,146 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/frozen_canvas_controller.py --mode merge-bank --output-dir analysis_outputs/controller_action_bank_20260703_phase2_bank_merged --merge-dirs analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0,analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1",
+  "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "coverage": {
+    "duplicate_action_rows": 10,
+    "duplicate_examples": [
+      {
+        "action": "KEEP_PRIMARY",
+        "task_id": "SingleLineInfilling/HumanEval/132/L1"
+      },
+      {
+        "action": "EXPAND_16",
+        "task_id": "SingleLineInfilling/HumanEval/132/L1"
+      },
+      {
+        "action": "EXPAND_24",
+        "task_id": "SingleLineInfilling/HumanEval/132/L1"
+      },
+      {
+        "action": "EXPAND_32",
+        "task_id": "SingleLineInfilling/HumanEval/132/L1"
+      },
+      {
+        "action": "EXPAND_48",
+        "task_id": "SingleLineInfilling/HumanEval/132/L1"
+      },
+      {
+        "action": "KEEP_PRIMARY",
+        "task_id": "SingleLineInfilling/HumanEval/132/L11"
+      },
+      {
+        "action": "EXPAND_16",
+        "task_id": "SingleLineInfilling/HumanEval/132/L11"
+      },
+      {
+        "action": "EXPAND_24",
+        "task_id": "SingleLineInfilling/HumanEval/132/L11"
+      },
+      {
+        "action": "EXPAND_32",
+        "task_id": "SingleLineInfilling/HumanEval/132/L11"
+      },
+      {
+        "action": "EXPAND_48",
+        "task_id": "SingleLineInfilling/HumanEval/132/L11"
+      }
+    ],
+    "expected_action_rows": 4635,
+    "expected_task_count": 927,
+    "extra_action_rows": 0,
+    "missing_action_rows": 0,
+    "missing_examples": [],
+    "observed_action_rows": 4635,
+    "observed_task_count": 927
+  },
+  "execution_status": "completed_with_coverage_warning",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M docs/paper_agent/codex_handoff.latest.zh.md\n M docs/paper_agent/experiment_plan.current.zh.md\n M docs/paper_agent/paper_agent_dashboard.zh.md\n M docs/paper_agent/research_design.current.zh.md\n M docs/paper_agent/review_manifest.latest.json\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_pilot/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation_v2/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/\n?? analysis_outputs/frozen_controller_20260703_phase2_freeze/\n?? analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/\n?? docs/paper_agent/frozen_controller_protocol.zh.md\n?? docs/paper_agent/lrdllm_protocol_audit.zh.md\n?? experiments/action_ceiling/frozen_canvas_controller.py\n?? experiments/action_ceiling/lrdllm_protocol_sanity.py\n?? experiments/action_ceiling/oracle_canvas_attribution.py\n?? tests/test_frozen_canvas_controller.py",
+  "merge_dirs": [
+    "analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0",
+    "analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1"
+  ],
+  "output_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+  "source_counts": {
+    "analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0": 2320,
+    "analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1": 2325
+  },
+  "started_at": "2026-07-03T21:19:43",
+  "summary": {
+    "action_counts": {
+      "EXPAND_16": 927,
+      "EXPAND_24": 927,
+      "EXPAND_32": 927,
+      "EXPAND_48": 927,
+      "KEEP_PRIMARY": 927
+    },
+    "benefit_labels_non_keep": 191,
+    "cost": {
+      "mean": 3.52723535730289,
+      "p50": 3.3891470790840685,
+      "p95": 5.8281581461196765
+    },
+    "harm_labels_non_keep": 1242,
+    "merge_coverage": {
+      "duplicate_action_rows": 10,
+      "duplicate_examples": [
+        {
+          "action": "KEEP_PRIMARY",
+          "task_id": "SingleLineInfilling/HumanEval/132/L1"
+        },
+        {
+          "action": "EXPAND_16",
+          "task_id": "SingleLineInfilling/HumanEval/132/L1"
+        },
+        {
+          "action": "EXPAND_24",
+          "task_id": "SingleLineInfilling/HumanEval/132/L1"
+        },
+        {
+          "action": "EXPAND_32",
+          "task_id": "SingleLineInfilling/HumanEval/132/L1"
+        },
+        {
+          "action": "EXPAND_48",
+          "task_id": "SingleLineInfilling/HumanEval/132/L1"
+        },
+        {
+          "action": "KEEP_PRIMARY",
+          "task_id": "SingleLineInfilling/HumanEval/132/L11"
+        },
+        {
+          "action": "EXPAND_16",
+          "task_id": "SingleLineInfilling/HumanEval/132/L11"
+        },
+        {
+          "action": "EXPAND_24",
+          "task_id": "SingleLineInfilling/HumanEval/132/L11"
+        },
+        {
+          "action": "EXPAND_32",
+          "task_id": "SingleLineInfilling/HumanEval/132/L11"
+        },
+        {
+          "action": "EXPAND_48",
+          "task_id": "SingleLineInfilling/HumanEval/132/L11"
+        }
+      ],
+      "expected_action_rows": 4635,
+      "expected_task_count": 927,
+      "extra_action_rows": 0,
+      "missing_action_rows": 0,
+      "missing_examples": [],
+      "observed_action_rows": 4635,
+      "observed_task_count": 927
+    },
+    "mode": "controller_action_bank",
+    "pass_count": 2504,
+    "row_count": 4635,
+    "split_counts": {
+      "calibration": 775,
+      "train": 3225,
+      "validation": 635
+    },
+    "task_count": 927
+  }
+}

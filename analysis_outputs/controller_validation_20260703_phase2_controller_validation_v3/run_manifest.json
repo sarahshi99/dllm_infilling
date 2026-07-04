@@ -1,0 +1,34 @@
+{
+  "bank_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/frozen_canvas_controller.py --mode controller --timestamp 20260703_phase2_controller_validation_v3 --bank-dir analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+  "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "execution_status": "completed",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_pilot/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard0/\n?? analysis_outputs/controller_action_bank_20260703_phase2_bank_shard1/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation_v2/\n?? analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/\n?? analysis_outputs/frozen_controller_20260703_phase2_freeze/\n?? analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr/\n?? analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/\n?? docs/paper_agent/frozen_controller_protocol.zh.md\n?? docs/paper_agent/lrdllm_protocol_audit.zh.md\n?? experiments/action_ceiling/frozen_canvas_controller.py\n?? experiments/action_ceiling/lrdllm_protocol_sanity.py\n?? experiments/action_ceiling/oracle_canvas_attribution.py\n?? tests/test_frozen_canvas_controller.py",
+  "output_dir": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3",
+  "started_at": "2026-07-03T19:32:11",
+  "validation_gate": {
+    "calibration_harm_budget_passed": false,
+    "calibration_harm_upper95": null,
+    "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+    "gate_passed": false,
+    "selected_controller": {
+      "feature_variant": "probe_only",
+      "model_family": "logistic",
+      "policy_variant": "benefit_only",
+      "score_threshold": 999.0
+    },
+    "selection_rule": "best_validation_pass_rate_no_gate_passing_controller",
+    "test_decision": "sealed",
+    "validation_controller_mean_cost_sec": 2.2306961533952667,
+    "validation_controller_pass_rate": 0.7086614173228346,
+    "validation_long_bucket_improved_and_aggregate_not_down": false,
+    "validation_not_below_v6": true,
+    "validation_risk_coverage_pareto_improved": false,
+    "validation_same_accuracy_lower_compute": true,
+    "validation_short_bucket_no_net_regression": true,
+    "validation_total_pass_improved": false,
+    "validation_v6_mean_cost_sec": 4.8113056458386145,
+    "validation_v6_pass_rate": 0.7086614173228346
+  }
+}

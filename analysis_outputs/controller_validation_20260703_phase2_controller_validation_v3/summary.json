@@ -1,0 +1,37 @@
+{
+  "action_bank_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+  "action_schema_version": "deployable_canvas_actions_v1",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "calibration_rows": 155,
+  "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "controller_variants": 9,
+  "feature_schema_version": "frozen_canvas_features_v1",
+  "mode": "frozen_canvas_controller_validation",
+  "test_evaluation_count": 0,
+  "test_status": "sealed",
+  "validation_gate": {
+    "calibration_harm_budget_passed": false,
+    "calibration_harm_upper95": null,
+    "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+    "gate_passed": false,
+    "selected_controller": {
+      "feature_variant": "probe_only",
+      "model_family": "logistic",
+      "policy_variant": "benefit_only",
+      "score_threshold": 999.0
+    },
+    "selection_rule": "best_validation_pass_rate_no_gate_passing_controller",
+    "test_decision": "sealed",
+    "validation_controller_mean_cost_sec": 2.2306961533952667,
+    "validation_controller_pass_rate": 0.7086614173228346,
+    "validation_long_bucket_improved_and_aggregate_not_down": false,
+    "validation_not_below_v6": true,
+    "validation_risk_coverage_pareto_improved": false,
+    "validation_same_accuracy_lower_compute": true,
+    "validation_short_bucket_no_net_regression": true,
+    "validation_total_pass_improved": false,
+    "validation_v6_mean_cost_sec": 4.8113056458386145,
+    "validation_v6_pass_rate": 0.7086614173228346
+  },
+  "validation_rows": 127
+}
