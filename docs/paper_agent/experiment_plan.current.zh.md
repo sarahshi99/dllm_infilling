@@ -2,6 +2,20 @@
 
 更新时间：2026-05-31 15:24 CST
 
+## Phase 2 冻结 controller 更新（2026-07-03）
+
+当前阶段已从 oracle action-ceiling diagnostics 进入 `Frozen Risk-Controlled Canvas Controller`。本轮完成：
+
+- C/E/F/G incremental attribution：`analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/`
+- frozen split/test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
+- train/calibration/validation action bank：`analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/`
+- controller validation：`analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/`
+- LR-DLLM audit/sanity：`docs/paper_agent/lrdllm_protocol_audit.zh.md` 与 `analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/`
+
+Validation verdict：`VALIDATION FAILURE — TEST REMAINS SEALED`。在 calibration split 上，当前 logistic controller 的所有非零干预 operating points 都无法满足 5% harm upper-confidence budget；risk-calibrated selected controller 因此选择零干预。validation 上它与 V6 同为 `90/127 = 70.87%`，但没有 pass gain，也没有触发 frozen test。test split 仍然 sealed，`test_evaluation_count=0`。
+
+下一步若继续 controller 主线，必须只在 train/calibration/validation 上改进 inference-visible feature/model/calibration，不得查看 sealed test labels。优先考虑 ordinal/survival canvas adequacy head 或更强但仍可解释的 calibration，而不是扩展 E/F/G remasking action。
+
 ## Codex Phase 0 更新（2026-07-02）
 
 V7/V8 full runs 已将“全局比例放长 reward”路线降级为负结果。Codex 审计后建议把下一阶段优先级从继续 probe/threshold sweep 转为 `True-long action-ceiling matrix`：用小规模、预注册、可 dry-run 的 action matrix 区分 canvas adequacy、rescue generation、candidate selection 和 trigger recall。该实验仍必须先写 action brief 和 dry-run manifest，不应直接启动 full GPU。

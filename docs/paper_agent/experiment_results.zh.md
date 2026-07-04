@@ -1,6 +1,45 @@
 # Experiment Results
 
-更新时间：2026-07-01 15:40 CST
+更新时间：2026-07-04 CST
+
+## Codex Phase 2 frozen controller validation（2026-07-03）
+
+本节记录 frozen controller 的 validation 结果，不是 1033-row full benchmark，也不是 held-out test result。Frozen test remains sealed。
+
+Artifacts：
+
+- attribution：`analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md`
+- action bank：`analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md`
+- controller validation：`analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md`
+- LR-DLLM sanity：`analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/verdict.md`
+
+Attribution：
+
+| Quantity | Value |
+|---|---:|
+| hard cases | `89` |
+| C oracle-sufficient hard recoveries | `29` |
+| C missed failed-long recoveries | `29/56` |
+| C triggered failed-long recoveries | `0/33` |
+| E/F/G any hard recoveries | `31` |
+| refinement incremental over C | `2` |
+
+Action bank：
+
+| Split scope | Tasks | Actions | Rows | Missing |
+|---|---:|---:|---:|---:|
+| train/calibration/validation | `927` | `5` | `4635` | `0` |
+
+Controller validation：
+
+| Method | Validation Pass@1 | Wins | Losses | Interventions | Notes |
+|---|---:|---:|---:|---:|---|
+| validation-selected controller | `90/127 = 70.87%` | `0` | `0` | `0` | calibration risk gate forces zero intervention |
+| V6 baseline | `90/127 = 70.87%` | `0` | `0` | `0` | same validation pass rate |
+| oracle action-bank upper bound | `104/127 = 81.89%` | `14` | `0` | `110` | diagnostic upper bound, not deployable |
+| always expand 32 | `56/127 = 44.09%` | `6` | `40` | `127` | unsafe unconditional overwrite |
+
+Verdict：`no_validation_signal_test_sealed`。当前 logistic, inference-visible controller 没有在 calibration split 上找到满足 5% harm upper-confidence budget 的非零干预 operating point；因此 frozen test 未运行，`test_evaluation_count=0`。
 
 ## Codex Phase 0 审计说明（2026-07-02）
 

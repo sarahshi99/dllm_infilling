@@ -1,6 +1,37 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-02 CST
+更新时间：2026-07-04 CST
+
+## Codex Phase 2 frozen controller 更新（2026-07-03）
+
+当前阶段：`Frozen Risk-Controlled Canvas Controller`。
+
+最新 central claim：
+
+> Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.
+
+中文：unknown-length DLLM infilling 至少有 canvas inadequacy 与 rescue adequacy 两个耦合但可分离的 regime。missed true-long failures 在 oracle-sufficient canvas 下有明显可恢复空间；already-triggered failures 在当前 E/F/G action family 下仍然 rescue-limited。当前可部署机会是风险受控、非 oracle 地预测何时扩展以及扩展到多长。
+
+Phase 2 compact artifacts：
+
+- C/E/F/G attribution：`analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md`
+- frozen protocol/test lock：`docs/paper_agent/frozen_controller_protocol.zh.md`，`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
+- deployable action bank：`analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md`
+- controller validation：`analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md`
+- LR-DLLM audit/sanity：`docs/paper_agent/lrdllm_protocol_audit.zh.md`，`analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/`
+
+核心结果：
+
+- C already recovers `29/89` hard cases; E/F/G add only `2` incremental hard recoveries over C.
+- Missed failed-long recoveries under oracle-sufficient canvas：`31/56`; triggered failed-long recoveries：`0/33`。
+- Action bank covers train/calibration/validation only：`927` tasks × `5` actions = `4635` rows; test remains sealed.
+- Validation oracle action-bank upper bound：`104/127 = 81.89%` with `14` wins and `0` losses.
+- Current logistic controller cannot pass calibration risk control: no nonzero-intervention point satisfies 5% harm upper bound.
+- Validation-selected controller is zero-intervention: `90/127 = 70.87%`, equal to V6, `0/0` wins/losses.
+- Frozen test was not run: `test_status=sealed`, `test_evaluation_count=0`.
+- LR-DLLM verdict：`protocol_mismatch_blocked`; no full run.
+
+Controller verdict：`no_validation_signal_test_sealed`。这不是 deployable success；它是一个受控 negative result，说明当前 inference-visible logistic controller 无法安全选择 action-bank 中的恢复空间。
 
 ## Codex Phase 1b distinct-candidate ceiling 更新（2026-07-02）
 

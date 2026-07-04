@@ -2,6 +2,16 @@
 
 创建时间：2026-05-31 12:36 CST
 
+## Phase 2 更新（2026-07-03）
+
+当前 central claim 已更新为：
+
+> Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.
+
+中文：unknown-length DLLM infilling 至少有 canvas inadequacy 与 rescue adequacy 两个耦合但可分离的 regime。missed true-long failures 在 oracle-sufficient canvas 下有明显可恢复空间，而 already-triggered failures 在当前 E/F/G longer-trajectory 与 trace-remasking action family 下仍然 rescue-limited。当前可部署机会是风险受控、非 oracle 地预测何时扩展以及扩展到多长。
+
+Phase 2 frozen controller validation 已完成，但未通过预注册 validation gate：在 calibration 上没有任何非零干预 operating point 满足 5% harm upper-confidence budget，因此 validation-selected controller 为零干预，test lock 保持 `sealed` 且 `test_evaluation_count=0`。这不是 held-out success claim；它是一个受控 negative result，说明当前 inference-visible logistic controller 不能安全利用 action-bank 中的 oracle upper-bound 空间。
+
 ## Problem Statement
 
 用于代码 infilling 的 diffusion language models 在 denoising 前需要 infill length 或 canvas。当前项目显示，length choice 不是次要工程细节；它是 `HumanEval-SingleLineInfilling` 的主导 failure mode，尤其当真实 middle span 长于 policy-selected mask length 时更明显。
@@ -24,11 +34,11 @@ minimum publishable contribution 是一个 method 与 evaluation package，在 m
 
 ## Current Central Claim
 
-Same-hardware A6000 evidence 支持以下较窄 claim：
+Same-hardware A6000 evidence 与 Phase 1/2 diagnostics 支持以下较窄 claim：
 
-> Inference-time confidence-curve agreement 可以安全恢复 medium-length DLLM code infilling cases，但 true-long code infilling 仍主要受 length underestimation 支配，需要比当前 official-CAL trigger family 更强的 length modeling。
+> Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.
 
-这还不是 CCF-A central claim。它是可信的 empirical foothold，也是有用的论文叙事约束。
+这还不是 CCF-A central claim。它是可信的 empirical foothold，也是有用的论文叙事约束。当前不能写成 “true-long 主要由 length underestimation 支配”；更准确的说法是 missed true-long 有 canvas/trigger-limited 空间，而 triggered failed-long 在当前 action family 下仍然 rescue-limited。candidate selection gap 尚未被系统证明，remasking 也不是主贡献。
 
 ## Evidence Base
 

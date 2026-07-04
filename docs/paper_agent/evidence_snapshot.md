@@ -14,6 +14,8 @@ Action-equivalence audit note, 2026-07-02: `analysis_outputs/action_ceiling_2026
 
 Distinct-candidate ceiling pilot note, 2026-07-02: `analysis_outputs/distinct_candidate_ceiling_20260702_phase1b_distinct_pilot/` contains the Phase 1b strict 3-case diagnostic. Verdict is `candidate_diversity_without_correctness`: action-distinctness gate passed via auditable trajectory differences, `113/L3` produced a distinct no-early-commit hash, but no hard-case correct candidate appeared. `85/L0` remained a single-hash `SyntaxError`; `113/L3` remained `UnitTestFailure`; only the positive control passed. This is candidate-existence evidence, not a deployable Pass@1 claim.
 
+Phase 2 frozen-controller note, 2026-07-03: attribution output `analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/` shows C oracle-sufficient canvas recovers `29/89` hard cases and E/F/G add only `2` incremental hard recoveries; triggered failed-long remains `0/33`. The deployable action bank `analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/` covers train/calibration/validation only (`927` rows × `5` actions = `4635` action rows). Controller validation `analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/` fails the preregistered risk gate: no nonzero-intervention calibration operating point satisfies the 5% harm upper-confidence budget. Frozen test remains sealed with `test_evaluation_count=0`. Verdict: `no_validation_signal_test_sealed`.
+
 ## Runs
 
 | Run | Rows | Pass | Rate | `<=8` | `9-12` | `13-16` | `17-24` | `25+` |

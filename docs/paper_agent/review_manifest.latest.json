@@ -1,151 +1,47 @@
 {
-  "updated_at_cst": "2026-07-03",
-  "task_type": "accelerated_execution_correction",
-  "phase": "long_failure_generation_screen_and_baseline_sanity",
+  "updated_at_cst": "2026-07-04",
+  "task_type": "phase2_frozen_risk_controlled_canvas_controller",
+  "phase": "frozen_risk_controlled_canvas_controller",
   "branch": "codex/risk-controlled-dynamic-rescue",
-  "starting_commit": "467734de306bedd81c217ea512d370e8cec3cf51",
-  "relevant_commits": [
-    {
-      "commit": "4e5c0fc",
-      "message": "feat: add third distinct generation action"
-    },
-    {
-      "commit": "89e30c1",
-      "message": "analysis: add accelerated execution screen runners"
-    },
-    {
-      "commit": "e11c18e",
-      "message": "analysis: add grouped task split"
-    },
-    {
-      "commit": "9eca940",
-      "message": "baseline: add cal protocol sanity"
-    },
-    {
-      "commit": "7def5f7",
-      "message": "results: add 95-case generation screen"
-    },
-    {
-      "commit": "2738b9b",
-      "message": "baseline: add cal full comparison tooling"
-    }
-  ],
+  "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
   "minimum_acceptance_met": true,
-  "hard_cases_expected": 89,
-  "hard_cases_executed": 89,
-  "positive_controls_executed": 6,
-  "seed0_generation_actions_expected": 285,
-  "seed0_generation_actions_executed": 285,
-  "multiseed_actions_executed": 180,
-  "grouped_split_status": "completed",
-  "cal_sanity_status": "protocol_matched_cal",
-  "cal_full_status": "completed_resumed_full",
-  "final_verdict": "mixed_generation_signal",
-  "action_definitions": {
-    "E_oracle_sufficient_no_early_commit": "Oracle-sufficient offline canvas with global early commit disabled; records effective updates and stop reason.",
-    "F_oracle_sufficient_trace_remask": "Oracle-sufficient candidate followed by internal-trace-guided individual-token remask/refinement; does not use unit-test labels or reference tokens.",
-    "G_oracle_sufficient_trace_span_remask": "Oracle-sufficient C trajectory followed by internal-trace-guided contiguous-span remask centered on the highest-instability token; span width fixed to max(2, min(8, ceil(0.20 * canvas_len))); fixed 24-step refinement with early commit disabled."
-  },
-  "screen_95case": {
-    "output_dir": "analysis_outputs/long_failure_generation_screen_20260702_accel95",
-    "report": "analysis_outputs/long_failure_generation_screen_20260702_accel95/report.md",
-    "case_manifest": "analysis_outputs/long_failure_generation_screen_20260702_accel95/case_manifest.csv",
-    "seed0_results": "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_results.csv",
-    "seed0_summary": "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_summary.json",
-    "multiseed_manifest": "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_case_manifest.csv",
-    "multiseed_summary": "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_summary.json",
-    "coverage": {
-      "case_count": 95,
-      "hard_case_count": 89,
-      "positive_control_count": 6,
-      "triggered_failed_long": 33,
-      "missed_failed_long": 56,
-      "seed0_action_count": 285
+  "central_claim": "Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.",
+  "attribution_audit": {
+    "status": "completed",
+    "output_dir": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2",
+    "report": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
+    "hard_cases": 89,
+    "positive_controls": 6,
+    "c_hard_recoveries": 29,
+    "c_missed_failed_long_recoveries": 29,
+    "c_triggered_failed_long_recoveries": 0,
+    "efg_any_hard_recoveries": 31,
+    "sufficient_canvas_effect": 29,
+    "refinement_incremental_effect": 2,
+    "c_failed_but_efg_passed_cases": [
+      "SingleLineInfilling/HumanEval/108/L2",
+      "SingleLineInfilling/HumanEval/89/L4"
+    ],
+    "action_incremental_over_c": {
+      "E_oracle_sufficient_no_early_commit": 2,
+      "F_oracle_sufficient_trace_remask": 1,
+      "G_oracle_sufficient_trace_span_remask": 1
     },
-    "pool_summary": {
-      "triggered_failed_long": {
-        "case_count": 33,
-        "new_correct_candidate_cases": 0,
-        "unique_candidate_case_count": 3,
-        "compile_repair_cases": 3,
-        "unchanged_by_all_actions": 30
-      },
-      "missed_failed_long": {
-        "case_count": 56,
-        "new_correct_candidate_cases": 31,
-        "unique_candidate_case_count": 7,
-        "compile_repair_cases": 6,
-        "unchanged_by_all_actions": 46
-      },
-      "positive_control_rescued": {
-        "case_count": 6,
-        "new_correct_candidate_cases": 6,
-        "unique_candidate_case_count": 1,
-        "compile_repair_cases": 4,
-        "unchanged_by_all_actions": 5
-      }
-    },
-    "action_summary": {
-      "E_oracle_sufficient_no_early_commit": {
-        "rows": 95,
-        "hard_correct_cases": 31,
-        "compile_success_actions": 73,
-        "output_changed_vs_C": 13,
-        "mean_cost_sec": 4.042,
-        "p95_cost_sec": 6.208
-      },
-      "F_oracle_sufficient_trace_remask": {
-        "rows": 95,
-        "hard_correct_cases": 30,
-        "compile_success_actions": 71,
-        "output_changed_vs_C": 7,
-        "avg_remasked_token_count": 3.18,
-        "mean_cost_sec": 4.229,
-        "p95_cost_sec": 5.896
-      },
-      "G_oracle_sufficient_trace_span_remask": {
-        "rows": 95,
-        "hard_correct_cases": 30,
-        "compile_success_actions": 71,
-        "output_changed_vs_C": 7,
-        "avg_remasked_token_count": 5.79,
-        "avg_remasked_span_width": 5.79,
-        "mean_cost_sec": 4.725,
-        "p95_cost_sec": 6.668
-      }
-    },
-    "hard_case_totals": {
-      "new_correct_candidate_count": 31,
-      "compile_repair_count": 9,
-      "diversity_without_correctness_count": 6,
-      "all_actions_unchanged_count": 76,
-      "all_actions_distinct_but_wrong_count": 1
-    },
-    "multiseed": {
-      "selected_case_count": 30,
-      "seeds": [
-        1,
-        2
-      ],
-      "actions_executed": 180,
-      "hard_selected_cases_with_any_correct_candidate": 24,
-      "multiseed_only_correct_cases": 0,
-      "interpretation": "Conditional diagnostic only; do not report selected-case Pass@3 as an unbiased benchmark metric."
+    "candidate_hash_change_vs_correctness_change": {
+      "hash_changed_any_refinement": 14,
+      "hash_changed_without_correctness_change": 11,
+      "correctness_changed_any_refinement": 3,
+      "correctness_changed_without_hash_change": 0
     }
   },
-  "grouped_split": {
-    "output_dir": "analysis_outputs/grouped_split_20260702_accel2",
-    "protocol_doc": "docs/paper_agent/grouped_split_protocol.zh.md",
-    "split_manifest": "analysis_outputs/grouped_split_20260702_accel2/split_manifest.json",
-    "group_unit": "HumanEval/<id>",
-    "seed": 20260702,
-    "verification_passed": true,
-    "task_group_counts": {
-      "train": 98,
-      "calibration": 25,
-      "validation": 25,
-      "test": 16
-    },
+  "split_lock": {
+    "status": "completed",
+    "split_dir": "analysis_outputs/grouped_split_20260702_accel2",
+    "protocol_doc": "docs/paper_agent/frozen_controller_protocol.zh.md",
+    "test_lock": "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json",
+    "split_manifest_sha256": "1d8e24abbaeeeb43a292f479d1c033c962d1a680fd03573451a14a3f1e83122f",
+    "test_status": "sealed",
+    "test_evaluation_count": 0,
     "row_counts": {
       "train": 645,
       "calibration": 155,
@@ -153,52 +49,132 @@
       "test": 106
     }
   },
-  "cal_sanity": {
-    "output_dir": "analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2",
-    "verdict": "protocol_matched_cal",
-    "protocol_boundary": "Same-repository same-protocol local CAL sanity, not an external official-code reproduction claim.",
-    "checks_all_passed": true
+  "action_bank": {
+    "status": "completed",
+    "output_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+    "report": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
+    "action_schema": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/action_schema.json",
+    "actions": [
+      "KEEP_PRIMARY",
+      "EXPAND_16",
+      "EXPAND_24",
+      "EXPAND_32",
+      "EXPAND_48"
+    ],
+    "task_count": 927,
+    "row_count": 4635,
+    "split_counts": {
+      "train": 3225,
+      "calibration": 775,
+      "validation": 635
+    },
+    "expected_action_rows": 4635,
+    "observed_action_rows": 4635,
+    "missing_action_rows": 0,
+    "extra_action_rows": 0,
+    "source_duplicate_action_rows": 10,
+    "benefit_labels_non_keep": 191,
+    "harm_labels_non_keep": 1242
   },
-  "cal_full": {
-    "resume_manifest_dir": "analysis_outputs/cal_full_resume_20260703_gpus10",
-    "raw_merged_run_dir": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
-    "compact_compare_dir": "analysis_outputs/cal_full_same_protocol_compare_20260703_gpus10_resumed_full",
-    "rows": 1033,
-    "pass_count": 774,
-    "pass_rate": 0.7492739593417231,
-    "paired_against_cal": {
-      "control": {
-        "common": 1033,
-        "cal_wins": 25,
-        "cal_losses": 38
-      },
-      "midcons": {
-        "common": 1033,
-        "cal_wins": 17,
-        "cal_losses": 38
-      },
-      "route2_len32": {
-        "common": 1033,
-        "cal_wins": 17,
-        "cal_losses": 44
-      },
-      "v6_short_override": {
-        "common": 1033,
-        "cal_wins": 17,
-        "cal_losses": 45
-      }
-    }
+  "feature_schema": {
+    "version": "frozen_canvas_features_v1",
+    "path": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/feature_schema.json",
+    "variants": [
+      "probe_only",
+      "trace_only",
+      "probe_trace_fused"
+    ],
+    "forbidden_features": [
+      "oracle_length",
+      "reference_code",
+      "unit_test_result",
+      "pass_fail",
+      "action_bank_outcome",
+      "error_type",
+      "HumanEval task id",
+      "split name",
+      "test-derived statistic"
+    ]
   },
-  "expansion_recommended": false,
-  "recommended_decision": "Do not expand the current oracle action family further before separating deployable trigger/selector work on the grouped split and diagnosing the triggered failed-long zero-recovery subset.",
+  "controller": {
+    "status": "validation_completed_test_sealed",
+    "output_dir": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3",
+    "report": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
+    "model_family": "logistic",
+    "controller_variants": 9,
+    "policy_variants": [
+      "benefit_only",
+      "benefit_plus_harm",
+      "risk_calibrated_benefit_plus_harm"
+    ],
+    "calibration_harm_budget_upper95": 0.05,
+    "calibration_result": "no_nonzero_intervention_operating_point_satisfies_harm_budget",
+    "selected_controller": {
+      "feature_variant": "probe_only",
+      "policy_variant": "benefit_only",
+      "score_threshold": 999.0
+    },
+    "validation_result": {
+      "gate_passed": false,
+      "failure_message": "VALIDATION FAILURE \u2014 TEST REMAINS SEALED",
+      "pass_count": 90,
+      "total": 127,
+      "pass_rate": 0.7086614173228346,
+      "wins_vs_primary": 0,
+      "losses_vs_primary": 0,
+      "intervention_count": 0,
+      "intervention_coverage": 0.0,
+      "validation_not_below_v6": true,
+      "validation_same_accuracy_lower_compute": true,
+      "validation_total_pass_improved": false,
+      "validation_risk_coverage_pareto_improved": false
+    },
+    "validation_baselines": {
+      "v6_pass_rate": 0.7086614173228346,
+      "local_cal_pass_rate": 0.7086614173228346,
+      "always_expand_32_pass_rate": 0.4409448818897638,
+      "oracle_action_bank_upper_bound_pass_rate": 0.8188976377952756,
+      "oracle_action_bank_upper_bound_wins": 14,
+      "oracle_action_bank_upper_bound_losses": 0
+    },
+    "invalid_attempts_not_used_for_claims": [
+      "analysis_outputs/controller_validation_20260703_phase2_controller_validation",
+      "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v2"
+    ]
+  },
+  "frozen_test": {
+    "status": "sealed",
+    "executed": false,
+    "evaluation_count": 0,
+    "result_dir": null
+  },
+  "ablation_status": {
+    "probe_only_vs_trace_only_vs_fused": "completed_validation_all_zero_after_risk_calibration",
+    "hand_route2_gate_vs_learned_gate": "completed_validation_baseline_table",
+    "benefit_only_vs_benefit_plus_harm": "completed_validation_all_zero_after_risk_calibration",
+    "no_calibration_vs_risk_calibration": "risk_curves_saved; nonzero points fail 5_percent_upper_bound",
+    "binary_keep_32_vs_multi_action": "completed via always_expand_32 and action-bank variants",
+    "unconditional_overwrite_vs_keep_reject": "completed; unconditional expand regresses",
+    "equal_compute_comparison": "compute_matched_simple_gate_expand32 included",
+    "equal_trigger_coverage_comparison": "not informative because selected controller has zero interventions"
+  },
+  "lrdllm": {
+    "audit_doc": "docs/paper_agent/lrdllm_protocol_audit.zh.md",
+    "sanity_dir": "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity",
+    "sanity_verdict": "protocol_mismatch_blocked",
+    "generation_executed": false,
+    "full_run_status": "not_run_protocol_mismatch_blocked",
+    "reason": "No executable official/local Stage I or Stage II LR-DLLM implementation or adapter is present in this repository."
+  },
+  "final_verdict": "no_validation_signal_test_sealed",
   "recommended_read_order": [
-    "analysis_outputs/long_failure_generation_screen_20260702_accel95/report.md",
-    "analysis_outputs/long_failure_generation_screen_20260702_accel95/seed0_summary.json",
-    "analysis_outputs/long_failure_generation_screen_20260702_accel95/multiseed_summary.json",
-    "analysis_outputs/grouped_split_20260702_accel2/split_manifest.json",
-    "docs/paper_agent/grouped_split_protocol.zh.md",
-    "analysis_outputs/cal_same_protocol_sanity_20260702_accel_cal10_v2/protocol_comparison.md",
-    "analysis_outputs/cal_full_same_protocol_compare_20260703_gpus10_resumed_full/report.md",
+    "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
+    "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
+    "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
+    "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/validation_baselines.csv",
+    "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/verdict.md",
+    "docs/paper_agent/frozen_controller_protocol.zh.md",
+    "docs/paper_agent/lrdllm_protocol_audit.zh.md",
     "docs/paper_agent/codex_handoff.latest.zh.md"
   ]
 }
