@@ -1,0 +1,116 @@
+{
+  "action_summary": {
+    "E_oracle_sufficient_no_early_commit": {
+      "c_fail_action_pass_cases": [
+        "SingleLineInfilling/HumanEval/108/L2",
+        "SingleLineInfilling/HumanEval/89/L4"
+      ],
+      "compile_status_changed_vs_c_cases": 2,
+      "correctness_changed_vs_c_cases": 2,
+      "error_type_changed_vs_c_cases": 4,
+      "hard_passed": 31,
+      "hash_changed_vs_c_cases": 13,
+      "incremental_hard_correct_over_c": 2,
+      "missed_failed_long_passed": 31,
+      "positive_control_passed": 6,
+      "triggered_failed_long_passed": 0
+    },
+    "F_oracle_sufficient_trace_remask": {
+      "c_fail_action_pass_cases": [
+        "SingleLineInfilling/HumanEval/89/L4"
+      ],
+      "compile_status_changed_vs_c_cases": 0,
+      "correctness_changed_vs_c_cases": 1,
+      "error_type_changed_vs_c_cases": 1,
+      "hard_passed": 30,
+      "hash_changed_vs_c_cases": 7,
+      "incremental_hard_correct_over_c": 1,
+      "missed_failed_long_passed": 30,
+      "positive_control_passed": 6,
+      "triggered_failed_long_passed": 0
+    },
+    "G_oracle_sufficient_trace_span_remask": {
+      "c_fail_action_pass_cases": [
+        "SingleLineInfilling/HumanEval/108/L2"
+      ],
+      "compile_status_changed_vs_c_cases": 0,
+      "correctness_changed_vs_c_cases": 2,
+      "error_type_changed_vs_c_cases": 2,
+      "hard_passed": 30,
+      "hash_changed_vs_c_cases": 7,
+      "incremental_hard_correct_over_c": 1,
+      "missed_failed_long_passed": 30,
+      "positive_control_passed": 5,
+      "triggered_failed_long_passed": 0
+    }
+  },
+  "c_correct": {
+    "hard": 29,
+    "missed_failed_long": 29,
+    "positive_control_rescued": 6,
+    "triggered_failed_long": 0
+  },
+  "candidate_hash_change_vs_correctness_change": {
+    "correctness_changed_any_refinement": 3,
+    "correctness_changed_without_hash_change": 0,
+    "hash_changed_any_refinement": 14,
+    "hash_changed_without_correctness_change": 11
+  },
+  "case_count": 95,
+  "correctness_overlap": {
+    "": 58,
+    "C_oracle_sufficient;E_oracle_sufficient_no_early_commit;F_oracle_sufficient_trace_remask": 1,
+    "C_oracle_sufficient;E_oracle_sufficient_no_early_commit;F_oracle_sufficient_trace_remask;G_oracle_sufficient_trace_span_remask": 34,
+    "E_oracle_sufficient_no_early_commit;F_oracle_sufficient_trace_remask": 1,
+    "E_oracle_sufficient_no_early_commit;G_oracle_sufficient_trace_span_remask": 1
+  },
+  "efg_any_correct": {
+    "hard": 31,
+    "missed_failed_long": 31,
+    "positive_control_rescued": 6,
+    "triggered_failed_long": 0
+  },
+  "hard_case_count": 89,
+  "hard_recovery_attribution": {
+    "c_failed_but_efg_passed_cases": [
+      "SingleLineInfilling/HumanEval/108/L2",
+      "SingleLineInfilling/HumanEval/89/L4"
+    ],
+    "c_passed_cases": [
+      "SingleLineInfilling/HumanEval/10/L5",
+      "SingleLineInfilling/HumanEval/107/L7",
+      "SingleLineInfilling/HumanEval/107/L9",
+      "SingleLineInfilling/HumanEval/112/L0",
+      "SingleLineInfilling/HumanEval/117/L4",
+      "SingleLineInfilling/HumanEval/124/L3",
+      "SingleLineInfilling/HumanEval/126/L0",
+      "SingleLineInfilling/HumanEval/145/L2",
+      "SingleLineInfilling/HumanEval/146/L6",
+      "SingleLineInfilling/HumanEval/148/L6",
+      "SingleLineInfilling/HumanEval/148/L8",
+      "SingleLineInfilling/HumanEval/153/L1",
+      "SingleLineInfilling/HumanEval/153/L3",
+      "SingleLineInfilling/HumanEval/156/L2",
+      "SingleLineInfilling/HumanEval/160/L1",
+      "SingleLineInfilling/HumanEval/32/L1",
+      "SingleLineInfilling/HumanEval/39/L5",
+      "SingleLineInfilling/HumanEval/40/L3",
+      "SingleLineInfilling/HumanEval/47/L4",
+      "SingleLineInfilling/HumanEval/48/L1",
+      "SingleLineInfilling/HumanEval/50/L0",
+      "SingleLineInfilling/HumanEval/63/L6",
+      "SingleLineInfilling/HumanEval/69/L0",
+      "SingleLineInfilling/HumanEval/71/L0",
+      "SingleLineInfilling/HumanEval/71/L3",
+      "SingleLineInfilling/HumanEval/78/L0",
+      "SingleLineInfilling/HumanEval/80/L5",
+      "SingleLineInfilling/HumanEval/92/L2",
+      "SingleLineInfilling/HumanEval/94/L9"
+    ],
+    "refinement_incremental_effect_c_failed_but_efg_passed": 2,
+    "sufficient_canvas_effect_c_passed": 29,
+    "total_efg_hard_recoveries": 31
+  },
+  "mode": "oracle_canvas_incremental_attribution",
+  "positive_control_count": 6
+}
