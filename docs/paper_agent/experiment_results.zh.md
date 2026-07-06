@@ -14,9 +14,9 @@ Artifacts：
 - copied artifact hashes：`analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 - GitHub verification：`analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`
 
-Verdict：`h200_environment_invalid`。
+Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。
 
-原因：当前服务器可在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 看到 `NVIDIA H200 NVL`，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。GitHub SSH auth 和 branch freshness 已恢复；剩余阻塞是 GPU/driver 可用性。因此没有启动任何 full rerun，也没有生成 H200 core baseline、H200 action bank、Controller V1 replay 或 Controller V2 结果。
+原因：当前服务器可在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 看到 `NVIDIA H200 NVL`。默认 Codex 沙箱内 `nvidia-smi` 失败、`/dev/nvidia*` 缺失、`dllm_env` 中 `torch.cuda.is_available() = false`；但 approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 中 `torch.cuda.is_available() = true`。GitHub SSH auth 和 branch freshness 已恢复。因此没有启动任何 full rerun，也没有生成 H200 core baseline、H200 action bank、Controller V1 replay 或 Controller V2 结果；后续 GPU reruns 必须通过 approved unsandboxed/escalated commands。
 
 Frozen test integrity 仍正常：`test_status=sealed`，`test_evaluation_count=0`。
 

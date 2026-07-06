@@ -13,7 +13,7 @@ Bootstrap artifacts：
 - `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 
-Verdict：`h200_environment_invalid`。服务器能在 `/proc/driver/nvidia` 看到 `NVIDIA H200 NVL`，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false`。因此 H200 core baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 均未启动。
+Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。默认 Codex 沙箱内看不到 `/dev/nvidia*`，所以 sandboxed `nvidia-smi` 失败且 `dllm_env` 中 PyTorch 报告 `cuda_available=false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 报告 `cuda_available=true`、`gpu_count=1`。因此 H200 core baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 尚未启动，但可通过 approved unsandboxed GPU commands 继续。
 
 GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 

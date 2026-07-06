@@ -265,9 +265,9 @@
 
 - action：执行 H200 新服务器 bootstrap / Git / artifact integrity 审计。
 - evidence：实际 Git root 为 `/home/shx/projects/dllm_infilling/git_workspace`；HEAD `2b0662bfe9fdab787a5249dc9cbefea12d683af1`；H200 在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 可见，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。
-- result：生成 `docs/paper_agent/new_server_h200_bootstrap.zh.md` 与 `analysis_outputs/h200_bootstrap_20260705_103617/`；verdict `h200_environment_invalid`；review manifest 增加 `server_migration` 字段；frozen test 仍 `sealed` 且 `test_evaluation_count=0`。
+- result：生成 `docs/paper_agent/new_server_h200_bootstrap.zh.md` 与 `analysis_outputs/h200_bootstrap_20260705_103617/`；initial sandbox-only verdict 为 `h200_environment_invalid`，后续 2026-07-06 host check 已修正为 `host_h200_available_sandbox_gpu_hidden`；review manifest 增加 `server_migration` 字段；frozen test 仍 `sealed` 且 `test_evaluation_count=0`。
 - github：当时 remote URL 存在，但 `git ls-remote` 和 `ssh -T git@github.com` 因 sandbox escalation approval rejection 未执行；该状态已在 2026-07-06 被新的 SSH/branch verification 取代，见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
-- next：修复 GPU device nodes / driver 可用性，并从可联网会话验证 GitHub；之后先 commit/push bootstrap，再进入 H200 Tier 1 reruns。
+- next：当时计划修复 GPU device nodes / driver 可用性并验证 GitHub；该路径后续修正为使用 approved unsandboxed/escalated GPU commands。
 
 ## 2026-07-05 10:55 UTC
 
@@ -281,4 +281,11 @@
 - action：恢复 GitHub SSH deploy-key access，并重新验证 H200 bootstrap 的远端状态。
 - evidence：`ssh -T git@github.com` 返回 `Hi sarahshi99/dllm_infilling! You've successfully authenticated, but GitHub does not provide shell access.`；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。
 - result：GitHub auth / branch freshness blocker 解除；H200 GPU blocker 仍存在：`nvidia-smi` 失败、`/dev/nvidia*` 缺失、`dllm_env` 中 `torch.cuda.is_available() = false`。
-- next：做 focused bootstrap commit/push；在 GPU device nodes / driver 恢复前不启动 H200 Tier 1 reruns。
+- next：做 focused bootstrap commit/push；该 GPU blocker 后续修正为 sandbox visibility issue。
+
+## 2026-07-06 UTC Host GPU Visibility Correction
+
+- action：区分默认 Codex sandbox 与 host/unsandboxed H200 可见性。
+- evidence：默认 sandbox 中 `/dev/nvidia*` 不可见，`nvidia-smi` 失败；approved host/unsandboxed `nvidia-smi` 成功，显示 `NVIDIA H200 NVL`、driver `580.159.03`、memory `143771 MiB`、无运行进程；approved host/unsandboxed `/dev/nvidia0`、`/dev/nvidiactl`、`/dev/nvidia-uvm` 可见；approved host/unsandboxed `dllm_env` PyTorch 报告 `cuda_available=true`、`gpu_count=1`。
+- result：H200 host environment 可用；此前 `h200_environment_invalid` 应修正为 `host_h200_available_sandbox_gpu_hidden`。后续 GPU 实验必须通过 approved unsandboxed/escalated commands 运行。
+- next：commit/push bootstrap correction，然后启动 H200 Tier 1 reruns。

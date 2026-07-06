@@ -2,20 +2,20 @@
 
 更新时间：2026-07-06 UTC
 
-## Verdict
+## Bootstrap Verdict
 
-`h200_environment_invalid`
+`host_h200_available_sandbox_gpu_hidden`
 
-本轮只完成 H200 新服务器 bootstrap 和复制 artifact 完整性审计。由于当前会话中 GPU 环境不可用，未启动任何 1033-row H200 full rerun、action bank rebuild、Controller V1 replay、true-long replay 或 Controller V2。
+本轮完成 H200 新服务器 bootstrap、复制 artifact 完整性审计和 GitHub push 验证。默认 Codex 沙箱中 GPU 不可见，但经批准的沙箱外检查确认 host H200 可用。因此，未启动任何 1033-row H200 full rerun、action bank rebuild、Controller V1 replay、true-long replay 或 Controller V2；后续 GPU 实验必须使用 approved unsandboxed/escalated execution path。
 
-阻塞原因：
+关键环境事实：
 
 - `/proc/driver/nvidia/gpus/0000:22:00.0/information` 可见 `NVIDIA H200 NVL`，UUID 为 `GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1`。
-- `nvidia-smi` 和 `nvidia-smi -L` 均失败：无法与 NVIDIA driver 通信。
-- `/dev/nvidia*` 设备节点当前不可见，只有 `/dev/nvidia-caps`。
-- `dllm_env` 中 PyTorch 可导入，但 `torch.cuda.is_available() = false`，`torch.cuda.device_count() = 0`。
+- 默认 Codex 沙箱内：`nvidia-smi` 和 `nvidia-smi -L` 均失败；`/dev/nvidia*` 不可见；`dllm_env` 中 `torch.cuda.is_available() = false`，`torch.cuda.device_count() = 0`。
+- 沙箱外/approved host check：`nvidia-smi` 正常，driver `580.159.03`，CUDA driver `13.0`，GPU `NVIDIA H200 NVL` 空闲，`/dev/nvidia0`、`/dev/nvidiactl`、`/dev/nvidia-uvm` 可见。
+- 沙箱外 `dllm_env` PyTorch：`torch.cuda.is_available() = true`，`torch.cuda.device_count() = 1`，GPU name `NVIDIA H200 NVL`。
 
-因此，按迁移协议必须停止 GPU 复现实验。当前结论是环境无效，而不是 H200 数值复现失败。
+因此，当前结论不是 host H200 invalid，而是 sandbox GPU device-node visibility limited。H200 reproduction 仍未完成；下一阶段可以通过 approved unsandboxed GPU command 进入 Tier 1 reruns。
 
 ## Workspace And Git
 
@@ -43,6 +43,7 @@ GitHub 远端验证已恢复：
 - `analysis_outputs/h200_bootstrap_20260705_103617/conda_environment.yml`
 - `analysis_outputs/h200_bootstrap_20260705_103617/pip_freeze.txt`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
+- `analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md`
 
 摘要：
 
@@ -112,7 +113,6 @@ The V6 compact summary is present at `git_workspace/outputs_clean/full_route2_v6
 
 ## Required Next Steps
 
-1. Fix system GPU visibility so `nvidia-smi` works and `/dev/nvidia0`, `/dev/nvidiactl`, and `/dev/nvidia-uvm` are visible.
-2. Re-run local CUDA probe in `dllm_env` and require `torch.cuda.is_available() = true`.
-3. Keep the focused bootstrap audit commit pushed before any GPU rerun.
-4. Only after GPU visibility is valid, start Tier 1 H200 full reruns and subsequent controller work.
+1. Keep the focused bootstrap audit commits pushed before any GPU rerun.
+2. Launch Tier 1 H200 full reruns through approved unsandboxed/escalated GPU commands, because default sandbox commands cannot see `/dev/nvidia*`.
+3. Continue to keep frozen test sealed until validation gate conditions are met.

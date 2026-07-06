@@ -1,12 +1,12 @@
 {
   "created_at_utc": "2026-07-05T10:39:23.051580+00:00",
   "timestamp": "20260705_103617",
-  "status": "blocked_before_gpu_reruns",
-  "repro_verdict": "h200_environment_invalid",
+  "status": "host_h200_available_sandbox_gpu_hidden_before_gpu_reruns",
+  "repro_verdict": "",
   "blockers": [
-    "NVIDIA device nodes are absent under /dev; nvidia-smi cannot communicate with the driver.",
-    "PyTorch in dllm_env reports cuda_available=false and gpu_count=0 despite H200 PCI/proc visibility.",
-    "GitHub SSH authentication and remote branch freshness are verified; push verification is pending the focused bootstrap commit."
+    "Default Codex sandbox hides /dev/nvidia* and therefore sandboxed nvidia-smi/PyTorch CUDA probes fail.",
+    "Host/unsandboxed H200 visibility is verified: nvidia-smi succeeds and PyTorch in dllm_env reports cuda_available=true.",
+    "H200 reproduction has not started yet; GPU experiments must use approved unsandboxed/escalated commands."
   ],
   "workspace": "/home/shx/projects/dllm_infilling/git_workspace",
   "outer_cwd_note": "/home/shx/projects/dllm_infilling contains an empty .git placeholder; actual repo root is git_workspace.",
@@ -23,7 +23,7 @@
     "github_ssh_auth_status": "deploy_key_authenticated_for_sarahshi99/dllm_infilling",
     "expected_migration_commit": "2b0662bfe9fdab787a5249dc9cbefea12d683af1",
     "status_short_branch_after_docs_update": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M docs/paper_agent/activity_ledger.zh.md\n M docs/paper_agent/codex_handoff.latest.zh.md\n M docs/paper_agent/current_action.md\n M docs/paper_agent/evidence_snapshot.md\n M docs/paper_agent/experiment_plan.current.zh.md\n M docs/paper_agent/experiment_results.zh.md\n M docs/paper_agent/paper_agent_dashboard.zh.md\n M docs/paper_agent/pause_checkpoint.current.md\n M docs/paper_agent/review_manifest.latest.json\n M docs/results/run_registry.md\n?? analysis_outputs/h200_bootstrap_20260705_103617/\n?? docs/paper_agent/new_server_h200_bootstrap.zh.md\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n",
-    "commit_push_status": "not_yet_committed_or_pushed_after_github_auth_restored; focused bootstrap commit pending."
+    "commit_push_status": "bootstrap audit commit 591014987088b455a95ba33924f66d13477e47b6 pushed to origin/codex/risk-controlled-dynamic-rescue; host GPU visibility correction pending in follow-up commit."
   },
   "system": {
     "hostname": "server",
@@ -47,7 +47,18 @@
       "/dev/nvidia-caps"
     ],
     "cuda_visible_devices": null,
-    "driver_status": "kernel_module_loaded_but_device_nodes_absent_or_driver_not_usable"
+      "driver_status": "host_driver_usable_outside_default_sandbox",
+      "host_unsandboxed_nvidia_smi": "ok; NVIDIA H200 NVL idle; driver 580.159.03; CUDA driver 13.0",
+      "host_unsandboxed_dev_nodes": [
+        "/dev/nvidia0",
+        "/dev/nvidiactl",
+        "/dev/nvidia-uvm"
+      ],
+      "host_unsandboxed_torch_cuda_available": true,
+      "host_unsandboxed_torch_gpu_count": 1,
+      "host_unsandboxed_torch_gpu_names": [
+        "NVIDIA H200 NVL"
+      ]
   },
   "python": {
     "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",

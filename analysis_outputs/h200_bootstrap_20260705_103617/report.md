@@ -2,11 +2,13 @@
 
 Timestamp: `20260705_103617`
 
-## Verdict
+## Bootstrap Verdict
 
-`h200_environment_invalid`
+`host_h200_available_sandbox_gpu_hidden`
 
-H200 reproduction is blocked before any full rerun. The machine exposes an NVIDIA H200 NVL in `/proc/driver/nvidia/gpus/0000:22:00.0/information`, but `nvidia-smi` fails and `/dev/nvidia*` device nodes are absent. PyTorch in `dllm_env` imports successfully but reports `cuda_available=false` and `gpu_count=0`.
+H200 reproduction has not started yet. The default Codex sandbox hides `/dev/nvidia*`, so sandboxed `nvidia-smi` fails and sandboxed PyTorch reports `cuda_available=false`. Follow-up approved host checks outside the sandbox show the H200 is healthy and idle: `nvidia-smi` succeeds, `/dev/nvidia0`, `/dev/nvidiactl`, and `/dev/nvidia-uvm` are present, and `dllm_env` PyTorch reports `cuda_available=true`, `gpu_count=1`, `gpu_names=["NVIDIA H200 NVL"]`.
+
+Detailed correction: `HOST_GPU_VISIBILITY_20260706.md`.
 
 ## Git
 
@@ -26,8 +28,10 @@ H200 reproduction is blocked before any full rerun. The machine exposes an NVIDI
 - Disk: `/home/shx/projects/dllm_infilling` has about 3.2T available
 - Driver proc version: NVIDIA open kernel module `580.159.03`
 - GPU proc identity: NVIDIA H200 NVL, UUID `GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1`
-- `nvidia-smi`: failed, cannot communicate with driver
-- `/dev/nvidia*`: none visible
+- Sandbox `nvidia-smi`: failed, cannot communicate with driver
+- Host/unsandboxed `nvidia-smi`: succeeds; H200 idle
+- Sandbox `/dev/nvidia*`: none visible
+- Host/unsandboxed `/dev/nvidia*`: `/dev/nvidia0`, `/dev/nvidiactl`, `/dev/nvidia-uvm`
 - Python env: `/home/shx/miniconda3/envs/dllm_env`, Python 3.10.20
 - PyTorch: `2.5.1+cu121`, CUDA runtime `12.1`, cuDNN `90100`
 - Transformers: `4.38.2`
@@ -55,6 +59,6 @@ H200 reproduction is blocked before any full rerun. The machine exposes an NVIDI
 - Six safetensor shards are present through HF snapshot symlinks; resolved total size is `16031197112` bytes.
 - Sampled shard hashes recorded for shard 1 and shard 6.
 
-## Stop Condition
+## Execution Condition
 
-Per migration protocol, full H200 baselines, action-bank rebuild, controller V1 replay, true-long replay, and Controller V2 are not started while the GPU environment is invalid.
+Full H200 baselines, action-bank rebuild, controller V1 replay, true-long replay, and Controller V2 were not started by this bootstrap audit. They should be launched only through approved unsandboxed/escalated GPU commands, not the default sandbox.

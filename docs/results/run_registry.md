@@ -2,7 +2,7 @@
 
 This registry records meaningful local experiment outputs without committing raw `results.jsonl` files to normal git.
 
-H200 bootstrap note, updated 2026-07-06 UTC: `analysis_outputs/h200_bootstrap_20260705_103617/` records the new-server environment and copied-artifact audit. Verdict is `h200_environment_invalid` because `nvidia-smi` cannot communicate with the driver, `/dev/nvidia*` nodes are absent, and PyTorch sees zero CUDA devices. GitHub SSH auth and remote branch freshness are verified. This is not a benchmark run and is intentionally excluded from the pass-rate table.
+H200 bootstrap note, updated 2026-07-06 UTC: `analysis_outputs/h200_bootstrap_20260705_103617/` records the new-server environment and copied-artifact audit. Bootstrap verdict is `host_h200_available_sandbox_gpu_hidden`: default sandbox GPU checks fail because `/dev/nvidia*` is hidden, but approved host/unsandboxed checks show H200 is healthy and `dllm_env` sees CUDA. GitHub SSH auth and remote branch freshness are verified. This is not a benchmark run and is intentionally excluded from the pass-rate table.
 
 Codex audit note, 2026-07-02: no new run was added in this pass. The audit found that newer runs generally have `config.json` and `summary.json`, but the registry still does not uniformly capture command, commit, environment, checkpoint checksum, GPU, seed, forward budget, P95 wall-clock, or VRAM. See `docs/paper_agent/codex_repository_audit.zh.md`.
 

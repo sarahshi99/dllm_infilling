@@ -4,16 +4,16 @@
 
 ## H200 迁移更新（2026-07-05）
 
-当前计划先暂停在 H200 bootstrap 阶段，verdict 为 `h200_environment_invalid`。H200 GPU 在 `/proc/driver/nvidia` 中可见，但 `nvidia-smi` 无法与 driver 通信，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false` 和 `gpu_count=0`。
+当前计划先完成 H200 bootstrap 修正，bootstrap verdict 为 `host_h200_available_sandbox_gpu_hidden`。H200 GPU 在 `/proc/driver/nvidia` 中可见；默认 Codex 沙箱内 `nvidia-smi` 无法与 driver 通信，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false` 和 `gpu_count=0`。但 approved host/unsandboxed check 显示 H200 正常空闲，`dllm_env` 中 PyTorch 报告 `cuda_available=true` 和 `gpu_count=1`。
 
-因此，Tier 1 full baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 均未启动。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证；下一步不是改 controller，而是先恢复 GPU 设备可见性。Bootstrap artifacts：
+因此，Tier 1 full baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 均未启动。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证；下一步是通过 approved unsandboxed/escalated GPU commands 启动 H200 Tier 1 reruns。Bootstrap artifacts：
 
 - `docs/paper_agent/new_server_h200_bootstrap.zh.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 
-只有当 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才进入 H200 Tier 1 reruns。
+只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才进入 H200 Tier 1 reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。
 
 ## Phase 2 冻结 controller 更新（2026-07-03）
 

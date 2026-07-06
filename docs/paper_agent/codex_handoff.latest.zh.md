@@ -10,8 +10,8 @@
 - Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
 - Environment manifest：`analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - New server doc：`docs/paper_agent/new_server_h200_bootstrap.zh.md`
-- Verdict：`h200_environment_invalid`
-- 阻塞：H200 在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 可见，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。
+- Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`
+- GPU 状态：默认 Codex 沙箱内 H200 不可见，`nvidia-smi` 失败且 `torch.cuda.is_available() = false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 中 `torch.cuda.is_available() = true`、`gpu_count = 1`。后续 GPU 实验必须使用 approved unsandboxed/escalated command。
 - GitHub：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
 - 未启动：core H200 baselines、action-bank rebuild、Controller V1 replay、true-long replay、Controller V2、frozen test。
