@@ -1,6 +1,23 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-04 CST
+更新时间：2026-07-06 UTC
+
+## H200 新服务器迁移状态（2026-07-05）
+
+当前状态：`PARTIAL — H200 REPRODUCTION OR CONTROLLER V2 INCOMPLETE`。
+
+Bootstrap artifacts：
+
+- `docs/paper_agent/new_server_h200_bootstrap.zh.md`
+- `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
+- `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
+- `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
+
+Verdict：`h200_environment_invalid`。服务器能在 `/proc/driver/nvidia` 看到 `NVIDIA H200 NVL`，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false`。因此 H200 core baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 均未启动。
+
+GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
+
+Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
 
 ## Codex Phase 2 frozen controller 更新（2026-07-03）
 

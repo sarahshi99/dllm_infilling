@@ -1,0 +1,235 @@
+{
+  "created_at_utc": "2026-07-05T10:39:23.051580+00:00",
+  "timestamp": "20260705_103617",
+  "status": "blocked_before_gpu_reruns",
+  "repro_verdict": "h200_environment_invalid",
+  "blockers": [
+    "NVIDIA device nodes are absent under /dev; nvidia-smi cannot communicate with the driver.",
+    "PyTorch in dllm_env reports cuda_available=false and gpu_count=0 despite H200 PCI/proc visibility.",
+    "GitHub SSH authentication and remote branch freshness are verified; push verification is pending the focused bootstrap commit."
+  ],
+  "workspace": "/home/shx/projects/dllm_infilling/git_workspace",
+  "outer_cwd_note": "/home/shx/projects/dllm_infilling contains an empty .git placeholder; actual repo root is git_workspace.",
+  "git": {
+    "branch": "codex/risk-controlled-dynamic-rescue",
+    "head": "2b0662bfe9fdab787a5249dc9cbefea12d683af1",
+    "remote": "origin\tgit@github.com:sarahshi99/dllm_infilling.git (fetch)\norigin\tgit@github.com:sarahshi99/dllm_infilling.git (push)\n",
+    "status_short_branch": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n?? analysis_outputs/h200_bootstrap_20260705_103617/\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n",
+    "fsck_returncode": 0,
+    "fsck_stdout": "dangling blob 47412594eb873ecd97c28b9a72ff7b148300b8b2\ndangling blob b531d67302a1313a0965beed65f5d0ce3c18a008\ndangling blob cb212f71f71e8ed203db8104b166bef3a0630a2b\ndangling blob 61024b7f28dd0e2c94a87323b4f419545f015566\ndangling blob bde295eda352101b79fa2918da151d655f79161e\ndangling blob e07207400bf1e9fff1cbaba02a3c4be6bcd6304b\ndangling blob 8c43bcb0c41c0a255e9c09519d7b5ed71eecb83d\ndangling blob cd738bb9f91c1e53427a2c284e94c9f24f721182\ndangling blob af946a8ea52011f5ace21bef1f95fe3bf3d9ef14\ndangling blob f8e40c3293df33c805c714bea9fd6de70320228e\ndangling blob 66f6623d1cf1f940e52bdd31a420ae37812d720f\ndangling blob 95a9b935842424100c3e481f711ea2b3460d3459\ndangling blob 33faa05c3991cf506a30365d307bf332b5b53079\ndangling blob 5baa111041cf1e1a98b4a1464ab9c30ae061614a\ndangling blob 26eb558ca23f14256ec1d597a40b5fe147b3ee10\ndangling blob 61fb3cd0e86793f83a20e9ebd8d14542818fe084\ndangling blob 846c9d2ac158fbf66c32369b5aedc5206ccf4097\ndangling blob d77ec8216aadbb28948dbfee7dbaf7aa2f89a314\ndangling blob 232f499772095599eb5abee8af135706377a106a\ndangling blob 272f06c1d254afef7025f15a3e30f3729f31665c\ndangling blob 78cfacfb6906cf3de8441cddf1594bc43a47b715\n",
+    "github_remote_verified": true,
+    "github_verification_status": "ssh_auth_and_branch_freshness_verified_2026-07-06",
+    "github_ls_remote_origin_branch": "2b0662bfe9fdab787a5249dc9cbefea12d683af1\trefs/heads/codex/risk-controlled-dynamic-rescue",
+    "github_ssh_auth_status": "deploy_key_authenticated_for_sarahshi99/dllm_infilling",
+    "expected_migration_commit": "2b0662bfe9fdab787a5249dc9cbefea12d683af1",
+    "status_short_branch_after_docs_update": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M docs/paper_agent/activity_ledger.zh.md\n M docs/paper_agent/codex_handoff.latest.zh.md\n M docs/paper_agent/current_action.md\n M docs/paper_agent/evidence_snapshot.md\n M docs/paper_agent/experiment_plan.current.zh.md\n M docs/paper_agent/experiment_results.zh.md\n M docs/paper_agent/paper_agent_dashboard.zh.md\n M docs/paper_agent/pause_checkpoint.current.md\n M docs/paper_agent/review_manifest.latest.json\n M docs/results/run_registry.md\n?? analysis_outputs/h200_bootstrap_20260705_103617/\n?? docs/paper_agent/new_server_h200_bootstrap.zh.md\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n",
+    "commit_push_status": "not_yet_committed_or_pushed_after_github_auth_restored; focused bootstrap commit pending."
+  },
+  "system": {
+    "hostname": "server",
+    "os_release": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n",
+    "uname": "Linux server 5.15.0-181-generic #191-Ubuntu SMP Fri May 22 19:09:02 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "cpu_summary_first_lines": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  384\nOn-line CPU(s) list:                     0-383\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9J14 96-Core Processor\nCPU family:                              25\nModel:                                   17\nThread(s) per core:                      2\nCore(s) per socket:                      96",
+    "ram": "               total        used        free      shared  buff/cache   available\nMem:           251Gi       7.3Gi       106Gi        99Mi       137Gi       242Gi\nSwap:          8.0Gi          0B       8.0Gi\n",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p2  3.5T  156G  3.2T   5% /home/shx/projects/dllm_infilling\n/dev/nvme0n1p2  3.5T  156G  3.2T   5% /tmp\n/dev/nvme0n1p2  3.5T  156G  3.2T   5% /home/shx/projects/dllm_infilling\n",
+    "compiler": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+  },
+  "gpu": {
+    "expected_gpu": "NVIDIA H200",
+    "nvidia_smi_returncode": 9,
+    "nvidia_smi_stdout": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.\n\n",
+    "nvidia_smi_stderr": "",
+    "nvidia_smi_L_returncode": 9,
+    "proc_driver_version": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  580.159.03  Release Build  (dvs-builder@U22-I3-AM27-29-6)  Fri Apr 24 06:03:03 UTC 2026\nGCC version:  gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04.3) \n",
+    "proc_gpu_information": "Model: \t\t NVIDIA H200 NVL\nIRQ:   \t\t 47\nGPU UUID: \t GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1\nVideo BIOS: \t 96.00.a7.00.00\nBus Type: \t PCIe\nDMA Size: \t 52 bits\nDMA Mask: \t 0xfffffffffffff\nBus Location: \t 0000:22:00.0\nDevice Minor: \t 0\nGPU Firmware: \t 580.159.03\nGPU Excluded:\t No\n",
+    "lspci_nvidia": "22:00.0 3D controller [0302]: NVIDIA Corporation Device [10de:233b] (rev a1)\n",
+    "dev_nvidia_nodes": [
+      "/dev/nvidia-caps"
+    ],
+    "cuda_visible_devices": null,
+    "driver_status": "kernel_module_loaded_but_device_nodes_absent_or_driver_not_usable"
+  },
+  "python": {
+    "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "python_executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "torch": "2.5.1+cu121",
+    "transformers": "4.38.2",
+    "accelerate": "1.13.0",
+    "numpy": "2.2.6",
+    "triton": "3.1.0",
+    "tokenizers": "0.15.2",
+    "cuda_available": false,
+    "cuda_runtime": "12.1",
+    "cudnn": 90100,
+    "gpu_count": 0,
+    "gpu_names": [],
+    "allow_tf32_matmul": false,
+    "allow_tf32_cudnn": true
+  },
+  "environment": {
+    "conda_env": "dllm_env",
+    "conda_envs": "# conda environments:\n#\nbase                  *  /home/shx/miniconda3\ndllm_env                 /home/shx/miniconda3/envs/dllm_env\nllmxy                    /home/shx/miniconda3/envs/llmxy\n\n",
+    "base_python": "Python 3.9.23",
+    "base_python_path": "/home/shx/miniconda3/bin/python",
+    "dllm_python": "Python 3.10.20",
+    "conda_environment_yml": "analysis_outputs/h200_bootstrap_20260705_103617/conda_environment.yml",
+    "pip_freeze": "analysis_outputs/h200_bootstrap_20260705_103617/pip_freeze.txt",
+    "offline_env": {
+      "HF_HUB_OFFLINE": null,
+      "TRANSFORMERS_OFFLINE": null,
+      "HF_HOME": null,
+      "HF_ENDPOINT": null,
+      "HF_HUB_DISABLE_XET": null
+    }
+  },
+  "model": {
+    "model_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_snapshot": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2",
+    "checkpoint_revision": "0f2787f2d87eac5eed8a087d5ecd24277e6255b2",
+    "checkpoint_files": [
+      {
+        "name": "config.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/config.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/021f5f1dbc5c4ff994be034f80a68eda43023de6",
+        "is_symlink": true,
+        "size_bytes": 1385,
+        "sha256": "5f99fefe855fdb5100bb6cadb57bdb09fae723ad54811f95c00ecacf29d58a6a"
+      },
+      {
+        "name": "configuration_llada.py",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/configuration_llada.py",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/3556bdac0bc0b06c6ec606830a28e9b3e6aeed56",
+        "is_symlink": true,
+        "size_bytes": 12000,
+        "sha256": null
+      },
+      {
+        "name": "generation_config.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/generation_config.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/eb204a82510094c3858dbd5a74ce794d936b73e9",
+        "is_symlink": true,
+        "size_bytes": 128,
+        "sha256": null
+      },
+      {
+        "name": "model-00001-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00001-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/4c0652913997c26851c51d5881918a93b2d502c0eeabcf3fe409800441ebc385",
+        "is_symlink": true,
+        "size_bytes": 2109747184,
+        "sha256": null,
+        "sha256_sampled": "4c0652913997c26851c51d5881918a93b2d502c0eeabcf3fe409800441ebc385"
+      },
+      {
+        "name": "model-00002-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00002-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/330b95434544dcdac54531ef01a14fd7dede828974d3ca2c440e443a011d0365",
+        "is_symlink": true,
+        "size_bytes": 2948598128,
+        "sha256": null
+      },
+      {
+        "name": "model-00003-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00003-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/e7847f941f2872c715af1700834056713aba45cfa66223d9e06000b1936e1abf",
+        "is_symlink": true,
+        "size_bytes": 2986883656,
+        "sha256": null
+      },
+      {
+        "name": "model-00004-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00004-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/9d5d75b011eae74467ec02db8875b582cce7b02eff143dab78b8530af4bf4dd2",
+        "is_symlink": true,
+        "size_bytes": 2952797224,
+        "sha256": null
+      },
+      {
+        "name": "model-00005-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00005-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/49e9018af8ae4852eefb2ffe7947df1931b7c4c1dcdd3648b36acd5c90eafd3d",
+        "is_symlink": true,
+        "size_bytes": 2919239128,
+        "sha256": null
+      },
+      {
+        "name": "model-00006-of-00006.safetensors",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model-00006-of-00006.safetensors",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/3a2c91cf7aac23ca84f48d4fdabf58ffd050e9f56b9c94b7962a3d3f5c35e3c6",
+        "is_symlink": true,
+        "size_bytes": 2113931792,
+        "sha256": null,
+        "sha256_sampled": "3a2c91cf7aac23ca84f48d4fdabf58ffd050e9f56b9c94b7962a3d3f5c35e3c6"
+      },
+      {
+        "name": "model.safetensors.index.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/model.safetensors.index.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/09d69a72c025a27f33511d39ddfb7c4ad2cff3f0",
+        "is_symlink": true,
+        "size_bytes": 24941,
+        "sha256": "28b4ec27206e42e7ade630450e6ce618bd197acf34d35120e8e86d2bb910a408"
+      },
+      {
+        "name": "modeling_llada.py",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/modeling_llada.py",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/810676f774fa5541030f36fbd7c451be588e8628",
+        "is_symlink": true,
+        "size_bytes": 61443,
+        "sha256": null
+      },
+      {
+        "name": "special_tokens_map.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/special_tokens_map.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/856c4639413f1ef3776854b9c00ee2df71edeeb4",
+        "is_symlink": true,
+        "size_bytes": 766,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/tokenizer.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/a5c86f8695ca08373d05da42696787f55b6f9afa",
+        "is_symlink": true,
+        "size_bytes": 6098411,
+        "sha256": "ee1ef8e5f6d9493ac25480b7b7337ff5d2c1b946190afff18d12c86ca738ae00"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/snapshots/0f2787f2d87eac5eed8a087d5ecd24277e6255b2/tokenizer_config.json",
+        "resolved_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base/blobs/2b5f4ab85a828637e1ba8f2790657ef986484624",
+        "is_symlink": true,
+        "size_bytes": 51165,
+        "sha256": "6e9f41633217287fcf9a58890efb26e91e905bd6ae2234b534b65e0c36f4dd3c"
+      }
+    ],
+    "checkpoint_shard_count": 6,
+    "checkpoint_shard_total_size_bytes": 16031197112,
+    "hf_cache_path": "/home/shx/.cache/huggingface",
+    "hf_cache_size_probe": "88G from du -sh /home/shx/.cache/huggingface",
+    "tokenizer_probe": {
+      "mask_token_id": 126336,
+      "tokenizer_length": 126346,
+      "tokenizer_mask_token_attr": null
+    }
+  },
+  "protocol": {
+    "dtype": "bfloat16 historically configured in runners",
+    "tf32": {
+      "torch_matmul_allow_tf32": false,
+      "cudnn_allow_tf32": true
+    },
+    "deterministic": "No global deterministic replay confirmed on H200 yet; historical seed protocol uses decode seed 42 and action-specific seeds in manifests.",
+    "random_seed_protocol": "Existing runners default decode seed 42; action ceiling uses fixed seeds documented in run manifests. H200 reruns not started."
+  },
+  "artifact_integrity": {
+    "copied_artifact_hashes_csv": "analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv",
+    "test_lock_status": "sealed",
+    "test_evaluation_count": 0,
+    "test_lock_integrity": "ok",
+    "copied_output_path_note": "V6 summary is present under git_workspace/outputs_clean, not the outer copied outputs_clean path."
+  },
+  "legacy_h200_smoke_artifact": {
+    "path": "/home/shx/projects/dllm_infilling/outputs_clean/smoke_remote_h200_setup_steps32_20260705_20260705_034216",
+    "interpretation": "local copied/current-server smoke artifact exists, but current session cannot use GPU; not treated as current H200 readiness proof"
+  }
+}

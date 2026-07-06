@@ -1,5 +1,45 @@
 # Paper Agent Pause Checkpoint
 
+Timestamp: 2026-07-06 UTC
+
+## H200 Migration Resume Point
+
+Current branch: `codex/risk-controlled-dynamic-rescue`
+
+Current HEAD: `2b0662bfe9fdab787a5249dc9cbefea12d683af1`
+
+Current phase: H200 new-server bootstrap is blocked before reproduction. Do not resume from the older V8/post-V8 plan until the server migration blocker is cleared.
+
+Latest artifacts:
+
+- `docs/paper_agent/new_server_h200_bootstrap.zh.md`
+- `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
+- `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
+- `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
+- `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`
+
+Blocking evidence:
+
+- H200 is visible at `/proc/driver/nvidia/gpus/0000:22:00.0/information`.
+- `nvidia-smi` fails with driver communication error.
+- `/dev/nvidia*` device nodes are absent except `/dev/nvidia-caps`.
+- `dllm_env` reports `torch.cuda.is_available() = false` and `gpu_count = 0`.
+- GitHub SSH auth is now verified by `ssh -T git@github.com`.
+- Remote branch freshness is verified: `git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` returns `2b0662bfe9fdab787a5249dc9cbefea12d683af1`, matching local HEAD.
+
+Frozen test status:
+
+- `test_status = sealed`
+- `test_evaluation_count = 0`
+
+Next three actions after blocker is fixed:
+
+1. Re-run `nvidia-smi`, `nvidia-smi -L`, and the `dllm_env` CUDA probe; require CUDA visibility before any GPU experiment.
+2. Stage only the H200 bootstrap files listed in `docs/paper_agent/current_action.md`, commit `docs: add h200 server bootstrap audit`, and push.
+3. Then start Tier 1 H200 reruns in new output directories after GPU visibility is fixed.
+
+## Historical Checkpoint Below
+
 Timestamp: 2026-07-01 15:40 CST
 
 ## Current Branch

@@ -4,6 +4,8 @@ Generated from existing local `results.jsonl` files. Raw outputs are not copied 
 
 Update: 2026-06-01 01:52 CST. This snapshot remains the compact evidence anchor for the current A6000 checkpoint; the later probe-curve audits are tracked separately in `docs/paper_agent/probe_curve_signal_audit.md`, `docs/paper_agent/probe_curve_signal_audit.json`, `docs/paper_agent/probe_curve_split_score_audit.md`, and `docs/paper_agent/probe_curve_split_score_audit.json`.
 
+H200 migration note, updated 2026-07-06 UTC: `analysis_outputs/h200_bootstrap_20260705_103617/` records the new-server bootstrap audit. Verdict is `h200_environment_invalid`: H200 is visible in `/proc/driver/nvidia`, but `nvidia-smi` fails, `/dev/nvidia*` device nodes are absent, and PyTorch reports no CUDA device. GitHub SSH auth and remote branch freshness are verified. No H200 full reruns have been started, so the evidence below remains copied historical evidence, not H200 replay evidence.
+
 Codex audit note, 2026-07-02: no raw outputs were copied or regenerated in this audit. The repository/evidence audit is tracked in `docs/paper_agent/codex_repository_audit.zh.md`; the current handoff is `docs/paper_agent/codex_handoff.latest.zh.md`.
 
 Action-ceiling dry-run note, 2026-07-02: `analysis_outputs/action_ceiling_20260702_dryrun/` contains compact case/action manifests only. It does not add a new pass-rate result and did not launch GPU.

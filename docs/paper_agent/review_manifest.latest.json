@@ -1,5 +1,5 @@
 {
-  "updated_at_cst": "2026-07-04",
+  "updated_at_cst": "2026-07-06",
   "task_type": "phase2_frozen_risk_controlled_canvas_controller",
   "phase": "frozen_risk_controlled_canvas_controller",
   "branch": "codex/risk-controlled-dynamic-rescue",
@@ -165,6 +165,25 @@
     "generation_executed": false,
     "full_run_status": "not_run_protocol_mismatch_blocked",
     "reason": "No executable official/local Stage I or Stage II LR-DLLM implementation or adapter is present in this repository."
+  },
+  "server_migration": {
+    "gpu": "NVIDIA H200 NVL",
+    "bootstrap_status": "blocked_gpu_device_nodes_missing",
+    "github_push_verified": false,
+    "github_remote_verified": true,
+    "github_remote_verification": "analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md",
+    "source_commit": "2b0662bfe9fdab787a5249dc9cbefea12d683af1",
+    "environment_manifest": "analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json",
+    "artifact_integrity_status": "compact_json_ok_test_lock_sealed_inventory_recorded",
+    "repro_verdict": "h200_environment_invalid",
+    "core_baselines_rerun": [],
+    "action_bank_rebuilt": false,
+    "controller_v1_replayed": false,
+    "true_long_full_rerun_required": false,
+    "bootstrap_report": "analysis_outputs/h200_bootstrap_20260705_103617/report.md",
+    "github_auth_blocker": null,
+    "frozen_test_status": "sealed",
+    "frozen_test_evaluation_count": 0
   },
   "final_verdict": "no_validation_signal_test_sealed",
   "recommended_read_order": [

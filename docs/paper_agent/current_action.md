@@ -1,63 +1,29 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-07-02 00:00 CST
+Timestamp: 2026-07-06 UTC
 
 ## Action Name
 
-Post-V8 rescue-quality and local-guard writing plan.
+H200 server migration bootstrap audit.
 
 ## Current Phase
 
-`superpowers:writing-plans` local fallback completed. No GPU experiment is running or launched by this action.
+`h200_environment_invalid`; reproduction and Controller V2 are blocked before GPU work.
 
-Plan output:
+## Evidence
 
-- `docs/superpowers/plans/2026-07-02-post-v8-rescue-quality-and-local-guard-plan.md`
+- Bootstrap output: `analysis_outputs/h200_bootstrap_20260705_103617/`
+- Report: `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
+- Manifest: `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
+- H200 visible in `/proc/driver/nvidia`, but `nvidia-smi` fails.
+- `/dev/nvidia*` device nodes are absent in this session.
+- `dllm_env` imports PyTorch/Transformers/NumPy, but `torch.cuda.is_available() = false`.
+- Frozen test remains `sealed`, `test_evaluation_count = 0`.
+- GitHub SSH auth and remote branch freshness are now verified: `ssh -T git@github.com` authenticates as the repo deploy key, and `git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` returns `2b0662bfe9fdab787a5249dc9cbefea12d683af1`.
+- Focused bootstrap commit/push is the only Git step before hardware remediation and Tier 1 reruns.
 
-Preceding brainstorm:
+## Stop Rule
 
-- `docs/paper_agent/experiments/20260701_next_step_brainstorm_after_v8.md`
+Do not launch H200 baselines, action bank rebuild, Controller V1 replay, true-long replay, Controller V2, or frozen test until GPU visibility is restored.
 
-## Plan Summary
-
-The next work should be CPU-only and answer two questions before any new GPU command:
-
-1. **Rescue quality:** why do Route2-triggered rows still fail even when rescue length is already enough?
-2. **Local proportional guard:** can V8's few long wins be isolated from its many short/medium losses by an inference-visible guard?
-
-## Evidence Behind The Plan
-
-- Current best LLaDA-Base follow-up remains V6 short override: `802/1033 = 77.64%`.
-- V8 global proportional reward is negative:
-  - V8a: `786/1033 = 76.09%`;
-  - V8b: `781/1033 = 75.61%`;
-  - V8c: `782/1033 = 75.70%`.
-- Route2/V3 diagnosis:
-  - `56` failed-long rows are missed by Route2;
-  - `33` triggered failed-long rows remain failures;
-  - `31/33` triggered failed-long rows already have rescue length at least oracle.
-
-## Planned Implementation Files
-
-- `analysis/post_v8_rescue_quality_audit.py`
-- `tests/test_post_v8_rescue_quality_audit.py`
-
-Planned outputs:
-
-- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/summary.json`
-- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/report.md`
-- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/row_action_table.csv`
-- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/triggered_failure_taxonomy.csv`
-- `analysis_outputs/post_v8_rescue_quality_audit_<timestamp>/v8_changed_row_taxonomy.csv`
-
-## Next Stage
-
-Use `superpowers:executing-plans` local fallback next:
-
-1. Write a short action brief for the CPU audit.
-2. Create tests first.
-3. Implement the CPU audit.
-4. Run verification.
-5. Run the audit and report a decision.
-
-Do not launch GPU until CPU evidence produces a credible new action brief with success/kill criteria.
+Do not claim H200 reproduction until GPU visibility is restored and Tier 1 reruns complete.

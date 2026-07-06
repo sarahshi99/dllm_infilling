@@ -1,13 +1,27 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-04 CST
+更新日期：2026-07-06 UTC
+
+## 0. H200 新服务器迁移状态
+
+当前恢复只完成到 bootstrap 审计，尚未进入 H200 full reproduction。
+
+- Bootstrap output：`analysis_outputs/h200_bootstrap_20260705_103617/`
+- Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
+- Environment manifest：`analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
+- New server doc：`docs/paper_agent/new_server_h200_bootstrap.zh.md`
+- Verdict：`h200_environment_invalid`
+- 阻塞：H200 在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 可见，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。
+- GitHub：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
+- Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
+- 未启动：core H200 baselines、action-bank rebuild、Controller V1 replay、true-long replay、Controller V2、frozen test。
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
-- 本轮起点 commit：`77c005153c8d98a8c8e078121ab33652baad6aba`
-- 当前阶段：Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 当前 HEAD：`2b0662bfe9fdab787a5249dc9cbefea12d683af1`
+- 当前阶段：H200 server migration bootstrap blocked before GPU reproduction；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`

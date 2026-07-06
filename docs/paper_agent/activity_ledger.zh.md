@@ -260,3 +260,25 @@
 - evidence：`tests/test_analyze_probe_curve_split_score.py`、`analysis/analyze_probe_curve_split_score.py`、`docs/paper_agent/probe_curve_split_score_audit.json`、`docs/paper_agent/probe_curve_split_score_audit.md`。
 - result：测试通过；aggregate held-out gate 未通过，结果为 `63` triggers、`47.62%` true-long precision、`32.97%` failed-long recall、`22.22%` short-risk、`7.94%` current-pass risk。
 - next：双语记录该 negative result，并保持 GPU work blocked。
+
+## 2026-07-05 10:45 UTC
+
+- action：执行 H200 新服务器 bootstrap / Git / artifact integrity 审计。
+- evidence：实际 Git root 为 `/home/shx/projects/dllm_infilling/git_workspace`；HEAD `2b0662bfe9fdab787a5249dc9cbefea12d683af1`；H200 在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 可见，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。
+- result：生成 `docs/paper_agent/new_server_h200_bootstrap.zh.md` 与 `analysis_outputs/h200_bootstrap_20260705_103617/`；verdict `h200_environment_invalid`；review manifest 增加 `server_migration` 字段；frozen test 仍 `sealed` 且 `test_evaluation_count=0`。
+- github：当时 remote URL 存在，但 `git ls-remote` 和 `ssh -T git@github.com` 因 sandbox escalation approval rejection 未执行；该状态已在 2026-07-06 被新的 SSH/branch verification 取代，见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
+- next：修复 GPU device nodes / driver 可用性，并从可联网会话验证 GitHub；之后先 commit/push bootstrap，再进入 H200 Tier 1 reruns。
+
+## 2026-07-05 10:55 UTC
+
+- action：尝试将 H200 bootstrap audit 做 focused staging/commit。
+- evidence：计划 stage `docs/paper_agent/new_server_h200_bootstrap.zh.md`、`analysis_outputs/h200_bootstrap_20260705_103617/` 以及相关 handoff/dashboard/manifest docs。
+- result：`git add` 需要写 Git index，已按 sandbox policy 请求 escalation，但审批层在执行前拒绝，错误为 `codex-auto-review` model not found / 422。未创建 commit，未 push。
+- next：需要在可正常批准 Git index/network 操作的会话或用户终端中执行 focused `git add`、`git commit`、`git push`；不要把未跟踪的 `scripts/bootstrap_remote_10_98_36_183.sh` 或 `scripts/no_flash_attn/` 混入提交。
+
+## 2026-07-06 UTC
+
+- action：恢复 GitHub SSH deploy-key access，并重新验证 H200 bootstrap 的远端状态。
+- evidence：`ssh -T git@github.com` 返回 `Hi sarahshi99/dllm_infilling! You've successfully authenticated, but GitHub does not provide shell access.`；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。
+- result：GitHub auth / branch freshness blocker 解除；H200 GPU blocker 仍存在：`nvidia-smi` 失败、`/dev/nvidia*` 缺失、`dllm_env` 中 `torch.cuda.is_available() = false`。
+- next：做 focused bootstrap commit/push；在 GPU device nodes / driver 恢复前不启动 H200 Tier 1 reruns。

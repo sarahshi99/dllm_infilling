@@ -1,6 +1,24 @@
 # Experiment Results
 
-更新时间：2026-07-04 CST
+更新时间：2026-07-06 UTC
+
+## H200 Bootstrap Audit（2026-07-05）
+
+本节不是实验结果，也不是 H200 reproduction。它记录新服务器迁移的环境阻塞状态。
+
+Artifacts：
+
+- bootstrap doc：`docs/paper_agent/new_server_h200_bootstrap.zh.md`
+- bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
+- environment manifest：`analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
+- copied artifact hashes：`analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
+- GitHub verification：`analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`
+
+Verdict：`h200_environment_invalid`。
+
+原因：当前服务器可在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 看到 `NVIDIA H200 NVL`，但 `nvidia-smi` 失败，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 `torch.cuda.is_available() = false`。GitHub SSH auth 和 branch freshness 已恢复；剩余阻塞是 GPU/driver 可用性。因此没有启动任何 full rerun，也没有生成 H200 core baseline、H200 action bank、Controller V1 replay 或 Controller V2 结果。
+
+Frozen test integrity 仍正常：`test_status=sealed`，`test_evaluation_count=0`。
 
 ## Codex Phase 2 frozen controller validation（2026-07-03）
 
