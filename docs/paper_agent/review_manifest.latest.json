@@ -1,5 +1,5 @@
 {
-  "updated_at_cst": "2026-07-06",
+  "updated_at_cst": "2026-07-07",
   "task_type": "phase2_frozen_risk_controlled_canvas_controller",
   "phase": "frozen_risk_controlled_canvas_controller",
   "branch": "codex/risk-controlled-dynamic-rescue",
@@ -116,7 +116,7 @@
     },
     "validation_result": {
       "gate_passed": false,
-      "failure_message": "VALIDATION FAILURE \u2014 TEST REMAINS SEALED",
+      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
       "pass_count": 90,
       "total": 127,
       "pass_rate": 0.7086614173228346,
@@ -173,19 +173,57 @@
     "github_remote_verified": true,
     "github_remote_verification": "analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md",
     "github_push_verification": "bootstrap audit commit 591014987088b455a95ba33924f66d13477e47b6 pushed to origin/codex/risk-controlled-dynamic-rescue on 2026-07-06 UTC",
-    "source_commit": "2b0662bfe9fdab787a5249dc9cbefea12d683af1",
+    "source_commit": "7e7117c186bfc7d2ba5bae924449d1af1926775f",
     "environment_manifest": "analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json",
     "artifact_integrity_status": "compact_json_ok_test_lock_sealed_inventory_recorded",
-    "repro_verdict": "",
-    "core_baselines_rerun": [],
+    "repro_verdict": "h200_material_outcome_drift",
+    "core_baselines_rerun": [
+      {
+        "name": "control",
+        "rows": 1033,
+        "pass_count": 787,
+        "old_pass_count": 787,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441"
+      },
+      {
+        "name": "midcons",
+        "rows": 1033,
+        "pass_count": 794,
+        "old_pass_count": 795,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029"
+      },
+      {
+        "name": "route2",
+        "rows": 1033,
+        "pass_count": 795,
+        "old_pass_count": 801,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537"
+      },
+      {
+        "name": "v6",
+        "rows": 1033,
+        "pass_count": 796,
+        "old_pass_count": 802,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307"
+      },
+      {
+        "name": "local_cal",
+        "rows": 1033,
+        "pass_count": 769,
+        "old_pass_count": 774,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939"
+      }
+    ],
     "action_bank_rebuilt": false,
     "controller_v1_replayed": false,
-    "true_long_full_rerun_required": false,
+    "true_long_full_rerun_required": null,
     "bootstrap_report": "analysis_outputs/h200_bootstrap_20260705_103617/report.md",
     "host_gpu_visibility_report": "analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md",
     "github_auth_blocker": null,
     "frozen_test_status": "sealed",
-    "frozen_test_evaluation_count": 0
+    "frozen_test_evaluation_count": 0,
+    "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
+    "controller_v2_blocked_reason": "H200 reproduction verdict is h200_material_outcome_drift; update H200 baselines/action bank and analyze drift before Controller V2."
   },
   "final_verdict": "no_validation_signal_test_sealed",
   "recommended_read_order": [

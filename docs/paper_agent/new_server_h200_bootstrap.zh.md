@@ -6,7 +6,28 @@
 
 `host_h200_available_sandbox_gpu_hidden`
 
-本轮完成 H200 新服务器 bootstrap、复制 artifact 完整性审计和 GitHub push 验证。默认 Codex 沙箱中 GPU 不可见，但经批准的沙箱外检查确认 host H200 可用。因此，未启动任何 1033-row H200 full rerun、action bank rebuild、Controller V1 replay、true-long replay 或 Controller V2；后续 GPU 实验必须使用 approved unsandboxed/escalated execution path。
+本轮完成 H200 新服务器 bootstrap、复制 artifact 完整性审计和 GitHub push 验证。默认 Codex 沙箱中 GPU 不可见，但经批准的沙箱外检查确认 host H200 可用。后续 GPU 实验必须使用 approved unsandboxed/escalated execution path。
+
+## Tier 1 H200 Reproduction Status
+
+更新时间：2026-07-07 UTC
+
+H200 core baselines 已全量重跑，compact audit 为：
+
+- `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`
+- reproduction verdict：`h200_material_outcome_drift`
+
+结果摘要：
+
+| Run | Old A6000 | H200 | Delta | Paired H200 Wins/Losses |
+|---|---:|---:|---:|---:|
+| Control | `787/1033` | `787/1033` | `0` | `4/4` |
+| Midcons | `795/1033` | `794/1033` | `-1` | `4/5` |
+| Route2 | `801/1033` | `795/1033` | `-6` | `3/9` |
+| V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
+| Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
+
+因此不得直接进入 Controller V2。下一步是用 H200 当前结果重建 train/calibration/validation action bank、replay Controller V1，并分析漂移原因；frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
 
 关键环境事实：
 
@@ -15,7 +36,7 @@
 - 沙箱外/approved host check：`nvidia-smi` 正常，driver `580.159.03`，CUDA driver `13.0`，GPU `NVIDIA H200 NVL` 空闲，`/dev/nvidia0`、`/dev/nvidiactl`、`/dev/nvidia-uvm` 可见。
 - 沙箱外 `dllm_env` PyTorch：`torch.cuda.is_available() = true`，`torch.cuda.device_count() = 1`，GPU name `NVIDIA H200 NVL`。
 
-因此，当前结论不是 host H200 invalid，而是 sandbox GPU device-node visibility limited。H200 reproduction 仍未完成；下一阶段可以通过 approved unsandboxed GPU command 进入 Tier 1 reruns。
+因此，当前结论不是 host H200 invalid，而是 sandbox GPU device-node visibility limited。Tier 1 reruns 已通过 approved unsandboxed GPU command 完成，且出现 material outcome drift。
 
 ## Workspace And Git
 
@@ -113,6 +134,7 @@ The V6 compact summary is present at `git_workspace/outputs_clean/full_route2_v6
 
 ## Required Next Steps
 
-1. Keep the focused bootstrap audit commits pushed before any GPU rerun.
-2. Launch Tier 1 H200 full reruns through approved unsandboxed/escalated GPU commands, because default sandbox commands cannot see `/dev/nvidia*`.
-3. Continue to keep frozen test sealed until validation gate conditions are met.
+1. Rebuild the H200 train/calibration/validation action bank without test rows.
+2. Replay Controller V1 on the H200 action bank.
+3. Analyze material drift before any Controller V2 work.
+4. Continue to keep frozen test sealed until validation gate conditions are met.

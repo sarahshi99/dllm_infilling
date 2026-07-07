@@ -1,10 +1,10 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-06 UTC
+更新日期：2026-07-07 UTC
 
 ## 0. H200 新服务器迁移状态
 
-当前恢复只完成到 bootstrap 审计，尚未进入 H200 full reproduction。
+当前恢复已完成 bootstrap 审计和 Tier 1 H200 core baseline full reruns。H200 reproduction verdict 为 `h200_material_outcome_drift`，因此不得直接进入 Controller V2；下一步先重建 H200 action bank、replay Controller V1，并分析漂移原因。
 
 - Bootstrap output：`analysis_outputs/h200_bootstrap_20260705_103617/`
 - Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
@@ -13,15 +13,18 @@
 - Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`
 - GPU 状态：默认 Codex 沙箱内 H200 不可见，`nvidia-smi` 失败且 `torch.cuda.is_available() = false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 中 `torch.cuda.is_available() = true`、`gpu_count = 1`。后续 GPU 实验必须使用 approved unsandboxed/escalated command。
 - GitHub：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
+- Tier 1 audit：`analysis_outputs/h200_repro_audit_20260707_tier1_v2/`
+- Tier 1 H200 results：Control `787/1033`、Midcons `794/1033`、Route2 `795/1033`、V6 `796/1033`、Local CAL `769/1033`。
+- Old-vs-H200 drift：Route2 `-6`、V6 `-6`、CAL `-5`; report records paired H200 wins/losses and candidate-hash agreement.
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
-- 未启动：core H200 baselines、action-bank rebuild、Controller V1 replay、true-long replay、Controller V2、frozen test。
+- 未完成：H200 action-bank rebuild、Controller V1 replay、true-long replay、Controller V2、frozen test。
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
-- 当前 HEAD：`2b0662bfe9fdab787a5249dc9cbefea12d683af1`
-- 当前阶段：H200 server migration bootstrap blocked before GPU reproduction；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 当前 HEAD：`7e7117c186bfc7d2ba5bae924449d1af1926775f` plus unpushed H200 Tier 1 audit changes until the next commit/push.
+- 当前阶段：H200 material drift triage before Controller V2；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
@@ -34,6 +37,17 @@
 中文：unknown-length DLLM infilling 至少有 canvas inadequacy 与 rescue adequacy 两个耦合但可分离的 regime。missed true-long failures 在 oracle-sufficient canvas 下有明显可恢复空间；already-triggered failures 在当前 E/F/G longer-trajectory 与 trace-remasking family 下仍然没有恢复。当前可部署机会是风险受控、非 oracle 地预测何时扩展以及扩展到多长。
 
 ## 2. 本轮完成内容
+
+H200 Tier 1 reproduction：
+
+- Control H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441`，`787/1033`。
+- Midcons H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029`，`794/1033`。
+- Route2 H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537`，`795/1033`。
+- V6 H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307`，`796/1033`。
+- Local CAL H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939`，`769/1033`。
+- Compact audit：`analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict `h200_material_outcome_drift`。
+
+Controller V2 status：blocked by material H200 drift until H200 action labels and Controller V1 replay are updated.
 
 代码：
 

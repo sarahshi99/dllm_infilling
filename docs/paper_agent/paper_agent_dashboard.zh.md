@@ -1,6 +1,6 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-06 UTC
+更新时间：2026-07-07 UTC
 
 ## H200 新服务器迁移状态（2026-07-05）
 
@@ -13,7 +13,9 @@ Bootstrap artifacts：
 - `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 
-Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。默认 Codex 沙箱内看不到 `/dev/nvidia*`，所以 sandboxed `nvidia-smi` 失败且 `dllm_env` 中 PyTorch 报告 `cuda_available=false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 报告 `cuda_available=true`、`gpu_count=1`。因此 H200 core baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 尚未启动，但可通过 approved unsandboxed GPU commands 继续。
+Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。默认 Codex 沙箱内看不到 `/dev/nvidia*`，所以 sandboxed `nvidia-smi` 失败且 `dllm_env` 中 PyTorch 报告 `cuda_available=false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 报告 `cuda_available=true`、`gpu_count=1`。
+
+Tier 1 H200 core baselines 已完成，compact audit 为 `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict 为 `h200_material_outcome_drift`。结果：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。Route2/V6 相对旧 A6000 均为 `-6`，CAL 为 `-5`，因此 Controller V2 暂停；下一步先重建 H200 action bank、replay Controller V1、分析漂移。
 
 GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 

@@ -1,19 +1,19 @@
 # Experiment Plan v3：Probe-Curve-First Length Modeling
 
-更新时间：2026-07-06 UTC
+更新时间：2026-07-07 UTC
 
 ## H200 迁移更新（2026-07-05）
 
 当前计划先完成 H200 bootstrap 修正，bootstrap verdict 为 `host_h200_available_sandbox_gpu_hidden`。H200 GPU 在 `/proc/driver/nvidia` 中可见；默认 Codex 沙箱内 `nvidia-smi` 无法与 driver 通信，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false` 和 `gpu_count=0`。但 approved host/unsandboxed check 显示 H200 正常空闲，`dllm_env` 中 PyTorch 报告 `cuda_available=true` 和 `gpu_count=1`。
 
-因此，Tier 1 full baselines、action bank rebuild、Controller V1 replay、true-long replay 和 Controller V2 均未启动。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证；下一步是通过 approved unsandboxed/escalated GPU commands 启动 H200 Tier 1 reruns。Bootstrap artifacts：
+Tier 1 full baselines 已通过 approved unsandboxed/escalated GPU commands 完成。Compact audit `analysis_outputs/h200_repro_audit_20260707_tier1_v2/` 给出 `h200_material_outcome_drift`：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证。Bootstrap artifacts：
 
 - `docs/paper_agent/new_server_h200_bootstrap.zh.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 
-只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才进入 H200 Tier 1 reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。
+只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才继续 H200 GPU reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。由于 Tier 1 已出现 material drift，下一步不是 Controller V2，而是 H200 action bank rebuild、Controller V1 replay 和漂移原因分析；frozen test 继续 sealed。
 
 ## Phase 2 冻结 controller 更新（2026-07-03）
 

@@ -1,6 +1,23 @@
 # Experiment Results
 
-更新时间：2026-07-06 UTC
+更新时间：2026-07-07 UTC
+
+## H200 Tier 1 Reproduction（2026-07-07）
+
+H200 core baselines 已完成全量重跑。Compact audit：
+
+- `analysis_outputs/h200_repro_audit_20260707_tier1_v2/report.md`
+- verdict：`h200_material_outcome_drift`
+
+| Run | Old A6000 | H200 | Delta | Paired H200 Wins/Losses |
+|---|---:|---:|---:|---:|
+| Control | `787/1033` | `787/1033` | `0` | `4/4` |
+| Midcons | `795/1033` | `794/1033` | `-1` | `4/5` |
+| Route2 | `801/1033` | `795/1033` | `-6` | `3/9` |
+| V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
+| Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
+
+结论：不能直接进入 Controller V2。必须先用 H200 当前结果重建 train/calibration/validation action bank、replay Controller V1，并分析 material drift。Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
 
 ## H200 Bootstrap Audit（2026-07-05）
 
@@ -16,7 +33,7 @@ Artifacts：
 
 Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。
 
-原因：当前服务器可在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 看到 `NVIDIA H200 NVL`。默认 Codex 沙箱内 `nvidia-smi` 失败、`/dev/nvidia*` 缺失、`dllm_env` 中 `torch.cuda.is_available() = false`；但 approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 中 `torch.cuda.is_available() = true`。GitHub SSH auth 和 branch freshness 已恢复。因此没有启动任何 full rerun，也没有生成 H200 core baseline、H200 action bank、Controller V1 replay 或 Controller V2 结果；后续 GPU reruns 必须通过 approved unsandboxed/escalated commands。
+原因：当前服务器可在 `/proc/driver/nvidia/gpus/0000:22:00.0/information` 看到 `NVIDIA H200 NVL`。默认 Codex 沙箱内 `nvidia-smi` 失败、`/dev/nvidia*` 缺失、`dllm_env` 中 `torch.cuda.is_available() = false`；但 approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 中 `torch.cuda.is_available() = true`。GitHub SSH auth 和 branch freshness 已恢复。后续 GPU reruns 必须通过 approved unsandboxed/escalated commands。
 
 Frozen test integrity 仍正常：`test_status=sealed`，`test_evaluation_count=0`。
 
