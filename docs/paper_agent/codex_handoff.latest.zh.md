@@ -4,7 +4,7 @@
 
 ## 0. H200 新服务器迁移状态
 
-当前恢复已完成 bootstrap 审计、Tier 1 H200 core baseline full reruns、H200 action-bank rebuild、Controller V1 replay 和 CPU-only material drift triage。H200 reproduction verdict 仍为 `h200_material_outcome_drift`，triage verdict 为 `material_drift_confirmed_controller_v2_blocked`，因此不得直接进入 Controller V2；下一步必须由研究者决定是否接受 H200 作为新 evidence base、追加迁移复查，或继续排查 kernel/model drift。旧 A6000 与 H200 结果继续分开报告。
+当前恢复已完成 bootstrap 审计、Tier 1 H200 core baseline full reruns、H200 action-bank rebuild、Controller V1 replay 和 CPU-only material drift triage。研究者已接受当前 H200 结果作为新的 evidence base；`h200_material_outcome_drift` 继续作为 reproducibility/audit 事实记录，但不再阻塞 Controller V2。旧 A6000 结果保留为 historical reference，后续 controller、validation、action bank、baseline 和论文主表以 H200 rerun 结果为准。
 
 - Bootstrap output：`analysis_outputs/h200_bootstrap_20260705_103617/`
 - Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
@@ -20,15 +20,16 @@
 - H200 Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected controller remains zero-intervention `probe_only + benefit_only` at threshold `999.0`; validation `89/127`，wins/losses vs primary `0/0`，gate failed，test decision `sealed`。
 - H200 action-bank/V1 comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；old-vs-H200 action-bank outcome agreement `94.95%`，V1 old `90/127` vs H200 `89/127`，Controller V2 allowed `false`。
 - H200 material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`；triage verdict `material_drift_confirmed_controller_v2_blocked`，core public split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
+- H200 evidence-base decision：`docs/paper_agent/h200_evidence_base_decision.zh.md`；drift accepted, Controller V2 authorized on H200 train/calibration/validation。
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
-- 未完成：researcher drift decision、true-long replay、Controller V2、frozen test。
+- 未完成：Controller V2 feasibility/validation、true-long replay、frozen test。
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
-- 当前阶段：H200 material drift decision before Controller V2；H200 action-bank/V1 replay 和 material drift triage 已完成但不解锁 Controller V2；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 当前阶段：Phase 3 H200 Controller V2；H200 drift accepted as evidence-base decision；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
@@ -66,7 +67,7 @@ H200 material drift triage：
 - Action bank outcome agreement remains `94.95%`; action-bank flip/label-change rows `267`，split limited to train/calibration/validation。
 - Frozen test remains `sealed`，`test_evaluation_count=0`。
 
-Controller V2 status：blocked by material H200 drift. Do not train Controller V2 until the research owner decides how to handle H200 material outcome drift.
+Controller V2 status：authorized on H200 evidence base. Do not use test split unless validation gate passes; frozen test remains sealed with `test_evaluation_count=0`.
 
 代码：
 

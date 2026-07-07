@@ -261,9 +261,18 @@
     "material_drift_core_public_flip_rows": 53,
     "material_drift_action_bank_flip_or_label_change_rows": 267,
     "material_drift_row_level_test_suppressed": true,
-    "controller_v2_blocked_reason": "H200 reproduction verdict remains h200_material_outcome_drift after H200 action-bank rebuild, Controller V1 replay, and CPU-only material drift triage; research decision is required before Controller V2."
+    "h200_evidence_base_accepted": true,
+    "h200_evidence_base_decision_doc": "docs/paper_agent/h200_evidence_base_decision.zh.md",
+    "h200_drift_no_longer_stop_condition": true,
+    "controller_v2_started": true,
+    "feasibility_audit_status": "pending",
+    "controller_v2_variants_completed": [],
+    "validation_gate_passed": false,
+    "test_status": "sealed",
+    "test_evaluation_count": 0,
+    "controller_v2_blocked_reason": null
   },
-  "final_verdict": "no_validation_signal_test_sealed",
+  "final_verdict": "controller_v2_in_progress",
   "recommended_read_order": [
     "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
     "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",

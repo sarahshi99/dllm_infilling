@@ -6,14 +6,14 @@
 
 当前计划先完成 H200 bootstrap 修正，bootstrap verdict 为 `host_h200_available_sandbox_gpu_hidden`。H200 GPU 在 `/proc/driver/nvidia` 中可见；默认 Codex 沙箱内 `nvidia-smi` 无法与 driver 通信，`/dev/nvidia*` 设备节点缺失，`dllm_env` 中 PyTorch 报告 `cuda_available=false` 和 `gpu_count=0`。但 approved host/unsandboxed check 显示 H200 正常空闲，`dllm_env` 中 PyTorch 报告 `cuda_available=true` 和 `gpu_count=1`。
 
-Tier 1 full baselines 已通过 approved unsandboxed/escalated GPU commands 完成。Compact audit `analysis_outputs/h200_repro_audit_20260707_tier1_v2/` 给出 `h200_material_outcome_drift`：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。H200 action bank `analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/` 和 Controller V1 replay `analysis_outputs/controller_validation_h200_20260707_v1_replay/` 已完成；comparison audit `analysis_outputs/h200_repro_audit_20260707_action_bank_v1/` 仍保持 `h200_material_outcome_drift`，Controller V2 allowed `false`。CPU-only material drift triage `analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/` verdict 为 `material_drift_confirmed_controller_v2_blocked`，并只写 train/calibration/validation row-level flips，不泄露 test row-level details。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证。Bootstrap artifacts：
+Tier 1 full baselines 已通过 approved unsandboxed/escalated GPU commands 完成。Compact audit `analysis_outputs/h200_repro_audit_20260707_tier1_v2/` 给出 `h200_material_outcome_drift`：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。H200 action bank `analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/` 和 Controller V1 replay `analysis_outputs/controller_validation_h200_20260707_v1_replay/` 已完成；comparison audit `analysis_outputs/h200_repro_audit_20260707_action_bank_v1/` 仍保持 `h200_material_outcome_drift`。CPU-only material drift triage `analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/` verdict 为 `material_drift_confirmed_controller_v2_blocked`，并只写 train/calibration/validation row-level flips，不泄露 test row-level details。研究者已接受当前 H200 rerun 结果为新的 evidence base，见 `docs/paper_agent/h200_evidence_base_decision.zh.md`；`h200_material_outcome_drift` 不再作为 Controller V2 停止条件。GitHub SSH auth 和 branch freshness 已在 2026-07-06 UTC 验证。Bootstrap artifacts：
 
 - `docs/paper_agent/new_server_h200_bootstrap.zh.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/report.md`
 - `analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json`
 - `analysis_outputs/h200_bootstrap_20260705_103617/copied_artifact_hashes.csv`
 
-只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才继续 H200 GPU reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。由于 Tier 1 已出现 material drift，且 H200 action bank/V1 replay/triage 未消除该漂移风险，下一步不是 Controller V2，而是研究者决策：接受 H200 作为新 evidence base、追加迁移复查，或继续排查数值/环境 drift；frozen test 继续 sealed。
+只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才继续 H200 GPU reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。Phase 3 现在以 H200 rerun evidence base 推进 Controller V2；frozen test 在 validation gate 通过前继续 sealed，`test_evaluation_count=0`。
 
 ## Phase 2 冻结 controller 更新（2026-07-03）
 

@@ -72,6 +72,19 @@ Key facts：
 
 Interpretation：H200 drift remains small in absolute pass-count terms but material for Route2/V6/CAL and for action labels. This triage does not explain away the drift or unlock Controller V2; it makes the blocker auditable while preserving test secrecy.
 
+## H200 Evidence Base Decision（2026-07-07）
+
+研究者已接受当前 H200 rerun 结果作为新的 evidence base。Decision doc：
+
+- `docs/paper_agent/h200_evidence_base_decision.zh.md`
+
+Consequences：
+
+- `h200_material_outcome_drift` 继续保留在 reproducibility/audit 文档中，但不再作为 Controller V2 的停止条件。
+- 旧 A6000 结果为 historical reference。
+- 后续 controller、validation、action bank、baseline 和论文主表以 H200 rerun 结果为准。
+- Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
+
 ## H200 Bootstrap Audit（2026-07-05）
 
 本节不是实验结果，也不是 H200 reproduction。它记录新服务器迁移的环境阻塞状态。

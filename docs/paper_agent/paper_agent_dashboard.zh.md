@@ -15,7 +15,7 @@ Bootstrap artifacts：
 
 Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。默认 Codex 沙箱内看不到 `/dev/nvidia*`，所以 sandboxed `nvidia-smi` 失败且 `dllm_env` 中 PyTorch 报告 `cuda_available=false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 报告 `cuda_available=true`、`gpu_count=1`。
 
-Tier 1 H200 core baselines 已完成，compact audit 为 `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict 为 `h200_material_outcome_drift`。结果：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。Route2/V6 相对旧 A6000 均为 `-6`，CAL 为 `-5`，因此 Controller V2 暂停。
+Tier 1 H200 core baselines 已完成，compact audit 为 `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict 为 `h200_material_outcome_drift`。结果：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。Route2/V6 相对旧 A6000 均为 `-6`，CAL 为 `-5`；该 drift 已被研究者接受为新 evidence-base 决策，不再阻塞 Controller V2。
 
 H200 action bank 与 Controller V1 replay 也已完成：
 
@@ -23,8 +23,9 @@ H200 action bank 与 Controller V1 replay 也已完成：
 - Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected zero-intervention controller，validation `89/127`，wins/losses `0/0`，gate failed，test decision `sealed`。
 - Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`，old-vs-H200 action-bank outcome agreement `94.95%`，server verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
 - Material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`，verdict `material_drift_confirmed_controller_v2_blocked`，core public-split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
+- Evidence-base decision：`docs/paper_agent/h200_evidence_base_decision.zh.md`。后续 controller、validation、action bank 和论文主表以 H200 rerun 结果为准；A6000 保留为 historical reference。
 
-下一步不是自动进入 Controller V2，而是由研究者决策 H200 material drift：接受 H200 作为新 evidence base、追加迁移复查，或继续排查数值/环境 drift。
+当前已进入 Phase 3 H200 Controller V2：feasibility audit、ordinal canvas adequacy、pairwise ranker、independent harm guard、calibration 和 validation。Frozen test 在 validation gate 通过前继续 sealed。
 
 GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 
