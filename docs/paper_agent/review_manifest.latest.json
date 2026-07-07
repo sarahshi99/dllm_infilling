@@ -1,58 +1,15 @@
 {
-  "updated_at_cst": "2026-07-07",
-  "task_type": "phase2_frozen_risk_controlled_canvas_controller",
-  "phase": "frozen_risk_controlled_canvas_controller",
-  "branch": "codex/risk-controlled-dynamic-rescue",
-  "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
-  "minimum_acceptance_met": true,
-  "central_claim": "Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.",
-  "attribution_audit": {
-    "status": "completed",
-    "output_dir": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2",
-    "report": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
-    "hard_cases": 89,
-    "positive_controls": 6,
-    "c_hard_recoveries": 29,
-    "c_missed_failed_long_recoveries": 29,
-    "c_triggered_failed_long_recoveries": 0,
-    "efg_any_hard_recoveries": 31,
-    "sufficient_canvas_effect": 29,
-    "refinement_incremental_effect": 2,
-    "c_failed_but_efg_passed_cases": [
-      "SingleLineInfilling/HumanEval/108/L2",
-      "SingleLineInfilling/HumanEval/89/L4"
-    ],
-    "action_incremental_over_c": {
-      "E_oracle_sufficient_no_early_commit": 2,
-      "F_oracle_sufficient_trace_remask": 1,
-      "G_oracle_sufficient_trace_span_remask": 1
-    },
-    "candidate_hash_change_vs_correctness_change": {
-      "hash_changed_any_refinement": 14,
-      "hash_changed_without_correctness_change": 11,
-      "correctness_changed_any_refinement": 3,
-      "correctness_changed_without_hash_change": 0
-    }
-  },
-  "split_lock": {
-    "status": "completed",
-    "split_dir": "analysis_outputs/grouped_split_20260702_accel2",
-    "protocol_doc": "docs/paper_agent/frozen_controller_protocol.zh.md",
-    "test_lock": "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json",
-    "split_manifest_sha256": "1d8e24abbaeeeb43a292f479d1c033c962d1a680fd03573451a14a3f1e83122f",
-    "test_status": "sealed",
-    "test_evaluation_count": 0,
-    "row_counts": {
-      "train": 645,
-      "calibration": 155,
-      "validation": 127,
-      "test": 106
-    }
+  "ablation_status": {
+    "benefit_only_vs_benefit_plus_harm": "completed_validation_all_zero_after_risk_calibration",
+    "binary_keep_32_vs_multi_action": "completed via always_expand_32 and action-bank variants",
+    "equal_compute_comparison": "compute_matched_simple_gate_expand32 included",
+    "equal_trigger_coverage_comparison": "not informative because selected controller has zero interventions",
+    "hand_route2_gate_vs_learned_gate": "completed_validation_baseline_table",
+    "no_calibration_vs_risk_calibration": "risk_curves_saved; nonzero points fail 5_percent_upper_bound",
+    "probe_only_vs_trace_only_vs_fused": "completed_validation_all_zero_after_risk_calibration",
+    "unconditional_overwrite_vs_keep_reject": "completed; unconditional expand regresses"
   },
   "action_bank": {
-    "status": "completed",
-    "output_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
-    "report": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
     "action_schema": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/action_schema.json",
     "actions": [
       "KEEP_PRIMARY",
@@ -61,29 +18,101 @@
       "EXPAND_32",
       "EXPAND_48"
     ],
-    "task_count": 927,
+    "benefit_labels_non_keep": 191,
+    "expected_action_rows": 4635,
+    "extra_action_rows": 0,
+    "harm_labels_non_keep": 1242,
+    "missing_action_rows": 0,
+    "observed_action_rows": 4635,
+    "output_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+    "report": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
     "row_count": 4635,
+    "source_duplicate_action_rows": 10,
     "split_counts": {
-      "train": 3225,
       "calibration": 775,
+      "train": 3225,
       "validation": 635
     },
-    "expected_action_rows": 4635,
-    "observed_action_rows": 4635,
-    "missing_action_rows": 0,
-    "extra_action_rows": 0,
-    "source_duplicate_action_rows": 10,
-    "benefit_labels_non_keep": 191,
-    "harm_labels_non_keep": 1242
+    "status": "completed",
+    "task_count": 927
+  },
+  "attribution_audit": {
+    "action_incremental_over_c": {
+      "E_oracle_sufficient_no_early_commit": 2,
+      "F_oracle_sufficient_trace_remask": 1,
+      "G_oracle_sufficient_trace_span_remask": 1
+    },
+    "c_failed_but_efg_passed_cases": [
+      "SingleLineInfilling/HumanEval/108/L2",
+      "SingleLineInfilling/HumanEval/89/L4"
+    ],
+    "c_hard_recoveries": 29,
+    "c_missed_failed_long_recoveries": 29,
+    "c_triggered_failed_long_recoveries": 0,
+    "candidate_hash_change_vs_correctness_change": {
+      "correctness_changed_any_refinement": 3,
+      "correctness_changed_without_hash_change": 0,
+      "hash_changed_any_refinement": 14,
+      "hash_changed_without_correctness_change": 11
+    },
+    "efg_any_hard_recoveries": 31,
+    "hard_cases": 89,
+    "output_dir": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2",
+    "positive_controls": 6,
+    "refinement_incremental_effect": 2,
+    "report": "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
+    "status": "completed",
+    "sufficient_canvas_effect": 29
+  },
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "central_claim": "Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.",
+  "controller": {
+    "calibration_harm_budget_upper95": 0.05,
+    "calibration_result": "no_nonzero_intervention_operating_point_satisfies_harm_budget",
+    "controller_variants": 9,
+    "invalid_attempts_not_used_for_claims": [
+      "analysis_outputs/controller_validation_20260703_phase2_controller_validation",
+      "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v2"
+    ],
+    "model_family": "logistic",
+    "output_dir": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3",
+    "policy_variants": [
+      "benefit_only",
+      "benefit_plus_harm",
+      "risk_calibrated_benefit_plus_harm"
+    ],
+    "report": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
+    "selected_controller": {
+      "feature_variant": "probe_only",
+      "policy_variant": "benefit_only",
+      "score_threshold": 999.0
+    },
+    "status": "validation_completed_test_sealed",
+    "validation_baselines": {
+      "always_expand_32_pass_rate": 0.4409448818897638,
+      "local_cal_pass_rate": 0.7086614173228346,
+      "oracle_action_bank_upper_bound_losses": 0,
+      "oracle_action_bank_upper_bound_pass_rate": 0.8188976377952756,
+      "oracle_action_bank_upper_bound_wins": 14,
+      "v6_pass_rate": 0.7086614173228346
+    },
+    "validation_result": {
+      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+      "gate_passed": false,
+      "intervention_count": 0,
+      "intervention_coverage": 0.0,
+      "losses_vs_primary": 0,
+      "pass_count": 90,
+      "pass_rate": 0.7086614173228346,
+      "total": 127,
+      "validation_not_below_v6": true,
+      "validation_risk_coverage_pareto_improved": false,
+      "validation_same_accuracy_lower_compute": true,
+      "validation_total_pass_improved": false,
+      "wins_vs_primary": 0
+    }
   },
   "feature_schema": {
-    "version": "frozen_canvas_features_v1",
-    "path": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/feature_schema.json",
-    "variants": [
-      "probe_only",
-      "trace_only",
-      "probe_trace_fused"
-    ],
     "forbidden_features": [
       "oracle_length",
       "reference_code",
@@ -94,186 +123,36 @@
       "HumanEval task id",
       "split name",
       "test-derived statistic"
-    ]
-  },
-  "controller": {
-    "status": "validation_completed_test_sealed",
-    "output_dir": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3",
-    "report": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
-    "model_family": "logistic",
-    "controller_variants": 9,
-    "policy_variants": [
-      "benefit_only",
-      "benefit_plus_harm",
-      "risk_calibrated_benefit_plus_harm"
     ],
-    "calibration_harm_budget_upper95": 0.05,
-    "calibration_result": "no_nonzero_intervention_operating_point_satisfies_harm_budget",
-    "selected_controller": {
-      "feature_variant": "probe_only",
-      "policy_variant": "benefit_only",
-      "score_threshold": 999.0
-    },
-    "validation_result": {
-      "gate_passed": false,
-      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
-      "pass_count": 90,
-      "total": 127,
-      "pass_rate": 0.7086614173228346,
-      "wins_vs_primary": 0,
-      "losses_vs_primary": 0,
-      "intervention_count": 0,
-      "intervention_coverage": 0.0,
-      "validation_not_below_v6": true,
-      "validation_same_accuracy_lower_compute": true,
-      "validation_total_pass_improved": false,
-      "validation_risk_coverage_pareto_improved": false
-    },
-    "validation_baselines": {
-      "v6_pass_rate": 0.7086614173228346,
-      "local_cal_pass_rate": 0.7086614173228346,
-      "always_expand_32_pass_rate": 0.4409448818897638,
-      "oracle_action_bank_upper_bound_pass_rate": 0.8188976377952756,
-      "oracle_action_bank_upper_bound_wins": 14,
-      "oracle_action_bank_upper_bound_losses": 0
-    },
-    "invalid_attempts_not_used_for_claims": [
-      "analysis_outputs/controller_validation_20260703_phase2_controller_validation",
-      "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v2"
-    ]
+    "path": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/feature_schema.json",
+    "variants": [
+      "probe_only",
+      "trace_only",
+      "probe_trace_fused"
+    ],
+    "version": "frozen_canvas_features_v1"
   },
+  "final_verdict": "risk_certification_limited_test_sealed",
   "frozen_test": {
-    "status": "sealed",
-    "executed": false,
     "evaluation_count": 0,
-    "result_dir": null
-  },
-  "ablation_status": {
-    "probe_only_vs_trace_only_vs_fused": "completed_validation_all_zero_after_risk_calibration",
-    "hand_route2_gate_vs_learned_gate": "completed_validation_baseline_table",
-    "benefit_only_vs_benefit_plus_harm": "completed_validation_all_zero_after_risk_calibration",
-    "no_calibration_vs_risk_calibration": "risk_curves_saved; nonzero points fail 5_percent_upper_bound",
-    "binary_keep_32_vs_multi_action": "completed via always_expand_32 and action-bank variants",
-    "unconditional_overwrite_vs_keep_reject": "completed; unconditional expand regresses",
-    "equal_compute_comparison": "compute_matched_simple_gate_expand32 included",
-    "equal_trigger_coverage_comparison": "not informative because selected controller has zero interventions"
+    "executed": false,
+    "result_dir": null,
+    "status": "sealed"
   },
   "lrdllm": {
     "audit_doc": "docs/paper_agent/lrdllm_protocol_audit.zh.md",
-    "sanity_dir": "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity",
-    "sanity_verdict": "protocol_mismatch_blocked",
-    "generation_executed": false,
     "full_run_status": "not_run_protocol_mismatch_blocked",
-    "reason": "No executable official/local Stage I or Stage II LR-DLLM implementation or adapter is present in this repository."
+    "generation_executed": false,
+    "reason": "No executable official/local Stage I or Stage II LR-DLLM implementation or adapter is present in this repository.",
+    "sanity_dir": "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity",
+    "sanity_verdict": "protocol_mismatch_blocked"
   },
-  "server_migration": {
-    "gpu": "NVIDIA H200 NVL",
-    "bootstrap_status": "host_h200_available_sandbox_gpu_hidden",
-    "github_push_verified": true,
-    "github_remote_verified": true,
-    "github_remote_verification": "analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md",
-    "github_push_verification": "bootstrap audit commit 591014987088b455a95ba33924f66d13477e47b6 pushed to origin/codex/risk-controlled-dynamic-rescue on 2026-07-06 UTC",
-    "source_commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
-    "environment_manifest": "analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json",
-    "artifact_integrity_status": "compact_json_ok_test_lock_sealed_inventory_recorded",
-    "repro_verdict": "h200_material_outcome_drift",
-    "core_baselines_rerun": [
-      {
-        "name": "control",
-        "rows": 1033,
-        "pass_count": 787,
-        "old_pass_count": 787,
-        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441"
-      },
-      {
-        "name": "midcons",
-        "rows": 1033,
-        "pass_count": 794,
-        "old_pass_count": 795,
-        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029"
-      },
-      {
-        "name": "route2",
-        "rows": 1033,
-        "pass_count": 795,
-        "old_pass_count": 801,
-        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537"
-      },
-      {
-        "name": "v6",
-        "rows": 1033,
-        "pass_count": 796,
-        "old_pass_count": 802,
-        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307"
-      },
-      {
-        "name": "local_cal",
-        "rows": 1033,
-        "pass_count": 769,
-        "old_pass_count": 774,
-        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939"
-      }
-    ],
-    "action_bank_rebuilt": true,
-    "action_bank_h200": {
-      "output_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
-      "task_count": 927,
-      "row_count": 4635,
-      "split_counts": {
-        "train": 3225,
-        "calibration": 775,
-        "validation": 635
-      },
-      "test_rows": 0,
-      "pass_count": 2506,
-      "benefit_labels_non_keep": 193,
-      "harm_labels_non_keep": 1237
-    },
-    "controller_v1_replayed": true,
-    "controller_v1_h200_replay": {
-      "output_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
-      "selected_controller": {
-        "feature_variant": "probe_only",
-        "policy_variant": "benefit_only",
-        "score_threshold": 999.0
-      },
-      "validation_pass_count": 89,
-      "validation_total": 127,
-      "validation_wins_vs_primary": 0,
-      "validation_losses_vs_primary": 0,
-      "intervention_count": 0,
-      "gate_passed": false,
-      "test_decision": "sealed",
-      "oracle_action_bank_upper_bound_pass_count": 106,
-      "oracle_action_bank_upper_bound_wins": 17,
-      "oracle_action_bank_upper_bound_losses": 0
-    },
-    "true_long_full_rerun_required": null,
-    "bootstrap_report": "analysis_outputs/h200_bootstrap_20260705_103617/report.md",
-    "host_gpu_visibility_report": "analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md",
-    "github_auth_blocker": null,
-    "frozen_test_status": "sealed",
-    "frozen_test_evaluation_count": 0,
-    "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
-    "action_bank_controller_repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_action_bank_v1",
-    "material_drift_triage_dir": "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage",
-    "material_drift_triage_verdict": "material_drift_confirmed_controller_v2_blocked",
-    "material_drift_core_public_flip_rows": 53,
-    "material_drift_action_bank_flip_or_label_change_rows": 267,
-    "material_drift_row_level_test_suppressed": true,
-    "h200_evidence_base_accepted": true,
-    "h200_evidence_base_decision_doc": "docs/paper_agent/h200_evidence_base_decision.zh.md",
-    "h200_drift_no_longer_stop_condition": true,
-    "controller_v2_started": true,
-    "feasibility_audit_status": "pending",
-    "controller_v2_variants_completed": [],
-    "validation_gate_passed": false,
-    "test_status": "sealed",
-    "test_evaluation_count": 0,
-    "controller_v2_blocked_reason": null
-  },
-  "final_verdict": "controller_v2_in_progress",
+  "minimum_acceptance_met": true,
+  "phase": "frozen_risk_controlled_canvas_controller",
   "recommended_read_order": [
+    "analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/report.md",
+    "analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/report.md",
+    "docs/paper_agent/h200_evidence_base_decision.zh.md",
     "analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md",
     "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
     "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
@@ -283,5 +162,138 @@
     "docs/paper_agent/frozen_controller_protocol.zh.md",
     "docs/paper_agent/lrdllm_protocol_audit.zh.md",
     "docs/paper_agent/codex_handoff.latest.zh.md"
-  ]
+  ],
+  "server_migration": {
+    "action_bank_controller_repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_action_bank_v1",
+    "action_bank_h200": {
+      "benefit_labels_non_keep": 193,
+      "harm_labels_non_keep": 1237,
+      "output_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+      "pass_count": 2506,
+      "row_count": 4635,
+      "split_counts": {
+        "calibration": 775,
+        "train": 3225,
+        "validation": 635
+      },
+      "task_count": 927,
+      "test_rows": 0
+    },
+    "action_bank_rebuilt": true,
+    "artifact_integrity_status": "compact_json_ok_test_lock_sealed_inventory_recorded",
+    "bootstrap_report": "analysis_outputs/h200_bootstrap_20260705_103617/report.md",
+    "bootstrap_status": "host_h200_available_sandbox_gpu_hidden",
+    "controller_v1_h200_replay": {
+      "gate_passed": false,
+      "intervention_count": 0,
+      "oracle_action_bank_upper_bound_losses": 0,
+      "oracle_action_bank_upper_bound_pass_count": 106,
+      "oracle_action_bank_upper_bound_wins": 17,
+      "output_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+      "selected_controller": {
+        "feature_variant": "probe_only",
+        "policy_variant": "benefit_only",
+        "score_threshold": 999.0
+      },
+      "test_decision": "sealed",
+      "validation_losses_vs_primary": 0,
+      "validation_pass_count": 89,
+      "validation_total": 127,
+      "validation_wins_vs_primary": 0
+    },
+    "controller_v1_replayed": true,
+    "controller_v2_blocked_reason": null,
+    "controller_v2_dir": "analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation",
+    "controller_v2_started": true,
+    "controller_v2_variants_completed": [
+      "ordinal_only",
+      "pairwise_only",
+      "ordinal_pairwise_harm"
+    ],
+    "controller_v2_verdict": "risk_certification_limited_test_sealed",
+    "core_baselines_rerun": [
+      {
+        "name": "control",
+        "old_pass_count": 787,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441",
+        "pass_count": 787,
+        "rows": 1033
+      },
+      {
+        "name": "midcons",
+        "old_pass_count": 795,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029",
+        "pass_count": 794,
+        "rows": 1033
+      },
+      {
+        "name": "route2",
+        "old_pass_count": 801,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537",
+        "pass_count": 795,
+        "rows": 1033
+      },
+      {
+        "name": "v6",
+        "old_pass_count": 802,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307",
+        "pass_count": 796,
+        "rows": 1033
+      },
+      {
+        "name": "local_cal",
+        "old_pass_count": 774,
+        "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939",
+        "pass_count": 769,
+        "rows": 1033
+      }
+    ],
+    "environment_manifest": "analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json",
+    "feasibility_audit_dir": "analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility",
+    "feasibility_audit_status": "completed",
+    "feasibility_audit_verdict": "mixed_controller_failure",
+    "frozen_test_evaluation_count": 0,
+    "frozen_test_status": "sealed",
+    "github_auth_blocker": null,
+    "github_push_verification": "bootstrap audit commit 591014987088b455a95ba33924f66d13477e47b6 pushed to origin/codex/risk-controlled-dynamic-rescue on 2026-07-06 UTC",
+    "github_push_verified": true,
+    "github_remote_verification": "analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md",
+    "github_remote_verified": true,
+    "gpu": "NVIDIA H200 NVL",
+    "h200_drift_no_longer_stop_condition": true,
+    "h200_evidence_base_accepted": true,
+    "h200_evidence_base_decision_doc": "docs/paper_agent/h200_evidence_base_decision.zh.md",
+    "host_gpu_visibility_report": "analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md",
+    "material_drift_action_bank_flip_or_label_change_rows": 267,
+    "material_drift_core_public_flip_rows": 53,
+    "material_drift_row_level_test_suppressed": true,
+    "material_drift_triage_dir": "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage",
+    "material_drift_triage_verdict": "material_drift_confirmed_controller_v2_blocked",
+    "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
+    "repro_verdict": "h200_material_outcome_drift",
+    "source_commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
+    "test_evaluation_count": 0,
+    "test_status": "sealed",
+    "true_long_full_rerun_required": null,
+    "validation_gate_passed": false,
+    "validation_gate_reason": "best nonzero V2 point has only +1 pass and population harm upper95 7.06%; other variants select zero intervention"
+  },
+  "split_lock": {
+    "protocol_doc": "docs/paper_agent/frozen_controller_protocol.zh.md",
+    "row_counts": {
+      "calibration": 155,
+      "test": 106,
+      "train": 645,
+      "validation": 127
+    },
+    "split_dir": "analysis_outputs/grouped_split_20260702_accel2",
+    "split_manifest_sha256": "1d8e24abbaeeeb43a292f479d1c033c962d1a680fd03573451a14a3f1e83122f",
+    "status": "completed",
+    "test_evaluation_count": 0,
+    "test_lock": "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json",
+    "test_status": "sealed"
+  },
+  "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+  "task_type": "phase2_frozen_risk_controlled_canvas_controller",
+  "updated_at_cst": "2026-07-07"
 }

@@ -22,7 +22,9 @@
 - H200 material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`；triage verdict `material_drift_confirmed_controller_v2_blocked`，core public split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
 - H200 evidence-base decision：`docs/paper_agent/h200_evidence_base_decision.zh.md`；drift accepted, Controller V2 authorized on H200 train/calibration/validation。
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
-- 未完成：Controller V2 feasibility/validation、true-long replay、frozen test。
+- Controller V2 feasibility audit：`analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/`，verdict `mixed_controller_failure`。
+- Controller V2 validation：`analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/`，verdict `risk_certification_limited_test_sealed`；best nonzero signal is `ordinal_only + probe_trace_fused` with validation `90/127`, wins/losses `5/4`, interventions `41`, population harm upper95 `7.06%`，未通过 gate。
+- 未完成：true-long replay、frozen test。
 
 ## 1. 当前状态
 
@@ -68,6 +70,14 @@ H200 material drift triage：
 - Frozen test remains `sealed`，`test_evaluation_count=0`。
 
 Controller V2 status：authorized on H200 evidence base. Do not use test split unless validation gate passes; frozen test remains sealed with `test_evaluation_count=0`.
+
+Controller V2 result：
+
+- Feasibility audit verdict：`mixed_controller_failure`。Validation recoverable rows `17/127`，harmable rows `67/127`，action-row benefit/harm `31/155`。Best validation recoverability AUC `0.7342` (`trace_only`)，但 calibration recoverable count and harm imbalance make certification hard。
+- Variant A `ordinal_only`：best `probe_trace_fused` validation `90/127`，wins/losses `5/4`，interventions `41`，population harm upper95 `0.0706`，gate failed。
+- Variant B `pairwise_only`：all feature variants selected zero intervention，validation `89/127`，wins/losses `0/0`，gate failed。
+- Variant C `ordinal_pairwise_harm`：selected zero intervention，validation `89/127`，wins/losses `0/0`，gate failed。
+- Frozen test remains `sealed`，`test_evaluation_count=0`。
 
 代码：
 

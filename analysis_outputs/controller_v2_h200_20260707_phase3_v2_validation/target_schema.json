@@ -1,0 +1,9 @@
+{
+  "targets": [
+    "recoverable",
+    "harmable",
+    "minimum_passing_action",
+    "pairwise_action_preference"
+  ],
+  "test_labels_used": false
+}

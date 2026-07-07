@@ -85,6 +85,34 @@ Consequences：
 - 后续 controller、validation、action bank、baseline 和论文主表以 H200 rerun 结果为准。
 - Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
 
+## H200 Controller V2（2026-07-07）
+
+Artifacts：
+
+- Feasibility audit：`analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/report.md`
+- Controller V2 validation：`analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/report.md`
+
+Feasibility audit verdict：`mixed_controller_failure`。
+
+| Quantity | Value |
+|---|---:|
+| validation recoverable rows | `17/127` |
+| validation harmable rows | `67/127` |
+| validation action-row benefit/harm | `31/155` |
+| best validation recoverability AUC | `0.7342` |
+| zero-harm interventions needed for 5% conditional upper95 | `59` |
+
+Controller V2 verdict：`risk_certification_limited_test_sealed`。
+
+| Variant | Feature | Validation | Wins | Losses | Interventions | Gate |
+|---|---|---:|---:|---:|---:|---|
+| ordinal only | probe only | `89/127` | `0` | `0` | `0` | fail |
+| ordinal only | probe trace fused | `90/127` | `5` | `4` | `41` | fail |
+| pairwise only | probe only / fused / trace control | `89/127` | `0` | `0` | `0` | fail |
+| ordinal + pairwise + harm | probe only / fused | `89/127` | `0` | `0` | `0` | fail |
+
+The only nonzero V2 point gains one pass but has population harm upper95 `7.06%` and does not meet the preregistered primary gate. Frozen test remains `sealed` with `test_evaluation_count=0`。
+
 ## H200 Bootstrap Audit（2026-07-05）
 
 本节不是实验结果，也不是 H200 reproduction。它记录新服务器迁移的环境阻塞状态。

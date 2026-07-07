@@ -15,6 +15,13 @@ Tier 1 full baselines 已通过 approved unsandboxed/escalated GPU commands 完�
 
 只有在 approved unsandboxed context 中 `nvidia-smi` 正常、`torch.cuda.is_available() = true`，才继续 H200 GPU reruns；默认 sandbox 的 CUDA probe 不作为 host GPU failure 证据。Phase 3 现在以 H200 rerun evidence base 推进 Controller V2；frozen test 在 validation gate 通过前继续 sealed，`test_evaluation_count=0`。
 
+Phase 3 H200 Controller V2 已完成第一轮 validation：
+
+- feasibility audit：`analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/`，verdict `mixed_controller_failure`；
+- controller V2 validation：`analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/`，verdict `risk_certification_limited_test_sealed`；
+- only nonzero V2 signal：`ordinal_only + probe_trace_fused`，validation `90/127`，wins/losses `5/4`，interventions `41`，population harm upper95 `7.06%`；
+- gate failed；frozen test remains `sealed`，`test_evaluation_count=0`。
+
 ## Phase 2 冻结 controller 更新（2026-07-03）
 
 当前阶段已从 oracle action-ceiling diagnostics 进入 `Frozen Risk-Controlled Canvas Controller`。本轮完成：

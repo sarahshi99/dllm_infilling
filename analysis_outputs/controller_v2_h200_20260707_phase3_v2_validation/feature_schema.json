@@ -1,0 +1,81 @@
+{
+  "action_feature_columns": [
+    "candidate_actual_canvas",
+    "canvas_delta_from_primary",
+    "normalized_canvas_cost",
+    "action_rank"
+  ],
+  "feature_variants": {
+    "probe_only": [
+      "selected_len",
+      "best_len",
+      "best_score",
+      "best_long_len",
+      "best_long_score",
+      "long_ratio",
+      "raw_long_ratio",
+      "selected_score",
+      "selected_raw_score",
+      "long_minus_best_score",
+      "long_len_minus_selected",
+      "official_selected_length",
+      "s3_selected_length",
+      "primary_selected_length"
+    ],
+    "probe_trace_fused": [
+      "selected_len",
+      "best_len",
+      "best_score",
+      "best_long_len",
+      "best_long_score",
+      "long_ratio",
+      "raw_long_ratio",
+      "selected_score",
+      "selected_raw_score",
+      "long_minus_best_score",
+      "long_len_minus_selected",
+      "official_selected_length",
+      "s3_selected_length",
+      "primary_selected_length",
+      "mean_final_confidence",
+      "mean_gap_at_stop_or_final",
+      "mean_top1_at_stop_or_final",
+      "remaining_mask_ratio_at_stop_or_final",
+      "remaining_masks_at_stop_or_final",
+      "stop_step",
+      "route2_trace_top1_last",
+      "route2_trace_top1_median",
+      "route2_trace_confidence_max",
+      "route2_trace_max_remaining_plateau_steps"
+    ],
+    "trace_only": [
+      "mean_final_confidence",
+      "mean_gap_at_stop_or_final",
+      "mean_top1_at_stop_or_final",
+      "remaining_mask_ratio_at_stop_or_final",
+      "remaining_masks_at_stop_or_final",
+      "stop_step",
+      "route2_trace_top1_last",
+      "route2_trace_top1_median",
+      "route2_trace_confidence_max",
+      "route2_trace_max_remaining_plateau_steps"
+    ]
+  },
+  "forbidden_features": [
+    "action_passed",
+    "benefit_label",
+    "error_type",
+    "harm_label",
+    "oracle_bucket",
+    "oracle_length",
+    "pass_fail",
+    "primary_passed",
+    "reference_code",
+    "split",
+    "task_group",
+    "task_id",
+    "unit_test_result"
+  ],
+  "source": "H200 train/calibration/validation action_training_table only",
+  "test_features_materialized": false
+}

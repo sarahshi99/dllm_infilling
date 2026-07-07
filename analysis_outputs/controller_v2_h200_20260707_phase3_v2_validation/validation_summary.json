@@ -1,0 +1,15 @@
+{
+  "bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/controller_v2_h200.py --timestamp 20260707_phase3_v2_validation --feasibility-dir analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility",
+  "commit": "2db9a778da5696f333067f8456c07c7c7d7941d4",
+  "controller_verdict": "risk_certification_limited_test_sealed",
+  "feasibility_dir": "analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n?? analysis_outputs/controller_action_bank_h200_20260707_smoke2/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1/\n?? analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/\n?? analysis_outputs/h200_repro_audit_20260707_tier1/\n?? experiments/action_ceiling/controller_feasibility_audit.py\n?? experiments/action_ceiling/controller_v2_h200.py\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n?? tests/test_controller_feasibility_audit.py\n?? tests/test_controller_v2_h200.py",
+  "selected_policy": null,
+  "test_decision": "sealed",
+  "test_evaluation_count": 0,
+  "test_lock_status": "sealed",
+  "v1_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+  "validation_gate_passed": false
+}
