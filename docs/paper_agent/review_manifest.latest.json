@@ -256,7 +256,12 @@
     "frozen_test_evaluation_count": 0,
     "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
     "action_bank_controller_repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_action_bank_v1",
-    "controller_v2_blocked_reason": "H200 reproduction verdict remains h200_material_outcome_drift after H200 action-bank rebuild and Controller V1 replay; triage material drift before Controller V2."
+    "material_drift_triage_dir": "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage",
+    "material_drift_triage_verdict": "material_drift_confirmed_controller_v2_blocked",
+    "material_drift_core_public_flip_rows": 53,
+    "material_drift_action_bank_flip_or_label_change_rows": 267,
+    "material_drift_row_level_test_suppressed": true,
+    "controller_v2_blocked_reason": "H200 reproduction verdict remains h200_material_outcome_drift after H200 action-bank rebuild, Controller V1 replay, and CPU-only material drift triage; research decision is required before Controller V2."
   },
   "final_verdict": "no_validation_signal_test_sealed",
   "recommended_read_order": [
@@ -264,6 +269,7 @@
     "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md",
     "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md",
     "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/validation_baselines.csv",
+    "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/report.md",
     "analysis_outputs/lrdllm_same_protocol_sanity_20260703_phase2_lrdllm_sanity/verdict.md",
     "docs/paper_agent/frozen_controller_protocol.zh.md",
     "docs/paper_agent/lrdllm_protocol_audit.zh.md",

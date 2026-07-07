@@ -27,7 +27,7 @@ H200 core baselines 已全量重跑，compact audit 为：
 | V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
 | Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
 
-因此不得直接进入 Controller V2。H200 action bank 与 Controller V1 replay 已于 2026-07-07 UTC 完成，但复现 verdict 仍是 `h200_material_outcome_drift`；下一步是研究者 triage H200 material drift，frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
+因此不得直接进入 Controller V2。H200 action bank、Controller V1 replay 与 CPU-only material drift triage 已于 2026-07-07 UTC 完成，但复现 verdict 仍是 `h200_material_outcome_drift`；下一步是研究者决策 H200 material drift，frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
 
 ## H200 Action Bank And Controller V1 Replay（2026-07-07）
 
@@ -64,6 +64,18 @@ Old-vs-H200 comparison：
 - old vs H200 V1 selected validation：`90/127` vs `89/127`
 - server migration verdict remains：`h200_material_outcome_drift`
 - Controller V2 allowed：`false`
+
+## H200 Material Drift Triage（2026-07-07）
+
+- Output：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`
+- Report：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/report.md`
+- Triage verdict：`material_drift_confirmed_controller_v2_blocked`
+- Core public-split flip rows：`53`
+- Action-bank flip/label-change rows：`267`
+- Row-level test details：suppressed
+- Frozen test：`sealed`，`test_evaluation_count=0`
+
+Interpretation：H200 drift remains small in absolute pass count but material for Route2/V6/CAL and action labels. This triage makes the blocker auditable; it does not unlock Controller V2.
 
 关键环境事实：
 

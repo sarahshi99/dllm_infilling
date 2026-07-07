@@ -22,8 +22,9 @@ H200 action bank 与 Controller V1 replay 也已完成：
 - Action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`927` tasks，`4635` action rows，test rows `0`，benefit/harm non-KEEP `193/1237`。
 - Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected zero-intervention controller，validation `89/127`，wins/losses `0/0`，gate failed，test decision `sealed`。
 - Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`，old-vs-H200 action-bank outcome agreement `94.95%`，server verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
+- Material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`，verdict `material_drift_confirmed_controller_v2_blocked`，core public-split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
 
-下一步不是自动进入 Controller V2，而是先分析/决策 H200 material drift。
+下一步不是自动进入 Controller V2，而是由研究者决策 H200 material drift：接受 H200 作为新 evidence base、追加迁移复查，或继续排查数值/环境 drift。
 
 GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 
