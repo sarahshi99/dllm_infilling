@@ -1,0 +1,31 @@
+{
+  "audit_reasons": [
+    "calibration has fewer recoverable rows than zero-harm 5% certification needs",
+    "non-KEEP action harm labels strongly outnumber benefit labels",
+    "some recoverability ranking signal exists outside the first controller"
+  ],
+  "audit_verdict": "mixed_controller_failure",
+  "bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/controller_feasibility_audit.py --timestamp 20260707_phase3_v2_feasibility",
+  "commit": "2db9a778da5696f333067f8456c07c7c7d7941d4",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n?? analysis_outputs/controller_action_bank_h200_20260707_smoke2/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1/\n?? analysis_outputs/h200_repro_audit_20260707_tier1/\n?? experiments/action_ceiling/controller_feasibility_audit.py\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n?? tests/test_controller_feasibility_audit.py",
+  "h200_evidence_base": true,
+  "primary_results": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl",
+  "route2_results": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537/results.jsonl",
+  "test_evaluation_count": 0,
+  "test_lock_status": "sealed",
+  "validation_recoverability_ranking": {
+    "auc": 0.7342245989304813,
+    "average_precision": 0.32142078913286914,
+    "base_rate": 0.13385826771653545,
+    "feature_variant": "trace_only",
+    "positives": 17,
+    "rows": 127,
+    "split": "validation",
+    "target": "recoverable",
+    "top_k": 17,
+    "top_k_hits": 5,
+    "top_k_precision": 0.29411764705882354
+  }
+}

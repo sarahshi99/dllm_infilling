@@ -1,0 +1,13 @@
+risk_quantity,harm_bound,confidence,zero_harm_interventions_required_cp,calibration_task_count,calibration_can_certify_with_zero_harm,zero_harm_cp_upper_at_full_calibration,zero_harm_wilson_upper_at_full_calibration,intervention_count,harm_count,clopper_pearson_upper,wilson_upper
+P(harm | intervene),0.05,0.95,59,155,True,0.019141730108768244,0.024185100124904303,,,,
+P(harm | intervene),0.1,0.95,29,155,True,0.019141730108768244,0.024185100124904303,,,,
+P(harm | intervene),0.15,0.95,19,155,True,0.019141730108768244,0.024185100124904303,,,,
+P(harm | intervene),curve,0.95,,,,,,1,0,0.9500000000000001,0.7934567085261071
+P(harm | intervene),curve,0.95,,,,,,2,0,0.7763932022500211,0.6576280471103807
+P(harm | intervene),curve,0.95,,,,,,5,0,0.4507197283469412,0.43449149475208104
+P(harm | intervene),curve,0.95,,,,,,10,0,0.2588655508930523,0.2775401687666165
+P(harm | intervene),curve,0.95,,,,,,20,0,0.13910834066826525,0.1611301254949332
+P(harm | intervene),curve,0.95,,,,,,40,0,0.07215752450551455,0.08762453925039232
+P(harm | intervene),curve,0.95,,,,,,60,0,0.04870291331009752,0.060173930477932895
+P(harm | intervene),curve,0.95,,,,,,80,0,0.03675419777998229,0.0458197362645751
+P(harm | intervene),curve,0.95,,,,,,155,0,0.019141730108768244,0.024185100124904303
