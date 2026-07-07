@@ -27,7 +27,7 @@ H200 core baselines 已全量重跑，compact audit 为：
 | V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
 | Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
 
-因此不得直接进入 Controller V2。H200 action bank、Controller V1 replay 与 CPU-only material drift triage 已于 2026-07-07 UTC 完成，但复现 verdict 仍是 `h200_material_outcome_drift`；下一步是研究者决策 H200 material drift，frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
+研究者已接受当前 H200 rerun 结果作为新的 evidence base；`h200_material_outcome_drift` 继续记录为 reproducibility caveat，但不再作为 Controller V2 的 stop condition。H200 action bank、Controller V1 replay、CPU-only material drift triage 和 Controller V2 validation 已于 2026-07-07 UTC 完成；frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
 
 ## H200 Action Bank And Controller V1 Replay（2026-07-07）
 
@@ -63,19 +63,20 @@ Old-vs-H200 comparison：
 - action-bank candidate-hash agreement：`80.13%`
 - old vs H200 V1 selected validation：`90/127` vs `89/127`
 - server migration verdict remains：`h200_material_outcome_drift`
-- Controller V2 allowed：`false`
+- H200 evidence-base accepted：`true`
+- H200 material drift no longer blocks Controller V2：`true`
 
 ## H200 Material Drift Triage（2026-07-07）
 
 - Output：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`
 - Report：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/report.md`
-- Triage verdict：`material_drift_confirmed_controller_v2_blocked`
+- Triage verdict before evidence-base acceptance：material drift was material enough to require a decision; this stop condition is now superseded by `docs/paper_agent/h200_evidence_base_decision.zh.md`
 - Core public-split flip rows：`53`
 - Action-bank flip/label-change rows：`267`
 - Row-level test details：suppressed
 - Frozen test：`sealed`，`test_evaluation_count=0`
 
-Interpretation：H200 drift remains small in absolute pass count but material for Route2/V6/CAL and action labels. This triage makes the blocker auditable; it does not unlock Controller V2.
+Interpretation：H200 drift remains small in absolute pass count but material for Route2/V6/CAL and action labels. The triage remains an audit artifact; the later evidence-base decision supersedes it as a stop condition and authorizes Controller V2 on H200 train/calibration/validation.
 
 关键环境事实：
 

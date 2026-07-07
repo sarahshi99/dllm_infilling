@@ -49,7 +49,7 @@ Controller V1 replay：
 | H200 oracle action-bank upper bound | `106/127 = 83.46%` | `17` | `0` | `17` | diagnostic upper bound, not deployable |
 | H200 always expand 32 | `57/127 = 44.88%` | `9` | `41` | `127` | unsafe unconditional overwrite |
 
-Controller V1 conclusion：H200 replay reproduces the qualitative negative result. The selected controller is still zero-intervention, gate failed, and test decision remains `sealed`. Because Tier 1 baselines have material outcome drift, Controller V2 remains blocked after drift triage and requires a research decision.
+Controller V1 conclusion：H200 replay reproduces the qualitative negative result. The selected controller is still zero-intervention, gate failed, and test decision remains `sealed`. The later H200 evidence-base decision authorizes Controller V2 despite the recorded material drift.
 
 ## H200 Material Drift Triage（2026-07-07）
 
@@ -57,20 +57,21 @@ Artifact：
 
 - `analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/report.md`
 
-Triage verdict：`material_drift_confirmed_controller_v2_blocked`。
+Triage status：pre-acceptance material drift audit, superseded as a stop condition by `docs/paper_agent/h200_evidence_base_decision.zh.md`。
 
 Key facts：
 
 | Quantity | Value |
 |---|---:|
 | server repro verdict | `h200_material_outcome_drift` |
-| Controller V2 allowed | `false` |
+| H200 evidence-base accepted | `true` |
+| H200 material drift blocks Controller V2 | `false` |
 | core public-split flip rows | `53` |
 | action-bank flip/label-change rows | `267` |
 | row-level test details | suppressed |
 | frozen test status / count | `sealed / 0` |
 
-Interpretation：H200 drift remains small in absolute pass-count terms but material for Route2/V6/CAL and for action labels. This triage does not explain away the drift or unlock Controller V2; it makes the blocker auditable while preserving test secrecy.
+Interpretation：H200 drift remains small in absolute pass-count terms but material for Route2/V6/CAL and for action labels. This triage remains auditable reproducibility evidence while preserving test secrecy; it no longer blocks Controller V2.
 
 ## H200 Evidence Base Decision（2026-07-07）
 

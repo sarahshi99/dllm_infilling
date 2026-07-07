@@ -21,8 +21,8 @@ H200 action bank 与 Controller V1 replay 也已完成：
 
 - Action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`927` tasks，`4635` action rows，test rows `0`，benefit/harm non-KEEP `193/1237`。
 - Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected zero-intervention controller，validation `89/127`，wins/losses `0/0`，gate failed，test decision `sealed`。
-- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`，old-vs-H200 action-bank outcome agreement `94.95%`，server verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
-- Material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`，verdict `material_drift_confirmed_controller_v2_blocked`，core public-split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
+- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`，old-vs-H200 action-bank outcome agreement `94.95%`，server verdict remains `h200_material_outcome_drift` as reproducibility caveat。
+- Material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`，pre-acceptance material drift audit，core public-split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
 - Evidence-base decision：`docs/paper_agent/h200_evidence_base_decision.zh.md`。后续 controller、validation、action bank 和论文主表以 H200 rerun 结果为准；A6000 保留为 historical reference。
 
 Phase 3 H200 Controller V2 已完成 train/calibration/validation。Feasibility audit `analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/` verdict 为 `mixed_controller_failure`。Controller V2 validation `analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/` verdict 为 `risk_certification_limited_test_sealed`：`ordinal_only + probe_trace_fused` 是唯一非零信号，validation `90/127`，wins/losses `5/4`，interventions `41`，但 population harm upper95 `7.06%` 且净增仅 `1`，未通过 gate。Frozen test 继续 sealed。

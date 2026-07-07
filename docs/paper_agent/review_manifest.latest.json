@@ -112,6 +112,7 @@
       "wins_vs_primary": 0
     }
   },
+  "controller_v2_authorized": true,
   "feature_schema": {
     "forbidden_features": [
       "oracle_length",
@@ -139,6 +140,9 @@
     "result_dir": null,
     "status": "sealed"
   },
+  "frozen_test_status": "sealed",
+  "h200_evidence_base_accepted": true,
+  "h200_material_drift_no_longer_blocks_controller_v2": true,
   "lrdllm": {
     "audit_doc": "docs/paper_agent/lrdllm_protocol_audit.zh.md",
     "full_run_status": "not_run_protocol_mismatch_blocked",
@@ -202,6 +206,7 @@
       "validation_wins_vs_primary": 0
     },
     "controller_v1_replayed": true,
+    "controller_v2_authorized": true,
     "controller_v2_blocked_reason": null,
     "controller_v2_dir": "analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation",
     "controller_v2_started": true,
@@ -263,12 +268,14 @@
     "h200_drift_no_longer_stop_condition": true,
     "h200_evidence_base_accepted": true,
     "h200_evidence_base_decision_doc": "docs/paper_agent/h200_evidence_base_decision.zh.md",
+    "h200_material_drift_no_longer_blocks_controller_v2": true,
     "host_gpu_visibility_report": "analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md",
     "material_drift_action_bank_flip_or_label_change_rows": 267,
     "material_drift_core_public_flip_rows": 53,
+    "material_drift_pre_acceptance_audit_verdict": "pre_acceptance_material_drift_audit_superseded",
     "material_drift_row_level_test_suppressed": true,
+    "material_drift_triage_current_stop_condition": false,
     "material_drift_triage_dir": "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage",
-    "material_drift_triage_verdict": "material_drift_confirmed_controller_v2_blocked",
     "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
     "repro_verdict": "h200_material_outcome_drift",
     "source_commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
@@ -295,5 +302,6 @@
   },
   "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
   "task_type": "phase2_frozen_risk_controlled_canvas_controller",
+  "test_evaluation_count": 0,
   "updated_at_cst": "2026-07-07"
 }

@@ -18,8 +18,8 @@
 - Old-vs-H200 drift：Route2 `-6`、V6 `-6`、CAL `-5`; report records paired H200 wins/losses and candidate-hash agreement.
 - H200 action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`927` train/calibration/validation tasks，`4635` rows，test rows `0`，benefit/harm non-KEEP `193/1237`。
 - H200 Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected controller remains zero-intervention `probe_only + benefit_only` at threshold `999.0`; validation `89/127`，wins/losses vs primary `0/0`，gate failed，test decision `sealed`。
-- H200 action-bank/V1 comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；old-vs-H200 action-bank outcome agreement `94.95%`，V1 old `90/127` vs H200 `89/127`，Controller V2 allowed `false`。
-- H200 material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`；triage verdict `material_drift_confirmed_controller_v2_blocked`，core public split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。
+- H200 action-bank/V1 comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；old-vs-H200 action-bank outcome agreement `94.95%`，V1 old `90/127` vs H200 `89/127`。This remains reproducibility evidence, not a Controller V2 stop condition。
+- H200 material drift triage：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`；pre-acceptance audit found material drift，core public split flip rows `53`，action-bank flip/label-change rows `267`，row-level test details suppressed。This is superseded by the H200 evidence-base decision。
 - H200 evidence-base decision：`docs/paper_agent/h200_evidence_base_decision.zh.md`；drift accepted, Controller V2 authorized on H200 train/calibration/validation。
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
 - Controller V2 feasibility audit：`analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/`，verdict `mixed_controller_failure`。
@@ -59,12 +59,12 @@ H200 action-bank and Controller V1 replay：
 - Action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`4635` rows，`927` tasks，split rows train `3225` / calibration `775` / validation `635`，actions all `927`，test rows `0`。
 - H200 action labels：pass count `2506`，benefit labels non-KEEP `193`，harm labels non-KEEP `1237`。
 - Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`；selected controller remains zero-intervention and gate failed; validation `89/127 = 70.08%`，oracle action-bank upper bound `106/127 = 83.46%` with `17` wins and `0` losses。
-- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；repro verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
+- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；repro verdict remains `h200_material_outcome_drift` as a reproducibility caveat only。
 
 H200 material drift triage：
 
 - Output：`analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage/`
-- Verdict：`material_drift_confirmed_controller_v2_blocked`
+- Pre-acceptance audit conclusion：H200 drift is material enough to record and separate from A6000 historical evidence; this no longer blocks Controller V2 after `docs/paper_agent/h200_evidence_base_decision.zh.md`.
 - Core aggregate drift remains Route2 `-6`、V6 `-6`、CAL `-5`; row-level core flip CSV only covers train/calibration/validation (`53` rows) and suppresses test row details。
 - Action bank outcome agreement remains `94.95%`; action-bank flip/label-change rows `267`，split limited to train/calibration/validation。
 - Frozen test remains `sealed`，`test_evaluation_count=0`。

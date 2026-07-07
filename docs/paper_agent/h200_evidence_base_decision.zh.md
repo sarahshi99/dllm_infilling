@@ -6,6 +6,18 @@
 
 研究者已接受当前 H200 rerun 结果作为后续 controller、validation、action bank、baseline 和论文主表的 evidence base。
 
+Protocol flags：
+
+```json
+{
+  "h200_evidence_base_accepted": true,
+  "h200_material_drift_no_longer_blocks_controller_v2": true,
+  "controller_v2_authorized": true,
+  "frozen_test_status": "sealed",
+  "test_evaluation_count": 0
+}
+```
+
 - `h200_material_outcome_drift` 已记录为 reproducibility/audit 事实，但不再作为 Controller V2 的停止条件。
 - 旧 A6000 结果保留为 historical reference，不与 H200 结果静默混合。
 - 后续 Phase 3 controller 设计、calibration、validation 和主方法比较均以 H200 rerun 结果为准。
