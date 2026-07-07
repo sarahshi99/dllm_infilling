@@ -27,7 +27,43 @@ H200 core baselines 已全量重跑，compact audit 为：
 | V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
 | Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
 
-因此不得直接进入 Controller V2。下一步是用 H200 当前结果重建 train/calibration/validation action bank、replay Controller V1，并分析漂移原因；frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
+因此不得直接进入 Controller V2。H200 action bank 与 Controller V1 replay 已于 2026-07-07 UTC 完成，但复现 verdict 仍是 `h200_material_outcome_drift`；下一步是研究者 triage H200 material drift，frozen test 继续保持 `sealed`、`test_evaluation_count=0`。
+
+## H200 Action Bank And Controller V1 Replay（2026-07-07）
+
+Artifacts：
+
+- H200 action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`
+- H200 Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`
+- Old-vs-H200 action/controller audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`
+
+Action-bank coverage：
+
+- train/calibration/validation tasks：`927`
+- action rows：`4635`
+- split rows：train `3225`，calibration `775`，validation `635`
+- action counts：each of `KEEP_PRIMARY`, `EXPAND_16`, `EXPAND_24`, `EXPAND_32`, `EXPAND_48` has `927`
+- test rows：`0`
+- H200 pass count：`2506`
+- H200 benefit/harm labels non-KEEP：`193/1237`
+
+Controller V1 replay：
+
+- selected controller：`probe_only` + `benefit_only`，threshold `999.0`
+- validation result：`89/127`
+- interventions：`0`
+- wins/losses vs primary：`0/0`
+- validation gate：failed
+- test decision：`sealed`
+- oracle action-bank upper bound：`106/127`，`17` wins / `0` losses
+
+Old-vs-H200 comparison：
+
+- action-bank outcome agreement：`94.95%`
+- action-bank candidate-hash agreement：`80.13%`
+- old vs H200 V1 selected validation：`90/127` vs `89/127`
+- server migration verdict remains：`h200_material_outcome_drift`
+- Controller V2 allowed：`false`
 
 关键环境事实：
 
@@ -134,7 +170,6 @@ The V6 compact summary is present at `git_workspace/outputs_clean/full_route2_v6
 
 ## Required Next Steps
 
-1. Rebuild the H200 train/calibration/validation action bank without test rows.
-2. Replay Controller V1 on the H200 action bank.
-3. Analyze material drift before any Controller V2 work.
-4. Continue to keep frozen test sealed until validation gate conditions are met.
+1. Analyze material H200 drift before any Controller V2 work.
+2. Decide whether to accept H200 results as the new evidence base or investigate environment/generation drift further.
+3. Continue to keep frozen test sealed until validation gate conditions are met.

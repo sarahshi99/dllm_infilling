@@ -1031,18 +1031,18 @@ def execute_controller(args: argparse.Namespace) -> None:
     split_assignment = load_split_assignments(Path(args.split_dir))
     primary_rows = rows_by_task(load_jsonl(resolve_existing_path(args.primary_results)))
     route2_rows = rows_by_task(load_jsonl(resolve_existing_path(args.route2_results)))
-    feature_rows = build_feature_rows(split_assignment=split_assignment, primary_rows=primary_rows, route2_rows=route2_rows)
+    controller_split_assignment = {
+        task_id: split
+        for task_id, split in split_assignment.items()
+        if split in BANK_SPLITS
+    }
+    feature_rows = build_feature_rows(split_assignment=controller_split_assignment, primary_rows=primary_rows, route2_rows=route2_rows)
     feature_by_task = {str(row["task_id"]): row for row in feature_rows}
     action_feature_rows = make_action_feature_rows(feature_by_task, bank_rows)
     schema = feature_schema()
     (output_dir / "feature_schema.json").write_text(json.dumps(schema, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
-    for split in ("train", "calibration", "validation", "test"):
+    for split in BANK_SPLITS:
         split_rows = [row for row in feature_rows if row.get("split") == split]
-        if split == "test":
-            split_rows = [
-                {key: value for key, value in row.items() if key not in {"oracle_length", "oracle_bucket", "primary_passed"}}
-                for row in split_rows
-            ]
         write_csv(output_dir / f"{split}_features.csv", split_rows)
     write_csv(output_dir / "action_training_table.csv", action_feature_rows)
 

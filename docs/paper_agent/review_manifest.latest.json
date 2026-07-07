@@ -173,7 +173,7 @@
     "github_remote_verified": true,
     "github_remote_verification": "analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md",
     "github_push_verification": "bootstrap audit commit 591014987088b455a95ba33924f66d13477e47b6 pushed to origin/codex/risk-controlled-dynamic-rescue on 2026-07-06 UTC",
-    "source_commit": "7e7117c186bfc7d2ba5bae924449d1af1926775f",
+    "source_commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
     "environment_manifest": "analysis_outputs/h200_bootstrap_20260705_103617/environment_manifest.json",
     "artifact_integrity_status": "compact_json_ok_test_lock_sealed_inventory_recorded",
     "repro_verdict": "h200_material_outcome_drift",
@@ -214,8 +214,40 @@
         "output_dir": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939"
       }
     ],
-    "action_bank_rebuilt": false,
-    "controller_v1_replayed": false,
+    "action_bank_rebuilt": true,
+    "action_bank_h200": {
+      "output_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+      "task_count": 927,
+      "row_count": 4635,
+      "split_counts": {
+        "train": 3225,
+        "calibration": 775,
+        "validation": 635
+      },
+      "test_rows": 0,
+      "pass_count": 2506,
+      "benefit_labels_non_keep": 193,
+      "harm_labels_non_keep": 1237
+    },
+    "controller_v1_replayed": true,
+    "controller_v1_h200_replay": {
+      "output_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+      "selected_controller": {
+        "feature_variant": "probe_only",
+        "policy_variant": "benefit_only",
+        "score_threshold": 999.0
+      },
+      "validation_pass_count": 89,
+      "validation_total": 127,
+      "validation_wins_vs_primary": 0,
+      "validation_losses_vs_primary": 0,
+      "intervention_count": 0,
+      "gate_passed": false,
+      "test_decision": "sealed",
+      "oracle_action_bank_upper_bound_pass_count": 106,
+      "oracle_action_bank_upper_bound_wins": 17,
+      "oracle_action_bank_upper_bound_losses": 0
+    },
     "true_long_full_rerun_required": null,
     "bootstrap_report": "analysis_outputs/h200_bootstrap_20260705_103617/report.md",
     "host_gpu_visibility_report": "analysis_outputs/h200_bootstrap_20260705_103617/HOST_GPU_VISIBILITY_20260706.md",
@@ -223,7 +255,8 @@
     "frozen_test_status": "sealed",
     "frozen_test_evaluation_count": 0,
     "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
-    "controller_v2_blocked_reason": "H200 reproduction verdict is h200_material_outcome_drift; update H200 baselines/action bank and analyze drift before Controller V2."
+    "action_bank_controller_repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_action_bank_v1",
+    "controller_v2_blocked_reason": "H200 reproduction verdict remains h200_material_outcome_drift after H200 action-bank rebuild and Controller V1 replay; triage material drift before Controller V2."
   },
   "final_verdict": "no_validation_signal_test_sealed",
   "recommended_read_order": [

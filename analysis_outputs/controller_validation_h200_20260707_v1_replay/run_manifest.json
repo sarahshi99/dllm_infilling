@@ -1,0 +1,34 @@
+{
+  "bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/frozen_canvas_controller.py --mode controller --timestamp h200_20260707_v1_replay --bank-dir analysis_outputs/controller_action_bank_h200_20260707_tier1_offline --primary-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl --control-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441/results.jsonl --midcons-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl --route2-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537/results.jsonl --v6-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307/results.jsonl --cal-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939/results.jsonl",
+  "commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
+  "execution_status": "completed",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M experiments/action_ceiling/frozen_canvas_controller.py\n?? analysis_outputs/controller_action_bank_h200_20260707_smoke2/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/\n?? analysis_outputs/controller_validation_h200_20260707_v1_replay/\n?? analysis_outputs/h200_repro_audit_20260707_tier1/\n?? experiments/action_ceiling/h200_action_bank_controller_compare.py\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n?? scripts/run_h200_controller_action_bank_20260707.sh\n?? tests/test_h200_action_bank_controller_compare.py",
+  "output_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+  "started_at": "2026-07-07T09:46:06",
+  "validation_gate": {
+    "calibration_harm_budget_passed": false,
+    "calibration_harm_upper95": null,
+    "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+    "gate_passed": false,
+    "selected_controller": {
+      "feature_variant": "probe_only",
+      "model_family": "logistic",
+      "policy_variant": "benefit_only",
+      "score_threshold": 999.0
+    },
+    "selection_rule": "best_validation_pass_rate_no_gate_passing_controller",
+    "test_decision": "sealed",
+    "validation_controller_mean_cost_sec": 0.8260514874017695,
+    "validation_controller_pass_rate": 0.7007874015748031,
+    "validation_long_bucket_improved_and_aggregate_not_down": false,
+    "validation_not_below_v6": true,
+    "validation_risk_coverage_pareto_improved": false,
+    "validation_same_accuracy_lower_compute": true,
+    "validation_short_bucket_no_net_regression": true,
+    "validation_total_pass_improved": false,
+    "validation_v6_mean_cost_sec": 1.6981044114946835,
+    "validation_v6_pass_rate": 0.7007874015748031
+  }
+}

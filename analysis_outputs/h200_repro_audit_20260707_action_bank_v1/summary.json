@@ -1,0 +1,126 @@
+{
+  "action_bank_rebuilt": true,
+  "baseline_audit": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/h200_action_bank_controller_compare.py --timestamp 20260707_action_bank_v1 --h200-action-bank analysis_outputs/controller_action_bank_h200_20260707_tier1_offline --h200-controller analysis_outputs/controller_validation_h200_20260707_v1_replay --baseline-audit analysis_outputs/h200_repro_audit_20260707_tier1_v2",
+  "commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
+  "controller_v1_replayed": true,
+  "controller_v2_allowed": false,
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/action_bank.csv\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/action_bank.jsonl\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/action_schema.json\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/report.md\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/run_manifest.json\nA  analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/summary.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/action_training_table.csv\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/calibration_features.csv\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/controller_validation_results.csv\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/feature_schema.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/model_coefficients.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/report.md\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_only_benefit_only.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_only_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_only_risk_calibrated_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_trace_fused_benefit_only.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_trace_fused_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_probe_trace_fused_risk_calibrated_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_trace_only_benefit_only.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_trace_only_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/risk_curve_trace_only_risk_calibrated_benefit_plus_harm.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/run_manifest.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/summary.json\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/train_features.csv\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/validation_baselines.csv\nA  analysis_outputs/controller_validation_h200_20260707_v1_replay/validation_features.csv\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/environment_diff.json\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/old_vs_h200_action_bank.csv\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/old_vs_h200_baselines.csv\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/old_vs_h200_controller_v1.csv\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/report.md\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/summary.json\nAD analysis_outputs/h200_repro_audit_20260707_action_bank_v1/true_long_replay.csv\nM  docs/paper_agent/codex_handoff.latest.zh.md\nM  docs/paper_agent/evidence_snapshot.md\nM  docs/paper_agent/experiment_plan.current.zh.md\nM  docs/paper_agent/experiment_results.zh.md\nM  docs/paper_agent/new_server_h200_bootstrap.zh.md\nM  docs/paper_agent/paper_agent_dashboard.zh.md\nM  docs/paper_agent/review_manifest.latest.json\nM  docs/results/run_registry.md\nM  experiments/action_ceiling/frozen_canvas_controller.py\nAM experiments/action_ceiling/h200_action_bank_controller_compare.py\nA  scripts/run_h200_controller_action_bank_20260707.sh\nA  tests/test_h200_action_bank_controller_compare.py\n?? analysis_outputs/controller_action_bank_h200_20260707_smoke2/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1/\n?? analysis_outputs/h200_repro_audit_20260707_tier1/\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/",
+  "h200_action_bank": {
+    "action_counts": {
+      "EXPAND_16": 927,
+      "EXPAND_24": 927,
+      "EXPAND_32": 927,
+      "EXPAND_48": 927,
+      "KEEP_PRIMARY": 927
+    },
+    "benefit_labels_non_keep": 193,
+    "harm_labels_non_keep": 1237,
+    "pass_count": 2506,
+    "row_count": 4635,
+    "split_counts": {
+      "calibration": 775,
+      "train": 3225,
+      "validation": 635
+    },
+    "task_count": 927
+  },
+  "h200_action_bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "h200_controller_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+  "h200_controller_v1": {
+    "action_bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+    "action_schema_version": "deployable_canvas_actions_v1",
+    "branch": "codex/risk-controlled-dynamic-rescue",
+    "calibration_rows": 155,
+    "commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
+    "controller_variants": 9,
+    "feature_schema_version": "frozen_canvas_features_v1",
+    "mode": "frozen_canvas_controller_validation",
+    "test_evaluation_count": 0,
+    "test_status": "sealed",
+    "validation_gate": {
+      "calibration_harm_budget_passed": false,
+      "calibration_harm_upper95": null,
+      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+      "gate_passed": false,
+      "selected_controller": {
+        "feature_variant": "probe_only",
+        "model_family": "logistic",
+        "policy_variant": "benefit_only",
+        "score_threshold": 999.0
+      },
+      "selection_rule": "best_validation_pass_rate_no_gate_passing_controller",
+      "test_decision": "sealed",
+      "validation_controller_mean_cost_sec": 0.8260514874017695,
+      "validation_controller_pass_rate": 0.7007874015748031,
+      "validation_long_bucket_improved_and_aggregate_not_down": false,
+      "validation_not_below_v6": true,
+      "validation_risk_coverage_pareto_improved": false,
+      "validation_same_accuracy_lower_compute": true,
+      "validation_short_bucket_no_net_regression": true,
+      "validation_total_pass_improved": false,
+      "validation_v6_mean_cost_sec": 1.6981044114946835,
+      "validation_v6_pass_rate": 0.7007874015748031
+    },
+    "validation_rows": 127
+  },
+  "old_action_bank": {
+    "action_counts": {
+      "EXPAND_16": 927,
+      "EXPAND_24": 927,
+      "EXPAND_32": 927,
+      "EXPAND_48": 927,
+      "KEEP_PRIMARY": 927
+    },
+    "row_count": 4635,
+    "split_counts": {
+      "calibration": 775,
+      "train": 3225,
+      "validation": 635
+    },
+    "task_count": 927
+  },
+  "old_action_bank_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+  "old_controller_dir": "analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3",
+  "old_controller_v1": {
+    "action_bank_dir": "analysis_outputs/controller_action_bank_20260703_phase2_bank_merged",
+    "action_schema_version": "deployable_canvas_actions_v1",
+    "branch": "codex/risk-controlled-dynamic-rescue",
+    "calibration_rows": 155,
+    "commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
+    "controller_variants": 9,
+    "feature_schema_version": "frozen_canvas_features_v1",
+    "mode": "frozen_canvas_controller_validation",
+    "test_evaluation_count": 0,
+    "test_status": "sealed",
+    "validation_gate": {
+      "calibration_harm_budget_passed": false,
+      "calibration_harm_upper95": null,
+      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
+      "gate_passed": false,
+      "selected_controller": {
+        "feature_variant": "probe_only",
+        "model_family": "logistic",
+        "policy_variant": "benefit_only",
+        "score_threshold": 999.0
+      },
+      "selection_rule": "best_validation_pass_rate_no_gate_passing_controller",
+      "test_decision": "sealed",
+      "validation_controller_mean_cost_sec": 2.2306961533952667,
+      "validation_controller_pass_rate": 0.7086614173228346,
+      "validation_long_bucket_improved_and_aggregate_not_down": false,
+      "validation_not_below_v6": true,
+      "validation_risk_coverage_pareto_improved": false,
+      "validation_same_accuracy_lower_compute": true,
+      "validation_short_bucket_no_net_regression": true,
+      "validation_total_pass_improved": false,
+      "validation_v6_mean_cost_sec": 4.8113056458386145,
+      "validation_v6_pass_rate": 0.7086614173228346
+    },
+    "validation_rows": 127
+  },
+  "repro_verdict": "h200_material_outcome_drift",
+  "test_evaluation_count": 0,
+  "test_lock_status": "sealed"
+}

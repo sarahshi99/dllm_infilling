@@ -4,7 +4,7 @@
 
 ## 0. H200 新服务器迁移状态
 
-当前恢复已完成 bootstrap 审计和 Tier 1 H200 core baseline full reruns。H200 reproduction verdict 为 `h200_material_outcome_drift`，因此不得直接进入 Controller V2；下一步先重建 H200 action bank、replay Controller V1，并分析漂移原因。
+当前恢复已完成 bootstrap 审计、Tier 1 H200 core baseline full reruns、H200 action-bank rebuild 和 Controller V1 replay。H200 reproduction verdict 仍为 `h200_material_outcome_drift`，因此不得直接进入 Controller V2；下一步必须先由研究者 triage H200 outcome/label drift，旧 A6000 与 H200 结果继续分开报告。
 
 - Bootstrap output：`analysis_outputs/h200_bootstrap_20260705_103617/`
 - Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
@@ -16,15 +16,18 @@
 - Tier 1 audit：`analysis_outputs/h200_repro_audit_20260707_tier1_v2/`
 - Tier 1 H200 results：Control `787/1033`、Midcons `794/1033`、Route2 `795/1033`、V6 `796/1033`、Local CAL `769/1033`。
 - Old-vs-H200 drift：Route2 `-6`、V6 `-6`、CAL `-5`; report records paired H200 wins/losses and candidate-hash agreement.
+- H200 action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`927` train/calibration/validation tasks，`4635` rows，test rows `0`，benefit/harm non-KEEP `193/1237`。
+- H200 Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected controller remains zero-intervention `probe_only + benefit_only` at threshold `999.0`; validation `89/127`，wins/losses vs primary `0/0`，gate failed，test decision `sealed`。
+- H200 action-bank/V1 comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；old-vs-H200 action-bank outcome agreement `94.95%`，V1 old `90/127` vs H200 `89/127`，Controller V2 allowed `false`。
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
-- 未完成：H200 action-bank rebuild、Controller V1 replay、true-long replay、Controller V2、frozen test。
+- 未完成：material H200 drift triage、true-long replay、Controller V2、frozen test。
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
-- 当前 HEAD：`7e7117c186bfc7d2ba5bae924449d1af1926775f` plus unpushed H200 Tier 1 audit changes until the next commit/push.
-- 当前阶段：H200 material drift triage before Controller V2；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
+- 当前阶段：H200 material drift triage before Controller V2；H200 action-bank/V1 replay 已完成但不解锁 Controller V2；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
@@ -47,7 +50,14 @@ H200 Tier 1 reproduction：
 - Local CAL H200：`/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939`，`769/1033`。
 - Compact audit：`analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict `h200_material_outcome_drift`。
 
-Controller V2 status：blocked by material H200 drift until H200 action labels and Controller V1 replay are updated.
+H200 action-bank and Controller V1 replay：
+
+- Action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`4635` rows，`927` tasks，split rows train `3225` / calibration `775` / validation `635`，actions all `927`，test rows `0`。
+- H200 action labels：pass count `2506`，benefit labels non-KEEP `193`，harm labels non-KEEP `1237`。
+- Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`；selected controller remains zero-intervention and gate failed; validation `89/127 = 70.08%`，oracle action-bank upper bound `106/127 = 83.46%` with `17` wins and `0` losses。
+- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`；repro verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
+
+Controller V2 status：blocked by material H200 drift. Do not train Controller V2 until the research owner decides how to handle H200 material outcome drift.
 
 代码：
 

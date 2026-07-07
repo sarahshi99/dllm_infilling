@@ -17,7 +17,39 @@ H200 core baselines 已完成全量重跑。Compact audit：
 | V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
 | Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
 
-结论：不能直接进入 Controller V2。必须先用 H200 当前结果重建 train/calibration/validation action bank、replay Controller V1，并分析 material drift。Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
+结论：不能直接进入 Controller V2。已继续用 H200 当前结果重建 train/calibration/validation action bank 并 replay Controller V1；server migration verdict 仍是 `h200_material_outcome_drift`。Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
+
+## H200 Action Bank And Controller V1 Replay（2026-07-07）
+
+Artifacts：
+
+- H200 action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/report.md`
+- H200 Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/report.md`
+- H200 comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/report.md`
+
+Action bank：
+
+| Quantity | Value |
+|---|---:|
+| task rows | `927` |
+| action rows | `4635` |
+| train / calibration / validation rows | `3225 / 775 / 635` |
+| test rows | `0` |
+| pass count | `2506/4635` |
+| benefit labels non-KEEP | `193` |
+| harm labels non-KEEP | `1237` |
+| old-vs-H200 outcome agreement | `94.95%` |
+
+Controller V1 replay：
+
+| Method | Validation Pass@1 | Wins | Losses | Interventions | Notes |
+|---|---:|---:|---:|---:|---|
+| H200 validation-selected controller | `89/127 = 70.08%` | `0` | `0` | `0` | calibration risk gate forces zero intervention |
+| H200 V6 baseline | `89/127 = 70.08%` | `0` | `0` | `0` | same validation pass rate |
+| H200 oracle action-bank upper bound | `106/127 = 83.46%` | `17` | `0` | `17` | diagnostic upper bound, not deployable |
+| H200 always expand 32 | `57/127 = 44.88%` | `9` | `41` | `127` | unsafe unconditional overwrite |
+
+Controller V1 conclusion：H200 replay reproduces the qualitative negative result. The selected controller is still zero-intervention, gate failed, and test decision remains `sealed`. Because Tier 1 baselines have material outcome drift, Controller V2 remains blocked pending drift triage.
 
 ## H200 Bootstrap Audit（2026-07-05）
 

@@ -1,0 +1,70 @@
+{
+  "action_schema_version": "deployable_canvas_actions_v1",
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/frozen_canvas_controller.py --mode bank --timestamp h200_20260707_tier1_offline --primary-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl",
+  "commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
+  "env_command_prefix": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "environment": {
+    "checkpoint_name": "GSAI-ML/LLaDA-8B-Base",
+    "checkpoint_resolved_local_path": "/home/shx/.cache/huggingface/hub/models--GSAI-ML--LLaDA-8B-Base",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_visible_devices": "0",
+    "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+    "gpu_models": [
+      "NVIDIA H200 NVL"
+    ],
+    "hostname": "server",
+    "platform": "Linux-5.15.0-181-generic-x86_64-with-glibc2.35",
+    "python_version": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.5.1+cu121"
+  },
+  "execution_status": "completed",
+  "feature_schema_version": "frozen_canvas_features_v1",
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M experiments/action_ceiling/frozen_canvas_controller.py\n?? analysis_outputs/controller_action_bank_h200_20260707_smoke2/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1/\n?? analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/\n?? analysis_outputs/h200_repro_audit_20260707_tier1/\n?? experiments/action_ceiling/h200_action_bank_controller_compare.py\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n?? scripts/run_h200_controller_action_bank_20260707.sh\n?? tests/test_h200_action_bank_controller_compare.py",
+  "output_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "planned_action_rows": 4635,
+  "planned_task_count": 927,
+  "primary_results": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl",
+  "repro_command": "CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/frozen_canvas_controller.py --mode bank --timestamp h200_20260707_tier1_offline --primary-results /home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029/results.jsonl",
+  "split_dir": "analysis_outputs/grouped_split_20260702_accel2",
+  "splits": [
+    "train",
+    "calibration",
+    "validation"
+  ],
+  "started_at": "2026-07-07T06:14:44",
+  "summary": {
+    "action_counts": {
+      "EXPAND_16": 927,
+      "EXPAND_24": 927,
+      "EXPAND_32": 927,
+      "EXPAND_48": 927,
+      "KEEP_PRIMARY": 927
+    },
+    "benefit_labels_non_keep": 193,
+    "cost": {
+      "mean": 1.1893461289886307,
+      "p50": 1.1560063179931603,
+      "p95": 1.5792336129234172
+    },
+    "harm_labels_non_keep": 1237,
+    "mode": "controller_action_bank",
+    "pass_count": 2506,
+    "row_count": 4635,
+    "split_counts": {
+      "calibration": 775,
+      "train": 3225,
+      "validation": 635
+    },
+    "task_count": 927
+  },
+  "wall_clock_sec": 5480.618069075979,
+  "written_rows": 4635
+}

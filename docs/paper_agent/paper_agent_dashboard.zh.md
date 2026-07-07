@@ -15,7 +15,15 @@ Bootstrap artifacts：
 
 Bootstrap verdict：`host_h200_available_sandbox_gpu_hidden`。默认 Codex 沙箱内看不到 `/dev/nvidia*`，所以 sandboxed `nvidia-smi` 失败且 `dllm_env` 中 PyTorch 报告 `cuda_available=false`；approved host/unsandboxed check 中 `nvidia-smi` 正常，H200 空闲，`dllm_env` 报告 `cuda_available=true`、`gpu_count=1`。
 
-Tier 1 H200 core baselines 已完成，compact audit 为 `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict 为 `h200_material_outcome_drift`。结果：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。Route2/V6 相对旧 A6000 均为 `-6`，CAL 为 `-5`，因此 Controller V2 暂停；下一步先重建 H200 action bank、replay Controller V1、分析漂移。
+Tier 1 H200 core baselines 已完成，compact audit 为 `analysis_outputs/h200_repro_audit_20260707_tier1_v2/`，verdict 为 `h200_material_outcome_drift`。结果：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。Route2/V6 相对旧 A6000 均为 `-6`，CAL 为 `-5`，因此 Controller V2 暂停。
+
+H200 action bank 与 Controller V1 replay 也已完成：
+
+- Action bank：`analysis_outputs/controller_action_bank_h200_20260707_tier1_offline/`，`927` tasks，`4635` action rows，test rows `0`，benefit/harm non-KEEP `193/1237`。
+- Controller V1 replay：`analysis_outputs/controller_validation_h200_20260707_v1_replay/`，selected zero-intervention controller，validation `89/127`，wins/losses `0/0`，gate failed，test decision `sealed`。
+- Comparison audit：`analysis_outputs/h200_repro_audit_20260707_action_bank_v1/`，old-vs-H200 action-bank outcome agreement `94.95%`，server verdict remains `h200_material_outcome_drift`，Controller V2 allowed `false`。
+
+下一步不是自动进入 Controller V2，而是先分析/决策 H200 material drift。
 
 GitHub 状态：SSH deploy key 已生效，`ssh -T git@github.com` 认证成功；`git ls-remote origin refs/heads/codex/risk-controlled-dynamic-rescue` 返回 `2b0662bfe9fdab787a5249dc9cbefea12d683af1`，与本地 HEAD 一致。见 `analysis_outputs/h200_bootstrap_20260705_103617/GITHUB_REMOTE_VERIFICATION.md`。
 

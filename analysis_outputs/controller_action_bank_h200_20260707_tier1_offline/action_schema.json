@@ -1,0 +1,41 @@
+{
+  "actions": [
+    {
+      "action": "KEEP_PRIMARY",
+      "definition": "actual_canvas=max(primary_selected_length,target_length)",
+      "target_length": null
+    },
+    {
+      "action": "EXPAND_16",
+      "definition": "actual_canvas=max(primary_selected_length,target_length)",
+      "target_length": 16
+    },
+    {
+      "action": "EXPAND_24",
+      "definition": "actual_canvas=max(primary_selected_length,target_length)",
+      "target_length": 24
+    },
+    {
+      "action": "EXPAND_32",
+      "definition": "actual_canvas=max(primary_selected_length,target_length)",
+      "target_length": 32
+    },
+    {
+      "action": "EXPAND_48",
+      "definition": "actual_canvas=max(primary_selected_length,target_length)",
+      "target_length": 48
+    }
+  ],
+  "denoising": {
+    "decoder": "experiments.action_ceiling.distinct_candidate_ceiling.decode_fixed_canvas",
+    "early_commit_enabled": true,
+    "total_steps": 64
+  },
+  "remasking_actions_excluded": [
+    "E_oracle_sufficient_no_early_commit",
+    "F_oracle_sufficient_trace_remask",
+    "G_oracle_sufficient_trace_span_remask"
+  ],
+  "seed": 0,
+  "version": "deployable_canvas_actions_v1"
+}
