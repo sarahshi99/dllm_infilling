@@ -1,0 +1,16 @@
+task_id,stratum,primary_pass,simple_pass,oracle_pass,oracle_length,primary_selected_length,simple_selected_length,oracle_selected_length,regime_label,primary_error_type,oracle_error_type
+SingleLineInfilling/HumanEval/0/L2,short_primary_pass,False,True,True,7,5,7,7,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/0/L4,short_primary_pass,True,True,True,6,6,6,6,stable_pass,,
+SingleLineInfilling/HumanEval/0/L5,short_primary_pass,True,True,True,4,3,9,4,stable_pass,,
+SingleLineInfilling/HumanEval/1/L13,positive_control_recoverable,True,False,True,9,9,6,9,stable_pass,,
+SingleLineInfilling/HumanEval/10/L5,medium_near_long_underselection,False,False,True,14,13,13,14,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/10/L8,medium_near_long_underselection,False,False,True,14,6,6,14,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/100/L0,medium_near_long_underselection,False,False,False,14,6,6,14,rescue_limited_or_noncanvas,UnitTestFailure,UnitTestFailure
+SingleLineInfilling/HumanEval/101/L12,positive_control_recoverable,True,True,True,6,6,13,6,stable_pass,,
+SingleLineInfilling/HumanEval/102/L3,positive_control_recoverable,True,True,True,4,4,4,4,stable_pass,,
+SingleLineInfilling/HumanEval/104/L2,missed_failed_long,False,False,True,19,4,4,19,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/107/L7,missed_failed_long,True,True,True,14,16,16,14,stable_pass,,
+SingleLineInfilling/HumanEval/107/L9,missed_failed_long,True,True,True,14,14,14,14,stable_pass,,
+SingleLineInfilling/HumanEval/147/L0,triggered_failed_long,False,False,True,21,16,16,21,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/71/L3,triggered_failed_long,False,False,True,29,15,15,29,canvas_recoverable,UnitTestFailure,
+SingleLineInfilling/HumanEval/80/L5,triggered_failed_long,False,False,True,33,11,11,33,canvas_recoverable,UnitTestFailure,

@@ -219,13 +219,36 @@
     "second_regime_sufficient_canvas_recoverability": 0.0,
     "second_regime_deployable_policy_gap": 0,
     "ccfa_blocking_gaps_remaining": [
-      "official second-regime benchmark data or stronger stress subset remains missing",
-      "deployable controller has no frozen-test improvement",
+      "official or stronger stress second-regime evidence remains missing; 18/18 synthetic minimal is not benchmark evidence",
+      "Dream-Coder second-backbone evidence is mixed and needs expanded diagnostic before stronger generalization claims",
+      "deployable controller has no frozen-test improvement and Controller V4 is not a priority",
       "LR-DLLM protocol-matched baseline remains blocked"
     ],
-    "paper_writing_status": "formal_diagnostic_mixed_draft_can_start_not_submission_ready"
+    "paper_writing_status": "formal_diagnostic_mixed_draft_can_start_not_submission_ready",
+    "research_planning_pass": "completed_20260708",
+    "coordination_files": {
+      "idea_board": "docs/paper_agent/idea_board.md",
+      "experiment_queue": "docs/paper_agent/experiment_queue.md",
+      "decision_log": "docs/paper_agent/decision_log.md"
+    },
+    "claim_boundary_cpu_audit_dir": "analysis_outputs/research_planning_20260708_cpu_claim_audit",
+    "claim_boundary_cpu_audit_verdict": "claim_boundary_consolidated_cpu_only",
+    "dreamcoder_expanded_manifest_dir": "analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1",
+    "dreamcoder_expanded_manifest_cases": 37,
+    "dreamcoder_expanded_manifest_frozen_test_rows": 0,
+    "dreamcoder_expanded_expected_gpu_report": "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md",
+    "next_selected_experiments": [
+      "EXP-001 CPU claim-boundary consolidation for diagnostic mixed paper",
+      "EXP-002 Dream-Coder expanded oracle-sufficient diagnostic on bounded non-test manifest",
+      "EXP-003 Second-regime stress gate before any benchmark claim"
+    ]
   },
   "recommended_read_order": [
+    "docs/paper_agent/idea_board.md",
+    "docs/paper_agent/experiment_queue.md",
+    "docs/paper_agent/decision_log.md",
+    "analysis_outputs/research_planning_20260708_cpu_claim_audit/report.md",
+    "analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/report.md",
     "analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/data_search_report.md",
     "analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/report.md",
     "analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/report.md",
@@ -395,5 +418,32 @@
   "test_evaluation_count": 0,
   "test_status": "sealed",
   "route_decision": "weak_validation_signal_test_sealed",
-  "updated_at_cst": "2026-07-08"
+  "updated_at_cst": "2026-07-08",
+  "research_coordination": {
+    "created_at_utc": "2026-07-08",
+    "branch": "codex/risk-controlled-dynamic-rescue",
+    "source_head_before_commit": "a345f656f001e60db94c173401e9c382e4497621",
+    "idea_board": "docs/paper_agent/idea_board.md",
+    "experiment_queue": "docs/paper_agent/experiment_queue.md",
+    "decision_log": "docs/paper_agent/decision_log.md",
+    "top_ideas": [
+      "IDEA-001 stress second-regime construction and diagnostic",
+      "IDEA-002 Dream-Coder expanded diagnostic and case-level taxonomy",
+      "IDEA-003 substitute strong baseline pack for blocked LR-DLLM",
+      "IDEA-004 controller route closure analysis",
+      "IDEA-005 model-dependent canvas/rescue boundary analysis"
+    ],
+    "selected_experiments": [
+      "EXP-001 CPU claim-boundary consolidation for diagnostic mixed paper",
+      "EXP-002 Dream-Coder expanded oracle-sufficient diagnostic on bounded non-test manifest",
+      "EXP-003 Second-regime stress gate before any benchmark claim"
+    ],
+    "cpu_experiments_executed": [
+      "analysis_outputs/research_planning_20260708_cpu_claim_audit",
+      "analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1"
+    ],
+    "frozen_test_status": "sealed",
+    "test_evaluation_count": 0,
+    "user_decision_needed": "Review whether to approve the bounded Dream-Coder GPU run and whether to prioritize official second-regime data recovery versus synthetic stress construction."
+  }
 }

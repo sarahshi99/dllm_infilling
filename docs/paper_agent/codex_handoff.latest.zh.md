@@ -54,6 +54,9 @@ Phase 4 continuation（2026-07-08）：
 - Dream-Coder fresh oracle diagnostic：已完成，输出 `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`。15-case subset 上 primary/control `7/15`，best simple length policy `7/15`，oracle-sufficient canvas `14/15`；missed-long oracle recoveries `3`，triggered-long oracle recoveries `3`，short regressions `0`。Qualitative agreement 为 mixed：Dream-Coder subset 不干净复刻 LLaDA H200 的 missed-vs-triggered split，因此只能作为 second-backbone diagnostic evidence，不可写成 model-agnostic confirmation。
 - Second-regime unblock：已实际尝试并成功构造明确标记的 synthetic minimal regime：`analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`，verdict `synthetic_second_regime_minimal_constructed`，`18` cases，short/medium/long 各 `6`。官方文件仍缺：`data/HumanEval-MultiLineInfilling.jsonl`、`data/HumanEval-RandomSpanInfilling.jsonl`、`data/HumanEval-RandomSpanInfillingLight.jsonl`。
 - Second-regime minimal diagnostic：已在 synthetic subset 上完成，输出 `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/`。Regime 明确标记为 `synthetic_second_regime_minimal`，不是 official MultiLine/RandomSpan benchmark。Control fixed、best deployable cal-lite、oracle-sufficient canvas 均为 `18/18`，canvas-limited fraction `0.0`，rescue-limited fraction `0.0`，deployable policy gap `0`。该结果证明 runner/data unblock 成功，但 subset 太易，不能作为强 second-regime stress evidence。
+- Research planning pass：新增协作文件 `docs/paper_agent/idea_board.md`、`docs/paper_agent/experiment_queue.md`、`docs/paper_agent/decision_log.md`。本轮提出并排序 10 个 idea，selected immediate experiments 为 second-regime stress gate、Dream-Coder expanded oracle diagnostic、CPU claim-boundary consolidation。
+- CPU claim-boundary consolidation：已完成低成本 CPU 分析，输出 `analysis_outputs/research_planning_20260708_cpu_claim_audit/`。结论：LLaDA H200 attribution 仍是最强机制证据（C oracle canvas `29/89` hard recoveries，triggered-long `0`，refinement incremental `2`）；Dream-Coder 15-case taxonomy 为 `7` canvas-recoverable、`7` stable-pass、`1` rescue/noncanvas-limited，支持 oracle-canvas recoverability 但 missed-vs-triggered split mixed；Controller V3 frozen-gate passing points `0`；synthetic second-regime 仍只是 unblock/sanity。
+- Dream-Coder expanded manifest：已完成 CPU-only manifest，输出 `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`。Manifest 有 `37` 个 train/calibration/validation-derived cases，frozen test rows `0`；预期 GPU 命令已写入 `docs/paper_agent/experiment_queue.md` 的 `EXP-002`。
 
 CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“未跑 fresh diagnostics”转为：official/strong second-regime stress evidence 仍缺、Dream-Coder diagnostic 为 mixed、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
 
@@ -263,22 +266,30 @@ Important ablation signals:
 
 ## 7. 下一步建议
 
-1. Diagnose calibration risk curve and labels.
-   - 科学问题：是否因为 calibration sample too small / harm labels too dense 导致 all-zero controller？
-   - 输出：risk-coverage diagnostic only, no test access。
+1. 审查并执行 second-regime stress gate（最高优先级）。
+   - 科学问题：是否能获得 official MultiLine/RandomSpan 或明确标记的 stress regime，使 second-regime 不再停留在 18/18 easy synthetic unblock？
+   - 输出：official 或 synthetic-stress compact report；若仍 all-pass，则停止该路线，不写 benchmark claim。
 
-2. Improve interpretable controller within frozen protocol.
-   - 科学问题：ordinal/survival canvas adequacy head 是否比 current logistic benefit head 更能选择 missed-long cases？
-   - 输出：new validation-only controller; test still sealed unless gate passes。
+2. 执行 Dream-Coder expanded37 oracle-sufficient diagnostic。
+   - 科学问题：Dream-Coder 的 mixed 15-case result 是采样问题，还是 model-dependent canvas/rescue boundary？
+   - 输出：`analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`，只跑 bounded oracle-sufficient diagnostic，不开发 trace-remasking adapter。
 
-3. Locate or implement LR-DLLM Stage I adapter.
-   - 科学问题：same-protocol LR-DLLM 是否是 stronger baseline？
-   - 输出：10-case sanity with verdict `local_stage1_adaptation` or `protocol_matched_lrdllm` before any full run。
+3. 做 baseline pack 和 controller route closure。
+   - 科学问题：LR-DLLM blocked 后，哪些 protocol-matched / audited baselines 可以公平支撑论文？V1/V2/V3 是否已足够关闭 controller route？
+   - 输出：paper table/figure evidence consolidation；不继续 Controller V4，不打开 frozen test。
 
 ## 8. 文件索引
 
 优先读：
 
+- `docs/paper_agent/idea_board.md`
+- `docs/paper_agent/experiment_queue.md`
+- `docs/paper_agent/decision_log.md`
+- `analysis_outputs/research_planning_20260708_cpu_claim_audit/report.md`
+- `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/report.md`
+- `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/report.md`
+- `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/report.md`
+- `analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/report.md`
 - `analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/report.md`
 - `analysis_outputs/controller_action_bank_20260703_phase2_bank_merged/report.md`
 - `analysis_outputs/controller_validation_20260703_phase2_controller_validation_v3/report.md`

@@ -1,0 +1,85 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "controller_v3": {
+    "best_pass_point": {
+      "family": "targeted_missed_long",
+      "feature_variant": "probe_trace_fused",
+      "frozen_test_gate_passed": "False",
+      "k": "15",
+      "losses": "1",
+      "net": "2",
+      "pass_count": "91",
+      "population_harm_upper95": "0.036807182572575155",
+      "short_bucket_losses": "1",
+      "wins": "3"
+    },
+    "claim_boundary": "validation shows weak route signal but no frozen-test authorization",
+    "exploratory_gate_points": 7,
+    "frozen_gate_points": 0,
+    "selected_policy": {
+      "family": "targeted_missed_long",
+      "feature_variant": "probe_only",
+      "k": 5,
+      "losses": 0,
+      "net": 1,
+      "pass_count": 90,
+      "population_harm_upper95": 0.023312410428213137,
+      "short_bucket_losses": 0,
+      "wins": 1
+    },
+    "selected_policy_intervention_outcomes": {
+      "neutral": 4,
+      "win": 1
+    }
+  },
+  "dreamcoder": {
+    "cases": 15,
+    "claim_boundary": "oracle canvas recoverability transfers, but missed-vs-triggered split is mixed on this subset",
+    "regime_counts": {
+      "canvas_recoverable": 7,
+      "rescue_limited_or_noncanvas": 1,
+      "stable_pass": 7
+    },
+    "stratum_canvas_recoveries": {
+      "medium_near_long_underselection": 2,
+      "missed_failed_long": 1,
+      "short_primary_pass": 1,
+      "triggered_failed_long": 3
+    },
+    "stratum_counts": {
+      "medium_near_long_underselection": 3,
+      "missed_failed_long": 3,
+      "positive_control_recoverable": 3,
+      "short_primary_pass": 3,
+      "triggered_failed_long": 3
+    }
+  },
+  "frozen_test_status": "sealed_not_touched",
+  "head": "a345f656f001e60db94c173401e9c382e4497621",
+  "llada_attribution_anchor": {
+    "c_hard_recoveries": 29,
+    "c_missed_failed_long_recoveries": 29,
+    "c_triggered_failed_long_recoveries": 0,
+    "hard_cases": 89,
+    "refinement_incremental_effect": 2
+  },
+  "second_regime_synthetic": {
+    "bucket_total": {
+      "long": 6,
+      "medium": 6,
+      "short": 6
+    },
+    "claim_boundary": "runner/data unblock only; all-pass synthetic set is too easy for benchmark claim",
+    "policy_pass": {
+      "best_deployable_cal_lite_fresh": 18,
+      "control_fixed_fresh": 18,
+      "oracle_sufficient_canvas_fresh": 18
+    },
+    "policy_total": {
+      "best_deployable_cal_lite_fresh": 18,
+      "control_fixed_fresh": 18,
+      "oracle_sufficient_canvas_fresh": 18
+    }
+  },
+  "verdict": "claim_boundary_consolidated_cpu_only"
+}

@@ -1,0 +1,29 @@
+{
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "case_count": 37,
+  "expected_gpu_command": "CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase4_continuation.py --mode dream-oracle --timestamp 20260708_dreamcoder_expanded37_v1 --manifest analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/case_manifest.csv",
+  "frozen_test_rows": 0,
+  "head": "a345f656f001e60db94c173401e9c382e4497621",
+  "note": "Intended cap was 45, but only 4 triggered failed-long rows matched the train/calibration/validation proxy definition; final bounded manifest has 37 cases.",
+  "oracle_bucket_counts": {
+    "13-16": 2,
+    "17-24": 10,
+    "25+": 14,
+    "9-12": 3,
+    "<=8": 8
+  },
+  "source": "H200 action table train/calibration/validation only",
+  "split_counts": {
+    "calibration": 1,
+    "train": 30,
+    "validation": 6
+  },
+  "stratum_counts": {
+    "medium_near_long_underselection": 8,
+    "missed_failed_long": 12,
+    "positive_control_recoverable": 7,
+    "short_primary_pass_harmable": 6,
+    "triggered_failed_long": 4
+  },
+  "verdict": "dreamcoder_expanded_manifest_ready"
+}
