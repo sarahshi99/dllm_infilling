@@ -1,247 +1,63 @@
 # CCF-A Readiness Assessment
 
-更新时间：2026-06-18 11:25 CST
+更新时间：2026-07-08 UTC
 
 ## 总体判断
 
-当前项目进展是：已经有明确研究问题、可复现实验链、多个同 backbone 本地对照、跨模型结果、trace 诊断和一批负结果；但还没有达到 CCF-A 会议论文的投稿就绪水平。
+当前项目已经从“继续调 controller”转为 `diagnostic-driven mixed paper`。这不是一个 positive controller paper：H200 Controller V1/V2/V3 都显示 deployable risk-controlled intervention 只有弱验证信号，frozen test 仍然 sealed，`test_evaluation_count=0`。
 
-Claim Readiness Gate verdict：`weak_candidate`。
+Claim Readiness Gate verdict：`diagnostic_mixed_candidate_with_blocking_gaps`。
 
-含义：项目已经不是零散实验，具备论文雏形；但还不能称为 `paper_candidate` 或 `submission_candidate`，因为核心贡献的“方法新意 + 强结果 + 外部可比性”还不够硬。尤其是 true-long code infilling 仍未解决，当前提升主要是 medium rescue 和 Route2 polish。
+最稳妥的论文主张是：
 
-## 1. 研究背景和动机
+> Unknown-length DLLM infilling has separable canvas-limited and rescue-limited regimes. Missed true-long cases expose substantial oracle-canvas recoverability, while already-triggered long failures remain resistant to longer trajectories and trace-guided remasking. Deployable risk-controlled control shows weak but insufficient validation signal, revealing a gap between diagnostic upper bound and safe inference-time intervention.
 
-DLLM（Diffusion Language Model，扩散式语言模型）通过逐步去噪生成文本或代码。和自回归模型不同，DLLM 做 code infilling（代码填空，即给定前缀和后缀，生成中间缺失代码）时，通常要先确定中间 canvas（生成画布，也就是留多少个 mask/token 位置）。
+## 已有强证据
 
-这个长度选择不是小工程细节。若 canvas 太短，真实答案写不完整；若 canvas 太长，短答案任务可能被干扰，甚至把本来能过的题改坏。本项目把问题聚焦为：
+1. H200 evidence base 已被研究者接受，主表和后续 controller 以 H200 rerun 为准；A6000 只保留为 historical reference。
+2. H200 core baselines 已全量重跑：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。
+3. H200 action bank 覆盖 frozen train/calibration/validation：`927` tasks × `5` actions = `4635` rows，test rows `0`。
+4. Oracle action-bank validation upper bound 为 `106/127`，相对 primary `17/0` wins/losses，说明 action bank 中确实存在可恢复空间。
+5. True-long attribution 的核心机制清晰：C oracle-sufficient canvas 恢复 `29/89` hard cases，全部来自 missed failed-long；triggered failed-long 为 `0/33`，支持 canvas inadequacy 与 rescue inadequacy 分离。
+6. Controller V1/V2/V3 的负结果是受控的：所有开发都停在 validation，frozen test 未打开。
 
-> 在不知道 oracle length（真实答案长度，只能在离线评测时知道）的情况下，DLLM 如何在推理阶段自动选择或修复 infilling length，并尽量提升中长答案而不伤害短答案？
+## Weak Evidence
 
-这个问题有 CCF-A 潜力，因为它触到 DLLM code infilling 的实践限制：fixed canvas（固定长度画布）不灵活，oracle length 不现实，单纯 confidence-based length selection 又容易低估长答案。
+1. Controller V3 有弱 validation signal：保守 top-k policy 可做到 `90/127`、`1/0` wins/losses、population harm upper95 `2.33%`，但净增只有 `+1`。
+2. Family A 的最高 pass-count 点为 `91/127`、`3/1` wins/losses、net `+2`，但出现一个 `<=8` short-bucket loss，不能授权 frozen test。
+3. Second-backbone feasibility audit 推荐 Dream-Coder Base：checkpoint 已缓存，runner 与 evaluator 可复用，历史 full SingleLine evidence 存在。但 fresh oracle-sufficient H200 diagnostic 被工具审批层阻塞，当前只能记录为 feasibility + extracted diagnostic，而不是完整 second-backbone confirmation。
+4. Dream-Coder 现有结果支持“可做跨 backbone 诊断”的可行性，但还不足以声称 model-agnostic generalization。
 
-## 2. 当前核心贡献和方法
+## Negative Evidence
 
-当前最诚实的 central claim 是：
+1. Controller V1 H200 replay 仍为 zero intervention：validation `89/127`，wins/losses `0/0`。
+2. Controller V2 最好的非零点为 `90/127`、`5/4` wins/losses，population harm upper95 `7.06%`，未通过 primary gate。
+3. Controller V3 没有满足 frozen-test gate 的 deployable policy；最终 route decision 为 `weak_validation_signal_test_sealed`。
+4. LR-DLLM final attempt verdict 为 `blocked_missing_algorithmic_detail`：仓库中没有 protocol-matched Stage I/II adapter，不能称为 official reproduction。
+5. Second-regime audit 发现 MultiLine/RandomSpan alias 存在，但本机 `data/` 缺少所需 JSONL，因此未运行 second-regime diagnostic。
 
-> Inference-time length control（推理阶段长度控制，不改模型权重，只在生成时选择/修复长度）可以较安全地恢复 medium-length under-selection（中等长度低估），但 true-long infilling（真实答案很长的填空）仍主要受 length underestimation（长度低估）和 rescue quality（修复生成质量）限制。
+## CCF-A Blocking Gaps
 
-已形成的贡献雏形：
+1. 缺少完整 second-backbone minimal diagnostic：Dream-Coder fresh oracle-sufficient canvas run 尚未执行成功。
+2. 缺少 second-regime diagnostic：MultiLine 或 RandomSpan 本地数据文件缺失。
+3. deployable controller 没有达到 frozen-test gate；因此没有 sealed test improvement。
+4. LR-DLLM 没有同协议 baseline，只能作为 blocked baseline 记录。
+5. 当前 paper contribution 需要靠机制诊断、负结果严谨性和泛化 audit 支撑，不能写成 SOTA 方法论文。
 
-1. `LCAL / midcons`：用长度探测曲线识别中等长度低估，在较低短答案风险下修复一部分 medium bucket。
-2. `official-CAL bounded repair`：只在保守边界内采用 official-CAL 风格的更长长度建议，避免无条件加长。
-3. `Route2 trace-gated rescue`：用 trace（解码轨迹，即去噪过程中 top1/confidence/plateau 等动态信号）触发二次 rescue，得到小幅无 loss polish。
-4. 系统负结果：single-feature probe、strict-split probe score、trace route analysis、Discovery V4 都显示当前信号不足以安全解决 true-long。
+## Next Required Experiments
 
-目前 strongest local positive：
+1. 手动或在审批层修复后运行 Dream-Coder Base oracle-sufficient canvas minimal diagnostic，输出 second-backbone diagnostic 的 fresh results。
+2. 补齐 `HumanEval-MultiLineInfilling` 或 `HumanEval-RandomSpanInfilling` 本地 JSONL，运行 second-regime minimal diagnostic。
+3. 若要增强 CCF-A 竞争力，优先验证 central claim 是否跨 backbone 或跨 regime 成立，而不是继续在人类验证集上调 Controller V4。
+4. 如果 LR-DLLM 官方代码或足够算法细节释放，再重做 protocol-matched Stage I sanity；在此之前不要把 heuristic local adapter 写成 LR-DLLM reproduction。
 
-- A6000 LLaDA-Base：Route2 precision len32 为 `801/1033 = 77.54%`，相对 midcons `+6` wins / `0` losses。
-- LLaDA-MoE：candidate `801/1033 = 77.54%`，local baseline `777/1033 = 75.22%`，`+24` tasks / `+2.32pp`，pairwise `31/7/770/225`。
+## Paper Framing Decision
 
-但是这些还不足以成为 CCF-A 级别的强主张，因为 true-long `25+` 基本没有改善，跨 backbone 结果混合，且外部 literature anchors 还不是 protocol-matched baselines。
+采用 `diagnostic-driven mixed paper`：
 
-## 3. 方法具体实现
+- 主贡献：揭示 unknown-length DLLM infilling 中 canvas-limited 与 rescue-limited 两种机制，以及 action-bank oracle upper bound 与 safe deployable controller 之间的缺口。
+- 正结果：oracle/action-ceiling 与部分 validation top-k 证明恢复空间存在。
+- 负结果：V1/V2/V3 controller 无法安全转化为 frozen-test policy。
+- 不声称：SOTA、controller success、unknown-length solved、frozen test improvement、model-agnostic generalization。
 
-### 3.1 长度探测
-
-对每个候选长度 `l`，构造：
-
-```text
-prefix + [MASK]^l + suffix
-```
-
-然后让模型前向一次，计算中间 mask 位置的平均最大 token 概率：
-
-```text
-raw_score(l) = mean_t max_v P(v | prefix, [MASK]^l, suffix)
-```
-
-为了避免模型总偏向短答案，`length_power` 模式使用：
-
-```text
-score(l) = raw_score(l) * l^alpha
-```
-
-其中 `alpha` 很小，例如 `0.06` 或 `0.10`。实现位置：
-
-```python
-def adjust_length_probe_score(raw_score, mask_length, cfg):
-    if cfg.decode.cal_lite_score_mode == "length_power":
-        return raw_score * (mask_length ** cfg.decode.cal_lite_length_alpha)
-```
-
-对应文件：`expvision_dllm_clean/length_probe.py`。
-
-### 3.2 LCAL / midcons
-
-LCAL 先在 compact length grid 上选择 base length，再判断是否需要更长的 correction。直觉是：如果长候选的分数接近或支持度足够，说明短答案选择可能低估了真实长度。
-
-简化伪代码：
-
-```python
-base = select_length(base_grid, alpha=0.06)
-if long_score_is_competitive(base, long_grid):
-    long = select_length(long_grid, alpha=0.10)
-    selected = max(base, long)
-else:
-    selected = base
-```
-
-项目里的实现还加入了 `weak_window`、`strong_min_len`、`support_count`、`long_score_floor`、`ratio_trigger_threshold` 等门控，目的是减少 short-risk（短答案风险，即在真实短答案上误触发长修复）。
-
-### 3.3 official-CAL bounded repair
-
-bounded repair 的核心不是“official-CAL 说多长就用多长”，而是只有满足边界才修复：
-
-```text
-delta = official_selected - s3_selected
-trigger = length_condition and delta_condition and optional_mid_rescue_conditions
-```
-
-简化伪代码：
-
-```python
-if s3_selected <= repair_max_s3_len:
-    official_selected = official_cal_select()
-    delta = official_selected - s3_selected
-    if (
-        repair_min_official_len <= official_selected <= repair_max_official_len
-        and repair_min_delta <= delta <= repair_max_delta
-    ):
-        selected = official_selected
-```
-
-对应文件：`clean_scripts/run_lcal_official_bounded_repair.py`。关键设计是保守触发，避免短答案回退。
-
-### 3.4 Route2 trace-gated rescue
-
-Route2 先运行 primary 方法并保存 step traces（逐步去噪轨迹）。如果轨迹像“长答案被卡住”，才跑 fixed-length rescue。
-
-两个已测试策略：
-
-```python
-POLICIES = {
-    "broad_plateau": [
-        ["top1_last", "<=", 0.667969],
-        ["max_remaining_plateau_steps", ">=", 16.0],
-    ],
-    "precision_top1_conf": [
-        ["top1_median", "<=", 0.464844],
-        ["confidence_max", "<=", 0.84375],
-    ],
-}
-```
-
-对应文件：`clean_scripts/run_route2_trace_rescue.py`。
-
-`precision_top1_conf + rescue_len32` 的结果最干净：`801/1033 = 77.54%`，pairwise `6/0/795/232`，无 observed loss。
-
-### 3.5 Discovery V4
-
-Discovery V4 是 CPU-only signal audit（只用 CPU 的信号审计，不启动 GPU），用于判断是否存在新的低风险 V4 policy。它构造 row-action table，合并 baseline、Route2 len24/len32、broad len24、probe/trace fields，再搜索 slice/rule/trace-shape/calibration/uplift 信号。
-
-它的候选评分为：
-
-```text
-score =
-  8 * missed_failed_long
-+ 2 * triggered_rescue_failure
-+ 5 * route2_win
-+ 4 * true_long_precision
-- 5 * short_risk
-- 3 * current_pass_risk
-```
-
-其中 current-pass risk 指当前 baseline 已经通过但候选规则可能干预的风险。
-
-最新结果：
-
-- output：`analysis_outputs/discovery_v4_signal_audit_20260618_000000`
-- decision：`route2_polish_only`
-- reason：没有找到比 Route2 polish 更稳定的低风险 V4 信号
-- verification：`tests/test_discovery_v4_signal_audit.py` 5 个单测通过，`py_compile` 通过
-
-## 4. 实验 setting 和结果
-
-### 4.1 统一设置
-
-- Dataset：`HumanEval-SingleLineInfilling`，HumanEval 派生的单行代码填空任务，本地共 `1033` rows。
-- Main metric：pass rate / pass@1，即一次生成通过单元测试的比例。
-- Pairwise W/L/TP/TF：同一题上 candidate 相对 baseline 的 win、loss、tie-pass、tie-fail。
-- Oracle buckets：按真实答案长度分桶：`<=8`、`9-12`、`13-16`、`17-24`、`25+`。
-- Comparison type：local same-backbone comparison 是主证据；CAL、LR-DLLM、DreamOn 等文献数值只是 literature anchors，除非本地复现同协议。
-
-### 4.2 A6000 LLaDA-Base 主线
-
-| Run | Pass | Rate | Delta |
-|---|---:|---:|---:|
-| control | `787/1033` | `76.19%` | baseline |
-| midcons | `795/1033` | `76.96%` | `+8`, `0` losses |
-| Route2 precision len32 | `801/1033` | `77.54%` | `+6` vs midcons, `0` losses |
-
-Bucket 结论：medium bucket 有收益，但 oracle `25+` 没有提升。
-
-### 4.3 跨 backbone 总结
-
-| Backbone | Local baseline | Current/candidate | Delta |
-|---|---:|---:|---:|
-| LLaDA-8B-Base Route2 | `795/1033` midcons | `801/1033` | `+6` vs midcons |
-| LLaDA-8B-Instruct | `817/1033` | `815/1033` | `-2` |
-| DreamCoder Base | `825/1033` | `832/1033` | `+7` |
-| DreamCoder Instruct | `848/1033` | `834/1033` | `-14` |
-| Dream-7B | `802/1033` | `803/1033` | `+1` |
-| DiffuCoder-Base | `838/1033` | `839/1033` | `+1` |
-| LLaDA-1.5 | `817/1033` | `818/1033` | `+1` |
-| LLaDA-MoE | `777/1033` | `801/1033` | `+24` |
-
-结论：LLaDA-MoE 是当前最强 local transfer；其他多数是 near-tie 或 negative transfer，不能宣称跨 backbone 稳定强提升。
-
-### 4.4 True-long failure evidence
-
-关键发现：
-
-- `midcons` 的 failed long 中 `90/91 = 98.90%` 是 under-selected。
-- Route2 precision len32 的 `57` triggers 中 true-long precision 为 `61.40%`。
-- `35` 个 failed-long 被 precision len32 触发，但只 rescue 成功 `2` 个。
-- `33` 个 triggered failed-long 仍失败，其中 `31/33` 的 rescue length 已经 >= oracle。
-
-这说明 true-long 的主要瓶颈不是简单“长度再加大”，而是 gate recall 与 rescue generation/selection quality 同时不足。
-
-## 5. 是否达到 CCF-A 水平
-
-### 5.1 支持点
-
-- 问题重要：unknown-length DLLM code infilling 是真实限制。
-- 证据链较完整：有 same-hardware、same-backbone、cross-backbone、trace diagnostics、negative evidence。
-- 项目纪律较好：报告中记录 baseline、环境、GPU、输出目录、pairwise、bucket metrics。
-- 已有局部亮点：midcons 无 loss 正收益、Route2 polish、LLaDA-MoE +2.32pp。
-
-### 5.2 不足点
-
-- 方法新意不足：当前规则仍偏 heuristic，缺少一个有原则的 long-length controller。
-- 主结果不够强：多数 backbone 是小幅正、near-tie 或 negative transfer。
-- true-long 没解决：oracle `25+` 基本没有改善。
-- 外部比较不足：文献结果不是 protocol-matched baseline，不能写 SOTA。
-- 消融不足：还需要系统拆解 LCAL、official repair、Route2 trace、rescue length、runtime cost。
-- 统计稳定性不足：需要更多 split/seed 或严格 deterministic split discipline。
-
-### 5.3 Verdict
-
-当前不是 CCF-A submission-ready。
-
-最高合理表述：
-
-> The project is a weak but credible paper candidate: it has a real problem, careful diagnostics, and localized positive evidence, but it still needs a principled long-length method or a stronger diagnostic-negative-result framing with protocol-matched baselines.
-
-中文汇报表述：
-
-> 目前项目已经从“调长度策略”推进到“发现 medium 与 true-long 两类错误机制不同”的阶段。它可以支撑一个有潜力的研究方向，但还不能支撑 CCF-A 投稿。下一阶段必须把 heuristic repair 升级为 principled length modeling，或者明确转成 rigorous diagnostic/negative-result paper。
-
-## 6. 建议下一步
-
-1. 先把 Discovery V4 的脚本、测试、report 写入 dashboard/results，并做 focused commit。
-2. 重新定义主方法：adaptive rescue generation、learned length classifier、dynamic canvas controller 或 length regularization。
-3. 建立 protocol-matched external baselines：同数据、同 prompt、同 canvas/evaluation setting 下对 CAL、LR-DLLM、DreamOn 或其可复现部分做对照。
-4. 做系统消融：移除/替换 LCAL、official repair、Route2 trace、rescue length、score mode，报告 total、bucket、wins/losses、runtime。
-5. 做错误案例分析：尤其是 `25+`、triggered-but-still-failed、missed failed-long。
-6. 论文 framing 二选一：method paper，或 diagnostic negative result + new controller paper。
+当前可以开始论文骨架和正式写作，但 CCF-A 强投稿仍需要至少一个泛化诊断补强：second-backbone fresh diagnostic 或 second-regime diagnostic。

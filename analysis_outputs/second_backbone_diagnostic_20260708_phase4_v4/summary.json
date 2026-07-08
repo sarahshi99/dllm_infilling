@@ -1,0 +1,22 @@
+{
+  "best_simple_pass_count": 7,
+  "case_count": 15,
+  "efg_status": "not_applicable_dreamcoder_no_trace_remask_adapter",
+  "manual_oracle_command": "HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HUB_OFFLINE=1 HF_HOME=/home/shx/.cache/huggingface TRANSFORMERS_OFFLINE=1 CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase4_generalization_audit.py --timestamp 20260708_phase4_oracle_manual --run-second-backbone-oracle",
+  "missed_long_oracle_recoveries": 0,
+  "missed_long_primary_passes": 2,
+  "oracle_blocked_reason": "auto_review_codex_auto_review_model_not_found_for_h200_gpu_command",
+  "oracle_pass_count": 0,
+  "policies": [
+    "primary_cal_lite",
+    "best_simple_lcal_bounded_repair",
+    "oracle_sufficient_canvas"
+  ],
+  "primary_pass_count": 7,
+  "qualitative_agreement_with_llada_h200": "partial: enough to test Dream-Coder canvas recoverability; full claim needs fresh oracle run",
+  "run_gpu_oracle": false,
+  "short_primary_pass_regressions_under_lcal": 0,
+  "triggered_long_oracle_recoveries": 0,
+  "triggered_long_primary_passes": 0,
+  "verdict": "diagnostic_subset_oracle_gpu_blocked"
+}

@@ -1,0 +1,13 @@
+{
+  "backbone": "Dream-org/Dream-Coder-v0-Base-7B",
+  "checkpoint_cached": true,
+  "current_prompt_evaluator": true,
+  "decode_loop_change": "uses clean_scripts/run_dreamcoder_official_infilling.py native diffusion_generate",
+  "dllm_infilling": true,
+  "h200_runnable": true,
+  "historical_full_result": "832/1033 lcal_official_bounded_repair; 825/1033 cal_lite",
+  "minimal_subset_cost": "about 3.8 sec/case/action from existing full run; 15 cases x 3 actions is <3 minutes after model load",
+  "recommended": true,
+  "reuse_existing_runner": true,
+  "tokenizer_change": "yes: Dream-Coder uses <|mask|> and bos_prefix_masks_suffix_eos canvas"
+}

@@ -1,0 +1,23 @@
+\documentclass[10pt,conference]{IEEEtran}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Diagnosing Canvas and Rescue Limits in Unknown-Length Diffusion Code Infilling}
+\author{Anonymous Authors}
+\begin{document}
+\maketitle
+\begin{abstract}
+Unknown-length diffusion code infilling exposes a gap between diagnostic recoverability and safe deployable control. We present a diagnostic-driven mixed study of canvas-limited and rescue-limited regimes, showing that missed true-long cases can be recoverable under oracle canvas expansion while already-triggered long failures remain resistant to longer trajectories and trace-guided remasking. Risk-controlled controllers show weak but insufficient validation signal, motivating a mixed framing rather than a positive controller claim.
+\end{abstract}
+\input{sections/introduction}
+\input{sections/problem}
+\input{sections/method_framework}
+\input{sections/experiments}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/related_work}
+\input{sections/limitations}
+\input{sections/conclusion}
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}

@@ -1,6 +1,20 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-07 UTC
+更新时间：2026-07-08 UTC
+
+## Phase 4 泛化审计与论文骨架（2026-07-08）
+
+当前 framing 已转为 `diagnostic-driven mixed paper`，不再继续 Controller V4，也不再在人类 validation split 上调新 policy。Controller V3 route decision 为 `weak_validation_signal_test_sealed`；frozen test 仍为 `sealed`，`test_evaluation_count=0`。
+
+Phase 4 compact artifacts：
+
+- Second-backbone feasibility：`analysis_outputs/second_backbone_feasibility_20260708_phase4_v4/`，verdict `recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 cache、official-canvas runner 和历史 full SingleLine evidence 均存在。
+- Second-backbone diagnostic：`analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/`，verdict `diagnostic_subset_oracle_gpu_blocked`。已抽取 15-case stratified diagnostic manifest 并连接 Dream-Coder existing full results；fresh oracle-sufficient canvas GPU diagnostic 被工具审批层阻塞，未写成完成结果。
+- Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`，verdict `blocked_missing_multiline_randomspan_dataset_files`。仓库有 MultiLine/RandomSpan aliases，但本机 `data/` 缺少 loader 需要的 JSONL。
+- LR-DLLM final attempt：`analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`，verdict `blocked_missing_algorithmic_detail`。没有 protocol-matched official/local Stage I/II adapter，不称为 reproduction。
+- Paper skeleton：`paper/diagnostic_mixed_draft/`。
+
+CCF-A readiness 结论：当前可开始正式写作，但不是 positive controller paper，也不是 submission-ready SOTA claim。最需要补的 CCF-A blocking experiments 是 second-backbone fresh oracle diagnostic 或 second-regime minimal diagnostic。
 
 ## H200 新服务器迁移状态（2026-07-05）
 

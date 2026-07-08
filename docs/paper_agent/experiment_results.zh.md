@@ -2,6 +2,32 @@
 
 更新时间：2026-07-08 UTC
 
+## Phase 4 Generalization And Paper Skeleton（2026-07-08）
+
+本阶段没有继续开发 Controller V4，没有运行 frozen test，也没有在人类 validation split 上继续调 policy。目标是补 CCF-A 所需的泛化可行性证据和论文骨架。
+
+Artifacts：
+
+- Second-backbone feasibility：`analysis_outputs/second_backbone_feasibility_20260708_phase4_v4/`
+- Second-backbone diagnostic extraction：`analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/`
+- Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`
+- LR-DLLM final attempt：`analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`
+- Paper skeleton：`paper/diagnostic_mixed_draft/`
+
+| Track | Verdict | Diagnostic run |
+|---|---|---|
+| Second backbone | `recommended_backbone_available` | 15-case Dream-Coder diagnostic extraction completed; fresh oracle GPU diagnostic blocked by tool approval layer |
+| Second regime | `blocked_missing_multiline_randomspan_dataset_files` | not run |
+| LR-DLLM | `blocked_missing_algorithmic_detail` | no protocol-matched runnable adapter |
+
+Second-backbone recommendation：`Dream-org/Dream-Coder-v0-Base-7B`。本机存在 Hugging Face cache、official-canvas runner 和历史 full SingleLine evidence；最小 subset 成本可控。当前 diagnostic 使用 existing Dream-Coder full results for primary/control and best simple length policy；oracle-sufficient canvas fresh run 未完成，因此不能把它写成跨 backbone central claim 已确认。
+
+Second-regime audit：`HumanEval-MultiLineInfilling`、`HumanEval-RandomSpanInfilling` 和 `HumanEval-RandomSpanInfillingLight` aliases 存在，但本机缺少 `data/` 下对应 JSONL 文件。需要补齐数据后才能运行 short/medium/long diagnostic subset。
+
+LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前只能报告 protocol audit 和 blocker，不能声称 official reproduction 或 local Stage I result。
+
+论文 framing：`diagnostic-driven mixed paper, not positive controller paper`。Central claim 是 canvas-limited 与 rescue-limited regimes 可分离，deployable risk-controlled controller 只有弱验证信号，揭示 oracle upper bound 与安全干预之间的 gap。
+
 ## H200 Tier 1 Reproduction（2026-07-07）
 
 H200 core baselines 已完成全量重跑。Compact audit：

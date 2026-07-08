@@ -27,12 +27,35 @@
 - Controller V3 candidate screen：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`，三族均完成。Family A best top-k 为 `probe_trace_fused, k=15`，validation `91/127`，wins/losses `3/1`，net `+2`，population harm upper95 `3.68%`，但有 `<=8` bucket loss；exploratory route 选择更保守的 Family A `probe_only, k=5`，validation `90/127`，wins/losses `1/0`，population harm upper95 `2.33%`。Frozen-test gate 未通过，route decision `weak_validation_signal_test_sealed`。
 - 未完成：true-long replay、frozen test。
 
+## 0.5 Phase 4 泛化审计与论文骨架
+
+当前路线已经停止 Controller V4，不继续新 remasking action、新 V8/V9 heuristic、H200 drift triage 或 frozen test。论文 framing 转为 `diagnostic-driven mixed paper`，不是 positive controller paper。
+
+Phase 4 outputs：
+
+- Phase 4 script：`experiments/phase4_generalization_audit.py`
+- Second-backbone feasibility：`analysis_outputs/second_backbone_feasibility_20260708_phase4_v4/`
+- Second-backbone diagnostic：`analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/`
+- Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`
+- LR-DLLM final attempt：`analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`
+- Paper skeleton：`paper/diagnostic_mixed_draft/`
+
+Phase 4 findings：
+
+- Second-backbone feasibility verdict：`recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 Hugging Face cache、official-canvas runner、evaluator compatibility 和历史 full SingleLine evidence 均存在。
+- Second-backbone diagnostic status：`diagnostic_subset_oracle_gpu_blocked`。已生成 15-case stratified diagnostic manifest，并从 existing Dream-Coder full runs 提取 primary/control 与 simple-length-policy evidence；fresh oracle-sufficient canvas GPU diagnostic 因工具审批层错误未运行成功，不得写成 complete cross-backbone confirmation。
+- Second-regime feasibility verdict：`blocked_missing_multiline_randomspan_dataset_files`。仓库有 MultiLine/RandomSpan aliases，但本机 `data/` 缺少对应 JSONL；未运行 second-regime diagnostic。
+- LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前仍无 protocol-matched official/local Stage I/II adapter；不要称为 official reproduction。
+- Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
+
+CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 是 second-backbone fresh oracle diagnostic 或 second-regime minimal diagnostic。
+
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
-- 当前阶段：Phase 3 H200 Controller V3 candidate screen complete；H200 drift accepted as evidence-base decision；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 当前阶段：Phase 4 generalization audit and diagnostic mixed paper skeleton；Controller V3 已完成且不继续 V4；H200 drift accepted as evidence-base decision。
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
