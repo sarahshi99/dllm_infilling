@@ -1,0 +1,23 @@
+{
+  "action_counts": {
+    "EXPAND_16": 2,
+    "EXPAND_24": 2,
+    "EXPAND_32": 2,
+    "EXPAND_48": 2,
+    "KEEP_PRIMARY": 2
+  },
+  "benefit_labels_non_keep": 0,
+  "cost": {
+    "mean": 1.1693930370965973,
+    "p50": 1.164764957036823,
+    "p95": 1.4274737990344875
+  },
+  "harm_labels_non_keep": 2,
+  "mode": "controller_action_bank",
+  "pass_count": 8,
+  "row_count": 10,
+  "split_counts": {
+    "train": 10
+  },
+  "task_count": 2
+}

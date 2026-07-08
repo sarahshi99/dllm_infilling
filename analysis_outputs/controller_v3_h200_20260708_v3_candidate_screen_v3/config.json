@@ -1,0 +1,45 @@
+{
+  "allowed_logistic_C": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "bank_action_schema_version": "deployable_canvas_actions_v1",
+  "bank_dir": "analysis_outputs/controller_action_bank_h200_20260707_tier1_offline",
+  "bank_summary_row_count": 4635,
+  "bank_summary_task_count": 927,
+  "families": [
+    "targeted_missed_long",
+    "two_stage_rejector",
+    "oracle_win_distillation"
+  ],
+  "feature_variants": [
+    "probe_only",
+    "probe_trace_fused"
+  ],
+  "learning_rate": [
+    0.05,
+    0.1
+  ],
+  "n_estimators": [
+    50,
+    100
+  ],
+  "note": "V3 implementation uses weighted logistic variants from the allowed model class; tree grids are recorded as allowed but not selected.",
+  "topk_values": [
+    5,
+    10,
+    15,
+    20,
+    30,
+    40,
+    60
+  ],
+  "tree_depth": [
+    2,
+    3,
+    4
+  ],
+  "v1_dir": "analysis_outputs/controller_validation_h200_20260707_v1_replay",
+  "v2_dir": "analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation"
+}

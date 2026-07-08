@@ -1,0 +1,15 @@
+family,feature_variant,k,topk_oracle_win_hits,wins,losses,net
+oracle_win_distillation,probe_only,5,2,1,0,1
+oracle_win_distillation,probe_only,10,3,1,0,1
+oracle_win_distillation,probe_only,15,3,1,1,0
+oracle_win_distillation,probe_only,20,5,2,3,-1
+oracle_win_distillation,probe_only,30,5,2,6,-4
+oracle_win_distillation,probe_only,40,8,5,8,-3
+oracle_win_distillation,probe_only,60,11,6,13,-7
+oracle_win_distillation,probe_trace_fused,5,2,2,1,1
+oracle_win_distillation,probe_trace_fused,10,4,3,2,1
+oracle_win_distillation,probe_trace_fused,15,6,3,2,1
+oracle_win_distillation,probe_trace_fused,20,7,3,4,-1
+oracle_win_distillation,probe_trace_fused,30,10,5,7,-2
+oracle_win_distillation,probe_trace_fused,40,11,6,8,-2
+oracle_win_distillation,probe_trace_fused,60,13,7,12,-5

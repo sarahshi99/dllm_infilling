@@ -1,0 +1,345 @@
+{
+  "baseline_summary": [
+    {
+      "avg_total_sec_including_probe": 6.025422790634112,
+      "gpu": "old_a6000",
+      "pass_count": 787,
+      "pass_rate": 0.7618586640851888,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529",
+      "rows": 1033,
+      "run": "control",
+      "summary_pass_rate": 0.7618586640851888,
+      "trigger_count": 79
+    },
+    {
+      "avg_total_sec_including_probe": 1.322957830938281,
+      "gpu": "h200",
+      "pass_count": 787,
+      "pass_rate": 0.7618586640851888,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_control_20260706_tier1_20260706_031441",
+      "rows": 1033,
+      "run": "control",
+      "summary_pass_rate": 0.7618586640851888,
+      "trigger_count": 80
+    },
+    {
+      "avg_total_sec_including_probe": 11.97756512547029,
+      "gpu": "old_a6000",
+      "pass_count": 795,
+      "pass_rate": 0.7696030977734754,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626",
+      "rows": 1033,
+      "run": "midcons",
+      "summary_pass_rate": 0.7696030977734754,
+      "trigger_count": 102
+    },
+    {
+      "avg_total_sec_including_probe": 1.4654791171587904,
+      "gpu": "h200",
+      "pass_count": 794,
+      "pass_rate": 0.7686350435624395,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_midcons_20260706_tier1_20260706_042029",
+      "rows": 1033,
+      "run": "midcons",
+      "summary_pass_rate": 0.7686350435624395,
+      "trigger_count": 104
+    },
+    {
+      "avg_total_sec_including_probe": 5.4621755333458655,
+      "gpu": "old_a6000",
+      "pass_count": 801,
+      "pass_rate": 0.7754114230396902,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_route2_trace_rescue_precision_top1_conf_len32_gpu3_20260614_010516",
+      "rows": 1033,
+      "run": "route2",
+      "summary_pass_rate": 0.7754114230396902,
+      "trigger_count": 57
+    },
+    {
+      "avg_total_sec_including_probe": 1.5564461394886162,
+      "gpu": "h200",
+      "pass_count": 795,
+      "pass_rate": 0.7696030977734754,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_route2_20260707_tier1_rerun_tmux_20260707_032537",
+      "rows": 1033,
+      "run": "route2",
+      "summary_pass_rate": 0.7696030977734754,
+      "trigger_count": 58
+    },
+    {
+      "avg_total_sec_including_probe": 4.876820151190141,
+      "gpu": "old_a6000",
+      "pass_count": 802,
+      "pass_rate": 0.7763794772507261,
+      "path": "/home/shx/projects/dllm_infilling/git_workspace/outputs_clean/full_route2_v6_short_override_gpu2_20260620_124754",
+      "rows": 1033,
+      "run": "v6",
+      "summary_pass_rate": 0.7763794772507261,
+      "trigger_count": 57
+    },
+    {
+      "avg_total_sec_including_probe": 1.721240794600442,
+      "gpu": "h200",
+      "pass_count": 796,
+      "pass_rate": 0.7705711519845111,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_v6_20260707_tier1_tmux_20260707_044307",
+      "rows": 1033,
+      "run": "v6",
+      "summary_pass_rate": 0.7705711519845111,
+      "trigger_count": 58
+    },
+    {
+      "avg_total_sec_including_probe": 3.569845807120801,
+      "gpu": "old_a6000",
+      "pass_count": 774,
+      "pass_rate": 0.7492739593417231,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/full_official_cal_lcas_v3b_accel_gpus10_20260702_resumed_full_20260703_111615",
+      "rows": 1033,
+      "run": "cal",
+      "summary_pass_rate": 0.7492739593417231,
+      "trigger_count": null
+    },
+    {
+      "avg_total_sec_including_probe": 1.1702381572060672,
+      "gpu": "h200",
+      "pass_count": 769,
+      "pass_rate": 0.744433688286544,
+      "path": "/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939",
+      "rows": 1033,
+      "run": "cal",
+      "summary_pass_rate": 0.744433688286544,
+      "trigger_count": null
+    }
+  ],
+  "branch": "codex/risk-controlled-dynamic-rescue",
+  "command": "/home/shx/miniconda3/envs/dllm_env/bin/python experiments/action_ceiling/h200_repro_audit.py --timestamp 20260707_tier1 --h200-run cal=/home/shx/projects/dllm_infilling/outputs_clean/h200_rebaseline_cal_20260707_tier1_tmux_20260707_051939",
+  "commit": "7e7117c186bfc7d2ba5bae924449d1af1926775f",
+  "comparisons": [
+    {
+      "bucket_agreement_rate": 1.0,
+      "bucket_outcome_agreement": {
+        "13-16": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 90
+        },
+        "17-24": {
+          "outcome_agreement_rate": 0.9878048780487805,
+          "rows": 82
+        },
+        "25+": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 31
+        },
+        "9-12": {
+          "outcome_agreement_rate": 0.9913793103448276,
+          "rows": 232
+        },
+        "<=8": {
+          "outcome_agreement_rate": 0.9916387959866221,
+          "rows": 598
+        }
+      },
+      "candidate_hash_agreement_rate": 0.9622458857696031,
+      "candidate_hash_comparable": 1033,
+      "common": 1033,
+      "error_type_agreement_rate": 0.989351403678606,
+      "h200_losses": 4,
+      "h200_pass_count": 787,
+      "h200_rows": 1033,
+      "h200_wins": 4,
+      "old_pass_count": 787,
+      "old_rows": 1033,
+      "outcome_agreement_rate": 0.9922555663117134,
+      "pass_delta_h200_minus_old": 0,
+      "run": "control",
+      "selected_length_agreement_rate": 0.972894482090997,
+      "selected_length_comparable": 1033,
+      "tie_fail": 242,
+      "tie_pass": 783,
+      "verification_signature_agreement_rate": 0.989351403678606
+    },
+    {
+      "bucket_agreement_rate": 1.0,
+      "bucket_outcome_agreement": {
+        "13-16": {
+          "outcome_agreement_rate": 0.9888888888888889,
+          "rows": 90
+        },
+        "17-24": {
+          "outcome_agreement_rate": 0.9878048780487805,
+          "rows": 82
+        },
+        "25+": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 31
+        },
+        "9-12": {
+          "outcome_agreement_rate": 0.9913793103448276,
+          "rows": 232
+        },
+        "<=8": {
+          "outcome_agreement_rate": 0.9916387959866221,
+          "rows": 598
+        }
+      },
+      "candidate_hash_agreement_rate": 0.9612778315585673,
+      "candidate_hash_comparable": 1033,
+      "common": 1033,
+      "error_type_agreement_rate": 0.9883833494675702,
+      "h200_losses": 5,
+      "h200_pass_count": 794,
+      "h200_rows": 1033,
+      "h200_wins": 4,
+      "old_pass_count": 795,
+      "old_rows": 1033,
+      "outcome_agreement_rate": 0.9912875121006777,
+      "pass_delta_h200_minus_old": -1,
+      "run": "midcons",
+      "selected_length_agreement_rate": 0.9719264278799613,
+      "selected_length_comparable": 1033,
+      "tie_fail": 234,
+      "tie_pass": 790,
+      "verification_signature_agreement_rate": 0.9883833494675702
+    },
+    {
+      "bucket_agreement_rate": 1.0,
+      "bucket_outcome_agreement": {
+        "13-16": {
+          "outcome_agreement_rate": 0.9888888888888889,
+          "rows": 90
+        },
+        "17-24": {
+          "outcome_agreement_rate": 0.975609756097561,
+          "rows": 82
+        },
+        "25+": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 31
+        },
+        "9-12": {
+          "outcome_agreement_rate": 0.9870689655172413,
+          "rows": 232
+        },
+        "<=8": {
+          "outcome_agreement_rate": 0.9899665551839465,
+          "rows": 598
+        }
+      },
+      "candidate_hash_agreement_rate": 0.9554695062923524,
+      "candidate_hash_comparable": 1033,
+      "common": 1033,
+      "error_type_agreement_rate": 0.9854791868344628,
+      "h200_losses": 9,
+      "h200_pass_count": 795,
+      "h200_rows": 1033,
+      "h200_wins": 3,
+      "old_pass_count": 801,
+      "old_rows": 1033,
+      "outcome_agreement_rate": 0.9883833494675702,
+      "pass_delta_h200_minus_old": -6,
+      "run": "route2",
+      "selected_length_agreement_rate": 0.9699903194578896,
+      "selected_length_comparable": 1033,
+      "tie_fail": 229,
+      "tie_pass": 792,
+      "verification_signature_agreement_rate": 0.9854791868344628
+    },
+    {
+      "bucket_agreement_rate": 1.0,
+      "bucket_outcome_agreement": {
+        "13-16": {
+          "outcome_agreement_rate": 0.9888888888888889,
+          "rows": 90
+        },
+        "17-24": {
+          "outcome_agreement_rate": 0.975609756097561,
+          "rows": 82
+        },
+        "25+": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 31
+        },
+        "9-12": {
+          "outcome_agreement_rate": 0.9870689655172413,
+          "rows": 232
+        },
+        "<=8": {
+          "outcome_agreement_rate": 0.9899665551839465,
+          "rows": 598
+        }
+      },
+      "candidate_hash_agreement_rate": 0.9554695062923524,
+      "candidate_hash_comparable": 1033,
+      "common": 1033,
+      "error_type_agreement_rate": 0.9854791868344628,
+      "h200_losses": 9,
+      "h200_pass_count": 796,
+      "h200_rows": 1033,
+      "h200_wins": 3,
+      "old_pass_count": 802,
+      "old_rows": 1033,
+      "outcome_agreement_rate": 0.9883833494675702,
+      "pass_delta_h200_minus_old": -6,
+      "run": "v6",
+      "selected_length_agreement_rate": 0.9699903194578896,
+      "selected_length_comparable": 1033,
+      "tie_fail": 228,
+      "tie_pass": 793,
+      "verification_signature_agreement_rate": 0.9854791868344628
+    },
+    {
+      "bucket_agreement_rate": 1.0,
+      "bucket_outcome_agreement": {
+        "13-16": {
+          "outcome_agreement_rate": 0.9666666666666667,
+          "rows": 90
+        },
+        "17-24": {
+          "outcome_agreement_rate": 0.9878048780487805,
+          "rows": 82
+        },
+        "25+": {
+          "outcome_agreement_rate": 0.967741935483871,
+          "rows": 31
+        },
+        "9-12": {
+          "outcome_agreement_rate": 1.0,
+          "rows": 232
+        },
+        "<=8": {
+          "outcome_agreement_rate": 0.9866220735785953,
+          "rows": 598
+        }
+      },
+      "candidate_hash_agreement_rate": 0.9612778315585673,
+      "candidate_hash_comparable": 1033,
+      "common": 1033,
+      "error_type_agreement_rate": 0.9854791868344628,
+      "h200_losses": 9,
+      "h200_pass_count": 769,
+      "h200_rows": 1033,
+      "h200_wins": 4,
+      "old_pass_count": 774,
+      "old_rows": 1033,
+      "outcome_agreement_rate": 0.9874152952565344,
+      "pass_delta_h200_minus_old": -5,
+      "run": "cal",
+      "selected_length_agreement_rate": 0.9690222652468539,
+      "selected_length_comparable": 1033,
+      "tie_fail": 255,
+      "tie_pass": 765,
+      "verification_signature_agreement_rate": 0.9854791868344628
+    }
+  ],
+  "git_working_tree_status": "## codex/risk-controlled-dynamic-rescue...origin/codex/risk-controlled-dynamic-rescue\n M docs/paper_agent/current_action.md\n?? experiments/action_ceiling/h200_repro_audit.py\n?? scripts/bootstrap_remote_10_98_36_183.sh\n?? scripts/no_flash_attn/\n?? scripts/run_h200_rebaseline_cal_20260707.sh\n?? scripts/run_h200_rebaseline_v6_20260707.sh\n?? tests/test_h200_repro_audit.py",
+  "new_gpu": "NVIDIA H200 NVL",
+  "old_expected_pass_counts": {
+    "cal": 774,
+    "control": 787,
+    "midcons": 795,
+    "route2": 801,
+    "v6": 802
+  },
+  "old_gpu": "NVIDIA RTX A6000",
+  "repro_verdict": "h200_material_outcome_drift"
+}

@@ -1,0 +1,12 @@
+{
+  "new_driver": "580.159.03",
+  "new_driver_cuda": "13.0",
+  "new_gpu": "NVIDIA H200 NVL",
+  "new_torch_cuda_runtime": "12.1",
+  "notes": [
+    "Old environment values are copied from prior run manifests.",
+    "H200 host GPU is visible only through approved host-side commands in this Codex environment."
+  ],
+  "old_gpu": "NVIDIA RTX A6000",
+  "old_torch_cuda_runtime": "12.1"
+}
