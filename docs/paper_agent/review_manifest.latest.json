@@ -113,6 +113,14 @@
     }
   },
   "controller_v2_authorized": true,
+  "controller_v3_completed": true,
+  "controller_v3_families_completed": [
+    "targeted_missed_long",
+    "two_stage_rejector",
+    "oracle_win_distillation"
+  ],
+  "controller_v3_output_dir": "analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3",
+  "controller_v3_started": true,
   "feature_schema": {
     "forbidden_features": [
       "oracle_length",
@@ -133,7 +141,7 @@
     ],
     "version": "frozen_canvas_features_v1"
   },
-  "final_verdict": "risk_certification_limited_test_sealed",
+  "final_verdict": "weak_validation_signal_test_sealed",
   "frozen_test": {
     "evaluation_count": 0,
     "executed": false,
@@ -216,6 +224,15 @@
       "ordinal_pairwise_harm"
     ],
     "controller_v2_verdict": "risk_certification_limited_test_sealed",
+    "controller_v3_completed": true,
+    "controller_v3_families_completed": [
+      "targeted_missed_long",
+      "two_stage_rejector",
+      "oracle_win_distillation"
+    ],
+    "controller_v3_output_dir": "analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3",
+    "controller_v3_started": true,
+    "controller_v3_verdict": "weak_validation_signal_test_sealed",
     "core_baselines_rerun": [
       {
         "name": "control",
@@ -278,12 +295,13 @@
     "material_drift_triage_dir": "analysis_outputs/h200_material_drift_triage_20260707_material_drift_triage",
     "repro_audit_dir": "analysis_outputs/h200_repro_audit_20260707_tier1_v2",
     "repro_verdict": "h200_material_outcome_drift",
+    "route_decision": "weak_validation_signal_test_sealed",
     "source_commit": "c05d2f8191c8ff31cec2e7472970262ed9d01526",
     "test_evaluation_count": 0,
     "test_status": "sealed",
     "true_long_full_rerun_required": null,
     "validation_gate_passed": false,
-    "validation_gate_reason": "best nonzero V2 point has only +1 pass and population harm upper95 7.06%; other variants select zero intervention"
+    "validation_gate_reason": "Controller V3 exploratory 7.5% gate passes for conservative top-k policies, but frozen-test 5% gate does not pass because the selected deployable policy does not reach net +2; frozen test remains sealed."
   },
   "split_lock": {
     "protocol_doc": "docs/paper_agent/frozen_controller_protocol.zh.md",
@@ -303,5 +321,7 @@
   "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
   "task_type": "phase2_frozen_risk_controlled_canvas_controller",
   "test_evaluation_count": 0,
-  "updated_at_cst": "2026-07-07"
+  "test_status": "sealed",
+  "route_decision": "weak_validation_signal_test_sealed",
+  "updated_at_cst": "2026-07-08"
 }

@@ -1,10 +1,10 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-07 UTC
+更新日期：2026-07-08 UTC
 
 ## 0. H200 新服务器迁移状态
 
-当前恢复已完成 bootstrap 审计、Tier 1 H200 core baseline full reruns、H200 action-bank rebuild、Controller V1 replay 和 CPU-only material drift triage。研究者已接受当前 H200 结果作为新的 evidence base；`h200_material_outcome_drift` 继续作为 reproducibility/audit 事实记录，但不再阻塞 Controller V2。旧 A6000 结果保留为 historical reference，后续 controller、validation、action bank、baseline 和论文主表以 H200 rerun 结果为准。
+当前恢复已完成 bootstrap 审计、Tier 1 H200 core baseline full reruns、H200 action-bank rebuild、Controller V1 replay、CPU-only material drift triage、Controller V2 validation 和 Controller V3 candidate screen。研究者已接受当前 H200 结果作为新的 evidence base；`h200_material_outcome_drift` 继续作为 reproducibility/audit 事实记录。旧 A6000 结果保留为 historical reference，后续 controller、validation、action bank、baseline 和论文主表以 H200 rerun 结果为准。
 
 - Bootstrap output：`analysis_outputs/h200_bootstrap_20260705_103617/`
 - Bootstrap report：`analysis_outputs/h200_bootstrap_20260705_103617/report.md`
@@ -24,6 +24,7 @@
 - Frozen test：仍为 `sealed`，`test_evaluation_count = 0`。
 - Controller V2 feasibility audit：`analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_feasibility/`，verdict `mixed_controller_failure`。
 - Controller V2 validation：`analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/`，verdict `risk_certification_limited_test_sealed`；best nonzero signal is `ordinal_only + probe_trace_fused` with validation `90/127`, wins/losses `5/4`, interventions `41`, population harm upper95 `7.06%`，未通过 gate。
+- Controller V3 candidate screen：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`，三族均完成。Family A best top-k 为 `probe_trace_fused, k=15`，validation `91/127`，wins/losses `3/1`，net `+2`，population harm upper95 `3.68%`，但有 `<=8` bucket loss；exploratory route 选择更保守的 Family A `probe_only, k=5`，validation `90/127`，wins/losses `1/0`，population harm upper95 `2.33%`。Frozen-test gate 未通过，route decision `weak_validation_signal_test_sealed`。
 - 未完成：true-long replay、frozen test。
 
 ## 1. 当前状态
@@ -31,7 +32,7 @@
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
-- 当前阶段：Phase 3 H200 Controller V2；H200 drift accepted as evidence-base decision；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
+- 当前阶段：Phase 3 H200 Controller V3 candidate screen complete；H200 drift accepted as evidence-base decision；历史阶段为 Phase 2 `Frozen Risk-Controlled Canvas Controller`
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
@@ -78,6 +79,18 @@ Controller V2 result：
 - Variant B `pairwise_only`：all feature variants selected zero intervention，validation `89/127`，wins/losses `0/0`，gate failed。
 - Variant C `ordinal_pairwise_harm`：selected zero intervention，validation `89/127`，wins/losses `0/0`，gate failed。
 - Frozen test remains `sealed`，`test_evaluation_count=0`。
+
+Controller V3 result：
+
+- Script：`experiments/action_ceiling/controller_v3_candidate_screen.py`
+- Output：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`
+- Required files present：`report.md`, `topk_policy_curves.csv`, `validation_predictions.csv`, `validation_action_selection.csv`, `validation_summary.json`, `validation_baselines.csv`, `validation_ablation.csv`, `oracle_win_distillation.csv`, `cost_risk_pareto.csv`。
+- Family A `targeted_missed_long` best top-k by pass count：`probe_trace_fused, k=15`，validation `91/127`，wins/losses `3/1`，net `+2`，population harm upper95 `0.0368`，oracle-win hits `5`；this fails exploratory gate because it has one short-bucket loss。
+- Family B `two_stage_rejector` best top-k：`probe_only, k=5`，validation `90/127`，wins/losses `1/0`，net `+1`，population harm upper95 `0.0233`，oracle-win hits `2`；exploratory gate passed, frozen-test gate failed。
+- Family C `oracle_win_distillation` diagnostic：`probe_only, k=5`，validation `90/127`，wins/losses `1/0`，net `+1`，population harm upper95 `0.0233`，oracle-win hits `2`；diagnostic only, cannot authorize frozen test。
+- Selected exploratory policy：Family A `targeted_missed_long`, `probe_only`, `k=5`，interventions `5`，wins/losses `1/0`，validation `90/127`，population harm upper95 `0.0233`，conditional harm `0/5` with upper95 `0.4507`。
+- Route decision：`weak_validation_signal_test_sealed`。
+- Frozen-test gate：failed because no deployable policy satisfies the stricter frozen-test criteria with net `>=2` and no short-bucket regression. Frozen test remains `sealed` with `test_evaluation_count=0`。
 
 代码：
 

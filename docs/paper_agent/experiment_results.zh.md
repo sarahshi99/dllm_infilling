@@ -1,6 +1,6 @@
 # Experiment Results
 
-更新时间：2026-07-07 UTC
+更新时间：2026-07-08 UTC
 
 ## H200 Tier 1 Reproduction（2026-07-07）
 
@@ -17,7 +17,7 @@ H200 core baselines 已完成全量重跑。Compact audit：
 | V6 | `802/1033` | `796/1033` | `-6` | `3/9` |
 | Local same-protocol CAL | `774/1033` | `769/1033` | `-5` | `4/9` |
 
-结论：不能直接进入 Controller V2。已继续用 H200 当前结果重建 train/calibration/validation action bank 并 replay Controller V1；server migration verdict 仍是 `h200_material_outcome_drift`。Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
+结论：H200 rerun 结果已作为新的 evidence base；server migration verdict 仍记录为 `h200_material_outcome_drift`。已继续用 H200 当前结果重建 train/calibration/validation action bank、replay Controller V1，并完成 Controller V2/V3 validation。Frozen test 仍为 `sealed`，`test_evaluation_count=0`。
 
 ## H200 Action Bank And Controller V1 Replay（2026-07-07）
 
@@ -113,6 +113,34 @@ Controller V2 verdict：`risk_certification_limited_test_sealed`。
 | ordinal + pairwise + harm | probe only / fused | `89/127` | `0` | `0` | `0` | fail |
 
 The only nonzero V2 point gains one pass but has population harm upper95 `7.06%` and does not meet the preregistered primary gate. Frozen test remains `sealed` with `test_evaluation_count=0`。
+
+## H200 Controller V3 Candidate Screen（2026-07-08）
+
+Artifacts：
+
+- Script：`experiments/action_ceiling/controller_v3_candidate_screen.py`
+- Output dir：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`
+- Report：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/report.md`
+- Top-k curves：`analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/topk_policy_curves.csv`
+
+All requested V3 families completed on the validation split:
+
+| Family | Best feature/k | Validation | Wins | Losses | Net | Pop harm upper95 | Oracle-win hits | Gate |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| Family A targeted missed-long | `probe_trace_fused`, `k=15` | `91/127` | `3` | `1` | `+2` | `3.68%` | `5` | fails exploratory due to one `<=8` bucket loss |
+| Family B two-stage rejector | `probe_only`, `k=5` | `90/127` | `1` | `0` | `+1` | `2.33%` | `2` | passes exploratory, fails frozen-test gate |
+| Family C oracle-win distillation | `probe_only`, `k=5` | `90/127` | `1` | `0` | `+1` | `2.33%` | `2` | diagnostic only |
+
+Selected exploratory route：
+
+- `targeted_missed_long`, `probe_only`, `k=5`
+- interventions：`5`
+- validation：`90/127`
+- wins/losses：`1/0`
+- population harm upper95：`2.33%`
+- conditional harm：`0/5`，upper95 `45.07%`
+
+Route decision：`weak_validation_signal_test_sealed`。The 7.5% exploratory gate passes for conservative top-k policies, but the stricter 5% frozen-test gate does not pass because no deployable policy gives net `>=2` without short-bucket regression. Frozen test remains `sealed` with `test_evaluation_count=0`。
 
 ## H200 Bootstrap Audit（2026-07-05）
 
