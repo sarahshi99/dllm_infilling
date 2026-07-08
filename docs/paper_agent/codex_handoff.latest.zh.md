@@ -43,12 +43,19 @@ Phase 4 outputs：
 Phase 4 findings：
 
 - Second-backbone feasibility verdict：`recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 Hugging Face cache、official-canvas runner、evaluator compatibility 和历史 full SingleLine evidence 均存在。
-- Second-backbone diagnostic status：`diagnostic_subset_oracle_gpu_blocked`。已生成 15-case stratified diagnostic manifest，并从 existing Dream-Coder full runs 提取 primary/control 与 simple-length-policy evidence；fresh oracle-sufficient canvas GPU diagnostic 因工具审批层错误未运行成功，不得写成 complete cross-backbone confirmation。
-- Second-regime feasibility verdict：`blocked_missing_multiline_randomspan_dataset_files`。仓库有 MultiLine/RandomSpan aliases，但本机 `data/` 缺少对应 JSONL；未运行 second-regime diagnostic。
+- Second-backbone diagnostic status：initial extraction `analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/` 已被 Full Access fresh oracle run `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/` 补齐；结果为 mixed second-backbone evidence，而不是 clean cross-backbone confirmation。
+- Second-regime feasibility verdict：official MultiLine/RandomSpan JSONL 仍缺；后续已构造并运行 `synthetic_second_regime_minimal`，但该结果不是 official second-regime benchmark。
 - LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前仍无 protocol-matched official/local Stage I/II adapter；不要称为 official reproduction。
 - Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
 
-CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 是 second-backbone fresh oracle diagnostic 或 second-regime minimal diagnostic。
+Phase 4 continuation（2026-07-08）：
+
+- New script：`experiments/phase4_continuation.py`。
+- Dream-Coder fresh oracle diagnostic：已完成，输出 `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`。15-case subset 上 primary/control `7/15`，best simple length policy `7/15`，oracle-sufficient canvas `14/15`；missed-long oracle recoveries `3`，triggered-long oracle recoveries `3`，short regressions `0`。Qualitative agreement 为 mixed：Dream-Coder subset 不干净复刻 LLaDA H200 的 missed-vs-triggered split，因此只能作为 second-backbone diagnostic evidence，不可写成 model-agnostic confirmation。
+- Second-regime unblock：已实际尝试并成功构造明确标记的 synthetic minimal regime：`analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`，verdict `synthetic_second_regime_minimal_constructed`，`18` cases，short/medium/long 各 `6`。官方文件仍缺：`data/HumanEval-MultiLineInfilling.jsonl`、`data/HumanEval-RandomSpanInfilling.jsonl`、`data/HumanEval-RandomSpanInfillingLight.jsonl`。
+- Second-regime minimal diagnostic：已在 synthetic subset 上完成，输出 `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/`。Regime 明确标记为 `synthetic_second_regime_minimal`，不是 official MultiLine/RandomSpan benchmark。Control fixed、best deployable cal-lite、oracle-sufficient canvas 均为 `18/18`，canvas-limited fraction `0.0`，rescue-limited fraction `0.0`，deployable policy gap `0`。该结果证明 runner/data unblock 成功，但 subset 太易，不能作为强 second-regime stress evidence。
+
+CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“未跑 fresh diagnostics”转为：official/strong second-regime stress evidence 仍缺、Dream-Coder diagnostic 为 mixed、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
 
 ## 1. 当前状态
 

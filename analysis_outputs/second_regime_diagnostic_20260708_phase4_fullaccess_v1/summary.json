@@ -1,0 +1,26 @@
+{
+  "avg_cost_sec": {
+    "best_deployable_cal_lite_fresh": 1.6589558525431332,
+    "control_fixed_fresh": 1.4054840178481147,
+    "oracle_sufficient_canvas_fresh": 1.3660979580276438
+  },
+  "best_existing_deployable_policy": "cal_lite_length_policy",
+  "best_existing_deployable_policy_pass": 18,
+  "canvas_limited_fraction": 0.0,
+  "case_count": 18,
+  "control_pass": 18,
+  "deployable_policy_gap": 0,
+  "official_multiline_randomspan_status": "missing_local_jsonl_not_official_benchmark",
+  "oracle_sufficient_canvas_pass": 18,
+  "qualitative_agreement_with_singleline": "assessable from fresh synthetic control/deployable/oracle diagnostic; compare canvas_limited_fraction with SingleLine oracle action ceiling",
+  "regime": "synthetic_second_regime_minimal",
+  "rescue_limited_fraction": 0.0,
+  "short_case_regressions": 0,
+  "short_medium_long_counts": {
+    "long": 6,
+    "medium": 6,
+    "short": 6
+  },
+  "sufficient_canvas_recoverability": 0.0,
+  "verdict": "second_regime_minimal_diagnostic_completed"
+}

@@ -9,12 +9,18 @@
 Phase 4 compact artifacts：
 
 - Second-backbone feasibility：`analysis_outputs/second_backbone_feasibility_20260708_phase4_v4/`，verdict `recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 cache、official-canvas runner 和历史 full SingleLine evidence 均存在。
-- Second-backbone diagnostic：`analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/`，verdict `diagnostic_subset_oracle_gpu_blocked`。已抽取 15-case stratified diagnostic manifest 并连接 Dream-Coder existing full results；fresh oracle-sufficient canvas GPU diagnostic 被工具审批层阻塞，未写成完成结果。
-- Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`，verdict `blocked_missing_multiline_randomspan_dataset_files`。仓库有 MultiLine/RandomSpan aliases，但本机 `data/` 缺少 loader 需要的 JSONL。
+- Second-backbone diagnostic：initial extraction `analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/` 已由 fresh oracle run `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/` 补齐；结论是 mixed second-backbone evidence，不是 model-agnostic confirmation。
+- Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`，verdict `blocked_missing_multiline_randomspan_dataset_files`。仓库有 MultiLine/RandomSpan aliases，但本机 `data/` 缺少 loader 需要的 JSONL；后续 synthetic diagnostic 不能替代 official benchmark。
 - LR-DLLM final attempt：`analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`，verdict `blocked_missing_algorithmic_detail`。没有 protocol-matched official/local Stage I/II adapter，不称为 reproduction。
 - Paper skeleton：`paper/diagnostic_mixed_draft/`。
 
 CCF-A readiness 结论：当前可开始正式写作，但不是 positive controller paper，也不是 submission-ready SOTA claim。最需要补的 CCF-A blocking experiments 是 second-backbone fresh oracle diagnostic 或 second-regime minimal diagnostic。
+
+Phase 4 continuation（2026-07-08）：
+
+- Dream-Coder fresh oracle diagnostic 已完成：`analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`。15-case subset 上 primary/control `7/15`，best simple policy `7/15`，oracle-sufficient canvas `14/15`；missed-long oracle recoveries `3`，triggered-long oracle recoveries `3`，short regressions `0`。Qualitative agreement mixed，不可写成 model-agnostic confirmation。
+- Second-regime unblock 已完成一次实际尝试：`analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/` 构造 `synthetic_second_regime_minimal`，18 cases，short/medium/long 各 6；官方 MultiLine/RandomSpan JSONL 仍缺。
+- Second-regime minimal diagnostic 已在 synthetic subset 上完成：`analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/`。Control fixed、best deployable cal-lite、oracle-sufficient canvas 均为 `18/18`，canvas-limited fraction `0.0`，deployable gap `0`。该结果是 synthetic unblock/sanity evidence，不是 official benchmark。
 
 ## H200 新服务器迁移状态（2026-07-05）
 

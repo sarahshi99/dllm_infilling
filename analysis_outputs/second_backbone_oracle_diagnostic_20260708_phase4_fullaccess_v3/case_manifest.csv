@@ -1,0 +1,16 @@
+stratum,task_id,task_group,split,oracle_length,oracle_bucket,primary_selected_length,primary_passed,recoverable_by_expansion,harmable_by_expansion,expansion_pass_count,triggered_long_proxy,missed_long_proxy
+short_primary_pass,SingleLineInfilling/HumanEval/0/L2,HumanEval/0,train,8,<=8,8,True,False,True,2,False,False
+short_primary_pass,SingleLineInfilling/HumanEval/0/L4,HumanEval/0,train,7,<=8,8,True,False,True,3,False,False
+short_primary_pass,SingleLineInfilling/HumanEval/0/L5,HumanEval/0,train,4,<=8,4,True,False,False,4,False,False
+medium_near_long_underselection,SingleLineInfilling/HumanEval/10/L5,HumanEval/10,train,17,17-24,16,False,True,False,1,True,False
+medium_near_long_underselection,SingleLineInfilling/HumanEval/10/L8,HumanEval/10,train,15,13-16,3,False,False,False,0,False,False
+medium_near_long_underselection,SingleLineInfilling/HumanEval/100/L0,HumanEval/100,train,15,13-16,3,False,False,False,0,False,False
+missed_failed_long,SingleLineInfilling/HumanEval/104/L2,HumanEval/104,train,20,17-24,6,False,False,False,0,False,True
+missed_failed_long,SingleLineInfilling/HumanEval/107/L7,HumanEval/107,train,17,17-24,10,False,True,False,2,False,True
+missed_failed_long,SingleLineInfilling/HumanEval/107/L9,HumanEval/107,train,17,17-24,4,False,True,False,2,False,True
+triggered_failed_long,SingleLineInfilling/HumanEval/147/L0,HumanEval/147,train,22,17-24,16,False,True,False,1,True,False
+triggered_failed_long,SingleLineInfilling/HumanEval/71/L3,HumanEval/71,validation,29,25+,16,False,True,False,2,True,False
+triggered_failed_long,SingleLineInfilling/HumanEval/80/L5,HumanEval/80,train,34,25+,20,False,True,False,1,True,False
+positive_control_recoverable,SingleLineInfilling/HumanEval/1/L13,HumanEval/1,train,10,9-12,7,False,True,False,2,False,False
+positive_control_recoverable,SingleLineInfilling/HumanEval/101/L12,HumanEval/101,validation,7,<=8,4,False,True,False,1,False,False
+positive_control_recoverable,SingleLineInfilling/HumanEval/102/L3,HumanEval/102,validation,4,<=8,7,False,True,False,1,False,False

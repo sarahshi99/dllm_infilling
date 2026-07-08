@@ -1,0 +1,17 @@
+{
+  "bucket_histogram": {
+    "long": 6,
+    "medium": 6,
+    "short": 6
+  },
+  "candidate_file_count": 31,
+  "case_count": 18,
+  "missing_official_files": [
+    "data/HumanEval-MultiLineInfilling.jsonl",
+    "data/HumanEval-RandomSpanInfilling.jsonl",
+    "data/HumanEval-RandomSpanInfillingLight.jsonl"
+  ],
+  "second_regime_manifest": "/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/second_regime_manifest.csv",
+  "synthetic_data_file": "/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/synthetic_second_regime_minimal.jsonl",
+  "verdict": "synthetic_second_regime_minimal_constructed"
+}

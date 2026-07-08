@@ -10,19 +10,21 @@ Artifacts：
 
 - Second-backbone feasibility：`analysis_outputs/second_backbone_feasibility_20260708_phase4_v4/`
 - Second-backbone diagnostic extraction：`analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/`
+- Second-backbone fresh oracle diagnostic：`analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`
 - Second-regime feasibility：`analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`
+- Second-regime synthetic diagnostic：`analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/`
 - LR-DLLM final attempt：`analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`
 - Paper skeleton：`paper/diagnostic_mixed_draft/`
 
 | Track | Verdict | Diagnostic run |
 |---|---|---|
-| Second backbone | `recommended_backbone_available` | 15-case Dream-Coder diagnostic extraction completed; fresh oracle GPU diagnostic blocked by tool approval layer |
-| Second regime | `blocked_missing_multiline_randomspan_dataset_files` | not run |
+| Second backbone | `second_backbone_fresh_oracle_completed` | Dream-Coder 15-case fresh oracle: primary `7/15`, simple `7/15`, oracle `14/15`; mixed qualitative agreement |
+| Second regime | `second_regime_minimal_diagnostic_completed` | synthetic minimal 18-case fresh diagnostic: control/deployable/oracle all `18/18`; not official benchmark |
 | LR-DLLM | `blocked_missing_algorithmic_detail` | no protocol-matched runnable adapter |
 
-Second-backbone recommendation：`Dream-org/Dream-Coder-v0-Base-7B`。本机存在 Hugging Face cache、official-canvas runner 和历史 full SingleLine evidence；最小 subset 成本可控。当前 diagnostic 使用 existing Dream-Coder full results for primary/control and best simple length policy；oracle-sufficient canvas fresh run 未完成，因此不能把它写成跨 backbone central claim 已确认。
+Second-backbone recommendation：`Dream-org/Dream-Coder-v0-Base-7B`。本机存在 Hugging Face cache、official-canvas runner 和历史 full SingleLine evidence；最小 subset 成本可控。Fresh oracle-sufficient diagnostic 已完成：primary/control `7/15`，best simple length policy `7/15`，oracle-sufficient canvas `14/15`，missed-long oracle recoveries `3`，triggered-long oracle recoveries `3`，short regressions `0`。Qualitative agreement mixed，因此不能把它写成 model-agnostic central claim 已确认。
 
-Second-regime audit：`HumanEval-MultiLineInfilling`、`HumanEval-RandomSpanInfilling` 和 `HumanEval-RandomSpanInfillingLight` aliases 存在，但本机缺少 `data/` 下对应 JSONL 文件。需要补齐数据后才能运行 short/medium/long diagnostic subset。
+Second-regime audit：`HumanEval-MultiLineInfilling`、`HumanEval-RandomSpanInfilling` 和 `HumanEval-RandomSpanInfillingLight` aliases 存在，但本机缺少 `data/` 下对应 JSONL 文件。当前已构造并运行明确标记的 `synthetic_second_regime_minimal`：18 cases，short/medium/long 各 `6`，control fixed、best deployable cal-lite 和 oracle-sufficient canvas 均为 `18/18`。这证明 runner/data unblock 成功，但 subset 太易，不能替代 official second-regime benchmark。
 
 LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前只能报告 protocol audit 和 blocker，不能声称 official reproduction 或 local Stage I result。
 

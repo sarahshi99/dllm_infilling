@@ -1,0 +1,19 @@
+{
+  "action_set": [
+    "primary_control_existing_full",
+    "best_simple_length_policy_existing_full",
+    "fresh_oracle_sufficient_canvas"
+  ],
+  "created_at_utc": "2026-07-08T05:49:14Z",
+  "efg_status": "not_applicable_dreamcoder_no_trace_remask_adapter",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "HF_HOME": "/home/shx/.cache/huggingface",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "manifest": "/home/shx/projects/dllm_infilling/git_workspace/analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/case_manifest.csv",
+  "model": "Dream-org/Dream-Coder-v0-Base-7B",
+  "working_directory": "/home/shx/projects/dllm_infilling/git_workspace"
+}

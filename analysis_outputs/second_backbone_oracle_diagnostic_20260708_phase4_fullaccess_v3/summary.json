@@ -1,0 +1,18 @@
+{
+  "avg_oracle_cost_sec": 1.2671651872224174,
+  "best_simple_policy_pass": 7,
+  "case_count": 15,
+  "efg_status": "not_applicable_dreamcoder_no_trace_remask_adapter",
+  "missed_long_oracle_recoveries": 3,
+  "oracle_error_type_histogram": {
+    "None": 14,
+    "UnitTestFailure": 1
+  },
+  "oracle_sufficient_canvas_pass": 14,
+  "primary_control_pass": 7,
+  "qualitative_agreement_with_llada_h200": "mixed: Dream-Coder subset does not cleanly match the LLaDA H200 missed-vs-triggered split",
+  "short_case_regressions_vs_primary": 0,
+  "triggered_long_oracle_recoveries": 3,
+  "verdict": "second_backbone_fresh_oracle_completed",
+  "wall_clock_sec": 28.179604149016086
+}
