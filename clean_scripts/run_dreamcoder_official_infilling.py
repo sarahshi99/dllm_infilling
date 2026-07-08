@@ -45,7 +45,11 @@ DEFAULT_BIAS_PARAMS = "1.0,1.77,0.56,0.06,0.24"
 def ensure_modeling_rope_utils_available() -> None:
     import transformers.utils as transformers_utils
 
-    if os.environ.get("DLLM_DISABLE_FLASH_ATTN", "0").strip().lower() in {"1", "true", "yes", "on"}:
+    flash_helper_available = importlib.util.find_spec("transformers.modeling_flash_attention_utils") is not None
+    if (
+        not flash_helper_available
+        or os.environ.get("DLLM_DISABLE_FLASH_ATTN", "0").strip().lower() in {"1", "true", "yes", "on"}
+    ):
         def _flash_attn_unavailable(*_args, **_kwargs) -> bool:
             return False
 

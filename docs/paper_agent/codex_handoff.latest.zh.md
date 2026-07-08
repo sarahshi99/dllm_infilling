@@ -44,7 +44,7 @@ Phase 4 findings：
 
 - Second-backbone feasibility verdict：`recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 Hugging Face cache、official-canvas runner、evaluator compatibility 和历史 full SingleLine evidence 均存在。
 - Second-backbone diagnostic status：initial extraction `analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/` 已被 Full Access fresh oracle run `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/` 补齐；结果为 mixed second-backbone evidence，而不是 clean cross-backbone confirmation。
-- Second-regime feasibility verdict：official MultiLine/RandomSpan JSONL 仍缺；后续已构造并运行 `synthetic_second_regime_minimal`，但该结果不是 official second-regime benchmark。
+- Second-regime feasibility verdict：先前缺少 local official MultiLine/RandomSpan JSONL；本轮已从公开 `loubnabnl/humaneval_infilling` 恢复/export 三个 official second-regime configs 到本地 `data/`，但尚未构造 official diagnostic manifest 或运行 GPU。
 - LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前仍无 protocol-matched official/local Stage I/II adapter；不要称为 official reproduction。
 - Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
 
@@ -57,13 +57,17 @@ Phase 4 continuation（2026-07-08）：
 - Research planning pass：新增协作文件 `docs/paper_agent/idea_board.md`、`docs/paper_agent/experiment_queue.md`、`docs/paper_agent/decision_log.md`。本轮提出并排序 10 个 idea，selected immediate experiments 为 second-regime stress gate、Dream-Coder expanded oracle diagnostic、CPU claim-boundary consolidation。
 - CPU claim-boundary consolidation：已完成低成本 CPU 分析，输出 `analysis_outputs/research_planning_20260708_cpu_claim_audit/`。结论：LLaDA H200 attribution 仍是最强机制证据（C oracle canvas `29/89` hard recoveries，triggered-long `0`，refinement incremental `2`）；Dream-Coder 15-case taxonomy 为 `7` canvas-recoverable、`7` stable-pass、`1` rescue/noncanvas-limited，支持 oracle-canvas recoverability 但 missed-vs-triggered split mixed；Controller V3 frozen-gate passing points `0`；synthetic second-regime 仍只是 unblock/sanity。
 - Dream-Coder expanded manifest：已完成 CPU-only manifest，输出 `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`。Manifest 有 `37` 个 train/calibration/validation-derived cases，frozen test rows `0`；预期 GPU 命令已写入 `docs/paper_agent/experiment_queue.md` 的 `EXP-002`。
+- Dream-Coder expanded37 oracle diagnostic：已按 queued command 完成一次 bounded GPU run，输出 `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`。Primary/control `11/37`，best simple `11/37`，oracle-sufficient canvas `26/37`，short regressions `0`。分层 oracle pass：missed_failed_long `3/12`，triggered_failed_long `4/4`，medium_near_long_underselection `6/8`，short_primary_pass_harmable `6/6`，positive_control_recoverable `7/7`。解释：这是 second-backbone diagnostic evidence；因为 Dream-Coder triggered_failed_long proxy 在 oracle canvas 下 `4/4` recoverable，而 LLaDA H200 triggered-long C/E/F/G 为 `0`，不可写成 model-agnostic confirmation。
+- Official second-regime data recovery：已完成 CPU-only recovery/schema/evaluator gate，输出 `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`。从公开 `loubnabnl/humaneval_infilling` 导出本地 `data/HumanEval-MultiLineInfilling.jsonl` (`5815` rows)、`data/HumanEval-RandomSpanInfilling.jsonl` (`1640` rows)、`data/HumanEval-RandomSpanInfillingLight.jsonl` (`164` rows)；first 3 tasks per config schema/evaluator smoke 全通过。GPU status `not_run`；下一步必须先构造 source-labeled official manifest 并确认 no frozen-controller test rows。
+- Controller route-closure table plan：新增 `docs/paper_agent/controller_route_closure_table_plan.md`，计划表列为 oracle upper bound、selected policy、interventions、validation wins/losses、validation pass、harm upper95、frozen-test decision、evidence path。
 
-CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“未跑 fresh diagnostics”转为：official/strong second-regime stress evidence 仍缺、Dream-Coder diagnostic 为 mixed、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
+CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“未跑 fresh diagnostics”转为：official second-regime diagnostic manifest/GPU evidence 仍缺、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
 
 ## 1. 当前状态
 
 - 工作目录：`/home/shx/projects/dllm_infilling/git_workspace`
 - 分支：`codex/risk-controlled-dynamic-rescue`
+- 本轮接手时已 push HEAD：`99bfd08d67df48090824bb57ff7f7581ad7a1d2c`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
 - 当前阶段：Phase 4 generalization audit and diagnostic mixed paper skeleton；Controller V3 已完成且不继续 V4；H200 drift accepted as evidence-base decision。
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
@@ -267,12 +271,12 @@ Important ablation signals:
 ## 7. 下一步建议
 
 1. 审查并执行 second-regime stress gate（最高优先级）。
-   - 科学问题：是否能获得 official MultiLine/RandomSpan 或明确标记的 stress regime，使 second-regime 不再停留在 18/18 easy synthetic unblock？
-   - 输出：official 或 synthetic-stress compact report；若仍 all-pass，则停止该路线，不写 benchmark claim。
+   - 科学问题：official MultiLine/RandomSpan 已恢复到本地后，如何构造 source-labeled、no frozen-controller test rows、evaluator-smoke-passing 的 bounded official manifest？
+   - 输出：official manifest + CPU compatibility report；GPU 仍需等 manifest gate 通过。
 
-2. 执行 Dream-Coder expanded37 oracle-sufficient diagnostic。
-   - 科学问题：Dream-Coder 的 mixed 15-case result 是采样问题，还是 model-dependent canvas/rescue boundary？
-   - 输出：`analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`，只跑 bounded oracle-sufficient diagnostic，不开发 trace-remasking adapter。
+2. 审查 Dream-Coder expanded37 结果。
+   - 科学问题：Dream-Coder 的 mixed evidence 是否足以支撑 model-dependent canvas/rescue boundary，而不是 model-agnostic confirmation？
+   - 输出：基于 `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md` 的论文 claim rewrite。
 
 3. 做 baseline pack 和 controller route closure。
    - 科学问题：LR-DLLM blocked 后，哪些 protocol-matched / audited baselines 可以公平支撑论文？V1/V2/V3 是否已足够关闭 controller route？
@@ -287,6 +291,9 @@ Important ablation signals:
 - `docs/paper_agent/decision_log.md`
 - `analysis_outputs/research_planning_20260708_cpu_claim_audit/report.md`
 - `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/report.md`
+- `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md`
+- `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/report.md`
+- `docs/paper_agent/controller_route_closure_table_plan.md`
 - `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/report.md`
 - `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/report.md`
 - `analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/report.md`

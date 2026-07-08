@@ -1,0 +1,97 @@
+{
+  "avg_oracle_cost_sec": 1.2704700535695017,
+  "best_simple_policy_pass": 11,
+  "case_count": 37,
+  "efg_status": "not_applicable_dreamcoder_no_trace_remask_adapter",
+  "interpretation": "second-backbone diagnostic evidence; not model-agnostic confirmation because triggered_failed_long is oracle-recoverable on this Dream-Coder manifest while LLaDA H200 triggered-long remained rescue-limited under C/E/F/G attribution.",
+  "missed_long_oracle_recoveries": 3,
+  "oracle_error_type_histogram": {
+    "None": 26,
+    "SyntaxError": 1,
+    "UnitTestFailure": 10
+  },
+  "oracle_sufficient_canvas_pass": 26,
+  "primary_control_pass": 11,
+  "qualitative_agreement_with_llada_h200": "mixed: Dream-Coder subset does not cleanly match the LLaDA H200 missed-vs-triggered split",
+  "short_case_regressions_vs_primary": 0,
+  "stratum_summary": [
+    {
+      "canvas_recoverable": 3,
+      "cases": 12,
+      "oracle_error_types": {
+        "None": 3,
+        "SyntaxError": 1,
+        "UnitTestFailure": 8
+      },
+      "oracle_pass": 3,
+      "oracle_regression": 0,
+      "primary_pass": 0,
+      "rescue_limited_or_noncanvas": 9,
+      "simple_pass": 0,
+      "stable_pass": 0,
+      "stratum": "missed_failed_long"
+    },
+    {
+      "canvas_recoverable": 4,
+      "cases": 4,
+      "oracle_error_types": {
+        "None": 4
+      },
+      "oracle_pass": 4,
+      "oracle_regression": 0,
+      "primary_pass": 0,
+      "rescue_limited_or_noncanvas": 0,
+      "simple_pass": 0,
+      "stable_pass": 0,
+      "stratum": "triggered_failed_long"
+    },
+    {
+      "canvas_recoverable": 5,
+      "cases": 8,
+      "oracle_error_types": {
+        "None": 6,
+        "UnitTestFailure": 2
+      },
+      "oracle_pass": 6,
+      "oracle_regression": 0,
+      "primary_pass": 1,
+      "rescue_limited_or_noncanvas": 2,
+      "simple_pass": 1,
+      "stable_pass": 1,
+      "stratum": "medium_near_long_underselection"
+    },
+    {
+      "canvas_recoverable": 1,
+      "cases": 6,
+      "oracle_error_types": {
+        "None": 6
+      },
+      "oracle_pass": 6,
+      "oracle_regression": 0,
+      "primary_pass": 5,
+      "rescue_limited_or_noncanvas": 0,
+      "simple_pass": 5,
+      "stable_pass": 5,
+      "stratum": "short_primary_pass_harmable"
+    },
+    {
+      "canvas_recoverable": 2,
+      "cases": 7,
+      "oracle_error_types": {
+        "None": 7
+      },
+      "oracle_pass": 7,
+      "oracle_regression": 0,
+      "primary_pass": 5,
+      "rescue_limited_or_noncanvas": 0,
+      "simple_pass": 5,
+      "stable_pass": 5,
+      "stratum": "positive_control_recoverable"
+    }
+  ],
+  "stratum_summary_csv": "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/stratum_summary.csv",
+  "stratum_taxonomy_csv": "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/stratum_taxonomy.csv",
+  "triggered_long_oracle_recoveries": 4,
+  "verdict": "second_backbone_fresh_oracle_completed",
+  "wall_clock_sec": 52.77163016301347
+}

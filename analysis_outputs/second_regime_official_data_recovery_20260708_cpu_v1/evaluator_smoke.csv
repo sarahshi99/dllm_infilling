@@ -1,0 +1,10 @@
+config,task_id,schema_ok,reference_middle_chars,tier1_parse_compile,tier2_smoke_exec,tier3_unit_tests,error
+HumanEval-MultiLineInfilling,MultiLineInfilling/HumanEval/0/L0_L0,True,41,True,True,True,
+HumanEval-MultiLineInfilling,MultiLineInfilling/HumanEval/0/L0_L1,True,88,True,True,True,
+HumanEval-MultiLineInfilling,MultiLineInfilling/HumanEval/0/L0_L2,True,116,True,True,True,
+HumanEval-RandomSpanInfilling,RandomSpanInfilling/HumanEval/0/1,True,77,True,True,True,
+HumanEval-RandomSpanInfilling,RandomSpanInfilling/HumanEval/0/2,True,78,True,True,True,
+HumanEval-RandomSpanInfilling,RandomSpanInfilling/HumanEval/0/3,True,35,True,True,True,
+HumanEval-RandomSpanInfillingLight,RandomSpanInfillingLight/HumanEval/0/1,True,73,True,True,True,
+HumanEval-RandomSpanInfillingLight,RandomSpanInfillingLight/HumanEval/1/1,True,178,True,True,True,
+HumanEval-RandomSpanInfillingLight,RandomSpanInfillingLight/HumanEval/2/1,True,6,True,True,True,

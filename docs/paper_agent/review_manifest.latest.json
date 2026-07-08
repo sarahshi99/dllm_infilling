@@ -219,8 +219,8 @@
     "second_regime_sufficient_canvas_recoverability": 0.0,
     "second_regime_deployable_policy_gap": 0,
     "ccfa_blocking_gaps_remaining": [
-      "official or stronger stress second-regime evidence remains missing; 18/18 synthetic minimal is not benchmark evidence",
-      "Dream-Coder second-backbone evidence is mixed and needs expanded diagnostic before stronger generalization claims",
+      "official second-regime data recovered locally, but source-labeled diagnostic manifest and GPU evidence are still missing",
+      "Dream-Coder expanded37 evidence is mixed/model-dependent and should not be written as model-agnostic confirmation",
       "deployable controller has no frozen-test improvement and Controller V4 is not a priority",
       "LR-DLLM protocol-matched baseline remains blocked"
     ],
@@ -241,9 +241,122 @@
       "EXP-001 CPU claim-boundary consolidation for diagnostic mixed paper",
       "EXP-002 Dream-Coder expanded oracle-sufficient diagnostic on bounded non-test manifest",
       "EXP-003 Second-regime stress gate before any benchmark claim"
-    ]
+    ],
+    "current_pushed_head_before_this_round": "99bfd08d67df48090824bb57ff7f7581ad7a1d2c",
+    "dreamcoder_expanded37_completed": true,
+    "dreamcoder_expanded37_dir": "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1",
+    "dreamcoder_expanded37_primary_pass": "11/37",
+    "dreamcoder_expanded37_simple_pass": "11/37",
+    "dreamcoder_expanded37_oracle_pass": "26/37",
+    "dreamcoder_expanded37_stratum_summary": [
+      {
+        "canvas_recoverable": 3,
+        "cases": 12,
+        "oracle_error_types": {
+          "None": 3,
+          "SyntaxError": 1,
+          "UnitTestFailure": 8
+        },
+        "oracle_pass": 3,
+        "oracle_regression": 0,
+        "primary_pass": 0,
+        "rescue_limited_or_noncanvas": 9,
+        "simple_pass": 0,
+        "stable_pass": 0,
+        "stratum": "missed_failed_long"
+      },
+      {
+        "canvas_recoverable": 4,
+        "cases": 4,
+        "oracle_error_types": {
+          "None": 4
+        },
+        "oracle_pass": 4,
+        "oracle_regression": 0,
+        "primary_pass": 0,
+        "rescue_limited_or_noncanvas": 0,
+        "simple_pass": 0,
+        "stable_pass": 0,
+        "stratum": "triggered_failed_long"
+      },
+      {
+        "canvas_recoverable": 5,
+        "cases": 8,
+        "oracle_error_types": {
+          "None": 6,
+          "UnitTestFailure": 2
+        },
+        "oracle_pass": 6,
+        "oracle_regression": 0,
+        "primary_pass": 1,
+        "rescue_limited_or_noncanvas": 2,
+        "simple_pass": 1,
+        "stable_pass": 1,
+        "stratum": "medium_near_long_underselection"
+      },
+      {
+        "canvas_recoverable": 1,
+        "cases": 6,
+        "oracle_error_types": {
+          "None": 6
+        },
+        "oracle_pass": 6,
+        "oracle_regression": 0,
+        "primary_pass": 5,
+        "rescue_limited_or_noncanvas": 0,
+        "simple_pass": 5,
+        "stable_pass": 5,
+        "stratum": "short_primary_pass_harmable"
+      },
+      {
+        "canvas_recoverable": 2,
+        "cases": 7,
+        "oracle_error_types": {
+          "None": 7
+        },
+        "oracle_pass": 7,
+        "oracle_regression": 0,
+        "primary_pass": 5,
+        "rescue_limited_or_noncanvas": 0,
+        "simple_pass": 5,
+        "stable_pass": 5,
+        "stratum": "positive_control_recoverable"
+      }
+    ],
+    "dreamcoder_expanded37_interpretation": "second-backbone diagnostic evidence; not model-agnostic confirmation because triggered_failed_long proxy recovers under Dream-Coder oracle canvas while LLaDA H200 triggered-long C/E/F/G did not.",
+    "official_second_regime_data_recovery_dir": "analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1",
+    "official_second_regime_data_recovery_verdict": "official_second_regime_data_recovered_cpu_only",
+    "official_second_regime_exports": [
+      {
+        "config": "HumanEval-MultiLineInfilling",
+        "row_count": 5815,
+        "export_path": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl",
+        "export_sha256": "3a1cb133597ff699fde9dba92788ef8dabf46f273f44477195b36639bd908306",
+        "status": "exported_official_jsonl"
+      },
+      {
+        "config": "HumanEval-RandomSpanInfilling",
+        "row_count": 1640,
+        "export_path": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-RandomSpanInfilling.jsonl",
+        "export_sha256": "be10c57f855885910dd8baa21389b209001f386ac478912fa6ece9f0446b32fb",
+        "status": "exported_official_jsonl"
+      },
+      {
+        "config": "HumanEval-RandomSpanInfillingLight",
+        "row_count": 164,
+        "export_path": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-RandomSpanInfillingLight.jsonl",
+        "export_sha256": "3239733a4bf3a907b9dd47a0caf1a6497354603d9595a194bca433580270c73f",
+        "status": "exported_official_jsonl"
+      }
+    ],
+    "official_second_regime_evaluator_smoke_all_passed_on_first3_each": true,
+    "official_second_regime_gpu_status": "not_run_manifest_gate_required",
+    "controller_route_closure_table_plan": "docs/paper_agent/controller_route_closure_table_plan.md"
   },
   "recommended_read_order": [
+    "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md",
+    "analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/report.md",
+    "docs/paper_agent/controller_route_closure_table_plan.md",
     "docs/paper_agent/idea_board.md",
     "docs/paper_agent/experiment_queue.md",
     "docs/paper_agent/decision_log.md",
@@ -444,6 +557,12 @@
     ],
     "frozen_test_status": "sealed",
     "test_evaluation_count": 0,
-    "user_decision_needed": "Review whether to approve the bounded Dream-Coder GPU run and whether to prioritize official second-regime data recovery versus synthetic stress construction."
+    "user_decision_needed": "Review/approve the next official second-regime manifest construction gate before any GPU diagnostic.",
+    "current_pushed_head_before_this_round": "99bfd08d67df48090824bb57ff7f7581ad7a1d2c",
+    "exp002_status": "completed",
+    "exp002_report": "analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md",
+    "exp003_cpu_recovery_status": "completed_cpu_only_official_data_recovered",
+    "exp003_report": "analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/report.md",
+    "controller_route_closure_table_plan": "docs/paper_agent/controller_route_closure_table_plan.md"
   }
 }

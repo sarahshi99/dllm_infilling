@@ -12,7 +12,8 @@ Updated: 2026-07-08 UTC
 - Official or stress second-regime evidence must be clearly labeled as official, synthetic stress, or unblock/sanity. Synthetic stress must not be presented as HumanEval MultiLine/RandomSpan official evidence.
 - LR-DLLM remains blocked by missing protocol-matched algorithmic detail. Do not claim official reproduction or invent a local Stage I/II adapter under the LR-DLLM name.
 - Dream-Coder is the selected second-backbone route for near-term diagnostics because local cache, runner compatibility, and existing full SingleLine outputs exist.
-- Dream-Coder evidence is currently mixed: oracle-sufficient canvas is strong on the 15-case subset, but the LLaDA missed-vs-triggered split is not cleanly replicated.
+- Dream-Coder evidence is currently mixed: expanded37 oracle-sufficient canvas reaches `26/37`, but the LLaDA missed-vs-triggered split is not cleanly replicated because Dream-Coder recovers triggered_failed_long proxy cases under oracle canvas.
+- Official second-regime data has been recovered locally from `loubnabnl/humaneval_infilling` at CPU/schema level; no GPU diagnostic is authorized until a source-labeled manifest passes the no-frozen-controller-test-row and evaluator-smoke gate.
 - Negative results are paper evidence if they preserve split discipline, report costs/risks, and are tied to a scientific claim boundary.
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.
 - Every new experiment must have a stop condition, success/failure rule, input manifest, and expected report path before GPU execution.

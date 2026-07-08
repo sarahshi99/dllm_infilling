@@ -1,0 +1,6 @@
+stratum,cases,primary_pass,simple_pass,oracle_pass,canvas_recoverable,rescue_limited_or_noncanvas,stable_pass,oracle_regression,oracle_error_types
+missed_failed_long,12,0,0,3,3,9,0,0,"{'None': 3, 'UnitTestFailure': 8, 'SyntaxError': 1}"
+triggered_failed_long,4,0,0,4,4,0,0,0,{'None': 4}
+medium_near_long_underselection,8,1,1,6,5,2,1,0,"{'None': 6, 'UnitTestFailure': 2}"
+short_primary_pass_harmable,6,5,5,6,1,0,5,0,{'None': 6}
+positive_control_recoverable,7,5,5,7,2,0,5,0,{'None': 7}
