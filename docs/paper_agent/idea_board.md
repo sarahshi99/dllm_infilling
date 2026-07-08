@@ -7,16 +7,16 @@ Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered b
 ## IDEA-001: Stress second-regime construction and diagnostic
 
 Source: joint
-Status: revised
+Status: running
 Scientific question: Does the canvas-limited vs rescue-limited split survive outside easy SingleLine-style construction when the infill regime stresses multiline context, random spans, longer gaps, and under-selection?
-Why it matters for CCF-A: This is the largest current blocking gap. The existing synthetic second-regime minimal run is 18/18 for all policies and only proves runner/data unblock, not a benchmark or stress claim.
-Minimum experiment: Build or obtain a clearly labeled second-regime stress manifest with nontrivial failures, preferably official `HumanEval-MultiLineInfilling` / `HumanEval-RandomSpanInfilling` JSONL; if official files remain missing, construct a stress-only synthetic manifest from train/calibration/validation-derived hard cases and report it as synthetic stress, not official benchmark.
+Why it matters for CCF-A: This is now the largest remaining claim-boundary question. The official first-pass is not easy, unlike synthetic 18/18, but it also shows substantial rescue-limited and harm-risk behavior.
+Minimum experiment: Completed a source-labeled official 120-case manifest and bounded diagnostic over `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight`; next minimum step is to review or run a smaller hard-tail manifest derived from first-pass failed/control-risk rows.
 Expected positive outcome: Control or deployable policy fails on a meaningful fraction while oracle-sufficient canvas recovers a nonzero subset, giving cross-regime evidence for diagnostic claims.
-Expected negative outcome: All policies remain near ceiling or oracle canvas does not help; the paper must present second-regime as unresolved/data-limited rather than claimed generalization.
-Cost: Medium if synthetic stress uses existing data; medium-high if official data must be recovered or generated; GPU cost bounded by a small manifest first.
-Risks: Synthetic stress can become artificial; official JSONL may remain unavailable; easy examples could inflate claims.
-Decision rule: Select only manifests with predeclared case source, no frozen test rows, at least one failure under control/deployable policy, and explicit labeling as official or synthetic. Stop after the first bounded diagnostic if it is all-pass.
-Related files: `analysis_outputs/second_regime_feasibility_20260708_phase4_v4/`, `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`, `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
+Expected negative outcome: Extreme/random-span strata remain mostly rescue-limited or oracle harms control enough that second-regime must be written as a scope boundary for current canvas-only claims.
+Cost: First-pass GPU completed in one bounded run; next hard-tail follow-up should be smaller and explicitly approved before GPU.
+Risks: Official random-span/extreme cases may stress semantics more than canvas length; oracle canvas can harm control; hard-tail reuse can overfit if described as a benchmark rather than follow-up diagnostic.
+Decision rule: Do not immediately full-run. Use the CPU hard-tail manifest only after web/user review; preserve labels for official first-pass, hard-tail follow-up, and synthetic unblock.
+Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
 
 ## IDEA-002: Dream-Coder expanded diagnostic and case-level taxonomy
 
@@ -121,14 +121,14 @@ Related files: `analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_
 Source: user
 Status: revised
 Scientific question: Can we intentionally construct tasks where length under-selection is common enough to stress policies, without turning the dataset into an artificial easy oracle-canvas demo?
-Why it matters for CCF-A: It is a path to stronger second-regime evidence if official MultiLine/RandomSpan files remain missing.
-Minimum experiment: Build a synthetic stress set from source tasks with known long oracle gaps and primary under-selection, then run control, deployable, and oracle-sufficient canvas.
-Expected positive outcome: A clearly labeled stress set exposes nontrivial canvas-limited failures and selector risk.
+Why it matters for CCF-A: Official second-regime first-pass already produced nontrivial failures, so synthetic stress is lower priority unless hard-tail official analysis fails to isolate mechanisms.
+Minimum experiment: Defer synthetic stress. Review the official hard-tail manifest first; only construct synthetic stress if official hard-tail cannot separate canvas-limited from rescue-limited mechanisms.
+Expected positive outcome: A clearly labeled stress set exposes nontrivial canvas-limited failures and selector risk not captured by official first-pass.
 Expected negative outcome: Stress set is too synthetic or too easy; use only as appendix/unblock evidence.
-Cost: Medium CPU+GPU.
-Risks: Dataset construction bias; reviewers may reject it as benchmark evidence.
-Decision rule: Merge into IDEA-001 unless it yields a principled manifest with transparent source and failure diversity.
-Related files: `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`, `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`
+Cost: Medium CPU+GPU, but currently not selected.
+Risks: Dataset construction bias; reviewers may reject it as benchmark evidence; it could distract from newly available official evidence.
+Decision rule: Keep merged under IDEA-001 and do not run synthetic stress in the current step.
+Related files: `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`
 
 ## IDEA-010: Paper table and figure evidence consolidation
 

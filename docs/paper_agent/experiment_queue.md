@@ -66,28 +66,29 @@ Result: Completed on 2026-07-08. Primary/control `11/37`, best simple `11/37`, o
 ## EXP-003: Second-regime stress gate before any benchmark claim
 
 Linked idea: IDEA-001, IDEA-009
-Status: completed_cpu_data_recovery_gate
-Hypothesis: A useful second-regime diagnostic requires a manifest with genuine control/deployable failures; the current synthetic minimal set is too easy and should not be promoted.
+Status: completed_first_pass_hard_tail_manifest_built
+Hypothesis: A useful second-regime diagnostic requires a source-labeled official manifest with genuine control/deployable failures; if oracle-sufficient canvas recovers a nonzero subset, the next step is a hard-tail manifest rather than an immediate larger GPU run.
 Inputs:
 - `analysis_outputs/second_regime_feasibility_20260708_phase4_v4/compatibility_report.md`
-- `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/second_regime_manifest.csv`
-- `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/summary.json`
-- Candidate official files, if recovered: `data/HumanEval-MultiLineInfilling.jsonl`, `data/HumanEval-RandomSpanInfilling.jsonl`, `data/HumanEval-RandomSpanInfillingLight.jsonl`
+- `data/HumanEval-MultiLineInfilling.jsonl`
+- `data/HumanEval-RandomSpanInfilling.jsonl`
+- `data/HumanEval-RandomSpanInfillingLight.jsonl`
+- `analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
+- `analysis_outputs/grouped_split_20260702_accel2/test_tasks.json`
 Commands:
 ```bash
-# Gate A: verify whether official second-regime JSONL files now exist.
-ls data/HumanEval-MultiLineInfilling.jsonl data/HumanEval-RandomSpanInfilling.jsonl data/HumanEval-RandomSpanInfillingLight.jsonl
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/official_second_regime_diagnostic.py --mode manifest
 
-# Gate B: if official files remain missing, do not claim benchmark status.
-# Build only a clearly labeled stress manifest from non-test existing evidence, then run a bounded diagnostic.
-# A dedicated stress manifest script/report should be added before GPU execution if web/user approve this route.
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+/home/shx/miniconda3/envs/dllm_env/bin/python experiments/official_second_regime_diagnostic.py --mode diagnostic
 ```
 Outputs:
-- Official route: a compact official second-regime diagnostic report under `analysis_outputs/second_regime_diagnostic_*`
-- Synthetic stress route: a clearly labeled stress manifest and report under `analysis_outputs/second_regime_stress_*`
-- CPU data recovery gate: `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/report.md`
+- CPU manifest gate: `analysis_outputs/second_regime_official_manifest_20260708_v1/report.md`
+- Official bounded GPU diagnostic: `analysis_outputs/second_regime_official_diagnostic_20260708_v1/report.md`
+- CPU hard-tail manifest: `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md`
 Success criterion: The selected manifest has nontrivial failures under control/deployable policy and a measurable oracle-canvas recoverability or rescue-limited fraction.
 Failure criterion: Official files remain missing and synthetic stress is all-pass, too small, or too artificial; the paper must keep second-regime as unresolved.
-Stop condition: Do not run a GPU diagnostic until the manifest has source labels, no frozen-test rows, and expected nontrivial failure diversity. Stop immediately if the only available manifest is the 18/18 easy synthetic set.
-Expected report path: `analysis_outputs/second_regime_stress_<timestamp>/report.md` or `analysis_outputs/second_regime_diagnostic_<timestamp>/report.md`
-Result: CPU-only official data recovery succeeded on 2026-07-08. `HumanEval-MultiLineInfilling` (`5815` rows), `HumanEval-RandomSpanInfilling` (`1640` rows), and `HumanEval-RandomSpanInfillingLight` (`164` rows) were exported locally from `loubnabnl/humaneval_infilling`; first 3 tasks per config passed schema/evaluator smoke. GPU remains `not_run`; next gate is a labeled official second-regime manifest before execution.
+Stop condition: Stop after the one bounded 120-case official diagnostic. If control/deployable failures are nontrivial and oracle recovers a subset, build a hard-tail manifest but do not immediately full-run. Do not run synthetic stress in this step.
+Expected report path: `analysis_outputs/second_regime_official_diagnostic_20260708_v1/report.md`
+Result: Completed on 2026-07-08. Manifest gate produced `120` official cases, `40` per config and `10` per bucket, with frozen-controller-test rows `0` and evaluator smoke `12/12`. Bounded GPU diagnostic results: control fixed64 `34/120`, best deployable cal-lite `36/120`, oracle-sufficient canvas `49/120`, oracle gain vs control `26`, deployable harm vs control `15`, oracle harm vs control `11`. Stop rule selected hard-tail follow-up, not immediate full-run. CPU hard-tail manifest has `104` cases, frozen rows `0`, and GPU status `not_run_stop_rule_observed`.

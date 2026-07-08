@@ -13,7 +13,9 @@ Updated: 2026-07-08 UTC
 - LR-DLLM remains blocked by missing protocol-matched algorithmic detail. Do not claim official reproduction or invent a local Stage I/II adapter under the LR-DLLM name.
 - Dream-Coder is the selected second-backbone route for near-term diagnostics because local cache, runner compatibility, and existing full SingleLine outputs exist.
 - Dream-Coder evidence is currently mixed: expanded37 oracle-sufficient canvas reaches `26/37`, but the LLaDA missed-vs-triggered split is not cleanly replicated because Dream-Coder recovers triggered_failed_long proxy cases under oracle canvas.
-- Official second-regime data has been recovered locally from `loubnabnl/humaneval_infilling` at CPU/schema level; no GPU diagnostic is authorized until a source-labeled manifest passes the no-frozen-controller-test-row and evaluator-smoke gate.
+- Official second-regime data has been recovered locally from `loubnabnl/humaneval_infilling`; the 120-case source-labeled manifest gate passed with frozen-controller-test rows `0` and evaluator smoke `12/12`.
+- Official second-regime first-pass GPU diagnostic is completed and is not near ceiling: control fixed64 `34/120`, deployable cal-lite `36/120`, oracle-sufficient canvas `49/120`, oracle gain vs control `26`, deployable harm vs control `15`, oracle harm vs control `11`.
+- Because official second-regime has meaningful failures and oracle recovers a nonzero subset, the stop rule is hard-tail follow-up, not immediate full-run. CPU hard-tail manifest `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/` has `104` rows, frozen rows `0`, and no GPU run yet.
 - Negative results are paper evidence if they preserve split discipline, report costs/risks, and are tied to a scientific claim boundary.
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.
 - Every new experiment must have a stop condition, success/failure rule, input manifest, and expected report path before GPU execution.

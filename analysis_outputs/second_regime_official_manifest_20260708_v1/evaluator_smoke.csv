@@ -1,0 +1,13 @@
+source_config,length_bucket,row_id,task_id,task_group,middle_len_tokens,tier1_parse_compile,tier2_smoke_exec,tier3_unit_tests,passed,error
+HumanEval-MultiLineInfilling,short,514,MultiLineInfilling/HumanEval/19/L11_L11,HumanEval/19,3,True,True,True,True,
+HumanEval-MultiLineInfilling,medium,133,MultiLineInfilling/HumanEval/2/L0_L0,HumanEval/2,9,True,True,True,True,
+HumanEval-MultiLineInfilling,long,342,MultiLineInfilling/HumanEval/10/L5_L5,HumanEval/10,17,True,True,True,True,
+HumanEval-MultiLineInfilling,extreme,4239,MultiLineInfilling/HumanEval/129/L0_L26,HumanEval/129,191,True,True,True,True,
+HumanEval-RandomSpanInfilling,short,5,RandomSpanInfilling/HumanEval/0/6,HumanEval/0,1,True,True,True,True,
+HumanEval-RandomSpanInfilling,medium,32,RandomSpanInfilling/HumanEval/3/3,HumanEval/3,9,True,True,True,True,
+HumanEval-RandomSpanInfilling,long,123,RandomSpanInfilling/HumanEval/12/4,HumanEval/12,17,True,True,True,True,
+HumanEval-RandomSpanInfilling,extreme,955,RandomSpanInfilling/HumanEval/95/6,HumanEval/95,141,True,True,True,True,
+HumanEval-RandomSpanInfillingLight,short,23,RandomSpanInfillingLight/HumanEval/23/1,HumanEval/23,2,True,True,True,True,
+HumanEval-RandomSpanInfillingLight,medium,19,RandomSpanInfillingLight/HumanEval/19/1,HumanEval/19,9,True,True,True,True,
+HumanEval-RandomSpanInfillingLight,long,5,RandomSpanInfillingLight/HumanEval/5/1,HumanEval/5,17,True,True,True,True,
+HumanEval-RandomSpanInfillingLight,extreme,129,RandomSpanInfillingLight/HumanEval/129/1,HumanEval/129,111,True,True,True,True,

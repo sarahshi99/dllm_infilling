@@ -1,0 +1,29 @@
+{
+  "bucket_counts": {
+    "extreme": 30,
+    "long": 28,
+    "medium": 27,
+    "short": 19
+  },
+  "case_count": 104,
+  "frozen_controller_test_rows": 0,
+  "gpu_status": "not_run_stop_rule_observed",
+  "next_step": "Web/user review should decide whether to run a smaller bounded hard-tail diagnostic; no GPU was run for this manifest.",
+  "oracle_harm_risk_extra_count": 3,
+  "primary_hard_tail_candidate_count": 101,
+  "selection_rule": "all first-pass official rows whose taxonomy is not stable_all_pass; includes oracle_canvas_harm_vs_control rows as harm-risk extras",
+  "source_config_counts": {
+    "HumanEval-MultiLineInfilling": 30,
+    "HumanEval-RandomSpanInfilling": 39,
+    "HumanEval-RandomSpanInfillingLight": 35
+  },
+  "source_diagnostic_dir": "analysis_outputs/second_regime_official_diagnostic_20260708_v1",
+  "taxonomy_counts": {
+    "deployable_and_oracle_recover_control_failure": 13,
+    "deployable_harm_vs_control": 15,
+    "oracle_canvas_harm_vs_control": 3,
+    "oracle_only_canvas_recoverable": 13,
+    "rescue_limited_or_noncanvas_failure": 60
+  },
+  "verdict": "official_second_regime_hard_tail_manifest_built_cpu_only"
+}

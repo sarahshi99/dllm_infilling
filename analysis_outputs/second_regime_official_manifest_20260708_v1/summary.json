@@ -1,0 +1,61 @@
+{
+  "bucket_counts": {
+    "HumanEval-MultiLineInfilling:extreme": 10,
+    "HumanEval-MultiLineInfilling:long": 10,
+    "HumanEval-MultiLineInfilling:medium": 10,
+    "HumanEval-MultiLineInfilling:short": 10,
+    "HumanEval-RandomSpanInfilling:extreme": 10,
+    "HumanEval-RandomSpanInfilling:long": 10,
+    "HumanEval-RandomSpanInfilling:medium": 10,
+    "HumanEval-RandomSpanInfilling:short": 10,
+    "HumanEval-RandomSpanInfillingLight:extreme": 10,
+    "HumanEval-RandomSpanInfillingLight:long": 10,
+    "HumanEval-RandomSpanInfillingLight:medium": 10,
+    "HumanEval-RandomSpanInfillingLight:short": 10
+  },
+  "bucket_definition": {
+    "extreme": "25+ reference/middle tokens; selected from longest available rows with task-group diversity",
+    "long": "17-24 reference/middle tokens",
+    "medium": "9-16 reference/middle tokens",
+    "short": "1-8 reference/middle tokens"
+  },
+  "case_count": 120,
+  "created_at_utc": "2026-07-08T12:58:37Z",
+  "evaluator_smoke_all_passed": true,
+  "evaluator_smoke_rows": 12,
+  "excluded_frozen_controller_test_rows": {
+    "HumanEval-MultiLineInfilling": 736,
+    "HumanEval-RandomSpanInfilling": 160,
+    "HumanEval-RandomSpanInfillingLight": 16
+  },
+  "frozen_controller_test_groups": [
+    "HumanEval/135",
+    "HumanEval/143",
+    "HumanEval/149",
+    "HumanEval/153",
+    "HumanEval/27",
+    "HumanEval/31",
+    "HumanEval/35",
+    "HumanEval/50",
+    "HumanEval/66",
+    "HumanEval/69",
+    "HumanEval/76",
+    "HumanEval/78",
+    "HumanEval/81",
+    "HumanEval/84",
+    "HumanEval/91",
+    "HumanEval/98"
+  ],
+  "frozen_controller_test_row_count_in_manifest": 0,
+  "manifest_selection_rule": "exclude frozen controller test task groups, then select 10 rows per source_config and bucket with task-group diversity where possible",
+  "no_frozen_controller_test_rows_included": true,
+  "per_config_bucket_target": 10,
+  "requested_case_count": 120,
+  "source_dataset": "loubnabnl/humaneval_infilling",
+  "source_row_counts_after_filter": {
+    "HumanEval-MultiLineInfilling": 5079,
+    "HumanEval-RandomSpanInfilling": 1469,
+    "HumanEval-RandomSpanInfillingLight": 148
+  },
+  "verdict": "official_second_regime_manifest_gate_passed"
+}
