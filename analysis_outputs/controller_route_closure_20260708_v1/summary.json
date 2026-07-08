@@ -1,0 +1,9 @@
+{
+  "csv": "analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.csv",
+  "frozen_test_status": "sealed",
+  "markdown": "analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md",
+  "paper_use": "negative/diagnostic controller evidence; no positive deployable controller claim",
+  "rows": 3,
+  "test_evaluation_count": 0,
+  "verdict": "controller_route_closed_for_current_paper_no_v4"
+}

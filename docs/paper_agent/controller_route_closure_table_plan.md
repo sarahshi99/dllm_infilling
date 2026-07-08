@@ -4,6 +4,8 @@ Updated: 2026-07-08 UTC
 
 Purpose: one paper table that closes the current controller route without opening frozen test or continuing Controller V4.
 
+Status: superseded by real artifacts in `analysis_outputs/controller_route_closure_20260708_v1/` (`route_closure_table.md`, `route_closure_table.csv`, `summary.json`).
+
 ## Planned Table
 
 | Controller | Oracle upper bound | Selected policy | Interventions | Validation wins/losses | Validation pass | Harm upper95 | Frozen-test decision | Evidence path |

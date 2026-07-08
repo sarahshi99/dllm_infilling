@@ -16,7 +16,10 @@ Updated: 2026-07-08 UTC
 - Official second-regime data has been recovered locally from `loubnabnl/humaneval_infilling`; the 120-case source-labeled manifest gate passed with frozen-controller-test rows `0` and evaluator smoke `12/12`.
 - Official second-regime first-pass GPU diagnostic is completed and is not near ceiling: control fixed64 `34/120`, deployable cal-lite `36/120`, oracle-sufficient canvas `49/120`, oracle gain vs control `26`, deployable harm vs control `15`, oracle harm vs control `11`.
 - Because official second-regime has meaningful failures and oracle recovers a nonzero subset, the stop rule is hard-tail follow-up, not immediate full-run. CPU hard-tail manifest `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/` has `104` rows, frozen rows `0`, and no GPU run yet.
+- Approved 48-case official second-regime hard-tail diagnostic is completed and first-pass labels remained stable (`0` label changes): control `12/48`, deployable `16/48`, oracle `28/48`, genuine canvas-recoverable `24`, rescue/non-canvas `12`, deployable harm `9`, oracle harm vs control `8`.
+- Official second-regime should be written as `mixed stress evidence`: it supports the canvas-sufficiency diagnostic on official data, but it is also a scope boundary for deployable cal-lite and rescue/non-canvas-limited random-span/extreme failures. Stop second-regime GPU work unless a concrete bug or preregistered follow-up appears.
+- Controller V1/V2/V3 route closure is now a real artifact at `analysis_outputs/controller_route_closure_20260708_v1/`; no Controller V4 is authorized.
 - Negative results are paper evidence if they preserve split discipline, report costs/risks, and are tied to a scientific claim boundary.
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.
 - Every new experiment must have a stop condition, success/failure rule, input manifest, and expected report path before GPU execution.
-- Current top immediate experiments are: second-regime stress gate, Dream-Coder expanded diagnostic, and controller/evidence consolidation.
+- Current top immediate work is paper claim/table consolidation: official second-regime mixed stress write-up, Dream-Coder model-dependent write-up, and controller route-closure integration.

@@ -7,16 +7,16 @@ Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered b
 ## IDEA-001: Stress second-regime construction and diagnostic
 
 Source: joint
-Status: running
+Status: done
 Scientific question: Does the canvas-limited vs rescue-limited split survive outside easy SingleLine-style construction when the infill regime stresses multiline context, random spans, longer gaps, and under-selection?
 Why it matters for CCF-A: This is now the largest remaining claim-boundary question. The official first-pass is not easy, unlike synthetic 18/18, but it also shows substantial rescue-limited and harm-risk behavior.
-Minimum experiment: Completed a source-labeled official 120-case manifest and bounded diagnostic over `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight`; next minimum step is to review or run a smaller hard-tail manifest derived from first-pass failed/control-risk rows.
+Minimum experiment: Completed a source-labeled official 120-case manifest and bounded diagnostic over `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight`; completed the approved smaller 48-case hard-tail diagnostic derived from fixed first-pass labels.
 Expected positive outcome: Control or deployable policy fails on a meaningful fraction while oracle-sufficient canvas recovers a nonzero subset, giving cross-regime evidence for diagnostic claims.
 Expected negative outcome: Extreme/random-span strata remain mostly rescue-limited or oracle harms control enough that second-regime must be written as a scope boundary for current canvas-only claims.
-Cost: First-pass GPU completed in one bounded run; next hard-tail follow-up should be smaller and explicitly approved before GPU.
+Cost: First-pass GPU completed in one bounded run; approved hard-tail GPU completed in one 48-case bounded run.
 Risks: Official random-span/extreme cases may stress semantics more than canvas length; oracle canvas can harm control; hard-tail reuse can overfit if described as a benchmark rather than follow-up diagnostic.
-Decision rule: Do not immediately full-run. Use the CPU hard-tail manifest only after web/user review; preserve labels for official first-pass, hard-tail follow-up, and synthetic unblock.
-Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
+Decision rule: Write official second-regime as mixed stress evidence. Do not run the full 104-case hard-tail manifest or additional second-regime GPU work unless a concrete bug or preregistered follow-up appears.
+Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
 
 ## IDEA-002: Dream-Coder expanded diagnostic and case-level taxonomy
 
@@ -49,16 +49,16 @@ Related files: `analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/`, `doc
 ## IDEA-004: Controller route closure analysis
 
 Source: joint
-Status: selected
+Status: done
 Scientific question: Can the paper close the controller route scientifically, showing why oracle action-bank headroom fails to become a safe deployable policy?
 Why it matters for CCF-A: A rigorous negative result can become a contribution if it explains the gap between upper bound, harm risk, calibration size, and inference-visible features.
-Minimum experiment: Consolidate V1/V2/V3 validation curves, oracle upper bound, selected top-k policies, harm confidence bounds, and short-bucket regressions into one route-closure table and narrative.
+Minimum experiment: Consolidated V1/V2/V3 validation curves, oracle upper bound, selected top-k policies, harm confidence bounds, and frozen-test decisions into one route-closure table and narrative.
 Expected positive outcome: The paper can claim a diagnostic gap: recovery space exists, but risk-controlled inference-time selection remains unsolved under sealed-test discipline.
 Expected negative outcome: The closure is too thin; more controller tuning would still not be justified without a new evidence source.
 Cost: Low CPU consolidation; no GPU.
 Risks: Overstating closure could look like giving up; underexplaining negative results weakens contribution.
 Decision rule: Close Controller V4 unless a new non-validation evidence source appears. Do not open frozen test on V3.
-Related files: `analysis_outputs/controller_validation_h200_20260707_v1_replay/`, `analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/`, `analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `docs/paper_agent/controller_route_closure_table_plan.md`
+Related files: `analysis_outputs/controller_validation_h200_20260707_v1_replay/`, `analysis_outputs/controller_v2_h200_20260707_phase3_v2_validation/`, `analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3/`, `analysis_outputs/controller_route_closure_20260708_v1/`, `docs/paper_agent/controller_route_closure_table_plan.md`
 
 ## IDEA-005: Model-dependent canvas/rescue boundary analysis
 
@@ -119,16 +119,16 @@ Related files: `analysis_outputs/controller_feasibility_h200_20260707_phase3_v2_
 ## IDEA-009: Under-selection stress dataset construction
 
 Source: user
-Status: revised
+Status: rejected
 Scientific question: Can we intentionally construct tasks where length under-selection is common enough to stress policies, without turning the dataset into an artificial easy oracle-canvas demo?
 Why it matters for CCF-A: Official second-regime first-pass already produced nontrivial failures, so synthetic stress is lower priority unless hard-tail official analysis fails to isolate mechanisms.
-Minimum experiment: Defer synthetic stress. Review the official hard-tail manifest first; only construct synthetic stress if official hard-tail cannot separate canvas-limited from rescue-limited mechanisms.
+Minimum experiment: Defer synthetic stress. Official first-pass plus 48-case hard-tail already separate canvas-recoverable, rescue-limited, deployable-harm, and oracle-harm cases well enough for current paper framing.
 Expected positive outcome: A clearly labeled stress set exposes nontrivial canvas-limited failures and selector risk not captured by official first-pass.
 Expected negative outcome: Stress set is too synthetic or too easy; use only as appendix/unblock evidence.
 Cost: Medium CPU+GPU, but currently not selected.
 Risks: Dataset construction bias; reviewers may reject it as benchmark evidence; it could distract from newly available official evidence.
-Decision rule: Keep merged under IDEA-001 and do not run synthetic stress in the current step.
-Related files: `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`
+Decision rule: Do not run synthetic stress in the current step; revive only if official hard-tail evidence is found buggy or insufficient by web review.
+Related files: `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3/`
 
 ## IDEA-010: Paper table and figure evidence consolidation
 

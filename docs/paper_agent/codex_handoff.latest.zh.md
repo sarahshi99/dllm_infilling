@@ -61,10 +61,11 @@ Phase 4 continuation（2026-07-08）：
 - Official second-regime data recovery：已完成 CPU-only recovery/schema/evaluator gate，输出 `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`。从公开 `loubnabnl/humaneval_infilling` 导出本地 `data/HumanEval-MultiLineInfilling.jsonl` (`5815` rows)、`data/HumanEval-RandomSpanInfilling.jsonl` (`1640` rows)、`data/HumanEval-RandomSpanInfillingLight.jsonl` (`164` rows)；first 3 tasks per config schema/evaluator smoke 全通过。
 - Official second-regime 120-case manifest gate：已完成，输出 `analysis_outputs/second_regime_official_manifest_20260708_v1/`。Manifest 为 `120` cases，三 config 各 `40`，每 config 的 short/medium/long/extreme 各 `10`；bucket 由 LLaDA tokenizer reference/middle token length 定义。Frozen-controller-test rows `0`，evaluator smoke `12/12`。
 - Official second-regime bounded GPU diagnostic：已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`。Control fixed64 `34/120`，best deployable cal-lite `36/120`，oracle-sufficient canvas `49/120`；oracle gain vs control `26`，deployable harm vs control `15`，oracle harm vs control `11`。Verdict：`official_second_regime_nontrivial_failures_oracle_recovers_subset_hard_tail_needed`。这不是 easy/near-ceiling，但也不是 clean positive controller evidence；它支持 official second-regime 作为 main diagnostic claim 的压力测试，同时要求 hard-tail 分析。
-- Official second-regime hard-tail manifest：按 stop rule CPU-only 构造，输出 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`，`104` cases，frozen rows `0`，GPU status `not_run_stop_rule_observed`。不要立即 full-run；需网页/user 先审查是否跑更小的 hard-tail bounded diagnostic。
-- Controller route-closure table plan：新增 `docs/paper_agent/controller_route_closure_table_plan.md`，计划表列为 oracle upper bound、selected policy、interventions、validation wins/losses、validation pass、harm upper95、frozen-test decision、evidence path。
+- Official second-regime hard-tail manifest：按 stop rule CPU-only 构造，输出 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`，`104` cases，frozen rows `0`，full 104 GPU run 未运行。
+- Official second-regime 48-case hard-tail diagnostic：网页/user 已批准 smaller bounded hard-tail GPU diagnostic；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`。采样组 `12/12/12/12`，source configs `16/16/16`，length buckets `12/12/12/12`，frozen rows `0`，未运行 full 104 hard-tail。结果：control fixed64 `12/48`，best deployable cal-lite `16/48`，oracle-sufficient canvas `28/48`；genuine canvas-recoverable `24`，rescue/non-canvas `12`，deployable help `13`，deployable harm `9`，oracle harm vs control `8`，first-pass label changes `0`。Verdict：`official_second_regime_mixed_stress_evidence`。二阶段官方数据支持 canvas-sufficiency diagnostic，但同时是 deployable cal-lite 和 rescue/non-canvas limitation 的 scope boundary；除非发现具体 bug 或新的 preregistered follow-up，停止 second-regime GPU work。
+- Controller route-closure table：真实 artifact 已生成于 `analysis_outputs/controller_route_closure_20260708_v1/`，含 `route_closure_table.md`、`route_closure_table.csv`、`summary.json`。V1/V2/V3 均作为 validation-only weak/negative evidence；frozen test remains sealed，`test_evaluation_count=0`，不授权 Controller V4。
 
-CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“official second-regime manifest/GPU evidence 缺失”转为：official second-regime first-pass 很难且需要 hard-tail 解释、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
+CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“official second-regime manifest/GPU evidence 缺失”转为：official second-regime 是 mixed stress evidence 而非 clean deployable-controller claim、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
 
 ## 1. 当前状态
 
@@ -72,6 +73,7 @@ CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但
 - 分支：`codex/risk-controlled-dynamic-rescue`
 - 上一轮已 push HEAD：`99bfd08d67df48090824bb57ff7f7581ad7a1d2c`
 - 本轮用户接受的起点 HEAD：`aeea238f5c9752d4e1df60ca29a101eb52f4c211`
+- 本轮 hard-tail 任务接受的起点 HEAD：`d9d741f0061b456ffdc43e5fd5f7233fb478a25a`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
 - 当前阶段：Phase 4 generalization audit and diagnostic mixed paper skeleton；Controller V3 已完成且不继续 V4；H200 drift accepted as evidence-base decision。
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
@@ -274,17 +276,17 @@ Important ablation signals:
 
 ## 7. 下一步建议
 
-1. 审查 official second-regime first-pass 与 hard-tail manifest（最高优先级）。
-   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 `34/120 -> 49/120` oracle-canvas improvement 是否足以支持 main diagnostic claim，还是应写成 second-regime scope boundary？
-   - 输出：基于 `analysis_outputs/second_regime_official_diagnostic_20260708_v1/report.md` 和 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md` 的 claim rewrite；如需 GPU，只能批准一个更小的 hard-tail bounded diagnostic。
+1. 审查 official second-regime first-pass 与 48-case hard-tail 结论（最高优先级）。
+   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 first-pass `34/120 -> 49/120` 与 hard-tail `12/48 -> 28/48` 是否应写成 supporting evidence、scope boundary，还是 mixed stress evidence？
+   - 当前建议：写成 `mixed stress evidence`。它支持 official regime 上的 canvas-sufficiency diagnostic，但不支持 positive deployable controller claim；停止 second-regime GPU work，除非发现具体 bug 或新的 preregistered follow-up。
 
 2. 审查 Dream-Coder expanded37 结果。
    - 科学问题：Dream-Coder 的 mixed evidence 是否足以支撑 model-dependent canvas/rescue boundary，而不是 model-agnostic confirmation？
    - 输出：基于 `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/report.md` 的论文 claim rewrite。
 
-3. 做 baseline pack 和 controller route closure。
-   - 科学问题：LR-DLLM blocked 后，哪些 protocol-matched / audited baselines 可以公平支撑论文？V1/V2/V3 是否已足够关闭 controller route？
-   - 输出：paper table/figure evidence consolidation；不继续 Controller V4，不打开 frozen test。
+3. 做 baseline pack 和 paper table/figure consolidation。
+   - 科学问题：LR-DLLM blocked 后，哪些 protocol-matched / audited baselines 可以公平支撑论文？V1/V2/V3 route closure 如何作为 negative/diagnostic evidence 写入主文？
+   - 输出：paper table/figure evidence consolidation；使用 `analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md`，不继续 Controller V4，不打开 frozen test。
 
 ## 8. 文件索引
 
@@ -299,7 +301,11 @@ Important ablation signals:
 - `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/report.md`
 - `analysis_outputs/second_regime_official_manifest_20260708_v1/report.md`
 - `analysis_outputs/second_regime_official_diagnostic_20260708_v1/report.md`
+- `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/report.md`
+- `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/taxonomy_summary.csv`
+- `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/case_failure_notes.csv`
 - `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md`
+- `analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md`
 - `docs/paper_agent/controller_route_closure_table_plan.md`
 - `analysis_outputs/second_regime_diagnostic_20260708_phase4_fullaccess_v1/report.md`
 - `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/report.md`
