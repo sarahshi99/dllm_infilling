@@ -1,0 +1,54 @@
+{
+  "best_deployable_cal_lite_pass": 20,
+  "case_count": 104,
+  "control_fixed64_pass": 18,
+  "created_at_utc": "2026-07-09T03:25:02Z",
+  "current_taxonomy_counts": {
+    "deployable_and_oracle_recover_control_failure": 13,
+    "deployable_harm_vs_control": 15,
+    "oracle_canvas_harm_vs_control": 3,
+    "oracle_only_canvas_recoverable": 13,
+    "rescue_limited_or_noncanvas_failure": 60
+  },
+  "deployable_cal_lite_harm_now": 15,
+  "deployable_cal_lite_help_now": 17,
+  "diagnostic_dir": "analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "first_pass_taxonomy_counts": {
+    "deployable_and_oracle_recover_control_failure": 13,
+    "deployable_harm_vs_control": 15,
+    "oracle_canvas_harm_vs_control": 3,
+    "oracle_only_canvas_recoverable": 13,
+    "rescue_limited_or_noncanvas_failure": 60
+  },
+  "frozen_controller_test_rows": 0,
+  "frozen_controller_test_status": "sealed_not_touched",
+  "full104_interpretation": "post_first_pass_fixed_hard_tail_stress_taxonomy_not_unbiased_benchmark_not_deployable_controller_claim",
+  "genuinely_canvas_recoverable_now": 26,
+  "label_changed_from_first_pass": 0,
+  "official_first_pass_120_unbiased_estimate": {
+    "best_deployable_cal_lite_pass": "36/120",
+    "control_fixed64_pass": "34/120",
+    "diagnostic_dir": "analysis_outputs/second_regime_official_diagnostic_20260708_v1",
+    "oracle_sufficient_canvas_pass": "49/120"
+  },
+  "oracle_canvas_harm_vs_control_now": 11,
+  "oracle_sufficient_canvas_pass": 33,
+  "prior_48_diagnostic": "analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1",
+  "rescue_limited_or_noncanvas_now": 60,
+  "sample_group_counts": {
+    "deployable_and_oracle_recover_control_failure": 13,
+    "harm_risk": 18,
+    "oracle_only_canvas_recoverable": 13,
+    "rescue_limited_or_noncanvas_failure": 60
+  },
+  "source_manifest": "analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/manifest.csv",
+  "stop_rule": "stop_second_regime_gpu_work_unless_bug_or_preregistered_followup",
+  "verdict": "official_second_regime_mixed_stress_evidence",
+  "wall_clock_sec": 600.4110670170048
+}

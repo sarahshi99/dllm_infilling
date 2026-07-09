@@ -44,7 +44,7 @@ Phase 4 findings：
 
 - Second-backbone feasibility verdict：`recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 Hugging Face cache、official-canvas runner、evaluator compatibility 和历史 full SingleLine evidence 均存在。
 - Second-backbone diagnostic status：initial extraction `analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/` 已被 Full Access fresh oracle run `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/` 补齐；结果为 mixed second-backbone evidence，而不是 clean cross-backbone confirmation。
-- Second-regime feasibility verdict：先前缺少 local official MultiLine/RandomSpan JSONL；已从公开 `loubnabnl/humaneval_infilling` 恢复/export 三个 official second-regime configs 到本地 `data/`，并完成 source-labeled official 120-case manifest、CPU smoke gate、bounded GPU diagnostic 和 CPU hard-tail manifest。
+- Second-regime feasibility verdict：先前缺少 local official MultiLine/RandomSpan JSONL；已从公开 `loubnabnl/humaneval_infilling` 恢复/export 三个 official second-regime configs 到本地 `data/`，并完成 source-labeled official 120-case manifest、CPU smoke gate、bounded GPU diagnostic、CPU hard-tail manifest、48-case hard-tail diagnostic 和 reviewer-requested full104 fixed hard-tail stress diagnostic。
 - LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前仍无 protocol-matched official/local Stage I/II adapter；不要称为 official reproduction。
 - Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
 
@@ -61,8 +61,9 @@ Phase 4 continuation（2026-07-08）：
 - Official second-regime data recovery：已完成 CPU-only recovery/schema/evaluator gate，输出 `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`。从公开 `loubnabnl/humaneval_infilling` 导出本地 `data/HumanEval-MultiLineInfilling.jsonl` (`5815` rows)、`data/HumanEval-RandomSpanInfilling.jsonl` (`1640` rows)、`data/HumanEval-RandomSpanInfillingLight.jsonl` (`164` rows)；first 3 tasks per config schema/evaluator smoke 全通过。
 - Official second-regime 120-case manifest gate：已完成，输出 `analysis_outputs/second_regime_official_manifest_20260708_v1/`。Manifest 为 `120` cases，三 config 各 `40`，每 config 的 short/medium/long/extreme 各 `10`；bucket 由 LLaDA tokenizer reference/middle token length 定义。Frozen-controller-test rows `0`，evaluator smoke `12/12`。
 - Official second-regime bounded GPU diagnostic：已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`。Control fixed64 `34/120`，best deployable cal-lite `36/120`，oracle-sufficient canvas `49/120`；oracle gain vs control `26`，deployable harm vs control `15`，oracle harm vs control `11`。Verdict：`official_second_regime_nontrivial_failures_oracle_recovers_subset_hard_tail_needed`。这不是 easy/near-ceiling，但也不是 clean positive controller evidence；它支持 official second-regime 作为 main diagnostic claim 的压力测试，同时要求 hard-tail 分析。
-- Official second-regime hard-tail manifest：按 stop rule CPU-only 构造，输出 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`，`104` cases，frozen rows `0`，full 104 GPU run 未运行。
-- Official second-regime 48-case hard-tail diagnostic：网页/user 已批准 smaller bounded hard-tail GPU diagnostic；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`。采样组 `12/12/12/12`，source configs `16/16/16`，length buckets `12/12/12/12`，frozen rows `0`，未运行 full 104 hard-tail。结果：control fixed64 `12/48`，best deployable cal-lite `16/48`，oracle-sufficient canvas `28/48`；genuine canvas-recoverable `24`，rescue/non-canvas `12`，deployable help `13`，deployable harm `9`，oracle harm vs control `8`，first-pass label changes `0`。Verdict：`official_second_regime_mixed_stress_evidence`。二阶段官方数据支持 canvas-sufficiency diagnostic，但同时是 deployable cal-lite 和 rescue/non-canvas limitation 的 scope boundary；除非发现具体 bug 或新的 preregistered follow-up，停止 second-regime GPU work。
+- Official second-regime hard-tail manifest：按 stop rule CPU-only 构造，输出 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`，`104` cases，frozen rows `0`。
+- Official second-regime 48-case hard-tail diagnostic：网页/user 已批准 smaller bounded hard-tail GPU diagnostic；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`。采样组 `12/12/12/12`，source configs `16/16/16`，length buckets `12/12/12/12`，frozen rows `0`。结果：control fixed64 `12/48`，best deployable cal-lite `16/48`，oracle-sufficient canvas `28/48`；genuine canvas-recoverable `24`，rescue/non-canvas `12`，deployable help `13`，deployable harm `9`，oracle harm vs control `8`，first-pass label changes `0`。Verdict：`official_second_regime_mixed_stress_evidence`。二阶段官方数据支持 canvas-sufficiency diagnostic，但同时是 deployable cal-lite 和 rescue/non-canvas limitation 的 scope boundary；full104 reviewer supplemental run 见下一条。
+- Official second-regime full104 hard-tail stress diagnostic：reviewer 要求在 GPU budget 不受限时完成固定 104-case hard-tail taxonomy/stress run；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/`。它是 post-first-pass fixed hard-tail stress set，不是 unbiased benchmark aggregate；official first-pass 120-case 仍是 official diagnostic estimate。结果：control fixed64 `18/104`，best deployable cal-lite `20/104`，oracle-sufficient canvas `33/104`；genuine canvas-recoverable `26`，rescue/non-canvas `60`，deployable help `17`，deployable harm `15`，oracle harm vs control `11`，first-pass label changes `0`。Verdict 仍为 `official_second_regime_mixed_stress_evidence`，不授权 deployable controller claims；除非具体 bug 或 preregistered follow-up，停止 second-regime GPU work。
 - Controller route-closure table：真实 artifact 已生成于 `analysis_outputs/controller_route_closure_20260708_v1/`，含 `route_closure_table.md`、`route_closure_table.csv`、`summary.json`。V1/V2/V3 均作为 validation-only weak/negative evidence；frozen test remains sealed，`test_evaluation_count=0`，不授权 Controller V4。
 
 CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“official second-regime manifest/GPU evidence 缺失”转为：official second-regime 是 mixed stress evidence 而非 clean deployable-controller claim、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
@@ -276,9 +277,9 @@ Important ablation signals:
 
 ## 7. 下一步建议
 
-1. 审查 official second-regime first-pass 与 48-case hard-tail 结论（最高优先级）。
-   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 first-pass `34/120 -> 49/120` 与 hard-tail `12/48 -> 28/48` 是否应写成 supporting evidence、scope boundary，还是 mixed stress evidence？
-   - 当前建议：写成 `mixed stress evidence`。它支持 official regime 上的 canvas-sufficiency diagnostic，但不支持 positive deployable controller claim；停止 second-regime GPU work，除非发现具体 bug 或新的 preregistered follow-up。
+1. 审查 official second-regime first-pass、48-case hard-tail 与 full104 hard-tail 结论（最高优先级）。
+   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 first-pass `34/120 -> 49/120`、48-case hard-tail `12/48 -> 28/48` 与 full104 hard-tail `18/104 -> 33/104` 是否应写成 supporting evidence、scope boundary，还是 mixed stress evidence？
+   - 当前建议：写成 `mixed stress evidence`。它支持 official regime 上的 canvas-sufficiency diagnostic，但不支持 positive deployable controller claim；120-case first-pass 仍是 unbiased official estimate，full104 只用于 taxonomy/robustness；停止 second-regime GPU work，除非发现具体 bug 或新的 preregistered follow-up。
 
 2. 审查 Dream-Coder expanded37 结果。
    - 科学问题：Dream-Coder 的 mixed evidence 是否足以支撑 model-dependent canvas/rescue boundary，而不是 model-agnostic confirmation？
@@ -304,6 +305,10 @@ Important ablation signals:
 - `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/report.md`
 - `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/taxonomy_summary.csv`
 - `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/case_failure_notes.csv`
+- `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/report.md`
+- `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/comparison_vs_48.csv`
+- `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/taxonomy_summary.csv`
+- `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/case_failure_notes.csv`
 - `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md`
 - `analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md`
 - `docs/paper_agent/controller_route_closure_table_plan.md`

@@ -34,6 +34,7 @@ MANIFEST_DIR = REPO / "analysis_outputs/second_regime_official_manifest_20260708
 DIAGNOSTIC_DIR = REPO / "analysis_outputs/second_regime_official_diagnostic_20260708_v1"
 HARD_TAIL_SOURCE_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1"
 HARD_TAIL_DIAGNOSTIC_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1"
+HARD_TAIL_FULL104_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1"
 TEST_LOCK = REPO / "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json"
 GROUPED_TEST_TASKS = REPO / "analysis_outputs/grouped_split_20260702_accel2/test_tasks.json"
 PROBE_LENGTHS = "3,4,5,6,7,8,9,10,11,12,13,14,15,16,20,24"
@@ -912,6 +913,94 @@ def build_hard_tail_48_manifest() -> dict[str, Any]:
     return summary
 
 
+HARD_TAIL_DIAGNOSTIC_FIELDS = [
+    "manifest_index",
+    "hard_tail_sample_group",
+    "first_pass_taxonomy",
+    "source_hard_tail_index",
+    "source_manifest_index",
+    "source_config",
+    "task_id",
+    "prompt_id",
+    "row_id",
+    "task_group",
+    "prefix_len_chars",
+    "middle_len_chars",
+    "suffix_len_chars",
+    "prefix_len_tokens",
+    "middle_len_tokens",
+    "suffix_len_tokens",
+    "length_bucket",
+    "control_fixed_canvas_tokens",
+    "deployable_policy",
+    "deployable_probe_lengths",
+    "oracle_canvas_tokens",
+    "first_pass_control_passed",
+    "first_pass_deployable_passed",
+    "first_pass_oracle_passed",
+    "first_pass_control_selected_canvas_tokens",
+    "first_pass_deployable_selected_canvas_tokens",
+    "first_pass_oracle_selected_canvas_tokens",
+    "frozen_controller_test_row",
+    "frozen_controller_test_exclusion_flag",
+    "row_key",
+    "selection_note",
+]
+
+
+def build_hard_tail_full104_manifest() -> dict[str, Any]:
+    HARD_TAIL_FULL104_DIR.mkdir(parents=True, exist_ok=True)
+    source_path = HARD_TAIL_SOURCE_DIR / "manifest.csv"
+    first_pass_manifest_path = DIAGNOSTIC_DIR / "manifest.csv"
+    if not source_path.exists():
+        raise FileNotFoundError(source_path)
+    if not first_pass_manifest_path.exists():
+        raise FileNotFoundError(first_pass_manifest_path)
+
+    source_rows = read_csv(source_path)
+    first_pass_by_idx = {row["manifest_index"]: row for row in read_csv(first_pass_manifest_path)}
+    if len(source_rows) != 104:
+        raise RuntimeError(f"Refusing to run non-104 fixed hard-tail source manifest: {len(source_rows)} rows")
+    if any(boolish(row.get("frozen_controller_test_row")) for row in source_rows):
+        raise RuntimeError("Refusing to run hard-tail full104 manifest with frozen-controller-test rows")
+
+    manifest: list[dict[str, Any]] = []
+    for idx, source in enumerate(source_rows):
+        first = first_pass_by_idx[source["source_manifest_index"]]
+        row = dict(first)
+        row["manifest_index"] = idx
+        row["hard_tail_sample_group"] = hard_tail_group(source)
+        row["source_hard_tail_index"] = source["hard_tail_index"]
+        row["source_manifest_index"] = source["source_manifest_index"]
+        row["first_pass_taxonomy"] = source["first_pass_taxonomy"]
+        row["first_pass_control_passed"] = source["control_passed"]
+        row["first_pass_deployable_passed"] = source["deployable_passed"]
+        row["first_pass_oracle_passed"] = source["oracle_passed"]
+        row["first_pass_control_selected_canvas_tokens"] = source["control_selected_canvas_tokens"]
+        row["first_pass_deployable_selected_canvas_tokens"] = source["deployable_selected_canvas_tokens"]
+        row["first_pass_oracle_selected_canvas_tokens"] = source["oracle_selected_canvas_tokens"]
+        row["selection_note"] = "fixed_104_case_hard_tail_stress_no_sampling_no_label_changes"
+        manifest.append(row)
+
+    write_csv(HARD_TAIL_FULL104_DIR / "manifest.csv", manifest, HARD_TAIL_DIAGNOSTIC_FIELDS)
+    summary = {
+        "verdict": "official_second_regime_hard_tail_full104_manifest_built",
+        "created_at_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "case_count": len(manifest),
+        "source_manifest": str(source_path.relative_to(REPO)),
+        "source_first_pass_diagnostic": str(DIAGNOSTIC_DIR.relative_to(REPO)),
+        "selection_rule": "use every fixed post-first-pass hard-tail row; no sampling and no label changes",
+        "sample_group_counts": dict(Counter(row["hard_tail_sample_group"] for row in manifest)),
+        "first_pass_taxonomy_counts": dict(Counter(row["first_pass_taxonomy"] for row in manifest)),
+        "source_config_counts": dict(Counter(row["source_config"] for row in manifest)),
+        "length_bucket_counts": dict(Counter(row["length_bucket"] for row in manifest)),
+        "frozen_controller_test_rows": sum(boolish(row.get("frozen_controller_test_row")) for row in manifest),
+        "gpu_status": "not_run_manifest_only",
+    }
+    write_json(HARD_TAIL_FULL104_DIR / "manifest_summary.json", summary)
+    return summary
+
+
 def build_case_failure_notes(
     manifest: Sequence[Mapping[str, str]],
     taxonomy: Sequence[Mapping[str, Any]],
@@ -1070,6 +1159,171 @@ def write_hard_tail_report(summary: Mapping[str, Any], taxonomy_summary: Sequenc
     (HARD_TAIL_DIAGNOSTIC_DIR / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def pct(count: int, total: int) -> str:
+    return f"{(100.0 * count / total):.2f}%" if total else ""
+
+
+def build_full104_comparison(summary: Mapping[str, Any]) -> list[dict[str, Any]]:
+    prior_path = HARD_TAIL_DIAGNOSTIC_DIR / "summary.json"
+    if not prior_path.exists():
+        return [
+            {
+                "metric": "prior_48_summary_status",
+                "prior_48": "missing",
+                "full104": "",
+                "delta_full104_minus_48": "",
+                "note": str(prior_path.relative_to(REPO)),
+            }
+        ]
+    prior = json.loads(prior_path.read_text(encoding="utf-8"))
+    metrics = [
+        ("case_count", "Cases"),
+        ("control_fixed64_pass", "Control fixed64 pass"),
+        ("best_deployable_cal_lite_pass", "Best deployable cal-lite pass"),
+        ("oracle_sufficient_canvas_pass", "Oracle-sufficient canvas pass"),
+        ("genuinely_canvas_recoverable_now", "Genuinely canvas-recoverable"),
+        ("rescue_limited_or_noncanvas_now", "Rescue/non-canvas-limited"),
+        ("deployable_cal_lite_help_now", "Deployable cal-lite help"),
+        ("deployable_cal_lite_harm_now", "Deployable cal-lite harm"),
+        ("oracle_canvas_harm_vs_control_now", "Oracle canvas harm vs control"),
+        ("label_changed_from_first_pass", "First-pass label changes"),
+    ]
+    rows: list[dict[str, Any]] = []
+    prior_total = int(prior.get("case_count", 0))
+    full_total = int(summary.get("case_count", 0))
+    for key, label in metrics:
+        prior_value = prior.get(key)
+        full_value = summary.get(key)
+        delta = ""
+        if isinstance(prior_value, int) and isinstance(full_value, int):
+            delta = full_value - prior_value
+        prior_rate = pct(int(prior_value), prior_total) if isinstance(prior_value, int) and key != "case_count" else ""
+        full_rate = pct(int(full_value), full_total) if isinstance(full_value, int) and key != "case_count" else ""
+        rows.append(
+            {
+                "metric": label,
+                "prior_48": prior_value,
+                "prior_48_rate": prior_rate,
+                "full104": full_value,
+                "full104_rate": full_rate,
+                "delta_full104_minus_48": delta,
+                "note": "counts are not benchmark estimates; full104 is fixed hard-tail stress completion",
+            }
+        )
+    rows.append(
+        {
+            "metric": "Verdict",
+            "prior_48": prior.get("verdict"),
+            "prior_48_rate": "",
+            "full104": summary.get("verdict"),
+            "full104_rate": "",
+            "delta_full104_minus_48": "",
+            "note": "compare robustness of mixed-stress conclusion, not unbiased official performance",
+        }
+    )
+    return rows
+
+
+def write_hard_tail_full104_report(
+    summary: Mapping[str, Any],
+    taxonomy_summary: Sequence[Mapping[str, Any]],
+    comparison: Sequence[Mapping[str, Any]],
+) -> None:
+    lines = [
+        "# Official Second-Regime Hard-Tail Full104 Stress Diagnostic",
+        "",
+        f"Verdict: `{summary['verdict']}`.",
+        "",
+        "This is a post-first-pass fixed hard-tail stress set: it uses all `104` rows from `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`.",
+        "It is used for failure taxonomy and for robustness of the mixed-stress conclusion established by the prior 48-case diagnostic.",
+        "The official first-pass 120-case results remain the unbiased official diagnostic estimate.",
+        "Full104 does not authorize deployable controller claims and is not a benchmark aggregate or positive-method sweep.",
+        "First-pass labels are not modified, sampling is not changed after seeing results, and the frozen controller test remains sealed.",
+        "",
+        "## Overall",
+        "",
+        f"Cases: `{summary['case_count']}`.",
+        f"Control fixed64 pass: `{summary['control_fixed64_pass']}/{summary['case_count']}`.",
+        f"Best deployable cal-lite pass: `{summary['best_deployable_cal_lite_pass']}/{summary['case_count']}`.",
+        f"Oracle-sufficient canvas pass: `{summary['oracle_sufficient_canvas_pass']}/{summary['case_count']}`.",
+        f"Genuinely canvas-recoverable now: `{summary['genuinely_canvas_recoverable_now']}`.",
+        f"Rescue-limited/non-canvas now: `{summary['rescue_limited_or_noncanvas_now']}`.",
+        f"Deployable cal-lite helps now: `{summary['deployable_cal_lite_help_now']}`.",
+        f"Deployable cal-lite harms control now: `{summary['deployable_cal_lite_harm_now']}`.",
+        f"Oracle canvas harms control now: `{summary['oracle_canvas_harm_vs_control_now']}`.",
+        f"First-pass label changes under full104 rerun: `{summary['label_changed_from_first_pass']}`.",
+        "",
+        "## Interpretation",
+        "",
+        "1. Genuinely canvas-recoverable cases are rows where control fails and oracle passes in this full104 hard-tail rerun. See `case_failure_notes.csv` rows with `genuinely_canvas_recoverable_now=True`.",
+        "2. Rescue-limited/non-canvas-limited cases are rows where both control and oracle fail.",
+        "3. Deployable cal-lite help/harm are recorded per row in `case_failure_notes.csv`.",
+        "4. Oracle canvas harm vs control is recorded per row in `case_failure_notes.csv`.",
+        "5. Paper wording: official second-regime should remain mixed stress evidence. The full104 run strengthens the taxonomy/robustness story, while the 120-case first pass remains the unbiased official diagnostic estimate.",
+        "",
+        "## Comparison Vs Prior 48-Case Diagnostic",
+        "",
+        "| Metric | Prior 48 | Prior 48 rate | Full104 | Full104 rate | Delta |",
+        "|---|---:|---:|---:|---:|---:|",
+    ]
+    for row in comparison:
+        metric = row["metric"]
+        if metric == "Verdict":
+            continue
+        lines.append(
+            f"| {metric} | `{row['prior_48']}` | `{row['prior_48_rate']}` | "
+            f"`{row['full104']}` | `{row['full104_rate']}` | `{row['delta_full104_minus_48']}` |"
+        )
+    verdict_rows = [row for row in comparison if row["metric"] == "Verdict"]
+    if verdict_rows:
+        verdict = verdict_rows[0]
+        lines.extend(
+            [
+                "",
+                f"Prior 48 verdict: `{verdict['prior_48']}`.",
+                f"Full104 verdict: `{verdict['full104']}`.",
+            ]
+        )
+    lines.extend(
+        [
+            "",
+            "## Taxonomy Summary",
+            "",
+            "| Sample group | Current taxonomy | Cases | Control | Deployable | Oracle | Canvas-recoverable | Rescue/non-canvas | Deployable help | Deployable harm | Oracle harm | Label changed |",
+            "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for row in taxonomy_summary:
+        if row["hard_tail_sample_group"] == "ALL" and row["current_taxonomy"] == "ALL":
+            continue
+        lines.append(
+            f"| `{row['hard_tail_sample_group']}` | `{row['current_taxonomy']}` | `{row['cases']}` | "
+            f"`{row['control_pass']}` | `{row['deployable_pass']}` | `{row['oracle_pass']}` | "
+            f"`{row['genuinely_canvas_recoverable_now']}` | `{row['rescue_limited_or_noncanvas_now']}` | "
+            f"`{row['deployable_cal_lite_help_now']}` | `{row['deployable_cal_lite_harm_now']}` | "
+            f"`{row['oracle_canvas_harm_vs_control_now']}` | `{row['label_changed_from_first_pass']}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Stop Rule",
+            "",
+            "Stop second-regime GPU work after this supplemental fixed-manifest stress/taxonomy completion unless web/user identifies a concrete bug or approves a clearly preregistered follow-up. Do not run synthetic stress or controller V4.",
+            "",
+            "## Compact Outputs",
+            "",
+            "- `manifest.csv`",
+            "- `results.csv`",
+            "- `taxonomy_summary.csv`",
+            "- `case_failure_notes.csv`",
+            "- `comparison_vs_48.csv`",
+            "- `summary.json`",
+            "- `report.md`",
+        ]
+    )
+    (HARD_TAIL_FULL104_DIR / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def run_hard_tail_diagnostic() -> dict[str, Any]:
     manifest_path = HARD_TAIL_DIAGNOSTIC_DIR / "manifest.csv"
     if not manifest_path.exists():
@@ -1127,6 +1381,75 @@ def run_hard_tail_diagnostic() -> dict[str, Any]:
     write_csv(HARD_TAIL_DIAGNOSTIC_DIR / "case_failure_notes.csv", notes)
     write_json(HARD_TAIL_DIAGNOSTIC_DIR / "summary.json", summary)
     write_hard_tail_report(summary, taxonomy_summary)
+    return summary
+
+
+def run_hard_tail_full104_diagnostic() -> dict[str, Any]:
+    manifest_path = HARD_TAIL_FULL104_DIR / "manifest.csv"
+    if not manifest_path.exists():
+        build_hard_tail_full104_manifest()
+    manifest, tasks = load_manifest_tasks(manifest_path)
+    if len(manifest) != 104:
+        raise RuntimeError(f"Refusing to run non-104 hard-tail full manifest: {len(manifest)} rows")
+    if any(boolish(row.get("frozen_controller_test_row")) for row in manifest):
+        raise RuntimeError("Refusing to run hard-tail full104 manifest with frozen-controller-test rows")
+
+    set_global_seed(42)
+    tokenizer, model = load_model_and_tokenizer(cfg_for_policy("fixed").model)
+
+    all_results: list[dict[str, Any]] = []
+    wall_start = time.perf_counter()
+    for policy_name, source in POLICIES:
+        all_results.extend(run_policy(policy_name, source, tasks, manifest, tokenizer, model))
+
+    taxonomy = build_failure_taxonomy(manifest, all_results)
+    notes = build_case_failure_notes(manifest, taxonomy, all_results)
+    taxonomy_summary = build_taxonomy_summary(notes)
+    overall = next(row for row in taxonomy_summary if row["hard_tail_sample_group"] == "ALL" and row["current_taxonomy"] == "ALL")
+    summary = {
+        "verdict": hard_tail_verdict(overall),
+        "created_at_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "source_manifest": str((HARD_TAIL_SOURCE_DIR / "manifest.csv").relative_to(REPO)),
+        "diagnostic_dir": str(HARD_TAIL_FULL104_DIR.relative_to(REPO)),
+        "case_count": int(overall["cases"]),
+        "control_fixed64_pass": int(overall["control_pass"]),
+        "best_deployable_cal_lite_pass": int(overall["deployable_pass"]),
+        "oracle_sufficient_canvas_pass": int(overall["oracle_pass"]),
+        "genuinely_canvas_recoverable_now": int(overall["genuinely_canvas_recoverable_now"]),
+        "rescue_limited_or_noncanvas_now": int(overall["rescue_limited_or_noncanvas_now"]),
+        "deployable_cal_lite_help_now": int(overall["deployable_cal_lite_help_now"]),
+        "deployable_cal_lite_harm_now": int(overall["deployable_cal_lite_harm_now"]),
+        "oracle_canvas_harm_vs_control_now": int(overall["oracle_canvas_harm_vs_control_now"]),
+        "label_changed_from_first_pass": int(overall["label_changed_from_first_pass"]),
+        "sample_group_counts": dict(Counter(row["hard_tail_sample_group"] for row in manifest)),
+        "first_pass_taxonomy_counts": dict(Counter(row["first_pass_taxonomy"] for row in manifest)),
+        "current_taxonomy_counts": dict(Counter(row["current_taxonomy"] for row in notes)),
+        "official_first_pass_120_unbiased_estimate": {
+            "diagnostic_dir": str(DIAGNOSTIC_DIR.relative_to(REPO)),
+            "control_fixed64_pass": "34/120",
+            "best_deployable_cal_lite_pass": "36/120",
+            "oracle_sufficient_canvas_pass": "49/120",
+        },
+        "prior_48_diagnostic": str(HARD_TAIL_DIAGNOSTIC_DIR.relative_to(REPO)),
+        "frozen_controller_test_status": "sealed_not_touched",
+        "frozen_controller_test_rows": 0,
+        "full104_interpretation": "post_first_pass_fixed_hard_tail_stress_taxonomy_not_unbiased_benchmark_not_deployable_controller_claim",
+        "stop_rule": "stop_second_regime_gpu_work_unless_bug_or_preregistered_followup",
+        "wall_clock_sec": time.perf_counter() - wall_start,
+        "environment": {
+            "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE"),
+            "TRANSFORMERS_OFFLINE": os.environ.get("TRANSFORMERS_OFFLINE"),
+            "TOKENIZERS_PARALLELISM": os.environ.get("TOKENIZERS_PARALLELISM"),
+        },
+    }
+    comparison = build_full104_comparison(summary)
+    write_csv(HARD_TAIL_FULL104_DIR / "results.csv", all_results)
+    write_csv(HARD_TAIL_FULL104_DIR / "taxonomy_summary.csv", taxonomy_summary)
+    write_csv(HARD_TAIL_FULL104_DIR / "case_failure_notes.csv", notes)
+    write_csv(HARD_TAIL_FULL104_DIR / "comparison_vs_48.csv", comparison)
+    write_json(HARD_TAIL_FULL104_DIR / "summary.json", summary)
+    write_hard_tail_full104_report(summary, taxonomy_summary, comparison)
     return summary
 
 
@@ -1193,7 +1516,17 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--mode",
-        choices=["manifest", "diagnostic", "all", "hard-tail-manifest", "hard-tail-diagnostic", "hard-tail-all"],
+        choices=[
+            "manifest",
+            "diagnostic",
+            "all",
+            "hard-tail-manifest",
+            "hard-tail-diagnostic",
+            "hard-tail-all",
+            "hard-tail-full104-manifest",
+            "hard-tail-full104-diagnostic",
+            "hard-tail-full104-all",
+        ],
         required=True,
     )
     return parser.parse_args()
@@ -1219,6 +1552,12 @@ def main() -> None:
     if args.mode in {"hard-tail-diagnostic", "hard-tail-all"}:
         summary = run_hard_tail_diagnostic()
         print(json.dumps({"diagnostic_dir": str(HARD_TAIL_DIAGNOSTIC_DIR), **summary}, indent=2, sort_keys=True))
+    if args.mode in {"hard-tail-full104-manifest", "hard-tail-full104-all"}:
+        summary = build_hard_tail_full104_manifest()
+        print(json.dumps({"diagnostic_dir": str(HARD_TAIL_FULL104_DIR), **summary}, indent=2, sort_keys=True))
+    if args.mode in {"hard-tail-full104-diagnostic", "hard-tail-full104-all"}:
+        summary = run_hard_tail_full104_diagnostic()
+        print(json.dumps({"diagnostic_dir": str(HARD_TAIL_FULL104_DIR), **summary}, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

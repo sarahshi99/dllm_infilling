@@ -1,0 +1,16 @@
+hard_tail_sample_group,current_taxonomy,cases,control_pass,deployable_pass,oracle_pass,genuinely_canvas_recoverable_now,rescue_limited_or_noncanvas_now,deployable_cal_lite_help_now,deployable_cal_lite_harm_now,oracle_canvas_harm_vs_control_now,label_changed_from_first_pass
+ALL,ALL,104,18,20,33,26,60,17,15,11,0
+ALL,deployable_and_oracle_recover_control_failure,13,0,13,13,13,0,13,0,0,0
+ALL,deployable_harm_vs_control,15,15,0,7,0,0,0,15,8,0
+ALL,oracle_canvas_harm_vs_control,3,3,3,0,0,0,0,0,3,0
+ALL,oracle_only_canvas_recoverable,13,0,0,13,13,0,0,0,0,0
+ALL,rescue_limited_or_noncanvas_failure,60,0,4,0,0,60,4,0,0,0
+deployable_and_oracle_recover_control_failure,ALL,13,0,13,13,13,0,13,0,0,0
+deployable_and_oracle_recover_control_failure,deployable_and_oracle_recover_control_failure,13,0,13,13,13,0,13,0,0,0
+harm_risk,ALL,18,18,3,7,0,0,0,15,11,0
+harm_risk,deployable_harm_vs_control,15,15,0,7,0,0,0,15,8,0
+harm_risk,oracle_canvas_harm_vs_control,3,3,3,0,0,0,0,0,3,0
+oracle_only_canvas_recoverable,ALL,13,0,0,13,13,0,0,0,0,0
+oracle_only_canvas_recoverable,oracle_only_canvas_recoverable,13,0,0,13,13,0,0,0,0,0
+rescue_limited_or_noncanvas_failure,ALL,60,0,4,0,0,60,4,0,0,0
+rescue_limited_or_noncanvas_failure,rescue_limited_or_noncanvas_failure,60,0,4,0,0,60,4,0,0,0

@@ -15,8 +15,8 @@ Expected positive outcome: Control or deployable policy fails on a meaningful fr
 Expected negative outcome: Extreme/random-span strata remain mostly rescue-limited or oracle harms control enough that second-regime must be written as a scope boundary for current canvas-only claims.
 Cost: First-pass GPU completed in one bounded run; approved hard-tail GPU completed in one 48-case bounded run.
 Risks: Official random-span/extreme cases may stress semantics more than canvas length; oracle canvas can harm control; hard-tail reuse can overfit if described as a benchmark rather than follow-up diagnostic.
-Decision rule: Write official second-regime as mixed stress evidence. Do not run the full 104-case hard-tail manifest or additional second-regime GPU work unless a concrete bug or preregistered follow-up appears.
-Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
+Decision rule: Write official second-regime as mixed stress evidence. The reviewer-requested fixed full104 hard-tail run is completed as supplemental taxonomy/robustness evidence; do not run additional second-regime GPU work unless a concrete bug or preregistered follow-up appears.
+Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
 
 ## IDEA-002: Dream-Coder expanded diagnostic and case-level taxonomy
 
