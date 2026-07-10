@@ -1,0 +1,7 @@
+taxonomy,cases,primary_pass,simple_pass,oracle_pass
+oracle_canvas_harm_vs_control,13,13,13,0
+oracle_only_canvas_recoverable,113,0,0,113
+rescue_limited_or_noncanvas_failure,55,0,1,0
+simple_and_oracle_recover_control_failure,24,0,24,24
+simple_harm_vs_control,16,16,0,15
+stable_pass,706,706,706,706

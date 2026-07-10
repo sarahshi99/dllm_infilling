@@ -1,0 +1,9 @@
+{
+  "claim_matrix_rows": 7,
+  "created_at_utc": "2026-07-10T06:32:05Z",
+  "failure_taxonomy_rows": 8,
+  "main_results_rows": 6,
+  "next_step": "web_review_claim_boundaries_and_table_placement",
+  "output_dir": "analysis_outputs/paper_evidence_consolidation_20260710_v1",
+  "verdict": "paper_evidence_consolidation_completed"
+}

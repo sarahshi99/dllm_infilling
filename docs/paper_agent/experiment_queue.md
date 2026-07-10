@@ -118,3 +118,64 @@ Failure criterion: Any row implies frozen-test authorization or positive deploya
 Stop condition: Do not add Controller V4 unless a new evidence source appears outside repeated validation tuning.
 Expected report path: `analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md`
 Result: Completed. V1 selects zero intervention; V2 best nonzero has `5/4` wins/losses and harm upper95 `7.06%`; V3 exploratory top-k has `1/0` wins/losses but fails frozen-test gate. Frozen test remains sealed with evaluation count `0`.
+
+## EXP-005: Paper evidence consolidation for diagnostic mixed paper
+
+Linked idea: IDEA-010
+Status: completed
+Hypothesis: The completed evidence base can support a CCF-A diagnostic mixed paper if every table row explicitly separates support, limits, allowed claims, forbidden claims, and paper placement.
+Inputs:
+- `analysis_outputs/oracle_canvas_attribution_20260703_phase2_attr_v2/summary.json`
+- `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/summary.json`
+- `analysis_outputs/second_regime_official_diagnostic_20260708_v1/summary.json`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/summary.json`
+- `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/summary.json`
+- `analysis_outputs/controller_route_closure_20260708_v1/summary.json`
+- `analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4/summary.json`
+Commands:
+```bash
+python experiments/paper_evidence_consolidation.py
+```
+Outputs:
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/claim_matrix.md`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/claim_matrix.csv`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/main_results_table.md`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/main_results_table.csv`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/official_second_regime_writeup.md`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/failure_taxonomy_table.md`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/failure_taxonomy_table.csv`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/paper_claim_rewrite.md`
+- `analysis_outputs/paper_evidence_consolidation_20260710_v1/summary.json`
+Success criterion: The consolidation names the final central claim, three contributions, claim matrix, main results table, official second-regime write-up, failure taxonomy, and forbidden claims without opening frozen test or upgrading negative evidence into positive controller claims.
+Failure criterion: Any artifact mixes H200 with historical A6000 evidence, treats hard-tail full104 as an unbiased benchmark, or claims deployable controller success.
+Stop condition: Stop after compact Markdown/CSV/JSON outputs and web-review-ready handoff updates; no generation or GPU needed for this experiment.
+Expected report path: `analysis_outputs/paper_evidence_consolidation_20260710_v1/paper_claim_rewrite.md`
+Result: Completed on 2026-07-10. Produced `7` claim-matrix rows, `6` main-results rows, `8` failure-taxonomy rows, and a paper claim rewrite. Verdict: `paper_evidence_consolidation_completed`.
+
+## EXP-006: Dream-Coder full allowed SingleLine optional diagnostic
+
+Linked idea: IDEA-002, IDEA-005
+Status: completed
+Hypothesis: A full non-frozen Dream-Coder SingleLine diagnostic can reduce sampling noise from expanded37 while preserving frozen-test discipline, but it should remain second-backbone evidence rather than model-agnostic confirmation.
+Inputs:
+- Local allowed non-frozen `HumanEval-SingleLineInfilling` rows
+- Existing Dream-Coder runner and cached `Dream-org/Dream-Coder-v0-Base-7B`
+- Frozen-controller-test split lock for exclusion only
+Commands:
+```bash
+# Optional full-run branch executed on 2026-07-10 with fixed policies:
+# primary/control, best simple length policy, oracle-sufficient canvas.
+```
+Outputs:
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/summary.json`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/manifest.csv`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/results.csv`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/stratum_summary.csv`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/taxonomy_summary.csv`
+- `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/comparison_vs_expanded37.csv`
+Success criterion: Manifest includes only non-frozen allowed SingleLine rows; all three fixed policies complete; results clarify whether oracle canvas recovery persists at full allowed scale.
+Failure criterion: Any frozen-controller-test row appears, policies are tuned after results, E/F/G actions are added for Dream-Coder, or outputs require raw generated-code dumps.
+Stop condition: Stop after one full allowed Dream-Coder SingleLine run; do not add Dream-Coder E/F/G actions or tune policy after results.
+Expected report path: `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
+Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and `2781` policy rows. Primary/control `735/927`, best simple length policy `744/927`, oracle-sufficient canvas `858/927`; oracle gain vs primary `137`, simple help/harm `25/16`, oracle harm vs primary `14`, rescue/non-canvas-limited `55`. Interpretation: optional full allowed second-backbone SingleLine diagnostic, not model-agnostic confirmation.

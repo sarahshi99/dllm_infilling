@@ -24,13 +24,13 @@ Source: codex
 Status: done
 Scientific question: Is Dream-Coder's mixed 15-case result a sampling artifact, or does it expose a real model-dependent canvas/rescue boundary that differs from LLaDA H200?
 Why it matters for CCF-A: A second backbone can upgrade the paper from a single-model diagnostic to a stronger generalization audit, but only if the qualitative claim is bounded correctly.
-Minimum experiment: Run a bounded Dream-Coder oracle-sufficient diagnostic on a larger train/calibration/validation-derived manifest, then publish a case taxonomy by stratum, oracle length, selected length, primary/simple/oracle pass, and error type.
+Minimum experiment: Completed a bounded Dream-Coder expanded37 oracle-sufficient diagnostic and optional full allowed SingleLine diagnostic, then published case/taxonomy summaries by stratum, oracle length, selected length, primary/simple/oracle pass, and error type.
 Expected positive outcome: Oracle canvas recoverability persists, and the mixed missed-vs-triggered pattern can be explained by model-specific length selection or task composition.
 Expected negative outcome: Recoverability disappears or becomes inconsistent; the paper should keep Dream-Coder as weak/mixed evidence and avoid model-agnostic claims.
-Cost: CPU manifest construction is done; GPU diagnostic is bounded to 37 cases, one backbone, oracle-sufficient action only.
+Cost: CPU manifest construction, bounded 37-case GPU diagnostic, and optional full allowed 927-case GPU diagnostic are completed.
 Risks: Dream-Coder has no trace-remasking adapter, so E/F/G refinement cannot be compared; train/calibration/validation-derived cases are not a held-out benchmark.
-Decision rule: Treat as strong support only if the expanded manifest shows nontrivial oracle-canvas recovery with no short-regression explosion and a stable, interpretable case taxonomy. Otherwise keep as mixed generalization evidence.
-Related files: `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`, `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`
+Decision rule: Use as Dream-Coder second-backbone diagnostic evidence because oracle-canvas recovery persists, but do not claim model-agnostic confirmation because the missed/triggered split remains model-dependent.
+Related files: `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`, `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`, `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/`
 
 ## IDEA-003: Substitute strong baseline pack for blocked LR-DLLM
 
@@ -63,16 +63,16 @@ Related files: `analysis_outputs/controller_validation_h200_20260707_v1_replay/`
 ## IDEA-005: Model-dependent canvas/rescue boundary analysis
 
 Source: codex
-Status: proposed
+Status: done
 Scientific question: Are canvas-limited and rescue-limited regimes intrinsic to unknown-length DLLM infilling, or are they backbone-specific and mediated by each model's length-selection behavior?
 Why it matters for CCF-A: It turns mixed Dream-Coder evidence into a sharper scientific question rather than a failed replication.
-Minimum experiment: Compare LLaDA H200 and Dream-Coder by stratum: primary selected length, oracle length, primary error type, oracle-canvas pass, and whether triggered-long proxies recover.
+Minimum experiment: Completed Dream-Coder expanded37 and full allowed SingleLine diagnostics, then compared primary/simple/oracle pass, oracle gain, harm, and rescue-limited counts against LLaDA H200 qualitative claims.
 Expected positive outcome: The paper can report a model-dependent boundary and explain why LLaDA triggered-long remains rescue-limited while Dream-Coder may recover some triggered proxies.
 Expected negative outcome: No stable pattern; downgrade to "mixed second-backbone audit" and avoid broad claims.
-Cost: Low CPU after Dream-Coder expanded diagnostic; GPU only for expanded Dream-Coder oracle run.
+Cost: Completed bounded 37-case GPU diagnostic and optional full allowed 927-case GPU diagnostic; remaining work is CPU writing.
 Risks: Small strata can overfit; Dream-Coder lacks trace-remasking actions.
-Decision rule: Require stratum-level consistency on an expanded manifest before using this in central claims.
-Related files: `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/dreamcoder_case_taxonomy.csv`
+Decision rule: Use Dream-Coder as second-backbone diagnostic evidence for oracle-canvas recoverability, but forbid model-agnostic confirmation of the LLaDA missed-vs-triggered split.
+Related files: `analysis_outputs/dreamcoder_expanded_manifest_20260708_cpu_v1/`, `analysis_outputs/second_backbone_oracle_diagnostic_20260708_dreamcoder_expanded37_v1/`, `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/dreamcoder_case_taxonomy.csv`
 
 ## IDEA-006: Error taxonomy across backbones and regimes
 
@@ -133,13 +133,13 @@ Related files: `analysis_outputs/second_regime_official_hard_tail_manifest_20260
 ## IDEA-010: Paper table and figure evidence consolidation
 
 Source: codex
-Status: running
+Status: done
 Scientific question: What exact tables and figures can support a diagnostic-driven mixed paper without overclaiming?
 Why it matters for CCF-A: The project is now evidence-rich but claim-fragile; paper quality depends on clean tables, negative evidence, and source separation.
-Minimum experiment: Build a compact evidence matrix: H200 baselines, oracle attribution, controller V1/V2/V3, Dream-Coder diagnostic, second-regime status, LR-DLLM blocker, and frozen-test integrity.
+Minimum experiment: Completed compact evidence matrix, main results table, official second-regime write-up, failure taxonomy, and paper claim rewrite.
 Expected positive outcome: Web ChatGPT and the user can review the paper's claim stack directly.
 Expected negative outcome: Evidence remains too scattered; defer broad writing until the top two diagnostics are stronger.
-Cost: Low CPU.
+Cost: Low CPU, completed.
 Risks: Consolidation can accidentally mix A6000 historical and H200 current evidence; must preserve labels.
-Decision rule: Every table row must cite one compact artifact and carry status labels: H200 evidence, historical reference, synthetic, blocked, validation-only, or sealed.
-Related files: `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `docs/paper_agent/codex_handoff.latest.zh.md`, `docs/results/run_registry.md`
+Decision rule: Every table row must cite one compact artifact and carry status labels: H200 evidence, official diagnostic, hard-tail stress, blocked, validation-only, or sealed.
+Related files: `analysis_outputs/paper_evidence_consolidation_20260710_v1/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `docs/paper_agent/codex_handoff.latest.zh.md`, `docs/results/run_registry.md`

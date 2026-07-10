@@ -1,0 +1,7 @@
+length_bucket,cases,primary_control_pass,best_simple_length_policy_pass,oracle_sufficient_canvas_pass,oracle_gain_vs_primary,simple_help_vs_primary,simple_harm_vs_primary,oracle_harm_vs_primary,rescue_limited_or_noncanvas
+ALL,927,735,744,858,137,25,16,14,55
+13-16,75,36,40,63,28,4,0,1,11
+17-24,56,18,17,48,30,0,1,0,8
+25+,24,4,4,12,8,0,0,0,12
+9-12,166,130,131,157,29,5,4,2,7
+<=8,606,547,552,578,42,16,11,11,17

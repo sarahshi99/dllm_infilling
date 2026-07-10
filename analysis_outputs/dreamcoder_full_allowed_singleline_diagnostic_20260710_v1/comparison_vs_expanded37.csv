@@ -1,0 +1,7 @@
+metric,expanded37,full_allowed,note
+Cases,37,927,full allowed excludes frozen-controller-test task groups
+Primary/control pass,11,735,
+Best simple pass,11,744,
+Oracle pass,26,858,
+Oracle gain vs primary,15,137,
+Oracle harm vs primary,0 short regressions reported,14,full allowed counts all length buckets

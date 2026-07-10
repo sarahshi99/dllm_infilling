@@ -1,0 +1,21 @@
+{
+  "avg_oracle_sec": 2.236127594406762,
+  "avg_primary_sec": 2.5276644018748944,
+  "avg_simple_sec": 2.7369571387443288,
+  "best_simple_length_policy_pass": 744,
+  "case_count": 927,
+  "created_at_utc": "2026-07-10T08:59:14Z",
+  "efg_status": "not_applicable_dreamcoder_no_trace_remask_adapter",
+  "frozen_controller_test_rows": 0,
+  "frozen_controller_test_status": "sealed_not_touched",
+  "interpretation": "optional full allowed Dream-Coder SingleLine diagnostic; second-backbone evidence only, not model-agnostic confirmation",
+  "oracle_gain_vs_primary_cases": 137,
+  "oracle_harm_vs_primary_cases": 14,
+  "oracle_sufficient_canvas_pass": 858,
+  "primary_control_pass": 735,
+  "rescue_limited_or_noncanvas_cases": 55,
+  "simple_harm_vs_primary_cases": 16,
+  "simple_help_vs_primary_cases": 25,
+  "verdict": "dreamcoder_full_allowed_singleline_mixed_second_backbone_diagnostic",
+  "wall_clock_sec": 7558.403534185956
+}
