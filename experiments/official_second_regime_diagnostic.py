@@ -35,6 +35,7 @@ DIAGNOSTIC_DIR = REPO / "analysis_outputs/second_regime_official_diagnostic_2026
 HARD_TAIL_SOURCE_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1"
 HARD_TAIL_DIAGNOSTIC_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1"
 HARD_TAIL_FULL104_DIR = REPO / "analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1"
+FULL_ALLOWED_DIR = REPO / "analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1"
 TEST_LOCK = REPO / "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json"
 GROUPED_TEST_TASKS = REPO / "analysis_outputs/grouped_split_20260702_accel2/test_tasks.json"
 PROBE_LENGTHS = "3,4,5,6,7,8,9,10,11,12,13,14,15,16,20,24"
@@ -79,6 +80,17 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, Any]], fields: Sequence[st
         writer.writeheader()
         for row in rows:
             writer.writerow({key: row.get(key, "") for key in fields})
+
+
+def append_csv_row(path: Path, row: Mapping[str, Any], fields: Sequence[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    needs_header = not path.exists() or path.stat().st_size == 0
+    with path.open("a", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(fields), lineterminator="\n")
+        if needs_header:
+            writer.writeheader()
+        writer.writerow({key: row.get(key, "") for key in fields})
+        handle.flush()
 
 
 def task_group(task_id: str) -> str:
@@ -478,6 +490,43 @@ def load_manifest_tasks(manifest_path: Path) -> tuple[list[dict[str, str]], list
     return manifest, tasks
 
 
+RESULT_FIELDS = [
+    "manifest_index",
+    "source_config",
+    "task_id",
+    "prompt_id",
+    "row_id",
+    "task_group",
+    "length_bucket",
+    "policy",
+    "status",
+    "passed",
+    "prefix_len_tokens",
+    "middle_len_tokens",
+    "suffix_len_tokens",
+    "oracle_canvas_tokens",
+    "selected_canvas_tokens",
+    "selected_minus_oracle",
+    "abs_selected_minus_oracle",
+    "mask_length_source",
+    "selected_score",
+    "selected_raw_score",
+    "selected_adjusted_score",
+    "compile_passed",
+    "tier2_smoke_exec_passed",
+    "tier3_unit_tests_passed",
+    "error_type",
+    "error_message",
+    "candidate_full_code_sha256",
+    "candidate_middle_sha256",
+    "total_sec_including_probe",
+    "decode_sec",
+    "verification_sec",
+    "length_probe_sec",
+    "mean_final_confidence",
+]
+
+
 def compact_result(
     manifest_row: Mapping[str, str],
     policy_name: str,
@@ -522,6 +571,69 @@ def compact_result(
     }
 
 
+def run_zero_oracle_result(task: CodeTask) -> dict[str, Any]:
+    start = time.perf_counter()
+    full_code = task.prefix + task.suffix
+    verification = run_verifier_stack(task=task, full_code=full_code, completion_without_suffix="")
+    verification_sec = sum(item.duration_sec for item in verification.values())
+    tier3 = verification.get("tier3_unit_tests")
+    return {
+        "task_id": task.task_id,
+        "task": task,
+        "code": full_code,
+        "prefix_text": task.prefix,
+        "middle_text": "",
+        "suffix_text": task.suffix,
+        "step_traces": [],
+        "length_probe": {
+            "candidate_scores": None,
+            "length_probe_sec": 0.0,
+            "selected_mask_length": 0,
+            "selected_score": None,
+            "selected_raw_score": None,
+            "selected_adjusted_score": None,
+            "selected_minus_oracle_length": 0,
+            "abs_selected_minus_oracle_length": 0,
+            "probe_lengths": None,
+            "tie_break": None,
+            "score_mode": None,
+            "length_alpha": None,
+        },
+        "metrics": {
+            "passed": bool(tier3.passed) if tier3 else False,
+            "decode_sec": 0.0,
+            "verification_sec": verification_sec,
+            "total_sec": verification_sec,
+            "total_sec_including_probe": time.perf_counter() - start,
+            "length_probe_sec": 0.0,
+            "total_steps": 0,
+            "mean_final_confidence": None,
+            "mask_length": 0,
+            "oracle_mask_length": 0,
+            "selected_mask_length": 0,
+            "selected_score": None,
+            "selected_raw_score": None,
+            "selected_adjusted_score": None,
+            "selected_minus_oracle_length": 0,
+            "abs_selected_minus_oracle_length": 0,
+            "mask_length_source": "oracle",
+            "score_mode": None,
+            "length_alpha": None,
+        },
+        "verification": {key: value.to_dict() for key, value in verification.items()},
+        "diagnostics": {
+            "task_prefix_equals_decoded_prefix": True,
+            "task_suffix_equals_decoded_suffix": True,
+            "final_full_code_parse_passed": None,
+            "final_full_code_compile_passed": None,
+            "final_full_code_parse_error": None,
+            "final_full_code_compile_error": None,
+            "reference_middle_text": "",
+            "decoded_middle_text": "",
+        },
+    }
+
+
 def run_policy(policy_name: str, mask_length_source: str, tasks: Sequence[CodeTask], manifest: Sequence[Mapping[str, str]], tokenizer: Any, model: Any) -> list[dict[str, Any]]:
     cfg = cfg_for_policy(mask_length_source)
     rows: list[dict[str, Any]] = []
@@ -529,7 +641,10 @@ def run_policy(policy_name: str, mask_length_source: str, tasks: Sequence[CodeTa
     for item, task in zip(manifest, tasks):
         start = time.perf_counter()
         try:
-            result = run_vanilla_decode(task, tokenizer, model, cfg)
+            if mask_length_source == "oracle" and int(item.get("middle_len_tokens") or 0) == 0:
+                result = run_zero_oracle_result(task)
+            else:
+                result = run_vanilla_decode(task, tokenizer, model, cfg)
             rows.append(compact_result(item, policy_name, result))
         except Exception as exc:
             rows.append(
@@ -550,6 +665,64 @@ def run_policy(policy_name: str, mask_length_source: str, tasks: Sequence[CodeTa
                 }
             )
     return rows
+
+
+def run_policy_incremental(
+    policy_name: str,
+    mask_length_source: str,
+    tasks: Sequence[CodeTask],
+    manifest: Sequence[Mapping[str, str]],
+    tokenizer: Any,
+    model: Any,
+    results_path: Path,
+    completed: set[tuple[str, str]],
+) -> None:
+    cfg = cfg_for_policy(mask_length_source)
+    set_global_seed(cfg.decode.seed)
+    written = 0
+    for item, task in zip(manifest, tasks):
+        key = (str(item["manifest_index"]), policy_name)
+        if key in completed:
+            continue
+        start = time.perf_counter()
+        try:
+            if mask_length_source == "oracle" and int(item.get("middle_len_tokens") or 0) == 0:
+                result = run_zero_oracle_result(task)
+            else:
+                result = run_vanilla_decode(task, tokenizer, model, cfg)
+            row = compact_result(item, policy_name, result)
+        except Exception as exc:
+            row = {
+                "manifest_index": item["manifest_index"],
+                "source_config": item["source_config"],
+                "task_id": item["task_id"],
+                "prompt_id": item["prompt_id"],
+                "row_id": item["row_id"],
+                "task_group": item["task_group"],
+                "length_bucket": item["length_bucket"],
+                "policy": policy_name,
+                "status": "error",
+                "passed": False,
+                "error_type": type(exc).__name__,
+                "error_message": str(exc)[:240],
+                "total_sec_including_probe": time.perf_counter() - start,
+            }
+        append_csv_row(results_path, row, RESULT_FIELDS)
+        completed.add(key)
+        written += 1
+        if written == 1 or written % 100 == 0:
+            print(
+                json.dumps(
+                    {
+                        "policy": policy_name,
+                        "new_rows_written": written,
+                        "manifest_index": item["manifest_index"],
+                        "total_completed_rows": len(completed),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
 
 
 def pass_for(by_case_policy: Mapping[tuple[str, str], Mapping[str, Any]], manifest_index: str, policy: str) -> bool:
@@ -1453,6 +1626,467 @@ def run_hard_tail_full104_diagnostic() -> dict[str, Any]:
     return summary
 
 
+FULL_ALLOWED_MANIFEST_FIELDS = [
+    "manifest_index",
+    "source_config",
+    "task_id",
+    "prompt_id",
+    "row_id",
+    "task_group",
+    "prefix_len_chars",
+    "middle_len_chars",
+    "suffix_len_chars",
+    "prefix_len_tokens",
+    "middle_len_tokens",
+    "suffix_len_tokens",
+    "length_bucket",
+    "selected_canvas_metadata_available",
+    "control_fixed_canvas_tokens",
+    "deployable_policy",
+    "deployable_probe_lengths",
+    "oracle_canvas_tokens",
+    "frozen_controller_test_row",
+    "frozen_controller_test_exclusion_flag",
+    "row_key",
+    "official_full_allowed_note",
+]
+
+
+def full_allowed_length_bucket(middle_tokens: int) -> str:
+    if middle_tokens <= 0:
+        return "empty_reference"
+    return length_bucket(middle_tokens)
+
+
+def build_full_allowed_manifest(tokenizer: Any) -> dict[str, Any]:
+    FULL_ALLOWED_DIR.mkdir(parents=True, exist_ok=True)
+    frozen_groups = load_frozen_test_groups()
+    manifest: list[dict[str, Any]] = []
+    excluded_counts: Counter[str] = Counter()
+    total_counts: Counter[str] = Counter()
+    empty_counts: Counter[str] = Counter()
+
+    for source_config, path in SOURCE_CONFIGS.items():
+        if not path.exists():
+            raise FileNotFoundError(path)
+        for row_id, row in enumerate(read_jsonl(path)):
+            total_counts[source_config] += 1
+            group = task_group(str(row["task_id"]))
+            if group in frozen_groups:
+                excluded_counts[source_config] += 1
+                continue
+            prefix = str(row.get("prompt", ""))
+            middle = str(row.get("canonical_solution", ""))
+            suffix = str(row.get("suffix", ""))
+            middle_tokens = token_len(tokenizer, middle)
+            if middle_tokens == 0:
+                empty_counts[source_config] += 1
+            manifest.append(
+                {
+                    "manifest_index": len(manifest),
+                    "source_config": source_config,
+                    "task_id": str(row["task_id"]),
+                    "prompt_id": prompt_id(str(row["task_id"])),
+                    "row_id": row_id,
+                    "task_group": group,
+                    "prefix_len_chars": len(prefix),
+                    "middle_len_chars": len(middle),
+                    "suffix_len_chars": len(suffix),
+                    "prefix_len_tokens": token_len(tokenizer, prefix),
+                    "middle_len_tokens": middle_tokens,
+                    "suffix_len_tokens": token_len(tokenizer, suffix),
+                    "length_bucket": full_allowed_length_bucket(middle_tokens),
+                    "selected_canvas_metadata_available": False,
+                    "control_fixed_canvas_tokens": 64,
+                    "deployable_policy": "cal_lite_length_power_alpha006",
+                    "deployable_probe_lengths": PROBE_LENGTHS,
+                    "oracle_canvas_tokens": middle_tokens,
+                    "frozen_controller_test_row": False,
+                    "frozen_controller_test_exclusion_flag": "included_not_frozen_controller_test",
+                    "row_key": stable_row_key(source_config, row_id, str(row["task_id"])),
+                    "official_full_allowed_note": "all_official_rows_except_frozen_controller_test_groups",
+                }
+            )
+
+    write_csv(FULL_ALLOWED_DIR / "manifest.csv", manifest, FULL_ALLOWED_MANIFEST_FIELDS)
+    summary = {
+        "verdict": "official_second_regime_full_allowed_manifest_built",
+        "created_at_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "case_count": len(manifest),
+        "source_dataset": "loubnabnl/humaneval_infilling",
+        "source_configs": list(SOURCE_CONFIGS),
+        "total_rows_by_config": dict(total_counts),
+        "excluded_frozen_rows_by_config": dict(excluded_counts),
+        "empty_reference_rows_by_config": dict(empty_counts),
+        "source_config_counts": dict(Counter(row["source_config"] for row in manifest)),
+        "length_bucket_counts": dict(Counter(row["length_bucket"] for row in manifest)),
+        "frozen_controller_test_rows": sum(boolish(row.get("frozen_controller_test_row")) for row in manifest),
+        "frozen_controller_test_status": "sealed_not_touched",
+        "selection_rule": "include all official rows from three configs except frozen-controller-test task groups",
+        "gpu_status": "not_run_manifest_only",
+    }
+    write_json(FULL_ALLOWED_DIR / "manifest_summary.json", summary)
+    return summary
+
+
+def build_policy_summary(
+    taxonomy_rows: Sequence[Mapping[str, Any]],
+    group_keys: Sequence[str],
+) -> list[dict[str, Any]]:
+    groups: dict[tuple[str, ...], list[Mapping[str, Any]]] = defaultdict(list)
+    for row in taxonomy_rows:
+        key = tuple(str(row[k]) for k in group_keys)
+        groups[key].append(row)
+    out: list[dict[str, Any]] = []
+    for key, rows in sorted(groups.items()):
+        cases = len(rows)
+        control_pass = sum(boolish(row["control_passed"]) for row in rows)
+        deployable_pass = sum(boolish(row["deployable_passed"]) for row in rows)
+        oracle_pass = sum(boolish(row["oracle_passed"]) for row in rows)
+        oracle_gain = sum((not boolish(row["control_passed"])) and boolish(row["oracle_passed"]) for row in rows)
+        deployable_help = sum((not boolish(row["control_passed"])) and boolish(row["deployable_passed"]) for row in rows)
+        deployable_harm = sum(boolish(row["control_passed"]) and (not boolish(row["deployable_passed"])) for row in rows)
+        oracle_harm = sum(boolish(row["control_passed"]) and (not boolish(row["oracle_passed"])) for row in rows)
+        rescue = sum(row["taxonomy"] == "rescue_limited_or_noncanvas_failure" for row in rows)
+        item = {group_keys[i]: key[i] for i in range(len(group_keys))}
+        item.update(
+            {
+                "cases": cases,
+                "control_fixed64_pass": control_pass,
+                "control_fixed64_rate": control_pass / cases if cases else None,
+                "best_deployable_cal_lite_pass": deployable_pass,
+                "best_deployable_cal_lite_rate": deployable_pass / cases if cases else None,
+                "oracle_sufficient_canvas_pass": oracle_pass,
+                "oracle_sufficient_canvas_rate": oracle_pass / cases if cases else None,
+                "oracle_gain_vs_control_cases": oracle_gain,
+                "oracle_gain_vs_control_rate": oracle_gain / cases if cases else None,
+                "deployable_help_vs_control_cases": deployable_help,
+                "deployable_help_vs_control_rate": deployable_help / cases if cases else None,
+                "deployable_harm_vs_control_cases": deployable_harm,
+                "deployable_harm_vs_control_rate": deployable_harm / cases if cases else None,
+                "oracle_harm_vs_control_cases": oracle_harm,
+                "oracle_harm_vs_control_rate": oracle_harm / cases if cases else None,
+                "rescue_limited_or_noncanvas_cases": rescue,
+                "rescue_limited_or_noncanvas_rate": rescue / cases if cases else None,
+            }
+        )
+        out.append(item)
+    return out
+
+
+def build_full_allowed_taxonomy_summary(taxonomy_rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    groups: dict[tuple[str, str, str], list[Mapping[str, Any]]] = defaultdict(list)
+    for row in taxonomy_rows:
+        groups[(str(row["source_config"]), str(row["length_bucket"]), str(row["taxonomy"]))].append(row)
+        groups[(str(row["source_config"]), "ALL", str(row["taxonomy"]))].append(row)
+        groups[("ALL", str(row["length_bucket"]), str(row["taxonomy"]))].append(row)
+        groups[("ALL", "ALL", str(row["taxonomy"]))].append(row)
+    out: list[dict[str, Any]] = []
+    for (source_config, bucket, taxonomy), rows in sorted(groups.items()):
+        out.append(
+            {
+                "source_config": source_config,
+                "length_bucket": bucket,
+                "taxonomy": taxonomy,
+                "cases": len(rows),
+                "control_pass": sum(boolish(row["control_passed"]) for row in rows),
+                "deployable_pass": sum(boolish(row["deployable_passed"]) for row in rows),
+                "oracle_pass": sum(boolish(row["oracle_passed"]) for row in rows),
+            }
+        )
+    return out
+
+
+def build_full_allowed_harm_summary(taxonomy_rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    rows = []
+    for group_keys in [("source_config",), ("length_bucket",), ("source_config", "length_bucket")]:
+        for item in build_policy_summary(taxonomy_rows, group_keys):
+            out = {"group": "+".join(group_keys), **item}
+            rows.append(out)
+    return rows
+
+
+def comparison_rows(
+    prior_name: str,
+    prior_total: int,
+    prior_metrics: Mapping[str, int],
+    current_summary: Mapping[str, Any],
+    note: str,
+) -> list[dict[str, Any]]:
+    mapping = [
+        ("case_count", "Cases"),
+        ("control_fixed64_pass", "Control fixed64 pass"),
+        ("best_deployable_cal_lite_pass", "Best deployable cal-lite pass"),
+        ("oracle_sufficient_canvas_pass", "Oracle-sufficient canvas pass"),
+        ("oracle_gain_vs_control_cases", "Oracle gain vs control"),
+        ("deployable_help_vs_control_cases", "Deployable help vs control"),
+        ("deployable_harm_vs_control_cases", "Deployable harm vs control"),
+        ("oracle_harm_vs_control_cases", "Oracle harm vs control"),
+        ("rescue_limited_or_noncanvas_cases", "Rescue/non-canvas-limited"),
+    ]
+    current_total = int(current_summary["case_count"])
+    out: list[dict[str, Any]] = []
+    for key, label in mapping:
+        prior_value = prior_metrics.get(key, "")
+        current_value = current_summary.get(key, "")
+        prior_rate = pct(int(prior_value), prior_total) if isinstance(prior_value, int) and key != "case_count" else ""
+        current_rate = pct(int(current_value), current_total) if isinstance(current_value, int) and key != "case_count" else ""
+        delta = current_value - prior_value if isinstance(prior_value, int) and isinstance(current_value, int) else ""
+        out.append(
+            {
+                "metric": label,
+                prior_name: prior_value,
+                f"{prior_name}_rate": prior_rate,
+                "full_allowed": current_value,
+                "full_allowed_rate": current_rate,
+                "delta_full_allowed_minus_prior": delta,
+                "note": note,
+            }
+        )
+    return out
+
+
+def full_allowed_verdict(summary: Mapping[str, Any]) -> str:
+    oracle_gain = int(summary["oracle_gain_vs_control_cases"])
+    rescue = int(summary["rescue_limited_or_noncanvas_cases"])
+    deploy_harm = int(summary["deployable_harm_vs_control_cases"])
+    oracle_harm = int(summary["oracle_harm_vs_control_cases"])
+    if oracle_gain > 0 and (rescue > 0 or deploy_harm > 0 or oracle_harm > 0):
+        return "official_second_regime_full_allowed_mixed_stress_evidence"
+    if oracle_gain > 0:
+        return "official_second_regime_full_allowed_supports_canvas_recoverability"
+    return "official_second_regime_full_allowed_scope_boundary_noncanvas_limited"
+
+
+def write_full_allowed_report(
+    summary: Mapping[str, Any],
+    config_summary: Sequence[Mapping[str, Any]],
+    length_summary: Sequence[Mapping[str, Any]],
+    harm_summary: Sequence[Mapping[str, Any]],
+    comparison_120: Sequence[Mapping[str, Any]],
+    comparison_full104: Sequence[Mapping[str, Any]],
+) -> None:
+    config_all = [row for row in config_summary if row["source_config"] != "ALL"]
+    config_support = sorted(config_all, key=lambda row: (-int(row["oracle_gain_vs_control_cases"]), str(row["source_config"])))
+    config_rescue = sorted(config_all, key=lambda row: (-float(row["rescue_limited_or_noncanvas_rate"] or 0.0), str(row["source_config"])))
+    lines = [
+        "# Official Second-Regime Full Allowed Diagnostic",
+        "",
+        f"Verdict: `{summary['verdict']}`.",
+        "",
+        "This is the full allowed official second-regime diagnostic: all rows from `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight` are included except HumanEval task groups in the frozen-controller-test split.",
+        "Frozen test remains sealed. This is not a controller test, does not use synthetic stress, does not add policies, and does not tune cal-lite after seeing results.",
+        "The same three fixed policies are used: control fixed64, best deployable cal-lite, and oracle-sufficient canvas.",
+        "",
+        "## Overall Pass Rates",
+        "",
+        f"Cases: `{summary['case_count']}`.",
+        f"Control fixed64: `{summary['control_fixed64_pass']}/{summary['case_count']}` (`{pct(int(summary['control_fixed64_pass']), int(summary['case_count']))}`).",
+        f"Best deployable cal-lite: `{summary['best_deployable_cal_lite_pass']}/{summary['case_count']}` (`{pct(int(summary['best_deployable_cal_lite_pass']), int(summary['case_count']))}`).",
+        f"Oracle-sufficient canvas: `{summary['oracle_sufficient_canvas_pass']}/{summary['case_count']}` (`{pct(int(summary['oracle_sufficient_canvas_pass']), int(summary['case_count']))}`).",
+        f"Oracle gain vs control: `{summary['oracle_gain_vs_control_cases']}`.",
+        f"Deployable help vs control: `{summary['deployable_help_vs_control_cases']}`.",
+        f"Deployable harm vs control: `{summary['deployable_harm_vs_control_cases']}`.",
+        f"Oracle harm vs control: `{summary['oracle_harm_vs_control_cases']}`.",
+        f"Rescue/non-canvas-limited cases: `{summary['rescue_limited_or_noncanvas_cases']}`.",
+        "",
+        "## Answers",
+        "",
+        "1. Full allowed official pass rates are listed above and in `summary.json`.",
+        "2. The 120-case first-pass estimate should be read as the unbiased diagnostic estimate; `comparison_vs_120_first_pass.csv` records how the full allowed population shifts that estimate.",
+        "3. Configs supporting canvas recoverability, ranked by oracle gain vs control:",
+    ]
+    for row in config_support:
+        lines.append(
+            f"   - `{row['source_config']}`: oracle gain `{row['oracle_gain_vs_control_cases']}/{row['cases']}` (`{pct(int(row['oracle_gain_vs_control_cases']), int(row['cases']))}`)."
+        )
+    lines.append("4. Configs mainly rescue/non-canvas-limited, ranked by rescue/non-canvas rate:")
+    for row in config_rescue:
+        lines.append(
+            f"   - `{row['source_config']}`: rescue/non-canvas `{row['rescue_limited_or_noncanvas_cases']}/{row['cases']}` (`{pct(int(row['rescue_limited_or_noncanvas_cases']), int(row['cases']))}`)."
+        )
+    lines.extend(
+        [
+            f"5. Deployable cal-lite helps on `{summary['deployable_help_vs_control_cases']}` cases and harms control on `{summary['deployable_harm_vs_control_cases']}` cases; see `harm_summary.csv`.",
+            f"6. Oracle canvas harms control on `{summary['oracle_harm_vs_control_cases']}` cases; see `harm_summary.csv` and `taxonomy_summary.csv`.",
+            f"7. The full official result is interpreted as `{summary['central_claim_effect']}` for the central diagnostic claim.",
+            "8. Allowed claims: official second-regime contains real canvas-recoverable cases and substantial rescue/non-canvas-limited and harm-risk cases; this strengthens a diagnostic mixed-stress paper. Forbidden claims: deployable controller success, frozen-test performance, synthetic benchmark evidence, or unbiased hard-tail benchmark performance.",
+            "",
+            "## By Config",
+            "",
+            "| Config | Cases | Control | Deployable | Oracle | Oracle gain | Rescue/non-canvas | Deployable harm | Oracle harm |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for row in config_all:
+        lines.append(
+            f"| `{row['source_config']}` | `{row['cases']}` | `{row['control_fixed64_pass']}` | "
+            f"`{row['best_deployable_cal_lite_pass']}` | `{row['oracle_sufficient_canvas_pass']}` | "
+            f"`{row['oracle_gain_vs_control_cases']}` | `{row['rescue_limited_or_noncanvas_cases']}` | "
+            f"`{row['deployable_harm_vs_control_cases']}` | `{row['oracle_harm_vs_control_cases']}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Comparison Notes",
+            "",
+            "- `comparison_vs_120_first_pass.csv` compares the unbiased 120-case first pass to this full allowed population.",
+            "- `comparison_vs_full104_hard_tail.csv` compares the fixed hard-tail stress/taxonomy subset to this full allowed population.",
+            "- Full allowed official diagnostic is broader than hard-tail, but it is still not a controller test and does not open frozen test.",
+            "",
+            "## Stop Rule",
+            "",
+            "Stop second-regime GPU work after this full allowed official diagnostic unless a concrete bug is found. Move next to paper evidence consolidation.",
+            "",
+            "## Compact Outputs",
+            "",
+            "- `manifest.csv`",
+            "- `results.csv`",
+            "- `config_summary.csv`",
+            "- `length_bucket_summary.csv`",
+            "- `taxonomy_summary.csv`",
+            "- `harm_summary.csv`",
+            "- `comparison_vs_120_first_pass.csv`",
+            "- `comparison_vs_full104_hard_tail.csv`",
+            "- `summary.json`",
+            "- `report.md`",
+        ]
+    )
+    (FULL_ALLOWED_DIR / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def finalize_full_allowed_outputs(wall_clock_sec: float) -> dict[str, Any]:
+    manifest = read_csv(FULL_ALLOWED_DIR / "manifest.csv")
+    results_path = FULL_ALLOWED_DIR / "results.csv"
+    results = read_csv(results_path)
+    expected = len(manifest) * len(POLICIES)
+    if len(results) != expected:
+        raise RuntimeError(f"Full allowed diagnostic incomplete: expected {expected} result rows, found {len(results)}")
+    keys = [(row["manifest_index"], row["policy"]) for row in results]
+    if len(keys) != len(set(keys)):
+        raise RuntimeError("Full allowed diagnostic has duplicate manifest_index/policy rows")
+
+    taxonomy = build_failure_taxonomy(manifest, results)
+    all_summary = build_policy_summary(taxonomy, ["source_config"])
+    all_row = {
+        "source_config": "ALL",
+        **build_policy_summary([{**row, "source_config": "ALL"} for row in taxonomy], ["source_config"])[0],
+    }
+    config_summary = [all_row, *all_summary]
+    length_summary = build_policy_summary(taxonomy, ["length_bucket"])
+    taxonomy_summary = build_full_allowed_taxonomy_summary(taxonomy)
+    harm_summary = build_full_allowed_harm_summary(taxonomy)
+    overall = all_row
+
+    summary: dict[str, Any] = {
+        "created_at_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "source_dataset": "loubnabnl/humaneval_infilling",
+        "manifest_dir": str(FULL_ALLOWED_DIR.relative_to(REPO)),
+        "diagnostic_dir": str(FULL_ALLOWED_DIR.relative_to(REPO)),
+        "model": "GSAI-ML/LLaDA-8B-Base",
+        "policies": [policy for policy, _ in POLICIES],
+        "case_count": int(overall["cases"]),
+        "control_fixed64_pass": int(overall["control_fixed64_pass"]),
+        "best_deployable_cal_lite_pass": int(overall["best_deployable_cal_lite_pass"]),
+        "oracle_sufficient_canvas_pass": int(overall["oracle_sufficient_canvas_pass"]),
+        "oracle_gain_vs_control_cases": int(overall["oracle_gain_vs_control_cases"]),
+        "deployable_help_vs_control_cases": int(overall["deployable_help_vs_control_cases"]),
+        "deployable_harm_vs_control_cases": int(overall["deployable_harm_vs_control_cases"]),
+        "oracle_harm_vs_control_cases": int(overall["oracle_harm_vs_control_cases"]),
+        "rescue_limited_or_noncanvas_cases": int(overall["rescue_limited_or_noncanvas_cases"]),
+        "frozen_controller_test_status": "sealed_not_touched",
+        "frozen_controller_test_rows": 0,
+        "synthetic_stress_status": "not_used",
+        "controller_test_status": "not_a_controller_test",
+        "cal_lite_tuning_status": "not_tuned_after_results",
+        "wall_clock_sec": wall_clock_sec,
+        "environment": {
+            "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE"),
+            "TRANSFORMERS_OFFLINE": os.environ.get("TRANSFORMERS_OFFLINE"),
+            "TOKENIZERS_PARALLELISM": os.environ.get("TOKENIZERS_PARALLELISM"),
+        },
+    }
+    summary["verdict"] = full_allowed_verdict(summary)
+    summary["central_claim_effect"] = (
+        "strengthens_mixed_diagnostic_claim"
+        if summary["oracle_gain_vs_control_cases"] > 0 and summary["rescue_limited_or_noncanvas_cases"] > 0
+        else "weakens_or_bounds_diagnostic_claim"
+    )
+
+    first_pass = json.loads((DIAGNOSTIC_DIR / "summary.json").read_text(encoding="utf-8"))
+    comparison_120 = comparison_rows(
+        "first_pass_120",
+        int(first_pass["case_count"]),
+        {
+            "case_count": int(first_pass["case_count"]),
+            "control_fixed64_pass": int(first_pass["control_fixed64_pass"]),
+            "best_deployable_cal_lite_pass": int(first_pass["best_deployable_cal_lite_pass"]),
+            "oracle_sufficient_canvas_pass": int(first_pass["oracle_sufficient_canvas_pass"]),
+            "oracle_gain_vs_control_cases": int(first_pass["oracle_gain_vs_control_cases"]),
+            "deployable_help_vs_control_cases": int(first_pass["deployable_gain_vs_control_cases"]),
+            "deployable_harm_vs_control_cases": int(first_pass["deployable_harm_vs_control_cases"]),
+            "oracle_harm_vs_control_cases": int(first_pass["oracle_harm_vs_control_cases"]),
+        },
+        summary,
+        "first_pass_120_is_unbiased_official_diagnostic_estimate",
+    )
+    full104 = json.loads((HARD_TAIL_FULL104_DIR / "summary.json").read_text(encoding="utf-8"))
+    comparison_full104 = comparison_rows(
+        "full104_hard_tail",
+        int(full104["case_count"]),
+        {
+            "case_count": int(full104["case_count"]),
+            "control_fixed64_pass": int(full104["control_fixed64_pass"]),
+            "best_deployable_cal_lite_pass": int(full104["best_deployable_cal_lite_pass"]),
+            "oracle_sufficient_canvas_pass": int(full104["oracle_sufficient_canvas_pass"]),
+            "oracle_gain_vs_control_cases": int(full104["genuinely_canvas_recoverable_now"]),
+            "deployable_help_vs_control_cases": int(full104["deployable_cal_lite_help_now"]),
+            "deployable_harm_vs_control_cases": int(full104["deployable_cal_lite_harm_now"]),
+            "oracle_harm_vs_control_cases": int(full104["oracle_canvas_harm_vs_control_now"]),
+            "rescue_limited_or_noncanvas_cases": int(full104["rescue_limited_or_noncanvas_now"]),
+        },
+        summary,
+        "full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark",
+    )
+
+    write_csv(FULL_ALLOWED_DIR / "config_summary.csv", config_summary)
+    write_csv(FULL_ALLOWED_DIR / "length_bucket_summary.csv", length_summary)
+    write_csv(FULL_ALLOWED_DIR / "taxonomy_summary.csv", taxonomy_summary)
+    write_csv(FULL_ALLOWED_DIR / "harm_summary.csv", harm_summary)
+    write_csv(FULL_ALLOWED_DIR / "comparison_vs_120_first_pass.csv", comparison_120)
+    write_csv(FULL_ALLOWED_DIR / "comparison_vs_full104_hard_tail.csv", comparison_full104)
+    write_json(FULL_ALLOWED_DIR / "summary.json", summary)
+    write_full_allowed_report(summary, config_summary, length_summary, harm_summary, comparison_120, comparison_full104)
+    return summary
+
+
+def run_full_allowed_diagnostic() -> dict[str, Any]:
+    manifest_path = FULL_ALLOWED_DIR / "manifest.csv"
+    if not manifest_path.exists():
+        from transformers import AutoTokenizer
+
+        tokenizer_for_manifest = AutoTokenizer.from_pretrained("GSAI-ML/LLaDA-8B-Base", trust_remote_code=True)
+        build_full_allowed_manifest(tokenizer_for_manifest)
+    manifest, tasks = load_manifest_tasks(manifest_path)
+    if any(boolish(row.get("frozen_controller_test_row")) for row in manifest):
+        raise RuntimeError("Refusing to run full allowed manifest with frozen-controller-test rows")
+
+    set_global_seed(42)
+    tokenizer, model = load_model_and_tokenizer(cfg_for_policy("fixed").model)
+
+    results_path = FULL_ALLOWED_DIR / "results.csv"
+    completed = set()
+    if results_path.exists() and results_path.stat().st_size > 0:
+        for row in read_csv(results_path):
+            completed.add((str(row["manifest_index"]), str(row["policy"])))
+
+    wall_start = time.perf_counter()
+    for policy_name, source in POLICIES:
+        run_policy_incremental(policy_name, source, tasks, manifest, tokenizer, model, results_path, completed)
+    return finalize_full_allowed_outputs(time.perf_counter() - wall_start)
+
+
 def write_diagnostic_report(summary: Mapping[str, Any], stratum_summary: Sequence[Mapping[str, Any]]) -> None:
     lines = [
         "# Official Second-Regime Bounded Diagnostic",
@@ -1526,6 +2160,9 @@ def parse_args() -> argparse.Namespace:
             "hard-tail-full104-manifest",
             "hard-tail-full104-diagnostic",
             "hard-tail-full104-all",
+            "full-allowed-manifest",
+            "full-allowed-diagnostic",
+            "full-allowed-all",
         ],
         required=True,
     )
@@ -1558,6 +2195,15 @@ def main() -> None:
     if args.mode in {"hard-tail-full104-diagnostic", "hard-tail-full104-all"}:
         summary = run_hard_tail_full104_diagnostic()
         print(json.dumps({"diagnostic_dir": str(HARD_TAIL_FULL104_DIR), **summary}, indent=2, sort_keys=True))
+    if args.mode in {"full-allowed-manifest", "full-allowed-all"}:
+        from transformers import AutoTokenizer
+
+        tokenizer = AutoTokenizer.from_pretrained("GSAI-ML/LLaDA-8B-Base", trust_remote_code=True)
+        summary = build_full_allowed_manifest(tokenizer)
+        print(json.dumps({"diagnostic_dir": str(FULL_ALLOWED_DIR), **summary}, indent=2, sort_keys=True))
+    if args.mode in {"full-allowed-diagnostic", "full-allowed-all"}:
+        summary = run_full_allowed_diagnostic()
+        print(json.dumps({"diagnostic_dir": str(FULL_ALLOWED_DIR), **summary}, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

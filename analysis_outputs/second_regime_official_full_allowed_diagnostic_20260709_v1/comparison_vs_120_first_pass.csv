@@ -1,0 +1,10 @@
+metric,first_pass_120,first_pass_120_rate,full_allowed,full_allowed_rate,delta_full_allowed_minus_prior,note
+Cases,120,,6707,,6587,first_pass_120_is_unbiased_official_diagnostic_estimate
+Control fixed64 pass,34,28.33%,2019,30.10%,1985,first_pass_120_is_unbiased_official_diagnostic_estimate
+Best deployable cal-lite pass,36,30.00%,1464,21.83%,1428,first_pass_120_is_unbiased_official_diagnostic_estimate
+Oracle-sufficient canvas pass,49,40.83%,3180,47.41%,3131,first_pass_120_is_unbiased_official_diagnostic_estimate
+Oracle gain vs control,26,21.67%,1633,24.35%,1607,first_pass_120_is_unbiased_official_diagnostic_estimate
+Deployable help vs control,17,14.17%,620,9.24%,603,first_pass_120_is_unbiased_official_diagnostic_estimate
+Deployable harm vs control,15,12.50%,1175,17.52%,1160,first_pass_120_is_unbiased_official_diagnostic_estimate
+Oracle harm vs control,11,9.17%,472,7.04%,461,first_pass_120_is_unbiased_official_diagnostic_estimate
+Rescue/non-canvas-limited,,,3055,45.55%,,first_pass_120_is_unbiased_official_diagnostic_estimate

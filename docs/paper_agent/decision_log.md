@@ -1,6 +1,6 @@
 # Decision Log
 
-Updated: 2026-07-08 UTC
+Updated: 2026-07-10 UTC
 
 - H200 accepted as the current evidence base. A6000 results remain historical reference only and must not be silently mixed into H200 main claims.
 - Frozen test remains sealed unless a preregistered validation gate explicitly passes. Current `test_evaluation_count` remains `0`.
@@ -18,7 +18,9 @@ Updated: 2026-07-08 UTC
 - Because official second-regime has meaningful failures and oracle recovers a nonzero subset, the stop rule became hard-tail follow-up, not immediate benchmark-style expansion. CPU hard-tail manifest `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/` has `104` rows and frozen rows `0`.
 - Approved 48-case official second-regime hard-tail diagnostic is completed and first-pass labels remained stable (`0` label changes): control `12/48`, deployable `16/48`, oracle `28/48`, genuine canvas-recoverable `24`, rescue/non-canvas `12`, deployable harm `9`, oracle harm vs control `8`.
 - Reviewer-requested fixed full104 official second-regime hard-tail stress diagnostic is completed as supplemental taxonomy/robustness evidence, not as an unbiased benchmark aggregate: control `18/104`, deployable `20/104`, oracle `33/104`, genuine canvas-recoverable `26`, rescue/non-canvas `60`, deployable harm `15`, oracle harm vs control `11`, first-pass label changes `0`.
-- Official second-regime should be written as `mixed stress evidence`: it supports the canvas-sufficiency diagnostic on official data, but it is also a scope boundary for deployable cal-lite and rescue/non-canvas-limited random-span/extreme failures. The 120-case first pass remains the unbiased official diagnostic estimate; full104 does not authorize deployable controller claims. Stop second-regime GPU work unless a concrete bug or preregistered follow-up appears.
+- User accepted HEAD `1547ed087e9e1eff68ddb14999e0fe40cb5b6d87` and revised execution strategy: when a run is scientifically useful, does not touch frozen test, and does not induce validation overfitting, prefer full runs over small bounded samples because GPU budget is not the limiting factor.
+- Full allowed official second-regime diagnostic is completed on all non-frozen rows from the three recovered official configs: `6707` rows, frozen rows `0`, control fixed64 `2019/6707`, deployable cal-lite `1464/6707`, oracle-sufficient canvas `3180/6707`, oracle gain vs control `1633`, deployable harm `1175`, oracle harm vs control `472`, rescue/non-canvas-limited `3055`.
+- Official second-regime should be written as `mixed stress evidence`: it supports the canvas-sufficiency diagnostic on official data, but it is also a scope boundary for deployable cal-lite and rescue/non-canvas-limited random-span/extreme failures. Full allowed strengthens the mixed diagnostic claim; the 120-case first pass remains the preregistered/unbiased official diagnostic estimate; full104 remains fixed hard-tail taxonomy/stress; none of these authorize deployable controller claims. Stop second-regime GPU work unless a concrete bug appears.
 - Controller V1/V2/V3 route closure is now a real artifact at `analysis_outputs/controller_route_closure_20260708_v1/`; no Controller V4 is authorized.
 - Negative results are paper evidence if they preserve split discipline, report costs/risks, and are tied to a scientific claim boundary.
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.

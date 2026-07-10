@@ -1,6 +1,6 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-08 UTC
+更新日期：2026-07-10 UTC
 
 ## 0. H200 新服务器迁移状态
 
@@ -44,7 +44,7 @@ Phase 4 findings：
 
 - Second-backbone feasibility verdict：`recommended_backbone_available`。推荐 `Dream-org/Dream-Coder-v0-Base-7B`，因为本机 Hugging Face cache、official-canvas runner、evaluator compatibility 和历史 full SingleLine evidence 均存在。
 - Second-backbone diagnostic status：initial extraction `analysis_outputs/second_backbone_diagnostic_20260708_phase4_v4/` 已被 Full Access fresh oracle run `analysis_outputs/second_backbone_oracle_diagnostic_20260708_phase4_fullaccess_v3/` 补齐；结果为 mixed second-backbone evidence，而不是 clean cross-backbone confirmation。
-- Second-regime feasibility verdict：先前缺少 local official MultiLine/RandomSpan JSONL；已从公开 `loubnabnl/humaneval_infilling` 恢复/export 三个 official second-regime configs 到本地 `data/`，并完成 source-labeled official 120-case manifest、CPU smoke gate、bounded GPU diagnostic、CPU hard-tail manifest、48-case hard-tail diagnostic 和 reviewer-requested full104 fixed hard-tail stress diagnostic。
+- Second-regime feasibility verdict：先前缺少 local official MultiLine/RandomSpan JSONL；已从公开 `loubnabnl/humaneval_infilling` 恢复/export 三个 official second-regime configs 到本地 `data/`，并完成 source-labeled official 120-case manifest、CPU smoke gate、bounded GPU diagnostic、CPU hard-tail manifest、48-case hard-tail diagnostic、reviewer-requested full104 fixed hard-tail stress diagnostic，以及 full allowed official second-regime diagnostic。
 - LR-DLLM final verdict：`blocked_missing_algorithmic_detail`。当前仍无 protocol-matched official/local Stage I/II adapter；不要称为 official reproduction。
 - Frozen test：仍为 `sealed`，`test_evaluation_count=0`。
 
@@ -64,9 +64,10 @@ Phase 4 continuation（2026-07-08）：
 - Official second-regime hard-tail manifest：按 stop rule CPU-only 构造，输出 `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`，`104` cases，frozen rows `0`。
 - Official second-regime 48-case hard-tail diagnostic：网页/user 已批准 smaller bounded hard-tail GPU diagnostic；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`。采样组 `12/12/12/12`，source configs `16/16/16`，length buckets `12/12/12/12`，frozen rows `0`。结果：control fixed64 `12/48`，best deployable cal-lite `16/48`，oracle-sufficient canvas `28/48`；genuine canvas-recoverable `24`，rescue/non-canvas `12`，deployable help `13`，deployable harm `9`，oracle harm vs control `8`，first-pass label changes `0`。Verdict：`official_second_regime_mixed_stress_evidence`。二阶段官方数据支持 canvas-sufficiency diagnostic，但同时是 deployable cal-lite 和 rescue/non-canvas limitation 的 scope boundary；full104 reviewer supplemental run 见下一条。
 - Official second-regime full104 hard-tail stress diagnostic：reviewer 要求在 GPU budget 不受限时完成固定 104-case hard-tail taxonomy/stress run；已完成一次 bounded run，输出 `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/`。它是 post-first-pass fixed hard-tail stress set，不是 unbiased benchmark aggregate；official first-pass 120-case 仍是 official diagnostic estimate。结果：control fixed64 `18/104`，best deployable cal-lite `20/104`，oracle-sufficient canvas `33/104`；genuine canvas-recoverable `26`，rescue/non-canvas `60`，deployable help `17`，deployable harm `15`，oracle harm vs control `11`，first-pass label changes `0`。Verdict 仍为 `official_second_regime_mixed_stress_evidence`，不授权 deployable controller claims；除非具体 bug 或 preregistered follow-up，停止 second-regime GPU work。
+- Official second-regime full allowed diagnostic：用户接受 HEAD `1547ed087e9e1eff68ddb14999e0fe40cb5b6d87` 后，按“GPU budget 不是限制、优先 full runs”策略完成 full allowed official population diagnostic，输出 `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/`。该 manifest 包含三个 official configs 中排除 frozen-controller-test task groups 后的全部 `6707` rows，frozen rows `0`，不是 controller test，不使用 synthetic stress，不新增 policy，不 tune cal-lite。结果：control fixed64 `2019/6707` (`30.10%`)，best deployable cal-lite `1464/6707` (`21.83%`)，oracle-sufficient canvas `3180/6707` (`47.41%`)；oracle gain vs control `1633`，deployable help `620`，deployable harm `1175`，oracle harm vs control `472`，rescue/non-canvas-limited `3055`。Verdict：`official_second_regime_full_allowed_mixed_stress_evidence`，strengthens mixed diagnostic claim；full allowed 是 broader allowed population diagnostic，120-case first-pass 仍保留为 preregistered/unbiased estimate，full104 仍是 fixed hard-tail taxonomy/stress。该结果不授权 deployable controller claim；second-regime GPU work 停止，除非发现 concrete bug。
 - Controller route-closure table：真实 artifact 已生成于 `analysis_outputs/controller_route_closure_20260708_v1/`，含 `route_closure_table.md`、`route_closure_table.csv`、`summary.json`。V1/V2/V3 均作为 validation-only weak/negative evidence；frozen test remains sealed，`test_evaluation_count=0`，不授权 Controller V4。
 
-CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“official second-regime manifest/GPU evidence 缺失”转为：official second-regime 是 mixed stress evidence 而非 clean deployable-controller claim、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
+CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但仍不是 submission-ready。最关键 blocking gaps 已从“official second-regime manifest/GPU evidence 缺失”转为：official second-regime full allowed population 强化 mixed diagnostic claim 但否定 deployable cal-lite controller success、Dream-Coder diagnostic 为 mixed/model-dependent、deployable controller 没有 frozen-test improvement、LR-DLLM protocol-matched baseline blocked。
 
 ## 1. 当前状态
 
@@ -76,7 +77,7 @@ CCF-A readiness：可以开始正式写作 diagnostic/mixed paper skeleton，但
 - 本轮用户接受的起点 HEAD：`aeea238f5c9752d4e1df60ca29a101eb52f4c211`
 - 本轮 hard-tail 任务接受的起点 HEAD：`d9d741f0061b456ffdc43e5fd5f7233fb478a25a`
 - 本轮 H200 action-bank/V1 replay source commit：`c05d2f8191c8ff31cec2e7472970262ed9d01526`。
-- 当前阶段：Phase 4 generalization audit and diagnostic mixed paper skeleton；Controller V3 已完成且不继续 V4；H200 drift accepted as evidence-base decision。
+- 当前阶段：Phase 4 generalization audit and diagnostic mixed paper skeleton；Controller V3 已完成且不继续 V4；H200 drift accepted as evidence-base decision；official second-regime GPU work 已在 full allowed diagnostic 后停止。
 - working tree：push 前包含本轮代码、compact results 和文档；push 后应为 clean。
 - test lock：`analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json`
 - test status：`sealed`
@@ -277,9 +278,9 @@ Important ablation signals:
 
 ## 7. 下一步建议
 
-1. 审查 official second-regime first-pass、48-case hard-tail 与 full104 hard-tail 结论（最高优先级）。
-   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 first-pass `34/120 -> 49/120`、48-case hard-tail `12/48 -> 28/48` 与 full104 hard-tail `18/104 -> 33/104` 是否应写成 supporting evidence、scope boundary，还是 mixed stress evidence？
-   - 当前建议：写成 `mixed stress evidence`。它支持 official regime 上的 canvas-sufficiency diagnostic，但不支持 positive deployable controller claim；120-case first-pass 仍是 unbiased official estimate，full104 只用于 taxonomy/robustness；停止 second-regime GPU work，除非发现具体 bug 或新的 preregistered follow-up。
+1. 审查 official second-regime full allowed 结果（最高优先级）。
+   - 科学问题：official MultiLine/RandomSpan/RandomSpanLight 的 full allowed `2019/6707 -> 3180/6707`，first-pass `34/120 -> 49/120`、48-case hard-tail `12/48 -> 28/48` 与 full104 hard-tail `18/104 -> 33/104` 应如何共同写成 mixed stress evidence？
+   - 当前建议：写成 `mixed stress evidence`。它支持 official regime 上的 canvas-sufficiency diagnostic，但不支持 positive deployable controller claim；full allowed 是 broader allowed population diagnostic，120-case first-pass 仍保留为 preregistered/unbiased estimate，full104 只用于 taxonomy/robustness；停止 second-regime GPU work，除非发现具体 bug。
 
 2. 审查 Dream-Coder expanded37 结果。
    - 科学问题：Dream-Coder 的 mixed evidence 是否足以支撑 model-dependent canvas/rescue boundary，而不是 model-agnostic confirmation？
@@ -309,6 +310,12 @@ Important ablation signals:
 - `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/comparison_vs_48.csv`
 - `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/taxonomy_summary.csv`
 - `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/case_failure_notes.csv`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/report.md`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/summary.json`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/config_summary.csv`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/harm_summary.csv`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/comparison_vs_120_first_pass.csv`
+- `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/comparison_vs_full104_hard_tail.csv`
 - `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md`
 - `analysis_outputs/controller_route_closure_20260708_v1/route_closure_table.md`
 - `docs/paper_agent/controller_route_closure_table_plan.md`

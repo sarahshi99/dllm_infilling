@@ -1,0 +1,35 @@
+{
+  "best_deployable_cal_lite_pass": 1464,
+  "cal_lite_tuning_status": "not_tuned_after_results",
+  "case_count": 6707,
+  "central_claim_effect": "strengthens_mixed_diagnostic_claim",
+  "control_fixed64_pass": 2019,
+  "controller_test_status": "not_a_controller_test",
+  "created_at_utc": "2026-07-09T20:07:02Z",
+  "deployable_harm_vs_control_cases": 1175,
+  "deployable_help_vs_control_cases": 620,
+  "diagnostic_dir": "analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "HF_HUB_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "frozen_controller_test_rows": 0,
+  "frozen_controller_test_status": "sealed_not_touched",
+  "manifest_dir": "analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1",
+  "model": "GSAI-ML/LLaDA-8B-Base",
+  "oracle_gain_vs_control_cases": 1633,
+  "oracle_harm_vs_control_cases": 472,
+  "oracle_sufficient_canvas_pass": 3180,
+  "policies": [
+    "control_fixed64",
+    "best_deployable_cal_lite_alpha006",
+    "oracle_sufficient_canvas"
+  ],
+  "rescue_limited_or_noncanvas_cases": 3055,
+  "source_dataset": "loubnabnl/humaneval_infilling",
+  "synthetic_stress_status": "not_used",
+  "verdict": "official_second_regime_full_allowed_mixed_stress_evidence",
+  "wall_clock_sec": 23403.812574771
+}

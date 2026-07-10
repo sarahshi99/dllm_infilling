@@ -1,6 +1,6 @@
 # Experiment Queue
 
-Updated: 2026-07-08 UTC
+Updated: 2026-07-10 UTC
 
 Only selected, executable experiments belong here. Frozen test remains sealed unless a validation gate explicitly passes.
 
@@ -66,8 +66,8 @@ Result: Completed on 2026-07-08. Primary/control `11/37`, best simple `11/37`, o
 ## EXP-003: Second-regime stress gate before any benchmark claim
 
 Linked idea: IDEA-001, IDEA-009
-Status: completed_full104_supplement_done
-Hypothesis: A useful second-regime diagnostic requires a source-labeled official manifest with genuine control/deployable failures; if oracle-sufficient canvas recovers a nonzero subset, bounded hard-tail diagnostics can complete taxonomy/robustness without becoming an unbiased benchmark aggregate or positive deployable controller claim.
+Status: completed_full_allowed_done
+Hypothesis: A useful second-regime diagnostic requires source-labeled official data with genuine control/deployable failures; if oracle-sufficient canvas recovers a nonzero subset, full allowed official population plus fixed hard-tail diagnostics can support mixed-stress taxonomy without becoming a positive deployable controller claim.
 Inputs:
 - `analysis_outputs/second_regime_feasibility_20260708_phase4_v4/compatibility_report.md`
 - `data/HumanEval-MultiLineInfilling.jsonl`
@@ -89,11 +89,12 @@ Outputs:
 - CPU hard-tail manifest: `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/report.md`
 - Bounded 48-case hard-tail diagnostic: `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/report.md`
 - Supplemental fixed full104 hard-tail stress diagnostic: `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/report.md`
+- Full allowed official second-regime diagnostic: `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/report.md`
 Success criterion: The selected manifest has nontrivial failures under control/deployable policy and a measurable oracle-canvas recoverability or rescue-limited fraction.
 Failure criterion: Official files remain missing and synthetic stress is all-pass, too small, or too artificial; the paper must keep second-regime as unresolved.
-Stop condition: Stop after the reviewer-requested fixed full104 hard-tail stress/taxonomy diagnostic unless a concrete bug or clearly preregistered follow-up appears. Do not run synthetic stress, add policies, open frozen test, or start Controller V4.
-Expected report path: `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/report.md`
-Result: Completed on 2026-07-09. Manifest gate produced `120` official cases, `40` per config and `10` per bucket, with frozen-controller-test rows `0` and evaluator smoke `12/12`. First-pass GPU results: control fixed64 `34/120`, best deployable cal-lite `36/120`, oracle-sufficient canvas `49/120`, oracle gain vs control `26`, deployable harm vs control `15`, oracle harm vs control `11`. The approved 48-case hard-tail diagnostic used balanced sample groups (`12/12/12/12`), source configs `16/16/16`, buckets `12/12/12/12`, frozen rows `0`, and did not alter first-pass labels. 48-case result: control `12/48`, deployable `16/48`, oracle `28/48`, genuine canvas-recoverable `24`, rescue/non-canvas `12`, deployable help `13`, deployable harm `9`, oracle harm vs control `8`, first-pass label changes `0`. Reviewer-requested full104 fixed hard-tail stress result: control `18/104`, deployable `20/104`, oracle `33/104`, genuine canvas-recoverable `26`, rescue/non-canvas `60`, deployable help `17`, deployable harm `15`, oracle harm vs control `11`, first-pass label changes `0`. Interpretation: official second-regime is mixed stress evidence, not a positive deployable controller claim; the 120-case first pass remains the unbiased official diagnostic estimate, while full104 is supplemental failure taxonomy/robustness evidence. Second-regime GPU work is stopped.
+Stop condition: Stop after the full allowed official second-regime diagnostic unless a concrete bug appears. Do not run synthetic stress, add policies, tune cal-lite, open frozen test, or start Controller V4.
+Expected report path: `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/report.md`
+Result: Completed on 2026-07-10. Manifest gate produced `120` official cases, `40` per config and `10` per bucket, with frozen-controller-test rows `0` and evaluator smoke `12/12`. First-pass GPU results: control fixed64 `34/120`, best deployable cal-lite `36/120`, oracle-sufficient canvas `49/120`, oracle gain vs control `26`, deployable harm vs control `15`, oracle harm vs control `11`. The approved 48-case hard-tail diagnostic used balanced sample groups (`12/12/12/12`), source configs `16/16/16`, buckets `12/12/12/12`, frozen rows `0`, and did not alter first-pass labels. 48-case result: control `12/48`, deployable `16/48`, oracle `28/48`, genuine canvas-recoverable `24`, rescue/non-canvas `12`, deployable help `13`, deployable harm `9`, oracle harm vs control `8`, first-pass label changes `0`. Reviewer-requested full104 fixed hard-tail stress result: control `18/104`, deployable `20/104`, oracle `33/104`, genuine canvas-recoverable `26`, rescue/non-canvas `60`, deployable help `17`, deployable harm `15`, oracle harm vs control `11`, first-pass label changes `0`. Full allowed official population result: `6707` rows, frozen rows `0`, control fixed64 `2019/6707`, best deployable cal-lite `1464/6707`, oracle-sufficient canvas `3180/6707`, oracle gain vs control `1633`, deployable help `620`, deployable harm `1175`, oracle harm vs control `472`, rescue/non-canvas-limited `3055`. Interpretation: official second-regime is mixed stress evidence, not a positive deployable controller claim; the full allowed diagnostic strengthens the mixed diagnostic claim, the 120-case first pass remains the preregistered/unbiased diagnostic estimate, and full104 remains supplemental failure taxonomy/robustness evidence. Second-regime GPU work is stopped.
 
 ## EXP-004: Controller V1/V2/V3 route-closure consolidation
 

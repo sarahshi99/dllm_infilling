@@ -1,6 +1,6 @@
 # Research Idea Board
 
-Updated: 2026-07-08 UTC
+Updated: 2026-07-10 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
@@ -9,14 +9,14 @@ Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered b
 Source: joint
 Status: done
 Scientific question: Does the canvas-limited vs rescue-limited split survive outside easy SingleLine-style construction when the infill regime stresses multiline context, random spans, longer gaps, and under-selection?
-Why it matters for CCF-A: This is now the largest remaining claim-boundary question. The official first-pass is not easy, unlike synthetic 18/18, but it also shows substantial rescue-limited and harm-risk behavior.
-Minimum experiment: Completed a source-labeled official 120-case manifest and bounded diagnostic over `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight`; completed the approved smaller 48-case hard-tail diagnostic derived from fixed first-pass labels.
+Why it matters for CCF-A: This is now the largest official-data claim-boundary question. The full allowed official population is not easy and shows both large oracle-canvas recoverability and substantial rescue-limited/harm-risk behavior.
+Minimum experiment: Completed a source-labeled official 120-case manifest and bounded diagnostic over `HumanEval-MultiLineInfilling`, `HumanEval-RandomSpanInfilling`, and `HumanEval-RandomSpanInfillingLight`; completed the approved smaller 48-case hard-tail diagnostic derived from fixed first-pass labels; completed reviewer-requested full104 hard-tail taxonomy/stress; completed full allowed official population diagnostic over all non-frozen rows.
 Expected positive outcome: Control or deployable policy fails on a meaningful fraction while oracle-sufficient canvas recovers a nonzero subset, giving cross-regime evidence for diagnostic claims.
 Expected negative outcome: Extreme/random-span strata remain mostly rescue-limited or oracle harms control enough that second-regime must be written as a scope boundary for current canvas-only claims.
-Cost: First-pass GPU completed in one bounded run; approved hard-tail GPU completed in one 48-case bounded run.
+Cost: First-pass GPU, 48-case hard-tail GPU, full104 hard-tail GPU, and full allowed official GPU diagnostic are completed. No more second-regime GPU work is planned unless a concrete bug appears.
 Risks: Official random-span/extreme cases may stress semantics more than canvas length; oracle canvas can harm control; hard-tail reuse can overfit if described as a benchmark rather than follow-up diagnostic.
-Decision rule: Write official second-regime as mixed stress evidence. The reviewer-requested fixed full104 hard-tail run is completed as supplemental taxonomy/robustness evidence; do not run additional second-regime GPU work unless a concrete bug or preregistered follow-up appears.
-Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
+Decision rule: Write official second-regime as mixed stress evidence. Full allowed strengthens the mixed diagnostic claim; the 120-case first pass remains the preregistered/unbiased estimate; fixed hard-tail runs provide taxonomy/robustness. Do not run additional second-regime GPU work unless a concrete bug appears.
+Related files: `analysis_outputs/second_regime_official_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_manifest_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_diagnostic_20260708_v1/`, `analysis_outputs/second_regime_official_hard_tail_full104_20260708_v1/`, `analysis_outputs/second_regime_official_full_allowed_diagnostic_20260709_v1/`, `analysis_outputs/second_regime_official_data_recovery_20260708_cpu_v1/`, `docs/paper_agent/experiment_queue.md`
 
 ## IDEA-002: Dream-Coder expanded diagnostic and case-level taxonomy
 

@@ -1,0 +1,10 @@
+metric,full104_hard_tail,full104_hard_tail_rate,full_allowed,full_allowed_rate,delta_full_allowed_minus_prior,note
+Cases,104,,6707,,6603,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Control fixed64 pass,18,17.31%,2019,30.10%,2001,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Best deployable cal-lite pass,20,19.23%,1464,21.83%,1444,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Oracle-sufficient canvas pass,33,31.73%,3180,47.41%,3147,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Oracle gain vs control,26,25.00%,1633,24.35%,1607,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Deployable help vs control,17,16.35%,620,9.24%,603,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Deployable harm vs control,15,14.42%,1175,17.52%,1160,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Oracle harm vs control,11,10.58%,472,7.04%,461,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
+Rescue/non-canvas-limited,60,57.69%,3055,45.55%,2995,full104_hard_tail_is_fixed_post_first_pass_stress_taxonomy_not_unbiased_benchmark
