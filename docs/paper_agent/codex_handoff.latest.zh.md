@@ -15,7 +15,7 @@
 - 当前 blocker：approved host/H200 command 在 process launch 前被 approval service 拒绝，错误 `422 Unprocessable Entity: model not found: codex-auto-review`。没有 GPU process、没有 smoke row、没有绕过执行。
 - Stage B：`blocked_not_started`；F1–F4：`blocked_on_bank`；Semantic Bridge V0：`blocked_on_f3_gate`。Homotopy、birth–death、particle assembly、fusion 均未实现。
 - 当前单一 decision：`blocked`。
-- Final pushed HEAD：本轮 focused commit/push 完成后填写；若仍为 `pending`，恢复者必须重新核对 remote/local HEAD。
+- Phase 5 scaffold commit：`08f01141b8cf6a8e611d55162a3c21d09ca0cf12`。Final pushed HEAD 将在 metadata commit push 后由 remote verification 确认。
 
 ## 0. H200 新服务器迁移状态
 

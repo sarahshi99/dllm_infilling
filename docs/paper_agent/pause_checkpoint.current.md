@@ -28,6 +28,8 @@ Frozen test: `sealed`, `test_evaluation_count=0`.
 
 Current decision: `blocked`.
 
+Phase 5 scaffold commit: `08f01141b8cf6a8e611d55162a3c21d09ca0cf12`.
+
 Next actions after explicit approval and functioning host approval:
 
 1. Run exact H200 command in `docs/paper_agent/current_action.md`; smoke auto-continues full only if its audit passes.
