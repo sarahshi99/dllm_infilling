@@ -651,7 +651,7 @@
     "f3_status": "blocked_on_bank",
     "f4_status": "blocked_on_bank",
     "final_decision": "blocked",
-    "final_pushed_head": "pending_push_of_metadata_commit",
+    "final_pushed_head": "pending_final_metadata_push",
     "forbidden_deployable_features": [
       "reference_code",
       "oracle_length",
@@ -692,7 +692,10 @@
       "unique_task_groups": 148
     },
     "primary_checkout_untracked_preserved": true,
+    "push_transport_result": "success: b8ae031..fabe640 to codex/risk-controlled-dynamic-rescue",
+    "pushed_checkpoint_head": "fabe6406bd8222b76bad220f76a3041e51144bdd",
     "remote_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
+    "remote_readback_status": "blocked_by_sandbox_dns_and_approval_service_422",
     "scaffold_commit": "08f01141b8cf6a8e611d55162a3c21d09ca0cf12",
     "semantic_bridge_v0_status": "blocked_on_f3_gate",
     "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6",
