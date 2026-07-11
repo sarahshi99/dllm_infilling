@@ -1,6 +1,20 @@
 # Experiment Results
 
-更新时间：2026-07-08 UTC
+更新时间：2026-07-11 UTC
+
+## Phase 5 Independent Method Falsification（2026-07-11）
+
+Fetch 后 verified remote/local starting HEAD 为 `b8ae031cf3b430833613aaf29083535edc0738f6`。主 checkout 的 untracked Phase 4/raw paths 未被修改；Phase 5 使用 clean isolated worktree。
+
+Stage A 已完成：四个独立方法与一个 auxiliary evaluator 分开登记，CCF-A gap ledger 已创建，shared-bank/F1–F4/F3 gate/forbidden-feature protocol 已预注册。Scaffold verification：`13` tests、`py_compile`、`git diff --check` 均通过。
+
+CPU read-only population audit：RandomSpanLight source `164` rows；排除 frozen groups 后 exactly `148` allowed unique groups，frozen intersection `[]`。Length buckets 为 short `22`、medium `40`、long `23`、extreme `63`；12-case smoke 为每 bucket `3`。Stage B rows：smoke `108`、full `1332`（`1184` deployable + `148` diagnostic ceiling）。Strict alpha transform structural pre-verifier eligible `121/148`，canonical verifier 仍需 approved host path 决定实际 F2 auxiliary population。
+
+GPU outcome：`blocked_not_started`。Exact H200 command 在 process launch 前被 approval service 拒绝：`422 Unprocessable Entity: model not found: codex-auto-review`。没有模型加载、canvas-128 generation、smoke/full row、evaluator outcome 或替代 length。
+
+F1 `blocked_on_bank`；F2 `blocked_on_bank`；F3 `blocked_on_bank`；F4 `blocked_on_bank`。Semantic Bridge V0 `blocked_on_f3_gate`，未运行。Homotopy、Birth–Death、Particle Assembly、fusion 均未实现。Frozen test remains `sealed`, `test_evaluation_count=0`。
+
+本轮单一 decision：`blocked`。
 
 ## Phase 4 Generalization And Paper Skeleton（2026-07-08）
 

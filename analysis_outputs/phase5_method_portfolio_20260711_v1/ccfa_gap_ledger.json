@@ -1,0 +1,19 @@
+{
+  "allowed_statuses": [
+    "closed",
+    "partially_closed",
+    "open",
+    "blocked",
+    "superseded"
+  ],
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "gap_count": 15,
+  "status_counts": {
+    "blocked": 4,
+    "closed": 0,
+    "open": 6,
+    "partially_closed": 3,
+    "superseded": 2
+  },
+  "source": "ccfa_gap_ledger.csv"
+}

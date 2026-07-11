@@ -100,7 +100,7 @@
       "v6_pass_rate": 0.7086614173228346
     },
     "validation_result": {
-      "failure_message": "VALIDATION FAILURE \u2014 TEST REMAINS SEALED",
+      "failure_message": "VALIDATION FAILURE — TEST REMAINS SEALED",
       "gate_passed": false,
       "intervention_count": 0,
       "intervention_coverage": 0.0,
@@ -157,7 +157,9 @@
     "evaluation_count": 0,
     "executed": false,
     "result_dir": null,
-    "status": "sealed"
+    "status": "sealed",
+    "test_evaluation_count": 0,
+    "test_status": "sealed"
   },
   "frozen_test_status": "sealed",
   "h200_evidence_base_accepted": true,
@@ -604,6 +606,103 @@
     "second_regime_unblock_dir": "analysis_outputs/second_regime_unblock_20260708_phase4_continue_v3",
     "second_regime_unblock_verdict": "synthetic_second_regime_minimal_constructed"
   },
+  "phase5_method_falsification": {
+    "ahead_behind": "0/0",
+    "candidate_bank": {
+      "alpha_auxiliary_separately_counted": true,
+      "canvas_lengths": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "deployable_candidates_per_task": 8,
+      "diagnostic_ceiling_per_task": 1,
+      "fixed64_control": {
+        "canvas": 64,
+        "seed": 0
+      },
+      "full_expected_base_rows": 1332,
+      "model": "GSAI-ML/LLaDA-8B-Base",
+      "seeds": [
+        0,
+        1
+      ],
+      "smoke_cases": 12,
+      "smoke_expected_base_rows": 108,
+      "status": "blocked_not_started"
+    },
+    "ccfa_gap_ledger": "analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv",
+    "clean_isolated_worktree": ".worktrees/phase5-method-falsification",
+    "combination_authorized": false,
+    "f1_status": "blocked_on_bank",
+    "f2_status": "blocked_on_bank",
+    "f3_gate": {
+      "delta_ci_low_strictly_above": 0.0,
+      "minimum_auc_delta": 0.01,
+      "required_baselines": [
+        "prefix_only",
+        "suffix_only",
+        "token_length",
+        "ordinary_confidence"
+      ],
+      "v0_on_failure": "kill_for_this_round"
+    },
+    "f3_status": "blocked_on_bank",
+    "f4_status": "blocked_on_bank",
+    "final_decision": "blocked",
+    "final_pushed_head": "pending",
+    "forbidden_deployable_features": [
+      "reference_code",
+      "oracle_length",
+      "unit_test_result",
+      "task_id",
+      "split_label",
+      "error_type",
+      "test_derived_statistic"
+    ],
+    "frozen_test_status": "sealed",
+    "gpu_blocker": {
+      "error": "422 Unprocessable Entity: model not found: codex-auto-review",
+      "gpu_process_started": false,
+      "smoke_rows_written": 0,
+      "stage": "before_process_launch",
+      "workaround_attempted": false
+    },
+    "local_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
+    "method_registry": "analysis_outputs/phase5_method_portfolio_20260711_v1/method_registry.csv",
+    "methods": {
+      "Birth–Death Canvas Diffusion": "registered_not_implemented",
+      "Constraint-Homotopy Infilling": "registered_not_implemented",
+      "Metamorphic Equivariance": "auxiliary_alpha_renaming_only",
+      "Semantic Bridge Projection": "conditional_on_f3_gate",
+      "Semantic Particle Assembly": "registered_not_implemented"
+    },
+    "population": {
+      "allowed_non_frozen_rows": 148,
+      "bucket_counts": {
+        "extreme": 63,
+        "long": 23,
+        "medium": 40,
+        "short": 22
+      },
+      "frozen_intersection": [],
+      "source_config": "HumanEval-RandomSpanInfillingLight",
+      "source_rows": 164,
+      "unique_task_groups": 148
+    },
+    "primary_checkout_untracked_preserved": true,
+    "remote_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
+    "semantic_bridge_v0_status": "blocked_on_f3_gate",
+    "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6",
+    "status": "blocked_before_gpu_launch",
+    "test_evaluation_count": 0,
+    "verification": {
+      "focused_tests": "13 passed",
+      "git_diff_check": "passed",
+      "py_compile": "passed"
+    }
+  },
   "recommended_read_order": [
     "analysis_outputs/paper_evidence_consolidation_20260710_v1/paper_claim_rewrite.md",
     "analysis_outputs/paper_evidence_consolidation_20260710_v1/claim_matrix.md",
@@ -907,9 +1006,9 @@
     "test_lock": "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json",
     "test_status": "sealed"
   },
-  "starting_commit": "77c005153c8d98a8c8e078121ab33652baad6aba",
-  "task_type": "phase4_generalization_and_paper_skeleton",
+  "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
+  "task_type": "phase5_independent_method_falsification",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-10"
+  "updated_at_cst": "2026-07-11"
 }

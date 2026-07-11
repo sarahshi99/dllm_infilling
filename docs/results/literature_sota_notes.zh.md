@@ -1,6 +1,16 @@
 # 文献与 SOTA 笔记
 
-更新时间：2026-07-02
+更新时间：2026-07-11
+
+## Phase 5 方法组合的 source-checked 边界
+
+1. FIM/InCoder 已建立双向 infilling conditioning：`https://arxiv.org/abs/2207.14255`、`https://arxiv.org/abs/2204.05999`。Semantic Bridge 的 novelty 不能是“看 prefix 和 suffix”，而必须是可审计 semantic obligations 与 candidate ranking advantage。
+2. Synchromesh/CSD 与 Constrained Discrete Diffusion 已覆盖 constrained generation：`https://arxiv.org/abs/2201.11227`、`https://arxiv.org/abs/2503.09790`。Constraint-Homotopy 必须证明 gradual schedule 的独立作用；本轮不实现。
+3. Birth–death sampling 与 diffusion SMC guidance 已有先例：`https://arxiv.org/abs/2211.00450`、`https://arxiv.org/abs/2601.21104`。Birth–Death Canvas Diffusion 目前只是内部 hypothesis；本轮不实现。
+4. MBR-EXEC 说明 candidate semantics/selection 常通过 execution 获益：`https://arxiv.org/abs/2204.11454`。本项目 deployable method 禁止 execution/unit-test outcome，因此 Semantic Particle Assembly 必须与 execution-aware selection 分开；本轮不实现。
+5. ReCode 使用 semantics-preserving transformations 测 robustness：`https://arxiv.org/abs/2212.10264`。Phase 5 alpha-renaming F2 只测 controlled equivariance predictive increment；稳定性不等于正确性。
+
+截至当前没有 Phase 5 numerical result：candidate-bank H200 command 在 launch 前被 approval service 以 `422 model not found: codex-auto-review` 阻塞。不得把 implementation/tests 或 manifest counts 写成 method performance。
 
 本文记录经过 source-check 的比较锚点，用于未来 SOTA 主张。当前项目尚不声称 SOTA。
 

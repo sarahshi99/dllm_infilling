@@ -1,0 +1,47 @@
+{
+  "combination_authorized": false,
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "frozen_test": {
+    "test_evaluation_count": 0,
+    "test_status": "sealed"
+  },
+  "methods": [
+    {
+      "implementation": "conditional_on_f3_gate",
+      "method_id": "M1",
+      "name": "Semantic Bridge Projection",
+      "phase5_role": "primary_method_candidate",
+      "status": "selected_for_f3_falsification"
+    },
+    {
+      "implementation": "not_authorized_this_round",
+      "method_id": "M2",
+      "name": "Constraint-Homotopy Infilling",
+      "phase5_role": "deferred_method",
+      "status": "registered_not_implemented"
+    },
+    {
+      "implementation": "not_authorized_this_round",
+      "method_id": "M3",
+      "name": "Birth–Death Canvas Diffusion",
+      "phase5_role": "deferred_method",
+      "status": "registered_not_implemented"
+    },
+    {
+      "implementation": "not_authorized_this_round",
+      "method_id": "M4",
+      "name": "Semantic Particle Assembly",
+      "phase5_role": "deferred_method",
+      "status": "registered_not_implemented"
+    },
+    {
+      "implementation": "auxiliary_evaluator_only",
+      "method_id": "E1",
+      "name": "Metamorphic Equivariance",
+      "phase5_role": "auxiliary_evaluator",
+      "status": "alpha_renaming_f2_only"
+    }
+  ],
+  "phase": 5,
+  "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6"
+}

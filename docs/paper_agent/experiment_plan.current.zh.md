@@ -1,6 +1,18 @@
-# Experiment Plan v3：Probe-Curve-First Length Modeling
+# Experiment Plan v5：Shared-Bank Premise Falsification
 
-更新时间：2026-07-07 UTC
+更新时间：2026-07-11 UTC
+
+## Phase 5 更新（2026-07-11）
+
+Population 固定为全部 `148` allowed non-frozen `HumanEval-RandomSpanInfillingLight` rows。Generation 固定为 `GSAI-ML/LLaDA-8B-Base`，canvas `16/32/64/128`，seeds `0/1`，每 task 八个 non-oracle candidates；`64/0` 是 fixed64 control。另保留 seed-0 oracle-sufficient diagnostic ceiling，但 oracle/reference fields 不得进入 deployable method。Stage B exact rows 为 smoke `108`、full `1332`。F2 alpha mirrors 在 full bank 通过后单独生成和审计。
+
+Canvas 128 必须通过同 protocol 验证：same `run_vanilla_decode`、fixed mask、linear target-mask schedule、`64` steps、actual canvas `128`、无替代。12-case smoke 覆盖 short/medium/long/extreme 各 `3`；schema/evaluator/resume/row-count/duplicate/frozen-lock 全通过后自动继续 full `148`，不再请求另一 approval。
+
+F1–F4 均从 shared bank 派生。F3 gate 通过才运行 standalone Semantic Bridge V0；否则 kill。本轮禁止 Controller V4、V8/V9、cal-lite tuning、Dream-Coder E/F/G、homotopy、birth–death、particle assembly 与 fusion。
+
+Forbidden deployable features：reference code、oracle length、unit-test/verifier outcome、task ID、split label、error type、test-derived statistic。Grouped evaluation unit 是 anonymized HumanEval base-task hash；identifier 只用于 grouping，不进入 feature vector。
+
+Current execution state：CPU implementation/manifest gates pass；approved H200 command 因 approval service `422 model not found: codex-auto-review` 在 launch 前 blocked。Stage B/C/D 均未产生 empirical result；frozen test remains sealed，`test_evaluation_count=0`。Current decision：`blocked`。
 
 ## H200 迁移更新（2026-07-05）
 

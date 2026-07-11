@@ -1,0 +1,19 @@
+{
+  "candidate_bank": {
+    "allowed_tasks": 148,
+    "canvas_lengths": [16, 32, 64, 128],
+    "deployable_candidates_per_task": 8,
+    "diagnostic_ceiling_candidates_per_task": 1,
+    "fixed64_control": {"canvas": 64, "seed": 0},
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "seeds": [0, 1]
+  },
+  "ccfa_gap_ledger": "ccfa_gap_ledger.csv",
+  "final_decision": "blocked",
+  "gpu_blocker": "approval service rejected the approved host command before launch: 422 model not found: codex-auto-review",
+  "frozen_test_evaluation_count": 0,
+  "frozen_test_status": "sealed",
+  "method_registry": "method_registry.csv",
+  "phase": 5,
+  "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6"
+}

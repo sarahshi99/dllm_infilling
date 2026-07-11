@@ -1,5 +1,14 @@
 # Paper-Agent Activity Ledger
 
+## 2026-07-11 UTC
+
+- action：开始 Phase 5 independent-method falsification；fetch 后核对 authoritative remote/local HEAD，保留主 checkout 用户已有 untracked paths，并建立 clean isolated worktree。
+- evidence：starting HEAD `b8ae031cf3b430833613aaf29083535edc0738f6`；Stage A registry/gap ledger；candidate-bank、F1–F4、conditional V0 scaffold；real-data read-only `164 -> 148` population audit。
+- verification：`13` focused tests / `OK`，三个 Phase 5 scripts `py_compile`，JSON/CSV parse，frozen lock sealed-zero audit，compact raw-code scan，`git diff --check`。
+- result：Stage A/scaffold pass；Stage B H200 command 在 process launch 前被 approval service 以 `422 model not found: codex-auto-review` 拒绝。GPU process `0`，smoke rows `0`，frozen test count `0`。
+- decision：`blocked`。F1–F4 blocked on bank；V0 blocked on F3；不实现 homotopy/birth–death/particle/fusion。
+- resume：用户看到 blocker 后明确批准重试 approved H200 command；命令见 `docs/paper_agent/current_action.md`。
+
 ## 2026-07-02 00:00 CST
 
 - action：继续上一轮 `superpowers:brainstorming` 后的下一阶段，使用 `superpowers:writing-plans` local fallback 写出 post-V8 CPU-only 执行计划。没有启动 GPU。

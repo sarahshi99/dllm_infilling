@@ -1,5 +1,7 @@
 # Paper-Agent Evidence Snapshot
 
+Phase 5 update, 2026-07-11 UTC: verified remote/local starting HEAD is `b8ae031cf3b430833613aaf29083535edc0738f6`. The independent-method portfolio and gap ledger are in `analysis_outputs/phase5_method_portfolio_20260711_v1/`. Focused implementation verification passes (`13` tests, py_compile, diff hygiene). A read-only real-data audit confirms `164` RandomSpanLight source rows, exactly `148` allowed unique non-frozen groups, and zero frozen intersection. No new empirical candidate/pass evidence exists: the approved H200 command was rejected before process launch (`422 model not found: codex-auto-review`). Stage B is `blocked_not_started`; F1–F4 and V0 are downstream blocked. Frozen test remains sealed and `test_evaluation_count=0`.
+
 Generated from existing local `results.jsonl` files. Raw outputs are not copied here.
 
 Update: 2026-06-01 01:52 CST. This snapshot remains the compact evidence anchor for the current A6000 checkpoint; the later probe-curve audits are tracked separately in `docs/paper_agent/probe_curve_signal_audit.md`, `docs/paper_agent/probe_curve_signal_audit.json`, `docs/paper_agent/probe_curve_split_score_audit.md`, and `docs/paper_agent/probe_curve_split_score_audit.json`.

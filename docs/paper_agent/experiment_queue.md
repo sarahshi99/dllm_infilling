@@ -1,8 +1,40 @@
 # Experiment Queue
 
-Updated: 2026-07-10 UTC
+Updated: 2026-07-11 UTC
 
 Only selected, executable experiments belong here. Frozen test remains sealed unless a validation gate explicitly passes.
+
+## EXP-007: Phase 5 full RandomSpanLight shared candidate bank
+
+Linked idea: IDEA-011, IDEA-015
+Status: blocked_not_started
+Hypothesis: A full-first shared bank can falsify candidate-diversity, equivariance, semantic-bridge, and ranking premises without method-specific generation distributions.
+Inputs: all `148` allowed non-frozen `HumanEval-RandomSpanInfillingLight` rows; LLaDA-8B-Base; canvas `16/32/64/128`; seeds `0/1`; fixed64 `(64,0)`; one diagnostic oracle ceiling.
+Smoke/full rows: exactly `108` then `1332`; alpha-renaming mirrors are a separate auxiliary block after the full gate.
+Command: exact approved H200 command in `docs/paper_agent/current_action.md`.
+Success criterion: canvas-128 same-protocol validation, schema/evaluator/resume/row-count/duplicate audits pass, zero frozen rows, unchanged test lock; smoke automatically continues full.
+Failure criterion: any substitution for 128, missing/duplicate/error row, frozen intersection, evaluator/schema failure, raw code in compact outputs, or changed test lock.
+Current blocker: approval service rejected launch before process creation with `422 model not found: codex-auto-review`.
+Expected report: `analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1/report.md`
+
+## EXP-008: Phase 5 F1–F4 premise falsification
+
+Linked idea: IDEA-011, IDEA-014, IDEA-015
+Status: blocked_on_exp007
+Hypothesis: One or more inference-visible premises add stable grouped ranking signal; failure is a valid kill result.
+Inputs: EXP-007 full bank only.
+Outputs: `analysis_outputs/phase5_premise_falsification_20260711_v1/`.
+Success/failure: F1/F2/F4 always report; F3 passes only under the preregistered combined-bridge gate.
+Stop: no deployable method implementation if F3 fails.
+
+## EXP-009: Semantic Bridge V0 conditional reranker
+
+Linked idea: IDEA-011
+Status: blocked_on_f3_gate
+Hypothesis: If F3 passes, a standalone combined-bridge reranker improves Pass@1 relative to fixed64 and confidence reranking on the same eight candidates.
+Inputs: EXP-007 full bank and EXP-008 grouped OOF combined scores.
+Outputs: `analysis_outputs/phase5_semantic_bridge_v0_20260711_v1/`.
+Kill: if F3 fails, write `killed_f3_gate_failed`; no heuristic fallback, extra generation, homotopy, birth–death, particle assembly, or fusion.
 
 ## EXP-001: CPU claim-boundary consolidation for diagnostic mixed paper
 

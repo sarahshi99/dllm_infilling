@@ -1,5 +1,41 @@
 # Paper Agent Pause Checkpoint
 
+## Phase 5 Authoritative Resume Point
+
+Timestamp: 2026-07-11 UTC
+
+Authoritative branch: `codex/risk-controlled-dynamic-rescue`
+
+Verified starting HEAD after fetch: `b8ae031cf3b430833613aaf29083535edc0738f6` (remote/local match, `0/0`). Ignore older HEAD values below.
+
+Clean implementation worktree: `.worktrees/phase5-method-falsification`; primary-checkout untracked user files preserved.
+
+Completed:
+
+- Stage A method registry and CCF-A gap ledger.
+- Shared-bank/F1–F4/F3 gate/forbidden-feature preregistration.
+- Candidate bank, premise falsification, and conditional V0 scaffold.
+- Focused verification: `13` tests, py_compile, JSON/CSV parse, sealed-zero audit, raw-code compact scan, diff hygiene.
+- Read-only RandomSpanLight audit: `164` source, `148` allowed unique groups, frozen intersection empty, Stage B expected rows `108` smoke / `1332` full.
+
+Blocker:
+
+- Approved H200 command was rejected before process launch by the approval service: `422 Unprocessable Entity: model not found: codex-auto-review`.
+- No GPU process/model load/candidate/evaluator row exists.
+- Do not retry or route around without explicit user approval after this notice.
+
+Frozen test: `sealed`, `test_evaluation_count=0`.
+
+Current decision: `blocked`.
+
+Next actions after explicit approval and functioning host approval:
+
+1. Run exact H200 command in `docs/paper_agent/current_action.md`; smoke auto-continues full only if its audit passes.
+2. Run F1–F4 from the full shared bank.
+3. Run conditional V0; it writes a killed report if F3 fails.
+
+## Historical H200 Checkpoint Below
+
 Timestamp: 2026-07-06 UTC
 
 ## H200 Migration Resume Point

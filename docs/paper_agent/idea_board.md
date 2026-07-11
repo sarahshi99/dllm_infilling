@@ -1,8 +1,50 @@
 # Research Idea Board
 
-Updated: 2026-07-10 UTC
+Updated: 2026-07-11 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
+
+## IDEA-011: Semantic Bridge Projection
+
+Source: user
+Status: blocked_on_shared_bank
+Scientific question: Can prefix-forward and suffix-backward semantic obligations rank passing candidates above failing candidates without oracle/reference/test features?
+Minimum experiment: F3 over the full shared 148-case bank; compare prefix-only, suffix-only, combined, token-length, and ordinary confidence with grouped OOF AUROC and bootstrap intervals.
+Decision rule: Implement standalone V0 only if combined wins every preregistered comparison by at least `0.01` AUROC and every delta CI lower bound is `>0`; otherwise kill for this round.
+Combination rule: Must remain standalone; no homotopy, birth–death, particle, controller, or cal-lite fusion.
+Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsification.md`, `analysis_outputs/phase5_method_portfolio_20260711_v1/`
+
+## IDEA-012: Constraint-Homotopy Infilling
+
+Source: user
+Status: registered_not_implemented
+Scientific question: Does a gradual schedule of inference-visible semantic constraints improve rescue quality relative to abrupt constraints under equal compute?
+Minimum experiment: Future standalone smoke/full protocol after the Semantic Bridge round closes.
+Decision rule: Do not implement in this round; do not combine with any other method.
+
+## IDEA-013: Birth–Death Canvas Diffusion
+
+Source: user
+Status: registered_not_implemented
+Scientific question: Can a fixed-compute population over canvas hypotheses preserve useful diversity while reallocating compute via birth/death decisions?
+Minimum experiment: Future standalone equal-compute population audit with explicit particle accounting.
+Decision rule: Do not implement in this round; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
+
+## IDEA-014: Semantic Particle Assembly
+
+Source: user
+Status: registered_not_implemented
+Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
+Minimum experiment: F1 is diagnostic only; future assembly method needs a separate preregistered protocol.
+Decision rule: Do not implement in this round; no fragment fusion after seeing outcomes.
+
+## IDEA-015: Metamorphic Equivariance Auxiliary Evaluator
+
+Source: user
+Status: blocked_on_shared_bank
+Scientific question: Does strict local alpha-renaming equivariance add predictive value for functional pass after controlling for canvas, seed, and confidence?
+Minimum experiment: F2 paired mirrors over reference-verified alpha transformations.
+Decision rule: Report predictive increment or negative evidence; never call stability correctness and never use it as an oracle.
 
 ## IDEA-001: Stress second-regime construction and diagnostic
 

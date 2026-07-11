@@ -1,6 +1,16 @@
-# Research Design v1：Length-Controlled Diffusion Code Infilling
+# Research Design v5：Independent Premise Falsification And Full-First Method Incubation
 
 创建时间：2026-05-31 12:36 CST
+
+## Phase 5 更新（2026-07-11）
+
+Phase 4 的 diagnostic/mixed claim 保留，但下一步不再继续 controller 或 cal-lite heuristic family。Phase 5 问题是：在一个预先固定、全量、共享的 RandomSpanLight candidate bank 上，是否存在独立于 oracle/test 的 inference-visible semantic premise，可以可靠地把 passing candidate 排在 failing candidate 前面，并转化为 standalone method。
+
+四个方法假设必须独立：Semantic Bridge Projection、Constraint-Homotopy Infilling、Birth–Death Canvas Diffusion、Semantic Particle Assembly。Metamorphic Equivariance 只做 auxiliary evaluator。当前 round 只允许检验 Semantic Bridge premise；其余三个只登记、不实现、不融合。
+
+当前可证伪 central hypothesis：prefix-forward 与 suffix-backward semantic bridge features 的组合，对 candidate functional pass 的 grouped out-of-fold ranking 必须同时优于 prefix-only、suffix-only、token-length 和 ordinary confidence。预注册 gate 为 AUROC delta 至少 `0.01`，且每个 grouped-bootstrap 95% delta interval lower bound `>0`。任一失败，本轮 kill Semantic Bridge V0。
+
+当前状态不是方法结果。Stage A/scaffold 已通过；H200 bank 因 approval-service launch blocker 未启动。Frozen test remains sealed, `test_evaluation_count=0`。Current decision：`blocked`。
 
 ## Phase 2 更新（2026-07-03）
 

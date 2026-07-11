@@ -1,6 +1,28 @@
 # CCF-A Readiness Assessment
 
-更新时间：2026-07-08 UTC
+更新时间：2026-07-11 UTC
+
+## Phase 5 CCF-A Gap Ledger
+
+完整 ledger：`analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv` 与 `.json`。状态只能是 `closed`、`partially_closed`、`open`、`blocked`、`superseded`。
+
+| Gap | Status | 当前证据 / 解除条件 |
+|---|---|---|
+| 独立、非 heuristic 的方法 premise | `partially_closed` | 五个想法已分开登记；只有 Semantic Bridge 进入本轮 falsification |
+| 148-case RandomSpanLight shared bank | `open` | manifest 已精确审计，GPU rows 尚未生成 |
+| candidate/AST/semantic-fragment diversity | `open` | F1 blocked on bank |
+| alpha-renaming equivariance 独立预测力 | `open` | F2 blocked on bank；不把 stability 称为 correctness |
+| combined bridge 相对四基线的真实优势 | `open` | F3 blocked；预注册 `0.01 + positive CI` gate |
+| inference-visible within-task ranking | `open` | F4 blocked on bank |
+| Semantic Bridge V0 Pass@1/help-harm | `blocked` | 仅在 F3 gate 通过后解除 |
+| frozen controller held-out result | `blocked` | Phase 5 不打开；`test_evaluation_count=0` |
+| resumable/duplicate-safe long run | `partially_closed` | code/tests 已有，需真实 smoke/full audit |
+| raw-code publication safety | `partially_closed` | compact schema 无 raw code，需 final tracked scan |
+| Controller V4 / heuristic-cal-lite continuation | `superseded` | 由 independent premise falsification 取代 |
+| Dream-Coder E/F/G 扩展 | `superseded` | 本轮禁止 |
+| CCF-A submission readiness | `open` | 仍缺 credible method result 或强 falsification-centered package |
+
+Phase 5 当前 decision：`blocked`。Blocker 是 approved H200 process launch 前的 approval-service `422 model not found: codex-auto-review`，不是方法结果。Claim Readiness Gate 仍为 `not_ready`；不得把未运行的 F1–F4 或 V0 写成证据。
 
 ## 总体判断
 
