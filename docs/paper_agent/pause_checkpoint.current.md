@@ -1,5 +1,29 @@
 # Paper Agent Pause Checkpoint
 
+## Phase 6 Active Long-Run Resume Point
+
+Timestamp: 2026-07-12 UTC
+
+- Starting commit: `52f07457a7974fafa69d59914bbc412a2d83e305`; Phase 6 implementation checkpoint: `b4746f6`.
+- Branch: `codex/phase6-abductive-bridge-v1`.
+- Method: standalone `Abductive Program-State Bridge V1`; no Phase 5 weight tuning and no method fusion.
+- Dataset: `HumanEval-MultiLineInfilling`, source `5815`, excluded frozen rows `736` from `16` groups, allowed rows `5079`.
+- Candidate pool: canvas `16/32/64/128` × seed `0/1`, LLaDA-8B-Base, `64` steps; expected full rows `40632`.
+- No existing exact-match bank was reusable; a new bank is running.
+- tmux: `phase6-multiline-bank`; Python PID at launch: `1191153`.
+- Log: `.worktrees/phase5-method-falsification/logs/paper_agent/20260712_phase6_multiline_candidate_bank.log`.
+- Raw local bank: `.worktrees/phase5-method-falsification/outputs_clean/phase6_multiline_candidate_bank_20260712_v1/candidate_bank_raw.jsonl`.
+- Compact bank: `.worktrees/phase5-method-falsification/analysis_outputs/phase6_multiline_candidate_bank_20260712_v1/`.
+- Technical smoke passed: `64/64`, zero missing/duplicate/error, schema/evaluator/resume/frozen/GPU-memory checks passed, `performance_gate_used=false`.
+- Smoke peak CUDA allocation: `16431375872` bytes; reported device total `150109880320` bytes.
+- Smoke automatically continued full. Do not stop for underperformance or an individual candidate error; record errors and continue. Pause only for a real program/resource/integrity/test-lock problem.
+- After full audit completes, run `analysis/phase6_abductive_bridge_v1.py` for same-pool fixed64/confidence/prefix-only/Phase5-combined/V1 comparison.
+- Frozen test remains `sealed`; `test_evaluation_count=0`.
+
+Current operational state: `running_full_candidate_bank`.
+
+Current scientific state: `exploratory_pending_full`.
+
 ## Phase 5 Authoritative Resume Point
 
 Timestamp: 2026-07-12 UTC

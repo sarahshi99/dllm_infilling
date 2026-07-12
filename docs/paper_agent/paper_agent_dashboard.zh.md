@@ -2,6 +2,15 @@
 
 更新时间：2026-07-12 UTC
 
+## Phase 6 Abductive Program-State Bridge V1 运行中
+
+- Branch / implementation checkpoint：`codex/phase6-abductive-bridge-v1` / `b4746f6`，从 Phase 5 result commit `52f0745` 开始。
+- MultiLine population：source `5815`，排除 frozen `736` rows / `16` groups，allowed `5079` rows；expected candidate rows `40632`。
+- V1 是独立方法：suffix backward obligations + prefix/candidate forward state + fixed lexicographic structural ranking；不调整 V0 权重，不使用 reference/unit tests/pass/oracle/supervised score，不融合其他方法。
+- Technical smoke：`64/64`，0 error/missing/duplicate；schema、evaluator、resume、frozen exclusion、GPU memory 均通过；`performance_gate_used=false`。
+- Smoke 已自动进入 full。tmux=`phase6-multiline-bank`，log=`logs/paper_agent/20260712_phase6_multiline_candidate_bank.log`。
+- Frozen test：`sealed`，`test_evaluation_count=0`。本轮是 exploratory/development，不称为 held-out SOTA。
+
 ## Phase 5 H200 shared bank 与 AST/def-use proxy gate（2026-07-12）
 
 - 唯一基线：`45bead22e3d21daa707be724cf2bdcbbf776592a`。
