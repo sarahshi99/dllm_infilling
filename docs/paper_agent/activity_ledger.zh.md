@@ -7,6 +7,7 @@
 - Phase 6 protocol：technical smoke only（runner/evaluator/schema/frozen/resume/duplicate/GPU memory）；通过后自动 full，无 performance launch gate。Frozen test 保持 `sealed`，`test_evaluation_count=0`。
 - Phase 6 launch：implementation checkpoint `b4746f6` 后执行 `bash scripts/manual_launch_phase6_multiline_candidate_bank.sh`；tmux `phase6-multiline-bank`、PID `1191153`、H200 memory/utilization、日志与 JSONL 写入均验证真实启动。
 - Technical smoke result：`64/64` rows，`0` missing/duplicate/error；schema/evaluator/frozen/resume/GPU-memory 全通过，`performance_gate_used=false`，peak CUDA allocation `16431375872` bytes。Runner 已自动继续 full `40632` rows。
+- robustness fix：local review 发现单 candidate exception row 可能缺 prefix/suffix/schema，违背“记录失败并继续”。安全停在 `278` rows、`0` duplicate；hotfix `f469264` 通过 `12` tests 后 push，并以同一命令 append-only resume。新 PID `1195368`；行数继续增长且 duplicates 保持 `0`。
 - manual H200 launch：以 `HEAD 45bead22e3d21daa707be724cf2bdcbbf776592a` 为唯一基线执行 `bash scripts/manual_launch_phase5_h200_candidate_bank.sh`；tmux/PID、H200 占用、日志和 JSONL 增长均验证真实启动。此前正确状态为 `infrastructure_blocked / scientific_pending`，不是科学失败。
 - bank result：smoke `108/108`、full base `1332/1332`、alpha auxiliary `728/728`；base 覆盖 `148` allowed cases，alpha 覆盖 `91` verified tasks；全程 `0` missing/duplicate/extra/error/frozen，run manifest `completed`。
 - F1/F2：F1 平均 unique hash `4.0`、unique parsable AST hash `3.3243`，`61` all-fail tasks 中 `6` 有 complementary units；F2 delta AUC `0.0143`，95% CI `[-0.0550,0.0829]`，不具 independent predictive evidence。
