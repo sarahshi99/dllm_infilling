@@ -2,6 +2,14 @@
 
 更新时间：2026-07-12 UTC
 
+## Canonical CCF-A Route
+
+- 唯一权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`；当前动作：`docs/paper_agent/current_action.md`。
+- P0 已按当前证据同步；P1 official baseline pack、P2 `6707 spans / 148 base-task clusters` 的 grouped statistics、P4 non-HumanEval real-code evaluation 仍 open。
+- 早期 1033 rows 是 development population，不是 held-out；local CAL/CAL-lite 不是 official CAL。
+- 四个正式方法为 M1 Abductive Program-State Bridge、M2 Constraint-Homotopy、M3 Birth--Death Canvas Diffusion、M4 Semantic Particle Assembly。Phase 5 只完成 M1-D0/M4-D0/A1 diagnostics。
+- 独立 premise diagnostics 可以共享冻结 bank 并行；方法不得 fusion。探索 full 仅受技术完整性 gate，论文 promotion 才使用严格性能 gate。
+
 ## Phase 5 H200 shared bank 与 AST/def-use proxy gate（2026-07-12）
 
 - 唯一基线：`45bead22e3d21daa707be724cf2bdcbbf776592a`。

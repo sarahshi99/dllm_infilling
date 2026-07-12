@@ -18,7 +18,12 @@ Phase 5 empirical boundary：shared bank 已完成。Current fixed AST/def-use p
 
 - CAL: "Diffusion LMs Can Approximate Optimal Infilling Lengths Implicitly"
   - arXiv: https://arxiv.org/abs/2602.00476
+  - Official code: https://github.com/NiuHechang/Calibrated_Adaptive_Length
   - 相关性：training-free calibrated adaptive length，用 denoising confidence / search 近似 optimal infilling length。
+- rho-EOS: "Training-free Bidirectional Variable-Length Control for Masked Diffusion LLMs"
+  - arXiv: https://arxiv.org/abs/2601.22527
+  - Official code: https://github.com/yjyddq/rho-EOS
+  - 相关性：在统一 denoising loop 中用 implicit EOS density 做双向 expansion/contraction；公开 quick-start 主要是 completion/generation setting，是否能公平适配 infilling 仍需 protocol audit。
 - LR-DLLM: "Improving Variable-Length Generation in Diffusion Language Models via Length Regularization"
   - arXiv: https://arxiv.org/abs/2602.07546
   - 相关性：把 generation length 显式作为 variable，并在 inference time 做 length-regularized decision。
@@ -27,6 +32,8 @@ Phase 5 empirical boundary：shared bank 已完成。Current fixed AST/def-use p
   - OpenReview: https://openreview.net/pdf?id=EQTPmqukiU
   - Code: https://github.com/DreamLM/DreamOn
   - 相关性：直接面向 code infilling 的 dynamic variable-length generation；不能把“beyond fixed-size canvas”作为本项目未限定的新颖点。
+
+Baseline execution boundary：CAL、rho-EOS、DreamOn 的代码可用性已经确认，但当前仓库尚未完成同 model/data/prompt/budget/evaluator 的 official baseline pack。DreamOn 是 training-based，应与 training-free CAL/rho-EOS/LR-DLLM 分层。LR-DLLM 当前仍缺 executable official/local Stage I/II adapter。
 
 ## Remasking / Candidate Exploration 锚点
 

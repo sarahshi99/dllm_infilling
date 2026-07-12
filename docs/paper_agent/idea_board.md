@@ -4,7 +4,21 @@ Updated: 2026-07-12 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
-## IDEA-011: AST/def-use bridge proxy V0
+Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.zh.md`. This board is subordinate to that roadmap.
+
+## Canonical Method Portfolio
+
+| ID | Method | Status | Historical mapping |
+|---|---|---|---|
+| `M1` | Abductive Program-State Bridge | full method not implemented | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M2` | Constraint-Homotopy Infilling | not implemented | IDEA-012 |
+| `M3` | Birth--Death Canvas Diffusion | not implemented | IDEA-013 |
+| `M4` | Semantic Particle Assembly | not implemented | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `A1` | Metamorphic Equivariance Evaluator | completed negative auxiliary | IDEA-015 / F2 |
+
+`P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
+
+## IDEA-011 / M1-D0: AST/def-use bridge proxy V0
 
 Source: user
 Status: killed_current_formula_new_iteration_required
@@ -16,9 +30,9 @@ Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsificatio
 
 Result: Full shared-bank evaluation completed. Combined proxy cross-canvas within-task accuracy was `0.6273` with positive selection net, but grouped-bootstrap delta lower bounds were not strictly positive against every deterministic baseline. Current formula is killed; do not tune it on these outcomes. Any continuation requires a separately preregistered structure mechanism.
 
-Scope boundary: This is not full Semantic Bridge Projection. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.
+Scope boundary: This is not M1 Abductive Program-State Bridge. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages. M1 may proceed as a new independent exploratory implementation; it must not tune this fixed formula on the same outcomes.
 
-## IDEA-012: Constraint-Homotopy Infilling
+## IDEA-012 / M2: Constraint-Homotopy Infilling
 
 Source: user
 Status: registered_not_implemented
@@ -26,7 +40,7 @@ Scientific question: Does a gradual schedule of inference-visible semantic const
 Minimum experiment: Future standalone smoke/full protocol after the Semantic Bridge round closes.
 Decision rule: Do not implement in this round; do not combine with any other method.
 
-## IDEA-013: Birth–Death Canvas Diffusion
+## IDEA-013 / M3: Birth–Death Canvas Diffusion
 
 Source: user
 Status: registered_not_implemented
@@ -34,7 +48,7 @@ Scientific question: Can a fixed-compute population over canvas hypotheses prese
 Minimum experiment: Future standalone equal-compute population audit with explicit particle accounting.
 Decision rule: Do not implement in this round; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
 
-## IDEA-014: Semantic Particle Assembly
+## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
 Status: registered_not_implemented
@@ -42,7 +56,7 @@ Scientific question: Are complementary inference-visible fragments in all-fail c
 Minimum experiment: F1 is diagnostic only; future assembly method needs a separate preregistered protocol.
 Decision rule: Do not implement in this round; no fragment fusion after seeing outcomes.
 
-## IDEA-015: Metamorphic Equivariance Auxiliary Evaluator
+## IDEA-015 / A1: Metamorphic Equivariance Auxiliary Evaluator
 
 Source: user
 Status: completed_negative

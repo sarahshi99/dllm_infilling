@@ -2,6 +2,9 @@
 
 ## 2026-07-12 UTC
 
+- reconciliation: added `docs/paper_agent/ccfa_master_roadmap.zh.md` as the sole route; marked P1 official baselines, P2 6707-span/148-cluster statistics, and P4 non-HumanEval evaluation as highest-priority open gaps.
+- naming: fixed M1 Abductive Program-State Bridge, M2 Constraint-Homotopy, M3 Birth--Death Canvas Diffusion, M4 Semantic Particle Assembly, with A1 equivariance auxiliary. F1--F4 are diagnostics, not four completed methods.
+- validity: marked 1033 spans development-only, 6707 totals descriptive, local CAL non-official, and oracle-action non-recovery as action-specific rather than uniquely causal.
 - action: ran the user-authorized manual H200 Phase 5 launcher from sole baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`; verified tmux/PID, GPU use, log growth, and JSONL writes.
 - bank: smoke `108/108`, full base `1332/1332`, alpha auxiliary `728/728`; zero missing, duplicate, extra, error, or frozen rows. Frozen test remained sealed at evaluation count `0`.
 - diagnostics: F1–F4 completed. F2 equivariance delta AUC `0.0143`, 95% CI `[-0.0550,0.0829]`. Combined proxy cross-canvas accuracy `0.6273`; selection net `+15` versus fixed64 and `+14` versus confidence.

@@ -1,131 +1,66 @@
 # Current Paper-Agent Action
 
-## 2026-07-12 Completion Update
+更新时间：2026-07-12 UTC
 
-The manual H200 run completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`. Full base bank `1332/1332` and alpha auxiliary `728/728` passed all integrity gates with `test_evaluation_count=0`. F1–F4 completed. The combined deterministic proxy had positive point estimates but failed the preregistered all-baseline grouped-bootstrap lower-bound condition. Conditional V0 wrote `killed_corrected_within_task_gate_failed`; no fallback or extra generation ran.
+权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`
 
-Phase 5 decision: `iterate`.
-
-Authoritative result report: `docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`.
-
-Timestamp: 2026-07-11 UTC
+起点证据：`52f07457a7974fafa69d59914bbc412a2d83e305`
 
 ## Action Name
 
-Phase 5 audit correction and full-first AST/def-use bridge proxy V0 incubation.
+`FOUNDATION-01`: official baseline protocol audit + 6707-row grouped-statistics specification + external-benchmark feasibility。
 
-## Current Phase And Baseline
+## 为什么现在做
 
-- Authoritative branch: `codex/risk-controlled-dynamic-rescue`.
-- Verified remote/local starting HEAD: `b8ae031cf3b430833613aaf29083535edc0738f6`.
-- Isolated implementation worktree: `.worktrees/phase5-method-falsification`.
-- Dataset: all `148` allowed non-frozen `HumanEval-RandomSpanInfillingLight` rows.
-- Model: `GSAI-ML/LLaDA-8B-Base`.
-- Fixed control: canvas `64`, seed `0`, same `64`-step decoding protocol.
-- Frozen controller test: `sealed`; `test_evaluation_count=0`.
+Phase 5 已完整结束，不存在 infrastructure blocker。四个正式方法尚未实现；M1-D0 fixed proxy 只有正向点估计并在严格 gate 下被 kill。当前更紧急的问题是论文证据地基仍不完整：official baseline 未对齐，6707 rows 只有 148 个独立 base-task groups，且没有非 HumanEval 外部评价。
 
-## Reviewer Motivation
+本动作不改变 central claim，不打开 frozen test，不运行 GPU generation。它把 P1/P2/P4 变成下一轮 Codex 可直接执行的工作包，同时允许 M1--M4 的独立 premise diagnostics 另行并行准备。
 
-Phase 4 established a canvas-adequacy versus rescue-adequacy gap but did not produce a safe deployable controller. Phase 5 asks whether independently motivated, inference-visible structure can rank already-generated candidates before another method family is promoted. The shared full bank prevents each premise diagnostic from receiving a bespoke generation distribution.
+## 立即执行的三个独立工作包
 
-Audit correction, 2026-07-12: the existing OOF logistic score is pass/fail-supervised and therefore cannot be a deployable training-free selector. It is retained only as `supervised_probe_diagnostic`. The current deployable mechanism is renamed `AST/def-use bridge proxy V0`; it uses a fixed deterministic formula and no pass/reference fitting. It is not a full Abductive Program-State Bridge or Semantic Bridge Projection. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.
+### `BASE-PROTOCOL-01`
 
-## Registered Portfolio
+按顺序审计 official CAL、rho-EOS、DreamOn；LR-DLLM 只复核 code/adapter availability。每个 official repository 固定 commit，并生成统一 matrix：training、model/checkpoint、dataset/split、prompt/FIM format、canvas/length rule、steps、forward count、seed、temperature、evaluator、oracle、wall-clock/GPU/memory，以及可比性等级。
 
-The methods remain separate:
+输出：
 
-1. `AST/def-use bridge proxy V0`: current round, deterministic F3/F4 proxy and conditional reranker only. `Semantic Bridge Projection` remains a future full-method concept, not the current implementation.
-2. `Constraint-Homotopy Infilling`: registered, not implemented this round.
-3. `Birth–Death Canvas Diffusion`: registered, not implemented this round.
-4. `Semantic Particle Assembly`: registered, not implemented this round.
-5. `Metamorphic Equivariance`: auxiliary evaluator F2 only; never called correctness.
+- `docs/paper_agent/external_baseline_protocol_matrix.zh.md`
+- `analysis_outputs/external_baseline_protocol_audit_<timestamp>/summary.json`
+- 对每个 baseline 给出 `ready_for_smoke`、`adapter_required`、`training_stratum_only` 或 `blocked_missing_detail`。
 
-No method fusion is authorized.
+不得把 local CAL/CAL-lite 改名为 official CAL，不得根据本地结果修改 official algorithm。
 
-## Shared Candidate Bank
+### `STAT-GROUP-01`
 
-Each allowed task receives eight non-oracle candidates:
+只读取 existing full-allowed compact results。统计单位固定为 `task_group=HumanEval/<id>`，当前 allowed group count 应为 `148`。生成：
 
-- canvas lengths `16,32,64,128`;
-- seeds `0,1`;
-- `64/0` is labeled `fixed64_control`;
-- all use `64` denoising steps and the same vanilla decoding protocol.
+- control vs cal-lite、control vs oracle 的 base-task grouped bootstrap CI；
+- paired wins/losses 和 group-aware permutation test；
+- config、length bucket、error type 的 cluster-aware CI；
+- accuracy--cost frontier；
+- control/cal-lite/oracle help-harm-recoverability intersection table 和 paper-ready figure data。
 
-One additional seed-0 oracle-sufficient candidate is retained only as `diagnostic_ceiling`; reference/oracle fields are prohibited from deployable feature extraction and selection. Stage B therefore has exactly `9` rows per task (`108` smoke, `1332` full). F2 alpha-renaming mirrors are generated only after the full base-bank gate, under a separate auxiliary audit, and are not counted as Stage B candidates.
+行级 `n=6707` 只能作为 descriptive span count，不得用于独立显著性。
 
-Raw generated code stays in ignored local output. Compact tracked artifacts contain hashes, metrics, schemas, audits, CSV/JSON/Markdown, and LaTeX only.
+输出：`analysis_outputs/second_regime_grouped_statistics_<timestamp>/`。
 
-## Premise Diagnostics
+### `EXT-FEAS-01`
 
-- F1: candidate/hash diversity, parsable AST diversity, reference-only offline semantic-unit precision/coverage, complementary correct fragments among all-fail tasks, consensus-landmark precision.
-- F2: deterministic semantics-preserving alpha-renaming only; test whether equivariance adds predictive value for functional pass after controlling for canvas, seed, and ordinary confidence. Stability is not correctness.
-- F3: prefix-forward, suffix-backward, combined bridge, token-length, and ordinary-confidence features; required-identifier/def-use/control-structure recovery, semantic-horizon prediction, candidate-ranking AUROC, grouped confidence intervals.
-- F4: within-task passing-versus-failing pairwise ranking across canvas lengths using inference-visible scores, with grouped confidence intervals.
+审计至少三个非 HumanEval 候选，优先选择具备 repository/file context、可执行 tests 或可靠 exact-match harness、公开许可和可冻结 split 的 benchmark。输出 dataset/evaluator/license/model-context/estimated-cost matrix，并推荐一个最小可执行者。不得把 HumanEval MultiLine 或换 backbone 当作非 HumanEval 外部评价。
 
-## AST/Def-Use Bridge Proxy V0 Formula And Gate
+输出：`docs/paper_agent/external_benchmark_feasibility.zh.md`。
 
-The deployable formula is frozen before outcomes:
+## 并行规则
 
-- `prefix_proxy = mean(prefix_candidate_use_coverage, prefix_available_use_coverage, prefix_boundary_indent_match, min(prefix_candidate_def_use_count/3, 1))`
-- `suffix_proxy = mean(suffix_required_recovery, suffix_boundary_indent_match, min(candidate_suffix_def_use_count/3, 1))`
-- `token_canvas_proxy = candidate_canvas_fill_ratio clipped to [0,1]`
-- `ordinary_confidence_proxy = ordinary_confidence clipped to [0,1]`
-- `combined_proxy = 0.30*prefix_proxy + 0.30*suffix_proxy + 0.20*full_parse_passed + 0.10*min(candidate_control_structure_count/3,1) + 0.10*ordinary_confidence_proxy`
+以上三个 CPU/read-only 工作包可以并行；并行指独立作业，不使用 subagent。它们不能互相改 protocol。M2/M3/M4 premise diagnostics 可以同时设计，但在各自 experiment brief 冻结前不写实现，也不得与 M1 fusion。
 
-The `supervised_probe_diagnostic` may fit pass-trained grouped-OOF logistic models, but its scores can never authorize or enter V0.
+## 后续 GPU
 
-V0 is authorized only if the deterministic combined proxy:
+本动作结束后，能适配的 official baselines 进入技术 smoke；smoke 只检查执行正确性，通过后按 full-first 原则运行完整 allowed population。探索实验不再用论文级性能 gate 阻止启动。任何 frozen test、正式方法 fusion 或大规模 training 仍需单独授权。
 
-- has within-task passing-vs-failing pairwise accuracy `>0.5`;
-- has cross-canvas within-task pairwise accuracy `>0.5` (registered primary ranking metric);
-- beats deterministic prefix-only, suffix-only, token/canvas, and ordinary-confidence scores on the primary metric, with every grouped-bootstrap `95%` delta lower bound `>0`;
-- has positive paired selection net versus fixed64 and versus confidence selection; and
-- has no short-bucket net regression versus either fixed64 or confidence.
+## 当前结论
 
-Global AUROC is secondary diagnostic only. If any gate condition fails, V0 is killed for this round. No substitute heuristic or fusion is allowed.
-
-## Exact Commands
-
-CPU preparation and tests:
-
-```bash
-/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_phase5_candidate_bank.py tests/test_phase5_premise_falsification.py
-/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile experiments/phase5_randomspanlight_candidate_bank.py analysis/phase5_premise_falsification.py analysis/phase5_semantic_bridge_v0.py
-```
-
-Approved H200 smoke, then automatic full continuation on a passed audit:
-
-```bash
-CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase5_randomspanlight_candidate_bank.py run --dataset-jsonl /home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-RandomSpanInfillingLight.jsonl --output-dir outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1 --compact-dir analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1 --smoke-cases 12 --auto-full
-```
-
-CPU diagnostics and conditional V0:
-
-```bash
-/home/shx/miniconda3/envs/dllm_env/bin/python analysis/phase5_premise_falsification.py --bank-dir outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1 --compact-bank-dir analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1 --output-dir analysis_outputs/phase5_premise_falsification_20260711_v1
-/home/shx/miniconda3/envs/dllm_env/bin/python analysis/phase5_semantic_bridge_v0.py --bank-dir outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1 --compact-bank-dir analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1 --premise-dir analysis_outputs/phase5_premise_falsification_20260711_v1 --output-dir analysis_outputs/phase5_semantic_bridge_v0_20260711_v1
-```
-
-## Environment And Paths
-
-- GPU: approved host/unsandboxed H200 path, `CUDA_VISIBLE_DEVICES=0`.
-- Python: `/home/shx/miniconda3/envs/dllm_env/bin/python`.
-- Log: `logs/paper_agent/20260711_phase5_randomspanlight_candidate_bank.log`.
-- Local raw bank: `outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1/`.
-- Compact outputs:
-  - `analysis_outputs/phase5_method_portfolio_20260711_v1/`
-  - `analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1/`
-  - `analysis_outputs/phase5_premise_falsification_20260711_v1/`
-  - `analysis_outputs/phase5_semantic_bridge_v0_20260711_v1/`
-
-## Success And Kill Criteria
-
-Smoke success requires schema validation, canvas-128 protocol validation, evaluator success, resumability, exact expected row counts, zero duplicate keys, zero missing keys, zero frozen rows, and unchanged `test_evaluation_count=0`. Passing smoke automatically continues to all `148` cases.
-
-Stop immediately if canvas `128` cannot run under the same protocol, the dataset population is not exactly `148`, any frozen group appears, raw code would enter tracked compact artifacts, duplicate/missing rows survive resume audit, or the test lock changes.
-
-Known risks: candidate seeds may be less diverse than expected; alpha-renaming may be only approximately measurable through generation; the AST/def-use proxy may correlate with syntax rather than functionality; grouped uncertainty may be wide over only `148` task groups. These risks prevent positive claims unless the corrected preregistered gate is met.
-
-## Expected Documentation Outputs
-
-Update the handoff, review manifest, idea board, queue, decision log, CCF-A readiness memo, experiment results, evidence snapshot, current research design/plan, and both literature notes. End with exactly one Phase 5 decision: `advance`, `iterate`, `reframe`, `stop`, or `blocked`.
+- Operational status：`ready_for_foundation_work`。
+- Scientific status：`diagnostic_mixed_not_submission_ready`。
+- Frozen test：`sealed`，`test_evaluation_count=0`。
+- Phase 5 historical result report：`docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`。

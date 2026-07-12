@@ -2,6 +2,17 @@
 
 更新日期：2026-07-12 UTC
 
+## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
+
+- 先读 `docs/paper_agent/ccfa_master_roadmap.zh.md`，再读 `docs/paper_agent/current_action.md`。
+- 当前证据 commit：`52f07457a7974fafa69d59914bbc412a2d83e305`；Phase 5 完成而非 blocked。
+- P0 current-snapshot narrative 已统一；P1 official baselines、P2 6707-row grouped statistics、P4 non-HumanEval external evaluation 仍是最高优先级 open gaps。
+- `6707` 是 span rows，不是独立样本；allowed base-task groups 为 `148`。早期 `1033` rows 是反复观察的 development population，不是 final held-out result。
+- 四个正式方法固定为 M1 Abductive Program-State Bridge、M2 Constraint-Homotopy、M3 Birth--Death Canvas Diffusion、M4 Semantic Particle Assembly。A1 Metamorphic Equivariance 只是 auxiliary evaluator。
+- Phase 5 只完成 M1-D0、M4-D0 和 A1 diagnostics。M1 完整方法、M2、M3、M4 都没有实现。
+- 新方法 premise diagnostics 可共享冻结 bank 并行运行，但必须独立记录；不得 fusion 或在同一 outcomes 上反复调当前 proxy。
+- 当前 next action 是 `BASE-PROTOCOL-01`、`STAT-GROUP-01`、`EXT-FEAS-01`；见 `current_action.md`。Frozen test 继续 sealed，count `0`。
+
 ## Phase 5 完成交接（authoritative）
 
 - 唯一 baseline：`45bead22e3d21daa707be724cf2bdcbbf776592a`。

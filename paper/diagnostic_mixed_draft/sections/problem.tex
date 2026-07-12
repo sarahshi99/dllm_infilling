@@ -1,1 +1,4 @@
-The task is HumanEval-style infilling with unknown target length. The key risk is that inference must choose both content and canvas length without access to oracle length, verifier outcomes, task identifiers, or test labels.
+\section{Problem and Claim Boundary}
+Given prefix $p$ and suffix $s$, an unknown-length infiller must choose a canvas $L$ and generate middle $m$ without access to reference length, reference code, verifier outcomes, task identifiers, or test labels. We call a case \emph{canvas-recoverable under an action} when the registered oracle-sufficient-canvas action changes a control failure into a pass. We call a case \emph{not recovered by the tested actions} when all registered actions fail.
+
+The second label is deliberately action-specific. It is not proof that the backbone is intrinsically incapable: seed choice, decoding algorithm, equivalent valid lengths, generation budget, oracle-length construction, and evaluator behavior remain competing explanations. Likewise, multiple spans from one HumanEval problem are correlated; the base HumanEval task, not each span row, is the inferential cluster.

@@ -1,5 +1,32 @@
 {
   "snapshot_version": 1,
+  "canonical_20260712": {
+    "roadmap": "docs/paper_agent/ccfa_master_roadmap.zh.md",
+    "early_1033_role": "development_mechanism_discovery_not_held_out",
+    "second_regime_full_allowed": {
+      "span_rows": 6707,
+      "allowed_base_task_clusters": 148,
+      "inferential_status": "grouped_statistics_pending"
+    },
+    "external_baselines": {
+      "official_code_available": [
+        "CAL",
+        "rho-EOS",
+        "DreamOn"
+      ],
+      "protocol_matched_local_pack": "open",
+      "lrdllm": "paper_audited_code_or_adapter_blocked"
+    },
+    "non_humaneval_external_evaluation": "open",
+    "formal_methods_completed": 0,
+    "phase5_completed_diagnostics": [
+      "M1-D0",
+      "M4-D0",
+      "A1"
+    ],
+    "frozen_test_status": "sealed",
+    "test_evaluation_count": 0
+  },
   "runs": {
     "a6000_control": {
       "name": "a6000_control",

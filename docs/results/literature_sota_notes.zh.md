@@ -1,6 +1,6 @@
 # 文献与 SOTA 笔记
 
-更新时间：2026-07-11
+更新时间：2026-07-12
 
 ## Phase 5 方法组合的 source-checked 边界
 
@@ -10,7 +10,15 @@
 4. MBR-EXEC 说明 candidate semantics/selection 常通过 execution 获益：`https://arxiv.org/abs/2204.11454`。本项目 deployable method 禁止 execution/unit-test outcome，因此 Semantic Particle Assembly 必须与 execution-aware selection 分开；本轮不实现。
 5. ReCode 使用 semantics-preserving transformations 测 robustness：`https://arxiv.org/abs/2212.10264`。Phase 5 alpha-renaming F2 只测 controlled equivariance predictive increment；稳定性不等于正确性。
 
-截至当前没有 Phase 5 numerical result：candidate-bank H200 command 在 launch 前被 approval service 以 `422 model not found: codex-auto-review` 阻塞。不得把 implementation/tests 或 manifest counts 写成 method performance。
+Phase 5 full shared bank 已完成：M1-D0 fixed AST/def-use proxy 的 cross-canvas pairwise accuracy 为 `0.6273`，选择相对 fixed64/confidence 的 net 为 `+15/+14`，但没有通过相对所有 deterministic baselines 的 preregistered grouped-bootstrap lower-bound gate。A1 equivariance 为负结果；M4-D0 只提供有限 assembly premise。不得把这些 diagnostics 写成四个正式方法已经实现。
+
+截至 2026-07-12，official CAL、rho-EOS 和 DreamOn 均有公开代码：
+
+- CAL：`https://github.com/NiuHechang/Calibrated_Adaptive_Length`；
+- rho-EOS：`https://github.com/yjyddq/rho-EOS`；
+- DreamOn：`https://github.com/DreamLM/DreamOn`。
+
+因此 external baseline gap 的 blocker 已从“普遍无代码”变为“尚未完成本地 protocol audit/adapter/full reproduction”。LR-DLLM 仍是 paper-audited、code/adapter-blocked。Local CAL/CAL-lite 不能称为 official CAL。
 
 本文记录经过 source-check 的比较锚点，用于未来 SOTA 主张。当前项目尚不声称 SOTA。
 

@@ -2,12 +2,12 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{amsmath}
-\title{Diagnosing Canvas and Rescue Limits in Unknown-Length Diffusion Code Infilling}
+\title{Diagnosing Canvas Adequacy and Rescue Adequacy in Unknown-Length Diffusion Code Infilling}
 \author{Anonymous Authors}
 \begin{document}
 \maketitle
 \begin{abstract}
-Unknown-length diffusion code infilling exposes a gap between diagnostic recoverability and safe deployable control. We present a diagnostic-driven mixed study of canvas-limited and rescue-limited regimes, showing that missed true-long cases can be recoverable under oracle canvas expansion while already-triggered long failures remain resistant to longer trajectories and trace-guided remasking. Risk-controlled controllers show weak but insufficient validation signal, motivating a mixed framing rather than a positive controller claim.
+Unknown-length diffusion code infilling requires choosing both content and generation space. We separate two questions that are often conflated: whether the allocated canvas is sufficient and whether the current decoding or rescue action can generate a correct infill once space is available. Across H200 LLaDA diagnostics, a Dream-Coder audit, and HumanEval MultiLine/RandomSpan stress data, oracle-sufficient canvas recovers many failures but can also harm previously correct outputs; deployable selectors do not yet harvest this headroom reliably. A full 6707-span audit covers only 148 independent HumanEval base tasks, so we treat row totals as descriptive and require cluster-aware inference. An inference-visible AST/def-use proxy shows promising selection gains but fails its preregistered superiority gate. The present evidence therefore supports a bounded empirical diagnosis, not a SOTA method claim. Protocol-matched official baselines, cluster-aware statistics, a non-HumanEval benchmark, and a fresh validated method remain required.
 \end{abstract}
 \input{sections/introduction}
 \input{sections/problem}

@@ -4,6 +4,10 @@
 
 Timestamp: 2026-07-12 UTC
 
+### Canonical Resume Override
+
+The current route is no longer another Phase 5 retry. Read `docs/paper_agent/ccfa_master_roadmap.zh.md` and `docs/paper_agent/current_action.md` first. Phase 5 is complete at result commit `52f07457a7974fafa69d59914bbc412a2d83e305`. Active work is P1 official baseline compatibility, P2 grouped statistics over 148 base-task clusters behind 6707 spans, and P4 non-HumanEval benchmark feasibility. M1--M4 are canonical independent methods; only M1-D0/M4-D0/A1 diagnostics have run. Frozen test remains sealed at count zero.
+
 ### Completed H200 Run And Scientific Decision
 
 - User-authoritative baseline: `45bead22e3d21daa707be724cf2bdcbbf776592a`.

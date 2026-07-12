@@ -1,84 +1,67 @@
 # CCF-A Readiness Assessment
 
-更新时间：2026-07-11 UTC
+更新时间：2026-07-12 UTC
 
-## Phase 5 CCF-A Gap Ledger
+权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`
 
-完整 ledger：`analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv` 与 `.json`。状态只能是 `closed`、`partially_closed`、`open`、`blocked`、`superseded`。
+最新方法证据：`52f07457a7974fafa69d59914bbc412a2d83e305`
 
-| Gap | Status | 当前证据 / 解除条件 |
-|---|---|---|
-| 独立、非 heuristic 的方法 premise | `partially_closed` | 五个想法已分开登记；只有 Semantic Bridge 进入本轮 falsification |
-| 148-case RandomSpanLight shared bank | `open` | manifest 已精确审计，GPU rows 尚未生成 |
-| candidate/AST/semantic-fragment diversity | `open` | F1 blocked on bank |
-| alpha-renaming equivariance 独立预测力 | `open` | F2 blocked on bank；不把 stability 称为 correctness |
-| deterministic AST/def-use proxy 的 within-task 优势 | `open` | corrected F3/F4 blocked；要求 cross-canvas primary delta CI `>0`、paired help/harm 与 short safety |
-| inference-visible within-task ranking | `open` | F4 blocked on bank |
-| AST/def-use bridge proxy V0 Pass@1/help-harm | `blocked` | 仅在 corrected within-task gate 通过后解除 |
-| frozen controller held-out result | `blocked` | Phase 5 不打开；`test_evaluation_count=0` |
-| resumable/duplicate-safe long run | `partially_closed` | code/tests 已有，需真实 smoke/full audit |
-| raw-code publication safety | `partially_closed` | compact schema 无 raw code，需 final tracked scan |
-| Controller V4 / heuristic-cal-lite continuation | `superseded` | 由 independent premise falsification 取代 |
-| Dream-Coder E/F/G 扩展 | `superseded` | 本轮禁止 |
-| CCF-A submission readiness | `open` | 仍缺 credible method result 或强 falsification-centered package |
+## 直接结论
 
-Phase 5 当前 decision：`blocked`。Blocker 是 approved H200 process launch 前的 approval-service `422 model not found: codex-auto-review`，不是方法结果。Claim Readiness Gate 仍为 `not_ready`；不得把未运行的 F1–F4 或 V0 写成证据。
+当前工作仍不是 CCF-A submission-ready。问题不再是 second-regime 数据缺失，也不再是 Phase 5 没运行；真正的四个最大缺口是：协议匹配强 baseline、对 6707 span rows 的 base-task-group 统计、非 HumanEval 真实软件工程评价，以及一个在 fresh validation 上成立的正方法。
 
-## 总体判断
+当前 framing 仍是 `diagnostic-driven mixed candidate`。Phase 5 为结构信号提供了正向点估计，但 fixed AST/def-use proxy 未通过预注册 gate；这不能升级为 standalone method claim，也没有否定完整 Abductive Program-State Bridge。
 
-当前项目已经从“继续调 controller”转为 `diagnostic-driven mixed paper`。这不是一个 positive controller paper：H200 Controller V1/V2/V3 都显示 deployable risk-controlled intervention 只有弱验证信号，frozen test 仍然 sealed，`test_evaluation_count=0`。
+## P0--P4 完成度
 
-Claim Readiness Gate verdict：`diagnostic_mixed_candidate_with_blocking_gaps`。
+| Priority | 状态 | 已完成 | 仍缺 |
+|---|---|---|---|
+| P0 仓库叙事统一 | `closed_for_current_snapshot` | central claim、readiness、paper skeleton、main table、queue、gap ledger 已按 2026-07-12 evidence 对齐 | 新结果后必须再次同步 |
+| P1 强 baseline | `open_highest_priority` | fixed64、oracle、CAL-lite、本地控制；LR-DLLM blocker audit | official CAL、rho-EOS、DreamOn 的协议审计/可运行复现；统一 compute 表 |
+| P2 6707 group statistics | `open_highest_priority` | row totals 与 config/bucket taxonomy；Phase 5 另有 148-group bootstrap | 6707 rows 按 148 base-task clusters 的 CI、paired test、cost frontier、intersection figure |
+| P3 新 selective controller | `not_started` | 旧 V1--V3 route closure | fresh second-regime/cross-model grouped split 上的 canvas/rescue/harm heads；禁止 V4 阈值续调 |
+| P4 外部评价 | `open_highest_priority` | HumanEval MultiLine/RandomSpan 与 Dream-Coder second backbone | 至少一个非 HumanEval、长函数/项目级、可执行的真实代码 infilling benchmark |
 
-最稳妥的论文主张是：
+## 已核实的证据边界
 
-> Unknown-length DLLM infilling has separable canvas-limited and rescue-limited regimes. Missed true-long cases expose substantial oracle-canvas recoverability, while already-triggered long failures remain resistant to longer trajectories and trace-guided remasking. Deployable risk-controlled control shows weak but insufficient validation signal, revealing a gap between diagnostic upper bound and safe inference-time intervention.
+- Early `1033` rows：经过 V1--V8、Route2 和多次 selector/threshold 观察，只能标为 development/mechanism evidence；`802/1033` 不是 held-out final result。
+- Full allowed second-regime：`6707` span rows 来自 `148` 个 allowed HumanEval base-task groups。`2019/6707`、`1464/6707`、`3180/6707` 是描述性 row totals，论文显著性和 CI 必须按 base task 聚类。
+- Official second-regime 数据已存在并完成 full allowed run；任何“官方 MultiLine/RandomSpan 数据仍缺失”的表述均已删除或标记为历史。
+- Dream-Coder full allowed SingleLine 已完成，但仍属于 HumanEval 和 second-backbone diagnostic，不等于真实软件工程外部验证。
+- Frozen controller test 仍 sealed，`test_evaluation_count=0`。
 
-## 已有强证据
+## Phase 5 的准确结论
 
-1. H200 evidence base 已被研究者接受，主表和后续 controller 以 H200 rerun 为准；A6000 只保留为 historical reference。
-2. H200 core baselines 已全量重跑：Control `787/1033`，Midcons `794/1033`，Route2 `795/1033`，V6 `796/1033`，Local CAL `769/1033`。
-3. H200 action bank 覆盖 frozen train/calibration/validation：`927` tasks × `5` actions = `4635` rows，test rows `0`。
-4. Oracle action-bank validation upper bound 为 `106/127`，相对 primary `17/0` wins/losses，说明 action bank 中确实存在可恢复空间。
-5. True-long attribution 的核心机制清晰：C oracle-sufficient canvas 恢复 `29/89` hard cases，全部来自 missed failed-long；triggered failed-long 为 `0/33`，支持 canvas inadequacy 与 rescue inadequacy 分离。
-6. Controller V1/V2/V3 的负结果是受控的：所有开发都停在 validation，frozen test 未打开。
+- Full bank：`1332/1332` over `148` tasks；alpha auxiliary `728/728` over `91` tasks；无 missing/duplicate/error/frozen。
+- M1-D0 combined proxy cross-canvas pairwise accuracy `0.6273`，选择相对 fixed64/confidence 的 net 为 `+15/+14`。
+- 预注册的 all-baseline grouped-bootstrap lower-bound 条件失败；fixed proxy verdict 为 `killed_corrected_within_task_gate_failed`。
+- M4-D0/F1 仅发现 `6/61` all-fail tasks 有互补正确 semantic units；A1/F2 equivariance delta AUC `0.0143` 且 CI 跨 0。
+- 因此四个正式方法并未完成：M1 完整方法、M2、M3、M4 都仍未实现。
 
-## Weak Evidence
+## 外部 baseline 状态
 
-1. Controller V3 有弱 validation signal：保守 top-k policy 可做到 `90/127`、`1/0` wins/losses、population harm upper95 `2.33%`，但净增只有 `+1`。
-2. Family A 的最高 pass-count 点为 `91/127`、`3/1` wins/losses、net `+2`，但出现一个 `<=8` short-bucket loss，不能授权 frozen test。
-3. Dream-Coder Base fresh oracle-sufficient diagnostic 已完成：15-case subset 上 primary/control `7/15`，best simple policy `7/15`，oracle-sufficient canvas `14/15`，short regressions `0`。这说明 second-backbone 上 oracle canvas 有强恢复空间。
-4. Dream-Coder 的 qualitative agreement 是 mixed：missed-long oracle recoveries `3`，triggered-long oracle recoveries `3`，不干净复刻 LLaDA H200 的 missed-vs-triggered split，因此仍不足以声称 model-agnostic generalization。
+官方 CAL、rho-EOS 和 DreamOn 均已有公开代码，因此“没有代码可用”不能再作为统一理由。下一步必须分别判断：
 
-## Negative Evidence
+- CAL：最接近本项目 setting，应第一优先适配 official HumanEval-Infilling Rest splits；
+- rho-EOS：training-free 且代码公开，但公开 setting 不是现成 infilling adapter，先做 protocol compatibility；
+- DreamOn：代码公开但需要 training/专用 checkpoint，必须与 training-free 方法分层；
+- LR-DLLM：论文已审计，但当前仍缺可执行 official/local Stage I/II adapter，保留 blocker，不做伪复现。
 
-1. Controller V1 H200 replay 仍为 zero intervention：validation `89/127`，wins/losses `0/0`。
-2. Controller V2 最好的非零点为 `90/127`、`5/4` wins/losses，population harm upper95 `7.06%`，未通过 primary gate。
-3. Controller V3 没有满足 frozen-test gate 的 deployable policy；最终 route decision 为 `weak_validation_signal_test_sealed`。
-4. LR-DLLM final attempt verdict 为 `blocked_missing_algorithmic_detail`：仓库中没有 protocol-matched Stage I/II adapter，不能称为 official reproduction。
-5. Second-regime audit 发现 MultiLine/RandomSpan alias 存在，但本机 `data/` 缺少所需 JSONL；后续已构造并运行明确标记的 `synthetic_second_regime_minimal`。该 synthetic subset 18/18 全部通过，说明 runner/data unblock 成功，但 subset 过易，不能替代 official second-regime benchmark。
+所有 baseline 必须记录 model、prompt、dataset/split、candidate/canvas policy、decode steps、forward count、seed、evaluator、training、oracle、wall-clock、GPU 和 peak memory。
 
-## CCF-A Blocking Gaps
+## 统计与因果风险
 
-1. 缺少 official 或更强 second-regime stress evidence：`HumanEval-MultiLineInfilling` / `HumanEval-RandomSpanInfilling` 本地 JSONL 仍缺，synthetic subset 太易。
-2. Dream-Coder fresh oracle diagnostic 是 mixed，而不是 clean cross-backbone confirmation；若要强泛化主张，需要扩大 second-backbone subset 或加入更难 case。
-3. deployable controller 没有达到 frozen-test gate；因此没有 sealed test improvement。
-4. LR-DLLM 没有同协议 baseline，只能作为 blocked baseline 记录。
-5. 当前 paper contribution 需要靠机制诊断、负结果严谨性和泛化 audit 支撑，不能写成 SOTA 方法论文。
+论文不得把“oracle canvas 没救回”写成唯一原因已经定位。允许的表述是：在当前 action family、seed、decode budget、oracle-length definition 与 evaluator 下未恢复。backbone、decoding、候选多样性、等价长度和 evaluator 严苛性仍是竞争解释。
 
-## Next Required Experiments
+6707-row 主结果必须补：base-task grouped bootstrap、paired group-aware permutation 或等价检验、help/harm CI、config/length/error strata CI、accuracy--cost frontier，以及 canvas recoverability 与 harm 的交集图。
 
-1. 补齐 `HumanEval-MultiLineInfilling` 或 `HumanEval-RandomSpanInfilling` 本地 JSONL，运行 official second-regime minimal diagnostic；当前 synthetic result 只能作为 unblock/sanity evidence。
-2. 若要增强 CCF-A 竞争力，优先扩大 Dream-Coder diagnostic 到更多 true-long/missed/triggered cases，判断 mixed split 是否稳定，而不是继续在人类验证集上调 Controller V4。
-3. 如果 LR-DLLM 官方代码或足够算法细节释放，再重做 protocol-matched Stage I sanity；在此之前不要把 heuristic local adapter 写成 LR-DLLM reproduction。
+## 严格投稿判断
 
-## Paper Framing Decision
+当前 verdict：`not_ready_but_recoverable`。
 
-采用 `diagnostic-driven mixed paper`：
+要达到有竞争力的 CCF-A/FSE 投稿，至少需要：
 
-- 主贡献：揭示 unknown-length DLLM infilling 中 canvas-limited 与 rescue-limited 两种机制，以及 action-bank oracle upper bound 与 safe deployable controller 之间的缺口。
-- 正结果：oracle/action-ceiling 与部分 validation top-k 证明恢复空间存在。
-- 负结果：V1/V2/V3 controller 无法安全转化为 frozen-test policy。
-- 不声称：SOTA、controller success、unknown-length solved、frozen test improvement、model-agnostic generalization。
-
-当前可以开始论文骨架和正式写作，但 CCF-A 强投稿仍需要至少一个泛化诊断补强：second-backbone fresh diagnostic 或 second-regime diagnostic。
+1. official CAL 和至少一个 rho-EOS/DreamOn 的可审计协议结果或明确 incompatibility report；
+2. 6707-row group-aware statistical package；
+3. 一个非 HumanEval 的真实代码 infilling benchmark；
+4. 一个独立方法在 fresh validation 上取得 compute-matched、group-aware、help/harm 可解释的增益，或者把论文彻底重构成足够强的 empirical diagnostic study。

@@ -2,6 +2,10 @@
 
 ## 2026-07-12 UTC
 
+- roadmap reconciliation：新增 `docs/paper_agent/ccfa_master_roadmap.zh.md` 作为唯一权威路线；P0 current-snapshot narrative 已同步，P1 official baselines、P2 `6707 spans / 148 base-task clusters` grouped statistics、P4 non-HumanEval external evaluation 标为最高优先级 open gaps。
+- method naming：固定 M1 Abductive Program-State Bridge、M2 Constraint-Homotopy、M3 Birth--Death Canvas Diffusion、M4 Semantic Particle Assembly；A1 Metamorphic Equivariance 是 auxiliary。F1--F4 只映射到 M4-D0/A1/M1-D0，不再称作四个方法已实现。
+- evidence guard：1033 rows 统一标为 development；6707 row totals 统一标为 descriptive；local CAL/CAL-lite 不等于 official CAL；oracle-action non-recovery 不再写成唯一 backbone/rescue 因果结论。
+- next queue：`BASE-PROTOCOL-01`、`STAT-GROUP-01`、`EXT-FEAS-01` 可作为独立工作包并行；M2/M3/M4 premise diagnostics 可共享冻结 bank，但方法和输出禁止 fusion。
 - manual H200 launch：以 `HEAD 45bead22e3d21daa707be724cf2bdcbbf776592a` 为唯一基线执行 `bash scripts/manual_launch_phase5_h200_candidate_bank.sh`；tmux/PID、H200 占用、日志和 JSONL 增长均验证真实启动。此前正确状态为 `infrastructure_blocked / scientific_pending`，不是科学失败。
 - bank result：smoke `108/108`、full base `1332/1332`、alpha auxiliary `728/728`；base 覆盖 `148` allowed cases，alpha 覆盖 `91` verified tasks；全程 `0` missing/duplicate/extra/error/frozen，run manifest `completed`。
 - F1/F2：F1 平均 unique hash `4.0`、unique parsable AST hash `3.3243`，`61` all-fail tasks 中 `6` 有 complementary units；F2 delta AUC `0.0143`，95% CI `[-0.0550,0.0829]`，不具 independent predictive evidence。

@@ -1,5 +1,11 @@
 # Research Design v5：Independent Premise Falsification And Full-First Method Incubation
 
+## 2026-07-12 Canonical Route Correction
+
+唯一权威路线为 `docs/paper_agent/ccfa_master_roadmap.zh.md`。研究分为两条同时推进但互不替代的轨道：Track A 补 official baselines、group-aware statistics、fresh/external evaluation 和 paper integrity；Track B 独立孵化 M1--M4。Phase 5 的 F1--F4 只是 M4-D0/A1/M1-D0 diagnostics，不是四个正式方法均已实现。
+
+中央 claim 保持 diagnostic/mixed：数据支持 canvas adequacy 与 rescue adequacy 应分开测量，但不授权单一因果归因。“当前 oracle action 未恢复”不得改写成“backbone 已被证明无能力”。早期 1033 rows 为 development；6707 spans 对应 148 个 base-task clusters；P1/P2/P4 仍 open。
+
 创建时间：2026-05-31 12:36 CST
 
 ## Phase 5 更新（2026-07-11）

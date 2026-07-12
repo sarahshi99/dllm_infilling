@@ -2,6 +2,10 @@
 
 Updated: 2026-07-12 UTC
 
+## Cross-Experiment Validity Boundary
+
+The repeatedly inspected 1033 SingleLine spans are development evidence, not final held-out performance. The 6707 full-allowed second-regime spans map to 148 allowed HumanEval base-task clusters; row totals are descriptive until grouped inference is complete. HumanEval MultiLine/RandomSpan is not a non-HumanEval external benchmark. Local CAL/CAL-lite is not an official CAL reproduction, and non-recovery under the tested oracle action does not uniquely identify a backbone cause. See `docs/paper_agent/ccfa_master_roadmap.zh.md`.
+
 ## Phase 5 H200 Completed Result
 
 The sole baseline was `45bead22e3d21daa707be724cf2bdcbbf776592a`. The earlier `422` occurred before any GPU process existed, so that state was infrastructure-blocked/scientifically pending, not a scientific failure. The user-authorized manual launch was verified by process, GPU, log, and JSONL activity.

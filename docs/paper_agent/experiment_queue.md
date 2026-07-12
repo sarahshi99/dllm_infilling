@@ -2,7 +2,29 @@
 
 Updated: 2026-07-12 UTC
 
-Only selected, executable experiments belong here. Frozen test remains sealed unless a validation gate explicitly passes.
+Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
+
+## Active Foundation Queue
+
+These work packages close paper-critical gaps and may run concurrently as independent jobs. They are not performance gates for affordable exploratory method runs.
+
+### BASE-PROTOCOL-01: official external baseline compatibility
+
+Status: selected_next. Audit official CAL, rho-EOS, DreamOn, and LR-DLLM availability. Freeze upstream commits and produce a protocol matrix covering model, data/split, prompt, canvas/length policy, steps/forwards, seeds, evaluator, training/oracle status, wall-clock, GPU, memory, and comparison class. Official CAL is first adaptation priority; rho-EOS requires an infilling compatibility decision; DreamOn belongs to a training-based stratum; LR-DLLM must remain blocked unless executable Stage I/II detail exists.
+
+### STAT-GROUP-01: full-allowed cluster-aware statistics
+
+Status: selected_next. Reanalyze the existing 6707-span, three-policy results using the 148 allowed HumanEval base tasks as clusters. Required outputs: grouped bootstrap CIs, paired group-aware test, config/length/error CIs, accuracy--cost frontier, and help/harm/recoverability intersections. No GPU and no frozen test.
+
+### EXT-FEAS-01: non-HumanEval external benchmark feasibility
+
+Status: selected_next. Compare at least three real-code candidates and recommend one with repository/file context, executable or reliable evaluation, public licensing, a freezable split, and feasible H200 cost. HumanEval MultiLine/RandomSpan does not satisfy this item.
+
+### METHOD-DIAGNOSTICS-01: independent M2/M3/M4 premises
+
+Status: brief_required. Cheap premise diagnostics may be designed and run in parallel on a frozen shared bank, with separate outputs and no fusion. F1/F2/F3/F4 already map to M4-D0/A1/M1-D0; they do not count as four implemented methods. M1 is the first full method candidate after its own new brief.
+
+## Historical Phase 5 Queue
 
 ## EXP-007: Phase 5 full RandomSpanLight shared candidate bank
 

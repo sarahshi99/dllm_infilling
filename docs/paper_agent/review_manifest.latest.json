@@ -66,9 +66,35 @@
     "status": "completed",
     "sufficient_canvas_effect": 29
   },
-  "branch": "codex/risk-controlled-dynamic-rescue",
+  "branch": "codex/ccfa-roadmap-reconciliation",
   "ccfa_submission_ready": false,
-  "central_claim": "Unknown-length DLLM infilling exhibits two coupled but separable regimes: canvas inadequacy and rescue inadequacy. Missed true-long failures are substantially trigger/canvas-limited, whereas already-triggered failures remain rescue-limited under the current longer-trajectory and trace-remasking action family. The main deployable opportunity is therefore risk-controlled, non-oracle prediction of when and how much to expand.",
+  "canonical_roadmap": {
+    "active_work": [
+      "BASE-PROTOCOL-01",
+      "STAT-GROUP-01",
+      "EXT-FEAS-01"
+    ],
+    "base_task_groups_behind_6707_spans": 148,
+    "document": "docs/paper_agent/ccfa_master_roadmap.zh.md",
+    "formal_methods_completed": 0,
+    "method_ids": [
+      "M1_abductive_program_state_bridge",
+      "M2_constraint_homotopy_infilling",
+      "M3_birth_death_canvas_diffusion",
+      "M4_semantic_particle_assembly"
+    ],
+    "open_highest_priority": [
+      "P1_protocol_matched_external_baselines",
+      "P2_group_aware_statistics",
+      "P4_non_humaneval_external_evaluation"
+    ],
+    "phase5_diagnostic_mapping": {
+      "F1": "M4-D0",
+      "F2": "A1_completed_negative_auxiliary",
+      "F3_F4": "M1-D0_killed_fixed_proxy"
+    }
+  },
+  "central_claim": "Unknown-length DLLM infilling exhibits a measurable distinction between canvas adequacy and action-specific rescue adequacy under the registered model, seed, decoding, budget, oracle-length, and evaluator settings. Oracle-sufficient canvas recovers many failures, while deployable selection remains harm-prone; non-recovery does not uniquely prove a backbone cause.",
   "controller": {
     "calibration_harm_budget_upper95": 0.05,
     "calibration_result": "no_nonzero_intervention_operating_point_satisfies_harm_budget",
@@ -686,7 +712,7 @@
     "f3_status": "completed_gate_failed",
     "f4_status": "completed",
     "final_decision": "iterate",
-    "final_pushed_head": "pending_final_metadata_push",
+    "final_pushed_head": "52f07457a7974fafa69d59914bbc412a2d83e305",
     "forbidden_deployable_features": [
       "reference_code",
       "oracle_length",
@@ -1069,8 +1095,8 @@
     "test_status": "sealed"
   },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
-  "task_type": "phase5_independent_method_falsification",
+  "task_type": "ccfa_roadmap_reconciliation_after_phase5",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-11"
+  "updated_at_cst": "2026-07-12"
 }

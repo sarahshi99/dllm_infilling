@@ -2,6 +2,10 @@
 
 Updated: 2026-07-12 UTC
 
+## Canonical CCF-A Route
+
+The sole current roadmap is `docs/paper_agent/ccfa_master_roadmap.zh.md`. P0 is synchronized for the current snapshot; P1 official baselines, P2 grouped inference for 6707 spans over 148 base-task clusters, and P4 non-HumanEval evaluation remain open. The early 1033 spans are development-only. M1--M4 are the four formal methods; Phase 5 ran only M1-D0/M4-D0/A1 diagnostics. Independent premise diagnostics may share a frozen bank, but methods remain separate.
+
 ## Phase 5 H200 Shared Bank And Proxy Gate
 
 - Sole baseline: `45bead22e3d21daa707be724cf2bdcbbf776592a`.

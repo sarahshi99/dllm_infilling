@@ -2,6 +2,10 @@
 
 Created: 2026-05-31 12:36 CST
 
+## Canonical Route Correction (2026-07-12)
+
+`docs/paper_agent/ccfa_master_roadmap.zh.md` is authoritative. Track A closes protocol-matched baselines, grouped statistics, external evaluation, and paper-integrity gaps; Track B incubates M1--M4 independently. F1--F4 map only to M4-D0/A1/M1-D0. The central claim is diagnostic and action-specific, not a unique backbone-cause claim. The 1033 spans are development-only and the 6707 spans correspond to 148 base-task clusters.
+
 ## Phase 5 Result Update (2026-07-12)
 
 The shared RandomSpanLight bank completed with base `1332/1332` and alpha auxiliary `728/728`, while frozen test evaluation count remained `0`. The fixed combined AST/def-use proxy reached cross-canvas within-task accuracy `0.6273` and positive paired selection nets, but failed the preregistered requirement that every deterministic-baseline grouped-bootstrap delta lower bound exceed zero. The current proxy V0 is killed; Phase 5 decision is `iterate`. This does not create a positive standalone-method claim or change the diagnostic/mixed central claim. Any continuation requires a new independent preregistration and may not tune the current formula on these outcomes.

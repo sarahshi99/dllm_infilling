@@ -2,6 +2,15 @@
 
 更新时间：2026-07-12 UTC
 
+## 跨实验有效性说明（所有后文章节均受此约束）
+
+- 早期 SingleLine `1033` rows 被 V1--V8、Route2、threshold 和 selector 多轮观察，统一视为 development/mechanism-discovery population。`802/1033` 等数值不是 final held-out performance。
+- Official second-regime full allowed 的 `6707` 是 span rows，来自 `148` 个 allowed HumanEval base-task groups。行级 pass totals 是描述统计；论文 CI、显著性和样本量必须按 base task 分组。
+- HumanEval MultiLine/RandomSpan 仍是 HumanEval 变体，不关闭非 HumanEval 真实软件工程评价缺口。
+- Local CAL/CAL-lite 不是 official CAL reproduction。Official CAL、rho-EOS、DreamOn 尚未形成 protocol-matched local baseline pack；LR-DLLM 仍为 code/adapter blocker。
+- “oracle canvas 未恢复”只说明当前 action/seed/decoding/budget/evaluator 下未恢复，不证明唯一原因一定是 backbone 或 rescue ceiling。
+- Canonical roadmap：`docs/paper_agent/ccfa_master_roadmap.zh.md`。
+
 ## Phase 5 H200 完成结果（2026-07-12）
 
 唯一基线为 `45bead22e3d21daa707be724cf2bdcbbf776592a`。此前 `422` 发生在任何 GPU 进程启动前，因此当时状态是 `infrastructure_blocked / scientific_pending`，不是科学失败。用户授权 manual launch 后，H200 进程、显存/利用率、日志和 JSONL 写入均被实际验证。

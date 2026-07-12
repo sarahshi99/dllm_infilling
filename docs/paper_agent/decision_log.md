@@ -2,6 +2,11 @@
 
 Updated: 2026-07-12 UTC
 
+- Canonical route is now `docs/paper_agent/ccfa_master_roadmap.zh.md`; later agents must not infer the current queue from historical Phase numbering.
+- P0 narrative is synchronized for the current evidence snapshot. P1 official baselines, P2 group-aware analysis of 6707 spans/148 base-task clusters, and P4 non-HumanEval external evaluation remain highest-priority open gaps.
+- Four formal methods are M1 Abductive Program-State Bridge, M2 Constraint-Homotopy, M3 Birth--Death Canvas Diffusion, and M4 Semantic Particle Assembly. Phase 5 completed only M1-D0/M4-D0/A1 diagnostics; no formal method has been completed.
+- Independent premise diagnostics may share a frozen bank and run concurrently with separate outputs. Exploratory full runs use technical integrity gates only; publication promotion retains fresh grouped validation and compute-matched evidence requirements.
+
 - Phase 5 manual H200 launch completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`; the former pre-launch state was infrastructure-blocked/scientifically pending, not a method failure.
 - The shared bank passed integrity: `1332/1332` base rows over `148` tasks and `728/728` alpha auxiliary rows over `91` verified tasks, with zero missing/duplicate/extra/error/frozen rows.
 - F2 alpha equivariance was not independently predictive: delta AUC `0.0143`, grouped-bootstrap 95% CI `[-0.0550, 0.0829]`.

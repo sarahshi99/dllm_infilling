@@ -2,6 +2,10 @@
 
 更新时间：2026-07-11 UTC
 
+## 2026-07-12 Plan Override
+
+本文件后文是 Phase 5 历史执行计划。新的唯一权威顺序和命名在 `docs/paper_agent/ccfa_master_roadmap.zh.md`，当前最小动作在 `docs/paper_agent/current_action.md`。Active order 为 P1 baseline protocol、P2 grouped statistics、P4 external feasibility，并行准备 M1--M4 的独立 diagnostics；不得从旧 Phase/EXP 编号自行推导下一实验。四个正式方法尚未完成，F1--F4 只映射到 M4-D0/A1/M1-D0。
+
 ## Phase 5 更新（2026-07-11）
 
 2026-07-12 completion：Stage B/C/D 已按计划完成。Base bank `1332/1332`、alpha auxiliary `728/728`，所有 integrity gates 通过且 `test_evaluation_count=0`。F1–F4 完成；corrected F3 gate 因 `positive_primary_delta_vs_all_baselines=false` 失败。Conditional V0 按 kill rule 写出 `killed_corrected_within_task_gate_failed`，没有 fallback/fusion/extra generation。Phase 5 decision=`iterate`；本计划不授权在已有 outcomes 上调当前公式。
