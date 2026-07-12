@@ -12,6 +12,8 @@ CPU read-only population audit：RandomSpanLight source `164` rows；排除 froz
 
 GPU outcome：`blocked_not_started`。Exact H200 command 在 process launch 前被 approval service 拒绝：`422 Unprocessable Entity: model not found: codex-auto-review`。没有模型加载、canvas-128 generation、smoke/full row、evaluator outcome 或替代 length。
 
+2026-07-12 corrected retry outcome：correction commit 已先 push；exact command authorized retry 一次，仍为相同 pre-launch `422`。Post-audit confirms candidate rows `0`、running process `0`。这是 `blocked_infrastructure`，不是 method failure。Manual tmux launch artifact：`docs/paper_agent/phase5_manual_h200_launch_20260712.md`。
+
 F1 `blocked_on_bank`；F2 `blocked_on_bank`；corrected F3/F4 `blocked_on_bank`。AST/def-use bridge proxy V0 `blocked_on_corrected_gate`，未运行。Full Semantic Bridge Projection、Homotopy、Birth–Death、Particle Assembly、fusion 均未实现。Frozen test remains `sealed`, `test_evaluation_count=0`。
 
 本轮单一 decision：`blocked`。

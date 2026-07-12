@@ -652,6 +652,8 @@
     "ccfa_gap_ledger": "analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv",
     "clean_isolated_worktree": ".worktrees/phase5-method-falsification",
     "combination_authorized": false,
+    "correction_commit": "5aa86c7a3368e8024449ccf421febfbf9eb78dd2",
+    "correction_push": "success: 3315ed8..5aa86c7",
     "f1_status": "blocked_on_bank",
     "f2_status": "blocked_on_bank",
     "f3_gate": {
@@ -691,11 +693,15 @@
     ],
     "frozen_test_status": "sealed",
     "gpu_blocker": {
+      "authorized_retry_count": 1,
+      "broad_sandbox_bypass_used": false,
+      "candidate_rows_written": 0,
       "error": "422 Unprocessable Entity: model not found: codex-auto-review",
       "gpu_process_started": false,
-      "smoke_rows_written": 0,
-      "stage": "before_process_launch",
-      "workaround_attempted": false
+      "manual_launch_doc": "docs/paper_agent/phase5_manual_h200_launch_20260712.md",
+      "manual_launch_script": "scripts/manual_launch_phase5_h200_candidate_bank.sh",
+      "method_failure": false,
+      "stage": "before_process_launch"
     },
     "local_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
     "method_registry": "analysis_outputs/phase5_method_portfolio_20260711_v1/method_registry.csv",
@@ -707,6 +713,7 @@
       "Semantic Bridge Projection": "future_full_method_not_current_implementation",
       "Semantic Particle Assembly": "registered_not_implemented"
     },
+    "operational_decision": "blocked_infrastructure",
     "population": {
       "allowed_non_frozen_rows": 148,
       "bucket_counts": {
@@ -728,7 +735,7 @@
     "scaffold_commit": "08f01141b8cf6a8e611d55162a3c21d09ca0cf12",
     "semantic_bridge_v0_status": "superseded_by_ast_def_use_proxy_v0",
     "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6",
-    "status": "blocked_before_gpu_launch",
+    "status": "blocked_infrastructure",
     "test_evaluation_count": 0,
     "verification": {
       "focused_tests": "13 passed",

@@ -7,6 +7,7 @@
 - correction：split 为 `supervised_probe_diagnostic` 与 fixed deterministic `AST/def-use bridge proxy V0`；V0 schema rejects supervised scores；primary gate 改为 within-task/cross-canvas ranking、deterministic baseline deltas、paired help/harm 与 short safety；global AUROC secondary-only。
 - verification interim：`18` focused tests pass；synthetic end-to-end corrected gate smoke correctly kills an insufficient case。Final fresh verification/commit/push pending before H200 retry。
 - frozen test：`sealed`，`test_evaluation_count=0`。
+- gpu retry：correction commit `5aa86c7a3368e8024449ccf421febfbf9eb78dd2` push 后 exact registered H200 command authorized retry 一次；approval service 再次 pre-launch `422`。candidate rows `0`、active process `0`。写出 manual tmux launcher；operational=`blocked_infrastructure`，scientific=`blocked`。
 
 ## 2026-07-11 UTC
 

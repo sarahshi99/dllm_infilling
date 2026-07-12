@@ -25,10 +25,14 @@ Blocker:
 - Approved H200 command was rejected before process launch by the approval service: `422 Unprocessable Entity: model not found: codex-auto-review`.
 - No GPU process/model load/candidate/evaluator row exists.
 - Do not retry or route around without explicit user approval after this notice.
+- 2026-07-12 user-authorized exact retry was performed once after correction commit `5aa86c7a3368e8024449ccf421febfbf9eb78dd2` was pushed; it returned the same pre-launch `422`. Candidate rows remain `0`; no process is active. Do not retry again in this session.
+- Manual launch entry: `docs/paper_agent/phase5_manual_h200_launch_20260712.md` and `scripts/manual_launch_phase5_h200_candidate_bank.sh`.
 
 Frozen test: `sealed`, `test_evaluation_count=0`.
 
-Current decision: `blocked`.
+Operational decision: `blocked_infrastructure`.
+
+Scientific decision: `blocked`.
 
 Phase 5 scaffold commit: `08f01141b8cf6a8e611d55162a3c21d09ca0cf12`.
 

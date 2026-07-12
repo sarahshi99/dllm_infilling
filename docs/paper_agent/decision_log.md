@@ -12,6 +12,7 @@ Updated: 2026-07-11 UTC
 - Controller V4, V8/V9, cal-lite tuning, Dream-Coder E/F/G, homotopy, birth–death, particle assembly, and fusion remain unauthorized.
 - CPU implementation gate passes: `13` tests, py_compile, diff hygiene; real-data audit is `164 -> 148`, frozen intersection empty, base expected rows `1332`.
 - H200 smoke/full is `blocked_not_started`: approval service returned `422 model not found: codex-auto-review` before launch. Do not retry or route around this without explicit user approval after the blocker notice.
+- The user explicitly authorized one corrected H200 retry on 2026-07-12. It returned the same pre-launch `422`; candidate rows remain `0` and no process started. Operational decision is `blocked_infrastructure`, not method failure. Manual tmux launch is recorded in `docs/paper_agent/phase5_manual_h200_launch_20260712.md`.
 - F1–F4 are `blocked_on_candidate_bank`; V0 is `blocked_on_f3_gate`; frozen test remains sealed with `test_evaluation_count=0`.
 - Current Phase 5 decision: `blocked`.
 
