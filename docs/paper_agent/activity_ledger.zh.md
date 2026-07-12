@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-07-12 UTC
+
+- action：按用户 audit correction 修复 F3/V0 supervision leakage；starting remote/local HEAD `3315ed82d42770e3ed7d8ae20e9d5f1570940ff6` verified `0/0`，clean isolated worktree。
+- defect：原 OOF logistic 使用 `passed` labels，且 V0 读取 `score_combined_bridge`；因此它是 supervised correctness controller，原 `outcomes_used_for_selection=false` 不准确。
+- correction：split 为 `supervised_probe_diagnostic` 与 fixed deterministic `AST/def-use bridge proxy V0`；V0 schema rejects supervised scores；primary gate 改为 within-task/cross-canvas ranking、deterministic baseline deltas、paired help/harm 与 short safety；global AUROC secondary-only。
+- verification interim：`18` focused tests pass；synthetic end-to-end corrected gate smoke correctly kills an insufficient case。Final fresh verification/commit/push pending before H200 retry。
+- frozen test：`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-11 UTC
 
 - action：开始 Phase 5 independent-method falsification；fetch 后核对 authoritative remote/local HEAD，保留主 checkout 用户已有 untracked paths，并建立 clean isolated worktree。

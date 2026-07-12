@@ -12,9 +12,9 @@
 | 148-case RandomSpanLight shared bank | `open` | manifest 已精确审计，GPU rows 尚未生成 |
 | candidate/AST/semantic-fragment diversity | `open` | F1 blocked on bank |
 | alpha-renaming equivariance 独立预测力 | `open` | F2 blocked on bank；不把 stability 称为 correctness |
-| combined bridge 相对四基线的真实优势 | `open` | F3 blocked；预注册 `0.01 + positive CI` gate |
+| deterministic AST/def-use proxy 的 within-task 优势 | `open` | corrected F3/F4 blocked；要求 cross-canvas primary delta CI `>0`、paired help/harm 与 short safety |
 | inference-visible within-task ranking | `open` | F4 blocked on bank |
-| Semantic Bridge V0 Pass@1/help-harm | `blocked` | 仅在 F3 gate 通过后解除 |
+| AST/def-use bridge proxy V0 Pass@1/help-harm | `blocked` | 仅在 corrected within-task gate 通过后解除 |
 | frozen controller held-out result | `blocked` | Phase 5 不打开；`test_evaluation_count=0` |
 | resumable/duplicate-safe long run | `partially_closed` | code/tests 已有，需真实 smoke/full audit |
 | raw-code publication safety | `partially_closed` | compact schema 无 raw code，需 final tracked scan |

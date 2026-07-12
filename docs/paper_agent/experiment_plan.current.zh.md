@@ -8,7 +8,7 @@ Population 固定为全部 `148` allowed non-frozen `HumanEval-RandomSpanInfilli
 
 Canvas 128 必须通过同 protocol 验证：same `run_vanilla_decode`、fixed mask、linear target-mask schedule、`64` steps、actual canvas `128`、无替代。12-case smoke 覆盖 short/medium/long/extreme 各 `3`；schema/evaluator/resume/row-count/duplicate/frozen-lock 全通过后自动继续 full `148`，不再请求另一 approval。
 
-F1–F4 均从 shared bank 派生。F3 gate 通过才运行 standalone Semantic Bridge V0；否则 kill。本轮禁止 Controller V4、V8/V9、cal-lite tuning、Dream-Coder E/F/G、homotopy、birth–death、particle assembly 与 fusion。
+F1–F4 均从 shared bank 派生。F3A 的 pass-trained OOF logistic models 明确标为 `supervised_probe_diagnostic`，不能进入 selection。F3B/F4 使用固定 deterministic AST/def-use/boundary/confidence proxy；corrected within-task/cross-canvas gate 通过才运行 standalone `AST/def-use bridge proxy V0`，否则 kill。Global AUROC 只作 secondary diagnostic。本轮禁止 Controller V4、V8/V9、cal-lite tuning、Dream-Coder E/F/G、homotopy、birth–death、particle assembly 与 fusion。
 
 Forbidden deployable features：reference code、oracle length、unit-test/verifier outcome、task ID、split label、error type、test-derived statistic。Grouped evaluation unit 是 anonymized HumanEval base-task hash；identifier 只用于 grouping，不进入 feature vector。
 

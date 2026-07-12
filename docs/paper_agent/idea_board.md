@@ -4,15 +4,17 @@ Updated: 2026-07-11 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
-## IDEA-011: Semantic Bridge Projection
+## IDEA-011: AST/def-use bridge proxy V0
 
 Source: user
 Status: blocked_on_shared_bank
-Scientific question: Can prefix-forward and suffix-backward semantic obligations rank passing candidates above failing candidates without oracle/reference/test features?
-Minimum experiment: F3 over the full shared 148-case bank; compare prefix-only, suffix-only, combined, token-length, and ordinary confidence with grouped OOF AUROC and bootstrap intervals.
-Decision rule: Implement standalone V0 only if combined wins every preregistered comparison by at least `0.01` AUROC and every delta CI lower bound is `>0`; otherwise kill for this round.
+Scientific question: Can a fixed AST/def-use/boundary proxy rank passing candidates above failing candidates within the same task without fitted correctness labels or reference information?
+Minimum experiment: F3/F4 over the full shared 148-case bank. Keep pass-trained OOF logistic models as `supervised_probe_diagnostic` only. Compare the deterministic combined proxy against deterministic prefix-only, suffix-only, token/canvas, and ordinary-confidence scores.
+Decision rule: Implement standalone V0 only if within-task and cross-canvas ranking exceed chance, every primary grouped-bootstrap delta lower bound is `>0`, paired selection net is positive versus fixed64 and confidence, and short-bucket net regression is absent. Global AUROC is secondary only.
 Combination rule: Must remain standalone; no homotopy, birth–death, particle, controller, or cal-lite fusion.
 Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsification.md`, `analysis_outputs/phase5_method_portfolio_20260711_v1/`
+
+Scope boundary: This is not full Semantic Bridge Projection. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.
 
 ## IDEA-012: Constraint-Homotopy Infilling
 

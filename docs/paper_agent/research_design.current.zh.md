@@ -6,9 +6,9 @@
 
 Phase 4 的 diagnostic/mixed claim 保留，但下一步不再继续 controller 或 cal-lite heuristic family。Phase 5 问题是：在一个预先固定、全量、共享的 RandomSpanLight candidate bank 上，是否存在独立于 oracle/test 的 inference-visible semantic premise，可以可靠地把 passing candidate 排在 failing candidate 前面，并转化为 standalone method。
 
-四个方法假设必须独立：Semantic Bridge Projection、Constraint-Homotopy Infilling、Birth–Death Canvas Diffusion、Semantic Particle Assembly。Metamorphic Equivariance 只做 auxiliary evaluator。当前 round 只允许检验 Semantic Bridge premise；其余三个只登记、不实现、不融合。
+四个方法假设必须独立。当前可执行机制准确命名为 `AST/def-use bridge proxy V0`；完整 Semantic Bridge Projection 仍是未来概念，需要 genuine program-state analysis、backward obligations、bridge anchors 与 denoising intervention。Constraint-Homotopy Infilling、Birth–Death Canvas Diffusion、Semantic Particle Assembly 只登记、不实现、不融合；Metamorphic Equivariance 只做 auxiliary evaluator。
 
-当前可证伪 central hypothesis：prefix-forward 与 suffix-backward semantic bridge features 的组合，对 candidate functional pass 的 grouped out-of-fold ranking 必须同时优于 prefix-only、suffix-only、token-length 和 ordinary confidence。预注册 gate 为 AUROC delta 至少 `0.01`，且每个 grouped-bootstrap 95% delta interval lower bound `>0`。任一失败，本轮 kill Semantic Bridge V0。
+Audit correction：pass-trained grouped-OOF logistic probes 属于 `supervised_probe_diagnostic`，只回答 features 是否含信息，不能授权或向 deployable V0 提供 score。Deployable proxy 使用 outcome-free fixed formula。其 primary hypothesis 是：deterministic combined proxy 在同 task、跨 canvas 的 passing-vs-failing ranking 上优于 deterministic prefix-only、suffix-only、token/canvas 与 ordinary confidence，且 grouped-bootstrap delta lower bound `>0`。同时要求 paired selection 对 fixed64/confidence 均为正 net、short bucket 无净回归。Global AUROC 仅为 secondary diagnostic。任一条件失败，本轮 kill proxy V0。
 
 当前状态不是方法结果。Stage A/scaffold 已通过；H200 bank 因 approval-service launch blocker 未启动。Frozen test remains sealed, `test_evaluation_count=0`。Current decision：`blocked`。
 

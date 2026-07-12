@@ -4,9 +4,10 @@ Updated: 2026-07-11 UTC
 
 - Phase 5 authoritative starting HEAD is `b8ae031cf3b430833613aaf29083535edc0738f6`, verified after fetch against `origin/codex/risk-controlled-dynamic-rescue`; older handoff HEAD values are historical only.
 - The dirty primary checkout is user-owned. Phase 5 uses a clean isolated worktree and does not move, delete, or hide existing untracked files.
-- Semantic Bridge Projection, Constraint-Homotopy Infilling, Birth–Death Canvas Diffusion, and Semantic Particle Assembly are four independent hypotheses. Metamorphic Equivariance is auxiliary-only. Do not combine them.
+- The current executable mechanism is `AST/def-use bridge proxy V0`, not full Semantic Bridge Projection. Semantic Bridge Projection remains a future concept requiring genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention. Constraint-Homotopy, Birth–Death, and Semantic Particle Assembly remain separate deferred hypotheses; Metamorphic Equivariance is auxiliary-only.
 - Stage B is exactly eight deployable candidates per task (`16/32/64/128 × seeds 0/1`) plus one seed-0 oracle-sufficient diagnostic ceiling. Fixed64 control is `(64,0)`. F2 alpha mirrors are separately counted.
-- F3 gate is frozen before outcomes: combined bridge must exceed prefix-only, suffix-only, token-length, and ordinary confidence by at least `0.01` AUROC, with every grouped-bootstrap 95% delta lower bound `>0`. Otherwise kill V0 for this round; no heuristic fallback.
+- Supervised OOF logistic probes use `passed` labels and are diagnostic only; their scores have no deployable authorization role and cannot enter V0.
+- The corrected deployable gate uses deterministic scores and requires within-task and cross-canvas ranking above chance, positive grouped-bootstrap primary deltas versus prefix-only/suffix-only/token-canvas/confidence, positive paired selection net versus fixed64 and confidence, and no short-bucket net regression. Global AUROC is secondary only.
 - Forbidden deployable inputs: reference code, oracle length, unit-test/verifier outcomes, task IDs, split labels, error types, and test-derived statistics.
 - Controller V4, V8/V9, cal-lite tuning, Dream-Coder E/F/G, homotopy, birth–death, particle assembly, and fusion remain unauthorized.
 - CPU implementation gate passes: `13` tests, py_compile, diff hygiene; real-data audit is `164 -> 148`, frozen intersection empty, base expected rows `1332`.

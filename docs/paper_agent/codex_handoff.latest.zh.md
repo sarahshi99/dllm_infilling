@@ -8,12 +8,12 @@
 - 已先执行 `git fetch --all --prune`；verified remote HEAD 与 local branch HEAD 均为 `b8ae031cf3b430833613aaf29083535edc0738f6`，ahead/behind `0/0`。这是 Phase 5 starting HEAD；不要使用本文件历史段落中的旧 HEAD。
 - 主 checkout 存在用户已有 untracked Phase 4/raw/helper paths；没有移动、删除或隐藏。Phase 5 在 clean isolated worktree `.worktrees/phase5-method-falsification` 从 exact starting HEAD 开始。
 - Frozen controller test：`sealed`，`test_evaluation_count=0`；Phase 5 没有读取或评估 frozen test。
-- 方法组合已独立登记于 `analysis_outputs/phase5_method_portfolio_20260711_v1/`：Semantic Bridge Projection、Constraint-Homotopy Infilling、Birth–Death Canvas Diffusion、Semantic Particle Assembly，以及仅作为 auxiliary evaluator 的 Metamorphic Equivariance。禁止 method fusion。
+- Audit correction（2026-07-12）：原 F3/V0 pass-trained OOF logistic score 间接使用 correctness labels，不能作为 training-free selector。现拆分为 `supervised_probe_diagnostic`（label-trained、diagnostic-only）与 fixed deterministic `AST/def-use bridge proxy V0`（no outcome/reference fit or selection）。Full Semantic Bridge Projection 仍是未来概念；program-state、backward obligations、bridge anchors、denoising intervention 未实现。
 - Scaffold：`experiments/phase5_randomspanlight_candidate_bank.py`、`analysis/phase5_premise_falsification.py`、`analysis/phase5_semantic_bridge_v0.py`；`13` tests pass，`py_compile` pass，`git diff --check` pass。
 - CPU read-only audit：source `164` rows，排除 `16` frozen HumanEval groups 后 exactly `148` allowed unique groups；bucket short/medium/long/extreme=`22/40/23/63`；12-case smoke=`3/3/3/3`；Stage B expected rows smoke `108`、full `1332`；frozen intersection `[]`。
 - Canvas 128 无替代：runner 在 generation 前验证 same `run_vanilla_decode` fixed-mask path、linear schedule、`64` denoising steps 和 actual canvas `128`。
 - 当前 blocker：approved host/H200 command 在 process launch 前被 approval service 拒绝，错误 `422 Unprocessable Entity: model not found: codex-auto-review`。没有 GPU process、没有 smoke row、没有绕过执行。
-- Stage B：`blocked_not_started`；F1–F4：`blocked_on_bank`；Semantic Bridge V0：`blocked_on_f3_gate`。Homotopy、birth–death、particle assembly、fusion 均未实现。
+- Stage B：`blocked_not_started`；F1–F4：`blocked_on_bank`；AST/def-use bridge proxy V0：`blocked_on_corrected_gate`。Homotopy、birth–death、particle assembly、fusion 均未实现。
 - 当前单一 decision：`blocked`。
 - Phase 5 pushed checkpoint HEAD：`fabe6406bd8222b76bad220f76a3041e51144bdd`。`git push` reported success (`b8ae031..fabe640`); separate `ls-remote` readback is blocked by sandbox DNS and the approval-service `422` outage.
 

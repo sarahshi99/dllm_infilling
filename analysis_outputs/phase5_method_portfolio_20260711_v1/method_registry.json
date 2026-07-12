@@ -7,11 +7,12 @@
   },
   "methods": [
     {
-      "implementation": "conditional_on_f3_gate",
+      "future_full_method_name": "Semantic Bridge Projection",
+      "implementation": "conditional_on_corrected_gate",
       "method_id": "M1",
-      "name": "Semantic Bridge Projection",
+      "name": "AST/def-use bridge proxy V0",
       "phase5_role": "primary_method_candidate",
-      "status": "selected_for_f3_falsification"
+      "status": "selected_for_corrected_f3_f4_falsification"
     },
     {
       "implementation": "not_authorized_this_round",

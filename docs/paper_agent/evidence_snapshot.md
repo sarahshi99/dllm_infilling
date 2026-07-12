@@ -1,6 +1,6 @@
 # Paper-Agent Evidence Snapshot
 
-Phase 5 update, 2026-07-11 UTC: verified remote/local starting HEAD is `b8ae031cf3b430833613aaf29083535edc0738f6`. The independent-method portfolio and gap ledger are in `analysis_outputs/phase5_method_portfolio_20260711_v1/`. Focused implementation verification passes (`13` tests, py_compile, diff hygiene). A read-only real-data audit confirms `164` RandomSpanLight source rows, exactly `148` allowed unique non-frozen groups, and zero frozen intersection. No new empirical candidate/pass evidence exists: the approved H200 command was rejected before process launch (`422 model not found: codex-auto-review`). Stage B is `blocked_not_started`; F1–F4 and V0 are downstream blocked. Frozen test remains sealed and `test_evaluation_count=0`.
+Phase 5 update, 2026-07-12 UTC: authoritative starting HEAD for the resumed correction is `3315ed82d42770e3ed7d8ae20e9d5f1570940ff6`. The original pass-trained F3 OOF score is now explicitly `supervised_probe_diagnostic` and cannot authorize or enter deployable selection. The current deployable mechanism is `AST/def-use bridge proxy V0`, using a fixed deterministic formula and a corrected within-task/cross-canvas gate. It is not full Semantic Bridge Projection. Focused correction tests currently pass (`18` tests before final verification). No new empirical candidate/pass evidence exists yet; frozen test remains sealed and `test_evaluation_count=0`.
 
 Generated from existing local `results.jsonl` files. Raw outputs are not copied here.
 

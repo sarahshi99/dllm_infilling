@@ -608,6 +608,23 @@
   },
   "phase5_method_falsification": {
     "ahead_behind": "0/0",
+    "ast_def_use_bridge_proxy_v0_status": "blocked_on_corrected_f3_gate",
+    "audit_correction_20260712": {
+      "defect": "pass-trained OOF scores indirectly used outcome labels for V0 selection",
+      "deployable_formula": "fixed deterministic AST/def-use/boundary/confidence formula",
+      "deployable_mechanism_name": "AST/def-use bridge proxy V0",
+      "global_auc_role": "secondary_diagnostic_only",
+      "outcome_labels_used_for_fit": false,
+      "outcome_labels_used_for_selection": false,
+      "primary_metric": "cross_canvas_within_task_pairwise_accuracy",
+      "reference_used_for_fit": false,
+      "reference_used_for_selection": false,
+      "supervised_probe_diagnostic": {
+        "deployable_authorization_role": "none",
+        "outcome_labels_used_for_fit": true
+      },
+      "tests": "18 passed before final verification"
+    },
     "candidate_bank": {
       "alpha_auxiliary_separately_counted": true,
       "canvas_lengths": [
@@ -638,15 +655,26 @@
     "f1_status": "blocked_on_bank",
     "f2_status": "blocked_on_bank",
     "f3_gate": {
-      "delta_ci_low_strictly_above": 0.0,
-      "minimum_auc_delta": 0.01,
-      "required_baselines": [
+      "cross_canvas_accuracy_above_chance_required": true,
+      "global_auc_role": "secondary_diagnostic_only",
+      "grouped_bootstrap_delta_ci_low_strictly_above": 0.0,
+      "no_short_bucket_net_regression_vs": [
+        "fixed64",
+        "confidence"
+      ],
+      "positive_selection_net_vs": [
+        "fixed64",
+        "confidence"
+      ],
+      "primary_metric": "cross_canvas_within_task_pairwise_accuracy",
+      "required_deterministic_baselines": [
         "prefix_only",
         "suffix_only",
-        "token_length",
+        "token_canvas",
         "ordinary_confidence"
       ],
-      "v0_on_failure": "kill_for_this_round"
+      "v0_on_failure": "kill_for_this_round",
+      "within_task_accuracy_above_chance_required": true
     },
     "f3_status": "blocked_on_bank",
     "f4_status": "blocked_on_bank",
@@ -672,10 +700,11 @@
     "local_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
     "method_registry": "analysis_outputs/phase5_method_portfolio_20260711_v1/method_registry.csv",
     "methods": {
+      "AST/def-use bridge proxy V0": "conditional_on_corrected_gate",
       "Birth–Death Canvas Diffusion": "registered_not_implemented",
       "Constraint-Homotopy Infilling": "registered_not_implemented",
       "Metamorphic Equivariance": "auxiliary_alpha_renaming_only",
-      "Semantic Bridge Projection": "conditional_on_f3_gate",
+      "Semantic Bridge Projection": "future_full_method_not_current_implementation",
       "Semantic Particle Assembly": "registered_not_implemented"
     },
     "population": {
@@ -697,7 +726,7 @@
     "remote_head_verified": "b8ae031cf3b430833613aaf29083535edc0738f6",
     "remote_readback_status": "blocked_by_sandbox_dns_and_approval_service_422",
     "scaffold_commit": "08f01141b8cf6a8e611d55162a3c21d09ca0cf12",
-    "semantic_bridge_v0_status": "blocked_on_f3_gate",
+    "semantic_bridge_v0_status": "superseded_by_ast_def_use_proxy_v0",
     "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6",
     "status": "blocked_before_gpu_launch",
     "test_evaluation_count": 0,

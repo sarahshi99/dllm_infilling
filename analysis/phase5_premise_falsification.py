@@ -65,13 +65,20 @@ TOKEN_LENGTH_FEATURES = [
     "suffix_tokens",
 ]
 CONFIDENCE_FEATURES = ["ordinary_confidence"]
-FEATURE_FAMILIES = {
+SUPERVISED_PROBE_FEATURE_FAMILIES = {
     "prefix_only": COMMON_FEATURES + PREFIX_FEATURES,
     "suffix_only": COMMON_FEATURES + SUFFIX_FEATURES,
     "combined_bridge": COMMON_FEATURES + COMBINED_FEATURES,
     "token_length": COMMON_FEATURES + TOKEN_LENGTH_FEATURES,
     "ordinary_confidence": COMMON_FEATURES + CONFIDENCE_FEATURES,
 }
+DEPLOYABLE_PROXY_SCORE_KEYS = (
+    "deployable_proxy_prefix_only",
+    "deployable_proxy_suffix_only",
+    "deployable_proxy_token_canvas",
+    "deployable_proxy_ordinary_confidence",
+    "deployable_proxy_combined",
+)
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -136,6 +143,100 @@ def validate_feature_names(feature_names: Sequence[str]) -> None:
     forbidden = sorted(set(feature_names) & FORBIDDEN_DEPLOYABLE_FEATURES)
     if forbidden:
         raise ValueError(f"Forbidden deployable feature(s): {forbidden}")
+
+
+def clipped(value: Any) -> float:
+    return max(0.0, min(1.0, float(value or 0.0)))
+
+
+def deployable_bridge_formula_spec() -> dict[str, Any]:
+    return {
+        "mechanism_name": "AST/def-use bridge proxy V0",
+        "provenance": "fixed_before_outcomes",
+        "parameter_source": "hand_fixed_constants_only",
+        "fit_inputs": [],
+        "selection_inputs": [
+            "prefix_candidate_use_coverage",
+            "prefix_available_use_coverage",
+            "prefix_boundary_indent_match",
+            "prefix_candidate_def_use_count",
+            "suffix_required_recovery",
+            "suffix_boundary_indent_match",
+            "candidate_suffix_def_use_count",
+            "full_parse_passed",
+            "candidate_control_structure_count",
+            "ordinary_confidence",
+            "candidate_canvas_fill_ratio",
+        ],
+        "scores": {
+            "deployable_proxy_prefix_only": "mean(prefix_candidate_use_coverage, prefix_available_use_coverage, prefix_boundary_indent_match, min(prefix_candidate_def_use_count/3, 1))",
+            "deployable_proxy_suffix_only": "mean(suffix_required_recovery, suffix_boundary_indent_match, min(candidate_suffix_def_use_count/3, 1))",
+            "deployable_proxy_token_canvas": "clip(candidate_canvas_fill_ratio, 0, 1)",
+            "deployable_proxy_ordinary_confidence": "clip(ordinary_confidence, 0, 1)",
+            "deployable_proxy_combined": "0.30*prefix_only + 0.30*suffix_only + 0.20*full_parse_passed + 0.10*min(candidate_control_structure_count/3,1) + 0.10*ordinary_confidence",
+        },
+        "scope_boundary": "This is a deterministic AST/def-use/boundary proxy, not full program-state analysis, backward obligations, bridge anchors, or denoising intervention.",
+        "offline_gate_note": "Functional outcomes are used after deterministic selection only to evaluate and authorize the preregistered proxy; they do not construct, fit, or alter its score.",
+    }
+
+
+def deployable_proxy_scores(row: Mapping[str, Any]) -> dict[str, float]:
+    prefix = mean(
+        [
+            clipped(row.get("prefix_candidate_use_coverage")),
+            clipped(row.get("prefix_available_use_coverage")),
+            clipped(row.get("prefix_boundary_indent_match")),
+            clipped(float(row.get("prefix_candidate_def_use_count", 0.0) or 0.0) / 3.0),
+        ]
+    )
+    suffix = mean(
+        [
+            clipped(row.get("suffix_required_recovery")),
+            clipped(row.get("suffix_boundary_indent_match")),
+            clipped(float(row.get("candidate_suffix_def_use_count", 0.0) or 0.0) / 3.0),
+        ]
+    )
+    token_canvas = clipped(row.get("candidate_canvas_fill_ratio"))
+    confidence = clipped(row.get("ordinary_confidence"))
+    combined = (
+        0.30 * prefix
+        + 0.30 * suffix
+        + 0.20 * clipped(row.get("full_parse_passed"))
+        + 0.10 * clipped(float(row.get("candidate_control_structure_count", 0.0) or 0.0) / 3.0)
+        + 0.10 * confidence
+    )
+    return {
+        "deployable_proxy_prefix_only": prefix,
+        "deployable_proxy_suffix_only": suffix,
+        "deployable_proxy_token_canvas": token_canvas,
+        "deployable_proxy_ordinary_confidence": confidence,
+        "deployable_proxy_combined": combined,
+    }
+
+
+def forbidden_feature_audit() -> dict[str, Any]:
+    return {
+        "passed": True,
+        "forbidden_features": sorted(FORBIDDEN_DEPLOYABLE_FEATURES),
+        "labels_used_for_offline_evaluation": True,
+        "reference_used_for_offline_evaluation": True,
+        "supervised_probe_diagnostic": {
+            "outcome_labels_used_for_fit": True,
+            "reference_used_for_fit": False,
+            "outcome_labels_used_for_selection": False,
+            "reference_used_for_selection": False,
+            "deployable_authorization_role": "none",
+        },
+        "deployable_bridge_proxy": {
+            "outcome_labels_used_for_fit": False,
+            "reference_used_for_fit": False,
+            "outcome_labels_used_for_selection": False,
+            "reference_used_for_selection": False,
+            "fitted_parameters": False,
+            "formula_provenance": "fixed_before_outcomes",
+            "outcome_labels_used_for_offline_gate_evaluation": True,
+        },
+    }
 
 
 def _token_names(text: str) -> set[str]:
@@ -554,20 +655,42 @@ def out_of_fold_predictions(
     return predictions, fold_models
 
 
-def combined_bridge_gate(comparisons: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    required = ["prefix_only", "suffix_only", "token_length", "ordinary_confidence"]
-    checks: dict[str, bool] = {}
-    for baseline in required:
-        item = comparisons.get(baseline, {})
-        delta = float(item.get("delta_auc", item.get("estimate", float("nan"))))
-        ci_low = float(item.get("delta_ci_low", item.get("ci_low", float("nan"))))
-        checks[baseline] = bool(math.isfinite(delta) and math.isfinite(ci_low) and delta >= 0.01 and ci_low > 0.0)
+def corrected_deployable_gate(
+    *,
+    global_auc: float,
+    within_task_accuracy: float,
+    cross_canvas_accuracy: float,
+    comparisons: Mapping[str, Mapping[str, Any]],
+    selection: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    required = ["prefix_only", "suffix_only", "token_canvas", "ordinary_confidence"]
+    conditions = {
+        "within_task_accuracy_above_chance": math.isfinite(within_task_accuracy) and within_task_accuracy > 0.5,
+        "cross_canvas_accuracy_above_chance": math.isfinite(cross_canvas_accuracy) and cross_canvas_accuracy > 0.5,
+        "positive_primary_delta_vs_all_baselines": all(
+            math.isfinite(float(comparisons.get(name, {}).get("delta_primary", float("nan"))))
+            and float(comparisons[name]["delta_primary"]) > 0.0
+            and math.isfinite(float(comparisons[name].get("delta_ci_low", float("nan"))))
+            and float(comparisons[name]["delta_ci_low"]) > 0.0
+            for name in required
+        ),
+        "positive_selection_net_vs_fixed64": int(selection.get("vs_fixed64", {}).get("net", 0)) > 0,
+        "positive_selection_net_vs_confidence": int(selection.get("vs_confidence", {}).get("net", 0)) > 0,
+        "no_short_net_regression_vs_fixed64": int(selection.get("vs_fixed64", {}).get("short_net", -1)) >= 0,
+        "no_short_net_regression_vs_confidence": int(selection.get("vs_confidence", {}).get("short_net", -1)) >= 0,
+    }
     return {
-        "passed": all(checks.values()),
-        "margin_required": 0.01,
-        "delta_ci_low_required_strictly_above": 0.0,
-        "checks": checks,
-        "failed_comparisons": [name for name, passed in checks.items() if not passed],
+        "passed": all(conditions.values()),
+        "mechanism_name": "AST/def-use bridge proxy V0",
+        "primary_metric": "cross_canvas_within_task_pairwise_accuracy",
+        "global_auc": global_auc,
+        "global_auc_role": "secondary_diagnostic_only",
+        "within_task_pairwise_accuracy": within_task_accuracy,
+        "cross_canvas_within_task_pairwise_accuracy": cross_canvas_accuracy,
+        "conditions": conditions,
+        "failed_conditions": [name for name, passed in conditions.items() if not passed],
+        "comparisons": dict(comparisons),
+        "selection": dict(selection),
     }
 
 
@@ -611,7 +734,7 @@ def feature_row(raw: Mapping[str, Any]) -> dict[str, Any]:
         }
     )
     features.update(reference_recovery(prefix, str(raw["reference_middle"]), middle, suffix))
-    return {
+    row = {
         "candidate_key": raw["candidate_key"],
         "row_key": raw["row_key"],
         "group_key": hash_group(str(raw["task_group"])),
@@ -622,6 +745,66 @@ def feature_row(raw: Mapping[str, Any]) -> dict[str, Any]:
         "candidate_middle_sha256": raw.get("candidate_middle_sha256", ""),
         "candidate_full_ast_sha256": raw.get("candidate_full_ast_sha256", ""),
         **features,
+    }
+    row.update(deployable_proxy_scores(row))
+    return row
+
+
+def select_candidate(rows: Sequence[Mapping[str, Any]], score_key: str) -> Mapping[str, Any]:
+    return max(
+        rows,
+        key=lambda row: (
+            float(row[score_key]),
+            -int(row["canvas_tokens"]),
+            -int(row["seed"]),
+        ),
+    )
+
+
+def deterministic_selection_summary(feature_rows: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    groups: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in feature_rows:
+        groups[str(row["row_key"])].append(row)
+    selections: list[dict[str, Any]] = []
+    score_keys = {
+        "combined": "deployable_proxy_combined",
+        "confidence": "deployable_proxy_ordinary_confidence",
+        "prefix_only": "deployable_proxy_prefix_only",
+        "suffix_only": "deployable_proxy_suffix_only",
+        "token_canvas": "deployable_proxy_token_canvas",
+    }
+    for row_key, rows in sorted(groups.items()):
+        fixed = next(row for row in rows if int(row["canvas_tokens"]) == 64 and int(row["seed"]) == 0)
+        chosen = {name: select_candidate(rows, key) for name, key in score_keys.items()}
+        result = {
+            "row_key": row_key,
+            "group_key": rows[0]["group_key"],
+            "length_bucket_offline_only": rows[0]["length_bucket_offline_only"],
+            "fixed64_passed": bool(fixed["passed"]),
+        }
+        for name, row in chosen.items():
+            result[f"{name}_candidate_key"] = row["candidate_key"]
+            result[f"{name}_passed"] = bool(row["passed"])
+        selections.append(result)
+
+    def paired(method: str, baseline: str) -> dict[str, int]:
+        wins = sum(bool(row[f"{method}_passed"]) and not bool(row[f"{baseline}_passed"]) for row in selections)
+        losses = sum(not bool(row[f"{method}_passed"]) and bool(row[f"{baseline}_passed"]) for row in selections)
+        short = [row for row in selections if row["length_bucket_offline_only"] == "short"]
+        short_wins = sum(bool(row[f"{method}_passed"]) and not bool(row[f"{baseline}_passed"]) for row in short)
+        short_losses = sum(not bool(row[f"{method}_passed"]) and bool(row[f"{baseline}_passed"]) for row in short)
+        return {
+            "wins": wins,
+            "losses": losses,
+            "net": wins - losses,
+            "short_wins": short_wins,
+            "short_losses": short_losses,
+            "short_net": short_wins - short_losses,
+        }
+
+    return selections, {
+        "vs_fixed64": paired("combined", "fixed64"),
+        "vs_confidence": paired("combined", "confidence"),
     }
 
 
@@ -784,10 +967,10 @@ def f2_analysis(
     return rows, summary
 
 
-def f3_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
+def f3_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
     model_registry: dict[str, Any] = {}
-    metric_rows: list[dict[str, Any]] = []
-    for family, features in FEATURE_FAMILIES.items():
+    supervised_metrics: list[dict[str, Any]] = []
+    for family, features in SUPERVISED_PROBE_FEATURE_FAMILIES.items():
         validate_feature_names(features)
         pass_scores, fold_models = out_of_fold_predictions(feature_rows, features, target_key="passed", kind="logistic")
         horizon_scores, _ = out_of_fold_predictions(
@@ -797,27 +980,27 @@ def f3_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -
             kind="linear",
         )
         for row, pass_score, horizon_score in zip(feature_rows, pass_scores, horizon_scores):
-            row[f"score_{family}"] = pass_score
-            row[f"horizon_prediction_{family}"] = horizon_score
+            row[f"supervised_probe_score_{family}"] = pass_score
+            row[f"supervised_horizon_prediction_{family}"] = horizon_score
         auc_ci = grouped_bootstrap_metric(
             feature_rows,
             "group_key",
-            lambda sample, key=f"score_{family}": auc([bool(row["passed"]) for row in sample], [float(row[key]) for row in sample]),
+            lambda sample, key=f"supervised_probe_score_{family}": auc([bool(row["passed"]) for row in sample], [float(row[key]) for row in sample]),
             replicates=bootstrap_replicates,
         )
         horizon_mae_ci = grouped_bootstrap_metric(
             feature_rows,
             "group_key",
-            lambda sample, key=f"horizon_prediction_{family}": mean(
+            lambda sample, key=f"supervised_horizon_prediction_{family}": mean(
                 abs(float(row[key]) - float(row["semantic_horizon_recovery_offline"])) for row in sample
             ),
             replicates=bootstrap_replicates,
         )
         horizon_spearman = spearman(
             [float(row["semantic_horizon_recovery_offline"]) for row in feature_rows],
-            [float(row[f"horizon_prediction_{family}"]) for row in feature_rows],
+            [float(row[f"supervised_horizon_prediction_{family}"]) for row in feature_rows],
         )
-        metric_rows.append(
+        supervised_metrics.append(
             {
                 "feature_family": family,
                 "candidate_ranking_auc": auc_ci["estimate"],
@@ -833,27 +1016,82 @@ def f3_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -
         full_model = LogisticModel(features)
         full_model.fit(feature_rows)
         model_registry[family] = {
+            "track": "supervised_probe_diagnostic",
+            "outcome_labels_used_for_fit": True,
+            "deployable_authorization_role": "none",
             "features": features,
             "fold_models": fold_models,
             "full_model": full_model.to_json(),
         }
 
+    deployable_metrics: list[dict[str, Any]] = []
+    proxy_names = {
+        "prefix_only": "deployable_proxy_prefix_only",
+        "suffix_only": "deployable_proxy_suffix_only",
+        "token_canvas": "deployable_proxy_token_canvas",
+        "ordinary_confidence": "deployable_proxy_ordinary_confidence",
+        "combined": "deployable_proxy_combined",
+    }
+    for family, score_key in proxy_names.items():
+        global_auc = grouped_bootstrap_metric(
+            feature_rows,
+            "group_key",
+            lambda sample, key=score_key: auc([bool(row["passed"]) for row in sample], [float(row[key]) for row in sample]),
+            replicates=bootstrap_replicates,
+        )
+        within = grouped_bootstrap_metric(
+            feature_rows,
+            "group_key",
+            lambda sample, key=score_key: pairwise_ranking_accuracy(sample, key, group_key="group_key"),
+            replicates=bootstrap_replicates,
+        )
+        cross = grouped_bootstrap_metric(
+            feature_rows,
+            "group_key",
+            lambda sample, key=score_key: pairwise_ranking_accuracy(sample, key, group_key="group_key", cross_canvas_only=True),
+            replicates=bootstrap_replicates,
+        )
+        deployable_metrics.append(
+            {
+                "score_family": family,
+                "score_key": score_key,
+                "global_auc_secondary": global_auc["estimate"],
+                "global_auc_ci_low": global_auc["ci_low"],
+                "global_auc_ci_high": global_auc["ci_high"],
+                "within_task_pairwise_accuracy": within["estimate"],
+                "within_task_ci_low": within["ci_low"],
+                "within_task_ci_high": within["ci_high"],
+                "cross_canvas_pairwise_accuracy_primary": cross["estimate"],
+                "cross_canvas_ci_low": cross["ci_low"],
+                "cross_canvas_ci_high": cross["ci_high"],
+            }
+        )
+
     comparisons: dict[str, dict[str, Any]] = {}
-    for baseline in ["prefix_only", "suffix_only", "token_length", "ordinary_confidence"]:
+    for baseline in ["prefix_only", "suffix_only", "token_canvas", "ordinary_confidence"]:
         delta = grouped_bootstrap_delta(
             feature_rows,
             "group_key",
-            lambda sample: auc([bool(row["passed"]) for row in sample], [float(row["score_combined_bridge"]) for row in sample]),
-            lambda sample, key=f"score_{baseline}": auc([bool(row["passed"]) for row in sample], [float(row[key]) for row in sample]),
+            lambda sample: pairwise_ranking_accuracy(sample, "deployable_proxy_combined", group_key="group_key", cross_canvas_only=True),
+            lambda sample, key=proxy_names[baseline]: pairwise_ranking_accuracy(sample, key, group_key="group_key", cross_canvas_only=True),
             replicates=bootstrap_replicates,
         )
         comparisons[baseline] = {
-            "delta_auc": delta["estimate"],
+            "delta_primary": delta["estimate"],
             "delta_ci_low": delta["ci_low"],
             "delta_ci_high": delta["ci_high"],
             "bootstrap_replicates_valid": delta["bootstrap_replicates_valid"],
         }
-    gate = combined_bridge_gate(comparisons)
+    selections, selection_summary = deterministic_selection_summary(feature_rows)
+    deployable_by_family = {row["score_family"]: row for row in deployable_metrics}
+    combined_metrics = deployable_by_family["combined"]
+    gate = corrected_deployable_gate(
+        global_auc=float(combined_metrics["global_auc_secondary"]),
+        within_task_accuracy=float(combined_metrics["within_task_pairwise_accuracy"]),
+        cross_canvas_accuracy=float(combined_metrics["cross_canvas_pairwise_accuracy_primary"]),
+        comparisons=comparisons,
+        selection=selection_summary,
+    )
     recovery = {
         key: grouped_bootstrap_metric(
             feature_rows,
@@ -871,35 +1109,42 @@ def f3_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -
         ]
     }
     summary = {
-        "verdict": "f3_combined_bridge_gate_passed" if gate["passed"] else "f3_combined_bridge_gate_failed",
+        "verdict": "f3_corrected_deployable_gate_passed" if gate["passed"] else "f3_corrected_deployable_gate_failed",
+        "mechanism_name": "AST/def-use bridge proxy V0",
         "candidate_count": len(feature_rows),
         "task_count": len({row["group_key"] for row in feature_rows}),
         "grouped_bootstrap_replicates": bootstrap_replicates,
-        "metrics": metric_rows,
-        "combined_bridge_comparisons": comparisons,
-        "combined_bridge_gate": gate,
-        "semantic_recovery_offline": recovery,
-        "forbidden_feature_audit": {
-            "passed": True,
-            "feature_families": FEATURE_FAMILIES,
-            "forbidden_features": sorted(FORBIDDEN_DEPLOYABLE_FEATURES),
-            "identifiers_and_labels_not_features": [
-                "candidate_key",
-                "row_key",
-                "group_key",
-                "passed",
-                "length_bucket_offline_only",
-                "reference semantic recovery fields",
-            ],
+        "supervised_probe_diagnostic": {
+            "outcome_labels_used_for_fit": True,
+            "deployable_authorization_role": "none",
+            "metrics": supervised_metrics,
         },
+        "deployable_bridge_proxy": {
+            "formula_provenance": "fixed_before_outcomes",
+            "outcome_labels_used_for_fit": False,
+            "reference_used_for_fit": False,
+            "outcome_labels_used_for_selection": False,
+            "reference_used_for_selection": False,
+            "metrics": deployable_metrics,
+            "comparisons": comparisons,
+            "selection": selection_summary,
+        },
+        "corrected_deployable_gate": gate,
+        "semantic_recovery_offline": recovery,
+        "forbidden_feature_audit": forbidden_feature_audit(),
     }
-    return metric_rows, summary, model_registry
+    return deployable_metrics, summary, model_registry, selections
 
 
 def f4_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     metrics: list[dict[str, Any]] = []
-    for family in FEATURE_FAMILIES:
-        score_key = f"score_{family}"
+    for family, score_key in {
+        "prefix_only": "deployable_proxy_prefix_only",
+        "suffix_only": "deployable_proxy_suffix_only",
+        "token_canvas": "deployable_proxy_token_canvas",
+        "ordinary_confidence": "deployable_proxy_ordinary_confidence",
+        "combined": "deployable_proxy_combined",
+    }.items():
         all_pairs = grouped_bootstrap_metric(
             feature_rows,
             "group_key",
@@ -930,7 +1175,7 @@ def f4_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -
         )
     best = max(metrics, key=lambda row: float(row["cross_canvas_pairwise_accuracy"]) if math.isfinite(float(row["cross_canvas_pairwise_accuracy"])) else -1.0)
     summary = {
-        "verdict": "f4_inference_visible_ranking_measured",
+        "verdict": "f4_deterministic_inference_visible_ranking_measured",
         "candidate_count": len(feature_rows),
         "task_count": len({row["group_key"] for row in feature_rows}),
         "best_cross_canvas_family": best["feature_family"],
@@ -941,7 +1186,7 @@ def f4_analysis(feature_rows: list[dict[str, Any]], bootstrap_replicates: int) -
 
 
 def render_report(f1: Mapping[str, Any], f2: Mapping[str, Any], f3: Mapping[str, Any], f4: Mapping[str, Any]) -> str:
-    gate = f3["combined_bridge_gate"]
+    gate = f3["corrected_deployable_gate"]
     lines = [
         "# Phase 5 Premise Falsification",
         "",
@@ -964,16 +1209,14 @@ def render_report(f1: Mapping[str, Any], f2: Mapping[str, Any], f3: Mapping[str,
         f"Delta 95% grouped CI: `[{f2['delta_auc']['ci_low']:.4f}, {f2['delta_auc']['ci_high']:.4f}]`.",
         "Equivariance/stability is not correctness.",
         "",
-        "## F3 Semantic Bridge",
+        "## F3A Supervised Probe Diagnostic",
         "",
-        f"Verdict: `{f3['verdict']}`.",
-        f"Combined gate passed: `{gate['passed']}`.",
-        f"Failed comparisons: `{gate['failed_comparisons']}`.",
+        "These grouped-OOF logistic probes use functional pass/fail labels. They answer only whether feature families contain information and cannot authorize or supply scores to V0.",
         "",
         "| Family | Pass AUROC | 95% CI | Horizon MAE | Horizon Spearman |",
         "|---|---:|---:|---:|---:|",
     ]
-    for row in f3["metrics"]:
+    for row in f3["supervised_probe_diagnostic"]["metrics"]:
         lines.append(
             f"| `{row['feature_family']}` | `{row['candidate_ranking_auc']:.4f}` | "
             f"`[{row['candidate_ranking_auc_ci_low']:.4f}, {row['candidate_ranking_auc_ci_high']:.4f}]` | "
@@ -982,7 +1225,12 @@ def render_report(f1: Mapping[str, Any], f2: Mapping[str, Any], f3: Mapping[str,
     lines.extend(
         [
             "",
-            "## F4 Within-Task Ranking",
+            "## F3B/F4 Deterministic AST/Def-Use Bridge Proxy",
+            "",
+            f"Verdict: `{f3['verdict']}`.",
+            f"Corrected gate passed: `{gate['passed']}`.",
+            f"Failed conditions: `{gate['failed_conditions']}`.",
+            "Global AUROC is secondary diagnostic only.",
             "",
             "| Family | Cross-canvas pairwise accuracy | 95% CI |",
             "|---|---:|---:|",
@@ -998,8 +1246,9 @@ def render_report(f1: Mapping[str, Any], f2: Mapping[str, Any], f3: Mapping[str,
             "",
             "## Method Gate",
             "",
-            "Semantic Bridge V0 is authorized only when combined bridge beats every registered baseline by at least `0.01` AUROC and every grouped-bootstrap delta interval is strictly above zero.",
+            "AST/def-use bridge proxy V0 is authorized only by the corrected within-task/cross-canvas, deterministic-baseline, paired-selection, and short-safety gate.",
             f"Current authorization: `{'authorized' if gate['passed'] else 'killed_for_this_round'}`.",
+            "This proxy is not full Semantic Bridge Projection or Abductive Program-State Bridge; genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.",
         ]
     )
     return "\n".join(lines) + "\n"
@@ -1028,7 +1277,7 @@ def run(args: argparse.Namespace) -> int:
     f1_rows, f1_summary = f1_analysis(deployable_raw)
     f2_rows, f2_summary = f2_analysis(deployable_raw, alpha_raw, args.bootstrap_replicates)
     features = [feature_row(row) for row in deployable_raw]
-    f3_metrics, f3_summary, model_registry = f3_analysis(features, args.bootstrap_replicates)
+    f3_metrics, f3_summary, model_registry, selection_preview = f3_analysis(features, args.bootstrap_replicates)
     f4_metrics, f4_summary = f4_analysis(features, args.bootstrap_replicates)
 
     compact_feature_fields = [
@@ -1039,10 +1288,11 @@ def run(args: argparse.Namespace) -> int:
         "seed",
         "passed",
         "length_bucket_offline_only",
-        *sorted({name for names in FEATURE_FAMILIES.values() for name in names}),
+        *sorted({name for names in SUPERVISED_PROBE_FEATURE_FAMILIES.values() for name in names}),
         "semantic_horizon_recovery_offline",
-        *[f"score_{family}" for family in FEATURE_FAMILIES],
-        *[f"horizon_prediction_{family}" for family in FEATURE_FAMILIES],
+        *[f"supervised_probe_score_{family}" for family in SUPERVISED_PROBE_FEATURE_FAMILIES],
+        *[f"supervised_horizon_prediction_{family}" for family in SUPERVISED_PROBE_FEATURE_FAMILIES],
+        *DEPLOYABLE_PROXY_SCORE_KEYS,
     ]
     write_csv(output_dir / "f1_task_diagnostics.csv", f1_rows)
     write_json(output_dir / "f1_summary.json", f1_summary)
@@ -1054,11 +1304,35 @@ def run(args: argparse.Namespace) -> int:
         ],
     )
     write_json(output_dir / "f2_summary.json", f2_summary)
-    write_csv(output_dir / "f3_oof_predictions.csv", features, compact_feature_fields)
-    write_csv(output_dir / "f3_metrics.csv", f3_metrics)
+    write_csv(output_dir / "f3_supervised_probe_oof_predictions.csv", features, compact_feature_fields)
+    write_csv(
+        output_dir / "f3_deployable_proxy_scores.csv",
+        [
+            {
+                "candidate_key": row["candidate_key"],
+                "row_key": row["row_key"],
+                "canvas_tokens": row["canvas_tokens"],
+                "seed": row["seed"],
+                **{key: row[key] for key in DEPLOYABLE_PROXY_SCORE_KEYS},
+            }
+            for row in features
+        ],
+        ["candidate_key", "row_key", "canvas_tokens", "seed", *DEPLOYABLE_PROXY_SCORE_KEYS],
+    )
+    write_csv(output_dir / "f3_deployable_proxy_metrics.csv", f3_metrics)
+    write_csv(output_dir / "f3_deployable_selection_preview.csv", selection_preview)
     write_json(output_dir / "f3_summary.json", f3_summary)
-    write_json(output_dir / "f3_model_registry.json", model_registry)
-    write_json(output_dir / "f3_gate.json", f3_summary["combined_bridge_gate"])
+    write_json(output_dir / "f3_supervised_probe_model_registry.json", model_registry)
+    formula = deployable_bridge_formula_spec()
+    write_json(output_dir / "deployable_bridge_formula.json", formula)
+    (output_dir / "deployable_bridge_formula.md").write_text(
+        "# AST/Def-Use Bridge Proxy V0 Fixed Formula\n\n"
+        f"Provenance: `{formula['provenance']}`. Parameters: `{formula['parameter_source']}`.\n\n"
+        + "\n".join(f"- `{name}`: `{value}`" for name, value in formula["scores"].items())
+        + f"\n\nScope boundary: {formula['scope_boundary']}\n",
+        encoding="utf-8",
+    )
+    write_json(output_dir / "f3_gate.json", f3_summary["corrected_deployable_gate"])
     write_csv(output_dir / "f4_pairwise_ranking.csv", f4_metrics)
     write_json(output_dir / "f4_summary.json", f4_summary)
     write_json(output_dir / "bank_integrity.json", integrity)
@@ -1071,7 +1345,7 @@ def run(args: argparse.Namespace) -> int:
         "f2": f2_summary,
         "f3": f3_summary,
         "f4": f4_summary,
-        "semantic_bridge_v0_authorized": bool(f3_summary["combined_bridge_gate"]["passed"]),
+        "ast_def_use_bridge_proxy_v0_authorized": bool(f3_summary["corrected_deployable_gate"]["passed"]),
         "frozen_test_status": "sealed",
         "test_evaluation_count": 0,
     }

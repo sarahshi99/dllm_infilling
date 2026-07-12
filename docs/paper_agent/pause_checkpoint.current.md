@@ -8,6 +8,8 @@ Authoritative branch: `codex/risk-controlled-dynamic-rescue`
 
 Verified starting HEAD after fetch: `b8ae031cf3b430833613aaf29083535edc0738f6` (remote/local match, `0/0`). Ignore older HEAD values below.
 
+2026-07-12 resumed audit correction started from verified remote/local HEAD `3315ed82d42770e3ed7d8ae20e9d5f1570940ff6`. Original F3/V0 was invalid as a training-free selector because pass-trained OOF logistic scores entered selection indirectly. The correction separates supervised diagnostic probes from a fixed deterministic `AST/def-use bridge proxy V0`, adds a corrected within-task/cross-canvas gate, and rejects supervised scores at the V0 boundary. Candidate-bank protocol remains unchanged.
+
 Clean implementation worktree: `.worktrees/phase5-method-falsification`; primary-checkout untracked user files preserved.
 
 Completed:

@@ -17,6 +17,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from analysis.phase5_premise_falsification import (
+    DEPLOYABLE_PROXY_SCORE_KEYS,
     FORBIDDEN_DEPLOYABLE_FEATURES,
     grouped_bootstrap_metric,
     read_jsonl,
@@ -24,6 +25,8 @@ from analysis.phase5_premise_falsification import (
     write_csv,
     write_json,
 )
+
+MECHANISM_NAME = "AST/def-use bridge proxy V0"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -67,6 +70,19 @@ def select_by_score(rows: Sequence[Mapping[str, Any]], score_key: str) -> Mappin
     )
 
 
+def validate_deployable_score_key(score_key: str) -> None:
+    if score_key not in DEPLOYABLE_PROXY_SCORE_KEYS:
+        raise ValueError(f"V0 rejects non-deployable or supervised score key: {score_key}")
+
+
+def validate_proxy_score_schema(rows: Sequence[Mapping[str, Any]]) -> None:
+    allowed = {"candidate_key", "row_key", "canvas_tokens", "seed", *DEPLOYABLE_PROXY_SCORE_KEYS}
+    for row in rows:
+        extra = set(row) - allowed
+        if extra:
+            raise ValueError(f"Deployable proxy score file contains forbidden/diagnostic columns: {sorted(extra)}")
+
+
 def exact_binomial_two_sided(discordant_a: int, discordant_b: int) -> float:
     n = discordant_a + discordant_b
     if n == 0:
@@ -104,21 +120,40 @@ def bootstrap_pass_rate(selections: Sequence[Mapping[str, Any]], key: str, repli
 def render_killed(gate: Mapping[str, Any]) -> str:
     return "\n".join(
         [
-            "# Semantic Bridge V0",
+            "# AST/Def-Use Bridge Proxy V0",
             "",
-            "Verdict: `killed_f3_gate_failed`.",
+            "Verdict: `killed_corrected_within_task_gate_failed`.",
             "",
-            "Semantic Bridge V0 was not implemented as a deployable reranker because F3 did not meet the preregistered combined-bridge advantage gate.",
-            f"Failed comparisons: `{gate.get('failed_comparisons', [])}`.",
+            "AST/def-use bridge proxy V0 was not run as a deployable reranker because F3 did not meet the corrected within-task/cross-canvas gate.",
+            f"Failed conditions: `{gate.get('failed_conditions', [])}`.",
+            "The pass-trained supervised probe is diagnostic only and was not supplied to selection.",
             "No homotopy, birth–death, particle assembly, fusion, heuristic fallback, or additional generation was run.",
+            "This proxy is not full Semantic Bridge Projection or Abductive Program-State Bridge.",
             "Frozen controller test remains sealed with `test_evaluation_count=0`.",
         ]
     ) + "\n"
 
 
+def write_killed_outputs(output_dir: Path, gate: Mapping[str, Any]) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary = {
+        "verdict": "killed_corrected_within_task_gate_failed",
+        "mechanism_name": MECHANISM_NAME,
+        "ast_def_use_bridge_proxy_v0_implemented": False,
+        "gate": dict(gate),
+        "supervised_probe_scores_used_for_selection": False,
+        "frozen_test_status": "sealed",
+        "test_evaluation_count": 0,
+    }
+    write_json(output_dir / "summary.json", summary)
+    write_json(output_dir / "gate_decision.json", summary)
+    (output_dir / "report.md").write_text(render_killed(gate), encoding="utf-8")
+    return summary
+
+
 def render_report(summary: Mapping[str, Any]) -> str:
     lines = [
-        "# Semantic Bridge V0",
+        "# AST/Def-Use Bridge Proxy V0",
         "",
         f"Verdict: `{summary['verdict']}`.",
         "",
@@ -168,19 +203,11 @@ def run(args: argparse.Namespace) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     gate = json.loads((premise_dir / "f3_gate.json").read_text(encoding="utf-8"))
     if not bool(gate.get("passed", False)):
-        summary = {
-            "verdict": "killed_f3_gate_failed",
-            "semantic_bridge_v0_implemented": False,
-            "gate": gate,
-            "frozen_test_status": "sealed",
-            "test_evaluation_count": 0,
-        }
-        write_json(output_dir / "summary.json", summary)
-        write_json(output_dir / "gate_decision.json", summary)
-        (output_dir / "report.md").write_text(render_killed(gate), encoding="utf-8")
+        write_killed_outputs(output_dir, gate)
         return 0
 
-    prediction_rows = read_csv(premise_dir / "f3_oof_predictions.csv")
+    prediction_rows = read_csv(premise_dir / "f3_deployable_proxy_scores.csv")
+    validate_proxy_score_schema(prediction_rows)
     raw_rows = [
         row
         for row in read_jsonl(bank_dir / "candidate_bank_raw.jsonl")
@@ -189,47 +216,51 @@ def run(args: argparse.Namespace) -> int:
     prediction_by_key = {str(row["candidate_key"]): row for row in prediction_rows}
     bank_summary_path = Path(args.compact_bank_dir).resolve() / "full_summary.json" if args.compact_bank_dir else None
     bank_summary = json.loads(bank_summary_path.read_text(encoding="utf-8")) if bank_summary_path and bank_summary_path.exists() else {}
+    raw_by_key = {str(row["candidate_key"]): row for row in raw_rows}
+    if set(prediction_by_key) != set(raw_by_key):
+        missing = sorted(set(raw_by_key) - set(prediction_by_key))
+        extra = sorted(set(prediction_by_key) - set(raw_by_key))
+        raise RuntimeError(f"Proxy/raw candidate-key mismatch: missing={missing[:5]} extra={extra[:5]}")
     groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for raw in raw_rows:
-        prediction = prediction_by_key.get(str(raw["candidate_key"]))
-        if prediction is None:
-            raise RuntimeError(f"Missing OOF prediction for {raw['candidate_key']}")
-        groups[str(raw["row_key"])].append({**raw, **prediction})
+    for prediction in prediction_rows:
+        groups[str(prediction["row_key"])].append(dict(prediction))
 
     ablation_scores = {
-        "forward_only": "score_prefix_only",
-        "backward_only": "score_suffix_only",
-        "combined": "score_combined_bridge",
-        "length_only": "score_token_length",
-        "confidence": "score_ordinary_confidence",
+        "prefix_only": "deployable_proxy_prefix_only",
+        "suffix_only": "deployable_proxy_suffix_only",
+        "combined": "deployable_proxy_combined",
+        "length_only": "deployable_proxy_token_canvas",
+        "confidence": "deployable_proxy_ordinary_confidence",
     }
     for key in ablation_scores.values():
-        validate_feature_names([key])
+        validate_deployable_score_key(key)
     selections: list[dict[str, Any]] = []
     for row_key, rows in sorted(groups.items()):
         fixed = next(row for row in rows if int(row["canvas_tokens"]) == 64 and int(row["seed"]) == 0)
         selected = {name: select_by_score(rows, score) for name, score in ablation_scores.items()}
-        reference_tokens = int(rows[0]["reference_middle_tokens"])
+        fixed_raw = raw_by_key[str(fixed["candidate_key"])]
+        reference_tokens = int(fixed_raw["reference_middle_tokens"])
         result: dict[str, Any] = {
             "row_key": row_key,
-            "group_key": hash_group(str(rows[0]["task_group"])),
+            "group_key": hash_group(str(fixed_raw["task_group"])),
             "length_bucket_offline_only": bucket_from_reference_tokens(reference_tokens),
             "fixed64_candidate_key": fixed["candidate_key"],
-            "fixed64_passed": bool(fixed["passed"]),
+            "fixed64_passed": bool(fixed_raw["passed"]),
         }
         for name, row in selected.items():
+            raw = raw_by_key[str(row["candidate_key"])]
             result[f"{name}_candidate_key"] = row["candidate_key"]
             result[f"{name}_canvas_tokens"] = row["canvas_tokens"]
             result[f"{name}_seed"] = row["seed"]
             result[f"{name}_score"] = row[ablation_scores[name]]
-            result[f"{name}_passed"] = bool(row["passed"])
+            result[f"{name}_passed"] = bool(raw["passed"])
         selections.append(result)
 
     combined_pass = sum(boolish(row["combined_passed"]) for row in selections)
     fixed_pass = sum(boolish(row["fixed64_passed"]) for row in selections)
     confidence_pass = sum(boolish(row["confidence_passed"]) for row in selections)
     ablations = []
-    for name in ["forward_only", "backward_only", "combined", "length_only"]:
+    for name in ["prefix_only", "suffix_only", "combined", "length_only"]:
         count = sum(boolish(row[f"{name}_passed"]) for row in selections)
         ci = bootstrap_pass_rate(selections, f"{name}_passed", args.bootstrap_replicates)
         ablations.append(
@@ -262,18 +293,31 @@ def run(args: argparse.Namespace) -> int:
     forbidden_audit = {
         "passed": True,
         "forbidden_features": sorted(FORBIDDEN_DEPLOYABLE_FEATURES),
-        "selection_score_column": "score_combined_bridge",
-        "reference_oracle_test_task_split_features_used": False,
-        "outcomes_used_for_selection": False,
-        "outcomes_used_for_offline_reporting_only": True,
+        "selection_score_column": "deployable_proxy_combined",
+        "labels_used_for_offline_evaluation": True,
+        "supervised_probe_diagnostic": {
+            "outcome_labels_used_for_fit": True,
+            "outcome_labels_used_for_selection": False,
+            "deployable_authorization_role": "none",
+        },
+        "deployable_bridge_proxy": {
+            "outcome_labels_used_for_fit": False,
+            "reference_used_for_fit": False,
+            "outcome_labels_used_for_selection": False,
+            "reference_used_for_selection": False,
+            "fitted_parameters": False,
+            "outcome_labels_used_for_offline_gate_evaluation": True,
+        },
     }
     paired = [
         paired_summary(selections, "combined", "fixed64"),
         paired_summary(selections, "combined", "confidence"),
     ]
     summary = {
-        "verdict": "semantic_bridge_v0_completed",
-        "semantic_bridge_v0_implemented": True,
+        "verdict": "ast_def_use_bridge_proxy_v0_completed",
+        "mechanism_name": MECHANISM_NAME,
+        "ast_def_use_bridge_proxy_v0_implemented": True,
+        "supervised_probe_scores_used_for_selection": False,
         "task_count": len(selections),
         "candidate_count_per_task": 8,
         "candidate_rows_scored": len(raw_rows),
@@ -311,7 +355,7 @@ def run(args: argparse.Namespace) -> int:
 
 
 def parser() -> argparse.ArgumentParser:
-    root = argparse.ArgumentParser(description="Conditional Semantic Bridge V0 reranker")
+    root = argparse.ArgumentParser(description="Conditional deterministic AST/def-use bridge proxy V0 reranker")
     root.add_argument("--bank-dir", required=True)
     root.add_argument("--compact-bank-dir")
     root.add_argument("--premise-dir", required=True)

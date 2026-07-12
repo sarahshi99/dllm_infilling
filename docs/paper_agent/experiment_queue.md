@@ -24,17 +24,17 @@ Status: blocked_on_exp007
 Hypothesis: One or more inference-visible premises add stable grouped ranking signal; failure is a valid kill result.
 Inputs: EXP-007 full bank only.
 Outputs: `analysis_outputs/phase5_premise_falsification_20260711_v1/`.
-Success/failure: F1/F2/F4 always report; F3 passes only under the preregistered combined-bridge gate.
+Success/failure: F1/F2/F4 always report. F3A supervised probes are diagnostic only. F3B passes only under the corrected deterministic within-task/cross-canvas, paired-selection, and short-safety gate.
 Stop: no deployable method implementation if F3 fails.
 
-## EXP-009: Semantic Bridge V0 conditional reranker
+## EXP-009: AST/def-use bridge proxy V0 conditional reranker
 
 Linked idea: IDEA-011
 Status: blocked_on_f3_gate
-Hypothesis: If F3 passes, a standalone combined-bridge reranker improves Pass@1 relative to fixed64 and confidence reranking on the same eight candidates.
+Hypothesis: If the corrected gate passes, a standalone deterministic AST/def-use bridge proxy improves Pass@1 relative to fixed64 and confidence reranking on the same eight candidates.
 Inputs: EXP-007 full bank and EXP-008 grouped OOF combined scores.
 Outputs: `analysis_outputs/phase5_semantic_bridge_v0_20260711_v1/`.
-Kill: if F3 fails, write `killed_f3_gate_failed`; no heuristic fallback, extra generation, homotopy, birth–death, particle assembly, or fusion.
+Kill: if the corrected gate fails, write `killed_corrected_within_task_gate_failed`; no supervised-score fallback, extra generation, homotopy, birth–death, particle assembly, or fusion.
 
 ## EXP-001: CPU claim-boundary consolidation for diagnostic mixed paper
 

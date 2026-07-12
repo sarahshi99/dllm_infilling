@@ -4,7 +4,7 @@ Timestamp: 2026-07-11 UTC
 
 ## Action Name
 
-Phase 5 independent-method falsification and full-first Semantic Bridge incubation.
+Phase 5 audit correction and full-first AST/def-use bridge proxy V0 incubation.
 
 ## Current Phase And Baseline
 
@@ -18,13 +18,15 @@ Phase 5 independent-method falsification and full-first Semantic Bridge incubati
 
 ## Reviewer Motivation
 
-Phase 4 established a canvas-adequacy versus rescue-adequacy gap but did not produce a safe deployable controller. Phase 5 asks whether independently motivated, inference-visible semantic structure can rank already-generated candidates before another method family is promoted. The shared full bank prevents each premise diagnostic from receiving a bespoke generation distribution.
+Phase 4 established a canvas-adequacy versus rescue-adequacy gap but did not produce a safe deployable controller. Phase 5 asks whether independently motivated, inference-visible structure can rank already-generated candidates before another method family is promoted. The shared full bank prevents each premise diagnostic from receiving a bespoke generation distribution.
+
+Audit correction, 2026-07-12: the existing OOF logistic score is pass/fail-supervised and therefore cannot be a deployable training-free selector. It is retained only as `supervised_probe_diagnostic`. The current deployable mechanism is renamed `AST/def-use bridge proxy V0`; it uses a fixed deterministic formula and no pass/reference fitting. It is not a full Abductive Program-State Bridge or Semantic Bridge Projection. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.
 
 ## Registered Portfolio
 
 The methods remain separate:
 
-1. `Semantic Bridge Projection`: current round, premise diagnostic F3 and conditional V0 reranker only.
+1. `AST/def-use bridge proxy V0`: current round, deterministic F3/F4 proxy and conditional reranker only. `Semantic Bridge Projection` remains a future full-method concept, not the current implementation.
 2. `Constraint-Homotopy Infilling`: registered, not implemented this round.
 3. `Birth–Death Canvas Diffusion`: registered, not implemented this round.
 4. `Semantic Particle Assembly`: registered, not implemented this round.
@@ -52,14 +54,27 @@ Raw generated code stays in ignored local output. Compact tracked artifacts cont
 - F3: prefix-forward, suffix-backward, combined bridge, token-length, and ordinary-confidence features; required-identifier/def-use/control-structure recovery, semantic-horizon prediction, candidate-ranking AUROC, grouped confidence intervals.
 - F4: within-task passing-versus-failing pairwise ranking across canvas lengths using inference-visible scores, with grouped confidence intervals.
 
-## Semantic Bridge V0 Gate
+## AST/Def-Use Bridge Proxy V0 Formula And Gate
 
-V0 is authorized only if combined bridge:
+The deployable formula is frozen before outcomes:
 
-- exceeds prefix-only, suffix-only, token-length, and ordinary-confidence candidate-ranking AUROC by at least `0.01`; and
-- has a grouped-bootstrap `95%` delta interval strictly above `0` against every baseline.
+- `prefix_proxy = mean(prefix_candidate_use_coverage, prefix_available_use_coverage, prefix_boundary_indent_match, min(prefix_candidate_def_use_count/3, 1))`
+- `suffix_proxy = mean(suffix_required_recovery, suffix_boundary_indent_match, min(candidate_suffix_def_use_count/3, 1))`
+- `token_canvas_proxy = candidate_canvas_fill_ratio clipped to [0,1]`
+- `ordinary_confidence_proxy = ordinary_confidence clipped to [0,1]`
+- `combined_proxy = 0.30*prefix_proxy + 0.30*suffix_proxy + 0.20*full_parse_passed + 0.10*min(candidate_control_structure_count/3,1) + 0.10*ordinary_confidence_proxy`
 
-If any comparison fails, V0 is killed for this round. No substitute heuristic or fusion is allowed.
+The `supervised_probe_diagnostic` may fit pass-trained grouped-OOF logistic models, but its scores can never authorize or enter V0.
+
+V0 is authorized only if the deterministic combined proxy:
+
+- has within-task passing-vs-failing pairwise accuracy `>0.5`;
+- has cross-canvas within-task pairwise accuracy `>0.5` (registered primary ranking metric);
+- beats deterministic prefix-only, suffix-only, token/canvas, and ordinary-confidence scores on the primary metric, with every grouped-bootstrap `95%` delta lower bound `>0`;
+- has positive paired selection net versus fixed64 and versus confidence selection; and
+- has no short-bucket net regression versus either fixed64 or confidence.
+
+Global AUROC is secondary diagnostic only. If any gate condition fails, V0 is killed for this round. No substitute heuristic or fusion is allowed.
 
 ## Exact Commands
 
@@ -101,7 +116,7 @@ Smoke success requires schema validation, canvas-128 protocol validation, evalua
 
 Stop immediately if canvas `128` cannot run under the same protocol, the dataset population is not exactly `148`, any frozen group appears, raw code would enter tracked compact artifacts, duplicate/missing rows survive resume audit, or the test lock changes.
 
-Known risks: candidate seeds may be less diverse than expected; alpha-renaming may be only approximately measurable through generation; bridge features may correlate with syntax rather than functionality; grouped uncertainty may be wide over only `148` task groups. These risks prevent positive claims unless the preregistered gate is met.
+Known risks: candidate seeds may be less diverse than expected; alpha-renaming may be only approximately measurable through generation; the AST/def-use proxy may correlate with syntax rather than functionality; grouped uncertainty may be wide over only `148` task groups. These risks prevent positive claims unless the corrected preregistered gate is met.
 
 ## Expected Documentation Outputs
 
