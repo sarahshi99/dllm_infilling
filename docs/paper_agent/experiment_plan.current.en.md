@@ -2,6 +2,10 @@
 
 Updated: 2026-05-31 15:24 CST
 
+## Phase 5 Completion Update (2026-07-12)
+
+Stages B/C/D completed as preregistered: base bank `1332/1332`, alpha auxiliary `728/728`, all integrity gates passed, and `test_evaluation_count=0`. F1–F4 completed. The corrected F3 gate failed `positive_primary_delta_vs_all_baselines`; conditional V0 wrote `killed_corrected_within_task_gate_failed` with no fallback, fusion, or extra generation. Phase 5 decision is `iterate`; this plan does not authorize tuning the current formula on observed outcomes.
+
 ## Objective
 
 Advance from the current `midcons` A6000 checkpoint toward a CCF-A-grade length-control method for DLLM code infilling. The plan prioritizes reproducible diagnostics before expensive GPU runs.

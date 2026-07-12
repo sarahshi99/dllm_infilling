@@ -1,0 +1,12 @@
+{
+  "alpha_rows": 728,
+  "base_candidate_rows": 1332,
+  "deployable_rows": 1184,
+  "duplicate_key_count": 0,
+  "duplicate_keys": [],
+  "error_row_count": 0,
+  "expected_base_candidate_rows": 1332,
+  "expected_deployable_rows": 1184,
+  "manifest_rows": 148,
+  "passed": true
+}

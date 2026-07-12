@@ -1,0 +1,14 @@
+{
+  "all_fail_task_count": 61,
+  "all_fail_tasks_with_complementary_correct_units": 6,
+  "candidate_count": 1184,
+  "mean_all_fail_complementary_correct_units": 0.16393442622950818,
+  "mean_consensus_landmark_precision_offline": 0.6827067915303212,
+  "mean_semantic_unit_coverage_offline": 0.7290521415521417,
+  "mean_semantic_unit_precision_offline": 0.6883439833251174,
+  "mean_unique_candidate_hashes": 4.0,
+  "mean_unique_parsable_ast_hashes": 3.324324324324324,
+  "reference_use": "offline_diagnostic_only",
+  "task_count": 148,
+  "verdict": "f1_completed_diagnostic_only"
+}

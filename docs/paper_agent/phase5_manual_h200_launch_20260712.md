@@ -1,8 +1,10 @@
 # Phase 5 Manual H200 Launch
 
-Operational decision: `blocked_infrastructure`.
+Completion update, 2026-07-12 UTC: the user-authorized manual launch completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`. Base bank `1332/1332`, alpha auxiliary `728/728`, and F1–F4 completed. Conditional V0 verdict is `killed_corrected_within_task_gate_failed`. Frozen test remains sealed with `test_evaluation_count=0`. Phase 5 decision: `iterate`.
 
-Scientific decision: `blocked` because no candidate bank or premise result exists yet.
+Historical pre-launch operational decision: `blocked_infrastructure`.
+
+Historical pre-launch scientific decision: `scientific_pending` because no candidate bank or premise result existed yet; this was not a scientific failure.
 
 The exact registered H200 command was retried once after the supervision audit correction and was rejected before process launch by the approval service:
 

@@ -1,0 +1,65 @@
+{
+  "comparisons": {
+    "ordinary_confidence": {
+      "bootstrap_replicates_valid": 1000,
+      "delta_ci_high": 0.2956967364180216,
+      "delta_ci_low": -0.051634914738555186,
+      "delta_primary": 0.13284132841328417
+    },
+    "prefix_only": {
+      "bootstrap_replicates_valid": 1000,
+      "delta_ci_high": 0.14510539795114258,
+      "delta_ci_low": -0.07354203483968702,
+      "delta_primary": 0.03321033210332114
+    },
+    "suffix_only": {
+      "bootstrap_replicates_valid": 1000,
+      "delta_ci_high": 0.24457552461988616,
+      "delta_ci_low": 0.005287330981775425,
+      "delta_primary": 0.12177121771217714
+    },
+    "token_canvas": {
+      "bootstrap_replicates_valid": 1000,
+      "delta_ci_high": 0.23616093653497036,
+      "delta_ci_low": -0.0037644381166279414,
+      "delta_primary": 0.1254612546125462
+    }
+  },
+  "conditions": {
+    "cross_canvas_accuracy_above_chance": true,
+    "no_short_net_regression_vs_confidence": true,
+    "no_short_net_regression_vs_fixed64": true,
+    "positive_primary_delta_vs_all_baselines": false,
+    "positive_selection_net_vs_confidence": true,
+    "positive_selection_net_vs_fixed64": true,
+    "within_task_accuracy_above_chance": true
+  },
+  "cross_canvas_within_task_pairwise_accuracy": 0.6273062730627307,
+  "failed_conditions": [
+    "positive_primary_delta_vs_all_baselines"
+  ],
+  "global_auc": 0.5843942942303598,
+  "global_auc_role": "secondary_diagnostic_only",
+  "mechanism_name": "AST/def-use bridge proxy V0",
+  "passed": false,
+  "primary_metric": "cross_canvas_within_task_pairwise_accuracy",
+  "selection": {
+    "vs_confidence": {
+      "losses": 13,
+      "net": 14,
+      "short_losses": 1,
+      "short_net": 3,
+      "short_wins": 4,
+      "wins": 27
+    },
+    "vs_fixed64": {
+      "losses": 8,
+      "net": 15,
+      "short_losses": 0,
+      "short_net": 5,
+      "short_wins": 5,
+      "wins": 23
+    }
+  },
+  "within_task_pairwise_accuracy": 0.6273062730627307
+}

@@ -4,13 +4,15 @@
 
 ## Phase 5 更新（2026-07-11）
 
+2026-07-12 result：shared bank 已完成，base `1332/1332`、alpha `728/728`，frozen test count `0`。Combined deterministic proxy 的 cross-canvas within-task accuracy 为 `0.6273` 且 paired selection net 为正，但没有通过“相对所有 deterministic baseline 的 grouped-bootstrap delta lower bound 均 >0”条件。当前 fixed proxy V0 被 kill，Phase 5 decision=`iterate`。这不改变 Phase 4 diagnostic/mixed central claim，也不产生 positive standalone-method claim；后续若继续，需要新的独立 preregistration，不能在本轮 outcomes 上调当前公式。
+
 Phase 4 的 diagnostic/mixed claim 保留，但下一步不再继续 controller 或 cal-lite heuristic family。Phase 5 问题是：在一个预先固定、全量、共享的 RandomSpanLight candidate bank 上，是否存在独立于 oracle/test 的 inference-visible semantic premise，可以可靠地把 passing candidate 排在 failing candidate 前面，并转化为 standalone method。
 
 四个方法假设必须独立。当前可执行机制准确命名为 `AST/def-use bridge proxy V0`；完整 Semantic Bridge Projection 仍是未来概念，需要 genuine program-state analysis、backward obligations、bridge anchors 与 denoising intervention。Constraint-Homotopy Infilling、Birth–Death Canvas Diffusion、Semantic Particle Assembly 只登记、不实现、不融合；Metamorphic Equivariance 只做 auxiliary evaluator。
 
 Audit correction：pass-trained grouped-OOF logistic probes 属于 `supervised_probe_diagnostic`，只回答 features 是否含信息，不能授权或向 deployable V0 提供 score。Deployable proxy 使用 outcome-free fixed formula。其 primary hypothesis 是：deterministic combined proxy 在同 task、跨 canvas 的 passing-vs-failing ranking 上优于 deterministic prefix-only、suffix-only、token/canvas 与 ordinary confidence，且 grouped-bootstrap delta lower bound `>0`。同时要求 paired selection 对 fixed64/confidence 均为正 net、short bucket 无净回归。Global AUROC 仅为 secondary diagnostic。任一条件失败，本轮 kill proxy V0。
 
-当前状态不是方法结果。Stage A/scaffold 已通过；H200 bank 因 approval-service launch blocker 未启动。Frozen test remains sealed, `test_evaluation_count=0`。Current decision：`blocked`。
+历史 pre-launch 状态是 infrastructure blocker；已被上述 completed result 取代。
 
 ## Phase 2 更新（2026-07-03）
 

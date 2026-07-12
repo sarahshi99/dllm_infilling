@@ -1,5 +1,13 @@
 # Current Paper-Agent Action
 
+## 2026-07-12 Completion Update
+
+The manual H200 run completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`. Full base bank `1332/1332` and alpha auxiliary `728/728` passed all integrity gates with `test_evaluation_count=0`. F1–F4 completed. The combined deterministic proxy had positive point estimates but failed the preregistered all-baseline grouped-bootstrap lower-bound condition. Conditional V0 wrote `killed_corrected_within_task_gate_failed`; no fallback or extra generation ran.
+
+Phase 5 decision: `iterate`.
+
+Authoritative result report: `docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`.
+
 Timestamp: 2026-07-11 UTC
 
 ## Action Name

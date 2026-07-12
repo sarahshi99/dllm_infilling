@@ -1,0 +1,38 @@
+{
+  "all_rows": {
+    "duplicate_count": 0,
+    "duplicate_keys": [],
+    "error_count": 0,
+    "error_keys": [],
+    "expected_count": 108,
+    "extra_count": 0,
+    "extra_keys": [],
+    "missing_count": 0,
+    "missing_keys": [],
+    "observed_count": 108,
+    "passed": true,
+    "unique_count": 108
+  },
+  "base_bank": {
+    "duplicate_count": 0,
+    "duplicate_keys": [],
+    "error_count": 0,
+    "error_keys": [],
+    "expected_count": 108,
+    "extra_count": 0,
+    "extra_keys": [],
+    "missing_count": 0,
+    "missing_keys": [],
+    "observed_count": 108,
+    "passed": true,
+    "unique_count": 108
+  },
+  "canvas128_generation_passed": true,
+  "evaluator_executed_for_all_ok_rows": true,
+  "frozen_test_invariant_passed": true,
+  "passed": true,
+  "phase": "smoke",
+  "resume_noop_writes": 0,
+  "resume_passed": true,
+  "schema_passed": true
+}

@@ -1,0 +1,67 @@
+{
+  "audit": {
+    "all_rows": {
+      "duplicate_count": 0,
+      "duplicate_keys": [],
+      "error_count": 0,
+      "error_keys": [],
+      "expected_count": 108,
+      "extra_count": 0,
+      "extra_keys": [],
+      "missing_count": 0,
+      "missing_keys": [],
+      "observed_count": 108,
+      "passed": true,
+      "unique_count": 108
+    },
+    "base_bank": {
+      "duplicate_count": 0,
+      "duplicate_keys": [],
+      "error_count": 0,
+      "error_keys": [],
+      "expected_count": 108,
+      "extra_count": 0,
+      "extra_keys": [],
+      "missing_count": 0,
+      "missing_keys": [],
+      "observed_count": 108,
+      "passed": true,
+      "unique_count": 108
+    },
+    "canvas128_generation_passed": true,
+    "evaluator_executed_for_all_ok_rows": true,
+    "frozen_test_invariant_passed": true,
+    "passed": true,
+    "phase": "smoke",
+    "resume_noop_writes": 0,
+    "resume_passed": true,
+    "schema_passed": true
+  },
+  "base_expected_rows": 108,
+  "candidate_kind_counts": {
+    "deployable_grid": 96,
+    "oracle_sufficient_diagnostic_ceiling": 12
+  },
+  "candidate_kind_pass_counts": {
+    "deployable_grid": 28,
+    "oracle_sufficient_diagnostic_ceiling": 9
+  },
+  "candidate_rows": 108,
+  "dataset_jsonl_local_read_only": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-RandomSpanInfillingLight.jsonl",
+  "denoising_steps_per_candidate": 64,
+  "frozen_test_status": "sealed",
+  "full_manifest_case_count": 148,
+  "gate_passed": true,
+  "mean_candidate_latency_sec": 2.202471612071989,
+  "peak_cuda_memory_bytes": 16336010752,
+  "phase": "smoke",
+  "raw_code_committed": false,
+  "raw_output_dir_local_only": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1",
+  "selected_case_count": 12,
+  "summed_candidate_latency_sec": 237.86693410377484,
+  "summed_gpu_decode_sec": 226.0358612416312,
+  "summed_verification_sec": 11.831072862143628,
+  "test_evaluation_count": 0,
+  "verdict": "smoke_passed",
+  "wall_sec": 255.207970950054
+}

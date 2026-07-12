@@ -1,8 +1,20 @@
 # Experiment Results
 
-更新时间：2026-07-11 UTC
+更新时间：2026-07-12 UTC
 
-## Phase 5 Independent Method Falsification（2026-07-11）
+## Phase 5 H200 完成结果（2026-07-12）
+
+唯一基线为 `45bead22e3d21daa707be724cf2bdcbbf776592a`。此前 `422` 发生在任何 GPU 进程启动前，因此当时状态是 `infrastructure_blocked / scientific_pending`，不是科学失败。用户授权 manual launch 后，H200 进程、显存/利用率、日志和 JSONL 写入均被实际验证。
+
+Full bank 完成：`148` allowed cases，base `1332/1332`（deployable `1184` + diagnostic ceiling `148`），alpha auxiliary `728/728` over `91` verified tasks；zero missing/duplicate/extra/error/frozen。Deployable pass `330/1184`，diagnostic ceiling pass `73/148`。Frozen test 全程 `sealed`，`test_evaluation_count=0`。
+
+F1：mean unique candidate hashes `4.0`，mean unique parsable AST hashes `3.3243`；`61` all-fail tasks 中 `6` 个有 complementary correct semantic units，仅为 diagnostic。F2：equivariance delta AUC `0.0143`，95% CI `[-0.0550,0.0829]`，verdict `f2_equivariance_not_independently_predictive`。
+
+F3/F4 deterministic combined proxy 的 cross-canvas within-task pairwise accuracy 为 `0.6273`；vs fixed64 `23` wins / `8` losses / net `+15`，short net `+5`；vs confidence `27/13` / net `+14`，short net `+3`。但 preregistered gate 要求相对所有 deterministic baseline 的 grouped-bootstrap delta lower bound 均 `>0`，该条件失败：prefix `-0.0735`、token/canvas `-0.0038`、confidence `-0.0516`。
+
+Conditional V0 正式 verdict：`killed_corrected_within_task_gate_failed`。没有 deployable reranker、supervised fallback、heuristic substitution、fusion 或额外 generation。Phase 5 单一 decision：`iterate`。
+
+## Phase 5 启动前历史状态（2026-07-11，superseded）
 
 Fetch 后 verified remote/local starting HEAD 为 `b8ae031cf3b430833613aaf29083535edc0738f6`。主 checkout 的 untracked Phase 4/raw paths 未被修改；Phase 5 使用 clean isolated worktree。
 
@@ -10,13 +22,13 @@ Stage A 已完成。2026-07-12 audit correction 发现原 F3/V0 将 pass-trained
 
 CPU read-only population audit：RandomSpanLight source `164` rows；排除 frozen groups 后 exactly `148` allowed unique groups，frozen intersection `[]`。Length buckets 为 short `22`、medium `40`、long `23`、extreme `63`；12-case smoke 为每 bucket `3`。Stage B rows：smoke `108`、full `1332`（`1184` deployable + `148` diagnostic ceiling）。Strict alpha transform structural pre-verifier eligible `121/148`，canonical verifier 仍需 approved host path 决定实际 F2 auxiliary population。
 
-GPU outcome：`blocked_not_started`。Exact H200 command 在 process launch 前被 approval service 拒绝：`422 Unprocessable Entity: model not found: codex-auto-review`。没有模型加载、canvas-128 generation、smoke/full row、evaluator outcome 或替代 length。
+当时 GPU outcome=`blocked_not_started`。Exact H200 command 在 process launch 前被 approval service 拒绝：`422 Unprocessable Entity: model not found: codex-auto-review`。后续 manual launch 已完成；以顶部 2026-07-12 结果为准。
 
 2026-07-12 corrected retry outcome：correction commit 已先 push；exact command authorized retry 一次，仍为相同 pre-launch `422`。Post-audit confirms candidate rows `0`、running process `0`。这是 `blocked_infrastructure`，不是 method failure。Manual tmux launch artifact：`docs/paper_agent/phase5_manual_h200_launch_20260712.md`。
 
-F1 `blocked_on_bank`；F2 `blocked_on_bank`；corrected F3/F4 `blocked_on_bank`。AST/def-use bridge proxy V0 `blocked_on_corrected_gate`，未运行。Full Semantic Bridge Projection、Homotopy、Birth–Death、Particle Assembly、fusion 均未实现。Frozen test remains `sealed`, `test_evaluation_count=0`。
+当时 F1/F2/F3/F4/V0 均 blocked；这些状态已被顶部完成结果取代。Full Semantic Bridge Projection、Homotopy、Birth–Death、Particle Assembly、fusion 仍未实现。Frozen test remains `sealed`, `test_evaluation_count=0`。
 
-本轮单一 decision：`blocked`。
+上述旧 `blocked` 是 manual launch 前的历史状态，已由本节完成结果取代。
 
 ## Phase 4 Generalization And Paper Skeleton（2026-07-08）
 

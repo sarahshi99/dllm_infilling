@@ -2,6 +2,10 @@
 
 Created: 2026-05-31 12:36 CST
 
+## Phase 5 Result Update (2026-07-12)
+
+The shared RandomSpanLight bank completed with base `1332/1332` and alpha auxiliary `728/728`, while frozen test evaluation count remained `0`. The fixed combined AST/def-use proxy reached cross-canvas within-task accuracy `0.6273` and positive paired selection nets, but failed the preregistered requirement that every deterministic-baseline grouped-bootstrap delta lower bound exceed zero. The current proxy V0 is killed; Phase 5 decision is `iterate`. This does not create a positive standalone-method claim or change the diagnostic/mixed central claim. Any continuation requires a new independent preregistration and may not tune the current formula on these outcomes.
+
 ## Problem Statement
 
 Diffusion language models for code infilling need an infill length or canvas before denoising. The current project shows that length choice is not a secondary implementation detail: it is a dominant failure mode for `HumanEval-SingleLineInfilling`, especially when the correct middle span is longer than the policy-selected mask length.

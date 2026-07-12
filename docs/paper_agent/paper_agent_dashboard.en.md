@@ -1,6 +1,17 @@
 # Paper Agent Dashboard
 
-Updated: 2026-06-18 00:00 CST
+Updated: 2026-07-12 UTC
+
+## Phase 5 H200 Shared Bank And Proxy Gate
+
+- Sole baseline: `45bead22e3d21daa707be724cf2bdcbbf776592a`.
+- The earlier pre-launch state was infrastructure-blocked/scientifically pending, not a method failure. Manual launch completed normally.
+- Bank integrity: base `1332/1332` over `148` allowed tasks; alpha auxiliary `728/728` over `91` verified tasks; zero missing, duplicate, extra, error, or frozen rows.
+- F2 equivariance delta AUC: `0.0143`, 95% CI `[-0.0550, 0.0829]`, not independently predictive.
+- Combined deterministic proxy cross-canvas within-task accuracy: `0.6273`; selection net `+15` versus fixed64 and `+14` versus confidence, with nonnegative short-bucket net.
+- The all-baseline grouped-bootstrap lower-bound gate failed. Conditional V0 verdict: `killed_corrected_within_task_gate_failed`.
+- No supervised fallback, heuristic substitution, fusion, or additional generation ran. Frozen test remained sealed with `test_evaluation_count=0`.
+- Phase 5 decision: `iterate`.
 
 ## Current Research Goal
 

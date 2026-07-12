@@ -2,6 +2,12 @@
 
 ## 2026-07-12 UTC
 
+- manual H200 launch：以 `HEAD 45bead22e3d21daa707be724cf2bdcbbf776592a` 为唯一基线执行 `bash scripts/manual_launch_phase5_h200_candidate_bank.sh`；tmux/PID、H200 占用、日志和 JSONL 增长均验证真实启动。此前正确状态为 `infrastructure_blocked / scientific_pending`，不是科学失败。
+- bank result：smoke `108/108`、full base `1332/1332`、alpha auxiliary `728/728`；base 覆盖 `148` allowed cases，alpha 覆盖 `91` verified tasks；全程 `0` missing/duplicate/extra/error/frozen，run manifest `completed`。
+- F1/F2：F1 平均 unique hash `4.0`、unique parsable AST hash `3.3243`，`61` all-fail tasks 中 `6` 有 complementary units；F2 delta AUC `0.0143`，95% CI `[-0.0550,0.0829]`，不具 independent predictive evidence。
+- F3/F4：combined proxy cross-canvas within-task accuracy `0.6273`；vs fixed64 `23/8`、net `+15`，vs confidence `27/13`、net `+14`，short net 非负。但相对 prefix/token/confidence 的 grouped-bootstrap delta lower bound 未严格大于 `0`。
+- conditional V0：按预注册写出 `killed_corrected_within_task_gate_failed`；未运行 deployable reranker，未使用 supervised probe selection，未增加 fallback/fusion/generation。Phase 5 decision=`iterate`。
+- verification：`18` tests / `OK`，py_compile、artifact assertions、JSON/CSV parse、forbidden-feature audit、compact raw-schema scan、`git diff --check` 通过。Frozen test 始终 `sealed`，`test_evaluation_count=0`。
 - action：按用户 audit correction 修复 F3/V0 supervision leakage；starting remote/local HEAD `3315ed82d42770e3ed7d8ae20e9d5f1570940ff6` verified `0/0`，clean isolated worktree。
 - defect：原 OOF logistic 使用 `passed` labels，且 V0 读取 `score_combined_bridge`；因此它是 supervised correctness controller，原 `outcomes_used_for_selection=false` 不准确。
 - correction：split 为 `supervised_probe_diagnostic` 与 fixed deterministic `AST/def-use bridge proxy V0`；V0 schema rejects supervised scores；primary gate 改为 within-task/cross-canvas ranking、deterministic baseline deltas、paired help/harm 与 short safety；global AUROC secondary-only。

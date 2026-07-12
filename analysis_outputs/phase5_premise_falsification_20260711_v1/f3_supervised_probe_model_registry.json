@@ -1,0 +1,1357 @@
+{
+  "combined_bridge": {
+    "deployable_authorization_role": "none",
+    "features": [
+      "canvas_log2",
+      "seed_value",
+      "prefix_candidate_def_use_count",
+      "prefix_candidate_use_coverage",
+      "prefix_available_use_coverage",
+      "prefix_boundary_indent_match",
+      "suffix_required_identifier_count",
+      "suffix_required_recovered_count",
+      "suffix_required_recovery",
+      "candidate_suffix_def_use_count",
+      "suffix_boundary_indent_match",
+      "full_parse_passed",
+      "candidate_control_structure_count",
+      "combined_bridge_satisfaction",
+      "semantic_horizon_prediction"
+    ],
+    "fold_models": {
+      "0": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match",
+          "full_parse_passed",
+          "candidate_control_structure_count",
+          "combined_bridge_satisfaction",
+          "semantic_horizon_prediction"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5987394957983194,
+          0.44950866127336675,
+          0.6282813125250093,
+          0.4228201537025046,
+          0.3550420168067227,
+          0.20378151260504201,
+          0.9138655462184873,
+          0.20378151260504201,
+          0.3625474871149589,
+          0.8298319327731093,
+          0.7184873949579832,
+          0.6011425156012408,
+          3.350840336134454
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3397284652902641,
+          0.33845649651804627,
+          0.4058061367795463,
+          0.3564029505336409,
+          0.8004697926785789,
+          0.5523692158172703,
+          0.27615997041772034,
+          0.5523692158172703,
+          0.3452138934324443,
+          0.3757803828343857,
+          0.8021469496499448,
+          0.20593406613003287,
+          2.20504085589998
+        ],
+        "weights": [
+          -0.3797624896852177,
+          0.20443811384170166,
+          0.0,
+          0.02463671642637589,
+          -0.3439565737381888,
+          0.2718291186065146,
+          -0.346099645003907,
+          -0.19709604594640978,
+          0.0022704374704450242,
+          -0.2367741724708621,
+          0.0022704374704450242,
+          -0.07475150939906275,
+          1.2693061498534035,
+          -0.2740537788042522,
+          0.2074549074567586,
+          0.13215609021083416
+        ]
+      },
+      "1": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match",
+          "full_parse_passed",
+          "candidate_control_structure_count",
+          "combined_bridge_satisfaction",
+          "semantic_horizon_prediction"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.6122881355932204,
+          0.4597290186273235,
+          0.6185280468119446,
+          0.41723616543531505,
+          0.3601694915254237,
+          0.1906779661016949,
+          0.915960451977401,
+          0.1906779661016949,
+          0.37664281098042024,
+          0.8326271186440678,
+          0.7139830508474576,
+          0.6034539354127465,
+          3.3495762711864407
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3245152045738717,
+          0.3515710320152527,
+          0.4057913800547127,
+          0.3560467354302885,
+          0.9005309009001328,
+          0.5183885212907712,
+          0.2757449597092743,
+          0.5183885212907712,
+          0.351635924457623,
+          0.3733084514748406,
+          0.7843648405573506,
+          0.19987867565428993,
+          2.1349194777288663
+        ],
+        "weights": [
+          -0.3696225291150428,
+          0.27653993526958365,
+          0.0,
+          -0.2620940637508443,
+          -0.24444947576029785,
+          0.34241202847379115,
+          -0.4058525302923675,
+          -0.106167707065281,
+          0.08234302599898254,
+          -0.17479046385334132,
+          0.08234302599898254,
+          -0.05718826534970419,
+          1.260772183524502,
+          -0.12252820043363376,
+          0.259202154461707,
+          0.03282943776006522
+        ]
+      },
+      "2": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match",
+          "full_parse_passed",
+          "candidate_control_structure_count",
+          "combined_bridge_satisfaction",
+          "semantic_horizon_prediction"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5282608695652173,
+          0.4319967472141381,
+          0.6343374741200823,
+          0.44909698996655245,
+          0.4282608695652174,
+          0.2391304347826087,
+          0.9065217391304345,
+          0.2391304347826087,
+          0.3598015542996337,
+          0.841304347826087,
+          0.7347826086956522,
+          0.6038431420928241,
+          3.3434782608695652
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.292648619573861,
+          0.33871719359374786,
+          0.4099236123003082,
+          0.3706626551929341,
+          0.9875668482554296,
+          0.5780319913177523,
+          0.28671212693276094,
+          0.5780319913177523,
+          0.33919627628999227,
+          0.3653920389869047,
+          0.8204498742880548,
+          0.20100336200027333,
+          2.1344638033445906
+        ],
+        "weights": [
+          -0.3702831317869478,
+          0.22069622925743967,
+          0.0,
+          -0.1624830912637446,
+          -0.08147933689361107,
+          0.3804298409168932,
+          -0.31902539532479424,
+          -0.10998687726026578,
+          0.06551431573984749,
+          -0.12355108875671716,
+          0.06551431573984749,
+          -0.10640961257066714,
+          1.057899428419293,
+          -0.14561413475902307,
+          0.2695880376924388,
+          0.04446772873244649
+        ]
+      },
+      "3": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match",
+          "full_parse_passed",
+          "candidate_control_structure_count",
+          "combined_bridge_satisfaction",
+          "semantic_horizon_prediction"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5375,
+          0.44031377765752755,
+          0.6202678571428559,
+          0.44139155982905687,
+          0.4270833333333333,
+          0.21875,
+          0.8951388888888888,
+          0.21875,
+          0.3482731419588008,
+          0.8291666666666667,
+          0.7208333333333333,
+          0.5957586486906353,
+          3.30625
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.279098803845896,
+          0.34289629157940943,
+          0.4074239017261422,
+          0.364586746945213,
+          0.9762256363441533,
+          0.5439654745477879,
+          0.303908915397402,
+          0.5439654745477879,
+          0.3292692219557718,
+          0.3763632627602662,
+          0.7939768923309722,
+          0.20389065942709056,
+          2.152508831766631
+        ],
+        "weights": [
+          -0.393912336103623,
+          0.2485394532865996,
+          0.0,
+          -0.15527880806329905,
+          -0.07432011830827953,
+          0.3840169821785982,
+          -0.2311046017279734,
+          -0.1212343726320539,
+          0.03630026231155416,
+          -0.19625478730149076,
+          0.03630026231155416,
+          -0.0014967517456729216,
+          1.0601871513718182,
+          -0.13078653214219427,
+          0.3151975442620152,
+          0.05403144513023087
+        ]
+      },
+      "4": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match",
+          "full_parse_passed",
+          "candidate_control_structure_count",
+          "combined_bridge_satisfaction",
+          "semantic_horizon_prediction"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.6020833333333333,
+          0.46872819888444855,
+          0.6445486111111106,
+          0.4615722934472901,
+          0.43125,
+          0.25416666666666665,
+          0.9041666666666666,
+          0.25416666666666665,
+          0.381542415577339,
+          0.85625,
+          0.69375,
+          0.6194680309478119,
+          3.40625
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3252341905196345,
+          0.35361541991583795,
+          0.40645195642843707,
+          0.37401769893108033,
+          0.9786589996009811,
+          0.6037929878875883,
+          0.2902046691560973,
+          0.6037929878875883,
+          0.3487111114492013,
+          0.35083605501715753,
+          0.7852563939037146,
+          0.19568451177400095,
+          2.125137863174999
+        ],
+        "weights": [
+          -0.3360194145474406,
+          0.3615635416468808,
+          0.0,
+          -0.008039422507585913,
+          -0.09907393335545563,
+          0.2994394718250714,
+          -0.1511111154583854,
+          -0.11312242516835996,
+          0.02209631758842527,
+          -0.21010583153800624,
+          0.02209631758842527,
+          -0.05827444940459874,
+          1.0471849765998256,
+          -0.32171182504848583,
+          0.26935453294065836,
+          0.05526769087499481
+        ]
+      }
+    },
+    "full_model": {
+      "constant": null,
+      "feature_names": [
+        "canvas_log2",
+        "seed_value",
+        "prefix_candidate_def_use_count",
+        "prefix_candidate_use_coverage",
+        "prefix_available_use_coverage",
+        "prefix_boundary_indent_match",
+        "suffix_required_identifier_count",
+        "suffix_required_recovered_count",
+        "suffix_required_recovery",
+        "candidate_suffix_def_use_count",
+        "suffix_boundary_indent_match",
+        "full_parse_passed",
+        "candidate_control_structure_count",
+        "combined_bridge_satisfaction",
+        "semantic_horizon_prediction"
+      ],
+      "mean": [
+        5.5,
+        0.5,
+        1.5760135135135136,
+        0.4501760439260441,
+        0.6291867760617754,
+        0.4384312196812161,
+        0.40033783783783783,
+        0.22128378378378377,
+        0.9070945945945946,
+        0.22128378378378377,
+        0.3657804870121002,
+        0.8378378378378378,
+        0.7162162162162162,
+        0.6047511598522644,
+        3.3513513513513513
+      ],
+      "std": [
+        1.118033988749895,
+        0.5,
+        1.3129934026845111,
+        0.3454020486065323,
+        0.4071776350065249,
+        0.36477592873148,
+        0.9319044113059827,
+        0.5605436314061609,
+        0.28688546552787075,
+        0.5605436314061609,
+        0.34310584547582734,
+        0.3685995053239436,
+        0.7972972972972946,
+        0.20146588761215029,
+        2.1509421721430866
+      ],
+      "weights": [
+        -0.36472261059295574,
+        0.2596492419346907,
+        0.0,
+        -0.11121440776937819,
+        -0.16839852037122205,
+        0.3354139377900948,
+        -0.2873979677828623,
+        -0.12687339213546403,
+        0.04092262833914934,
+        -0.18997345549924657,
+        0.04092262833914934,
+        -0.05739878867497034,
+        1.1366205528606002,
+        -0.19409833036603777,
+        0.2633492064649751,
+        0.06560791645334461
+      ]
+    },
+    "outcome_labels_used_for_fit": true,
+    "track": "supervised_probe_diagnostic"
+  },
+  "ordinary_confidence": {
+    "deployable_authorization_role": "none",
+    "features": [
+      "canvas_log2",
+      "seed_value",
+      "ordinary_confidence"
+    ],
+    "fold_models": {
+      "0": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "ordinary_confidence"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.987632943802521
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.010727463552395856
+        ],
+        "weights": [
+          -0.004940370101648383,
+          0.152005915342508,
+          0.0,
+          0.11493897630332635
+        ]
+      },
+      "1": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "ordinary_confidence"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.9879088320974576
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.011040801124145704
+        ],
+        "weights": [
+          -0.012625507078585296,
+          0.19575310638664528,
+          0.0,
+          0.2130290555187766
+        ]
+      },
+      "2": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "ordinary_confidence"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.986820652173913
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.011681449576769778
+        ],
+        "weights": [
+          -0.006706863060736516,
+          0.1537996629513049,
+          0.0,
+          0.13811513563363073
+        ]
+      },
+      "3": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "ordinary_confidence"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.9873616536458333
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.011450374613616266
+        ],
+        "weights": [
+          -0.00767286914667215,
+          0.18255020443421285,
+          0.0,
+          0.11923169994837585
+        ]
+      },
+      "4": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "ordinary_confidence"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.9871500651041667
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.011400780491388256
+        ],
+        "weights": [
+          -0.019483506139598497,
+          0.2663510114749569,
+          0.0,
+          0.22296013242511392
+        ]
+      }
+    },
+    "full_model": {
+      "constant": null,
+      "feature_names": [
+        "canvas_log2",
+        "seed_value",
+        "ordinary_confidence"
+      ],
+      "mean": [
+        5.5,
+        0.5,
+        0.987377269847973
+      ],
+      "std": [
+        1.118033988749895,
+        0.5,
+        0.011269469963787287
+      ],
+      "weights": [
+        -0.00952183084296646,
+        0.19073718603938478,
+        0.0,
+        0.16145346594675014
+      ]
+    },
+    "outcome_labels_used_for_fit": true,
+    "track": "supervised_probe_diagnostic"
+  },
+  "prefix_only": {
+    "deployable_authorization_role": "none",
+    "features": [
+      "canvas_log2",
+      "seed_value",
+      "prefix_candidate_def_use_count",
+      "prefix_candidate_use_coverage",
+      "prefix_available_use_coverage",
+      "prefix_boundary_indent_match"
+    ],
+    "fold_models": {
+      "0": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5987394957983194,
+          0.44950866127336675,
+          0.6282813125250093,
+          0.4228201537025046
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3397284652902641,
+          0.33845649651804627,
+          0.4058061367795463,
+          0.3564029505336409
+        ],
+        "weights": [
+          -0.11357544120976075,
+          0.02938454330984693,
+          0.0,
+          0.09842026626251571,
+          -0.09955557099718276,
+          0.6747900989605055,
+          -0.21567948482317786
+        ]
+      },
+      "1": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.6122881355932204,
+          0.4597290186273235,
+          0.6185280468119446,
+          0.41723616543531505
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3245152045738717,
+          0.3515710320152527,
+          0.4057913800547127,
+          0.3560467354302885
+        ],
+        "weights": [
+          -0.10997471177089213,
+          0.11198019440671467,
+          0.0,
+          -0.1536070144435742,
+          -0.010763313425001633,
+          0.7817991748388349,
+          -0.06978515819660012
+        ]
+      },
+      "2": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5282608695652173,
+          0.4319967472141381,
+          0.6343374741200823,
+          0.44909698996655245
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.292648619573861,
+          0.33871719359374786,
+          0.4099236123003082,
+          0.3706626551929341
+        ],
+        "weights": [
+          -0.14233733340265586,
+          0.11150134948979179,
+          0.0,
+          -0.11394759257236418,
+          0.11367166002375108,
+          0.776920152185824,
+          -0.12203838296610564
+        ]
+      },
+      "3": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.5375,
+          0.44031377765752755,
+          0.6202678571428559,
+          0.44139155982905687
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.279098803845896,
+          0.34289629157940943,
+          0.4074239017261422,
+          0.364586746945213
+        ],
+        "weights": [
+          -0.1512999732424379,
+          0.10312184255834503,
+          0.0,
+          -0.07381979618624136,
+          0.11163492119084073,
+          0.7968214153451592,
+          -0.042990482674384524
+        ]
+      },
+      "4": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "prefix_candidate_def_use_count",
+          "prefix_candidate_use_coverage",
+          "prefix_available_use_coverage",
+          "prefix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          1.6020833333333333,
+          0.46872819888444855,
+          0.6445486111111106,
+          0.4615722934472901
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          1.3252341905196345,
+          0.35361541991583795,
+          0.40645195642843707,
+          0.37401769893108033
+        ],
+        "weights": [
+          -0.10768462523266022,
+          0.1713309664670405,
+          0.0,
+          0.012986355771437955,
+          0.07698437693441211,
+          0.607868761687338,
+          0.004675611876484055
+        ]
+      }
+    },
+    "full_model": {
+      "constant": null,
+      "feature_names": [
+        "canvas_log2",
+        "seed_value",
+        "prefix_candidate_def_use_count",
+        "prefix_candidate_use_coverage",
+        "prefix_available_use_coverage",
+        "prefix_boundary_indent_match"
+      ],
+      "mean": [
+        5.5,
+        0.5,
+        1.5760135135135136,
+        0.4501760439260441,
+        0.6291867760617754,
+        0.4384312196812161
+      ],
+      "std": [
+        1.118033988749895,
+        0.5,
+        1.3129934026845111,
+        0.3454020486065323,
+        0.4071776350065249,
+        0.36477592873148
+      ],
+      "weights": [
+        -0.12082036219675805,
+        0.10615249708217532,
+        0.0,
+        -0.04404077989391586,
+        0.035980218913295794,
+        0.7232754396905852,
+        -0.08776331329802825
+      ]
+    },
+    "outcome_labels_used_for_fit": true,
+    "track": "supervised_probe_diagnostic"
+  },
+  "suffix_only": {
+    "deployable_authorization_role": "none",
+    "features": [
+      "canvas_log2",
+      "seed_value",
+      "suffix_required_identifier_count",
+      "suffix_required_recovered_count",
+      "suffix_required_recovery",
+      "candidate_suffix_def_use_count",
+      "suffix_boundary_indent_match"
+    ],
+    "fold_models": {
+      "0": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.3550420168067227,
+          0.20378151260504201,
+          0.9138655462184873,
+          0.20378151260504201,
+          0.3625474871149589
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.8004697926785789,
+          0.5523692158172703,
+          0.27615997041772034,
+          0.5523692158172703,
+          0.3452138934324443
+        ],
+        "weights": [
+          -0.028757386303855687,
+          0.1398776454837386,
+          0.0,
+          -0.5690306335895389,
+          0.1462639917047157,
+          -0.10358992554548341,
+          0.1462639917047157,
+          0.04764973826899188
+        ]
+      },
+      "1": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.3601694915254237,
+          0.1906779661016949,
+          0.915960451977401,
+          0.1906779661016949,
+          0.37664281098042024
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.9005309009001328,
+          0.5183885212907712,
+          0.2757449597092743,
+          0.5183885212907712,
+          0.351635924457623
+        ],
+        "weights": [
+          -0.025517948216301517,
+          0.14028000801824433,
+          0.0,
+          -0.3978020300534856,
+          0.1862326490250106,
+          -0.06502381264371651,
+          0.1862326490250106,
+          0.016158984515679497
+        ]
+      },
+      "2": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.4282608695652174,
+          0.2391304347826087,
+          0.9065217391304345,
+          0.2391304347826087,
+          0.3598015542996337
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.9875668482554296,
+          0.5780319913177523,
+          0.28671212693276094,
+          0.5780319913177523,
+          0.33919627628999227
+        ],
+        "weights": [
+          -0.026936717758608255,
+          0.11276745446120161,
+          0.0,
+          -0.34077327807449376,
+          0.14099630095301297,
+          0.05291858163651905,
+          0.14099630095301297,
+          -0.02882599239231322
+        ]
+      },
+      "3": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.4270833333333333,
+          0.21875,
+          0.8951388888888888,
+          0.21875,
+          0.3482731419588008
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.9762256363441533,
+          0.5439654745477879,
+          0.303908915397402,
+          0.5439654745477879,
+          0.3292692219557718
+        ],
+        "weights": [
+          -0.03284970722785874,
+          0.17543120264357437,
+          0.0,
+          -0.4529002973310588,
+          0.17143755888717702,
+          -0.06342068552392116,
+          0.17143755888717702,
+          0.08779226314542839
+        ]
+      },
+      "4": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "suffix_required_identifier_count",
+          "suffix_required_recovered_count",
+          "suffix_required_recovery",
+          "candidate_suffix_def_use_count",
+          "suffix_boundary_indent_match"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          0.43125,
+          0.25416666666666665,
+          0.9041666666666666,
+          0.25416666666666665,
+          0.381542415577339
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          0.9786589996009811,
+          0.6037929878875883,
+          0.2902046691560973,
+          0.6037929878875883,
+          0.3487111114492013
+        ],
+        "weights": [
+          -0.022422695470430177,
+          0.21619241347072826,
+          0.0,
+          -0.36777984087682297,
+          0.12166441841565628,
+          -0.0854912979484549,
+          0.12166441841565628,
+          0.06340173745058018
+        ]
+      }
+    },
+    "full_model": {
+      "constant": null,
+      "feature_names": [
+        "canvas_log2",
+        "seed_value",
+        "suffix_required_identifier_count",
+        "suffix_required_recovered_count",
+        "suffix_required_recovery",
+        "candidate_suffix_def_use_count",
+        "suffix_boundary_indent_match"
+      ],
+      "mean": [
+        5.5,
+        0.5,
+        0.40033783783783783,
+        0.22128378378378377,
+        0.9070945945945946,
+        0.22128378378378377,
+        0.3657804870121002
+      ],
+      "std": [
+        1.118033988749895,
+        0.5,
+        0.9319044113059827,
+        0.5605436314061609,
+        0.28688546552787075,
+        0.5605436314061609,
+        0.34310584547582734
+      ],
+      "weights": [
+        -0.02490200809113676,
+        0.15642848730563386,
+        0.0,
+        -0.42224511881938415,
+        0.15054453260886977,
+        -0.052094027866551436,
+        0.15054453260886977,
+        0.04061923876536103
+      ]
+    },
+    "outcome_labels_used_for_fit": true,
+    "track": "supervised_probe_diagnostic"
+  },
+  "token_length": {
+    "deployable_authorization_role": "none",
+    "features": [
+      "canvas_log2",
+      "seed_value",
+      "candidate_middle_tokens",
+      "canvas_tokens",
+      "candidate_canvas_fill_ratio",
+      "prefix_tokens",
+      "suffix_tokens"
+    ],
+    "fold_models": {
+      "0": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "candidate_middle_tokens",
+          "canvas_tokens",
+          "candidate_canvas_fill_ratio",
+          "prefix_tokens",
+          "suffix_tokens"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          59.98739495798319,
+          60.0,
+          0.9998358718487395,
+          6.773109243697479,
+          2.1848739495798317
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          42.88321850500751,
+          42.89522117905443,
+          0.0017465579824610237,
+          4.908296825535478,
+          3.0041047172458057
+        ],
+        "weights": [
+          -0.0024780420078340097,
+          0.08365714034363958,
+          0.0,
+          0.0103279140405664,
+          0.010891682030272624,
+          -0.005009508021320851,
+          0.007838630603333946,
+          -0.007258297756531239
+        ]
+      },
+      "1": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "candidate_middle_tokens",
+          "canvas_tokens",
+          "candidate_canvas_fill_ratio",
+          "prefix_tokens",
+          "suffix_tokens"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          59.983050847457626,
+          60.0,
+          0.999801377118644,
+          6.788135593220339,
+          2.406779661016949
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          42.876494499000515,
+          42.89522117905443,
+          0.0018924266324095284,
+          4.795569450492365,
+          3.317231049053814
+        ],
+        "weights": [
+          -0.003839187966849773,
+          0.13697043102851017,
+          0.0,
+          -0.006613945313066772,
+          -0.007182600337966953,
+          0.02819359378431177,
+          0.005860266635373922,
+          -0.036510913624462335
+        ]
+      },
+      "2": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "candidate_middle_tokens",
+          "canvas_tokens",
+          "candidate_canvas_fill_ratio",
+          "prefix_tokens",
+          "suffix_tokens"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          59.98478260869565,
+          60.0,
+          0.9998641304347826,
+          6.51304347826087,
+          2.3043478260869565
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          42.87456156394563,
+          42.89522117905443,
+          0.0012544962848246946,
+          4.362618315109291,
+          3.209155145607998
+        ],
+        "weights": [
+          -0.005225475661018993,
+          0.09835782004897735,
+          0.0,
+          0.0036896411360022438,
+          0.0017900200527691309,
+          -0.043040687858500806,
+          0.10333490031539162,
+          -0.019428003643356177
+        ]
+      },
+      "3": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "candidate_middle_tokens",
+          "canvas_tokens",
+          "candidate_canvas_fill_ratio",
+          "prefix_tokens",
+          "suffix_tokens"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          59.983333333333334,
+          60.0,
+          0.9998046875,
+          6.991666666666666,
+          2.175
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          42.876806732259965,
+          42.89522117905443,
+          0.0018767624095572255,
+          4.827863283988969,
+          3.1135791301972873
+        ],
+        "weights": [
+          -0.006119305828377496,
+          0.0445285937930569,
+          0.0,
+          0.05440928193193512,
+          0.053737711248273076,
+          0.02327478709576214,
+          -0.023578844609050634,
+          0.06651812246673271
+        ]
+      },
+      "4": {
+        "constant": null,
+        "feature_names": [
+          "canvas_log2",
+          "seed_value",
+          "candidate_middle_tokens",
+          "canvas_tokens",
+          "candidate_canvas_fill_ratio",
+          "prefix_tokens",
+          "suffix_tokens"
+        ],
+        "mean": [
+          5.5,
+          0.5,
+          59.985416666666666,
+          60.0,
+          0.9998372395833334,
+          6.575,
+          2.216666666666667
+        ],
+        "std": [
+          1.118033988749895,
+          0.5,
+          42.87697755198068,
+          42.89522117905443,
+          0.0017393294280459181,
+          4.786547990636529,
+          3.2715524687150572
+        ],
+        "weights": [
+          -0.03475104825703359,
+          0.17293167137103865,
+          0.0,
+          0.021231673117665963,
+          0.019068870612603105,
+          0.43590245921868603,
+          0.012428739209891956,
+          -0.0607940301360709
+        ]
+      }
+    },
+    "full_model": {
+      "constant": null,
+      "feature_names": [
+        "canvas_log2",
+        "seed_value",
+        "candidate_middle_tokens",
+        "canvas_tokens",
+        "candidate_canvas_fill_ratio",
+        "prefix_tokens",
+        "suffix_tokens"
+      ],
+      "mean": [
+        5.5,
+        0.5,
+        59.9847972972973,
+        60.0,
+        0.999828441722973,
+        6.72972972972973,
+        2.2567567567567566
+      ],
+      "std": [
+        1.118033988749895,
+        0.5,
+        42.87763196506888,
+        42.89522117905443,
+        0.001720600364531105,
+        4.745687365977942,
+        3.1859523198058026
+      ],
+      "weights": [
+        -0.004492197804996048,
+        0.10979054186459782,
+        0.0,
+        0.014727352366578723,
+        0.013837722854192921,
+        0.0358357185950675,
+        0.016604674166241357,
+        -0.011963552321412817
+      ]
+    },
+    "outcome_labels_used_for_fit": true,
+    "track": "supervised_probe_diagnostic"
+  }
+}

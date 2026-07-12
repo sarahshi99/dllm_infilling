@@ -1,0 +1,54 @@
+{
+  "best_cross_canvas_family": "combined",
+  "best_cross_canvas_pairwise_accuracy": 0.6273062730627307,
+  "candidate_count": 1184,
+  "metrics": [
+    {
+      "cross_canvas_pairwise_accuracy": 0.5940959409594095,
+      "cross_canvas_pairwise_ci_high": 0.6992780385494057,
+      "cross_canvas_pairwise_ci_low": 0.47353629375348416,
+      "feature_family": "prefix_only",
+      "within_task_pairwise_accuracy": 0.5940959409594095,
+      "within_task_pairwise_ci_high": 0.6992780385494057,
+      "within_task_pairwise_ci_low": 0.47353629375348416
+    },
+    {
+      "cross_canvas_pairwise_accuracy": 0.5055350553505535,
+      "cross_canvas_pairwise_ci_high": 0.6204863725736279,
+      "cross_canvas_pairwise_ci_low": 0.40344268864047345,
+      "feature_family": "suffix_only",
+      "within_task_pairwise_accuracy": 0.5055350553505535,
+      "within_task_pairwise_ci_high": 0.6204863725736279,
+      "within_task_pairwise_ci_low": 0.40344268864047345
+    },
+    {
+      "cross_canvas_pairwise_accuracy": 0.5018450184501845,
+      "cross_canvas_pairwise_ci_high": 0.5231965309053911,
+      "cross_canvas_pairwise_ci_low": 0.48367011001931637,
+      "feature_family": "token_canvas",
+      "within_task_pairwise_accuracy": 0.5018450184501845,
+      "within_task_pairwise_ci_high": 0.5231965309053911,
+      "within_task_pairwise_ci_low": 0.48367011001931637
+    },
+    {
+      "cross_canvas_pairwise_accuracy": 0.4944649446494465,
+      "cross_canvas_pairwise_ci_high": 0.620440713342384,
+      "cross_canvas_pairwise_ci_low": 0.3754705598455599,
+      "feature_family": "ordinary_confidence",
+      "within_task_pairwise_accuracy": 0.4944649446494465,
+      "within_task_pairwise_ci_high": 0.620440713342384,
+      "within_task_pairwise_ci_low": 0.3754705598455599
+    },
+    {
+      "cross_canvas_pairwise_accuracy": 0.6273062730627307,
+      "cross_canvas_pairwise_ci_high": 0.7366025936772846,
+      "cross_canvas_pairwise_ci_low": 0.4989794209055657,
+      "feature_family": "combined",
+      "within_task_pairwise_accuracy": 0.6273062730627307,
+      "within_task_pairwise_ci_high": 0.7366025936772846,
+      "within_task_pairwise_ci_low": 0.4989794209055657
+    }
+  ],
+  "task_count": 148,
+  "verdict": "f4_deterministic_inference_visible_ranking_measured"
+}

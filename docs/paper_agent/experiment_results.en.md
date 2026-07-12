@@ -1,6 +1,18 @@
 # Experiment Results
 
-Updated: 2026-06-17 17:10 CST
+Updated: 2026-07-12 UTC
+
+## Phase 5 H200 Completed Result
+
+The sole baseline was `45bead22e3d21daa707be724cf2bdcbbf776592a`. The earlier `422` occurred before any GPU process existed, so that state was infrastructure-blocked/scientifically pending, not a scientific failure. The user-authorized manual launch was verified by process, GPU, log, and JSONL activity.
+
+The full bank completed over `148` allowed cases: base `1332/1332` (`1184` deployable plus `148` diagnostic ceiling) and alpha auxiliary `728/728` over `91` verified tasks, with zero missing, duplicate, extra, error, or frozen rows. Deployable pass count was `330/1184`; diagnostic-ceiling pass count was `73/148`. Frozen test remained sealed with `test_evaluation_count=0`.
+
+F1 found mean unique candidate hashes `4.0` and mean unique parsable AST hashes `3.3243`; `6/61` all-fail tasks contained complementary correct semantic units, diagnostic-only. F2 equivariance delta AUC was `0.0143`, 95% CI `[-0.0550, 0.0829]`, so it was not independently predictive.
+
+The deterministic combined F3/F4 proxy reached cross-canvas within-task pairwise accuracy `0.6273`. Selection was `23/8`, net `+15`, versus fixed64 and `27/13`, net `+14`, versus confidence, with nonnegative short-bucket net. It nevertheless failed the preregistered requirement that every grouped-bootstrap delta lower bound exceed zero.
+
+Conditional V0 verdict: `killed_corrected_within_task_gate_failed`. No deployable reranker, supervised fallback, heuristic substitution, fusion, or additional generation was run. Phase 5 decision: `iterate`.
 
 ## Three-Way Comparison: Paper-Reported Numbers vs Our Previous Methods vs Current Method
 

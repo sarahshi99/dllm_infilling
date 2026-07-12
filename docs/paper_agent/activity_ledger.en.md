@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-07-12 UTC
+
+- action: ran the user-authorized manual H200 Phase 5 launcher from sole baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`; verified tmux/PID, GPU use, log growth, and JSONL writes.
+- bank: smoke `108/108`, full base `1332/1332`, alpha auxiliary `728/728`; zero missing, duplicate, extra, error, or frozen rows. Frozen test remained sealed at evaluation count `0`.
+- diagnostics: F1–F4 completed. F2 equivariance delta AUC `0.0143`, 95% CI `[-0.0550,0.0829]`. Combined proxy cross-canvas accuracy `0.6273`; selection net `+15` versus fixed64 and `+14` versus confidence.
+- decision: the preregistered all-baseline uncertainty condition failed. Conditional V0 wrote `killed_corrected_within_task_gate_failed`; no supervised fallback, fusion, heuristic substitution, or extra generation ran. Phase 5 decision=`iterate`.
+- verification: `18` tests passed; py_compile, artifact assertions, JSON/CSV parsing, forbidden-feature audit, compact raw-schema scan, and diff hygiene passed.
+
 ## 2026-06-18 00:00 CST
 
 - action: implemented and ran the CPU-only Discovery V4 signal audit. No GPU job was launched.

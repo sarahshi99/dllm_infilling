@@ -1,0 +1,36 @@
+{
+  "deployable_bridge_proxy": {
+    "fitted_parameters": false,
+    "formula_provenance": "fixed_before_outcomes",
+    "outcome_labels_used_for_fit": false,
+    "outcome_labels_used_for_offline_gate_evaluation": true,
+    "outcome_labels_used_for_selection": false,
+    "reference_used_for_fit": false,
+    "reference_used_for_selection": false
+  },
+  "forbidden_features": [
+    "error_type",
+    "oracle_length",
+    "oracle_mask_length",
+    "pass_fail",
+    "passed",
+    "reference_code",
+    "reference_middle",
+    "row_key",
+    "split",
+    "split_label",
+    "task_group",
+    "task_id",
+    "unit_test_result"
+  ],
+  "labels_used_for_offline_evaluation": true,
+  "passed": true,
+  "reference_used_for_offline_evaluation": true,
+  "supervised_probe_diagnostic": {
+    "deployable_authorization_role": "none",
+    "outcome_labels_used_for_fit": true,
+    "outcome_labels_used_for_selection": false,
+    "reference_used_for_fit": false,
+    "reference_used_for_selection": false
+  }
+}

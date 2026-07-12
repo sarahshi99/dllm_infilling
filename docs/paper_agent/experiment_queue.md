@@ -1,40 +1,43 @@
 # Experiment Queue
 
-Updated: 2026-07-11 UTC
+Updated: 2026-07-12 UTC
 
 Only selected, executable experiments belong here. Frozen test remains sealed unless a validation gate explicitly passes.
 
 ## EXP-007: Phase 5 full RandomSpanLight shared candidate bank
 
 Linked idea: IDEA-011, IDEA-015
-Status: blocked_not_started
+Status: completed
 Hypothesis: A full-first shared bank can falsify candidate-diversity, equivariance, semantic-bridge, and ranking premises without method-specific generation distributions.
 Inputs: all `148` allowed non-frozen `HumanEval-RandomSpanInfillingLight` rows; LLaDA-8B-Base; canvas `16/32/64/128`; seeds `0/1`; fixed64 `(64,0)`; one diagnostic oracle ceiling.
 Smoke/full rows: exactly `108` then `1332`; alpha-renaming mirrors are a separate auxiliary block after the full gate.
 Command: exact approved H200 command in `docs/paper_agent/current_action.md`.
 Success criterion: canvas-128 same-protocol validation, schema/evaluator/resume/row-count/duplicate audits pass, zero frozen rows, unchanged test lock; smoke automatically continues full.
 Failure criterion: any substitution for 128, missing/duplicate/error row, frozen intersection, evaluator/schema failure, raw code in compact outputs, or changed test lock.
-Current blocker: approval service rejected launch before process creation with `422 model not found: codex-auto-review`.
+Historical blocker: approval service rejected earlier launches before process creation. User-authorized manual launch subsequently completed.
 Expected report: `analysis_outputs/phase5_randomspanlight_candidate_bank_20260711_v1/report.md`
+Result: base `1332/1332` over `148` tasks and alpha auxiliary `728/728` over `91` verified tasks; zero missing/duplicate/extra/error/frozen rows; `test_evaluation_count=0`.
 
 ## EXP-008: Phase 5 F1–F4 premise falsification
 
 Linked idea: IDEA-011, IDEA-014, IDEA-015
-Status: blocked_on_exp007
+Status: completed
 Hypothesis: One or more inference-visible premises add stable grouped ranking signal; failure is a valid kill result.
 Inputs: EXP-007 full bank only.
 Outputs: `analysis_outputs/phase5_premise_falsification_20260711_v1/`.
 Success/failure: F1/F2/F4 always report. F3A supervised probes are diagnostic only. F3B passes only under the corrected deterministic within-task/cross-canvas, paired-selection, and short-safety gate.
 Stop: no deployable method implementation if F3 fails.
+Result: F1–F4 completed. F2 was negative. F3/F4 combined proxy had cross-canvas accuracy `0.6273`, but the corrected gate failed `positive_primary_delta_vs_all_baselines`.
 
 ## EXP-009: AST/def-use bridge proxy V0 conditional reranker
 
 Linked idea: IDEA-011
-Status: blocked_on_f3_gate
+Status: killed_gate_failed
 Hypothesis: If the corrected gate passes, a standalone deterministic AST/def-use bridge proxy improves Pass@1 relative to fixed64 and confidence reranking on the same eight candidates.
 Inputs: EXP-007 full bank and EXP-008 grouped OOF combined scores.
 Outputs: `analysis_outputs/phase5_semantic_bridge_v0_20260711_v1/`.
 Kill: if the corrected gate fails, write `killed_corrected_within_task_gate_failed`; no supervised-score fallback, extra generation, homotopy, birth–death, particle assembly, or fusion.
+Result: `killed_corrected_within_task_gate_failed`; V0 was not implemented as a deployable reranker and frozen test stayed sealed at count `0`.
 
 ## EXP-001: CPU claim-boundary consolidation for diagnostic mixed paper
 

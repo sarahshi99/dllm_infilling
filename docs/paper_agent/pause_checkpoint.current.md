@@ -2,7 +2,22 @@
 
 ## Phase 5 Authoritative Resume Point
 
-Timestamp: 2026-07-11 UTC
+Timestamp: 2026-07-12 UTC
+
+### Completed H200 Run And Scientific Decision
+
+- User-authoritative baseline: `45bead22e3d21daa707be724cf2bdcbbf776592a`.
+- The earlier pre-launch state was `infrastructure_blocked / scientific_pending`, not a scientific failure. The manual launcher subsequently created a real GPU process and completed normally.
+- Base bank: `1332/1332` rows over `148` allowed tasks; zero missing, duplicate, extra, error, frozen, or malformed rows.
+- Alpha auxiliary: `728/728` rows over `91` verified tasks; zero missing, duplicate, extra, or error rows.
+- F1–F4 completed. The deterministic combined proxy reached cross-canvas within-task pairwise accuracy `0.6273`, selection net `+15` versus fixed64 and `+14` versus confidence, with no short-bucket net regression.
+- The corrected gate failed because grouped-bootstrap delta lower bounds were not strictly positive against every deterministic baseline. Conditional V0 verdict: `killed_corrected_within_task_gate_failed`.
+- No supervised-score fallback, heuristic substitution, method fusion, or additional generation was run.
+- Frozen test remains `sealed`; `test_evaluation_count=0`.
+- Fresh verification: `18` tests, py_compile, artifact assertions, JSON/CSV parse, forbidden-feature audit, exact compact raw-schema scan, and diff hygiene passed.
+- Result report: `docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`.
+
+Phase 5 decision: `iterate`.
 
 Authoritative branch: `codex/risk-controlled-dynamic-rescue`
 
@@ -20,7 +35,7 @@ Completed:
 - Focused verification: `13` tests, py_compile, JSON/CSV parse, sealed-zero audit, raw-code compact scan, diff hygiene.
 - Read-only RandomSpanLight audit: `164` source, `148` allowed unique groups, frozen intersection empty, Stage B expected rows `108` smoke / `1332` full.
 
-Blocker:
+Historical infrastructure blocker (resolved by the user-authorized manual launch):
 
 - Approved H200 command was rejected before process launch by the approval service: `422 Unprocessable Entity: model not found: codex-auto-review`.
 - No GPU process/model load/candidate/evaluator row exists.
@@ -30,17 +45,17 @@ Blocker:
 
 Frozen test: `sealed`, `test_evaluation_count=0`.
 
-Operational decision: `blocked_infrastructure`.
+Operational decision: `completed`.
 
-Scientific decision: `blocked`.
+Scientific decision: `current_proxy_gate_failed`; future work requires a new preregistered iteration.
 
 Phase 5 scaffold commit: `08f01141b8cf6a8e611d55162a3c21d09ca0cf12`.
 
-Next actions after explicit approval and functioning host approval:
+Completed actions:
 
-1. Run exact H200 command in `docs/paper_agent/current_action.md`; smoke auto-continues full only if its audit passes.
-2. Run F1–F4 from the full shared bank.
-3. Run conditional V0; it writes a killed report if F3 fails.
+1. Exact H200 command completed; smoke/full/alpha audits passed.
+2. F1–F4 completed from the full shared bank.
+3. Conditional V0 wrote the preregistered killed report after the corrected F3 gate failed.
 
 ## Historical H200 Checkpoint Below
 

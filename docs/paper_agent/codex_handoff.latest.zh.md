@@ -1,8 +1,22 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-11 UTC
+更新日期：2026-07-12 UTC
 
-## Phase 5 恢复入口（authoritative）
+## Phase 5 完成交接（authoritative）
+
+- 唯一 baseline：`45bead22e3d21daa707be724cf2bdcbbf776592a`。
+- 先前 pre-launch 正确状态为 `infrastructure_blocked / scientific_pending`，不是科学失败。Manual H200 launch 后 infrastructure blocker 已解除。
+- Bank：base `1332/1332` over `148` tasks，alpha `728/728` over `91` verified tasks；zero missing/duplicate/extra/error/frozen。
+- F1–F4 完成。Combined proxy cross-canvas within-task accuracy `0.6273`；vs fixed64 net `+15`，vs confidence net `+14`，short net 非负。
+- Corrected gate 失败：并非所有 deterministic baseline delta 的 grouped-bootstrap lower bound 都 `>0`。V0 verdict=`killed_corrected_within_task_gate_failed`。
+- 没有 supervised fallback、heuristic substitution、fusion 或额外 generation；frozen test `sealed`，`test_evaluation_count=0`。
+- Fresh verification：`18` tests、py_compile、artifact assertions、JSON/CSV parse、forbidden-feature audit、compact raw-schema scan、diff hygiene 均通过。
+- Phase 5 decision：`iterate`。不要在本轮 outcomes 上调当前固定公式；若继续，先写新的独立 preregistration。
+- Result report：`docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`。
+
+## Phase 5 启动前历史恢复入口（superseded）
+
+本节记录 manual launch 前的审计和 blocker provenance。恢复时以顶部“Phase 5 完成交接（authoritative）”为准。
 
 - Authoritative branch：`codex/risk-controlled-dynamic-rescue`。
 - 已先执行 `git fetch --all --prune`；verified remote HEAD 与 local branch HEAD 均为 `b8ae031cf3b430833613aaf29083535edc0738f6`，ahead/behind `0/0`。这是 Phase 5 starting HEAD；不要使用本文件历史段落中的旧 HEAD。
@@ -12,10 +26,10 @@
 - Scaffold：`experiments/phase5_randomspanlight_candidate_bank.py`、`analysis/phase5_premise_falsification.py`、`analysis/phase5_semantic_bridge_v0.py`；`13` tests pass，`py_compile` pass，`git diff --check` pass。
 - CPU read-only audit：source `164` rows，排除 `16` frozen HumanEval groups 后 exactly `148` allowed unique groups；bucket short/medium/long/extreme=`22/40/23/63`；12-case smoke=`3/3/3/3`；Stage B expected rows smoke `108`、full `1332`；frozen intersection `[]`。
 - Canvas 128 无替代：runner 在 generation 前验证 same `run_vanilla_decode` fixed-mask path、linear schedule、`64` denoising steps 和 actual canvas `128`。
-- 当前 blocker：approved host/H200 command 在 process launch 前被 approval service 拒绝，错误 `422 Unprocessable Entity: model not found: codex-auto-review`。没有 GPU process、没有 smoke row、没有绕过执行。
+- 历史 blocker：approved host/H200 command 在 process launch 前被 approval service 拒绝，错误 `422 Unprocessable Entity: model not found: codex-auto-review`。当时没有 GPU process、没有 smoke row、没有绕过执行；后续 manual launch 已解除该 blocker。
 - 2026-07-12 authorized retry：在 correction commit `5aa86c7a3368e8024449ccf421febfbf9eb78dd2` push 后，exact registered H200 command 重试一次，得到相同 pre-launch `422`。Post-audit：candidate rows `0`、active process `0`、frozen count `0`。Operational decision=`blocked_infrastructure`；scientific decision=`blocked`。Manual tmux command：`docs/paper_agent/phase5_manual_h200_launch_20260712.md`。
-- Stage B：`blocked_not_started`；F1–F4：`blocked_on_bank`；AST/def-use bridge proxy V0：`blocked_on_corrected_gate`。Homotopy、birth–death、particle assembly、fusion 均未实现。
-- 当前单一 decision：`blocked`。
+- 当时 Stage B=`blocked_not_started`、F1–F4=`blocked_on_bank`、V0=`blocked_on_corrected_gate`；这些状态均已被顶部完成交接取代。Homotopy、birth–death、particle assembly、fusion 均未实现。
+- 当时 decision=`blocked`；已被顶部 `iterate` 取代。
 - Phase 5 pushed checkpoint HEAD：`fabe6406bd8222b76bad220f76a3041e51144bdd`。`git push` reported success (`b8ae031..fabe640`); separate `ls-remote` readback is blocked by sandbox DNS and the approval-service `422` outage.
 
 ## 0. H200 新服务器迁移状态

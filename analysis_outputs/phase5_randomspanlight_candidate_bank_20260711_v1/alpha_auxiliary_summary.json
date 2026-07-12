@@ -1,0 +1,26 @@
+{
+  "audit": {
+    "duplicate_count": 0,
+    "duplicate_keys": [],
+    "error_count": 0,
+    "error_keys": [],
+    "expected_count": 728,
+    "extra_count": 0,
+    "extra_keys": [],
+    "missing_count": 0,
+    "missing_keys": [],
+    "observed_count": 728,
+    "passed": true,
+    "unique_count": 728
+  },
+  "candidate_rows": 728,
+  "denoising_steps_per_candidate": 64,
+  "eligible_task_count": 91,
+  "expected_candidate_rows": 728,
+  "frozen_test_status": "sealed",
+  "gate_passed": true,
+  "peak_cuda_memory_bytes": 16593536512,
+  "test_evaluation_count": 0,
+  "verdict": "alpha_auxiliary_passed",
+  "wall_sec_since_run_start": 5724.038159913034
+}

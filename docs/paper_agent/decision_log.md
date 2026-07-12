@@ -1,6 +1,14 @@
 # Decision Log
 
-Updated: 2026-07-11 UTC
+Updated: 2026-07-12 UTC
+
+- Phase 5 manual H200 launch completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`; the former pre-launch state was infrastructure-blocked/scientifically pending, not a method failure.
+- The shared bank passed integrity: `1332/1332` base rows over `148` tasks and `728/728` alpha auxiliary rows over `91` verified tasks, with zero missing/duplicate/extra/error/frozen rows.
+- F2 alpha equivariance was not independently predictive: delta AUC `0.0143`, grouped-bootstrap 95% CI `[-0.0550, 0.0829]`.
+- The deterministic combined AST/def-use proxy produced positive point estimates and paired selection nets, but failed the preregistered all-baseline uncertainty gate. It must not be promoted or tuned on these outcomes.
+- Conditional V0 verdict is `killed_corrected_within_task_gate_failed`; supervised diagnostic scores were not used for selection, and no fallback/fusion/additional generation was run.
+- Frozen test remains sealed with `test_evaluation_count=0`.
+- Phase 5 decision: `iterate`.
 
 - Phase 5 authoritative starting HEAD is `b8ae031cf3b430833613aaf29083535edc0738f6`, verified after fetch against `origin/codex/risk-controlled-dynamic-rescue`; older handoff HEAD values are historical only.
 - The dirty primary checkout is user-owned. Phase 5 uses a clean isolated worktree and does not move, delete, or hide existing untracked files.
@@ -14,7 +22,7 @@ Updated: 2026-07-11 UTC
 - H200 smoke/full is `blocked_not_started`: approval service returned `422 model not found: codex-auto-review` before launch. Do not retry or route around this without explicit user approval after the blocker notice.
 - The user explicitly authorized one corrected H200 retry on 2026-07-12. It returned the same pre-launch `422`; candidate rows remain `0` and no process started. Operational decision is `blocked_infrastructure`, not method failure. Manual tmux launch is recorded in `docs/paper_agent/phase5_manual_h200_launch_20260712.md`.
 - F1–F4 are `blocked_on_candidate_bank`; V0 is `blocked_on_f3_gate`; frozen test remains sealed with `test_evaluation_count=0`.
-- Current Phase 5 decision: `blocked`.
+- Historical Phase 5 pre-launch decision was `blocked`; it is superseded by the completed `iterate` decision above.
 
 - H200 accepted as the current evidence base. A6000 results remain historical reference only and must not be silently mixed into H200 main claims.
 - Frozen test remains sealed unless a preregistered validation gate explicitly passes. Current `test_evaluation_count` remains `0`.

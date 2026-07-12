@@ -608,7 +608,7 @@
   },
   "phase5_method_falsification": {
     "ahead_behind": "0/0",
-    "ast_def_use_bridge_proxy_v0_status": "blocked_on_corrected_f3_gate",
+    "ast_def_use_bridge_proxy_v0_status": "killed_corrected_within_task_gate_failed",
     "audit_correction_20260712": {
       "defect": "pass-trained OOF scores indirectly used outcome labels for V0 selection",
       "deployable_formula": "fixed deterministic AST/def-use/boundary/confidence formula",
@@ -623,7 +623,7 @@
         "deployable_authorization_role": "none",
         "outcome_labels_used_for_fit": true
       },
-      "tests": "18 passed before final verification"
+      "tests": "18 passed in fresh final verification"
     },
     "candidate_bank": {
       "alpha_auxiliary_separately_counted": true,
@@ -647,15 +647,20 @@
       ],
       "smoke_cases": 12,
       "smoke_expected_base_rows": 108,
-      "status": "blocked_not_started"
+      "status": "completed",
+      "base_rows_observed": 1332,
+      "base_rows_error": 0,
+      "alpha_verified_tasks": 91,
+      "alpha_rows_observed": 728,
+      "alpha_rows_error": 0
     },
     "ccfa_gap_ledger": "analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv",
     "clean_isolated_worktree": ".worktrees/phase5-method-falsification",
     "combination_authorized": false,
     "correction_commit": "5aa86c7a3368e8024449ccf421febfbf9eb78dd2",
     "correction_push": "success: 3315ed8..5aa86c7",
-    "f1_status": "blocked_on_bank",
-    "f2_status": "blocked_on_bank",
+    "f1_status": "completed_diagnostic_only",
+    "f2_status": "completed_negative_not_independently_predictive",
     "f3_gate": {
       "cross_canvas_accuracy_above_chance_required": true,
       "global_auc_role": "secondary_diagnostic_only",
@@ -678,9 +683,9 @@
       "v0_on_failure": "kill_for_this_round",
       "within_task_accuracy_above_chance_required": true
     },
-    "f3_status": "blocked_on_bank",
-    "f4_status": "blocked_on_bank",
-    "final_decision": "blocked",
+    "f3_status": "completed_gate_failed",
+    "f4_status": "completed",
+    "final_decision": "iterate",
     "final_pushed_head": "pending_final_metadata_push",
     "forbidden_deployable_features": [
       "reference_code",
@@ -692,6 +697,20 @@
       "test_derived_statistic"
     ],
     "frozen_test_status": "sealed",
+    "completed_result": {
+      "baseline_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
+      "combined_cross_canvas_within_task_accuracy": 0.6273062730627307,
+      "f2_delta_auc": 0.014293639053254426,
+      "f2_delta_auc_ci_low": -0.05496102368573791,
+      "f2_delta_auc_ci_high": 0.08286532790327428,
+      "failed_gate_conditions": [
+        "positive_primary_delta_vs_all_baselines"
+      ],
+      "selection_net_vs_fixed64": 15,
+      "selection_net_vs_confidence": 14,
+      "supervised_probe_scores_used_for_selection": false,
+      "result_report": "docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md"
+    },
     "gpu_blocker": {
       "authorized_retry_count": 1,
       "broad_sandbox_bypass_used": false,
@@ -713,7 +732,7 @@
       "Semantic Bridge Projection": "future_full_method_not_current_implementation",
       "Semantic Particle Assembly": "registered_not_implemented"
     },
-    "operational_decision": "blocked_infrastructure",
+    "operational_decision": "completed",
     "population": {
       "allowed_non_frozen_rows": 148,
       "bucket_counts": {
@@ -734,11 +753,14 @@
     "remote_readback_status": "blocked_by_sandbox_dns_and_approval_service_422",
     "scaffold_commit": "08f01141b8cf6a8e611d55162a3c21d09ca0cf12",
     "semantic_bridge_v0_status": "superseded_by_ast_def_use_proxy_v0",
-    "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6",
-    "status": "blocked_infrastructure",
+    "starting_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
+    "status": "completed_current_proxy_gate_failed",
     "test_evaluation_count": 0,
     "verification": {
-      "focused_tests": "13 passed",
+      "artifact_assertions": "passed",
+      "compact_raw_schema_scan": "passed",
+      "focused_tests": "18 passed",
+      "forbidden_feature_audit": "passed",
       "git_diff_check": "passed",
       "py_compile": "passed"
     }

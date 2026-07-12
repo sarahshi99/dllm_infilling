@@ -1,0 +1,67 @@
+{
+  "audit": {
+    "all_rows": {
+      "duplicate_count": 0,
+      "duplicate_keys": [],
+      "error_count": 0,
+      "error_keys": [],
+      "expected_count": 1332,
+      "extra_count": 0,
+      "extra_keys": [],
+      "missing_count": 0,
+      "missing_keys": [],
+      "observed_count": 1332,
+      "passed": true,
+      "unique_count": 1332
+    },
+    "base_bank": {
+      "duplicate_count": 0,
+      "duplicate_keys": [],
+      "error_count": 0,
+      "error_keys": [],
+      "expected_count": 1332,
+      "extra_count": 0,
+      "extra_keys": [],
+      "missing_count": 0,
+      "missing_keys": [],
+      "observed_count": 1332,
+      "passed": true,
+      "unique_count": 1332
+    },
+    "canvas128_generation_passed": true,
+    "evaluator_executed_for_all_ok_rows": true,
+    "frozen_test_invariant_passed": true,
+    "passed": true,
+    "phase": "full",
+    "resume_noop_writes": 0,
+    "resume_passed": true,
+    "schema_passed": true
+  },
+  "base_expected_rows": 1332,
+  "candidate_kind_counts": {
+    "deployable_grid": 1184,
+    "oracle_sufficient_diagnostic_ceiling": 148
+  },
+  "candidate_kind_pass_counts": {
+    "deployable_grid": 330,
+    "oracle_sufficient_diagnostic_ceiling": 73
+  },
+  "candidate_rows": 1332,
+  "dataset_jsonl_local_read_only": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-RandomSpanInfillingLight.jsonl",
+  "denoising_steps_per_candidate": 64,
+  "frozen_test_status": "sealed",
+  "full_manifest_case_count": 148,
+  "gate_passed": true,
+  "mean_candidate_latency_sec": 2.5858264303508016,
+  "peak_cuda_memory_bytes": 16545870336,
+  "phase": "full",
+  "raw_code_committed": false,
+  "raw_output_dir_local_only": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/outputs_clean/phase5_randomspanlight_candidate_bank_20260711_v1",
+  "selected_case_count": 148,
+  "summed_candidate_latency_sec": 3444.3208052272676,
+  "summed_gpu_decode_sec": 3268.383423533407,
+  "summed_verification_sec": 175.93738169386052,
+  "test_evaluation_count": 0,
+  "verdict": "full_passed",
+  "wall_sec": 3469.8390784639632
+}

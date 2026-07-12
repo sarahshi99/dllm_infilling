@@ -1,0 +1,39 @@
+{
+  "ast_match_rate": 0.046703296703296704,
+  "baseline_auc": {
+    "bootstrap_replicates_requested": 1000,
+    "bootstrap_replicates_valid": 1000,
+    "ci_high": 0.5713176819804654,
+    "ci_low": 0.4333692276063072,
+    "estimate": 0.5030880177514793,
+    "group_count": 91
+  },
+  "baseline_controls": [
+    "canvas",
+    "seed",
+    "ordinary_confidence"
+  ],
+  "delta_auc": {
+    "bootstrap_replicates_requested": 1000,
+    "bootstrap_replicates_valid": 1000,
+    "ci_high": 0.08286532790327428,
+    "ci_low": -0.05496102368573791,
+    "estimate": 0.014293639053254426,
+    "group_count": 91
+  },
+  "equivariance_augmented_auc": {
+    "bootstrap_replicates_requested": 1000,
+    "bootstrap_replicates_valid": 1000,
+    "ci_high": 0.5798558579451436,
+    "ci_low": 0.44979064763077337,
+    "estimate": 0.5173816568047337,
+    "group_count": 91
+  },
+  "exact_middle_hash_rate": 0.0521978021978022,
+  "interpretation_guard": "equivariance_or_stability_is_not_correctness",
+  "mean_semantic_jaccard": 0.6205102339434245,
+  "paired_candidate_count": 728,
+  "paired_task_count": 91,
+  "transformation": "strict_local_alpha_renaming_reference_verified",
+  "verdict": "f2_equivariance_not_independently_predictive"
+}

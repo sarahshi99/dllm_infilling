@@ -1,18 +1,20 @@
 # Research Idea Board
 
-Updated: 2026-07-11 UTC
+Updated: 2026-07-12 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
 ## IDEA-011: AST/def-use bridge proxy V0
 
 Source: user
-Status: blocked_on_shared_bank
+Status: killed_current_formula_new_iteration_required
 Scientific question: Can a fixed AST/def-use/boundary proxy rank passing candidates above failing candidates within the same task without fitted correctness labels or reference information?
 Minimum experiment: F3/F4 over the full shared 148-case bank. Keep pass-trained OOF logistic models as `supervised_probe_diagnostic` only. Compare the deterministic combined proxy against deterministic prefix-only, suffix-only, token/canvas, and ordinary-confidence scores.
 Decision rule: Implement standalone V0 only if within-task and cross-canvas ranking exceed chance, every primary grouped-bootstrap delta lower bound is `>0`, paired selection net is positive versus fixed64 and confidence, and short-bucket net regression is absent. Global AUROC is secondary only.
 Combination rule: Must remain standalone; no homotopy, birth–death, particle, controller, or cal-lite fusion.
 Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsification.md`, `analysis_outputs/phase5_method_portfolio_20260711_v1/`
+
+Result: Full shared-bank evaluation completed. Combined proxy cross-canvas within-task accuracy was `0.6273` with positive selection net, but grouped-bootstrap delta lower bounds were not strictly positive against every deterministic baseline. Current formula is killed; do not tune it on these outcomes. Any continuation requires a separately preregistered structure mechanism.
 
 Scope boundary: This is not full Semantic Bridge Projection. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages.
 
@@ -43,10 +45,12 @@ Decision rule: Do not implement in this round; no fragment fusion after seeing o
 ## IDEA-015: Metamorphic Equivariance Auxiliary Evaluator
 
 Source: user
-Status: blocked_on_shared_bank
+Status: completed_negative
 Scientific question: Does strict local alpha-renaming equivariance add predictive value for functional pass after controlling for canvas, seed, and confidence?
 Minimum experiment: F2 paired mirrors over reference-verified alpha transformations.
 Decision rule: Report predictive increment or negative evidence; never call stability correctness and never use it as an oracle.
+
+Result: `728` paired candidates across `91` verified tasks. Delta AUC `0.0143`, 95% CI `[-0.0550, 0.0829]`; equivariance was not independently predictive.
 
 ## IDEA-001: Stress second-regime construction and diagnostic
 

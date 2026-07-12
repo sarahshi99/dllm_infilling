@@ -1,6 +1,18 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-08 UTC
+更新时间：2026-07-12 UTC
+
+## Phase 5 H200 shared bank 与 AST/def-use proxy gate（2026-07-12）
+
+- 唯一基线：`45bead22e3d21daa707be724cf2bdcbbf776592a`。
+- 状态纠正：此前 approval-service `422` 发生在任何 GPU 进程启动前，正确口径是 `infrastructure_blocked / scientific_pending`，不是科学失败。用户授权 manual launch 后 infrastructure blocker 已解除。
+- Candidate bank：`148` 个 allowed cases，base `1332/1332`，deployable `1184`，oracle-ceiling diagnostic `148`；zero missing/duplicate/extra/error/frozen。F2 alpha auxiliary `728/728`，覆盖 `91` 个 reference-verified tasks，同样 zero error。
+- F1：平均 unique candidate hashes `4.0`，平均 unique parsable AST hashes `3.3243`；`61` 个 all-fail tasks 中 `6` 个存在 complementary correct semantic units，仅作 diagnostic。
+- F2：equivariance AUC 增量 `0.0143`，95% CI `[-0.0550, 0.0829]`，结论为 `f2_equivariance_not_independently_predictive`。
+- F3/F4：deterministic combined proxy cross-canvas within-task accuracy `0.6273`；选择相对 fixed64 为 `23/8`、net `+15`，相对 confidence 为 `27/13`、net `+14`，短桶 net 均非负。
+- Gate：未满足“相对所有 deterministic baselines 的 grouped-bootstrap delta lower bound 均 >0”；conditional V0 verdict 为 `killed_corrected_within_task_gate_failed`。没有 supervised fallback、heuristic substitution、fusion 或额外生成。
+- Frozen test：`sealed`，`test_evaluation_count=0`。
+- Phase 5 decision：`iterate`。当前固定 proxy 不能晋升；后续若继续，必须是新的独立预注册机制，不能在本轮 outcomes 上调当前公式。
 
 ## Phase 4 泛化审计与论文骨架（2026-07-08）
 

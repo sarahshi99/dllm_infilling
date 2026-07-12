@@ -1,6 +1,6 @@
 # 文献与 Novelty 边界笔记
 
-更新时间：2026-07-11
+更新时间：2026-07-12
 
 ## Phase 5 独立方法的最近邻与 Novelty 边界
 
@@ -10,7 +10,7 @@
 - Semantic Particle Assembly：candidate-set semantic selection 的直接近邻包括 MBR-EXEC（https://arxiv.org/abs/2204.11454），但它依赖 execution/simulated execution。Phase 5 禁止 unit tests/oracle/reference 进入 deployable selection，因此未来 assembly 必须来自纯 inference-visible landmarks。本轮只登记，不实现。
 - Metamorphic Equivariance：ReCode（https://arxiv.org/abs/2212.10264）使用 semantics-preserving transformations 评估 code-generation robustness。Phase 5 仅使用严格 local alpha-renaming，并明确 `equivariance/stability != correctness`；它只能是 auxiliary evaluator。
 
-Phase 5 当前没有 numerical performance claim。Shared-bank generation 因 approved H200 launch approval-service blocker 尚未开始；任何 novelty 判断保持 hypothesis 状态。
+Phase 5 empirical boundary：shared bank 已完成。Current fixed AST/def-use proxy 虽有 cross-canvas within-task accuracy `0.6273` 与正 paired selection net，但没有通过相对所有 deterministic baselines 的 preregistered grouped-bootstrap lower-bound gate；alpha equivariance delta AUC 的 95% CI 也跨 `0`。因此本轮不形成新的 numerical method-performance claim，current V0 被 kill。Novelty 判断仍只能支持“program-structure signal 值得以新机制继续研究”，不能声称已得到 standalone Semantic Bridge method。
 
 本文件是 `docs/results/literature_sota_notes.zh.md` 的 paper-agent compact 版本，记录 Phase 1b 后最需要约束论文表述的 source-checked 文献。不要把这里的 reported numbers 当成本地同协议 baseline。
 
