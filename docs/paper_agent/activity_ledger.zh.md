@@ -2,6 +2,9 @@
 
 ## 2026-07-12 UTC
 
+- Phase 6 start：从 commit `52f07457a7974fafa69d59914bbc412a2d83e305` 建立 `codex/phase6-abductive-bridge-v1`。Phase 5 strict gate 只作为 paper promotion gate；本轮实现独立 Abductive Program-State Bridge V1，不调整 V0 权重、不融合其他方法。
+- MultiLine audit：source `5815` rows；排除 frozen `16` HumanEval groups / `736` rows 后 allowed `5079` rows；同池 `16/32/64/128 × seeds 0/1` 预计 `40632` candidate rows。现有 artifact 无完全匹配 bank，因此需要新 full bank。
+- Phase 6 protocol：technical smoke only（runner/evaluator/schema/frozen/resume/duplicate/GPU memory）；通过后自动 full，无 performance launch gate。Frozen test 保持 `sealed`，`test_evaluation_count=0`。
 - manual H200 launch：以 `HEAD 45bead22e3d21daa707be724cf2bdcbbf776592a` 为唯一基线执行 `bash scripts/manual_launch_phase5_h200_candidate_bank.sh`；tmux/PID、H200 占用、日志和 JSONL 增长均验证真实启动。此前正确状态为 `infrastructure_blocked / scientific_pending`，不是科学失败。
 - bank result：smoke `108/108`、full base `1332/1332`、alpha auxiliary `728/728`；base 覆盖 `148` allowed cases，alpha 覆盖 `91` verified tasks；全程 `0` missing/duplicate/extra/error/frozen，run manifest `completed`。
 - F1/F2：F1 平均 unique hash `4.0`、unique parsable AST hash `3.3243`，`61` all-fail tasks 中 `6` 有 complementary units；F2 delta AUC `0.0143`，95% CI `[-0.0550,0.0829]`，不具 independent predictive evidence。

@@ -6,12 +6,12 @@
     "blocked",
     "superseded"
   ],
-  "created_at_utc": "2026-07-11T00:00:00Z",
+  "created_at_utc": "2026-07-12T00:00:00Z",
   "gap_count": 15,
   "status_counts": {
-    "blocked": 4,
-    "closed": 0,
-    "open": 6,
+    "blocked": 1,
+    "closed": 7,
+    "open": 2,
     "partially_closed": 3,
     "superseded": 2
   },

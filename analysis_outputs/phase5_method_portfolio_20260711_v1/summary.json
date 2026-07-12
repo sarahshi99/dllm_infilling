@@ -9,11 +9,13 @@
     "seeds": [0, 1]
   },
   "ccfa_gap_ledger": "ccfa_gap_ledger.csv",
-  "final_decision": "blocked",
-  "gpu_blocker": "approval service rejected the approved host command before launch: 422 model not found: codex-auto-review",
+  "final_decision": "iterate",
+  "gpu_blocker": null,
   "frozen_test_evaluation_count": 0,
   "frozen_test_status": "sealed",
   "method_registry": "method_registry.csv",
   "phase": 5,
-  "starting_head": "b8ae031cf3b430833613aaf29083535edc0738f6"
+  "starting_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
+  "completion_commit": "52f07457a7974fafa69d59914bbc412a2d83e305",
+  "phase5_result": "killed_corrected_within_task_gate_failed"
 }
