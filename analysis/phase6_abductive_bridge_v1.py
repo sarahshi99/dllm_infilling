@@ -371,11 +371,12 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
     selections: list[dict[str, Any]] = []
     selection_latency = defaultdict(float)
     for row_key, rows in sorted(groups.items()):
-        prefix = str(rows[0]["prefix_text"])
-        suffix = str(rows[0]["suffix_text"])
+        context_row = next((row for row in rows if row.get("prefix_text") is not None and row.get("suffix_text") is not None), rows[0])
+        prefix = str(context_row.get("prefix_text", ""))
+        suffix = str(context_row.get("suffix_text", ""))
         scored: list[dict[str, Any]] = []
         for row in rows:
-            features = bridge_features(prefix, str(row["middle_text"]), suffix)
+            features = bridge_features(prefix, str(row.get("middle_text", "")), suffix)
             candidate_tokens = float(row.get("candidate_middle_tokens") or 0.0)
             canvas = float(row["canvas_tokens"])
             features.update(

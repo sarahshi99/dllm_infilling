@@ -9,6 +9,7 @@ from experiments.phase6_multiline_candidate_bank import (
     build_manifest_without_tokenizer,
     candidate_key,
     expected_candidate_keys,
+    normalize_candidate_row,
 )
 
 
@@ -49,6 +50,19 @@ class Phase6MultiLineCandidateBankTest(unittest.TestCase):
         self.assertEqual(len(rows), 5815)
         self.assertEqual(len(manifest), 5079)
         self.assertEqual(len(expected_candidate_keys(manifest)), 40632)
+
+    def test_error_row_is_normalized_for_resume_and_analysis(self) -> None:
+        task = type("Task", (), {"prefix": "def f():\n", "suffix": "    return x\n"})()
+        row = normalize_candidate_row(
+            {"candidate_key": "k", "status": "error", "passed": False},
+            task,
+        )
+        self.assertEqual(row["middle_text"], "")
+        self.assertEqual(row["prefix_text"], "def f():\n")
+        self.assertEqual(row["suffix_text"], "    return x\n")
+        self.assertEqual(row["candidate_middle_tokens"], 0)
+        self.assertEqual(row["metrics"], {})
+        self.assertEqual(row["verification"], {})
 
 
 if __name__ == "__main__":

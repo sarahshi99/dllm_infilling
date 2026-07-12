@@ -139,6 +139,18 @@ def build_candidate_specs() -> list[dict[str, Any]]:
     ]
 
 
+def normalize_candidate_row(row: Mapping[str, Any], task: Any) -> dict[str, Any]:
+    normalized = dict(row)
+    normalized.setdefault("prefix_text", str(task.prefix))
+    normalized.setdefault("middle_text", "")
+    normalized.setdefault("suffix_text", str(task.suffix))
+    normalized.setdefault("candidate_middle_tokens", 0)
+    normalized.setdefault("metrics", {})
+    normalized.setdefault("verification", {})
+    normalized.setdefault("diagnostics", {})
+    return normalized
+
+
 def candidate_key(row_key: str, canvas_tokens: int, seed: int) -> str:
     return f"{row_key}|deployable_grid|canvas={int(canvas_tokens)}|seed={int(seed)}"
 
@@ -229,14 +241,14 @@ def run_population(
             key = candidate_key(str(item["row_key"]), int(spec["canvas_tokens"]), int(spec["seed"]))
             if key in completed:
                 continue
-            row = run_candidate(
+            row = normalize_candidate_row(run_candidate(
                 manifest_row=item,
                 source_row=source,
                 task=task,
                 spec=spec,
                 tokenizer=tokenizer,
                 model=model,
-            )
+            ), task)
             append_jsonl(raw_path, row)
             completed.add(key)
             written += 1
