@@ -1,0 +1,9 @@
+# M4 Semantic Particle Assembly V0 Experiment Brief
+
+M4 is a separate candidate method; no M1--M4 method is currently selected as the paper’s main method.
+
+M4 first reads the existing full 148-task RandomSpanLight eight-candidate bank and performs an offline assembly audit before any repair decode. For each candidate it extracts AST statement fragments, candidate-level basic-block fragments, and def-use fragments. Assembly traces suffix backward obligations to fragment definitions and recursively adds visible def-use providers; if no obligation provider is available it falls back to the visible best candidate’s basic block. Selection and assembly receive only candidate text/state/confidence and prefix/suffix structure. They cannot read reference/canonical solution, tests or verifier outcomes, passed labels, oracle length, task/task-group/source IDs, split labels, or frozen-test state.
+
+The offline comparison writes independent best-single-particle and assembly-without-repair outputs. Only after the full 148-case offline audit passes does M4 run assembly-with-repair: the assembled text is encoded into a fixed canvas `64`, fragment boundaries/padding are remasked, and one `64`-forward repair decode connects fragments. Test code is constructed only after assembly selection, for post-generation evaluation. Best, assembly, and repair outputs are separate, resumable, deduplicated, and audited; repair must show exactly 64 forwards.
+
+The GPU route is a 12-case repair smoke followed automatically by all 148 allowed RandomSpanLight groups on technical pass. Report best-single, assembly-without-repair, assembly-with-repair, task-macro primary metric, descriptive span-micro rate, help/harm, fragments/events, repair forward/token budget, wall time, and memory. Frozen controller test remains sealed with `test_evaluation_count=0`.
