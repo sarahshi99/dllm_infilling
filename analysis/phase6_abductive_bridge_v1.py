@@ -430,9 +430,18 @@ def _write_frontier_rows(selections: Sequence[Mapping[str, Any]], methods: Seque
     return rows
 
 
-def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> dict[str, Any]:
+def run_analysis(
+    bank_dir: Path,
+    generic_refinement_dir: Path,
+    m1_refinement_dir: Path,
+    compact_bank_dir: Path,
+    output_dir: Path,
+) -> dict[str, Any]:
     all_raw = read_jsonl(bank_dir / "candidate_bank_raw.jsonl")
-    refinement_raw = read_jsonl(bank_dir / "m1_refinement_raw.jsonl")
+    refinement_raw = [
+        *read_jsonl(generic_refinement_dir / "equal_compute_generic_remask_raw.jsonl"),
+        *read_jsonl(m1_refinement_dir / "m1_dependency_cone_remask_raw.jsonl"),
+    ]
     grid_rows = [row for row in all_raw if row.get("candidate_kind") == "deployable_grid"]
     oracle_rows = [row for row in all_raw if row.get("candidate_kind") == "oracle_sufficient_diagnostic_ceiling"]
     grouped_grid: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -549,8 +558,8 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
             "unit_tests_or_outcomes_used_for_selection": False,
             "oracle_length_used_for_selection": False,
             "task_identity_or_split_used_for_selection": False,
-            "generic_remask": "actual 64-forward low-final-confidence refinement of the M1-selected stage-one state",
-            "m1_full": "actual 64-forward dependency-cone remask; safe fixed64 fallback when no deployable cone exists",
+            "generic_remask": "actual 64-forward low-final-confidence refinement with the same initial remask cardinality as the dependency cone",
+            "m1_full": "actual 64-forward AST/def-use dependency-cone remask; safe fallback is a fixed64 null refinement with its own 64 forwards",
         },
         "frozen_test_status": bank_summary.get("frozen_test_status"),
         "test_evaluation_count": bank_summary.get("test_evaluation_count"),
@@ -578,9 +587,9 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
                 "smaller_seed_tiebreak",
             ],
             "stage_two": {
-                "equal_compute_generic_remask": "same selected stage-one candidate; low-confidence token remask; 64 forward passes",
-                "m1_dependency_cone_remask": "same selected stage-one candidate; suffix-obligation dependency cone; 64 forward passes",
-                "safe_fallback": "reuse fixed64 only when the deployable dependency cone is absent or unmappable",
+                "equal_compute_generic_remask": "same selected stage-one candidate; low-confidence token remask matched to the M1 cone cardinality; 64 forward passes",
+                "m1_dependency_cone_remask": "same selected stage-one candidate; AST/def-use suffix-obligation dependency cone; 64 forward passes",
+                "safe_fallback": "fixed64 null refinement when the deployable dependency cone is absent or unmappable; still 64 forward passes",
             },
             "forbidden_selection_fields": sorted(FORBIDDEN_SELECTION_FIELDS),
         },
@@ -610,7 +619,7 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
         [
             "",
             "No reference, unit tests, pass/fail labels, oracle length, supervised score, task identity, split label, or frozen-test statistic entered selection or remasking.",
-            "Generic and M1 full each execute an additional 64-forward refinement. M1 falls back to fixed64 only when no deployable dependency cone can be mapped.",
+            "Generic and M1 full each execute an additional 64-forward refinement. M1 fallback is an explicit fixed64 null refinement, not a zero-forward row.",
         ]
     )
     (output_dir / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -620,6 +629,8 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Phase 6 Abductive Program-State Bridge V1")
     root.add_argument("--bank-dir", required=True)
+    root.add_argument("--generic-refinement-dir", required=True)
+    root.add_argument("--m1-refinement-dir", required=True)
     root.add_argument("--compact-bank-dir", required=True)
     root.add_argument("--output-dir", required=True)
     return root
@@ -627,7 +638,13 @@ def parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     args = parser().parse_args()
-    run_analysis(Path(args.bank_dir).resolve(), Path(args.compact_bank_dir).resolve(), Path(args.output_dir).resolve())
+    run_analysis(
+        Path(args.bank_dir).resolve(),
+        Path(args.generic_refinement_dir).resolve(),
+        Path(args.m1_refinement_dir).resolve(),
+        Path(args.compact_bank_dir).resolve(),
+        Path(args.output_dir).resolve(),
+    )
     return 0
 
 

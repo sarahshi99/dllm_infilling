@@ -11,6 +11,7 @@ from experiments.phase6_multiline_candidate_bank import (
     expected_candidate_keys,
     expected_oracle_keys,
     normalize_candidate_row,
+    resolve_output_dirs,
 )
 from experiments.phase6_abductive_bridge_runner import expected_refinement_keys
 
@@ -65,6 +66,12 @@ class Phase6MultiLineCandidateBankTest(unittest.TestCase):
             ["run", "--dataset-jsonl", "data.jsonl", "--output-dir", "raw", "--compact-dir", "compact"]
         )
         self.assertEqual(parsed.smoke_cases, 12)
+
+    def test_stage_one_and_refinement_outputs_are_always_distinct(self) -> None:
+        stage1, generic, m1 = resolve_output_dirs(Path("raw"), None, None)
+        self.assertEqual(len({stage1, generic, m1}), 3)
+        with self.assertRaises(ValueError):
+            resolve_output_dirs(Path("raw"), "raw", "m1")
 
     def test_error_row_is_normalized_for_resume_and_analysis(self) -> None:
         task = type("Task", (), {"prefix": "def f():\n", "suffix": "    return x\n"})()

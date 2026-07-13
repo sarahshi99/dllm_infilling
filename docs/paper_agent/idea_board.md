@@ -10,13 +10,13 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | implementation started | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
-| `M2` | Constraint-Homotopy Infilling | optional cheap diagnostic; not M1 prerequisite | IDEA-012 |
-| `M3` | Birth--Death Canvas Diffusion | optional cheap diagnostic; not M1 prerequisite | IDEA-013 |
-| `M4` | Semantic Particle Assembly | downgraded | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M1` | Abductive Program-State Bridge | first candidate code complete; semantic/integrity repair then GPU smoke | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M2` | Constraint-Homotopy Infilling | independent V0 implementation next | IDEA-012 |
+| `M3` | Birth--Death Canvas Diffusion | independent V0 implementation after M2 launch | IDEA-013 |
+| `M4` | Semantic Particle Assembly | independent V0 implementation after M3 launch | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
-`P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
+M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
 
 ## IDEA-011 / M1-D0: AST/def-use bridge proxy V0
 
@@ -30,31 +30,31 @@ Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsificatio
 
 Result: Full shared-bank evaluation completed. Combined proxy cross-canvas within-task accuracy was `0.6273` with positive selection net, but grouped-bootstrap delta lower bounds were not strictly positive against every deterministic baseline. Current formula is killed; do not tune it on these outcomes. Any continuation requires a separately preregistered structure mechanism.
 
-Scope boundary: This is not M1 Abductive Program-State Bridge. M1 now proceeds as an independent implementation with suffix backward obligations, prefix/candidate forward facts, contradiction checks, dependency-cone remasking, and safe fallback. It must not tune this fixed proxy formula on the same outcomes, and deployable M1 may not consume reference code, oracle length, tests/outcomes, task IDs, split labels, or passed labels.
+Scope boundary: This is not M1 Abductive Program-State Bridge. M1 proceeds independently with suffix backward obligations, prefix/candidate forward facts, contradiction checks, AST/def-use dependency-cone remasking, and a 64-forward fixed64 null fallback. It must not tune this fixed proxy formula on the same outcomes, and deployable M1 may not consume reference code, oracle length, tests/outcomes, task IDs, split labels, or passed labels.
 
 ## IDEA-012 / M2: Constraint-Homotopy Infilling
 
 Source: user
 Status: registered_not_implemented
 Scientific question: Does a gradual schedule of inference-visible semantic constraints improve rescue quality relative to abrupt constraints under equal compute?
-Minimum experiment: Future standalone smoke/full protocol after the Semantic Bridge round closes.
-Decision rule: Cheap diagnostic may run later, but it is not a prerequisite for M1 implementation/full and must not combine with any other method.
+Minimum experiment: Independent 12--24-case technical smoke followed directly by the 148-case allowed RandomSpanLight full. Compare gradual and abrupt constraints under the same 64-forward budget.
+Decision rule: Constraints may use only prefix/suffix/current candidate/inference-visible confidence; no test/reference input and no fusion with another candidate method.
 
 ## IDEA-013 / M3: Birth–Death Canvas Diffusion
 
 Source: user
 Status: registered_not_implemented
 Scientific question: Can a fixed-compute population over canvas hypotheses preserve useful diversity while reallocating compute via birth/death decisions?
-Minimum experiment: Future standalone equal-compute population audit with explicit particle accounting.
-Decision rule: Cheap diagnostic may run later, but it is not a prerequisite for M1 implementation/full; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
+Minimum experiment: Independent 12-case smoke then 148-case allowed RandomSpanLight full, with `16/32/64/128` particles and a fixed total-forward budget against a uniform fixed-grid control.
+Decision rule: Birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
 
 ## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
-Status: downgraded
+Status: independent V0 queued after M3 launch
 Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
-Minimum experiment: F1 is diagnostic only; future assembly method needs a separate preregistered protocol.
-Decision rule: Do not prioritize in this round; no fragment fusion after seeing outcomes.
+Minimum experiment: First inspect the existing 148-case bank offline, then run an independent fixed-budget repair decode. Compare best-single, assembly-without-repair, and assembly-with-repair.
+Decision rule: Fragments may use only AST statement/basic-block/def-use structure plus prefix/suffix obligations and inference-visible consistency; no test/reference selection or outcome-guided assembly.
 
 ## IDEA-015 / A1: Metamorphic Equivariance Auxiliary Evaluator
 

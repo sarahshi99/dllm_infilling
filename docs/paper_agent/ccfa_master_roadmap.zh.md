@@ -65,13 +65,13 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 | Canonical ID | 正式名称 | 当前状态 | 已完成的只是 | 下一独立实验 |
 |---|---|---|---|---|
-| `M1` | Abductive Program-State Bridge | `implementation_complete_gpu_queued_after_official_CAL` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | `0d75c71` 已实现 suffix backward obligations、prefix/candidate forward facts、contradiction set、实际 dependency-cone 与 generic 64-forward remasking、fixed64 safe fallback；12-case MultiLine technical smoke 后直接 full `5079` non-frozen MultiLine spans |
-| `M2` | Constraint-Homotopy Infilling | `cheap_diagnostic_not_prerequisite` | 只有文献/novelty 登记 | 可独立保留 cheap diagnostic，但不是 M1 implementation/full 的前置条件 |
-| `M3` | Birth--Death Canvas Diffusion | `cheap_diagnostic_not_prerequisite` | 只有文献/novelty 登记 | 可独立保留 cheap diagnostic，但不是 M1 implementation/full 的前置条件 |
-| `M4` | Semantic Particle Assembly | `deprioritized` | `M4-D0/F1`：61 个 all-fail tasks 中仅 6 个有互补正确 semantic units | 降级；不在本轮抢占 M1。仍不得使用 tests/reference 选择片段 |
+| `M1` | Abductive Program-State Bridge | `candidate_v0_code_complete_smoke_next` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | 独立候选；修复后使用 suffix backward obligations、prefix/candidate forward facts、contradiction set、AST/def-use dependency cone、等计算 generic remask 与 64-forward fixed64 null fallback；12-case MultiLine smoke 后直接 full `5079` |
+| `M2` | Constraint-Homotopy Infilling | `candidate_v0_implementation_next` | 只有文献/novelty 登记 | 独立候选；同一 64-forward budget 下 gradual vs abrupt constraints；技术检查后直接 `148` RandomSpanLight full |
+| `M3` | Birth--Death Canvas Diffusion | `candidate_v0_implementation_queued` | 只有文献/novelty 登记 | 独立候选；`16/32/64/128` particles，fixed total-forward budget，对照 uniform fixed-grid；12-case smoke 后 `148` full |
+| `M4` | Semantic Particle Assembly | `candidate_v0_implementation_queued` | `M4-D0/F1`：61 个 all-fail tasks 中仅 6 个有互补正确 semantic units | 独立候选；先 148-case offline assembly audit，再 one fixed-budget repair decode；不得用 tests/reference 选择片段 |
 | `A1` | Metamorphic Equivariance Evaluator | `stopped_negative_auxiliary` | 728 pairs/91 tasks，delta AUC `0.0143`，CI 跨 0 | 停止新工作；保留为负诊断证据，不进入 fusion |
 
-重要命名边界：
+重要命名边界：M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不构成选择、promotion 或其他候选的终止。
 
 - `AST/def-use bridge proxy V0` = `M1-D0`，不是 M1 完整方法；
 - F1 = `M4-D0` premise diagnostic，不是 Semantic Particle Assembly；
@@ -86,8 +86,8 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 - P1 official baseline protocol audits/adapters；
 - P2 对已有 6707 rows 的 group-aware CPU analysis；
 - P4 外部 benchmark feasibility、dataset/evaluator audit；
-- M1 full implementation 与 P1/P2/P4；M2/M3 cheap diagnostics 不构成 M1 前置门；
-- 不同 GPU、独立输出目录、固定协议下的 baseline full runs。
+- M1--M4 的独立代码/技术 smoke 与 P1/P2/P4；任一候选不构成其他候选的前置门；
+- 现有 candidate bank 可继续运行；新增 GPU process 后 10 分钟审计 memory/utilization/power/OOM/ECC/throughput，保留至少 25 GiB 后才能增加第三个；不同方法和进程必须独立输出目录。
 
 并行指实验作业，不授权 subagent。每个方法必须有独立输入、输出、指标和结论，不能因另一个方法的结果而临时改公式。
 
@@ -110,6 +110,6 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 1. `P1-BASELINES`：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility（忠实适配才 smoke/full）；LR-DLLM 只做 blocker audit。
 2. `P2-GROUP-STATS` 与 `P4-EXTERNAL`：立刻并行 CPU grouped statistics 和 ExecRepoBench 版本/许可/字段/evaluator audit；P4 不再做泛泛三候选调研。
-3. 方法线：M1 full implementation 立即开始；M2/M3 cheap diagnostics 不是前置条件；M4 降级、A1 停止；P3 等 official CAL 后再决定。M1 smoke 技术通过后直接 full，性能 gate 仅服务于论文 promotion。
+3. 方法线：M1--M4 都是独立候选，当前不选主方法。M1 修复/验证后立即 12-case MultiLine smoke，技术通过直接 full；M2 随 M1 smoke 实现并在技术检查后直接 148-case full；M3 随 M2 运行实现；M4 随 M3 运行实现。性能 gate 只服务后续论文 promotion，A1 仍是停止的负辅助，P3 等 official CAL 后再决定。
 
 P1/P2/P4 未关闭前，可以做探索实验，但任何方法结果都不得宣称 CCF-A-ready 或 SOTA。外部 baseline、严谨统计和真实场景不能被新方法实验替代。

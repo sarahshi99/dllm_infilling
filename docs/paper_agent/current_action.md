@@ -8,57 +8,38 @@
 
 ## Action Name
 
-`FAST-SPRINT-01`: official CAL + P2.1 grouped statistics + M1.1 Abductive Program-State Bridge + ExecRepoBench preparation。
+`FAST-SPRINT-01`: official baselines、P2.1 grouped statistics、四个独立候选方法 M1--M4、以及 ExecRepoBench preparation。
 
-## 为什么现在做
+## 当前决定与边界
 
-Phase 5 已完整结束；本轮 operational decision 是 `iterate_and_execute`，不是 blocked。M1-D0 fixed proxy 的历史 kill 仍有效，但不阻止一个独立的 M1 full implementation。当前同时补齐 official baseline、cluster-aware statistics、M1 bridge 和 repository-level external evaluator；冻结 controller test 保持 sealed。
+Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3、M4 是平行的独立候选方法；当前**没有**论文主方法。M1 只因最先完成代码而先进入 smoke，不代表 M2--M4 被降级、放弃或融合。Phase 5 的 `M1-D0` fixed proxy kill 和 `M4-D0/F1` premise 结果保持为历史结论，不能被改写成对四个新 V0 的 kill。
 
-本动作不重写历史实验结论，不打开 frozen test（`test_evaluation_count=0`）。所有 full run 必须 resume/dedup，并在结束后审计 missing/duplicate/error。GPU 串行顺序固定为 official CAL full -> M1 MultiLine full -> DreamOn official full；rho-EOS 先 compatibility。
+冻结 controller test 始终 sealed，`test_evaluation_count=0`；不得读取 106 个 sealed SingleLine test rows。所有 full run 必须支持 resume/dedup，并在结束后审计 missing/duplicate/error。现有 MultiLine candidate-bank PID `1195368` 继续运行，不暂停、不删除输出。
 
-## 立即执行的并行工作包
+## 立即执行的工作包
 
-### `P1.1-OFFICIAL-CAL`
+### P1/P2/P4
 
-固定 official CAL repository commit；审计模型、prompt、dataset mapping、canvas、steps、forward count、seed、evaluator、wall time、GPU、memory。只在 exact current-manifest mapping 或明确交集上比较；12-case technical smoke 通过后自动运行完整 allowed population，不要求先看到正向效果。local CAL/CAL-lite 不得改名为 official CAL。
+- `P1.1-OFFICIAL-CAL`：固定 official commit，审计 model/prompt/dataset mapping/canvas/steps/forwards/seed/evaluator/wall/GPU/memory；12-case technical smoke 后自动 full。DreamOn official full 是后续 baseline；rho-EOS 仅 faithful infilling compatibility 后 smoke/full；LR-DLLM 只保留 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
+- `P2.1-GROUPED-STATS`：`6707` spans / `20121` results 背后是 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 只 descriptive。保持 cluster bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 8-cell intersection；禁止行级独立显著性。
+- `P4.1-EXECREPOBENCH`：首个外部 benchmark 已固定为 ExecRepoBench。固定 dataset/Qwen evaluator commit，审计下载/环境/许可/字段，按 repository group，并完成跨多个 repository 与六种 fill_type 的 evaluator smoke。最终 external result 等方法配置冻结后再开。
 
-输出：
+### M1.1 Abductive Program-State Bridge
 
-- fixed upstream commit / environment manifest、compact audit、smoke/full resume logs、missing/duplicate/error audit。
+先完成两轮语义/完整性审计与修复：AST/def-use dependency cone 不能只是 identifier 同名；candidate 缺失 suffix obligation 时执行 fixed64 的 64-forward null refinement；generic/M1 使用等 canvas、等 64 forwards、匹配 remask cardinality；stage-one、generic、M1 raw output 分离。随后运行真实 12-case MultiLine smoke；技术通过自动继续全部 `5079` non-frozen MultiLine spans，不设性能 gate。模型为 LLaDA-8B-Base，canvas `16/32/64/128`、seeds `0/1`、64 steps。
 
-DreamOn 在 CAL full 后按 training-based stratum 运行；rho-EOS 仅在 faithful infilling compatibility 后运行；LR-DLLM 只保留 blocker audit。
+### M2/M3/M4 独立候选线
 
-### `P2.1-GROUPED-STATS`
+- `M2 Constraint-Homotopy V0`：同一 64-forward 预算下 gradual 与 abrupt constraints；约束只来自 prefix/suffix/current candidate/confidence。技术检查后直接 148-case RandomSpanLight full。
+- `M3 Birth-Death Canvas Diffusion V0`：同时维护 canvas `16/32/64/128` particles，在固定 total-forward budget 下只用 inference-visible confidence、syntax、prefix/suffix compatibility birth/death；先 12-case smoke 再 148-case RandomSpanLight full。
+- `M4 Semantic Particle Assembly V0`：从 8 candidates 提取 AST statement/basic-block/def-use fragments，以 inference-visible obligations 选择；比较 best-single、assembly-without-repair、assembly-with-repair；先 148-case bank offline assembly，再实际 fixed-budget repair。
 
-输入 existing `6707`-span / `20121`-result files；验证 `148` 个 `task_group`。primary estimand 为每个 base task 内先计算 policy accuracy、再对 task 等权平均。span-micro totals 仅 descriptive。执行 `10000` 次 fixed-seed cluster bootstrap、task-level paired wins/losses、group-aware label-swap permutation；config/length/error strata 必须同时报告 group count 与 cluster CI。
+四个 V0 的数据路线固定为：12--24 technical smoke → 148 RandomSpanLight first full → 927 non-frozen SingleLine development comparison → 5079 MultiLine later validation → method freeze 后 ExecRepoBench。禁止任何 tests/reference/canonical solution/oracle length/task ID/split/passed label 进入 deployable method。
 
-- accuracy-cost frontier；
-- control/CAL-lite/oracle 八格 intersection；
-- compact CSV/JSON/Markdown 与 paper-ready figure data。
+## H200 并行约束
 
-禁止行级独立显著性。
+候选库保持运行；先启动一个新的 GPU experiment process，10 分钟后审计 memory/utilization/power/OOM/ECC 与各任务吞吐。稳定且保留至少 25 GiB 显存余量时才允许第三个进程；总吞吐显著下降则减少 GPU process，但不停止方法代码开发。每个方法、每个进程必须有独立 output/log directory。
 
-输出：`analysis_outputs/second_regime_grouped_statistics_<timestamp>/`。
+## 证据命名
 
-### `M1.1-ABDUCTIVE-PROGRAM-STATE-BRIDGE`
-
-代码与独立 brief 已完成于 `0d75c71`：stage one 是 `16/32/64/128 × seeds 0/1` 的共享 64-step bank；stage two 分别执行实际 64-forward generic low-confidence remask 与 dependency-cone targeted remask。deployable method 禁止 reference code、oracle length、unit-test outcome、task ID、split label 与 passed labels；无可映射 dependency cone 时才 safe fallback 到 fixed64。模型 `GSAI-ML/LLaDA-8B-Base`；existing evaluator。下一 GPU step 仍是 12-case MultiLine technical smoke；技术通过后直接跑全部 `5079` non-frozen spans，不设性能 gate。此 job 等待前序 official CAL full，不能抢占既定 GPU 顺序。
-
-报告 fixed64、ordinary-confidence best-of-grid、equal-compute generic remask、M1 score-only、M1 full、oracle ceiling；task-macro delta、span-micro accuracy、help/harm、分桶、forward/token budget、wall time、显存。性能 gate 仅用于 paper promotion。
-
-### `P4.1-EXECREPOBENCH`
-
-直接选择 ExecRepoBench 作为首个 external benchmark：固定 dataset version 与 Qwen evaluator commit，审计下载、环境、许可、字段；按 repository 分组；完成至少覆盖多个 repository 和六类 fill_type 的 evaluator smoke。M1 配置冻结前不得打开最终 external result。
-
-## 执行边界
-
-- M1 full implementation 立即开始；M2/M3 cheap diagnostics 不是前置条件；M4 降级、A1 停止；P3 等 official CAL 后再决定。
-- 所有并行指独立作业，不使用 subagent；GPU full 必须维持既定顺序。
-- historical `802/1033` 为 A6000 historical；`796/1033` 为 H200 evidence base；不可混为单一结果。
-
-## 当前结论
-
-- Operational status：`iterate_and_execute`。
-- Scientific status：`diagnostic_mixed_not_submission_ready`。
-- Frozen test：`sealed`，`test_evaluation_count=0`。
-- Phase 5 historical result report：`docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md`。
+historical `802/1033` 是 A6000 historical；`796/1033` 是 H200 evidence base。两者都不是 final held-out result，且不得合并成单一结论。

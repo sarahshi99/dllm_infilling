@@ -334,6 +334,28 @@ def choose_smoke_manifest(manifest: Sequence[Mapping[str, Any]], count: int) -> 
     return sorted(selected, key=lambda row: int(row["case_index"]))
 
 
+def resolve_output_dirs(
+    output_dir: Path,
+    generic_output_dir: str | None,
+    m1_output_dir: str | None,
+) -> tuple[Path, Path, Path]:
+    """Keep stage-one, generic, and M1 raw data isolated by construction."""
+    stage1_dir = Path(output_dir).resolve()
+    generic_dir = (
+        Path(generic_output_dir).resolve()
+        if generic_output_dir
+        else stage1_dir.with_name(f"{stage1_dir.name}_generic")
+    )
+    m1_dir = (
+        Path(m1_output_dir).resolve()
+        if m1_output_dir
+        else stage1_dir.with_name(f"{stage1_dir.name}_dependency_cone")
+    )
+    if len({stage1_dir, generic_dir, m1_dir}) != 3:
+        raise ValueError("stage-one, generic, and M1 dependency-cone outputs must use distinct directories")
+    return stage1_dir, generic_dir, m1_dir
+
+
 def run_population(
     manifest: Sequence[Mapping[str, Any]],
     source_rows: Sequence[Mapping[str, Any]],
@@ -468,6 +490,13 @@ def create_compact_artifacts(
     schema_required = {"candidate_key", "row_key", "candidate_kind", "canvas_tokens", "seed", "status", "passed", "verification"}
     schema_passed = all(schema_required <= set(row) for row in rows)
     evaluator_passed = all(bool(row.get("verification")) for row in rows if row.get("status") == "ok")
+    refinement_forward_passed = all(
+        int((row.get("metrics") or {}).get("refinement_forward_count") or 0) == TOTAL_STEPS
+        and int((row.get("metrics") or {}).get("actual_forward_count") or 0)
+        == int((row.get("metrics") or {}).get("stage1_forward_count") or 0) + TOTAL_STEPS
+        for row in refinement_rows
+        if row.get("status") == "ok"
+    )
     frozen_ok = (
         test_lock.get("test_status") == "sealed"
         and int(test_lock.get("test_evaluation_count", -1)) == 0
@@ -490,6 +519,7 @@ def create_compact_artifacts(
         and audit["error_count"] == 0
         and schema_passed
         and evaluator_passed
+        and refinement_forward_passed
         and protocol.get("supported")
         and frozen_ok
         and resume_passed
@@ -505,6 +535,7 @@ def create_compact_artifacts(
         "performance_gate_used": False,
         "schema_passed": schema_passed,
         "evaluator_executed_for_all_ok_rows": evaluator_passed,
+        "refinement_second_stage_64_forwards_passed": refinement_forward_passed,
         "frozen_test_invariant_passed": frozen_ok,
         "resume_passed": resume_passed,
         "resume_noop_writes": resume_noop_writes,
@@ -588,11 +619,16 @@ def render_report(smoke: Mapping[str, Any], full: Mapping[str, Any] | None) -> s
 
 def run(args: argparse.Namespace) -> int:
     dataset_jsonl = Path(args.dataset_jsonl).resolve()
-    raw_dir = Path(args.output_dir).resolve()
+    raw_dir, generic_raw_dir, m1_raw_dir = resolve_output_dirs(
+        Path(args.output_dir), args.generic_output_dir, args.m1_output_dir
+    )
     compact_dir = Path(args.compact_dir).resolve()
     raw_path = raw_dir / "candidate_bank_raw.jsonl"
-    refinement_raw_path = raw_dir / "m1_refinement_raw.jsonl"
+    generic_refinement_raw_path = generic_raw_dir / "equal_compute_generic_remask_raw.jsonl"
+    m1_refinement_raw_path = m1_raw_dir / "m1_dependency_cone_remask_raw.jsonl"
     raw_dir.mkdir(parents=True, exist_ok=True)
+    generic_raw_dir.mkdir(parents=True, exist_ok=True)
+    m1_raw_dir.mkdir(parents=True, exist_ok=True)
     compact_dir.mkdir(parents=True, exist_ok=True)
     started_at = utc_now()
     started = time.perf_counter()
@@ -628,10 +664,11 @@ def run(args: argparse.Namespace) -> int:
     smoke_noop = run_population(smoke_manifest, source_rows, raw_path, tokenizer, model)
     smoke_stage1_rows = read_jsonl(raw_path)
     run_m1_refinement_population(
+        method="equal_compute_generic_remask",
         manifest=smoke_manifest,
         source_rows=source_rows,
         stage1_rows=smoke_stage1_rows,
-        raw_path=refinement_raw_path,
+        raw_path=generic_refinement_raw_path,
         tokenizer=tokenizer,
         model=model,
         cfg_for=cfg_for,
@@ -639,10 +676,35 @@ def run(args: argparse.Namespace) -> int:
         append_jsonl=append_jsonl,
     )
     smoke_refinement_noop = run_m1_refinement_population(
+        method="equal_compute_generic_remask",
         manifest=smoke_manifest,
         source_rows=source_rows,
         stage1_rows=smoke_stage1_rows,
-        raw_path=refinement_raw_path,
+        raw_path=generic_refinement_raw_path,
+        tokenizer=tokenizer,
+        model=model,
+        cfg_for=cfg_for,
+        set_seed=set_global_seed,
+        append_jsonl=append_jsonl,
+    )
+    run_m1_refinement_population(
+        method="m1_dependency_cone_remask",
+        manifest=smoke_manifest,
+        source_rows=source_rows,
+        stage1_rows=smoke_stage1_rows,
+        raw_path=m1_refinement_raw_path,
+        tokenizer=tokenizer,
+        model=model,
+        cfg_for=cfg_for,
+        set_seed=set_global_seed,
+        append_jsonl=append_jsonl,
+    )
+    smoke_refinement_noop += run_m1_refinement_population(
+        method="m1_dependency_cone_remask",
+        manifest=smoke_manifest,
+        source_rows=source_rows,
+        stage1_rows=smoke_stage1_rows,
+        raw_path=m1_refinement_raw_path,
         tokenizer=tokenizer,
         model=model,
         cfg_for=cfg_for,
@@ -655,7 +717,7 @@ def run(args: argparse.Namespace) -> int:
         full_manifest=manifest,
         selected_manifest=smoke_manifest,
         raw_rows=read_jsonl(raw_path),
-        refinement_rows=read_jsonl(refinement_raw_path),
+        refinement_rows=[*read_jsonl(generic_refinement_raw_path), *read_jsonl(m1_refinement_raw_path)],
         protocol=protocol,
         phase_name="smoke",
         raw_dir=raw_dir,
@@ -689,10 +751,11 @@ def run(args: argparse.Namespace) -> int:
         full_noop = run_population(manifest, source_rows, raw_path, tokenizer, model)
         full_stage1_rows = read_jsonl(raw_path)
         run_m1_refinement_population(
+            method="equal_compute_generic_remask",
             manifest=manifest,
             source_rows=source_rows,
             stage1_rows=full_stage1_rows,
-            raw_path=refinement_raw_path,
+            raw_path=generic_refinement_raw_path,
             tokenizer=tokenizer,
             model=model,
             cfg_for=cfg_for,
@@ -700,10 +763,35 @@ def run(args: argparse.Namespace) -> int:
             append_jsonl=append_jsonl,
         )
         full_refinement_noop = run_m1_refinement_population(
+            method="equal_compute_generic_remask",
             manifest=manifest,
             source_rows=source_rows,
             stage1_rows=full_stage1_rows,
-            raw_path=refinement_raw_path,
+            raw_path=generic_refinement_raw_path,
+            tokenizer=tokenizer,
+            model=model,
+            cfg_for=cfg_for,
+            set_seed=set_global_seed,
+            append_jsonl=append_jsonl,
+        )
+        run_m1_refinement_population(
+            method="m1_dependency_cone_remask",
+            manifest=manifest,
+            source_rows=source_rows,
+            stage1_rows=full_stage1_rows,
+            raw_path=m1_refinement_raw_path,
+            tokenizer=tokenizer,
+            model=model,
+            cfg_for=cfg_for,
+            set_seed=set_global_seed,
+            append_jsonl=append_jsonl,
+        )
+        full_refinement_noop += run_m1_refinement_population(
+            method="m1_dependency_cone_remask",
+            manifest=manifest,
+            source_rows=source_rows,
+            stage1_rows=full_stage1_rows,
+            raw_path=m1_refinement_raw_path,
             tokenizer=tokenizer,
             model=model,
             cfg_for=cfg_for,
@@ -716,7 +804,7 @@ def run(args: argparse.Namespace) -> int:
             full_manifest=manifest,
             selected_manifest=manifest,
             raw_rows=read_jsonl(raw_path),
-            refinement_rows=read_jsonl(refinement_raw_path),
+            refinement_rows=[*read_jsonl(generic_refinement_raw_path), *read_jsonl(m1_refinement_raw_path)],
             protocol=protocol,
             phase_name="full",
             raw_dir=raw_dir,
@@ -749,7 +837,8 @@ def run(args: argparse.Namespace) -> int:
             "expected_full_refinement_rows": len(manifest) * len(REFINEMENT_METHODS),
             "expected_full_candidate_rows": len(manifest) * (8 + 1 + len(REFINEMENT_METHODS)),
             "stage1_raw_path": str(raw_path),
-            "m1_refinement_raw_path": str(refinement_raw_path),
+            "generic_refinement_raw_path": str(generic_refinement_raw_path),
+            "m1_dependency_cone_refinement_raw_path": str(m1_refinement_raw_path),
             "smoke": smoke_summary,
             "full": full_summary,
             "frozen_test_status": "sealed",
@@ -765,6 +854,8 @@ def parser() -> argparse.ArgumentParser:
     run_parser = sub.add_parser("run")
     run_parser.add_argument("--dataset-jsonl", required=True)
     run_parser.add_argument("--output-dir", required=True)
+    run_parser.add_argument("--generic-output-dir")
+    run_parser.add_argument("--m1-output-dir")
     run_parser.add_argument("--compact-dir", required=True)
     run_parser.add_argument("--smoke-cases", type=int, default=12)
     run_parser.add_argument("--auto-full", action="store_true")

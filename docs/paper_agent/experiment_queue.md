@@ -6,7 +6,7 @@ Only selected, executable work belongs here. Canonical IDs and priorities come f
 
 ## Active FAST-SPRINT-01 Queue
 
-These work packages may run concurrently where CPU/IO permits. GPU full jobs are serialized: official CAL full -> M1 MultiLine full -> DreamOn official full. Frozen test remains sealed with `test_evaluation_count=0`.
+M1--M4 are independent candidate methods; no paper primary method is selected. CPU/IO work may run concurrently. The existing MultiLine candidate bank remains live; one new GPU process starts first, followed by a 10-minute safety/throughput audit before a third process is allowed. Every process/method has its own output directory. Frozen test remains sealed with `test_evaluation_count=0`.
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
@@ -18,15 +18,27 @@ Status: completed CPU (`c66678a`). Input existing `6707` spans / `20121` results
 
 ### P4.1: ExecRepoBench external evaluator preparation
 
-Status: executing audit/smoke. ExecRepoBench is selected directly as the first external benchmark. Freeze data version and Qwen evaluator commit; audit download/environment/license/fields; cluster by repository; smoke must cover multiple repositories and all six fill types. Do not open final external results before M1 configuration freeze.
+Status: executing audit/smoke. ExecRepoBench is selected directly as the first external benchmark. Freeze data version and Qwen evaluator commit; audit download/environment/license/fields; cluster by repository; smoke must cover multiple repositories and all six fill types. Do not open final external results before the eventual method configuration freeze.
 
 ### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 
-Status: implementation complete; GPU queued after official CAL full (`0d75c71`). The independent brief and executable protocol now use suffix backward obligations, prefix/candidate forward facts, contradiction set, real dependency-cone targeted remasking, actual equal-compute generic remasking, and fixed64-only safe fallback when no deployable cone maps. Stage one is 8 candidates/span; stage two runs an additional 64 forwards per generic/M1 refinement. Use LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. 12-case MultiLine technical smoke auto-promotes to all `5079` non-frozen spans when integrity passes. Report fixed64, ordinary-confidence grid, equal-compute generic remask, M1 score-only, M1 full, and oracle ceiling; include equal-weight task macro delta, descriptive span micro, help/harm, buckets, budgets, wall/memory. No full performance gate.
+Status: semantic/integrity repair and verification, then immediate 12-case GPU smoke. The runner uses suffix backward obligations, prefix/candidate forward facts, contradiction diagnostics, AST/def-use statement cones, and real equal-compute generic remasking. Missing candidate dependencies take an explicit fixed64 null refinement that still performs 64 forwards; generic and M1 raw outputs are separate/resumable/deduplicated. LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. Technical pass auto-promotes to all `5079` non-frozen MultiLine spans. Report fixed64, confidence grid, equal-compute generic, M1 score-only/full, oracle ceiling, task-macro/span-micro/help-harm/buckets/budget/wall/memory. No full performance gate.
 
-### M2/M3/M4/A1 portfolio disposition
+### M2: Constraint-Homotopy V0
 
-M2/M3 cheap diagnostics are optional and not M1 prerequisites. M4 is downgraded. A1 is stopped as completed negative auxiliary. P3 is deferred until official CAL evidence.
+Status: implementation starts while M1 smoke runs. Create independent brief/runner/analysis/tests/output. Compare gradual versus abrupt inference-visible constraints within the same 64-forward budget; no test/reference inputs. Technical checks auto-promote to `148` allowed RandomSpanLight rows.
+
+### M3: Birth-Death Canvas Diffusion V0
+
+Status: implementation starts while M2 runs. Maintain `16/32/64/128` particles under a fixed total-forward budget; birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility. 12-case smoke then `148`-case RandomSpanLight full in isolated outputs.
+
+### M4: Semantic Particle Assembly V0
+
+Status: implementation starts while M3 runs. Assemble AST statement/basic-block/def-use fragments from eight candidates using only inference-visible obligations, then run one fixed-budget repair decode. First audit existing 148-case bank offline, then execute repair. Compare best-single, assembly-without-repair, assembly-with-repair in isolated outputs.
+
+### A1/P3 status
+
+`A1` remains a completed negative auxiliary, not a candidate method. `P3-SELECTIVE` remains deferred pending official CAL evidence; neither changes M1--M4's independent portfolio status.
 
 ## Historical Phase 5 Queue
 

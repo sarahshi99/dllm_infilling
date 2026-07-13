@@ -8,10 +8,12 @@ returns only the generated state plus post-generation evaluator results.
 
 from __future__ import annotations
 
-import io
-import re
 import time
-import tokenize
+import ast
+import builtins
+import keyword
+import re
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 import torch
@@ -180,39 +182,27 @@ def decode_fixed_canvas_state(
     }
 
 
-def generic_low_confidence_indices(confidences: Sequence[float], canvas_tokens: int) -> list[int]:
+def generic_low_confidence_indices(
+    confidences: Sequence[float],
+    canvas_tokens: int,
+    remask_count: int | None = None,
+) -> list[int]:
+    """Choose generic targets with the same intervention cardinality as M1.
+
+    ``remask_count`` is optional for the standalone helper, but the M1 runner
+    supplies the dependency-cone cardinality. Both refinements already use the
+    same canvas and 64 model forwards; matching initially masked positions
+    keeps their edit opportunity comparable as well.
+    """
     if len(confidences) != int(canvas_tokens):
         raise ValueError("generic remask requires one confidence value per canvas token")
-    count = remask_count_for_canvas(int(canvas_tokens))
+    count = remask_count_for_canvas(int(canvas_tokens)) if remask_count is None else int(remask_count)
+    if count < 0:
+        raise ValueError("remask_count must not be negative")
+    count = min(count, int(canvas_tokens))
     return sorted(
         sorted(range(int(canvas_tokens)), key=lambda index: (float(confidences[index]), index))[:count]
     )
-
-
-def _line_offsets(text: str) -> list[int]:
-    offsets = [0]
-    for match in re.finditer("\\n", text):
-        offsets.append(match.end())
-    return offsets
-
-
-def identifier_character_spans(text: str, names: Sequence[str]) -> list[tuple[int, int, str]]:
-    wanted = {str(name) for name in names}
-    if not wanted:
-        return []
-    try:
-        offsets = _line_offsets(text)
-        spans: list[tuple[int, int, str]] = []
-        for item in tokenize.generate_tokens(io.StringIO(text).readline):
-            if item.type != tokenize.NAME or item.string not in wanted:
-                continue
-            start = offsets[item.start[0] - 1] + item.start[1]
-            end = offsets[item.end[0] - 1] + item.end[1]
-            spans.append((start, end, item.string))
-        return spans
-    except (tokenize.TokenError, IndentationError):
-        pattern = re.compile(r"\\b(" + "|".join(re.escape(name) for name in sorted(wanted, key=len, reverse=True)) + r")\\b")
-        return [(match.start(), match.end(), match.group(1)) for match in pattern.finditer(text)]
 
 
 def decoded_token_ranges(tokenizer: Any, token_ids: Sequence[int]) -> tuple[str, list[tuple[int, int]]]:
@@ -232,19 +222,239 @@ def decoded_token_ranges(tokenizer: Any, token_ids: Sequence[int]) -> tuple[str,
     return previous, ranges
 
 
+_IGNORED_NAMES = set(dir(builtins)) | set(keyword.kwlist) | {"True", "False", "None"}
+
+
+@dataclass(frozen=True)
+class DependencyConePlan:
+    """AST/def-use remasking plan for one candidate state.
+
+    The plan contains only candidate state and prefix/suffix program text. It
+    never reads evaluator outcomes, reference code, task identity, split
+    information, or oracle metadata.
+    """
+
+    token_indices: tuple[int, ...]
+    statement_spans: tuple[tuple[int, int], ...]
+    required_names: tuple[str, ...]
+    selected_statement_count: int
+    unresolved_names: tuple[str, ...]
+    reason: str
+
+    @property
+    def executable(self) -> bool:
+        return bool(self.token_indices) and not self.unresolved_names and not self.reason
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "token_indices": list(self.token_indices),
+            "statement_spans": [list(span) for span in self.statement_spans],
+            "required_names": list(self.required_names),
+            "selected_statement_count": self.selected_statement_count,
+            "unresolved_names": list(self.unresolved_names),
+            "reason": self.reason,
+            "executable": self.executable,
+        }
+
+
+def _source_offset(source: str, lineno: int, column: int) -> int:
+    if lineno <= 0:
+        return 0
+    lines = source.splitlines(keepends=True)
+    return sum(len(line) for line in lines[: lineno - 1]) + int(column)
+
+
+def _node_span(source: str, node: ast.AST) -> tuple[int, int] | None:
+    lineno = getattr(node, "lineno", None)
+    end_lineno = getattr(node, "end_lineno", None)
+    col = getattr(node, "col_offset", None)
+    end_col = getattr(node, "end_col_offset", None)
+    if None in (lineno, end_lineno, col, end_col):
+        return None
+    start = _source_offset(source, int(lineno), int(col))
+    end = _source_offset(source, int(end_lineno), int(end_col))
+    return (start, end) if start < end else None
+
+
+def _bound_prefix_names(prefix: str) -> set[str]:
+    """Small lexical fallback because an infilling prefix can be incomplete."""
+    names: set[str] = set()
+    for match in re.finditer(r"\b(?:async\s+)?def\s+\w+\s*\((.*?)\)\s*(?:->[^:]*)?:", prefix, flags=re.S):
+        for item in match.group(1).split(","):
+            name = item.strip().lstrip("*").split(":", 1)[0].split("=", 1)[0].strip()
+            if re.fullmatch(r"[A-Za-z_]\w*", name):
+                names.add(name)
+    for pattern in (
+        r"(?m)^\s*([A-Za-z_]\w*)\s*(?::[^=\n]+)?=",
+        r"(?m)^\s*for\s+([A-Za-z_]\w*)\s+in\b",
+        r"(?m)^\s*(?:def|class)\s+([A-Za-z_]\w*)\b",
+        r"(?m)^\s*(?:import|from)\s+([A-Za-z_]\w*)\b",
+    ):
+        names.update(re.findall(pattern, prefix))
+    return names
+
+
+def _statement_defs_uses(statement: ast.stmt) -> tuple[set[str], set[str]]:
+    """Return direct runtime definitions and loads for one candidate statement."""
+    definitions: set[str] = set()
+    uses: set[str] = set()
+
+    class Visitor(ast.NodeVisitor):
+        def visit_Name(self, node: ast.Name) -> None:
+            if node.id in _IGNORED_NAMES:
+                return
+            if isinstance(node.ctx, (ast.Store, ast.Del)):
+                definitions.add(node.id)
+            elif isinstance(node.ctx, ast.Load):
+                uses.add(node.id)
+
+        def visit_arg(self, node: ast.arg) -> None:
+            definitions.add(node.arg)
+
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+            definitions.add(node.name)
+            for decorator in node.decorator_list:
+                self.visit(decorator)
+            for default in [*node.args.defaults, *node.args.kw_defaults]:
+                if default is not None:
+                    self.visit(default)
+            if node.returns is not None:
+                self.visit(node.returns)
+
+        visit_AsyncFunctionDef = visit_FunctionDef
+
+        def visit_ClassDef(self, node: ast.ClassDef) -> None:
+            definitions.add(node.name)
+            for decorator in node.decorator_list:
+                self.visit(decorator)
+            for base in node.bases:
+                self.visit(base)
+            for keyword_item in node.keywords:
+                self.visit(keyword_item.value)
+
+        def visit_Import(self, node: ast.Import) -> None:
+            for alias in node.names:
+                definitions.add(alias.asname or alias.name.split(".", 1)[0])
+
+        def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+            for alias in node.names:
+                definitions.add(alias.asname or alias.name)
+
+    Visitor().visit(statement)
+    return definitions, uses - definitions
+
+
+def _candidate_statements(prefix: str, candidate: str, suffix: str) -> tuple[list[tuple[int, int, set[str], set[str]]], str]:
+    source = prefix + candidate + suffix
+    candidate_start = len(prefix)
+    candidate_end = candidate_start + len(candidate)
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return [], "candidate_full_program_ast_unavailable"
+    statements: list[tuple[int, int, set[str], set[str]]] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.stmt):
+            continue
+        span = _node_span(source, node)
+        if span is None:
+            continue
+        start, end = span
+        if start < candidate_start or end > candidate_end:
+            continue
+        definitions, uses = _statement_defs_uses(node)
+        statements.append((start - candidate_start, end - candidate_start, definitions, uses))
+    return sorted(statements, key=lambda item: (item[0], item[1])), ""
+
+
+def dependency_cone_plan(
+    tokenizer: Any,
+    token_ids: Sequence[int],
+    *,
+    prefix: str,
+    suffix: str,
+    dependency_names: Sequence[str],
+) -> DependencyConePlan:
+    """Trace suffix obligations backwards through AST statement def-use edges.
+
+    For each suffix-required name, select the latest preceding candidate
+    statement that defines it, then recursively select statements defining the
+    RHS names used by that statement. Entire statement spans—not matching
+    identifier occurrences—are mapped back to candidate token indices.
+    """
+    decoded, token_ranges = decoded_token_ranges(tokenizer, token_ids)
+    required = tuple(sorted({str(name) for name in dependency_names if str(name)}))
+    if not required:
+        return DependencyConePlan((), (), required, 0, (), "no_suffix_dependency_obligation")
+    statements, parse_reason = _candidate_statements(prefix, decoded, suffix)
+    if parse_reason:
+        return DependencyConePlan((), (), required, 0, (), parse_reason)
+    prefix_names = _bound_prefix_names(prefix)
+    selected_indices: set[int] = set()
+    unresolved: set[str] = set()
+    pending: list[tuple[str, int, bool]] = [(name, len(decoded), True) for name in required]
+    visited: set[tuple[str, int, bool]] = set()
+
+    while pending:
+        name, before, direct_obligation = pending.pop()
+        state = (name, before, direct_obligation)
+        if state in visited or name in _IGNORED_NAMES:
+            continue
+        visited.add(state)
+        providers = [
+            (index, statement)
+            for index, statement in enumerate(statements)
+            if statement[0] < before and name in statement[2]
+        ]
+        if not providers:
+            if direct_obligation or name not in prefix_names:
+                unresolved.add(name)
+            continue
+        index, statement = max(providers, key=lambda item: (item[1][0], item[1][1], item[0]))
+        if index in selected_indices:
+            continue
+        selected_indices.add(index)
+        statement_start, _, _, uses = statement
+        for dependency in sorted(uses):
+            if dependency not in _IGNORED_NAMES:
+                pending.append((dependency, statement_start, False))
+
+    if unresolved:
+        return DependencyConePlan(
+            (),
+            (),
+            required,
+            len(selected_indices),
+            tuple(sorted(unresolved)),
+            "missing_required_definition_in_candidate:" + ",".join(sorted(unresolved)),
+        )
+    spans = tuple(sorted((statements[index][0], statements[index][1]) for index in selected_indices))
+    mapped: list[int] = []
+    for token_index, (left, right) in enumerate(token_ranges):
+        if left < 0 or right <= left:
+            continue
+        if any(left < span_right and span_left < right for span_left, span_right in spans):
+            mapped.append(token_index)
+    if not mapped:
+        return DependencyConePlan((), spans, required, len(selected_indices), (), "dependency_cone_statement_not_mappable_to_candidate_tokens")
+    return DependencyConePlan(tuple(sorted(set(mapped))), spans, required, len(selected_indices), (), "")
+
+
 def dependency_cone_token_indices(
     tokenizer: Any,
     token_ids: Sequence[int],
     dependency_names: Sequence[str],
+    *,
+    prefix: str,
+    suffix: str,
 ) -> list[int]:
-    decoded, token_ranges = decoded_token_ranges(tokenizer, token_ids)
-    spans = identifier_character_spans(decoded, dependency_names)
-    if not spans:
-        return []
-    indices: list[int] = []
-    for index, (left, right) in enumerate(token_ranges):
-        if left < 0 or right <= left:
-            continue
-        if any(left < span_right and span_left < right for span_left, span_right, _ in spans):
-            indices.append(index)
-    return sorted(set(indices))
+    """Compatibility wrapper around the AST/def-use dependency-cone plan."""
+    return list(
+        dependency_cone_plan(
+            tokenizer,
+            token_ids,
+            prefix=prefix,
+            suffix=suffix,
+            dependency_names=dependency_names,
+        ).token_indices
+    )

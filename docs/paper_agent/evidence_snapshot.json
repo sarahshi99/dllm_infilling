@@ -19,6 +19,16 @@
     },
     "non_humaneval_external_evaluation": "open",
     "formal_methods_completed": 0,
+    "candidate_method_portfolio": {
+      "paper_primary_method": "none_selected",
+      "methods": {
+        "M1": "candidate_v0_code_complete_semantic_integrity_repair_then_smoke",
+        "M2": "candidate_v0_implementation_next",
+        "M3": "candidate_v0_implementation_queued",
+        "M4": "candidate_v0_implementation_queued"
+      },
+      "historical_boundary": "M1-D0_and_M4-D0_are_historical_diagnostics_not_kills_of_M1_to_M4_V0"
+    },
     "phase5_completed_diagnostics": [
       "M1-D0",
       "M4-D0",
