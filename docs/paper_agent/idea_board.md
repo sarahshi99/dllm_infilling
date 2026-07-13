@@ -10,10 +10,10 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | first candidate code complete; semantic/integrity repair then GPU smoke | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
-| `M2` | Constraint-Homotopy Infilling | independent V0 implementation next | IDEA-012 |
-| `M3` | Birth--Death Canvas Diffusion | independent V0 implementation after M2 launch | IDEA-013 |
-| `M4` | Semantic Particle Assembly | independent V0 implementation after M3 launch | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M1` | Abductive Program-State Bridge | code/test complete (`1d9ef3f`); GPU launch awaits host control-plane recovery | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M2` | Constraint-Homotopy Infilling | code/test complete (`4a91d73`); GPU launch awaits host control-plane recovery | IDEA-012 |
+| `M3` | Birth--Death Canvas Diffusion | code/test complete (`a874c54`); GPU launch awaits host control-plane recovery | IDEA-013 |
+| `M4` | Semantic Particle Assembly | code/test complete (`ed94471`); full 148-case offline structural audit passed; GPU repair awaits host control-plane recovery | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
 M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
@@ -35,7 +35,7 @@ Scope boundary: This is not M1 Abductive Program-State Bridge. M1 proceeds indep
 ## IDEA-012 / M2: Constraint-Homotopy Infilling
 
 Source: user
-Status: registered_not_implemented
+Status: V0 code/test complete; no GPU result yet
 Scientific question: Does a gradual schedule of inference-visible semantic constraints improve rescue quality relative to abrupt constraints under equal compute?
 Minimum experiment: Independent 12--24-case technical smoke followed directly by the 148-case allowed RandomSpanLight full. Compare gradual and abrupt constraints under the same 64-forward budget.
 Decision rule: Constraints may use only prefix/suffix/current candidate/inference-visible confidence; no test/reference input and no fusion with another candidate method.
@@ -43,7 +43,7 @@ Decision rule: Constraints may use only prefix/suffix/current candidate/inferenc
 ## IDEA-013 / M3: Birth–Death Canvas Diffusion
 
 Source: user
-Status: registered_not_implemented
+Status: V0 code/test complete; no GPU result yet
 Scientific question: Can a fixed-compute population over canvas hypotheses preserve useful diversity while reallocating compute via birth/death decisions?
 Minimum experiment: Independent 12-case smoke then 148-case allowed RandomSpanLight full, with `16/32/64/128` particles and a fixed total-forward budget against a uniform fixed-grid control.
 Decision rule: Birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
@@ -51,7 +51,7 @@ Decision rule: Birth/death may use only inference-visible confidence, syntax, an
 ## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
-Status: independent V0 queued after M3 launch
+Status: V0 code/test complete; 148-case offline structural audit passed; no GPU repair result yet
 Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
 Minimum experiment: First inspect the existing 148-case bank offline, then run an independent fixed-budget repair decode. Compare best-single, assembly-without-repair, and assembly-with-repair.
 Decision rule: Fragments may use only AST statement/basic-block/def-use structure plus prefix/suffix obligations and inference-visible consistency; no test/reference selection or outcome-guided assembly.

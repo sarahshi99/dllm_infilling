@@ -284,7 +284,45 @@ def choose_smoke(manifest: Sequence[Mapping[str, Any]], count: int) -> list[dict
     return sorted(chosen, key=lambda row: int(row["case_index"]))
 
 
-def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequence[Mapping[str, Any]]], source_rows: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequence[Mapping[str, Any]]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    best_rows: list[dict[str, Any]] = []
+    assembly_rows: list[dict[str, Any]] = []
+    for item in manifest:
+        assembly = assemble_fragments(grouped[str(item["row_key"])])
+        best_diagnostic = analyze_candidate(assembly["prefix"], assembly["best_middle_text"], assembly["suffix"])
+        assembly_diagnostic = analyze_candidate(assembly["prefix"], assembly["assembly_text"], assembly["suffix"])
+        common = {key: item[key] for key in ("row_key", "case_index", "source_row_id", "task_group", "length_bucket", "reference_middle_tokens")}
+        best_rows.append({
+            **common,
+            "candidate_key": method_key(str(item["row_key"]), METHODS[0]),
+            "candidate_kind": METHODS[0],
+            "status": "ok",
+            "offline_structural_valid": bool(best_diagnostic.full_parse_passed),
+            "middle_text": assembly["best_middle_text"],
+            "metrics": {"actual_forward_count": 0, "token_budget": 0},
+            "assembly": {key: assembly[key] for key in ("best_candidate_ordinal", "suffix_obligations", "resolved_obligations")},
+            "structural_diagnostics": {"full_parse_passed": best_diagnostic.full_parse_passed, "unsatisfied_obligation_count": len(best_diagnostic.unsatisfied_obligations), "def_use_conflict_count": len(best_diagnostic.def_use_conflicts)},
+        })
+        assembly_rows.append({
+            **common,
+            "candidate_key": method_key(str(item["row_key"]), METHODS[1]),
+            "candidate_kind": METHODS[1],
+            "status": "ok",
+            "offline_structural_valid": bool(assembly_diagnostic.full_parse_passed),
+            "middle_text": assembly["assembly_text"],
+            "metrics": {"actual_forward_count": 0, "token_budget": 0},
+            "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations")},
+            "structural_diagnostics": {"full_parse_passed": assembly_diagnostic.full_parse_passed, "unsatisfied_obligation_count": len(assembly_diagnostic.unsatisfied_obligations), "def_use_conflict_count": len(assembly_diagnostic.def_use_conflicts)},
+        })
+    return best_rows, assembly_rows
+
+
+def evaluated_offline_rows(
+    manifest: Sequence[Mapping[str, Any]],
+    grouped: Mapping[str, Sequence[Mapping[str, Any]]],
+    source_rows: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Post-selection evaluator rows for the best/assembly comparison arms."""
     best_rows: list[dict[str, Any]] = []
     assembly_rows: list[dict[str, Any]] = []
     for item in manifest:
@@ -301,7 +339,6 @@ def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Se
             "passed": best_eval["passed"],
             "middle_text": assembly["best_middle_text"],
             "metrics": {"actual_forward_count": 0, "token_budget": 0},
-            "assembly": {key: assembly[key] for key in ("best_candidate_ordinal", "suffix_obligations", "resolved_obligations")},
             "verification": best_eval["verification"],
         })
         assembly_rows.append({
@@ -312,7 +349,6 @@ def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Se
             "passed": assembly_eval["passed"],
             "middle_text": assembly["assembly_text"],
             "metrics": {"actual_forward_count": 0, "token_budget": 0},
-            "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations")},
             "verification": assembly_eval["verification"],
         })
     return best_rows, assembly_rows
@@ -376,7 +412,7 @@ def run(args: argparse.Namespace) -> int:
     if len({best_dir, assembly_dir, repair_dir}) != 3:
         raise ValueError("M4 best, assembly, and repair outputs must be distinct")
     # Required first: offline assembly audit over the full existing 148-case bank.
-    all_best, all_assembly = offline_rows(manifest, grouped, source_rows)
+    all_best, all_assembly = offline_rows(manifest, grouped)
     write_replace_jsonl(best_dir / "m4_best_single_raw.jsonl", all_best)
     write_replace_jsonl(assembly_dir / "m4_assembly_raw.jsonl", all_assembly)
     offline = {METHODS[0]: audit(all_best, manifest, METHODS[0], 0), METHODS[1]: audit(all_assembly, manifest, METHODS[1], 0)}
@@ -387,21 +423,33 @@ def run(args: argparse.Namespace) -> int:
         return 0
     tokenizer, model = load_model_and_tokenizer(cfg_for().model)
     selected = choose_smoke(manifest, int(args.smoke_cases))
+    evaluated_best, evaluated_assembly = evaluated_offline_rows(selected, grouped, source_rows)
+    write_replace_jsonl(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
+    write_replace_jsonl(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
     run_repair(selected, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
     noops = run_repair(selected, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
     smoke_rows = read_jsonl(repair_dir / "m4_repair_raw.jsonl")
     smoke = audit(smoke_rows, selected, METHODS[2], REPAIR_STEPS)
-    smoke_gate = bool(smoke["passed"] and noops == 0 and lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0)
+    best_smoke = audit(evaluated_best, selected, METHODS[0], 0)
+    assembly_smoke = audit(evaluated_assembly, selected, METHODS[1], 0)
+    smoke_gate = bool(smoke["passed"] and best_smoke["passed"] and assembly_smoke["passed"] and noops == 0 and lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0)
     full = None
     if smoke_gate and args.auto_full:
+        evaluated_best, evaluated_assembly = evaluated_offline_rows(manifest, grouped, source_rows)
+        write_replace_jsonl(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
+        write_replace_jsonl(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
         run_repair(manifest, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
         full_noops = run_repair(manifest, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
-        full = audit(read_jsonl(repair_dir / "m4_repair_raw.jsonl"), manifest, METHODS[2], REPAIR_STEPS)
-        full["resume_noop_writes"] = full_noops
+        full = {
+            "best": audit(evaluated_best, manifest, METHODS[0], 0),
+            "assembly": audit(evaluated_assembly, manifest, METHODS[1], 0),
+            "repair": audit(read_jsonl(repair_dir / "m4_repair_raw.jsonl"), manifest, METHODS[2], REPAIR_STEPS),
+            "resume_noop_writes": full_noops,
+        }
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(compact_dir / "offline_method_audit.csv", [{"method": method, **value} for method, value in offline.items()])
-    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": smoke, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "test_evaluation_count": 0})
-    return 0 if smoke_gate and (full is None or full["passed"]) else 2
+    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "test_evaluation_count": 0})
+    return 0 if smoke_gate and (full is None or all(full[name]["passed"] for name in ("best", "assembly", "repair"))) else 2
 
 
 def parser() -> argparse.ArgumentParser:

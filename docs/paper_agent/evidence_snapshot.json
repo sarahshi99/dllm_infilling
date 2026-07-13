@@ -22,12 +22,14 @@
     "candidate_method_portfolio": {
       "paper_primary_method": "none_selected",
       "methods": {
-        "M1": "candidate_v0_code_complete_semantic_integrity_repair_then_smoke",
-        "M2": "candidate_v0_implementation_next",
-        "M3": "candidate_v0_implementation_queued",
-        "M4": "candidate_v0_implementation_queued"
+        "M1": "code_test_complete_1d9ef3f_gpu_pending_host_control_plane",
+        "M2": "code_test_complete_4a91d73_gpu_pending_host_control_plane",
+        "M3": "code_test_complete_a874c54_gpu_pending_host_control_plane",
+        "M4": "code_test_complete_ed94471_gpu_pending_host_control_plane"
       },
-      "historical_boundary": "M1-D0_and_M4-D0_are_historical_diagnostics_not_kills_of_M1_to_M4_V0"
+      "historical_boundary": "M1-D0_and_M4-D0_are_historical_diagnostics_not_kills_of_M1_to_M4_V0",
+      "gpu_execution_status": "no_new_method_gpu_pid_or_result; host_approval_control_plane_422_before_process_creation",
+      "m4_offline_structural_audit": "148_best_and_148_assembly_rows_zero_missing_duplicate_error_frozen_count_zero"
     },
     "phase5_completed_diagnostics": [
       "M1-D0",

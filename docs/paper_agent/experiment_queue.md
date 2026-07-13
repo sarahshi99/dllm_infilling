@@ -22,19 +22,19 @@ Status: executing audit/smoke. ExecRepoBench is selected directly as the first e
 
 ### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 
-Status: semantic/integrity repair and verification, then immediate 12-case GPU smoke. The runner uses suffix backward obligations, prefix/candidate forward facts, contradiction diagnostics, AST/def-use statement cones, and real equal-compute generic remasking. Missing candidate dependencies take an explicit fixed64 null refinement that still performs 64 forwards; generic and M1 raw outputs are separate/resumable/deduplicated. LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. Technical pass auto-promotes to all `5079` non-frozen MultiLine spans. Report fixed64, confidence grid, equal-compute generic, M1 score-only/full, oracle ceiling, task-macro/span-micro/help-harm/buckets/budget/wall/memory. No full performance gate.
+Status: code/semantic/integrity verification complete at `1d9ef3f`; ready for immediate 12-case GPU smoke. The runner uses suffix backward obligations, prefix/candidate forward facts, contradiction diagnostics, AST/def-use statement cones, and real equal-compute generic remasking. Missing candidate dependencies take an explicit fixed64 null refinement that still performs 64 forwards; generic and M1 raw outputs are separate/resumable/deduplicated. `167` unittest cases, py_compile, JSON and diff checks passed. A host approval-control-plane `422` rejected the launch/host-audit request before process creation; no result/PID/output exists and PID 1195368 remains untouched. On recovery, `scripts/manual_launch_phase6_multiline_candidate_bank.sh` runs 12-case smoke then auto-full `5079`.
 
 ### M2: Constraint-Homotopy V0
 
-Status: implementation starts while M1 smoke runs. Create independent brief/runner/analysis/tests/output. Compare gradual versus abrupt inference-visible constraints within the same 64-forward budget; no test/reference inputs. Technical checks auto-promote to `148` allowed RandomSpanLight rows.
+Status: code/test/launcher complete at `4a91d73`; queued behind the same temporary host control-plane condition. Independent brief/runner/analysis/tests/output compare gradual versus abrupt inference-visible constraints within the same 64-forward budget; no test/reference inputs. Technical checks auto-promote to `148` allowed RandomSpanLight rows.
 
 ### M3: Birth-Death Canvas Diffusion V0
 
-Status: implementation starts while M2 runs. Maintain `16/32/64/128` particles under a fixed total-forward budget; birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility. 12-case smoke then `148`-case RandomSpanLight full in isolated outputs.
+Status: code/test/launcher complete at `a874c54`; queued behind the same temporary host control-plane condition. Maintain initial `16/32/64/128` particles; uniform and birth/death each use `256` forwards/task. Birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility. 12-case smoke then `148`-case RandomSpanLight full in isolated outputs.
 
 ### M4: Semantic Particle Assembly V0
 
-Status: implementation starts while M3 runs. Assemble AST statement/basic-block/def-use fragments from eight candidates using only inference-visible obligations, then run one fixed-budget repair decode. First audit existing 148-case bank offline, then execute repair. Compare best-single, assembly-without-repair, assembly-with-repair in isolated outputs.
+Status: code/test/launcher complete at `ed94471`; the full 148-case offline structural audit completed (`analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`): both best-single and assembly rows are 148/148 with zero missing/duplicate/error and frozen count zero. GPU repair remains queued behind the same temporary host control-plane condition. Assemble AST statement/basic-block/def-use fragments from eight candidates using only inference-visible obligations, then run one 64-forward repair decode. Compare best-single, assembly-without-repair, assembly-with-repair in isolated outputs.
 
 ### A1/P3 status
 

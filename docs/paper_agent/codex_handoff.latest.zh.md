@@ -5,13 +5,13 @@
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 
 - 先读 `docs/paper_agent/ccfa_master_roadmap.zh.md`，再读 `docs/paper_agent/current_action.md`。
-- 起点已核对为 `8b348f979f09cda07811e04b7ad3dee60e56373b`；当前工作 checkpoint 为 `0d75c71`。Phase 5 完成，当前决策为 `iterate_and_execute`，不是 blocked。
+- 起点已核对为 `8b348f979f09cda07811e04b7ad3dee60e56373b`；candidate-portfolio checkpoints 为 M1 `1d9ef3f`、M2 `4a91d73`、M3 `a874c54`、M4 `ed94471`。Phase 5 完成，当前决策为 `iterate_and_execute`，不是 blocked。
 - 当前 action 是 `FAST-SPRINT-01`：P1.1 official CAL、P2.1 grouped statistics、独立候选 M1--M4、P4.1 ExecRepoBench。先读 `current_action.md` 的具体门与路径。
 - P1 顺序：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility；LR-DLLM 只 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
 - `6707` spans / `20121` policy results 背后只有 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 是 descriptive。早期 `802/1033` 是 A6000 historical，`796/1033` 是 H200 evidence base；都不是 final held-out。
-- M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不代表 M2/M3/M4 被放弃。M1 修复为 AST/def-use statement dependency cone：generic/M1 都追加 `64` forwards，缺失 candidate dependency 时以 fixed64 的 `64`-forward null refinement 记录 fallback，stage-one/generic/M1 raw outputs 分离。M1 12-case MultiLine 技术 smoke 后直接 full `5079`；M2 在 M1 smoke 期间实现，技术检查后直接 `148` RandomSpanLight full，随后 M3、M4 各自独立实现/运行。
+- M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不代表 M2/M3/M4 被放弃。M1 修复为 AST/def-use statement dependency cone：generic/M1 都追加 `64` forwards，缺失 candidate dependency 时以 fixed64 的 `64`-forward null refinement 记录 fallback，stage-one/generic/M1 raw outputs 分离。M2 具备 same-64-forward gradual/abrupt runner；M3 具备 initial 16/32/64/128 particles、uniform/birth-death equal-256-forward runner；M4 已完成真实 full-148 offline structural AST statement/basic-block/def-use assembly audit（best/assembly 各 148/148，zero missing/duplicate/error，frozen count 0），下一步才是 64-forward repair。四条线都有独立 brief/analysis/tests/launcher，尚无 candidate-method GPU result。
 - P4 直接使用 ExecRepoBench；M1 配置冻结前只做多 repository、六 fill_type smoke，不打开最终 external result。
-- 现有 MultiLine candidate-bank PID `1195368` 不暂停、不删除输出。先加一个新 GPU process，10 分钟后审计 memory/utilization/power/OOM/ECC 与吞吐；保留至少 25 GiB 后才可加第三个。所有 full run 必须 resume/dedup + missing/duplicate/error audit；每个方法/进程独立 output/log directory。Frozen test 继续 sealed，count `0`。
+- 现有 MultiLine candidate-bank PID `1195368` 不暂停、不删除输出。新 M1 host GPU audit/launch 请求在 process creation 前被外部 approval control plane 以 `422 model not found: codex-auto-review` 拒绝，因此没有新增 PID、结果或输出，也不允许绕过。control plane 恢复后先按 10 分钟 memory/utilization/power/OOM/ECC/throughput audit 和 ≥25 GiB 余量规则启动 M1，继而 M2/M3/M4。所有 full run 必须 resume/dedup + missing/duplicate/error audit；每个方法/进程独立 output/log directory。Frozen test 继续 sealed，count `0`。
 
 ## Phase 5 完成交接（authoritative）
 

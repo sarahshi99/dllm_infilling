@@ -5,6 +5,7 @@ from experiments.m4_semantic_particle_assembly import (
     assemble_fragments,
     candidate_fragments,
     candidate_view,
+    offline_rows,
     parser,
 )
 
@@ -55,6 +56,18 @@ class M4SemanticParticleAssemblyTest(unittest.TestCase):
         view = candidate_view(row)
         self.assertEqual(view["middle_text"], MIDDLE)
         self.assertEqual(view["canvas_tokens"], 64)
+
+    def test_full_offline_assembly_check_is_structural_and_does_not_need_evaluator(self) -> None:
+        manifest = [{"row_key": "r", "case_index": 0, "source_row_id": 0, "task_group": "HumanEval/0", "length_bucket": "short", "reference_middle_tokens": 4}]
+        raw_candidates = [
+            {**candidate(seed=index % 2), "candidate_kind": "deployable_grid"}
+            for index in range(8)
+        ]
+        best, assembly = offline_rows(manifest, {"r": raw_candidates})
+        self.assertEqual(len(best), 1)
+        self.assertEqual(len(assembly), 1)
+        self.assertIn("offline_structural_valid", best[0])
+        self.assertNotIn("verification", best[0])
 
     def test_parser_defaults_to_twelve_case_smoke(self) -> None:
         args = parser().parse_args(
