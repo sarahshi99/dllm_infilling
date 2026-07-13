@@ -9,8 +9,10 @@ from experiments.phase6_multiline_candidate_bank import (
     build_manifest_without_tokenizer,
     candidate_key,
     expected_candidate_keys,
+    expected_oracle_keys,
     normalize_candidate_row,
 )
+from experiments.phase6_abductive_bridge_runner import expected_refinement_keys
 
 
 class Phase6MultiLineCandidateBankTest(unittest.TestCase):
@@ -36,10 +38,15 @@ class Phase6MultiLineCandidateBankTest(unittest.TestCase):
         self.assertNotEqual(manifest[0]["row_key"], manifest[1]["row_key"])
 
     def test_expected_keys_count_eight_per_row(self) -> None:
-        manifest = [{"row_key": "a"}, {"row_key": "b"}]
+        manifest = [
+            {"row_key": "a", "reference_middle_tokens": 3},
+            {"row_key": "b", "reference_middle_tokens": 5},
+        ]
         keys = expected_candidate_keys(manifest)
         self.assertEqual(len(keys), 16)
-        self.assertIn(candidate_key("a", 128, 1), keys)
+        self.assertIn(candidate_key("a", "deployable_grid", 128, 1), keys)
+        self.assertEqual(len(expected_oracle_keys(manifest)), 2)
+        self.assertEqual(len(expected_refinement_keys(manifest)), 4)
 
     def test_real_multiline_allowed_population_is_5079(self) -> None:
         repo = Path(__file__).resolve().parents[1]
@@ -50,6 +57,14 @@ class Phase6MultiLineCandidateBankTest(unittest.TestCase):
         self.assertEqual(len(rows), 5815)
         self.assertEqual(len(manifest), 5079)
         self.assertEqual(len(expected_candidate_keys(manifest)), 40632)
+
+    def test_default_smoke_is_twelve_cases(self) -> None:
+        from experiments.phase6_multiline_candidate_bank import parser
+
+        parsed = parser().parse_args(
+            ["run", "--dataset-jsonl", "data.jsonl", "--output-dir", "raw", "--compact-dir", "compact"]
+        )
+        self.assertEqual(parsed.smoke_cases, 12)
 
     def test_error_row_is_normalized_for_resume_and_analysis(self) -> None:
         task = type("Task", (), {"prefix": "def f():\n", "suffix": "    return x\n"})()

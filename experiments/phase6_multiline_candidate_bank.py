@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 import re
 import sys
@@ -17,14 +16,21 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from expvision_dllm_clean.modeling import load_model_and_tokenizer
 from expvision_dllm_clean.config import ExperimentConfig
+from expvision_dllm_clean.modeling import load_model_and_tokenizer, set_global_seed
 from experiments.phase5_randomspanlight_candidate_bank import (
+    ast_hash,
     code_task,
     compact_candidate_row,
     protocol_validation,
-    run_candidate,
+    sha256_text as shared_sha256_text,
 )
+from experiments.phase6_abductive_bridge_runner import (
+    REFINEMENT_METHODS,
+    expected_refinement_keys as expected_m1_refinement_keys,
+    run_population as run_m1_refinement_population,
+)
+from experiments.phase6_remask import decode_fixed_canvas_state
 
 
 MODEL_PATH = "GSAI-ML/LLaDA-8B-Base"
@@ -80,7 +86,7 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
 
 
 def sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return shared_sha256_text(text)
 
 
 def task_group(task_id: str) -> str:
@@ -139,6 +145,17 @@ def build_candidate_specs() -> list[dict[str, Any]]:
     ]
 
 
+def build_oracle_spec(reference_middle_tokens: int) -> dict[str, Any]:
+    return {
+        "candidate_kind": "oracle_sufficient_diagnostic_ceiling",
+        "control_label": "diagnostic_ceiling_only",
+        "deployable": False,
+        "canvas_tokens": max(1, int(reference_middle_tokens)),
+        "seed": 0,
+        "total_steps": TOTAL_STEPS,
+    }
+
+
 def normalize_candidate_row(row: Mapping[str, Any], task: Any) -> dict[str, Any]:
     normalized = dict(row)
     normalized.setdefault("prefix_text", str(task.prefix))
@@ -151,15 +168,113 @@ def normalize_candidate_row(row: Mapping[str, Any], task: Any) -> dict[str, Any]
     return normalized
 
 
-def candidate_key(row_key: str, canvas_tokens: int, seed: int) -> str:
-    return f"{row_key}|deployable_grid|canvas={int(canvas_tokens)}|seed={int(seed)}"
+def run_stage1_candidate(
+    *,
+    manifest_row: Mapping[str, Any],
+    source_row: Mapping[str, Any],
+    task: Any,
+    spec: Mapping[str, Any],
+    tokenizer: Any,
+    model: Any,
+) -> dict[str, Any]:
+    """Generate a state-retaining stage-one row without exposing its evaluator to M1."""
+    key = candidate_key(
+        str(manifest_row["row_key"]),
+        str(spec["candidate_kind"]),
+        int(spec["canvas_tokens"]),
+        int(spec["seed"]),
+    )
+    started = time.perf_counter()
+    set_global_seed(int(spec["seed"]))
+    try:
+        result = decode_fixed_canvas_state(
+            task=task,
+            tokenizer=tokenizer,
+            model=model,
+            cfg=cfg_for(int(spec["canvas_tokens"]), int(spec["seed"])),
+            canvas_tokens=int(spec["canvas_tokens"]),
+            total_steps=int(spec["total_steps"]),
+            phase_name="stage1_shared_candidate_bank",
+        )
+        middle = str(result.get("middle_text") or "")
+        code = str(result.get("code") or "")
+        metrics = dict(result.get("metrics") or {})
+        return {
+            "candidate_key": key,
+            "row_key": manifest_row["row_key"],
+            "case_index": manifest_row["case_index"],
+            "source_row_id": manifest_row["source_row_id"],
+            "task_group": manifest_row["task_group"],
+            "length_bucket": manifest_row["length_bucket"],
+            "reference_middle_tokens": manifest_row["reference_middle_tokens"],
+            "candidate_kind": spec["candidate_kind"],
+            "control_label": spec["control_label"],
+            "deployable": spec["deployable"],
+            "canvas_tokens": spec["canvas_tokens"],
+            "seed": spec["seed"],
+            "total_steps": spec["total_steps"],
+            "status": "ok",
+            "passed": bool(metrics.get("passed", False)),
+            "prefix_text": task.prefix,
+            "middle_text": middle,
+            "suffix_text": task.suffix,
+            "code": code,
+            "candidate_middle_tokens": len(result.get("middle_token_ids") or []),
+            "candidate_middle_sha256": sha256_text(middle),
+            "candidate_full_code_sha256": sha256_text(code),
+            "candidate_full_ast_sha256": ast_hash(code),
+            "middle_token_ids": result.get("middle_token_ids") or [],
+            "final_token_confidences": result.get("final_token_confidences") or [],
+            "metrics": metrics,
+            "verification": result.get("verification") or {},
+            "diagnostics": result.get("diagnostics") or {},
+            "trajectory": result.get("trajectory") or {},
+            "wall_sec": time.perf_counter() - started,
+        }
+    except Exception as exc:
+        return {
+            "candidate_key": key,
+            "row_key": manifest_row["row_key"],
+            "case_index": manifest_row["case_index"],
+            "source_row_id": manifest_row["source_row_id"],
+            "task_group": manifest_row["task_group"],
+            "length_bucket": manifest_row["length_bucket"],
+            "reference_middle_tokens": manifest_row["reference_middle_tokens"],
+            "candidate_kind": spec["candidate_kind"],
+            "control_label": spec["control_label"],
+            "deployable": spec["deployable"],
+            "canvas_tokens": spec["canvas_tokens"],
+            "seed": spec["seed"],
+            "total_steps": spec["total_steps"],
+            "status": "error",
+            "passed": False,
+            "error_type": type(exc).__name__,
+            "error_message": str(exc)[:240],
+            "wall_sec": time.perf_counter() - started,
+        }
+
+
+def candidate_key(row_key: str, candidate_kind: str, canvas_tokens: int, seed: int) -> str:
+    return f"{row_key}|{candidate_kind}|canvas={int(canvas_tokens)}|seed={int(seed)}"
 
 
 def expected_candidate_keys(manifest: Sequence[Mapping[str, Any]]) -> set[str]:
     return {
-        candidate_key(str(row["row_key"]), int(spec["canvas_tokens"]), int(spec["seed"]))
+        candidate_key(str(row["row_key"]), str(spec["candidate_kind"]), int(spec["canvas_tokens"]), int(spec["seed"]))
         for row in manifest
         for spec in build_candidate_specs()
+    }
+
+
+def expected_oracle_keys(manifest: Sequence[Mapping[str, Any]]) -> set[str]:
+    return {
+        candidate_key(
+            str(row["row_key"]),
+            "oracle_sufficient_diagnostic_ceiling",
+            int(row["reference_middle_tokens"]),
+            0,
+        )
+        for row in manifest
     }
 
 
@@ -237,11 +352,11 @@ def run_population(
     for item in manifest:
         source = source_rows[int(item["source_row_id"])]
         task = code_task(source)
-        for spec in specs:
-            key = candidate_key(str(item["row_key"]), int(spec["canvas_tokens"]), int(spec["seed"]))
+        for spec in [*specs, build_oracle_spec(int(item["reference_middle_tokens"]))]:
+            key = candidate_key(str(item["row_key"]), str(spec["candidate_kind"]), int(spec["canvas_tokens"]), int(spec["seed"]))
             if key in completed:
                 continue
-            row = normalize_candidate_row(run_candidate(
+            row = normalize_candidate_row(run_stage1_candidate(
                 manifest_row=item,
                 source_row=source,
                 task=task,
@@ -300,6 +415,7 @@ def create_compact_artifacts(
     full_manifest: Sequence[Mapping[str, Any]],
     selected_manifest: Sequence[Mapping[str, Any]],
     raw_rows: Sequence[Mapping[str, Any]],
+    refinement_rows: Sequence[Mapping[str, Any]],
     protocol: Mapping[str, Any],
     phase_name: str,
     raw_dir: Path,
@@ -309,12 +425,46 @@ def create_compact_artifacts(
     total_memory_bytes: int,
     test_lock: Mapping[str, Any],
     resume_noop_writes: int,
+    refinement_resume_noop_writes: int,
 ) -> dict[str, Any]:
     compact_dir.mkdir(parents=True, exist_ok=True)
     selected_keys = {str(row["row_key"]) for row in selected_manifest}
-    rows = [row for row in raw_rows if str(row.get("row_key", "")) in selected_keys and row.get("candidate_kind") == "deployable_grid"]
+    all_stage1_for_selected = [
+        row for row in raw_rows if str(row.get("row_key", "")) in selected_keys
+    ]
+    stage1_grid_rows = [
+        row
+        for row in all_stage1_for_selected
+        if str(row.get("row_key", "")) in selected_keys and row.get("candidate_kind") == "deployable_grid"
+    ]
+    oracle_rows = [
+        row
+        for row in all_stage1_for_selected
+        if str(row.get("row_key", "")) in selected_keys
+        and row.get("candidate_kind") == "oracle_sufficient_diagnostic_ceiling"
+    ]
+    refinement_rows = [
+        row
+        for row in refinement_rows
+        if str(row.get("row_key", "")) in selected_keys and row.get("candidate_kind") in REFINEMENT_METHODS
+    ]
     expected = expected_candidate_keys(selected_manifest)
-    audit = audit_rows(rows, expected)
+    expected_oracle = expected_oracle_keys(selected_manifest)
+    expected_refinement = expected_m1_refinement_keys(selected_manifest)
+    grid_audit = audit_rows(stage1_grid_rows, expected)
+    oracle_audit = audit_rows(oracle_rows, expected_oracle)
+    refinement_audit = audit_rows(refinement_rows, expected_refinement)
+    stage1_rows = [*stage1_grid_rows, *oracle_rows]
+    expected_stage1 = expected | expected_oracle
+    stage1_audit = audit_rows(stage1_rows, expected_stage1)
+    unexpected_stage1_rows = [
+        row
+        for row in all_stage1_for_selected
+        if str(row.get("candidate_key")) not in expected_stage1
+    ]
+    rows = [*stage1_rows, *refinement_rows]
+    expected_all = expected_stage1 | expected_refinement
+    audit = audit_rows(rows, expected_all)
     schema_required = {"candidate_key", "row_key", "candidate_kind", "canvas_tokens", "seed", "status", "passed", "verification"}
     schema_passed = all(schema_required <= set(row) for row in rows)
     evaluator_passed = all(bool(row.get("verification")) for row in rows if row.get("status") == "ok")
@@ -323,10 +473,21 @@ def create_compact_artifacts(
         and int(test_lock.get("test_evaluation_count", -1)) == 0
         and not any(bool(row.get("frozen_controller_test_row")) for row in selected_manifest)
     )
-    resume_passed = int(resume_noop_writes) == 0 and set(str(row.get("candidate_key")) for row in rows) == expected
+    resume_passed = (
+        int(resume_noop_writes) == 0
+        and int(refinement_resume_noop_writes) == 0
+        and set(str(row.get("candidate_key")) for row in stage1_rows) == expected_stage1
+        and set(str(row.get("candidate_key")) for row in refinement_rows) == expected_refinement
+    )
     gpu_memory_healthy = peak_memory_bytes > 0 and total_memory_bytes > peak_memory_bytes
     technical_gate_passed = bool(
         audit["integrity_passed"]
+        and stage1_audit["integrity_passed"]
+        and grid_audit["integrity_passed"]
+        and oracle_audit["integrity_passed"]
+        and refinement_audit["integrity_passed"]
+        and not unexpected_stage1_rows
+        and audit["error_count"] == 0
         and schema_passed
         and evaluator_passed
         and protocol.get("supported")
@@ -347,10 +508,17 @@ def create_compact_artifacts(
         "frozen_test_invariant_passed": frozen_ok,
         "resume_passed": resume_passed,
         "resume_noop_writes": resume_noop_writes,
+        "refinement_resume_noop_writes": refinement_resume_noop_writes,
         "gpu_memory_healthy": gpu_memory_healthy,
         "peak_memory_bytes": peak_memory_bytes,
         "total_memory_bytes": total_memory_bytes,
         "rows": audit,
+        "stage1_rows": stage1_audit,
+        "unexpected_stage1_row_count": len(unexpected_stage1_rows),
+        "unexpected_stage1_keys": [str(row.get("candidate_key")) for row in unexpected_stage1_rows[:100]],
+        "stage1_grid_rows": grid_audit,
+        "oracle_diagnostic_rows": oracle_audit,
+        "refinement_rows": refinement_audit,
     }
     write_json(compact_dir / f"{phase_name}_audit.json", audit_payload)
     latencies = [float((row.get("metrics") or {}).get("total_sec_including_probe") or row.get("wall_sec") or 0.0) for row in rows]
@@ -364,7 +532,13 @@ def create_compact_artifacts(
         "selected_case_count": len(selected_manifest),
         "full_manifest_case_count": len(full_manifest),
         "candidate_rows": len(rows),
-        "expected_candidate_rows": len(expected),
+        "stage1_candidate_rows": len(stage1_rows),
+        "refinement_candidate_rows": len(refinement_rows),
+        "expected_candidate_rows": len(expected_all),
+        "expected_stage1_grid_rows": len(expected),
+        "expected_oracle_rows": len(expected_oracle),
+        "expected_refinement_rows": len(expected_refinement),
+        "candidate_kind_counts": dict(Counter(str(row.get("candidate_kind")) for row in rows)),
         "ok_candidate_rows": sum(row.get("status") == "ok" for row in rows),
         "error_candidate_rows": sum(row.get("status") != "ok" for row in rows),
         "pass_count": sum(bool(row.get("passed")) for row in rows),
@@ -417,6 +591,7 @@ def run(args: argparse.Namespace) -> int:
     raw_dir = Path(args.output_dir).resolve()
     compact_dir = Path(args.compact_dir).resolve()
     raw_path = raw_dir / "candidate_bank_raw.jsonl"
+    refinement_raw_path = raw_dir / "m1_refinement_raw.jsonl"
     raw_dir.mkdir(parents=True, exist_ok=True)
     compact_dir.mkdir(parents=True, exist_ok=True)
     started_at = utc_now()
@@ -451,12 +626,36 @@ def run(args: argparse.Namespace) -> int:
 
     run_population(smoke_manifest, source_rows, raw_path, tokenizer, model)
     smoke_noop = run_population(smoke_manifest, source_rows, raw_path, tokenizer, model)
+    smoke_stage1_rows = read_jsonl(raw_path)
+    run_m1_refinement_population(
+        manifest=smoke_manifest,
+        source_rows=source_rows,
+        stage1_rows=smoke_stage1_rows,
+        raw_path=refinement_raw_path,
+        tokenizer=tokenizer,
+        model=model,
+        cfg_for=cfg_for,
+        set_seed=set_global_seed,
+        append_jsonl=append_jsonl,
+    )
+    smoke_refinement_noop = run_m1_refinement_population(
+        manifest=smoke_manifest,
+        source_rows=source_rows,
+        stage1_rows=smoke_stage1_rows,
+        raw_path=refinement_raw_path,
+        tokenizer=tokenizer,
+        model=model,
+        cfg_for=cfg_for,
+        set_seed=set_global_seed,
+        append_jsonl=append_jsonl,
+    )
     peak = int(torch.cuda.max_memory_allocated())
     smoke_summary = create_compact_artifacts(
         compact_dir=compact_dir,
         full_manifest=manifest,
         selected_manifest=smoke_manifest,
         raw_rows=read_jsonl(raw_path),
+        refinement_rows=read_jsonl(refinement_raw_path),
         protocol=protocol,
         phase_name="smoke",
         raw_dir=raw_dir,
@@ -466,6 +665,7 @@ def run(args: argparse.Namespace) -> int:
         total_memory_bytes=total_memory,
         test_lock=test_lock,
         resume_noop_writes=smoke_noop,
+        refinement_resume_noop_writes=smoke_refinement_noop,
     )
     if not smoke_summary["technical_gate_passed"]:
         (compact_dir / "report.md").write_text(render_report(smoke_summary, None), encoding="utf-8")
@@ -487,12 +687,36 @@ def run(args: argparse.Namespace) -> int:
     if args.auto_full:
         run_population(manifest, source_rows, raw_path, tokenizer, model)
         full_noop = run_population(manifest, source_rows, raw_path, tokenizer, model)
+        full_stage1_rows = read_jsonl(raw_path)
+        run_m1_refinement_population(
+            manifest=manifest,
+            source_rows=source_rows,
+            stage1_rows=full_stage1_rows,
+            raw_path=refinement_raw_path,
+            tokenizer=tokenizer,
+            model=model,
+            cfg_for=cfg_for,
+            set_seed=set_global_seed,
+            append_jsonl=append_jsonl,
+        )
+        full_refinement_noop = run_m1_refinement_population(
+            manifest=manifest,
+            source_rows=source_rows,
+            stage1_rows=full_stage1_rows,
+            raw_path=refinement_raw_path,
+            tokenizer=tokenizer,
+            model=model,
+            cfg_for=cfg_for,
+            set_seed=set_global_seed,
+            append_jsonl=append_jsonl,
+        )
         peak = int(torch.cuda.max_memory_allocated())
         full_summary = create_compact_artifacts(
             compact_dir=compact_dir,
             full_manifest=manifest,
             selected_manifest=manifest,
             raw_rows=read_jsonl(raw_path),
+            refinement_rows=read_jsonl(refinement_raw_path),
             protocol=protocol,
             phase_name="full",
             raw_dir=raw_dir,
@@ -502,6 +726,7 @@ def run(args: argparse.Namespace) -> int:
             total_memory_bytes=total_memory,
             test_lock=test_lock,
             resume_noop_writes=full_noop,
+            refinement_resume_noop_writes=full_refinement_noop,
         )
 
     final_status = "completed" if full_summary is None or full_summary["technical_gate_passed"] else "full_integrity_failed"
@@ -519,7 +744,12 @@ def run(args: argparse.Namespace) -> int:
             "source_row_count": len(source_rows),
             "allowed_case_count": len(manifest),
             "excluded_frozen_group_count": len(frozen_groups),
-            "expected_full_candidate_rows": len(manifest) * 8,
+            "expected_full_stage1_grid_rows": len(manifest) * 8,
+            "expected_full_oracle_rows": len(manifest),
+            "expected_full_refinement_rows": len(manifest) * len(REFINEMENT_METHODS),
+            "expected_full_candidate_rows": len(manifest) * (8 + 1 + len(REFINEMENT_METHODS)),
+            "stage1_raw_path": str(raw_path),
+            "m1_refinement_raw_path": str(refinement_raw_path),
             "smoke": smoke_summary,
             "full": full_summary,
             "frozen_test_status": "sealed",
@@ -536,7 +766,7 @@ def parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--dataset-jsonl", required=True)
     run_parser.add_argument("--output-dir", required=True)
     run_parser.add_argument("--compact-dir", required=True)
-    run_parser.add_argument("--smoke-cases", type=int, default=8)
+    run_parser.add_argument("--smoke-cases", type=int, default=12)
     run_parser.add_argument("--auto-full", action="store_true")
     return root
 

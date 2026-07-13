@@ -7,12 +7,12 @@ import builtins
 import csv
 import json
 import keyword
+import math
 import re
 import sys
-import time
 import tokenize
 from collections import defaultdict
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from io import StringIO
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -20,9 +20,6 @@ from typing import Any, Iterable, Mapping, Sequence
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
-
-from analysis.phase5_premise_falsification import bridge_features, deployable_proxy_scores
-
 
 BUILTIN_NAMES = set(dir(builtins))
 IGNORED_NAMES = BUILTIN_NAMES | set(keyword.kwlist) | {"True", "False", "None"}
@@ -42,6 +39,11 @@ FORBIDDEN_SELECTION_FIELDS = {
     "split",
     "split_label",
     "supervised_score",
+    "row_key",
+    "source_row_id",
+    "case_index",
+    "reference_middle_tokens",
+    "length_bucket",
 }
 
 
@@ -327,49 +329,33 @@ def select_v1_candidate(
     prefix: str,
     suffix: str,
     candidates: Sequence[Mapping[str, Any]],
-) -> tuple[Mapping[str, Any], dict[str, CandidateAnalysis]]:
-    allowed_fields = {"candidate_key", "middle_text", "canvas_tokens", "seed"}
-    diagnostics: dict[str, CandidateAnalysis] = {}
+) -> tuple[Mapping[str, Any], dict[int, CandidateAnalysis]]:
+    """Select with state-only fields; opaque storage identifiers never enter ranking."""
+    allowed_fields = {"candidate_ordinal", "middle_text", "canvas_tokens", "seed"}
+    diagnostics: dict[int, CandidateAnalysis] = {}
     for row in candidates:
         validate_selection_fields(set(row) - allowed_fields)
-        diagnostics[str(row["candidate_key"])] = analyze_candidate(prefix, str(row["middle_text"]), suffix)
+        ordinal = int(row["candidate_ordinal"])
+        if ordinal in diagnostics:
+            raise ValueError(f"Duplicate candidate ordinal {ordinal}")
+        diagnostics[ordinal] = analyze_candidate(prefix, str(row["middle_text"]), suffix)
     chosen = min(
         candidates,
         key=lambda row: (
-            diagnostics[str(row["candidate_key"])].ranking_key,
+            diagnostics[int(row["candidate_ordinal"])].ranking_key,
             int(row["canvas_tokens"]),
             int(row["seed"]),
-            str(row["candidate_key"]),
         ),
     )
     return chosen, diagnostics
 
 
-def _max_score(rows: Sequence[Mapping[str, Any]], key: str) -> Mapping[str, Any]:
-    return max(rows, key=lambda row: (float(row[key]), -int(row["canvas_tokens"]), -int(row["seed"])))
-
-
-def _generic_remask_score(row: Mapping[str, Any]) -> tuple[float, int, int]:
-    """Fixed equal-grid generic remask proxy: confidence-only with longer-canvas tie break."""
-    return (
-        float((row.get("metrics") or {}).get("mean_final_confidence") or 0.0),
-        int(row["canvas_tokens"]),
-        -int(row["seed"]),
-    )
-
-
-def _max_generic_remask(rows: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
-    return max(rows, key=_generic_remask_score)
-
-
-def _generic_remask_candidate(
-    prefix: str,
-    suffix: str,
-    rows: Sequence[Mapping[str, Any]],
-) -> Mapping[str, Any]:
-    """Select a generic remask candidate without structural obligations or outcome signals."""
-    del prefix, suffix
-    return _max_generic_remask(rows)
+def selected_base_key(row: Mapping[str, Any]) -> str:
+    """Stable state-only identifier used to attach a stage-two refinement."""
+    key = row.get("selected_base_candidate_key")
+    if not isinstance(key, str) or not key:
+        raise ValueError("Refinement row is missing selected_base_candidate_key")
+    return key
 
 
 def _pairwise(rows: Sequence[Mapping[str, Any]], method: str, baseline: str) -> dict[str, int]:
@@ -378,84 +364,141 @@ def _pairwise(rows: Sequence[Mapping[str, Any]], method: str, baseline: str) -> 
     return {"wins": wins, "losses": losses, "net": wins - losses, "help": wins, "harm": losses}
 
 
-def _method_summary(rows: Sequence[Mapping[str, Any]], method: str) -> dict[str, Any]:
-    passed = sum(bool(row[f"{method}_passed"]) for row in rows)
-    return {"pass_count": passed, "task_count": len(rows), "pass_at_1": passed / len(rows) if rows else 0.0}
+def _row_budget(row: Mapping[str, Any]) -> dict[str, float]:
+    metrics = row.get("metrics") or {}
+    return {
+        "forward_count": float(metrics.get("actual_forward_count") or metrics.get("total_steps") or 0.0),
+        "token_budget": float(metrics.get("canvas_tokens") or row.get("canvas_tokens") or 0.0)
+        * float(metrics.get("actual_forward_count") or metrics.get("total_steps") or 0.0),
+        "wall_sec": float(metrics.get("total_sec_including_probe") or row.get("wall_sec") or 0.0),
+    }
+
+
+def _budget_summary(selections: Sequence[Mapping[str, Any]], method: str) -> dict[str, float]:
+    budgets = [
+        {
+            "forward_count": float(row.get(f"{method}_forward_count") or 0.0),
+            "token_budget": float(row.get(f"{method}_token_budget") or 0.0),
+            "wall_sec": float(row.get(f"{method}_wall_sec") or 0.0),
+        }
+        for row in selections
+    ]
+    count = len(budgets)
+    return {
+        "mean_forward_count": sum(item["forward_count"] for item in budgets) / count if count else math.nan,
+        "mean_token_budget": sum(item["token_budget"] for item in budgets) / count if count else math.nan,
+        "mean_wall_sec": sum(item["wall_sec"] for item in budgets) / count if count else math.nan,
+        "total_forward_count": sum(item["forward_count"] for item in budgets),
+        "total_token_budget": sum(item["token_budget"] for item in budgets),
+        "total_wall_sec": sum(item["wall_sec"] for item in budgets),
+    }
+
+
+def _mean(values: Sequence[float]) -> float:
+    return sum(values) / len(values) if values else math.nan
+
+
+def _task_macro_summary(selections: Sequence[Mapping[str, Any]], method: str) -> dict[str, Any]:
+    groups: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in selections:
+        groups[str(row["task_group"])].append(row)
+    group_accuracy = [
+        _mean([float(bool(item[f"{method}_passed"])) for item in items])
+        for _, items in sorted(groups.items())
+    ]
+    return {
+        "task_group_count": len(group_accuracy),
+        "equal_weight_base_task_macro_accuracy": _mean(group_accuracy),
+        "span_micro_accuracy_descriptive": _mean([float(bool(row[f"{method}_passed"])) for row in selections]),
+    }
+
+
+def _write_frontier_rows(selections: Sequence[Mapping[str, Any]], methods: Sequence[str]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for method in methods:
+        macro = _task_macro_summary(selections, method)
+        budget = _budget_summary(selections, method)
+        rows.append(
+            {
+                "method": method,
+                **macro,
+                "mean_forward_count": budget["mean_forward_count"],
+                "mean_token_budget": budget["mean_token_budget"],
+                "mean_wall_sec": budget["mean_wall_sec"],
+            }
+        )
+    return rows
 
 
 def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> dict[str, Any]:
-    raw = [row for row in read_jsonl(bank_dir / "candidate_bank_raw.jsonl") if row.get("candidate_kind") == "deployable_grid"]
-    groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in raw:
-        groups[str(row["row_key"])].append(row)
-    if not groups or any(len(rows) != 8 for rows in groups.values()):
-        raise RuntimeError("Phase 6 analysis requires exactly eight candidates per allowed row")
+    all_raw = read_jsonl(bank_dir / "candidate_bank_raw.jsonl")
+    refinement_raw = read_jsonl(bank_dir / "m1_refinement_raw.jsonl")
+    grid_rows = [row for row in all_raw if row.get("candidate_kind") == "deployable_grid"]
+    oracle_rows = [row for row in all_raw if row.get("candidate_kind") == "oracle_sufficient_diagnostic_ceiling"]
+    grouped_grid: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in grid_rows:
+        grouped_grid[str(row["row_key"])].append(row)
+    if not grouped_grid or any(len(rows) != 8 for rows in grouped_grid.values()):
+        raise RuntimeError("Phase 6 analysis requires exactly eight stage-one deployable candidates per allowed row")
+    oracle_by_key = {str(row["row_key"]): row for row in oracle_rows}
+    refinement_by_method: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for row in refinement_raw:
+        method = str(row.get("candidate_kind") or "")
+        if method in {"equal_compute_generic_remask", "m1_dependency_cone_remask"}:
+            row_key = str(row["row_key"])
+            if row_key in refinement_by_method[method]:
+                raise RuntimeError(f"Duplicate refinement result for {method}/{row_key}")
+            refinement_by_method[method][row_key] = row
+    required = set(grouped_grid)
+    if set(oracle_by_key) != required:
+        raise RuntimeError("M1 analysis oracle ceiling rows do not match the stage-one task population")
+    for method in ("equal_compute_generic_remask", "m1_dependency_cone_remask"):
+        if set(refinement_by_method[method]) != required:
+            raise RuntimeError(f"M1 analysis {method} rows do not match the stage-one task population")
 
     selections: list[dict[str, Any]] = []
-    selection_latency = defaultdict(float)
-    for row_key, rows in sorted(groups.items()):
-        context_row = next((row for row in rows if row.get("prefix_text") is not None and row.get("suffix_text") is not None), rows[0])
-        prefix = str(context_row.get("prefix_text", ""))
-        suffix = str(context_row.get("suffix_text", ""))
-        scored: list[dict[str, Any]] = []
-        for row in rows:
-            features = bridge_features(prefix, str(row.get("middle_text", "")), suffix)
-            candidate_tokens = float(row.get("candidate_middle_tokens") or 0.0)
-            canvas = float(row["canvas_tokens"])
-            features.update(
-                {
-                    "candidate_canvas_fill_ratio": candidate_tokens / canvas if canvas else 0.0,
-                    "ordinary_confidence": float((row.get("metrics") or {}).get("mean_final_confidence") or 0.0),
-                }
-            )
-            scores = deployable_proxy_scores(features)
-            scored.append({**row, **scores})
-
-        fixed = next(row for row in scored if int(row["canvas_tokens"]) == 64 and int(row["seed"]) == 0)
-        started = time.perf_counter(); confidence = _max_score(scored, "deployable_proxy_ordinary_confidence"); selection_latency["confidence"] += time.perf_counter() - started
-        started = time.perf_counter(); generic_remask = _generic_remask_candidate(prefix, suffix, scored); selection_latency["generic_remask"] += time.perf_counter() - started
-        started = time.perf_counter(); prefix_only = _max_score(scored, "deployable_proxy_prefix_only"); selection_latency["prefix_only"] += time.perf_counter() - started
-        started = time.perf_counter(); score_only = _max_score(scored, "deployable_proxy_combined"); selection_latency["m1_score_only"] += time.perf_counter() - started
-        v1_inputs = [
-            {
-                "candidate_key": row["candidate_key"],
-                "middle_text": row.get("middle_text", ""),
-                "canvas_tokens": row["canvas_tokens"],
-                "seed": row["seed"],
-            }
-            for row in scored
-        ]
-        started = time.perf_counter(); v1_input, v1_diagnostics = select_v1_candidate(prefix, suffix, v1_inputs); selection_latency["abductive_bridge_v1"] += time.perf_counter() - started
-        by_key = {str(row["candidate_key"]): row for row in scored}
+    for row_key, rows in sorted(grouped_grid.items()):
+        fixed64 = next(row for row in rows if int(row["canvas_tokens"]) == 64 and int(row["seed"]) == 0)
+        confidence = max(
+            rows,
+            key=lambda row: (
+                float((row.get("metrics") or {}).get("mean_final_confidence") or 0.0),
+                -int(row["canvas_tokens"]),
+                -int(row["seed"]),
+            ),
+        )
+        selected_key = selected_base_key(refinement_by_method["m1_dependency_cone_remask"][row_key])
+        selected_base = next(row for row in rows if str(row["candidate_key"]) == selected_key)
         chosen = {
-            "fixed64": fixed,
+            "fixed64": fixed64,
             "ordinary_confidence_best_of_grid": confidence,
-            "equal_compute_generic_remask": generic_remask,
-            "prefix_only": prefix_only,
-            "m1_score_only": score_only,
-            "m1_full": by_key[str(v1_input["candidate_key"])],
+            "equal_compute_generic_remask": refinement_by_method["equal_compute_generic_remask"][row_key],
+            "m1_score_only": selected_base,
+            "m1_full": refinement_by_method["m1_dependency_cone_remask"][row_key],
+            "oracle_ceiling": oracle_by_key[row_key],
         }
         output: dict[str, Any] = {
             "row_key": row_key,
-            "length_bucket_offline_only": rows[0]["length_bucket"],
+            "task_group": fixed64["task_group"],
+            "length_bucket_offline_only": fixed64["length_bucket"],
         }
         for name, row in chosen.items():
-            output[f"{name}_candidate_key"] = row["candidate_key"]
-            output[f"{name}_canvas_tokens"] = row["canvas_tokens"]
-            output[f"{name}_seed"] = row["seed"]
-            output[f"{name}_passed"] = bool(row["passed"])
-        diagnostic = v1_diagnostics[str(v1_input["candidate_key"])]
-        output.update(
-            {
-                "v1_full_parse_passed": diagnostic.full_parse_passed,
-                "v1_boundary_violation_count": len(diagnostic.boundary_violations),
-                "v1_control_contradiction_count": len(diagnostic.control_contradictions),
-                "v1_unsatisfied_obligation_count": len(diagnostic.unsatisfied_obligations),
-                "v1_def_use_conflict_count": len(diagnostic.def_use_conflicts),
-                "v1_undefined_use_count": len(diagnostic.undefined_uses),
-                "v1_restored_dependency_count": len(diagnostic.restored_dependencies),
-            }
-        )
+            budget = _row_budget(row)
+            output.update(
+                {
+                    f"{name}_candidate_key": row["candidate_key"],
+                    f"{name}_canvas_tokens": row["canvas_tokens"],
+                    f"{name}_seed": row["seed"],
+                    f"{name}_passed": bool(row.get("passed")),
+                    f"{name}_forward_count": budget["forward_count"],
+                    f"{name}_token_budget": budget["token_budget"],
+                    f"{name}_wall_sec": budget["wall_sec"],
+                }
+            )
+        diagnostics = refinement_by_method["m1_dependency_cone_remask"][row_key].get("selection_diagnostics") or {}
+        output.update({f"v1_{key}": value for key, value in diagnostics.items()})
+        output["m1_full_fallback_to_fixed64"] = bool(refinement_by_method["m1_dependency_cone_remask"][row_key].get("fallback_to_fixed64"))
+        output["m1_full_remasked_token_count"] = int(refinement_by_method["m1_dependency_cone_remask"][row_key].get("remasked_token_count") or 0)
         selections.append(output)
 
     methods = [
@@ -464,30 +507,33 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
         "equal_compute_generic_remask",
         "m1_score_only",
         "m1_full",
+        "oracle_ceiling",
     ]
-    method_summaries = {method: _method_summary(selections, method) for method in methods}
-    pairwise: dict[str, Any] = {}
-    for method in methods[1:]:
-        pairwise[f"{method}_vs_fixed64"] = _pairwise(selections, method, "fixed64")
-    for baseline in methods[:-1]:
-        pairwise[f"m1_full_vs_{baseline}"] = _pairwise(selections, "m1_full", baseline)
-
+    method_summaries = {method: _task_macro_summary(selections, method) for method in methods}
+    pairwise = {f"{method}_vs_fixed64": _pairwise(selections, method, "fixed64") for method in methods[1:]}
+    pairwise.update({
+        f"m1_full_vs_{method}": _pairwise(selections, "m1_full", method)
+        for method in ("ordinary_confidence_best_of_grid", "equal_compute_generic_remask", "m1_score_only")
+    })
     bucket_rows: list[dict[str, Any]] = []
-    for bucket in ["short", "medium", "long", "extreme"]:
+    for bucket in ("short", "medium", "long", "extreme"):
         subset = [row for row in selections if row["length_bucket_offline_only"] == bucket]
         for method in methods:
-            summary = _method_summary(subset, method)
-            bucket_rows.append({"length_bucket_offline_only": bucket, "method": method, **summary})
-
+            bucket_rows.append({"length_bucket_offline_only": bucket, "method": method, **_task_macro_summary(subset, method)})
+    frontier_rows = _write_frontier_rows(selections, methods)
     bank_summary = json.loads((compact_bank_dir / "full_summary.json").read_text(encoding="utf-8"))
     summary = {
-        "verdict": "phase6_exploratory_comparison_completed",
+        "verdict": "phase6_m1_full_real_refinement_completed",
         "task_count": len(selections),
-        "candidate_count": len(raw),
+        "task_group_count": len({row["task_group"] for row in selections}),
+        "stage1_grid_candidate_count": len(grid_rows),
+        "oracle_ceiling_count": len(oracle_rows),
+        "real_refinement_count": len(refinement_raw),
+        "primary_estimand": "equal_weight_base_task_macro_accuracy",
+        "span_micro_role": "descriptive_only",
         "methods": method_summaries,
         "pairwise": pairwise,
-        "selection_latency_sec_total": dict(selection_latency),
-        "selection_latency_sec_mean_per_task": {name: value / len(selections) for name, value in selection_latency.items()},
+        "accuracy_cost_frontier": frontier_rows,
         "candidate_generation": {
             "wall_sec": bank_summary.get("wall_sec"),
             "summed_gpu_decode_sec": bank_summary.get("summed_gpu_decode_sec"),
@@ -495,7 +541,6 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
             "mean_candidate_latency_sec": bank_summary.get("mean_candidate_latency_sec"),
             "peak_cuda_memory_bytes": bank_summary.get("peak_cuda_memory_bytes"),
             "candidate_rows": bank_summary.get("candidate_rows"),
-            "denoising_steps_per_candidate": bank_summary.get("denoising_steps_per_candidate"),
         },
         "selection_policy": {
             "mechanism": "fixed_lexicographic_abductive_program_state_bridge_m1_1",
@@ -503,9 +548,9 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
             "reference_used_for_selection": False,
             "unit_tests_or_outcomes_used_for_selection": False,
             "oracle_length_used_for_selection": False,
-            "supervised_score_used_for_selection": False,
-            "fusion_used": False,
-            "generic_remask": "confidence-only longer-canvas tie-break over the same 8-candidate equal grid; it has no obligation/contradiction features",
+            "task_identity_or_split_used_for_selection": False,
+            "generic_remask": "actual 64-forward low-final-confidence refinement of the M1-selected stage-one state",
+            "m1_full": "actual 64-forward dependency-cone remask; safe fixed64 fallback when no deployable cone exists",
         },
         "frozen_test_status": bank_summary.get("frozen_test_status"),
         "test_evaluation_count": bank_summary.get("test_evaluation_count"),
@@ -514,6 +559,7 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
     output_dir.mkdir(parents=True, exist_ok=True)
     write_csv(output_dir / "selection_results.csv", selections)
     write_csv(output_dir / "length_bucket_summary.csv", bucket_rows)
+    write_csv(output_dir / "accuracy_cost_frontier.csv", frontier_rows)
     write_json(output_dir / "summary.json", summary)
     write_json(
         output_dir / "method_spec.json",
@@ -531,32 +577,40 @@ def run_analysis(bank_dir: Path, compact_bank_dir: Path, output_dir: Path) -> di
                 "smaller_canvas_tiebreak",
                 "smaller_seed_tiebreak",
             ],
+            "stage_two": {
+                "equal_compute_generic_remask": "same selected stage-one candidate; low-confidence token remask; 64 forward passes",
+                "m1_dependency_cone_remask": "same selected stage-one candidate; suffix-obligation dependency cone; 64 forward passes",
+                "safe_fallback": "reuse fixed64 only when the deployable dependency cone is absent or unmappable",
+            },
             "forbidden_selection_fields": sorted(FORBIDDEN_SELECTION_FIELDS),
         },
     )
     lines = [
         "# M1.1 Abductive Program-State Bridge",
         "",
-        "Exploratory/development same-pool comparison; not held-out SOTA.",
+        "Exploratory/development same-pool comparison with actual two-stage refinement; not held-out SOTA.",
         "",
-        f"Tasks/candidates: `{len(selections)}` / `{len(raw)}`.",
+        f"Spans/task groups: `{len(selections)}` / `{summary['task_group_count']}`.",
         f"Frozen test: `{summary['frozen_test_status']}`, `test_evaluation_count={summary['test_evaluation_count']}`.",
         "",
-        "## Pass@1",
+        "## Equal-weight task-macro accuracy",
         "",
     ]
     for method in methods:
         item = method_summaries[method]
-        lines.append(f"- {method}: `{item['pass_count']}/{item['task_count']} = {item['pass_at_1']:.4%}`")
+        lines.append(
+            f"- {method}: `{item['equal_weight_base_task_macro_accuracy']:.4%}` macro; "
+            f"`{item['span_micro_accuracy_descriptive']:.4%}` span-micro descriptive"
+        )
     lines.extend(["", "## M1 Full Pairwise", ""])
-    for baseline in methods[:-1]:
+    for baseline in ("ordinary_confidence_best_of_grid", "equal_compute_generic_remask", "m1_score_only"):
         item = pairwise[f"m1_full_vs_{baseline}"]
         lines.append(f"- vs {baseline}: `{item['wins']}` wins / `{item['losses']}` losses / net `{item['net']}`")
     lines.extend(
         [
             "",
-            "No reference, unit tests, pass/fail labels, oracle length, supervised score, task identity, or frozen-test statistic entered selection.",
-            "No homotopy, birth–death, particle assembly, controller, cal-lite, or method fusion was used.",
+            "No reference, unit tests, pass/fail labels, oracle length, supervised score, task identity, split label, or frozen-test statistic entered selection or remasking.",
+            "Generic and M1 full each execute an additional 64-forward refinement. M1 falls back to fixed64 only when no deployable dependency cone can be mapped.",
         ]
     )
     (output_dir / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

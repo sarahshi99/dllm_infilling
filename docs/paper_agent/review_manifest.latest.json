@@ -104,7 +104,32 @@
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
     "p4_first_external_benchmark": "ExecRepoBench",
-    "m1_status": "implementation_started",
+    "m1_status": "implementation_started_real_two_stage_remask_protocol",
+    "m1_protocol": {
+      "dataset": "HumanEval-MultiLineInfilling",
+      "allowed_non_frozen_spans": 5079,
+      "stage1_grid": "16/32/64/128 x seeds 0/1; 64 steps; 8 candidates per span",
+      "oracle_ceiling": "one offline-only diagnostic row per span",
+      "stage2": "generic low-confidence remask and dependency-cone targeted remask each run an additional 64 forwards",
+      "safe_fallback": "M1 returns fixed64 only when no suffix-derived dependency cone is deployably mappable",
+      "smoke_cases": 12,
+      "full_gate": "technical integrity only; automatic full after smoke; no performance gate",
+      "raw_rows_expected_full": 55869,
+      "raw_row_breakdown": {
+        "stage1_grid": 40632,
+        "oracle_diagnostic": 5079,
+        "real_refinements": 10158
+      },
+      "selection_forbidden": [
+        "reference code",
+        "oracle length",
+        "unit-test outcome",
+        "passed label",
+        "task ID",
+        "task group",
+        "split label"
+      ]
+    },
     "m2_m3_status": "cheap_diagnostics_not_prerequisites",
     "m4_status": "downgraded",
     "a1_status": "stopped_completed_negative_auxiliary",

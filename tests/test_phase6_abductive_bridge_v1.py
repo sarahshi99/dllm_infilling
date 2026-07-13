@@ -2,12 +2,12 @@ import unittest
 
 from analysis.phase6_abductive_bridge_v1 import (
     FORBIDDEN_SELECTION_FIELDS,
-    _generic_remask_candidate,
     analyze_candidate,
     extract_backward_obligations,
     select_v1_candidate,
     validate_selection_fields,
 )
+from experiments.phase6_remask import dependency_cone_token_indices, generic_low_confidence_indices
 
 
 class Phase6AbductiveBridgeV1Test(unittest.TestCase):
@@ -50,35 +50,41 @@ class Phase6AbductiveBridgeV1Test(unittest.TestCase):
         prefix = "def f(xs):\n"
         suffix = "    return total\n"
         rows = [
-            {"candidate_key": "bad", "middle_text": "    total = missing\n", "canvas_tokens": 16, "seed": 0},
-            {"candidate_key": "good", "middle_text": "    total = sum(xs)\n", "canvas_tokens": 32, "seed": 1},
+            {"candidate_ordinal": 0, "middle_text": "    total = missing\n", "canvas_tokens": 16, "seed": 0},
+            {"candidate_ordinal": 1, "middle_text": "    total = sum(xs)\n", "canvas_tokens": 32, "seed": 1},
         ]
         chosen, diagnostics = select_v1_candidate(prefix, suffix, rows)
-        self.assertEqual(chosen["candidate_key"], "good")
-        self.assertEqual(diagnostics["good"].undefined_uses, ())
+        self.assertEqual(chosen["candidate_ordinal"], 1)
+        self.assertEqual(diagnostics[1].undefined_uses, ())
 
     def test_error_candidate_is_ranked_without_crashing(self) -> None:
         prefix = "def f(xs):\n"
         suffix = "    return total\n"
         rows = [
-            {"candidate_key": "error", "middle_text": "", "canvas_tokens": 16, "seed": 0},
-            {"candidate_key": "good", "middle_text": "    total = sum(xs)\n", "canvas_tokens": 32, "seed": 0},
+            {"candidate_ordinal": 0, "middle_text": "", "canvas_tokens": 16, "seed": 0},
+            {"candidate_ordinal": 1, "middle_text": "    total = sum(xs)\n", "canvas_tokens": 32, "seed": 0},
         ]
         chosen, _ = select_v1_candidate(prefix, suffix, rows)
-        self.assertEqual(chosen["candidate_key"], "good")
+        self.assertEqual(chosen["candidate_ordinal"], 1)
 
     def test_forbidden_selection_fields_are_rejected(self) -> None:
         for field in FORBIDDEN_SELECTION_FIELDS:
             with self.assertRaises(ValueError):
                 validate_selection_fields(["candidate_key", field])
 
-    def test_generic_remask_does_not_use_structural_or_outcome_fields(self) -> None:
-        rows = [
-            {"candidate_key": "a", "canvas_tokens": 16, "seed": 0, "metrics": {"mean_final_confidence": 0.8}},
-            {"candidate_key": "b", "canvas_tokens": 32, "seed": 1, "metrics": {"mean_final_confidence": 0.8}},
-        ]
-        chosen = _generic_remask_candidate("ignored", "ignored", rows)
-        self.assertEqual(chosen["candidate_key"], "b")
+    def test_generic_remask_uses_only_low_confidence_token_state(self) -> None:
+        indices = generic_low_confidence_indices([0.9, 0.1, 0.8, 0.2, 0.7, 0.3, 0.6, 0.4, 0.5, 0.95], 10)
+        self.assertEqual(indices, [1])
+
+    def test_dependency_cone_maps_suffix_obligation_to_generated_token(self) -> None:
+        class Tokenizer:
+            mapping = {0: "    total", 1: " = sum(xs)\n"}
+
+            def decode(self, ids, skip_special_tokens: bool = True):
+                del skip_special_tokens
+                return "".join(self.mapping[int(item)] for item in ids)
+
+        self.assertEqual(dependency_cone_token_indices(Tokenizer(), [0, 1], ["total"]), [0])
 
 
 if __name__ == "__main__":
