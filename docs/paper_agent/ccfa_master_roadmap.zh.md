@@ -37,7 +37,7 @@
 | ID | 工作 | 当前状态 | 已有证据 | 关闭条件 |
 |---|---|---|---|---|
 | `P0-NARRATIVE` | 统一仓库叙事 | `closed_for_current_snapshot` | official second-regime、Dream-Coder full、Phase 5 result 已存在 | 每个 decision-bearing result 后同步 readiness、claim、paper、table、queue 和 ledger |
-| `P1-BASELINES` | 协议匹配强 baseline | `open_highest_priority` | local controls 和 literature anchors 存在，但不是正式复现 | 顺序固定为 official CAL -> DreamOn -> rho-EOS compatibility；CAL technical smoke 通过后直接 full；DreamOn 为 training-based stratum；rho-EOS 只有忠实 infilling adaptation 才进入 smoke/full；LR-DLLM 仅保留 blocker audit |
+| `P1-BASELINES` | 协议匹配强 baseline | `official_CAL_commit_pinned_checkout_pending` | local controls 和 literature anchors 存在，但不是正式复现；official CAL upstream 已固定至 `NiuHechang/Calibrated_Adaptive_Length@741e8418` | 顺序固定为 official CAL -> DreamOn -> rho-EOS compatibility；CAL checkout/protocol audit 后 technical smoke 通过即直接 full；DreamOn 为 training-based stratum；rho-EOS 只有忠实 infilling adaptation 才进入 smoke/full；LR-DLLM 仅保留 blocker audit |
 | `P2-GROUP-STATS` | 6707-row group-aware statistics | `completed_CPU_c66678a` | `6707` spans / `20121` policy rows、`148` groups；compact CSV/JSON/Markdown 与 figure data 已写出 | primary estimand 是每个 base task 内先算 policy accuracy、再对 task 等权平均（equal-weight base-task macro accuracy）；span-micro rate 仅 descriptive；10,000 fixed-seed bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 8-cell intersection 已完成 |
 | `P3-SELECTIVE` | 真正两阶段/三头 selective controller | `deferred_until_official_CAL` | V1--V3 是旧 validation route closure，不等于该新设计 | official CAL 完成后再决定是否启动；只可使用新数据源和 grouped split；canvas/rescue/harm 分头；禁止 V4 式阈值续调 |
 | `P4-EXTERNAL` | 非 HumanEval、真实软件工程外部评价 | `pinned_audit_ready_checkout_network_blocked` | MultiLine/RandomSpan 仍是 HumanEval 变体；dataset `fa61028c`、Qwen evaluator `33bc6aa` 已固定，smoke-plan audit 已实现 | 首选且唯一当前首发 benchmark 为 ExecRepoBench；审计 checkout/许可/字段，按 repository cluster；完成多 repo、六类 fill_type evaluator smoke 后才可记录 smoke completion；M1 配置冻结前不打开最终 external result |
@@ -48,7 +48,7 @@
 
 截至 2026-07-13 的 source check 与执行顺序：
 
-- official CAL 是第一条执行 baseline：固定 upstream commit，审计 model、prompt、dataset mapping、canvas、steps、forward count、seed、evaluator、wall time、GPU 和 memory；只在 exact current-manifest mapping 或明确交集比较；12-case technical smoke 通过后自动跑完整 allowed population。local CAL/CAL-lite 永远不能改名为 official CAL。
+- official CAL 是第一条执行 baseline：upstream 固定为 `https://github.com/NiuHechang/Calibrated_Adaptive_Length` 的 `741e8418a88a732b4c92812424d4f03cab1f7b1f`；checkout 后审计 model、prompt、dataset mapping、canvas、steps、forward count、seed、evaluator、wall time、GPU 和 memory；只在 exact current-manifest mapping 或明确交集比较；12-case technical smoke 通过后自动跑完整 allowed population。local CAL/CAL-lite 永远不能改名为 official CAL。
 - DreamOn 是第二条执行 baseline：固定 official repo/checkpoint/训练与推理协议，作为 training-based stratum 单列；official CAL full 完成后才启动其 official full。
 - rho-EOS 排在 DreamOn 后：先做 infilling compatibility audit；只有 faithful adaptation（不把 completion quick-start 偷换成 FIM）才进入 smoke/full。
 - LR-DLLM 当前没有可执行 official/local Stage I/II adapter；状态为 `paper_audited_code_or_adapter_blocked`，本轮只维护 blocker audit，不造 adapter、不伪造复现。

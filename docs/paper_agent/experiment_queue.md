@@ -10,7 +10,7 @@ M1--M4 are independent candidate methods; no paper primary method is selected. C
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
-Status: executing. Freeze official CAL upstream commit; audit model, prompt, exact dataset mapping/intersection, canvas, steps, forward count, seed, evaluator, wall time, GPU and memory. 12-case technical smoke auto-promotes to full allowed population if integrity passes; no performance gate. local CAL/CAL-lite is never official CAL. DreamOn waits after CAL full and stays training-based; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
+Status: upstream pinned, checkout/protocol audit pending. Official source is `https://github.com/NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`; local CAL/CAL-lite remains a distinct same-protocol baseline and is never official CAL. After checkout, audit model, prompt, exact dataset mapping/intersection, canvas, steps, forward count, seed, evaluator, wall time, GPU and memory. 12-case technical smoke auto-promotes to full allowed population if integrity passes; no performance gate. DreamOn waits after CAL full and stays training-based; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
 
 ### P2.1: full-allowed grouped statistics
 

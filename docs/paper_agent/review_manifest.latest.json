@@ -101,6 +101,11 @@
       "DreamOn",
       "rho_EOS_faithful_infilling_compatibility"
     ],
+    "official_cal_upstream": {
+      "repository": "https://github.com/NiuHechang/Calibrated_Adaptive_Length",
+      "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+      "status": "pinned_checkout_protocol_audit_pending"
+    },
     "lrdllm_scope": "blocker_audit_only",
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
