@@ -42,7 +42,7 @@ DreamOn 在 CAL full 后按 training-based stratum 运行；rho-EOS 仅在 faith
 
 ### `M1.1-ABDUCTIVE-PROGRAM-STATE-BRIDGE`
 
-先写独立 experiment brief，但同一轮继续实现：suffix backward obligations、prefix/candidate forward facts、contradiction set、dependency-cone targeted remasking 与 safe fallback。deployable method 禁止 reference code、oracle length、unit-test outcome、task ID、split label 与 passed labels。模型 `GSAI-ML/LLaDA-8B-Base`；existing evaluator；canvas `16/32/64/128`；seeds `0/1`；`64` steps。先跑 12-case MultiLine technical smoke；技术通过后直接跑全部 `5079` non-frozen MultiLine spans，不设性能 gate。
+代码与独立 brief 已完成于 `0d75c71`：stage one 是 `16/32/64/128 × seeds 0/1` 的共享 64-step bank；stage two 分别执行实际 64-forward generic low-confidence remask 与 dependency-cone targeted remask。deployable method 禁止 reference code、oracle length、unit-test outcome、task ID、split label 与 passed labels；无可映射 dependency cone 时才 safe fallback 到 fixed64。模型 `GSAI-ML/LLaDA-8B-Base`；existing evaluator。下一 GPU step 仍是 12-case MultiLine technical smoke；技术通过后直接跑全部 `5079` non-frozen spans，不设性能 gate。此 job 等待前序 official CAL full，不能抢占既定 GPU 顺序。
 
 报告 fixed64、ordinary-confidence best-of-grid、equal-compute generic remask、M1 score-only、M1 full、oracle ceiling；task-macro delta、span-micro accuracy、help/harm、分桶、forward/token budget、wall time、显存。性能 gate 仅用于 paper promotion。
 

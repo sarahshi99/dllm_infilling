@@ -14,7 +14,7 @@ Status: executing. Freeze official CAL upstream commit; audit model, prompt, exa
 
 ### P2.1: full-allowed grouped statistics
 
-Status: executing CPU. Input existing `6707` spans / `20121` results; verify `148` groups. Primary: equal-weight base-task macro accuracy (within-task policy accuracy then task mean). Secondary: span-micro descriptive totals. Required: 10,000 fixed-seed cluster bootstrap, task paired wins/losses, group-aware label-swap permutation, config/length/error strata with group count + cluster CI, accuracy-cost frontier, and control/CAL-lite/oracle 8-cell intersection. No row-independent significance and no frozen test.
+Status: completed CPU (`c66678a`). Input existing `6707` spans / `20121` results; verified `148` groups. Primary: equal-weight base-task macro accuracy (within-task policy accuracy then task mean). Secondary: span-micro descriptive totals. Completed 10,000 fixed-seed cluster bootstrap, task paired wins/losses, group-aware label-swap permutation, config/length/error strata with group count + cluster CI, accuracy-cost frontier, and control/CAL-lite/oracle 8-cell intersection. No row-independent significance and no frozen test.
 
 ### P4.1: ExecRepoBench external evaluator preparation
 
@@ -22,7 +22,7 @@ Status: executing audit/smoke. ExecRepoBench is selected directly as the first e
 
 ### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 
-Status: executing. Write independent brief then immediately implement suffix backward obligations, prefix/candidate forward facts, contradiction set, dependency-cone targeted remasking, and safe fallback. Use LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. 12-case MultiLine technical smoke auto-promotes to all `5079` non-frozen MultiLine spans when technical checks pass. Report fixed64, ordinary-confidence grid, equal-compute generic remask, M1 score-only, M1 full, and oracle ceiling; include task-macro delta, span micro, help/harm, buckets, budgets, wall/memory. No full performance gate.
+Status: implementation complete; GPU queued after official CAL full (`0d75c71`). The independent brief and executable protocol now use suffix backward obligations, prefix/candidate forward facts, contradiction set, real dependency-cone targeted remasking, actual equal-compute generic remasking, and fixed64-only safe fallback when no deployable cone maps. Stage one is 8 candidates/span; stage two runs an additional 64 forwards per generic/M1 refinement. Use LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. 12-case MultiLine technical smoke auto-promotes to all `5079` non-frozen spans when integrity passes. Report fixed64, ordinary-confidence grid, equal-compute generic remask, M1 score-only, M1 full, and oracle ceiling; include equal-weight task macro delta, descriptive span micro, help/harm, buckets, budgets, wall/memory. No full performance gate.
 
 ### M2/M3/M4/A1 portfolio disposition
 

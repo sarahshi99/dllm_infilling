@@ -65,7 +65,7 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 | Canonical ID | 正式名称 | 当前状态 | 已完成的只是 | 下一独立实验 |
 |---|---|---|---|---|
-| `M1` | Abductive Program-State Bridge | `implementation_started` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | 立即实现 suffix backward obligations、prefix/candidate forward facts、contradiction set、dependency-cone targeted remasking 与 safe fallback；12-case MultiLine technical smoke 后直接 full `5079` non-frozen MultiLine spans |
+| `M1` | Abductive Program-State Bridge | `implementation_complete_gpu_queued_after_official_CAL` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | `0d75c71` 已实现 suffix backward obligations、prefix/candidate forward facts、contradiction set、实际 dependency-cone 与 generic 64-forward remasking、fixed64 safe fallback；12-case MultiLine technical smoke 后直接 full `5079` non-frozen MultiLine spans |
 | `M2` | Constraint-Homotopy Infilling | `cheap_diagnostic_not_prerequisite` | 只有文献/novelty 登记 | 可独立保留 cheap diagnostic，但不是 M1 implementation/full 的前置条件 |
 | `M3` | Birth--Death Canvas Diffusion | `cheap_diagnostic_not_prerequisite` | 只有文献/novelty 登记 | 可独立保留 cheap diagnostic，但不是 M1 implementation/full 的前置条件 |
 | `M4` | Semantic Particle Assembly | `deprioritized` | `M4-D0/F1`：61 个 all-fail tasks 中仅 6 个有互补正确 semantic units | 降级；不在本轮抢占 M1。仍不得使用 tests/reference 选择片段 |

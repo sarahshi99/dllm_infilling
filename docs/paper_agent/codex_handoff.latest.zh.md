@@ -5,11 +5,11 @@
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 
 - 先读 `docs/paper_agent/ccfa_master_roadmap.zh.md`，再读 `docs/paper_agent/current_action.md`。
-- 当前证据 commit：`8b348f979f09cda07811e04b7ad3dee60e56373b`；Phase 5 完成，当前决策为 `iterate_and_execute`。
+- 起点已核对为 `8b348f979f09cda07811e04b7ad3dee60e56373b`；当前工作 checkpoint 为 `0d75c71`。Phase 5 完成，当前决策为 `iterate_and_execute`，不是 blocked。
 - 当前 action 是 `FAST-SPRINT-01`：P1.1 official CAL、P2.1 grouped statistics、M1.1 Abductive Program-State Bridge、P4.1 ExecRepoBench。先读 `current_action.md` 的具体门与路径。
 - P1 顺序：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility；LR-DLLM 只 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
 - `6707` spans / `20121` policy results 背后只有 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 是 descriptive。早期 `802/1033` 是 A6000 historical，`796/1033` 是 H200 evidence base；都不是 final held-out。
-- M1 立即实现并在 12-case MultiLine 技术 smoke 后直接 full `5079` non-frozen spans；M2/M3 cheap diagnostics 非前置，M4 降级，A1 停止，P3 等 official CAL。
+- M1 真实二阶段实现已提交：stage-one 8-cell bank 后，generic 与 dependency-cone M1 分别实际追加 `64` forwards；无可映射 cone 才 fallback fixed64。12-case MultiLine 技术 smoke 后直接 full `5079` non-frozen spans；M2/M3 cheap diagnostics 非前置，M4 降级，A1 停止，P3 等 official CAL。GPU 仍严格等待 official CAL full 先完成。
 - P4 直接使用 ExecRepoBench；M1 配置冻结前只做多 repository、六 fill_type smoke，不打开最终 external result。
 - 所有 full run 必须 resume/dedup + missing/duplicate/error audit。GPU 顺序固定为 CAL full -> M1 full -> DreamOn full。Frozen test 继续 sealed，count `0`。
 

@@ -11,6 +11,7 @@ Updated: 2026-07-13 UTC
 - P2.1 primary estimand is equal-weight base-task macro accuracy: calculate each policy's accuracy within each base task, then average over `148` task groups. Span-micro totals remain descriptive only. All inferential resampling/tests are cluster-aware; row-independent significance is prohibited.
 - P4 directly selects ExecRepoBench as the first external benchmark; no generic three-candidate research phase. Freeze data/Qwen evaluator commits and complete repository-grouped, six-fill-type smoke before any final external outcome.
 - M1 full implementation starts immediately; M2/M3 cheap diagnostics are not prerequisites, M4 is downgraded, A1 is stopped, and P3 waits for official CAL. M1 technical smoke promotes directly to full absent integrity failure; performance gates are paper-promotion-only.
+- M1 implementation checkpoint: `0d75c71` replaces selection-only placeholders with real equal-compute generic and dependency-cone 64-forward refinements, resumable/deduplicated raw banks, separate stage-one/oracle/refinement audits, fixed64-only safe fallback, and equal-weight task-macro/accuracy-cost outputs. GPU execution remains queued behind official CAL full; this ordering is a scheduler constraint, not a blocked route decision.
 - Evidence-hardware boundary: `802/1033` is A6000 historical evidence; `796/1033` is the H200 evidence base. Do not silently pool or relabel them as held-out performance.
 - Frozen controller test remains sealed with `test_evaluation_count=0`.
 
