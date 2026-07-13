@@ -1,0 +1,9 @@
+control_passed,cal_lite_passed,oracle_passed,intersection_label,span_count,interpretation
+False,False,False,control=0|cal_lite=0|oracle=0,2996,rescue_or_noncanvas_limited
+False,False,True,control=0|cal_lite=0|oracle=1,1072,oracle_only_canvas_recoverable
+False,True,False,control=0|cal_lite=1|oracle=0,59,cal_lite_recovers_but_oracle_regresses
+False,True,True,control=0|cal_lite=1|oracle=1,561,cal_lite_and_oracle_recover_control_failure
+True,False,False,control=1|cal_lite=0|oracle=0,411,cal_lite_and_oracle_harm_control
+True,False,True,control=1|cal_lite=0|oracle=1,764,cal_lite_harm_oracle_keeps_control
+True,True,False,control=1|cal_lite=1|oracle=0,61,oracle_harm_control
+True,True,True,control=1|cal_lite=1|oracle=1,783,all_pass
