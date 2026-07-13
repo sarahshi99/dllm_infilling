@@ -66,14 +66,15 @@
     "status": "completed",
     "sufficient_canvas_effect": 29
   },
-  "branch": "codex/ccfa-roadmap-reconciliation",
+  "branch": "codex/ccfa-method-portfolio-v0",
   "ccfa_submission_ready": false,
   "canonical_roadmap": {
     "active_work": [
       "FAST-SPRINT-01",
       "P1.1-official-CAL",
       "P2.1-grouped-statistics",
-      "M1.1-abductive-program-state-bridge",
+      "M1.1-abductive-program-state-bridge-running-full",
+      "M2.1-constraint-homotopy-resource-queued",
       "P4.1-ExecRepoBench"
     ],
     "base_task_groups_behind_6707_spans": 148,
@@ -104,7 +105,20 @@
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
     "p4_first_external_benchmark": "ExecRepoBench",
-    "m1_status": "implementation_started_real_two_stage_remask_protocol",
+    "m1_status": "technical_smoke_passed_auto_full_running_pid_1576214_integrity_pending",
+    "m1_smoke": {
+      "cases": 12,
+      "rows": 132,
+      "missing_duplicate_error": "0/0/0",
+      "frozen_test_evaluation_count": 0,
+      "second_stage_64_forward_audit": "passed"
+    },
+    "m2_status": "code_complete_resource_queued_due_to_strict_25600_MiB_reserve",
+    "p4_pinned_provenance": {
+      "dataset_commit": "fa61028ce495c9ceff58398b8a7c47b5ae9f5276",
+      "qwen_evaluator_commit": "33bc6aabd7791ad7b32f7e92104f11f2359ba890",
+      "status": "smoke_plan_audit_ready_checkout_network_blocked_no_external_result"
+    },
     "m1_protocol": {
       "dataset": "HumanEval-MultiLineInfilling",
       "allowed_non_frozen_spans": 5079,
@@ -1150,5 +1164,5 @@
   "task_type": "ccfa_roadmap_reconciliation_after_phase5",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-12"
+  "updated_at_cst": "2026-07-13"
 }

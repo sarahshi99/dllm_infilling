@@ -1,0 +1,14 @@
+{
+  "canvas_tokens": 128,
+  "mask_length_source": "fixed",
+  "max_input_tokens": 727,
+  "max_position_embeddings": null,
+  "min_input_tokens": 173,
+  "over_model_limit_count": 0,
+  "same_decoder": "expvision_dllm_clean.decode.run_vanilla_decode",
+  "same_schedule": "linear_target_masks",
+  "substitution_used": false,
+  "supported": true,
+  "total_steps": 64,
+  "validated_task_count": 5079
+}

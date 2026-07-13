@@ -38,9 +38,9 @@
 |---|---|---|---|---|
 | `P0-NARRATIVE` | 统一仓库叙事 | `closed_for_current_snapshot` | official second-regime、Dream-Coder full、Phase 5 result 已存在 | 每个 decision-bearing result 后同步 readiness、claim、paper、table、queue 和 ledger |
 | `P1-BASELINES` | 协议匹配强 baseline | `open_highest_priority` | local controls 和 literature anchors 存在，但不是正式复现 | 顺序固定为 official CAL -> DreamOn -> rho-EOS compatibility；CAL technical smoke 通过后直接 full；DreamOn 为 training-based stratum；rho-EOS 只有忠实 infilling adaptation 才进入 smoke/full；LR-DLLM 仅保留 blocker audit |
-| `P2-GROUP-STATS` | 6707-row group-aware statistics | `executing` | row-level totals 已完成；Phase 5 另有 148-group bootstrap | primary estimand 是每个 base task 内先算 policy accuracy、再对 task 等权平均（equal-weight base-task macro accuracy）；span-micro rate 仅 descriptive；以 `HumanEval/<id>` 为 cluster，补 10,000 fixed-seed bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 help/harm/oracle 交集 |
+| `P2-GROUP-STATS` | 6707-row group-aware statistics | `completed_CPU_c66678a` | `6707` spans / `20121` policy rows、`148` groups；compact CSV/JSON/Markdown 与 figure data 已写出 | primary estimand 是每个 base task 内先算 policy accuracy、再对 task 等权平均（equal-weight base-task macro accuracy）；span-micro rate 仅 descriptive；10,000 fixed-seed bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 8-cell intersection 已完成 |
 | `P3-SELECTIVE` | 真正两阶段/三头 selective controller | `deferred_until_official_CAL` | V1--V3 是旧 validation route closure，不等于该新设计 | official CAL 完成后再决定是否启动；只可使用新数据源和 grouped split；canvas/rescue/harm 分头；禁止 V4 式阈值续调 |
-| `P4-EXTERNAL` | 非 HumanEval、真实软件工程外部评价 | `executing_ExecRepoBench_first` | MultiLine/RandomSpan 仍是 HumanEval 变体 | 首选且唯一当前首发 benchmark 为 ExecRepoBench；固定 dataset/Qwen evaluator commit、许可和字段；按 repository cluster；M1 配置冻结前只做多 repo、六类 fill_type 的 evaluator smoke，不打开最终 external result |
+| `P4-EXTERNAL` | 非 HumanEval、真实软件工程外部评价 | `pinned_audit_ready_checkout_network_blocked` | MultiLine/RandomSpan 仍是 HumanEval 变体；dataset `fa61028c`、Qwen evaluator `33bc6aa` 已固定，smoke-plan audit 已实现 | 首选且唯一当前首发 benchmark 为 ExecRepoBench；审计 checkout/许可/字段，按 repository cluster；完成多 repo、六类 fill_type evaluator smoke 后才可记录 smoke completion；M1 配置冻结前不打开最终 external result |
 
 ### P1 baseline 的统一协议表
 
@@ -65,10 +65,10 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 | Canonical ID | 正式名称 | 当前状态 | 已完成的只是 | 下一独立实验 |
 |---|---|---|---|---|
-| `M1` | Abductive Program-State Bridge | `candidate_v0_code_test_complete_gpu_pending_host_control_plane` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | `1d9ef3f`：suffix backward obligations、forward facts、contradiction set、AST/def-use dependency cone、等计算 generic remask、64-forward fixed64 null fallback；12-case MultiLine smoke 后 full `5079` |
-| `M2` | Constraint-Homotopy Infilling | `candidate_v0_code_test_complete_gpu_pending_host_control_plane` | 只有文献/novelty 登记 | `4a91d73`：same-64-forward gradual vs abrupt constraints；技术检查后直接 `148` RandomSpanLight full |
-| `M3` | Birth--Death Canvas Diffusion | `candidate_v0_code_test_complete_gpu_pending_host_control_plane` | 只有文献/novelty 登记 | `a874c54`：initial `16/32/64/128` particles，uniform/birth-death equal `256` forwards；12-case smoke 后 `148` full |
-| `M4` | Semantic Particle Assembly | `candidate_v0_offline148_passed_repair_gpu_pending_host_control_plane` | `M4-D0/F1`：61 个 all-fail tasks 中仅 6 个有互补正确 semantic units | `ed94471` + `analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`：offline best/assembly 各 148/148、zero missing/duplicate/error、frozen count 0；next 是 one 64-forward repair decode；不得用 tests/reference 选择片段 |
+| `M1` | Abductive Program-State Bridge | `candidate_v0_MultiLine_full_running` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | `1d9ef3f`：12-case technical smoke 已完整通过，`--auto-full` 已启动 `5079` non-frozen MultiLine stage-one；PID `1576214`，终审仍需 resume/dedup/missing/duplicate/error |
+| `M2` | Constraint-Homotopy Infilling | `candidate_v0_code_test_complete_GPU_queued_resource_margin` | 只有文献/novelty 登记 | `4a91d73`：same-64-forward gradual vs abrupt constraints；当前第三模型进程会违反 `25,600 MiB` reserve，条件满足后技术检查直接 `148` RandomSpanLight full |
+| `M3` | Birth--Death Canvas Diffusion | `candidate_v0_code_test_complete_GPU_queued_after_M2` | 只有文献/novelty 登记 | `a874c54`：initial `16/32/64/128` particles，uniform/birth-death equal `256` forwards；12-case smoke 后 `148` full |
+| `M4` | Semantic Particle Assembly | `candidate_v0_offline148_passed_repair_GPU_queued_after_M3` | `M4-D0/F1`：61 个 all-fail tasks 中仅 6 个有互补正确 semantic units | `ed94471` + `analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`：offline best/assembly 各 148/148、zero missing/duplicate/error、frozen count 0；next 是 one 64-forward repair decode；不得用 tests/reference 选择片段 |
 | `A1` | Metamorphic Equivariance Evaluator | `stopped_negative_auxiliary` | 728 pairs/91 tasks，delta AUC `0.0143`，CI 跨 0 | 停止新工作；保留为负诊断证据，不进入 fusion |
 
 重要命名边界：M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不构成选择、promotion 或其他候选的终止。
@@ -110,6 +110,6 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 1. `P1-BASELINES`：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility（忠实适配才 smoke/full）；LR-DLLM 只做 blocker audit。
 2. `P2-GROUP-STATS` 与 `P4-EXTERNAL`：立刻并行 CPU grouped statistics 和 ExecRepoBench 版本/许可/字段/evaluator audit；P4 不再做泛泛三候选调研。
-3. 方法线：M1--M4 都是独立候选，当前不选主方法。四条线的 code/test/brief/analysis/launcher 均已完成；当前仅 host approval control plane 在 process creation 前阻断 M1 audit/launch。恢复后 M1 先做 12-case MultiLine smoke→`5079` full；M2/M3 依次做 12-case→`148` full；M4 先 full-148 offline assembly audit 再 12-case repair→`148` repair full。性能 gate 只服务后续论文 promotion，A1 仍是停止的负辅助，P3 等 official CAL 后再决定。
+3. 方法线：M1--M4 都是独立候选，当前不选主方法。四条线的 code/test/brief/analysis/launcher 均已完成；M1 的 12-case MultiLine technical smoke 已通过并自动开始 `5079` full，existing candidate-bank PID `1195368` 没有暂停。2026-07-13 资源复查后启动 M2 会使剩余显存低于 `25,600 MiB`，故 M2/M3/M4 不抢占 M1，待安全余量满足时依次做 12-case→`148` full；M4 保持先 full-148 offline assembly audit 再 12-case repair→`148` repair full。性能 gate 只服务后续论文 promotion，A1 仍是停止的负辅助，P3 等 official CAL 后再决定。
 
 P1/P2/P4 未关闭前，可以做探索实验，但任何方法结果都不得宣称 CCF-A-ready 或 SOTA。外部 baseline、严谨统计和真实场景不能被新方法实验替代。
