@@ -1,17 +1,17 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-12 UTC
+更新日期：2026-07-13 UTC
 
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 
 - 先读 `docs/paper_agent/ccfa_master_roadmap.zh.md`，再读 `docs/paper_agent/current_action.md`。
-- 当前证据 commit：`52f07457a7974fafa69d59914bbc412a2d83e305`；Phase 5 完成而非 blocked。
-- P0 current-snapshot narrative 已统一；P1 official baselines、P2 6707-row grouped statistics、P4 non-HumanEval external evaluation 仍是最高优先级 open gaps。
-- `6707` 是 span rows，不是独立样本；allowed base-task groups 为 `148`。早期 `1033` rows 是反复观察的 development population，不是 final held-out result。
-- 四个正式方法固定为 M1 Abductive Program-State Bridge、M2 Constraint-Homotopy、M3 Birth--Death Canvas Diffusion、M4 Semantic Particle Assembly。A1 Metamorphic Equivariance 只是 auxiliary evaluator。
-- Phase 5 只完成 M1-D0、M4-D0 和 A1 diagnostics。M1 完整方法、M2、M3、M4 都没有实现。
-- 新方法 premise diagnostics 可共享冻结 bank 并行运行，但必须独立记录；不得 fusion 或在同一 outcomes 上反复调当前 proxy。
-- 当前 next action 是 `BASE-PROTOCOL-01`、`STAT-GROUP-01`、`EXT-FEAS-01`；见 `current_action.md`。Frozen test 继续 sealed，count `0`。
+- 当前证据 commit：`8b348f979f09cda07811e04b7ad3dee60e56373b`；Phase 5 完成，当前决策为 `iterate_and_execute`。
+- 当前 action 是 `FAST-SPRINT-01`：P1.1 official CAL、P2.1 grouped statistics、M1.1 Abductive Program-State Bridge、P4.1 ExecRepoBench。先读 `current_action.md` 的具体门与路径。
+- P1 顺序：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility；LR-DLLM 只 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
+- `6707` spans / `20121` policy results 背后只有 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 是 descriptive。早期 `802/1033` 是 A6000 historical，`796/1033` 是 H200 evidence base；都不是 final held-out。
+- M1 立即实现并在 12-case MultiLine 技术 smoke 后直接 full `5079` non-frozen spans；M2/M3 cheap diagnostics 非前置，M4 降级，A1 停止，P3 等 official CAL。
+- P4 直接使用 ExecRepoBench；M1 配置冻结前只做多 repository、六 fill_type smoke，不打开最终 external result。
+- 所有 full run 必须 resume/dedup + missing/duplicate/error audit。GPU 顺序固定为 CAL full -> M1 full -> DreamOn full。Frozen test 继续 sealed，count `0`。
 
 ## Phase 5 完成交接（authoritative）
 

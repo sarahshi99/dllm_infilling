@@ -1,6 +1,6 @@
 # Research Idea Board
 
-Updated: 2026-07-12 UTC
+Updated: 2026-07-13 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
@@ -10,13 +10,13 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | full method not implemented | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
-| `M2` | Constraint-Homotopy Infilling | not implemented | IDEA-012 |
-| `M3` | Birth--Death Canvas Diffusion | not implemented | IDEA-013 |
-| `M4` | Semantic Particle Assembly | not implemented | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
-| `A1` | Metamorphic Equivariance Evaluator | completed negative auxiliary | IDEA-015 / F2 |
+| `M1` | Abductive Program-State Bridge | implementation started | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M2` | Constraint-Homotopy Infilling | optional cheap diagnostic; not M1 prerequisite | IDEA-012 |
+| `M3` | Birth--Death Canvas Diffusion | optional cheap diagnostic; not M1 prerequisite | IDEA-013 |
+| `M4` | Semantic Particle Assembly | downgraded | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
-`P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
+`P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
 
 ## IDEA-011 / M1-D0: AST/def-use bridge proxy V0
 
@@ -30,7 +30,7 @@ Related files: `docs/paper_agent/experiments/20260711_phase5_method_falsificatio
 
 Result: Full shared-bank evaluation completed. Combined proxy cross-canvas within-task accuracy was `0.6273` with positive selection net, but grouped-bootstrap delta lower bounds were not strictly positive against every deterministic baseline. Current formula is killed; do not tune it on these outcomes. Any continuation requires a separately preregistered structure mechanism.
 
-Scope boundary: This is not M1 Abductive Program-State Bridge. Genuine program-state analysis, backward obligations, bridge anchors, and denoising intervention remain future stages. M1 may proceed as a new independent exploratory implementation; it must not tune this fixed formula on the same outcomes.
+Scope boundary: This is not M1 Abductive Program-State Bridge. M1 now proceeds as an independent implementation with suffix backward obligations, prefix/candidate forward facts, contradiction checks, dependency-cone remasking, and safe fallback. It must not tune this fixed proxy formula on the same outcomes, and deployable M1 may not consume reference code, oracle length, tests/outcomes, task IDs, split labels, or passed labels.
 
 ## IDEA-012 / M2: Constraint-Homotopy Infilling
 
@@ -38,7 +38,7 @@ Source: user
 Status: registered_not_implemented
 Scientific question: Does a gradual schedule of inference-visible semantic constraints improve rescue quality relative to abrupt constraints under equal compute?
 Minimum experiment: Future standalone smoke/full protocol after the Semantic Bridge round closes.
-Decision rule: Do not implement in this round; do not combine with any other method.
+Decision rule: Cheap diagnostic may run later, but it is not a prerequisite for M1 implementation/full and must not combine with any other method.
 
 ## IDEA-013 / M3: Birth–Death Canvas Diffusion
 
@@ -46,20 +46,20 @@ Source: user
 Status: registered_not_implemented
 Scientific question: Can a fixed-compute population over canvas hypotheses preserve useful diversity while reallocating compute via birth/death decisions?
 Minimum experiment: Future standalone equal-compute population audit with explicit particle accounting.
-Decision rule: Do not implement in this round; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
+Decision rule: Cheap diagnostic may run later, but it is not a prerequisite for M1 implementation/full; do not borrow theoretical guarantees from continuous birth–death sampling without proof.
 
 ## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
-Status: registered_not_implemented
+Status: downgraded
 Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
 Minimum experiment: F1 is diagnostic only; future assembly method needs a separate preregistered protocol.
-Decision rule: Do not implement in this round; no fragment fusion after seeing outcomes.
+Decision rule: Do not prioritize in this round; no fragment fusion after seeing outcomes.
 
 ## IDEA-015 / A1: Metamorphic Equivariance Auxiliary Evaluator
 
 Source: user
-Status: completed_negative
+Status: stopped_completed_negative
 Scientific question: Does strict local alpha-renaming equivariance add predictive value for functional pass after controlling for canvas, seed, and confidence?
 Minimum experiment: F2 paired mirrors over reference-verified alpha transformations.
 Decision rule: Report predictive increment or negative evidence; never call stability correctness and never use it as an oracle.

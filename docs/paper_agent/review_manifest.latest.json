@@ -70,9 +70,11 @@
   "ccfa_submission_ready": false,
   "canonical_roadmap": {
     "active_work": [
-      "BASE-PROTOCOL-01",
-      "STAT-GROUP-01",
-      "EXT-FEAS-01"
+      "FAST-SPRINT-01",
+      "P1.1-official-CAL",
+      "P2.1-grouped-statistics",
+      "M1.1-abductive-program-state-bridge",
+      "P4.1-ExecRepoBench"
     ],
     "base_task_groups_behind_6707_spans": 148,
     "document": "docs/paper_agent/ccfa_master_roadmap.zh.md",
@@ -92,7 +94,27 @@
       "F1": "M4-D0",
       "F2": "A1_completed_negative_auxiliary",
       "F3_F4": "M1-D0_killed_fixed_proxy"
-    }
+    },
+    "baseline_order": [
+      "official_CAL",
+      "DreamOn",
+      "rho_EOS_faithful_infilling_compatibility"
+    ],
+    "lrdllm_scope": "blocker_audit_only",
+    "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
+    "p2_span_micro_role": "descriptive_only",
+    "p4_first_external_benchmark": "ExecRepoBench",
+    "m1_status": "implementation_started",
+    "m2_m3_status": "cheap_diagnostics_not_prerequisites",
+    "m4_status": "downgraded",
+    "a1_status": "stopped_completed_negative_auxiliary",
+    "p3_status": "deferred_until_official_CAL",
+    "gpu_full_order": [
+      "official_CAL_full",
+      "M1_MultiLine_full",
+      "DreamOn_official_full"
+    ],
+    "full_run_integrity": "resume_dedup_missing_duplicate_error_audit_required"
   },
   "central_claim": "Unknown-length DLLM infilling exhibits a measurable distinction between canvas adequacy and action-specific rescue adequacy under the registered model, seed, decoding, budget, oracle-length, and evaluator settings. Oracle-sufficient canvas recovers many failures, while deployable selection remains harm-prone; non-recovery does not uniquely prove a backbone cause.",
   "controller": {
@@ -189,6 +211,11 @@
   },
   "frozen_test_status": "sealed",
   "h200_evidence_base_accepted": true,
+  "hardware_evidence_boundary": {
+    "a6000_historical": "802/1033",
+    "h200_evidence_base": "796/1033",
+    "pooling_rule": "do_not_silently_pool_or_relabel_as_heldout"
+  },
   "h200_material_drift_no_longer_blocks_controller_v2": true,
   "lrdllm": {
     "audit_doc": "docs/paper_agent/lrdllm_protocol_audit.zh.md",

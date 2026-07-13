@@ -1,28 +1,32 @@
 # Experiment Queue
 
-Updated: 2026-07-12 UTC
+Updated: 2026-07-13 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
 
-## Active Foundation Queue
+## Active FAST-SPRINT-01 Queue
 
-These work packages close paper-critical gaps and may run concurrently as independent jobs. They are not performance gates for affordable exploratory method runs.
+These work packages may run concurrently where CPU/IO permits. GPU full jobs are serialized: official CAL full -> M1 MultiLine full -> DreamOn official full. Frozen test remains sealed with `test_evaluation_count=0`.
 
-### BASE-PROTOCOL-01: official external baseline compatibility
+### P1.1: official CAL protocol audit, smoke, then full
 
-Status: selected_next. Audit official CAL, rho-EOS, DreamOn, and LR-DLLM availability. Freeze upstream commits and produce a protocol matrix covering model, data/split, prompt, canvas/length policy, steps/forwards, seeds, evaluator, training/oracle status, wall-clock, GPU, memory, and comparison class. Official CAL is first adaptation priority; rho-EOS requires an infilling compatibility decision; DreamOn belongs to a training-based stratum; LR-DLLM must remain blocked unless executable Stage I/II detail exists.
+Status: executing. Freeze official CAL upstream commit; audit model, prompt, exact dataset mapping/intersection, canvas, steps, forward count, seed, evaluator, wall time, GPU and memory. 12-case technical smoke auto-promotes to full allowed population if integrity passes; no performance gate. local CAL/CAL-lite is never official CAL. DreamOn waits after CAL full and stays training-based; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
 
-### STAT-GROUP-01: full-allowed cluster-aware statistics
+### P2.1: full-allowed grouped statistics
 
-Status: selected_next. Reanalyze the existing 6707-span, three-policy results using the 148 allowed HumanEval base tasks as clusters. Required outputs: grouped bootstrap CIs, paired group-aware test, config/length/error CIs, accuracy--cost frontier, and help/harm/recoverability intersections. No GPU and no frozen test.
+Status: executing CPU. Input existing `6707` spans / `20121` results; verify `148` groups. Primary: equal-weight base-task macro accuracy (within-task policy accuracy then task mean). Secondary: span-micro descriptive totals. Required: 10,000 fixed-seed cluster bootstrap, task paired wins/losses, group-aware label-swap permutation, config/length/error strata with group count + cluster CI, accuracy-cost frontier, and control/CAL-lite/oracle 8-cell intersection. No row-independent significance and no frozen test.
 
-### EXT-FEAS-01: non-HumanEval external benchmark feasibility
+### P4.1: ExecRepoBench external evaluator preparation
 
-Status: selected_next. Compare at least three real-code candidates and recommend one with repository/file context, executable or reliable evaluation, public licensing, a freezable split, and feasible H200 cost. HumanEval MultiLine/RandomSpan does not satisfy this item.
+Status: executing audit/smoke. ExecRepoBench is selected directly as the first external benchmark. Freeze data version and Qwen evaluator commit; audit download/environment/license/fields; cluster by repository; smoke must cover multiple repositories and all six fill types. Do not open final external results before M1 configuration freeze.
 
-### METHOD-DIAGNOSTICS-01: independent M2/M3/M4 premises
+### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 
-Status: brief_required. Cheap premise diagnostics may be designed and run in parallel on a frozen shared bank, with separate outputs and no fusion. F1/F2/F3/F4 already map to M4-D0/A1/M1-D0; they do not count as four implemented methods. M1 is the first full method candidate after its own new brief.
+Status: executing. Write independent brief then immediately implement suffix backward obligations, prefix/candidate forward facts, contradiction set, dependency-cone targeted remasking, and safe fallback. Use LLaDA-8B-Base, existing evaluator, canvas `16/32/64/128`, seeds `0/1`, 64 steps. 12-case MultiLine technical smoke auto-promotes to all `5079` non-frozen MultiLine spans when technical checks pass. Report fixed64, ordinary-confidence grid, equal-compute generic remask, M1 score-only, M1 full, and oracle ceiling; include task-macro delta, span micro, help/harm, buckets, budgets, wall/memory. No full performance gate.
+
+### M2/M3/M4/A1 portfolio disposition
+
+M2/M3 cheap diagnostics are optional and not M1 prerequisites. M4 is downgraded. A1 is stopped as completed negative auxiliary. P3 is deferred until official CAL evidence.
 
 ## Historical Phase 5 Queue
 

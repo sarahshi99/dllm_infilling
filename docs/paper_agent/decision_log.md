@@ -1,11 +1,18 @@
 # Decision Log
 
-Updated: 2026-07-12 UTC
+Updated: 2026-07-13 UTC
 
 - Canonical route is now `docs/paper_agent/ccfa_master_roadmap.zh.md`; later agents must not infer the current queue from historical Phase numbering.
 - P0 narrative is synchronized for the current evidence snapshot. P1 official baselines, P2 group-aware analysis of 6707 spans/148 base-task clusters, and P4 non-HumanEval external evaluation remain highest-priority open gaps.
 - Four formal methods are M1 Abductive Program-State Bridge, M2 Constraint-Homotopy, M3 Birth--Death Canvas Diffusion, and M4 Semantic Particle Assembly. Phase 5 completed only M1-D0/M4-D0/A1 diagnostics; no formal method has been completed.
 - Independent premise diagnostics may share a frozen bank and run concurrently with separate outputs. Exploratory full runs use technical integrity gates only; publication promotion retains fresh grouped validation and compute-matched evidence requirements.
+
+- Route-focus decision: `FAST-SPRINT-01` is `iterate_and_execute`, not blocked. Official baseline order is official CAL -> DreamOn -> rho-EOS compatibility; LR-DLLM remains blocker audit only.
+- P2.1 primary estimand is equal-weight base-task macro accuracy: calculate each policy's accuracy within each base task, then average over `148` task groups. Span-micro totals remain descriptive only. All inferential resampling/tests are cluster-aware; row-independent significance is prohibited.
+- P4 directly selects ExecRepoBench as the first external benchmark; no generic three-candidate research phase. Freeze data/Qwen evaluator commits and complete repository-grouped, six-fill-type smoke before any final external outcome.
+- M1 full implementation starts immediately; M2/M3 cheap diagnostics are not prerequisites, M4 is downgraded, A1 is stopped, and P3 waits for official CAL. M1 technical smoke promotes directly to full absent integrity failure; performance gates are paper-promotion-only.
+- Evidence-hardware boundary: `802/1033` is A6000 historical evidence; `796/1033` is the H200 evidence base. Do not silently pool or relabel them as held-out performance.
+- Frozen controller test remains sealed with `test_evaluation_count=0`.
 
 - Phase 5 manual H200 launch completed from baseline `45bead22e3d21daa707be724cf2bdcbbf776592a`; the former pre-launch state was infrastructure-blocked/scientifically pending, not a method failure.
 - The shared bank passed integrity: `1332/1332` base rows over `148` tasks and `728/728` alpha auxiliary rows over `91` verified tasks, with zero missing/duplicate/extra/error/frozen rows.
