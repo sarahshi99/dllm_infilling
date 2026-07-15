@@ -66,7 +66,7 @@
     "status": "completed",
     "sufficient_canvas_effect": 29
   },
-  "branch": "codex/ccfa-roadmap-reconciliation",
+  "branch": "codex/ccfa-roadmap-reconciliation-recheck-20260715",
   "ccfa_submission_ready": false,
   "canonical_roadmap": {
     "active_work": [
@@ -104,6 +104,15 @@
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
     "p4_first_external_benchmark": "ExecRepoBench",
+    "p1_official_cal_source_audit": {
+      "cal_commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+      "humaneval_infilling_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+      "exact_multiline_task_id_intersection": 5815,
+      "non_frozen_allowed_intersection": 5079,
+      "smoke_cases": 12,
+      "status": "source_mapping_audited_gpu_pending"
+    },
+    "p4_exec_repobench_status": "dataset_fa61028c_qwen_33bc6aa_recorded_checkout_fetch_blocked_no_smoke",
     "m1_status": "implementation_started_real_two_stage_remask_protocol",
     "m1_protocol": {
       "dataset": "HumanEval-MultiLineInfilling",

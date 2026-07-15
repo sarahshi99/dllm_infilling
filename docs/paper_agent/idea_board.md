@@ -1,6 +1,6 @@
 # Research Idea Board
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-15 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
@@ -10,7 +10,7 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | implementation started | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M1` | Abductive Program-State Bridge | real two-stage implementation exists; active runtime is tracked separately and no performance conclusion is implied | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
 | `M2` | Constraint-Homotopy Infilling | optional cheap diagnostic; not M1 prerequisite | IDEA-012 |
 | `M3` | Birth--Death Canvas Diffusion | optional cheap diagnostic; not M1 prerequisite | IDEA-013 |
 | `M4` | Semantic Particle Assembly | downgraded | IDEA-014 / F1 was only `M4-D0` premise diagnostic |

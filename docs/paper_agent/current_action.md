@@ -1,6 +1,6 @@
 # Current Paper-Agent Action
 
-更新时间：2026-07-13 UTC
+更新时间：2026-07-15 UTC
 
 权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`
 
@@ -20,7 +20,7 @@ Phase 5 已完整结束；本轮 operational decision 是 `iterate_and_execute`�
 
 ### `P1.1-OFFICIAL-CAL`
 
-固定 official CAL repository commit；审计模型、prompt、dataset mapping、canvas、steps、forward count、seed、evaluator、wall time、GPU、memory。只在 exact current-manifest mapping 或明确交集上比较；12-case technical smoke 通过后自动运行完整 allowed population，不要求先看到正向效果。local CAL/CAL-lite 不得改名为 official CAL。
+已固定 official CAL `741e8418a88a732b4c92812424d4f03cab1f7b1f` 与 official HumanEval-Infilling `88062ff9859c875d04db115b698ed4b0f0395170`。source audit 验证 MultiLine `5815/5815` exact task-ID mapping，project non-frozen intersection=`5079`，并写出无 outcome 的 12-case smoke manifest。审计覆盖模型、prompt、动态 canvas、steps/forward contract、seed 缺口、evaluator、environment/license；GPU smoke 等现有 M1 作业不再被打断后执行。local CAL/CAL-lite 不得改名为 official CAL。
 
 输出：
 
@@ -48,7 +48,7 @@ DreamOn 在 CAL full 后按 training-based stratum 运行；rho-EOS 仅在 faith
 
 ### `P4.1-EXECREPOBENCH`
 
-直接选择 ExecRepoBench 作为首个 external benchmark：固定 dataset version 与 Qwen evaluator commit，审计下载、环境、许可、字段；按 repository 分组；完成至少覆盖多个 repository 和六类 fill_type 的 evaluator smoke。M1 配置冻结前不得打开最终 external result。
+直接选择 ExecRepoBench 作为首个 external benchmark：dataset `fa61028c` 与 Qwen evaluator `33bc6aa` 已固定。Qwen checkout fetch 在 2026-07-15 再次被 approval control plane `422` 拒绝；不绕过下载，也不误报 evaluator smoke。checkout 恢复后审计环境、许可、字段、repository grouping 和多 repository/六 fill_type smoke；M1 配置冻结前不得打开最终 external result。
 
 ## 执行边界
 

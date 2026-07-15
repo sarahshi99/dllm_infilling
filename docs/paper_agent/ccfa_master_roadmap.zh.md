@@ -37,10 +37,10 @@
 | ID | 工作 | 当前状态 | 已有证据 | 关闭条件 |
 |---|---|---|---|---|
 | `P0-NARRATIVE` | 统一仓库叙事 | `closed_for_current_snapshot` | official second-regime、Dream-Coder full、Phase 5 result 已存在 | 每个 decision-bearing result 后同步 readiness、claim、paper、table、queue 和 ledger |
-| `P1-BASELINES` | 协议匹配强 baseline | `open_highest_priority` | local controls 和 literature anchors 存在，但不是正式复现 | 顺序固定为 official CAL -> DreamOn -> rho-EOS compatibility；CAL technical smoke 通过后直接 full；DreamOn 为 training-based stratum；rho-EOS 只有忠实 infilling adaptation 才进入 smoke/full；LR-DLLM 仅保留 blocker audit |
-| `P2-GROUP-STATS` | 6707-row group-aware statistics | `executing` | row-level totals 已完成；Phase 5 另有 148-group bootstrap | primary estimand 是每个 base task 内先算 policy accuracy、再对 task 等权平均（equal-weight base-task macro accuracy）；span-micro rate 仅 descriptive；以 `HumanEval/<id>` 为 cluster，补 10,000 fixed-seed bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 help/harm/oracle 交集 |
+| `P1-BASELINES` | 协议匹配强 baseline | `official_CAL_source_mapping_audited_gpu_pending` | official CAL `741e8418` 与 HumanEval-Infilling `88062ff` 已固定；MultiLine `5815/5815` exact mapping、allowed intersection `5079`、12-case smoke manifest 已写出 | 顺序固定为 official CAL -> DreamOn -> rho-EOS compatibility；补齐 seed adapter、requirements、runtime manifest 后 CAL technical smoke 通过即 full；DreamOn 为 training-based stratum；rho-EOS 只有忠实 infilling adaptation 才进入 smoke/full；LR-DLLM 仅保留 blocker audit |
+| `P2-GROUP-STATS` | 6707-row group-aware statistics | `completed_CPU_c66678a` | `6707` spans / `20121` policy results、`148` groups；compact statistics/figure data 已生成 | primary estimand 是每个 base task 内先算 policy accuracy、再对 task 等权平均（equal-weight base-task macro accuracy）；span-micro rate 仅 descriptive；10,000 bootstrap、paired wins/losses、label-swap、strata CI、cost frontier 和 8-cell intersection 已完成 |
 | `P3-SELECTIVE` | 真正两阶段/三头 selective controller | `deferred_until_official_CAL` | V1--V3 是旧 validation route closure，不等于该新设计 | official CAL 完成后再决定是否启动；只可使用新数据源和 grouped split；canvas/rescue/harm 分头；禁止 V4 式阈值续调 |
-| `P4-EXTERNAL` | 非 HumanEval、真实软件工程外部评价 | `executing_ExecRepoBench_first` | MultiLine/RandomSpan 仍是 HumanEval 变体 | 首选且唯一当前首发 benchmark 为 ExecRepoBench；固定 dataset/Qwen evaluator commit、许可和字段；按 repository cluster；M1 配置冻结前只做多 repo、六类 fill_type 的 evaluator smoke，不打开最终 external result |
+| `P4-EXTERNAL` | 非 HumanEval、真实软件工程外部评价 | `ExecRepoBench_pinned_checkout_blocked` | MultiLine/RandomSpan 仍是 HumanEval 变体；dataset `fa61028c` / Qwen evaluator `33bc6aa` 已记录，但 Qwen checkout fetch 被 approval control plane `422` 拒绝 | 首选且唯一当前首发 benchmark 为 ExecRepoBench；checkout 恢复后固定许可/字段、按 repository cluster，完成多 repo、六类 fill_type evaluator smoke；M1 配置冻结前不打开最终 external result |
 
 ### P1 baseline 的统一协议表
 

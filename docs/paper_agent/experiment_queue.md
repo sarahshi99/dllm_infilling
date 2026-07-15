@@ -1,6 +1,6 @@
 # Experiment Queue
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-15 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
 
@@ -10,7 +10,7 @@ These work packages may run concurrently where CPU/IO permits. GPU full jobs are
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
-Status: executing. Freeze official CAL upstream commit; audit model, prompt, exact dataset mapping/intersection, canvas, steps, forward count, seed, evaluator, wall time, GPU and memory. 12-case technical smoke auto-promotes to full allowed population if integrity passes; no performance gate. local CAL/CAL-lite is never official CAL. DreamOn waits after CAL full and stays training-based; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
+Status: source/mapping audit completed. CAL `741e8418` + HumanEval-Infilling `88062ff` are pinned; `5815/5815` MultiLine IDs match exactly and the sealed allowed intersection is `5079`. `analysis_outputs/official_cal_source_audit_20260715_v1/` contains the 12-case smoke manifest and contract audit. GPU smoke waits for the pre-existing M1 job rather than disrupting it; it must capture seed adapter, runtime forwards, wall/GPU/memory and resume/dedup/missing/duplicate/error. local CAL/CAL-lite is never official CAL. DreamOn waits after CAL full; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
 
 ### P2.1: full-allowed grouped statistics
 
@@ -18,7 +18,7 @@ Status: completed CPU (`c66678a`). Input existing `6707` spans / `20121` results
 
 ### P4.1: ExecRepoBench external evaluator preparation
 
-Status: executing audit/smoke. ExecRepoBench is selected directly as the first external benchmark. Freeze data version and Qwen evaluator commit; audit download/environment/license/fields; cluster by repository; smoke must cover multiple repositories and all six fill types. Do not open final external results before M1 configuration freeze.
+Status: source refs pinned but evaluator checkout blocked. ExecRepoBench is selected directly as the first external benchmark; dataset `fa61028c` and Qwen evaluator `33bc6aa` are recorded. A direct Qwen checkout fetch was blocked by approval-control-plane `422`; no bypass, smoke, or final external result has been claimed. On checkout recovery, audit download/environment/license/fields, cluster by repository, and cover multiple repositories/six fill types before M1 configuration freeze.
 
 ### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 

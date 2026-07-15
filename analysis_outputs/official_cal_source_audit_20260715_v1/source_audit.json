@@ -1,0 +1,63 @@
+{
+  "environment": {
+    "missing_required_packages": [
+      "scipy"
+    ],
+    "python": "3.10.20",
+    "required_package_present": {
+      "accelerate": true,
+      "datasets": true,
+      "numpy": true,
+      "scipy": false,
+      "torch": true,
+      "tqdm": true,
+      "transformers": true
+    }
+  },
+  "gpu_execution_blocker": "existing M1 GPU job predates CAL audit; preserve current job and do not violate requested serial ordering",
+  "humaneval_infilling": {
+    "commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "current_data_sha256": "3a1cb133597ff699fde9dba92788ef8dabf46f273f44477195b36639bd908306",
+    "current_multiline_rows": 5815,
+    "current_non_frozen_allowed_rows": 5079,
+    "evaluator_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/human_eval_infilling/evaluate_functional_correctness.py",
+    "evaluator_sha256": "5c2ec64099ce03af215590bf60e20216ecf5fd64907bea70ab0e2da14db4d31c",
+    "exact_task_id_intersection": 5815,
+    "license": "MIT",
+    "official_data_sha256": "2f341612eee1d35da1357a4f365e0c0b3ba6e2b62eb491e88aaefa4855af0349",
+    "official_multiline_rows": 5815,
+    "repository": "https://github.com/openai/human-eval-infilling"
+  },
+  "official_cal": {
+    "benchmark_default": "single-line; smoke contract uses multi-line exact mapping",
+    "cfg_scale": 0.0,
+    "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+    "dstep": 4,
+    "formal_decode_steps": "selected length when --steps is omitted",
+    "forward_count_contract": "one model forward per CAL probe plus selected-length formal decode forwards",
+    "initial_generation_length": 8,
+    "license_file_present": false,
+    "llada_script": "/home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/llada_cal/llada_code_infilling.py",
+    "llada_script_sha256": "5cda5fe1c46a0d334e7685e66d93f10d7f47516ecb3a1718bbd9ccbf9f54cc8d",
+    "max_generation_length": 64,
+    "model_default": "GSAI-ML/LLaDA-8B-Base",
+    "oracle_default": false,
+    "prompt_contract": "official prefix + masked middle + suffix",
+    "repository": "https://github.com/NiuHechang/Calibrated_Adaptive_Length",
+    "seed_contract": "no explicit seed CLI/set_seed found in llada_code_infilling.py",
+    "source_contains_oracle_switch": "--oracle; prohibited for deployable comparison smoke",
+    "source_text_mentions_gpu_ids": true,
+    "source_uses_official_evaluator": "evaluate_functional_correctness.py --benchmark_name=<split>",
+    "span": 1,
+    "temperature": 0.0,
+    "use_bias_default": false
+  },
+  "smoke": {
+    "case_count": 12,
+    "execution_started": false,
+    "performance_gate": false,
+    "population": "exact_current_manifest_intersection_non_frozen_multiline",
+    "test_evaluation_count": 0
+  },
+  "status": "source_and_mapping_audited_gpu_execution_pending"
+}

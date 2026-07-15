@@ -1,6 +1,6 @@
 # Decision Log
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-15 UTC
 
 - Canonical route is now `docs/paper_agent/ccfa_master_roadmap.zh.md`; later agents must not infer the current queue from historical Phase numbering.
 - P0 narrative is synchronized for the current evidence snapshot. P1 official baselines, P2 group-aware analysis of 6707 spans/148 base-task clusters, and P4 non-HumanEval external evaluation remain highest-priority open gaps.
@@ -8,6 +8,8 @@ Updated: 2026-07-13 UTC
 - Independent premise diagnostics may share a frozen bank and run concurrently with separate outputs. Exploratory full runs use technical integrity gates only; publication promotion retains fresh grouped validation and compute-matched evidence requirements.
 
 - Route-focus decision: `FAST-SPRINT-01` is `iterate_and_execute`, not blocked. Official baseline order is official CAL -> DreamOn -> rho-EOS compatibility; LR-DLLM remains blocker audit only.
+- P1.1 source audit fixed CAL `741e8418a88a732b4c92812424d4f03cab1f7b1f` and HumanEval-Infilling `88062ff9859c875d04db115b698ed4b0f0395170`. Official/current MultiLine mapping is exact (`5815` IDs), current non-frozen intersection is `5079`, and a 12-case no-outcome smoke manifest is written. No CAL GPU evaluation has started and no existing M1 job was stopped or reordered.
+- P4 remains ExecRepoBench-first. The recorded dataset/Qwen refs are `fa61028c`/`33bc6aa`; direct Qwen checkout fetch was blocked by approval-control-plane `422`, so no evaluator smoke or external result is claimed.
 - P2.1 primary estimand is equal-weight base-task macro accuracy: calculate each policy's accuracy within each base task, then average over `148` task groups. Span-micro totals remain descriptive only. All inferential resampling/tests are cluster-aware; row-independent significance is prohibited.
 - P4 directly selects ExecRepoBench as the first external benchmark; no generic three-candidate research phase. Freeze data/Qwen evaluator commits and complete repository-grouped, six-fill-type smoke before any final external outcome.
 - M1 full implementation starts immediately; M2/M3 cheap diagnostics are not prerequisites, M4 is downgraded, A1 is stopped, and P3 waits for official CAL. M1 technical smoke promotes directly to full absent integrity failure; performance gates are paper-promotion-only.

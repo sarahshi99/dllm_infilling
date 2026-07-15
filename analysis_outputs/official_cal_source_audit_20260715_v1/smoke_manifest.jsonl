@@ -1,0 +1,12 @@
+{"smoke_order": 0, "source_row_id": 0, "task_group": "HumanEval/0", "task_id": "MultiLineInfilling/HumanEval/0/L0_L0", "task_id_sha256": "725433a7c0297770358724de9de3d15555cea8f3abff750460ae47acb2bb6419"}
+{"smoke_order": 1, "source_row_id": 462, "task_group": "HumanEval/19", "task_id": "MultiLineInfilling/HumanEval/19/L3_L3", "task_id_sha256": "a75f405346026e837e2c9b6e9715b811eac9a9466ad54593765d00479ca0b56d"}
+{"smoke_order": 2, "source_row_id": 923, "task_group": "HumanEval/39", "task_id": "MultiLineInfilling/HumanEval/39/L3_L10", "task_id_sha256": "2290a5f1fa7725abf2153297292d496e77b0370e4291185dfd17e1fd70f94838"}
+{"smoke_order": 3, "source_row_id": 1385, "task_group": "HumanEval/64", "task_id": "MultiLineInfilling/HumanEval/64/L1_L4", "task_id_sha256": "6f90be41122d537795d9702ce388cc0caaf3b1378960dd7d8d73d9374ad5b938"}
+{"smoke_order": 4, "source_row_id": 1847, "task_group": "HumanEval/94", "task_id": "MultiLineInfilling/HumanEval/94/L3_L9", "task_id_sha256": "9b529125647f2760c25b28e5d6b5f171d76538f04a3e58470b64fd19623389d8"}
+{"smoke_order": 5, "source_row_id": 2308, "task_group": "HumanEval/99", "task_id": "MultiLineInfilling/HumanEval/99/L13_L16", "task_id_sha256": "ca13a8129bdbaa94efecacc671913ae48ed4a39839ade95985a7049d4eb7c63d"}
+{"smoke_order": 6, "source_row_id": 2770, "task_group": "HumanEval/108", "task_id": "MultiLineInfilling/HumanEval/108/L3_L4", "task_id_sha256": "c1b8554d25395970edd53e368ae70acb9d0d552deaa3e35b20dc2aeb4914a5fa"}
+{"smoke_order": 7, "source_row_id": 3231, "task_group": "HumanEval/119", "task_id": "MultiLineInfilling/HumanEval/119/L11_L13", "task_id_sha256": "a83c3a1baa7f1174491d603a5908702a02cf409c6b22dda044c324b4e21f7c47"}
+{"smoke_order": 8, "source_row_id": 3693, "task_group": "HumanEval/129", "task_id": "MultiLineInfilling/HumanEval/129/L2_L12", "task_id_sha256": "cc87cd3060615bcd77ea0b4dfde160a6e35b888173d2e26928d85d55fcf65e8f"}
+{"smoke_order": 9, "source_row_id": 4155, "task_group": "HumanEval/133", "task_id": "MultiLineInfilling/HumanEval/133/L3_L4", "task_id_sha256": "adfe7f59abcf14665a41d0647c778859ba194bacc615809fa2829039e6124417"}
+{"smoke_order": 10, "source_row_id": 4616, "task_group": "HumanEval/145", "task_id": "MultiLineInfilling/HumanEval/145/L5_L5", "task_id_sha256": "4d734720538774d95be6c356c76a63782bdbec1317c50d85832e203c98fa6241"}
+{"smoke_order": 11, "source_row_id": 5078, "task_group": "HumanEval/163", "task_id": "MultiLineInfilling/HumanEval/163/L3_L3", "task_id_sha256": "a8b6024e4e0fc528ba742e7837435b4b0abc43002e8c537da863b0ef6bd404b3"}
