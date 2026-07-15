@@ -376,3 +376,11 @@ Important ablation signals:
 - `docs/paper_agent/frozen_controller_protocol.zh.md`
 - `docs/paper_agent/lrdllm_protocol_audit.zh.md`
 - `docs/paper_agent/review_manifest.latest.json`
+
+## 2026-07-15 Execution Sprint V1 handoff
+
+- Authoritative branch: `codex/ccfa-execution-sprint-v1`; base verified as `ce416c4670fbb118cc8ac70d2a3ef9315f4912d1`. Do not rebase from `afd3c45`.
+- Pushed implementation checkpoint: `9335d84076a768ce148375a6ef3b6fee2baa3277` (`research: launch-safe candidate portfolio runners`).
+- Historical M1 MultiLine: safely paused/resumable with `27217/45711`, `12/5079`, `12/5079`; exact paths/resume command are in `runtime_status.current.json`; no partial performance viewed.
+- New CPU artifacts: `analysis_outputs/official_cal_corrected_protocol_20260715_v1/` and `analysis_outputs/phase6_score_only_candidate_selection_20260715_v1/`.
+- Host GPU access and scipy installation are currently blocked by approval-control-plane `422`; do not bypass via sandbox/tmux. On authorization, launch `scripts/manual_launch_m1_abductive_program_state_bridge_20260715.sh` first, then audit 10 minutes before any second process.

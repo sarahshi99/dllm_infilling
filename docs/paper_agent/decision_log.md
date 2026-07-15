@@ -70,3 +70,7 @@ Updated: 2026-07-15 UTC
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.
 - Every new experiment must have a stop condition, success/failure rule, input manifest, and expected report path before GPU execution.
 - Current top immediate work is web review and paper drafting from consolidated evidence, not new second-regime GPU work or Controller V4.
+
+- 2026-07-15 execution-sprint correction: `codex/ccfa-execution-sprint-v1@ce416c4` supersedes `afd3c45` for implementation. M1 MultiLine is `safely_paused_resumable`, not killed; no partial M1 outcome was inspected. New M1--M4 runners use a prefix/suffix-only visible task and construct evaluator/test state only after generation.
+- Corrected CAL audit reproduces the official seed-42 100-row SingleLine demo split and field-hash maps it to 100 MultiLine rows. Official comparison population is `4990` non-frozen CAL-Rest common rows, not 5079. `scipy` remains missing; normal and escalated installation attempts are network/approval blocked, so no official CAL GPU run is claimed.
+- Historical completed Phase6 bank analysis (`5079×8`, 148 clusters) is named `Phase6 score-only candidate selection / M1 historical precursor`. Fixed combined deterministic proxy has task-macro delta `+0.0531` vs fixed64 with 95% cluster CI `[+0.0148,+0.0957]`; fixed score-only abductive selector delta is `+0.0200` with CI `[-0.0152,+0.0599]`. This is a fixed, non-tuned historical analysis, not M1 full and not method promotion.

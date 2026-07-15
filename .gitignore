@@ -15,6 +15,7 @@ logs/
 model_generalization_runs/
 analysis_outputs/long_underestimate_detector/**/sweep.csv
 analysis_outputs/long_underestimate_detector/**/sweep.json
+analysis_outputs/phase6_score_only_candidate_selection_20260715_v1/chunks/
 .worktrees/
 
 # Local editor / agent state

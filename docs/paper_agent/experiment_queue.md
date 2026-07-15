@@ -252,3 +252,10 @@ Failure criterion: Any frozen-controller-test row appears, policies are tuned af
 Stop condition: Stop after one full allowed Dream-Coder SingleLine run; do not add Dream-Coder E/F/G actions or tune policy after results.
 Expected report path: `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
 Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and `2781` policy rows. Primary/control `735/927`, best simple length policy `744/927`, oracle-sufficient canvas `858/927`; oracle gain vs primary `137`, simple help/harm `25/16`, oracle harm vs primary `14`, rescue/non-canvas-limited `55`. Interpretation: optional full allowed second-backbone SingleLine diagnostic, not model-agnostic confirmation.
+
+## Execution Sprint V1 queue update — 2026-07-15
+
+1. **M1 RandomSpanLight** — implementation pushed and GPU launcher prepared: `12` technical smoke then integrity-only auto-full to `148`, never 5079. Blocked only by host GPU approval; no scientific performance gate.
+2. **M2/M3/M4 RandomSpanLight** — independent output directories and launchers prepared. M2 has vanilla fixed64 + gradual + abrupt; M3 reports exact token-forward accounting and only claims equal-forward; M4 reports actual best/assembly/repair accuracy with standalone 512/576-forward costs.
+3. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are prepared. Smoke then full is scripted, but `scipy` is absent and its installation is host-approval blocked. Do not label local CAL/CAL-lite as official CAL.
+4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.

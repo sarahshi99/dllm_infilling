@@ -45,3 +45,9 @@ Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3�
 ## 证据命名
 
 historical `802/1033` 是 A6000 historical；`796/1033` 是 H200 evidence base。两者都不是 final held-out result，且不得合并成单一结论。
+
+## 2026-07-15 Execution Sprint V1 current state
+
+`codex/ccfa-execution-sprint-v1`（base `ce416c4`）是权威执行分支；`afd3c45` 已 superseded。M1 5079 MultiLine 已安全暂停、可恢复但不自动恢复；M1 RandomSpanLight 新 runner、M2/M3/M4 独立 runner、共同 grouped analyzer 与 CAL adapter 已在 `9335d84` 后继续实现。完整 CPU tests 已通过，frozen test 仍为 sealed/count=0。
+
+真实 GPU 启动尚未发生：主机 GPU 只读审计和 `scipy` 下载的 escalation 均被 approval control plane `422 model not found: codex-auto-review` 拒绝；不绕过该控制面。下一项一旦权限恢复是 M1 RandomSpanLight `12→148`，随后 M2、M3、M4；official CAL smoke/full 可作为第二进程但先满足其 dependency gate。

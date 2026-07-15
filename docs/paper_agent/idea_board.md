@@ -205,3 +205,13 @@ Cost: Low CPU, completed.
 Risks: Consolidation can accidentally mix A6000 historical and H200 current evidence; must preserve labels.
 Decision rule: Every table row must cite one compact artifact and carry status labels: H200 evidence, official diagnostic, hard-tail stress, blocked, validation-only, or sealed.
 Related files: `analysis_outputs/paper_evidence_consolidation_20260710_v1/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `docs/paper_agent/codex_handoff.latest.zh.md`, `docs/results/run_registry.md`
+
+## IDEA-011: Candidate portfolio before method promotion
+
+Status: active, no primary selected.
+
+Question: Can independently implemented M1--M4 improve over fixed64 under task-group-aware uncertainty and matched standalone compute?
+
+Guardrails: do not fuse methods; 148 RandomSpanLight is development evidence; only up to two methods may move to 296/927; 5079 is selected-method-only; frozen test stays sealed.
+
+Current evidence: historical Phase6 score-only precursor has a positive fixed Phase5 combined proxy point/CI against fixed64, while the fixed abductive score-only selector is weak; neither is true M1 full and neither selects the paper method.

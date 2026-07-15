@@ -113,3 +113,11 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 3. 方法线：M1--M4 都是独立候选，当前不选主方法。四条线的 code/test/brief/analysis/launcher 均已完成；M1 的 12-case MultiLine technical smoke 已通过并自动开始 `5079` full，existing candidate-bank PID `1195368` 没有暂停。2026-07-13 资源复查后启动 M2 会使剩余显存低于 `25,600 MiB`，故 M2/M3/M4 不抢占 M1，待安全余量满足时依次做 12-case→`148` full；M4 保持先 full-148 offline assembly audit 再 12-case repair→`148` repair full。性能 gate 只服务后续论文 promotion，A1 仍是停止的负辅助，P3 等 official CAL 后再决定。
 
 P1/P2/P4 未关闭前，可以做探索实验，但任何方法结果都不得宣称 CCF-A-ready 或 SOTA。外部 baseline、严谨统计和真实场景不能被新方法实验替代。
+
+## 2026-07-15 Execution Sprint V1（superseding status）
+
+- 权威基线为 `origin/codex/ccfa-method-portfolio-v0@ce416c4670fbb118cc8ac70d2a3ef9315f4912d1`；新权威分支为 `codex/ccfa-execution-sprint-v1`。`afd3c45` integration branch 已 superseded，不能作为实现基础。
+- 历史 M1 5079 MultiLine 是 `safely_paused_resumable`：stage-one `27217/45711`，generic `12/5079`，dependency-cone `12/5079`，所有审计行 unique、无 error；没有读取部分性能。只有最终选中方法才可在原目录以 `--auto-full --selected-method-only-5079` 恢复。
+- M1--M4 仍是独立候选，尚未选论文主方法。新 V0 数据路线固定为 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine development → selected-method-only 5079 MultiLine → configuration freeze 后 ExecRepoBench`。
+- corrected official CAL protocol 已 CPU 审计：seed-42 demo=100，SingleLine Rest=933/non-frozen=838，MultiLine full=5815、demo-linked exclusion=100、Rest=5715、non-frozen CAL-Rest common=`4990`。5079 不得表述为 official CAL exact population。正式 smoke/full 因 host GPU approval 和缺失 `scipy` 均待解除。
+- 已完成 historical `Phase6 score-only candidate selection / M1 historical precursor`：`40632=5079×8` 完整候选库，148 task clusters；它不是 M1 full，也不授权调参或融合。

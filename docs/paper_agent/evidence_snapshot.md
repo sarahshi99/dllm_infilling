@@ -91,3 +91,9 @@ Interpretation: the current evidence supports using `midcons` as a short/medium 
 - strict_heldout_pass: `False`
 
 Interpretation: the simple dependency-free multivariate score does not pass the offline GPU gate. GPU work remains blocked until a safer signal, trace-enabled evidence, dynamic canvas control, or length-regularized modeling plan is justified.
+
+## Execution Sprint V1 evidence anchor
+
+- P2.1 remains complete with 148 task-group cluster inference; frozen test count remains `0`.
+- Historical Phase6 candidate bank is complete (`40632/40632`) and its fixed score-only precursor analysis covers `5079` spans / `148` groups. It finds ordinary confidence materially below fixed64 (macro delta `-0.0620`, 95% CI `[-0.0944,-0.0285]`); Phase5 combined deterministic proxy is positive (`+0.0531`, CI `[+0.0148,+0.0957]`); fixed abductive score-only is weak (`+0.0200`, CI crosses zero). These are historical selector observations, not M1 full outcomes.
+- official CAL corrected provenance is pinned to CAL `741e8418` and HumanEval-Infilling `88062ff`; 4990 CAL-Rest non-frozen common population is frozen in the audit artifact. GPU generation has not started.

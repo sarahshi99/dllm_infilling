@@ -66,15 +66,15 @@
     "status": "completed",
     "sufficient_canvas_effect": 29
   },
-  "branch": "codex/ccfa-method-portfolio-v0",
+  "branch": "codex/ccfa-execution-sprint-v1",
   "ccfa_submission_ready": false,
   "canonical_roadmap": {
     "active_work": [
       "FAST-SPRINT-01",
       "P1.1-official-CAL",
       "P2.1-grouped-statistics",
-      "M1.1-abductive-program-state-bridge-running-full",
-      "M2.1-constraint-homotopy-resource-queued",
+      "M1.1-abductive-program-state-bridge-randomspanlight-ready",
+      "M2.1-constraint-homotopy-randomspanlight-ready",
       "P4.1-ExecRepoBench"
     ],
     "base_task_groups_behind_6707_spans": 148,
@@ -104,13 +104,13 @@
     "official_cal_upstream": {
       "repository": "https://github.com/NiuHechang/Calibrated_Adaptive_Length",
       "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
-      "status": "pinned_checkout_protocol_audit_pending"
+      "status": "corrected_protocol_cpu_audited_4990_common_smoke_pending_scipy_and_host_gpu_authorization"
     },
     "lrdllm_scope": "blocker_audit_only",
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
     "p4_first_external_benchmark": "ExecRepoBench",
-    "m1_status": "technical_smoke_passed_auto_full_running_pid_1576214_integrity_pending",
+    "m1_status": "historical_5079_safely_paused_resumable_new_randomspanlight_runner_ready",
     "m1_smoke": {
       "cases": 12,
       "rows": 132,
@@ -1169,5 +1169,5 @@
   "task_type": "ccfa_roadmap_reconciliation_after_phase5",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-13"
+  "updated_at_cst": "2026-07-15"
 }

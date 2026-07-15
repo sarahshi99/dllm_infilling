@@ -1,0 +1,98 @@
+{
+  "environment": {
+    "missing_required_packages": [
+      "scipy"
+    ],
+    "python": "3.10.20",
+    "required_package_present": {
+      "accelerate": true,
+      "datasets": true,
+      "numpy": true,
+      "scipy": false,
+      "torch": true,
+      "tqdm": true,
+      "transformers": true
+    }
+  },
+  "frozen_controller_test": {
+    "test_evaluation_count": 0,
+    "test_status": "sealed"
+  },
+  "humaneval_infilling": {
+    "commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "current_multiline_sha256": "3a1cb133597ff699fde9dba92788ef8dabf46f273f44477195b36639bd908306",
+    "evaluator_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/human_eval_infilling/evaluate_functional_correctness.py",
+    "evaluator_sha256": "5c2ec64099ce03af215590bf60e20216ecf5fd64907bea70ab0e2da14db4d31c",
+    "field_hash_mismatch_count": 0,
+    "field_hash_task_count": 5815,
+    "license": "MIT",
+    "official_multiline_sha256": "2f341612eee1d35da1357a4f365e0c0b3ba6e2b62eb491e88aaefa4855af0349",
+    "official_singleline_sha256": "1277073e7ddce163ef68598c2bca777f688a53df99422f097e37362090f88e1f",
+    "repository": "openai/human-eval-infilling"
+  },
+  "official_cal": {
+    "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+    "forward_contract": "search_forwards + formal_decode_forwards; adapter records both and total per case",
+    "license_file_present": false,
+    "license_note": "upstream checkout has no LICENSE file; no upstream source is copied into paper artifacts",
+    "llada_script": "/home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/llada_cal/llada_code_infilling.py",
+    "llada_script_sha256": "5cda5fe1c46a0d334e7685e66d93f10d7f47516ecb3a1718bbd9ccbf9f54cc8d",
+    "model": "GSAI-ML/LLaDA-8B-Base",
+    "official_fixed32_config": {
+      "arm": "official_fixed32_same_decoder",
+      "block_length": null,
+      "cfg_scale": 0.0,
+      "dstep": -1,
+      "initial_gen_length": 32,
+      "max_gen_length": 128,
+      "oracle": false,
+      "span": 1,
+      "steps": null,
+      "temperature": 0.0,
+      "use_bias": false
+    },
+    "primary_multiline_config": {
+      "block_length": null,
+      "cfg_scale": 0.0,
+      "dstep": 4,
+      "initial_gen_length": 32,
+      "max_gen_length": 128,
+      "oracle": false,
+      "span": 1,
+      "steps": null,
+      "temperature": 0.0,
+      "use_bias": true
+    },
+    "project_fixed64_control": {
+      "arm": "project_internal_fixed64_control_not_same_compute_as_official_cal",
+      "canvas_tokens": 64,
+      "steps": 64
+    },
+    "prompt_contract": "official prefix + masked middle + suffix",
+    "repository": "NiuHechang/Calibrated_Adaptive_Length",
+    "seed": 42,
+    "source_has_explicit_seed_cli": false
+  },
+  "population": {
+    "frozen_group_count": 16,
+    "mapped_demo_exclusion": 100,
+    "multiline_full": 5815,
+    "multiline_rest": 5715,
+    "not_official_cal_exact": "5079 project non-frozen MultiLine spans",
+    "official_cal_exact_population_name": "CAL-Rest non-frozen common population",
+    "project_nonfrozen_multiline_rest_common": 4990,
+    "project_nonfrozen_singleline_rest": 838,
+    "singleline_demo_seed42": 100,
+    "singleline_full": 1033,
+    "singleline_rest": 933
+  },
+  "smoke": {
+    "base_task_deduplicated": true,
+    "case_count": 12,
+    "demo_linked_rows_excluded": true,
+    "execution_started": false,
+    "performance_gate": false,
+    "stratifier": "canonical_solution_utf8_bytes_offline_only quartiles"
+  },
+  "status": "corrected_protocol_cpu_audited_gpu_smoke_pending"
+}
