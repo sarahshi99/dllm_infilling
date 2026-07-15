@@ -19,3 +19,5 @@
 - 将来仅当某一方法获选进入 5079 时，才可在**原三个目录**上恢复，并显式使用 `--auto-full --selected-method-only-5079` 与 existing-key dedup；绝不从头重跑。
 
 冻结 controller test 继续 `sealed`，`test_evaluation_count=0`。下一项实际 GPU 工作是新独立输出目录中的 M1 RandomSpanLight `12 smoke → 148 full`。
+
+主机 GPU 只读审计及 SciPy 下载均已按流程请求 escalation，但 approval control plane 返回 `422 model not found: codex-auto-review`。因此没有启动任何新 GPU tmux、没有绕过 sandbox/host policy；M1 RandomSpanLight 仍是授权恢复后的第一项 GPU 工作。

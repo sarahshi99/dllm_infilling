@@ -66,5 +66,16 @@
     "resume_command": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0 && CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase6_multiline_candidate_bank.py run --dataset-jsonl /home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl --output-dir outputs_clean/m1_stage1_multiline_20260713_v3 --generic-output-dir outputs_clean/m1_generic_multiline_20260713_v3 --m1-output-dir outputs_clean/m1_dependency_cone_multiline_20260713_v3 --compact-dir analysis_outputs/m1_multiline_20260713_v3 --smoke-cases 12 --auto-full --selected-method-only-5079"
   },
   "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
-  "next_gpu_task": "M1 RandomSpanLight 12-case technical smoke then only 148-case full"
+  "host_gpu_authorization": {
+    "requested_read_only_audit": true,
+    "result": "approval_control_plane_422_model_not_found_codex_auto_review",
+    "gpu_job_started": false,
+    "no_bypass_used": true
+  },
+  "official_cal_dependency": {
+    "scipy_present": false,
+    "normal_install_result": "network_proxy_operation_not_permitted",
+    "escalated_install_result": "approval_control_plane_422_model_not_found_codex_auto_review"
+  },
+  "next_gpu_task": "M1 RandomSpanLight 12-case technical smoke then only 148-case full; waiting for host authorization"
 }
