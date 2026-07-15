@@ -1,6 +1,6 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-13 UTC
+更新日期：2026-07-15 UTC
 
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 
@@ -10,7 +10,8 @@
 - P1 顺序：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility；LR-DLLM 只 blocker audit。official CAL 已固定上游 `NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`，尚待 checkout/protocol audit；local CAL/CAL-lite 不得叫 official CAL。
 - `6707` spans / `20121` policy results 背后只有 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 是 descriptive。早期 `802/1033` 是 A6000 historical，`796/1033` 是 H200 evidence base；都不是 final held-out。
 - M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不代表 M2/M3/M4 被放弃。M1 修复为 AST/def-use statement dependency cone：generic/M1 都追加 `64` forwards，缺失 candidate dependency 时以 fixed64 的 `64`-forward null refinement 记录 fallback，stage-one/generic/M1 raw outputs 分离。M2 具备 same-64-forward gradual/abrupt runner；M3 具备 initial 16/32/64/128 particles、uniform/birth-death equal-256-forward runner；M4 已完成真实 full-148 offline structural AST statement/basic-block/def-use assembly audit（best/assembly 各 148/148，zero missing/duplicate/error，frozen count 0），下一步才是 64-forward repair。四条线都有独立 brief/analysis/tests/launcher。
-- M1 的 12-case MultiLine technical smoke 已通过：`132` rows、zero missing/duplicate/error、resume no-op/evaluator/schema/frozen/second-stage-64-forward checks 全通过。`--auto-full` 已启动 `5079` non-frozen MultiLine stage-one（PID `1576214`）；这是 running integrity state，不是方法胜负或最终结果。既有 candidate-bank PID `1195368` 未暂停、未删除输出。全量结论必须等待 resume/dedup + missing/duplicate/error 终审；所有方法/进程维持独立 output/log directory，Frozen test sealed/count `0`。
+- 旧共享 MultiLine candidate bank 已自然完成：`40632/40632` unique rows、missing/duplicate/error=`0/0/0`，final audit/resume audit/frozen invariant 均通过；历史 PID `1195368` 与 tmux session 已自然退出，**不得重启**。新版 M1 PID `1576214` 的 stage-one 在预算门槛 <80%，因此应安全暂停；SIGINT 请求被 host approval control plane `422` 拒绝，实际仍 running。没有 SIGKILL、tmux Ctrl-C 或 raw 目录修改；M1 结论与任何部分性能都未查看。详情见 `runtime_status.current.json`。
+- 数据路线已在 runner 层固定为 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`。M2/M3/M4 的 auto-full 只能到 148；未来 5079 必须同时显式给出 `--auto-full --selected-method-only-5079`，不能再由 smoke 裸自动进入。
 - P4 直接使用 ExecRepoBench；M1 配置冻结前只做多 repository、六 fill_type smoke，不打开最终 external result。dataset 固定 `fa61028ce495c9ceff58398b8a7c47b5ae9f5276`，Qwen evaluator 固定 `33bc6aabd7791ad7b32f7e92104f11f2359ba890`，无代码 smoke-plan audit 已实现；checkout 的 host network fetch 仍受独立 approval-control-plane `422` 阻断，因此实际 evaluator smoke 未完成、不能误报。
 - 10 分钟后 H200 审计正常（OOM/ECC 0），但当前 free `38,246 MiB`、M1 footprint 约 `19,054 MiB`；新 M2 模型会把余量降到约 `19 GiB`，低于严格 `25,600 MiB` reserve。故 M2/M3/M4 是 resource-queued，不停止代码开发，也不抢占现有两项工作。
 

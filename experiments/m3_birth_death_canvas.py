@@ -44,6 +44,12 @@ from experiments.m2_constraint_homotopy import (
     write_json,
 )
 from experiments.phase6_remask import decoded_token_ranges
+from experiments.method_population_schedule import (
+    RANDOMSPANLIGHT_ALLOWED_CASES,
+    SMOKE_CASES,
+    population_schedule,
+    require_randomspanlight_full,
+)
 
 
 del M2_METHODS
@@ -426,7 +432,7 @@ def run(args: argparse.Namespace) -> int:
         raise RuntimeError("M3 expects 164 RandomSpanLight source rows")
     tokenizer, model = load_model_and_tokenizer(cfg_for(64).model)
     manifest = build_manifest(source_rows, tokenizer, frozen_groups)
-    if len(manifest) != 148:
+    if len(manifest) != RANDOMSPANLIGHT_ALLOWED_CASES:
         raise RuntimeError("M3 requires 148 allowed task groups")
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable for M3")
@@ -442,12 +448,13 @@ def run(args: argparse.Namespace) -> int:
         return 2
     full = None
     if args.auto_full:
+        require_randomspanlight_full(len(manifest))
         run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=uniform_raw, tokenizer=tokenizer, model=model)
         run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
         noops = run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=uniform_raw, tokenizer=tokenizer, model=model)
         noops += run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
         full = summarize(compact_dir, "full", manifest, read_jsonl(uniform_raw), read_jsonl(birth_raw), lock, noops)
-    write_json(compact_dir / "run_manifest.json", {"status": "completed" if full is None or full["technical_gate_passed"] else "full_failed", "smoke": smoke, "full": full, "methods": list(METHODS), "total_forwards": TOTAL_FORWARDS, "test_evaluation_count": 0})
+    write_json(compact_dir / "run_manifest.json", {"status": "completed" if full is None or full["technical_gate_passed"] else "full_failed", "smoke": smoke, "full": full, "methods": list(METHODS), "total_forwards": TOTAL_FORWARDS, "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
     return 0 if full is None or full["technical_gate_passed"] else 3
 
 
@@ -457,7 +464,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--uniform-output-dir", required=True)
     root.add_argument("--birth-death-output-dir", required=True)
     root.add_argument("--compact-dir", required=True)
-    root.add_argument("--smoke-cases", type=int, default=12)
+    root.add_argument("--smoke-cases", type=int, default=SMOKE_CASES)
     root.add_argument("--auto-full", action="store_true")
     return root
 

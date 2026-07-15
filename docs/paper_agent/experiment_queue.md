@@ -1,12 +1,12 @@
 # Experiment Queue
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-15 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
 
 ## Active FAST-SPRINT-01 Queue
 
-M1--M4 are independent candidate methods; no paper primary method is selected. CPU/IO work may run concurrently. The existing MultiLine candidate bank remains live; one new GPU process starts first, followed by a 10-minute safety/throughput audit before a third process is allowed. Every process/method has its own output directory. Frozen test remains sealed with `test_evaluation_count=0`.
+M1--M4 are independent candidate methods; no paper primary method is selected. CPU/IO work may run concurrently. The old shared MultiLine candidate bank is complete (`40632/40632`, final audit passed) and must not be restarted. Every process/method has its own output directory. Frozen test remains sealed with `test_evaluation_count=0`.
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
@@ -22,11 +22,11 @@ Status: pinned audit implementation ready; host checkout network currently block
 
 ### M1.1: Abductive Program-State Bridge implementation and MultiLine full
 
-Status: technical smoke passed; full stage-one is running. The runner uses suffix backward obligations, prefix/candidate forward facts, contradiction diagnostics, AST/def-use statement cones, and real equal-compute generic remasking. Missing candidate dependencies take an explicit fixed64 null refinement that still performs 64 forwards; generic and M1 raw outputs are separate/resumable/deduplicated. `185` unittest cases, py_compile, JSON and diff checks passed. `analysis_outputs/m1_multiline_20260713_v3/smoke_summary.json` verifies 12 cases / 132 rows, zero missing/duplicate/error, resume no-op, evaluator/schema/frozen checks, and second-stage 64-forward audit; `--auto-full` then started the 5079-span run as PID `1576214`. PID `1195368` remains untouched. Full conclusion waits for its final integrity audit.
+Status: pre-outcome compute-budget reconciliation requires a safe pause because stage-one is below 80%. A host SIGINT was requested for PID `1576214` but rejected by the approval control plane (`422`); no SIGKILL or tmux workaround is allowed, so the process is still live and raw output remains append-only. Future 5079 execution now requires explicit `--auto-full --selected-method-only-5079`; bare auto-full cannot bypass the 12→148→296/927 route. See `runtime_status.current.json`; no partial performance result was inspected.
 
 ### M2: Constraint-Homotopy V0
 
-Status: code/test/launcher complete at `4a91d73`; independent brief/runner/analysis/tests/output compare gradual versus abrupt inference-visible constraints within the same 64-forward budget; no test/reference inputs. M2 remains ready for technical smoke then `148` allowed RandomSpanLight rows, but current H200 reserve would fall below the strict 25 GiB threshold if it launched beside PID `1195368` and M1 PID `1576214`.
+Status: CPU route and targeted tests are being refreshed. `scripts/manual_launch_m2_constraint_homotopy_20260715.sh` uses an independent tmux/log/output family and can only auto-promote smoke to the 148-task RandomSpanLight population. It is not launched until M1 has actually exited safely and the GPU audit confirms free ≥25,600 MiB with OOM/ECC zero.
 
 ### M3: Birth-Death Canvas Diffusion V0
 

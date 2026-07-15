@@ -1,6 +1,6 @@
 # Decision Log
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-15 UTC
 
 - Canonical route is now `docs/paper_agent/ccfa_master_roadmap.zh.md`; later agents must not infer the current queue from historical Phase numbering.
 - P0 narrative is synchronized for the current evidence snapshot. P1 official baselines, P2 group-aware analysis of 6707 spans/148 base-task clusters, and P4 non-HumanEval external evaluation remain highest-priority open gaps.
@@ -14,6 +14,8 @@ Updated: 2026-07-13 UTC
 - P4 provenance is now fixed in executable audit code: ExecRepoBench dataset `fa61028ce495c9ceff58398b8a7c47b5ae9f5276` and Qwen evaluator `33bc6aabd7791ad7b32f7e92104f11f2359ba890`. The audit outputs only repository/fill-type counts and index/hash-only six-fill smoke plans; the actual checkout/evaluator smoke remains pending because host network fetch approval returned `422`, and no final external result has been opened.
 - M1 full implementation starts immediately; M2/M3 cheap diagnostics are not prerequisites, M4 is downgraded, A1 is stopped, and P3 waits for official CAL. M1 technical smoke promotes directly to full absent integrity failure; performance gates are paper-promotion-only.
 - M1 technical smoke passed on 2026-07-13: 12 cases / 132 rows, zero missing/duplicate/error, no frozen evaluation, resume no-op, evaluator/schema and actual second-stage 64-forward checks all passed. Its auto-full 5079-span MultiLine stage-one is live as PID `1576214`; this does not select M1 as the paper method. The existing candidate bank PID `1195368` remains untouched. M2 launch is deferred only by the explicit `25,600 MiB` GPU reserve after the required 10-minute resource audit, not by a scientific gate.
+- Runtime reconciliation, 2026-07-15: the old shared MultiLine bank completed naturally at `40632/40632`, unique with zero missing/duplicate/error and final audit passed; it is retained and must not restart. M1 stage-one was below the 80% pre-outcome compute-budget threshold. The required SIGINT to PID `1576214` was attempted but host approval returned `422`; no SIGKILL or indirect workaround is authorized. `performance_inspected_before_pause=false` and no partial performance conclusion was read.
+- Runner population policy is now executable: `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`. M2/M3/M4 may auto-promote only to 148; Phase 6 rejects a bare 5079 `--auto-full` unless `--selected-method-only-5079` is explicit.
 - M1 implementation checkpoint: `0d75c71` replaces selection-only placeholders with real equal-compute generic and dependency-cone 64-forward refinements, resumable/deduplicated raw banks, separate stage-one/oracle/refinement audits, fixed64-only safe fallback, and equal-weight task-macro/accuracy-cost outputs. GPU execution remains queued behind official CAL full; this ordering is a scheduler constraint, not a blocked route decision.
 - Evidence-hardware boundary: `802/1033` is A6000 historical evidence; `796/1033` is the H200 evidence base. Do not silently pool or relabel them as held-out performance.
 - Frozen controller test remains sealed with `test_evaluation_count=0`.

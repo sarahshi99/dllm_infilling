@@ -26,6 +26,12 @@ from expvision_dllm_clean.modeling import load_model_and_tokenizer, resolve_mask
 from expvision_dllm_clean.verifier import run_verifier_stack
 from experiments.m2_constraint_homotopy import append_jsonl, load_frozen_groups, read_jsonl, sha256_text, write_csv, write_json
 from experiments.phase6_remask import decode_fixed_canvas_state
+from experiments.method_population_schedule import (
+    RANDOMSPANLIGHT_ALLOWED_CASES,
+    SMOKE_CASES,
+    population_schedule,
+    require_randomspanlight_full,
+)
 
 
 MODEL_PATH = "GSAI-ML/LLaDA-8B-Base"
@@ -435,6 +441,7 @@ def run(args: argparse.Namespace) -> int:
     smoke_gate = bool(smoke["passed"] and best_smoke["passed"] and assembly_smoke["passed"] and noops == 0 and lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0)
     full = None
     if smoke_gate and args.auto_full:
+        require_randomspanlight_full(len(manifest))
         evaluated_best, evaluated_assembly = evaluated_offline_rows(manifest, grouped, source_rows)
         write_replace_jsonl(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
         write_replace_jsonl(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
@@ -448,7 +455,7 @@ def run(args: argparse.Namespace) -> int:
         }
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(compact_dir / "offline_method_audit.csv", [{"method": method, **value} for method, value in offline.items()])
-    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "test_evaluation_count": 0})
+    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
     return 0 if smoke_gate and (full is None or all(full[name]["passed"] for name in ("best", "assembly", "repair"))) else 2
 
 
@@ -460,7 +467,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--assembly-output-dir", required=True)
     root.add_argument("--repair-output-dir", required=True)
     root.add_argument("--compact-dir", required=True)
-    root.add_argument("--smoke-cases", type=int, default=12)
+    root.add_argument("--smoke-cases", type=int, default=SMOKE_CASES)
     root.add_argument("--repair", action="store_true")
     root.add_argument("--auto-full", action="store_true")
     return root

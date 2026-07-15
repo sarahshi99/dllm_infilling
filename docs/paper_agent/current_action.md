@@ -1,6 +1,6 @@
 # Current Paper-Agent Action
 
-更新时间：2026-07-13 UTC
+更新时间：2026-07-15 UTC
 
 权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`
 
@@ -14,7 +14,7 @@
 
 Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3、M4 是平行的独立候选方法；当前**没有**论文主方法。M1 只因最先完成代码而先进入 smoke，不代表 M2--M4 被降级、放弃或融合。Phase 5 的 `M1-D0` fixed proxy kill 和 `M4-D0/F1` premise 结果保持为历史结论，不能被改写成对四个新 V0 的 kill。
 
-冻结 controller test 始终 sealed，`test_evaluation_count=0`；不得读取 106 个 sealed SingleLine test rows。所有 full run 必须支持 resume/dedup，并在结束后审计 missing/duplicate/error。现有 MultiLine candidate-bank PID `1195368` 继续运行，不暂停、不删除输出。
+冻结 controller test 始终 sealed，`test_evaluation_count=0`；不得读取 106 个 sealed SingleLine test rows。所有 full run 必须支持 resume/dedup，并在结束后审计 missing/duplicate/error。旧共享 MultiLine candidate bank 已自然完成 `40,632/40,632` 且 final audit 通过；不重启、不重建、不改写 raw。
 
 ## 立即执行的工作包
 
@@ -26,21 +26,21 @@ Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3�
 
 ### M1.1 Abductive Program-State Bridge
 
-两轮语义/完整性审计与修复已在 `1d9ef3f` 完成：AST/def-use dependency cone、seed-0 fixed64 检测、64-forward null fallback、等 canvas/forwards/cardinality generic、分离 raw outputs、forbidden-input/activation/determinism/resume tests 均已落地。用户授权重试后，M1 12-case MultiLine technical smoke 已通过，并由 `--auto-full` 自动进入全部 `5079` non-frozen spans 的 stage-one；新 PID `1576214` 与既有 candidate-bank PID `1195368` 均继续运行，互不共享 output directory。full 结论仍须等待 resume/dedup/missing/duplicate/error 终审；不设性能 gate。
+两轮语义/完整性审计与修复已在 `1d9ef3f` 完成：AST/def-use dependency cone、seed-0 fixed64 检测、64-forward null fallback、等 canvas/forwards/cardinality generic、分离 raw outputs、forbidden-input/activation/determinism/resume tests 均已落地。新版计算预算路线要求 stage-one <80% 时安全暂停。2026-07-15 的 t0/t+10 审计确认该条件满足；仅针对 PID `1576214` 的 SIGINT 已请求但被 host approval control plane `422` 拒绝，故 M1 实际仍运行，未使用 SIGKILL 或替代绕过。三个 raw 目录保持 append-only。详情见 `runtime_status.current.json`；不读取或报告部分性能。
 
 ### M2/M3/M4 独立候选线
 
-- `M2 Constraint-Homotopy V0`：`4a91d73` 已完成独立 runner/analysis/brief/tests/launcher；同一 64-forward 预算下 gradual 与 abrupt constraints，约束只来自 prefix/suffix/current candidate/confidence。已准备技术 smoke→148-case full，但当前严格 25 GiB H200 余量不允许第三个模型进程。
+- `M2 Constraint-Homotopy V0`：CPU runner 已升级为固定路线 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`；M2 的 auto-full 被强制限制为 `148`。完成 M2 targeted CPU tests 后，仍等待 M1 实际安全退出才可用独立 `20260715_v1` tmux/log/output 启动。
 - `M3 Birth-Death Canvas Diffusion V0`：`a874c54` 已完成独立 runner/analysis/brief/tests/launcher；初始 canvas `16/32/64/128` particles，uniform 与 birth/death 各固定 256 forwards/task，只用 inference-visible confidence、syntax、prefix/suffix compatibility。M2 资源安全完成后再作 12-case→148-case full。
 - `M4 Semantic Particle Assembly V0`：`ed94471` 已完成独立 runner/analysis/brief/tests/launcher；完整 148-case offline structural assembly audit 已实际完成于 `analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`（best/assembly 均 148/148、zero missing/duplicate/error、frozen sealed/count 0）。从 8 candidates 提取 AST statement/basic-block/def-use fragments，以 inference-visible obligations 选择；M3 资源安全完成后作 64-forward repair smoke/full。
 
-四个 V0 的数据路线固定为：12--24 technical smoke → 148 RandomSpanLight first full → 927 non-frozen SingleLine development comparison → 5079 MultiLine later validation → method freeze 后 ExecRepoBench。禁止任何 tests/reference/canonical solution/oracle length/task ID/split/passed label 进入 deployable method。
+四个 V0 的数据路线固定为：12 technical smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 non-frozen SingleLine development comparison → selected-method-only 5079 MultiLine → method freeze 后 ExecRepoBench。裸 `--auto-full` 不得直接进入 5079。禁止任何 tests/reference/canonical solution/oracle length/task ID/split/passed label 进入 deployable method。
 
 ## H200 并行约束
 
 候选库保持运行；先启动一个新的 GPU experiment process，10 分钟后审计 memory/utilization/power/OOM/ECC 与各任务吞吐。稳定且保留至少 25 GiB 显存余量时才允许第三个进程；总吞吐显著下降则减少 GPU process，但不停止方法代码开发。每个方法、每个进程必须有独立 output/log directory。
 
-M1 已占用新的 GPU experiment process，2026-07-13 复查可用显存为 `38,246 MiB`、M1 footprint 为约 `19,054 MiB`。若现在启动 M2，安全余量约 `19 GiB`，低于严格 `25,600 MiB` 门槛；因此 M2 launch 继续排队，但方法代码开发不停止。GPU host 可查询恢复不改变任何 scientific result，也不授权绕过 P4 的独立 network approval failure。
+旧库完成后 H200 已有足够空闲显存，但 M2 的前置条件是新版 M1 已**实际**安全退出，而非仅有暂停意图。当前 SIGINT 被外部 control plane 拒绝，因此 M2 继续排队；不通过 tmux 或 SIGKILL 绕过。GPU host 可查询恢复不改变任何 scientific result，也不授权绕过 P4 的独立 network approval failure。
 
 ## 证据命名
 

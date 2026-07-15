@@ -31,6 +31,12 @@ from experiments.phase6_abductive_bridge_runner import (
     run_population as run_m1_refinement_population,
 )
 from experiments.phase6_remask import decode_fixed_canvas_state
+from experiments.method_population_schedule import (
+    SELECTED_METHOD_MULTILINE_CASES,
+    SMOKE_CASES,
+    population_schedule,
+    selected_multiline_full_requested,
+)
 
 
 MODEL_PATH = "GSAI-ML/LLaDA-8B-Base"
@@ -618,6 +624,10 @@ def render_report(smoke: Mapping[str, Any], full: Mapping[str, Any] | None) -> s
 
 
 def run(args: argparse.Namespace) -> int:
+    full_requested = selected_multiline_full_requested(
+        auto_full=args.auto_full,
+        selected_method_only_5079=args.selected_method_only_5079,
+    )
     dataset_jsonl = Path(args.dataset_jsonl).resolve()
     raw_dir, generic_raw_dir, m1_raw_dir = resolve_output_dirs(
         Path(args.output_dir), args.generic_output_dir, args.m1_output_dir
@@ -639,7 +649,7 @@ def run(args: argparse.Namespace) -> int:
 
     tokenizer, model = load_model_and_tokenizer(cfg_for(64, 0).model)
     manifest = build_manifest(source_rows, tokenizer, frozen_groups)
-    if len(manifest) != 5079:
+    if len(manifest) != SELECTED_METHOD_MULTILINE_CASES:
         raise RuntimeError(f"Expected 5079 allowed rows, found {len(manifest)}")
     if any(row["task_group"] in frozen_groups for row in manifest):
         raise RuntimeError("Frozen row survived manifest exclusion")
@@ -746,7 +756,7 @@ def run(args: argparse.Namespace) -> int:
         return 2
 
     full_summary: dict[str, Any] | None = None
-    if args.auto_full:
+    if full_requested:
         run_population(manifest, source_rows, raw_path, tokenizer, model)
         full_noop = run_population(manifest, source_rows, raw_path, tokenizer, model)
         full_stage1_rows = read_jsonl(raw_path)
@@ -836,6 +846,8 @@ def run(args: argparse.Namespace) -> int:
             "expected_full_oracle_rows": len(manifest),
             "expected_full_refinement_rows": len(manifest) * len(REFINEMENT_METHODS),
             "expected_full_candidate_rows": len(manifest) * (8 + 1 + len(REFINEMENT_METHODS)),
+            "population_schedule": population_schedule(),
+            "full_population_authorization": "selected_method_multiline" if full_requested else None,
             "stage1_raw_path": str(raw_path),
             "generic_refinement_raw_path": str(generic_refinement_raw_path),
             "m1_dependency_cone_refinement_raw_path": str(m1_refinement_raw_path),
@@ -857,8 +869,9 @@ def parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--generic-output-dir")
     run_parser.add_argument("--m1-output-dir")
     run_parser.add_argument("--compact-dir", required=True)
-    run_parser.add_argument("--smoke-cases", type=int, default=12)
+    run_parser.add_argument("--smoke-cases", type=int, default=SMOKE_CASES)
     run_parser.add_argument("--auto-full", action="store_true")
+    run_parser.add_argument("--selected-method-only-5079", action="store_true")
     return root
 
 

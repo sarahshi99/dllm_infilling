@@ -36,6 +36,12 @@ from expvision_dllm_clean.decode import linear_target_masks, prepare_model_input
 from expvision_dllm_clean.modeling import load_model_and_tokenizer, set_global_seed
 from expvision_dllm_clean.verifier import parse_compile_diagnostics, run_verifier_stack
 from experiments.phase6_remask import decoded_token_ranges
+from experiments.method_population_schedule import (
+    RANDOMSPANLIGHT_ALLOWED_CASES,
+    SMOKE_CASES,
+    population_schedule,
+    require_randomspanlight_full,
+)
 
 
 MODEL_PATH = "GSAI-ML/LLaDA-8B-Base"
@@ -548,7 +554,7 @@ def run(args: argparse.Namespace) -> int:
         raise RuntimeError(f"Expected 164 RandomSpanLight source rows, found {len(source_rows)}")
     tokenizer, model = load_model_and_tokenizer(cfg_for().model)
     manifest = build_manifest(source_rows, tokenizer, frozen_groups)
-    if len(manifest) != 148 or len({row["task_group"] for row in manifest}) != 148:
+    if len(manifest) != RANDOMSPANLIGHT_ALLOWED_CASES or len({row["task_group"] for row in manifest}) != RANDOMSPANLIGHT_ALLOWED_CASES:
         raise RuntimeError("M2 requires exactly 148 allowed RandomSpanLight task groups")
     selected = choose_smoke_manifest(manifest, int(args.smoke_cases))
     if not torch.cuda.is_available():
@@ -575,6 +581,7 @@ def run(args: argparse.Namespace) -> int:
         return 2
     full: dict[str, Any] | None = None
     if args.auto_full:
+        require_randomspanlight_full(len(manifest))
         run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
         run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=abrupt_raw, tokenizer=tokenizer, model=model)
         full_noops = run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
@@ -603,6 +610,8 @@ def run(args: argparse.Namespace) -> int:
             "abrupt_raw": str(abrupt_raw),
             "smoke": smoke,
             "full": full,
+            "population_schedule": population_schedule(),
+            "automatic_full_population": "randomspanlight_full",
             "frozen_test_status": "sealed",
             "test_evaluation_count": 0,
         },
@@ -616,7 +625,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--gradual-output-dir", required=True)
     root.add_argument("--abrupt-output-dir", required=True)
     root.add_argument("--compact-dir", required=True)
-    root.add_argument("--smoke-cases", type=int, default=12)
+    root.add_argument("--smoke-cases", type=int, default=SMOKE_CASES)
     root.add_argument("--auto-full", action="store_true")
     return root
 

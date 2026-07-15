@@ -1,11 +1,16 @@
+import tempfile
 import unittest
+from pathlib import Path
 
 from experiments.m2_constraint_homotopy import (
     METHODS,
     TOTAL_STEPS,
+    audit_rows,
+    append_jsonl,
     expected_keys,
     homotopy_weight,
     parser,
+    run_method,
     visible_constraint_scores,
 )
 
@@ -66,6 +71,48 @@ class M2ConstraintHomotopyTest(unittest.TestCase):
             ]
         )
         self.assertEqual(args.smoke_cases, 12)
+
+    def test_forward_accounting_and_duplicate_audit_are_strict(self) -> None:
+        key = next(iter(expected_keys([{"row_key": "a"}], METHODS[0])))
+        audit = audit_rows([{"candidate_key": key, "status": "ok", "metrics": {"actual_forward_count": 64}}], {key})
+        self.assertTrue(audit["passed"])
+        duplicate = audit_rows(
+            [
+                {"candidate_key": key, "status": "ok", "metrics": {"actual_forward_count": 64}},
+                {"candidate_key": key, "status": "ok", "metrics": {"actual_forward_count": 64}},
+            ],
+            {key},
+        )
+        self.assertEqual(duplicate["duplicate_count"], 1)
+        self.assertFalse(duplicate["passed"])
+
+    def test_resume_is_noop_and_duplicate_raw_is_refused_before_decode(self) -> None:
+        manifest = [{"row_key": "a", "source_row_id": 0}]
+        key = next(iter(expected_keys(manifest, METHODS[0])))
+        with tempfile.TemporaryDirectory() as directory:
+            raw = Path(directory) / "m2.jsonl"
+            append_jsonl(raw, {"candidate_key": key, "candidate_kind": METHODS[0], "status": "ok"})
+            self.assertEqual(
+                run_method(
+                    method=METHODS[0],
+                    manifest=manifest,
+                    source_rows=[],
+                    raw_path=raw,
+                    tokenizer=None,
+                    model=None,
+                ),
+                0,
+            )
+            append_jsonl(raw, {"candidate_key": key, "candidate_kind": METHODS[0], "status": "ok"})
+            with self.assertRaisesRegex(RuntimeError, "duplicate keys"):
+                run_method(
+                    method=METHODS[0],
+                    manifest=manifest,
+                    source_rows=[],
+                    raw_path=raw,
+                    tokenizer=None,
+                    model=None,
+                )
 
 
 if __name__ == "__main__":

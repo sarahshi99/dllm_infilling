@@ -67,6 +67,14 @@ class Phase6MultiLineCandidateBankTest(unittest.TestCase):
         )
         self.assertEqual(parsed.smoke_cases, 12)
 
+    def test_selected_method_authorization_is_required_for_5079_full(self) -> None:
+        from experiments.method_population_schedule import selected_multiline_full_requested
+
+        self.assertFalse(selected_multiline_full_requested(auto_full=False, selected_method_only_5079=False))
+        self.assertTrue(selected_multiline_full_requested(auto_full=True, selected_method_only_5079=True))
+        with self.assertRaises(ValueError):
+            selected_multiline_full_requested(auto_full=True, selected_method_only_5079=False)
+
     def test_stage_one_and_refinement_outputs_are_always_distinct(self) -> None:
         stage1, generic, m1 = resolve_output_dirs(Path("raw"), None, None)
         self.assertEqual(len({stage1, generic, m1}), 3)
