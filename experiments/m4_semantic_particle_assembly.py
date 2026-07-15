@@ -21,9 +21,8 @@ if str(REPO) not in sys.path:
 
 from analysis.phase6_abductive_bridge_v1 import analyze_candidate, extract_backward_obligations
 from expvision_dllm_clean.config import ExperimentConfig
-from expvision_dllm_clean.dataset import CodeTask
 from expvision_dllm_clean.modeling import load_model_and_tokenizer, resolve_mask_token_id, set_global_seed
-from expvision_dllm_clean.verifier import run_verifier_stack
+from experiments.deployable_visible_task import evaluate_completion_after_decode, visible_task
 from experiments.m2_constraint_homotopy import append_jsonl, load_frozen_groups, read_jsonl, sha256_text, write_csv, write_json
 from experiments.phase6_remask import decode_fixed_canvas_state
 from experiments.method_population_schedule import (
@@ -41,6 +40,8 @@ REPAIR_STEPS = 64
 SEED = 0
 METHODS = ("m4_best_single_particle", "m4_assembly_without_repair", "m4_assembly_with_repair")
 DEPLOYABLE_CANDIDATE_FIELDS = {"middle_text", "canvas_tokens", "seed", "final_token_confidences", "prefix_text", "suffix_text"}
+STAGE1_GRID_FORWARD_BUDGET = 8 * REPAIR_STEPS
+STAGE1_GRID_TOKEN_BUDGET = 2 * (16 + 32 + 64 + 128) * REPAIR_STEPS
 
 
 def cfg_for() -> ExperimentConfig:
@@ -199,24 +200,14 @@ def assemble_fragments(candidates: Sequence[Mapping[str, Any]]) -> dict[str, Any
     }
 
 
-def evaluator_task(prefix: str, suffix: str, source: Mapping[str, Any]) -> CodeTask:
-    return CodeTask(
-        task_id="m4_runtime_evaluator_task",
+def evaluate_text(prefix: str, suffix: str, middle: str, source: Mapping[str, Any]) -> dict[str, Any]:
+    return evaluate_completion_after_decode(
         prefix=prefix,
         suffix=suffix,
-        full_prompt=prefix + "<FILL_ME>" + suffix,
-        test_code=str(source["test"]),
-        entry_point=str(source["entry_point"]),
-        canonical_solution="",
-        raw={},
+        middle=middle,
+        source_row=source,
+        method="m4",
     )
-
-
-def evaluate_text(prefix: str, suffix: str, middle: str, source: Mapping[str, Any]) -> dict[str, Any]:
-    task = evaluator_task(prefix, suffix, source)
-    verification = run_verifier_stack(task=task, full_code=prefix + middle + suffix, completion_without_suffix=middle)
-    tier3 = verification.get("tier3_unit_tests")
-    return {"passed": bool(tier3.passed) if tier3 else False, "verification": {name: result.to_dict() for name, result in verification.items()}}
 
 
 def connector_indices(tokenizer: Any, fragments: Sequence[Mapping[str, Any]], assembly: str) -> tuple[list[int], list[int]]:
@@ -233,7 +224,7 @@ def connector_indices(tokenizer: Any, fragments: Sequence[Mapping[str, Any]], as
 
 def repair_assembly(assembly: Mapping[str, Any], source: Mapping[str, Any], tokenizer: Any, model: Any) -> dict[str, Any]:
     middle_ids, indices = connector_indices(tokenizer, assembly["selected_fragments"], str(assembly["assembly_text"]))
-    task = evaluator_task(str(assembly["prefix"]), str(assembly["suffix"]), source)
+    task = visible_task(str(assembly["prefix"]), str(assembly["suffix"]), method="m4")
     set_global_seed(SEED)
     result = decode_fixed_canvas_state(
         task=task,
@@ -246,6 +237,13 @@ def repair_assembly(assembly: Mapping[str, Any], source: Mapping[str, Any], toke
         initial_middle_ids=middle_ids,
         initial_mask_indices=indices,
         schedule_length=max(1, len(indices)),
+        evaluate_after_decode=lambda prefix, middle, suffix: evaluate_completion_after_decode(
+            prefix=prefix,
+            suffix=suffix,
+            middle=middle,
+            source_row=source,
+            method="m4",
+        ),
     )
     result["connector_indices"] = indices
     return result
@@ -344,7 +342,14 @@ def evaluated_offline_rows(
             "status": "ok",
             "passed": best_eval["passed"],
             "middle_text": assembly["best_middle_text"],
-            "metrics": {"actual_forward_count": 0, "token_budget": 0},
+            "metrics": {
+                "actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
+                "standalone_actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
+                "shared_bank_incremental_forward_count": 0,
+                "token_budget": STAGE1_GRID_TOKEN_BUDGET,
+                "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET,
+                "verification_sec": best_eval["verification_sec"],
+            },
             "verification": best_eval["verification"],
         })
         assembly_rows.append({
@@ -354,15 +359,34 @@ def evaluated_offline_rows(
             "status": "ok",
             "passed": assembly_eval["passed"],
             "middle_text": assembly["assembly_text"],
-            "metrics": {"actual_forward_count": 0, "token_budget": 0},
+            "metrics": {
+                "actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
+                "standalone_actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
+                "shared_bank_incremental_forward_count": 0,
+                "token_budget": STAGE1_GRID_TOKEN_BUDGET,
+                "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET,
+                "verification_sec": assembly_eval["verification_sec"],
+            },
             "verification": assembly_eval["verification"],
         })
     return best_rows, assembly_rows
 
 
-def write_replace_jsonl(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("".join(json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n" for row in rows), encoding="utf-8")
+def append_rows_resume(path: Path, rows: Sequence[Mapping[str, Any]]) -> int:
+    """Append missing rows and reject duplicate raw keys without rewriting output."""
+    existing = read_jsonl(path) if path.exists() else []
+    counts = Counter(str(row.get("candidate_key") or "") for row in existing)
+    if any(value > 1 for value in counts.values()):
+        raise RuntimeError("M4 resume refuses duplicate candidate keys")
+    written = 0
+    for row in rows:
+        key = str(row["candidate_key"])
+        if key in counts:
+            continue
+        append_jsonl(path, row)
+        counts[key] = 1
+        written += 1
+    return written
 
 
 def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequence[Mapping[str, Any]]], source_rows: Sequence[Mapping[str, Any]], raw_path: Path, tokenizer: Any, model: Any) -> int:
@@ -380,6 +404,18 @@ def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequ
             assembly = assemble_fragments(grouped[str(item["row_key"])])
             repair = repair_assembly(assembly, source_rows[int(item["source_row_id"])], tokenizer, model)
             middle = str(repair["middle_text"])
+            repair_metrics = dict(repair.get("metrics") or {})
+            repair_metrics.update(
+                {
+                    "repair_forward_count": REPAIR_STEPS,
+                    "actual_forward_count": STAGE1_GRID_FORWARD_BUDGET + REPAIR_STEPS,
+                    "standalone_actual_forward_count": STAGE1_GRID_FORWARD_BUDGET + REPAIR_STEPS,
+                    "shared_bank_incremental_forward_count": REPAIR_STEPS,
+                    "token_budget": STAGE1_GRID_TOKEN_BUDGET + CANVAS_TOKENS * REPAIR_STEPS,
+                    "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET + CANVAS_TOKENS * REPAIR_STEPS,
+                    "shared_bank_incremental_token_budget": CANVAS_TOKENS * REPAIR_STEPS,
+                }
+            )
             row = {
                 **item,
                 "candidate_key": key,
@@ -388,7 +424,7 @@ def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequ
                 "passed": bool((repair.get("metrics") or {}).get("passed", False)),
                 "middle_text": middle,
                 "candidate_middle_sha256": sha256_text(middle),
-                "metrics": repair.get("metrics") or {},
+                "metrics": repair_metrics,
                 "connector_indices": repair.get("connector_indices") or [],
                 "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations")},
                 "verification": repair.get("verification") or {},
@@ -419,8 +455,8 @@ def run(args: argparse.Namespace) -> int:
         raise ValueError("M4 best, assembly, and repair outputs must be distinct")
     # Required first: offline assembly audit over the full existing 148-case bank.
     all_best, all_assembly = offline_rows(manifest, grouped)
-    write_replace_jsonl(best_dir / "m4_best_single_raw.jsonl", all_best)
-    write_replace_jsonl(assembly_dir / "m4_assembly_raw.jsonl", all_assembly)
+    append_rows_resume(best_dir / "m4_best_single_raw.jsonl", all_best)
+    append_rows_resume(assembly_dir / "m4_assembly_raw.jsonl", all_assembly)
     offline = {METHODS[0]: audit(all_best, manifest, METHODS[0], 0), METHODS[1]: audit(all_assembly, manifest, METHODS[1], 0)}
     if not all(item["passed"] for item in offline.values()):
         raise RuntimeError("M4 offline assembly audit failed")
@@ -430,27 +466,27 @@ def run(args: argparse.Namespace) -> int:
     tokenizer, model = load_model_and_tokenizer(cfg_for().model)
     selected = choose_smoke(manifest, int(args.smoke_cases))
     evaluated_best, evaluated_assembly = evaluated_offline_rows(selected, grouped, source_rows)
-    write_replace_jsonl(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
-    write_replace_jsonl(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
+    append_rows_resume(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
+    append_rows_resume(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
     run_repair(selected, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
     noops = run_repair(selected, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
     smoke_rows = read_jsonl(repair_dir / "m4_repair_raw.jsonl")
-    smoke = audit(smoke_rows, selected, METHODS[2], REPAIR_STEPS)
-    best_smoke = audit(evaluated_best, selected, METHODS[0], 0)
-    assembly_smoke = audit(evaluated_assembly, selected, METHODS[1], 0)
+    smoke = audit(smoke_rows, selected, METHODS[2], STAGE1_GRID_FORWARD_BUDGET + REPAIR_STEPS)
+    best_smoke = audit(evaluated_best, selected, METHODS[0], STAGE1_GRID_FORWARD_BUDGET)
+    assembly_smoke = audit(evaluated_assembly, selected, METHODS[1], STAGE1_GRID_FORWARD_BUDGET)
     smoke_gate = bool(smoke["passed"] and best_smoke["passed"] and assembly_smoke["passed"] and noops == 0 and lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0)
     full = None
     if smoke_gate and args.auto_full:
         require_randomspanlight_full(len(manifest))
         evaluated_best, evaluated_assembly = evaluated_offline_rows(manifest, grouped, source_rows)
-        write_replace_jsonl(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
-        write_replace_jsonl(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
+        append_rows_resume(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
+        append_rows_resume(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
         run_repair(manifest, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
         full_noops = run_repair(manifest, grouped, source_rows, repair_dir / "m4_repair_raw.jsonl", tokenizer, model)
         full = {
-            "best": audit(evaluated_best, manifest, METHODS[0], 0),
-            "assembly": audit(evaluated_assembly, manifest, METHODS[1], 0),
-            "repair": audit(read_jsonl(repair_dir / "m4_repair_raw.jsonl"), manifest, METHODS[2], REPAIR_STEPS),
+            "best": audit(evaluated_best, manifest, METHODS[0], STAGE1_GRID_FORWARD_BUDGET),
+            "assembly": audit(evaluated_assembly, manifest, METHODS[1], STAGE1_GRID_FORWARD_BUDGET),
+            "repair": audit(read_jsonl(repair_dir / "m4_repair_raw.jsonl"), manifest, METHODS[2], STAGE1_GRID_FORWARD_BUDGET + REPAIR_STEPS),
             "resume_noop_writes": full_noops,
         }
     compact_dir.mkdir(parents=True, exist_ok=True)

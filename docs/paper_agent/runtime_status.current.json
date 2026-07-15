@@ -1,156 +1,70 @@
 {
-  "audit_utc": "2026-07-15T04:58:32Z",
-  "measurement_window": {
-    "t0_utc": "2026-07-15T04:48:08Z",
-    "t_plus_10m_utc": "2026-07-15T04:58:32Z",
-    "elapsed_seconds": 624
-  },
+  "audit_utc": "2026-07-15T12:00:00Z",
+  "authoritative_branch": "codex/ccfa-execution-sprint-v1",
+  "authoritative_base": "ce416c4670fbb118cc8ac70d2a3ef9315f4912d1",
   "performance_inspected": false,
   "old_multiline_candidate_bank": {
     "historical_pid": 1195368,
     "tmux_session": "phase6-multiline-bank",
     "tmux_session_present": false,
     "live_pid": null,
-    "process_state": "exited_naturally_after_final_audit",
     "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/outputs_clean/phase6_multiline_candidate_bank_20260712_v1/candidate_bank_raw.jsonl",
-    "log_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/logs/paper_agent/20260712_phase6_multiline_candidate_bank.log",
     "expected_rows": 40632,
-    "t0_rows": 40632,
-    "t_plus_10m_rows": 40632,
-    "rows_per_hour": 0.0,
-    "complete_ratio": 1.0,
-    "eta_hours": 0.0,
-    "file_bytes": 231489740,
-    "last_modified_utc": "2026-07-15T02:34:57.623554+00:00",
-    "status_counts": {"ok": 40632, "error": 0},
+    "rows": 40632,
     "unique_candidate_keys": 40632,
-    "duplicate_candidate_key_rows": 0,
-    "last_jsonl_line_parseable": true,
-    "final_audit": {
-      "artifact": "analysis_outputs/phase6_multiline_candidate_bank_20260712_v1/full_audit.json",
-      "expected": 40632,
-      "observed": 40632,
-      "missing": 0,
-      "duplicate": 0,
-      "error": 0,
-      "resume_noop_writes": 0,
-      "frozen_test_invariant_passed": true
-    },
-    "latest_log_health": {
-      "last_20_checked": true,
-      "traceback": false,
-      "cuda_oom": false,
-      "disk_error": false
-    },
-    "decision": "completed_final_audit_passed_do_not_restart"
+    "duplicate_rows": 0,
+    "status_counts": {"ok": 40632, "error": 0},
+    "decision": "completed_pending_score_only_analysis_do_not_restart"
   },
-  "m1_multiline": {
+  "m1_multiline_safely_paused_resumable": {
     "historical_pid": 1576214,
     "tmux_session": "phase6-m1-multiline-v3",
-    "tmux_session_present": true,
-    "live_pid": 1576214,
-    "process_state_at_t_plus_10m": "Rl+",
-    "etime_at_t_plus_10m": "1-18:17:58",
-    "cpu_percent_at_t_plus_10m": 103.0,
-    "memory_percent_at_t_plus_10m": 0.3,
-    "rss_kib_at_t_plus_10m": 856996,
-    "vsz_kib_at_t_plus_10m": 54885160,
+    "tmux_session_present": false,
+    "live_pid": null,
+    "state": "safely_paused_resumable",
+    "pause_reason": "pre_outcome_compute_budget_reconciliation",
+    "performance_inspected_before_pause": false,
     "stage_one": {
       "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_stage1_multiline_20260713_v3/candidate_bank_raw.jsonl",
-      "expected_rows": 45711,
-      "t0_rows": 22749,
-      "t_plus_10m_rows": 22921,
-      "rows_per_hour": 992.3076923077,
-      "complete_ratio": 0.5014324780,
-      "eta_hours_linear": 22.9674418605,
-      "file_bytes": 558659297,
-      "last_modified_utc": "2026-07-15T04:58:48.317924+00:00",
-      "status_counts": {"ok": 22921, "error": 0},
-      "unique_candidate_keys": 22921,
-      "duplicate_candidate_key_rows": 0,
-      "last_jsonl_line_parseable": true
+      "complete": 27217,
+      "expected": 45711,
+      "unique_candidate_keys": 27217,
+      "duplicate_rows": 0,
+      "status_counts": {"ok": 27217, "error": 0},
+      "last_jsonl_line_parseable": true,
+      "bytes": 665261410,
+      "mtime_utc": "2026-07-15T11:43:10.581270Z"
     },
     "generic_refinement": {
       "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_generic_multiline_20260713_v3/equal_compute_generic_remask_raw.jsonl",
-      "expected_rows": 5079,
-      "t0_rows": 12,
-      "t_plus_10m_rows": 12,
-      "file_bytes": 77084,
-      "last_modified_utc": "2026-07-13T11:00:08.119939+00:00",
-      "status_counts": {"ok": 12, "error": 0},
+      "complete": 12,
+      "expected": 5079,
       "unique_candidate_keys": 12,
-      "duplicate_candidate_key_rows": 0,
-      "last_jsonl_line_parseable": true
+      "duplicate_rows": 0,
+      "status_counts": {"ok": 12, "error": 0},
+      "last_jsonl_line_parseable": true,
+      "bytes": 77084,
+      "mtime_utc": "2026-07-13T11:00:08.119939Z"
     },
     "dependency_cone_refinement": {
       "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_dependency_cone_multiline_20260713_v3/m1_dependency_cone_remask_raw.jsonl",
-      "expected_rows": 5079,
-      "t0_rows": 12,
-      "t_plus_10m_rows": 12,
-      "file_bytes": 76641,
-      "last_modified_utc": "2026-07-13T11:01:46.068573+00:00",
-      "status_counts": {"ok": 12, "error": 0},
+      "complete": 12,
+      "expected": 5079,
       "unique_candidate_keys": 12,
-      "duplicate_candidate_key_rows": 0,
-      "last_jsonl_line_parseable": true
+      "duplicate_rows": 0,
+      "status_counts": {"ok": 12, "error": 0},
+      "last_jsonl_line_parseable": true,
+      "bytes": 76641,
+      "mtime_utc": "2026-07-13T11:01:46.068573Z"
     },
-    "overall": {
-      "expected_rows": 55869,
-      "t_plus_10m_rows": 22945,
-      "complete_ratio": 0.4106864333,
-      "eta_hours_linear_from_stage_one_rate": 33.1784883721
+    "runner_provenance": {
+      "source_history_commit": "1d9ef3f",
+      "launch_snapshot": "not_recorded_in_interrupted_run_manifest",
+      "future_resume_requires": ["--auto-full", "--selected-method-only-5079"],
+      "dedup_contract": "reuse the three existing directories and continue from the first missing candidate_key"
     },
-    "log_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/logs/paper_agent/20260713_m1_multiline_v3.log",
-    "latest_log_health": {
-      "last_20_checked": true,
-      "traceback": false,
-      "cuda_oom": false,
-      "disk_error": false
-    },
-    "pause_reason": "pre_outcome_compute_budget_reconciliation",
-    "performance_inspected_before_pause": false,
-    "safe_sigint": {
-      "requested": true,
-      "signal": "SIGINT",
-      "result": "host_approval_control_plane_422_rejected",
-      "sigkill_used": false,
-      "actual_pause_completed": false
-    },
-    "resumable": true,
-    "historical_resume_command": "CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase6_multiline_candidate_bank.py run --dataset-jsonl /home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl --output-dir outputs_clean/m1_stage1_multiline_20260713_v3 --generic-output-dir outputs_clean/m1_generic_multiline_20260713_v3 --m1-output-dir outputs_clean/m1_dependency_cone_multiline_20260713_v3 --compact-dir analysis_outputs/m1_multiline_20260713_v3 --smoke-cases 12 --auto-full",
-    "future_5079_guard": "requires --auto-full --selected-method-only-5079 after intermediate tiers"
+    "resume_command": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0 && CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase6_multiline_candidate_bank.py run --dataset-jsonl /home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl --output-dir outputs_clean/m1_stage1_multiline_20260713_v3 --generic-output-dir outputs_clean/m1_generic_multiline_20260713_v3 --m1-output-dir outputs_clean/m1_dependency_cone_multiline_20260713_v3 --compact-dir analysis_outputs/m1_multiline_20260713_v3 --smoke-cases 12 --auto-full --selected-method-only-5079"
   },
-  "gpu": {
-    "index": 0,
-    "name": "NVIDIA H200 NVL",
-    "utilization_percent": 99,
-    "memory_total_mib": 143771,
-    "memory_used_mib": 33729,
-    "memory_free_mib": 109427,
-    "power_watts": 275.56,
-    "temperature_c": 53,
-    "uncorrected_volatile_ecc": 0,
-    "compute_processes_mib": {
-      "168219": 2372,
-      "1238805": 3446,
-      "1471638": 5558,
-      "1576214": 20584,
-      "1975394": 1636
-    }
-  },
-  "storage": {
-    "filesystem": "/dev/nvme0n1p2",
-    "available": "2.5T",
-    "inode_free": 232141584,
-    "inode_use_percent": 1
-  },
-  "population_route": [
-    "12 technical smoke",
-    "148 RandomSpanLight",
-    "296 MultiLine-Core / 927 SingleLine",
-    "selected-method-only 5079 MultiLine"
-  ],
-  "next_gpu_task": "M2 12-case technical smoke then only 148-case RandomSpanLight full",
-  "m2_started": false,
-  "m2_launch_blocker": "M1 safe pause is required but host SIGINT approval was rejected; no workaround used"
+  "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
+  "next_gpu_task": "M1 RandomSpanLight 12-case technical smoke then only 148-case full"
 }

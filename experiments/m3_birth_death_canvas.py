@@ -18,7 +18,7 @@ import time
 import traceback
 from collections import Counter
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 import torch
 
@@ -28,10 +28,12 @@ if str(REPO) not in sys.path:
 
 from analysis.phase6_abductive_bridge_v1 import analyze_candidate
 from expvision_dllm_clean.config import ExperimentConfig
-from expvision_dllm_clean.dataset import CodeTask
 from expvision_dllm_clean.decode import linear_target_masks, prepare_model_inputs
 from expvision_dllm_clean.modeling import load_model_and_tokenizer, set_global_seed
-from expvision_dllm_clean.verifier import run_verifier_stack
+from experiments.deployable_visible_task import (
+    evaluate_completion_after_decode,
+    visible_task as make_visible_task,
+)
 from experiments.m2_constraint_homotopy import (
     METHODS as M2_METHODS,
     append_jsonl,
@@ -88,31 +90,9 @@ def expected_keys(manifest: Sequence[Mapping[str, Any]], method: str) -> set[str
     return {method_key(str(row["row_key"]), method) for row in manifest}
 
 
-def visible_task(prefix: str, suffix: str) -> CodeTask:
+def visible_task(prefix: str, suffix: str) -> Any:
     """Model input contains no evaluator test/reference state."""
-    return CodeTask(
-        task_id="m3_visible_state",
-        prefix=prefix,
-        suffix=suffix,
-        full_prompt=prefix + "<FILL_ME>" + suffix,
-        test_code="",
-        entry_point="",
-        canonical_solution="",
-        raw={},
-    )
-
-
-def evaluator_task(prefix: str, suffix: str, source_row: Mapping[str, Any]) -> CodeTask:
-    return CodeTask(
-        task_id="m3_runtime_evaluator_task",
-        prefix=prefix,
-        suffix=suffix,
-        full_prompt=prefix + "<FILL_ME>" + suffix,
-        test_code=str(source_row["test"]),
-        entry_point=str(source_row["entry_point"]),
-        canonical_solution="",
-        raw={},
-    )
+    return make_visible_task(prefix, suffix, method="m3")
 
 
 def _device(model: Any) -> Any:
@@ -123,7 +103,7 @@ def _device(model: Any) -> Any:
 def new_particle(
     *,
     canvas_tokens: int,
-    task: CodeTask,
+    task: Any,
     tokenizer: Any,
     model: Any,
     born_round: int = 0,
@@ -223,6 +203,47 @@ def step_particle(
     }
 
 
+def birth_death_reallocate(
+    *,
+    particles: list[dict[str, Any]],
+    prefix: str,
+    suffix: str,
+    tokenizer: Any,
+    model: Any,
+    task: Any,
+    round_index: int,
+    score_fn: Callable[[Mapping[str, Any], str, str, Any], tuple[int, int, int, float, int]] = visible_particle_score,
+    particle_factory: Callable[..., dict[str, Any]] = new_particle,
+) -> dict[str, Any] | None:
+    """Replace the visibly weakest particle with a visible copy of the best."""
+    ranked = sorted(
+        enumerate(particles),
+        key=lambda item: score_fn(item[1], prefix, suffix, tokenizer),
+    )
+    dead_index, dead = ranked[0]
+    _, parent = ranked[-1]
+    parent_score = score_fn(parent, prefix, suffix, tokenizer)
+    dead_score = score_fn(dead, prefix, suffix, tokenizer)
+    if parent_score <= dead_score:
+        return None
+    parent_text = particle_text(parent, tokenizer)
+    particles[dead_index] = particle_factory(
+        canvas_tokens=int(parent["canvas_tokens"]),
+        task=task,
+        tokenizer=tokenizer,
+        model=model,
+        born_round=round_index + 1,
+        candidate_text=parent_text,
+    )
+    return {
+        "round": round_index,
+        "dead_canvas": int(dead["canvas_tokens"]),
+        "born_canvas": int(parent["canvas_tokens"]),
+        "parent_score": list(parent_score),
+        "dead_score": list(dead_score),
+    }
+
+
 def decode_population(
     *,
     method: str,
@@ -237,38 +258,24 @@ def decode_population(
     particles = [new_particle(canvas_tokens=canvas, task=task, tokenizer=tokenizer, model=model) for canvas in CANVASES]
     events: list[dict[str, Any]] = []
     forwards = 0
+    token_forwards = 0
     for round_index in range(STEPS_PER_PARTICLE):
         for particle in particles:
             step_particle(particle=particle, prefix=prefix, suffix=suffix, tokenizer=tokenizer, model=model)
             forwards += 1
+            token_forwards += int(particle["canvas_tokens"])
         if method == "m3_birth_death_canvas" and round_index in DEATH_ROUNDS:
-            ranked = sorted(
-                enumerate(particles),
-                key=lambda item: visible_particle_score(item[1], prefix, suffix, tokenizer),
+            event = birth_death_reallocate(
+                particles=particles,
+                prefix=prefix,
+                suffix=suffix,
+                tokenizer=tokenizer,
+                model=model,
+                task=task,
+                round_index=round_index,
             )
-            dead_index, dead = ranked[0]
-            _, parent = ranked[-1]
-            parent_score = visible_particle_score(parent, prefix, suffix, tokenizer)
-            dead_score = visible_particle_score(dead, prefix, suffix, tokenizer)
-            if parent_score > dead_score:
-                parent_text = particle_text(parent, tokenizer)
-                particles[dead_index] = new_particle(
-                    canvas_tokens=int(parent["canvas_tokens"]),
-                    task=task,
-                    tokenizer=tokenizer,
-                    model=model,
-                    born_round=round_index + 1,
-                    candidate_text=parent_text,
-                )
-                events.append(
-                    {
-                        "round": round_index,
-                        "dead_canvas": int(dead["canvas_tokens"]),
-                        "born_canvas": int(parent["canvas_tokens"]),
-                        "parent_score": list(parent_score),
-                        "dead_score": list(dead_score),
-                    }
-                )
+            if event is not None:
+                events.append(event)
     if forwards != TOTAL_FORWARDS:
         raise RuntimeError("M3 violated fixed total forward budget")
     selected = max(particles, key=lambda item: visible_particle_score(item, prefix, suffix, tokenizer))
@@ -282,17 +289,21 @@ def decode_population(
         "particle_canvases_final": [int(item["canvas_tokens"]) for item in particles],
         "birth_death_events": events,
         "actual_forward_count": forwards,
+        "actual_token_forward_budget": token_forwards,
     }
 
 
 def result_row(method: str, item: Mapping[str, Any], source: Mapping[str, Any], decoded: Mapping[str, Any]) -> dict[str, Any]:
     prefix, suffix = str(source["prompt"]), str(source["suffix"])
     middle = str(decoded["middle_text"])
-    task = evaluator_task(prefix, suffix, source)
     code = prefix + middle + suffix
-    verification = run_verifier_stack(task=task, full_code=code, completion_without_suffix=middle)
-    verification_sec = sum(value.duration_sec for value in verification.values())
-    tier3 = verification.get("tier3_unit_tests")
+    evaluated = evaluate_completion_after_decode(
+        prefix=prefix,
+        suffix=suffix,
+        middle=middle,
+        source_row=source,
+        method="m3",
+    )
     return {
         "candidate_key": method_key(str(item["row_key"]), method),
         "row_key": item["row_key"],
@@ -303,7 +314,7 @@ def result_row(method: str, item: Mapping[str, Any], source: Mapping[str, Any], 
         "length_bucket": item["length_bucket"],
         "reference_middle_tokens": item["reference_middle_tokens"],
         "status": "ok",
-        "passed": bool(tier3.passed) if tier3 else False,
+        "passed": bool(evaluated["passed"]),
         "canvas_tokens": int(decoded["selected_canvas_tokens"]),
         "seed": SEED,
         "total_steps": TOTAL_FORWARDS,
@@ -313,15 +324,17 @@ def result_row(method: str, item: Mapping[str, Any], source: Mapping[str, Any], 
         "code": code,
         "metrics": {
             "actual_forward_count": int(decoded["actual_forward_count"]),
-            "token_budget_proxy": int(decoded["actual_forward_count"]) * int(decoded["selected_canvas_tokens"]),
-            "verification_sec": verification_sec,
+            "standalone_actual_forward_count": int(decoded["actual_forward_count"]),
+            "actual_token_forward_budget": int(decoded["actual_token_forward_budget"]),
+            "token_budget": int(decoded["actual_token_forward_budget"]),
+            "verification_sec": float(evaluated["verification_sec"]),
         },
         "selection": {
             "selected_visible_score": decoded["selected_visible_score"],
             "particle_canvases_final": decoded["particle_canvases_final"],
             "birth_death_events": decoded["birth_death_events"],
         },
-        "verification": {name: value.to_dict() for name, value in verification.items()},
+        "verification": evaluated["verification"],
     }
 
 

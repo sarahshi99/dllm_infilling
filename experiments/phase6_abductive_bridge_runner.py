@@ -23,6 +23,10 @@ from experiments.phase6_remask import (
     generic_low_confidence_indices,
     remask_count_for_canvas,
 )
+from experiments.deployable_visible_task import (
+    evaluate_with_evaluator_task,
+    visible_task,
+)
 
 
 REFINEMENT_METHODS = (
@@ -187,6 +191,7 @@ def _result_row(
     method: str,
     manifest_row: Mapping[str, Any],
     selected_base: Mapping[str, Any],
+    stage1_grid_rows: Sequence[Mapping[str, Any]],
     selected_state: Mapping[str, Any],
     result: Mapping[str, Any],
     remask_indices: Sequence[int],
@@ -200,11 +205,17 @@ def _result_row(
     metrics = dict(result.get("metrics") or {})
     middle = str(result.get("middle_text") or "")
     code = str(result.get("code") or "")
-    stage1_forward = _stage1_forward_count(selected_base)
+    selected_stage1_forward = _stage1_forward_count(selected_base)
+    stage1_forward = sum(_stage1_forward_count(row) for row in stage1_grid_rows)
     refinement_forward = int(metrics.get("actual_forward_count") or 0)
-    stage1_wall = _stage1_wall_sec(selected_base)
+    selected_stage1_wall = _stage1_wall_sec(selected_base)
+    stage1_wall = sum(_stage1_wall_sec(row) for row in stage1_grid_rows)
     refinement_wall = float(metrics.get("total_sec_including_probe") or 0.0)
     canvas = int(selected_state["canvas_tokens"])
+    stage1_token_budget = sum(
+        int(row["canvas_tokens"]) * _stage1_forward_count(row) for row in stage1_grid_rows
+    )
+    refinement_token_budget = canvas * refinement_forward
     return {
         "candidate_key": refinement_key(str(manifest_row["row_key"]), method),
         "row_key": manifest_row["row_key"],
@@ -239,12 +250,19 @@ def _result_row(
         "dependency_cone": cone.to_dict(),
         "metrics": {
             **metrics,
+            "stage1_selected_candidate_forward_count": selected_stage1_forward,
             "stage1_forward_count": stage1_forward,
+            "standalone_stage1_grid_forward_count": stage1_forward,
             "refinement_forward_count": refinement_forward,
             "actual_forward_count": stage1_forward + refinement_forward,
-            "stage1_token_budget": canvas * stage1_forward,
-            "refinement_token_budget": canvas * refinement_forward,
-            "token_budget": canvas * (stage1_forward + refinement_forward),
+            "standalone_actual_forward_count": stage1_forward + refinement_forward,
+            "shared_bank_incremental_forward_count": refinement_forward,
+            "stage1_token_budget": stage1_token_budget,
+            "refinement_token_budget": refinement_token_budget,
+            "token_budget": stage1_token_budget + refinement_token_budget,
+            "standalone_token_budget": stage1_token_budget + refinement_token_budget,
+            "shared_bank_incremental_token_budget": refinement_token_budget,
+            "stage1_selected_candidate_wall_sec": selected_stage1_wall,
             "stage1_wall_sec": stage1_wall,
             "refinement_wall_sec": refinement_wall,
             "total_sec_including_probe": stage1_wall + refinement_wall,
@@ -366,9 +384,22 @@ def build_refinement_row_for_case(
 
         if len(token_ids) != canvas:
             raise RuntimeError("M1 refinement has no saved deployable state for fixed64 fallback")
-        # Evaluator-only task creation is deliberately after target selection,
-        # cone construction, and generic/M1 remask choice.
-        task = evaluator_task_factory(str(selected_state["prefix_text"]), str(selected_state["suffix_text"]), source_row)
+        # The deployable decode receives only prefix/suffix.  This closure
+        # reads test fields only when the decoder has returned a completion.
+        task = visible_task(
+            str(selected_state["prefix_text"]),
+            str(selected_state["suffix_text"]),
+            method="m1",
+        )
+
+        def evaluate_after_decode(prefix: str, middle: str, suffix: str) -> Mapping[str, Any]:
+            return evaluate_with_evaluator_task(
+                task=evaluator_task_factory(prefix, suffix, source_row),
+                prefix=prefix,
+                suffix=suffix,
+                middle=middle,
+            )
+
         set_seed(int(selected_state["seed"]))
         result = decode_fn(
             task=task,
@@ -381,11 +412,13 @@ def build_refinement_row_for_case(
             initial_middle_ids=token_ids,
             initial_mask_indices=remask_indices,
             schedule_length=max(1, len(remask_indices)),
+            evaluate_after_decode=evaluate_after_decode,
         )
         return _result_row(
             method=method,
             manifest_row=manifest_row,
             selected_base=selected_base,
+            stage1_grid_rows=stage1_rows,
             selected_state=selected_state,
             result=result,
             remask_indices=remask_indices,

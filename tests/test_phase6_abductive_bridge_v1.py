@@ -238,7 +238,9 @@ class Phase6AbductiveBridgeV1Test(unittest.TestCase):
         self.assertTrue(row["fallback_to_fixed64"])
         self.assertTrue(row["null_refinement_executed"])
         self.assertEqual(row["metrics"]["refinement_forward_count"], 64)
-        self.assertEqual(row["metrics"]["actual_forward_count"], 128)
+        self.assertEqual(row["metrics"]["actual_forward_count"], 576)
+        self.assertEqual(row["metrics"]["shared_bank_incremental_forward_count"], 64)
+        self.assertEqual(row["metrics"]["standalone_stage1_grid_forward_count"], 512)
 
     def test_synthetic_activation_runs_64_forwards_for_generic_and_m1(self) -> None:
         calls = []
@@ -353,6 +355,33 @@ class Phase6AbductiveBridgeV1Test(unittest.TestCase):
         selected_state, _, _, _, cone = build_deployable_refinement_plan(stage1_rows(poison=True), Tokenizer())
         self.assertEqual(selected_state["canvas_tokens"], 16)
         self.assertTrue(cone.executable)
+
+    def test_test_bearing_source_is_not_materialized_until_after_decode(self) -> None:
+        class SourcePoison(dict):
+            def __getitem__(self, key):
+                raise AssertionError(f"source field read before post-decode evaluator: {key}")
+
+        calls = []
+
+        def visible_only_decode(**kwargs):
+            self.assertEqual(kwargs["task"].test_code, "")
+            self.assertEqual(kwargs["task"].entry_point, "")
+            self.assertIsNone(kwargs["task"].canonical_solution)
+            return fake_decode(calls)(**kwargs)
+
+        row = build_refinement_row_for_case(
+            method="m1_dependency_cone_remask",
+            manifest_row=manifest_row(),
+            source_row=SourcePoison(),
+            stage1_rows=stage1_rows(),
+            tokenizer=Tokenizer(),
+            model=object(),
+            cfg_for=lambda canvas, seed: (canvas, seed),
+            set_seed=lambda seed: None,
+            decode_fn=visible_only_decode,
+        )
+        self.assertEqual(row["status"], "ok")
+        self.assertEqual(len(calls), 1)
 
 
 if __name__ == "__main__":

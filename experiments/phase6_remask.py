@@ -14,7 +14,7 @@ import builtins
 import keyword
 import re
 from dataclasses import dataclass
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 import torch
 
@@ -68,12 +68,16 @@ def decode_fixed_canvas_state(
     initial_middle_ids: Sequence[int] | None = None,
     initial_mask_indices: Sequence[int] | None = None,
     schedule_length: int | None = None,
+    evaluate_after_decode: Callable[[str, str, str], Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Run a fixed 64-step decode and retain the final token state locally.
 
     ``initial_middle_ids`` makes stage two a real refinement: only the supplied
     positions are remasked, and all other first-stage tokens are preserved as
-    the initial state.  The verifier runs only after decoding has completed.
+    the initial state.  In new candidate-method runners, ``task`` is a
+    prefix/suffix-only visible task and ``evaluate_after_decode`` constructs
+    test-bearing evaluator state only after decoding has completed.  The
+    legacy fallback is retained for historical runners.
     """
     if int(canvas_tokens) <= 0 or int(total_steps) <= 0:
         raise ValueError("canvas_tokens and total_steps must be positive")
@@ -144,14 +148,27 @@ def decode_fixed_canvas_state(
     decode_sec = time.perf_counter() - decode_started
     final_middle_ids = [int(value) for value in x_t[0, middle_start:middle_end].detach().cpu().tolist()]
     segments = _segments(tokenizer, prepared, final_middle_ids)
-    verification = run_verifier_stack(
-        task=task,
-        full_code=str(segments["full_text"]),
-        completion_without_suffix=str(segments["middle_text"]),
-    )
-    verification_sec = sum(item.duration_sec for item in verification.values())
-    tier3 = verification.get("tier3_unit_tests")
-    passed = bool(tier3.passed) if tier3 else False
+    if evaluate_after_decode is None:
+        verification = run_verifier_stack(
+            task=task,
+            full_code=str(segments["full_text"]),
+            completion_without_suffix=str(segments["middle_text"]),
+        )
+        verification_payload = {name: result.to_dict() for name, result in verification.items()}
+        verification_sec = sum(item.duration_sec for item in verification.values())
+        tier3 = verification.get("tier3_unit_tests")
+        passed = bool(tier3.passed) if tier3 else False
+    else:
+        evaluated = dict(
+            evaluate_after_decode(
+                str(segments["prefix_text"]),
+                str(segments["middle_text"]),
+                str(segments["suffix_text"]),
+            )
+        )
+        verification_payload = dict(evaluated.get("verification") or {})
+        verification_sec = float(evaluated.get("verification_sec") or 0.0)
+        passed = bool(evaluated.get("passed", False))
     return {
         "code": segments["full_text"],
         "prefix_text": segments["prefix_text"],
@@ -173,7 +190,7 @@ def decode_fixed_canvas_state(
             "canvas_tokens": int(canvas_tokens),
             "remasked_initial_token_count": len(remask_indices),
         },
-        "verification": {name: result.to_dict() for name, result in verification.items()},
+        "verification": verification_payload,
         "diagnostics": _diagnostics(task, segments),
         "trajectory": {
             "phase": phase_name,

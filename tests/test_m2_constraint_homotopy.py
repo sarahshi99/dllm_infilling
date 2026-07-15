@@ -11,6 +11,8 @@ from experiments.m2_constraint_homotopy import (
     homotopy_weight,
     parser,
     run_method,
+    choose_remask_positions,
+    visible_constraint_signals,
     visible_constraint_scores,
 )
 
@@ -26,31 +28,54 @@ class Tokenizer:
 class M2ConstraintHomotopyTest(unittest.TestCase):
     def test_gradual_and_abrupt_share_fixed_64_forward_budget_but_differ_in_schedule(self) -> None:
         self.assertEqual(TOTAL_STEPS, 64)
-        self.assertLess(homotopy_weight(METHODS[0], 15), homotopy_weight(METHODS[0], 47))
-        self.assertEqual(homotopy_weight(METHODS[1], 31), 0.0)
-        self.assertEqual(homotopy_weight(METHODS[1], 32), 1.0)
+        self.assertEqual(homotopy_weight(METHODS[0], 47), 0.0)
+        self.assertLess(homotopy_weight(METHODS[1], 15), homotopy_weight(METHODS[1], 47))
+        self.assertEqual(homotopy_weight(METHODS[2], 31), 0.0)
+        self.assertEqual(homotopy_weight(METHODS[2], 32), 1.0)
 
     def test_constraint_view_uses_only_prefix_suffix_and_current_candidate(self) -> None:
-        scores, meta = visible_constraint_scores(
+        protection, repair, meta = visible_constraint_signals(
             prefix="def f(xs):\n",
             suffix="    return total\n",
             tokenizer=Tokenizer(),
             candidate_token_ids=[0, 1],
         )
-        self.assertEqual(len(scores), 2)
+        self.assertEqual(len(protection), 2)
         self.assertTrue(meta["full_parse_passed"])
         self.assertEqual(meta["suffix_dependency_count"], 1)
-        self.assertGreater(scores[0], 0.0)
+        self.assertGreater(protection[0], 0.0)
+        self.assertEqual(repair[0], 0.0)
 
     def test_syntax_incompatibility_is_inference_visible_constraint(self) -> None:
-        scores, meta = visible_constraint_scores(
+        protection, repair, meta = visible_constraint_signals(
             prefix="def f(xs):\n",
             suffix="    return total\n",
             tokenizer=Tokenizer(),
             candidate_token_ids=[2],
         )
         self.assertFalse(meta["full_parse_passed"])
-        self.assertGreater(scores[0], 0.0)
+        self.assertEqual(protection[0], 0.0)
+        self.assertGreater(repair[0], 0.0)
+
+    def test_constraint_schedule_changes_actual_remask_choice(self) -> None:
+        vanilla = choose_remask_positions(
+            confidences=[0.2, 0.2],
+            protection_bonus=[3.0, 0.0],
+            repair_priority=[0.0, 3.0],
+            masked_positions=[0, 1],
+            target_masks=1,
+            weight=homotopy_weight(METHODS[0], 40),
+        )
+        constrained = choose_remask_positions(
+            confidences=[0.2, 0.2],
+            protection_bonus=[3.0, 0.0],
+            repair_priority=[0.0, 3.0],
+            masked_positions=[0, 1],
+            target_masks=1,
+            weight=homotopy_weight(METHODS[2], 40),
+        )
+        self.assertEqual(vanilla, [0])
+        self.assertEqual(constrained, [1])
 
     def test_method_keys_cover_one_row_per_method(self) -> None:
         manifest = [{"row_key": "a"}, {"row_key": "b"}]
@@ -62,6 +87,8 @@ class M2ConstraintHomotopyTest(unittest.TestCase):
             [
                 "--dataset-jsonl",
                 "data.jsonl",
+                "--vanilla-output-dir",
+                "vanilla",
                 "--gradual-output-dir",
                 "gradual",
                 "--abrupt-output-dir",

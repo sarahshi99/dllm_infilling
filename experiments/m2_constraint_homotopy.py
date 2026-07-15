@@ -21,7 +21,7 @@ import traceback
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 import torch
 
@@ -31,10 +31,14 @@ if str(REPO) not in sys.path:
 
 from analysis.phase6_abductive_bridge_v1 import extract_backward_obligations
 from expvision_dllm_clean.config import ExperimentConfig
-from expvision_dllm_clean.dataset import CodeTask
 from expvision_dllm_clean.decode import linear_target_masks, prepare_model_inputs
 from expvision_dllm_clean.modeling import load_model_and_tokenizer, set_global_seed
-from expvision_dllm_clean.verifier import parse_compile_diagnostics, run_verifier_stack
+from expvision_dllm_clean.verifier import parse_compile_diagnostics
+from experiments.deployable_visible_task import (
+    evaluate_completion_after_decode,
+    visible_task,
+)
+from analysis.phase6_abductive_bridge_v1 import analyze_candidate
 from experiments.phase6_remask import decoded_token_ranges
 from experiments.method_population_schedule import (
     RANDOMSPANLIGHT_ALLOWED_CASES,
@@ -49,7 +53,7 @@ SOURCE_CONFIG = "HumanEval-RandomSpanInfillingLight"
 CANVAS_TOKENS = 64
 TOTAL_STEPS = 64
 SEED = 0
-METHODS = ("m2_gradual_constraints", "m2_abrupt_constraints")
+METHODS = ("m2_vanilla_fixed64", "m2_gradual_constraints", "m2_abrupt_constraints")
 TEST_LOCK = REPO / "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json"
 GROUPED_TEST_TASKS = REPO / "analysis_outputs/grouped_split_20260702_accel2/test_tasks.json"
 
@@ -199,6 +203,8 @@ def expected_keys(manifest: Sequence[Mapping[str, Any]], method: str) -> set[str
 
 
 def homotopy_weight(method: str, step: int, total_steps: int = TOTAL_STEPS) -> float:
+    if method == "m2_vanilla_fixed64":
+        return 0.0
     if method == "m2_gradual_constraints":
         return min(1.0, max(0.0, (int(step) + 1) / int(total_steps)))
     if method == "m2_abrupt_constraints":
@@ -206,60 +212,91 @@ def homotopy_weight(method: str, step: int, total_steps: int = TOTAL_STEPS) -> f
     raise ValueError(f"Unknown M2 method {method!r}")
 
 
-def visible_constraint_scores(
+def visible_constraint_signals(
     *,
     prefix: str,
     suffix: str,
     tokenizer: Any,
     candidate_token_ids: Sequence[int],
-) -> tuple[list[float], dict[str, Any]]:
-    """Use only current candidate, prefix/suffix, and syntax/obligation visibility."""
+) -> tuple[list[float], list[float], dict[str, Any]]:
+    """Return separate protection and repair signals from visible state only."""
     candidate, ranges = decoded_token_ranges(tokenizer, candidate_token_ids)
     obligations = extract_backward_obligations(prefix, suffix)
-    try:
-        ast.parse(prefix + candidate + suffix)
-        parse_passed = True
-    except SyntaxError:
-        parse_passed = False
-    scores: list[float] = []
+    diagnostic = analyze_candidate(prefix, candidate, suffix)
+    parse_passed = bool(diagnostic.full_parse_passed)
+    protection_bonus: list[float] = []
+    repair_priority: list[float] = []
     required = set(obligations.dependency_names)
+    unsatisfied = set(diagnostic.unsatisfied_obligations)
     for left, right in ranges:
         piece = candidate[left:right] if left >= 0 and right > left else ""
-        score = 0.0
+        protect = 0.0
+        repair = 0.0
         if not parse_passed and any(mark in piece for mark in ("\n", ":", "(", ")", "[", "]", "{", "}")):
-            score += 1.0
-        if required and any(re.search(rf"\b{re.escape(name)}\b", piece) for name in required):
-            score += 1.0
+            repair += 1.0
+        mentioned_required = [name for name in required if re.search(rf"\b{re.escape(name)}\b", piece)]
+        if mentioned_required:
+            if not parse_passed or any(name in unsatisfied for name in mentioned_required):
+                repair += 1.0
+            else:
+                protect += 1.0
         if obligations.control_requirements and any(mark in piece for mark in ("if", "for", "while", "try", "except", "else", "finally", ":")):
-            score += 0.5
-        scores.append(score)
-    return scores, {
+            if parse_passed:
+                protect += 0.5
+            else:
+                repair += 0.5
+        protection_bonus.append(protect)
+        repair_priority.append(repair)
+    return protection_bonus, repair_priority, {
         "full_parse_passed": parse_passed,
         "suffix_dependency_count": len(required),
         "suffix_control_requirement_count": len(obligations.control_requirements),
+        "unsatisfied_obligation_count": len(unsatisfied),
     }
 
 
-def evaluator_task(prefix: str, suffix: str, source_row: Mapping[str, Any]) -> CodeTask:
-    """Build evaluator state only after the deployable method is fixed."""
-    return CodeTask(
-        task_id="m2_runtime_evaluator_task",
+def visible_constraint_scores(
+    *, prefix: str, suffix: str, tokenizer: Any, candidate_token_ids: Sequence[int]
+) -> tuple[list[float], dict[str, Any]]:
+    """Compatibility view: repair priority minus protection for diagnostics."""
+    protection, repair, meta = visible_constraint_signals(
         prefix=prefix,
         suffix=suffix,
-        full_prompt=prefix + "<FILL_ME>" + suffix,
-        test_code=str(source_row["test"]),
-        entry_point=str(source_row["entry_point"]),
-        canonical_solution="",
-        raw={},
+        tokenizer=tokenizer,
+        candidate_token_ids=candidate_token_ids,
     )
+    return [repair_value - protect_value for protect_value, repair_value in zip(protection, repair)], meta
+
+
+def choose_remask_positions(
+    *,
+    confidences: Sequence[float],
+    protection_bonus: Sequence[float],
+    repair_priority: Sequence[float],
+    masked_positions: Sequence[int],
+    target_masks: int,
+    weight: float,
+) -> list[int]:
+    """Protect visible obligations and prioritize visibly broken positions."""
+    ranked = sorted(
+        (
+            float(confidences[index])
+            + float(weight) * float(protection_bonus[index])
+            - float(weight) * float(repair_priority[index]),
+            int(index),
+        )
+        for index in masked_positions
+    )
+    return [index for _, index in ranked[: min(int(target_masks), len(ranked))]]
 
 
 def decode_constraint_homotopy(
     *,
     method: str,
-    task: CodeTask,
+    task: Any,
     tokenizer: Any,
     model: Any,
+    evaluate_after_decode: Callable[[str, str, str], Mapping[str, Any]],
 ) -> dict[str, Any]:
     """Run exactly 64 forwards; evaluator execution occurs after denoising."""
     cfg = cfg_for()
@@ -289,7 +326,7 @@ def decode_constraint_homotopy(
         middle_probs = max_probs[:, middle_start:middle_end]
         proposed_ids = x_t[0, middle_start:middle_end].detach().clone()
         proposed_ids[middle_mask[0]] = predictions[0, middle_start:middle_end][middle_mask[0]]
-        constraint_scores, constraint_meta = visible_constraint_scores(
+        protection_bonus, repair_priority, constraint_meta = visible_constraint_signals(
             prefix=task.prefix,
             suffix=task.suffix,
             tokenizer=tokenizer,
@@ -298,14 +335,14 @@ def decode_constraint_homotopy(
         target_masks = linear_target_masks(CANVAS_TOKENS, TOTAL_STEPS, step)
         weight = homotopy_weight(method, step)
         masked_positions = torch.nonzero(middle_mask[0], as_tuple=False).flatten().tolist()
-        ranked = sorted(
-            (
-                float(middle_probs[0, index].item()) - weight * float(constraint_scores[index]),
-                int(index),
-            )
-            for index in masked_positions
+        retain = choose_remask_positions(
+            confidences=[float(value) for value in middle_probs[0].detach().cpu().tolist()],
+            protection_bonus=protection_bonus,
+            repair_priority=repair_priority,
+            masked_positions=masked_positions,
+            target_masks=target_masks,
+            weight=weight,
         )
-        retain = [index for _, index in ranked[: min(target_masks, len(ranked))]]
         x_t[current_mask] = predictions[current_mask]
         if retain:
             x_t[0, [middle_start + index for index in retain]] = mask_token_id
@@ -321,6 +358,9 @@ def decode_constraint_homotopy(
                 "homotopy_weight": weight,
                 "remaining_masks_after": int((after_middle == mask_token_id).sum().item()),
                 "constraint": constraint_meta,
+                "protection_bonus": protection_bonus,
+                "repair_priority": repair_priority,
+                "remasked_positions": retain,
             }
         )
 
@@ -330,19 +370,17 @@ def decode_constraint_homotopy(
     middle = tokenizer.decode(middle_ids, skip_special_tokens=True)
     suffix = tokenizer.decode(prepared["suffix_ids"], skip_special_tokens=True)
     code = prefix + middle + suffix
-    verification = run_verifier_stack(task=task, full_code=code, completion_without_suffix=middle)
-    verification_sec = sum(item.duration_sec for item in verification.values())
-    tier3 = verification.get("tier3_unit_tests")
+    evaluated = dict(evaluate_after_decode(prefix, middle, suffix))
     return {
         "code": code,
         "middle_text": middle,
         "middle_token_ids": middle_ids,
         "final_token_confidences": final_confidences,
         "metrics": {
-            "passed": bool(tier3.passed) if tier3 else False,
+            "passed": bool(evaluated.get("passed", False)),
             "decode_sec": decode_sec,
-            "verification_sec": verification_sec,
-            "total_sec_including_probe": decode_sec + verification_sec,
+            "verification_sec": float(evaluated.get("verification_sec") or 0.0),
+            "total_sec_including_probe": decode_sec + float(evaluated.get("verification_sec") or 0.0),
             "actual_forward_count": TOTAL_STEPS,
             "token_budget": CANVAS_TOKENS * TOTAL_STEPS,
             "effective_update_steps": effective_update_steps,
@@ -353,7 +391,7 @@ def decode_constraint_homotopy(
             "final_full_code": parse_compile_diagnostics(code, compile_mode="exec"),
             "final_constraint": trace[-1]["constraint"],
         },
-        "verification": {name: result.to_dict() for name, result in verification.items()},
+        "verification": evaluated.get("verification") or {},
         "trajectory": trace,
     }
 
@@ -445,11 +483,25 @@ def run_method(
             continue
         source = source_rows[int(item["source_row_id"])]
         try:
-            # Method choice is fixed before this evaluator-only task carries
-            # test code; decode selection never inspects that test code.
-            task = evaluator_task(str(source["prompt"]), str(source["suffix"]), source)
+            task = visible_task(str(source["prompt"]), str(source["suffix"]), method="m2")
             set_global_seed(SEED)
-            row = result_row(method=method, manifest_row=item, result=decode_constraint_homotopy(method=method, task=task, tokenizer=tokenizer, model=model))
+            row = result_row(
+                method=method,
+                manifest_row=item,
+                result=decode_constraint_homotopy(
+                    method=method,
+                    task=task,
+                    tokenizer=tokenizer,
+                    model=model,
+                    evaluate_after_decode=lambda prefix, middle, suffix: evaluate_completion_after_decode(
+                        prefix=prefix,
+                        suffix=suffix,
+                        middle=middle,
+                        source_row=source,
+                        method="m2",
+                    ),
+                ),
+            )
         except Exception as exc:
             row = error_row(method, item, exc)
         append_jsonl(raw_path, row)
@@ -492,18 +544,19 @@ def compact_summary(
     compact_dir: Path,
     phase: str,
     selected_manifest: Sequence[Mapping[str, Any]],
-    gradual_rows: Sequence[Mapping[str, Any]],
-    abrupt_rows: Sequence[Mapping[str, Any]],
+    rows_by_method: Mapping[str, Sequence[Mapping[str, Any]]],
     test_lock: Mapping[str, Any],
     resume_noops: int,
     peak_memory_bytes: int,
     wall_sec: float,
 ) -> dict[str, Any]:
-    gradual_audit = audit_rows(gradual_rows, expected_keys(selected_manifest, METHODS[0]))
-    abrupt_audit = audit_rows(abrupt_rows, expected_keys(selected_manifest, METHODS[1]))
+    audits = {
+        method: audit_rows(rows_by_method[method], expected_keys(selected_manifest, method))
+        for method in METHODS
+    }
     frozen_ok = test_lock.get("test_status") == "sealed" and int(test_lock.get("test_evaluation_count", -1)) == 0
-    gate_passed = bool(gradual_audit["passed"] and abrupt_audit["passed"] and frozen_ok and resume_noops == 0 and peak_memory_bytes > 0)
-    rows = [*gradual_rows, *abrupt_rows]
+    gate_passed = bool(all(audit["passed"] for audit in audits.values()) and frozen_ok and resume_noops == 0 and peak_memory_bytes > 0)
+    rows = [row for method_rows in rows_by_method.values() for row in method_rows]
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(
         compact_dir / f"{phase}_results.csv",
@@ -527,7 +580,7 @@ def compact_summary(
         "phase": phase,
         "technical_gate_passed": gate_passed,
         "selected_case_count": len(selected_manifest),
-        "methods": {METHODS[0]: gradual_audit, METHODS[1]: abrupt_audit},
+        "methods": audits,
         "frozen_test_status": test_lock.get("test_status"),
         "test_evaluation_count": test_lock.get("test_evaluation_count"),
         "resume_noop_writes": resume_noops,
@@ -541,13 +594,17 @@ def compact_summary(
 
 def run(args: argparse.Namespace) -> int:
     dataset_jsonl = Path(args.dataset_jsonl).resolve()
+    vanilla_dir = Path(args.vanilla_output_dir).resolve()
     gradual_dir = Path(args.gradual_output_dir).resolve()
     abrupt_dir = Path(args.abrupt_output_dir).resolve()
     compact_dir = Path(args.compact_dir).resolve()
-    if gradual_dir == abrupt_dir:
-        raise ValueError("M2 gradual and abrupt methods require independent output directories")
-    gradual_raw = gradual_dir / "m2_gradual_raw.jsonl"
-    abrupt_raw = abrupt_dir / "m2_abrupt_raw.jsonl"
+    if len({vanilla_dir, gradual_dir, abrupt_dir}) != 3:
+        raise ValueError("M2 vanilla, gradual, and abrupt methods require independent output directories")
+    raw_by_method = {
+        METHODS[0]: vanilla_dir / "m2_vanilla_raw.jsonl",
+        METHODS[1]: gradual_dir / "m2_gradual_raw.jsonl",
+        METHODS[2]: abrupt_dir / "m2_abrupt_raw.jsonl",
+    }
     frozen_groups, lock = load_frozen_groups()
     source_rows = read_jsonl(dataset_jsonl)
     if len(source_rows) != 164:
@@ -561,16 +618,17 @@ def run(args: argparse.Namespace) -> int:
         raise RuntimeError("CUDA unavailable for M2")
     torch.cuda.reset_peak_memory_stats()
     started = time.perf_counter()
-    run_method(method=METHODS[0], manifest=selected, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
-    run_method(method=METHODS[1], manifest=selected, source_rows=source_rows, raw_path=abrupt_raw, tokenizer=tokenizer, model=model)
-    smoke_noops = run_method(method=METHODS[0], manifest=selected, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
-    smoke_noops += run_method(method=METHODS[1], manifest=selected, source_rows=source_rows, raw_path=abrupt_raw, tokenizer=tokenizer, model=model)
+    for method in METHODS:
+        run_method(method=method, manifest=selected, source_rows=source_rows, raw_path=raw_by_method[method], tokenizer=tokenizer, model=model)
+    smoke_noops = sum(
+        run_method(method=method, manifest=selected, source_rows=source_rows, raw_path=raw_by_method[method], tokenizer=tokenizer, model=model)
+        for method in METHODS
+    )
     smoke = compact_summary(
         compact_dir=compact_dir,
         phase="smoke",
         selected_manifest=selected,
-        gradual_rows=read_jsonl(gradual_raw),
-        abrupt_rows=read_jsonl(abrupt_raw),
+        rows_by_method={method: read_jsonl(raw_by_method[method]) for method in METHODS},
         test_lock=lock,
         resume_noops=smoke_noops,
         peak_memory_bytes=int(torch.cuda.max_memory_allocated()),
@@ -582,16 +640,17 @@ def run(args: argparse.Namespace) -> int:
     full: dict[str, Any] | None = None
     if args.auto_full:
         require_randomspanlight_full(len(manifest))
-        run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
-        run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=abrupt_raw, tokenizer=tokenizer, model=model)
-        full_noops = run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=gradual_raw, tokenizer=tokenizer, model=model)
-        full_noops += run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=abrupt_raw, tokenizer=tokenizer, model=model)
+        for method in METHODS:
+            run_method(method=method, manifest=manifest, source_rows=source_rows, raw_path=raw_by_method[method], tokenizer=tokenizer, model=model)
+        full_noops = sum(
+            run_method(method=method, manifest=manifest, source_rows=source_rows, raw_path=raw_by_method[method], tokenizer=tokenizer, model=model)
+            for method in METHODS
+        )
         full = compact_summary(
             compact_dir=compact_dir,
             phase="full",
             selected_manifest=manifest,
-            gradual_rows=read_jsonl(gradual_raw),
-            abrupt_rows=read_jsonl(abrupt_raw),
+            rows_by_method={method: read_jsonl(raw_by_method[method]) for method in METHODS},
             test_lock=lock,
             resume_noops=full_noops,
             peak_memory_bytes=int(torch.cuda.max_memory_allocated()),
@@ -606,8 +665,7 @@ def run(args: argparse.Namespace) -> int:
             "canvas_tokens": CANVAS_TOKENS,
             "total_steps": TOTAL_STEPS,
             "methods": list(METHODS),
-            "gradual_raw": str(gradual_raw),
-            "abrupt_raw": str(abrupt_raw),
+            "raw_by_method": {method: str(path) for method, path in raw_by_method.items()},
             "smoke": smoke,
             "full": full,
             "population_schedule": population_schedule(),
@@ -622,6 +680,7 @@ def run(args: argparse.Namespace) -> int:
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="M2 Constraint-Homotopy V0")
     root.add_argument("--dataset-jsonl", required=True)
+    root.add_argument("--vanilla-output-dir", required=True)
     root.add_argument("--gradual-output-dir", required=True)
     root.add_argument("--abrupt-output-dir", required=True)
     root.add_argument("--compact-dir", required=True)

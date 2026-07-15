@@ -7,6 +7,7 @@ from experiments.m3_birth_death_canvas import (
     METHODS,
     STEPS_PER_PARTICLE,
     TOTAL_FORWARDS,
+    birth_death_reallocate,
     expected_keys,
     parser,
     visible_particle_score,
@@ -42,7 +43,53 @@ class M3BirthDeathCanvasTest(unittest.TestCase):
     def test_visible_task_does_not_carry_test_or_reference(self) -> None:
         task = visible_task("def f(xs):\n", "    return total\n")
         self.assertEqual(task.test_code, "")
-        self.assertEqual(task.canonical_solution, "")
+        self.assertIsNone(task.canonical_solution)
+
+    def test_birth_death_event_is_deterministic_and_changes_population(self) -> None:
+        particles = [
+            {
+                "canvas_tokens": 16,
+                "score": (0, 0, 0, 0.1, -16),
+                "prepared": {"middle_start": 0, "middle_end": 2},
+                "x_t": torch.tensor([[0, 1]]),
+            },
+            {
+                "canvas_tokens": 64,
+                "score": (1, 0, 0, 0.9, -64),
+                "prepared": {"middle_start": 0, "middle_end": 2},
+                "x_t": torch.tensor([[0, 1]]),
+            },
+        ]
+
+        def score(particle, prefix, suffix, tokenizer):
+            del prefix, suffix, tokenizer
+            return particle["score"]
+
+        def factory(**kwargs):
+            return {
+                "canvas_tokens": kwargs["canvas_tokens"],
+                "born_round": kwargs["born_round"],
+                "copied_text": kwargs["candidate_text"],
+                "score": (1, 0, 0, 0.9, -64),
+            }
+
+        event = birth_death_reallocate(
+            particles=particles,
+            prefix="def f(xs):\n",
+            suffix="    return total\n",
+            tokenizer=Tokenizer(),
+            model=object(),
+            task=object(),
+            round_index=15,
+            score_fn=score,
+            particle_factory=factory,
+        )
+        self.assertIsNotNone(event)
+        assert event is not None
+        self.assertEqual(event["dead_canvas"], 16)
+        self.assertEqual(event["born_canvas"], 64)
+        self.assertEqual(particles[0]["canvas_tokens"], 64)
+        self.assertEqual(particles[0]["born_round"], 16)
 
     def test_method_key_population_and_smoke_default(self) -> None:
         self.assertEqual(len(expected_keys([{"row_key": "a"}], METHODS[0])), 1)
