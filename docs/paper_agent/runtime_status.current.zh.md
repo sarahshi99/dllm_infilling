@@ -1,31 +1,26 @@
 # Runtime Status — 2026-07-16 UTC
 
-审计时间：`2026-07-16T03:56:01Z`。权威分支为 `codex/ccfa-execution-sprint-v1`（审计时 HEAD `9694b29`，base `ce416c4670fbb118cc8ac70d2a3ef9315f4912d1`）。`performance_inspected=false`：本记录只读取 JSONL 的行数、候选键、`status`、末行可解析性、日志错误标记和硬件遥测；没有读取或报告新 M1/M2 的 pass rate、help/harm 或其它性能结论。
+审计时间：`2026-07-16T15:37:00Z`；审计时 HEAD 为 `8440af1`。Frozen controller test 仍为 `sealed`，`test_evaluation_count=0`。
 
-## 历史工作保持不动
+## M2：完整并已正式复核
 
-- 旧共享 MultiLine candidate bank：`40632/40632`、unique=`40632`、duplicate=`0`、`ok=40632`、`error=0`；已完成 score-only historical precursor 分析，仍不得重启、重建、改写或删除。
-- 历史 5079-case M1：PID `1576214`/tmux `phase6-m1-multiline-v3` 均不存在，状态为 `safely_paused_resumable`。stage-one=`27217/45711`，generic=`12/5079`，dependency-cone=`12/5079`；三份原 raw 保留、末行可解析、无 duplicate/error，且从未读取部分性能。未来只有胜出方法才可在**原目录**使用 `--auto-full --selected-method-only-5079` 加 existing-key dedup 恢复。
-- Frozen controller test：`sealed`，`test_evaluation_count=0`。
+- tmux/PID 已自然退出；vanilla、gradual、abrupt 均 `148/148`、unique=`148`、duplicate/error=`0`，row-key 集合一致。
+- 每个 ok row 都是 canvas=`64`、seed=`0`、actual forwards=`64`、token-forwards=`4096`；末行可解析，full technical gate passed，run manifest=`completed`。
+- 正式 10,000 task-cluster grouped 统计与无代码 activation audit 已完成：`analysis_outputs/m2_constraint_homotopy_20260716_grouped_v1/`；结论是 `constraints_activated_no_reliable_grouped_advantage`。详见 `docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md`。
 
-## 新 M1 RandomSpanLight
+## M3：已启动并自然完成 12→148
 
-- tmux：`m1-randomspanlight-sprint-v1`；pane PID `2251036`，真实 Python PID `2251038`，状态 `Rl+`、elapsed `00:28:56`。
-- 独立目录：stage1 `outputs_clean/m1_randomspanlight_20260715_v1/stage1/`，generic `.../generic/`，dependency-cone `.../dependency_cone/`；日志 `logs/paper_agent/20260716_m1_randomspanlight_sprint_v1.log`。
-- 只读完整性：stage-one `70/1332`（unique `70`、duplicate `0`、`ok=70`、`error=0`）；generic `0/148`；M1 dependency-cone `0/148`。当前仍在 12-case smoke 的 stage-one 段；各 raw 最后一行可解析。
-- 吞吐：launch t0 目录不存在，故 t0=`0`；启动约 13.25 分钟时为 `33` stage-one rows，M2 启动基线也为 `33`。当前总计 `70/1628`，启动以来约 `145.2 rows/hour`，M2 并发窗口约 `158.2 rows/hour`。按当前 row-equivalent 速度，stage-one ETA 约 `8.69h`，完整 148-route ETA 约 `10.73h`。共享 GPU 的 wall-clock 仅标为 contention measurement。
+- pre-launch 修正已在 `8440af1`：移除不能改变 token 排序的 scalar penalty；within-particle remasking 只按 ordinary confidence，syntax/obligation/contradiction 只作 particle ranking、birth/death 与最终选择。
+- M3 tmux/PID 已自然退出；smoke 和 full technical gate 均通过，run manifest=`completed`。
+- uniform、birth-death 均 `148/148`、unique=`148`、duplicate/error=`0`、row-key 集合一致、每 row=`256` forwards。uniform token-forward 固定=`15360`；birth/death 实测 min/mean/max=`8192/11532.11/24832`，共发生 `444` 个 birth/death events（148/148 rows 非零）。这支持 equal-forward、**不**支持 equal-token 的表述。
+- peak CUDA allocation=`16,383,515,136` bytes；full wall=`8036.64s`。作业在可取得独立 t+10 snapshot 前已到达两臂 `148`，故以 completion audit 取代 t+10 行数审计；无 OOM/Traceback/磁盘错误。
 
-## 新 M2 Constraint-Homotopy
+## M1：未受本轮干预
 
-- 新 M1 的 t+10 审计确认 M1 有行增长、空闲显存 ≥25 GiB、OOM/ECC=0 后启动；不等待新 M1 结束，也没有触碰旧 5079 M1。
-- tmux：`m2-constraint-homotopy-sprint-v1`；真实 Python PID `2254866`，状态 `Rsl+`、elapsed `00:14:02`。
-- 独立目录：vanilla `outputs_clean/m2_vanilla_randomspanlight_20260715_sprint_v1/`，gradual `...m2_gradual.../`，abrupt `...m2_abrupt.../`；日志 `logs/paper_agent/20260715_m2_constraint_homotopy_sprint_v1.log`。
-- 启动后 t0=`0`，当前 vanilla=`12/148`、gradual=`12/148`、abrupt=`6/148`，总计 `30/444`；每份 raw unique、0 duplicate、`status=ok`、末行可解析。约 `128.3 rows/hour`，完整 148-route 粗略 ETA `3.23h`，同样只作 contention operational estimate。
+- 历史 5079 MultiLine M1 继续 `safely_paused_resumable`，完全未动、未读部分性能。
+- 新 RandomSpanLight M1 没有 live PID/tmux；raw 只读审计显示 stage1=`1332/1332`、generic=`148/148`、dependency-cone=`148/148`，均 unique、0 duplicate/error。smoke technical gate 已通过；launcher 未留下 final run manifest。本轮不 resume、不重启、不改写 M1，也不读其 outcome performance。
 
-## H200 与安全决定
+## GPU 与下一步
 
-- H200 NVL：utilization=`100%`，used/free=`97053/46104 MiB`，power=`271.42 W`，temperature=`52°C`，uncorrected ECC=`0`。
-- 研究进程显存：M1 PID `2251038`=`17098 MiB`；M2 PID `2254866`=`16408 MiB`。两者仍在增长、日志中未发现 Traceback/CUDA OOM/磁盘错误，磁盘余量 `2.5T`、free inodes=`232121442`。
-- 决定：`healthy_continue_two_independent_jobs`。现在不启动第三个研究进程；只在新的 t+10 审计仍同时满足两个任务增长、OOM/ECC=0、free memory ≥`25600 MiB` 时再考虑。M3、M4 等一个研究槽空出后依序启动。
-
-SciPy 仍未安装（本地 import 为 `ModuleNotFoundError`；安装请求被宿主审批服务返回 422），故 corrected official CAL 维持 `waiting_for_scipy_then_12_case_smoke`。这不停止 M1/M2，也不构成 scientific blocker。
+- M3 启动时曾两次出现短暂 `nvidia-smi` driver communication failure；随后恢复。最终 H200 audit：utilization=`95%`、free=`120054 MiB`、power=`177.99W`、temperature=`41°C`、ECC=`0`。
+- 本轮没有启动 M4、official CAL 或 DreamOn。SciPy 仍缺失，official CAL 保持 corrected-protocol 的 smoke 前依赖状态。

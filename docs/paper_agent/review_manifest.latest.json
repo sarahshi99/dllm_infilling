@@ -73,13 +73,14 @@
       "FAST-SPRINT-01",
       "P1.1-official-CAL",
       "P2.1-grouped-statistics",
-      "M1.1-abductive-program-state-bridge-randomspanlight-ready",
-      "M2.1-constraint-homotopy-randomspanlight-ready",
+      "M1.1-abductive-program-state-bridge-randomspanlight-raw-complete-unanalysed",
+      "M2.1-constraint-homotopy-randomspanlight-completed-reviewed",
+      "M3.1-birth-death-randomspanlight-technical-full-completed",
       "P4.1-ExecRepoBench"
     ],
     "base_task_groups_behind_6707_spans": 148,
     "document": "docs/paper_agent/ccfa_master_roadmap.zh.md",
-    "formal_methods_completed": 0,
+    "formal_methods_completed": 2,
     "method_ids": [
       "M1_abductive_program_state_bridge",
       "M2_constraint_homotopy_infilling",
@@ -110,7 +111,7 @@
     "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
     "p2_span_micro_role": "descriptive_only",
     "p4_first_external_benchmark": "ExecRepoBench",
-    "m1_status": "historical_5079_safely_paused_resumable_new_randomspanlight_runner_ready",
+    "m1_status": "historical_5079_safely_paused_resumable_new_randomspanlight_raw_complete_no_outcome_analysis",
     "m1_smoke": {
       "cases": 12,
       "rows": 132,
@@ -118,7 +119,8 @@
       "frozen_test_evaluation_count": 0,
       "second_stage_64_forward_audit": "passed"
     },
-    "m2_status": "code_complete_resource_queued_due_to_strict_25600_MiB_reserve",
+    "m2_status": "completed_reviewed_constraints_activated_no_reliable_grouped_advantage",
+    "m3_status": "technical_full_completed_equal_forward_only_outcome_analysis_pending",
     "p4_pinned_provenance": {
       "dataset_commit": "fa61028ce495c9ceff58398b8a7c47b5ae9f5276",
       "qwen_evaluator_commit": "33bc6aabd7791ad7b32f7e92104f11f2359ba890",

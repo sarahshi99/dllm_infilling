@@ -22,15 +22,15 @@ Status: pinned audit implementation ready; host checkout network currently block
 
 ### M1.1: Abductive Program-State Bridge
 
-Status: historical 5079-case MultiLine M1 is `safely_paused_resumable`, not killed or abandoned. Its original raw directories are immutable/append-only; future recovery is selected-method-only and requires `--auto-full --selected-method-only-5079` with existing-key dedup. The independent new M1 RandomSpanLight runner is live in `12` technical smoke → automatic `148` full only; it has its own tmux/log/output family and no performance gate. No partial performance result is used for routing.
+Status: historical 5079-case MultiLine M1 is `safely_paused_resumable`, not killed or abandoned. Its original raw directories are immutable/append-only; future recovery is selected-method-only and requires `--auto-full --selected-method-only-5079` with existing-key dedup. The independent RandomSpanLight raw files are complete (`1332/1332`, `148/148`, `148/148`; 0 duplicate/error), but the original process exited before final compact manifest creation. Do not resume, rerun, or read outcome performance in this queue item without a new explicit decision.
 
 ### M2: Constraint-Homotopy V0
 
-Status: targeted tests passed and `scripts/manual_launch_m2_constraint_homotopy_sprint_v1.sh` is live in an independent tmux/log/output family. It runs `12` technical smoke → automatic `148` RandomSpanLight full only; it never auto-promotes to 296/927/5079. M2 started after the M1 t+10 audit confirmed free ≥25 GiB, OOM/ECC=0, and continued M1 row growth.
+Status: completed and formally reviewed. All three arms are `148/148`, fixed 64 forwards/4096 token-forwards, 0 missing/extra/duplicate/error, and frozen sealed/count=0. Its predeclared conclusion is `constraints_activated_no_reliable_grouped_advantage`; no automatic 296/927/5079 promotion. Result: `docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md`.
 
 ### M3: Birth-Death Canvas Diffusion V0
 
-Status: code/test/launcher complete at `a874c54`; queued after M2 once the strict 25 GiB reserve permits a third model process. Maintain initial `16/32/64/128` particles; uniform and birth/death each use `256` forwards/task. Birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility. 12-case smoke then `148`-case RandomSpanLight full in isolated outputs.
+Status: completed technical full at pre-launch commit `8440af1`. Uniform and birth/death are each `148/148`, 0 duplicate/error, exact 256 forwards/task, and frozen sealed/count=0. M3 claims equal-forward only; actual token-forward budgets differ and are recorded. Do not select a paper method or auto-promote it from this completion alone.
 
 ### M4: Semantic Particle Assembly V0
 
@@ -255,7 +255,7 @@ Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and 
 
 ## Execution Sprint V1 queue update — 2026-07-16
 
-1. **M1 RandomSpanLight** — live: `12` technical smoke then integrity-only auto-full to `148`, never 5079. The old MultiLine M1 remains safely paused/resumable. No scientific performance gate.
-2. **M2 RandomSpanLight** — live after M1 t+10 audit, with vanilla fixed64 + gradual + abrupt and a separate tmux/log/output family. M3 and M4 remain independent queued candidates; M3 reports exact token-forward accounting and only claims equal-forward; M4 reports actual best/assembly/repair accuracy with standalone 512/576-forward costs.
+1. **M1 RandomSpanLight** — raw is complete (`1332/1332`, `148/148`, `148/148`) but the launcher did not write its final compact manifest. The old MultiLine M1 remains safely paused/resumable. No M1 outcome has been used for scientific routing.
+2. **M2/M3 RandomSpanLight** — M2 is completed/reviewed; M3 is technically completed at `8440af1`. M3 records exact token-forward accounting and only claims equal-forward. M4 remains an independent queued candidate and was not launched this round.
 3. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are prepared. Smoke then full is scripted, but `scipy` is absent and its installation is host-approval blocked. Do not label local CAL/CAL-lite as official CAL.
 4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.

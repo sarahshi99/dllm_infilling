@@ -1,0 +1,92 @@
+{
+  "automatic_full_population": "randomspanlight_full",
+  "compute_claim": "equal_forward_only_not_equal_token",
+  "frozen_test_status": "sealed",
+  "full": {
+    "fixed_total_forward_budget": 256,
+    "frozen_test_status": "sealed",
+    "methods": {
+      "m3_birth_death_canvas": {
+        "duplicate_count": 0,
+        "error_count": 0,
+        "extra_count": 0,
+        "missing_count": 0,
+        "nonbudget_count": 0,
+        "passed": true
+      },
+      "m3_uniform_fixed_grid": {
+        "duplicate_count": 0,
+        "error_count": 0,
+        "extra_count": 0,
+        "missing_count": 0,
+        "nonbudget_count": 0,
+        "passed": true
+      }
+    },
+    "peak_cuda_memory_bytes": 16383515136,
+    "phase": "full",
+    "selected_case_count": 148,
+    "technical_gate_passed": true,
+    "test_evaluation_count": 0,
+    "wall_sec": 8036.642967173131
+  },
+  "methods": [
+    "m3_uniform_fixed_grid",
+    "m3_birth_death_canvas"
+  ],
+  "model": "GSAI-ML/LLaDA-8B-Base",
+  "population_schedule": [
+    {
+      "case_count": 12,
+      "stage": "technical_smoke"
+    },
+    {
+      "case_count": 148,
+      "stage": "randomspanlight_full"
+    },
+    {
+      "case_count": 296,
+      "stage": "multiline_core"
+    },
+    {
+      "case_count": 927,
+      "stage": "singleline_development"
+    },
+    {
+      "case_count": 5079,
+      "stage": "selected_method_multiline"
+    }
+  ],
+  "smoke": {
+    "fixed_total_forward_budget": 256,
+    "frozen_test_status": "sealed",
+    "methods": {
+      "m3_birth_death_canvas": {
+        "duplicate_count": 0,
+        "error_count": 0,
+        "extra_count": 0,
+        "missing_count": 0,
+        "nonbudget_count": 0,
+        "passed": true
+      },
+      "m3_uniform_fixed_grid": {
+        "duplicate_count": 0,
+        "error_count": 0,
+        "extra_count": 0,
+        "missing_count": 0,
+        "nonbudget_count": 0,
+        "passed": true
+      }
+    },
+    "peak_cuda_memory_bytes": 16245091328,
+    "phase": "smoke",
+    "selected_case_count": 12,
+    "technical_gate_passed": true,
+    "test_evaluation_count": 0,
+    "wall_sec": 845.5647654670756
+  },
+  "source_config": "HumanEval-RandomSpanInfillingLight",
+  "status": "completed",
+  "test_evaluation_count": 0,
+  "total_forwards": 256
+}

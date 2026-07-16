@@ -1,153 +1,82 @@
 {
-  "audit_utc": "2026-07-16T03:56:01Z",
+  "audit_utc": "2026-07-16T15:37:00Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
-  "authoritative_base": "ce416c4670fbb118cc8ac70d2a3ef9315f4912d1",
-  "head_at_audit": "9694b29",
-  "performance_inspected": false,
+  "head_at_audit": "8440af14c4e527de0f0b96efb4482f80387c81fd",
+  "operational_decision": "execute",
+  "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
+  "performance_visibility": {
+    "m1_randomspanlight_performance_inspected": false,
+    "m2_result_performance_inspected": true,
+    "m3_randomspanlight_performance_inspected": false
+  },
   "old_multiline_candidate_bank": {
-    "historical_pid": 1195368,
-    "tmux_session": "phase6-multiline-bank",
-    "tmux_session_present": false,
-    "live_pid": null,
-    "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/outputs_clean/phase6_multiline_candidate_bank_20260712_v1/candidate_bank_raw.jsonl",
-    "expected_rows": 40632,
+    "state": "completed_do_not_restart",
     "rows": 40632,
     "unique_candidate_keys": 40632,
     "duplicate_rows": 0,
-    "status_counts": {"ok": 40632, "error": 0},
-    "decision": "completed_performed_score_only_analysis_do_not_restart"
+    "status_counts": {"ok": 40632, "error": 0}
   },
-  "m1_multiline_safely_paused_resumable": {
-    "historical_pid": 1576214,
-    "tmux_session": "phase6-m1-multiline-v3",
-    "tmux_session_present": false,
-    "live_pid": null,
+  "m1_multiline_5079": {
     "state": "safely_paused_resumable",
-    "pause_reason": "pre_outcome_compute_budget_reconciliation",
     "performance_inspected_before_pause": false,
-    "stage_one": {
-      "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_stage1_multiline_20260713_v3/candidate_bank_raw.jsonl",
-      "complete": 27217,
-      "expected": 45711,
-      "unique_candidate_keys": 27217,
-      "duplicate_rows": 0,
-      "status_counts": {"ok": 27217, "error": 0},
-      "last_jsonl_line_parseable": true,
-      "bytes": 665261410,
-      "mtime_utc": "2026-07-15T11:43:10.581270Z"
-    },
-    "generic_refinement": {
-      "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_generic_multiline_20260713_v3/equal_compute_generic_remask_raw.jsonl",
-      "complete": 12,
-      "expected": 5079,
-      "unique_candidate_keys": 12,
-      "duplicate_rows": 0,
-      "status_counts": {"ok": 12, "error": 0},
-      "last_jsonl_line_parseable": true,
-      "bytes": 77084,
-      "mtime_utc": "2026-07-13T11:00:08.119939Z"
-    },
-    "dependency_cone_refinement": {
-      "raw_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0/outputs_clean/m1_dependency_cone_multiline_20260713_v3/m1_dependency_cone_remask_raw.jsonl",
-      "complete": 12,
-      "expected": 5079,
-      "unique_candidate_keys": 12,
-      "duplicate_rows": 0,
-      "status_counts": {"ok": 12, "error": 0},
-      "last_jsonl_line_parseable": true,
-      "bytes": 76641,
-      "mtime_utc": "2026-07-13T11:01:46.068573Z"
-    },
-    "runner_provenance": {
-      "source_history_commit": "1d9ef3f",
-      "future_resume_requires": ["--auto-full", "--selected-method-only-5079"],
-      "dedup_contract": "reuse the three existing directories and continue from the first missing candidate_key"
-    },
-    "resume_command": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-method-portfolio-v0 && CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/phase6_multiline_candidate_bank.py run --dataset-jsonl /home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl --output-dir outputs_clean/m1_stage1_multiline_20260713_v3 --generic-output-dir outputs_clean/m1_generic_multiline_20260713_v3 --m1-output-dir outputs_clean/m1_dependency_cone_multiline_20260713_v3 --compact-dir analysis_outputs/m1_multiline_20260713_v3 --smoke-cases 12 --auto-full --selected-method-only-5079"
+    "stage_one": {"complete": 27217, "expected": 45711},
+    "generic_refinement": {"complete": 12, "expected": 5079},
+    "dependency_cone_refinement": {"complete": 12, "expected": 5079},
+    "future_resume_requires": ["--auto-full", "--selected-method-only-5079"]
   },
-  "active_gpu_jobs": {
-    "m1_randomspanlight": {
-      "state": "running_smoke_then_148_auto_full_no_performance_gate",
-      "tmux_session": "m1-randomspanlight-sprint-v1",
-      "tmux_pane_pid": 2251036,
-      "live_pid": 2251038,
-      "process": {"state": "Rl+", "elapsed": "00:28:56", "cpu_percent": 103.0, "rss_kib": 1044564},
-      "log_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/logs/paper_agent/20260716_m1_randomspanlight_sprint_v1.log",
-      "output_dirs": {
-        "stage1": "outputs_clean/m1_randomspanlight_20260715_v1/stage1",
-        "generic": "outputs_clean/m1_randomspanlight_20260715_v1/generic",
-        "dependency_cone": "outputs_clean/m1_randomspanlight_20260715_v1/dependency_cone",
-        "compact": "analysis_outputs/m1_randomspanlight_20260715_v1"
-      },
-      "t0_rows": 0,
-      "first_growth_observation": {"stage1_rows": 33, "process_elapsed_approx_minutes": 13.25},
-      "m2_launch_baseline_rows": 33,
-      "current": {
-        "stage1": {"complete": 70, "expected": 1332, "unique_candidate_keys": 70, "duplicate_rows": 0, "status_counts": {"ok": 70, "error": 0}, "last_jsonl_line_parseable": true, "bytes": 1601237, "mtime_utc": "2026-07-16T03:56:29.091537Z"},
-        "generic": {"complete": 0, "expected": 148, "unique_candidate_keys": 0, "duplicate_rows": 0, "status_counts": {}, "last_jsonl_line_parseable": true},
-        "dependency_cone": {"complete": 0, "expected": 148, "unique_candidate_keys": 0, "duplicate_rows": 0, "status_counts": {}, "last_jsonl_line_parseable": true},
-        "complete_total": 70,
-        "expected_total": 1628,
-        "completion_fraction": 0.0430
-      },
-      "throughput": {
-        "rows_per_hour_since_t0": 145.2,
-        "post_m2_launch_rows_per_hour": 158.2,
-        "eta_hours_stage1_at_current_rate": 8.69,
-        "eta_hours_total_at_current_rate": 10.73,
-        "interpretation": "row-equivalent operational estimate only; shared-GPU wall clock is contention measurement"
-      },
-      "log_error_scan": {"traceback": false, "cuda_oom": false, "disk_error": false}
+  "m1_randomspanlight": {
+    "state": "raw_complete_no_final_compact_manifest_no_action_taken",
+    "tmux_session": "phase_exited",
+    "live_pid": null,
+    "stage1_raw": {"complete": 1332, "expected": 1332, "unique_candidate_keys": 1332, "duplicate_rows": 0, "status_counts": {"ok": 1332, "error": 0}},
+    "generic_raw": {"complete": 148, "expected": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "status_counts": {"ok": 148, "error": 0}},
+    "dependency_cone_raw": {"complete": 148, "expected": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "status_counts": {"ok": 148, "error": 0}},
+    "smoke_technical_gate_passed": true,
+    "note": "Raw completion was observed without reading outcome performance; the launcher exited before writing its final run_manifest, and this turn does not resume or modify M1."
+  },
+  "m2_constraint_homotopy": {
+    "state": "completed_reviewed_148_randomspanlight",
+    "tmux_session": "phase_exited",
+    "live_pid": null,
+    "integrity": {
+      "vanilla": {"complete": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "error_rows": 0, "canvas": 64, "seed": 0, "forwards": 64},
+      "gradual": {"complete": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "error_rows": 0, "canvas": 64, "seed": 0, "forwards": 64},
+      "abrupt": {"complete": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "error_rows": 0, "canvas": 64, "seed": 0, "forwards": 64},
+      "row_key_sets_identical": true,
+      "full_technical_gate_passed": true,
+      "run_manifest_status": "completed",
+      "frozen_test_status": "sealed",
+      "test_evaluation_count": 0
     },
-    "m2_constraint_homotopy": {
-      "state": "running_smoke_then_148_auto_full_no_performance_gate",
-      "tmux_session": "m2-constraint-homotopy-sprint-v1",
-      "tmux_pane_pid": 2254866,
-      "live_pid": 2254866,
-      "process": {"state": "Rsl+", "elapsed": "00:14:02", "cpu_percent": 102.0, "rss_kib": 1051340},
-      "log_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/logs/paper_agent/20260715_m2_constraint_homotopy_sprint_v1.log",
-      "output_dirs": {
-        "vanilla": "outputs_clean/m2_vanilla_randomspanlight_20260715_sprint_v1",
-        "gradual": "outputs_clean/m2_gradual_randomspanlight_20260715_sprint_v1",
-        "abrupt": "outputs_clean/m2_abrupt_randomspanlight_20260715_sprint_v1",
-        "compact": "analysis_outputs/m2_constraint_homotopy_20260715_sprint_v1"
-      },
-      "t0_rows": 0,
-      "current": {
-        "vanilla": {"complete": 12, "expected": 148, "unique_candidate_keys": 12, "duplicate_rows": 0, "status_counts": {"ok": 12, "error": 0}, "last_jsonl_line_parseable": true, "bytes": 47635, "mtime_utc": "2026-07-16T03:48:23.401712Z"},
-        "gradual": {"complete": 12, "expected": 148, "unique_candidate_keys": 12, "duplicate_rows": 0, "status_counts": {"ok": 12, "error": 0}, "last_jsonl_line_parseable": true, "bytes": 46682, "mtime_utc": "2026-07-16T03:53:55.765600Z"},
-        "abrupt": {"complete": 6, "expected": 148, "unique_candidate_keys": 6, "duplicate_rows": 0, "status_counts": {"ok": 6, "error": 0}, "last_jsonl_line_parseable": true, "bytes": 22462, "mtime_utc": "2026-07-16T03:56:41.199961Z"},
-        "complete_total": 30,
-        "expected_total": 444,
-        "completion_fraction": 0.0676
-      },
-      "throughput": {
-        "rows_per_hour_since_t0": 128.3,
-        "eta_hours_total_at_current_rate": 3.23,
-        "interpretation": "row-equivalent operational estimate only; shared-GPU wall clock is contention measurement"
-      },
-      "log_error_scan": {"traceback": false, "cuda_oom": false, "disk_error": false}
-    }
+    "scientific_judgment": "constraints_activated_no_reliable_grouped_advantage",
+    "result_report": "docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md",
+    "analysis_output": "analysis_outputs/m2_constraint_homotopy_20260716_grouped_v1"
+  },
+  "m3_birth_death": {
+    "state": "completed_technical_full_148_pending_outcome_analysis",
+    "prelaunch_commit": "8440af14c4e527de0f0b96efb4482f80387c81fd",
+    "tmux_session": "phase_exited",
+    "live_pid": null,
+    "uniform": {"complete": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "error_rows": 0, "actual_forwards": 256, "actual_token_forward_min": 15360, "actual_token_forward_mean": 15360.0, "actual_token_forward_max": 15360},
+    "birth_death": {"complete": 148, "unique_candidate_keys": 148, "duplicate_rows": 0, "error_rows": 0, "actual_forwards": 256, "actual_token_forward_min": 8192, "actual_token_forward_mean": 11532.108108108108, "actual_token_forward_max": 24832, "birth_death_event_total": 444, "birth_death_event_nonzero_rows": 148},
+    "row_key_sets_identical": true,
+    "smoke_technical_gate_passed": true,
+    "full_technical_gate_passed": true,
+    "run_manifest_status": "completed",
+    "peak_cuda_memory_bytes": 16383515136,
+    "run_wall_sec": 8036.642967173131,
+    "smoke_wall_sec": 845.5647654670756,
+    "post_smoke_rows_per_hour": 136.17,
+    "t_plus_10_audit": "completion_audit_superseded_sampling: the job reached both 148-row endpoints before a separate t+10 sample could be recorded",
+    "frozen_test_status": "sealed",
+    "test_evaluation_count": 0
   },
   "gpu_audit": {
-    "gpu": "NVIDIA H200 NVL",
-    "utilization_percent": 100,
-    "memory_used_mib": 97053,
-    "memory_free_mib": 46104,
-    "power_watts": 271.42,
-    "temperature_c": 52,
-    "uncorrected_volatile_ecc": 0,
-    "job_memory_mib": {"m1_randomspanlight_pid_2251038": 17098, "m2_constraint_homotopy_pid_2254866": 16408},
-    "two_job_decision": "healthy_continue_two_independent_jobs",
-    "third_job_decision": "do_not_start_until_a_new_t_plus_10_audit_confirms_both_growth_and_free_memory_gte_25600_mib"
+    "final_after_m3": {"utilization_percent": 95, "memory_used_mib": 23103, "memory_free_mib": 120054, "power_watts": 177.99, "temperature_c": 41, "uncorrected_volatile_ecc": 0},
+    "transient_nvidia_smi_driver_communication_failure_during_m3_start": true,
+    "recovered_before_final_audit": true,
+    "m1_m2_m3_oom_or_ecc_reported": false
   },
-  "storage_audit": {"available": "2.5T", "inode_free": 232121442, "disk_error_detected": false},
-  "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
-  "official_cal_dependency": {
-    "scipy_present": false,
-    "local_import_result": "ModuleNotFoundError",
-    "install_attempt_result": "approval_control_plane_422_model_not_found_codex_auto_review",
-    "cal_state": "corrected_protocol_waiting_for_scipy_then_12_case_smoke"
-  },
-  "next_gpu_task": "Keep M1 and M2 running. When one research slot frees, start M3 then M4 only after its own safety audit; official CAL smoke remains queued behind SciPy availability."
+  "official_cal_dependency": {"scipy_present": false, "state": "corrected_protocol_waiting_for_scipy_then_12_case_smoke"},
+  "next_gpu_task": "None started this round: do not start M4, official CAL, or DreamOn until a subsequent explicit scheduling decision."
 }

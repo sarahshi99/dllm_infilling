@@ -1,0 +1,28 @@
+{
+  "fixed_total_forward_budget": 256,
+  "frozen_test_status": "sealed",
+  "methods": {
+    "m3_birth_death_canvas": {
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "nonbudget_count": 0,
+      "passed": true
+    },
+    "m3_uniform_fixed_grid": {
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "nonbudget_count": 0,
+      "passed": true
+    }
+  },
+  "peak_cuda_memory_bytes": 16245091328,
+  "phase": "smoke",
+  "selected_case_count": 12,
+  "technical_gate_passed": true,
+  "test_evaluation_count": 0,
+  "wall_sec": 845.5647654670756
+}

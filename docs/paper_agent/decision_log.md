@@ -1,10 +1,10 @@
 # Decision Log
 
-Updated: 2026-07-15 UTC
+Updated: 2026-07-16 UTC
 
 - Canonical route is now `docs/paper_agent/ccfa_master_roadmap.zh.md`; later agents must not infer the current queue from historical Phase numbering.
 - P0 narrative is synchronized for the current evidence snapshot. P1 official baselines, P2 group-aware analysis of 6707 spans/148 base-task clusters, and P4 non-HumanEval external evaluation remain highest-priority open gaps.
-- Four formal methods are M1 Abductive Program-State Bridge, M2 Constraint-Homotopy, M3 Birth--Death Canvas Diffusion, and M4 Semantic Particle Assembly. Phase 5 completed only M1-D0/M4-D0/A1 diagnostics; no formal method has been completed.
+- Four formal methods are M1 Abductive Program-State Bridge, M2 Constraint-Homotopy, M3 Birth--Death Canvas Diffusion, and M4 Semantic Particle Assembly. Phase 5 completed only M1-D0/M4-D0/A1 diagnostics; since then M2 has completed its 148-case review and M3 its technical 148-case full, but no formal method has been selected as paper primary.
 - Independent premise diagnostics may share a frozen bank and run concurrently with separate outputs. Exploratory full runs use technical integrity gates only; publication promotion retains fresh grouped validation and compute-matched evidence requirements.
 
 - Route-focus decision: `FAST-SPRINT-01` is `iterate_and_execute`, not blocked. Official baseline order is official CAL -> DreamOn -> rho-EOS compatibility; LR-DLLM remains blocker audit only.
@@ -74,3 +74,5 @@ Updated: 2026-07-15 UTC
 - 2026-07-15 execution-sprint correction: `codex/ccfa-execution-sprint-v1@ce416c4` supersedes `afd3c45` for implementation. M1 MultiLine is `safely_paused_resumable`, not killed; no partial M1 outcome was inspected. New M1--M4 runners use a prefix/suffix-only visible task and construct evaluator/test state only after generation.
 - Corrected CAL audit reproduces the official seed-42 100-row SingleLine demo split and field-hash maps it to 100 MultiLine rows. Official comparison population is `4990` non-frozen CAL-Rest common rows, not 5079. `scipy` remains missing; normal and escalated installation attempts are network/approval blocked, so no official CAL GPU run is claimed.
 - Historical completed Phase6 bank analysis (`5079×8`, 148 clusters) is named `Phase6 score-only candidate selection / M1 historical precursor`. Fixed combined deterministic proxy has task-macro delta `+0.0531` vs fixed64 with 95% cluster CI `[+0.0148,+0.0957]`; fixed score-only abductive selector delta is `+0.0200` with CI `[-0.0152,+0.0599]`. This is a fixed, non-tuned historical analysis, not M1 full and not method promotion.
+- 2026-07-16: M2 Constraint-Homotopy completed independent 148-case RandomSpanLight full. Integrity was exact (`148×3`, matched population, 0 missing/extra/duplicate/error, 64 forwards/4096 token-forwards, frozen sealed/count=0). Fixed grouped result is `constraints_activated_no_reliable_grouped_advantage`: gradual vs vanilla `+1.35pp` CI crosses zero; abrupt vs vanilla `-2.03pp` CI crosses zero. Hash audit confirms schedules changed candidate outputs, so this is mechanism activation without reliable grouped benefit; it does not select a method or block M3.
+- 2026-07-16: M3 pre-launch commit `8440af1` removed an ineffective scalar token penalty. Ordinary confidence now controls only within-particle remasking; visible syntax/obligations/contradictions control particle ranking, birth/death, and selection. Full unittest (`213`) passed. M3 then naturally completed its independent 12→148 technical full with both arms `148/148`, 0 duplicate/error, exact 256 forwards, and frozen sealed/count=0. It claims equal-forward only, not equal-token.

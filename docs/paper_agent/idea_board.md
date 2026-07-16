@@ -1,6 +1,6 @@
 # Research Idea Board
 
-Updated: 2026-07-13 UTC
+Updated: 2026-07-16 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
@@ -10,9 +10,9 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | 12-case technical smoke passed; 5079-span MultiLine full is running (`PID 1576214`) | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
-| `M2` | Constraint-Homotopy Infilling | code/test complete (`4a91d73`); launch waits only for ≥25 GiB H200 reserve | IDEA-012 |
-| `M3` | Birth--Death Canvas Diffusion | code/test complete (`a874c54`); queued after M2 resource-safe run | IDEA-013 |
+| `M1` | Abductive Program-State Bridge | historical 5079 remains safely paused; independent RandomSpanLight raw is complete but unanalysed | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M2` | Constraint-Homotopy Infilling | 148-case full reviewed: constraints activated, no reliable grouped advantage | IDEA-012 |
+| `M3` | Birth--Death Canvas Diffusion | 148-case technical full completed at `8440af1`; outcome analysis remains separate | IDEA-013 |
 | `M4` | Semantic Particle Assembly | code/test complete (`ed94471`); full 148-case offline structural audit passed; repair queued after M3 resource-safe run | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
@@ -35,15 +35,17 @@ Scope boundary: This is not M1 Abductive Program-State Bridge. M1 proceeds indep
 ## IDEA-012 / M2: Constraint-Homotopy Infilling
 
 Source: user
-Status: V0 code/test complete; GPU run is resource-queued, not abandoned.
+Status: 148-case GPU full completed and grouped review is complete. Candidate hashes differ across schedules, but task-group evidence does not support a reliable advantage for gradual or abrupt constraints.
 Scientific question: Does a gradual schedule of inference-visible semantic constraints improve rescue quality relative to abrupt constraints under equal compute?
 Minimum experiment: Independent 12--24-case technical smoke followed directly by the 148-case allowed RandomSpanLight full. Compare gradual and abrupt constraints under the same 64-forward budget.
 Decision rule: Constraints may use only prefix/suffix/current candidate/inference-visible confidence; no test/reference input and no fusion with another candidate method.
 
+Result: `constraints_activated_no_reliable_grouped_advantage`; gradual vs vanilla task-macro delta `+1.35pp` with 95% CI crossing zero, abrupt vs vanilla `-2.03pp` with CI crossing zero. This is negative/weak method evidence, not a reason to stop M3 or select another method.
+
 ## IDEA-013 / M3: Birth–Death Canvas Diffusion
 
 Source: user
-Status: V0 code/test complete; GPU run is resource-queued, not abandoned.
+Status: 12-case smoke → 148-case full completed in isolated outputs. The pre-launch correction removed a scalar token penalty that could not change token ordering; within-particle remasking is ordinary confidence, while visible syntax/obligations rank particles and govern birth/death.
 Scientific question: Can a fixed-compute population over canvas hypotheses preserve useful diversity while reallocating compute via birth/death decisions?
 Minimum experiment: Independent 12-case smoke then 148-case allowed RandomSpanLight full, with `16/32/64/128` particles and a fixed total-forward budget against a uniform fixed-grid control.
 Decision rule: Birth/death may use only inference-visible confidence, syntax, and prefix/suffix compatibility; do not borrow theoretical guarantees from continuous birth–death sampling without proof.

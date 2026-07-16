@@ -1,19 +1,19 @@
 # Codex Handoff Latest
 
-更新日期：2026-07-15 UTC
+更新日期：2026-07-16 UTC
 
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 
 - 先读 `docs/paper_agent/ccfa_master_roadmap.zh.md`，再读 `docs/paper_agent/current_action.md`。
 - 起点已核对为 `8b348f979f09cda07811e04b7ad3dee60e56373b`；candidate-portfolio checkpoints 为 M1 `1d9ef3f`、M2 `4a91d73`、M3 `a874c54`、M4 `ed94471`。Phase 5 完成，当前决策为 `iterate_and_execute`，不是 blocked。
-- 当前 action 是 `FAST-SPRINT-01`：P1.1 official CAL、P2.1 grouped statistics、独立候选 M1--M4、P4.1 ExecRepoBench。先读 `current_action.md` 的具体门与路径。
+- 当前 action 是 `FAST-SPRINT-01`：P1.1 official CAL、P2.1 grouped statistics、独立候选 M1--M4、P4.1 ExecRepoBench。M2 的 148-case full 已 formal reviewed，M3 的 148-case technical full 已完成；先读 `current_action.md` 与 `runtime_status.current.json`。
 - P1 顺序：official CAL full -> DreamOn official full -> rho-EOS infilling compatibility；LR-DLLM 只 blocker audit。official CAL 已固定上游 `NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`，尚待 checkout/protocol audit；local CAL/CAL-lite 不得叫 official CAL。
 - `6707` spans / `20121` policy results 背后只有 `148` base-task groups。primary 是 equal-weight base-task macro accuracy；span-micro 是 descriptive。早期 `802/1033` 是 A6000 historical，`796/1033` 是 H200 evidence base；都不是 final held-out。
-- M1--M4 是平行独立候选，当前没有论文主方法；M1 最先完成代码不代表 M2/M3/M4 被放弃。M1 修复为 AST/def-use statement dependency cone：generic/M1 都追加 `64` forwards，缺失 candidate dependency 时以 fixed64 的 `64`-forward null refinement 记录 fallback，stage-one/generic/M1 raw outputs 分离。M2 具备 same-64-forward gradual/abrupt runner；M3 具备 initial 16/32/64/128 particles、uniform/birth-death equal-256-forward runner；M4 已完成真实 full-148 offline structural AST statement/basic-block/def-use assembly audit（best/assembly 各 148/148，zero missing/duplicate/error，frozen count 0），下一步才是 64-forward repair。四条线都有独立 brief/analysis/tests/launcher。
-- 旧共享 MultiLine candidate bank 已自然完成：`40632/40632` unique rows、missing/duplicate/error=`0/0/0`，final audit/resume audit/frozen invariant 均通过；历史 PID `1195368` 与 tmux session 已自然退出，**不得重启**。新版 M1 PID `1576214` 的 stage-one 在预算门槛 <80%，因此应安全暂停；SIGINT 请求被 host approval control plane `422` 拒绝，实际仍 running。没有 SIGKILL、tmux Ctrl-C 或 raw 目录修改；M1 结论与任何部分性能都未查看。详情见 `runtime_status.current.json`。
+- M1--M4 是平行独立候选，当前没有论文主方法。M1 RandomSpanLight raw 已完整写入但本轮未读 outcome；历史 5079 M1 仍 safely paused。M2 148-case full 结论为 `constraints_activated_no_reliable_grouped_advantage`。M3 以 `8440af1` 修正无效 scalar penalty 后完成 `12→148` technical full（equal-forward only，token budgets 分开记录）。M4 仍未在本轮启动。
+- 旧共享 MultiLine candidate bank 已自然完成：`40632/40632` unique rows、missing/duplicate/error=`0/0/0`，**不得重启**。历史 5079 M1 保持 safely paused/resumable。新 M1 RandomSpanLight raw 为 `1332/1332`、`148/148`、`148/148`、0 duplicate/error；其 launcher 已退出但没有 final manifest，本轮不 resume/重启/修改，也没有读取其 outcome performance。
 - 数据路线已在 runner 层固定为 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`。M2/M3/M4 的 auto-full 只能到 148；未来 5079 必须同时显式给出 `--auto-full --selected-method-only-5079`，不能再由 smoke 裸自动进入。
 - P4 直接使用 ExecRepoBench；M1 配置冻结前只做多 repository、六 fill_type smoke，不打开最终 external result。dataset 固定 `fa61028ce495c9ceff58398b8a7c47b5ae9f5276`，Qwen evaluator 固定 `33bc6aabd7791ad7b32f7e92104f11f2359ba890`，无代码 smoke-plan audit 已实现；checkout 的 host network fetch 仍受独立 approval-control-plane `422` 阻断，因此实际 evaluator smoke 未完成、不能误报。
-- 10 分钟后 H200 审计正常（OOM/ECC 0），但当前 free `38,246 MiB`、M1 footprint 约 `19,054 MiB`；新 M2 模型会把余量降到约 `19 GiB`，低于严格 `25,600 MiB` reserve。故 M2/M3/M4 是 resource-queued，不停止代码开发，也不抢占现有两项工作。
+- 本轮 M2 与 M3 已在满足 H200 余量/ECC 审计后完成。M3 启动时短暂出现 `nvidia-smi` driver communication failure，随后恢复；最终 free=`120054 MiB`、ECC=`0`。本轮明确没有启动 M4、official CAL 或 DreamOn。
 
 ## Phase 5 完成交接（authoritative）
 
