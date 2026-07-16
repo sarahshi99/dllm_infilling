@@ -1,6 +1,6 @@
 # Current Paper-Agent Action
 
-更新时间：2026-07-15 UTC
+更新时间：2026-07-16 UTC
 
 权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`
 
@@ -26,11 +26,13 @@ Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3�
 
 ### M1.1 Abductive Program-State Bridge
 
-两轮语义/完整性审计与修复已在 `1d9ef3f` 完成：AST/def-use dependency cone、seed-0 fixed64 检测、64-forward null fallback、等 canvas/forwards/cardinality generic、分离 raw outputs、forbidden-input/activation/determinism/resume tests 均已落地。新版计算预算路线要求 stage-one <80% 时安全暂停。2026-07-15 的 t0/t+10 审计确认该条件满足；仅针对 PID `1576214` 的 SIGINT 已请求但被 host approval control plane `422` 拒绝，故 M1 实际仍运行，未使用 SIGKILL 或替代绕过。三个 raw 目录保持 append-only。详情见 `runtime_status.current.json`；不读取或报告部分性能。
+两轮语义/完整性审计与修复已在 `1d9ef3f` 完成：AST/def-use dependency cone、seed-0 fixed64 检测、64-forward null fallback、等 canvas/forwards/cardinality generic、分离 raw outputs、forbidden-input/activation/determinism/resume tests 均已落地。**历史 5079-case MultiLine M1** 已在用户安全中断后成为 `safely_paused_resumable`：原三个 raw 目录 append-only 保留，不读取部分性能，未来仅胜出方法可用原目录与 `--auto-full --selected-method-only-5079` 的 existing-key dedup 恢复。
+
+新的独立 **M1 RandomSpanLight** 已于 2026-07-16 实际启动，路径为 `12 technical smoke → automatic 148-case full`，绝不恢复或改写旧 5079 raw。smoke 只审计 schema/CUDA/evaluator/missing/duplicate/error/forward budget/resume/frozen seal，不含性能 gate。其固定 grouped analyzer 与成本合同已在 `9694b29` 推送，且在读取新 148-case outcome 前完成；live PID/tmux/吞吐只记录于 `runtime_status.current.json`，不在本路线文档中报告中途性能。
 
 ### M2/M3/M4 独立候选线
 
-- `M2 Constraint-Homotopy V0`：CPU runner 已升级为固定路线 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`；M2 的 auto-full 被强制限制为 `148`。完成 M2 targeted CPU tests 后，仍等待 M1 实际安全退出才可用独立 `20260715_v1` tmux/log/output 启动。
+- `M2 Constraint-Homotopy V0`：CPU runner 已升级为固定路线 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine → selected-method-only 5079 MultiLine`；M2 的 auto-full 被强制限制为 `148`。在新 M1 t+10 资源审计满足 `free ≥25 GiB`、OOM/ECC=0 且 M1 继续增长后，M2 已于 2026-07-16 在独立 tmux/log/output 中实际启动；不等待 M1 结束，也不触碰旧 5079 M1。
 - `M3 Birth-Death Canvas Diffusion V0`：`a874c54` 已完成独立 runner/analysis/brief/tests/launcher；初始 canvas `16/32/64/128` particles，uniform 与 birth/death 各固定 256 forwards/task，只用 inference-visible confidence、syntax、prefix/suffix compatibility。M2 资源安全完成后再作 12-case→148-case full。
 - `M4 Semantic Particle Assembly V0`：`ed94471` 已完成独立 runner/analysis/brief/tests/launcher；完整 148-case offline structural assembly audit 已实际完成于 `analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`（best/assembly 均 148/148、zero missing/duplicate/error、frozen sealed/count 0）。从 8 candidates 提取 AST statement/basic-block/def-use fragments，以 inference-visible obligations 选择；M3 资源安全完成后作 64-forward repair smoke/full。
 
@@ -38,16 +40,14 @@ Operational decision 是 `iterate_and_execute`，不是 blocked。M1、M2、M3�
 
 ## H200 并行约束
 
-候选库保持运行；先启动一个新的 GPU experiment process，10 分钟后审计 memory/utilization/power/OOM/ECC 与各任务吞吐。稳定且保留至少 25 GiB 显存余量时才允许第三个进程；总吞吐显著下降则减少 GPU process，但不停止方法代码开发。每个方法、每个进程必须有独立 output/log directory。
-
-旧库完成后 H200 已有足够空闲显存，但 M2 的前置条件是新版 M1 已**实际**安全退出，而非仅有暂停意图。当前 SIGINT 被外部 control plane 拒绝，因此 M2 继续排队；不通过 tmux 或 SIGKILL 绕过。GPU host 可查询恢复不改变任何 scientific result，也不授权绕过 P4 的独立 network approval failure。
+旧共享候选库已完成；当前新 M1 与 M2 最多并行两个独立 GPU experiment process。M1 启动 t+10 后已审计 memory/utilization/power/OOM/ECC 与行增长，并据此启动 M2；M2 启动后再次审计两者吞吐。只有两个任务均持续增长、OOM/ECC=0、且仍保留至少 25 GiB 显存余量时，才允许考虑第三个进程；总吞吐显著下降则回到单研究进程，但不停止方法代码开发。每个方法、每个进程均有独立 output/log directory。
 
 ## 证据命名
 
 historical `802/1033` 是 A6000 historical；`796/1033` 是 H200 evidence base。两者都不是 final held-out result，且不得合并成单一结论。
 
-## 2026-07-15 Execution Sprint V1 current state
+## 2026-07-16 Execution Sprint V1 current state
 
 `codex/ccfa-execution-sprint-v1`（base `ce416c4`）是权威执行分支；`afd3c45` 已 superseded。M1 5079 MultiLine 已安全暂停、可恢复但不自动恢复；M1 RandomSpanLight 新 runner、M2/M3/M4 独立 runner、共同 grouped analyzer 与 CAL adapter 已在 `9335d84` 后继续实现。完整 CPU tests 已通过，frozen test 仍为 sealed/count=0。
 
-真实 GPU 启动尚未发生：主机 GPU 只读审计和 `scipy` 下载的 escalation 均被 approval control plane `422 model not found: codex-auto-review` 拒绝；不绕过该控制面。下一项一旦权限恢复是 M1 RandomSpanLight `12→148`，随后 M2、M3、M4；official CAL smoke/full 可作为第二进程但先满足其 dependency gate。
+真实 GPU 执行已开始：新 M1 RandomSpanLight 先启动，M2 随 M1 的 t+10 安全审计启动；M3、M4 依空出的研究 GPU 槽按顺序进入各自 `12→148`。SciPy 在 `dllm_env` 中仍缺失，网络安装请求由宿主审批服务返回 `422 model not found: codex-auto-review`；这只推迟 official CAL smoke，不改变 M1--M4 的执行队列，也不构成 scientific blocker。

@@ -1,6 +1,6 @@
 # Experiment Queue
 
-Updated: 2026-07-15 UTC
+Updated: 2026-07-16 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
 
@@ -20,13 +20,13 @@ Status: completed CPU (`c66678a`). Input existing `6707` spans / `20121` results
 
 Status: pinned audit implementation ready; host checkout network currently blocked by approval-control-plane `422`. Dataset is fixed at `fa61028ce495c9ceff58398b8a7c47b5ae9f5276`; Qwen evaluator is fixed at `33bc6aabd7791ad7b32f7e92104f11f2359ba890`. `experiments/p4_execrepobench_audit.py` verifies those revisions, schema/fields, repository grouping and emits a six-fill, multi-repository smoke plan without code or external scores. Complete download/environment/license/field audit and actual evaluator smoke once checkout is available; do not open final external results before the eventual method configuration freeze.
 
-### M1.1: Abductive Program-State Bridge implementation and MultiLine full
+### M1.1: Abductive Program-State Bridge
 
-Status: pre-outcome compute-budget reconciliation requires a safe pause because stage-one is below 80%. A host SIGINT was requested for PID `1576214` but rejected by the approval control plane (`422`); no SIGKILL or tmux workaround is allowed, so the process is still live and raw output remains append-only. Future 5079 execution now requires explicit `--auto-full --selected-method-only-5079`; bare auto-full cannot bypass the 12→148→296/927 route. See `runtime_status.current.json`; no partial performance result was inspected.
+Status: historical 5079-case MultiLine M1 is `safely_paused_resumable`, not killed or abandoned. Its original raw directories are immutable/append-only; future recovery is selected-method-only and requires `--auto-full --selected-method-only-5079` with existing-key dedup. The independent new M1 RandomSpanLight runner is live in `12` technical smoke → automatic `148` full only; it has its own tmux/log/output family and no performance gate. No partial performance result is used for routing.
 
 ### M2: Constraint-Homotopy V0
 
-Status: CPU route and targeted tests are being refreshed. `scripts/manual_launch_m2_constraint_homotopy_20260715.sh` uses an independent tmux/log/output family and can only auto-promote smoke to the 148-task RandomSpanLight population. It is not launched until M1 has actually exited safely and the GPU audit confirms free ≥25,600 MiB with OOM/ECC zero.
+Status: targeted tests passed and `scripts/manual_launch_m2_constraint_homotopy_sprint_v1.sh` is live in an independent tmux/log/output family. It runs `12` technical smoke → automatic `148` RandomSpanLight full only; it never auto-promotes to 296/927/5079. M2 started after the M1 t+10 audit confirmed free ≥25 GiB, OOM/ECC=0, and continued M1 row growth.
 
 ### M3: Birth-Death Canvas Diffusion V0
 
@@ -253,9 +253,9 @@ Stop condition: Stop after one full allowed Dream-Coder SingleLine run; do not a
 Expected report path: `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
 Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and `2781` policy rows. Primary/control `735/927`, best simple length policy `744/927`, oracle-sufficient canvas `858/927`; oracle gain vs primary `137`, simple help/harm `25/16`, oracle harm vs primary `14`, rescue/non-canvas-limited `55`. Interpretation: optional full allowed second-backbone SingleLine diagnostic, not model-agnostic confirmation.
 
-## Execution Sprint V1 queue update — 2026-07-15
+## Execution Sprint V1 queue update — 2026-07-16
 
-1. **M1 RandomSpanLight** — implementation pushed and GPU launcher prepared: `12` technical smoke then integrity-only auto-full to `148`, never 5079. Blocked only by host GPU approval; no scientific performance gate.
-2. **M2/M3/M4 RandomSpanLight** — independent output directories and launchers prepared. M2 has vanilla fixed64 + gradual + abrupt; M3 reports exact token-forward accounting and only claims equal-forward; M4 reports actual best/assembly/repair accuracy with standalone 512/576-forward costs.
+1. **M1 RandomSpanLight** — live: `12` technical smoke then integrity-only auto-full to `148`, never 5079. The old MultiLine M1 remains safely paused/resumable. No scientific performance gate.
+2. **M2 RandomSpanLight** — live after M1 t+10 audit, with vanilla fixed64 + gradual + abrupt and a separate tmux/log/output family. M3 and M4 remain independent queued candidates; M3 reports exact token-forward accounting and only claims equal-forward; M4 reports actual best/assembly/repair accuracy with standalone 512/576-forward costs.
 3. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are prepared. Smoke then full is scripted, but `scipy` is absent and its installation is host-approval blocked. Do not label local CAL/CAL-lite as official CAL.
 4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.
