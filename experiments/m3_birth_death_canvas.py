@@ -10,7 +10,6 @@ control spends the same 4 x 64 forward budget without reallocation.
 from __future__ import annotations
 
 import argparse
-import ast
 import hashlib
 import json
 import sys
@@ -80,6 +79,38 @@ def cfg_for(canvas_tokens: int) -> ExperimentConfig:
     return cfg
 
 
+def remaining_lifetime_steps(born_round: int) -> int:
+    if not 0 <= int(born_round) < STEPS_PER_PARTICLE:
+        raise ValueError("M3 born_round must fall within the global denoising schedule")
+    return STEPS_PER_PARTICLE - int(born_round)
+
+
+def confidence_retained_positions(
+    confidences: Sequence[float], masked_positions: Sequence[int], target_masks: int
+) -> list[int]:
+    """Use ordinary within-particle confidence for remasking.
+
+    Syntax, visible obligations, and contradictions instead rank particles for
+    birth/death and final selection. A scalar particle penalty cannot alter a
+    token ordering, so it is deliberately absent here.
+    """
+    ranked = sorted((float(confidences[index]), int(index)) for index in masked_positions)
+    return [index for _, index in ranked[: min(int(target_masks), len(ranked))]]
+
+
+def birth_death_enabled(method: str, round_index: int) -> bool:
+    return method == METHODS[1] and int(round_index) in DEATH_ROUNDS
+
+
+def particle_round_token_forwards(particles: Sequence[Mapping[str, Any]]) -> int:
+    return sum(int(particle["canvas_tokens"]) for particle in particles)
+
+
+def require_isolated_output_dirs(uniform_dir: Path, birth_dir: Path) -> None:
+    if uniform_dir == birth_dir:
+        raise ValueError("M3 methods require independent output directories")
+
+
 def method_key(row_key: str, method: str) -> str:
     if method not in METHODS:
         raise ValueError(f"Unknown M3 method {method!r}")
@@ -125,7 +156,7 @@ def new_particle(
         "x_t": x_t,
         "born_round": int(born_round),
         "age": 0,
-        "lifetime_steps": STEPS_PER_PARTICLE - int(born_round),
+        "lifetime_steps": remaining_lifetime_steps(int(born_round)),
         "last_confidences": [0.0] * int(canvas_tokens),
     }
 
@@ -159,9 +190,6 @@ def visible_particle_score(particle: Mapping[str, Any], prefix: str, suffix: str
 def step_particle(
     *,
     particle: dict[str, Any],
-    prefix: str,
-    suffix: str,
-    tokenizer: Any,
     model: Any,
 ) -> None:
     prepared = particle["prepared"]
@@ -176,31 +204,15 @@ def step_particle(
     current_mask = x_t == mask_token_id
     middle_mask = current_mask[:, middle_start:middle_end]
     middle_probs = max_probs[:, middle_start:middle_end]
-    proposed = x_t[0, middle_start:middle_end].detach().clone()
-    proposed[middle_mask[0]] = predictions[0, middle_start:middle_end][middle_mask[0]]
-    proposed_text = tokenizer.decode([int(value) for value in proposed.detach().cpu().tolist()], skip_special_tokens=True)
-    try:
-        syntax_ok = bool(ast.parse(prefix + proposed_text + suffix))
-    except SyntaxError:
-        syntax_ok = False
-    diagnostic = analyze_candidate(prefix, proposed_text, suffix)
-    penalty = 0.25 * (not syntax_ok) + 0.10 * len(diagnostic.unsatisfied_obligations) + 0.05 * len(diagnostic.control_contradictions)
-    remaining = max(1, int(particle["lifetime_steps"]) - int(particle["age"]))
     target_masks = linear_target_masks(int(particle["canvas_tokens"]), int(particle["lifetime_steps"]), int(particle["age"]))
     masked_positions = torch.nonzero(middle_mask[0], as_tuple=False).flatten().tolist()
-    ranked = sorted((float(middle_probs[0, index].item()) - penalty, int(index)) for index in masked_positions)
-    retain = [index for _, index in ranked[: min(target_masks, len(ranked))]]
+    confidences = [float(value) for value in middle_probs[0].detach().cpu().tolist()]
+    retain = confidence_retained_positions(confidences, masked_positions, target_masks)
     x_t[current_mask] = predictions[current_mask]
     if retain:
         x_t[0, [middle_start + index for index in retain]] = mask_token_id
-    particle["last_confidences"] = [float(value) for value in middle_probs[0].detach().cpu().tolist()]
+    particle["last_confidences"] = confidences
     particle["age"] = int(particle["age"]) + 1
-    particle["last_visible_diagnostic"] = {
-        "syntax_ok": syntax_ok,
-        "unsatisfied_obligation_count": len(diagnostic.unsatisfied_obligations),
-        "control_contradiction_count": len(diagnostic.control_contradictions),
-        "remaining_local_steps": remaining,
-    }
 
 
 def birth_death_reallocate(
@@ -260,11 +272,11 @@ def decode_population(
     forwards = 0
     token_forwards = 0
     for round_index in range(STEPS_PER_PARTICLE):
+        token_forwards += particle_round_token_forwards(particles)
         for particle in particles:
-            step_particle(particle=particle, prefix=prefix, suffix=suffix, tokenizer=tokenizer, model=model)
+            step_particle(particle=particle, model=model)
             forwards += 1
-            token_forwards += int(particle["canvas_tokens"])
-        if method == "m3_birth_death_canvas" and round_index in DEATH_ROUNDS:
+        if birth_death_enabled(method, round_index):
             event = birth_death_reallocate(
                 particles=particles,
                 prefix=prefix,
@@ -408,16 +420,20 @@ def audit(rows: Sequence[Mapping[str, Any]], expected: set[str]) -> dict[str, An
     }
 
 
-def summarize(compact_dir: Path, phase: str, manifest: Sequence[Mapping[str, Any]], uniform_rows: Sequence[Mapping[str, Any]], birth_rows: Sequence[Mapping[str, Any]], lock: Mapping[str, Any], resume_noops: int) -> dict[str, Any]:
+def summarize(
+    compact_dir: Path,
+    phase: str,
+    manifest: Sequence[Mapping[str, Any]],
+    uniform_rows: Sequence[Mapping[str, Any]],
+    birth_rows: Sequence[Mapping[str, Any]],
+    lock: Mapping[str, Any],
+    resume_noops: int,
+    peak_memory_bytes: int,
+    wall_sec: float,
+) -> dict[str, Any]:
     left, right = audit(uniform_rows, expected_keys(manifest, METHODS[0])), audit(birth_rows, expected_keys(manifest, METHODS[1]))
     frozen = lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0
     gate = bool(left["passed"] and right["passed"] and frozen and resume_noops == 0)
-    paired = {str(row["row_key"]): row for row in uniform_rows}
-    wins = losses = 0
-    for row in birth_rows:
-        baseline = paired[str(row["row_key"])]
-        wins += bool(row.get("passed")) and not bool(baseline.get("passed"))
-        losses += not bool(row.get("passed")) and bool(baseline.get("passed"))
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(compact_dir / f"{phase}_summary.csv", [{"method": METHODS[0], **left}, {"method": METHODS[1], **right}])
     result = {
@@ -425,8 +441,9 @@ def summarize(compact_dir: Path, phase: str, manifest: Sequence[Mapping[str, Any
         "technical_gate_passed": gate,
         "selected_case_count": len(manifest),
         "methods": {METHODS[0]: left, METHODS[1]: right},
-        "paired_birth_death_vs_uniform": {"wins": wins, "losses": losses, "net": wins - losses},
         "fixed_total_forward_budget": TOTAL_FORWARDS,
+        "peak_cuda_memory_bytes": int(peak_memory_bytes),
+        "wall_sec": float(wall_sec),
         "frozen_test_status": lock.get("test_status"),
         "test_evaluation_count": lock.get("test_evaluation_count"),
     }
@@ -437,8 +454,7 @@ def summarize(compact_dir: Path, phase: str, manifest: Sequence[Mapping[str, Any
 def run(args: argparse.Namespace) -> int:
     dataset = Path(args.dataset_jsonl).resolve()
     uniform_dir, birth_dir, compact_dir = Path(args.uniform_output_dir).resolve(), Path(args.birth_death_output_dir).resolve(), Path(args.compact_dir).resolve()
-    if uniform_dir == birth_dir:
-        raise ValueError("M3 methods require independent output directories")
+    require_isolated_output_dirs(uniform_dir, birth_dir)
     frozen_groups, lock = load_frozen_groups()
     source_rows = read_jsonl(dataset)
     if len(source_rows) != 164:
@@ -451,11 +467,23 @@ def run(args: argparse.Namespace) -> int:
         raise RuntimeError("CUDA unavailable for M3")
     selected = choose_smoke_manifest(manifest, int(args.smoke_cases))
     uniform_raw, birth_raw = uniform_dir / "m3_uniform_raw.jsonl", birth_dir / "m3_birth_death_raw.jsonl"
+    torch.cuda.reset_peak_memory_stats()
+    started = time.perf_counter()
     run_method(method=METHODS[0], manifest=selected, source_rows=source_rows, raw_path=uniform_raw, tokenizer=tokenizer, model=model)
     run_method(method=METHODS[1], manifest=selected, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
     noops = run_method(method=METHODS[0], manifest=selected, source_rows=source_rows, raw_path=uniform_raw, tokenizer=tokenizer, model=model)
     noops += run_method(method=METHODS[1], manifest=selected, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
-    smoke = summarize(compact_dir, "smoke", selected, read_jsonl(uniform_raw), read_jsonl(birth_raw), lock, noops)
+    smoke = summarize(
+        compact_dir,
+        "smoke",
+        selected,
+        read_jsonl(uniform_raw),
+        read_jsonl(birth_raw),
+        lock,
+        noops,
+        int(torch.cuda.max_memory_allocated()),
+        time.perf_counter() - started,
+    )
     if not smoke["technical_gate_passed"]:
         write_json(compact_dir / "run_manifest.json", {"status": "smoke_failed", "smoke": smoke, "test_evaluation_count": 0})
         return 2
@@ -466,8 +494,18 @@ def run(args: argparse.Namespace) -> int:
         run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
         noops = run_method(method=METHODS[0], manifest=manifest, source_rows=source_rows, raw_path=uniform_raw, tokenizer=tokenizer, model=model)
         noops += run_method(method=METHODS[1], manifest=manifest, source_rows=source_rows, raw_path=birth_raw, tokenizer=tokenizer, model=model)
-        full = summarize(compact_dir, "full", manifest, read_jsonl(uniform_raw), read_jsonl(birth_raw), lock, noops)
-    write_json(compact_dir / "run_manifest.json", {"status": "completed" if full is None or full["technical_gate_passed"] else "full_failed", "smoke": smoke, "full": full, "methods": list(METHODS), "total_forwards": TOTAL_FORWARDS, "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
+        full = summarize(
+            compact_dir,
+            "full",
+            manifest,
+            read_jsonl(uniform_raw),
+            read_jsonl(birth_raw),
+            lock,
+            noops,
+            int(torch.cuda.max_memory_allocated()),
+            time.perf_counter() - started,
+        )
+    write_json(compact_dir / "run_manifest.json", {"status": "completed" if full is None or full["technical_gate_passed"] else "full_failed", "model": MODEL_PATH, "source_config": SOURCE_CONFIG, "smoke": smoke, "full": full, "methods": list(METHODS), "total_forwards": TOTAL_FORWARDS, "compute_claim": "equal_forward_only_not_equal_token", "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "frozen_test_status": "sealed", "test_evaluation_count": 0})
     return 0 if full is None or full["technical_gate_passed"] else 3
 
 
