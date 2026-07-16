@@ -34,6 +34,11 @@ METHODS = (
     "best_of_8_oracle_ceiling_offline_only",
 )
 
+FIXED64_FORWARDS = 64
+GRID_SELECTOR_FORWARDS = 8 * 64
+FIXED64_TOKEN_FORWARDS = 64 * 64
+GRID_SELECTOR_TOKEN_FORWARDS = 2 * (16 + 32 + 64 + 128) * 64
+
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as handle:
@@ -114,8 +119,30 @@ def choose_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, Mapping[str, Any
     }
 
 
-def selection_record(method: str, row: Mapping[str, Any]) -> dict[str, Any]:
-    metrics = dict(row.get("metrics") or {})
+def candidate_wall_sec(row: Mapping[str, Any]) -> float:
+    metrics = row.get("metrics") or {}
+    return float(metrics.get("total_sec_including_probe") or row.get("wall_sec") or 0.0)
+
+
+def selection_record(
+    method: str,
+    row: Mapping[str, Any],
+    grid_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Record fixed, predeclared standalone cost for a selected candidate.
+
+    A fixed64 control decodes just one 64-token canvas.  Every selector has
+    to produce and inspect all eight grid candidates; its wall accounting is
+    therefore the sum of those eight candidate runs, not the selected run.
+    """
+    if len(grid_rows) != 8:
+        raise RuntimeError("score-only selection requires exactly eight grid candidates")
+    fixed64 = method == METHODS[0]
+    required_rows = (row,) if fixed64 else tuple(grid_rows)
+    forwards = FIXED64_FORWARDS if fixed64 else GRID_SELECTOR_FORWARDS
+    token_budget = FIXED64_TOKEN_FORWARDS if fixed64 else GRID_SELECTOR_TOKEN_FORWARDS
+    selected_wall = candidate_wall_sec(row)
+    required_wall = sum(candidate_wall_sec(candidate) for candidate in required_rows)
     return {
         "row_key": str(row["row_key"]),
         "task_group": str(row["task_group"]),
@@ -126,11 +153,14 @@ def selection_record(method: str, row: Mapping[str, Any]) -> dict[str, Any]:
         "selected_canvas_tokens": int(row["canvas_tokens"]),
         "selected_seed": int(row["seed"]),
         "metrics": {
-            "actual_forward_count": 512,
-            "standalone_actual_forward_count": 512,
+            "actual_forward_count": forwards,
+            "standalone_actual_forward_count": forwards,
             "shared_bank_incremental_forward_count": 0,
-            "token_budget": 2 * (16 + 32 + 64 + 128) * 64,
-            "total_sec_including_probe": float(metrics.get("total_sec_including_probe") or row.get("wall_sec") or 0.0),
+            "token_budget": token_budget,
+            "standalone_token_budget": token_budget,
+            "selected_candidate_wall_sec": selected_wall,
+            "required_candidate_wall_sec": required_wall,
+            "total_sec_including_probe": required_wall,
         },
         "method": method,
     }
@@ -150,7 +180,10 @@ def payload_for_span(row_key: str, candidates: Sequence[Mapping[str, Any]]) -> d
         "row_key": row_key,
         "task_group": chosen[METHODS[0]]["task_group"],
         "length_bucket": chosen[METHODS[0]]["length_bucket"],
-        "methods": {method: selection_record(method, candidate) for method, candidate in chosen.items()},
+        "methods": {
+            method: selection_record(method, candidate, candidates)
+            for method, candidate in chosen.items()
+        },
     }
 
 
@@ -230,7 +263,7 @@ def run_analysis(raw_path: Path, output_dir: Path, *, bootstrap_replicates: int 
         chosen = choose_rows(candidates)
         record: dict[str, Any] = {"row_key": row_key, "task_group": chosen[METHODS[0]]["task_group"], "length_bucket": chosen[METHODS[0]]["length_bucket"]}
         for method, candidate in chosen.items():
-            selections[method].append(selection_record(method, candidate))
+            selections[method].append(selection_record(method, candidate, candidates))
             record[f"{method}_candidate_key"] = candidate["candidate_key"]
             record[f"{method}_canvas"] = candidate["canvas_tokens"]
             record[f"{method}_passed"] = bool(candidate.get("passed"))
