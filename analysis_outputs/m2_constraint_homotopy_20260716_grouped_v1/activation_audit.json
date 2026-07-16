@@ -1,0 +1,115 @@
+{
+  "candidate_hash_fields": [
+    "candidate_full_code_sha256",
+    "candidate_middle_sha256"
+  ],
+  "dynamics": [
+    {
+      "effective_update_steps": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      },
+      "method": "m2_vanilla_fixed64",
+      "total_token_changes": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      }
+    },
+    {
+      "effective_update_steps": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      },
+      "method": "m2_gradual_constraints",
+      "total_token_changes": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      }
+    },
+    {
+      "effective_update_steps": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      },
+      "method": "m2_abrupt_constraints",
+      "total_token_changes": {
+        "count": 148,
+        "max": 64.0,
+        "mean": 64.0,
+        "median": 64.0,
+        "min": 64.0,
+        "nonzero_count": 148,
+        "p25": 64.0,
+        "p75": 64.0,
+        "p95": 64.0
+      }
+    }
+  ],
+  "pairwise_hash_differences": [
+    {
+      "candidate_full_code_sha256_different_count": 105,
+      "candidate_middle_sha256_different_count": 105,
+      "comparison": "gradual_vs_vanilla",
+      "method_a": "m2_gradual_constraints",
+      "method_b": "m2_vanilla_fixed64",
+      "row_count": 148
+    },
+    {
+      "candidate_full_code_sha256_different_count": 68,
+      "candidate_middle_sha256_different_count": 68,
+      "comparison": "abrupt_vs_vanilla",
+      "method_a": "m2_abrupt_constraints",
+      "method_b": "m2_vanilla_fixed64",
+      "row_count": 148
+    },
+    {
+      "candidate_full_code_sha256_different_count": 78,
+      "candidate_middle_sha256_different_count": 78,
+      "comparison": "gradual_vs_abrupt",
+      "method_a": "m2_gradual_constraints",
+      "method_b": "m2_abrupt_constraints",
+      "row_count": 148
+    }
+  ],
+  "raw_generated_code_included": false,
+  "schedule_activation": "changed_candidates_observed",
+  "scientific_judgment": {
+    "label": "constraints_activated_no_reliable_grouped_advantage",
+    "reason": "candidate hashes changed but no comparison meets the predeclared grouped support rule"
+  }
+}

@@ -1,0 +1,4 @@
+method_a,method_b,task_macro_delta,task_macro_ci_low,task_macro_ci_high,task_group_count,wins,losses,ties,span_help,span_harm,group_label_swap_two_sided_p,permutation_replicates,permutation_seed
+m2_gradual_constraints,m2_vanilla_fixed64,0.013513513513513514,-0.04054054054054054,0.06756756756756757,148,9,7,132,9,7,0.8113188681131887,10000,20261806
+m2_abrupt_constraints,m2_vanilla_fixed64,-0.02027027027027027,-0.060810810810810814,0.02027027027027027,148,3,6,139,3,6,0.5108489151084892,10000,20261807
+m2_gradual_constraints,m2_abrupt_constraints,0.033783783783783786,0.0,0.07432432432432433,148,7,2,139,7,2,0.1782821717828217,10000,20261808

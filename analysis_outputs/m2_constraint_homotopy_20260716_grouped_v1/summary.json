@@ -1,0 +1,234 @@
+{
+  "activation_audit": {
+    "candidate_hash_fields": [
+      "candidate_full_code_sha256",
+      "candidate_middle_sha256"
+    ],
+    "dynamics": [
+      {
+        "effective_update_steps": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        },
+        "method": "m2_vanilla_fixed64",
+        "total_token_changes": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        }
+      },
+      {
+        "effective_update_steps": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        },
+        "method": "m2_gradual_constraints",
+        "total_token_changes": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        }
+      },
+      {
+        "effective_update_steps": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        },
+        "method": "m2_abrupt_constraints",
+        "total_token_changes": {
+          "count": 148,
+          "max": 64.0,
+          "mean": 64.0,
+          "median": 64.0,
+          "min": 64.0,
+          "nonzero_count": 148,
+          "p25": 64.0,
+          "p75": 64.0,
+          "p95": 64.0
+        }
+      }
+    ],
+    "pairwise_hash_differences": [
+      {
+        "candidate_full_code_sha256_different_count": 105,
+        "candidate_middle_sha256_different_count": 105,
+        "comparison": "gradual_vs_vanilla",
+        "method_a": "m2_gradual_constraints",
+        "method_b": "m2_vanilla_fixed64",
+        "row_count": 148
+      },
+      {
+        "candidate_full_code_sha256_different_count": 68,
+        "candidate_middle_sha256_different_count": 68,
+        "comparison": "abrupt_vs_vanilla",
+        "method_a": "m2_abrupt_constraints",
+        "method_b": "m2_vanilla_fixed64",
+        "row_count": 148
+      },
+      {
+        "candidate_full_code_sha256_different_count": 78,
+        "candidate_middle_sha256_different_count": 78,
+        "comparison": "gradual_vs_abrupt",
+        "method_a": "m2_gradual_constraints",
+        "method_b": "m2_abrupt_constraints",
+        "row_count": 148
+      }
+    ],
+    "raw_generated_code_included": false,
+    "schedule_activation": "changed_candidates_observed",
+    "scientific_judgment": {
+      "label": "constraints_activated_no_reliable_grouped_advantage",
+      "reason": "candidate hashes changed but no comparison meets the predeclared grouped support rule"
+    }
+  },
+  "bootstrap_replicates": 10000,
+  "inference_unit": "task_group",
+  "method_summary": [
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260715,
+      "equal_weight_task_macro_accuracy": 0.25675675675675674,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 64.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 64.0,
+      "mean_token_forward_budget": 4096.0,
+      "mean_wall_sec": 28.572765415940257,
+      "method": "m2_vanilla_fixed64",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.25675675675675674,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.3310810810810811,
+      "task_macro_ci_low": 0.1891891891891892
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260716,
+      "equal_weight_task_macro_accuracy": 0.2702702702702703,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 64.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 64.0,
+      "mean_token_forward_budget": 4096.0,
+      "mean_wall_sec": 25.749723000802742,
+      "method": "m2_gradual_constraints",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.2702702702702703,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.34459459459459457,
+      "task_macro_ci_low": 0.20270270270270271
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260717,
+      "equal_weight_task_macro_accuracy": 0.23648648648648649,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 64.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 64.0,
+      "mean_token_forward_budget": 4096.0,
+      "mean_wall_sec": 28.382119418642596,
+      "method": "m2_abrupt_constraints",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.23648648648648649,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.30405405405405406,
+      "task_macro_ci_low": 0.16891891891891891
+    }
+  ],
+  "paired_effects": [
+    {
+      "group_label_swap_two_sided_p": 0.8113188681131887,
+      "losses": 7,
+      "method_a": "m2_gradual_constraints",
+      "method_b": "m2_vanilla_fixed64",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261806,
+      "span_harm": 7,
+      "span_help": 9,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.06756756756756757,
+      "task_macro_ci_low": -0.04054054054054054,
+      "task_macro_delta": 0.013513513513513514,
+      "ties": 132,
+      "wins": 9
+    },
+    {
+      "group_label_swap_two_sided_p": 0.5108489151084892,
+      "losses": 6,
+      "method_a": "m2_abrupt_constraints",
+      "method_b": "m2_vanilla_fixed64",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261807,
+      "span_harm": 6,
+      "span_help": 3,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.02027027027027027,
+      "task_macro_ci_low": -0.060810810810810814,
+      "task_macro_delta": -0.02027027027027027,
+      "ties": 139,
+      "wins": 3
+    },
+    {
+      "group_label_swap_two_sided_p": 0.1782821717828217,
+      "losses": 2,
+      "method_a": "m2_gradual_constraints",
+      "method_b": "m2_abrupt_constraints",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261808,
+      "span_harm": 2,
+      "span_help": 7,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.07432432432432433,
+      "task_macro_ci_low": 0.0,
+      "task_macro_delta": 0.033783783783783786,
+      "ties": 139,
+      "wins": 7
+    }
+  ],
+  "primary_estimand": "equal_weight_base_task_macro_accuracy",
+  "run_full_wall_sec": 12248.530978705967,
+  "run_peak_cuda_memory_bytes": 16496130048,
+  "scientific_judgment": {
+    "label": "constraints_activated_no_reliable_grouped_advantage",
+    "reason": "candidate hashes changed but no comparison meets the predeclared grouped support rule"
+  },
+  "span_micro_role": "descriptive_only",
+  "title": "M2 Constraint-Homotopy V0"
+}

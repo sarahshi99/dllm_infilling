@@ -1,0 +1,13 @@
+method,length_bucket,span_count,task_group_count,span_micro_accuracy_descriptive,mean_forward_count,mean_token_forward_budget
+m2_vanilla_fixed64,extreme,63,63,0.30158730158730157,64.0,4096.0
+m2_vanilla_fixed64,long,23,23,0.2608695652173913,64.0,4096.0
+m2_vanilla_fixed64,medium,40,40,0.2,64.0,4096.0
+m2_vanilla_fixed64,short,22,22,0.22727272727272727,64.0,4096.0
+m2_gradual_constraints,extreme,63,63,0.3492063492063492,64.0,4096.0
+m2_gradual_constraints,long,23,23,0.13043478260869565,64.0,4096.0
+m2_gradual_constraints,medium,40,40,0.25,64.0,4096.0
+m2_gradual_constraints,short,22,22,0.22727272727272727,64.0,4096.0
+m2_abrupt_constraints,extreme,63,63,0.30158730158730157,64.0,4096.0
+m2_abrupt_constraints,long,23,23,0.17391304347826086,64.0,4096.0
+m2_abrupt_constraints,medium,40,40,0.2,64.0,4096.0
+m2_abrupt_constraints,short,22,22,0.18181818181818182,64.0,4096.0
