@@ -97,6 +97,13 @@ gstack 和 Superpowers 是阶段工具，不是循环工具。
 - 原始 `outputs_clean/`、`logs/`、模型权重和 trace-heavy artifacts 不提交到普通 git。
 - 本地原始输出要保留用于分析；除非用户明确要求，不要删除或覆盖历史运行。
 
+## Workspace hygiene 与 coding-agent containment
+
+- workspace hygiene / coding-agent safety audit 默认只做清单、元数据和只读验证；没有明确授权时，不得创建、删除、替换、复用或 prune worktree。
+- 不得把工具工作目录切换到已知活动 execution worktree，也不得编辑其文件。对活动作业只允许读取 tmux、进程、cwd、输出路径和行数等运行元数据；不得发送 signal、tmux 输入或读取部分性能结果。
+- cleanup proposal 必须先保存在 pending manifest 中。每个 approved 与 executed 字段必须为 JSON boolean false，且 files_deleted、files_moved、files_truncated 必须保持为 0，直到用户对具体路径和动作明确授权。
+- 只读审计脚本不得提供写入或 apply 选项；需要实际 cleanup 时，必须由单独、经用户授权的命令和新的审计记录执行。
+
 ## Git 与文档安全
 
 - 不要删除、覆盖、回滚用户已有工作，除非用户明确要求。

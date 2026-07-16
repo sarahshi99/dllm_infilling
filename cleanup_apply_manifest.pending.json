@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "workspace_hygiene_cleanup_apply_manifest",
+  "status": "pending",
+  "audit_snapshot_utc": "2026-07-16T04:54:19Z",
+  "approved": false,
+  "executed": false,
+  "files_deleted": 0,
+  "files_moved": 0,
+  "files_truncated": 0,
+  "mutation_counters": {
+    "files_deleted": 0,
+    "files_moved": 0,
+    "files_truncated": 0
+  },
+  "candidate_cleanup_actions": [],
+  "protected_live_outputs": [
+    {
+      "job": "M1 RandomSpanLight",
+      "action": "preserve",
+      "approved": false,
+      "executed": false,
+      "paths": [
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m1_randomspanlight_20260715_v1/stage1/m1_stage1_candidate_bank_raw.jsonl",
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m1_randomspanlight_20260715_v1/generic/m1_equal_compute_generic_raw.jsonl",
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m1_randomspanlight_20260715_v1/dependency_cone/m1_dependency_cone_raw.jsonl"
+      ]
+    },
+    {
+      "job": "M2 Constraint-Homotopy",
+      "action": "preserve",
+      "approved": false,
+      "executed": false,
+      "paths": [
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m2_vanilla_randomspanlight_20260715_sprint_v1/m2_vanilla_raw.jsonl",
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m2_gradual_randomspanlight_20260715_sprint_v1/m2_gradual_raw.jsonl",
+        "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/outputs_clean/m2_abrupt_randomspanlight_20260715_sprint_v1/m2_abrupt_raw.jsonl"
+      ]
+    }
+  ],
+  "apply_preconditions": [
+    "Explicit user authorization naming each path and action.",
+    "A fresh non-destructive audit after the affected job is no longer active.",
+    "An independently reviewed apply command; this pending manifest contains no apply command."
+  ]
+}
