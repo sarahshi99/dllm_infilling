@@ -1,19 +1,21 @@
 # Research Idea Board
 
-Updated: 2026-07-16 UTC
+Updated: 2026-07-17 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
 Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.zh.md`. This board is subordinate to that roadmap.
 
+The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.current.json`; this board keeps hypotheses and historical context only.
+
 ## Canonical Method Portfolio
 
 | ID | Method | Status | Historical mapping |
 |---|---|---|---|
-| `M1` | Abductive Program-State Bridge | historical 5079 remains safely paused; independent RandomSpanLight raw is complete but unanalysed | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
+| `M1` | Abductive Program-State Bridge | historical 5079 safely paused; independent RandomSpanLight raw complete, outcome analysis pending | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
 | `M2` | Constraint-Homotopy Infilling | 148-case full reviewed: constraints activated, no reliable grouped advantage | IDEA-012 |
-| `M3` | Birth--Death Canvas Diffusion | 148-case technical full completed at `8440af1`; outcome analysis remains separate | IDEA-013 |
-| `M4` | Semantic Particle Assembly | code/test complete (`ed94471`); full 148-case offline structural audit passed; repair queued after M3 resource-safe run | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M3` | Birth--Death Canvas Diffusion | 148-case generation/technical audit completed; outcome analysis pending | IDEA-013 |
+| `M4` | Semantic Particle Assembly | offline 148 structural audit passed; GPU repair pending after CAL stable t+10 and a safe second slot | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
 M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.

@@ -253,9 +253,11 @@ Stop condition: Stop after one full allowed Dream-Coder SingleLine run; do not a
 Expected report path: `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
 Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and `2781` policy rows. Primary/control `735/927`, best simple length policy `744/927`, oracle-sufficient canvas `858/927`; oracle gain vs primary `137`, simple help/harm `25/16`, oracle harm vs primary `14`, rescue/non-canvas-limited `55`. Interpretation: optional full allowed second-backbone SingleLine diagnostic, not model-agnostic confirmation.
 
-## Execution Sprint V1 queue update — 2026-07-16
+## Execution Sprint V1 queue update — 2026-07-17
 
-1. **M1 RandomSpanLight** — raw is complete (`1332/1332`, `148/148`, `148/148`) but the launcher did not write its final compact manifest. The old MultiLine M1 remains safely paused/resumable. No M1 outcome has been used for scientific routing.
-2. **M2/M3 RandomSpanLight** — M2 is completed/reviewed; M3 is technically completed at `8440af1`. M3 records exact token-forward accounting and only claims equal-forward. M4 remains an independent queued candidate and was not launched this round.
-3. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are prepared. Smoke then full is scripted, but `scipy` is absent and its installation is host-approval blocked. Do not label local CAL/CAL-lite as official CAL.
+Current M1--M4 statuses are centralized in `docs/paper_agent/method_portfolio.current.json`; the queue below is execution order, not a competing status register.
+
+1. **M1/M3 fixed outcome analysis** — M1 raw is complete (`1332/1332`, `148/148`, `148/148`) and M3 technical full is complete (`148/148` per arm). Commit their outcome-blind grouped analyzers before reading passed outcomes; no M1 historical 5079 resume.
+2. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are being fail-stop/resume hardened. Then run 12-case smoke and, after technical integrity passes, automatic 4,990 full. Do not label local CAL/CAL-lite as official CAL.
+3. **M4** — remains independent: after CAL full has a stable t+10 audit and a safe second GPU slot, run repair 12→148. M2 remains completed/reviewed and not promoted.
 4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.
