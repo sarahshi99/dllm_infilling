@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 
 from analysis.m1_randomspanlight_grouped_analysis import (
+    COMPARISONS,
     METHODS,
     refinement_record,
     stage1_selection_record,
@@ -24,6 +25,13 @@ def grid_row(canvas: int, seed: int, wall_sec: float) -> dict[str, object]:
 
 
 class M1RandomSpanLightGroupedAnalysisTest(unittest.TestCase):
+    def test_primary_comparisons_are_compute_matched_before_outcomes(self) -> None:
+        self.assertEqual(COMPARISONS[:3], (
+            ("m1_dependency_cone_full", "equal_compute_generic_remask"),
+            ("m1_score_only_abductive_selector", "ordinary_confidence_best_of_grid"),
+            ("m1_dependency_cone_full", "m1_score_only_abductive_selector"),
+        ))
+
     def test_standalone_costs_are_fixed_before_outcomes(self) -> None:
         grid = [
             grid_row(canvas, seed, float(index + 1))

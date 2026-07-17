@@ -25,8 +25,8 @@ def row(row_key: str, group: str, passed: bool, token_budget: int) -> dict[str, 
 
 class M3BirthDeathCanvasAnalysisTest(unittest.TestCase):
     def test_grouped_analyzer_uses_requested_cluster_bootstrap_budget(self) -> None:
-        uniform = [row("a", "g0", False, 15360), row("b", "g1", True, 15360)]
-        birth = [row("a", "g0", True, 16000), row("b", "g1", True, 17000)]
+        uniform = [row(f"row-{index}", f"g{index}", bool(index % 2), 15360) for index in range(148)]
+        birth = [row(f"row-{index}", f"g{index}", True, 12000 + index) for index in range(148)]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             uniform_raw, birth_raw = root / "uniform.jsonl", root / "birth.jsonl"
@@ -35,7 +35,7 @@ class M3BirthDeathCanvasAnalysisTest(unittest.TestCase):
             summary = run_analysis(uniform_raw, birth_raw, root / "out", bootstrap_replicates=20)
         self.assertEqual(summary["bootstrap_replicates"], 20)
         self.assertEqual(summary["compute_claim"], "equal_forward_only; actual token-forward totals are descriptive and may differ")
-        self.assertEqual(summary["paired_effects"][0]["task_group_count"], 2)
+        self.assertEqual(summary["paired_effects"][0]["task_group_count"], 148)
 
 
 if __name__ == "__main__":

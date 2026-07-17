@@ -31,6 +31,16 @@ METHODS = (
     "m1_dependency_cone_full",
     "oracle_ceiling_offline_only",
 )
+COMPARISONS = (
+    ("m1_dependency_cone_full", "equal_compute_generic_remask"),
+    ("m1_score_only_abductive_selector", "ordinary_confidence_best_of_grid"),
+    ("m1_dependency_cone_full", "m1_score_only_abductive_selector"),
+    ("ordinary_confidence_best_of_grid", "fixed64_seed0"),
+    ("equal_compute_generic_remask", "fixed64_seed0"),
+    ("m1_score_only_abductive_selector", "fixed64_seed0"),
+    ("m1_dependency_cone_full", "fixed64_seed0"),
+    ("oracle_ceiling_offline_only", "fixed64_seed0"),
+)
 GRID_KIND = "deployable_grid"
 ORACLE_KIND = "oracle_sufficient_diagnostic_ceiling"
 FIXED64_FORWARDS = 64
@@ -103,6 +113,7 @@ def stage1_selection_record(
         "status": str(selected.get("status") or ""),
         "passed": bool(selected.get("passed", False)),
         "candidate_key": str(selected.get("candidate_key") or ""),
+        "candidate_middle_sha256": str(selected.get("candidate_middle_sha256") or ""),
         "selected_canvas_tokens": int(selected["canvas_tokens"]),
         "selected_seed": int(selected["seed"]),
         "method": method,
@@ -131,6 +142,7 @@ def refinement_record(method: str, row: Mapping[str, Any]) -> dict[str, Any]:
         "status": str(row.get("status") or ""),
         "passed": bool(row.get("passed", False)),
         "candidate_key": str(row.get("candidate_key") or ""),
+        "candidate_middle_sha256": str(row.get("candidate_middle_sha256") or ""),
         "selected_canvas_tokens": int(row["canvas_tokens"]),
         "selected_seed": int(row["seed"]),
         "method": method,
@@ -151,6 +163,7 @@ def oracle_record(row: Mapping[str, Any]) -> dict[str, Any]:
         "status": str(row.get("status") or ""),
         "passed": bool(row.get("passed", False)),
         "candidate_key": str(row.get("candidate_key") or ""),
+        "candidate_middle_sha256": str(row.get("candidate_middle_sha256") or ""),
         "selected_canvas_tokens": canvas,
         "selected_seed": int(row["seed"]),
         "method": METHODS[5],
@@ -196,6 +209,11 @@ def assemble_methods(
     expected = set(stage_grid)
     if set(oracle_by_key) != expected or set(generic_by_key) != expected or set(m1_by_key) != expected:
         raise RuntimeError("M1 grouped analysis requires matched stage-one/oracle/generic/M1 populations")
+    if len(expected) != 148:
+        raise RuntimeError(f"M1 grouped analysis requires exactly 148 RandomSpanLight rows, got {len(expected)}")
+    groups = {str(next(iter(rows))["task_group"]) for rows in stage_grid.values()}
+    if len(groups) != 148:
+        raise RuntimeError("M1 grouped analysis requires 148 aligned base task groups")
 
     rows_by_method: dict[str, list[dict[str, Any]]] = {method: [] for method in METHODS}
     for row_key in sorted(expected):
@@ -215,6 +233,54 @@ def assemble_methods(
         rows_by_method[METHODS[4]].append(refinement_record(METHODS[4], m1_by_key[row_key]))
         rows_by_method[METHODS[5]].append(oracle_record(oracle_by_key[row_key]))
     return rows_by_method
+
+
+def _hash_difference(left: Sequence[Mapping[str, Any]], right: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    left_by_key = {str(row["row_key"]): str(row.get("candidate_middle_sha256") or "") for row in left}
+    right_by_key = {str(row["row_key"]): str(row.get("candidate_middle_sha256") or "") for row in right}
+    if set(left_by_key) != set(right_by_key):
+        raise RuntimeError("M1 activation audit requires aligned method row keys")
+    return {
+        "row_count": len(left_by_key),
+        "different_candidate_hash_count": sum(left_by_key[key] != right_by_key[key] for key in left_by_key),
+        "same_candidate_hash_count": sum(left_by_key[key] == right_by_key[key] for key in left_by_key),
+    }
+
+
+def _histogram(values: Sequence[Any]) -> dict[str, int]:
+    counts = Counter(str(value) for value in values)
+    return {key: int(counts[key]) for key in sorted(counts)}
+
+
+def m1_activation_audit(
+    *,
+    rows_by_method: Mapping[str, Sequence[Mapping[str, Any]]],
+    generic_rows: Sequence[Mapping[str, Any]],
+    m1_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Summarize mechanism activation without writing generated code."""
+    if len(generic_rows) != 148 or len(m1_rows) != 148:
+        raise RuntimeError("M1 activation audit requires complete 148-row refinement arms")
+    full = list(rows_by_method["m1_dependency_cone_full"])
+    generic = list(rows_by_method["equal_compute_generic_remask"])
+    score_only = list(rows_by_method["m1_score_only_abductive_selector"])
+    cone_sizes = [len((row.get("dependency_cone") or {}).get("token_indices") or []) for row in m1_rows]
+    remasked_sizes = [int(row.get("remasked_token_count") or 0) for row in m1_rows]
+    fallback_rows = [row for row in m1_rows if bool(row.get("fallback_to_fixed64"))]
+    return {
+        "contains_generated_code": False,
+        "m1_full_vs_generic_candidate_hash": _hash_difference(full, generic),
+        "m1_full_vs_score_only_candidate_hash": _hash_difference(full, score_only),
+        "dependency_cone_nonempty_count": sum(size > 0 for size in cone_sizes),
+        "dependency_cone_nonempty_rate": sum(size > 0 for size in cone_sizes) / len(cone_sizes),
+        "targeted_remask_activation_count": sum(bool(row.get("targeted_remask_executed")) for row in m1_rows),
+        "targeted_remask_activation_rate": sum(bool(row.get("targeted_remask_executed")) for row in m1_rows) / len(m1_rows),
+        "fallback_count": len(fallback_rows),
+        "fallback_rate": len(fallback_rows) / len(m1_rows),
+        "fallback_reasons": _histogram([str(row.get("fallback_reason") or "none") for row in fallback_rows]),
+        "dependency_cone_token_count_distribution": _histogram(cone_sizes),
+        "remasked_token_count_distribution": _histogram(remasked_sizes),
+    }
 
 
 def write_figure_data(output_dir: Path, summary: Mapping[str, Any], peak_memory_bytes: int | None) -> None:
@@ -267,7 +333,7 @@ def run_analysis(
         output_dir=output_dir,
         title="M1 Abductive Program-State Bridge / RandomSpanLight",
         rows_by_method=rows_by_method,
-        comparisons=tuple((method, METHODS[0]) for method in METHODS[1:]),
+        comparisons=COMPARISONS,
         bootstrap_replicates=bootstrap_replicates,
     )
     peak_memory = peak_memory_from_run_manifest(run_manifest)
@@ -286,7 +352,16 @@ def run_analysis(
             },
             "oracle_role": "offline ceiling only; never deployable or a compute-matched control",
             "run_peak_cuda_memory_bytes": peak_memory,
+            "fixed_comparisons": [list(item) for item in COMPARISONS],
         }
+    )
+    activation = m1_activation_audit(
+        rows_by_method=rows_by_method,
+        generic_rows=read_jsonl(generic_raw),
+        m1_rows=read_jsonl(m1_raw),
+    )
+    (output_dir / "activation_audit.json").write_text(
+        json.dumps(activation, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     (output_dir / "summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8"
