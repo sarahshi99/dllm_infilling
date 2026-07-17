@@ -242,7 +242,7 @@ def decode_one(
     prefix_mask = encoded_prefix["attention_mask"].to(model.device)
     suffix_mask = encoded_suffix["attention_mask"].to(model.device)
     torch.cuda.reset_peak_memory_stats()
-    started = time.perf_counter()
+    decode_started = time.perf_counter()
     output, search_forwards = generate(
         ledger,
         prefix_ids=prefix_ids,
@@ -259,7 +259,7 @@ def decode_one(
         dstep=config["dstep"],
         use_bias=config["use_bias"],
     )
-    decode_sec = time.perf_counter() - started
+    decode_sec = time.perf_counter() - decode_started
     full_ids = output[0]
     prefix_len, suffix_len = int(prefix_ids.shape[1]), int(suffix_ids.shape[1])
     middle_ids = full_ids[prefix_len : len(full_ids) - suffix_len] if suffix_len else full_ids[prefix_len:]
@@ -359,7 +359,7 @@ def run(args: argparse.Namespace) -> int:
     expected = expected_keys(manifest, arm)
     completed = existing_keys & expected
     starting_completed_count = len(completed)
-    started = time.perf_counter()
+    run_started = time.perf_counter()
     initial_progress = progress_payload(
         arm=arm,
         mode=mode,
@@ -367,7 +367,7 @@ def run(args: argparse.Namespace) -> int:
         completed_count=len(completed),
         starting_completed_count=starting_completed_count,
         failure_journal_count=failure_count(failure_path),
-        started=started,
+        started=run_started,
     )
     atomic_write_json(progress_path, initial_progress)
     atomic_write_json(
@@ -408,7 +408,7 @@ def run(args: argparse.Namespace) -> int:
         if key in completed:
             continue
         source = rows_by_source[source_row_id]
-        started = time.perf_counter()
+        case_started = time.perf_counter()
         try:
             result = decode_one(
                 row=source,
@@ -449,7 +449,7 @@ def run(args: argparse.Namespace) -> int:
                 "error_type": type(exc).__name__,
                 "error_message": str(exc)[:240],
                 "failure_traceback": traceback.format_exc(),
-                "metrics": {"wall_sec": time.perf_counter() - started},
+                "metrics": {"wall_sec": time.perf_counter() - case_started},
             }
             append_jsonl(failure_path, failure)
             failed_progress = progress_payload(
@@ -459,7 +459,7 @@ def run(args: argparse.Namespace) -> int:
                 completed_count=len(completed),
                 starting_completed_count=starting_completed_count,
                 failure_journal_count=failure_count(failure_path),
-                started=started,
+                started=run_started,
             )
             failed_progress["status"] = "failed_stop"
             atomic_write_json(progress_path, failed_progress)
@@ -483,7 +483,7 @@ def run(args: argparse.Namespace) -> int:
                     completed_count=len(completed),
                     starting_completed_count=starting_completed_count,
                     failure_journal_count=failure_count(failure_path),
-                    started=started,
+                    started=run_started,
                 ),
             )
     rows = canonical_success_rows(raw_path)
@@ -500,7 +500,7 @@ def run(args: argparse.Namespace) -> int:
         completed_count=len(completed),
         starting_completed_count=starting_completed_count,
         failure_journal_count=failure_count(failure_path),
-        started=started,
+        started=run_started,
     )
     final_progress["status"] = "completed" if audit["passed"] and audit["failure_journal_count"] == 0 else "audit_failed"
     atomic_write_json(progress_path, final_progress)

@@ -4,6 +4,7 @@ import unittest
 import json
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 from experiments.p1_official_cal_adapter import (
     ARMS,
@@ -53,6 +54,12 @@ class OfficialCalAdapterTest(unittest.TestCase):
         self.assertNotIn("#                     exec", enabled)
         with self.assertRaisesRegex(RuntimeError, "absent or ambiguous"):
             enable_pinned_evaluator_source("no marker")
+
+    def test_progress_rate_uses_run_elapsed_time(self) -> None:
+        with patch("experiments.p1_official_cal_adapter.time.perf_counter", return_value=15.0):
+            progress = progress_payload(arm="official_cal_primary", mode="full", expected_count=100, completed_count=15, starting_completed_count=5, failure_journal_count=0, started=5.0)
+        self.assertEqual(progress["rows_per_hour"], 3600.0)
+        self.assertEqual(progress["eta_seconds"], 85.0)
 
 
 if __name__ == "__main__":
