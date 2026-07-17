@@ -1,0 +1,305 @@
+{
+  "analysis_protocol": "fixed_before_reading_148_case_outcomes",
+  "bootstrap_replicates": 10000,
+  "fixed_comparisons": [
+    [
+      "m1_dependency_cone_full",
+      "equal_compute_generic_remask"
+    ],
+    [
+      "m1_score_only_abductive_selector",
+      "ordinary_confidence_best_of_grid"
+    ],
+    [
+      "m1_dependency_cone_full",
+      "m1_score_only_abductive_selector"
+    ],
+    [
+      "ordinary_confidence_best_of_grid",
+      "fixed64_seed0"
+    ],
+    [
+      "equal_compute_generic_remask",
+      "fixed64_seed0"
+    ],
+    [
+      "m1_score_only_abductive_selector",
+      "fixed64_seed0"
+    ],
+    [
+      "m1_dependency_cone_full",
+      "fixed64_seed0"
+    ],
+    [
+      "oracle_ceiling_offline_only",
+      "fixed64_seed0"
+    ]
+  ],
+  "inference": "10000 fixed-seed task-group cluster bootstrap and group-aware paired label-swap test",
+  "inference_unit": "task_group",
+  "method_summary": [
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260715,
+      "equal_weight_task_macro_accuracy": 0.25675675675675674,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 0.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 64.0,
+      "mean_token_forward_budget": 4096.0,
+      "mean_wall_sec": 24.419118305644638,
+      "method": "fixed64_seed0",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.25675675675675674,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.3310810810810811,
+      "task_macro_ci_low": 0.1891891891891892
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260716,
+      "equal_weight_task_macro_accuracy": 0.27702702702702703,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 0.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 512.0,
+      "mean_token_forward_budget": 30720.0,
+      "mean_wall_sec": 193.95867037246117,
+      "method": "ordinary_confidence_best_of_grid",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.27702702702702703,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.35135135135135137,
+      "task_macro_ci_low": 0.20945945945945946
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260717,
+      "equal_weight_task_macro_accuracy": 0.24324324324324326,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 64.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 576.0,
+      "mean_token_forward_budget": 34636.10810810811,
+      "mean_wall_sec": 205.34083493795353,
+      "method": "equal_compute_generic_remask",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.24324324324324326,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.3108108108108108,
+      "task_macro_ci_low": 0.17567567567567569
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260718,
+      "equal_weight_task_macro_accuracy": 0.25675675675675674,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 0.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 512.0,
+      "mean_token_forward_budget": 30720.0,
+      "mean_wall_sec": 193.95867037246117,
+      "method": "m1_score_only_abductive_selector",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.25675675675675674,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.3310810810810811,
+      "task_macro_ci_low": 0.1891891891891892
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260719,
+      "equal_weight_task_macro_accuracy": 0.23648648648648649,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 64.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 576.0,
+      "mean_token_forward_budget": 34636.10810810811,
+      "mean_wall_sec": 204.08280897867155,
+      "method": "m1_dependency_cone_full",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.23648648648648649,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.30405405405405406,
+      "task_macro_ci_low": 0.16891891891891891
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260720,
+      "equal_weight_task_macro_accuracy": 0.49324324324324326,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 0.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 64.0,
+      "mean_token_forward_budget": 1664.4324324324325,
+      "mean_wall_sec": 22.17267838341335,
+      "method": "oracle_ceiling_offline_only",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.49324324324324326,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.5743243243243243,
+      "task_macro_ci_low": 0.41216216216216217
+    }
+  ],
+  "oracle_role": "offline ceiling only; never deployable or a compute-matched control",
+  "paired_effects": [
+    {
+      "group_label_swap_two_sided_p": 1.0,
+      "losses": 1,
+      "method_a": "m1_dependency_cone_full",
+      "method_b": "equal_compute_generic_remask",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261806,
+      "span_harm": 1,
+      "span_help": 0,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.0,
+      "task_macro_ci_low": -0.02027027027027027,
+      "task_macro_delta": -0.006756756756756757,
+      "ties": 147,
+      "wins": 0
+    },
+    {
+      "group_label_swap_two_sided_p": 0.7071292870712929,
+      "losses": 16,
+      "method_a": "m1_score_only_abductive_selector",
+      "method_b": "ordinary_confidence_best_of_grid",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261807,
+      "span_harm": 16,
+      "span_help": 13,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.05405405405405406,
+      "task_macro_ci_low": -0.0945945945945946,
+      "task_macro_delta": -0.02027027027027027,
+      "ties": 119,
+      "wins": 13
+    },
+    {
+      "group_label_swap_two_sided_p": 0.7384261573842615,
+      "losses": 19,
+      "method_a": "m1_dependency_cone_full",
+      "method_b": "m1_score_only_abductive_selector",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261808,
+      "span_harm": 19,
+      "span_help": 16,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.060810810810810814,
+      "task_macro_ci_low": -0.10135135135135136,
+      "task_macro_delta": -0.02027027027027027,
+      "ties": 113,
+      "wins": 16
+    },
+    {
+      "group_label_swap_two_sided_p": 0.7416258374162584,
+      "losses": 16,
+      "method_a": "ordinary_confidence_best_of_grid",
+      "method_b": "fixed64_seed0",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261809,
+      "span_harm": 16,
+      "span_help": 19,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.10135135135135136,
+      "task_macro_ci_low": -0.05405405405405406,
+      "task_macro_delta": 0.02027027027027027,
+      "ties": 113,
+      "wins": 19
+    },
+    {
+      "group_label_swap_two_sided_p": 0.6913308669133087,
+      "losses": 4,
+      "method_a": "equal_compute_generic_remask",
+      "method_b": "fixed64_seed0",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261810,
+      "span_harm": 4,
+      "span_help": 2,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.02027027027027027,
+      "task_macro_ci_low": -0.0472972972972973,
+      "task_macro_delta": -0.013513513513513514,
+      "ties": 142,
+      "wins": 2
+    },
+    {
+      "group_label_swap_two_sided_p": 1.0,
+      "losses": 20,
+      "method_a": "m1_score_only_abductive_selector",
+      "method_b": "fixed64_seed0",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261811,
+      "span_harm": 20,
+      "span_help": 20,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.08783783783783784,
+      "task_macro_ci_low": -0.08783783783783784,
+      "task_macro_delta": 0.0,
+      "ties": 108,
+      "wins": 20
+    },
+    {
+      "group_label_swap_two_sided_p": 0.3758624137586241,
+      "losses": 4,
+      "method_a": "m1_dependency_cone_full",
+      "method_b": "fixed64_seed0",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261812,
+      "span_harm": 4,
+      "span_help": 1,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.006756756756756757,
+      "task_macro_ci_low": -0.05405405405405406,
+      "task_macro_delta": -0.02027027027027027,
+      "ties": 143,
+      "wins": 1
+    },
+    {
+      "group_label_swap_two_sided_p": 9.999000099990002e-05,
+      "losses": 14,
+      "method_a": "oracle_ceiling_offline_only",
+      "method_b": "fixed64_seed0",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261813,
+      "span_harm": 14,
+      "span_help": 49,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.33783783783783783,
+      "task_macro_ci_low": 0.13513513513513514,
+      "task_macro_delta": 0.23648648648648649,
+      "ties": 85,
+      "wins": 49
+    }
+  ],
+  "primary_estimand": "equal_weight_base_task_macro_accuracy",
+  "run_peak_cuda_memory_bytes": 16545872384,
+  "span_micro_role": "descriptive_only",
+  "standalone_cost_contract": {
+    "equal_compute_generic_remask": {
+      "forwards": 576
+    },
+    "fixed64_seed0": {
+      "forwards": 64,
+      "token_forwards": 4096
+    },
+    "m1_dependency_cone_full": {
+      "forwards": 576
+    },
+    "m1_score_only_abductive_selector": {
+      "forwards": 512,
+      "token_forwards": 30720
+    },
+    "ordinary_confidence_best_of_grid": {
+      "forwards": 512,
+      "token_forwards": 30720
+    }
+  },
+  "title": "M1 Abductive Program-State Bridge / RandomSpanLight"
+}

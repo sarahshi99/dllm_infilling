@@ -16,7 +16,7 @@
 
 历史 Phase、EXP、V1--V8 编号只用于追溯，不得覆盖本文件。若其他文档与本文件矛盾，以本文件和最新 verified result report 为准，并把矛盾视为研究完整性问题。
 
-**2026-07-17 当前方法状态覆盖说明：** 顶部早期表格与 2026-07-13/15 历史叙述只保存当时事实。M1--M4 的唯一当前状态登记是 `docs/paper_agent/method_portfolio.current.json`（中文摘要为 `method_portfolio.current.zh.md`）。它明确：M1 RandomSpanLight raw complete / outcome analysis pending、历史 5079 safely paused；M2 reviewed not promoted；M3 generation/technical complete / outcome analysis pending；M4 offline 148 complete / GPU repair pending；当前没有 paper primary。
+**2026-07-17 当前方法状态覆盖说明：** 顶部早期表格与 2026-07-13/15 历史叙述只保存当时事实。M1--M4 的唯一当前状态登记是 `docs/paper_agent/method_portfolio.current.json`（中文摘要为 `method_portfolio.current.zh.md`）。它明确：M1 148 reviewed/not promoted、历史 5079 safely paused；M2 reviewed/not promoted；M3 148 reviewed/not promoted；M4 offline 148 complete / GPU repair pending；当前没有 paper primary。
 
 ## 2. 当前最强但受限的论文结论
 
@@ -67,9 +67,9 @@ Full allowed second-regime 有 `6707` span rows、`20121` policy-result rows，�
 
 | Canonical ID | 正式名称 | 当前状态 | 已完成的只是 | 下一独立实验 |
 |---|---|---|---|---|
-| `M1` | Abductive Program-State Bridge | `randomspanlight_raw_complete_outcome_analysis_pending; historical_5079_safely_paused_resumable` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | 固定 fair analyzer 后，比较 full vs generic（576 vs 576）与 score-only vs confidence（512 vs 512） |
+| `M1` | Abductive Program-State Bridge | `reviewed_not_promoted_v0; historical_5079_safely_paused_resumable` | `M1-D0` fixed AST/def-use proxy；该公式在 Phase 5 gate 下被 kill | full-vs-generic=`-0.68pp`、help/harm=`0/1`，不进入 296/927/5079 |
 | `M2` | Constraint-Homotopy Infilling | `reviewed_not_promoted` | 148-case 约束激活但无可靠 grouped 优势 | 保留负/弱结论；本 V0 不进入 296/927/5079 |
-| `M3` | Birth--Death Canvas Diffusion | `randomspanlight_generation_and_technical_audit_complete_outcome_analysis_pending` | 12→148 已完整；所有 row equal 256 forwards，非 equal-token | 固定 fair analyzer 后比较 birth-death vs uniform |
+| `M3` | Birth--Death Canvas Diffusion | `reviewed_not_promoted_v0` | 12→148 已完整；所有 row equal 256 forwards，非 equal-token | birth-death-vs-uniform=`-4.05pp`、help/harm=`8/14`；lower token 但不满足 efficiency promotion |
 | `M4` | Semantic Particle Assembly | `offline_148_complete_gpu_repair_pending` | `M4-D0/F1`：premise diagnostic，不是完整方法 | CAL full 稳定 t+10 且第二 GPU 槽安全后，repair smoke→148 full |
 | `A1` | Metamorphic Equivariance Evaluator | `stopped_negative_auxiliary` | 728 pairs/91 tasks，delta AUC `0.0143`，CI 跨 0 | 停止新工作；保留为负诊断证据，不进入 fusion |
 

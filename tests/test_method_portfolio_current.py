@@ -16,9 +16,10 @@ class MethodPortfolioCurrentTest(unittest.TestCase):
         self.assertEqual(payload["frozen_controller_test"], {"status": "sealed", "test_evaluation_count": 0})
         methods = payload["methods"]
         self.assertEqual(set(methods), {"M1", "M2", "M3", "M4"})
+        self.assertIn("reviewed_not_promoted", methods["M1"]["current_status"])
         self.assertIn("safely_paused", methods["M1"]["current_status"])
         self.assertEqual(methods["M2"]["current_status"], "reviewed_not_promoted")
-        self.assertIn("outcome_analysis_pending", methods["M3"]["current_status"])
+        self.assertEqual(methods["M3"]["current_status"], "reviewed_not_promoted_v0")
         self.assertEqual(methods["M4"]["current_status"], "offline_148_complete_gpu_repair_pending")
 
     def test_subordinate_current_docs_point_to_the_register(self) -> None:

@@ -1,0 +1,71 @@
+{
+  "bootstrap_replicates": 10000,
+  "compute_claim": "equal_forward_only; actual token-forward totals are descriptive and may differ",
+  "fixed_comparison": [
+    "m3_birth_death_canvas",
+    "m3_uniform_fixed_grid"
+  ],
+  "inference_unit": "task_group",
+  "method_summary": [
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260715,
+      "equal_weight_task_macro_accuracy": 0.2972972972972973,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 256.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 256.0,
+      "mean_token_forward_budget": 15360.0,
+      "mean_wall_sec": 30.90736047871178,
+      "method": "m3_uniform_fixed_grid",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.2972972972972973,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.3716216216216216,
+      "task_macro_ci_low": 0.22297297297297297
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260716,
+      "equal_weight_task_macro_accuracy": 0.25675675675675674,
+      "error_row_count": 0,
+      "mean_incremental_forward_count": 256.0,
+      "mean_peak_memory_bytes": NaN,
+      "mean_standalone_forward_count": 256.0,
+      "mean_token_forward_budget": 11532.108108108108,
+      "mean_wall_sec": 23.39144278432847,
+      "method": "m3_birth_death_canvas",
+      "ok_row_count": 148,
+      "row_count": 148,
+      "span_micro_accuracy_descriptive": 0.25675675675675674,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.32432432432432434,
+      "task_macro_ci_low": 0.1891891891891892
+    }
+  ],
+  "paired_effects": [
+    {
+      "group_label_swap_two_sided_p": 0.28877112288771123,
+      "losses": 14,
+      "method_a": "m3_birth_death_canvas",
+      "method_b": "m3_uniform_fixed_grid",
+      "permutation_replicates": 10000,
+      "permutation_seed": 20261806,
+      "span_harm": 14,
+      "span_help": 8,
+      "task_group_count": 148,
+      "task_macro_ci_high": 0.02027027027027027,
+      "task_macro_ci_low": -0.10135135135135136,
+      "task_macro_delta": -0.04054054054054054,
+      "ties": 126,
+      "wins": 8
+    }
+  ],
+  "primary_estimand": "equal_weight_base_task_macro_accuracy",
+  "run_full_wall_sec": 8036.642967173131,
+  "run_peak_cuda_memory_bytes": 16383515136,
+  "span_micro_role": "descriptive_only",
+  "title": "M3 Birth-Death Canvas Diffusion V0",
+  "uniform_token_forward_contract": 15360
+}

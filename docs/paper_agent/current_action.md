@@ -28,12 +28,12 @@ Operational decision 是 `execute_and_monitor`，不是 blocked。M1、M2、M3�
 
 两轮语义/完整性审计与修复已在 `1d9ef3f` 完成：AST/def-use dependency cone、seed-0 fixed64 检测、64-forward null fallback、等 canvas/forwards/cardinality generic、分离 raw outputs、forbidden-input/activation/determinism/resume tests 均已落地。**历史 5079-case MultiLine M1** 已在用户安全中断后成为 `safely_paused_resumable`：原三个 raw 目录 append-only 保留，不读取部分性能，未来仅胜出方法可用原目录与 `--auto-full --selected-method-only-5079` 的 existing-key dedup 恢复。
 
-新的独立 **M1 RandomSpanLight** 已完成 raw 路线 `stage1=1332/1332`、generic=`148/148`、dependency-cone=`148/148`，各自 unique 且 0 duplicate/error；状态为 `randomspanlight_raw_complete_outcome_analysis_pending`。历史 5079 保持 `safely_paused_resumable`，不得 resume、重启或改写 raw。先 commit outcome-blind fair analyzer，再读固定 148-case result。
+新的独立 **M1 RandomSpanLight** 已完成并正式复核：stage1=`1332/1332`、generic=`148/148`、dependency-cone=`148/148`，各自 unique 且 0 duplicate/error。预冻结 full-vs-generic fair delta=`-0.68pp`、help/harm=`0/1`，cone targeted activation=`17/148`；结论为 `reviewed_not_promoted_v0`，不得用本 outcome retune 或进入 296/927/5079。历史 5079 继续 `safely_paused_resumable`。
 
 ### M2/M3/M4 独立候选线
 
 - `M2 Constraint-Homotopy V0`：已完成独立 `12→148`，full integrity audit 为三臂各 `148/148`、0 missing/extra/duplicate/error、64 forwards/4096 token-forwards、frozen sealed/count=0。正式 grouped result 为 `constraints_activated_no_reliable_grouped_advantage`：schedule 改变候选 hash，但没有可靠 task-group 优势；不自动进入 296/927/5079，也不阻止 M3。详见 `docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md`。
-- `M3 Birth-Death Canvas Diffusion V0`：行为保持 pre-launch 修正已在 `8440af1` 完成：删除无效 scalar token penalty，普通 confidence 只用于 within-particle remask，syntax/obligation/contradiction 只用于 particle ranking、birth/death 与 selection。M3 已自然完成独立 `12→148` technical full；两臂各 `148/148`、0 duplicate/error、256 forwards，且只声称 equal-forward，不声称 equal-token。状态为 `randomspanlight_generation_and_technical_audit_complete_outcome_analysis_pending`；先 commit fixed grouped analyzer，再读结果。
+- `M3 Birth-Death Canvas Diffusion V0`：行为保持 pre-launch 修正已在 `8440af1` 完成。M3 现在已正式复核：birth-death − uniform task-macro=`-4.05pp`、help/harm=`8/14`；birth/death mechanism 确实激活且 mean token-forward 更低，但 accuracy point estimate 也更低。结论为 `reviewed_not_promoted_v0`，不进入 296/927/5079；仅保留 equal-forward/non-equal-token 的成本观察。
 - `M4 Semantic Particle Assembly V0`：`ed94471` 已完成独立 runner/analysis/brief/tests/launcher；完整 148-case offline structural assembly audit 已实际完成于 `analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`（best/assembly 均 148/148、zero missing/duplicate/error、frozen sealed/count 0）。从 8 candidates 提取 AST statement/basic-block/def-use fragments，以 inference-visible obligations 选择；M3 资源安全完成后作 64-forward repair smoke/full。
 
 四个 V0 的数据路线固定为：12 technical smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 non-frozen SingleLine development comparison → selected-method-only 5079 MultiLine → method freeze 后 ExecRepoBench。裸 `--auto-full` 不得直接进入 5079。禁止任何 tests/reference/canonical solution/oracle length/task ID/split/passed label 进入 deployable method。
@@ -50,4 +50,4 @@ historical `802/1033` 是 A6000 historical；`796/1033` 是 H200 evidence base�
 
 `codex/ccfa-execution-sprint-v1`（base `ce416c4`）是权威执行分支；`afd3c45` 已 superseded。M1 5079 MultiLine 已安全暂停、可恢复但不自动恢复；M1 RandomSpanLight 新 runner、M2/M3/M4 独立 runner、共同 grouped analyzer 与 CAL adapter 已在 `9335d84` 后继续实现。完整 CPU tests 已通过，frozen test 仍为 sealed/count=0。
 
-真实 GPU 执行已完成 M2 与 M3 的 `12→148` 路线；M1 RandomSpanLight raw 也已完整写入但尚未分析 outcome。official CAL 正在按 4,990 common subset 的 fail-stop/resume hardening 后启动 smoke；SciPy 的审批失败只能触发 pinned import-closure 审计，不把研究判为 blocked。
+真实 GPU 执行已完成 M1/M2/M3 的 148 路线并正式复核；M1/M2/M3 当前都不晋级。official CAL 的 12-case smoke 已实际发起，但 pinned HumanEval-Infilling evaluator commit 的 `execution.py` 在 import 时出现 `IndentationError`；此为真实 evaluator blocker，adapter 已 fail-stop，未生成任何 CAL row。SciPy 的审批失败只触发了 pinned import-closure 审计，不把研究判为 blocked。

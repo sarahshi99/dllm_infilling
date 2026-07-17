@@ -1,0 +1,75 @@
+{
+  "birth_death_actual_token_forward": {
+    "max": 24832,
+    "mean": 11532.108108108108,
+    "min": 8192
+  },
+  "birth_death_event_nonzero_row_count": 148,
+  "birth_death_event_total": 444,
+  "candidate_hash_difference_count": 76,
+  "contains_generated_code": false,
+  "final_particle_canvas_distribution": {
+    "128": 47,
+    "16": 308,
+    "32": 157,
+    "64": 80
+  },
+  "population_changes_by_round": [
+    {
+      "born_canvas_distribution": {
+        "128": 18,
+        "16": 81,
+        "32": 33,
+        "64": 16
+      },
+      "dead_canvas_distribution": {
+        "128": 83,
+        "16": 12,
+        "32": 16,
+        "64": 37
+      },
+      "event_count": 148,
+      "round": 15
+    },
+    {
+      "born_canvas_distribution": {
+        "128": 11,
+        "16": 85,
+        "32": 33,
+        "64": 19
+      },
+      "dead_canvas_distribution": {
+        "128": 38,
+        "16": 22,
+        "32": 27,
+        "64": 61
+      },
+      "event_count": 148,
+      "round": 31
+    },
+    {
+      "born_canvas_distribution": {
+        "128": 10,
+        "16": 84,
+        "32": 33,
+        "64": 21
+      },
+      "dead_canvas_distribution": {
+        "128": 19,
+        "16": 56,
+        "32": 47,
+        "64": 26
+      },
+      "event_count": 148,
+      "round": 47
+    }
+  ],
+  "row_count": 148,
+  "selected_canvas_distribution": {
+    "128": 10,
+    "16": 83,
+    "32": 39,
+    "64": 16
+  },
+  "uniform_birth_death_event_count": 0
+}

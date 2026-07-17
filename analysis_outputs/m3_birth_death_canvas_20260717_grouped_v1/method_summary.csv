@@ -1,0 +1,3 @@
+method,row_count,ok_row_count,error_row_count,task_group_count,equal_weight_task_macro_accuracy,task_macro_ci_low,task_macro_ci_high,bootstrap_replicates,bootstrap_seed,span_micro_accuracy_descriptive,mean_standalone_forward_count,mean_incremental_forward_count,mean_token_forward_budget,mean_wall_sec,mean_peak_memory_bytes
+m3_uniform_fixed_grid,148,148,0,148,0.2972972972972973,0.22297297297297297,0.3716216216216216,10000,20260715,0.2972972972972973,256.0,256.0,15360.0,30.90736047871178,nan
+m3_birth_death_canvas,148,148,0,148,0.25675675675675674,0.1891891891891892,0.32432432432432434,10000,20260716,0.25675675675675674,256.0,256.0,11532.108108108108,23.39144278432847,nan

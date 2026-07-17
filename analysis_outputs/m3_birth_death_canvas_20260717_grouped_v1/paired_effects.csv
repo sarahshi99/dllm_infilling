@@ -1,0 +1,2 @@
+method_a,method_b,task_macro_delta,task_macro_ci_low,task_macro_ci_high,task_group_count,wins,losses,ties,span_help,span_harm,group_label_swap_two_sided_p,permutation_replicates,permutation_seed
+m3_birth_death_canvas,m3_uniform_fixed_grid,-0.04054054054054054,-0.10135135135135136,0.02027027027027027,148,8,14,126,8,14,0.28877112288771123,10000,20261806

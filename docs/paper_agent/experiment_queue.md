@@ -257,7 +257,7 @@ Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and 
 
 Current M1--M4 statuses are centralized in `docs/paper_agent/method_portfolio.current.json`; the queue below is execution order, not a competing status register.
 
-1. **M1/M3 fixed outcome analysis** — M1 raw is complete (`1332/1332`, `148/148`, `148/148`) and M3 technical full is complete (`148/148` per arm). Commit their outcome-blind grouped analyzers before reading passed outcomes; no M1 historical 5079 resume.
+1. **M1/M3 results** — formal fixed analyses are complete. M1 full loses its fair generic comparison and M3 birth-death has lower point accuracy than uniform; neither V0 may enter 296/927/5079 or be retuned on its 148-case outcome. No M1 historical 5079 resume.
 2. **official CAL** — corrected `4990` CAL-Rest common manifest and official adapter are being fail-stop/resume hardened. Then run 12-case smoke and, after technical integrity passes, automatic 4,990 full. Do not label local CAL/CAL-lite as official CAL.
 3. **M4** — remains independent: after CAL full has a stable t+10 audit and a safe second GPU slot, run repair 12→148. M2 remains completed/reviewed and not promoted.
 4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.
