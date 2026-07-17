@@ -1,5 +1,24 @@
 {
   "snapshot_version": 1,
+  "execution_sprint_20260717": {
+    "operational_decision": "execute_and_monitor",
+    "method_portfolio": {
+      "paper_primary_method": null,
+      "M1": "reviewed_not_promoted_v0; historical_5079_safely_paused_resumable",
+      "M2": "reviewed_not_promoted_v0; constraints_activated_no_reliable_grouped_advantage",
+      "M3": "reviewed_not_promoted_v0; lower_token_but_lower_accuracy_than_uniform",
+      "M4": "offline_148_complete_gpu_repair_pending_safe_slot"
+    },
+    "official_cal": {
+      "label": "official CAL reproduction on the 4,990-case non-frozen common subset",
+      "cal_commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+      "evaluator_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+      "evaluator_execution_mode": "upstream_documented_local_enablement_overlay; checkout_unchanged",
+      "smoke": "12/12 integrity passed",
+      "full": "running; integrity-only progress; partial_accuracy_not_inspected"
+    },
+    "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0}
+  },
   "canonical_20260712": {
     "roadmap": "docs/paper_agent/ccfa_master_roadmap.zh.md",
     "early_1033_role": "development_mechanism_discovery_not_held_out",

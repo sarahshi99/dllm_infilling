@@ -384,3 +384,12 @@ Important ablation signals:
 - Historical M1 MultiLine: safely paused/resumable with `27217/45711`, `12/5079`, `12/5079`; exact paths/resume command are in `runtime_status.current.json`; no partial performance viewed.
 - New CPU artifacts: `analysis_outputs/official_cal_corrected_protocol_20260715_v1/` and `analysis_outputs/phase6_score_only_candidate_selection_20260715_v1/`.
 - Host GPU access and scipy installation are currently blocked by approval-control-plane `422`; do not bypass via sandbox/tmux. On authorization, launch `scripts/manual_launch_m1_abductive_program_state_bridge_20260715.sh` first, then audit 10 minutes before any second process.
+
+## 2026-07-17 execution-and-monitor handoff（superseding current status）
+
+- 权威分支仍为 `codex/ccfa-execution-sprint-v1`；当前方法状态只读 `docs/paper_agent/method_portfolio.current.json`。
+- M1 fair full-vs-generic=`-0.68pp`（help/harm=`0/1`），M3 birth-death-vs-uniform=`-4.05pp`（help/harm=`8/14`）。连同 M2，三者都是 `reviewed_not_promoted_v0`；禁止选择、fusion、outcome-driven tuning、296/927 扩展或历史 M1 5079 resume。
+- official CAL commits 仍为 `741e8418` / `88062ff`。上游 evaluator README 故意注释了一行 execution call；adapter 以 provenance-recorded 的 in-memory 单行 overlay 恢复该 README 指定行为，pinned checkout 未修改。SciPy 不在实际 decoder/evaluator import closure。
+- official CAL smoke 已 `12/12` technical integrity pass，随后自动启动 4,990-case common-population full。canonical raw 是 success-only，failure journal 独立；CAL partial accuracy 必须保持未读。实时 PID/tmux/进度/GPU snapshot 见 `runtime_status.current.json`。
+- M4 没有被放弃。`ccfa-execution-sprint-supervisor-v1` 是非破坏性 tmux supervisor：它只在 CAL t+10 持续增长、ECC=0、>=25GiB free、且没有第三个 GPU research process 时启动；绝不停止 CAL/外部 PID、覆盖 raw output 或使用 SIGKILL。
+- Frozen controller test 仍为 `sealed`，`test_evaluation_count=0`；不提交 raw generated code。现有未跟踪 compact 目录 `analysis_outputs/m1_randomspanlight_20260715_v1/` 与 `analysis_outputs/m2_constraint_homotopy_20260715_sprint_v1/` 是用户工作，保持不动。

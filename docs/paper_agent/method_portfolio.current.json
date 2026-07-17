@@ -70,7 +70,7 @@
       "implementation": {"runner": "experiments/m4_semantic_particle_assembly.py", "analyzer": "analysis/m4_semantic_particle_assembly.py", "tests": "tests/test_m4_semantic_particle_assembly.py", "launcher": "scripts/manual_launch_m4_semantic_particle_assembly_sprint_v1.sh"},
       "completed_evidence": "Offline structural audit completed on 148 cases; GPU repair smoke/full remains pending and candidate bank is read-only.",
       "current_status": "offline_148_complete_gpu_repair_pending",
-      "exact_next_action": "After CAL has a stable safe t+10 audit and a second GPU slot, run 12-case repair smoke then automatic 148-case full.",
+      "exact_next_action": "The non-destructive supervisor launches 12-case repair smoke then automatic 148-case full only after CAL t+10 growth, ECC=0, >=25GiB free memory, and no third GPU research process.",
       "promotion_conditions": ["assembly_without_repair versus best_single task-macro point delta > 0", "help > harm", "fragment/provider mechanism activates"],
       "iterate_conditions": ["positive but uncertain equal-compute assembly signal"],
       "stop_conditions": ["no fair primary-comparison benefit or assembly mechanism inactive"],

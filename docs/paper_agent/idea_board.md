@@ -15,7 +15,7 @@ The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.cu
 | `M1` | Abductive Program-State Bridge | 148 reviewed/not promoted; historical 5079 safely paused | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
 | `M2` | Constraint-Homotopy Infilling | 148-case full reviewed: constraints activated, no reliable grouped advantage | IDEA-012 |
 | `M3` | Birth--Death Canvas Diffusion | 148 reviewed/not promoted: lower token-forward but lower accuracy point estimate | IDEA-013 |
-| `M4` | Semantic Particle Assembly | offline 148 structural audit passed; GPU repair pending after CAL stable t+10 and a safe second slot | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M4` | Semantic Particle Assembly | offline 148 structural audit passed; GPU repair is supervisor-queued after CAL stable t+10 and a strict safe second slot | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
 M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.

@@ -123,3 +123,9 @@ P1/P2/P4 未关闭前，可以做探索实验，但任何方法结果都不得�
 - M1--M4 仍是独立候选，尚未选论文主方法。新 V0 数据路线固定为 `12 smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 SingleLine development → selected-method-only 5079 MultiLine → configuration freeze 后 ExecRepoBench`。
 - corrected official CAL protocol 已 CPU 审计：seed-42 demo=100，SingleLine Rest=933/non-frozen=838，MultiLine full=5815、demo-linked exclusion=100、Rest=5715、non-frozen CAL-Rest common=`4990`。5079 不得表述为 official CAL exact population。正式 smoke/full 因 host GPU approval 和缺失 `scipy` 均待解除。
 - 已完成 historical `Phase6 score-only candidate selection / M1 historical precursor`：`40632=5079×8` 完整候选库，148 task clusters；它不是 M1 full，也不授权调参或融合。
+
+## 2026-07-17 execution-and-monitor refresh
+
+- M1/M2/M3 的 148-case fixed grouped result 都已记录在 `method_portfolio.current.json`：M1 full-vs-generic=`-0.68pp`、M3 birth-death-vs-uniform=`-4.05pp`，M2 无可靠 grouped advantage；三者均不进入 296/927/5079，也不触发 outcome-driven retune/fusion。
+- official CAL smoke 已通过并自动启动 **official CAL reproduction on the 4,990-case non-frozen common subset**。上游 HumanEval-Infilling README 明示的 commented execution call 以单行 runtime overlay 恢复；pinned checkout 不变，source/enabled hash 被记录。SciPy 缺失不在实际 decoder/evaluator import closure。
+- CAL full 的 progress 只汇报 integrity，不读取部分 accuracy；M4 由 non-destructive supervisor 在 CAL t+10 后仅于 ECC=0、free>=25GiB、无第三 GPU research process 时启动。当前外部 GPU 作业不满足该槽位条件，绝不抢占或停止 CAL。

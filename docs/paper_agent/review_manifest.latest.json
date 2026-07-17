@@ -1,4 +1,12 @@
 {
+  "execution_sprint_20260717": {
+    "authoritative_branch": "codex/ccfa-execution-sprint-v1",
+    "operational_decision": "execute_and_monitor",
+    "method_portfolio_register": "docs/paper_agent/method_portfolio.current.json",
+    "method_status": {"M1": "reviewed_not_promoted_v0", "M2": "reviewed_not_promoted_v0", "M3": "reviewed_not_promoted_v0", "M4": "gpu_repair_pending_safe_slot_supervised"},
+    "official_cal": {"status": "full_running_after_12_case_integrity_smoke", "population": 4990, "partial_accuracy_inspected": false, "evaluator_execution_mode": "upstream_documented_local_enablement_overlay"},
+    "frozen_test": {"status": "sealed", "test_evaluation_count": 0}
+  },
   "ablation_status": {
     "benefit_only_vs_benefit_plus_harm": "completed_validation_all_zero_after_risk_calibration",
     "binary_keep_32_vs_multi_action": "completed via always_expand_32 and action-bank variants",
