@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -160,7 +161,40 @@ def progress_payload(
     }
 
 
-def load_official_runtime(official_cal_root: Path, humaneval_root: Path) -> tuple[Any, Any]:
+def enable_pinned_evaluator_source(source: str) -> str:
+    """Restore exactly the single execution line documented by upstream."""
+    marker = "#                     exec(check_program, exec_globals)"
+    replacement = "                    exec(check_program, exec_globals)"
+    if source.count(marker) != 1:
+        raise RuntimeError("pinned evaluator enablement marker is absent or ambiguous")
+    return source.replace(marker, replacement)
+
+
+def _enabled_pinned_evaluator(humaneval_root: Path) -> tuple[Any, dict[str, Any]]:
+    """Enable the one evaluator call the pinned upstream README requires users to restore.
+
+    The pinned checkout is never modified.  The README documents that its
+    execution call is deliberately commented pending an explicit local safety
+    decision; without it the file is syntactically invalid.  This in-memory
+    overlay restores exactly that one documented line and records both hashes.
+    """
+    source_path = humaneval_root / "human_eval_infilling" / "execution.py"
+    source = source_path.read_text(encoding="utf-8")
+    enabled_source = enable_pinned_evaluator_source(source)
+    namespace: dict[str, Any] = {"__name__": "pinned_humaneval_infilling_execution_enabled", "__file__": str(source_path)}
+    exec(compile(enabled_source, str(source_path), "exec"), namespace, namespace)
+    check_correctness = namespace.get("check_correctness")
+    if not callable(check_correctness):
+        raise RuntimeError("enabled pinned evaluator did not define check_correctness")
+    return check_correctness, {
+        "evaluator_execution_mode": "upstream_documented_local_enablement_overlay",
+        "evaluator_source_sha256": hashlib.sha256(source.encode("utf-8")).hexdigest(),
+        "evaluator_enabled_source_sha256": hashlib.sha256(enabled_source.encode("utf-8")).hexdigest(),
+        "evaluator_enablement": "restored only README-documented exec(check_program, exec_globals); pinned checkout unchanged",
+    }
+
+
+def load_official_runtime(official_cal_root: Path, humaneval_root: Path) -> tuple[Any, Any, dict[str, Any]]:
     if git_head(official_cal_root) != EXPECTED_CAL_COMMIT:
         raise RuntimeError("official CAL checkout is not pinned")
     if git_head(humaneval_root) != EXPECTED_HUMANEVAL_COMMIT:
@@ -169,9 +203,8 @@ def load_official_runtime(official_cal_root: Path, humaneval_root: Path) -> tupl
         if path not in sys.path:
             sys.path.insert(0, path)
     from llada_cal.llada_cal import generate  # type: ignore
-    from human_eval_infilling.execution import check_correctness  # type: ignore
-
-    return generate, check_correctness
+    check_correctness, evaluator_provenance = _enabled_pinned_evaluator(humaneval_root)
+    return generate, check_correctness, evaluator_provenance
 
 
 def indexed_rows(dataset: Path) -> dict[int, dict[str, Any]]:
@@ -350,7 +383,18 @@ def run(args: argparse.Namespace) -> int:
             "seed": int(args.seed),
         },
     )
-    generate, check_correctness = load_official_runtime(official_cal_root, humaneval_root)
+    try:
+        generate, check_correctness, evaluator_provenance = load_official_runtime(official_cal_root, humaneval_root)
+    except Exception as exc:
+        preflight = {
+            **initial_progress,
+            "status": "preflight_failed",
+            "preflight_error_type": type(exc).__name__,
+            "preflight_error_message": str(exc)[:240],
+        }
+        atomic_write_json(progress_path, preflight)
+        atomic_write_json(run_manifest_path, preflight)
+        raise
     from transformers import AutoModel, AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
@@ -389,6 +433,7 @@ def run(args: argparse.Namespace) -> int:
                 "metrics": result,
                 "official_cal_commit": EXPECTED_CAL_COMMIT,
                 "evaluator_commit": EXPECTED_HUMANEVAL_COMMIT,
+                "evaluator_provenance": evaluator_provenance,
                 "config": arm_config(arm),
                 "gpu": torch.cuda.get_device_name(),
             }
@@ -459,7 +504,7 @@ def run(args: argparse.Namespace) -> int:
     )
     final_progress["status"] = "completed" if audit["passed"] and audit["failure_journal_count"] == 0 else "audit_failed"
     atomic_write_json(progress_path, final_progress)
-    atomic_write_json(run_manifest_path, {**final_progress, "final_audit": audit})
+    atomic_write_json(run_manifest_path, {**final_progress, "final_audit": audit, "evaluator_provenance": evaluator_provenance})
     return 0 if audit["passed"] and audit["failure_journal_count"] == 0 else 2
 
 

@@ -241,7 +241,8 @@ def audit(
     official_multi = humaneval_root / "data" / "HumanEval-MultiLineInfilling.jsonl.gz"
     official_single = humaneval_root / "data" / "HumanEval-SingleLineInfilling.jsonl.gz"
     evaluator = humaneval_root / "human_eval_infilling" / "evaluate_functional_correctness.py"
-    if not all(path.is_file() for path in (cal_script, official_multi, official_single, evaluator, current_dataset)):
+    evaluator_execution = humaneval_root / "human_eval_infilling" / "execution.py"
+    if not all(path.is_file() for path in (cal_script, official_multi, official_single, evaluator, evaluator_execution, current_dataset)):
         raise RuntimeError("pinned CAL source, evaluator, or dataset input is missing")
 
     official_multi_rows = read_jsonl(official_multi)
@@ -324,6 +325,14 @@ def audit(
             "current_multiline_sha256": sha256(current_dataset),
             "evaluator_path": str(evaluator),
             "evaluator_sha256": sha256(evaluator),
+            "execution_path": str(evaluator_execution),
+            "execution_sha256": sha256(evaluator_execution),
+            "execution_enablement": {
+                "required": True,
+                "mode": "upstream_documented_local_enablement_overlay",
+                "reason": "README documents an intentionally commented exec call; its comment leaves the pinned file syntactically invalid until the documented local enablement is applied",
+                "pinned_checkout_modified": False,
+            },
             "field_hash_task_count": len(comparison),
             "field_hash_mismatch_count": 0,
         },

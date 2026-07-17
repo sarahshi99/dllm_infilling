@@ -15,6 +15,7 @@ from experiments.p1_official_cal_adapter import (
     expected_keys,
     progress_payload,
     atomic_write_json,
+    enable_pinned_evaluator_source,
 )
 
 
@@ -44,6 +45,14 @@ class OfficialCalAdapterTest(unittest.TestCase):
             manifest = root / "progress.json"
             atomic_write_json(manifest, progress_payload(arm="official_cal_primary", mode="smoke", expected_count=12, completed_count=3, starting_completed_count=0, failure_journal_count=0, started=0.0))
             self.assertEqual(json.loads(manifest.read_text(encoding="utf-8"))["completed_count"], 3)
+
+    def test_pinned_evaluator_enablement_is_one_documented_line(self) -> None:
+        source = "before\n#                     exec(check_program, exec_globals)\nafter\n"
+        enabled = enable_pinned_evaluator_source(source)
+        self.assertEqual(enabled.count("exec(check_program, exec_globals)"), 1)
+        self.assertNotIn("#                     exec", enabled)
+        with self.assertRaisesRegex(RuntimeError, "absent or ambiguous"):
+            enable_pinned_evaluator_source("no marker")
 
 
 if __name__ == "__main__":

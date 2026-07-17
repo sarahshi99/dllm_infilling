@@ -33,6 +33,14 @@
     "current_multiline_sha256": "3a1cb133597ff699fde9dba92788ef8dabf46f273f44477195b36639bd908306",
     "evaluator_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/human_eval_infilling/evaluate_functional_correctness.py",
     "evaluator_sha256": "5c2ec64099ce03af215590bf60e20216ecf5fd64907bea70ab0e2da14db4d31c",
+    "execution_enablement": {
+      "mode": "upstream_documented_local_enablement_overlay",
+      "pinned_checkout_modified": false,
+      "reason": "README documents an intentionally commented exec call; its comment leaves the pinned file syntactically invalid until the documented local enablement is applied",
+      "required": true
+    },
+    "execution_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/human_eval_infilling/execution.py",
+    "execution_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb",
     "field_hash_mismatch_count": 0,
     "field_hash_task_count": 5815,
     "license": "MIT",
