@@ -1,10 +1,20 @@
 {
   "environment": {
-    "missing_required_packages": [
+    "missing_upstream_declared_packages": [
       "scipy"
     ],
     "python": "3.10.20",
-    "required_package_present": {
+    "runtime_decoder_evaluator_import_package_present": {
+      "numpy": true,
+      "torch": true,
+      "transformers": true
+    },
+    "scipy_runtime_import_closure": {
+      "pinned_upstream_algorithm_modified": false,
+      "reason": "scipy occurs only in pinned upstream length_bias.py fitting utility; llada_cal.llada_cal.generate and the adapter/evaluator execution path do not import it",
+      "required": false
+    },
+    "upstream_declared_package_present": {
       "accelerate": true,
       "datasets": true,
       "numpy": true,

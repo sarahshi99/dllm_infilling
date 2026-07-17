@@ -89,6 +89,75 @@ def append_jsonl(path: Path, row: Mapping[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n")
         handle.flush()
+        os.fsync(handle.fileno())
+
+
+def atomic_write_json(path: Path, value: Mapping[str, Any]) -> None:
+    """Replace a compact manifest atomically; raw results remain append-only."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
+    with temporary.open("w", encoding="utf-8") as handle:
+        handle.write(json.dumps(dict(value), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+
+
+def canonical_success_rows(path: Path) -> list[dict[str, Any]]:
+    """Read a canonical raw file that is contractually success-only."""
+    rows = read_jsonl(path) if path.exists() else []
+    if any(row.get("status") != "ok" for row in rows):
+        raise RuntimeError("official CAL canonical raw must contain status=ok rows only")
+    counts = Counter(str(row.get("candidate_key") or "") for row in rows)
+    if any(not key or count > 1 for key, count in counts.items()):
+        raise RuntimeError("official CAL resume refuses blank or duplicate candidate keys")
+    return rows
+
+
+def gpu_snapshot() -> dict[str, Any]:
+    if not torch.cuda.is_available():
+        return {"available": False}
+    free, total = torch.cuda.mem_get_info()
+    return {
+        "available": True,
+        "name": torch.cuda.get_device_name(),
+        "memory_free_bytes": int(free),
+        "memory_total_bytes": int(total),
+        "memory_allocated_bytes": int(torch.cuda.memory_allocated()),
+        "peak_memory_allocated_bytes": int(torch.cuda.max_memory_allocated()),
+    }
+
+
+def progress_payload(
+    *,
+    arm: str,
+    mode: str,
+    expected_count: int,
+    completed_count: int,
+    starting_completed_count: int,
+    failure_journal_count: int,
+    started: float,
+) -> dict[str, Any]:
+    elapsed = max(time.perf_counter() - started, 0.0)
+    completed_since_start = max(completed_count - starting_completed_count, 0)
+    rows_per_hour = (completed_since_start / elapsed * 3600.0) if elapsed and completed_since_start else None
+    missing_count = expected_count - completed_count
+    eta_seconds = (missing_count / rows_per_hour * 3600.0) if rows_per_hour and missing_count else 0.0 if not missing_count else None
+    return {
+        "status": "running",
+        "updated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "arm": arm,
+        "mode": mode,
+        "expected_count": expected_count,
+        "completed_count": completed_count,
+        "existing_completed_count_at_start": starting_completed_count,
+        "missing_count": missing_count,
+        "canonical_error_count": 0,
+        "failure_journal_count": failure_journal_count,
+        "rows_per_hour": rows_per_hour,
+        "eta_seconds": eta_seconds,
+        "gpu": gpu_snapshot(),
+    }
 
 
 def load_official_runtime(official_cal_root: Path, humaneval_root: Path) -> tuple[Any, Any]:
@@ -219,6 +288,10 @@ def audit_rows(rows: Sequence[Mapping[str, Any]], expected: set[str], arm: str) 
     }
 
 
+def failure_count(path: Path) -> int:
+    return len(read_jsonl(path)) if path.exists() else 0
+
+
 def run(args: argparse.Namespace) -> int:
     official_cal_root = Path(args.official_cal_root).resolve()
     humaneval_root = Path(args.humaneval_root).resolve()
@@ -226,7 +299,10 @@ def run(args: argparse.Namespace) -> int:
     manifest_path = Path(args.manifest_jsonl).resolve()
     output_dir = Path(args.output_dir).resolve()
     arm = str(args.arm)
+    if int(args.progress_every) <= 0:
+        raise ValueError("--progress-every must be positive")
     manifest = read_jsonl(manifest_path)
+    mode = "full" if args.auto_full else "smoke"
     if args.auto_full:
         if len(manifest) != 4990:
             raise RuntimeError("official CAL auto-full requires the audited 4990-row CAL-Rest common manifest")
@@ -236,6 +312,44 @@ def run(args: argparse.Namespace) -> int:
     runtime_manifest = json.loads((manifest_path.parent / "source_audit.json").read_text(encoding="utf-8"))
     if runtime_manifest["population"]["project_nonfrozen_multiline_rest_common"] != 4990:
         raise RuntimeError("source audit does not certify corrected common population")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    raw_path = output_dir / f"{arm}_raw.jsonl"
+    failure_path = output_dir / f"{arm}_failure_journal.jsonl"
+    progress_path = output_dir / f"{arm}_{mode}_progress.json"
+    run_manifest_path = output_dir / f"{arm}_{mode}_run_manifest.json"
+    existing = canonical_success_rows(raw_path)
+    all_common_manifest = read_jsonl(manifest_path.parent / "cal_rest_common_manifest.jsonl")
+    all_known = expected_keys(all_common_manifest, arm)
+    existing_keys = {str(row["candidate_key"]) for row in existing}
+    if not existing_keys <= all_known:
+        raise RuntimeError("official CAL canonical raw contains keys outside the audited common population")
+    expected = expected_keys(manifest, arm)
+    completed = existing_keys & expected
+    starting_completed_count = len(completed)
+    started = time.perf_counter()
+    initial_progress = progress_payload(
+        arm=arm,
+        mode=mode,
+        expected_count=len(expected),
+        completed_count=len(completed),
+        starting_completed_count=starting_completed_count,
+        failure_journal_count=failure_count(failure_path),
+        started=started,
+    )
+    atomic_write_json(progress_path, initial_progress)
+    atomic_write_json(
+        run_manifest_path,
+        {
+            **initial_progress,
+            "status": "running",
+            "raw_path": str(raw_path),
+            "failure_journal_path": str(failure_path),
+            "resume_contract": "skip only existing status=ok candidate_key values; canonical raw is append-only",
+            "official_cal_commit": EXPECTED_CAL_COMMIT,
+            "evaluator_commit": EXPECTED_HUMANEVAL_COMMIT,
+            "seed": int(args.seed),
+        },
+    )
     generate, check_correctness = load_official_runtime(official_cal_root, humaneval_root)
     from transformers import AutoModel, AutoTokenizer
 
@@ -244,12 +358,6 @@ def run(args: argparse.Namespace) -> int:
         tokenizer.padding_side = "left"
     model = AutoModel.from_pretrained(MODEL_PATH, trust_remote_code=True, torch_dtype=torch.bfloat16).to("cuda").eval()
     evaluator_problems = evaluator_problem_map(humaneval_root)
-    raw_path = output_dir / f"{arm}_raw.jsonl"
-    existing = read_jsonl(raw_path) if raw_path.exists() else []
-    counts = Counter(str(row.get("candidate_key") or "") for row in existing)
-    if any(value > 1 for value in counts.values()):
-        raise RuntimeError("official CAL resume refuses duplicate candidate keys")
-    completed = set(counts)
     for item in manifest:
         source_row_id = int(item["source_row_id"])
         key = candidate_key(source_row_id, arm)
@@ -285,7 +393,7 @@ def run(args: argparse.Namespace) -> int:
                 "gpu": torch.cuda.get_device_name(),
             }
         except Exception as exc:
-            row = {
+            failure = {
                 "candidate_key": key,
                 "arm": arm,
                 "source_row_id": source_row_id,
@@ -298,13 +406,61 @@ def run(args: argparse.Namespace) -> int:
                 "failure_traceback": traceback.format_exc(),
                 "metrics": {"wall_sec": time.perf_counter() - started},
             }
+            append_jsonl(failure_path, failure)
+            failed_progress = progress_payload(
+                arm=arm,
+                mode=mode,
+                expected_count=len(expected),
+                completed_count=len(completed),
+                starting_completed_count=starting_completed_count,
+                failure_journal_count=failure_count(failure_path),
+                started=started,
+            )
+            failed_progress["status"] = "failed_stop"
+            atomic_write_json(progress_path, failed_progress)
+            atomic_write_json(
+                run_manifest_path,
+                {**failed_progress, "status": "failed_stop", "failure_candidate_key": key},
+            )
+            raise RuntimeError(f"official CAL fail-stop at {key}; inspect failure journal") from exc
+        if row.get("status") != "ok":
+            raise RuntimeError("official CAL adapter attempted to append a non-ok canonical row")
         append_jsonl(raw_path, row)
         completed.add(key)
-    rows = read_jsonl(raw_path)
-    audit = audit_rows(rows, expected_keys(manifest, arm), arm)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "final_audit.json").write_text(json.dumps(audit, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    return 0 if audit["passed"] else 2
+        newly_completed = len(completed) - starting_completed_count
+        if newly_completed % int(args.progress_every) == 0 or len(completed) == len(expected):
+            atomic_write_json(
+                progress_path,
+                progress_payload(
+                    arm=arm,
+                    mode=mode,
+                    expected_count=len(expected),
+                    completed_count=len(completed),
+                    starting_completed_count=starting_completed_count,
+                    failure_journal_count=failure_count(failure_path),
+                    started=started,
+                ),
+            )
+    rows = canonical_success_rows(raw_path)
+    relevant_rows = [row for row in rows if str(row["candidate_key"]) in expected]
+    audit = audit_rows(relevant_rows, expected, arm)
+    audit["failure_journal_count"] = failure_count(failure_path)
+    audit["canonical_raw_success_only"] = True
+    audit["mode"] = mode
+    atomic_write_json(output_dir / f"{arm}_{mode}_final_audit.json", audit)
+    final_progress = progress_payload(
+        arm=arm,
+        mode=mode,
+        expected_count=len(expected),
+        completed_count=len(completed),
+        starting_completed_count=starting_completed_count,
+        failure_journal_count=failure_count(failure_path),
+        started=started,
+    )
+    final_progress["status"] = "completed" if audit["passed"] and audit["failure_journal_count"] == 0 else "audit_failed"
+    atomic_write_json(progress_path, final_progress)
+    atomic_write_json(run_manifest_path, {**final_progress, "final_audit": audit})
+    return 0 if audit["passed"] and audit["failure_journal_count"] == 0 else 2
 
 
 def parser() -> argparse.ArgumentParser:
@@ -317,6 +473,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--arm", choices=ARMS, required=True)
     root.add_argument("--seed", type=int, default=42)
     root.add_argument("--smoke-cases", type=int, default=12)
+    root.add_argument("--progress-every", type=int, default=25)
     root.add_argument("--auto-full", action="store_true")
     return root
 

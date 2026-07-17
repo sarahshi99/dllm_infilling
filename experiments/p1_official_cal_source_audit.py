@@ -28,7 +28,8 @@ from typing import Any, Iterable, Mapping, Sequence
 REPO = Path(__file__).resolve().parents[1]
 EXPECTED_CAL_COMMIT = "741e8418a88a732b4c92812424d4f03cab1f7b1f"
 EXPECTED_HUMANEVAL_COMMIT = "88062ff9859c875d04db115b698ed4b0f0395170"
-REQUIRED_PACKAGES = ("torch", "transformers", "numpy", "scipy", "tqdm", "datasets", "accelerate")
+UPSTREAM_DECLARED_PACKAGES = ("torch", "transformers", "numpy", "scipy", "tqdm", "datasets", "accelerate")
+RUNTIME_IMPORT_PACKAGES = ("torch", "transformers", "numpy")
 EVALUATION_FIELDS = ("prompt", "suffix", "canonical_solution", "test", "entry_point")
 PRIMARY_CAL_CONFIG = {
     "initial_gen_length": 32,
@@ -293,7 +294,8 @@ def audit(
             )
         )
     smoke = choose_smoke(common, smoke_cases)
-    package_status = {name: bool(importlib.util.find_spec(name)) for name in REQUIRED_PACKAGES}
+    upstream_package_status = {name: bool(importlib.util.find_spec(name)) for name in UPSTREAM_DECLARED_PACKAGES}
+    runtime_package_status = {name: bool(importlib.util.find_spec(name)) for name in RUNTIME_IMPORT_PACKAGES}
     source = cal_script.read_text(encoding="utf-8")
     payload = {
         "status": "corrected_protocol_cpu_audited_gpu_smoke_pending",
@@ -349,8 +351,14 @@ def audit(
         "frozen_controller_test": {"test_status": "sealed", "test_evaluation_count": 0},
         "environment": {
             "python": sys.version.split()[0],
-            "required_package_present": package_status,
-            "missing_required_packages": sorted(name for name, present in package_status.items() if not present),
+            "upstream_declared_package_present": upstream_package_status,
+            "missing_upstream_declared_packages": sorted(name for name, present in upstream_package_status.items() if not present),
+            "runtime_decoder_evaluator_import_package_present": runtime_package_status,
+            "scipy_runtime_import_closure": {
+                "required": False,
+                "reason": "scipy occurs only in pinned upstream length_bias.py fitting utility; llada_cal.llada_cal.generate and the adapter/evaluator execution path do not import it",
+                "pinned_upstream_algorithm_modified": False,
+            },
         },
     }
     write_json(output_dir / "source_audit.json", payload)

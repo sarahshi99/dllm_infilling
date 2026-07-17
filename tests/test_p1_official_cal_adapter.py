@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 import unittest
+import json
+import tempfile
+from pathlib import Path
 
 from experiments.p1_official_cal_adapter import (
     ARMS,
     ForwardLedgerModel,
     arm_config,
     audit_rows,
+    canonical_success_rows,
     candidate_key,
     expected_keys,
+    progress_payload,
+    atomic_write_json,
 )
 
 
@@ -25,6 +31,19 @@ class OfficialCalAdapterTest(unittest.TestCase):
         rows = [{"candidate_key": key, "arm": "official_cal_primary", "status": "ok", "metrics": {"search_forwards": 5, "formal_decode_forwards": 32, "total_forwards": 37}}]
         self.assertTrue(audit_rows(rows, expected_keys(manifest, "official_cal_primary"), "official_cal_primary")["passed"])
         self.assertFalse(audit_rows(rows, expected_keys(manifest, "official_fixed32"), "official_fixed32")["passed"])
+
+    def test_canonical_raw_is_success_only_and_progress_is_compact(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            raw = root / "raw.jsonl"
+            raw.write_text(json.dumps({"candidate_key": "a", "status": "ok"}) + "\n", encoding="utf-8")
+            self.assertEqual(len(canonical_success_rows(raw)), 1)
+            raw.write_text(json.dumps({"candidate_key": "a", "status": "error"}) + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "status=ok"):
+                canonical_success_rows(raw)
+            manifest = root / "progress.json"
+            atomic_write_json(manifest, progress_payload(arm="official_cal_primary", mode="smoke", expected_count=12, completed_count=3, starting_completed_count=0, failure_journal_count=0, started=0.0))
+            self.assertEqual(json.loads(manifest.read_text(encoding="utf-8"))["completed_count"], 3)
 
 
 if __name__ == "__main__":

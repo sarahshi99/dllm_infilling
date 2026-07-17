@@ -6,7 +6,10 @@ AUDIT="$ROOT/analysis_outputs/official_cal_corrected_protocol_20260715_v1"
 OUT="$ROOT/outputs_clean/official_cal_primary_20260715_sprint_v1"
 LOG="$ROOT/logs/paper_agent/20260715_official_cal_primary_sprint_v1.log"
 mkdir -p "$(dirname "$LOG")" "$OUT"
-"$PYTHON" -c 'import scipy' >/dev/null
+# Pinned upstream's `length_bias.py` fitting utility imports SciPy, but the
+# audited runtime path `llada_cal.llada_cal.generate` does not.  Do not block
+# the reproduction on an unused fitting dependency; the adapter smoke proves
+# the actual pinned decoder/evaluator import path.
 cd "$ROOT"
 env CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface \
   "$PYTHON" experiments/p1_official_cal_adapter.py \
