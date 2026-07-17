@@ -15,6 +15,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+import torch
+
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
@@ -178,6 +180,7 @@ def assemble_fragments(candidates: Sequence[Mapping[str, Any]]) -> dict[str, Any
             selected.append(provider)
             pending.extend(name for name in provider["uses"] if name not in resolved)
         resolved.add(name)
+    selected_from_obligations = bool(selected)
     if not selected:
         selected = [fragment for fragment in candidate_fragments(best, best_ordinal) if fragment["kind"] == "basic_block"][:1]
     deduplicated: list[dict[str, Any]] = []
@@ -197,7 +200,23 @@ def assemble_fragments(candidates: Sequence[Mapping[str, Any]]) -> dict[str, Any
         "selected_fragments": deduplicated,
         "suffix_obligations": sorted(obligation_names),
         "resolved_obligations": sorted(resolved),
+        "assembly_fallback_to_best": not selected_from_obligations,
     }
+
+
+def assembly_metadata(assembly: Mapping[str, Any]) -> dict[str, Any]:
+    fragments = list(assembly.get("selected_fragments") or [])
+    return {
+        "fragment_count": len(fragments),
+        "provider_candidate_count": len({int(fragment.get("candidate_ordinal", -1)) for fragment in fragments}),
+        "suffix_obligation_count": len(assembly.get("suffix_obligations") or []),
+        "resolved_obligation_count": len(assembly.get("resolved_obligations") or []),
+        "assembly_fallback_to_best": bool(assembly.get("assembly_fallback_to_best")),
+    }
+
+
+def stage1_wall_sec(candidates: Sequence[Mapping[str, Any]]) -> float:
+    return sum(float((row.get("metrics") or {}).get("total_sec_including_probe") or row.get("wall_sec") or 0.0) for row in candidates)
 
 
 def evaluate_text(prefix: str, suffix: str, middle: str, source: Mapping[str, Any]) -> dict[str, Any]:
@@ -304,7 +323,7 @@ def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Se
             "offline_structural_valid": bool(best_diagnostic.full_parse_passed),
             "middle_text": assembly["best_middle_text"],
             "metrics": {"actual_forward_count": 0, "token_budget": 0},
-            "assembly": {key: assembly[key] for key in ("best_candidate_ordinal", "suffix_obligations", "resolved_obligations")},
+            "assembly": {key: assembly[key] for key in ("best_candidate_ordinal", "suffix_obligations", "resolved_obligations", "assembly_fallback_to_best")},
             "structural_diagnostics": {"full_parse_passed": best_diagnostic.full_parse_passed, "unsatisfied_obligation_count": len(best_diagnostic.unsatisfied_obligations), "def_use_conflict_count": len(best_diagnostic.def_use_conflicts)},
         })
         assembly_rows.append({
@@ -315,7 +334,7 @@ def offline_rows(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Se
             "offline_structural_valid": bool(assembly_diagnostic.full_parse_passed),
             "middle_text": assembly["assembly_text"],
             "metrics": {"actual_forward_count": 0, "token_budget": 0},
-            "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations")},
+            "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations", "assembly_fallback_to_best")},
             "structural_diagnostics": {"full_parse_passed": assembly_diagnostic.full_parse_passed, "unsatisfied_obligation_count": len(assembly_diagnostic.unsatisfied_obligations), "def_use_conflict_count": len(assembly_diagnostic.def_use_conflicts)},
         })
     return best_rows, assembly_rows
@@ -332,6 +351,7 @@ def evaluated_offline_rows(
     for item in manifest:
         assembly = assemble_fragments(grouped[str(item["row_key"])])
         source = source_rows[int(item["source_row_id"])]
+        stage1_wall = stage1_wall_sec(grouped[str(item["row_key"])])
         best_eval = evaluate_text(assembly["prefix"], assembly["suffix"], assembly["best_middle_text"], source)
         assembly_eval = evaluate_text(assembly["prefix"], assembly["suffix"], assembly["assembly_text"], source)
         common = {key: item[key] for key in ("row_key", "case_index", "source_row_id", "task_group", "length_bucket", "reference_middle_tokens")}
@@ -342,6 +362,7 @@ def evaluated_offline_rows(
             "status": "ok",
             "passed": best_eval["passed"],
             "middle_text": assembly["best_middle_text"],
+            "candidate_middle_sha256": sha256_text(assembly["best_middle_text"]),
             "metrics": {
                 "actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
                 "standalone_actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
@@ -349,7 +370,10 @@ def evaluated_offline_rows(
                 "token_budget": STAGE1_GRID_TOKEN_BUDGET,
                 "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET,
                 "verification_sec": best_eval["verification_sec"],
+                "stage1_wall_sec": stage1_wall,
+                "total_sec_including_probe": stage1_wall + best_eval["verification_sec"],
             },
+            "assembly_metadata": assembly_metadata(assembly),
             "verification": best_eval["verification"],
         })
         assembly_rows.append({
@@ -359,6 +383,7 @@ def evaluated_offline_rows(
             "status": "ok",
             "passed": assembly_eval["passed"],
             "middle_text": assembly["assembly_text"],
+            "candidate_middle_sha256": sha256_text(assembly["assembly_text"]),
             "metrics": {
                 "actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
                 "standalone_actual_forward_count": STAGE1_GRID_FORWARD_BUDGET,
@@ -366,7 +391,10 @@ def evaluated_offline_rows(
                 "token_budget": STAGE1_GRID_TOKEN_BUDGET,
                 "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET,
                 "verification_sec": assembly_eval["verification_sec"],
+                "stage1_wall_sec": stage1_wall,
+                "total_sec_including_probe": stage1_wall + assembly_eval["verification_sec"],
             },
+            "assembly_metadata": assembly_metadata(assembly),
             "verification": assembly_eval["verification"],
         })
     return best_rows, assembly_rows
@@ -402,6 +430,7 @@ def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequ
             continue
         try:
             assembly = assemble_fragments(grouped[str(item["row_key"])])
+            stage1_wall = stage1_wall_sec(grouped[str(item["row_key"])])
             repair = repair_assembly(assembly, source_rows[int(item["source_row_id"])], tokenizer, model)
             middle = str(repair["middle_text"])
             repair_metrics = dict(repair.get("metrics") or {})
@@ -414,6 +443,8 @@ def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequ
                     "token_budget": STAGE1_GRID_TOKEN_BUDGET + CANVAS_TOKENS * REPAIR_STEPS,
                     "standalone_token_budget": STAGE1_GRID_TOKEN_BUDGET + CANVAS_TOKENS * REPAIR_STEPS,
                     "shared_bank_incremental_token_budget": CANVAS_TOKENS * REPAIR_STEPS,
+                    "stage1_wall_sec": stage1_wall,
+                    "total_sec_including_probe": stage1_wall + float(repair_metrics.get("total_sec_including_probe") or repair_metrics.get("wall_sec") or 0.0),
                 }
             )
             row = {
@@ -427,6 +458,7 @@ def run_repair(manifest: Sequence[Mapping[str, Any]], grouped: Mapping[str, Sequ
                 "metrics": repair_metrics,
                 "connector_indices": repair.get("connector_indices") or [],
                 "assembly": {key: assembly[key] for key in ("selected_fragments", "suffix_obligations", "resolved_obligations")},
+                "assembly_metadata": assembly_metadata(assembly),
                 "verification": repair.get("verification") or {},
             }
         except Exception as exc:
@@ -464,6 +496,8 @@ def run(args: argparse.Namespace) -> int:
         write_json(compact_dir / "offline_summary.json", {"offline": offline, "case_count": len(manifest), "frozen_test_status": lock.get("test_status"), "test_evaluation_count": lock.get("test_evaluation_count")})
         return 0
     tokenizer, model = load_model_and_tokenizer(cfg_for().model)
+    torch.cuda.reset_peak_memory_stats()
+    gpu_started = time.perf_counter()
     selected = choose_smoke(manifest, int(args.smoke_cases))
     evaluated_best, evaluated_assembly = evaluated_offline_rows(selected, grouped, source_rows)
     append_rows_resume(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
@@ -488,10 +522,12 @@ def run(args: argparse.Namespace) -> int:
             "assembly": audit(evaluated_assembly, manifest, METHODS[1], STAGE1_GRID_FORWARD_BUDGET),
             "repair": audit(read_jsonl(repair_dir / "m4_repair_raw.jsonl"), manifest, METHODS[2], STAGE1_GRID_FORWARD_BUDGET + REPAIR_STEPS),
             "resume_noop_writes": full_noops,
+            "wall_sec": time.perf_counter() - gpu_started,
+            "peak_cuda_memory_bytes": int(torch.cuda.max_memory_allocated()),
         }
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(compact_dir / "offline_method_audit.csv", [{"method": method, **value} for method, value in offline.items()])
-    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
+    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke, "wall_sec": time.perf_counter() - gpu_started, "peak_cuda_memory_bytes": int(torch.cuda.max_memory_allocated())}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
     return 0 if smoke_gate and (full is None or all(full[name]["passed"] for name in ("best", "assembly", "repair"))) else 2
 
 
