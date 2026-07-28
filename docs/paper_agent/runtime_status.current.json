@@ -62,5 +62,5 @@
   },
   "gpu_audit": {"utc": "2026-07-28T19:07:16Z", "gpu": "NVIDIA H200 NVL", "utilization_percent": 0, "memory_used_mib": 0, "memory_free_mib": 143156, "temperature_c": 29, "uncorrected_volatile_ecc": 0, "project_gpu_processes": 0},
   "storage": {"home_available": "2.3T", "home_inode_free": 231232594},
-  "next_safe_action": "No new GPU run. Commit/push compact evidence; any future DreamOn smoke needs a new brief and pinned evaluator, while rho-EOS needs a separately audited faithful FIM protocol."
+  "next_safe_action": "All authorized long runs completed. No new GPU run is pending; any future DreamOn smoke needs a new brief and pinned evaluator, while rho-EOS needs a separately audited faithful FIM protocol."
 }

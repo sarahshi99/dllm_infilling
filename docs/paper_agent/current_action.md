@@ -8,7 +8,7 @@
 
 ## 2026-07-28 当前最小动作（覆盖历史 action）
 
-四个 M1--M4 V0 都已完成当前已授权的 148-group formal decision，且没有 paper primary。official CAL 的 4,990-case full 已完整性完成（`4990/4990`、missing/error=`0/0`；运行期间未读取 partial accuracy）。M4 mandatory `40,632` bank 与 RandomSpanLight context 的交集为 `0/164`，故使用已冻结的 MultiLine-Core manifest；技术完整性通过，但 primary `assembly_without_repair − best_single`=`-12.84pp`、help/harm=`0/19`，不进入 296/927。DreamOn official source 已审计但未启动 GPU smoke；rho-EOS 是 completion-only，不能伪装成 FIM baseline。当前动作是提交/推送 compact evidence 并保持所有 raw outputs 不变；没有新的 GPU 作业。
+四个 M1--M4 V0 都已完成当前已授权的 148-group formal decision，且没有 paper primary。official CAL 的 4,990-case full 已完整性完成（`4990/4990`、missing/error=`0/0`；运行期间未读取 partial accuracy）。M4 mandatory `40,632` bank 与 RandomSpanLight context 的交集为 `0/164`，故使用已冻结的 MultiLine-Core manifest；技术完整性通过，但 primary `assembly_without_repair − best_single`=`-12.84pp`、help/harm=`0/19`，不进入 296/927。DreamOn official source 已审计但未启动 GPU smoke；rho-EOS 是 completion-only，不能伪装成 FIM baseline。所有授权 long runs 与 CPU audit 已完成并已 push；保持 raw outputs 不变，只有新的明确 brief 才可启动后续 GPU 作业。
 
 起点证据：`8b348f979f09cda07811e04b7ad3dee60e56373b`
 

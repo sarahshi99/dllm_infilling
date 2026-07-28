@@ -325,4 +325,5 @@
 - result：M1/M2/M3/M4 全部 reviewed/not promoted，当前没有 paper primary。M4 mandatory bank 与 RandomSpanLight context match=`0/164`，因此其 148-group MultiLine-Core fair primary assembly−best=`-12.84pp`、help/harm=`0/19`。official CAL smoke=`12/12`、full=`4990/4990`、missing/error=`0/0`，运行时没有读取 partial accuracy。frozen=`sealed/0`。
 - action：在 `/tmp/dllm_infilling_protocol_audit_20260728/` 对 DreamOn 与 rho-EOS 做 CPU-only 官方 source audit；无模型下载、无 GPU、无 pass-rate 评测。
 - result：DreamOn `8a0a549` 有 genuine FIM/HumanEval-Infilling dynamic route，但 training-based/official 8-GPU；rho-EOS `69992ca` 为 completion-only、无 faithful FIM/evaluator route。详见 `analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/`。
-- next：提交 compact audit/dashboard/checkpoint 更新；后续 DreamOn smoke 需要新 brief，rho-EOS 需要新 faithful FIM protocol。
+- result：focused commits 已 push 到 `origin/codex/ccfa-execution-sprint-v1`；所有授权 long runs 已完成，raw outputs 未进入 Git。
+- next：后续 DreamOn smoke 需要新 brief，rho-EOS 需要新 faithful FIM protocol；当前没有自动 GPU action。

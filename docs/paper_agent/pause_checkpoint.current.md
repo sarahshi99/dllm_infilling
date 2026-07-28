@@ -21,7 +21,7 @@ Branch: `codex/ccfa-execution-sprint-v1` (M4 result and compact CPU audit artifa
 
 ### Next Safe Actions
 
-1. Push focused local commits if the remote accepts them; never stage raw outputs.
+1. No authorized GPU action is pending; preserve current raw outputs and compact status.
 2. If resuming P1, write a fresh DreamOn 12-case smoke brief that pins evaluator and explicitly labels training-based/8-GPU protocol; do not launch automatically from this checkpoint.
 3. Do not create a rho-EOS FIM adapter without a separately audited algorithmic protocol.
 
