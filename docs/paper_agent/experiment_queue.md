@@ -1,8 +1,14 @@
 # Experiment Queue
 
-Updated: 2026-07-16 UTC
+Updated: 2026-07-28 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
+
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=offline_148_complete_gpu_repair_pending_launch_authorized -->
+
+## 2026-07-28 Reconciliation Override
+
+`method_portfolio.current.json` is the sole current M1--M4 register. official CAL's 4,990-case full has completed its integrity protocol (`4990/4990`, zero missing/error; no partial accuracy read while running). M1/M2/M3 are formally reviewed and not eligible for 296/927/5079. The only executable method item is M4 repair `12-case smoke → automatic 148-case full` in an isolated second GPU slot; no paper primary is selected before its pre-frozen analysis.
 
 ## Active FAST-SPRINT-01 Queue
 
@@ -10,7 +16,7 @@ M1--M4 are independent candidate methods; no paper primary method is selected. C
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
-Status: upstream pinned, checkout/protocol audit pending. Official source is `https://github.com/NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`; local CAL/CAL-lite remains a distinct same-protocol baseline and is never official CAL. After checkout, audit model, prompt, exact dataset mapping/intersection, canvas, steps, forward count, seed, evaluator, wall time, GPU and memory. 12-case technical smoke auto-promotes to full allowed population if integrity passes; no performance gate. DreamOn waits after CAL full and stays training-based; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
+Status: completed integrity reproduction. Official source is `https://github.com/NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`; the run is labeled **official CAL reproduction on the 4,990-case non-frozen common subset**, not a 5,715-case paper-number reproduction. Smoke `12/12` and full `4990/4990` have zero missing/error; no partial accuracy was read while it ran. DreamOn remains deferred; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
 
 ### P2.1: full-allowed grouped statistics
 
@@ -22,7 +28,7 @@ Status: pinned audit implementation ready; host checkout network currently block
 
 ### M1.1: Abductive Program-State Bridge
 
-Status: historical 5079-case MultiLine M1 is `safely_paused_resumable`, not killed or abandoned. Its original raw directories are immutable/append-only; future recovery is selected-method-only and requires `--auto-full --selected-method-only-5079` with existing-key dedup. The independent RandomSpanLight raw files are complete (`1332/1332`, `148/148`, `148/148`; 0 duplicate/error), but the original process exited before final compact manifest creation. Do not resume, rerun, or read outcome performance in this queue item without a new explicit decision.
+Status: formally reviewed, not promoted. Historical 5079-case MultiLine M1 is `safely_paused_resumable`, not killed or abandoned. Its original raw directories are immutable/append-only; future recovery is selected-method-only and requires `--auto-full --selected-method-only-5079` with existing-key dedup. Independent RandomSpanLight is complete (`1332/1332`, `148/148`, `148/148`; 0 duplicate/error); frozen full-vs-generic is `-0.68pp` with help/harm `0/1`, so this V0 must not resume, retune, or enter 296/927/5079.
 
 ### M2: Constraint-Homotopy V0
 
@@ -30,11 +36,11 @@ Status: completed and formally reviewed. All three arms are `148/148`, fixed 64 
 
 ### M3: Birth-Death Canvas Diffusion V0
 
-Status: completed technical full at pre-launch commit `8440af1`. Uniform and birth/death are each `148/148`, 0 duplicate/error, exact 256 forwards/task, and frozen sealed/count=0. M3 claims equal-forward only; actual token-forward budgets differ and are recorded. Do not select a paper method or auto-promote it from this completion alone.
+Status: formally reviewed, not promoted. Uniform and birth/death are each `148/148`, 0 duplicate/error, exact 256 forwards/task, and frozen sealed/count=0. Frozen birth-death-vs-uniform task-macro is `-4.05pp` with help/harm `8/14`; lower token-forward does not meet the accuracy or efficiency promotion rule. Do not retune or enter 296/927/5079.
 
 ### M4: Semantic Particle Assembly V0
 
-Status: code/test/launcher complete at `ed94471`; the full 148-case offline structural audit completed (`analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`): both best-single and assembly rows are 148/148 with zero missing/duplicate/error and frozen count zero. GPU repair is queued after M3 once the strict 25 GiB reserve permits it. Assemble AST statement/basic-block/def-use fragments from eight candidates using only inference-visible obligations, then run one 64-forward repair decode. Compare best-single, assembly-without-repair, assembly-with-repair in isolated outputs.
+Status: repair launch authorized. The full 148-case offline structural audit completed (`analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`): both best-single and assembly rows are 148/148 with zero missing/duplicate/error and frozen count zero. official CAL is now complete; the 2026-07-28 H200 audit has ECC=0, one unrelated process, and sufficient post-load reserve. Launch 12-case repair smoke then automatic 148 full; compare best-single, assembly-without-repair, assembly-with-repair in isolated append-only outputs.
 
 ### A1/P3 status
 

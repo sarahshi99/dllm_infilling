@@ -20,12 +20,21 @@ class MethodPortfolioCurrentTest(unittest.TestCase):
         self.assertIn("safely_paused", methods["M1"]["current_status"])
         self.assertEqual(methods["M2"]["current_status"], "reviewed_not_promoted")
         self.assertEqual(methods["M3"]["current_status"], "reviewed_not_promoted_v0")
-        self.assertEqual(methods["M4"]["current_status"], "offline_148_complete_gpu_repair_pending")
+        self.assertEqual(methods["M4"]["current_status"], "offline_148_complete_gpu_repair_pending_launch_authorized")
 
     def test_subordinate_current_docs_point_to_the_register(self) -> None:
         marker = "method_portfolio.current.json"
         for name in ("ccfa_master_roadmap.zh.md", "current_action.md", "experiment_queue.md", "idea_board.md"):
             self.assertIn(marker, (DOCS / name).read_text(encoding="utf-8"), name)
+
+    def test_current_docs_carry_the_same_normalized_status_anchor(self) -> None:
+        expected = (
+            "M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; "
+            "M3=reviewed_not_promoted_v0; "
+            "M4=offline_148_complete_gpu_repair_pending_launch_authorized"
+        )
+        for name in ("ccfa_master_roadmap.zh.md", "current_action.md", "experiment_queue.md", "idea_board.md"):
+            self.assertIn(expected, (DOCS / name).read_text(encoding="utf-8"), name)
 
 
 if __name__ == "__main__":

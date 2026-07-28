@@ -1,12 +1,16 @@
 # Research Idea Board
 
-Updated: 2026-07-17 UTC
+Updated: 2026-07-28 UTC
 
 Purpose: shared idea board for user, Codex, and web ChatGPT. Ideas are ordered by current CCF-A value, not by execution cost. Negative evidence is explicitly useful and must be recorded.
 
 Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.zh.md`. This board is subordinate to that roadmap.
 
 The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.current.json`; this board keeps hypotheses and historical context only.
+
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=offline_148_complete_gpu_repair_pending_launch_authorized -->
+
+2026-07-28 runtime reconciliation: M1/M2/M3 are fixed 148-group non-promotions; the historical M1 5079 remains safely paused. official CAL has completed integrity `4990/4990` with zero missing/error and no partial accuracy read while it ran. M4 has the sole live method action: its offline structural audit is complete and its fixed repair smoke/full is launch-authorized in a safe second GPU slot. No paper primary is selected.
 
 ## Canonical Method Portfolio
 
@@ -15,7 +19,7 @@ The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.cu
 | `M1` | Abductive Program-State Bridge | 148 reviewed/not promoted; historical 5079 safely paused | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
 | `M2` | Constraint-Homotopy Infilling | 148-case full reviewed: constraints activated, no reliable grouped advantage | IDEA-012 |
 | `M3` | Birth--Death Canvas Diffusion | 148 reviewed/not promoted: lower token-forward but lower accuracy point estimate | IDEA-013 |
-| `M4` | Semantic Particle Assembly | offline 148 structural audit passed; GPU repair is supervisor-queued after CAL stable t+10 and a strict safe second slot | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M4` | Semantic Particle Assembly | offline 148 structural audit passed; GPU repair is launch-authorized in a strict safe second slot | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
 M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
@@ -55,7 +59,7 @@ Decision rule: Birth/death may use only inference-visible confidence, syntax, an
 ## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
-Status: V0 code/test complete; 148-case offline structural audit passed; repair is resource-queued, not abandoned.
+Status: V0 code/test complete; 148-case offline structural audit passed; repair smoke→automatic full is launch-authorized after CAL integrity completion and the 2026-07-28 H200 safety audit.
 Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
 Minimum experiment: First inspect the existing 148-case bank offline, then run an independent fixed-budget repair decode. Compare best-single, assembly-without-repair, and assembly-with-repair.
 Decision rule: Fragments may use only AST statement/basic-block/def-use structure plus prefix/suffix obligations and inference-visible consistency; no test/reference selection or outcome-guided assembly.

@@ -1,8 +1,14 @@
 # Current Paper-Agent Action
 
-更新时间：2026-07-17 UTC
+更新时间：2026-07-28 UTC
 
 权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`；M1--M4 唯一当前状态登记：`docs/paper_agent/method_portfolio.current.json`。
+
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=offline_148_complete_gpu_repair_pending_launch_authorized -->
+
+## 2026-07-28 当前最小动作（覆盖历史 action）
+
+`M4 Semantic Particle Assembly` repair 已获启动授权。official CAL 的 4,990-case full 已完整性完成（`4990/4990`、missing/error=`0/0`；运行期间未读取 partial accuracy），故不再把其历史 t+10 条件误写为当前阻塞。H200 当前 ECC=`0`、仅一个无关 GPU process、空闲约 `130GiB`；以第二研究 GPU process 启动固定 launcher 的 `12-case smoke → automatic 148-case full`。M1/M2/M3 的 148-group 正式结论保持不晋级，M1 5079 保持暂停，当前没有 paper primary。若 M4 technical/full integrity 通过，立即运行预先提交的 grouped analyzer；若 primary `assembly_without_repair vs best_single` 不满足 point delta `>0` 且 help>harm，则不进入 296/927。
 
 起点证据：`8b348f979f09cda07811e04b7ad3dee60e56373b`
 
@@ -34,13 +40,13 @@ Operational decision 是 `execute_and_monitor`，不是 blocked。M1、M2、M3�
 
 - `M2 Constraint-Homotopy V0`：已完成独立 `12→148`，full integrity audit 为三臂各 `148/148`、0 missing/extra/duplicate/error、64 forwards/4096 token-forwards、frozen sealed/count=0。正式 grouped result 为 `constraints_activated_no_reliable_grouped_advantage`：schedule 改变候选 hash，但没有可靠 task-group 优势；不自动进入 296/927/5079，也不阻止 M3。详见 `docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md`。
 - `M3 Birth-Death Canvas Diffusion V0`：行为保持 pre-launch 修正已在 `8440af1` 完成。M3 现在已正式复核：birth-death − uniform task-macro=`-4.05pp`、help/harm=`8/14`；birth/death mechanism 确实激活且 mean token-forward 更低，但 accuracy point estimate 也更低。结论为 `reviewed_not_promoted_v0`，不进入 296/927/5079；仅保留 equal-forward/non-equal-token 的成本观察。
-- `M4 Semantic Particle Assembly V0`：offline 148 structural audit 已完成；cost/activation analyzer 已在 `267dda5` 加固。`ccfa-execution-sprint-supervisor-v1` 只会在 CAL full t+10 后、ECC=0、free>=25GiB、且无第三个 GPU research process 时启动独立 repair `12→148`。当前外部作业占用使条件未满足；不覆盖或创建 M4 raw 以绕开该条件。
+- `M4 Semantic Particle Assembly V0`：offline 148 structural audit 已完成；cost/activation analyzer 已在 `267dda5` 加固。official CAL 已完成完整性 full；2026-07-28 H200 audit 满足 ECC=0、预计加载后 free>=25GiB、且 M4 是第二研究 GPU process，故启动独立 repair `12→148`。不覆盖既有 raw；输出保持独立 append-only。
 
 四个 V0 的数据路线固定为：12 technical smoke → 148 RandomSpanLight → 296 MultiLine-Core / 927 non-frozen SingleLine development comparison → selected-method-only 5079 MultiLine → method freeze 后 ExecRepoBench。裸 `--auto-full` 不得直接进入 5079。禁止任何 tests/reference/canonical solution/oracle length/task ID/split/passed label 进入 deployable method。
 
 ## H200 并行约束
 
-旧共享候选库、M2 与 M3 已完成；本轮不启动 M4、official CAL 或 DreamOn。M3 启动期间曾短暂出现两次 `nvidia-smi` driver communication failure，随后恢复；最终 H200 空闲 `120054 MiB`、ECC=0，且三个新方法没有记录到 OOM。每个方法、每个进程均保持独立 output/log directory。
+旧共享候选库、M2 与 M3 已完成；official CAL full 也已完整性结束。本轮启动 M4，DreamOn 仍不在本轮范围。H200 当前空闲约 `130GiB`、ECC=0；一个无关训练作业不中断且 M4 仅作为第二研究 process。每个方法、每个进程均保持独立 output/log directory。
 
 ## 证据命名
 

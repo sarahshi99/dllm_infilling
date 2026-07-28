@@ -1,8 +1,12 @@
 {
   "schema_version": 1,
-  "updated_utc": "2026-07-17T09:30:00Z",
+  "updated_utc": "2026-07-28T11:56:49Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
   "operational_decision": "execute_and_monitor",
+  "runtime_reconciliation": {
+    "official_cal": "completed_integrity_4990_of_4990_with_zero_missing_or_error; no partial accuracy was read while it ran",
+    "m4_gpu_slot": "launch_authorized_after_live_H200_audit: ECC=0, one unrelated GPU process, and >25GiB projected free memory after model load"
+  },
   "paper_primary_method": null,
   "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
   "current_status_source": "This file is the sole current-status register for M1--M4; historical reports retain their original conclusions.",
@@ -69,8 +73,8 @@
       "cost": {"best_single_forwards": 512, "assembly_without_repair_forwards": 512, "assembly_with_repair_forwards": 576},
       "implementation": {"runner": "experiments/m4_semantic_particle_assembly.py", "analyzer": "analysis/m4_semantic_particle_assembly.py", "tests": "tests/test_m4_semantic_particle_assembly.py", "launcher": "scripts/manual_launch_m4_semantic_particle_assembly_sprint_v1.sh"},
       "completed_evidence": "Offline structural audit completed on 148 cases; GPU repair smoke/full remains pending and candidate bank is read-only.",
-      "current_status": "offline_148_complete_gpu_repair_pending",
-      "exact_next_action": "The non-destructive supervisor launches 12-case repair smoke then automatic 148-case full only after CAL t+10 growth, ECC=0, >=25GiB free memory, and no third GPU research process.",
+      "current_status": "offline_148_complete_gpu_repair_pending_launch_authorized",
+      "exact_next_action": "Launch the fixed 12-case repair smoke then automatic 148-case full in an isolated tmux session; current H200 audit has ECC=0, one unrelated GPU process, and >25GiB projected free memory after model load.",
       "promotion_conditions": ["assembly_without_repair versus best_single task-macro point delta > 0", "help > harm", "fragment/provider mechanism activates"],
       "iterate_conditions": ["positive but uncertain equal-compute assembly signal"],
       "stop_conditions": ["no fair primary-comparison benefit or assembly mechanism inactive"],
