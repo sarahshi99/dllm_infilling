@@ -1,0 +1,13 @@
+method,length_bucket,span_count,task_group_count,span_micro_accuracy_descriptive,mean_forward_count,mean_token_forward_budget
+m4_best_single_particle,extreme,60,60,0.16666666666666666,512.0,30720.0
+m4_best_single_particle,long,30,30,0.2,512.0,30720.0
+m4_best_single_particle,medium,35,35,0.4857142857142857,512.0,30720.0
+m4_best_single_particle,short,23,23,0.4782608695652174,512.0,30720.0
+m4_assembly_without_repair,extreme,60,60,0.08333333333333333,512.0,30720.0
+m4_assembly_without_repair,long,30,30,0.1,512.0,30720.0
+m4_assembly_without_repair,medium,35,35,0.2857142857142857,512.0,30720.0
+m4_assembly_without_repair,short,23,23,0.30434782608695654,512.0,30720.0
+m4_assembly_with_repair,extreme,60,60,0.13333333333333333,576.0,34816.0
+m4_assembly_with_repair,long,30,30,0.23333333333333334,576.0,34816.0
+m4_assembly_with_repair,medium,35,35,0.08571428571428572,576.0,34816.0
+m4_assembly_with_repair,short,23,23,0.13043478260869565,576.0,34816.0

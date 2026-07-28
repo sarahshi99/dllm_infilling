@@ -8,9 +8,9 @@ Canonical route and naming are defined in `docs/paper_agent/ccfa_master_roadmap.
 
 The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.current.json`; this board keeps hypotheses and historical context only.
 
-<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=multiline_core_148_manifest_frozen_repair_pending_launch_authorized -->
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=reviewed_not_promoted_v0_multilinecore_cross_source -->
 
-2026-07-28 runtime reconciliation: M1/M2/M3 are fixed 148-group non-promotions; the historical M1 5079 remains safely paused. official CAL has completed integrity `4990/4990` with zero missing/error and no partial accuracy read while it ran. The mandatory 40,632-row M4 bank is MultiLine and has zero RandomSpanLight visible-context matches, so M4 has a committed outcome-blind 148-group MultiLine-Core manifest; its fixed repair smoke/full is launch-authorized. No paper primary is selected.
+2026-07-28 runtime reconciliation: M1/M2/M3 are fixed 148-group non-promotions; the historical M1 5079 remains safely paused. official CAL has completed integrity `4990/4990` with zero missing/error and no partial accuracy read while it ran. The mandatory 40,632-row M4 bank is MultiLine and has zero RandomSpanLight visible-context matches, so M4 used the committed outcome-blind 148-group MultiLine-Core manifest; it is technically complete but primary-negative (`-12.84pp`, help/harm `0/19`). No paper primary is selected.
 
 ## Canonical Method Portfolio
 
@@ -19,7 +19,7 @@ The sole current M1--M4 status register is `docs/paper_agent/method_portfolio.cu
 | `M1` | Abductive Program-State Bridge | 148 reviewed/not promoted; historical 5079 safely paused | IDEA-011 / F3-F4 were only the killed fixed proxy `M1-D0` |
 | `M2` | Constraint-Homotopy Infilling | 148-case full reviewed: constraints activated, no reliable grouped advantage | IDEA-012 |
 | `M3` | Birth--Death Canvas Diffusion | 148 reviewed/not promoted: lower token-forward but lower accuracy point estimate | IDEA-013 |
-| `M4` | Semantic Particle Assembly | historical RandomSpanLight offline audit passed; mandatory MultiLine 148-group manifest frozen and GPU repair launch-authorized | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
+| `M4` | Semantic Particle Assembly | MultiLine-Core 148 reviewed/not promoted (cross-source); historical RandomSpanLight audit remains structural only | IDEA-014 / F1 was only `M4-D0` premise diagnostic |
 | `A1` | Metamorphic Equivariance Evaluator | stopped completed negative auxiliary | IDEA-015 / F2 |
 
 M1--M4 are independent candidates and no paper primary method is selected. `P3-SELECTIVE` (fresh canvas-adequacy/rescue-success/harm-abstention routing) is a separate selector track. It is not Controller V4 and is not one of M1--M4. It is deferred until official CAL evidence. Independent premise diagnostics may share a frozen candidate bank and run concurrently, but methods and conclusions remain separate.
@@ -59,7 +59,7 @@ Decision rule: Birth/death may use only inference-visible confidence, syntax, an
 ## IDEA-014 / M4: Semantic Particle Assembly
 
 Source: user
-Status: V0 code/test complete; historical RandomSpanLight 148-case offline structural audit passed. The mandatory 40,632-row MultiLine bank has zero visible-context overlap with RandomSpanLight, so a fixed outcome-blind 148-group MultiLine-Core manifest replaces the impossible RandomSpanLight GPU repair input; smoke→automatic full is launch-authorized after CAL integrity completion and the 2026-07-28 H200 safety audit.
+Status: V0 code/test complete; historical RandomSpanLight 148-case offline structural audit passed. The mandatory 40,632-row MultiLine bank has zero visible-context overlap with RandomSpanLight, so a fixed outcome-blind 148-group MultiLine-Core manifest replaced the impossible RandomSpanLight GPU repair input. Technical smoke→full passed, but fair assembly-without-repair − best-single=`-12.84pp` with help/harm=`0/19`; this V0 is not promoted and cannot retune/fuse/expand.
 Scientific question: Are complementary inference-visible fragments in all-fail candidate sets composable into correct programs without execution/reference guidance?
 Minimum experiment: First inspect the existing 148-case bank offline, then run an independent fixed-budget repair decode. Compare best-single, assembly-without-repair, and assembly-with-repair.
 Decision rule: Fragments may use only AST statement/basic-block/def-use structure plus prefix/suffix obligations and inference-visible consistency; no test/reference selection or outcome-guided assembly.

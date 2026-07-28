@@ -4,11 +4,11 @@ Updated: 2026-07-28 UTC
 
 Only selected, executable work belongs here. Canonical IDs and priorities come from `docs/paper_agent/ccfa_master_roadmap.zh.md`. Frozen test remains sealed unless a future fresh-validation protocol explicitly authorizes it.
 
-<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=multiline_core_148_manifest_frozen_repair_pending_launch_authorized -->
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=reviewed_not_promoted_v0_multilinecore_cross_source -->
 
 ## 2026-07-28 Reconciliation Override
 
-`method_portfolio.current.json` is the sole current M1--M4 register. official CAL's 4,990-case full has completed its integrity protocol (`4990/4990`, zero missing/error; no partial accuracy read while running). M1/M2/M3 are formally reviewed and not eligible for 296/927/5079. The mandatory 40,632-row M4 bank has no visible-context match to RandomSpanLight, so the only executable method item is a committed one-span-per-group MultiLine-Core M4 repair `12-case smoke → automatic 148-case full`; no paper primary is selected before its pre-frozen analysis.
+`method_portfolio.current.json` is the sole current M1--M4 register. official CAL's 4,990-case full has completed its integrity protocol (`4990/4990`, zero missing/error; no partial accuracy read while running). M1/M2/M3 are formally reviewed and not eligible for 296/927/5079. The mandatory 40,632-row M4 bank had no visible-context match to RandomSpanLight, so M4 ran the committed one-span-per-group MultiLine-Core repair; it is formally negative and not eligible for 296/927/5079. No paper primary is selected.
 
 ## Active FAST-SPRINT-01 Queue
 
@@ -40,7 +40,7 @@ Status: formally reviewed, not promoted. Uniform and birth/death are each `148/1
 
 ### M4: Semantic Particle Assembly V0
 
-Status: repair launch authorized. The historical 148-case RandomSpanLight offline structural audit completed (`analysis_outputs/m4_semantic_particle_assembly_20260713_v0/offline_summary.json`): both best-single and assembly rows are 148/148 with zero missing/duplicate/error and frozen count zero. The required 40,632-row MultiLine bank cannot be substituted into RandomSpanLight (visible-context match `0/164`), so a committed outcome-blind hash selection yields exactly one non-frozen MultiLine source per `148` task groups. official CAL is complete; the 2026-07-28 H200 audit has ECC=0 and sufficient post-load reserve. Launch 12-case repair smoke then automatic 148 full; compare best-single, assembly-without-repair, assembly-with-repair in isolated append-only outputs.
+Status: completed and formally reviewed. The historical 148-case RandomSpanLight offline structural audit remains historical. The required 40,632-row MultiLine bank cannot be substituted into RandomSpanLight (visible-context match `0/164`), so the committed outcome-blind hash selection used exactly one non-frozen MultiLine source per `148` task groups. Technical integrity was exact (`148×3`, zero missing/duplicate/error, frozen sealed/count=0); fair assembly-without-repair − best-single=`-12.84pp` CI `[-18.24,-7.43]pp`, help/harm=`0/19`. Fragment/assembly activation occurred but is negative. Do not retune, fuse, or enter 296/927/5079.
 
 ### A1/P3 status
 

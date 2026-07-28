@@ -1,17 +1,19 @@
 {
-  "audit_utc": "2026-07-17T10:58:41Z",
+  "audit_utc": "2026-07-28T19:07:16Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
-  "head_at_audit": "9824eba",
+  "head_at_audit": "0b7de44_plus_uncommitted_m4_result_record",
   "operational_decision": "execute_and_monitor",
   "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
   "performance_visibility": {
     "m1_randomspanlight_performance_inspected": true,
     "m2_result_performance_inspected": true,
     "m3_randomspanlight_performance_inspected": true,
-    "official_cal_partial_performance_inspected": false
+    "m4_multilinecore_performance_inspected_after_precommitted_analyzer": true,
+    "official_cal_partial_performance_inspected_while_running": false,
+    "official_cal_final_outcome_analysis_opened": false
   },
   "old_multiline_candidate_bank": {
-    "state": "completed_do_not_restart",
+    "state": "completed_read_only_do_not_restart",
     "rows": 40632,
     "unique_candidate_keys": 40632,
     "duplicate_rows": 0,
@@ -27,66 +29,38 @@
   },
   "m1_randomspanlight": {
     "state": "reviewed_not_promoted_v0",
-    "integrity": {"stage1": "1332/1332", "generic": "148/148", "dependency_cone": "148/148", "task_groups": 148, "missing_duplicate_error": "0/0/0"},
-    "fair_primary_result": {"comparison": "m1_dependency_cone_full - equal_compute_generic_remask", "task_macro_delta": -0.006756756756756757, "span_help": 0, "span_harm": 1, "targeted_activation_count": 17},
+    "fair_primary": {"delta_pp": -0.6756756756756757, "help_harm": "0/1", "targeted_activation": "17/148"},
     "result_report": "docs/paper_agent/experiments/m1_abductive_program_state_bridge_20260717_randomspanlight_result.zh.md"
   },
   "m2_constraint_homotopy": {
-    "state": "reviewed_not_promoted_v0",
+    "state": "reviewed_not_promoted",
     "scientific_judgment": "constraints_activated_no_reliable_grouped_advantage",
     "result_report": "docs/paper_agent/experiments/m2_constraint_homotopy_20260716_randomspanlight_result.zh.md"
   },
   "m3_birth_death": {
     "state": "reviewed_not_promoted_v0",
-    "integrity": {"uniform": "148/148", "birth_death": "148/148", "task_groups": 148, "missing_duplicate_error": "0/0/0", "forwards_per_arm": 256},
-    "fair_primary_result": {"comparison": "m3_birth_death_canvas - m3_uniform_fixed_grid", "task_macro_delta": -0.04054054054054054, "span_help": 8, "span_harm": 14, "birth_death_events": 444, "mean_token_forward": 11532.108108108108},
+    "fair_primary": {"delta_pp": -4.054054054054054, "help_harm": "8/14", "events": 444, "mean_token_forward": 11532.108108108108},
     "result_report": "docs/paper_agent/experiments/m3_birth_death_canvas_20260717_randomspanlight_result.zh.md"
   },
   "m4_semantic_particle_assembly": {
-    "state": "gpu_repair_pending_safe_slot_supervised",
-    "offline_audit": "148 best/assembly structural rows complete; no raw output is being overwritten",
-    "supervisor_tmux": "ccfa-execution-sprint-supervisor-v1",
-    "launch_condition": "CAL full stable after t+10, ECC=0, free memory >=25600 MiB, and no third GPU research process"
+    "state": "reviewed_not_promoted_v0_multilinecore_cross_source",
+    "source_reconciliation": {"mandatory_bank_rows": 40632, "randomspanlight_visible_context_matches": "0/164", "frozen_manifest": "148 hash-selected MultiLine-Core groups"},
+    "technical_integrity": {"best": "148/148", "assembly": "148/148", "repair": "148/148", "missing_duplicate_error": "0/0/0", "forwards": {"best": 512, "assembly": 512, "repair": 576}, "resume_noop_writes": 0, "frozen_test": "sealed/0"},
+    "fair_primary": {"comparison": "assembly_without_repair - best_single", "delta_pp": -12.837837837837837, "ci_pp": [-18.243243243243242, -7.4324324324324325], "help_harm": "0/19", "hash_changes": "83/148"},
+    "run": {"wall_sec": 264.4726320069749, "peak_cuda_memory_bytes": 16553162240, "gpu_ecc": 0},
+    "result_report": "docs/paper_agent/experiments/m4_semantic_particle_assembly_20260728_multilinecore_result.zh.md"
   },
   "official_cal": {
-    "state": "official_cal_full_running",
+    "state": "completed_integrity",
     "label": "official CAL reproduction on the 4,990-case non-frozen common subset",
     "cal_commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
     "evaluator_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
     "evaluator_execution_mode": "upstream_documented_local_enablement_overlay; pinned checkout unchanged",
-    "scipy": {"present": false, "runtime_required": false, "reason": "only the upstream fitting utility imports scipy; pinned decoder/evaluator execution path does not"},
-    "tmux_session": "official-cal-primary-sprint-v1",
-    "pane_pid": 2578976,
-    "python_pid": 2579423,
+    "scipy": {"present": false, "runtime_required": false, "reason": "pinned decoder/evaluator import closure does not import scipy"},
     "smoke": {"expected": 12, "completed": 12, "unique": 12, "missing_duplicate_error": "0/0/0", "technical_gate": "passed"},
-    "full": {
-      "expected": 4990,
-      "raw_rows_at_audit": 923,
-      "unique_candidate_keys_at_audit": 923,
-      "status_counts_at_audit": {"ok": 923, "error": 0},
-      "duplicate_keys_at_audit": 0,
-      "failure_journal_rows_at_audit": 0,
-      "full_t0": {"utc": "2026-07-17T10:05:14Z", "raw_rows": 12},
-      "t_plus_10_integrity_audit": {"utc": "2026-07-17T10:16:01Z", "raw_rows": 209, "growth_observed": true},
-      "true_rows_per_hour_from_t0_to_audit": 1022.6379794200187,
-      "eta_hours_from_audit": 3.976969447493597,
-      "partial_accuracy_visibility": false
-    }
+    "full": {"expected": 4990, "completed": 4990, "missing": 0, "canonical_error_count": 0, "failure_journal_count": 0, "status": "completed", "finished_utc": "2026-07-17T15:29:01Z", "partial_accuracy_visibility": false}
   },
-  "gpu_audit": {
-    "utc": "2026-07-17T10:58:29Z",
-    "gpu": "NVIDIA H200 NVL",
-    "utilization_percent": 99,
-    "memory_used_mib": 59881,
-    "memory_free_mib": 83890,
-    "power_watts": 262,
-    "temperature_c": 50,
-    "uncorrected_volatile_ecc": 0,
-    "cal_python_pid_memory_mib": 17862,
-    "other_gpu_processes_present": true,
-    "nvidia_smi_direct_query_note": "sandbox-side calls intermittently failed driver communication; host-side supervisor and tmux audit observed a healthy ECC=0 snapshot",
-    "cal_oom_or_traceback_seen": false
-  },
-  "storage": {"home_available": "2.4T", "home_inode_free": 231998365},
-  "next_gpu_task": "Keep official CAL full running; supervisor launches M4 only after the strict safe-slot condition becomes true. No method is eligible for 296/927 expansion at this checkpoint."
+  "gpu_audit": {"utc": "2026-07-28T19:07:16Z", "gpu": "NVIDIA H200 NVL", "utilization_percent": 0, "memory_used_mib": 0, "memory_free_mib": 143156, "temperature_c": 29, "uncorrected_volatile_ecc": 0, "project_gpu_processes": 0},
+  "storage": {"home_available": "2.3T", "home_inode_free": 231232594},
+  "next_safe_action": "CPU-only DreamOn official protocol audit and rho-EOS infilling compatibility audit; do not launch unaudited GPU full."
 }

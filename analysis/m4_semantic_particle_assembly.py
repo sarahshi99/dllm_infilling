@@ -6,9 +6,14 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping, Sequence
+
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
 
 from analysis.grouped_effects import DEFAULT_BOOTSTRAP_REPLICATES, write_grouped_effect_report
 

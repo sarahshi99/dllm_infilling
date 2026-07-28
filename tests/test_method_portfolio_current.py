@@ -20,7 +20,7 @@ class MethodPortfolioCurrentTest(unittest.TestCase):
         self.assertIn("safely_paused", methods["M1"]["current_status"])
         self.assertEqual(methods["M2"]["current_status"], "reviewed_not_promoted")
         self.assertEqual(methods["M3"]["current_status"], "reviewed_not_promoted_v0")
-        self.assertEqual(methods["M4"]["current_status"], "multiline_core_148_manifest_frozen_repair_pending_launch_authorized")
+        self.assertEqual(methods["M4"]["current_status"], "reviewed_not_promoted_v0_multilinecore_cross_source")
         self.assertTrue(all("route" in method and "927" in method["route"] for method in methods.values()))
 
     def test_subordinate_current_docs_point_to_the_register(self) -> None:
@@ -32,7 +32,7 @@ class MethodPortfolioCurrentTest(unittest.TestCase):
         expected = (
             "M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; "
             "M3=reviewed_not_promoted_v0; "
-            "M4=multiline_core_148_manifest_frozen_repair_pending_launch_authorized"
+            "M4=reviewed_not_promoted_v0_multilinecore_cross_source"
         )
         for name in ("ccfa_master_roadmap.zh.md", "current_action.md", "experiment_queue.md", "idea_board.md"):
             self.assertIn(expected, (DOCS / name).read_text(encoding="utf-8"), name)

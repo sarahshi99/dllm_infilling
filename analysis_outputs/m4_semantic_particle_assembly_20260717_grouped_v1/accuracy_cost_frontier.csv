@@ -1,0 +1,4 @@
+method,equal_weight_task_macro_accuracy,actual_forwards,actual_token_forward_budget,mean_wall_sec
+m4_best_single_particle,0.2972972972972973,512.0,30720.0,37.20135411883018
+m4_assembly_without_repair,0.16891891891891891,512.0,30720.0,37.121483015448305
+m4_assembly_with_repair,0.14189189189189189,576.0,34816.0,38.54388758582511

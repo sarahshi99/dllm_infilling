@@ -1,0 +1,110 @@
+{
+  "automatic_full_population": "multiline_core_148_hash_selected",
+  "case_count": 148,
+  "full": {
+    "assembly": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "best": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "peak_cuda_memory_bytes": 16553162240,
+    "repair": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "resume_noop_writes": 0,
+    "wall_sec": 264.4726320069749
+  },
+  "methods": [
+    "m4_best_single_particle",
+    "m4_assembly_without_repair",
+    "m4_assembly_with_repair"
+  ],
+  "offline": {
+    "m4_assembly_without_repair": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "m4_best_single_particle": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    }
+  },
+  "population_schedule": [
+    {
+      "case_count": 12,
+      "stage": "technical_smoke"
+    },
+    {
+      "case_count": 148,
+      "stage": "randomspanlight_full"
+    },
+    {
+      "case_count": 296,
+      "stage": "multiline_core"
+    },
+    {
+      "case_count": 927,
+      "stage": "singleline_development"
+    },
+    {
+      "case_count": 5079,
+      "stage": "selected_method_multiline"
+    }
+  ],
+  "selection_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/m4_semantic_particle_assembly_20260728_multilinecore_manifest_v1/selection_manifest.json",
+  "smoke": {
+    "assembly": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "best": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "peak_cuda_memory_bytes": 16553162240,
+    "repair": {
+      "bad_forward_count": 0,
+      "duplicate_count": 0,
+      "error_count": 0,
+      "extra_count": 0,
+      "missing_count": 0,
+      "passed": true
+    },
+    "wall_sec": 264.4731608160073
+  },
+  "smoke_gate_passed": true,
+  "source_config": "HumanEval-MultiLineInfilling",
+  "test_evaluation_count": 0
+}

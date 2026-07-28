@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from analysis.m4_semantic_particle_assembly import run_analysis
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def row(index: int, method: str, passed: bool, forwards: int) -> dict[str, object]:
@@ -20,6 +25,17 @@ def row(index: int, method: str, passed: bool, forwards: int) -> dict[str, objec
 
 
 class M4SemanticParticleAssemblyAnalysisTest(unittest.TestCase):
+    def test_direct_cli_resolves_repo_imports(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "analysis" / "m4_semantic_particle_assembly.py"), "--help"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Shared grouped analysis", result.stdout)
+
     def test_grouped_output_keeps_primary_equal_compute_comparison_and_activation(self) -> None:
         methods = ("m4_best_single_particle", "m4_assembly_without_repair", "m4_assembly_with_repair")
         payloads = {method: [row(index, method, bool((index + offset) % 3), 576 if method == methods[2] else 512) for index in range(148)] for offset, method in enumerate(methods)}

@@ -1,0 +1,4 @@
+method_a,method_b,task_macro_delta,task_macro_ci_low,task_macro_ci_high,task_group_count,wins,losses,ties,span_help,span_harm,group_label_swap_two_sided_p,permutation_replicates,permutation_seed
+m4_assembly_without_repair,m4_best_single_particle,-0.12837837837837837,-0.18243243243243243,-0.07432432432432433,148,0,19,129,0,19,9.999000099990002e-05,10000,20261806
+m4_assembly_with_repair,m4_best_single_particle,-0.1554054054054054,-0.24324324324324326,-0.06756756756756757,148,11,34,103,11,34,0.00019998000199980003,10000,20261807
+m4_assembly_with_repair,m4_assembly_without_repair,-0.02702702702702703,-0.0945945945945946,0.04054054054054054,148,11,15,122,11,15,0.561043895610439,10000,20261808
