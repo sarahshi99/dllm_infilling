@@ -5,7 +5,11 @@ Plan: FAST-SPRINT-01 / M4 V0
 
 ## Action
 
-Launch the pre-frozen `Semantic Particle Assembly` repair route as `12` technical smoke cases followed automatically by the complete `148`-task RandomSpanLight population. The fair primary comparison remains `assembly_without_repair` versus `best_single` at `512` standalone forwards; the repair arm is a separately labeled `576`-forward secondary comparison.
+Launch the pre-frozen `Semantic Particle Assembly` repair route as `12` technical smoke cases followed automatically by a deterministic `148`-group MultiLine-Core pre-screen. The fair primary comparison remains `assembly_without_repair` versus `best_single` at `512` standalone forwards; the repair arm is a separately labeled `576`-forward secondary comparison.
+
+### Data-source reconciliation
+
+The originally wired Phase-5 RandomSpanLight bank has `2,060` rows, while the user-authorized immutable bank is `40,632 = 5,079 × 8` and is MultiLine. A read-only visible-context audit found zero matches between the `164` RandomSpanLight rows and the 40,632-bank rows. It is therefore impossible to use the mandated bank while honestly calling the GPU repair run RandomSpanLight. The runner will instead select exactly one MultiLine source span per non-frozen base-task group by a fixed SHA-256 hash of the visible source identity, commit the compact 148-row manifest before GPU launch, and retain the old RandomSpanLight offline audit as historical structural evidence. This is a data/protocol reconciliation, not an outcome-driven method change; any cross-method ranking will mark M4 versus M1/M3 as cross-source rather than apples-to-apples.
 
 ## Reviewer Motivation and Hypothesis
 
@@ -13,12 +17,12 @@ A reviewer needs to know whether visible program fragments add value beyond best
 
 ## Inputs, Environment, and Exact Command
 
-- Dataset: non-frozen `HumanEval-RandomSpanInfillingLight`, `148` base-task groups.
+- Dataset: outcome-blind one-span-per-group `HumanEval-MultiLineInfilling` subset, `148` non-frozen base-task groups, selected from the mandated bank before GPU launch.
 - Model: `GSAI-ML/LLaDA-8B-Base` through the existing runner/cache.
 - GPU: H200 GPU `0`; one unrelated process is retained. Pre-launch audit: ECC=`0`, about `130 GiB` free; projected post-load reserve exceeds `25 GiB`.
-- Candidate bank: read-only `phase5_randomspanlight_candidate_bank_20260711_v1/candidate_bank_raw.jsonl` (`40,632 = 5,079 × 8`); it is never rebuilt, moved, or overwritten.
-- Log: `logs/paper_agent/20260715_m4_semantic_particle_assembly_sprint_v1.log`.
-- Outputs: isolated append-only `outputs_clean/m4_{best,assembly,repair}_randomspanlight_20260715_sprint_v1/` and compact `analysis_outputs/m4_semantic_particle_assembly_20260715_sprint_v1/`.
+- Candidate bank: read-only `phase6_multiline_candidate_bank_20260712_v1/candidate_bank_raw.jsonl` (`40,632 = 5,079 × 8`); it is never rebuilt, moved, or overwritten.
+- Log: `logs/paper_agent/20260728_m4_semantic_particle_assembly_multilinecore_v1.log`.
+- Outputs: isolated append-only `outputs_clean/m4_{best,assembly,repair}_multilinecore_20260728_v1/` and compact `analysis_outputs/m4_semantic_particle_assembly_20260728_multilinecore_v1/`.
 
 ```bash
 tmux new-session -d \
@@ -29,7 +33,7 @@ tmux new-session -d \
 
 ## Technical Success and Kill Criteria
 
-Technical success requires smoke then full to have all three arms `148/148`, unique candidate keys, no missing/duplicate/error rows, repair exactly `64` forwards, canonical outputs append-only/resume no-op, frozen test `sealed` with count `0`, no OOM/ECC/driver/disk error, and no third research GPU process. Fail-stop on duplicate keys, unexpected error rows, frozen intersection, OOM/ECC, persistent driver failure, or a below-25-GiB post-load reserve; do not kill the unrelated process.
+Technical success requires the committed manifest to have exactly one non-frozen source span in each of `148` base-task groups, then smoke/full to have all three arms `148/148`, unique candidate keys, no missing/duplicate/error rows, repair exactly `64` forwards, canonical outputs append-only/resume no-op, frozen test `sealed` with count `0`, no OOM/ECC/driver/disk error, and no third research GPU process. Fail-stop on a malformed/non-deterministic manifest, duplicate keys, unexpected error rows, frozen intersection, OOM/ECC, persistent driver failure, or a below-25-GiB post-load reserve; do not kill the unrelated process.
 
 ## Outcome Handling and Documentation
 

@@ -28,10 +28,8 @@ from experiments.deployable_visible_task import evaluate_completion_after_decode
 from experiments.m2_constraint_homotopy import append_jsonl, load_frozen_groups, read_jsonl, sha256_text, write_csv, write_json
 from experiments.phase6_remask import decode_fixed_canvas_state
 from experiments.method_population_schedule import (
-    RANDOMSPANLIGHT_ALLOWED_CASES,
     SMOKE_CASES,
     population_schedule,
-    require_randomspanlight_full,
 )
 
 
@@ -46,12 +44,12 @@ STAGE1_GRID_FORWARD_BUDGET = 8 * REPAIR_STEPS
 STAGE1_GRID_TOKEN_BUDGET = 2 * (16 + 32 + 64 + 128) * REPAIR_STEPS
 
 
-def cfg_for() -> ExperimentConfig:
+def cfg_for(source_config: str = SOURCE_CONFIG) -> ExperimentConfig:
     cfg = ExperimentConfig()
     cfg.model.model_path = MODEL_PATH
     cfg.model.torch_dtype = "bfloat16"
     cfg.model.device_map = "auto"
-    cfg.data.dataset_subset = SOURCE_CONFIG
+    cfg.data.dataset_subset = str(source_config)
     cfg.decode.mask_length_source = "fixed"
     cfg.decode.fixed_mask_length = CANVAS_TOKENS
     cfg.decode.total_steps = REPAIR_STEPS
@@ -97,6 +95,52 @@ def candidate_view(row: Mapping[str, Any]) -> dict[str, Any]:
         "prefix_text": str(row.get("prefix_text") or ""),
         "suffix_text": str(row.get("suffix_text") or ""),
     }
+
+
+def _group_deployable_bank_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, list[Mapping[str, Any]]]:
+    grouped: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in rows:
+        if row.get("candidate_kind") == "deployable_grid":
+            grouped[str(row["row_key"])].append(row)
+    for row_key, candidates in grouped.items():
+        if len(candidates) != 8:
+            raise RuntimeError(f"M4 bank requires exactly eight deployable candidates per row: {row_key}")
+    return grouped
+
+
+def build_multiline_core_selection_manifest(
+    rows: Sequence[Mapping[str, Any]], frozen_groups: set[str]
+) -> list[dict[str, Any]]:
+    """Choose one visible-source row per base task without reading outcomes."""
+    grouped = _group_deployable_bank_rows(rows)
+    selected: dict[str, tuple[str, Mapping[str, Any]]] = {}
+    for row_key, candidates in grouped.items():
+        context = candidates[0]
+        task_group = str(context["task_group"])
+        if task_group in frozen_groups:
+            raise RuntimeError("Frozen task leaked into M4 candidate bank")
+        selection_hash = sha256_text(f"m4_multiline_core_v1|{task_group}|{row_key}")
+        prior = selected.get(task_group)
+        if prior is None or (selection_hash, row_key) < (prior[0], str(prior[1]["row_key"])):
+            selected[task_group] = (selection_hash, context)
+    manifest = []
+    for task_group in sorted(selected):
+        selection_hash, context = selected[task_group]
+        manifest.append(
+            {
+                "row_key": str(context["row_key"]),
+                "case_index": int(context["case_index"]),
+                "source_row_id": int(context["source_row_id"]),
+                "task_group": task_group,
+                "length_bucket": str(context["length_bucket"]),
+                "reference_middle_tokens": int(context["reference_middle_tokens"]),
+                "selection_hash": selection_hash,
+                "visible_context_sha256": sha256_text(
+                    str(context.get("prefix_text") or "") + "\0" + str(context.get("suffix_text") or "")
+                ),
+            }
+        )
+    return manifest
 
 
 def candidate_fragments(candidate: Mapping[str, Any], ordinal: int) -> list[dict[str, Any]]:
@@ -268,31 +312,74 @@ def repair_assembly(assembly: Mapping[str, Any], source: Mapping[str, Any], toke
     return result
 
 
-def build_manifest_from_bank(rows: Sequence[Mapping[str, Any]], frozen_groups: set[str]) -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]]:
-    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in rows:
-        if row.get("candidate_kind") == "deployable_grid":
-            grouped[str(row["row_key"])].append(dict(row))
-    manifest: list[dict[str, Any]] = []
-    for row_key, candidates in sorted(grouped.items()):
-        if len(candidates) != 8:
-            raise RuntimeError("M4 bank requires exactly eight deployable candidates per row")
-        context = candidates[0]
-        if str(context["task_group"]) in frozen_groups:
-            raise RuntimeError("Frozen task leaked into M4 candidate bank")
-        manifest.append(
-            {
-                "row_key": row_key,
-                "case_index": context["case_index"],
-                "source_row_id": context["source_row_id"],
-                "task_group": context["task_group"],
-                "length_bucket": context["length_bucket"],
-                "reference_middle_tokens": context["reference_middle_tokens"],
-            }
-        )
+def build_manifest_from_bank(
+    rows: Sequence[Mapping[str, Any]],
+    frozen_groups: set[str],
+    selection_manifest: Sequence[Mapping[str, Any]] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, list[Mapping[str, Any]]]]:
+    grouped = _group_deployable_bank_rows(rows)
+    if selection_manifest is None:
+        manifest: list[dict[str, Any]] = []
+        for row_key, candidates in sorted(grouped.items()):
+            context = candidates[0]
+            if str(context["task_group"]) in frozen_groups:
+                raise RuntimeError("Frozen task leaked into M4 candidate bank")
+            manifest.append(
+                {
+                    "row_key": row_key,
+                    "case_index": int(context["case_index"]),
+                    "source_row_id": int(context["source_row_id"]),
+                    "task_group": str(context["task_group"]),
+                    "length_bucket": str(context["length_bucket"]),
+                    "reference_middle_tokens": int(context["reference_middle_tokens"]),
+                }
+            )
+    else:
+        manifest = []
+        seen_keys: set[str] = set()
+        for selected in selection_manifest:
+            row_key = str(selected["row_key"])
+            if row_key in seen_keys or row_key not in grouped:
+                raise RuntimeError("M4 selection manifest has duplicate or unknown row key")
+            seen_keys.add(row_key)
+            context = grouped[row_key][0]
+            if str(context["task_group"]) != str(selected["task_group"]):
+                raise RuntimeError("M4 selection manifest task group does not match bank")
+            if str(context["task_group"]) in frozen_groups:
+                raise RuntimeError("Frozen task leaked into M4 selection manifest")
+            expected_context_hash = sha256_text(
+                str(context.get("prefix_text") or "") + "\0" + str(context.get("suffix_text") or "")
+            )
+            if str(selected.get("visible_context_sha256") or "") != expected_context_hash:
+                raise RuntimeError("M4 selection manifest visible context hash does not match bank")
+            manifest.append(
+                {
+                    "row_key": row_key,
+                    "case_index": int(context["case_index"]),
+                    "source_row_id": int(context["source_row_id"]),
+                    "task_group": str(context["task_group"]),
+                    "length_bucket": str(context["length_bucket"]),
+                    "reference_middle_tokens": int(context["reference_middle_tokens"]),
+                    "selection_hash": str(selected["selection_hash"]),
+                    "visible_context_sha256": expected_context_hash,
+                }
+            )
     if len(manifest) != 148 or len({row["task_group"] for row in manifest}) != 148:
-        raise RuntimeError("M4 requires the existing 148-task RandomSpanLight bank")
+        raise RuntimeError("M4 requires exactly 148 aligned non-frozen task groups")
     return manifest, grouped
+
+
+def validate_manifest_source_context(
+    manifest: Sequence[Mapping[str, Any]],
+    grouped: Mapping[str, Sequence[Mapping[str, Any]]],
+    source_rows: Sequence[Mapping[str, Any]],
+) -> None:
+    """Fail before evaluation if a selected bank row belongs to another visible infill context."""
+    for item in manifest:
+        source = source_rows[int(item["source_row_id"])]
+        candidate = grouped[str(item["row_key"])][0]
+        if str(source["prompt"]) != str(candidate.get("prefix_text") or "") or str(source["suffix"]) != str(candidate.get("suffix_text") or ""):
+            raise RuntimeError("M4 selected source visible context does not match candidate bank")
 
 
 def choose_smoke(manifest: Sequence[Mapping[str, Any]], count: int) -> list[dict[str, Any]]:
@@ -481,7 +568,12 @@ def run(args: argparse.Namespace) -> int:
     source_rows = read_jsonl(Path(args.dataset_jsonl).resolve())
     bank_rows = read_jsonl(Path(args.candidate_bank_raw).resolve())
     frozen_groups, lock = load_frozen_groups()
-    manifest, grouped = build_manifest_from_bank(bank_rows, frozen_groups)
+    selection_payload = None
+    if args.selection_manifest:
+        payload = json.loads(Path(args.selection_manifest).read_text(encoding="utf-8"))
+        selection_payload = payload["selected_rows"]
+    manifest, grouped = build_manifest_from_bank(bank_rows, frozen_groups, selection_payload)
+    validate_manifest_source_context(manifest, grouped, source_rows)
     best_dir, assembly_dir, repair_dir, compact_dir = (Path(args.best_output_dir).resolve(), Path(args.assembly_output_dir).resolve(), Path(args.repair_output_dir).resolve(), Path(args.compact_dir).resolve())
     if len({best_dir, assembly_dir, repair_dir}) != 3:
         raise ValueError("M4 best, assembly, and repair outputs must be distinct")
@@ -495,7 +587,7 @@ def run(args: argparse.Namespace) -> int:
     if not args.repair:
         write_json(compact_dir / "offline_summary.json", {"offline": offline, "case_count": len(manifest), "frozen_test_status": lock.get("test_status"), "test_evaluation_count": lock.get("test_evaluation_count")})
         return 0
-    tokenizer, model = load_model_and_tokenizer(cfg_for().model)
+    tokenizer, model = load_model_and_tokenizer(cfg_for(args.source_config).model)
     torch.cuda.reset_peak_memory_stats()
     gpu_started = time.perf_counter()
     selected = choose_smoke(manifest, int(args.smoke_cases))
@@ -511,7 +603,6 @@ def run(args: argparse.Namespace) -> int:
     smoke_gate = bool(smoke["passed"] and best_smoke["passed"] and assembly_smoke["passed"] and noops == 0 and lock.get("test_status") == "sealed" and int(lock.get("test_evaluation_count", -1)) == 0)
     full = None
     if smoke_gate and args.auto_full:
-        require_randomspanlight_full(len(manifest))
         evaluated_best, evaluated_assembly = evaluated_offline_rows(manifest, grouped, source_rows)
         append_rows_resume(best_dir / "m4_best_evaluated_raw.jsonl", evaluated_best)
         append_rows_resume(assembly_dir / "m4_assembly_evaluated_raw.jsonl", evaluated_assembly)
@@ -527,7 +618,7 @@ def run(args: argparse.Namespace) -> int:
         }
     compact_dir.mkdir(parents=True, exist_ok=True)
     write_csv(compact_dir / "offline_method_audit.csv", [{"method": method, **value} for method, value in offline.items()])
-    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke, "wall_sec": time.perf_counter() - gpu_started, "peak_cuda_memory_bytes": int(torch.cuda.max_memory_allocated())}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "population_schedule": population_schedule(), "automatic_full_population": "randomspanlight_full", "test_evaluation_count": 0})
+    write_json(compact_dir / "run_manifest.json", {"offline": offline, "smoke": {"best": best_smoke, "assembly": assembly_smoke, "repair": smoke, "wall_sec": time.perf_counter() - gpu_started, "peak_cuda_memory_bytes": int(torch.cuda.max_memory_allocated())}, "smoke_gate_passed": smoke_gate, "full": full, "case_count": len(manifest), "methods": list(METHODS), "population_schedule": population_schedule(), "automatic_full_population": str(args.population_label), "source_config": str(args.source_config), "selection_manifest": str(args.selection_manifest or ""), "test_evaluation_count": 0})
     return 0 if smoke_gate and (full is None or all(full[name]["passed"] for name in ("best", "assembly", "repair"))) else 2
 
 
@@ -539,6 +630,9 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--assembly-output-dir", required=True)
     root.add_argument("--repair-output-dir", required=True)
     root.add_argument("--compact-dir", required=True)
+    root.add_argument("--selection-manifest")
+    root.add_argument("--source-config", default=SOURCE_CONFIG)
+    root.add_argument("--population-label", default="randomspanlight_full")
     root.add_argument("--smoke-cases", type=int, default=SMOKE_CASES)
     root.add_argument("--repair", action="store_true")
     root.add_argument("--auto-full", action="store_true")

@@ -1,0 +1,1493 @@
+{
+  "frozen_test_status": "sealed",
+  "schema_version": 1,
+  "selected_row_count": 148,
+  "selected_rows": [
+    {
+      "case_index": 17,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 34,
+      "row_key": "HumanEval-MultiLineInfilling:17:1a2bec960cdf7ff9",
+      "selection_hash": "0e32d2323e2c5ad4861bbeb9918589f9fe48f3298a725ccf33b6b5272b8e801d",
+      "source_row_id": 17,
+      "task_group": "HumanEval/0",
+      "visible_context_sha256": "4fbf9304a9b160b5add0882f3d5b13985faa26043e87c4924d882c7bf75950b2"
+    },
+    {
+      "case_index": 106,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:106:984d95f8076e43ef",
+      "selection_hash": "033a43c9554e79a0a0ad8d87becd9abfed71648caf77b5f05f4d2dcf1377d1c6",
+      "source_row_id": 106,
+      "task_group": "HumanEval/1",
+      "visible_context_sha256": "bcaed2a3ff050a99ef7f8f9a09daa0c6875744e0c72e5a34a9960db6a5a674c3"
+    },
+    {
+      "case_index": 327,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:327:561d335544769b59",
+      "selection_hash": "102b2d0b74ca861172f3c66d6cdfc09620d578594b5e6fa6b23d17171a3baa2b",
+      "source_row_id": 327,
+      "task_group": "HumanEval/10",
+      "visible_context_sha256": "8d24dc1ba15ac71996aeef9898f017abc5def1e814e0a8e5cd07ecd8457b4ad1"
+    },
+    {
+      "case_index": 2320,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:2896:a92c9f9f32c104f1",
+      "selection_hash": "0863cc08eccef379de82942ba23fab84858efdaebd4a10de67c34af5e86f69d9",
+      "source_row_id": 2896,
+      "task_group": "HumanEval/100",
+      "visible_context_sha256": "b055bae4e2b91268d576476828e3ea7a2ebda5eb5b67cda65151637a1822df4c"
+    },
+    {
+      "case_index": 2340,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:2916:fcf581e87ac1cbd8",
+      "selection_hash": "01a0e4de0d2fab939de71992af6eea7a083f2ed7d63ce8d06d45e38063efeefe",
+      "source_row_id": 2916,
+      "task_group": "HumanEval/101",
+      "visible_context_sha256": "7dc0cd42c953f9c0395b2045627463113c36ffab49429ae5a1ad249123b452ac"
+    },
+    {
+      "case_index": 2399,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 12,
+      "row_key": "HumanEval-MultiLineInfilling:2975:ac7738bf2346f967",
+      "selection_hash": "12366b314f75b9e1ee44d15e128169fceddece5ce7cc41940ebbb8f97330f0eb",
+      "source_row_id": 2975,
+      "task_group": "HumanEval/102",
+      "visible_context_sha256": "cbc6f3e595158b80f130ad9b49716c0e84056c4278c2d7b80c844efc2db76dd7"
+    },
+    {
+      "case_index": 2412,
+      "length_bucket": "long",
+      "reference_middle_tokens": 23,
+      "row_key": "HumanEval-MultiLineInfilling:2988:ca7e33c052df135b",
+      "selection_hash": "0ef198b5d18bf5be890e1ab41097140a7c627ef487639a81051ca6aabc8282e8",
+      "source_row_id": 2988,
+      "task_group": "HumanEval/103",
+      "visible_context_sha256": "5def4a2957852cc9380e5d92aeb5b797e82bf4f7f85d0922b5135a07c9b62bd1"
+    },
+    {
+      "case_index": 2427,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 35,
+      "row_key": "HumanEval-MultiLineInfilling:3003:c0e4e548c8ce363c",
+      "selection_hash": "0e7f1e6a3e130c3cc05e72c443bfa3bc23ef916569f58efe9f8be6167d3dfbee",
+      "source_row_id": 3003,
+      "task_group": "HumanEval/104",
+      "visible_context_sha256": "49258a3052b73f049a125379a7527a9056622b16ece3ad1c4355e0352214bc24"
+    },
+    {
+      "case_index": 2479,
+      "length_bucket": "long",
+      "reference_middle_tokens": 24,
+      "row_key": "HumanEval-MultiLineInfilling:3055:d8dc92833ad7a2d7",
+      "selection_hash": "025151fccf26a1d89a49a66e33aba1e909a816e120f346b4ba1cd3a54f29e49d",
+      "source_row_id": 3055,
+      "task_group": "HumanEval/105",
+      "visible_context_sha256": "3a7c521c8c405ebcecc3dbe0e27314f53afcc59ca9efc8fa9134f5b128f5ef0d"
+    },
+    {
+      "case_index": 2654,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 38,
+      "row_key": "HumanEval-MultiLineInfilling:3230:3a8ca37cb6a660be",
+      "selection_hash": "03986d040a2f047cd1edbe4c08682477494ae01ca1d740433ba50ca5ef5f9972",
+      "source_row_id": 3230,
+      "task_group": "HumanEval/106",
+      "visible_context_sha256": "c56f6ad5dd4ff94b0f0867f35d105e024fada14d6807f3c0b076335ef0941cd8"
+    },
+    {
+      "case_index": 2723,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:3299:69fbc8ec1cfa947f",
+      "selection_hash": "02a3f54b7290ba7603fef5090f6f352a047c4d4d31a17c10608b96d083460e1c",
+      "source_row_id": 3299,
+      "task_group": "HumanEval/107",
+      "visible_context_sha256": "ed25f75a2633ea8f47a49c379f4f73015410d0bd083b4ef86ad7f210bb7f9eb8"
+    },
+    {
+      "case_index": 2759,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 26,
+      "row_key": "HumanEval-MultiLineInfilling:3335:30533dc2acfb7ffc",
+      "selection_hash": "2591fcf2206b509fc60cc4ab3dc52d2f2b9d98d19bcad00415202d0d2c37bd96",
+      "source_row_id": 3335,
+      "task_group": "HumanEval/108",
+      "visible_context_sha256": "10a4802c7e4f4a12e7c991ffc2d869e2fce823a35bb641a0977e8771f0f4d4a5"
+    },
+    {
+      "case_index": 2802,
+      "length_bucket": "long",
+      "reference_middle_tokens": 23,
+      "row_key": "HumanEval-MultiLineInfilling:3378:2158448b8b4b6031",
+      "selection_hash": "0158f562e37eeed83b3874847db97fb0825f6c1cd5be23200c1fc98bba984196",
+      "source_row_id": 3378,
+      "task_group": "HumanEval/109",
+      "visible_context_sha256": "0bc2da236875a507d75480453b0823b226eb4527bb6fb240b3bc748939c6f32a"
+    },
+    {
+      "case_index": 359,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:359:179f279044026f1f",
+      "selection_hash": "021c43e469dc156d6b62ac99844495ddf45e71cea21bd5e8a2478c54d6c77ba6",
+      "source_row_id": 359,
+      "task_group": "HumanEval/11",
+      "visible_context_sha256": "024dc64392e3a1cad21f3586f69dc6092967903e683b7221387d93ad0d46e424"
+    },
+    {
+      "case_index": 2896,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 10,
+      "row_key": "HumanEval-MultiLineInfilling:3472:d4172f811ffcb44f",
+      "selection_hash": "01c66dc24ba04e2b4cb78863ae3c524867a81f2d4f4725ccfad1f3d4b5075507",
+      "source_row_id": 3472,
+      "task_group": "HumanEval/110",
+      "visible_context_sha256": "28e8f583f17a5ef4f4d250190dc20698bc991bb362ec90540893a3639116101e"
+    },
+    {
+      "case_index": 2949,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:3525:0ac39e06a9d1e299",
+      "selection_hash": "04610df7fe91e1d34836e404bb9e55e4adf855f3915b372d20eb4e7208889fa1",
+      "source_row_id": 3525,
+      "task_group": "HumanEval/111",
+      "visible_context_sha256": "223a5fb5324c9bb3b02b085c23f32b2af339c9d213333bad5bcb79c928b95871"
+    },
+    {
+      "case_index": 2977,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:3553:20ea73cd036807d2",
+      "selection_hash": "42a7350f3dd279020de62faf88d65c8c7451ab60e96c30ce65fa4471dc9ce2f2",
+      "source_row_id": 3553,
+      "task_group": "HumanEval/112",
+      "visible_context_sha256": "1bb8e6212c5996fcdfe8c8bfd4fcbad37ddf8d8f5fadb0135232742ec76c5b37"
+    },
+    {
+      "case_index": 2991,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 64,
+      "row_key": "HumanEval-MultiLineInfilling:3567:68091a371e4f10e7",
+      "selection_hash": "02b9691361f540150b43a506db5b440e480c1e2dae73ee913fc00af699db9ab3",
+      "source_row_id": 3567,
+      "task_group": "HumanEval/113",
+      "visible_context_sha256": "ef21f07b4614da6973ce3fbab5682693f493e7583cc99a58da5fbfafb13eeac8"
+    },
+    {
+      "case_index": 3046,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:3622:2de1f72fe1dff5aa",
+      "selection_hash": "000cecb545b39ccd6fbf5278ae769951dec19004a6cf2a5632ed4edfd78d9b6b",
+      "source_row_id": 3622,
+      "task_group": "HumanEval/114",
+      "visible_context_sha256": "1652e9e7149b9da1f3bc98f431d4448ac076be2d0e84caa44eafb42bd8e0b38e"
+    },
+    {
+      "case_index": 3061,
+      "length_bucket": "long",
+      "reference_middle_tokens": 17,
+      "row_key": "HumanEval-MultiLineInfilling:3637:c186336285554ed7",
+      "selection_hash": "fd69384ecaf6d48ef62fe46eda872d9108b8ad4730495c7fe214fc361a53eb79",
+      "source_row_id": 3637,
+      "task_group": "HumanEval/115",
+      "visible_context_sha256": "085f76d2fae5e474f07231661ea4a9c0c5417114816125af9968373d79378d2b"
+    },
+    {
+      "case_index": 3062,
+      "length_bucket": "long",
+      "reference_middle_tokens": 21,
+      "row_key": "HumanEval-MultiLineInfilling:3638:b3bba8a330bd9651",
+      "selection_hash": "9821a8b58f8dca4baa87127cd9d6a45e989b4b87a0943abd6976420cb6f6cdda",
+      "source_row_id": 3638,
+      "task_group": "HumanEval/116",
+      "visible_context_sha256": "9e20166d5180ef9ae2c98a027aed6f1c333041484f243131c89ce9318d0fbf5b"
+    },
+    {
+      "case_index": 3082,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 42,
+      "row_key": "HumanEval-MultiLineInfilling:3658:4fc863ad1af34e69",
+      "selection_hash": "0680b78454125c338503f4a7d517f16a47d89b9a2dad9b2bb98b24a85d4792de",
+      "source_row_id": 3658,
+      "task_group": "HumanEval/117",
+      "visible_context_sha256": "ebc23de047ed0ca868016d5312fffca6250d6d2c9702be75cae06750dc6bdf12"
+    },
+    {
+      "case_index": 3129,
+      "length_bucket": "long",
+      "reference_middle_tokens": 17,
+      "row_key": "HumanEval-MultiLineInfilling:3705:4ca4b68a42896242",
+      "selection_hash": "05a5c3159440132f8a0268f8e50d3e14152991ba41aabb683a306ac2c0fb2e0f",
+      "source_row_id": 3705,
+      "task_group": "HumanEval/118",
+      "visible_context_sha256": "a07a6bbce8ff54d206dee6f0cc2ffc8f5fdedb53a40bb22cf978ebde4c710ea2"
+    },
+    {
+      "case_index": 3172,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 26,
+      "row_key": "HumanEval-MultiLineInfilling:3748:cf21ad9b5913fce2",
+      "selection_hash": "090c10e11181fc4b9a0818af8cf44147736116eed407968a4706a00a599eddba",
+      "source_row_id": 3748,
+      "task_group": "HumanEval/119",
+      "visible_context_sha256": "60047d276515a0de12d25469ef86dca870d780c994fd7d79abc8fb353299e522"
+    },
+    {
+      "case_index": 369,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:369:ce13b1cfe0fc64e8",
+      "selection_hash": "202933252a7294721e64c5e01ea0173491666a4f96eac112886de3da58d85ddc",
+      "source_row_id": 369,
+      "task_group": "HumanEval/12",
+      "visible_context_sha256": "1b9961d48d69ca8f75636558ef882c74b3482b9d6c4bf953d27a0e991cbdc045"
+    },
+    {
+      "case_index": 3240,
+      "length_bucket": "short",
+      "reference_middle_tokens": 4,
+      "row_key": "HumanEval-MultiLineInfilling:3816:bfb6cfcafbdfa553",
+      "selection_hash": "1ba3bb36bbacbfdf675e6e3e0fed8657fd91ef095f17abfb041dccf3083cdc83",
+      "source_row_id": 3816,
+      "task_group": "HumanEval/120",
+      "visible_context_sha256": "f8abfe502d290aef1941a94ffd0dcf7b93bb60566f8c457cf38c849a71e34217"
+    },
+    {
+      "case_index": 3250,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 28,
+      "row_key": "HumanEval-MultiLineInfilling:3826:b3f05695d911d251",
+      "selection_hash": "4f97efbca09c4c8a9ef120c0659ec30bcd1e01044ba09e4d83cc18a601e71bd7",
+      "source_row_id": 3826,
+      "task_group": "HumanEval/121",
+      "visible_context_sha256": "12287f092e7c1714522aa0ef7ca5dfc4dbf3c3c523d9fd3bd5dbbb1bc5733eee"
+    },
+    {
+      "case_index": 3251,
+      "length_bucket": "long",
+      "reference_middle_tokens": 21,
+      "row_key": "HumanEval-MultiLineInfilling:3827:e8a1e223aa25a484",
+      "selection_hash": "b5c227ce295f07f7925fa205cbe06182827b68b7494ccab30d3087fe01517322",
+      "source_row_id": 3827,
+      "task_group": "HumanEval/122",
+      "visible_context_sha256": "1ab70df4d20532a799cbaa8082cc03fee807fa9ae5e62173f2c9816acc86ccdc"
+    },
+    {
+      "case_index": 3272,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 73,
+      "row_key": "HumanEval-MultiLineInfilling:3848:348a04a5edce86ba",
+      "selection_hash": "01705a2327d3e2446eba0ade394c95150a446601fefce16c764cd89dc5fe76bf",
+      "source_row_id": 3848,
+      "task_group": "HumanEval/123",
+      "visible_context_sha256": "9417e047ab82743c5bb44f3fd1b5bbc0ebc6626da6132c7aeb4f520e7250dbed"
+    },
+    {
+      "case_index": 3417,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 54,
+      "row_key": "HumanEval-MultiLineInfilling:3993:cade8dc34e03632e",
+      "selection_hash": "00485d03b4ff942fed9e2ed145be7938230dc42621a063d39b59d89345fe44a4",
+      "source_row_id": 3993,
+      "task_group": "HumanEval/124",
+      "visible_context_sha256": "b86ed9ae7a7722dd88f2736f48280f893b65c3d75340b442fc01f4ba3ed6febe"
+    },
+    {
+      "case_index": 3465,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:4041:8bc777ecc904d3a4",
+      "selection_hash": "216bd4438262fe9b5dfcc35e5da962927b014f03686f1b01293d108b06e3e4d5",
+      "source_row_id": 4041,
+      "task_group": "HumanEval/125",
+      "visible_context_sha256": "06b9667e613bff9d1a4bc9dc44a032a854c9af7e47bc0b731ffe9db5cab342ae"
+    },
+    {
+      "case_index": 3513,
+      "length_bucket": "short",
+      "reference_middle_tokens": 4,
+      "row_key": "HumanEval-MultiLineInfilling:4089:886f5031e7b5d2fe",
+      "selection_hash": "08d895ce02cc2ac583334cf0bc09fac18f5acc98bd004e40520056be5dabbab9",
+      "source_row_id": 4089,
+      "task_group": "HumanEval/126",
+      "visible_context_sha256": "d35e7c81d6e6ac9c31b4a40246fba8170bfd732391bfaa45e1e1a23cee21ba45"
+    },
+    {
+      "case_index": 3627,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:4203:ebab7f32cf1535f7",
+      "selection_hash": "00b4f0cb67ef6b70687107df2a709f84e189c73fba21cec624ab0025336e7b9b",
+      "source_row_id": 4203,
+      "task_group": "HumanEval/127",
+      "visible_context_sha256": "651ca335ca38c2b8999b217a540523ae3e5df1f6713be594a72f8c06803f85cd"
+    },
+    {
+      "case_index": 3638,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 52,
+      "row_key": "HumanEval-MultiLineInfilling:4214:95c95bdc7d597be3",
+      "selection_hash": "2999d386a278a22b142444eb2ee8f7eaf68f1b9db15f134c78b14851fa17f4ce",
+      "source_row_id": 4214,
+      "task_group": "HumanEval/128",
+      "visible_context_sha256": "f642de736250b55443afb3e377c8e116078bd936e69fe89eeb3ed8ca98fc2455"
+    },
+    {
+      "case_index": 3727,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 37,
+      "row_key": "HumanEval-MultiLineInfilling:4303:d61cae49735c6ba7",
+      "selection_hash": "01e24332494d1753204922136e3891ebb98ac77d74448ddccb22b171511b5306",
+      "source_row_id": 4303,
+      "task_group": "HumanEval/129",
+      "visible_context_sha256": "e3afe5f8de81eaadcb537b584683d76bd3380316437a5f274bd99f11d6c8fcdb"
+    },
+    {
+      "case_index": 395,
+      "length_bucket": "short",
+      "reference_middle_tokens": 4,
+      "row_key": "HumanEval-MultiLineInfilling:395:988eb3824ffc51e2",
+      "selection_hash": "1f2ac20e98ef40f4242344517aea3586acaa77d40b6d30db2f921cea14d6f0ad",
+      "source_row_id": 395,
+      "task_group": "HumanEval/13",
+      "visible_context_sha256": "ba5b913af5ec6c6853606c89422fab6664e2e88b75008c8159f948af07ce587c"
+    },
+    {
+      "case_index": 3907,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 42,
+      "row_key": "HumanEval-MultiLineInfilling:4483:8db92313f5cb5a8a",
+      "selection_hash": "010d2830611f06f5a85342a11a15d15aea10ac6924fe0f5c9abc34e902d7acb9",
+      "source_row_id": 4483,
+      "task_group": "HumanEval/130",
+      "visible_context_sha256": "a0551d535872925bd292991e8dba5cb9e20556503f99e0eb338bcc0c98943181"
+    },
+    {
+      "case_index": 3964,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 39,
+      "row_key": "HumanEval-MultiLineInfilling:4540:abb3f11cad42e2df",
+      "selection_hash": "043c1b39d7ecd98ee225e0618b54cd0cf2d8016550685f3716633506c902ed75",
+      "source_row_id": 4540,
+      "task_group": "HumanEval/131",
+      "visible_context_sha256": "600052749355a28210d6b62b457425fe1c0da878c5e1e6965124b670a3c475d2"
+    },
+    {
+      "case_index": 4101,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 41,
+      "row_key": "HumanEval-MultiLineInfilling:4677:c1441c69b818e332",
+      "selection_hash": "014377e21d14d11217847d47b97b5fdf322ac4f9deb6e270e9a036c4d429023f",
+      "source_row_id": 4677,
+      "task_group": "HumanEval/132",
+      "visible_context_sha256": "6c30e794895ae866af3b4f5ea29eee58ae290d5719243afe10569a8104bfd29d"
+    },
+    {
+      "case_index": 4143,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 10,
+      "row_key": "HumanEval-MultiLineInfilling:4719:646d598016bdbc9c",
+      "selection_hash": "03f213899eed9f448d4bb692003a0dee6ae3f1baa0b272caa8394d2e24aae4e2",
+      "source_row_id": 4719,
+      "task_group": "HumanEval/133",
+      "visible_context_sha256": "6a2e75947c287892fa3bbcbd269b17711f527041ce5c04503b923ef97bc8e6ab"
+    },
+    {
+      "case_index": 4157,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 12,
+      "row_key": "HumanEval-MultiLineInfilling:4733:57f4bce2a44bfb37",
+      "selection_hash": "7868ba3db9d09b5e1bab17f7b11e34cc4a0a0d2e89bf33dff9856756b739e82a",
+      "source_row_id": 4733,
+      "task_group": "HumanEval/134",
+      "visible_context_sha256": "a4f754aa85a75de5f348c110fa56355596b89c492e4013af18a8c4aad9f3ecd4"
+    },
+    {
+      "case_index": 4160,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 16,
+      "row_key": "HumanEval-MultiLineInfilling:4764:4f6831d80c7bb45b",
+      "selection_hash": "11898b4cee8a642c48db72fa79295bd0ae6045fcc9eed132091ee3c01712605d",
+      "source_row_id": 4764,
+      "task_group": "HumanEval/136",
+      "visible_context_sha256": "5ea3657b0cc7a36445466840641319ad58d684119aa6dc8da2f621e132f7d533"
+    },
+    {
+      "case_index": 4169,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 63,
+      "row_key": "HumanEval-MultiLineInfilling:4773:da22e5165738777b",
+      "selection_hash": "0544c5abc98e87037e7ddcf79942a759163a1aa656018b58af1849202dfda301",
+      "source_row_id": 4773,
+      "task_group": "HumanEval/137",
+      "visible_context_sha256": "436598669c17370759cf49e4b0e9c4a4b5a004157403323e283f02d09932b0a8"
+    },
+    {
+      "case_index": 4181,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:4785:7b978e87216e2869",
+      "selection_hash": "bd1c43e6953592b47f1ee0656be1646fd67101eed50da1183d6d0cefdafd7e8e",
+      "source_row_id": 4785,
+      "task_group": "HumanEval/138",
+      "visible_context_sha256": "2f1ec709ca7a9a335f0b0fd5994e5af46a18851c3c687d54f6dfae16a5f3e0a3"
+    },
+    {
+      "case_index": 4188,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:4792:a5c95bd8dbeb8624",
+      "selection_hash": "0de5c0dbbd6c2ff0ba9dd9847b48e5a2237e23ed10a9f59f874d867c9aded863",
+      "source_row_id": 4792,
+      "task_group": "HumanEval/139",
+      "visible_context_sha256": "7cc6b59f6f790cfb8c22be25c0b03add898e1410847ec51edf8783d933b70505"
+    },
+    {
+      "case_index": 396,
+      "length_bucket": "short",
+      "reference_middle_tokens": 5,
+      "row_key": "HumanEval-MultiLineInfilling:396:48d005bcf6c59a94",
+      "selection_hash": "13ef8a550070895ca57281f6269fe823b93985740b11c267516f2daa9f0d3e3a",
+      "source_row_id": 396,
+      "task_group": "HumanEval/14",
+      "visible_context_sha256": "038f69f047188ffb079814732acc3bd591ec072b6ee60b497d1e3f5ba0114bf4"
+    },
+    {
+      "case_index": 4237,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 128,
+      "row_key": "HumanEval-MultiLineInfilling:4841:8e4dc3a83941aba7",
+      "selection_hash": "0043b4903fc694d48cfce9a6c25ce459807e3ff960d192a1d4329848e6c85643",
+      "source_row_id": 4841,
+      "task_group": "HumanEval/140",
+      "visible_context_sha256": "eda5c4ad939e6786efbb0c4d27cbf762e70bc1951ddfaa34a827a4878135da9a"
+    },
+    {
+      "case_index": 4492,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 25,
+      "row_key": "HumanEval-MultiLineInfilling:5096:4548cfd1d9143821",
+      "selection_hash": "03ef07b5899692e50ca4602bb3154d0ad545b55972d2460bf071900084784f81",
+      "source_row_id": 5096,
+      "task_group": "HumanEval/141",
+      "visible_context_sha256": "efe75489fca4daa960058d548801e6f1b90b6656f9a0e0b6cafcc7cbde5127fc"
+    },
+    {
+      "case_index": 4546,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 52,
+      "row_key": "HumanEval-MultiLineInfilling:5150:0cd2d64a7fc5ebcd",
+      "selection_hash": "005d7db063a61485b2286286e2d555f1623fea0a109c53a23c1231bd15353a7e",
+      "source_row_id": 5150,
+      "task_group": "HumanEval/142",
+      "visible_context_sha256": "16f7386d4e1b72e4c75ca7bbd883ea98170fe261059e1ebe38511bd1d498138d"
+    },
+    {
+      "case_index": 4582,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 30,
+      "row_key": "HumanEval-MultiLineInfilling:5252:4d720e6ad0ce19e9",
+      "selection_hash": "022c05167197e287b949782020c9191e3236813ce7a0af832128f1e556f0bcbf",
+      "source_row_id": 5252,
+      "task_group": "HumanEval/144",
+      "visible_context_sha256": "0d52d27558f9b481451d0ad12640f5b110c793357f0a224ea671e1f978e3612f"
+    },
+    {
+      "case_index": 4614,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:5284:f1f20d1ba10cfeb1",
+      "selection_hash": "009597b5a43f735c89164761cc2e1a5a1d44504d9494f4fe5d6a35b63e4cffa7",
+      "source_row_id": 5284,
+      "task_group": "HumanEval/145",
+      "visible_context_sha256": "19086e1a3777b8af3176801dba3f54efc69c12d6cbf0cef45fb78b890062d7e3"
+    },
+    {
+      "case_index": 4634,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 9,
+      "row_key": "HumanEval-MultiLineInfilling:5304:32b5a29c60ec79b6",
+      "selection_hash": "033b8230ab3f35a4071dd2dd056318608331ee0c69d4e3a8fbc7118e1630ff45",
+      "source_row_id": 5304,
+      "task_group": "HumanEval/146",
+      "visible_context_sha256": "eff1e0cda2faff7351fed1cd2d778002794dd7a2c5eecda7ae025725e0bc99e9"
+    },
+    {
+      "case_index": 4685,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:5355:4536281a358b2b22",
+      "selection_hash": "07bb3c2e4601a40c2acda4286d0df4041696245d22a157d6121fb4395e5054e1",
+      "source_row_id": 5355,
+      "task_group": "HumanEval/147",
+      "visible_context_sha256": "d4768d1894783e3f75983bcd52359668ae8868021b325f20d9e22fa612d35c7f"
+    },
+    {
+      "case_index": 4702,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 40,
+      "row_key": "HumanEval-MultiLineInfilling:5372:5d5ba86855d28358",
+      "selection_hash": "003aee0cd0b2d2c3253a12771949055fdf89193e81c231e7a8c5bbebc9c06e65",
+      "source_row_id": 5372,
+      "task_group": "HumanEval/148",
+      "visible_context_sha256": "db172ed20923e66b1f22fa8915d9fa5ad13047a6940c9ab9ddd332244cab8131"
+    },
+    {
+      "case_index": 406,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:406:65005d50d810f5d5",
+      "selection_hash": "bddae71b2fb1c21b2aa55c651ec6cdb36c9be2203d10bafa10bfd06c56971c6f",
+      "source_row_id": 406,
+      "task_group": "HumanEval/15",
+      "visible_context_sha256": "b471929b1c0ea9dc94b0f8f19fb0be997fc89e382cc4b120bb659deaca91107a"
+    },
+    {
+      "case_index": 4763,
+      "length_bucket": "short",
+      "reference_middle_tokens": 7,
+      "row_key": "HumanEval-MultiLineInfilling:5454:7017aacdfe008b52",
+      "selection_hash": "01a8d12c84cccdf69c94ddee13e768b764d35a1df2fead0fdc34d4144b796993",
+      "source_row_id": 5454,
+      "task_group": "HumanEval/150",
+      "visible_context_sha256": "6ddfed6f190596fb2a8caaf3f97bf25a0091ed47b926325c06834c097855b40c"
+    },
+    {
+      "case_index": 4772,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 30,
+      "row_key": "HumanEval-MultiLineInfilling:5463:f1f6d53efaa1fa52",
+      "selection_hash": "7eac1a0006952d746e077a7d2df9f9104a7d918fa1abc18cb04ac22a5367c64b",
+      "source_row_id": 5463,
+      "task_group": "HumanEval/151",
+      "visible_context_sha256": "8e82f3823d331af7b2878d1fc0163e793aed7f9cca294106e60523ee2104dc96"
+    },
+    {
+      "case_index": 4773,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:5464:9443eea879617660",
+      "selection_hash": "82dd0fff73c596e85861a54a4e02f5fac68f59b61a00c559b233ecbec7854ad0",
+      "source_row_id": 5464,
+      "task_group": "HumanEval/152",
+      "visible_context_sha256": "01f66e4272f21b8a4074ea31b451380d4ca054ab5171f650222ce92cfb7f17c7"
+    },
+    {
+      "case_index": 4776,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 29,
+      "row_key": "HumanEval-MultiLineInfilling:5512:47eda9e928e5131f",
+      "selection_hash": "0363d3a38d4bce44f75314c84ec986fa04f912379200b20d9c22beaf4396a279",
+      "source_row_id": 5512,
+      "task_group": "HumanEval/154",
+      "visible_context_sha256": "ff43d3dc397e06dbe1caa35d392c9e985c64461e211be7f5cff2b7fb11a3bb4c"
+    },
+    {
+      "case_index": 4815,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 42,
+      "row_key": "HumanEval-MultiLineInfilling:5551:757f858772284bfc",
+      "selection_hash": "044fac26629b2802021048ca6bb467eff9b2766aeaaba27226bd14b8d863a4bc",
+      "source_row_id": 5551,
+      "task_group": "HumanEval/155",
+      "visible_context_sha256": "59f2c2fa4c7e7ed9f05b215d3c169a973725bdc261cbf826bcc82197c5c2e555"
+    },
+    {
+      "case_index": 4873,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 98,
+      "row_key": "HumanEval-MultiLineInfilling:5609:85f9b14f11de8a8a",
+      "selection_hash": "0528907da03e499063c2df9c406e20fb2a0f74f8dce336f82319afb584366d82",
+      "source_row_id": 5609,
+      "task_group": "HumanEval/156",
+      "visible_context_sha256": "a4b02d6ea3cad6958a44fb3849327dabe348d3e73a86e88a90f157b90df531cf"
+    },
+    {
+      "case_index": 4943,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 29,
+      "row_key": "HumanEval-MultiLineInfilling:5679:b70193bdad23c6e1",
+      "selection_hash": "da90af86d86d6ec22adf0266eaf9dcdeb04784eab78f67fd80d6044b924dc680",
+      "source_row_id": 5679,
+      "task_group": "HumanEval/157",
+      "visible_context_sha256": "bd5151c0099c085630fa8d15364dd29f3ee04fcddf3919e970ea51f9847c6c5e"
+    },
+    {
+      "case_index": 4944,
+      "length_bucket": "long",
+      "reference_middle_tokens": 21,
+      "row_key": "HumanEval-MultiLineInfilling:5680:b75632636eee3175",
+      "selection_hash": "bf948818e530ec965d8836d3050fbb9349abd179a3d3fd6533c04196aea159a4",
+      "source_row_id": 5680,
+      "task_group": "HumanEval/158",
+      "visible_context_sha256": "99e8ae4d9e92cab42b4456086eadef0373dfcfeb83944789262a4cf0fb5cc697"
+    },
+    {
+      "case_index": 4947,
+      "length_bucket": "long",
+      "reference_middle_tokens": 24,
+      "row_key": "HumanEval-MultiLineInfilling:5683:356bf7935818e594",
+      "selection_hash": "21932666015fbd968f897c804b27f08f5b6c5469827ce7b441fed4e98b70f058",
+      "source_row_id": 5683,
+      "task_group": "HumanEval/159",
+      "visible_context_sha256": "f0884ff878ccb544b3126cc82711652ff874ce826900043a02ea7fdc55814ea9"
+    },
+    {
+      "case_index": 407,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:407:acff85b6052deb89",
+      "selection_hash": "e28245755785bf4b68d80b533dccb685c8361c49be2df147de223eaadc545245",
+      "source_row_id": 407,
+      "task_group": "HumanEval/16",
+      "visible_context_sha256": "b7a67eef3a044b5625e155de181dc99cf79cc42189aee6965fe40e7673fa7704"
+    },
+    {
+      "case_index": 4957,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 42,
+      "row_key": "HumanEval-MultiLineInfilling:5693:b2acc4854dfcc92e",
+      "selection_hash": "036fde721397836afd74d7c6466b8095d8111cc6fe940d7274157da59de772f8",
+      "source_row_id": 5693,
+      "task_group": "HumanEval/160",
+      "visible_context_sha256": "960a28244297ba2d26c587eb93a88c62a79aa0c93b421be36b4a0dc53dadcfbd"
+    },
+    {
+      "case_index": 4966,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 13,
+      "row_key": "HumanEval-MultiLineInfilling:5702:3eccea1d12f5a353",
+      "selection_hash": "017b705bc3877b880555e78dfa724e215f3a0f3ac523410ca745b18e51129715",
+      "source_row_id": 5702,
+      "task_group": "HumanEval/161",
+      "visible_context_sha256": "817b1d89de300531ad17ff55d84d7a3baddfef4096f27a2046992562409fd090"
+    },
+    {
+      "case_index": 5071,
+      "length_bucket": "long",
+      "reference_middle_tokens": 24,
+      "row_key": "HumanEval-MultiLineInfilling:5807:145351ac20588e79",
+      "selection_hash": "77be15d8c70998c2fd6b3f4a71b2050b7229f4735c7b6daa88fb779c3803bb8b",
+      "source_row_id": 5807,
+      "task_group": "HumanEval/162",
+      "visible_context_sha256": "41abf065f00d1c6ba4cf91282fee93b3bba27bec414a5e8d3ae762cdc4f78ea7"
+    },
+    {
+      "case_index": 5078,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 25,
+      "row_key": "HumanEval-MultiLineInfilling:5814:a8b6024e4e0fc528",
+      "selection_hash": "2003e1453dbf2bac110cb4831cfc0a2787980d4c646a69f3f2acc73bf5dab5ef",
+      "source_row_id": 5814,
+      "task_group": "HumanEval/163",
+      "visible_context_sha256": "33c9e2b7588edebce2bf675b8d1f44e14fb08abc06a9d1b5d156a5eb96324080"
+    },
+    {
+      "case_index": 409,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 43,
+      "row_key": "HumanEval-MultiLineInfilling:409:fed153225d3bdd2f",
+      "selection_hash": "02915be51245105762175bdec1aa7332701b77d38dad263fa86bfa0d54640a1e",
+      "source_row_id": 409,
+      "task_group": "HumanEval/17",
+      "visible_context_sha256": "97a06c42a678be4b60f98d471824c6fce7a0ff2c76257414733d6380b01516c8"
+    },
+    {
+      "case_index": 419,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 43,
+      "row_key": "HumanEval-MultiLineInfilling:419:dfbb2170595ebbfd",
+      "selection_hash": "20cb29b966ceeae03c1646f3cdcc848af45f991b3dd514cd8de09df40324854f",
+      "source_row_id": 419,
+      "task_group": "HumanEval/18",
+      "visible_context_sha256": "32aa34590714ee371c2f27998200fb610eafad14699d1d57c4f71545bb159730"
+    },
+    {
+      "case_index": 428,
+      "length_bucket": "long",
+      "reference_middle_tokens": 22,
+      "row_key": "HumanEval-MultiLineInfilling:428:caf43e38ad9c1884",
+      "selection_hash": "00447793c752ab4410b3cfd6b2b92a60ea76131bd746b8399e3095b6540a93e1",
+      "source_row_id": 428,
+      "task_group": "HumanEval/19",
+      "visible_context_sha256": "3ca1bf832983e3fdc4ce837ce3921424be1339d9e9fb1446bace47020e719bc2"
+    },
+    {
+      "case_index": 133,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 9,
+      "row_key": "HumanEval-MultiLineInfilling:133:19d6628664edbdca",
+      "selection_hash": "0813ba116b996bba0422ca44ec3dc9d08fbc8921bd26e45a7af7ba6100260473",
+      "source_row_id": 133,
+      "task_group": "HumanEval/2",
+      "visible_context_sha256": "8b7f5fd5441df1738459dcc533dd57bcfcd08e4a8d558aa035a97d6dc2be4349"
+    },
+    {
+      "case_index": 615,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 33,
+      "row_key": "HumanEval-MultiLineInfilling:615:713145ad8d2d89ff",
+      "selection_hash": "018bd376c22e7ce11fede56fcdc27787fee01dc7f9b09fe7d1e69fd39f329c6e",
+      "source_row_id": 615,
+      "task_group": "HumanEval/20",
+      "visible_context_sha256": "6dbd525113aa003e4ca84e1ea1de7aa13c8d203a873883b0e876ca2d9c0f6e14"
+    },
+    {
+      "case_index": 623,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:623:fa9afa694f996e22",
+      "selection_hash": "74ab9ddb38454d57c9b99299b2396ed3eda2674f7726035903159770eb44e031",
+      "source_row_id": 623,
+      "task_group": "HumanEval/21",
+      "visible_context_sha256": "7e61f58089fe213917d962b5c0332d592ba164814492859e4ae2e45961ba548d"
+    },
+    {
+      "case_index": 628,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:628:ce2da0849410149b",
+      "selection_hash": "d73737503b10d06174cbdeee4eaa6648b9c610394090e0bbd9f4edd682324eb1",
+      "source_row_id": 628,
+      "task_group": "HumanEval/22",
+      "visible_context_sha256": "57bc90e33bafacf87a11d2539c54df1978f1b54456631f21223b2ae2b76f917f"
+    },
+    {
+      "case_index": 629,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:629:ebe88f7ebe9b98c3",
+      "selection_hash": "bd034c41d73197fcda815d3b3244ef9261470ec04fc4675a7c47934f4d1863f3",
+      "source_row_id": 629,
+      "task_group": "HumanEval/23",
+      "visible_context_sha256": "5a5a6d5798d96ce6794830e628526df9f59e57a5c02de45a1a2d2192ed1c905f"
+    },
+    {
+      "case_index": 634,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:634:e78d98d291b8fb48",
+      "selection_hash": "40e9285c2ba35be00303e0b62c50ee34b4329d2305c6f657cfe5bba34756f4b5",
+      "source_row_id": 634,
+      "task_group": "HumanEval/24",
+      "visible_context_sha256": "5833ba5a06e7e36ce8b39af2ec0815219de1d1e901bf285f9b4d28c1cb9f0c41"
+    },
+    {
+      "case_index": 654,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 51,
+      "row_key": "HumanEval-MultiLineInfilling:654:6198a1d129b44eb3",
+      "selection_hash": "03bfb50df0c9b4e4bdaf7b844f76cd48ab37b53196eea719ebf3c9670f46e6e6",
+      "source_row_id": 654,
+      "task_group": "HumanEval/25",
+      "visible_context_sha256": "08fb490db56d12f0680e3f2b5be62af050ab23a7e8fb68184ad110d9e0c00791"
+    },
+    {
+      "case_index": 718,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 27,
+      "row_key": "HumanEval-MultiLineInfilling:718:9ca19b12246d93e6",
+      "selection_hash": "0ddb15ab8c35999ccfcd5967f3d9b69f575c6d0e28381eaa32a3ab07ab543ddb",
+      "source_row_id": 718,
+      "task_group": "HumanEval/26",
+      "visible_context_sha256": "0840c1e5adaaa64a9f51e3609b6cb7e400dab77b76954a77a0b4b43351920c32"
+    },
+    {
+      "case_index": 720,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 9,
+      "row_key": "HumanEval-MultiLineInfilling:721:552c88798cf18786",
+      "selection_hash": "fa369703a346b05a19649b6fcc311fbfcafc2f2fd2d220fa89134e0df95821ca",
+      "source_row_id": 721,
+      "task_group": "HumanEval/28",
+      "visible_context_sha256": "e0c63f76656a9e71a69d6c5d8e1ec69680346ee1d7f4dfa03f3c76a877f2c464"
+    },
+    {
+      "case_index": 721,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:722:a4091ce40edc2bda",
+      "selection_hash": "5e694ac533880979d67d9621b296ee7c0a9869390ff596420e99d96b96f00f71",
+      "source_row_id": 722,
+      "task_group": "HumanEval/29",
+      "visible_context_sha256": "4ee1a8c69f9141eb3e9ee2512ce61920ee76e5e4941ab61673ce6c05806ef6a4"
+    },
+    {
+      "case_index": 150,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 12,
+      "row_key": "HumanEval-MultiLineInfilling:150:e9a62d6407692e49",
+      "selection_hash": "08b728c698044cdcc8761d1bae6ba60bd48f9122934b752815014fcf97cf937a",
+      "source_row_id": 150,
+      "task_group": "HumanEval/3",
+      "visible_context_sha256": "00e62412004dfea19744a7d336b3e1203e3bd0c154f2349ca909b0b0b7502bda"
+    },
+    {
+      "case_index": 722,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:723:1fcec8473f3e69df",
+      "selection_hash": "3ca6b1caa939584a0cb780851447c6b78dbda7994680c07f99a0e818a0eeb1ac",
+      "source_row_id": 723,
+      "task_group": "HumanEval/30",
+      "visible_context_sha256": "284ab34d6a36f8cd86a52eca7f3a3f32b85064ac46e04d1e674cd12f2d1dd02d"
+    },
+    {
+      "case_index": 781,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:803:371a4d1181430f61",
+      "selection_hash": "00fac0c713178492b76bdc897557ae49e847863433cdbd5e48f02772783fbef5",
+      "source_row_id": 803,
+      "task_group": "HumanEval/32",
+      "visible_context_sha256": "cc89af322ab4777459c863cfcdf94ef0f7126125291c6a3557d7e7e47d3f958a"
+    },
+    {
+      "case_index": 791,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 25,
+      "row_key": "HumanEval-MultiLineInfilling:813:91c4a6148f040c80",
+      "selection_hash": "3968be1ec990f46e4a96d0f155ed04c977ecc451881f1c9ba95e3cfc38428b54",
+      "source_row_id": 813,
+      "task_group": "HumanEval/33",
+      "visible_context_sha256": "631127baf334058eba6e305d6c03ca323eaca1a1869d876e936ebf550fe76acb"
+    },
+    {
+      "case_index": 795,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:817:138d244568d80701",
+      "selection_hash": "4d04ca2bd85b47b3e174ff259d470358f9b469594e965fc3e9b432b09f6a827a",
+      "source_row_id": 817,
+      "task_group": "HumanEval/34",
+      "visible_context_sha256": "05a165e3b2314f1b264787a6f7843e3b953426a864d6126d3356a0a017ac1eac"
+    },
+    {
+      "case_index": 834,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 27,
+      "row_key": "HumanEval-MultiLineInfilling:871:cc4060c3f2544c4a",
+      "selection_hash": "00a444598833d2e6a2ac2a9cf1a0f80bf2e5853bc6967acd8a63db67032c0c04",
+      "source_row_id": 871,
+      "task_group": "HumanEval/36",
+      "visible_context_sha256": "4fb9974567448d5b22bd09fd774866fdff8540fb8e3429c76f274a3cce1093bc"
+    },
+    {
+      "case_index": 859,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:896:468e79dbefac666e",
+      "selection_hash": "0509135037f031943cd13a2d950f0897065a1f0f2a9e8419f3f4e8bc51d7369c",
+      "source_row_id": 896,
+      "task_group": "HumanEval/37",
+      "visible_context_sha256": "23d22e4e2a17732ef3190da6f3a8f27a78029c6934f3f85edb079760d003d3b7"
+    },
+    {
+      "case_index": 886,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 12,
+      "row_key": "HumanEval-MultiLineInfilling:923:0994973d36c417dc",
+      "selection_hash": "391f6cd60f39863611f64169c0b653d3b314735b97dbadbe56a8961bdccb97f7",
+      "source_row_id": 923,
+      "task_group": "HumanEval/38",
+      "visible_context_sha256": "f3811b26054cc2d5e6a06570237db62ab72a1eb192628e75d3767d92c293af24"
+    },
+    {
+      "case_index": 1004,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:1041:0c4360e44a38a54b",
+      "selection_hash": "000fab9dceb6a4730e81e4c8aefd346546e3bfe0b85ea9f6371504132b0f6b10",
+      "source_row_id": 1041,
+      "task_group": "HumanEval/39",
+      "visible_context_sha256": "513a465e60a706a6bc9efe59db98e668bfc6e91ef45ea46ee5f75daa31273516"
+    },
+    {
+      "case_index": 157,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:157:108345d29536c713",
+      "selection_hash": "33afb06ceea18961b50d8cacdfb5417b8b08894abca59687dec9d07921be28c7",
+      "source_row_id": 157,
+      "task_group": "HumanEval/4",
+      "visible_context_sha256": "bf967247e06bfe7faf48738080a381293d1cc8abce8c597b977d918dac1610e4"
+    },
+    {
+      "case_index": 1013,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:1050:dd2489294f412027",
+      "selection_hash": "187a27cc53691fc23baf86567f5d59164c3ff5679d1cc29c89f021920640aea2",
+      "source_row_id": 1050,
+      "task_group": "HumanEval/40",
+      "visible_context_sha256": "1220b0f37348ab65c1ebde491ebcc171fc1729e371cedb39b864473a5c8f094c"
+    },
+    {
+      "case_index": 1028,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:1065:ab597edb0c3c3d23",
+      "selection_hash": "8f67283c1b32bb3c53e34de71312929d316e35212a7c540511998e1d8dfe8967",
+      "source_row_id": 1065,
+      "task_group": "HumanEval/41",
+      "visible_context_sha256": "eb9763003453635ee36fb3b7d96033e6be6fb32da8ef9e7ae5e44a31007534c2"
+    },
+    {
+      "case_index": 1029,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:1066:1e5db44e1c86faaf",
+      "selection_hash": "1e8e8f950d58a1cf20cf2e2a97195cfc022cd629f88e4fa8d930ee89e14610f4",
+      "source_row_id": 1066,
+      "task_group": "HumanEval/42",
+      "visible_context_sha256": "73d2441ee8a57301762cb2ceb07b8e5663bd712bb83e2124c4c8cbe021529a16"
+    },
+    {
+      "case_index": 1036,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 27,
+      "row_key": "HumanEval-MultiLineInfilling:1073:83d52dd789f40327",
+      "selection_hash": "058b1a0961f6ea3841d9727d26f66852788942481ba4e548afeaa254c5fa2012",
+      "source_row_id": 1073,
+      "task_group": "HumanEval/43",
+      "visible_context_sha256": "155dfd921d330eca4f0f643b1ee3c9d6525bba42c30d9d075d9aa8fd7c9bac85"
+    },
+    {
+      "case_index": 1047,
+      "length_bucket": "long",
+      "reference_middle_tokens": 24,
+      "row_key": "HumanEval-MultiLineInfilling:1084:8b22aec5fc84e678",
+      "selection_hash": "15268e60682ba617a7b30784bbc6107f92b3e9049d2e8999136688b31b141011",
+      "source_row_id": 1084,
+      "task_group": "HumanEval/44",
+      "visible_context_sha256": "995fa5d00e2f553f3c64d0847e79a6fc9447da50e065ba6bfa5a7b5da030285e"
+    },
+    {
+      "case_index": 1060,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:1097:cfa96a17e007f1f6",
+      "selection_hash": "352d6eb879b3fa3f0e0945b8afd65e7231b879a830c00cf63b22257930914600",
+      "source_row_id": 1097,
+      "task_group": "HumanEval/45",
+      "visible_context_sha256": "c65da657b76145e5330a94da29e10fc5b304de4fd320434b5069d3513961687c"
+    },
+    {
+      "case_index": 1081,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 44,
+      "row_key": "HumanEval-MultiLineInfilling:1118:ae911b9a5bdcd773",
+      "selection_hash": "0c9c16b6b8b4f0dc99a90984988d0c20bdd64f5375caa8759454a512302bcd07",
+      "source_row_id": 1118,
+      "task_group": "HumanEval/46",
+      "visible_context_sha256": "9072679ea53ff19b9f27239bcdff57979e01e3c906528bb8d3f0a3b46e14cd1d"
+    },
+    {
+      "case_index": 1092,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 35,
+      "row_key": "HumanEval-MultiLineInfilling:1129:17a2fed39cfebdc0",
+      "selection_hash": "07021655fbeff15be07c3cb6201ed0f9aaa680413607b74182e924dbf48ec15b",
+      "source_row_id": 1129,
+      "task_group": "HumanEval/47",
+      "visible_context_sha256": "5a2bc8fb6f8bcb851aac8980ae74a16ad4861f6c18f47b92349268ff39ef6f67"
+    },
+    {
+      "case_index": 1110,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 25,
+      "row_key": "HumanEval-MultiLineInfilling:1147:69046f6b095a1a7b",
+      "selection_hash": "1397045a44df74517b3b7638e4dcc0931eaff23b2ca4f4cdffc585581be04e2b",
+      "source_row_id": 1147,
+      "task_group": "HumanEval/48",
+      "visible_context_sha256": "e48e111c209c51dff94dc614206c545fb5ca6aefabe8d594cb2e04592362f26d"
+    },
+    {
+      "case_index": 1122,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:1159:3e0f9f8639bba5dd",
+      "selection_hash": "0c6c20ece6b9d63d6e7b836fd976c2013c350cc6c6112625be88a208ee007731",
+      "source_row_id": 1159,
+      "task_group": "HumanEval/49",
+      "visible_context_sha256": "6c1e8f234baf0f8977e4d2d1547d6bc5b13ffe84c3376488736e1e60e25cc8dc"
+    },
+    {
+      "case_index": 184,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:184:6bc5a3f3e7e71c48",
+      "selection_hash": "0073dee0fb663d0fa850ad025f59264d39d4f5658574142bdcd1f7d626dcd3cd",
+      "source_row_id": 184,
+      "task_group": "HumanEval/5",
+      "visible_context_sha256": "fdaeae4e9833cb1925f163fe469b2a8bd14895ae6b6ff5bcb9efcfa4a788a4e6"
+    },
+    {
+      "case_index": 1124,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 34,
+      "row_key": "HumanEval-MultiLineInfilling:1162:082db6b88b6514b4",
+      "selection_hash": "4a44f0fa8f2f4af597407bfe9440b56e1a86f4d40781784e02473ede24fa9767",
+      "source_row_id": 1162,
+      "task_group": "HumanEval/51",
+      "visible_context_sha256": "84da83d93c7cf5c41f4702bdba5ab4dac72bef4e5a4274f98f997556afee81b7"
+    },
+    {
+      "case_index": 1130,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 11,
+      "row_key": "HumanEval-MultiLineInfilling:1168:670bbf18ed5cfe6b",
+      "selection_hash": "3ebda3460da44f00d2100bc145a86c36d1150426c597de4e777586e0441bb4bb",
+      "source_row_id": 1168,
+      "task_group": "HumanEval/52",
+      "visible_context_sha256": "0c83297dd9aafac40abb4c07dc40ce68318879f3172b28cbde87a39f4871fd1f"
+    },
+    {
+      "case_index": 1135,
+      "length_bucket": "short",
+      "reference_middle_tokens": 6,
+      "row_key": "HumanEval-MultiLineInfilling:1173:85ed89f9493c0cca",
+      "selection_hash": "81a29d465254e4f4014747f953e5f9e4d7707c538bdcfcb0b2582d48b33ba6d1",
+      "source_row_id": 1173,
+      "task_group": "HumanEval/53",
+      "visible_context_sha256": "a0fa5cdc1b9a16f74a84a2e3b504d4272e500f23014c6c0895023a60469249a7"
+    },
+    {
+      "case_index": 1136,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 12,
+      "row_key": "HumanEval-MultiLineInfilling:1174:5b0781ced8256b0c",
+      "selection_hash": "5aa94356564af8dcf2498dbc8fb92a21adcab623c10ea544e5f00646fed8a52a",
+      "source_row_id": 1174,
+      "task_group": "HumanEval/54",
+      "visible_context_sha256": "4cf39d305e5e46ee4d9754a61077345e6a1b8211e1e8aca212f18086b27f933d"
+    },
+    {
+      "case_index": 1148,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 29,
+      "row_key": "HumanEval-MultiLineInfilling:1186:14c7981e372f1a83",
+      "selection_hash": "032588ddce5d34f80bf570973c60c7a5745b081f11887cb07a04592142fa5df1",
+      "source_row_id": 1186,
+      "task_group": "HumanEval/55",
+      "visible_context_sha256": "8bf380ce74703d11c744bdf28101bba7eba6b506da455262fadacd332c7a6ec5"
+    },
+    {
+      "case_index": 1155,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 26,
+      "row_key": "HumanEval-MultiLineInfilling:1193:0e25253bb88b32f5",
+      "selection_hash": "031406099dd46a0cbb37222adf61c3ef41184915540af51346e04cdc7254ab8b",
+      "source_row_id": 1193,
+      "task_group": "HumanEval/56",
+      "visible_context_sha256": "cc3d395137dcfc51e1bbdff33b87823d587144a43c907481581dab9b15c23d4c"
+    },
+    {
+      "case_index": 1200,
+      "length_bucket": "short",
+      "reference_middle_tokens": 4,
+      "row_key": "HumanEval-MultiLineInfilling:1238:f1af17a259093c0b",
+      "selection_hash": "1ac838f5b2016c8a2cf8920976978ebf5e6fc70d7932ac294f93db53117813fc",
+      "source_row_id": 1238,
+      "task_group": "HumanEval/57",
+      "visible_context_sha256": "93d01431aeb9db002f67bb915bac8e51a1fbd9b5680ed9887d580cb2ea19dd9b"
+    },
+    {
+      "case_index": 1206,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 33,
+      "row_key": "HumanEval-MultiLineInfilling:1244:09dcbb8423819e7b",
+      "selection_hash": "01232dfad311cb431042a9332fa267595d48e62c066f0d0df2b18666e1ab0f18",
+      "source_row_id": 1244,
+      "task_group": "HumanEval/58",
+      "visible_context_sha256": "334340f7636884cc75d83104b5da984ae5b88b79b05733e504ff87760d86f419"
+    },
+    {
+      "case_index": 1242,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 50,
+      "row_key": "HumanEval-MultiLineInfilling:1280:9dc4bacc49c654b7",
+      "selection_hash": "03c86764861e838d961d5829baec8a0a84090070eb4b476419f1583680ca09d3",
+      "source_row_id": 1280,
+      "task_group": "HumanEval/59",
+      "visible_context_sha256": "465f620aa8b8a2a27d273df90d0098ff04a24021e217ea0e8d2fbf95dd3ede81"
+    },
+    {
+      "case_index": 209,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 33,
+      "row_key": "HumanEval-MultiLineInfilling:209:dfa893d53d69f125",
+      "selection_hash": "028c3462d724e033bf663abeec348beeacd76bebb09a6896d7dac297ae6a7d53",
+      "source_row_id": 209,
+      "task_group": "HumanEval/6",
+      "visible_context_sha256": "2611ba9b1b7195e50d0114b06eb44c4048586388f571d3978ec3cfb62bf460af"
+    },
+    {
+      "case_index": 1302,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 10,
+      "row_key": "HumanEval-MultiLineInfilling:1340:e149b50a5ce3f861",
+      "selection_hash": "105bababec33a8876ab44e1441f45aebf2afd6dffac7092762b2efab5d798935",
+      "source_row_id": 1340,
+      "task_group": "HumanEval/60",
+      "visible_context_sha256": "0fb32fbf8a13bbbec17c15fdc7028a412895f87e3a6b3f365c109afbd11ab2a0"
+    },
+    {
+      "case_index": 1328,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 10,
+      "row_key": "HumanEval-MultiLineInfilling:1366:98fb0d80156f4548",
+      "selection_hash": "074745cd2255e68a968aeb0475e5e3e76d0fc17d74f074d4b8212458b3aaa1c6",
+      "source_row_id": 1366,
+      "task_group": "HumanEval/61",
+      "visible_context_sha256": "707ee3f678bfe97295bfd383ccf364f9484f72b597c3f99d498507af8575c847"
+    },
+    {
+      "case_index": 1348,
+      "length_bucket": "long",
+      "reference_middle_tokens": 20,
+      "row_key": "HumanEval-MultiLineInfilling:1386:4de4105278ed032b",
+      "selection_hash": "8f9aec91d64c5c0a842fd32afe8692fcf2468b6f4ff9fe258eb2c236b8edf29e",
+      "source_row_id": 1386,
+      "task_group": "HumanEval/62",
+      "visible_context_sha256": "1fcd9a674a3202f50949a009cd9a6e6d5e2df049002197b747dd39a75360fc44"
+    },
+    {
+      "case_index": 1364,
+      "length_bucket": "long",
+      "reference_middle_tokens": 21,
+      "row_key": "HumanEval-MultiLineInfilling:1402:63cd4c111b5e6af4",
+      "selection_hash": "127f7684385ae98429a615f00488053a1b1fd738f9038fe1c87b13e67be69345",
+      "source_row_id": 1402,
+      "task_group": "HumanEval/63",
+      "visible_context_sha256": "152aeee972f3e6fb842032d8e5d7acc1bf99ae05de75ed4da0802d174125331f"
+    },
+    {
+      "case_index": 1387,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 29,
+      "row_key": "HumanEval-MultiLineInfilling:1425:8a3b9132faada462",
+      "selection_hash": "0d892518a8bd28fb78f29e4622eaeab969c0a819e6f4de98e02cd1862776c3d9",
+      "source_row_id": 1425,
+      "task_group": "HumanEval/64",
+      "visible_context_sha256": "9b27e5003cfa2a35dedf729624a62d2e048cb9b17e888feb47e6b75449248b44"
+    },
+    {
+      "case_index": 1397,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:1435:c7d97e2cf5da4750",
+      "selection_hash": "11e62c52368a18bc48397535a4a5415f34aa8f24b401034c86af582803675b50",
+      "source_row_id": 1435,
+      "task_group": "HumanEval/65",
+      "visible_context_sha256": "25c04b6f6c54020041f265bc5b11aadfc8b6670fb9fc08f7aae763c0c507832f"
+    },
+    {
+      "case_index": 1419,
+      "length_bucket": "short",
+      "reference_middle_tokens": 7,
+      "row_key": "HumanEval-MultiLineInfilling:1460:87487bddc9d4364d",
+      "selection_hash": "01fbfdad65b93c39c76404c816c33f9f2a8e8ed2f6c654fd986cdb53c1ed3c97",
+      "source_row_id": 1460,
+      "task_group": "HumanEval/67",
+      "visible_context_sha256": "063f7f0651afd565366a39f74bb5710924822808e1568cc6ff1e4abc82af3970"
+    },
+    {
+      "case_index": 1426,
+      "length_bucket": "long",
+      "reference_middle_tokens": 19,
+      "row_key": "HumanEval-MultiLineInfilling:1467:ee59d7d8be904d01",
+      "selection_hash": "13876e0d68efa5eb5bbd6e3dda7bb21386380dd99f284d44c1dcc3c071e247ea",
+      "source_row_id": 1467,
+      "task_group": "HumanEval/68",
+      "visible_context_sha256": "2da7a56801bd95bb50b142a3aaa812e338f465290ceb2e025960f430fe7f0583"
+    },
+    {
+      "case_index": 260,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 14,
+      "row_key": "HumanEval-MultiLineInfilling:260:f48ed6362e7d5fef",
+      "selection_hash": "7c699d52dcf67aa8a7ff76a804c25f38eaa931978720d35d94fd8a2378bc1736",
+      "source_row_id": 260,
+      "task_group": "HumanEval/7",
+      "visible_context_sha256": "f531e1515b30c8c02ef609805678b13c1067afc377cbb612256706d918d96acc"
+    },
+    {
+      "case_index": 1439,
+      "length_bucket": "long",
+      "reference_middle_tokens": 20,
+      "row_key": "HumanEval-MultiLineInfilling:1516:01484d70a247dd70",
+      "selection_hash": "2d541632aa4251ba731537d8485e443b02079401fbb0c3e325094bcd0c63ed83",
+      "source_row_id": 1516,
+      "task_group": "HumanEval/70",
+      "visible_context_sha256": "272b837f2fea3e00ed77ca16a2bde024760b2a787585024221524589d6e45bb6"
+    },
+    {
+      "case_index": 1461,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 48,
+      "row_key": "HumanEval-MultiLineInfilling:1538:0ee5afb3de892bc4",
+      "selection_hash": "0b6b282b4d4b5e44be59b3c557ee564099242e5fb12499f26eab821ce33dee0c",
+      "source_row_id": 1538,
+      "task_group": "HumanEval/71",
+      "visible_context_sha256": "dff8a8bff56fe025433b9d082ee7aaf4b16c6ff1f3334e1ade506530d18932fe"
+    },
+    {
+      "case_index": 1491,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 13,
+      "row_key": "HumanEval-MultiLineInfilling:1568:68ea3d9ed5323177",
+      "selection_hash": "02b92112d6d16a9eed831ff7d34691a79c71c194ac756ea33ad8438418f8becf",
+      "source_row_id": 1568,
+      "task_group": "HumanEval/72",
+      "visible_context_sha256": "a27c9487366ac5a2c5f6abb82fba99704ab394740ddc21e26b25ea2918677957"
+    },
+    {
+      "case_index": 1521,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 36,
+      "row_key": "HumanEval-MultiLineInfilling:1598:1046d94383298a04",
+      "selection_hash": "084a2dbcd1c18d69376e6316118af09fe1c8e551020b871506cb2ba077030b22",
+      "source_row_id": 1598,
+      "task_group": "HumanEval/73",
+      "visible_context_sha256": "59e6ba523523bcae00b143c5381f2984928280e3ebedc60cff273a8a9cbc8975"
+    },
+    {
+      "case_index": 1556,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 33,
+      "row_key": "HumanEval-MultiLineInfilling:1633:add8ba653e804d0c",
+      "selection_hash": "01e4c9622f493d044f979ae4f72e0fe8f0626b4c27f3b44d8f50e75fdb244f28",
+      "source_row_id": 1633,
+      "task_group": "HumanEval/74",
+      "visible_context_sha256": "7b39aa582d702e6a1762ef72c9eef7f2bc44ee1a5cbf44c650d0e5f3e19651a5"
+    },
+    {
+      "case_index": 1625,
+      "length_bucket": "short",
+      "reference_middle_tokens": 4,
+      "row_key": "HumanEval-MultiLineInfilling:1702:e104450dd6c186e3",
+      "selection_hash": "002383d2d6496e64abf9eab66e02f2ad3ee450d012953fbdc8cb823db6734dae",
+      "source_row_id": 1702,
+      "task_group": "HumanEval/75",
+      "visible_context_sha256": "52fad56f3c5cc7db6f920b2c0b5cb9707e591f2d3c54f4192228df78025b58aa"
+    },
+    {
+      "case_index": 1681,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 26,
+      "row_key": "HumanEval-MultiLineInfilling:1779:1efc8f6d97e515ac",
+      "selection_hash": "2fe6765ce98515eb54115e0e78f2de5dc5830d5e654a7577721ea59566c3cc6a",
+      "source_row_id": 1779,
+      "task_group": "HumanEval/77",
+      "visible_context_sha256": "b306bbb1662666c499f1c9b8a272fb3a2ee45b4995519ce10a576c017e438d0a"
+    },
+    {
+      "case_index": 1683,
+      "length_bucket": "long",
+      "reference_middle_tokens": 17,
+      "row_key": "HumanEval-MultiLineInfilling:1802:4f57ca29622f4efb",
+      "selection_hash": "014c2f1d28185b306728da48c650ce69306ddb00c1614d20898ff3c8332008c3",
+      "source_row_id": 1802,
+      "task_group": "HumanEval/79",
+      "visible_context_sha256": "298651978f69fdaa0e2559c4d31ed0b9eb7d55baf792d15665bdbfa67d53621d"
+    },
+    {
+      "case_index": 267,
+      "length_bucket": "short",
+      "reference_middle_tokens": 7,
+      "row_key": "HumanEval-MultiLineInfilling:267:5ff821aa1da4115f",
+      "selection_hash": "0d3e6de196e116a4fb7886537ef35a9b2c151788c15aa18802d6ed02ab185327",
+      "source_row_id": 267,
+      "task_group": "HumanEval/8",
+      "visible_context_sha256": "e31aaba89bdc53442f10efd637214f5acccf319c742ead46662263b3d1d57296"
+    },
+    {
+      "case_index": 1691,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:1810:df3cfe42b0c32ed6",
+      "selection_hash": "0469293861e8ea0cedbce7a59930ea19487c6c425b6f8087817f82dc2faae925",
+      "source_row_id": 1810,
+      "task_group": "HumanEval/80",
+      "visible_context_sha256": "1c8925b945ae4f6a353457d0da535b1a2a425fc4cfd8a01d31165034deb46cdc"
+    },
+    {
+      "case_index": 1719,
+      "length_bucket": "medium",
+      "reference_middle_tokens": 15,
+      "row_key": "HumanEval-MultiLineInfilling:2273:b30d5d67686a1a42",
+      "selection_hash": "15c763342ff98c77f1d9f682c9c061d4c01c9ea2e22030ae1f07d47ac96bd5c8",
+      "source_row_id": 2273,
+      "task_group": "HumanEval/82",
+      "visible_context_sha256": "c47599f6853191f243ec596d23a4561d2a98b04e00c869e374185962396a37d1"
+    },
+    {
+      "case_index": 1734,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 28,
+      "row_key": "HumanEval-MultiLineInfilling:2288:198a67a85fc88fdf",
+      "selection_hash": "2d653396bb698118218488b9826307d9fa5a3d632a282655b6987258fe5e70c3",
+      "source_row_id": 2288,
+      "task_group": "HumanEval/83",
+      "visible_context_sha256": "a2c763bfdfc331737f662217c0a8fabe88b418857f10cf688df806d2c2a2e8ed"
+    },
+    {
+      "case_index": 1736,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 32,
+      "row_key": "HumanEval-MultiLineInfilling:2291:89d5466960989c57",
+      "selection_hash": "773bb3fe8cce86d5cdfb83374dc14744baac4baa1491638301c3323103da5755",
+      "source_row_id": 2291,
+      "task_group": "HumanEval/85",
+      "visible_context_sha256": "0718341a4d709ac6686093dfe091524d74c29dae46f681b335722b2c86954ce4"
+    },
+    {
+      "case_index": 1737,
+      "length_bucket": "long",
+      "reference_middle_tokens": 21,
+      "row_key": "HumanEval-MultiLineInfilling:2292:81702b28a5c78849",
+      "selection_hash": "1d7ffb1b95c97931926c675fe8d01dc6eba45fe957b32afba6583a5b1d69f236",
+      "source_row_id": 2292,
+      "task_group": "HumanEval/86",
+      "visible_context_sha256": "b230495841343b89afa0b00a64c956d022f66058c39bce59ab6f1393358ff1e7"
+    },
+    {
+      "case_index": 1740,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 27,
+      "row_key": "HumanEval-MultiLineInfilling:2295:1a2d48d472cec4dd",
+      "selection_hash": "2d6434715c071a56d4e90406c322012fdd30f3afdea2c281ae0ce1e0e7d28e78",
+      "source_row_id": 2295,
+      "task_group": "HumanEval/87",
+      "visible_context_sha256": "20bc4fc07f92bd7a745ded96da370f1daca54a5933cc352eacef2a73544f7b6c"
+    },
+    {
+      "case_index": 1741,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 34,
+      "row_key": "HumanEval-MultiLineInfilling:2296:e789470279bef754",
+      "selection_hash": "30027fee455ecbf155e5d68f6d41572f8df166ee41bbfa5987a42e6022c71fbe",
+      "source_row_id": 2296,
+      "task_group": "HumanEval/88",
+      "visible_context_sha256": "c033265cac118a76782ab3a7b2015379f354a2da62c3120942d56905dfd9b5b2"
+    },
+    {
+      "case_index": 1748,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 62,
+      "row_key": "HumanEval-MultiLineInfilling:2303:56bbda384440cb14",
+      "selection_hash": "0936c704f4aa355a5bc21fc89ac34f54e484770d927bc76f47f10d0471d9e4df",
+      "source_row_id": 2303,
+      "task_group": "HumanEval/89",
+      "visible_context_sha256": "52438eb1b73e8f6ff269d2d558bbc2af66435dd34966ffccb7980ea03bbfeca4"
+    },
+    {
+      "case_index": 315,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 31,
+      "row_key": "HumanEval-MultiLineInfilling:315:4cfd2f56a266523e",
+      "selection_hash": "06f980bace111b06da0dc020482d9dd0115e166ac7cf0a072549a8f6b97ed49e",
+      "source_row_id": 315,
+      "task_group": "HumanEval/9",
+      "visible_context_sha256": "efe8a63cc09f1cb0d6adfb475067ff80a2cbce89ca1b90af4bb8a3243cc92bc8"
+    },
+    {
+      "case_index": 1779,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 26,
+      "row_key": "HumanEval-MultiLineInfilling:2334:47c95d067346c959",
+      "selection_hash": "1d61e39427ef14561b61685a5edd26896f2dc3611e0e18dd7dcccf38ce72b9ac",
+      "source_row_id": 2334,
+      "task_group": "HumanEval/90",
+      "visible_context_sha256": "3f0d23ed1bfc93daf966dc2948c1eead47e3eb97bbcc5652782d3c18cc6ba1f3"
+    },
+    {
+      "case_index": 1783,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 44,
+      "row_key": "HumanEval-MultiLineInfilling:2344:460955204b8691a7",
+      "selection_hash": "2c87492245fbed86d3dc8691ab7de9ecf5edbc8da91407b89344925708ed76a6",
+      "source_row_id": 2344,
+      "task_group": "HumanEval/92",
+      "visible_context_sha256": "f602e3e0f56fca48bc3c3fcacf6eba4a5e17d4216a9f546314d05a950b87a9c2"
+    },
+    {
+      "case_index": 1804,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 33,
+      "row_key": "HumanEval-MultiLineInfilling:2365:132f9fd94e767db3",
+      "selection_hash": "019b1c22d3f4853ebf98ba477712072ac58c60ad6db7d99ef3955bc0c7cc2cb6",
+      "source_row_id": 2365,
+      "task_group": "HumanEval/93",
+      "visible_context_sha256": "8c6010e256b116bc1c29e7c691a90656dff87f692b2c1dac32566396fd7796b8"
+    },
+    {
+      "case_index": 1882,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:2443:6b0498e0fd3f2737",
+      "selection_hash": "025ae1919fdefe3f3ccdfc2c84262c96c02a6ba38aeac5f7d24cab0dbe7de2f2",
+      "source_row_id": 2443,
+      "task_group": "HumanEval/94",
+      "visible_context_sha256": "3bb7741e0376c86aeac5763e4535075a8a895b840b2bb70c889bc7dfc9de3bb2"
+    },
+    {
+      "case_index": 2025,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:2586:10867da362c8061f",
+      "selection_hash": "011e5772b93b15cd2e792787f197ada5edbb89490c03eeb3feddb1bfe49861d3",
+      "source_row_id": 2586,
+      "task_group": "HumanEval/95",
+      "visible_context_sha256": "b56c4bf4bed0af5bd26f1e3a03aa229e617d6c231035a17995eef6715be876e2"
+    },
+    {
+      "case_index": 2152,
+      "length_bucket": "extreme",
+      "reference_middle_tokens": 42,
+      "row_key": "HumanEval-MultiLineInfilling:2713:fc84921c5d02e69b",
+      "selection_hash": "074f9f8ef8b4a3c8df27f54108eb16349653d6da52daa5328b9e859ac6d6e28a",
+      "source_row_id": 2713,
+      "task_group": "HumanEval/96",
+      "visible_context_sha256": "8ae003435c2f2aef2fb4c0c4a630c08338e7bc813f4cc4feff7df7440f312057"
+    },
+    {
+      "case_index": 2183,
+      "length_bucket": "long",
+      "reference_middle_tokens": 18,
+      "row_key": "HumanEval-MultiLineInfilling:2744:9aced00aa18ef6ba",
+      "selection_hash": "041e4411bb2215d5d239ffca2edc310bc17464faaff84e6f6e3dd94d902dc568",
+      "source_row_id": 2744,
+      "task_group": "HumanEval/97",
+      "visible_context_sha256": "773af23f1cc9d1f8f541426d83295bf820c98344beff809ec12bef14520d04e4"
+    },
+    {
+      "case_index": 2310,
+      "length_bucket": "short",
+      "reference_middle_tokens": 8,
+      "row_key": "HumanEval-MultiLineInfilling:2886:25830363d992bff5",
+      "selection_hash": "018b2dd26d60ae34a4e48dd676dbe7f8820152181b747344631b0eb89c1fc520",
+      "source_row_id": 2886,
+      "task_group": "HumanEval/99",
+      "visible_context_sha256": "b3432c07642fc3dab3a1c482d00c16bde4953fd270f1d244e412e46b382dd349"
+    }
+  ],
+  "selected_task_group_count": 148,
+  "selection_rule": "minimum sha256('m4_multiline_core_v1|task_group|row_key') per task group",
+  "source_bank": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/phase5-method-falsification/outputs_clean/phase6_multiline_candidate_bank_20260712_v1/candidate_bank_raw.jsonl",
+  "source_bank_rows": 40632,
+  "source_bank_sha256": "f51728b445a68eac39ae9a051ab2b9865712a42339eaa65ce8fcf7be7c58537e",
+  "test_evaluation_count": 0
+}

@@ -5,6 +5,8 @@ from experiments.m4_semantic_particle_assembly import (
     assemble_fragments,
     candidate_fragments,
     candidate_view,
+    build_multiline_core_selection_manifest,
+    validate_manifest_source_context,
     offline_rows,
     parser,
 )
@@ -29,6 +31,10 @@ class PoisonRow(dict):
         return super().__getitem__(key)
 
 
+class SelectionPoisonRow(PoisonRow):
+    forbidden = {"passed", "reference_middle", "canonical_solution", "verification", "task_id", "split_label", "oracle_length"}
+
+
 def candidate(seed: int = 0):
     return {
         "middle_text": MIDDLE,
@@ -41,6 +47,41 @@ def candidate(seed: int = 0):
 
 
 class M4SemanticParticleAssemblyTest(unittest.TestCase):
+
+    def test_multiline_core_selection_is_outcome_blind_deterministic_and_one_per_group(self) -> None:
+        rows = []
+        for group_index, (group, row_keys) in enumerate((("HumanEval/0", ("r0a", "r0b")), ("HumanEval/1", ("r1a", "r1b")))):
+            for source_offset, row_key in enumerate(row_keys):
+                for seed in (0, 1):
+                    for canvas in (16, 32, 64, 128):
+                        rows.append(
+                            SelectionPoisonRow(
+                                {
+                                    **candidate(seed=seed),
+                                    "candidate_kind": "deployable_grid",
+                                    "row_key": row_key,
+                                    "task_group": group,
+                                    "case_index": group_index * 10 + source_offset,
+                                    "source_row_id": group_index * 10 + source_offset,
+                                    "length_bucket": "short",
+                                    "reference_middle_tokens": 4,
+                                    "passed": seed == 0,
+                                }
+                            )
+                        )
+        forward = build_multiline_core_selection_manifest(rows, frozen_groups=set())
+        backward = build_multiline_core_selection_manifest(list(reversed(rows)), frozen_groups=set())
+        self.assertEqual(forward, backward)
+        self.assertEqual(len(forward), 2)
+        self.assertEqual({row["task_group"] for row in forward}, {"HumanEval/0", "HumanEval/1"})
+        self.assertTrue(all("selection_hash" in row and "passed" not in row for row in forward))
+
+    def test_selected_bank_context_must_match_evaluator_source(self) -> None:
+        manifest = [{"row_key": "r", "source_row_id": 0}]
+        grouped = {"r": [{**candidate(), "candidate_kind": "deployable_grid"} for _ in range(8)]}
+        validate_manifest_source_context(manifest, grouped, [{"prompt": PREFIX, "suffix": SUFFIX}])
+        with self.assertRaisesRegex(RuntimeError, "visible context"):
+            validate_manifest_source_context(manifest, grouped, [{"prompt": PREFIX, "suffix": "different"}])
     def test_extracts_statement_basic_block_and_def_use_fragments(self) -> None:
         kinds = {item["kind"] for item in candidate_fragments(candidate(), 0)}
         self.assertTrue({"statement", "basic_block", "def_use"} <= kinds)

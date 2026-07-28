@@ -4,11 +4,11 @@
 证据基线：`8b348f979f09cda07811e04b7ad3dee60e56373b`
 目标：CCF-A/FSE 级论文，而不是继续堆叠零散实验编号。
 
-<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=offline_148_complete_gpu_repair_pending_launch_authorized -->
+<!-- method-portfolio-status: M1=reviewed_not_promoted_v0; M2=reviewed_not_promoted; M3=reviewed_not_promoted_v0; M4=multiline_core_148_manifest_frozen_repair_pending_launch_authorized -->
 
 ## 2026-07-28 实时状态覆盖
 
-本节覆盖顶部早期表格及 `2026-07-13/15/17` 的历史执行时态，但不改写任何历史实验结论。M1、M2、M3 已完成固定 148-group 正式分析且均不晋级；M1 历史 5079 保持 `safely_paused_resumable`。official CAL 已完成 **official CAL reproduction on the 4,990-case non-frozen common subset** 的完整性复现（`4990/4990`、missing/error=`0/0`），运行期间未读取部分 accuracy。M4 离线 148 structural audit 已完成；经 2026-07-28 H200 审计（ECC=0、一个无关 GPU process、预计加载后仍远高于 25GiB）获准进入独立 `12-case smoke → automatic 148-case full`。当前仍没有 paper primary；只有 M4 的预先固定公平主要比较可能改变该结论。
+本节覆盖顶部早期表格及 `2026-07-13/15/17` 的历史执行时态，但不改写任何历史实验结论。M1、M2、M3 已完成固定 148-group 正式分析且均不晋级；M1 历史 5079 保持 `safely_paused_resumable`。official CAL 已完成 **official CAL reproduction on the 4,990-case non-frozen common subset** 的完整性复现（`4990/4990`、missing/error=`0/0`），运行期间未读取部分 accuracy。M4 的 mandatory `40,632=5,079×8` MultiLine bank 与 RandomSpanLight visible context 的交集是 `0/164`，故 GPU repair 采用已冻结的 one-span-per-group MultiLine-Core `148` manifest，而不虚称 RandomSpanLight；经 2026-07-28 H200 审计（ECC=0、预计加载后仍远高于 25GiB）获准进入独立 `12-case smoke → automatic 148-case full`。M4 与 M1/M3 的跨来源 delta 不是 apples-to-apples。当前仍没有 paper primary；只有 M4 的预先固定公平主要比较可能改变该结论。
 
 ## 1. 本文件的权威性
 
@@ -22,7 +22,7 @@
 
 历史 Phase、EXP、V1--V8 编号只用于追溯，不得覆盖本文件。若其他文档与本文件矛盾，以本文件和最新 verified result report 为准，并把矛盾视为研究完整性问题。
 
-**当前方法状态登记说明：** 顶部早期表格与 2026-07-13/15/17 历史叙述只保存当时事实。M1--M4 的唯一当前状态登记是 `docs/paper_agent/method_portfolio.current.json`（中文摘要为 `method_portfolio.current.zh.md`）。它明确：M1 148 reviewed/not promoted、历史 5079 safely paused；M2 reviewed/not promoted；M3 reviewed/not promoted；M4 offline 148 complete / GPU repair launch authorized；当前没有 paper primary。
+**当前方法状态登记说明：** 顶部早期表格与 2026-07-13/15/17 历史叙述只保存当时事实。M1--M4 的唯一当前状态登记是 `docs/paper_agent/method_portfolio.current.json`（中文摘要为 `method_portfolio.current.zh.md`）。它明确：M1 148 reviewed/not promoted、历史 5079 safely paused；M2 reviewed/not promoted；M3 reviewed/not promoted；M4 MultiLine-Core 148 manifest frozen / GPU repair launch authorized；当前没有 paper primary。
 
 ## 2. 当前最强但受限的论文结论
 
