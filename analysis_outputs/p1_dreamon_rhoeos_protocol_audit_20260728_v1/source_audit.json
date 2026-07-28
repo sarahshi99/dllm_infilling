@@ -1,0 +1,45 @@
+{
+  "audit_utc": "2026-07-28T19:07:16Z",
+  "scope": "CPU-only official-source audit; no model download, GPU inference, training, or pass-rate evaluation",
+  "dreamon": {
+    "repository": "https://github.com/DreamLM/DreamOn.git",
+    "head": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "source_hashes": {
+      "readme.md": "bf08c32546a451c8f96b53085a289370d198c2ef9bb64f2b7b790c922aa70779",
+      "eval/eval_humaneval_infilling.sh": "a94c3ab8b8c6603da09ae27a9c41f1b85e68eb5c60c97c69f38a5babb05e4114",
+      "eval/evaluate.py": "d8cf3ce89a23b182444d42f270d4b3bd030a9dc7e752e075b92919fb1a1da57c",
+      "eval/generator.py": "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858"
+    },
+    "protocol_evidence": {
+      "model": "Dream-org/DreamOn-v0-7B",
+      "training_based": true,
+      "fim_prompt": "prefix + initial mask span + suffix",
+      "official_task": "human_eval_infilling single-line",
+      "official_evaluator": "human_eval_infilling plus evaluate_infilling_functional_correctness",
+      "official_dynamic_command": {"min_gen_lens": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "mask_expansion": true, "torchrun_gpus": 8},
+      "oracle_boundary": "canonical_solution is used only by the non-expansion/oracle middle-length path; dynamic expansion calls prefix/suffix generation"
+    },
+    "verdict": "official_source_audited_gpu_smoke_not_started",
+    "next_requirement": "freeze a 12-case smoke manifest, pin the HumanEval-Infilling evaluator revision, preserve the official dynamic parameters, and record whether an 8-GPU topology change affects comparability before any GPU launch"
+  },
+  "rho_eos": {
+    "repository": "https://github.com/yjyddq/rho-EOS.git",
+    "head": "69992caff275e5cd4c96f654aad633fca69f3f75",
+    "source_hashes": {
+      "README.md": "797a9f97f0edf622b98a95644a1c961d0cf7a3be1188319c7b34017794b4bbad",
+      "scripts/eval_LLaDA_rho_EOS.sh": "9cf41efd8ca58db750c3cf047c39470372a2b02b0e52977168780ac6c844a6cb",
+      "models/LLaDA_rho_EOS.py": "19cf36607dd4935aab791a6aae92c3ccfc58819c02b627b01d26781af457978d",
+      "requirements.txt": "25de28fdb494c38a4f975fb9ec58912f08b72c79e345ccffd445dd2e7c3da283"
+    },
+    "protocol_evidence": {
+      "training_based": false,
+      "official_tasks": ["gsm8k", "math500", "humaneval", "mbpp"],
+      "generation_interface": "left prompt followed by initial masked continuation; returns tokens after prompt_length",
+      "suffix_or_fim_interface_present": false,
+      "official_infill_evaluator_present": false
+    },
+    "verdict": "completion_only_or_unfaithful_for_infilling",
+    "next_requirement": "a faithful FIM adaptation must be specified and audited as a new algorithmic protocol before any smoke; no GPU run is authorized from the completion quick-start"
+  },
+  "verification": {"dreamon_source_pycompile": "passed", "dreamon_launcher_bash_n": "passed", "rho_eos_source_pycompile": "passed", "rho_eos_launcher_bash_n": "passed"}
+}

@@ -16,7 +16,7 @@ M1--M4 are independent candidate methods; no paper primary method is selected. C
 
 ### P1.1: official CAL protocol audit, smoke, then full
 
-Status: completed integrity reproduction. Official source is `https://github.com/NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`; the run is labeled **official CAL reproduction on the 4,990-case non-frozen common subset**, not a 5,715-case paper-number reproduction. Smoke `12/12` and full `4990/4990` have zero missing/error; no partial accuracy was read while it ran. DreamOn remains deferred; rho-EOS first requires faithful infilling compatibility; LR-DLLM remains blocker audit only.
+Status: CAL completed integrity reproduction. Official source is `https://github.com/NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`; the run is labeled **official CAL reproduction on the 4,990-case non-frozen common subset**, not a 5,715-case paper-number reproduction. Smoke `12/12` and full `4990/4990` have zero missing/error; no partial accuracy was read while it ran. DreamOn `8a0a549` is source-audited: an official FIM/evaluator path exists, but it is training-based and GPU smoke is not yet approved by a new brief. rho-EOS `69992ca` is completion-only with no suffix/FIM or HumanEval-Infilling evaluator route, so no faithful smoke/full is queued. LR-DLLM remains blocker audit only.
 
 ### P2.1: full-allowed grouped statistics
 

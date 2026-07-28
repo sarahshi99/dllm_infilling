@@ -1,5 +1,34 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-28 Execution Sprint V1 Authoritative Resume Point
+
+Timestamp: 2026-07-28 UTC
+Branch: `codex/ccfa-execution-sprint-v1` (M4 result and compact CPU audit artifacts are the current authoritative working state; consult `git log` for commit IDs)
+
+### Completed
+
+- M1/M2/M3 formal 148-group decisions are fixed and non-promoted. M1 historical 5079 is `safely_paused_resumable` only.
+- official CAL smoke=`12/12`, full=`4990/4990`, missing/error=`0/0`, final integrity complete. Do not claim a 5,715-case reproduction and do not report partial CAL accuracy.
+- M4 used the mandated read-only `40,632` MultiLine bank after proving RandomSpanLight visible-context match=`0/164`. Frozen hash-selected 148-group manifest; technical three-arm full passed; fair equal-512 assembly−best=`-12.84pp`, help/harm=`0/19`; status=`reviewed_not_promoted_v0_multilinecore_cross_source`.
+- DreamOn `8a0a549` official source audit found a genuine FIM/HumanEval-Infilling dynamic-expansion route but training-based/8-GPU requirements; GPU smoke not started. rho-EOS `69992ca` is completion-only and has no faithful FIM/evaluator route; no GPU run authorized.
+- Frozen test remains `sealed`, count=`0`; raw outputs remain uncommitted. Existing untracked M1/M2 analysis directories are user-owned and untouched.
+
+### Current State / Risks
+
+- No paper primary and no eligible 296/927 expansion; do not retune or fuse M1--M4.
+- H200 snapshot after M4: util=`0%`, free=`143156 MiB`, ECC=`0`; no project GPU process.
+- Claim readiness: `not_ready`. Remaining paper gaps are external baseline outcomes, external benchmark, and a new independently preregistered method—not parameter repair of the four negative V0s.
+
+### Next Safe Actions
+
+1. Push focused local commits if the remote accepts them; never stage raw outputs.
+2. If resuming P1, write a fresh DreamOn 12-case smoke brief that pins evaluator and explicitly labels training-based/8-GPU protocol; do not launch automatically from this checkpoint.
+3. Do not create a rho-EOS FIM adapter without a separately audited algorithmic protocol.
+
+### Recommended Resume Prompt
+
+Read `method_portfolio.current.json`, `runtime_status.current.json`, this top section, `paper_agent_dashboard.zh.md`, and `analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/report.zh.md`. Preserve M1--M4 negative results and raw outputs; do not restart CAL or M4. Only proceed to a new GPU experiment after a new user-authorized brief.
+
 ## Phase 5 Authoritative Resume Point
 
 Timestamp: 2026-07-12 UTC

@@ -317,3 +317,12 @@
 - evidence：默认 sandbox 中 `/dev/nvidia*` 不可见，`nvidia-smi` 失败；approved host/unsandboxed `nvidia-smi` 成功，显示 `NVIDIA H200 NVL`、driver `580.159.03`、memory `143771 MiB`、无运行进程；approved host/unsandboxed `/dev/nvidia0`、`/dev/nvidiactl`、`/dev/nvidia-uvm` 可见；approved host/unsandboxed `dllm_env` PyTorch 报告 `cuda_available=true`、`gpu_count=1`。
 - result：H200 host environment 可用；此前 `h200_environment_invalid` 应修正为 `host_h200_available_sandbox_gpu_hidden`。后续 GPU 实验必须通过 approved unsandboxed/escalated commands 运行。
 - next：commit/push bootstrap correction，然后启动 H200 Tier 1 reruns。
+
+## 2026-07-28 UTC Execution Sprint V1
+
+- action：协调 M1--M4 current-status register，验证既有 official CAL full integrity，冻结/修复 M4 40,632-row bank 的 outcome-blind MultiLine-Core manifest，并完成 M4 12-case smoke→148 full→grouped analysis。
+- evidence：M1/M3 analyzer pre-outcome commit `5a5b5f4`；M4 analyzer pre-launch `267dda5`；M4 manifest commit `0b7de44`；M4 result commit `53a3f00`；`analysis_outputs/m4_semantic_particle_assembly_20260717_grouped_v1/`；`runtime_status.current.json`。
+- result：M1/M2/M3/M4 全部 reviewed/not promoted，当前没有 paper primary。M4 mandatory bank 与 RandomSpanLight context match=`0/164`，因此其 148-group MultiLine-Core fair primary assembly−best=`-12.84pp`、help/harm=`0/19`。official CAL smoke=`12/12`、full=`4990/4990`、missing/error=`0/0`，运行时没有读取 partial accuracy。frozen=`sealed/0`。
+- action：在 `/tmp/dllm_infilling_protocol_audit_20260728/` 对 DreamOn 与 rho-EOS 做 CPU-only 官方 source audit；无模型下载、无 GPU、无 pass-rate 评测。
+- result：DreamOn `8a0a549` 有 genuine FIM/HumanEval-Infilling dynamic route，但 training-based/official 8-GPU；rho-EOS `69992ca` 为 completion-only、无 faithful FIM/evaluator route。详见 `analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/`。
+- next：提交 compact audit/dashboard/checkpoint 更新；后续 DreamOn smoke 需要新 brief，rho-EOS 需要新 faithful FIM protocol。

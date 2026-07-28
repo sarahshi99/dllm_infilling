@@ -1,6 +1,15 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-12 UTC
+更新时间：2026-07-28 UTC
+
+## 2026-07-28 Execution Sprint V1 — Authoritative Snapshot
+
+- 权威分支：`codex/ccfa-execution-sprint-v1`。M1--M4 唯一当前状态登记是 `method_portfolio.current.json`；四条 V0 都已 reviewed/not promoted，当前没有 paper primary，frozen controller test=`sealed/0`。
+- M1 RandomSpanLight fair full−generic=`-0.68pp`、help/harm=`0/1`；M2 是 `constraints_activated_no_reliable_grouped_advantage`；M3 birth-death−uniform=`-4.05pp`、help/harm=`8/14`，lower-token 但 lower-accuracy。
+- M4 必须使用的 `40,632=5,079×8` MultiLine bank 与 RandomSpanLight visible context 匹配=`0/164`，故使用 committed 148-group MultiLine-Core manifest；technical `148×3` passed，fair assembly−best=`-12.84pp`、help/harm=`0/19`。机制 hash 改变存在，但 M4 不进入 296/927/5079、retune 或 fusion；M4 与 M1/M3 不是 apples-to-apples cross-source ranking。
+- official CAL 的标签固定为 **official CAL reproduction on the 4,990-case non-frozen common subset**：smoke `12/12`、full `4990/4990`，missing/error=`0/0`。运行期间未读取 partial accuracy，final outcome analysis 尚未打开。
+- DreamOn official source `8a0a549` 已 CPU 审计，存在 genuine FIM HumanEval-Infilling dynamic-expansion route，但为 training-based、official full 是 8-GPU，未启动 GPU smoke。rho-EOS `69992ca` 是 completion-only、无 suffix/FIM 或 HumanEval-Infilling evaluator，不得冒充本项目 infilling baseline。
+- 当前 H200 空闲、ECC=`0`；所有授权 long runs 已完成。当前 Claim Readiness=`not_ready`：无 paper primary、无 fresh positive method、未完成 external benchmark/complete external baseline pack。
 
 ## Canonical CCF-A Route
 

@@ -21,4 +21,4 @@
 
 - H200 NVL snapshot：util=`0%`、used/free=`0/143156 MiB`、temperature=`29C`、ECC=`0`、本项目 GPU process=`0`。M4 full wall=`264.47s`，peak allocation=`15.42 GiB`，无 OOM。
 - `/home/shx` 可用约 `2.3T`，inode free=`231,232,594`。
-- 下一安全动作：仅做 DreamOn official protocol audit 与 rho-EOS infilling compatibility 的 CPU 准备；不启动未经审计的 GPU full。
+- DreamOn/rho-EOS CPU audit 已完成。下一安全动作：提交/推送 compact evidence；未来 DreamOn smoke 需要新 brief 与 pinned evaluator，rho-EOS 需要单独审计的 faithful FIM protocol。当前没有新 GPU 作业。

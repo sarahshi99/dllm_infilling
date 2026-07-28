@@ -8,7 +8,7 @@
 
 ## 2026-07-28 当前最小动作（覆盖历史 action）
 
-四个 M1--M4 V0 都已完成当前已授权的 148-group formal decision，且没有 paper primary。official CAL 的 4,990-case full 已完整性完成（`4990/4990`、missing/error=`0/0`；运行期间未读取 partial accuracy）。M4 mandatory `40,632` bank 与 RandomSpanLight context 的交集为 `0/164`，故使用已冻结的 MultiLine-Core manifest；技术完整性通过，但 primary `assembly_without_repair − best_single`=`-12.84pp`、help/harm=`0/19`，不进入 296/927。当前最小动作是 CPU-only 的 DreamOn official protocol audit 与 rho-EOS infilling compatibility audit；不得启动未经审计的 GPU full。
+四个 M1--M4 V0 都已完成当前已授权的 148-group formal decision，且没有 paper primary。official CAL 的 4,990-case full 已完整性完成（`4990/4990`、missing/error=`0/0`；运行期间未读取 partial accuracy）。M4 mandatory `40,632` bank 与 RandomSpanLight context 的交集为 `0/164`，故使用已冻结的 MultiLine-Core manifest；技术完整性通过，但 primary `assembly_without_repair − best_single`=`-12.84pp`、help/harm=`0/19`，不进入 296/927。DreamOn official source 已审计但未启动 GPU smoke；rho-EOS 是 completion-only，不能伪装成 FIM baseline。当前动作是提交/推送 compact evidence 并保持所有 raw outputs 不变；没有新的 GPU 作业。
 
 起点证据：`8b348f979f09cda07811e04b7ad3dee60e56373b`
 
@@ -26,7 +26,7 @@ Operational decision 是 `execute_and_monitor`，不是 blocked。M1、M2、M3�
 
 ### P1/P2/P4
 
-- `P1.1-OFFICIAL-CAL`：official upstream 已固定为 `NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f`。checkout 后审计 model/prompt/dataset mapping/canvas/steps/forwards/seed/evaluator/wall/GPU/memory；12-case technical smoke 后自动 full。DreamOn official full 是后续 baseline；rho-EOS 仅 faithful infilling compatibility 后 smoke/full；LR-DLLM 只保留 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
+- `P1.1-OFFICIAL-CAL`：official `NiuHechang/Calibrated_Adaptive_Length@741e8418a88a732b4c92812424d4f03cab1f7b1f` 的 smoke/full integrity 已完成；DreamOn `8a0a549` 的 FIM/evaluator source route 已审计，未来需新的 12-case smoke brief；rho-EOS `69992ca` completion-only，未有 faithful FIM adapter，不进入 smoke/full；LR-DLLM 只保留 blocker audit。local CAL/CAL-lite 不得叫 official CAL。
 - `P2.1-GROUPED-STATS`：已在 `c66678a` 完成。`6707` spans / `20121` results 背后是 `148` base-task groups；primary 是 equal-weight base-task macro accuracy，span-micro 只 descriptive。10,000 次 cluster bootstrap、paired wins/losses、group-aware label-swap、分层 CI、cost frontier 和 8-cell intersection 已写入 compact CSV/JSON/Markdown；禁止行级独立显著性。
 - `P4.1-EXECREPOBENCH`：首个外部 benchmark 已固定为 ExecRepoBench。pinned provenance 为 dataset `fa61028ce495c9ceff58398b8a7c47b5ae9f5276` 与 Qwen evaluator `33bc6aabd7791ad7b32f7e92104f11f2359ba890`；`experiments/p4_execrepobench_audit.py` 已准备只输出无代码的 repository-grouped six-fill smoke plan。实际数据/evaluator checkout 的 host 网络 fetch 在 2026-07-13 被 approval control plane `422` 阻断，故 evaluator smoke 尚未宣称完成；最终 external result 仍等方法配置冻结后才可开。
 
