@@ -327,3 +327,10 @@
 - result：DreamOn `8a0a549` 有 genuine FIM/HumanEval-Infilling dynamic route，但 training-based/official 8-GPU；rho-EOS `69992ca` 为 completion-only、无 faithful FIM/evaluator route。详见 `analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/`。
 - result：focused commits 已 push 到 `origin/codex/ccfa-execution-sprint-v1`；所有授权 long runs 已完成，raw outputs 未进入 Git。
 - next：后续 DreamOn smoke 需要新 brief，rho-EOS 需要新 faithful FIM protocol；当前没有自动 GPU action。
+
+## 2026-07-29 UTC 实验完成度审计
+
+- action：基于 `method_portfolio.current.json`、`runtime_status.current.json`、M1--M4 正式 result reports、official baseline protocol audits 与 compact historical full evidence，整理完整中文实验状态报告和下一阶段待审批 prompt；未读取 raw code、未打开 CAL final outcome、未启动 GPU。
+- result：确认 M1--M4 的 148-group formal decision 全部完成且均不晋级；296/927/selected-only-5079 是科学 gate 主动停止。official CAL full 技术完整性完成但 performance analysis 未完成；DreamOn 与 ExecRepoBench 是主要可推进缺口，rho-EOS/LR-DLLM 是真实协议 blocker。报告：`docs/paper_agent/experiments/20260729_experiment_completion_status_and_next_stage.zh.md`；prompt：`docs/paper_agent/prompts/20260729_next_stage_approval_prompt.zh.md`。
+- safety：frozen test=`sealed/0`；raw outputs、logs、模型和用户未跟踪 M1/M2 analysis directories 保持不变；当前无项目 GPU process。
+- next：等待用户批准阶段 A/B/C/D 的执行边界；未获批准前不启动 DreamOn GPU 或新 M5 GPU。

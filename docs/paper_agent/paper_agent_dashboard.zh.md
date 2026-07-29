@@ -1,6 +1,12 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-28 UTC
+更新时间：2026-07-29 UTC
+
+## 2026-07-29 完成度审计与审批入口
+
+- 完整中文状态报告：`docs/paper_agent/experiments/20260729_experiment_completion_status_and_next_stage.zh.md`。
+- 下一阶段待审批 prompt：`docs/paper_agent/prompts/20260729_next_stage_approval_prompt.zh.md`。
+- 审计结论：M1--M4 的 148-group formal decisions 均已完成且无人晋级；296/927/selected-only-5079 是按科学 gate 主动停止。official CAL full 完整性为 `4990/4990`、0 missing/error，但 final outcome analysis 待 outcome-blind analyzer freeze。DreamOn GPU reproduction、ExecRepoBench evaluator smoke 未完成；rho-EOS/LR-DLLM 保持协议 blocker。当前没有 GPU 作业，frozen test=`sealed/0`。
 
 ## 2026-07-28 Execution Sprint V1 — Authoritative Snapshot
 
