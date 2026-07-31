@@ -67,6 +67,25 @@ class DreamOnSingleLineAdapterTest(unittest.TestCase):
             "dreamon_singleline_source_row=7|arm=dreamon_dynamic_min16_max64",
         )
 
+    def test_multiline_profile_changes_only_candidate_namespace_contract(self) -> None:
+        arm = arm_name(8)
+        self.assertEqual(
+            candidate_key("dreamon", 11, arm, "multiline"),
+            "dreamon_multiline_source_row=11|arm=dreamon_dynamic_min8_max64",
+        )
+        self.assertEqual(
+            paired_seed_key(11, 8, "multiline"),
+            "dreamon_multiline_source_row=11|arm=dreamon_dynamic_min8_max64",
+        )
+        manifest = [{"source_row_id": 11}, {"source_row_id": 12}]
+        self.assertEqual(
+            expected_keys(manifest, arm, "dreamon", "multiline"),
+            {
+                "dreamon_multiline_source_row=11|arm=dreamon_dynamic_min8_max64",
+                "dreamon_multiline_source_row=12|arm=dreamon_dynamic_min8_max64",
+            },
+        )
+
     def test_row_seed_is_deterministic_and_arm_specific(self) -> None:
         first = derive_row_seed(42, "key-a")
         self.assertEqual(first, derive_row_seed(42, "key-a"))

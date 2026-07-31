@@ -164,11 +164,11 @@
       "source": {"repository": "DreamLM/DreamOn", "revision": "8a0a54918412eda9402a327646f7f067f7160ec8", "license": "LICENSE present"},
       "checkpoint": {"id": "Dream-org/DreamOn-v0-7B", "revision": "8ccc74750e43177327f29dab9e91882ba759e194", "status": "cached; Apache-2.0"},
       "training_class": "training-based",
-      "population": {"rows": 5079, "clusters": 148, "manifest": null},
-      "decoder": {"status": "must remain per-example identical to official source"},
-      "implementation_class": "unsupported until benchmark-only adapter proof",
-      "status": "blocked_adapter_equivalence_unproven",
-      "paths": {"raw": null, "status": null, "report": null},
+      "population": {"rows": 5079, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl", "manifest_sha256": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/dreamon_multiline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "5bd2d19ba9b8c48318708c79319e306d2438404d7c13e9bfaf327de6a483ebf9", "smoke_summary": "analysis_outputs/baseline_manifests_20260731_v1/dreamon_multiline_technical_smoke12_manifest_summary.json", "smoke_summary_sha256": "a7b3452bce5c190e00adba0b285e43cd61f1335f3772539854c6abf66be5aec6"},
+      "decoder": {"initial_lengths": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "remasking": "entropy", "mask_expansion": true, "seed": 42, "adapter_boundary": "dataset/manifest/evaluator-row namespace only; per-example source algorithm unchanged"},
+      "implementation_class": "official-source MultiLine reproduction via benchmark-only adapter",
+      "status": "adapter_tests_action_manifest_outcome_blind_ready_pending_commit_push_and_smoke",
+      "paths": {"raw": "outputs_clean/dreamon_multiline_20260731_v1/dreamon_dynamic_min<L>_max64_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamon_multiline_benchmark_adapter_action.zh.md", "report": null},
       "paired_comparison": {"eligible": false, "reason": "Adapter and fixed controls are not frozen."}
     },
     {

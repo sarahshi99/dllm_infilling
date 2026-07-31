@@ -56,8 +56,10 @@ MODEL_PROFILES = {
         "license": "not_present_in_cached_snapshot; external metadata verification pending",
     },
 }
-DATASET_NAME = "HumanEval-SingleLineInfilling"
-FULL_COUNT = 927
+DATASETS = {
+    "singleline": ("HumanEval-SingleLineInfilling", 927),
+    "multiline": ("HumanEval-MultiLineInfilling", 5079),
+}
 CLUSTER_COUNT = 148
 INITIAL_LENGTHS = (4, 8, 16, 32, 64)
 
@@ -103,19 +105,35 @@ def derive_row_seed(global_seed: int, candidate_key: str) -> int:
     return int.from_bytes(digest[:8], "big") & ((1 << 63) - 1)
 
 
-def candidate_key(model_profile: str, source_row_id: int, arm: str) -> str:
-    prefix = "dreamon_singleline" if model_profile == "dreamon" else "dreamcoder_singleline"
+def candidate_key(
+    model_profile: str,
+    source_row_id: int,
+    arm: str,
+    dataset_profile: str = "singleline",
+) -> str:
+    if dataset_profile not in DATASETS:
+        raise ValueError(f"unsupported dataset profile: {dataset_profile}")
+    model_prefix = "dreamon" if model_profile == "dreamon" else "dreamcoder"
+    prefix = f"{model_prefix}_{dataset_profile}"
     return f"{prefix}_source_row={int(source_row_id)}|arm={arm}"
 
 
-def paired_seed_key(source_row_id: int, length: int) -> str:
-    return candidate_key("dreamon", source_row_id, arm_name(length, "dreamon"))
+def paired_seed_key(source_row_id: int, length: int, dataset_profile: str = "singleline") -> str:
+    return candidate_key(
+        "dreamon", source_row_id, arm_name(length, "dreamon"), dataset_profile
+    )
 
 
 def expected_keys(
-    manifest: Sequence[Mapping[str, Any]], arm: str, model_profile: str = "dreamon"
+    manifest: Sequence[Mapping[str, Any]],
+    arm: str,
+    model_profile: str = "dreamon",
+    dataset_profile: str = "singleline",
 ) -> set[str]:
-    keys = {candidate_key(model_profile, int(row["source_row_id"]), arm) for row in manifest}
+    keys = {
+        candidate_key(model_profile, int(row["source_row_id"]), arm, dataset_profile)
+        for row in manifest
+    }
     if len(keys) != len(manifest) or "" in keys:
         raise RuntimeError("DreamOn manifest has duplicate or blank normalized keys")
     return keys
@@ -391,20 +409,22 @@ def run(args: argparse.Namespace) -> int:
     output_dir = Path(args.output_dir).resolve()
     min_gen_len = int(args.min_gen_len)
     model_profile = str(args.model_profile)
+    dataset_profile = str(args.dataset_profile)
+    dataset_name, full_count = DATASETS[dataset_profile]
     arm = arm_name(min_gen_len, model_profile)
     config = protocol_config(min_gen_len, model_profile)
     mode = str(args.mode)
-    expected_mode_count = 12 if mode == "smoke" else FULL_COUNT
+    expected_mode_count = 12 if mode == "smoke" else full_count
     manifest = read_jsonl(manifest_path)
     full_manifest = read_jsonl(full_manifest_path)
     if len(manifest) != expected_mode_count:
         raise RuntimeError(f"DreamOn {mode} requires exactly {expected_mode_count} manifest rows")
-    if len(full_manifest) != FULL_COUNT:
-        raise RuntimeError("DreamOn full manifest must contain exactly 927 rows")
+    if len(full_manifest) != full_count:
+        raise RuntimeError(f"DreamOn {dataset_profile} full manifest must contain {full_count} rows")
     if int(args.progress_every) <= 0:
         raise ValueError("--progress-every must be positive")
     population = certify_population(
-        dataset_name=DATASET_NAME,
+        dataset_name=dataset_name,
         manifest_path=manifest_path,
         full_manifest_path=full_manifest_path,
         summary_path=summary_path,
@@ -412,7 +432,7 @@ def run(args: argparse.Namespace) -> int:
     )
     source_info = source_provenance(source_root)
     model_info = model_provenance(model_snapshot, model_profile)
-    source_rows = load_dataset_rows(evaluator_root, DATASET_NAME)
+    source_rows = load_dataset_rows(evaluator_root, dataset_name)
     verify_manifest_source_rows(manifest, source_rows)
     if args.preflight_only:
         _, tokenizer_wrapper = load_source_runtime(source_root)
@@ -446,8 +466,8 @@ def run(args: argparse.Namespace) -> int:
     failure_path = output_dir / f"{arm}_failure_journal.jsonl"
     progress_path = output_dir / f"{arm}_{mode}_progress.json"
     run_manifest_path = output_dir / f"{arm}_{mode}_run_manifest.json"
-    full_expected = expected_keys(full_manifest, arm, model_profile)
-    expected = expected_keys(manifest, arm, model_profile)
+    full_expected = expected_keys(full_manifest, arm, model_profile, dataset_profile)
+    expected = expected_keys(manifest, arm, model_profile, dataset_profile)
     existing = canonical_rows(raw_path, full_expected, arm)
     completed = {str(row["candidate_key"]) for row in existing} & expected
     starting_completed = len(completed)
@@ -471,17 +491,26 @@ def run(args: argparse.Namespace) -> int:
             **source_info,
             **model_info,
             "protocol": config,
-            "dataset": DATASET_NAME,
+            "dataset": dataset_name,
+            "dataset_profile": dataset_profile,
             "manifest": str(manifest_path),
             "full_manifest": str(full_manifest_path),
             "implementation_label": (
-                "DreamOn official-source single-H200 reproduction"
+                (
+                    "DreamOn official-source single-H200 reproduction"
+                    if dataset_profile == "singleline"
+                    else "DreamOn official-source MultiLine reproduction via benchmark-only adapter"
+                )
                 if model_profile == "dreamon"
                 else "DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder"
             ),
             "model_profile": model_profile,
             "topology_boundary": (
-                "single H200; not exact official 8-GPU topology reproduction"
+                (
+                    "single H200; not exact official 8-GPU topology reproduction"
+                    if dataset_profile == "singleline"
+                    else "single H200; benchmark-only loader/manifest adapter; per-example source algorithm unchanged"
+                )
                 if model_profile == "dreamon"
                 else "single-H200 common-protocol local fixed-canvas control"
             ),
@@ -499,6 +528,11 @@ def run(args: argparse.Namespace) -> int:
                 None
                 if model_profile == "dreamon"
                 else "min_gen_len=max_gen_len; source EOS contraction remains enabled"
+            ),
+            "benchmark_adapter_boundary": (
+                None
+                if dataset_profile == "singleline"
+                else "only dataset population, manifest, candidate namespace, and evaluator input row change"
             ),
             "resume_contract": "append-only canonical raw; exact successful keys skipped",
             "frozen_test_status": "sealed",
@@ -531,13 +565,13 @@ def run(args: argparse.Namespace) -> int:
     torch.cuda.reset_peak_memory_stats()
     for source_row_id in sorted(manifest_by_source):
         item = manifest_by_source[source_row_id]
-        key = candidate_key(model_profile, source_row_id, arm)
+        key = candidate_key(model_profile, source_row_id, arm, dataset_profile)
         if key in completed:
             continue
         source = source_rows[source_row_id]
         safe = selection_view(source)
         if str(safe["task_id"]) != str(item["task_id"]):
-            raise RuntimeError("DreamOn manifest/source task id mismatch")
+            raise RuntimeError(f"DreamOn {dataset_profile} manifest/source task id mismatch")
         row_started = time.perf_counter()
         torch.cuda.reset_peak_memory_stats()
         try:
@@ -547,7 +581,7 @@ def run(args: argparse.Namespace) -> int:
                 seed_key=(
                     None
                     if model_profile == "dreamon"
-                    else paired_seed_key(source_row_id, min_gen_len)
+                    else paired_seed_key(source_row_id, min_gen_len, dataset_profile)
                 ),
                 global_seed=int(args.seed),
                 generator=generator,
@@ -570,7 +604,7 @@ def run(args: argparse.Namespace) -> int:
                 {
                     "candidate_key": key,
                     "arm": arm,
-                    "dataset": DATASET_NAME,
+                    "dataset": dataset_name,
                     "source_row_id": source_row_id,
                     "task_id": str(item["task_id"]),
                     "task_group": str(item["task_group"]),
@@ -589,7 +623,7 @@ def run(args: argparse.Namespace) -> int:
                 {
                     "candidate_key": key,
                     "arm": arm,
-                    "dataset": DATASET_NAME,
+                    "dataset": dataset_name,
                     "source_row_id": source_row_id,
                     "task_id": str(item["task_id"]),
                     "status": "error",
@@ -661,6 +695,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--evaluator-root", required=True)
     root.add_argument("--model-snapshot", required=True)
     root.add_argument("--model-profile", choices=tuple(MODEL_PROFILES), default="dreamon")
+    root.add_argument("--dataset-profile", choices=tuple(DATASETS), default="singleline")
     root.add_argument("--manifest-jsonl", required=True)
     root.add_argument("--full-manifest-jsonl", required=True)
     root.add_argument("--manifest-summary-json", required=True)
