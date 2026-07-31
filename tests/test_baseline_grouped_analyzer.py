@@ -127,6 +127,62 @@ class BaselineGroupedAnalyzerTest(unittest.TestCase):
         rows = normalize_rows(raw_rows((True, False, True)), legacy)
         self.assertEqual([row["candidate_key"] for row in rows], ["task/a0", "task/a1", "task/b0"])
 
+    def test_lrdllm_schema_aliases_preserve_cost_and_dynamic_metrics(self) -> None:
+        raw = raw_rows((True, False, True))
+        for index, row in enumerate(raw):
+            row["metrics"] = {  # type: ignore[index]
+                "search_forward_calls": 4,
+                "decode_forward_calls": 5,
+                "total_forward_calls": 9,
+                "total_token_forwards": 90 + index,
+                "wall_sec": 1.0,
+                "peak_memory_bytes": 100,
+                "final_generated_length": 12 + index,
+                "expansion_moves": int(index == 1),
+                "contraction_moves": int(index == 2),
+                "termination_reason": "remaining_length_zero",
+            }
+        summary = summarize_method(
+            normalize_rows(raw, manifest()),
+            method="lrdllm",
+            expected_rows=3,
+            expected_clusters=2,
+            bootstrap_replicates=20,
+            seed=19,
+        )
+        self.assertEqual(summary["total_forward_calls"], 27)
+        self.assertEqual(summary["total_token_forwards"], 273)
+        self.assertEqual(summary["dynamic"]["selected_length_mean"], 13)
+        self.assertEqual(summary["dynamic"]["expansion_count_total"], 1)
+        self.assertEqual(summary["dynamic"]["contraction_count_total"], 1)
+
+    def test_daedal_schema_aliases_preserve_final_length_and_expansion(self) -> None:
+        raw = raw_rows((True, True, False))
+        for index, row in enumerate(raw):
+            row["metrics"] = {  # type: ignore[index]
+                "search_forwards": 0,
+                "formal_decode_forwards": 6,
+                "total_forwards": 6,
+                "token_forwards": 60,
+                "wall_sec": 1.0,
+                "peak_memory_bytes": 100,
+                "final_gen_length": 8 + index,
+                "net_expansion_tokens": index,
+                "net_contraction_tokens": 0,
+                "termination_reason": "all_middle_positions_filled",
+            }
+        summary = summarize_method(
+            normalize_rows(raw, manifest()),
+            method="daedal",
+            expected_rows=3,
+            expected_clusters=2,
+            bootstrap_replicates=20,
+            seed=23,
+        )
+        self.assertEqual(summary["dynamic"]["selected_length_mean"], 9)
+        self.assertEqual(summary["dynamic"]["expansion_count_total"], 3)
+        self.assertEqual(summary["dynamic"]["contraction_count_total"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

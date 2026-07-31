@@ -149,7 +149,9 @@ def _cost_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         decode_value = _number(
             _metric(row, "formal_decode_forwards", "decode_forwards", "decode_forward_calls")
         )
-        total_value = _number(_metric(row, "total_forwards", "actual_forward_count"))
+        total_value = _number(
+            _metric(row, "total_forwards", "total_forward_calls", "actual_forward_count")
+        )
         if search_value is not None and decode_value is not None and total_value is not None:
             if abs(total_value - search_value - decode_value) > 1e-9:
                 raise RuntimeError("forward accounting does not satisfy total=search+decode")
@@ -164,6 +166,7 @@ def _cost_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
                 row,
                 "token_budget",
                 "token_forwards",
+                "total_token_forwards",
                 "actual_token_forward_budget",
                 "standalone_token_budget",
             )
@@ -195,18 +198,51 @@ def _dynamic_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     lengths = [
         value
         for row in rows
-        if (value := _number(_metric(row, "selected_length", "final_length", "generated_length")))
+        if (
+            value := _number(
+                _metric(
+                    row,
+                    "selected_length",
+                    "final_length",
+                    "generated_length",
+                    "final_generated_length",
+                    "final_gen_length",
+                )
+            )
+        )
         is not None
     ]
     expansions = [
         value
         for row in rows
-        if (value := _number(_metric(row, "expansion_count", "num_expansions"))) is not None
+        if (
+            value := _number(
+                _metric(
+                    row,
+                    "expansion_count",
+                    "num_expansions",
+                    "expansion_moves",
+                    "net_expansion_tokens",
+                )
+            )
+        )
+        is not None
     ]
     contractions = [
         value
         for row in rows
-        if (value := _number(_metric(row, "contraction_count", "num_contractions"))) is not None
+        if (
+            value := _number(
+                _metric(
+                    row,
+                    "contraction_count",
+                    "num_contractions",
+                    "contraction_moves",
+                    "net_contraction_tokens",
+                )
+            )
+        )
+        is not None
     ]
     termination = Counter(
         str(value)
