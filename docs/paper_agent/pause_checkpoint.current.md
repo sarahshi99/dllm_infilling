@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 LR-DLLM SingleLine Completion Override
+
+- `paper-guided, author-unverified reimplementation of LR-DLLM` DreamCoder SingleLine primary 已于 `2026-07-31T10:56:03Z` 完成 `927/927`，failure/error=`0/0`。冻结 analyzer：row=`72.7077%`，148-cluster macro=`60.5238%`，CI=`[54.9216%,65.8574%]`；Fixed64未完成前不做paired comparison。
+- 该进程释放显存后，资源 watcher 于 `2026-07-31T10:56:09Z` 启动 DAEDAL MultiLine Fixed8 full；tmux/pane=`daedal_fim_ml4990_fixed8_20260731/3552559`，Python PID=`3717698`。
+- RandomSpan/MultiLine LR primary、SingleLine Fixed64、CAL primary/Fixed32、DAEDAL SingleLine dynamic及MultiLine dynamic/Fixed8继续运行。Frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-31 Baseline Closure Concurrent Execution Checkpoint（authoritative override）
 
 - branch=`codex/ccfa-execution-sprint-v1`；remote/local launch HEAD=`9f0deb9b11576653fab7f0c75572561e7bdc246f`，是用户指定 `b42ba3038c794ca76d3f5908bd869e0164228a9e` 的 descendant。仅保留两处既知用户 untracked M1/M2 目录，无重叠 dirty。

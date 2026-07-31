@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- LR SingleLine result：DreamCoder primary完成`927/927`，row=`72.7077%`，148-cluster macro=`60.5238%`，CI=`[54.9216%,65.8574%]`，search/decode/total forwards=`35555/9397/44952`，token-forwards=`11288608`，wall=`2631.826s`，peak=`15784173568` bytes。Fixed64未完成前不做paired comparison。
+- resource continuation：LR SingleLine释放显存后，watcher于`2026-07-31T10:56:09Z`启动DAEDAL MultiLine Fixed8 full（tmux/pane=`daedal_fim_ml4990_fixed8_20260731/3552559`，Python=`3717698`）。
 - branch/runtime：remote/local=`9f0deb9`，是用户指定 `b42ba303` descendant；两处用户 untracked M1/M2目录保持不变。单张H200 physical index=`0`；外部约70GiB进程自然退出后按用户并行授权启动多个独立 tmux，未 kill/preempt。
 - CAL SingleLine：primary smoke=`12/12`、resume no-op通过并启动838 full；official_fixed32 smoke=`12/12`、resume `new_rows_written=0`并启动838 full。两臂均零failure/error，未读取partial accuracy。
 - LR-DLLM：technical=`12/12`、mechanism=`64/64`，mechanism expansion-positive=`45`、contraction-positive=`37`，guard/accounting error=`0`，resume幂等。DreamCoder SingleLine/RandomSpan/MultiLine primary full与SingleLine Fixed64 full均已启动；准确标签保持 `paper-guided, author-unverified reimplementation of LR-DLLM`。

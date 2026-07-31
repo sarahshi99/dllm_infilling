@@ -6,8 +6,8 @@
 
 - 权威分支：`codex/ccfa-execution-sprint-v1@9f0deb9`，remote/local一致；该 HEAD 是用户指定 `b42ba303` 的 descendant。Phase 0、CAL/LR/DAEDAL adapters与 manifests不重做。
 - CAL SingleLine：primary 与 official_fixed32 的 12-case smoke/resume gates均通过，两个 `838` full 正在独立 tmux 运行；运行中未读 partial accuracy。
-- LR-DLLM：无作者代码；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。12-case technical、64-case mechanism和resume gates通过；DreamCoder SingleLine `927`、RandomSpan `1480`、MultiLine `5079` primary full及 SingleLine Fixed64 full均在运行。
-- CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic在运行；Fixed8已完成 `838/838`，row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`。MultiLine dynamic `4990`在运行；Fixed8 full在资源守候 tmux中，free≥20GiB即启动。
+- LR-DLLM：无作者代码；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder SingleLine primary已完成 `927/927`：row=`72.7077%`、148-cluster macro=`60.5238%`、CI=`[54.9216%,65.8574%]`；Fixed64未完成前不做paired comparison。RandomSpan/MultiLine primary和SingleLine Fixed64继续运行。
+- CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic在运行；Fixed8已完成 `838/838`，row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`。MultiLine dynamic与Fixed8两个 `4990` full均已启动。
 - DreamOn：released checkpoint `8ccc7475…` 已完整缓存，license=`apache-2.0`；现有项目树仍缺已冻结 DreamOn adapter/manifest，故状态从 cache blocker 转为 implementation/protocol freeze pending，不阻塞其他 baseline。
 - GPU0 是单张 H200；2026-07-31T10:44Z 有8个项目模型稳定并发、ECC=`0`。外部约70GiB进程自行结束；全程未 kill/preempt。Frozen test=`sealed/0`。
 - 下一资源动作由 tmux `daedal_fim_ml4990_fixed8_20260731` 自动执行；不得转入 M5、PPT、ExecRepoBench final 或 frozen evaluation。
