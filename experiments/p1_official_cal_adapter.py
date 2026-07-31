@@ -28,12 +28,29 @@ from experiments.p1_official_cal_source_audit import (
     EXPECTED_HUMANEVAL_COMMIT,
     git_head,
     read_jsonl,
+    sha256,
 )
 from expvision_dllm_clean.modeling import set_global_seed
 
 
 MODEL_PATH = "GSAI-ML/LLaDA-8B-Base"
 ARMS = ("official_cal_primary", "official_fixed32", "project_fixed64_internal")
+BENCHMARKS = {
+    "multi-line": {
+        "full_count": 4990,
+        "cluster_count": 143,
+        "dataset_filename": "HumanEval-MultiLineInfilling.jsonl.gz",
+        "candidate_prefix": "cal_rest_source_row",
+        "default_full_manifest_name": "cal_rest_common_manifest.jsonl",
+    },
+    "single-line": {
+        "full_count": 838,
+        "cluster_count": 143,
+        "dataset_filename": "HumanEval-SingleLineInfilling.jsonl.gz",
+        "candidate_prefix": "cal_singleline_rest_source_row",
+        "default_full_manifest_name": None,
+    },
+}
 
 
 class ForwardLedgerModel:
@@ -79,10 +96,13 @@ def arm_config(arm: str) -> dict[str, Any]:
     raise ValueError(f"unknown CAL arm {arm!r}")
 
 
-def candidate_key(source_row_id: int, arm: str) -> str:
+def candidate_key(source_row_id: int, arm: str, benchmark_name: str = "multi-line") -> str:
     if arm not in ARMS:
         raise ValueError(f"unknown arm {arm!r}")
-    return f"cal_rest_source_row={int(source_row_id)}|arm={arm}"
+    if benchmark_name not in BENCHMARKS:
+        raise ValueError(f"unknown benchmark {benchmark_name!r}")
+    prefix = BENCHMARKS[benchmark_name]["candidate_prefix"]
+    return f"{prefix}={int(source_row_id)}|arm={arm}"
 
 
 def append_jsonl(path: Path, row: Mapping[str, Any]) -> None:
@@ -211,10 +231,10 @@ def indexed_rows(dataset: Path) -> dict[int, dict[str, Any]]:
     return {index: row for index, row in enumerate(read_jsonl(dataset))}
 
 
-def evaluator_problem_map(humaneval_root: Path) -> dict[str, dict[str, Any]]:
+def evaluator_problem_map(humaneval_root: Path, benchmark_name: str) -> dict[str, dict[str, Any]]:
     import gzip
 
-    path = humaneval_root / "data" / "HumanEval-MultiLineInfilling.jsonl.gz"
+    path = humaneval_root / "data" / str(BENCHMARKS[benchmark_name]["dataset_filename"])
     with gzip.open(path, "rt", encoding="utf-8") as handle:
         return {str(row["task_id"]): row for row in (json.loads(line) for line in handle if line.strip())}
 
@@ -273,7 +293,12 @@ def decode_one(
     evaluator_sec = time.perf_counter() - evaluator_started
     return {
         "completion": completion,
+        "initial_gen_length": int(config["initial_gen_length"]),
         "selected_length": len(middle_ids),
+        "net_expansion_tokens": max(len(middle_ids) - int(config["initial_gen_length"]), 0),
+        "net_contraction_tokens": max(int(config["initial_gen_length"]) - len(middle_ids), 0),
+        "length_direction": "expanded" if len(middle_ids) > int(config["initial_gen_length"]) else "contracted" if len(middle_ids) < int(config["initial_gen_length"]) else "unchanged",
+        "termination_reason": "upstream_event_level_reason_not_exposed",
         "search_forwards": int(search_forwards),
         "formal_decode_forwards": formal_forwards,
         "total_forwards": total_forwards,
@@ -291,8 +316,50 @@ def decode_one(
     }
 
 
-def expected_keys(manifest: Sequence[Mapping[str, Any]], arm: str) -> set[str]:
-    return {candidate_key(int(row["source_row_id"]), arm) for row in manifest}
+def expected_keys(
+    manifest: Sequence[Mapping[str, Any]], arm: str, benchmark_name: str = "multi-line"
+) -> set[str]:
+    return {candidate_key(int(row["source_row_id"]), arm, benchmark_name) for row in manifest}
+
+
+def certify_population(
+    *,
+    benchmark_name: str,
+    current_dataset: Path,
+    manifest_path: Path,
+    full_manifest_path: Path,
+) -> dict[str, Any]:
+    contract = BENCHMARKS[benchmark_name]
+    full_manifest = read_jsonl(full_manifest_path)
+    if len(full_manifest) != int(contract["full_count"]):
+        raise RuntimeError(f"{benchmark_name} full manifest has the wrong row count")
+    if len({str(row["task_group"]) for row in full_manifest}) != int(contract["cluster_count"]):
+        raise RuntimeError(f"{benchmark_name} full manifest has the wrong cluster count")
+    if benchmark_name == "multi-line":
+        source_audit_path = manifest_path.parent / "source_audit.json"
+        source_audit = json.loads(source_audit_path.read_text(encoding="utf-8"))
+        if source_audit["population"]["project_nonfrozen_multiline_rest_common"] != 4990:
+            raise RuntimeError("source audit does not certify corrected MultiLine population")
+        return {
+            "population_certificate": str(source_audit_path),
+            "current_dataset_sha256": sha256(current_dataset),
+            "full_manifest_sha256": sha256(full_manifest_path),
+        }
+    summary_path = full_manifest_path.parent / "cal_singleline_rest_nonfrozen_manifest_summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    if not (
+        summary["cal_rest_intersection_nonfrozen_rows"] == 838
+        and summary["cal_rest_intersection_nonfrozen_clusters"] == 143
+        and summary["official_singleline_sha256"] == sha256(current_dataset)
+        and summary["full_manifest_sha256"] == sha256(full_manifest_path)
+        and summary["sealed_files_opened"] is False
+    ):
+        raise RuntimeError("SingleLine immutable population certificate mismatch")
+    return {
+        "population_certificate": str(summary_path),
+        "current_dataset_sha256": sha256(current_dataset),
+        "full_manifest_sha256": sha256(full_manifest_path),
+    }
 
 
 def audit_rows(rows: Sequence[Mapping[str, Any]], expected: set[str], arm: str) -> dict[str, Any]:
@@ -332,31 +399,45 @@ def run(args: argparse.Namespace) -> int:
     manifest_path = Path(args.manifest_jsonl).resolve()
     output_dir = Path(args.output_dir).resolve()
     arm = str(args.arm)
+    benchmark_name = str(args.benchmark_name)
+    contract = BENCHMARKS[benchmark_name]
+    if args.full_manifest_jsonl:
+        full_manifest_path = Path(args.full_manifest_jsonl).resolve()
+    else:
+        default_name = contract["default_full_manifest_name"]
+        if not default_name:
+            raise RuntimeError("SingleLine requires --full-manifest-jsonl")
+        full_manifest_path = manifest_path.parent / str(default_name)
     if int(args.progress_every) <= 0:
         raise ValueError("--progress-every must be positive")
     manifest = read_jsonl(manifest_path)
     mode = "full" if args.auto_full else "smoke"
     if args.auto_full:
-        if len(manifest) != 4990:
-            raise RuntimeError("official CAL auto-full requires the audited 4990-row CAL-Rest common manifest")
+        if len(manifest) != int(contract["full_count"]):
+            raise RuntimeError(
+                f"official CAL {benchmark_name} auto-full requires the audited {contract['full_count']}-row manifest"
+            )
     elif len(manifest) != int(args.smoke_cases):
         raise RuntimeError("smoke manifest size does not match --smoke-cases")
     rows_by_source = indexed_rows(current_dataset)
-    runtime_manifest = json.loads((manifest_path.parent / "source_audit.json").read_text(encoding="utf-8"))
-    if runtime_manifest["population"]["project_nonfrozen_multiline_rest_common"] != 4990:
-        raise RuntimeError("source audit does not certify corrected common population")
+    population_provenance = certify_population(
+        benchmark_name=benchmark_name,
+        current_dataset=current_dataset,
+        manifest_path=manifest_path,
+        full_manifest_path=full_manifest_path,
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
     raw_path = output_dir / f"{arm}_raw.jsonl"
     failure_path = output_dir / f"{arm}_failure_journal.jsonl"
     progress_path = output_dir / f"{arm}_{mode}_progress.json"
     run_manifest_path = output_dir / f"{arm}_{mode}_run_manifest.json"
     existing = canonical_success_rows(raw_path)
-    all_common_manifest = read_jsonl(manifest_path.parent / "cal_rest_common_manifest.jsonl")
-    all_known = expected_keys(all_common_manifest, arm)
+    all_common_manifest = read_jsonl(full_manifest_path)
+    all_known = expected_keys(all_common_manifest, arm, benchmark_name)
     existing_keys = {str(row["candidate_key"]) for row in existing}
     if not existing_keys <= all_known:
         raise RuntimeError("official CAL canonical raw contains keys outside the audited common population")
-    expected = expected_keys(manifest, arm)
+    expected = expected_keys(manifest, arm, benchmark_name)
     completed = existing_keys & expected
     starting_completed_count = len(completed)
     run_started = time.perf_counter()
@@ -381,6 +462,8 @@ def run(args: argparse.Namespace) -> int:
             "official_cal_commit": EXPECTED_CAL_COMMIT,
             "evaluator_commit": EXPECTED_HUMANEVAL_COMMIT,
             "seed": int(args.seed),
+            "benchmark_name": benchmark_name,
+            **population_provenance,
         },
     )
     try:
@@ -401,10 +484,10 @@ def run(args: argparse.Namespace) -> int:
     if tokenizer.padding_side != "left":
         tokenizer.padding_side = "left"
     model = AutoModel.from_pretrained(MODEL_PATH, trust_remote_code=True, torch_dtype=torch.bfloat16).to("cuda").eval()
-    evaluator_problems = evaluator_problem_map(humaneval_root)
+    evaluator_problems = evaluator_problem_map(humaneval_root, benchmark_name)
     for item in manifest:
         source_row_id = int(item["source_row_id"])
-        key = candidate_key(source_row_id, arm)
+        key = candidate_key(source_row_id, arm, benchmark_name)
         if key in completed:
             continue
         source = rows_by_source[source_row_id]
@@ -426,6 +509,7 @@ def run(args: argparse.Namespace) -> int:
                 "source_row_id": source_row_id,
                 "task_id": str(source["task_id"]),
                 "task_group": str(item["task_group"]),
+                "benchmark_name": benchmark_name,
                 "status": "ok",
                 "passed": result.pop("passed"),
                 "completion": result.pop("completion"),
@@ -444,6 +528,7 @@ def run(args: argparse.Namespace) -> int:
                 "source_row_id": source_row_id,
                 "task_id": str(source.get("task_id") or ""),
                 "task_group": str(item.get("task_group") or ""),
+                "benchmark_name": benchmark_name,
                 "status": "error",
                 "passed": False,
                 "error_type": type(exc).__name__,
@@ -503,8 +588,18 @@ def run(args: argparse.Namespace) -> int:
         started=run_started,
     )
     final_progress["status"] = "completed" if audit["passed"] and audit["failure_journal_count"] == 0 else "audit_failed"
+    final_progress["new_rows_written"] = len(completed) - starting_completed_count
     atomic_write_json(progress_path, final_progress)
-    atomic_write_json(run_manifest_path, {**final_progress, "final_audit": audit, "evaluator_provenance": evaluator_provenance})
+    atomic_write_json(
+        run_manifest_path,
+        {
+            **final_progress,
+            "benchmark_name": benchmark_name,
+            "final_audit": audit,
+            "evaluator_provenance": evaluator_provenance,
+            **population_provenance,
+        },
+    )
     return 0 if audit["passed"] and audit["failure_journal_count"] == 0 else 2
 
 
@@ -513,7 +608,9 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--official-cal-root", required=True)
     root.add_argument("--humaneval-root", required=True)
     root.add_argument("--current-dataset", required=True)
+    root.add_argument("--benchmark-name", choices=tuple(BENCHMARKS), default="multi-line")
     root.add_argument("--manifest-jsonl", required=True)
+    root.add_argument("--full-manifest-jsonl")
     root.add_argument("--output-dir", required=True)
     root.add_argument("--arm", choices=ARMS, required=True)
     root.add_argument("--seed", type=int, default=42)

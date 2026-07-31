@@ -2,6 +2,38 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-07-31 CAL SingleLine 838 smoke→full（覆盖上一动作）
+
+Action name：`CAL-PHASE1B-SINGLELINE-838`。
+
+状态：`adapter_verified_ready_for_commit_then_smoke`。
+
+准确标签：`official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset`。
+
+Scope：只参数化 pinned adapter 的 official HumanEval-Infilling benchmark loader/evaluator，从 MultiLine 切到官方 SingleLine；复用同一 `llada_cal.generate`、同一 seed-42 100-demo bias 参数、model/decoder/evaluator。禁止重新拟合 bias，禁止打开 frozen files。
+
+GPU/env：physical GPU=`0`，`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false`，最多一个项目 GPU 进程。Output=`outputs_clean/official_cal_singleline_20260731_v1/`；log=`logs/paper_agent/20260731_official_cal_singleline.log`；full tmux=`cal_singleline_838_20260731`。
+
+Exact smoke command：
+
+```bash
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/p1_official_cal_adapter.py --official-cal-root /home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418 --humaneval-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --current-dataset /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-SingleLineInfilling.jsonl.gz --benchmark-name single-line --manifest-jsonl analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl --full-manifest-jsonl analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl --output-dir outputs_clean/official_cal_singleline_20260731_v1 --arm official_cal_primary --smoke-cases 12
+```
+
+Full command（smoke+resume-noop gate 通过后，在独立 tmux 立即启动）：
+
+```bash
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface /home/shx/miniconda3/envs/dllm_env/bin/python experiments/p1_official_cal_adapter.py --official-cal-root /home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418 --humaneval-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --current-dataset /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-SingleLineInfilling.jsonl.gz --benchmark-name single-line --manifest-jsonl analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl --full-manifest-jsonl analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl --output-dir outputs_clean/official_cal_singleline_20260731_v1 --arm official_cal_primary --auto-full
+```
+
+实际 launcher：smoke=`bash scripts/manual_launch_official_cal_singleline_20260731.sh smoke`；full=`tmux new-session -d -s cal_singleline_838_20260731 'cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1 && bash scripts/manual_launch_official_cal_singleline_20260731.sh full'`。
+
+Success gate：smoke=`12/12` unique exact keys，missing/duplicate/error/failure=`0`，evaluator正常，forward/token/wall/memory字段完整，resume no-op writes=`0`，frozen=`sealed/0`。Full gate=`838/838`、143 clusters、同样零错误与完整账本。
+
+Kill criteria：source/checkpoint/config/hash/population不一致；任何 failure journal；forward/token accounting错误；OOM/ECC；已有无关 GPU process。Budget：smoke约2–5分钟（含模型加载）；full约55–70分钟。运行中只读 progress/ETA/OOM/ECC/failure，不读 partial accuracy。
+
+Fresh verification：11 个 CAL/builder tests `OK`；adapter `py_compile`、launcher `bash -n`、CLI help、SingleLine certificate/hash preflight、`git diff --check` 全部通过。`reviewer_gate_disabled`，local diff review无 blocker。
+
 ## 2026-07-31 CAL MultiLine 4,990 解盲（覆盖上一动作）
 
 Action name：`CAL-PHASE1A-MULTILINE-4990-UNBLIND`。

@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from experiments.p1_official_cal_adapter import (
     ARMS,
+    BENCHMARKS,
     ForwardLedgerModel,
     arm_config,
     audit_rows,
@@ -27,12 +28,30 @@ class OfficialCalAdapterTest(unittest.TestCase):
         self.assertEqual(arm_config("official_fixed32")["initial_gen_length"], 32)
         self.assertIn("not_same_compute", arm_config("project_fixed64_internal")["comparison_boundary"])
 
+    def test_singleline_benchmark_contract_is_distinct_and_fixed_at_838(self) -> None:
+        self.assertEqual(BENCHMARKS["single-line"]["full_count"], 838)
+        self.assertEqual(BENCHMARKS["multi-line"]["full_count"], 4990)
+        self.assertEqual(candidate_key(3, "official_cal_primary"), "cal_rest_source_row=3|arm=official_cal_primary")
+        self.assertEqual(
+            candidate_key(3, "official_cal_primary", "single-line"),
+            "cal_singleline_rest_source_row=3|arm=official_cal_primary",
+        )
+
     def test_resume_audit_checks_exact_keys_and_forward_partition(self) -> None:
         manifest = [{"source_row_id": 3}]
         key = candidate_key(3, "official_cal_primary")
         rows = [{"candidate_key": key, "arm": "official_cal_primary", "status": "ok", "metrics": {"search_forwards": 5, "formal_decode_forwards": 32, "total_forwards": 37}}]
         self.assertTrue(audit_rows(rows, expected_keys(manifest, "official_cal_primary"), "official_cal_primary")["passed"])
         self.assertFalse(audit_rows(rows, expected_keys(manifest, "official_fixed32"), "official_fixed32")["passed"])
+        single_key = candidate_key(3, "official_cal_primary", "single-line")
+        single_rows = [{"candidate_key": single_key, "arm": "official_cal_primary", "status": "ok", "metrics": {"search_forwards": 5, "formal_decode_forwards": 32, "total_forwards": 37}}]
+        self.assertTrue(
+            audit_rows(
+                single_rows,
+                expected_keys(manifest, "official_cal_primary", "single-line"),
+                "official_cal_primary",
+            )["passed"]
+        )
 
     def test_canonical_raw_is_success_only_and_progress_is_compact(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

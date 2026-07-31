@@ -82,8 +82,8 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl", "smoke_manifest_sha256": "56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1"},
       "decoder": {"initial_gen_length": 32, "span": 1, "dstep": 4, "max_gen_length": 128, "use_bias": true, "temperature": 0.0, "cfg_scale": 0.0, "oracle": false, "seed": 42},
       "implementation_class": "official-source adaptation to the official SingleLine loader/evaluator",
-      "status": "manifest_frozen_smoke_pending",
-      "paths": {"raw": null, "status": null, "report": null},
+      "status": "adapter_verified_commit_pending_then_smoke",
+      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_smoke_run_manifest.json", "report": null},
       "paired_comparison": {"eligible": "after_official_fixed32_complete", "reason": "Primary common-protocol control is official_fixed32, not Fixed64."}
     },
     {
