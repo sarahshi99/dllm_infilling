@@ -152,7 +152,7 @@
       "implementation_class": "official-source single-H200 adapter using pinned MDMGenerator",
       "status": "all_five_singleline_fulls_completed_and_grouped_analyzed",
       "paths": {"raw": "outputs_clean/dreamon_singleline_20260731_v1/dreamon_dynamic_min<L>_max64_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamon_singleline_execution_action.zh.md", "report": "docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md", "analysis": "analysis_outputs/dreamon_singleline_official_source_20260731_v1/summary.json"},
-      "paired_comparison": {"eligible": false, "reason": "No matching DreamCoder fixed-length controls completed under DreamOn sampling/decoder."}
+      "paired_comparison": {"eligible": "Fixed8 completed; Fixed4/16/32/64 pending", "reason": "DreamOn min8 minus DreamCoder Fixed8 macro +33.243pp CI [+28.390,+38.417]pp; full-system training/checkpoint plus dynamic-canvas contrast, not compute-matched."}
     },
     {
       "id": "dreamon_dreamcoder_multiline_5079",
@@ -201,8 +201,8 @@
       "population": {"rows": 927, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl", "manifest_sha256": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "c1dc18fac3fd67ba73b11a197e547b4d6c30dc60b1ad018d672447c3d2885280"},
       "decoder": {"lengths": [4, 8, 16, 32, 64], "fixed_semantics": "min_gen_len=max_gen_len; EOS contraction retained", "temperature": 0.2, "top_p": 0.9, "steps": 256, "remasking": "entropy", "seed": 42, "seed_policy": "same per-row seed key as corresponding DreamOn dynamic arm"},
       "implementation_class": "common-protocol local comparison",
-      "status": "adapter_tests_action_ready_outcome_blind_pending_commit_push_and_smoke",
-      "paths": {"raw": "outputs_clean/dreamcoder_dreamon_fixed_singleline_20260731_v1/dreamcoder_fixed<L>_dreamon_decoder_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_controls_action.zh.md", "report": null},
+      "status": "all_smoke_resume_gates_passed_fixed8_completed_fixed16_32_64_running_fixed4_memory_gated",
+      "paths": {"raw": "outputs_clean/dreamcoder_dreamon_fixed_singleline_20260731_v1/dreamcoder_fixed<L>_dreamon_decoder_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_controls_action.zh.md", "report": {"Fixed8": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed8_paired_result.zh.md"}},
       "paired_comparison": {"eligible": "after_freeze_and_completion", "reason": "Priority is Fixed64 plus the fixed arm corresponding to the executed DreamOn arm."}
     },
     {

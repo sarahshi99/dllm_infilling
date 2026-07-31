@@ -15,7 +15,8 @@
         "min64_max64": {"row_pass_at_1": 0.9169363538295577, "task_macro_pass_at_1": 0.8512993106743105, "ci_95": [0.8025823601604851, 0.8974112292081037], "recovered_resource_oom_journal": 1}
       },
       "canonical_audit": "all five arms 927/927; zero missing duplicate canonical error or accounting defect",
-      "paired_status": "pending DreamCoder DreamOn-matched fixed controls",
+      "paired_fixed8": {"dreamon_row_pass_at_1": 0.9039913700107874, "dreamon_task_macro_pass_at_1": 0.8133130289380289, "dreamcoder_fixed8_row_pass_at_1": 0.6073354908306364, "dreamcoder_fixed8_task_macro_pass_at_1": 0.48087876344455277, "task_macro_delta": 0.332434265493476, "ci_95": [0.2838991551162604, 0.38417363805932886], "row_help_harm": [286, 11], "cluster_help_harm_tie": [111, 1, 36]},
+      "paired_status": "Fixed8 completed; Fixed4/16/32/64 pending",
       "report": "docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md"
     },
     "lrdllm_dreamcoder_randomspan": {

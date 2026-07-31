@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- DreamOn min8 paired：DreamOn row/macro=`90.3991/81.3313%`，DreamCoder Fixed8=`60.7335/48.0879%`；row help/harm=`286/11`，cluster=`111/1/36`，macro delta=`+33.243pp` CI=`[+28.390,+38.417]pp`。完整系统差异，不归因于单独动态长度或训练。
+- Fixed8 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；释放显存后，将Fixed4自建空闲queue从58GiB保守门槛替换为36GiB，未停止任何GPU进程或外部任务。
 - LR RandomSpan paired：primary row/macro=`18.3784%`，Fixed64=`33.5135%`；primary−Fixed64 row help/harm=`104/328`，cluster=`19/107/22`，macro delta=`-15.135pp` CI=`[-17.905,-12.365]pp`。明确负结果，未合并dataset Mean。
 - DreamCoder DreamOn-matched controls：commit=`31291ac`先push；Fixed4/8/16/32/64 smoke=`12/12`且resume no-op=`0` writes。Fixed64/32/16直接full启动，Fixed8由36GiB gate释放，Fixed4在58GiB gate等待。
 - DreamOn SingleLine completion：五个 official-source released arms 完成`927/927`并分析。min4/8/16/32/64 row=`88.4574/90.3991/90.7228/91.2621/91.6936%`；macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。五项canonical audit全通过；min32/min64各保留1条已恢复的并发显存OOM journal。无matched fixed controls，未算paired delta。

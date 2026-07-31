@@ -15,6 +15,12 @@
 - primary−Fixed64 row help/harm=`104/328`，cluster=`19/107/22`，task-macro delta=`-15.135pp`，95% CI=`[-17.905,-12.365]pp`。该结果明确为负，不输出跨dataset Mean。
 - MultiLine Fixed64继续运行。DreamCoder DreamOn-matched Fixed64/32/16/8 full运行，Fixed4显存门控等待；Frozen test=`sealed/0`。
 
+## 2026-07-31 DreamOn vs DreamCoder Fixed8 Override
+
+- DreamOn min8/max64 vs DreamCoder Fixed8：row=`90.3991% vs 60.7335%`；task-macro=`81.3313% vs 48.0879%`。
+- paired row help/harm=`286/11`；cluster=`111/1/36`；macro delta=`+33.243pp`，95% CI=`[+28.390,+38.417]pp`。
+- 这是 training-based released DreamOn system 与 DreamCoder base fixed-canvas control 的整体差异，不是纯动态长度、纯训练或 compute-matched effect。Fixed16/32/64运行，Fixed4 36GiB门控等待。
+
 ## 2026-07-31 Baseline Closure Execution Status
 
 - 权威分支：`codex/ccfa-execution-sprint-v1@6195157`（DreamOn result commit 的 parent），remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。

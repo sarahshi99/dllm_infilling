@@ -1,0 +1,2 @@
+method_a,method_b,paired_candidate_key_count,cluster_count,task_macro_delta,task_macro_delta_ci_low,task_macro_delta_ci_high,row_help,row_harm,cluster_help,cluster_harm,cluster_tie,bootstrap_replicates,bootstrap_seed
+dreamon_dynamic_min8_max64,dreamcoder_fixed8_dreamon_decoder,927,148,0.332434265493476,0.2838991551162604,0.38417363805932886,286,11,111,1,36,10000,20260831

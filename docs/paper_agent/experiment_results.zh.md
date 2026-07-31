@@ -2,6 +2,13 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn min8 vs DreamCoder Fixed8
+
+- DreamOn min8/max64 row/macro=`90.3991/81.3313%`；DreamCoder Fixed8 row/macro=`60.7335/48.0879%`。
+- DreamOn−Fixed8 row help/harm=`286/11`；cluster help/harm/tie=`111/1/36`；task-macro delta=`+33.243pp`，95% CI=`[+28.390,+38.417]pp`。
+- 两臂 same population/source decoder/sampling/seed-key，但 checkpoint/training class不同；因此这是 full-system paired contrast，不是纯动态长度或 compute-matched effect。
+- 报告：`docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed8_paired_result.zh.md`。
+
 ## LR-DLLM DreamCoder RandomSpan paired result
 
 - 唯一实现标签：`paper-guided, author-unverified reimplementation of LR-DLLM`。

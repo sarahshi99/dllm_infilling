@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn min8 vs Fixed8 Paired Override
+
+- DreamOn min8−DreamCoder Fixed8：row help/harm=`286/11`；cluster=`111/1/36`；task-macro delta=`+33.243pp`，95% CI=`[+28.390,+38.417]pp`。
+- 该 delta 是 released training-based system 相对 base fixed control 的整体差异，不隔离动态长度或训练效应，也不称compute-matched。
+- Fixed16/32/64 full与LR MultiLine Fixed64运行；Fixed4在Fixed8完成后改为free≥36GiB门控。Frozen test=`sealed/0`。
+
 ## 2026-07-31 LR RandomSpan Paired + DreamCoder Control Launch Override
 
 - LR-DLLM RandomSpan primary−same-key Fixed64：row help/harm=`104/328`；cluster=`19/107/22`；task-macro delta=`-15.135pp`，95% CI=`[-17.905,-12.365]pp`，明确负于 Fixed64。

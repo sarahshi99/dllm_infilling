@@ -23,7 +23,7 @@
 | min32 / max64 | `91.2621%` | `83.0372%` | `[77.7295%,87.8439%]` | `14,318` | `4,041,982` | `1.8537s` | `24,018,886,656 B` |
 | min64 / max64 | `91.6936%` | `85.1299%` | `[80.2582%,89.7411%]` | `9,168` | `2,595,211` | `1.3476s` | `24,258,207,744 B` |
 
-这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。DreamCoder 的 DreamOn-matched Fixed4/8/16/32/64 controls 尚未完成，因此本报告不计算 paired delta、paired CI 或 help/harm，也不把 Fixed64 称为 compute-matched。
+这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。DreamCoder Fixed8 matched control 已完成：DreamOn min8−Fixed8 task-macro delta=`+33.243pp`，CI=`[+28.390,+38.417]pp`，row help/harm=`286/11`。这是 training-based released system 相对 base fixed control 的整体差异，不是纯动态长度或 compute-matched effect。Fixed4/16/32/64仍未完成。
 
 ## Dynamic mechanism / integrity
 
