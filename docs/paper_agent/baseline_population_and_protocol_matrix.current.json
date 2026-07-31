@@ -167,9 +167,9 @@
       "population": {"rows": 5079, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl", "manifest_sha256": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/dreamon_multiline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "5bd2d19ba9b8c48318708c79319e306d2438404d7c13e9bfaf327de6a483ebf9", "smoke_summary": "analysis_outputs/baseline_manifests_20260731_v1/dreamon_multiline_technical_smoke12_manifest_summary.json", "smoke_summary_sha256": "a7b3452bce5c190e00adba0b285e43cd61f1335f3772539854c6abf66be5aec6"},
       "decoder": {"initial_lengths": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "remasking": "entropy", "mask_expansion": true, "seed": 42, "adapter_boundary": "dataset/manifest/evaluator-row namespace only; per-example source algorithm unchanged"},
       "implementation_class": "official-source MultiLine reproduction via benchmark-only adapter",
-      "status": "all_five_smoke_resume_gates_passed_min4_full_running_min8_16_32_64_resource_queued",
+      "status": "all_five_smoke_resume_gates_passed_min4_min8_full_running_min16_32_64_resource_queued",
       "paths": {"raw": "outputs_clean/dreamon_multiline_20260731_v1/dreamon_dynamic_min<L>_max64_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamon_multiline_benchmark_adapter_action.zh.md", "report": null},
-      "paired_comparison": {"eligible": false, "reason": "Adapter and fixed controls are not frozen."}
+      "paired_comparison": {"eligible": "after_same_length_fixed_controls_complete", "reason": "MultiLine matched fixed controls are now preregistered; paired deltas require exact same-length candidate keys and completed outcomes."}
     },
     {
       "id": "dreamon_randomspan_extension",
@@ -204,6 +204,23 @@
       "status": "all_five_controls_completed_and_paired_analyzed",
       "paths": {"raw": "outputs_clean/dreamcoder_dreamon_fixed_singleline_20260731_v1/dreamcoder_fixed<L>_dreamon_decoder_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_controls_action.zh.md", "report": {"Fixed4": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed4_paired_result.zh.md", "Fixed8": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed8_paired_result.zh.md", "Fixed16": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed16_paired_result.zh.md", "Fixed32": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed32_paired_result.zh.md", "Fixed64": "docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed64_paired_result.zh.md"}},
       "paired_comparison": {"eligible": "after_freeze_and_completion", "reason": "Priority is Fixed64 plus the fixed arm corresponding to the executed DreamOn arm."}
+    },
+    {
+      "id": "dreamcoder_fixed4_8_16_32_64_multiline_5079",
+      "baseline": "DreamCoder fixed-length controls",
+      "label": "DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine",
+      "backbone": "Dream-org/Dream-Coder-v0-Base-7B",
+      "dataset": "MultiLine",
+      "protocol": "DreamOn_matched_sampling_fixed_lengths_benchmark_only_multiline_adapter",
+      "source": {"repository": "DreamLM/DreamOn MDMGenerator over released DreamCoder checkpoint", "revision": "8a0a54918412eda9402a327646f7f067f7160ec8", "license": "DreamOn source Apache-2.0; DreamCoder cached snapshot has no license metadata"},
+      "checkpoint": {"id": "Dream-org/Dream-Coder-v0-Base-7B", "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63"},
+      "training_class": "training-free controls",
+      "population": {"rows": 5079, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl", "manifest_sha256": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/dreamon_multiline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "5bd2d19ba9b8c48318708c79319e306d2438404d7c13e9bfaf327de6a483ebf9"},
+      "decoder": {"lengths": [4, 8, 16, 32, 64], "fixed_semantics": "min_gen_len=max_gen_len; EOS contraction retained", "temperature": 0.2, "top_p": 0.9, "steps": 256, "remasking": "entropy", "seed": 42, "seed_policy": "same per-row seed key as corresponding DreamOn MultiLine dynamic arm"},
+      "implementation_class": "common-protocol local comparison via benchmark-only MultiLine adapter",
+      "status": "preregistered_launcher_test_frozen_smoke_pending",
+      "paths": {"raw": "outputs_clean/dreamcoder_dreamon_fixed_multiline_20260731_v1/dreamcoder_fixed<L>_dreamon_decoder_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_multiline_controls_action.zh.md", "report": null},
+      "paired_comparison": {"eligible": "after_same_length_dynamic_and_fixed_completion", "reason": "Only exact same-length, same-manifest candidate keys may be paired; controls are not compute-matched."}
     },
     {
       "id": "lrdllm_dreamcoder_singleline_randomspan_multiline",

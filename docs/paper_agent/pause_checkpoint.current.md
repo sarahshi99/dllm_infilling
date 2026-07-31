@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamCoder MultiLine Matched-Control Freeze Override
+
+- `DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine` 复用现有adapter的`dreamcoder_fixed + multiline`组合；没有新算法分支。
+- full=`5079/148`，smoke=`12/12`；launcher=`scripts/manual_launch_dreamcoder_dreamon_fixed_multiline_20260731.sh`，action=`docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_multiline_controls_action.zh.md`。
+- 本 freeze commit/push后先做CPU preflight，再由独立free-memory queue执行五个smoke/resume；通过前不启动full。Frozen test=`sealed/0`。
+
 ## 2026-07-31 DreamOn SingleLine Matched-Control Closure Override
 
 - DreamOn min64−DreamCoder Fixed64：row help/harm=`327/25`；cluster=`90/7/51`；task-macro delta=`+21.211pp`，95% CI=`[+15.657,+26.692]pp`。

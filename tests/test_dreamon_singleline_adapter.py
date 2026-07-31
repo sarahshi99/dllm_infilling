@@ -86,6 +86,25 @@ class DreamOnSingleLineAdapterTest(unittest.TestCase):
             },
         )
 
+    def test_dreamcoder_fixed_multiline_keeps_dynamic_arm_seed_pairing(self) -> None:
+        arm = arm_name(64, "dreamcoder_fixed")
+        self.assertEqual(
+            candidate_key("dreamcoder_fixed", 11, arm, "multiline"),
+            "dreamcoder_multiline_source_row=11|arm=dreamcoder_fixed64_dreamon_decoder",
+        )
+        self.assertEqual(
+            paired_seed_key(11, 64, "multiline"),
+            "dreamon_multiline_source_row=11|arm=dreamon_dynamic_min64_max64",
+        )
+        manifest = [{"source_row_id": 11}, {"source_row_id": 12}]
+        self.assertEqual(
+            expected_keys(manifest, arm, "dreamcoder_fixed", "multiline"),
+            {
+                "dreamcoder_multiline_source_row=11|arm=dreamcoder_fixed64_dreamon_decoder",
+                "dreamcoder_multiline_source_row=12|arm=dreamcoder_fixed64_dreamon_decoder",
+            },
+        )
+
     def test_row_seed_is_deterministic_and_arm_specific(self) -> None:
         first = derive_row_seed(42, "key-a")
         self.assertEqual(first, derive_row_seed(42, "key-a"))

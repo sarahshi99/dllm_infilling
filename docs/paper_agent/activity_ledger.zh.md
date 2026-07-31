@@ -2,6 +2,7 @@
 
 ## 2026-07-31 UTC
 
+- DreamCoder MultiLine matched-control freeze：复用`dreamcoder_fixed + multiline`现有adapter组合，新增namespace/paired-seed test、launcher、action与matrix条目；population=`5079/148`，smoke=`12/12`，先commit/push再进入GPU gate。
 - DreamOn min64 paired：DreamOn row/macro=`91.6936/85.1299%`，DreamCoder Fixed64=`59.1154/63.9190%`；row help/harm=`327/25`，cluster=`90/7/51`，macro delta=`+21.211pp` CI=`[+15.657,+26.692]pp`。完整系统差异，不作纯动态归因。
 - DreamOn SingleLine controls closure：Fixed4/8/16/32/64全部`927/927`且paired分析完成；五个Fixed controls的missing/duplicate/error/failure/accounting=`0`。DreamOn min64 canonical audit通过，但保留1条已恢复的资源OOM journal；Fixed64释放显存后MultiLine min8 queue于`2026-07-31T17:06:36Z`自动启动PID=`2151434`。
 - DreamOn MultiLine adapter：commit=`487fdaa`先push；新增benchmark-only dataset profile、outcome-blind 12-cluster smoke manifest、tests/launcher/action。22 tests、双profile preflight、builder idempotence、forbidden/sealed-zero与diff review通过。

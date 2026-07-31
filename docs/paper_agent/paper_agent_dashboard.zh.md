@@ -2,6 +2,12 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-07-31 DreamCoder MultiLine Matched-Control Freeze Override
+
+- 新增准确标签：`DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine`；复用现有 pinned generator与benchmark-only dataset profile，不修改每例算法。
+- population=`5079/148`，smoke=`12/12`，manifest hashes与DreamOn MultiLine相同；fixed key独立，row seed key与对应dynamic minL arm对齐。
+- launcher/test/action/matrix先冻结并push；之后按free≥36GiB的独立tmux运行五个smoke/resume gates，优先Fixed64。当前不读任何partial accuracy。Frozen test=`sealed/0`。
+
 ## 2026-07-31 DreamOn MultiLine Benchmark-Only Adapter Launch Override
 
 - 准确标签：`DreamOn official-source MultiLine reproduction via benchmark-only adapter`。Adapter只改变 dataset/manifest/evaluator-row namespace，逐例 `decode_one`、pinned generator、sampling、seed、model forward和evaluator不分叉。
