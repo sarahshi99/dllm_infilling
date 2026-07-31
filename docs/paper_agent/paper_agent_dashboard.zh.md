@@ -1,6 +1,15 @@
 # Paper Agent Dashboard
 
-更新时间：2026-07-29 UTC
+更新时间：2026-07-31 UTC
+
+## 2026-07-31 Official CAL MultiLine 4,990 解盲
+
+- 准确标签：**official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset**。
+- integrity：`4990/4990` exact unique，missing/extra/duplicate/error/failure=`0/0/0/0/0`，arm/config/source/evaluator 与 preregistration 精确匹配。
+- row Pass@1=`1643/4990=32.9259%`；equal-weight task-macro=`27.8471%`，10,000 cluster-bootstrap 95% CI=`[24.3313%,31.2715%]`。
+- total search/decode/forward calls=`76,807/156,841/233,648`；token-forwards=`63,545,173`；mean wall=`3.8762 s/row`；peak memory=`15.42 GiB`。
+- 同 4,990 keys 上没有 completed `official_fixed32`，因此不报告 paired delta/help-harm；Fixed64 不称 equal-compute。
+- 正式报告：`docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。下一动作是 SingleLine 838 technical smoke；DreamOn cache blocker 不阻塞 CAL。
 
 ## 2026-07-31 External Baseline Closure 术语与协议覆盖
 

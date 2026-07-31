@@ -334,3 +334,12 @@
 - result：确认 M1--M4 的 148-group formal decision 全部完成且均不晋级；296/927/selected-only-5079 是科学 gate 主动停止。official CAL full 技术完整性完成但 performance analysis 未完成；DreamOn 与 ExecRepoBench 是主要可推进缺口，rho-EOS/LR-DLLM 是真实协议 blocker。报告：`docs/paper_agent/experiments/20260729_experiment_completion_status_and_next_stage.zh.md`；prompt：`docs/paper_agent/prompts/20260729_next_stage_approval_prompt.zh.md`。
 - safety：frozen test=`sealed/0`；raw outputs、logs、模型和用户未跟踪 M1/M2 analysis directories 保持不变；当前无项目 GPU process。
 - next：等待用户批准阶段 A/B/C/D 的执行边界；未获批准前不启动 DreamOn GPU 或新 M5 GPU。
+
+## 2026-07-31 UTC External Baseline Phase 0 与 CAL 4,990 解盲
+
+- action：在 outcome-blind 条件下冻结 baseline population/protocol matrix、统一 grouped analyzer、synthetic tests 和 SingleLine CAL-Rest 838 immutable manifests；focused commits `8d9838d`、`e7a790b` 已 push。
+- verification：17 个相关 tests + legacy-key regression `OK`，py_compile、JSON parse、forbidden-field audit、`838 rows/143 clusters`、smoke12、diff hygiene 通过；两份 sealed frozen files 未打开。
+- action：commit/push 后读取现有 official CAL 4,990 raw，核验 exact arm/config/source/evaluator/cost ledger，并运行 10,000 cluster-bootstrap analyzer。
+- result：row Pass@1=`1643/4990=32.9259%`；task-macro=`27.8471%`，95% CI=`[24.3313%,31.2715%]`；total forwards/token-forwards=`233648/63545173`；mean wall=`3.8762s`；peak memory=`15.42GiB`。无 same-key fixed32，paired delta/help-harm 未报告。
+- safety：frozen=`sealed/0`；M1--M4/raw user directories untouched；DreamOn checkpoint 缺失不阻塞 CAL。
+- next：focused commit/push CAL result，随后 SingleLine 838 smoke；gate 通过即 tmux full。

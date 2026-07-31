@@ -1,5 +1,35 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 External Baseline Closure Authoritative Resume Point
+
+Timestamp: 2026-07-31 UTC
+Branch: `codex/ccfa-execution-sprint-v1`
+
+### Completed
+
+- Phase 0 matrix/analyzer/SingleLine 838 immutable manifests committed and pushed at `8d9838d`; legacy manifest-key compatibility committed/pushed at `e7a790b` before outcome read.
+- official-source CAL MultiLine 4,990 provenance/config gate passed and final outcome was analyzed: row `1643/4990=32.9259%`; 143-cluster task-macro `27.8471%`, 10,000 bootstrap CI `[24.3313%,31.2715%]`.
+- No same-key official_fixed32 exists, so no paired delta/help-harm is reported.
+- Frozen test remains `sealed`, `test_evaluation_count=0`; M1--M4 and historical raw remain unchanged.
+
+### Running / Next
+
+- No GPU process is active at this checkpoint. Server has one H200 at physical device index `0`; use `CUDA_VISIBLE_DEVICES=0`, at most one project GPU process.
+- Next exact action: commit/push CAL 4,990 result docs, then run frozen SingleLine CAL-Rest smoke12. If technical gate passes, immediately launch SingleLine 838 full in an independent tmux.
+- DreamOn released checkpoint is missing from local cache; this blocks DreamOn Phase 2 only, not CAL.
+
+### Result paths
+
+- `analysis_outputs/official_cal_multiline_4990_grouped_20260731_v1/`
+- `docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`
+- `analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl`
+
+### Safety
+
+- frozen controller test=`sealed/0`
+- test_evaluation_count=`0`
+- no M5/PPT/ExecRepoBench final/M1--M4 action
+
 ## 2026-07-28 Execution Sprint V1 Authoritative Resume Point
 
 Timestamp: 2026-07-28 UTC

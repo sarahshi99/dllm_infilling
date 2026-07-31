@@ -1,0 +1,10 @@
+{
+  "bucket_definition": "Descriptive quartiles of canonical-solution UTF-8 bytes from the immutable outcome-blind manifest; never used by the method.",
+  "completion_utf8_bytes_quartile_cuts": [51, 103, 184],
+  "buckets": {
+    "q1_short": {"rows": 1251, "clusters": 131, "row_pass_count": 717, "row_pass_at_1": 0.5731414868105515, "equal_weight_task_macro_pass_at_1": 0.5015783136736357, "mean_selected_length": 29.414868105515588, "mean_total_forwards": 45.17106314948042, "mean_token_forwards": 12229.95523581135},
+    "q2_medium": {"rows": 1246, "clusters": 124, "row_pass_count": 632, "row_pass_at_1": 0.507223113964687, "equal_weight_task_macro_pass_at_1": 0.3801355848361276, "mean_selected_length": 30.109951845906902, "mean_total_forwards": 45.35072231139647, "mean_token_forwards": 12049.418940609952},
+    "q3_long": {"rows": 1251, "clusters": 97, "row_pass_count": 265, "row_pass_at_1": 0.21183053557154277, "equal_weight_task_macro_pass_at_1": 0.14104608473267047, "mean_selected_length": 32.73541167066347, "mean_total_forwards": 47.65707434052758, "mean_token_forwards": 12670.940847322143},
+    "q4_extreme": {"rows": 1242, "clusters": 59, "row_pass_count": 29, "row_pass_at_1": 0.023349436392914653, "equal_weight_task_macro_pass_at_1": 0.017709455752616305, "mean_selected_length": 33.47342995169082, "mean_total_forwards": 49.12479871175523, "mean_token_forwards": 13994.022544283414}
+  }
+}

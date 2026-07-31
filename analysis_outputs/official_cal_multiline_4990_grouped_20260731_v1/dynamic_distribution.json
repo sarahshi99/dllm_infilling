@@ -1,0 +1,30 @@
+{
+  "dynamic_trace_availability": {
+    "available_in_raw": ["selected_length", "search_forwards"],
+    "event_level_contraction_count": false,
+    "event_level_expansion_count": false,
+    "termination_reason": false
+  },
+  "final_length_relation_to_initial32": {
+    "net_contracted_lt32": 2418,
+    "net_expanded_gt32": 2119,
+    "unchanged_eq32": 453
+  },
+  "search_forwards": {"max": 54, "min": 9, "p50": 14.0, "p90": 23.0, "zero": 0},
+  "selected_length_buckets": {
+    "<=8": 34,
+    "9-16": 148,
+    "17-24": 561,
+    "25-32": 2128,
+    "33-48": 1974,
+    "49-64": 135,
+    "65+": 10
+  },
+  "selected_length_max": 77,
+  "selected_length_mean": 31.4310621242485,
+  "selected_length_min": 2,
+  "selected_length_p50": 32,
+  "selected_length_p90": 40,
+  "selected_length_unique_count": 70,
+  "interpretation_boundary": "Net final length above/below initial32 is observable. Event-level expansion/contraction counts and termination reasons were not recorded in the historical raw and are reported as unavailable rather than inferred."
+}

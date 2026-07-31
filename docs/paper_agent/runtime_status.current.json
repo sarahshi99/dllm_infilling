@@ -1,7 +1,7 @@
 {
-  "audit_utc": "2026-07-28T19:07:16Z",
+  "audit_utc": "2026-07-31T06:15:00Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
-  "head_at_audit": "0b7de44_plus_uncommitted_m4_result_record",
+  "head_at_audit": "e7a790beb2c7e17bfaa5cdc764c5b82dd05ebd83_plus_uncommitted_cal_result_record",
   "operational_decision": "execute_and_monitor",
   "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
   "performance_visibility": {
@@ -10,7 +10,7 @@
     "m3_randomspanlight_performance_inspected": true,
     "m4_multilinecore_performance_inspected_after_precommitted_analyzer": true,
     "official_cal_partial_performance_inspected_while_running": false,
-    "official_cal_final_outcome_analysis_opened": false
+    "official_cal_final_outcome_analysis_opened": true
   },
   "old_multiline_candidate_bank": {
     "state": "completed_read_only_do_not_restart",
@@ -51,16 +51,17 @@
     "result_report": "docs/paper_agent/experiments/m4_semantic_particle_assembly_20260728_multilinecore_result.zh.md"
   },
   "official_cal": {
-    "state": "completed_integrity",
-    "label": "official CAL reproduction on the 4,990-case non-frozen common subset",
+    "state": "completed_analyzed_absolute_only_no_fixed32_pair",
+    "label": "official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset",
     "cal_commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
     "evaluator_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
     "evaluator_execution_mode": "upstream_documented_local_enablement_overlay; pinned checkout unchanged",
     "scipy": {"present": false, "runtime_required": false, "reason": "pinned decoder/evaluator import closure does not import scipy"},
     "smoke": {"expected": 12, "completed": 12, "unique": 12, "missing_duplicate_error": "0/0/0", "technical_gate": "passed"},
-    "full": {"expected": 4990, "completed": 4990, "missing": 0, "canonical_error_count": 0, "failure_journal_count": 0, "status": "completed", "finished_utc": "2026-07-17T15:29:01Z", "partial_accuracy_visibility": false}
+    "full": {"expected": 4990, "completed": 4990, "missing": 0, "canonical_error_count": 0, "failure_journal_count": 0, "status": "completed_analyzed", "finished_utc": "2026-07-17T15:29:01Z", "partial_accuracy_visibility": false, "row_pass_count": 1643, "row_pass_at_1": 0.3292585170340681, "task_macro_pass_at_1": 0.27847050051889416, "task_macro_ci_95": [0.24331335402777038, 0.3127150779401506], "total_forward_calls": 233648, "total_token_forwards": 63545173, "mean_wall_sec": 3.8762292860494365, "peak_gpu_memory_bytes": 16560579584, "paired_fixed32_status": "not_available"},
+    "result_report": "docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md"
   },
   "gpu_audit": {"utc": "2026-07-28T19:07:16Z", "gpu": "NVIDIA H200 NVL", "utilization_percent": 0, "memory_used_mib": 0, "memory_free_mib": 143156, "temperature_c": 29, "uncorrected_volatile_ecc": 0, "project_gpu_processes": 0},
   "storage": {"home_available": "2.3T", "home_inode_free": 231232594},
-  "next_safe_action": "All authorized long runs completed. No new GPU run is pending; any future DreamOn smoke needs a new brief and pinned evaluator, while rho-EOS needs a separately audited faithful FIM protocol."
+  "next_safe_action": "Run the frozen CAL SingleLine 838 technical smoke on physical GPU 0; if its technical gate passes, launch the 838 full in an independent tmux session."
 }

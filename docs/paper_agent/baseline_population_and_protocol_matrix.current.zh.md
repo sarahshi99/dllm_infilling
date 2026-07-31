@@ -44,7 +44,7 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 
 | Baseline / label | Backbone | Dataset/population | Protocol class | Status | Paired comparison |
 |---|---|---|---|---|---|
-| official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset | LLaDA-8B-Base | MultiLine 4990/143 | official/direct + documented evaluator overlay | integrity complete；Phase 0 commit 前 outcome blind | 当前无 identical-key official_fixed32，只能先报绝对表现/成本 |
+| official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset | LLaDA-8B-Base | MultiLine 4990/143 | official/direct + documented evaluator overlay | analyzed：row `32.9259%`；task-macro `27.8471%`，95% CI `[24.3313,31.2715]%` | 当前无 identical-key official_fixed32，只报绝对表现/成本 |
 | official_fixed32 | LLaDA-8B-Base | MultiLine 4990/143 | official/direct | not run | 完成后可与 CAL 配对 |
 | official-source CAL initial32 | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source SingleLine loader adaptation | immutable manifest frozen；smoke pending | 中心控制是 official_fixed32 |
 | Fixed4/8/16/64 sensitivity | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source adaptation | adapter extension not frozen | Fixed64 不自动等于 equal-compute |
@@ -67,6 +67,17 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 - SingleLine CAL smoke12：`analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl`，SHA256=`56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1`。
 
 Unsupported/blocked 组合不生成伪 manifest。DreamOn、DreamCoder CAL、LR-DLLM、DAEDAL 的新 manifest 只有在 source/checkpoint/decoder/evaluator 可执行性和协议边界完成冻结后创建。
+
+## CAL MultiLine 4,990 解盲结果
+
+- row Pass@1=`1643/4990=32.9259%`
+- equal-weight 143-cluster task-macro=`27.8471%`
+- 10,000 cluster-bootstrap 95% CI=`[24.3313%,31.2715%]`
+- search/decode/total forwards=`76,807/156,841/233,648`
+- token-forwards=`63,545,173`；mean wall=`3.8762 s/row`；peak memory=`15.42 GiB`
+- no official_fixed32 same-key result，故 paired delta/help-harm=`not reported`
+
+正式报告：`docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。
 
 ## Unified analyzer contract
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_utc": "2026-07-31T06:09:44Z",
+  "updated_utc": "2026-07-31T06:19:56Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
   "frozen_controller_test": {
     "status": "sealed",
@@ -47,8 +47,9 @@
       "population": {"rows": 4990, "clusters": 143, "manifest": "analysis_outputs/official_cal_corrected_protocol_20260715_v1/cal_rest_common_manifest.jsonl", "manifest_sha256": "e805489111e788e315bcf14838b077b09d0c23c44900ad8220d9e9afcbb95c48"},
       "decoder": {"initial_gen_length": 32, "span": 1, "dstep": 4, "max_gen_length": 128, "use_bias": true, "temperature": 0.0, "cfg_scale": 0.0, "oracle": false, "seed": 42},
       "implementation_class": "official/direct with documented evaluator enablement overlay",
-      "status": "completed_integrity_outcome_blind_until_phase0_commit",
-      "paths": {"raw": "outputs_clean/official_cal_primary_20260715_sprint_v1/official_cal_primary_raw.jsonl", "status": "outputs_clean/official_cal_primary_20260715_sprint_v1/official_cal_primary_full_run_manifest.json", "report": null},
+      "status": "completed_analyzed_absolute_only_no_fixed32_pair",
+      "paths": {"raw": "outputs_clean/official_cal_primary_20260715_sprint_v1/official_cal_primary_raw.jsonl", "status": "outputs_clean/official_cal_primary_20260715_sprint_v1/official_cal_primary_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md"},
+      "result_summary": {"row_pass_count": 1643, "row_pass_at_1": 0.3292585170340681, "task_macro_pass_at_1": 0.27847050051889416, "task_macro_ci_95": [0.24331335402777038, 0.3127150779401506], "total_forward_calls": 233648, "total_token_forwards": 63545173, "mean_wall_sec": 3.8762292860494365, "peak_gpu_memory_bytes": 16560579584},
       "paired_comparison": {"eligible": false, "reason": "No completed official_fixed32 arm on the identical 4,990 normalized candidate keys."}
     },
     {

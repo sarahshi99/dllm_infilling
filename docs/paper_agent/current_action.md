@@ -2,6 +2,32 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-07-31 CAL MultiLine 4,990 解盲（覆盖上一动作）
+
+Action name：`CAL-PHASE1A-MULTILINE-4990-UNBLIND`。
+
+状态：`completed_result_ready_for_focused_commit`。
+
+准确标签：`official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset`。
+
+Reviewer motivation：确认现有 raw 确实来自 pinned official CAL primary arm，并在不伪造 fixed32 paired control 的前提下报告绝对 accuracy、grouped uncertainty 和完整成本。
+
+Exact commands：
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python - <<'PY'
+# Read all 4,990 canonical rows only after analyzer commit/push; audit exact keys,
+# arm/config/source/evaluator revisions, failures, and forward/token fields.
+PY
+/home/shx/miniconda3/envs/dllm_env/bin/python -m analysis.baseline_grouped_analyzer --manifest analysis_outputs/official_cal_corrected_protocol_20260715_v1/cal_rest_common_manifest.jsonl --method official_cal_primary=outputs_clean/official_cal_primary_20260715_sprint_v1/official_cal_primary_raw.jsonl --expected-rows 4990 --expected-clusters 143 --bootstrap-replicates 10000 --seed 20260731 --output-dir analysis_outputs/official_cal_multiline_4990_grouped_20260731_v1
+```
+
+GPU=`none`。Inputs：pinned CAL `741e8418…`、evaluator `88062ff…`、LLaDA checkpoint cache revision `0f2787f…`。Success gate：4990 unique exact manifest rows、143 clusters、0 missing/duplicate/error/failure-journal、arm/config exact、cost fields complete、forward accounting守恒、10,000 cluster bootstrap成功。Kill criteria：任一 revision/config/key/count/cost 不一致；此时不得按 official CAL primary arm解释。
+
+Comparison boundary：同 4,990 normalized keys 上没有 completed `official_fixed32` 时，不计算 paired delta/paired CI。Fixed64 也不称为 equal-compute。
+
+Result：row Pass@1=`1643/4990=32.9259%`；143-cluster task-macro=`27.8471%`，95% CI=`[24.3313%,31.2715%]`；integrity 与成本 gate 全部通过。正式报告=`docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。首次 direct-script invocation 因 Python module path 失败，使用不改变统计实现的 `python -m analysis.baseline_grouped_analyzer` 成功完成。
+
 ## 2026-07-31 当前最小动作（覆盖历史 action）
 
 Action name：`BASELINE-CLOSURE-PHASE0-PROTOCOL-ANALYZER-FREEZE`。

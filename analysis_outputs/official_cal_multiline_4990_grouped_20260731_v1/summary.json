@@ -1,0 +1,47 @@
+{
+  "bootstrap_replicates": 10000,
+  "cluster_count": 143,
+  "inference_unit": "base_function_task_group",
+  "methods": [
+    {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20260731,
+      "cluster_count": 143,
+      "dynamic": {
+        "contraction_count_total": null,
+        "contraction_positive_rows": 0,
+        "expansion_count_total": null,
+        "expansion_positive_rows": 0,
+        "selected_length_count": 4990,
+        "selected_length_max": 77.0,
+        "selected_length_mean": 31.4310621242485,
+        "selected_length_min": 2.0,
+        "selected_length_p50": 32.0,
+        "selected_length_p90": 40.0,
+        "termination_reason_counts": {}
+      },
+      "equal_weight_task_macro_pass_at_1": 0.27847050051889416,
+      "mean_decode_forward_calls": 31.4310621242485,
+      "mean_search_forward_calls": 15.392184368737475,
+      "mean_token_forwards": 12734.503607214428,
+      "mean_total_forward_calls": 46.82324649298597,
+      "mean_wall_sec": 3.8762292860494365,
+      "method": "official_cal_primary",
+      "peak_gpu_memory_bytes": 16560579584.0,
+      "row_count": 4990,
+      "row_pass_at_1": 0.3292585170340681,
+      "task_macro_ci_high": 0.3127150779401506,
+      "task_macro_ci_low": 0.24331335402777038,
+      "total_decode_forward_calls": 156841.0,
+      "total_forward_calls": 233648.0,
+      "total_search_forward_calls": 76807.0,
+      "total_token_forwards": 63545173.0,
+      "total_wall_sec": 19342.38413738669
+    }
+  ],
+  "paired_comparisons": [],
+  "primary_estimand": "equal_weight_base_function_task_macro_pass_at_1",
+  "row_count": 4990,
+  "row_metric": "row_level_pass_at_1",
+  "schema_version": 1
+}

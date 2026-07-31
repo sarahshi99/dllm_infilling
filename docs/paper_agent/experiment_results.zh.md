@@ -1,6 +1,21 @@
 # Experiment Results
 
-更新时间：2026-07-12 UTC
+更新时间：2026-07-31 UTC
+
+## Official-source CAL MultiLine 4,990（2026-07-31）
+
+准确标签：`official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset`。这不是完整 5,715-case reproduction，也不代表论文四个 initial lengths 的整表。
+
+- row Pass@1：`1643/4990 = 32.9259%`
+- equal-weight 143-cluster task-macro：`27.8471%`
+- 10,000 cluster-bootstrap 95% CI：`[24.3313%,31.2715%]`
+- integrity：missing/extra/duplicate/error/failure=`0/0/0/0/0`
+- search/decode/total forwards：`76,807/156,841/233,648`
+- token-forwards：`63,545,173`；mean wall=`3.8762s`；peak memory=`15.42 GiB`
+- selected length mean/p50/p90/range=`31.43/32/40/2..77`
+- no identical-key `official_fixed32`，因此 paired delta/CI/help-harm 均不报告。
+
+报告：`docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`；grouped artifacts：`analysis_outputs/official_cal_multiline_4990_grouped_20260731_v1/`。
 
 ## 跨实验有效性说明（所有后文章节均受此约束）
 
