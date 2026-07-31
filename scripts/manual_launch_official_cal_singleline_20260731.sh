@@ -2,8 +2,13 @@
 set -uo pipefail
 
 MODE="${1:-}"
+ARM="${2:-official_cal_primary}"
 if [[ "$MODE" != "smoke" && "$MODE" != "full" ]]; then
-  echo "usage: $0 smoke|full" >&2
+  echo "usage: $0 smoke|full [official_cal_primary|official_fixed32|project_fixed64_internal]" >&2
+  exit 2
+fi
+if [[ "$ARM" != "official_cal_primary" && "$ARM" != "official_fixed32" && "$ARM" != "project_fixed64_internal" ]]; then
+  echo "invalid arm: $ARM" >&2
   exit 2
 fi
 
@@ -29,7 +34,7 @@ COMMON=(
   --benchmark-name single-line
   --full-manifest-jsonl "$FULL_MANIFEST"
   --output-dir "$OUTPUT"
-  --arm official_cal_primary
+  --arm "$ARM"
 )
 
 if [[ "$MODE" == "smoke" ]]; then
@@ -41,6 +46,7 @@ fi
 {
   echo "RUN_START_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo "MODE=$MODE"
+  echo "ARM=$ARM"
   printf 'COMMAND='
   printf '%q ' env CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false HF_ENDPOINT=https://hf-mirror.com HF_HUB_DISABLE_XET=1 HF_HOME=/home/shx/.cache/huggingface "${COMMAND[@]}"
   printf '\n'

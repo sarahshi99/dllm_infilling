@@ -30,6 +30,8 @@ Exact smoke/full commands 与 `docs/paper_agent/current_action.md` 一致。
 
 Launcher：`scripts/manual_launch_official_cal_singleline_20260731.sh`。Smoke 直接调用 `smoke` mode；full 由独立 tmux `cal_singleline_838_20260731` 调用 `full` mode。每次启动向同一 log append exact escaped command、start/end UTC 和 exit code；canonical raw 继续 append-only/dedup。
 
+同 manifest 的中心控制使用 launcher 第二参数：smoke=`bash scripts/manual_launch_official_cal_singleline_20260731.sh smoke official_fixed32`；full=`bash scripts/manual_launch_official_cal_singleline_20260731.sh full official_fixed32`。默认省略第二参数时仍是 `official_cal_primary`。Fixed64仅作长度敏感性/其他 common-protocol baseline，不称 CAL equal-compute。
+
 ## Gates
 
 Smoke：12 exact unique rows；0 missing/duplicate/error/failure；forward/token守恒；成本字段完整；evaluator正常；resume no-op写入0行。通过后立即 tmux full。
