@@ -2,6 +2,12 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamCoder MultiLine matched controls / execution-only status
+
+- `DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine` 的launcher/test/action/matrix已在`497737e`冻结并push；CPU preflight验证source/checkpoint/evaluator/tokenizer与`5079/148`、`12/12` manifest hashes。
+- 五个smoke/resume及五个full均已建立predecessor+60GiB稳定显存门控tmux；尚未产生可解盲full outcome，不报告accuracy。
+- 同长度DreamOn dynamic与Fixed control都完整且candidate keys一致后才计算paired delta；不称compute-matched。Frozen test=`sealed/0`。
+
 ## DreamOn min64 vs DreamCoder Fixed64 / SingleLine matched-control closure
 
 - DreamOn min64/max64 row/macro=`91.6936/85.1299%`；DreamCoder Fixed64 row/macro=`59.1154/63.9190%`。

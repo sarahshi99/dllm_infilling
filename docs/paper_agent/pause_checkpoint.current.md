@@ -4,7 +4,9 @@
 
 - `DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine` 复用现有adapter的`dreamcoder_fixed + multiline`组合；没有新算法分支。
 - full=`5079/148`，smoke=`12/12`；launcher=`scripts/manual_launch_dreamcoder_dreamon_fixed_multiline_20260731.sh`，action=`docs/paper_agent/experiments/20260731_dreamcoder_dreamon_fixed_multiline_controls_action.zh.md`。
-- 本 freeze commit/push后先做CPU preflight，再由独立free-memory queue执行五个smoke/resume；通过前不启动full。Frozen test=`sealed/0`。
+- freeze commit=`497737e`已push，CPU preflight通过。10个独立tmux watcher已建立：smoke/resume串行`64→4→8→16→32`，full等待全部smoke及对应dynamic/fixed predecessor；统一free≥60GiB连续3次20秒采样才释放。
+- Fixed64 smoke queue=`dreamcoder_dreamon_fixed64_ml_smoke_queue_20260731`，pane=`2773397`；其他pane=`2788663/2788704/2788742/2788778/2788816/2788852/2788889/2788929/2788968`。当前GPU余量不足，所有新queue均未加载模型。
+- `2026-07-31T17:58:11Z`进度：DreamOn min4=`1277/5079` ETA约3h45m；min8=`916/5079` ETA约3h54m；LR Fixed64=`3448/5079` ETA约1h44m；failure均0，GPU0 free=`14439 MiB`，ECC=0。Frozen test=`sealed/0`。
 
 ## 2026-07-31 DreamOn SingleLine Matched-Control Closure Override
 

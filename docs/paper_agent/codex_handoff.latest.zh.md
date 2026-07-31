@@ -2,6 +2,8 @@
 
 更新日期：2026-07-31 UTC
 
+- DreamCoder MultiLine matched controls：freeze commit=`497737e`已push；CPU preflight通过，5 smoke/resume + 5 full predecessor/60GiB-gated tmux watchers已建立。Fixed64 smoke queue=`dreamcoder_dreamon_fixed64_ml_smoke_queue_20260731` pane=`2773397`；其余PIDs见runtime。未读partial accuracy。
+
 ## 2026-07-31 External Baseline Closure Override
 
 - Branch：`codex/ccfa-execution-sprint-v1`。
