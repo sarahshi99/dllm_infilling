@@ -44,7 +44,7 @@ tmux new-session -d -s daedal_fim_sl838_20260731 'cd /home/shx/projects/dllm_inf
 
 MultiLine 先重复 dynamic/control smoke，再分别 full。Output=`outputs_clean/daedal_fim_<dataset>_20260731_v1/`；logs=`logs/paper_agent/20260731_daedal_fim_<dataset>_<arm>.log`。
 
-GPU：physical `0`；launcher检测到任何已有 compute PID即退出3。CAL SingleLine 838 保持最高 GPU 优先级；本 baseline 不抢占、不 kill。
+GPU：physical `0`；默认 launcher 检测到已有 compute PID即退出3。2026-07-31 用户追加授权允许并行时，必须显式设置 `ALLOW_SHARED_GPU=1` 并记录 pre-existing PIDs；仍不抢占、不 kill。
 
 ## Gates and budget
 

@@ -40,7 +40,7 @@ else
 fi
 
 mapfile -t GPU_PIDS < <(nvidia-smi --query-compute-apps=pid --format=csv,noheader,nounits | sed '/^[[:space:]]*$/d')
-if (( ${#GPU_PIDS[@]} > 0 )); then
+if (( ${#GPU_PIDS[@]} > 0 )) && [[ "${ALLOW_SHARED_GPU:-0}" != "1" ]]; then
   echo "refusing to launch: physical GPU 0 already has compute PIDs: ${GPU_PIDS[*]}" >&2
   exit 3
 fi
@@ -77,6 +77,8 @@ ENVIRONMENT=(
   echo "ARM=$ARM"
   echo "MODE=$MODE"
   echo "DATASET=$DATASET"
+  echo "ALLOW_SHARED_GPU=${ALLOW_SHARED_GPU:-0}"
+  echo "PREEXISTING_GPU_PIDS=${GPU_PIDS[*]:-none}"
   printf 'COMMAND='
   printf '%q ' env "${ENVIRONMENT[@]}" "${COMMAND[@]}"
   printf '\n'

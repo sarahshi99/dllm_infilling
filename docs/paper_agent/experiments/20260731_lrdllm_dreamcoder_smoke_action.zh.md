@@ -28,7 +28,7 @@
 
 ## Exact execution
 
-GPU：physical `0`，`CUDA_VISIBLE_DEVICES=0`。GPU 必须没有任何已有 compute PID；launcher发现已有 PID 会退出3，不抢占、不 kill。CAL SingleLine 仍有更高优先级；只有 CAL gate/运行不再占用 GPU 后才进入本 smoke。
+GPU：physical `0`，`CUDA_VISIBLE_DEVICES=0`。默认 launcher 发现已有 PID 会退出3；2026-07-31 用户追加授权允许并行时，必须显式设置 `ALLOW_SHARED_GPU=1`，记录 pre-existing PIDs，并在启动后核验显存/ECC。仍不抢占、不 kill。
 
 Technical smoke：
 

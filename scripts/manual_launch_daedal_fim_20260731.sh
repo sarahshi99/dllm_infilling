@@ -36,7 +36,7 @@ MANIFEST="$FULL_MANIFEST"
 if [[ "$MODE" == "smoke" ]]; then MANIFEST="$SMOKE_MANIFEST"; fi
 
 mapfile -t GPU_PIDS < <(nvidia-smi --query-compute-apps=pid --format=csv,noheader,nounits | sed '/^[[:space:]]*$/d')
-if (( ${#GPU_PIDS[@]} > 0 )); then
+if (( ${#GPU_PIDS[@]} > 0 )) && [[ "${ALLOW_SHARED_GPU:-0}" != "1" ]]; then
   echo "refusing to launch: physical GPU 0 already has compute PIDs: ${GPU_PIDS[*]}" >&2
   exit 3
 fi
@@ -60,6 +60,8 @@ COMMAND=(
 ENVIRONMENT=(CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false TRANSFORMERS_OFFLINE=1 HF_HUB_OFFLINE=1 HF_HOME=/home/shx/.cache/huggingface)
 {
   echo "RUN_START_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "ALLOW_SHARED_GPU=${ALLOW_SHARED_GPU:-0}"
+  echo "PREEXISTING_GPU_PIDS=${GPU_PIDS[*]:-none}"
   printf 'COMMAND='
   printf '%q ' env "${ENVIRONMENT[@]}" "${COMMAND[@]}"
   printf '\n'
