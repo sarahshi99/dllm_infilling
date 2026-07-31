@@ -2,6 +2,7 @@
 
 ## 2026-07-31 UTC
 
+- DreamOn adapter freeze：checkpoint/source/hash/license与official-source max64协议固定；新增直接调用pinned `MDMGenerator` 的SingleLine adapter、6 tests、launcher/action。公开source未固定seed，预注册per-candidate seed-42派生；unused OmegaConf import使用hash-locked import-only compatibility shim。CPU preflight通过927/148 population、smoke12、tokenizer IDs；GPU/outcome/raw=`0`。
 - CAL SingleLine result：primary完成`838/838`，准确标签=`official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset`；row=`52.3866%`，143-cluster macro=`41.2711%`，CI=`[36.3798%,46.0499%]`，search/decode/total forwards=`13226/25504/38730`，token-forwards=`10548607`，wall=`3105.563s`，peak=`16560579584` bytes。Fixed32未完成前不做paired comparison。
 - CAL Fixed64 sensitivity：action commit=`5bc4df8`先push；resource watcher随后于`2026-07-31T11:02:49Z`启动`project_fixed64_internal` 12-case smoke。该arm不是CAL equal-compute control。
 - LR SingleLine result：DreamCoder primary完成`927/927`，row=`72.7077%`，148-cluster macro=`60.5238%`，CI=`[54.9216%,65.8574%]`，search/decode/total forwards=`35555/9397/44952`，token-forwards=`11288608`，wall=`2631.826s`，peak=`15784173568` bytes。Fixed64未完成前不做paired comparison。

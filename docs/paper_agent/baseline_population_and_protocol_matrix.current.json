@@ -147,11 +147,11 @@
       "source": {"repository": "DreamLM/DreamOn", "revision": "8a0a54918412eda9402a327646f7f067f7160ec8", "license": "LICENSE present"},
       "checkpoint": {"id": "Dream-org/DreamOn-v0-7B", "revision": "8ccc74750e43177327f29dab9e91882ba759e194", "status": "cached; Apache-2.0"},
       "training_class": "training-based",
-      "population": {"rows": 927, "clusters": 148, "manifest": null},
-      "decoder": {"initial_lengths": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "remasking": "entropy", "mask_expansion": true},
-      "implementation_class": "official/direct source route",
-      "status": "checkpoint_ready_adapter_seed_resume_protocol_not_frozen",
-      "paths": {"raw": null, "status": null, "report": "analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/report.zh.md"},
+      "population": {"rows": 927, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl", "manifest_sha256": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "c1dc18fac3fd67ba73b11a197e547b4d6c30dc60b1ad018d672447c3d2885280"},
+      "decoder": {"initial_lengths": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "remasking": "entropy", "mask_expansion": true, "seed": 42, "seed_policy": "deterministic per candidate"},
+      "implementation_class": "official-source single-H200 adapter using pinned MDMGenerator",
+      "status": "adapter_tests_launcher_action_preflight_verified_smoke_pending",
+      "paths": {"raw": "outputs_clean/dreamon_singleline_20260731_v1/dreamon_dynamic_min<L>_max64_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamon_singleline_execution_action.zh.md", "report": "analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/report.zh.md"},
       "paired_comparison": {"eligible": false, "reason": "No matching DreamCoder fixed-length controls completed under DreamOn sampling/decoder."}
     },
     {

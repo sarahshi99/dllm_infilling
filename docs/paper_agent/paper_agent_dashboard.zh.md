@@ -8,7 +8,7 @@
 - CAL SingleLine：primary已完成 `838/838`，row=`52.3866%`、143-cluster macro=`41.2711%`、CI=`[36.3798%,46.0499%]`；official_fixed32 full继续运行，完成前不做paired comparison。`project_fixed64_internal` sensitivity smoke已启动，且不称equal-compute。
 - LR-DLLM：无作者代码；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder SingleLine primary已完成 `927/927`：row=`72.7077%`、148-cluster macro=`60.5238%`、CI=`[54.9216%,65.8574%]`；Fixed64未完成前不做paired comparison。RandomSpan/MultiLine primary和SingleLine Fixed64继续运行。
 - CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic在运行；Fixed8已完成 `838/838`，row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`。MultiLine dynamic与Fixed8两个 `4990` full均已启动。
-- DreamOn：released checkpoint `8ccc7475…` 已完整缓存，license=`apache-2.0`；现有项目树仍缺已冻结 DreamOn adapter/manifest，故状态从 cache blocker 转为 implementation/protocol freeze pending，不阻塞其他 baseline。
+- DreamOn：released checkpoint `8ccc7475…` 已完整缓存，license=`apache-2.0`；SingleLine official-source single-H200 adapter/tests/launcher/action和927/148 common manifest reuse已CPU preflight验证。commit/push后先跑min4 12-case smoke；paper Lmax128未与source max64混合。
 - GPU0 是单张 H200；2026-07-31T10:44Z 有8个项目模型稳定并发、ECC=`0`。外部约70GiB进程自行结束；全程未 kill/preempt。Frozen test=`sealed/0`。
 - 下一资源动作由 tmux `daedal_fim_ml4990_fixed8_20260731` 自动执行；不得转入 M5、PPT、ExecRepoBench final 或 frozen evaluation。
 

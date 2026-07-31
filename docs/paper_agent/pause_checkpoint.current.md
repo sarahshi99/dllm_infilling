@@ -1,5 +1,12 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn Adapter Freeze Override
+
+- DreamOn released checkpoint blocker已解除；`Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194`、Apache-2.0和source `8a0a549…` hashes已固定。
+- 新增outcome-blind `experiments/dreamon_singleline_adapter.py`、6个unit tests、launcher与action brief。CPU preflight验证SingleLine smoke12/common 927 manifests、source/checkpoint/evaluator/tokenizer IDs；没有加载GPU模型、没有生成/evaluator raw。
+- official-source协议固定为min=`4/8/16/32/64`、max=`64`、steps=`256`、temperature=`0.2`、top-p=`0.9`、entropy与mask expansion；paper正文Lmax=128保持独立未执行。随机性固定为per-candidate seed-42派生，不称exact official 8-GPU random stream。
+- 下一动作：本commit/push成功后，在真实显存槽上启动min4 12-case smoke；frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-31 CAL SingleLine Primary Completion Override
 
 - `official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset` 于 `2026-07-31T11:02:34Z` 完成 `838/838`，failure/error=`0/0`。冻结 analyzer：row=`52.3866%`，143-cluster macro=`41.2711%`，CI=`[36.3798%,46.0499%]`。
