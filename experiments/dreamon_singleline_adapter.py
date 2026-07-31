@@ -41,31 +41,47 @@ SOURCE_REVISION = "8a0a54918412eda9402a327646f7f067f7160ec8"
 SOURCE_GENERATOR_SHA256 = "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858"
 SOURCE_EVALUATE_SHA256 = "d8cf3ce89a23b182444d42f270d4b3bd030a9dc7e752e075b92919fb1a1da57c"
 SOURCE_LICENSE_SHA256 = "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
-MODEL_ID = "Dream-org/DreamOn-v0-7B"
-MODEL_REVISION = "8ccc74750e43177327f29dab9e91882ba759e194"
-MODEL_CONFIG_SHA256 = "c02a98999d7d22491e6cd43f9830fdfe241773cc0d0470f205d1850a3938e8d3"
 MODEL_INDEX_SHA256 = "998a078123ffc97763690de7f2a677eb89168af5eaf8a5e12e6bc24d18e25bdb"
+MODEL_PROFILES = {
+    "dreamon": {
+        "id": "Dream-org/DreamOn-v0-7B",
+        "revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+        "config_sha256": "c02a98999d7d22491e6cd43f9830fdfe241773cc0d0470f205d1850a3938e8d3",
+        "license": "apache-2.0",
+    },
+    "dreamcoder_fixed": {
+        "id": "Dream-org/Dream-Coder-v0-Base-7B",
+        "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+        "config_sha256": "3c180c6d6d9b55a9d3a083b0460c27520ee3c695ff3724e2e87200849cff08c9",
+        "license": "not_present_in_cached_snapshot; external metadata verification pending",
+    },
+}
 DATASET_NAME = "HumanEval-SingleLineInfilling"
 FULL_COUNT = 927
 CLUSTER_COUNT = 148
 INITIAL_LENGTHS = (4, 8, 16, 32, 64)
 
 
-def arm_name(min_gen_len: int) -> str:
+def arm_name(min_gen_len: int, model_profile: str = "dreamon") -> str:
     if int(min_gen_len) not in INITIAL_LENGTHS:
         raise ValueError(f"DreamOn min_gen_len must be one of {INITIAL_LENGTHS}")
-    return f"dreamon_dynamic_min{int(min_gen_len)}_max64"
+    if model_profile == "dreamon":
+        return f"dreamon_dynamic_min{int(min_gen_len)}_max64"
+    if model_profile == "dreamcoder_fixed":
+        return f"dreamcoder_fixed{int(min_gen_len)}_dreamon_decoder"
+    raise ValueError(f"unsupported model profile: {model_profile}")
 
 
-def protocol_config(min_gen_len: int) -> dict[str, Any]:
-    arm_name(min_gen_len)
+def protocol_config(min_gen_len: int, model_profile: str = "dreamon") -> dict[str, Any]:
+    arm_name(min_gen_len, model_profile)
+    max_gen_len = 64 if model_profile == "dreamon" else int(min_gen_len)
     return {
         "dtype": "bf16",
         "device": "cuda",
         "max_tokens": 2048,
         "max_prompt_len": 2048,
         "min_gen_len": int(min_gen_len),
-        "max_gen_len": 64,
+        "max_gen_len": max_gen_len,
         "batch_size": 1,
         "steps": 256,
         "eps": 1e-3,
@@ -87,8 +103,19 @@ def derive_row_seed(global_seed: int, candidate_key: str) -> int:
     return int.from_bytes(digest[:8], "big") & ((1 << 63) - 1)
 
 
-def expected_keys(manifest: Sequence[Mapping[str, Any]], arm: str) -> set[str]:
-    keys = {f"dreamon_singleline_source_row={int(row['source_row_id'])}|arm={arm}" for row in manifest}
+def candidate_key(model_profile: str, source_row_id: int, arm: str) -> str:
+    prefix = "dreamon_singleline" if model_profile == "dreamon" else "dreamcoder_singleline"
+    return f"{prefix}_source_row={int(source_row_id)}|arm={arm}"
+
+
+def paired_seed_key(source_row_id: int, length: int) -> str:
+    return candidate_key("dreamon", source_row_id, arm_name(length, "dreamon"))
+
+
+def expected_keys(
+    manifest: Sequence[Mapping[str, Any]], arm: str, model_profile: str = "dreamon"
+) -> set[str]:
+    keys = {candidate_key(model_profile, int(row["source_row_id"]), arm) for row in manifest}
     if len(keys) != len(manifest) or "" in keys:
         raise RuntimeError("DreamOn manifest has duplicate or blank normalized keys")
     return keys
@@ -194,23 +221,25 @@ def source_provenance(source_root: Path) -> dict[str, Any]:
     }
 
 
-def model_provenance(snapshot: Path) -> dict[str, Any]:
-    if snapshot.name != MODEL_REVISION:
-        raise RuntimeError("DreamOn cached checkpoint revision mismatch")
-    if sha256(snapshot / "config.json") != MODEL_CONFIG_SHA256:
-        raise RuntimeError("DreamOn checkpoint config hash mismatch")
+def model_provenance(snapshot: Path, model_profile: str = "dreamon") -> dict[str, Any]:
+    profile = MODEL_PROFILES[model_profile]
+    if snapshot.name != profile["revision"]:
+        raise RuntimeError(f"{model_profile} cached checkpoint revision mismatch")
+    if sha256(snapshot / "config.json") != profile["config_sha256"]:
+        raise RuntimeError(f"{model_profile} checkpoint config hash mismatch")
     if sha256(snapshot / "model.safetensors.index.json") != MODEL_INDEX_SHA256:
-        raise RuntimeError("DreamOn checkpoint weight-index hash mismatch")
-    readme = (snapshot / "README.md").read_text(encoding="utf-8")
-    if "license: apache-2.0" not in readme.lower():
+        raise RuntimeError(f"{model_profile} checkpoint weight-index hash mismatch")
+    if model_profile == "dreamon" and "license: apache-2.0" not in (
+        snapshot / "README.md"
+    ).read_text(encoding="utf-8").lower():
         raise RuntimeError("DreamOn checkpoint Apache-2.0 metadata is missing")
     return {
-        "model_id": MODEL_ID,
-        "model_revision": MODEL_REVISION,
+        "model_id": profile["id"],
+        "model_revision": profile["revision"],
         "model_snapshot": str(snapshot),
-        "config_sha256": MODEL_CONFIG_SHA256,
+        "config_sha256": profile["config_sha256"],
         "model_index_sha256": MODEL_INDEX_SHA256,
-        "license": "apache-2.0",
+        "license": profile["license"],
     }
 
 
@@ -289,12 +318,13 @@ def decode_one(
     *,
     safe: Mapping[str, str],
     candidate_key: str,
+    seed_key: str | None = None,
     global_seed: int,
     generator: Any,
     tokenizer: Any,
     counting_model: CountingModel,
 ) -> dict[str, Any]:
-    row_seed = derive_row_seed(global_seed, candidate_key)
+    row_seed = derive_row_seed(global_seed, seed_key or candidate_key)
     torch.manual_seed(row_seed)
     torch.cuda.manual_seed_all(row_seed)
     prefix_ids = tokenizer.encode(str(safe["prefix"]), add_bos=True, add_eos=False)
@@ -360,8 +390,9 @@ def run(args: argparse.Namespace) -> int:
     summary_path = Path(args.manifest_summary_json).resolve()
     output_dir = Path(args.output_dir).resolve()
     min_gen_len = int(args.min_gen_len)
-    arm = arm_name(min_gen_len)
-    config = protocol_config(min_gen_len)
+    model_profile = str(args.model_profile)
+    arm = arm_name(min_gen_len, model_profile)
+    config = protocol_config(min_gen_len, model_profile)
     mode = str(args.mode)
     expected_mode_count = 12 if mode == "smoke" else FULL_COUNT
     manifest = read_jsonl(manifest_path)
@@ -380,7 +411,7 @@ def run(args: argparse.Namespace) -> int:
         evaluator_root=evaluator_root,
     )
     source_info = source_provenance(source_root)
-    model_info = model_provenance(model_snapshot)
+    model_info = model_provenance(model_snapshot, model_profile)
     source_rows = load_dataset_rows(evaluator_root, DATASET_NAME)
     verify_manifest_source_rows(manifest, source_rows)
     if args.preflight_only:
@@ -415,8 +446,8 @@ def run(args: argparse.Namespace) -> int:
     failure_path = output_dir / f"{arm}_failure_journal.jsonl"
     progress_path = output_dir / f"{arm}_{mode}_progress.json"
     run_manifest_path = output_dir / f"{arm}_{mode}_run_manifest.json"
-    full_expected = expected_keys(full_manifest, arm)
-    expected = expected_keys(manifest, arm)
+    full_expected = expected_keys(full_manifest, arm, model_profile)
+    expected = expected_keys(manifest, arm, model_profile)
     existing = canonical_rows(raw_path, full_expected, arm)
     completed = {str(row["candidate_key"]) for row in existing} & expected
     starting_completed = len(completed)
@@ -443,10 +474,32 @@ def run(args: argparse.Namespace) -> int:
             "dataset": DATASET_NAME,
             "manifest": str(manifest_path),
             "full_manifest": str(full_manifest_path),
-            "implementation_label": "DreamOn official-source single-H200 reproduction",
-            "topology_boundary": "single H200; not exact official 8-GPU topology reproduction",
-            "seed_policy": "SHA256(global_seed, candidate_key) deterministic per candidate",
-            "randomness_boundary": "same temperature/top-p sampling distribution; not the unreleased unseeded official random stream",
+            "implementation_label": (
+                "DreamOn official-source single-H200 reproduction"
+                if model_profile == "dreamon"
+                else "DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder"
+            ),
+            "model_profile": model_profile,
+            "topology_boundary": (
+                "single H200; not exact official 8-GPU topology reproduction"
+                if model_profile == "dreamon"
+                else "single-H200 common-protocol local fixed-canvas control"
+            ),
+            "seed_policy": (
+                "SHA256(global_seed, candidate_key) deterministic per candidate"
+                if model_profile == "dreamon"
+                else "SHA256(global_seed, corresponding DreamOn dynamic candidate key)"
+            ),
+            "randomness_boundary": (
+                "same temperature/top-p sampling distribution; not the unreleased unseeded official random stream"
+                if model_profile == "dreamon"
+                else "same row seed as the corresponding DreamOn dynamic arm; same sampling and source decoder"
+            ),
+            "fixed_control_semantics": (
+                None
+                if model_profile == "dreamon"
+                else "min_gen_len=max_gen_len; source EOS contraction remains enabled"
+            ),
             "resume_contract": "append-only canonical raw; exact successful keys skipped",
             "frozen_test_status": "sealed",
             "test_evaluation_count": 0,
@@ -478,7 +531,7 @@ def run(args: argparse.Namespace) -> int:
     torch.cuda.reset_peak_memory_stats()
     for source_row_id in sorted(manifest_by_source):
         item = manifest_by_source[source_row_id]
-        key = f"dreamon_singleline_source_row={source_row_id}|arm={arm}"
+        key = candidate_key(model_profile, source_row_id, arm)
         if key in completed:
             continue
         source = source_rows[source_row_id]
@@ -491,6 +544,11 @@ def run(args: argparse.Namespace) -> int:
             decoded = decode_one(
                 safe=safe,
                 candidate_key=key,
+                seed_key=(
+                    None
+                    if model_profile == "dreamon"
+                    else paired_seed_key(source_row_id, min_gen_len)
+                ),
                 global_seed=int(args.seed),
                 generator=generator,
                 tokenizer=tokenizer,
@@ -602,6 +660,7 @@ def parser() -> argparse.ArgumentParser:
     root.add_argument("--source-root", required=True)
     root.add_argument("--evaluator-root", required=True)
     root.add_argument("--model-snapshot", required=True)
+    root.add_argument("--model-profile", choices=tuple(MODEL_PROFILES), default="dreamon")
     root.add_argument("--manifest-jsonl", required=True)
     root.add_argument("--full-manifest-jsonl", required=True)
     root.add_argument("--manifest-summary-json", required=True)

@@ -8,11 +8,13 @@ from experiments.dreamon_singleline_adapter import (
     OfficialHFTokenizerWrapper,
     arm_name,
     audit_rows,
+    candidate_key,
     call_with_generation_profile,
     derive_row_seed,
     expected_keys,
     generation_target_code,
     movement_counts,
+    paired_seed_key,
     protocol_config,
 )
 
@@ -38,6 +40,31 @@ class DreamOnSingleLineAdapterTest(unittest.TestCase):
                 "dreamon_singleline_source_row=3|arm=dreamon_dynamic_min32_max64",
                 "dreamon_singleline_source_row=7|arm=dreamon_dynamic_min32_max64",
             },
+        )
+
+    def test_dreamcoder_fixed_profile_reuses_decoder_with_fixed_maximum(self) -> None:
+        self.assertEqual(
+            arm_name(32, "dreamcoder_fixed"), "dreamcoder_fixed32_dreamon_decoder"
+        )
+        config = protocol_config(32, "dreamcoder_fixed")
+        self.assertEqual(config["min_gen_len"], 32)
+        self.assertEqual(config["max_gen_len"], 32)
+        self.assertEqual(config["steps"], 256)
+        self.assertEqual(config["temperature"], 0.2)
+        self.assertEqual(config["top_p"], 0.9)
+        self.assertEqual(config["alg"], "entropy")
+        self.assertTrue(config["delete_eos_token"])
+
+    def test_fixed_control_uses_distinct_raw_key_but_paired_dynamic_seed_key(self) -> None:
+        fixed_arm = arm_name(16, "dreamcoder_fixed")
+        fixed_key = candidate_key("dreamcoder_fixed", 7, fixed_arm)
+        self.assertEqual(
+            fixed_key,
+            "dreamcoder_singleline_source_row=7|arm=dreamcoder_fixed16_dreamon_decoder",
+        )
+        self.assertEqual(
+            paired_seed_key(7, 16),
+            "dreamon_singleline_source_row=7|arm=dreamon_dynamic_min16_max64",
         )
 
     def test_row_seed_is_deterministic_and_arm_specific(self) -> None:
