@@ -27,6 +27,12 @@
 - paired row help/harm=`194/31`；cluster=`81/9/58`；macro delta=`+13.943pp`，95% CI=`[+9.618,+18.405]pp`。
 - 完整系统对比边界不变。Fixed4/32/64与LR MultiLine Fixed64运行，failure=0，Frozen test=`sealed/0`。
 
+## 2026-07-31 DreamOn vs DreamCoder Fixed4 Override
+
+- DreamOn min4/max64 vs DreamCoder Fixed4：row=`88.4574% vs 25.1348%`；task-macro=`78.1111% vs 19.6466%`。
+- paired row help/harm=`590/3`；cluster=`124/0/24`；macro delta=`+58.464pp`，95% CI=`[+53.091,+63.720]pp`。
+- 完整系统对比边界不变。Fixed32/64与LR MultiLine Fixed64运行，failure=0，Frozen test=`sealed/0`。
+
 ## 2026-07-31 Baseline Closure Execution Status
 
 - 权威分支：`codex/ccfa-execution-sprint-v1@6195157`（DreamOn result commit 的 parent），remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。

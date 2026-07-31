@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- DreamOn min4 paired：DreamOn row/macro=`88.4574/78.1111%`，DreamCoder Fixed4=`25.1348/19.6466%`；row help/harm=`590/3`，cluster=`124/0/24`，macro delta=`+58.464pp` CI=`[+53.091,+63.720]pp`。完整系统差异，不作纯动态归因。
+- Fixed4 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；只剩 Fixed32/64 controls 与 LR MultiLine Fixed64运行。
 - DreamOn min16 paired：DreamOn row/macro=`90.7228/83.1788%`，DreamCoder Fixed16=`73.1392/69.2358%`；row help/harm=`194/31`，cluster=`81/9/58`，macro delta=`+13.943pp` CI=`[+9.618,+18.405]pp`。完整系统差异，不作纯动态归因。
 - Fixed16 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；Fixed4门控已于`2026-07-31T16:05:34Z`自动释放并运行。
 - DreamOn min8 paired：DreamOn row/macro=`90.3991/81.3313%`，DreamCoder Fixed8=`60.7335/48.0879%`；row help/harm=`286/11`，cluster=`111/1/36`，macro delta=`+33.243pp` CI=`[+28.390,+38.417]pp`。完整系统差异，不归因于单独动态长度或训练。

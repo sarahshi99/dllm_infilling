@@ -9,6 +9,7 @@
 - LR-DLLM RandomSpan primary−Fixed64 macro=`-15.135pp`，CI=`[-17.905,-12.365]pp`，row help/harm=`104/328`；明确负结果。MultiLine Fixed64仍运行。
 - DreamOn min8−DreamCoder Fixed8 macro=`+33.243pp`，CI=`[+28.390,+38.417]pp`，row help/harm=`286/11`；这是training-based released system与base fixed control的完整系统差异。
 - DreamOn min16−DreamCoder Fixed16 macro=`+13.943pp`，CI=`[+9.618,+18.405]pp`，row help/harm=`194/31`；同一完整系统差异边界。
+- DreamOn min4−DreamCoder Fixed4 macro=`+58.464pp`，CI=`[+53.091,+63.720]pp`，row help/harm=`590/3`；同一完整系统差异边界。
 - Phase 0 matrix/analyzer/manifests 已在 `8d9838d` push；legacy manifest-key compatibility 在 `e7a790b` push，均发生在 CAL outcome read 前。
 - CAL MultiLine 4,990 已解盲：row `1643/4990=32.9259%`；143-cluster task-macro `27.8471%`，95% CI `[24.3313%,31.2715%]`。准确标签见 `docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。
 - 没有 same-key official_fixed32，不得写 paired improvement。下一动作是 SingleLine CAL-Rest smoke12；通过后在 physical GPU0 的独立 tmux 启动 838 full。
