@@ -2,12 +2,20 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn official-source SingleLine completed
+
+- 准确标签：`DreamOn official-source single-H200 reproduction`；source=`8a0a549`，checkpoint=`8ccc7475`，released-source max64/steps256/temp0.2/top-p0.9/entropy/expansion协议。
+- min4/8/16/32/64 row Pass@1=`88.4574/90.3991/90.7228/91.2621/91.6936%`；equal-weight 148-cluster macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。
+- 对应95% CI依次为`[72.4789,83.4275]%`、`[75.8913,86.3460]%`、`[78.0777,87.9909]%`、`[77.7295,87.8439]%`、`[80.2582,89.7411]%`。
+- canonical rows均为`927/927`，missing/duplicate/error/accounting=`0`。当前无DreamCoder matched fixed controls，不报告paired delta/help-harm；paper Lmax128未执行。
+- 报告：`docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md`；Frozen test=`sealed/0`。
+
 ## Completed paired and cross-dataset baseline results
 
 - CAL SingleLine primary−official_fixed32：row help/harm=`130/96`；cluster=`47/31/65`；task-macro delta=`+1.898pp`，95% CI=`[-2.233,+5.759]pp`。Fixed64 sensitivity完成，但不是equal-compute。
 - DAEDAL SingleLine dynamic−Fixed8：row=`54/49`；cluster=`27/26/90`；macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`。MultiLine：row=`97/56`；cluster=`35/15/93`；macro=`+0.455pp`，CI=`[-1.375,+1.791]pp`。
 - LR-DLLM DreamCoder SingleLine−Fixed64：row=`246/114`；cluster=`67/38/43`；macro=`+0.796pp`，CI=`[-6.746,+8.178]pp`。RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`；两个cross-dataset Fixed64 controls仍运行。
-- DreamOn min4/8/16/32/64 smoke与resume gates全部通过；五个SingleLine 927 full运行中，不读取partial accuracy。
+- DreamOn min4/8/16/32/64 smoke、resume与五个SingleLine 927 full全部完成；结果见上节。
 - 所有上述paired CI均跨0。Frozen test=`sealed`，`test_evaluation_count=0`。
 
 ## External Baseline Concurrent Execution Update

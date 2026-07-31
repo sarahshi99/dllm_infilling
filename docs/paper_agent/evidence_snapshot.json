@@ -1,5 +1,25 @@
 {
   "snapshot_version": 1,
+  "baseline_closure_20260731": {
+    "dreamon_singleline": {
+      "label": "DreamOn official-source single-H200 reproduction",
+      "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+      "checkpoint_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+      "population_rows": 927,
+      "base_function_clusters": 148,
+      "arms": {
+        "min4_max64": {"row_pass_at_1": 0.8845738942826321, "task_macro_pass_at_1": 0.7811111689401165, "ci_95": [0.7247887791884502, 0.8342754904555888]},
+        "min8_max64": {"row_pass_at_1": 0.9039913700107874, "task_macro_pass_at_1": 0.8133130289380289, "ci_95": [0.7589129836004831, 0.8634597848660347]},
+        "min16_max64": {"row_pass_at_1": 0.9072276159654801, "task_macro_pass_at_1": 0.8317881255381254, "ci_95": [0.7807767521048772, 0.8799088538151033]},
+        "min32_max64": {"row_pass_at_1": 0.912621359223301, "task_macro_pass_at_1": 0.8303718147468147, "ci_95": [0.7772950742481989, 0.8784391617204116], "recovered_resource_oom_journal": 1},
+        "min64_max64": {"row_pass_at_1": 0.9169363538295577, "task_macro_pass_at_1": 0.8512993106743105, "ci_95": [0.8025823601604851, 0.8974112292081037], "recovered_resource_oom_journal": 1}
+      },
+      "canonical_audit": "all five arms 927/927; zero missing duplicate canonical error or accounting defect",
+      "paired_status": "pending DreamCoder DreamOn-matched fixed controls",
+      "report": "docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md"
+    },
+    "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0}
+  },
   "execution_sprint_20260717": {
     "operational_decision": "execute_and_monitor",
     "method_portfolio": {

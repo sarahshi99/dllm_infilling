@@ -49,7 +49,7 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 | official-source CAL initial32 | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source SingleLine loader adaptation | immutable manifest frozen；smoke pending | 中心控制是 official_fixed32 |
 | Fixed4/8/16/64 sensitivity | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source adaptation | adapter extension not frozen | Fixed64 不自动等于 equal-compute |
 | DreamCoder CAL | DreamCoder Base | SingleLine/MultiLine | official-source audit pending | blocker：同一 100-demo bias/CAL algorithm 未证明 | 不可配对 |
-| DreamOn official-source single-H200 reproduction | DreamOn-v0-7B@8ccc7475 | SingleLine 927/148 | official/direct source route | checkpoint已缓存；项目adapter/seed/resume协议尚未冻结 | DreamCoder matched fixed controls 未完成 |
+| DreamOn official-source single-H200 reproduction | DreamOn-v0-7B@8ccc7475 | SingleLine 927/148 | official/direct source route | 五个 released-source arms 完成并分析；row=`88.46..91.69%`，macro=`78.11..85.13%` | DreamCoder matched fixed controls 未完成，只报绝对指标 |
 | DreamOn MultiLine via benchmark-only adapter | DreamOn-v0-7B@8ccc7475 | MultiLine 5079/148 | unsupported until adapter equivalence proof | checkpoint ready；adapter equivalence pending | 不可配对 |
 | LR-DLLM | DreamCoder Base | SingleLine 927；RandomSpan 1480；MultiLine 5079 | paper-guided reimplementation pending author-code search | blocker：official code/ambiguity freeze | 不可配对 |
 | LR-DLLM | LLaDA-8B-Base | 同上 | DreamCoder technical credibility 后移植 | blocked by predecessor | 不可配对 |

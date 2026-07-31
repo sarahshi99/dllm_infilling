@@ -2,14 +2,21 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-07-31 DreamOn SingleLine Completion Override
+
+- `DreamOn official-source single-H200 reproduction` 五个 released-source arms 已完成 `927/927` 并经冻结 analyzer 分析。min4/8/16/32/64 row Pass@1=`88.4574/90.3991/90.7228/91.2621/91.6936%`；task-macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。
+- 五项 final canonical audit 均为 missing/duplicate/error/accounting=`0`。min32/min64 各保留 1 条并发显存 OOM failure journal，原地 resume/dedup 后完成；历史 raw/failure 不覆盖。
+- 当前没有 DreamCoder DreamOn-matched fixed controls，因此不计算 paired delta/help-harm；paper Lmax128 未运行。正式报告：`docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md`。
+- LR RandomSpan/MultiLine Fixed64 controls继续运行。Frozen test=`sealed`，`test_evaluation_count=0`；不进入M5/PPT/ExecRepoBench final。
+
 ## 2026-07-31 Baseline Closure Execution Status
 
-- 权威分支：`codex/ccfa-execution-sprint-v1@5e0b432`，remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。
+- 权威分支：`codex/ccfa-execution-sprint-v1@6195157`（DreamOn result commit 的 parent），remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。
 - CAL SingleLine：primary vs official_fixed32 same-key macro delta=`+1.898pp`，CI=`[-2.233,+5.759]pp`，row help/harm=`130/96`；CI跨0。Fixed64 sensitivity完成，但不称equal-compute。
 - LR-DLLM：唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。SingleLine vs Fixed64 macro delta=`+0.796pp`，CI=`[-6.746,+8.178]pp`，row help/harm=`246/114`；RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`。RandomSpan/MultiLine Fixed64 controls运行中。
 - CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic−Fixed8 macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`；MultiLine=`+0.455pp`，CI=`[-1.375,+1.791]pp`。两项CI均跨0，Fixed8不称equal-compute。
-- DreamOn：official-source SingleLine min4/8/16/32/64的12-case smoke与resume gates全部通过，五个927 full均在独立tmux运行；paper Lmax128未与source max64混合。
-- GPU0 单张H200；2026-07-31T14:39Z 7个项目模型稳定并发，free约9GiB、ECC=`0`；不添加第8个模型，不kill/preempt。Frozen test=`sealed/0`。
+- DreamOn：official-source SingleLine min4/8/16/32/64的12-case smoke、resume gates与五个927 full全部完成；paper Lmax128未与source max64混合。
+- GPU0 单张H200；2026-07-31T15:20Z LR 两个 controls 运行，外部两进程不抢占，free约79GiB、ECC=`0`。Frozen test=`sealed/0`。
 - 不进入M5、PPT、ExecRepoBench final或frozen evaluation。
 
 ## 2026-07-31 Official CAL MultiLine 4,990 解盲

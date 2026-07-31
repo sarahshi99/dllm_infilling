@@ -1,5 +1,12 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn SingleLine Completion Override
+
+- `DreamOn official-source single-H200 reproduction` 的 min4/8/16/32/64 五个 full 均完成 `927/927`。row Pass@1=`88.4574/90.3991/90.7228/91.2621/91.6936%`；148-cluster macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。
+- 五项 canonical audit 均为 missing/duplicate/error/forward-accounting/length-accounting=`0`。min32/min64 各有 1 条已恢复的资源 OOM failure journal；append-only raw 保留，resume/dedup完成。
+- DreamCoder DreamOn-matched Fixed4/8/16/32/64 尚未冻结/完成，所以当前只报绝对指标。LR RandomSpan/MultiLine Fixed64 controls继续运行。
+- frozen test=`sealed`，`test_evaluation_count=0`；不进入M5/PPT/ExecRepoBench final。
+
 ## 2026-07-31 Baseline Results + DreamOn Fulls Override
 
 - CAL SingleLine same-key：primary−official_fixed32 row help/harm=`130/96`，cluster=`47/31/65`，task-macro delta=`+1.898pp`，95% CI=`[-2.233,+5.759]pp`。Fixed64 sensitivity完成，但不称equal-compute。

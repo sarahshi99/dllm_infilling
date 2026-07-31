@@ -5,6 +5,7 @@
 ## 2026-07-31 External Baseline Closure Override
 
 - Branch：`codex/ccfa-execution-sprint-v1`。
+- DreamOn official-source SingleLine五个released arms已完成：min4/8/16/32/64 row=`88.4574/90.3991/90.7228/91.2621/91.6936%`，macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`；canonical audit均通过。无matched fixed controls，不算paired delta。
 - Phase 0 matrix/analyzer/manifests 已在 `8d9838d` push；legacy manifest-key compatibility 在 `e7a790b` push，均发生在 CAL outcome read 前。
 - CAL MultiLine 4,990 已解盲：row `1643/4990=32.9259%`；143-cluster task-macro `27.8471%`，95% CI `[24.3313%,31.2715%]`。准确标签见 `docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。
 - 没有 same-key official_fixed32，不得写 paired improvement。下一动作是 SingleLine CAL-Rest smoke12；通过后在 physical GPU0 的独立 tmux 启动 838 full。
