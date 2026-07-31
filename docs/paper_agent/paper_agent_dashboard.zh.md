@@ -7,7 +7,7 @@
 - 准确标签：`DreamOn official-source MultiLine reproduction via benchmark-only adapter`。Adapter只改变 dataset/manifest/evaluator-row namespace，逐例 `decode_one`、pinned generator、sampling、seed、model forward和evaluator不分叉。
 - immutable population=`5079 rows/148 clusters`；smoke=`12 rows/12 clusters`，SHA256=`5bd2d19b...`，forbidden/sealed/outcome fields=`0`。
 - min4/8/16/32/64 smoke与resume no-op全部通过：每臂`12/12`、missing/duplicate/error/failure/accounting=`0`、resume writes=`0`。
-- min4 full tmux/pane/Python=`dreamon_ml5079_min4_20260731/1829390/1829424`；min8/16/32/64均为独立predecessor+free-memory queues。当前只监控progress/failure/OOM/ECC，不读partial accuracy。
+- min4 full tmux/pane/Python=`dreamon_ml5079_min4_20260731/1829390/1829424`；min8 queue已于`2026-07-31T17:06:36Z`释放并运行Python=`2151434`；min16/32/64保持独立predecessor+free-memory queues。当前只监控progress/failure/OOM/ECC，不读partial accuracy。
 - 当前日期：Friday, July 31, 2026。Frozen test=`sealed/0`；不进入M5/PPT/ExecRepoBench final。
 
 ## 2026-07-31 DreamOn SingleLine Completion Override
@@ -46,6 +46,14 @@
 - DreamOn min32/max64 vs DreamCoder Fixed32：row=`91.2621% vs 63.2147%`；task-macro=`83.0372% vs 63.9771%`。
 - paired row help/harm=`286/26`；cluster=`89/9/50`；macro delta=`+19.060pp`，95% CI=`[+13.661,+24.447]pp`。
 - 完整系统对比边界不变。只剩 Fixed64 control 与LR MultiLine Fixed64运行；Frozen test=`sealed/0`。
+
+## 2026-07-31 DreamOn vs DreamCoder Fixed64 / SingleLine Closure Override
+
+- DreamOn min64/max64 vs DreamCoder Fixed64：row=`91.6936% vs 59.1154%`；task-macro=`85.1299% vs 63.9190%`。
+- paired row help/harm=`327/25`；cluster=`90/7/51`；macro delta=`+21.211pp`，95% CI=`[+15.657,+26.692]pp`。
+- DreamOn SingleLine五个 matched controls现已全部完成；所有 paired CIs高于0，但均为training-based released system vs base fixed control的完整系统差异，不作纯动态/compute-matched归因。
+- DreamOn min64 canonical raw与accounting完整，但保留1条已恢复的并发显存OOM journal；Fixed64 control failure=`0`，历史journal不覆盖。
+- MultiLine min4/min8 full运行，后续arms队列；LR MultiLine Fixed64运行。当前日期Friday, July 31, 2026；Frozen test=`sealed/0`。
 
 ## 2026-07-31 Baseline Closure Execution Status
 

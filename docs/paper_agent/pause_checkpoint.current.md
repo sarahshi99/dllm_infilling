@@ -1,10 +1,17 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn SingleLine Matched-Control Closure Override
+
+- DreamOn min64−DreamCoder Fixed64：row help/harm=`327/25`；cluster=`90/7/51`；task-macro delta=`+21.211pp`，95% CI=`[+15.657,+26.692]pp`。
+- DreamCoder Fixed4/8/16/32/64 controls全部`927/927`，missing/duplicate/error/failure/accounting=`0`；五个same-length paired analyses全部完成。
+- DreamOn min64 canonical audit=`927/927`且missing/duplicate/error/accounting=`0`，但append-only journal保留1条已恢复的资源OOM，所以其strict progress status仍为`audit_failed`；不要改写为failure=`0`。
+- MultiLine min4/min8 full运行，min16/32/64队列；LR MultiLine Fixed64运行。当前日期Friday, July 31, 2026；Frozen test=`sealed/0`。
+
 ## 2026-07-31 DreamOn MultiLine Launch Override
 
 - `DreamOn official-source MultiLine reproduction via benchmark-only adapter` 已在commit `487fdaa` push后通过五个12-case smoke/resume gates。
 - min4 full运行：tmux/pane/Python=`dreamon_ml5079_min4_20260731/1829390/1829424`，output=`outputs_clean/dreamon_multiline_20260731_v1/`，log=`logs/paper_agent/20260731_dreamon_multiline_min4.log`。
-- min8 queue=`dreamon_ml5079_min8_queue_20260731`（free≥36GiB）；min16等待min4完成；min32等待min8；min64等待min16。所有queue只读进度/显存，不占GPU。
+- min8 queue=`dreamon_ml5079_min8_queue_20260731`已于`2026-07-31T17:06:36Z`释放，Python=`2151434`；min16等待min4完成；min32等待min8；min64等待min16。剩余queue只读进度/显存，不占GPU。
 - 当前日期是Friday, July 31, 2026；不读partial accuracy。Frozen test=`sealed`，`test_evaluation_count=0`。
 
 ## 2026-07-31 DreamOn min32 vs Fixed32 Paired Override

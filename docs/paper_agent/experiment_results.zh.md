@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn min64 vs DreamCoder Fixed64 / SingleLine matched-control closure
+
+- DreamOn min64/max64 row/macro=`91.6936/85.1299%`；DreamCoder Fixed64 row/macro=`59.1154/63.9190%`。
+- DreamOn−Fixed64 row help/harm=`327/25`；cluster help/harm/tie=`90/7/51`；task-macro delta=`+21.211pp`，95% CI=`[+15.657,+26.692]pp`。
+- Fixed4/8/16/32/64 five-control deltas依次=`+58.464/+33.243/+13.943/+19.060/+21.211pp`，CIs全部高于0。same population/source decoder/sampling/seed-key，但checkpoint/training class不同；均为full-system contrast。
+- Fixed64 control failure journal=`0`；DreamOn min64 canonical audit通过，但保留1条已恢复的资源OOM journal，strict progress status因此为`audit_failed`。
+- 报告：`docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed64_paired_result.zh.md`。
+
 ## DreamOn MultiLine benchmark-only adapter technical status
 
 - 准确标签：`DreamOn official-source MultiLine reproduction via benchmark-only adapter`；population=`5079/148`，adapter仅改变benchmark loader/manifest/evaluator-row namespace。

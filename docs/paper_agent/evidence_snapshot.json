@@ -29,7 +29,8 @@
       "paired_fixed16": {"dreamon_row_pass_at_1": 0.9072276159654801, "dreamon_task_macro_pass_at_1": 0.8317881255381254, "dreamcoder_fixed16_row_pass_at_1": 0.7313915857605178, "dreamcoder_fixed16_task_macro_pass_at_1": 0.6923576009102324, "task_macro_delta": 0.13943052462789302, "ci_95": [0.09618444356931198, 0.18405262962006375], "row_help_harm": [194, 31], "cluster_help_harm_tie": [81, 9, 58]},
       "paired_fixed4": {"dreamon_row_pass_at_1": 0.8845738942826321, "dreamon_task_macro_pass_at_1": 0.7811111689401165, "dreamcoder_fixed4_row_pass_at_1": 0.2513484358144552, "dreamcoder_fixed4_task_macro_pass_at_1": 0.19646638232164537, "task_macro_delta": 0.5846447866184707, "ci_95": [0.5309058205357546, 0.6371951867675552], "row_help_harm": [590, 3], "cluster_help_harm_tie": [124, 0, 24]},
       "paired_fixed32": {"dreamon_row_pass_at_1": 0.912621359223301, "dreamon_task_macro_pass_at_1": 0.8303718147468147, "dreamcoder_fixed32_row_pass_at_1": 0.6321467098166127, "dreamcoder_fixed32_task_macro_pass_at_1": 0.639771043718412, "task_macro_delta": 0.19060077102840253, "ci_95": [0.13661058975203708, 0.24447484267796762], "row_help_harm": [286, 26], "cluster_help_harm_tie": [89, 9, 50]},
-      "paired_status": "Fixed4/8/16/32 completed; Fixed64 pending",
+      "paired_fixed64": {"dreamon_row_pass_at_1": 0.9169363538295577, "dreamon_task_macro_pass_at_1": 0.8512993106743105, "dreamcoder_fixed64_row_pass_at_1": 0.5911542610571737, "dreamcoder_fixed64_task_macro_pass_at_1": 0.6391899446175761, "task_macro_delta": 0.21210936605673442, "ci_95": [0.15657170809720142, 0.2669168044003568], "row_help_harm": [327, 25], "cluster_help_harm_tie": [90, 7, 51]},
+      "paired_status": "Fixed4/8/16/32/64 completed and analyzed",
       "report": "docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md"
     },
     "lrdllm_dreamcoder_randomspan": {

@@ -23,7 +23,15 @@
 | min32 / max64 | `91.2621%` | `83.0372%` | `[77.7295%,87.8439%]` | `14,318` | `4,041,982` | `1.8537s` | `24,018,886,656 B` |
 | min64 / max64 | `91.6936%` | `85.1299%` | `[80.2582%,89.7411%]` | `9,168` | `2,595,211` | `1.3476s` | `24,258,207,744 B` |
 
-这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。Matched controls 已完成 Fixed4/8/16/32：DreamOn deltas分别为`+58.464/+33.243/+13.943/+19.060pp`，四项95% CI均高于0。它们是 training-based released system 相对 base fixed controls 的整体差异，不是纯动态长度或 compute-matched effect。仅 Fixed64仍未完成。
+这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。Matched Fixed4/8/16/32/64 controls已全部完成。它们是 training-based released system 相对 base fixed controls 的整体差异，不是纯动态长度或 compute-matched effect。
+
+| Length | DreamCoder fixed macro | DreamOn−fixed macro delta | 95% paired cluster CI | Row help/harm | Cluster help/harm/tie |
+|---:|---:|---:|---:|---:|---:|
+| 4 | `19.6466%` | `+58.464pp` | `[+53.091,+63.720]pp` | `590/3` | `124/0/24` |
+| 8 | `48.0879%` | `+33.243pp` | `[+28.390,+38.417]pp` | `286/11` | `111/1/36` |
+| 16 | `69.2358%` | `+13.943pp` | `[+9.618,+18.405]pp` | `194/31` | `81/9/58` |
+| 32 | `63.9771%` | `+19.060pp` | `[+13.661,+24.447]pp` | `286/26` | `89/9/50` |
+| 64 | `63.9190%` | `+21.211pp` | `[+15.657,+26.692]pp` | `327/25` | `90/7/51` |
 
 ## Dynamic mechanism / integrity
 
