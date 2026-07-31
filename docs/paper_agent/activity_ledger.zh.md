@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- DreamOn min16 paired：DreamOn row/macro=`90.7228/83.1788%`，DreamCoder Fixed16=`73.1392/69.2358%`；row help/harm=`194/31`，cluster=`81/9/58`，macro delta=`+13.943pp` CI=`[+9.618,+18.405]pp`。完整系统差异，不作纯动态归因。
+- Fixed16 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；Fixed4门控已于`2026-07-31T16:05:34Z`自动释放并运行。
 - DreamOn min8 paired：DreamOn row/macro=`90.3991/81.3313%`，DreamCoder Fixed8=`60.7335/48.0879%`；row help/harm=`286/11`，cluster=`111/1/36`，macro delta=`+33.243pp` CI=`[+28.390,+38.417]pp`。完整系统差异，不归因于单独动态长度或训练。
 - Fixed8 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；释放显存后，将Fixed4自建空闲queue从58GiB保守门槛替换为36GiB，未停止任何GPU进程或外部任务。
 - LR RandomSpan paired：primary row/macro=`18.3784%`，Fixed64=`33.5135%`；primary−Fixed64 row help/harm=`104/328`，cluster=`19/107/22`，macro delta=`-15.135pp` CI=`[-17.905,-12.365]pp`。明确负结果，未合并dataset Mean。
