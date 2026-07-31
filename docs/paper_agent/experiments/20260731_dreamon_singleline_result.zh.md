@@ -23,7 +23,7 @@
 | min32 / max64 | `91.2621%` | `83.0372%` | `[77.7295%,87.8439%]` | `14,318` | `4,041,982` | `1.8537s` | `24,018,886,656 B` |
 | min64 / max64 | `91.6936%` | `85.1299%` | `[80.2582%,89.7411%]` | `9,168` | `2,595,211` | `1.3476s` | `24,258,207,744 B` |
 
-这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。Matched controls 已完成 Fixed4/8/16：DreamOn−Fixed4 macro=`+58.464pp`，CI=`[+53.091,+63.720]pp`；Fixed8=`+33.243pp`，CI=`[+28.390,+38.417]pp`；Fixed16=`+13.943pp`，CI=`[+9.618,+18.405]pp`。这些是 training-based released system 相对 base fixed controls 的整体差异，不是纯动态长度或 compute-matched effect。Fixed32/64仍未完成。
+这些是五个预注册 initial-length arms 的绝对结果，不从 outcome 中事后选择一个新 primary protocol。Matched controls 已完成 Fixed4/8/16/32：DreamOn deltas分别为`+58.464/+33.243/+13.943/+19.060pp`，四项95% CI均高于0。它们是 training-based released system 相对 base fixed controls 的整体差异，不是纯动态长度或 compute-matched effect。仅 Fixed64仍未完成。
 
 ## Dynamic mechanism / integrity
 

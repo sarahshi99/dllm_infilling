@@ -2,6 +2,13 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn min32 vs DreamCoder Fixed32
+
+- DreamOn min32/max64 row/macro=`91.2621/83.0372%`；DreamCoder Fixed32 row/macro=`63.2147/63.9771%`。
+- DreamOn−Fixed32 row help/harm=`286/26`；cluster help/harm/tie=`89/9/50`；task-macro delta=`+19.060pp`，95% CI=`[+13.661,+24.447]pp`。
+- same population/source decoder/sampling/seed-key，但 checkpoint/training class不同；是 full-system paired contrast，不是纯动态长度或 compute-matched effect。
+- 报告：`docs/paper_agent/experiments/20260731_dreamon_dreamcoder_fixed32_paired_result.zh.md`。
+
 ## DreamOn min4 vs DreamCoder Fixed4
 
 - DreamOn min4/max64 row/macro=`88.4574/78.1111%`；DreamCoder Fixed4 row/macro=`25.1348/19.6466%`。

@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn min32 vs Fixed32 Paired Override
+
+- DreamOn min32−DreamCoder Fixed32：row help/harm=`286/26`；cluster=`89/9/50`；task-macro delta=`+19.060pp`，95% CI=`[+13.661,+24.447]pp`。
+- Fixed32 completed=`927/927`，missing/duplicate/error/failure/accounting=`0`。Fixed64与LR MultiLine Fixed64运行。
+- delta 为完整系统对比，不隔离动态长度或训练。Frozen test=`sealed/0`。
+
 ## 2026-07-31 DreamOn min4 vs Fixed4 Paired Override
 
 - DreamOn min4−DreamCoder Fixed4：row help/harm=`590/3`；cluster=`124/0/24`；task-macro delta=`+58.464pp`，95% CI=`[+53.091,+63.720]pp`。
