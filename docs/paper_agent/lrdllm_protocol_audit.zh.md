@@ -34,16 +34,21 @@
 
 本轮独立模块为 `expvision_dllm_clean/lrdllm_stage1.py`，独立 adapter 为 `experiments/p1_lrdllm_stage1_adapter.py`；没有修改 CAL-lite 历史行为，也没有把新 arm 加入 official CAL `ARMS`。
 
-Stage I 选择长度后只运行一次 pinned official CAL LLaDA fixed-canvas decoder：`dstep=-1`、`use_bias=False`、`steps=None`、`block_length=None`、`temperature=0.0`、`cfg_scale=0.0`。pinned upstream 在固定路径内把 `steps` 和 `block_length` 解析为选定 `L`；`L=32` mock argument-capture 与 existing `official_fixed32` 逐参数等价。该 decoder 不再改变 canvas 长度，因此不是 Stage II，也不能外推完整 LR-DLLM 最终性能。
+Stage I 选择长度后只运行一次 pinned official CAL LLaDA fixed-canvas decoder：`dstep=-1`、`use_bias=False`、`steps=None`、`block_length=None`、`temperature=0.0`、`cfg_scale=0.0`。pinned upstream 在固定路径内把 `steps` 和 `block_length` 解析为选定 `L`；`L=32` mock argument-capture 与 existing `official_fixed32` 逐参数等价。真实 `llada_cal.py` SHA256=`b1d684040334ea1ffeacd92279cfa98e007ec5c9ce1a39840054e98420989225`，并已通过 CPU controlled semantic audit。该 decoder 不再改变 canvas 长度，因此不是 Stage II，也不能外推完整 LR-DLLM 最终性能。
 
 完整冻结见 `docs/paper_agent/experiments/20260731_lrdllm_stage1_protocol_freeze.zh.md`。
 
 ## Current execution status
 
-- CPU tests：27 个指定 core/adapter/official-CAL regression tests 全部 `OK`。
+- reviewer hardening 已加入 strict full gate、probe-only gate、exact manifest allowlist、source/model/evaluator provenance、failure-journal versioning和逐 row semantic audit；72 个 LR-DLLM/official-CAL/builder/grouped-analyzer tests 全部通过。
 - `py_compile`、CLI help、launcher `bash -n`、`git diff --check` 和 CPU preflight 通过。
 - smoke/full manifest SHA256 分别为 `56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1` 与 `52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0`；full 只 preflight。
 - 2026-07-31 07:25 UTC GPU 0 上已有三个外部计算进程，占用约 105 GiB；ECC 为 0。因此 technical smoke 状态是 `blocked_by_existing_gpu_process`，未抢占、未结束进程，也未启动 838 full。
+- reviewer-hardening 本轮严格没有重新查询或启动 GPU workload；probe-only/smoke/full execution counts均为 0。
+
+Full gate不能由环境变量单独绕过：必须验证同一 implementation commit 的 probe-only audit、12/12 smoke final audit、resume-noop、decoder source hash、model artifact-set hash、evaluator/dataset/manifest hashes。任何 failure journal要求新 output version。
+
+公平比较：本 arm 不得与 LR-DLLM 论文主表直接比较。838 scientific run必须有同一 838-key、同一 decoder 的 `official_fixed32` control；official CAL仍是独立 arm；Fixed64不能称 equal-compute。
 
 ## Historical sanity boundary
 

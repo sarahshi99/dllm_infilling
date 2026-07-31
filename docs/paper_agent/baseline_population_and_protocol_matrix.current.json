@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_utc": "2026-07-31T06:19:56Z",
+  "updated_utc": "2026-07-31T15:05:39Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
   "frozen_controller_test": {
     "status": "sealed",
@@ -85,6 +85,27 @@
       "status": "completed_analyzed_paired_with_official_fixed32",
       "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_official_cal_singleline_838_result.zh.md"},
       "paired_comparison": {"eligible": "after_official_fixed32_complete", "reason": "Primary common-protocol control is official_fixed32, not Fixed64."}
+    },
+    {
+      "id": "local_lrdllm_stage1_llada_singleline_calrest_838",
+      "baseline": "local LR-DLLM Stage-I-only adaptation",
+      "label": "local LR-DLLM Stage-I-only adaptation from arXiv:2602.07546v1 Algorithm 1",
+      "backbone": "GSAI-ML/LLaDA-8B-Base",
+      "dataset": "SingleLine",
+      "protocol": "Algorithm_1_all_exponential_probes_then_one_fixed_canvas_decode",
+      "source": {"paper": "arXiv:2602.07546", "revision": "v1", "official_code": null, "license": null, "search_conclusion": "No audited author implementation found as of 2026-07-31.", "fixed_decoder_repository_revision": "741e8418a88a732b4c92812424d4f03cab1f7b1f", "fixed_decoder_source_sha256": "b1d684040334ea1ffeacd92279cfa98e007ec5c9ce1a39840054e98420989225", "controlled_source_semantic_audit": "steps=None->L; block_length=None->L; dstep=-1->search_forwards=0; fixed output canvas=L"},
+      "checkpoint": {"id": "GSAI-ML/LLaDA-8B-Base", "revision": "0f2787f2d87eac5eed8a087d5ecd24277e6255b2", "artifact_set_sha256": "923e056fe742858e8b817406ae942feccb53ace80116187070de81b29901719a", "config_sha256": "5f99fefe855fdb5100bb6cadb57bdb09fae723ad54811f95c00ecacf29d58a6a", "weight_index_sha256": "28b4ec27206e42e7ade630450e6ce618bd197acf34d35120e8e86d2bb910a408", "tokenizer_config_sha256": "6e9f41633217287fcf9a58890efb26e91e905bd6ae2234b534b65e0c36f4dd3c", "mask_token_id": 126336},
+      "training_class": "training-free",
+      "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0", "technical_smoke_rows": 12, "technical_smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl", "technical_smoke_manifest_sha256": "56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1"},
+      "selector": {"stage": "stage1_only", "probe_grid": [1, 2, 4, 8, 16, 32, 64, 128], "confidence": "mean mask-span negative entropy", "log_base": "natural", "fit": "per-instance OLS with intercept over all exponential probes", "corrected_score": "A(L)-k_hat*log(L)", "tie_break": "shorter on exact tie"},
+      "decoder": {"label": "Stage-I-only selector + fixed-canvas decode", "steps": null, "block_length": null, "dstep": -1, "max_gen_length": 128, "use_bias": false, "temperature": 0.0, "cfg_scale": 0.0, "length_behavior": "pinned upstream resolves steps=L and block_length=L; no post-selection canvas change"},
+      "implementation_class": "paper-guided Stage-I-only adaptation; not official/full/protocol-matched LR-DLLM",
+      "status": "reviewer_hardened_cpu_preflight_verified_probe_smoke_full_zero_rows",
+      "execution_sequence": {"probe_only": {"required_rows": 1, "required_forwards_per_row": 8, "executed_rows": 0}, "technical_smoke": {"required_rows": 12, "requires_probe_only_gate": true, "requires_resume_noop": true, "executed_rows": 0}, "full": {"required_rows": 838, "requires_strict_smoke_provenance_gate": true, "executed_rows": 0}},
+      "paths": {"probe_raw": "outputs_clean/lrdllm_stage1_singleline_probe1_20260731_v1/local_lrdllm_stage1_fixed_decode_probe_only_raw.jsonl", "smoke_raw": "outputs_clean/lrdllm_stage1_singleline_smoke_20260731_v1/local_lrdllm_stage1_fixed_decode_raw.jsonl", "smoke_status": "outputs_clean/lrdllm_stage1_singleline_smoke_20260731_v1/local_lrdllm_stage1_fixed_decode_smoke_run_manifest.json", "protocol_freeze": "docs/paper_agent/experiments/20260731_lrdllm_stage1_protocol_freeze.zh.md", "report": "docs/paper_agent/experiments/20260731_lrdllm_stage1_implementation_and_smoke.zh.md"},
+      "stage2": {"implemented": false, "status": "not_implemented"},
+      "full_execution": {"started": false, "status": "strict_gate_not_satisfied"},
+      "paired_comparison": {"eligible": false, "reason": "This is not full LR-DLLM and cannot be compared directly to paper main-table numbers. An 838-key same-decoder official_fixed32 control is required before a scientific run; official CAL is separate and Fixed64 is not equal-compute."}
     },
     {
       "id": "cal_llada_singleline_fixed32_838",

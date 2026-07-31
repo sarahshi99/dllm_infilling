@@ -139,13 +139,32 @@ def _task_accuracies(rows: Sequence[Mapping[str, Any]]) -> dict[str, float]:
 
 def _cost_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     search: list[float] = []
+    length_selection: list[float] = []
     decode: list[float] = []
     total: list[float] = []
     tokens: list[float] = []
     walls: list[float] = []
     memories: list[float] = []
     for row in rows:
-        search_value = _number(_metric(row, "search_forwards", "search_forward_calls"))
+        length_selection_value = _number(
+            _metric(row, "stage1_probe_forwards", "length_selection_forwards")
+        )
+        compatibility_search_value = _number(
+            _metric(row, "search_forwards", "search_forward_calls")
+        )
+        if (
+            length_selection_value is not None
+            and compatibility_search_value is not None
+            and abs(length_selection_value - compatibility_search_value) > 1e-9
+        ):
+            raise RuntimeError(
+                "Stage-I length-selection forwards differ from search_forwards compatibility alias"
+            )
+        search_value = (
+            length_selection_value
+            if length_selection_value is not None
+            else compatibility_search_value
+        )
         decode_value = _number(
             _metric(row, "formal_decode_forwards", "decode_forwards", "decode_forward_calls")
         )
@@ -157,6 +176,8 @@ def _cost_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
                 raise RuntimeError("forward accounting does not satisfy total=search+decode")
         if search_value is not None:
             search.append(search_value)
+        if length_selection_value is not None:
+            length_selection.append(length_selection_value)
         if decode_value is not None:
             decode.append(decode_value)
         if total_value is not None:
@@ -182,6 +203,13 @@ def _cost_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return {
         "total_search_forward_calls": sum(search) if search else None,
         "mean_search_forward_calls": _mean(search),
+        "total_length_selection_forward_calls": (
+            sum(length_selection) if length_selection else None
+        ),
+        "mean_length_selection_forward_calls": _mean(length_selection),
+        "search_forward_label": (
+            "compatibility aggregate; Stage-I rows represent length selection, not CAL hill-climbing"
+        ),
         "total_decode_forward_calls": sum(decode) if decode else None,
         "mean_decode_forward_calls": _mean(decode),
         "total_forward_calls": sum(total) if total else None,

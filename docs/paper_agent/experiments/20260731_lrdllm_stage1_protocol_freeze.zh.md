@@ -11,11 +11,12 @@
 ## 1. 基线与开始状态
 
 - base branch：`origin/codex/ccfa-execution-sprint-v1`
-- base HEAD：`48661dcc52ee7b2c840f5a2dde9eb9b35f8af078`
+- original base HEAD：`48661dcc52ee7b2c840f5a2dde9eb9b35f8af078`
+- reviewer-hardening authoritative base HEAD：`619515789d9297903242fe1412d6123eeb1e1ec8`
 - implementation branch：`codex/lrdllm-stage1-adapter-v1`
 - clean worktree：`git_workspace/.worktrees/lrdllm-stage1-adapter-v1`
 - 初始 `git status --short`：空
-- `current_action.md` 顶部动作：`CAL-PHASE1B-SINGLELINE-838`，状态 `adapter_verified_ready_for_commit_then_smoke`；本轮不覆盖该动作。
+- `current_action.md` 顶部动作：`CAL-PHASE1B-SINGLELINE-838`，状态 `adapter_committed_smoke_blocked_by_external_gpu_processes_0_of_12`；本轮不覆盖该动作。
 
 ## 2. 来源审计与实现身份
 
@@ -75,6 +76,7 @@
 - `torch.no_grad()`、`model.eval()`；熵至少 float32。
 - `MAX_LENGTH=128` 必须精确记录 `probe_forward_count=8`，否则整行 fail-stop。
 - token-forward 定义为每次实际 model call 的 `batch_size * input_sequence_length`。当前 batch size 固定为 1，因此 probe token-forwards 是八个 probe input token counts 之和。
+- 准确成本字段为 `stage1_probe_forwards` / `length_selection_forwards`。`search_forwards` 只作为 unified analyzer 兼容别名，明确表示 Stage-I length selection，不得解释为 CAL hill-climbing search。
 
 ## 5. Stage I 后的正式 fixed-canvas decode
 
@@ -83,6 +85,7 @@
 证据链：
 
 - pinned CAL repository commit：`741e8418a88a732b4c92812424d4f03cab1f7b1f`
+- pinned `llada_cal/llada_cal.py` SHA256：`b1d684040334ea1ffeacd92279cfa98e007ec5c9ce1a39840054e98420989225`
 - existing `official_fixed32` adapter config：`initial_gen_length=32, steps=None, block_length=None, span=1, max_gen_length=128, dstep=-1, use_bias=False, temperature=0.0, cfg_scale=0.0`
 - pinned `llada_cal.generate` 在 `dstep < 0` 时不进入 CAL length discovery，并返回 `search_steps=0`。
 - pinned implementation 随后执行：
@@ -109,6 +112,8 @@ use_bias=False
 
 这不是凭感觉选择 `steps=L`：adapter 保持与 existing `official_fixed32` 相同的显式调用参数，由 pinned upstream 对 `None` 做 `steps=L, block_length=L` 的解析。`max_gen_length=128` 在 `dstep=-1` 路径中不触发搜索，只为保持 fixed32 参数模板等价。测试必须用 mock argument capture 证明 `L=32` 调用参数逐项等价。
 
+Reviewer hardening 还必须直接导入上述真实 pinned source，并用 CPU fake model 受控执行 `generate`。冻结审计例 `L=4` 必须观察到：`steps_per_block=4`、block mask length=`4`、formal forwards=`4`、search forwards=`0`、output middle canvas=`4`。源码 hash 或任一语义不一致时状态为 `fixed_decode_protocol_ambiguity`，禁止任何 GPU 执行。
+
 正式解码仍执行 fixed canvas 内 LLaDA 标准 low-confidence denoising schedule；它不改变 canvas 长度，不是 LR-DLLM Stage II，也不是 selector-level remasking/rescue。formal decode 返回的 middle token count必须等于 Stage I 的 `selected_length`，upstream `search_steps` 必须为 0。
 
 与论文完整 LR-DLLM 的差异：论文 Stage II 会动态局部调整 remaining length 并逐 token commit；本轮完全省略 Stage II。论文中用于完整方法采样的 `temperature=0.2, top_p=0.9` 不移植到这个本地 fixed-canvas control；本轮按共同协议要求保持 existing official fixed decoder 的 `temperature=0.0, cfg_scale=0.0`。因此本实验只回答：
@@ -131,7 +136,44 @@ use_bias=False
 
 12-case smoke 只作技术 smoke。完成后可以报告 accuracy，但禁止据此修改 probe grid、entropy、fit scope、tie-break、decoder 或任何参数。
 
-## 7. 成本与 fail-stop gate
+Manifest 采用 exact allowlist，唯一允许字段为：
+
+```text
+candidate_key,dataset,evaluator_commit,population,seed,smoke_order,
+source_row_id,task_group,task_id,technical_stratum
+```
+
+任何额外字段均 fail-stop。selector 仍只接收 `prompt/suffix` 安全视图。
+
+## 7. Artifact provenance 与执行序列
+
+冻结 model revision：`0f2787f2d87eac5eed8a087d5ecd24277e6255b2`。CPU preflight 必须解析实际 snapshot commit并逐文件检查 config、remote model code、weight index、6 个 safetensors shards、tokenizer config/tokenizer 和 special-token artifacts。artifact-set SHA256 固定为：
+
+```text
+923e056fe742858e8b817406ae942feccb53ace80116187070de81b29901719a
+```
+
+关键文件：
+
+- `config.json`：`5f99fefe855fdb5100bb6cadb57bdb09fae723ad54811f95c00ecacf29d58a6a`
+- `model.safetensors.index.json`：`28b4ec27206e42e7ade630450e6ce618bd197acf34d35120e8e86d2bb910a408`
+- `modeling_llada.py`：`98bac7e53fef0bb7ca01e3716c11a7f710d183e10dbb9783b88db9dbba2e3766`
+- `tokenizer_config.json`：`6e9f41633217287fcf9a58890efb26e91e905bd6ae2234b534b65e0c36f4dd3c`
+- `tokenizer.json`：`ee1ef8e5f6d9493ac25480b7b7337ff5d2c1b946190afff18d12c86ca738ae00`
+
+同时记录 Python、torch、transformers、torch CUDA version 和 resolved mask token id=`126336`。任一 model/source/evaluator artifact 不一致必须在模型 forward 前 fail-stop。
+
+执行序列严格为：
+
+1. CPU source/model/evaluator/manifest preflight。
+2. 精确 1-case、8-forward `probe_only` sanity：无 formal decode、无 evaluator、无 completion。
+3. probe-only gate通过后，才允许 12-case technical smoke；smoke必须再运行一次得到 `resume_noop=true,new_rows_written=0`。
+4. 838 full 必须读取同一 implementation commit 的 smoke final audit、resume record和 provenance；环境变量不能绕过。
+5. 任一已有 failure journal 都使该 output version永久不能宣称成功，必须改用新版本目录；旧 journal 不删除、不覆盖。
+
+full gate要求 smoke=`12/12` exact keys，missing/duplicate/error/failure=`0`，每行 probe forwards=`8`，forward/token ledger与 finite/semantic/provenance audit全部通过。code commit、decoder source hash、model artifact-set hash、evaluator hashes、dataset hash、smoke/full manifest hashes必须一致。
+
+## 8. 成本与 fail-stop gate
 
 每行分别记录：
 
@@ -155,7 +197,14 @@ total_token_forwards = probe_token_forwards + formal_decode_token_forwards
 
 `MAX_LENGTH=128` 时 `probe_forwards=8`。任何 ledger 不守恒、selected canvas 长度不一致、fixed decoder `search_steps != 0`、manifest/hash/source revision 不一致或 non-finite 诊断均 fail-stop，并只写 failure journal，不污染 success-only canonical raw。
 
-## 8. 仍不完全由论文明确的事项
+## 9. 公平比较边界
+
+- 本 arm 不是论文完整 LR-DLLM，不得与论文主表数字直接比较。
+- 838 scientific run 前必须有同一 838 keys、同一 pinned decoder 的 `official_fixed32` control；本轮不运行。
+- official CAL primary 是另一独立比较 arm，不能与本 arm混同。
+- Fixed64 是标准 fixed-length sensitivity baseline，但未实际 compute-match 前不得称 equal-compute。
+
+## 10. 仍不完全由论文明确的事项
 
 1. 正文称 slope 来自 “long-span regime”，但没有阈值；本轮按 Algorithm 1 使用全部指数点。
 2. 论文未规定 argmax 平分规则；本地确定性规则为更短长度。

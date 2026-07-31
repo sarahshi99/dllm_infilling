@@ -156,6 +156,29 @@ class BaselineGroupedAnalyzerTest(unittest.TestCase):
         self.assertEqual(summary["dynamic"]["expansion_count_total"], 1)
         self.assertEqual(summary["dynamic"]["contraction_count_total"], 1)
 
+    def test_stage1_probe_forwards_are_reported_as_length_selection(self) -> None:
+        raw = raw_rows((True, False, True))
+        for row in raw:
+            row["metrics"] = {  # type: ignore[index]
+                "stage1_probe_forwards": 8,
+                "length_selection_forwards": 8,
+                "search_forwards": 8,
+                "formal_decode_forwards": 4,
+                "total_forwards": 12,
+                "total_token_forwards": 120,
+            }
+        summary = summarize_method(
+            normalize_rows(raw, manifest()),
+            method="stage1-only",
+            expected_rows=3,
+            expected_clusters=2,
+            bootstrap_replicates=20,
+            seed=21,
+        )
+        self.assertEqual(summary["total_length_selection_forward_calls"], 24)
+        self.assertEqual(summary["total_search_forward_calls"], 24)
+        self.assertIn("not CAL hill-climbing", summary["search_forward_label"])
+
     def test_daedal_schema_aliases_preserve_final_length_and_expansion(self) -> None:
         raw = raw_rows((True, True, False))
         for index, row in enumerate(raw):

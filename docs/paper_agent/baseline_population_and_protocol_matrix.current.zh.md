@@ -47,6 +47,7 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 | official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset | LLaDA-8B-Base | MultiLine 4990/143 | official/direct + documented evaluator overlay | analyzed：row `32.9259%`；task-macro `27.8471%`，95% CI `[24.3313,31.2715]%` | 当前无 identical-key official_fixed32，只报绝对表现/成本 |
 | official_fixed32 | LLaDA-8B-Base | MultiLine 4990/143 | official/direct | not run | 完成后可与 CAL 配对 |
 | official-source CAL initial32 | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source SingleLine loader adaptation | immutable manifest frozen；smoke pending | 中心控制是 official_fixed32 |
+| local LR-DLLM Stage-I-only adaptation from arXiv:2602.07546v1 Algorithm 1 | LLaDA-8B-Base | SingleLine CAL-Rest 838/143；probe1→technical smoke12 | paper-guided Stage-I-only selector + fixed-canvas decode | reviewer-hardened CPU preflight complete；probe/smoke/full=`0` rows | 不代表 full LR-DLLM；838 scientific run前必须完成同838-key、同decoder official_fixed32 |
 | Fixed4/8/16/64 sensitivity | LLaDA-8B-Base | SingleLine CAL-Rest 838/143 | official-source adaptation | adapter extension not frozen | Fixed64 不自动等于 equal-compute |
 | DreamCoder CAL | DreamCoder Base | SingleLine/MultiLine | official-source audit pending | blocker：同一 100-demo bias/CAL algorithm 未证明 | 不可配对 |
 | DreamOn official-source single-H200 reproduction | DreamOn-v0-7B@8ccc7475 | SingleLine 927/148 | official/direct source route | checkpoint已缓存；项目adapter/seed/resume协议尚未冻结 | DreamCoder matched fixed controls 未完成 |
@@ -67,6 +68,8 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 - SingleLine CAL smoke12：`analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl`，SHA256=`56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1`。
 
 Unsupported/blocked 组合不生成伪 manifest。DreamOn、DreamCoder CAL、LR-DLLM、DAEDAL 的新 manifest 只有在 source/checkpoint/decoder/evaluator 可执行性和协议边界完成冻结后创建。
+
+LR-DLLM 状态边界固定为：official full LR-DLLM=`still blocked / no audited author code`；local Stage-I-only Algorithm-1 adaptation=`reviewer-hardened, CPU-preflight verified, no GPU rows`；Stage II=`not implemented in the local Stage-I-only arm`。本 arm 不与论文主表直接比较；official CAL 是独立 arm；Fixed64 未实际预算匹配前不能称 equal-compute。本轮没有启动 probe-only、smoke 或 838 full。
 
 ## CAL MultiLine 4,990 解盲结果
 
