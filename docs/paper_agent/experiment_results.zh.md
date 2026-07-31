@@ -2,6 +2,13 @@
 
 更新时间：2026-07-31 UTC
 
+## LR-DLLM DreamCoder RandomSpan paired result
+
+- 唯一实现标签：`paper-guided, author-unverified reimplementation of LR-DLLM`。
+- Primary row/macro=`18.3784%`，95% CI=`[16.0135,20.7432]%`；same-key Fixed64 row/macro=`33.5135%`，CI=`[30.5405,36.4865]%`。
+- Primary−Fixed64 row help/harm=`104/328`；cluster help/harm/tie=`19/107/22`；task-macro delta=`-15.135pp`，95% CI=`[-17.905,-12.365]pp`。
+- 该差异明确为负；RandomSpan、SingleLine、MultiLine分别报告，不生成合并Mean。报告：`docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_randomspan_result.zh.md`。
+
 ## DreamOn official-source SingleLine completed
 
 - 准确标签：`DreamOn official-source single-H200 reproduction`；source=`8a0a549`，checkpoint=`8ccc7475`，released-source max64/steps256/temp0.2/top-p0.9/entropy/expansion协议。
@@ -14,7 +21,7 @@
 
 - CAL SingleLine primary−official_fixed32：row help/harm=`130/96`；cluster=`47/31/65`；task-macro delta=`+1.898pp`，95% CI=`[-2.233,+5.759]pp`。Fixed64 sensitivity完成，但不是equal-compute。
 - DAEDAL SingleLine dynamic−Fixed8：row=`54/49`；cluster=`27/26/90`；macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`。MultiLine：row=`97/56`；cluster=`35/15/93`；macro=`+0.455pp`，CI=`[-1.375,+1.791]pp`。
-- LR-DLLM DreamCoder SingleLine−Fixed64：row=`246/114`；cluster=`67/38/43`；macro=`+0.796pp`，CI=`[-6.746,+8.178]pp`。RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`；两个cross-dataset Fixed64 controls仍运行。
+- LR-DLLM DreamCoder SingleLine−Fixed64：row=`246/114`；cluster=`67/38/43`；macro=`+0.796pp`，CI=`[-6.746,+8.178]pp`。RandomSpan primary−Fixed64 macro=`-15.135pp`，CI=`[-17.905,-12.365]pp`；MultiLine primary row=`31.9945%`、macro=`37.1082%`，Fixed64仍运行。
 - DreamOn min4/8/16/32/64 smoke、resume与五个SingleLine 927 full全部完成；结果见上节。
 - 所有上述paired CI均跨0。Frozen test=`sealed`，`test_evaluation_count=0`。
 

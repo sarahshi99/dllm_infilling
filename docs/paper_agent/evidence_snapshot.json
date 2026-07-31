@@ -18,6 +18,18 @@
       "paired_status": "pending DreamCoder DreamOn-matched fixed controls",
       "report": "docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md"
     },
+    "lrdllm_dreamcoder_randomspan": {
+      "implementation_label": "paper-guided, author-unverified reimplementation of LR-DLLM",
+      "primary_row_pass_at_1": 0.1837837837837838,
+      "primary_task_macro_pass_at_1": 0.18378378378378382,
+      "fixed64_row_pass_at_1": 0.33513513513513515,
+      "fixed64_task_macro_pass_at_1": 0.33513513513513515,
+      "paired_task_macro_delta": -0.1513513513513513,
+      "paired_ci_95": [-0.17905405405405403, -0.12364864864864865],
+      "row_help_harm": [104, 328],
+      "cluster_help_harm_tie": [19, 107, 22],
+      "report": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_randomspan_result.zh.md"
+    },
     "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0}
   },
   "execution_sprint_20260717": {

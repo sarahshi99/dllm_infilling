@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 LR RandomSpan Paired + DreamCoder Control Launch Override
+
+- LR-DLLM RandomSpan primary−same-key Fixed64：row help/harm=`104/328`；cluster=`19/107/22`；task-macro delta=`-15.135pp`，95% CI=`[-17.905,-12.365]pp`，明确负于 Fixed64。
+- DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder：五个12-case smoke/resume gates全部通过。full Fixed64/32/16/8已运行；Fixed4在独立58GiB free-memory gate等待。
+- LR MultiLine Fixed64继续运行；不读取partial accuracy。frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-31 DreamOn SingleLine Completion Override
 
 - `DreamOn official-source single-H200 reproduction` 的 min4/8/16/32/64 五个 full 均完成 `927/927`。row Pass@1=`88.4574/90.3991/90.7228/91.2621/91.6936%`；148-cluster macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。

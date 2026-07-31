@@ -52,7 +52,7 @@ CAL seed-42：SingleLine=`1033/100 Demo/933 Rest`，CAL-Rest∩non-frozen=`838 r
 | DreamOn official-source single-H200 reproduction | DreamOn-v0-7B@8ccc7475 | SingleLine 927/148 | official/direct source route | 五个 released-source arms 完成并分析；row=`88.46..91.69%`，macro=`78.11..85.13%` | DreamCoder matched fixed controls 未完成，只报绝对指标 |
 | DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder | DreamCoder Base@2346ccd3 | SingleLine 927/148 | common-protocol local controls；min=max，EOS contraction保留 | adapter/tests/action outcome-blind ready；commit/push后smoke | 同L dynamic arm完成后可same-manifest配对；不是equal-compute |
 | DreamOn MultiLine via benchmark-only adapter | DreamOn-v0-7B@8ccc7475 | MultiLine 5079/148 | unsupported until adapter equivalence proof | checkpoint ready；adapter equivalence pending | 不可配对 |
-| LR-DLLM | DreamCoder Base | SingleLine 927；RandomSpan 1480；MultiLine 5079 | paper-guided reimplementation pending author-code search | blocker：official code/ambiguity freeze | 不可配对 |
+| LR-DLLM | DreamCoder Base | SingleLine 927；RandomSpan 1480；MultiLine 5079 | paper-guided, author-unverified reimplementation | SingleLine paired完成；RandomSpan primary−Fixed64=`-15.135pp` CI完全低于0；MultiLine Fixed64运行中 | 仅同dataset/same-key配对；不合并Mean |
 | LR-DLLM | LLaDA-8B-Base | 同上 | DreamCoder technical credibility 后移植 | blocked by predecessor | 不可配对 |
 | CAL authors’ DAEDAL FIM adaptation | LLaDA-8B-Base | SingleLine 838；MultiLine 4990 | pinned CAL `daedal_cal` source path | source present，adapter audit pending | decoder/fixed control 冻结后才可配对 |
 | DreamCoder + local uncalibrated short-range selector | DreamCoder Base | SingleLine 927 | historical local diagnostic | complete | 仅限历史三臂内部，不对 official baseline 直接算 delta |

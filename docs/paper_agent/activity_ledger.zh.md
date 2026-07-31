@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- LR RandomSpan paired：primary row/macro=`18.3784%`，Fixed64=`33.5135%`；primary−Fixed64 row help/harm=`104/328`，cluster=`19/107/22`，macro delta=`-15.135pp` CI=`[-17.905,-12.365]pp`。明确负结果，未合并dataset Mean。
+- DreamCoder DreamOn-matched controls：commit=`31291ac`先push；Fixed4/8/16/32/64 smoke=`12/12`且resume no-op=`0` writes。Fixed64/32/16直接full启动，Fixed8由36GiB gate释放，Fixed4在58GiB gate等待。
 - DreamOn SingleLine completion：五个 official-source released arms 完成`927/927`并分析。min4/8/16/32/64 row=`88.4574/90.3991/90.7228/91.2621/91.6936%`；macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。五项canonical audit全通过；min32/min64各保留1条已恢复的并发显存OOM journal。无matched fixed controls，未算paired delta。
 - paired/final analysis：CAL primary−Fixed32 macro=`+1.898pp` CI=`[-2.233,+5.759]pp`；DAEDAL SingleLine dynamic−Fixed8=`+0.410pp` CI=`[-2.062,+2.734]pp`；DAEDAL MultiLine=`+0.455pp` CI=`[-1.375,+1.791]pp`；LR SingleLine−Fixed64=`+0.796pp` CI=`[-6.746,+8.178]pp`。全部cluster CI跨0，不写显著提升。
 - LR remaining datasets：RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`；对应Fixed64 controls已按commit `70c0055`后启动并运行。

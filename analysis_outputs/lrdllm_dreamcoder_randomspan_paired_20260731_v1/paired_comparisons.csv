@@ -1,0 +1,2 @@
+method_a,method_b,paired_candidate_key_count,cluster_count,task_macro_delta,task_macro_delta_ci_low,task_macro_delta_ci_high,row_help,row_harm,cluster_help,cluster_harm,cluster_tie,bootstrap_replicates,bootstrap_seed
+lrdllm_primary,fixed64_common_protocol,1480,148,-0.1513513513513513,-0.17905405405405403,-0.12364864864864865,104,328,19,107,22,10000,20260831

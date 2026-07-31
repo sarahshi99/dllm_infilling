@@ -9,6 +9,12 @@
 - 当前没有 DreamCoder DreamOn-matched fixed controls，因此不计算 paired delta/help-harm；paper Lmax128 未运行。正式报告：`docs/paper_agent/experiments/20260731_dreamon_singleline_result.zh.md`。
 - LR RandomSpan/MultiLine Fixed64 controls继续运行。Frozen test=`sealed`，`test_evaluation_count=0`；不进入M5/PPT/ExecRepoBench final。
 
+## 2026-07-31 LR-DLLM RandomSpan Paired Override
+
+- `paper-guided, author-unverified reimplementation of LR-DLLM` RandomSpan primary row/macro=`18.3784%`；same-key Fixed64=`33.5135%`。
+- primary−Fixed64 row help/harm=`104/328`，cluster=`19/107/22`，task-macro delta=`-15.135pp`，95% CI=`[-17.905,-12.365]pp`。该结果明确为负，不输出跨dataset Mean。
+- MultiLine Fixed64继续运行。DreamCoder DreamOn-matched Fixed64/32/16/8 full运行，Fixed4显存门控等待；Frozen test=`sealed/0`。
+
 ## 2026-07-31 Baseline Closure Execution Status
 
 - 权威分支：`codex/ccfa-execution-sprint-v1@6195157`（DreamOn result commit 的 parent），remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。
