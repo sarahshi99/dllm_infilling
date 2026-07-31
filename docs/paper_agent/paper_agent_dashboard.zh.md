@@ -9,6 +9,7 @@
 - freeze commit=`497737e`已push，CPU preflight通过。五个smoke/resume与五个full watcher均已建立；统一要求free≥60GiB连续3次20秒采样，smoke顺序=`64→4→8→16→32`，full按smoke、对应DreamOn arm和前一fixed arm完整性门释放。
 - Fixed64 smoke queue tmux/pane=`dreamcoder_dreamon_fixed64_ml_smoke_queue_20260731/2773397`；其余queue PIDs见runtime。当前不读任何partial accuracy。Frozen test=`sealed/0`。
 - `2026-07-31T17:58:11Z`：DreamOn MultiLine min4=`1277/5079`（ETA约3h45m），min8=`916/5079`（约3h54m）；LR MultiLine Fixed64=`3448/5079`（约1h44m）；均failure=`0`。GPU0 free=`14439 MiB`，ECC=`0`。
+- LR paired analyzer watcher已启动：tmux/pane=`lrdllm_multiline_paired_analyzer_wait_20260731/2857187`；仅在Fixed64=`5079/5079`、failure=0、final audit通过后运行冻结analyzer。最新`18:04:15Z`进度为min4/min8/LR=`1428/984/3542 of 5079`。
 
 ## 2026-07-31 DreamOn MultiLine Benchmark-Only Adapter Launch Override
 

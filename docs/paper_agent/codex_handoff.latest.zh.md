@@ -3,6 +3,7 @@
 更新日期：2026-07-31 UTC
 
 - DreamCoder MultiLine matched controls：freeze commit=`497737e`已push；CPU preflight通过，5 smoke/resume + 5 full predecessor/60GiB-gated tmux watchers已建立。Fixed64 smoke queue=`dreamcoder_dreamon_fixed64_ml_smoke_queue_20260731` pane=`2773397`；其余PIDs见runtime。未读partial accuracy。
+- LR MultiLine paired analyzer watcher=`lrdllm_multiline_paired_analyzer_wait_20260731` pane=`2857187`；只在Fixed64 exact completion后生成10,000-bootstrap same-key analysis。最新`18:04:15Z` progress=`3542/5079`，failure=0。
 
 ## 2026-07-31 External Baseline Closure Override
 
