@@ -116,8 +116,8 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0"},
       "decoder": {"lengths": [4, 8, 16, 64], "temperature": 0.0, "cfg_scale": 0.0, "seed": 42},
       "implementation_class": "official-source adaptation",
-      "status": "adapter_extension_not_yet_frozen",
-      "paths": {"raw": null, "status": null, "report": null},
+      "status": "fixed64_action_frozen_smoke_resource_pending; fixed4_8_16_not_executable",
+      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/project_fixed64_internal_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_cal_singleline_fixed64_sensitivity_action.zh.md", "report": null},
       "paired_comparison": {"eligible": "only_after_same_decoder_completion", "reason": "Fixed64 is not CAL equal-compute unless forward/token budgets actually match."}
     },
     {
