@@ -250,11 +250,11 @@
       "checkpoint": {"id": "GSAI-ML/LLaDA-8B-Base", "revision": "0f2787f2d87eac5eed8a087d5ecd24277e6255b2"},
       "training_class": "training-free",
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0"},
-      "decoder": {"status": "source semantics and fixed control must be audited before executable manifest reuse"},
+      "decoder": {"initial_gen_length": 8, "stage1": false, "stage2": true, "max_gen_length": 128, "block_length": 32, "temperature": 0.0, "cfg_scale": 0.0, "high_conf_threshold": 0.9, "low_conf_threshold": 0.3, "expansion_factor": 2, "eos_confidence_threshold": 0.5, "expand_eos_confidence_threshold": 0.9, "eos_check_tokens": 8, "fixed_control": "same-decoder Fixed8 with stage1/stage2 disabled"},
       "implementation_class": "official-source adaptation by CAL authors",
-      "status": "source_path_present_adapter_audit_pending",
-      "paths": {"raw": null, "status": null, "report": null},
-      "paired_comparison": {"eligible": false, "reason": "Decoder/evaluator and fixed-length control are not frozen."}
+      "status": "adapter_preflight_verified_smoke_pending_gpu_after_CAL",
+      "paths": {"raw": "outputs_clean/daedal_fim_singleline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_daedal_fim_adaptation_action.zh.md", "report": null},
+      "paired_comparison": {"eligible": "after_same-key dynamic and Fixed8 arms complete", "reason": "No paired delta before both arms complete on identical candidate keys."}
     },
     {
       "id": "daedal_cal_llada_multiline_4990",
@@ -267,11 +267,11 @@
       "checkpoint": {"id": "GSAI-ML/LLaDA-8B-Base", "revision": "0f2787f2d87eac5eed8a087d5ecd24277e6255b2"},
       "training_class": "training-free",
       "population": {"rows": 4990, "clusters": 143, "manifest": "analysis_outputs/official_cal_corrected_protocol_20260715_v1/cal_rest_common_manifest.jsonl", "manifest_sha256": "e805489111e788e315bcf14838b077b09d0c23c44900ad8220d9e9afcbb95c48"},
-      "decoder": {"status": "source semantics and fixed control must be audited before executable manifest reuse"},
+      "decoder": {"initial_gen_length": 8, "stage1": false, "stage2": true, "max_gen_length": 128, "block_length": 32, "temperature": 0.0, "cfg_scale": 0.0, "high_conf_threshold": 0.9, "low_conf_threshold": 0.3, "expansion_factor": 2, "eos_confidence_threshold": 0.5, "expand_eos_confidence_threshold": 0.9, "eos_check_tokens": 8, "fixed_control": "same-decoder Fixed8 with stage1/stage2 disabled"},
       "implementation_class": "official-source adaptation by CAL authors",
-      "status": "source_path_present_adapter_audit_pending",
-      "paths": {"raw": null, "status": null, "report": null},
-      "paired_comparison": {"eligible": false, "reason": "Decoder/evaluator and fixed-length control are not frozen."}
+      "status": "adapter_preflight_verified_smoke_pending_gpu_after_CAL",
+      "paths": {"raw": "outputs_clean/daedal_fim_multiline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_daedal_fim_adaptation_action.zh.md", "report": null},
+      "paired_comparison": {"eligible": "after_same-key dynamic and Fixed8 arms complete", "reason": "No paired delta before both arms complete on identical candidate keys."}
     },
     {
       "id": "local_dreamcoder_primary_927",
