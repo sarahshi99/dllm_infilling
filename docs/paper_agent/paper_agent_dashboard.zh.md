@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-07-31 DreamOn MultiLine Benchmark-Only Adapter Launch Override
+
+- 准确标签：`DreamOn official-source MultiLine reproduction via benchmark-only adapter`。Adapter只改变 dataset/manifest/evaluator-row namespace，逐例 `decode_one`、pinned generator、sampling、seed、model forward和evaluator不分叉。
+- immutable population=`5079 rows/148 clusters`；smoke=`12 rows/12 clusters`，SHA256=`5bd2d19b...`，forbidden/sealed/outcome fields=`0`。
+- min4/8/16/32/64 smoke与resume no-op全部通过：每臂`12/12`、missing/duplicate/error/failure/accounting=`0`、resume writes=`0`。
+- min4 full tmux/pane/Python=`dreamon_ml5079_min4_20260731/1829390/1829424`；min8/16/32/64均为独立predecessor+free-memory queues。当前只监控progress/failure/OOM/ECC，不读partial accuracy。
+- 当前日期：Friday, July 31, 2026。Frozen test=`sealed/0`；不进入M5/PPT/ExecRepoBench final。
+
 ## 2026-07-31 DreamOn SingleLine Completion Override
 
 - `DreamOn official-source single-H200 reproduction` 五个 released-source arms 已完成 `927/927` 并经冻结 analyzer 分析。min4/8/16/32/64 row Pass@1=`88.4574/90.3991/90.7228/91.2621/91.6936%`；task-macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`。

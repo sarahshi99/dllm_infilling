@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- DreamOn MultiLine adapter：commit=`487fdaa`先push；新增benchmark-only dataset profile、outcome-blind 12-cluster smoke manifest、tests/launcher/action。22 tests、双profile preflight、builder idempotence、forbidden/sealed-zero与diff review通过。
+- DreamOn MultiLine execution：min4/8/16/32/64 smoke=`12/12`且resume no-op=`0` writes；min4 full PID=`1829424`运行，min8/16/32/64由predecessor+36GiB free-memory queues依次接续。未读partial accuracy。
 - DreamOn min32 paired：DreamOn row/macro=`91.2621/83.0372%`，DreamCoder Fixed32=`63.2147/63.9771%`；row help/harm=`286/26`，cluster=`89/9/50`，macro delta=`+19.060pp` CI=`[+13.661,+24.447]pp`。完整系统差异，不作纯动态归因。
 - Fixed32 completion：`927/927`，missing/duplicate/error/failure/accounting=`0`；只剩 Fixed64 control 与 LR MultiLine Fixed64运行。
 - DreamOn min4 paired：DreamOn row/macro=`88.4574/78.1111%`，DreamCoder Fixed4=`25.1348/19.6466%`；row help/harm=`590/3`，cluster=`124/0/24`，macro delta=`+58.464pp` CI=`[+53.091,+63.720]pp`。完整系统差异，不作纯动态归因。

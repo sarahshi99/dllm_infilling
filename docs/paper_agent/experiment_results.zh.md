@@ -2,6 +2,12 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn MultiLine benchmark-only adapter technical status
+
+- 准确标签：`DreamOn official-source MultiLine reproduction via benchmark-only adapter`；population=`5079/148`，adapter仅改变benchmark loader/manifest/evaluator-row namespace。
+- 五个 released-source arms 的12-case smoke和resume no-op全部通过；canonical/outcome full 尚未完成，因此不报告任何MultiLine Pass@1。
+- min4 full运行，min8/16/32/64资源队列；不读取partial accuracy。Frozen test=`sealed/0`。
+
 ## DreamOn min32 vs DreamCoder Fixed32
 
 - DreamOn min32/max64 row/macro=`91.2621/83.0372%`；DreamCoder Fixed32 row/macro=`63.2147/63.9771%`。

@@ -5,6 +5,7 @@
 ## 2026-07-31 External Baseline Closure Override
 
 - Branch：`codex/ccfa-execution-sprint-v1`。
+- DreamOn MultiLine benchmark-only adapter commit=`487fdaa`；五个smoke/resume gates通过。min4 full PID=`1829424`运行，min8/16/32/64独立资源队列；未读partial accuracy。
 - DreamOn official-source SingleLine五个released arms已完成：min4/8/16/32/64 row=`88.4574/90.3991/90.7228/91.2621/91.6936%`，macro=`78.1111/81.3313/83.1788/83.0372/85.1299%`；canonical audit均通过。无matched fixed controls，不算paired delta。
 - LR-DLLM RandomSpan primary−Fixed64 macro=`-15.135pp`，CI=`[-17.905,-12.365]pp`，row help/harm=`104/328`；明确负结果。MultiLine Fixed64仍运行。
 - DreamOn min8−DreamCoder Fixed8 macro=`+33.243pp`，CI=`[+28.390,+38.417]pp`，row help/harm=`286/11`；这是training-based released system与base fixed control的完整系统差异。

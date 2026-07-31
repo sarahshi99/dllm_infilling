@@ -1,6 +1,16 @@
 {
   "snapshot_version": 1,
   "baseline_closure_20260731": {
+    "dreamon_multiline": {
+      "label": "DreamOn official-source MultiLine reproduction via benchmark-only adapter",
+      "population_rows": 5079,
+      "base_function_clusters": 148,
+      "smoke_manifest_sha256": "5bd2d19ba9b8c48318708c79319e306d2438404d7c13e9bfaf327de6a483ebf9",
+      "adapter_boundary": "dataset/manifest/candidate/evaluator-row/output namespace only; per-example algorithm unchanged",
+      "smoke": "all five arms 12/12; resume no-op; zero missing duplicate error failure or accounting defect",
+      "full_status": "min4 running; min8/16/32/64 predecessor and free-memory queued",
+      "partial_accuracy_inspected": false
+    },
     "dreamon_singleline": {
       "label": "DreamOn official-source single-H200 reproduction",
       "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",

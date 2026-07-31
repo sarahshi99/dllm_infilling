@@ -1,5 +1,12 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 DreamOn MultiLine Launch Override
+
+- `DreamOn official-source MultiLine reproduction via benchmark-only adapter` 已在commit `487fdaa` push后通过五个12-case smoke/resume gates。
+- min4 full运行：tmux/pane/Python=`dreamon_ml5079_min4_20260731/1829390/1829424`，output=`outputs_clean/dreamon_multiline_20260731_v1/`，log=`logs/paper_agent/20260731_dreamon_multiline_min4.log`。
+- min8 queue=`dreamon_ml5079_min8_queue_20260731`（free≥36GiB）；min16等待min4完成；min32等待min8；min64等待min16。所有queue只读进度/显存，不占GPU。
+- 当前日期是Friday, July 31, 2026；不读partial accuracy。Frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-31 DreamOn min32 vs Fixed32 Paired Override
 
 - DreamOn min32−DreamCoder Fixed32：row help/harm=`286/26`；cluster=`89/9/50`；task-macro delta=`+19.060pp`，95% CI=`[+13.661,+24.447]pp`。
