@@ -2,6 +2,8 @@
 
 ## 2026-07-31 UTC
 
+- CAL SingleLine result：primary完成`838/838`，准确标签=`official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset`；row=`52.3866%`，143-cluster macro=`41.2711%`，CI=`[36.3798%,46.0499%]`，search/decode/total forwards=`13226/25504/38730`，token-forwards=`10548607`，wall=`3105.563s`，peak=`16560579584` bytes。Fixed32未完成前不做paired comparison。
+- CAL Fixed64 sensitivity：action commit=`5bc4df8`先push；resource watcher随后于`2026-07-31T11:02:49Z`启动`project_fixed64_internal` 12-case smoke。该arm不是CAL equal-compute control。
 - LR SingleLine result：DreamCoder primary完成`927/927`，row=`72.7077%`，148-cluster macro=`60.5238%`，CI=`[54.9216%,65.8574%]`，search/decode/total forwards=`35555/9397/44952`，token-forwards=`11288608`，wall=`2631.826s`，peak=`15784173568` bytes。Fixed64未完成前不做paired comparison。
 - resource continuation：LR SingleLine释放显存后，watcher于`2026-07-31T10:56:09Z`启动DAEDAL MultiLine Fixed8 full（tmux/pane=`daedal_fim_ml4990_fixed8_20260731/3552559`，Python=`3717698`）。
 - branch/runtime：remote/local=`9f0deb9`，是用户指定 `b42ba303` descendant；两处用户 untracked M1/M2目录保持不变。单张H200 physical index=`0`；外部约70GiB进程自然退出后按用户并行授权启动多个独立 tmux，未 kill/preempt。

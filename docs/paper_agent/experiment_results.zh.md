@@ -4,6 +4,7 @@
 
 ## External Baseline Concurrent Execution Update
 
+- **official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset**：row Pass@1=`52.3866%`；equal-weight task-macro=`41.2711%`，95% CI=`[36.3798%,46.0499%]`；search/decode/total forwards=`13226/25504/38730`，token-forwards=`10548607`，wall=`3105.563s`，peak=`16560579584` bytes。official_fixed32未完成前不报告paired delta/help-harm。
 - **paper-guided, author-unverified reimplementation of LR-DLLM on DreamCoder, SingleLine 927/148**：row Pass@1=`72.7077%`；equal-weight task-macro=`60.5238%`，95% CI=`[54.9216%,65.8574%]`；search/decode/total forwards=`35555/9397/44952`，token-forwards=`11288608`，wall=`2631.826s`，peak=`15784173568` bytes。Fixed64未完成前不报告paired delta/help-harm。
 - CAL SingleLine primary/official_fixed32：两项smoke=`12/12`、resume no-op通过，两个838 full均运行中；不报告partial outcome。
 - `paper-guided, author-unverified reimplementation of LR-DLLM`：12-case technical与64-case mechanism gates通过；DreamCoder SingleLine/RandomSpan/MultiLine primary及SingleLine Fixed64 full运行中；不报告partial outcome。

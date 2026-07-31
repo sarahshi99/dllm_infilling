@@ -1,5 +1,11 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 CAL SingleLine Primary Completion Override
+
+- `official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset` 于 `2026-07-31T11:02:34Z` 完成 `838/838`，failure/error=`0/0`。冻结 analyzer：row=`52.3866%`，143-cluster macro=`41.2711%`，CI=`[36.3798%,46.0499%]`。
+- 同 key official_fixed32 full仍运行，故暂不做paired comparison。`project_fixed64_internal` action已在commit `5bc4df8` push后，于`2026-07-31T11:02:49Z`启动12-case smoke；它是长度敏感性参考，不称equal-compute。
+- Frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## 2026-07-31 LR-DLLM SingleLine Completion Override
 
 - `paper-guided, author-unverified reimplementation of LR-DLLM` DreamCoder SingleLine primary 已于 `2026-07-31T10:56:03Z` 完成 `927/927`，failure/error=`0/0`。冻结 analyzer：row=`72.7077%`，148-cluster macro=`60.5238%`，CI=`[54.9216%,65.8574%]`；Fixed64未完成前不做paired comparison。
