@@ -19,4 +19,12 @@
 - expansion/contraction positive rows：`323/443`；total counts=`1872/3184`；
 - pinned upstream adapter未暴露更细 event-level termination reason，838 rows统一登记为`upstream_event_level_reason_not_exposed`。
 
-同 key `official_fixed32` 尚未完成时，不计算 paired delta、paired CI 或 help/harm。Fixed64 sensitivity 也不称 equal-compute。完整 grouped artifact：`analysis_outputs/official_cal_singleline_primary_grouped_20260731_v1/`。
+## Fixed controls and paired comparison
+
+`official_fixed32`：row=`48.3294%`；143-cluster macro=`39.3731%`，CI=`[34.6495%,44.0732%]`；forwards/token-forwards=`26816/7338528`；wall=`3652.148s`；peak=`16552904704` bytes。
+
+Primary−Fixed32 same-key paired：row help/harm=`130/96`（row delta=`+4.0573pp`）；cluster help/harm/tie=`47/31/65`；task-macro delta=`+1.8980pp`，95% paired cluster CI=`[-2.2332,+5.7591]pp`。CI跨0。
+
+`project_fixed64_internal` sensitivity：row=`47.8520%`；macro=`39.5620%`，CI=`[34.7851%,44.3053%]`；forwards/token-forwards=`53632/16393280`；wall=`5912.041s`。Primary−Fixed64 row help/harm=`151/113`，cluster=`45/32/66`，macro delta=`+1.7091pp`，CI=`[-2.2374,+5.5446]pp`。Fixed64不称equal-compute或compute-matched。
+
+完整 paired artifact：`analysis_outputs/official_cal_singleline_paired_grouped_20260731_v1/`。

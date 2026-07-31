@@ -2,6 +2,9 @@
 
 ## 2026-07-31 UTC
 
+- paired/final analysis：CAL primary−Fixed32 macro=`+1.898pp` CI=`[-2.233,+5.759]pp`；DAEDAL SingleLine dynamic−Fixed8=`+0.410pp` CI=`[-2.062,+2.734]pp`；DAEDAL MultiLine=`+0.455pp` CI=`[-1.375,+1.791]pp`；LR SingleLine−Fixed64=`+0.796pp` CI=`[-6.746,+8.178]pp`。全部cluster CI跨0，不写显著提升。
+- LR remaining datasets：RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`；对应Fixed64 controls已按commit `70c0055`后启动并运行。
+- DreamOn execution：min4/8/16/32/64 smoke与resume gates全部通过，remaining masks/accounting=`0`；五个927 full均启动。标签=`DreamOn official-source single-H200 reproduction`，不是exact official 8-GPU random stream；paper max128未运行。
 - DreamOn adapter freeze：checkpoint/source/hash/license与official-source max64协议固定；新增直接调用pinned `MDMGenerator` 的SingleLine adapter、6 tests、launcher/action。公开source未固定seed，预注册per-candidate seed-42派生；unused OmegaConf import使用hash-locked import-only compatibility shim。CPU preflight通过927/148 population、smoke12、tokenizer IDs；GPU/outcome/raw=`0`。
 - CAL SingleLine result：primary完成`838/838`，准确标签=`official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset`；row=`52.3866%`，143-cluster macro=`41.2711%`，CI=`[36.3798%,46.0499%]`，search/decode/total forwards=`13226/25504/38730`，token-forwards=`10548607`，wall=`3105.563s`，peak=`16560579584` bytes。Fixed32未完成前不做paired comparison。
 - CAL Fixed64 sensitivity：action commit=`5bc4df8`先push；resource watcher随后于`2026-07-31T11:02:49Z`启动`project_fixed64_internal` 12-case smoke。该arm不是CAL equal-compute control。

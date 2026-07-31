@@ -1,5 +1,13 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 Baseline Results + DreamOn Fulls Override
+
+- CAL SingleLine same-key：primary−official_fixed32 row help/harm=`130/96`，cluster=`47/31/65`，task-macro delta=`+1.898pp`，95% CI=`[-2.233,+5.759]pp`。Fixed64 sensitivity完成，但不称equal-compute。
+- DAEDAL SingleLine dynamic−Fixed8 macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`；MultiLine=`+0.455pp`，CI=`[-1.375,+1.791]pp`。两项CI跨0。
+- LR-DLLM DreamCoder：SingleLine vs Fixed64 macro=`+0.796pp`，CI=`[-6.746,+8.178]pp`，row help/harm=`246/114`；RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`。RandomSpan/MultiLine Fixed64 controls仍运行。
+- DreamOn official-source SingleLine：min4/8/16/32/64 smoke=`12/12`且resume `0` writes；五个927 full均在独立tmux运行。2026-07-31T14:39Z GPU free约9GiB、ECC=0；不添加第8个模型。
+- frozen test=`sealed`，`test_evaluation_count=0`；不进入M5/PPT/ExecRepoBench final。
+
 ## 2026-07-31 DreamOn Adapter Freeze Override
 
 - DreamOn released checkpoint blocker已解除；`Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194`、Apache-2.0和source `8a0a549…` hashes已固定。

@@ -82,7 +82,7 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_smoke12_manifest.jsonl", "smoke_manifest_sha256": "56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1"},
       "decoder": {"initial_gen_length": 32, "span": 1, "dstep": 4, "max_gen_length": 128, "use_bias": true, "temperature": 0.0, "cfg_scale": 0.0, "oracle": false, "seed": 42},
       "implementation_class": "official-source adaptation to the official SingleLine loader/evaluator",
-      "status": "completed_analyzed_absolute_only_fixed32_running",
+      "status": "completed_analyzed_paired_with_official_fixed32",
       "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/official_cal_primary_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_official_cal_singleline_838_result.zh.md"},
       "paired_comparison": {"eligible": "after_official_fixed32_complete", "reason": "Primary common-protocol control is official_fixed32, not Fixed64."}
     },
@@ -99,8 +99,8 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0"},
       "decoder": {"initial_gen_length": 32, "dstep": -1, "max_gen_length": 128, "use_bias": false, "temperature": 0.0, "cfg_scale": 0.0, "seed": 42},
       "implementation_class": "official/direct",
-      "status": "smoke_resume_passed_full_running",
-      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/official_fixed32_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/official_fixed32_full_run_manifest.json", "report": null},
+      "status": "completed_analyzed_same_key_control",
+      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/official_fixed32_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/official_fixed32_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_official_cal_singleline_838_result.zh.md"},
       "paired_comparison": {"eligible": "after_complete", "reason": "Identical manifest and decoder family."}
     },
     {
@@ -116,8 +116,8 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0"},
       "decoder": {"lengths": [4, 8, 16, 64], "temperature": 0.0, "cfg_scale": 0.0, "seed": 42},
       "implementation_class": "official-source adaptation",
-      "status": "fixed64_action_frozen_smoke_resource_pending; fixed4_8_16_not_executable",
-      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/project_fixed64_internal_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_cal_singleline_fixed64_sensitivity_action.zh.md", "report": null},
+      "status": "fixed64_completed_analyzed; fixed4_8_16_not_executable",
+      "paths": {"raw": "outputs_clean/official_cal_singleline_20260731_v1/project_fixed64_internal_raw.jsonl", "status": "outputs_clean/official_cal_singleline_20260731_v1/project_fixed64_internal_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_official_cal_singleline_838_result.zh.md"},
       "paired_comparison": {"eligible": "only_after_same_decoder_completion", "reason": "Fixed64 is not CAL equal-compute unless forward/token budgets actually match."}
     },
     {
@@ -150,7 +150,7 @@
       "population": {"rows": 927, "clusters": 148, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl", "manifest_sha256": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269", "smoke_manifest": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_technical_smoke12_manifest.jsonl", "smoke_manifest_sha256": "c1dc18fac3fd67ba73b11a197e547b4d6c30dc60b1ad018d672447c3d2885280"},
       "decoder": {"initial_lengths": [4, 8, 16, 32, 64], "max_gen_len": 64, "steps": 256, "temperature": 0.2, "top_p": 0.9, "remasking": "entropy", "mask_expansion": true, "seed": 42, "seed_policy": "deterministic per candidate"},
       "implementation_class": "official-source single-H200 adapter using pinned MDMGenerator",
-      "status": "adapter_tests_launcher_action_preflight_verified_smoke_pending",
+      "status": "all_five_smoke_resume_gates_passed_all_five_fulls_running",
       "paths": {"raw": "outputs_clean/dreamon_singleline_20260731_v1/dreamon_dynamic_min<L>_max64_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_dreamon_singleline_execution_action.zh.md", "report": "analysis_outputs/p1_dreamon_rhoeos_protocol_audit_20260728_v1/report.zh.md"},
       "paired_comparison": {"eligible": false, "reason": "No matching DreamCoder fixed-length controls completed under DreamOn sampling/decoder."}
     },
@@ -218,8 +218,8 @@
       "population": {"rows": {"SingleLine": 927, "RandomSpan": 1480, "MultiLine": 5079}, "clusters": 148, "manifest": {"SingleLine": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl", "RandomSpan": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_randomspan_nonfrozen_manifest.jsonl", "MultiLine": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl"}, "manifest_sha256": {"SingleLine": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269", "RandomSpan": "474f7a2740027ff3b709ed7ab8b4f3c68125cda10688881f204d9dd405d2073e", "MultiLine": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80"}},
       "decoder": {"probe_grid": [1, 2, 4, 8, 16, 32, 64, 128], "max_gen": 128, "temperature": 0.2, "top_p": 0.9},
       "implementation_class": "paper-guided, author-unverified reimplementation of LR-DLLM",
-      "status": "singleline_primary_completed_randomspan_multiline_and_singleline_fixed64_running",
-      "paths": {"raw": {"SingleLine": "outputs_clean/lrdllm_dreamcoder_singleline_20260731_v1/lrdllm_primary_raw.jsonl", "RandomSpan": "outputs_clean/lrdllm_dreamcoder_randomspan_20260731_v1/lrdllm_primary_raw.jsonl", "MultiLine": "outputs_clean/lrdllm_dreamcoder_multiline_20260731_v1/lrdllm_primary_raw.jsonl"}, "status": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_smoke_action.zh.md", "report": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_singleline_result.zh.md"},
+      "status": "singleline_paired_completed_randomspan_multiline_primary_completed_fixed64_controls_running",
+      "paths": {"raw": {"SingleLine": "outputs_clean/lrdllm_dreamcoder_singleline_20260731_v1/lrdllm_primary_raw.jsonl", "RandomSpan": "outputs_clean/lrdllm_dreamcoder_randomspan_20260731_v1/lrdllm_primary_raw.jsonl", "MultiLine": "outputs_clean/lrdllm_dreamcoder_multiline_20260731_v1/lrdllm_primary_raw.jsonl"}, "status": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_smoke_action.zh.md", "report": {"SingleLine": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_singleline_result.zh.md", "RandomSpan": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_randomspan_result.zh.md", "MultiLine": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_multiline_result.zh.md"}},
       "paired_comparison": {"eligible": "after_same-key Fixed64 and LR-DLLM arms complete", "reason": "Manifests and candidate keys are shared; no paired delta is allowed before both arms complete."}
     },
     {
@@ -252,8 +252,8 @@
       "population": {"rows": 838, "clusters": 143, "manifest": "analysis_outputs/baseline_manifests_20260731_v1/cal_singleline_rest_nonfrozen_manifest.jsonl", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0"},
       "decoder": {"initial_gen_length": 8, "stage1": false, "stage2": true, "max_gen_length": 128, "block_length": 32, "temperature": 0.0, "cfg_scale": 0.0, "high_conf_threshold": 0.9, "low_conf_threshold": 0.3, "expansion_factor": 2, "eos_confidence_threshold": 0.5, "expand_eos_confidence_threshold": 0.9, "eos_check_tokens": 8, "fixed_control": "same-decoder Fixed8 with stage1/stage2 disabled"},
       "implementation_class": "official-source adaptation by CAL authors",
-      "status": "dynamic_full_running_fixed8_completed_analyzed",
-      "paths": {"raw": "outputs_clean/daedal_fim_singleline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_daedal_fim_adaptation_action.zh.md", "report": "docs/paper_agent/experiments/20260731_daedal_fim_singleline_fixed8_result.zh.md"},
+      "status": "dynamic_fixed8_completed_analyzed_paired",
+      "paths": {"raw": "outputs_clean/daedal_fim_singleline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "outputs_clean/daedal_fim_singleline_20260731_v1/daedal_dynamic_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_daedal_fim_singleline_result.zh.md"},
       "paired_comparison": {"eligible": "after_same-key dynamic and Fixed8 arms complete", "reason": "No paired delta before both arms complete on identical candidate keys."}
     },
     {
@@ -269,8 +269,8 @@
       "population": {"rows": 4990, "clusters": 143, "manifest": "analysis_outputs/official_cal_corrected_protocol_20260715_v1/cal_rest_common_manifest.jsonl", "manifest_sha256": "e805489111e788e315bcf14838b077b09d0c23c44900ad8220d9e9afcbb95c48"},
       "decoder": {"initial_gen_length": 8, "stage1": false, "stage2": true, "max_gen_length": 128, "block_length": 32, "temperature": 0.0, "cfg_scale": 0.0, "high_conf_threshold": 0.9, "low_conf_threshold": 0.3, "expansion_factor": 2, "eos_confidence_threshold": 0.5, "expand_eos_confidence_threshold": 0.9, "eos_check_tokens": 8, "fixed_control": "same-decoder Fixed8 with stage1/stage2 disabled"},
       "implementation_class": "official-source adaptation by CAL authors",
-      "status": "dynamic_full_running_fixed8_smoke_resume_passed_resource_queued",
-      "paths": {"raw": "outputs_clean/daedal_fim_multiline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "docs/paper_agent/experiments/20260731_daedal_fim_adaptation_action.zh.md", "report": null},
+      "status": "dynamic_fixed8_completed_analyzed_paired",
+      "paths": {"raw": "outputs_clean/daedal_fim_multiline_20260731_v1/daedal_dynamic_raw.jsonl", "status": "outputs_clean/daedal_fim_multiline_20260731_v1/daedal_dynamic_full_run_manifest.json", "report": "docs/paper_agent/experiments/20260731_daedal_fim_multiline_result.zh.md"},
       "paired_comparison": {"eligible": "after_same-key dynamic and Fixed8 arms complete", "reason": "No paired delta before both arms complete on identical candidate keys."}
     },
     {

@@ -19,4 +19,10 @@
 - expansion/contraction positive rows：`465/354`；total counts=`1363/732`；
 - termination：`remaining_length_zero=918`，`max_gen_reached=9`。
 
-同 key Fixed64 尚未完成时，不计算 paired delta、paired CI 或 help/harm。完整 grouped artifact：`analysis_outputs/lrdllm_dreamcoder_singleline_grouped_20260731_v1/`。
+## Same-key Fixed64 comparison
+
+Fixed64 common protocol：row=`58.4682%`；148-cluster macro=`59.7278%`，CI=`[54.3576%,65.1391%]`；forwards/token-forwards=`59328/16979584`；wall=`6247.311s`；peak=`15831009792` bytes。
+
+LR-DLLM−Fixed64 paired：row help/harm=`246/114`（row delta=`+14.2395pp`）；cluster help/harm/tie=`67/38/43`；task-macro delta=`+0.7961pp`，95% paired cluster CI=`[-6.7464,+8.1782]pp`。Row-micro positive does not imply a significant equal-weight base-function macro effect；CI跨0。
+
+完整 paired artifact：`analysis_outputs/lrdllm_dreamcoder_singleline_paired_20260731_v1/`。

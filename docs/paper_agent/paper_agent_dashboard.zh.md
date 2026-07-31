@@ -4,13 +4,13 @@
 
 ## 2026-07-31 Baseline Closure Execution Status
 
-- 权威分支：`codex/ccfa-execution-sprint-v1@9f0deb9`，remote/local一致；该 HEAD 是用户指定 `b42ba303` 的 descendant。Phase 0、CAL/LR/DAEDAL adapters与 manifests不重做。
-- CAL SingleLine：primary已完成 `838/838`，row=`52.3866%`、143-cluster macro=`41.2711%`、CI=`[36.3798%,46.0499%]`；official_fixed32 full继续运行，完成前不做paired comparison。`project_fixed64_internal` sensitivity smoke已启动，且不称equal-compute。
-- LR-DLLM：无作者代码；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder SingleLine primary已完成 `927/927`：row=`72.7077%`、148-cluster macro=`60.5238%`、CI=`[54.9216%,65.8574%]`；Fixed64未完成前不做paired comparison。RandomSpan/MultiLine primary和SingleLine Fixed64继续运行。
-- CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic在运行；Fixed8已完成 `838/838`，row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`。MultiLine dynamic与Fixed8两个 `4990` full均已启动。
-- DreamOn：released checkpoint `8ccc7475…` 已完整缓存，license=`apache-2.0`；SingleLine official-source single-H200 adapter/tests/launcher/action和927/148 common manifest reuse已CPU preflight验证。commit/push后先跑min4 12-case smoke；paper Lmax128未与source max64混合。
-- GPU0 是单张 H200；2026-07-31T10:44Z 有8个项目模型稳定并发、ECC=`0`。外部约70GiB进程自行结束；全程未 kill/preempt。Frozen test=`sealed/0`。
-- 下一资源动作由 tmux `daedal_fim_ml4990_fixed8_20260731` 自动执行；不得转入 M5、PPT、ExecRepoBench final 或 frozen evaluation。
+- 权威分支：`codex/ccfa-execution-sprint-v1@5e0b432`，remote/local一致，是用户指定 `b42ba303` descendant。Phase 0与既有 adapters/manifests不重做。
+- CAL SingleLine：primary vs official_fixed32 same-key macro delta=`+1.898pp`，CI=`[-2.233,+5.759]pp`，row help/harm=`130/96`；CI跨0。Fixed64 sensitivity完成，但不称equal-compute。
+- LR-DLLM：唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。SingleLine vs Fixed64 macro delta=`+0.796pp`，CI=`[-6.746,+8.178]pp`，row help/harm=`246/114`；RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`。RandomSpan/MultiLine Fixed64 controls运行中。
+- CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic−Fixed8 macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`；MultiLine=`+0.455pp`，CI=`[-1.375,+1.791]pp`。两项CI均跨0，Fixed8不称equal-compute。
+- DreamOn：official-source SingleLine min4/8/16/32/64的12-case smoke与resume gates全部通过，五个927 full均在独立tmux运行；paper Lmax128未与source max64混合。
+- GPU0 单张H200；2026-07-31T14:39Z 7个项目模型稳定并发，free约9GiB、ECC=`0`；不添加第8个模型，不kill/preempt。Frozen test=`sealed/0`。
+- 不进入M5、PPT、ExecRepoBench final或frozen evaluation。
 
 ## 2026-07-31 Official CAL MultiLine 4,990 解盲
 

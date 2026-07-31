@@ -1,0 +1,2 @@
+method_a,method_b,paired_candidate_key_count,cluster_count,task_macro_delta,task_macro_delta_ci_low,task_macro_delta_ci_high,row_help,row_harm,cluster_help,cluster_harm,cluster_tie,bootstrap_replicates,bootstrap_seed
+daedal_dynamic,daedal_fixed8_control,4990,143,0.00455291319030127,-0.013749041679225506,0.017912935628655344,97,56,35,15,93,10000,20260831

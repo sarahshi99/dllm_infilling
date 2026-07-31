@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## Completed paired and cross-dataset baseline results
+
+- CAL SingleLine primary−official_fixed32：row help/harm=`130/96`；cluster=`47/31/65`；task-macro delta=`+1.898pp`，95% CI=`[-2.233,+5.759]pp`。Fixed64 sensitivity完成，但不是equal-compute。
+- DAEDAL SingleLine dynamic−Fixed8：row=`54/49`；cluster=`27/26/90`；macro=`+0.410pp`，CI=`[-2.062,+2.734]pp`。MultiLine：row=`97/56`；cluster=`35/15/93`；macro=`+0.455pp`，CI=`[-1.375,+1.791]pp`。
+- LR-DLLM DreamCoder SingleLine−Fixed64：row=`246/114`；cluster=`67/38/43`；macro=`+0.796pp`，CI=`[-6.746,+8.178]pp`。RandomSpan primary row/macro=`18.3784%`；MultiLine primary row=`31.9945%`、macro=`37.1082%`；两个cross-dataset Fixed64 controls仍运行。
+- DreamOn min4/8/16/32/64 smoke与resume gates全部通过；五个SingleLine 927 full运行中，不读取partial accuracy。
+- 所有上述paired CI均跨0。Frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## External Baseline Concurrent Execution Update
 
 - **official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset**：row Pass@1=`52.3866%`；equal-weight task-macro=`41.2711%`，95% CI=`[36.3798%,46.0499%]`；search/decode/total forwards=`13226/25504/38730`，token-forwards=`10548607`，wall=`3105.563s`，peak=`16560579584` bytes。official_fixed32未完成前不报告paired delta/help-harm。
