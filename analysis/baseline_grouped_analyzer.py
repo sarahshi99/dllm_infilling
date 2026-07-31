@@ -79,12 +79,17 @@ def validate_manifest(rows: Sequence[Mapping[str, Any]]) -> None:
     forbidden = sorted({field for row in rows for field in MANIFEST_FORBIDDEN_FIELDS if field in row})
     if forbidden:
         raise RuntimeError(f"manifest contains forbidden fields: {forbidden}")
-    for field in ("candidate_key", "task_id", "task_group"):
+    for field in ("task_id", "task_group"):
         values = [str(row.get(field) or "") for row in rows]
         if any(not value for value in values):
             raise RuntimeError(f"manifest has blank {field}")
-        if field in {"candidate_key", "task_id"} and len(values) != len(set(values)):
+        if field == "task_id" and len(values) != len(set(values)):
             raise RuntimeError(f"manifest has duplicate {field}")
+    candidate_keys = [str(row.get("candidate_key") or row["task_id"]) for row in rows]
+    if any(not value for value in candidate_keys):
+        raise RuntimeError("manifest has blank normalized candidate_key")
+    if len(candidate_keys) != len(set(candidate_keys)):
+        raise RuntimeError("manifest has duplicate normalized candidate_key")
 
 
 def normalize_rows(
@@ -113,7 +118,7 @@ def normalize_rows(
             raise RuntimeError(f"task_group mismatch for {task_id}")
         normalized.append(
             {
-                "candidate_key": str(manifest_row["candidate_key"]),
+                "candidate_key": str(manifest_row.get("candidate_key") or manifest_row["task_id"]),
                 "task_id": task_id,
                 "task_group": str(manifest_row["task_group"]),
                 "status": str(raw.get("status") or ""),

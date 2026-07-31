@@ -122,6 +122,11 @@ class BaselineGroupedAnalyzerTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "forbidden fields"):
             validate_manifest(invalid)
 
+    def test_legacy_immutable_manifest_uses_task_id_as_candidate_key(self) -> None:
+        legacy = [{key: value for key, value in row.items() if key != "candidate_key"} for row in manifest()]
+        rows = normalize_rows(raw_rows((True, False, True)), legacy)
+        self.assertEqual([row["candidate_key"] for row in rows], ["task/a0", "task/a1", "task/b0"])
+
 
 if __name__ == "__main__":
     unittest.main()
