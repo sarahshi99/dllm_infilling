@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## External Baseline Concurrent Execution Update
+
+- CAL SingleLine primary/official_fixed32：两项smoke=`12/12`、resume no-op通过，两个838 full均运行中；不报告partial outcome。
+- `paper-guided, author-unverified reimplementation of LR-DLLM`：12-case technical与64-case mechanism gates通过；DreamCoder SingleLine/RandomSpan/MultiLine primary及SingleLine Fixed64 full运行中；不报告partial outcome。
+- **CAL authors’ DAEDAL FIM adaptation — same-decoder Fixed8 control on SingleLine CAL-Rest 838/143**：row Pass@1=`50.8353%`；equal-weight task-macro=`37.5859%`，10,000 cluster-bootstrap 95% CI=`[32.6317%,42.6749%]`；search/decode/total forwards=`0/3817/3817`，token-forwards=`928151`，wall=`1106.634s`，peak memory=`17733972992` bytes。Dynamic arm未完成前不报告paired delta/help-harm。
+- DAEDAL SingleLine dynamic与MultiLine dynamic运行中；MultiLine Fixed8已经通过smoke/resume gate并等待显存槽启动。DreamOn checkpoint已缓存，但adapter/protocol freeze尚未完成，无GPU outcome。
+- Frozen test=`sealed`，`test_evaluation_count=0`。
+
 ## External Baseline Closure Progress（no new GPU outcome）
 
 - CAL MultiLine 4,990 正式绝对结果：row Pass@1=`1643/4990=32.9259%`；143-cluster macro=`27.8471%`，10,000 bootstrap 95% CI=`[24.3313%,31.2715%]`。没有 same-key Fixed32，不报告 paired delta。

@@ -1,5 +1,16 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 Baseline Closure Concurrent Execution Checkpoint（authoritative override）
+
+- branch=`codex/ccfa-execution-sprint-v1`；remote/local launch HEAD=`9f0deb9b11576653fab7f0c75572561e7bdc246f`，是用户指定 `b42ba3038c794ca76d3f5908bd869e0164228a9e` 的 descendant。仅保留两处既知用户 untracked M1/M2 目录，无重叠 dirty。
+- CAL MultiLine 4,990 最终标签/结果不变：`official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset`；row=`32.9259%`，task-macro=`27.8471%`，CI=`[24.3313%,31.2715%]`，没有 same-key Fixed32 paired result。
+- CAL SingleLine：primary smoke/resume gate通过，primary full tmux=`cal_singleline_838_20260731`（pane/Python=`3110755/3110763`）；Fixed32 smoke=`12/12`、resume no-op=`0` writes，full tmux=`cal_fixed32_sl838_20260731`（`3467135/3467143`）。两臂都只读 progress/integrity，未读 partial accuracy。
+- LR-DLLM：标签固定为 `paper-guided, author-unverified reimplementation of LR-DLLM`；technical=`12/12`、mechanism=`64/64`、resume gates通过。Primary full：SingleLine tmux=`lrdllm_dc_sl927_20260731`（`3156939/3156977`）、RandomSpan=`lrdllm_dc_randomspan1480_20260731`（`3447694/3447727`）、MultiLine=`lrdllm_dc_multiline5079_20260731`（`3451834/3451862`）。Fixed64 SingleLine full=`lrdllm_fixed64_sl927_20260731`（`3478035/3478062`）。
+- DAEDAL：准确标签=`CAL authors’ DAEDAL FIM adaptation`。SingleLine dynamic tmux=`daedal_fim_sl838_20260731`（`3142712/3142739`）；Fixed8 已完成 `838/838` 并分析：row=`50.8353%`，143-cluster macro=`37.5859%`，CI=`[32.6317%,42.6749%]`。MultiLine dynamic full=`daedal_fim_ml4990_dynamic_20260731`（`3488947/3488975`）；Fixed8 full 资源守候 tmux=`daedal_fim_ml4990_fixed8_20260731`（pane=`3552559`），free≥20GiB且ECC=0时原地启动。
+- DreamOn checkpoint 已通过 mirror 完整缓存：`Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194`，license=`apache-2.0`，snapshot=`/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194`。项目内尚无已冻结 DreamOn adapter/manifest，因此不得误报为 smoke-ready。
+- 2026-07-31T10:44Z GPU0=`NVIDIA H200 NVL`，8 个项目模型稳定并发，free约`6.1GiB`，util=`100%`，ECC=`0`；外部约70GiB进程已自行退出，无 kill/preempt。
+- safety：frozen test=`sealed`，`test_evaluation_count=0`；M5、M1--M4、PPT、ExecRepoBench final均未进入。
+
 ## 2026-07-31 Baseline Closure Latest Checkpoint（authoritative override）
 
 - branch=`codex/ccfa-execution-sprint-v1`；remote 已同步到 `96d7a24`，本段文档更新 commit 待生成。

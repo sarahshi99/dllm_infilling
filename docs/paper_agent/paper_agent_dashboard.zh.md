@@ -4,12 +4,13 @@
 
 ## 2026-07-31 Baseline Closure Execution Status
 
-- 权威分支：`codex/ccfa-execution-sprint-v1`。Phase 0、CAL 4,990 result、CAL SingleLine adapter、LR-DLLM prereg/core/adapter/manifests、DAEDAL adapter和 analyzer schema aliases 均已 focused commit/push。
-- CAL SingleLine 838：smoke=`0/12`、full=`0/838`；具体 blocker 是 GPU0 外部 PID `755980/810890/818373`。项目未启动 GPU process，未创建 output，不抢占/kill。
-- LR-DLLM：无作者代码；标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder SingleLine/RandomSpan/MultiLine=`927/1480/5079` manifests 已冻结；technical/mechanism/full 均未运行，technical=`0/12`。
-- CAL authors’ DAEDAL FIM adaptation：SingleLine/MultiLine=`838/4990`，same-decoder Fixed8 控制已冻结；两项均 preflight-only，smoke=`0/12`。
-- DreamOn：released checkpoint cache 缺失，状态=`blocked_checkpoint_not_cached`；不阻塞 CAL。Frozen test=`sealed/0`。
-- GPU恢复顺序：CAL SingleLine smoke→resume no-op→tmux 838 full；其后才考虑 LR-DLLM technical/mechanism smoke或 DAEDAL smoke。不得自动转入 M5、PPT、ExecRepoBench final 或 frozen evaluation。
+- 权威分支：`codex/ccfa-execution-sprint-v1@9f0deb9`，remote/local一致；该 HEAD 是用户指定 `b42ba303` 的 descendant。Phase 0、CAL/LR/DAEDAL adapters与 manifests不重做。
+- CAL SingleLine：primary 与 official_fixed32 的 12-case smoke/resume gates均通过，两个 `838` full 正在独立 tmux 运行；运行中未读 partial accuracy。
+- LR-DLLM：无作者代码；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。12-case technical、64-case mechanism和resume gates通过；DreamCoder SingleLine `927`、RandomSpan `1480`、MultiLine `5079` primary full及 SingleLine Fixed64 full均在运行。
+- CAL authors’ DAEDAL FIM adaptation：SingleLine dynamic在运行；Fixed8已完成 `838/838`，row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`。MultiLine dynamic `4990`在运行；Fixed8 full在资源守候 tmux中，free≥20GiB即启动。
+- DreamOn：released checkpoint `8ccc7475…` 已完整缓存，license=`apache-2.0`；现有项目树仍缺已冻结 DreamOn adapter/manifest，故状态从 cache blocker 转为 implementation/protocol freeze pending，不阻塞其他 baseline。
+- GPU0 是单张 H200；2026-07-31T10:44Z 有8个项目模型稳定并发、ECC=`0`。外部约70GiB进程自行结束；全程未 kill/preempt。Frozen test=`sealed/0`。
+- 下一资源动作由 tmux `daedal_fim_ml4990_fixed8_20260731` 自动执行；不得转入 M5、PPT、ExecRepoBench final 或 frozen evaluation。
 
 ## 2026-07-31 Official CAL MultiLine 4,990 解盲
 

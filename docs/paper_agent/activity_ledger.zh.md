@@ -1,5 +1,15 @@
 # Paper-Agent Activity Ledger
 
+## 2026-07-31 UTC
+
+- branch/runtime：remote/local=`9f0deb9`，是用户指定 `b42ba303` descendant；两处用户 untracked M1/M2目录保持不变。单张H200 physical index=`0`；外部约70GiB进程自然退出后按用户并行授权启动多个独立 tmux，未 kill/preempt。
+- CAL SingleLine：primary smoke=`12/12`、resume no-op通过并启动838 full；official_fixed32 smoke=`12/12`、resume `new_rows_written=0`并启动838 full。两臂均零failure/error，未读取partial accuracy。
+- LR-DLLM：technical=`12/12`、mechanism=`64/64`，mechanism expansion-positive=`45`、contraction-positive=`37`，guard/accounting error=`0`，resume幂等。DreamCoder SingleLine/RandomSpan/MultiLine primary full与SingleLine Fixed64 full均已启动；准确标签保持 `paper-guided, author-unverified reimplementation of LR-DLLM`。
+- DAEDAL：SingleLine dynamic与Fixed8 smoke/resume gates通过；dynamic full运行中，Fixed8 full完成`838/838`。冻结 analyzer给出Fixed8 row=`50.8353%`、143-cluster macro=`37.5859%`、CI=`[32.6317%,42.6749%]`、forwards=`3817`、token-forwards=`928151`、wall=`1106.634s`、peak=`17733972992` bytes。dynamic未完成前不做paired comparison。
+- DAEDAL MultiLine：dynamic/Fixed8 smoke均`12/12`且resume no-op；dynamic 4990 full已启动。Fixed8 4990 full由tmux `daedal_fim_ml4990_fixed8_20260731`等待free≥20GiB与ECC=0后自动启动。
+- DreamOn：direct huggingface.co下载因network unreachable失败；`HF_ENDPOINT=https://hf-mirror.com`重试成功，18/18 files，snapshot revision=`8ccc74750e43177327f29dab9e91882ba759e194`，license=`apache-2.0`。source audit不重做；项目内尚无冻结adapter/manifest，不冒充可运行。
+- safety：所有progress/failure/ECC轮询不读partial accuracy；frozen test=`sealed`，`test_evaluation_count=0`；M5/M1--M4/PPT/ExecRepoBench final均未进入。
+
 ## 2026-07-12 UTC
 
 - roadmap reconciliation：新增 `docs/paper_agent/ccfa_master_roadmap.zh.md` 作为唯一权威路线；P0 current-snapshot narrative 已同步，P1 official baselines、P2 `6707 spans / 148 base-task clusters` grouped statistics、P4 non-HumanEval external evaluation 标为最高优先级 open gaps。
