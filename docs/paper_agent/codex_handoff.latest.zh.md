@@ -9,6 +9,9 @@
 - CAL MultiLine 4,990 已解盲：row `1643/4990=32.9259%`；143-cluster task-macro `27.8471%`，95% CI `[24.3313%,31.2715%]`。准确标签见 `docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`。
 - 没有 same-key official_fixed32，不得写 paired improvement。下一动作是 SingleLine CAL-Rest smoke12；通过后在 physical GPU0 的独立 tmux 启动 838 full。
 - DreamOn checkpoint cache 缺失只阻塞 DreamOn Phase 2。Frozen test=`sealed/0`；M1--M4/M5/PPT/ExecRepoBench final 均不动。
+- CAL SingleLine adapter commit=`54f1a98`；838/143 manifest已冻结。当前 smoke=`0/12`，因 GPU0 外部 PID `755980/810890/818373` 阻塞；项目没有 GPU PID/output。GPU空闲后先执行 `bash scripts/manual_launch_official_cal_singleline_20260731.sh smoke`，resume no-op 后 tmux full。
+- LR-DLLM：作者代码未找到；prereg/core/adapter/manifests commits=`a0737dc/92ab200/815a795`，analyzer alias=`96d7a24`。DreamCoder 927/1480/5079均未运行，technical=`0/12`、mechanism=`0/64`。
+- DAEDAL：commit=`48661dc`，准确标签=`CAL authors’ DAEDAL FIM adaptation`；SingleLine/MultiLine dynamic+Fixed8只完成 preflight，smoke=`0/12`。pinned CAL checkout无 LICENSE。
 
 ## 当前唯一恢复入口（覆盖后文历史 Phase 编号）
 

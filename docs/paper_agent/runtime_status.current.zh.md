@@ -1,4 +1,13 @@
-# Runtime Status — 2026-07-28 UTC
+# Runtime Status — 2026-07-31 UTC
+
+## 2026-07-31 External Baseline Closure Current Override
+
+- CAL MultiLine 4,990 已完成解盲与绝对指标报告；准确标签和结果见 `docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md`，没有 same-key official_fixed32，因此没有 paired delta。
+- CAL SingleLine 838 adapter/manifest/launcher 已 commit/push；smoke=`0/12`。GPU0 在 `2026-07-31T07:10:13Z` 有外部 PID `755980/810890/818373`，used/free=`55361/87796 MiB`、util=`53%`、ECC=`0`。按 kill criteria 不抢占、不 kill，output 尚未创建。
+- LR-DLLM：截至 2026-07-31 未找到作者代码；实现标签固定为 **paper-guided, author-unverified reimplementation of LR-DLLM**。歧义 preregistration、pure core、DreamCoder adapter、927/1480/5079 manifests、12/64 smoke manifests和 analyzer schema aliases 已 push；GPU technical smoke=`0/12`，CAL 优先。
+- DAEDAL：准确标签固定为 **CAL authors’ DAEDAL FIM adaptation**。pinned source 存在上游 evaluation-script keyword mismatch；本地 adapter 直接调用未修改的 pinned `generate`，SingleLine/MultiLine preflight通过；smoke=`0/12`。CAL repo 无 LICENSE，只做内部审计/运行。
+- DreamOn released checkpoint 不在 cache，只阻塞 DreamOn Phase 2。Frozen test=`sealed`，`test_evaluation_count=0`。
+- 下一安全动作：GPU0 零 compute PID 后立即执行 CAL SingleLine smoke；12/12技术 gate和 resume no-op 通过后，独立 tmux `cal_singleline_838_20260731` 启动838 full。
 
 审计时间：`2026-07-28T19:07:16Z`。Operational decision=`execute_and_monitor`；frozen controller test=`sealed`，`test_evaluation_count=0`。
 

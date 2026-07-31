@@ -1,7 +1,7 @@
 {
-  "audit_utc": "2026-07-31T06:15:00Z",
+  "audit_utc": "2026-07-31T07:10:13Z",
   "authoritative_branch": "codex/ccfa-execution-sprint-v1",
-  "head_at_audit": "e7a790beb2c7e17bfaa5cdc764c5b82dd05ebd83_plus_uncommitted_cal_result_record",
+  "head_at_audit": "96d7a24_plus_checkpoint_update_pending",
   "operational_decision": "execute_and_monitor",
   "frozen_controller_test": {"status": "sealed", "test_evaluation_count": 0},
   "performance_visibility": {
@@ -61,7 +61,11 @@
     "full": {"expected": 4990, "completed": 4990, "missing": 0, "canonical_error_count": 0, "failure_journal_count": 0, "status": "completed_analyzed", "finished_utc": "2026-07-17T15:29:01Z", "partial_accuracy_visibility": false, "row_pass_count": 1643, "row_pass_at_1": 0.3292585170340681, "task_macro_pass_at_1": 0.27847050051889416, "task_macro_ci_95": [0.24331335402777038, 0.3127150779401506], "total_forward_calls": 233648, "total_token_forwards": 63545173, "mean_wall_sec": 3.8762292860494365, "peak_gpu_memory_bytes": 16560579584, "paired_fixed32_status": "not_available"},
     "result_report": "docs/paper_agent/experiments/20260731_official_cal_multiline_4990_result.zh.md"
   },
-  "gpu_audit": {"utc": "2026-07-28T19:07:16Z", "gpu": "NVIDIA H200 NVL", "utilization_percent": 0, "memory_used_mib": 0, "memory_free_mib": 143156, "temperature_c": 29, "uncorrected_volatile_ecc": 0, "project_gpu_processes": 0},
+  "official_cal_singleline_838": {"state": "smoke_blocked_by_external_gpu_processes", "label": "official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset", "manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0", "smoke_manifest_sha256": "56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1", "smoke_completed": 0, "smoke_expected": 12, "output_created": false, "launcher": "scripts/manual_launch_official_cal_singleline_20260731.sh"},
+  "dreamon": {"state": "blocked_checkpoint_not_cached", "checkpoint": "Dream-org/DreamOn-v0-7B", "boundary": "blocks DreamOn Phase 2 only"},
+  "lrdllm": {"state": "author_unverified_adapter_manifests_preflight_verified_gpu_smoke_pending_after_CAL", "label": "paper-guided, author-unverified reimplementation of LR-DLLM", "official_code_search": "no author implementation found as of 2026-07-31", "dreamcoder_populations": {"SingleLine": 927, "RandomSpan": 1480, "MultiLine": 5079}, "technical_smoke": {"completed": 0, "expected": 12}, "commits": ["a0737dc", "92ab200", "815a795", "96d7a24"]},
+  "daedal_fim_adaptation": {"state": "adapter_preflight_verified_gpu_smoke_pending_after_CAL", "label": "CAL authors’ DAEDAL FIM adaptation", "populations": {"SingleLine": 838, "MultiLine": 4990}, "technical_smoke": {"completed": 0, "expected": 12}, "fixed_control": "same-decoder Fixed8", "license": "pinned CAL checkout has no LICENSE; internal audit/run only", "commit": "48661dc"},
+  "gpu_audit": {"utc": "2026-07-31T07:10:13Z", "gpu": "NVIDIA H200 NVL", "utilization_percent": 53, "memory_used_mib": 55361, "memory_free_mib": 87796, "uncorrected_volatile_ecc": 0, "project_gpu_processes": 0, "external_compute_pids": [755980, 810890, 818373], "launch_decision": "blocked_do_not_preempt"},
   "storage": {"home_available": "2.3T", "home_inode_free": 231232594},
-  "next_safe_action": "Run the frozen CAL SingleLine 838 technical smoke on physical GPU 0; if its technical gate passes, launch the 838 full in an independent tmux session."
+  "next_safe_action": "When physical GPU 0 has zero external compute PIDs and ECC=0, run bash scripts/manual_launch_official_cal_singleline_20260731.sh smoke; audit 12/12 without reading accuracy, repeat for resume no-op, then launch tmux cal_singleline_838_20260731 full."
 }

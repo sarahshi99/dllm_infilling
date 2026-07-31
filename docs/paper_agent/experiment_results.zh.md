@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## External Baseline Closure Progress（no new GPU outcome）
+
+- CAL MultiLine 4,990 正式绝对结果：row Pass@1=`1643/4990=32.9259%`；143-cluster macro=`27.8471%`，10,000 bootstrap 95% CI=`[24.3313%,31.2715%]`。没有 same-key Fixed32，不报告 paired delta。
+- CAL SingleLine 838：adapter/manifest/preflight完成，GPU smoke/full=`0/12,0/838`，无结果。
+- LR-DLLM：无作者代码；本地标签固定为 `paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder 927/1480/5079 manifests与 adapter preflight完成，但 generation/evaluation=`0`，不报告 Pass@1。
+- `CAL authors’ DAEDAL FIM adaptation`：SingleLine 838、MultiLine 4990 dynamic/Fixed8 adapter preflight完成，但 generation/evaluation=`0`，不报告 Pass@1。
+- 当前无新 GPU outcome 的原因是外部 GPU PID 占用，不是科学 gate 失败。Frozen test=`sealed/0`。
+
 ## Official-source CAL MultiLine 4,990（2026-07-31）
 
 准确标签：`official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset`。这不是完整 5,715-case reproduction，也不代表论文四个 initial lengths 的整表。

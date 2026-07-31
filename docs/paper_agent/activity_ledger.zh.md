@@ -343,3 +343,13 @@
 - result：row Pass@1=`1643/4990=32.9259%`；task-macro=`27.8471%`，95% CI=`[24.3313%,31.2715%]`；total forwards/token-forwards=`233648/63545173`；mean wall=`3.8762s`；peak memory=`15.42GiB`。无 same-key fixed32，paired delta/help-harm 未报告。
 - safety：frozen=`sealed/0`；M1--M4/raw user directories untouched；DreamOn checkpoint 缺失不阻塞 CAL。
 - next：focused commit/push CAL result，随后 SingleLine 838 smoke；gate 通过即 tmux full。
+
+## 2026-07-31 UTC Baseline Closure Continued Execution
+
+- action：完成并 push CAL SingleLine 838 adapter/launcher；在 GPU 外部任务占用期间，按独立 baseline 继续完成 LR-DLLM 作者代码搜索结论、ambiguity preregistration、pure core、DreamCoder adapter、927/1480/5079 immutable manifests、12/64 smoke manifests，以及 CAL authors’ DAEDAL FIM adaptation adapter/Fixed8 control。
+- commits：`54f1a98`、`a0737dc`、`92ab200`、`815a795`、`48661dc`、`96d7a24`，均已 push 到 `origin/codex/ccfa-execution-sprint-v1`。
+- verification：LR core/builder/adapter 22 tests；DAEDAL及组合 targeted tests 36；analyzer 9 tests；py_compile、bash -n、JSON parse、manifest missing/duplicate/forbidden audit、checkpoint/source/evaluator hash preflight和 launcher GPU refusal gate通过。
+- result：CAL SingleLine smoke=`0/12`；LR technical/mechanism=`0/12,0/64`；DAEDAL smoke=`0/12`。没有读取 partial accuracy，没有新 GPU outcome。DreamOn checkpoint absent 独立阻塞 Phase2。
+- blocker：GPU0 外部 PID `755980/810890/818373`，2026-07-31T07:10:13Z used/free=`55361/87796 MiB`、util=`53%`、ECC=`0`。不抢占、不 kill；launchers安全退出3。
+- safety：frozen test=`sealed/0`；M1--M4、M5、PPT、ExecRepoBench final未进入；用户 untracked M1/M2目录保持原样。
+- next：GPU0 零 compute PID后立即执行 CAL SingleLine smoke→resume no-op→tmux 838 full；CAL完成前不抢跑 LR/DAEDAL GPU。

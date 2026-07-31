@@ -6,7 +6,7 @@
 
 Action name：`CAL-PHASE1B-SINGLELINE-838`。
 
-状态：`adapter_verified_ready_for_commit_then_smoke`。
+状态：`adapter_committed_smoke_blocked_by_external_gpu_processes_0_of_12`。
 
 准确标签：`official-source CAL, initial length 32, on the 838-row / 143-cluster project-non-frozen SingleLine CAL-Rest subset`。
 
@@ -32,7 +32,7 @@ Success gate：smoke=`12/12` unique exact keys，missing/duplicate/error/failure
 
 Kill criteria：source/checkpoint/config/hash/population不一致；任何 failure journal；forward/token accounting错误；OOM/ECC；已有无关 GPU process。Budget：smoke约2–5分钟（含模型加载）；full约55–70分钟。运行中只读 progress/ETA/OOM/ECC/failure，不读 partial accuracy。
 
-Fresh verification：11 个 CAL/builder tests `OK`；adapter `py_compile`、launcher `bash -n`、CLI help、SingleLine certificate/hash preflight、`git diff --check` 全部通过。`reviewer_gate_disabled`，local diff review无 blocker。
+Fresh verification：targeted CAL/builder tests `OK`；adapter `py_compile`、launcher `bash -n`、CLI help、SingleLine certificate/hash preflight、`git diff --check` 全部通过。`reviewer_gate_disabled`，local diff review无 blocker。2026-07-31T07:10:13Z GPU0 仍有外部 PID `755980/810890/818373`，因此 smoke 尚未启动、output 未创建、进度=`0/12`；不得抢占或 kill。
 
 ## 2026-07-31 CAL MultiLine 4,990 解盲（覆盖上一动作）
 

@@ -1,5 +1,17 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-07-31 Baseline Closure Latest Checkpoint（authoritative override）
+
+- branch=`codex/ccfa-execution-sprint-v1`；remote 已同步到 `96d7a24`，本段文档更新 commit 待生成。
+- pushed commits：Phase0 `8d9838d/e7a790b`；CAL 4,990 result `64c49c7`；CAL SingleLine adapter `54f1a98`；LR prereg/core/adapter `a0737dc/92ab200/815a795`；DAEDAL adapter `48661dc`；LR/DAEDAL analyzer aliases `96d7a24`。
+- CAL 4,990 label/result：`official-source CAL, initial length 32, on the 4,990-row / 143-cluster project-non-frozen CAL-Rest common subset`；row=`1643/4990=32.9259%`，task-macro=`27.8471%`，CI=`[24.3313%,31.2715%]`；no same-key fixed32。
+- CAL SingleLine：manifest=`838/143`；smoke=`0/12`、full=`0/838`。恢复命令：`bash scripts/manual_launch_official_cal_singleline_20260731.sh smoke`。通过完整性 gate 后重复同命令验证 `new_rows_written=0`，再启动 tmux `cal_singleline_838_20260731` full。
+- 当前 blocker：GPU0 外部 PID `755980/810890/818373`；2026-07-31T07:10:13Z used/free=`55361/87796 MiB`、util=`53%`、ECC=`0`。不要 kill/抢占。三个 baseline launcher均会因已有 compute PID退出3。
+- LR-DLLM：官方代码搜索结论为未找到作者实现；唯一标签=`paper-guided, author-unverified reimplementation of LR-DLLM`。DreamCoder adapter/manifests/preflight完成；SingleLine/RandomSpan/MultiLine formal status=`0/927,0/1480,0/5079`；technical=`0/12`、mechanism=`0/64`。
+- DAEDAL：标签=`CAL authors’ DAEDAL FIM adaptation`；SingleLine/MultiLine adapter preflight完成，dynamic/Fixed8 smoke均未运行。CAL source无 LICENSE，禁止复制到发布 artifact。
+- DreamOn checkpoint `Dream-org/DreamOn-v0-7B` 不在 cache，独立阻塞 Phase2。
+- safety：frozen test=`sealed`，`test_evaluation_count=0`；sealed files未打开；用户 untracked M1/M2目录保持不变；M5/M1--M4/PPT/ExecRepoBench final均未进入。
+
 ## 2026-07-31 External Baseline Closure Authoritative Resume Point
 
 Timestamp: 2026-07-31 UTC
