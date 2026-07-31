@@ -1,0 +1,26 @@
+{
+  "allowed_singleline_manifest_sha256": "2e2e0604b1f9129350ab3fb9143f478f6dbc63ae0f30306f69cc067004cb8ede",
+  "cal_rest_intersection_nonfrozen_clusters": 143,
+  "cal_rest_intersection_nonfrozen_rows": 838,
+  "demo_mapping_count": 100,
+  "demo_mapping_sha256": "a63dd1050661a15956c914d5eafd1b1b11413f6726b90dc88828dd36bd3b1fb5",
+  "forbidden_fields_present": [],
+  "frozen_controller_test": {
+    "status": "sealed",
+    "test_evaluation_count": 0
+  },
+  "full_manifest_sha256": "52ef81385984a362fee8729c52cbfa7480265582cabb8250d3ffc27b0aa59af0",
+  "multiline_cal_rest_common_clusters": 143,
+  "multiline_cal_rest_common_rows": 4990,
+  "multiline_common_manifest_sha256": "e805489111e788e315bcf14838b077b09d0c23c44900ad8220d9e9afcbb95c48",
+  "official_multiline_sha256": "2f341612eee1d35da1357a4f365e0c0b3ba6e2b62eb491e88aaefa4855af0349",
+  "official_singleline_rows": 1033,
+  "official_singleline_sha256": "1277073e7ddce163ef68598c2bca777f688a53df99422f097e37362090f88e1f",
+  "project_nonfrozen_rows": 927,
+  "schema_version": 1,
+  "sealed_files_opened": false,
+  "seed42_demo_rows": 100,
+  "seed42_rest_rows": 933,
+  "smoke_manifest_sha256": "56559f3f83ba1ce84c9e03622c5ced6e2ed8d2fa08145a1a64dc0cae0885caa1",
+  "status": "immutable_manifest_frozen_outcome_blind"
+}

@@ -1,6 +1,48 @@
 # Current Paper-Agent Action
 
-更新时间：2026-07-29 UTC
+更新时间：2026-07-31 UTC
+
+## 2026-07-31 当前最小动作（覆盖历史 action）
+
+Action name：`BASELINE-CLOSURE-PHASE0-PROTOCOL-ANALYZER-FREEZE`。
+
+状态：`verified_ready_for_focused_commit_outcome_blind`。
+
+阶段：external baseline closure Phase 0。用户已明确授权补全/规范化 external baselines，但排除 M5、M1--M4、PPT、ExecRepoBench final benchmark 和 frozen controller test。本动作先冻结 population/protocol matrix、真正可执行组合的 immutable manifest、统一 grouped analyzer 与 synthetic fixtures；在 focused commit/push 成功前，不读取 official CAL 4,990 的 final `passed` outcome，也不启动任何 full run。
+
+Reviewer motivation：外部 baseline 只有在 population、decoder、sampling、seed、evaluator、candidate keys、统计单位和成本账本一致时才能支持直接比较；否则必须分离为 literature anchor、official-source/paper-protocol reproduction on project non-frozen subset 和 common-protocol local comparison。
+
+涉及文件：
+
+- `docs/paper_agent/baseline_population_and_protocol_matrix.current.zh.md`
+- `docs/paper_agent/baseline_population_and_protocol_matrix.current.json`
+- `docs/paper_agent/experiments/20260731_baseline_closure_phase0_protocol_analyzer_freeze.zh.md`
+- `analysis/baseline_grouped_analyzer.py`
+- `analysis/build_cal_singleline_rest_manifest.py`
+- `tests/test_baseline_grouped_analyzer.py`
+- `tests/test_build_cal_singleline_rest_manifest.py`
+- `analysis_outputs/baseline_manifests_20260731_v1/`
+
+Exact CPU commands：
+
+```bash
+/home/shx/miniconda3/envs/dllm_env/bin/python -m unittest tests/test_baseline_grouped_analyzer.py tests/test_build_cal_singleline_rest_manifest.py
+/home/shx/miniconda3/envs/dllm_env/bin/python -m py_compile analysis/baseline_grouped_analyzer.py analysis/build_cal_singleline_rest_manifest.py
+/home/shx/miniconda3/envs/dllm_env/bin/python analysis/build_cal_singleline_rest_manifest.py --official-singleline /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-SingleLineInfilling.jsonl.gz --official-multiline /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-MultiLineInfilling.jsonl.gz --multiline-common-manifest analysis_outputs/official_cal_corrected_protocol_20260715_v1/cal_rest_common_manifest.jsonl --allowed-singleline-manifest analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/manifest.csv --output-dir analysis_outputs/baseline_manifests_20260731_v1 --smoke-cases 12
+git diff --check
+```
+
+GPU/env/log/output：CPU-only；GPU=`none`。不创建 GPU log；manifest 输出写入 `analysis_outputs/baseline_manifests_20260731_v1/`。
+
+Success gate：SingleLine CAL-Rest ∩ non-frozen=`838` rows/`143` clusters，Demo=`100`、Rest=`933`，与已有 allowed manifest 一致，frozen intersection 通过既有 `included_not_frozen_controller_test` 证明为零；manifest hash 固定；synthetic analyzer 正确输出 row Pass@1、equal-weight task macro、10,000 cluster bootstrap CI、row/group help-harm、forward/token/wall/memory、动态长度/扩缩/终止分布，并拒绝不同 candidate-key 集合的 paired comparison。
+
+Kill criteria：任何 population/count/hash/source revision 不一致；builder 需要读取两份 sealed frozen 文件；analyzer 允许非同 key 配对；synthetic tests、JSON/CSV parse、forbidden-input 或 diff hygiene 失败。
+
+Known risks：历史 allowed manifest 含 oracle-length metadata，但本动作只使用 `task_id/task_group/source_dataset/frozen exclusion flag` 构造 population，不把 oracle length 写入新 manifest或 analyzer deployable inputs。`reviewer_gate_disabled`，采用 local diff review + fresh verification fallback。
+
+Expected documentation outputs：baseline matrix、Phase 0 brief、immutable manifest summary/hash、后续各 baseline 的准确标签和 blocker 状态；不改变 central claim。
+
+Fresh verification：17 个相关 tests `OK`；`py_compile` 通过；matrix/manifest summary JSON parse 通过；正式 manifest audit=`838 rows/143 clusters`，smoke=`12 rows/12 clusters`，forbidden fields=`0`；`git diff --check` 通过。`reviewer_gate_disabled`，local diff review 未发现 blocker。
 
 权威路线：`docs/paper_agent/ccfa_master_roadmap.zh.md`；M1--M4 唯一当前状态登记：`docs/paper_agent/method_portfolio.current.json`。
 

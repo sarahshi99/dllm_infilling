@@ -1,5 +1,7 @@
 # 2026-07-29 实验完成度、结果判断与下一阶段建议
 
+> 2026-07-31 术语覆盖：历史 `CAL-lite` 当前准确标签为 `local uncalibrated short-range selector`；`Dream-Coder primary/simple/offline oracle` 分别为 `DreamCoder + local uncalibrated short-range selector`、`DreamCoder + local bounded-repair selector`、`reference-length diagnostic`。这些本地方法均不是 Fixed64、official CAL、DreamOn 或 LR-DLLM；历史 raw/path 不改。详见 `docs/paper_agent/baseline_population_and_protocol_matrix.current.zh.md`。
+
 ## 结论摘要
 
 截至 2026-07-29，Execution Sprint V1 已授权的长任务已经全部结束，当前没有运行中的项目 GPU 进程。M1--M4 都完成了当前预注册的 148-group 技术运行与正式 grouped analysis，但没有一个满足 296/927/selected-only-5079 的晋级条件；这些扩展没有运行是科学 gate 主动止损，不是遗漏。
@@ -70,7 +72,7 @@ DreamOn/rho-EOS 的协议审计见 [`analysis_outputs/p1_dreamon_rhoeos_protocol
 | Phase 5 RandomSpanLight bank/premise audit | base `1332/1332`，alpha `728/728` | deterministic combined proxy 有排序信号，但 corrected grouped gate 失败；conditional V0 被 kill |
 | P2.1 grouped statistics | `6,707` spans / `20,121` results / `148` task groups | 10,000 cluster bootstrap、paired/group-aware statistics 完成；是统计基础设施，不是新方法结果 |
 | H200 LLaDA-Base core reruns | 1,033-row Control/Midcons/Route2/V6/Local-CAL 全部完成 | Control `787`、Midcons `794`、Route2 `795`、V6 `796`、Local CAL `769`；存在 hardware outcome drift，不能与 A6000 静默合并；V6 仅小幅本地正向 |
-| Dream-Coder full allowed SingleLine diagnostic | non-frozen `927` cases、3 policies=`2781` rows、frozen=0 | primary/simple/oracle=`735/744/858`；simple help/harm=`25/16`，说明小幅 policy gain 和显著 oracle canvas ceiling，但仍是 second-backbone diagnostic |
+| DreamCoder full allowed SingleLine diagnostic | non-frozen `927` cases、3 policies=`2781` rows、frozen=0 | DreamCoder + local uncalibrated short-range selector / local bounded-repair selector / reference-length diagnostic=`735/744/858`；bounded-repair help/harm=`25/16`，说明小幅 local policy gain 和显著 reference-length ceiling，但仍是 second-backbone diagnostic |
 | 1,033-row local same-backbone matrix | 多个 backbone 的 baseline/candidate pair 均完整 | DreamCoder-Base `+7` tasks；LLaDA-MoE `+24` tasks 为最强本地 transfer；Dream/DiffuCoder/LLaDA-1.5 各约 `+1`；LLaDA-Instruct `−2`、DreamCoder-Instruct `−14`。这些是 local comparisons，不是对应论文 official reproduction或 external SOTA |
 | Trace/controller/action-bank full diagnostics | 1,033-row traces、927-task action bank、validation controller audits 完成 | 多数 route/controller gate 失败或只弱正向；支持 failure taxonomy，不支持开启 frozen test 或宣称 deployable controller success |
 

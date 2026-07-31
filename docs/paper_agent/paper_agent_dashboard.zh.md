@@ -2,6 +2,13 @@
 
 更新时间：2026-07-29 UTC
 
+## 2026-07-31 External Baseline Closure 术语与协议覆盖
+
+- 当前权威 baseline matrix：`docs/paper_agent/baseline_population_and_protocol_matrix.current.zh.md` / `.json`。
+- 历史 `CAL-lite` 当前统一写作 `local uncalibrated short-range selector`；`Dream-Coder primary/simple/offline oracle` 分别写作 `DreamCoder + local uncalibrated short-range selector`、`DreamCoder + local bounded-repair selector`、`reference-length diagnostic`。历史 raw/path 不改。
+- 上述本地方法都不是 Fixed64、official CAL、DreamOn 或 LR-DLLM。Fixed64 是标准 fixed-length baseline，但没有实际 matching forward/token budget 时不得称为 CAL/DreamOn/LR-DLLM equal-compute control。
+- CAL SingleLine seed-42 Rest∩non-frozen manifest 已 outcome-blind 冻结为 `838 rows/143 clusters`；MultiLine CAL-Rest common 保持 `4990 rows/143 clusters`。frozen test=`sealed/0`。
+
 ## 2026-07-29 完成度审计与审批入口
 
 - 完整中文状态报告：`docs/paper_agent/experiments/20260729_experiment_completion_status_and_next_stage.zh.md`。
