@@ -128,7 +128,7 @@
       "dataset": "SingleLine and MultiLine",
       "protocol": "pinned_dreamcoder_cal_same_demo_bias_pending_audit",
       "source": {"repository": "NiuHechang/Calibrated_Adaptive_Length", "revision": "741e8418a88a732b4c92812424d4f03cab1f7b1f", "source_file_sha256": ["a2cd1d2bca62ca9b080a9de1f973bb9bc1c214e239d9dad19445ff5d7e5a11c9", "ad15b876d7abf1d8c521cb6ea7622f925f80fb2fee65fd267562dc3ad2179597"], "license": "no LICENSE file in pinned checkout"},
-      "checkpoint": {"id": "Dream-org/Dream-Coder-v0-Base-7B", "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63"},
+      "checkpoint": {"id": "Dream-org/Dream-Coder-v0-Base-7B", "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63", "config_sha256": "3c180c6d6d9b55a9d3a083b0460c27520ee3c695ff3724e2e87200849cff08c9", "weight_index_sha256": "998a078123ffc97763690de7f2a677eb89168af5eaf8a5e12e6bc24d18e25bdb", "license": "not present in cached snapshot; external metadata verification pending"},
       "training_class": "training-free",
       "population": {"rows": null, "clusters": null, "manifest": null},
       "decoder": {"status": "must prove same CAL algorithm and 100-demo bias protocol"},
@@ -215,12 +215,12 @@
       "source": {"paper": "arXiv:2602.07546", "revision": "v1", "official_code": null, "license": null, "search_conclusion": "No author implementation found as of 2026-07-31."},
       "checkpoint": {"id": "Dream-org/Dream-Coder-v0-Base-7B", "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63"},
       "training_class": "training-free",
-      "population": {"rows": {"SingleLine": 927, "RandomSpan": 1480, "MultiLine": 5079}, "clusters": 148, "manifest": null},
+      "population": {"rows": {"SingleLine": 927, "RandomSpan": 1480, "MultiLine": 5079}, "clusters": 148, "manifest": {"SingleLine": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl", "RandomSpan": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_randomspan_nonfrozen_manifest.jsonl", "MultiLine": "analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl"}, "manifest_sha256": {"SingleLine": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269", "RandomSpan": "474f7a2740027ff3b709ed7ab8b4f3c68125cda10688881f204d9dd405d2073e", "MultiLine": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80"}},
       "decoder": {"probe_grid": [1, 2, 4, 8, 16, 32, 64, 128], "max_gen": 128, "temperature": 0.2, "top_p": 0.9},
       "implementation_class": "paper-guided, author-unverified reimplementation of LR-DLLM",
-      "status": "ambiguity_preregistration_frozen_pure_core_pending",
-      "paths": {"raw": null, "status": "docs/paper_agent/lrdllm_author_unverified_ambiguity_ledger.zh.md", "report": "docs/paper_agent/lrdllm_protocol_audit.zh.md"},
-      "paired_comparison": {"eligible": false, "reason": "Implementation and per-dataset manifests are not frozen."}
+      "status": "adapter_manifests_preflight_verified_technical_smoke_pending_gpu_after_CAL",
+      "paths": {"raw": {"SingleLine": "outputs_clean/lrdllm_dreamcoder_singleline_20260731_v1/lrdllm_primary_raw.jsonl", "RandomSpan": "outputs_clean/lrdllm_dreamcoder_randomspan_20260731_v1/lrdllm_primary_raw.jsonl", "MultiLine": "outputs_clean/lrdllm_dreamcoder_multiline_20260731_v1/lrdllm_primary_raw.jsonl"}, "status": "docs/paper_agent/experiments/20260731_lrdllm_dreamcoder_smoke_action.zh.md", "report": "docs/paper_agent/lrdllm_protocol_audit.zh.md"},
+      "paired_comparison": {"eligible": "after_same-key Fixed64 and LR-DLLM arms complete", "reason": "Manifests and candidate keys are shared; no paired delta is allowed before both arms complete."}
     },
     {
       "id": "lrdllm_llada_singleline_randomspan_multiline",

@@ -1,0 +1,60 @@
+{
+  "allowed_group_certificate": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/manifest.csv",
+  "allowed_group_certificate_sha256": "2e2e0604b1f9129350ab3fb9143f478f6dbc63ae0f30306f69cc067004cb8ede",
+  "allowed_groups": 148,
+  "builder": "analysis/build_lrdllm_common_manifests.py",
+  "datasets": {
+    "HumanEval-MultiLineInfilling": {
+      "full_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_multiline_nonfrozen_manifest.jsonl",
+      "full_manifest_sha256": "b18fe79cda00048b89e0d92983e1b3d90aa82d95c0b17b684847f2962d132f80",
+      "nonfrozen_clusters": 148,
+      "nonfrozen_rows": 5079,
+      "official_rows": 5815,
+      "source_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-MultiLineInfilling.jsonl.gz",
+      "source_sha256": "2f341612eee1d35da1357a4f365e0c0b3ba6e2b62eb491e88aaefa4855af0349"
+    },
+    "HumanEval-RandomSpanInfilling": {
+      "full_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_randomspan_nonfrozen_manifest.jsonl",
+      "full_manifest_sha256": "474f7a2740027ff3b709ed7ab8b4f3c68125cda10688881f204d9dd405d2073e",
+      "nonfrozen_clusters": 148,
+      "nonfrozen_rows": 1480,
+      "official_rows": 1640,
+      "source_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-RandomSpanInfilling.jsonl.gz",
+      "source_sha256": "b4f330d8a8ff97bf85d9def497dffcae4d741e506449386a877236e422e33e8d"
+    },
+    "HumanEval-SingleLineInfilling": {
+      "full_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_nonfrozen_manifest.jsonl",
+      "full_manifest_sha256": "84b86f059c4c479a1e45591bb038411fc5c16424c1e78fb81ebf038617d74269",
+      "mechanism_smoke_clusters": 64,
+      "mechanism_smoke_context_buckets": {
+        "0": 16,
+        "1": 16,
+        "2": 16,
+        "3": 16
+      },
+      "mechanism_smoke_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_mechanism_smoke64_manifest.jsonl",
+      "mechanism_smoke_manifest_sha256": "b1b27a59c724a957814b1878022b7ba1523eaaa55a9fabc7fe7fa2016060508f",
+      "mechanism_smoke_rows": 64,
+      "nonfrozen_clusters": 148,
+      "nonfrozen_rows": 927,
+      "official_rows": 1033,
+      "source_path": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff/data/HumanEval-SingleLineInfilling.jsonl.gz",
+      "source_sha256": "1277073e7ddce163ef68598c2bca777f688a53df99422f097e37362090f88e1f",
+      "technical_smoke_clusters": 12,
+      "technical_smoke_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/ccfa-execution-sprint-v1/analysis_outputs/baseline_manifests_20260731_v1/lrdllm_common_singleline_technical_smoke12_manifest.jsonl",
+      "technical_smoke_manifest_sha256": "c1dc18fac3fd67ba73b11a197e547b4d6c30dc60b1ad018d672447c3d2885280",
+      "technical_smoke_rows": 12
+    }
+  },
+  "forbidden_fields_used": [],
+  "sealed_files_opened": false,
+  "selection_fields": [
+    "task_id",
+    "task_group",
+    "source_row_id",
+    "prompt",
+    "suffix",
+    "entry_point"
+  ],
+  "test_evaluation_count": 0
+}

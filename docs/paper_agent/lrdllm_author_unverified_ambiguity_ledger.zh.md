@@ -28,6 +28,8 @@
 14. **No oracle/evaluator leakage**：选择器和 manifest builder不得读取 `canonical_solution`、reference middle/oracle length、tests、evaluator pass/fail 或任何历史 outcome。evaluator 只能在整条 completion 已固定后调用。冻结 test 文件不打开，`test_evaluation_count=0`。
 15. **Resume/dedup**：canonical raw append-only；candidate key 唯一；成功行 resume no-op；error 只进入 failure journal；重新运行不得覆盖成功行或改变 row seed。
 
+Pre-outcome implementation clarification：commit sampling 使用独立 model forward，不复用 stable confidence forward 的 logits。这样 search/decode/total forward 分区互斥且可审计；该选择在任何 GPU smoke 或 evaluator outcome 前写入并提交。
+
 ## Registered sensitivities, not primary
 
 只有主实现完成全部技术 gate 后，且另行建立 immutable manifest/action brief，才可运行以下 sensitivity；不得根据主结果挑选：
