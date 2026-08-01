@@ -2,7 +2,7 @@
 
 Timestamp: 2026-08-01 UTC
 
-Action: implement and execute the protocol-frozen DreamOn slot-aware progressive V2 experiment family.
+Action: execute `v2_opentail` after the completed V2-Hard negative full result.
 
 Methods, in fixed order:
 
@@ -25,7 +25,12 @@ Frozen evidence:
 - DreamOn commit: `8a0a54918412eda9402a327646f7f067f7160ec8`
 - HumanEval Infilling commit: `88062ff9859c875d04db115b698ed4b0f0395170`
 
-Execution gate: protocol/public implementation commit and push, then for each method unit tests -> smoke 5 -> pilot 30 -> full 642 -> score/completeness audit -> focused commit/push.
+Completed:
+
+- protocol/public implementation commit `f15749e` and audit-fix commit `4205475` are pushed;
+- V2-Hard completed 642/642 with 7 passes, 421 explicit forward-cap failures, and zero disallowed protocol violations.
+
+Current execution gate: V2-OpenTail unit tests -> smoke 5 -> pilot 30 -> full 642 -> score/completeness audit -> focused commit/push.
 
 Scientific stop rule: stop and report if the frozen method definition must change. Ordinary engineering fixes rerun the affected method from smoke in fresh outputs.
 

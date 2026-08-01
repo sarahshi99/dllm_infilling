@@ -307,3 +307,10 @@
 - evidence：默认 sandbox 中 `/dev/nvidia*` 不可见，`nvidia-smi` 失败；approved host/unsandboxed `nvidia-smi` 成功，显示 `NVIDIA H200 NVL`、driver `580.159.03`、memory `143771 MiB`、无运行进程；approved host/unsandboxed `/dev/nvidia0`、`/dev/nvidiactl`、`/dev/nvidia-uvm` 可见；approved host/unsandboxed `dllm_env` PyTorch 报告 `cuda_available=true`、`gpu_count=1`。
 - result：H200 host environment 可用；此前 `h200_environment_invalid` 应修正为 `host_h200_available_sandbox_gpu_hidden`。后续 GPU 实验必须通过 approved unsandboxed/escalated commands 运行。
 - next：commit/push bootstrap correction，然后启动 H200 Tier 1 reruns。
+
+## 2026-08-01 UTC DreamOn Progressive V2-Hard
+
+- action：在独立分支 `codex/dreamon-progressive-v2-slots` 冻结 642-row protocol，完成 slot-aware generator/runner 与 41 个 focused tests，并依次执行 V2-Hard smoke、30-case pilot 和 full 642。
+- evidence：`repro_results/dreamon_progressive_v2_protocol/`、`repro_results/dreamon_progressive_v2_hard_all642/`、`docs/paper_agent/experiments/20260801_dreamon_v2_hard_full.md`。
+- result：V2-Hard `7/642 = 1.09%`，compile `46/642`，exact `3/642`；421 条显式 256-forward cap failure，0 disallowed protocol violation，0 runtime error，0 post-hoc truncation。该 oracle exact-three-line structural diagnostic 是强负结果，削弱 hard-slot-only stable progressive decoding 假设。
+- next：按冻结顺序执行 V2-OpenTail，不因 V2-Hard Pass@1 下降停止。

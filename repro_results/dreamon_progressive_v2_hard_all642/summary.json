@@ -1,0 +1,52 @@
+{
+  "blank_region_count": 214,
+  "compile_pass_rate": 0.07165109034267912,
+  "compile_passed": 46,
+  "completion_physical_lines": {
+    "distribution": {
+      "0": 421,
+      "3": 221
+    },
+    "mean": 1.0327102803738317
+  },
+  "completion_tokens": {
+    "mean": 12.082554517133957,
+    "median": 0.0
+  },
+  "delete_count": 45011,
+  "exact_match_rate": 0.004672897196261682,
+  "exact_matches": 3,
+  "expand_count": 60749,
+  "forwards": {
+    "max": 256,
+    "mean": 188.6417445482866,
+    "median": 256.0,
+    "total": 121108
+  },
+  "global_expand_cap_hits": 3079,
+  "num_base_problems": 115,
+  "num_samples": 642,
+  "pass_rate": 0.010903426791277258,
+  "passed": 7,
+  "peak_cuda_memory_bytes": {
+    "max": 15850694656,
+    "mean": 15584345808.149532
+  },
+  "protocol_error_count": 421,
+  "runtime_error_count": 0,
+  "slot_expand_cap_hits": 27593,
+  "task_macro_pass_rate": 0.014106280193236715,
+  "token_forwards": {
+    "max": 150471,
+    "mean": 51129.04828660436,
+    "median": 49278.5,
+    "total": 32824849
+  },
+  "unresolved_mask_count": 8094,
+  "wall_time_seconds": {
+    "max": 53.71651004604064,
+    "mean": 16.501913330675468,
+    "median": 16.79854389495449,
+    "total": 10594.22835829365
+  }
+}
