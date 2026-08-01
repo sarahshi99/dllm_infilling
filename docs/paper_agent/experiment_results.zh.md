@@ -882,3 +882,11 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - 更安全的 diagnostic signal、trace-enabled evidence，或显示没有 short-bucket regression 的 smoke GPU run；
 - full same-hardware run 改善 long buckets；
 - 或严谨 negative result，支撑转向 dynamic canvas 或 length regularization。
+
+## DreamOn V2 decoder iteration（2026-08-01）
+
+- V2-Hard-v1 原始结果保持不变：Pass@1 `7/642`、compile `46/642`、421 个 forward-cap failure。
+- 解释修正为：`V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy`。
+- 已确认混杂：hard newline proposal blanket ban、EOS 仅删除 selected mask、缺少 exact deterministic transition cycle detection。
+- V2-OpenTail-v1 full partial357 已封存为 abandoned，`resumable:false`；Joint-v1 未启动。
+- 当前仅授权 `v2_hard_v2_boundary` protocol version 2；尚无新 empirical result，必须先通过 smoke/pilot 预注册门禁。

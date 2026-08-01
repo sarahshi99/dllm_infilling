@@ -314,3 +314,10 @@
 - evidence：`repro_results/dreamon_progressive_v2_protocol/`、`repro_results/dreamon_progressive_v2_hard_all642/`、`docs/paper_agent/experiments/20260801_dreamon_v2_hard_full.md`。
 - result：V2-Hard `7/642 = 1.09%`，compile `46/642`，exact `3/642`；421 条显式 256-forward cap failure，0 disallowed protocol violation，0 runtime error，0 post-hoc truncation。该 oracle exact-three-line structural diagnostic 是强负结果，削弱 hard-slot-only stable progressive decoding 假设。
 - next：按冻结顺序执行 V2-OpenTail，不因 V2-Hard Pass@1 下降停止。
+
+## 2026-08-01 UTC DreamOn V2 decoder protocol iterate
+
+- decision：旧 V2 解码协议被确认存在 newline blanket ban、单-mask EOS delete 和缺失 exact-transition cycle detection 三个混杂因素；研究决策改为 `iterate`。
+- archive：V2-Hard-v1 642-row 原始结果保持只读并标注为 decoder/protocol failure diagnostic；V2-OpenTail-v1 partial357 移入 `repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357/`，`resumable:false`；Joint-v1 未启动。
+- action：本轮只实现 `v2_hard_v2_boundary` protocol version 2，经过严格 smoke/pilot 门禁后才允许 full，并在该方法结束后停止。
+- protocol：`repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`。

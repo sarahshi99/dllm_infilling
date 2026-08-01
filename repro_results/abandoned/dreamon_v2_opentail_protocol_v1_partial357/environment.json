@@ -1,0 +1,17 @@
+{
+  "config_hash": "ee4d0ef90b3fb03c2bbbb07252f7826d57f45f44d5f9fa9d8c1fab76b49172e5",
+  "cuda_runtime": "12.1",
+  "device": "cuda",
+  "gpu": {
+    "name": "NVIDIA H200 NVL",
+    "total_memory_bytes": 150109880320
+  },
+  "model_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "population_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots/repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+  "protocol_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots/repro_results/dreamon_progressive_v2_protocol/protocol.json",
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "pytorch": "2.5.1+cu121",
+  "recorded_at_utc": "2026-08-01T16:02:05.996810+00:00",
+  "runner_commit": "0cf2e9bd47590629fdde31ab1028b59044e63cef",
+  "transformers": "4.46.2"
+}

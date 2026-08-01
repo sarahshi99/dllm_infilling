@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import time
 from dataclasses import dataclass
 from enum import Enum, IntEnum
-from typing import Any, Iterable, Sequence
+from typing import Any, Iterable, Mapping, Sequence
 
 import torch
 
@@ -18,6 +19,7 @@ class Method(str, Enum):
     V2_HARD = "v2_hard"
     V2_OPENTAIL = "v2_opentail"
     JOINT_OPENTAIL = "joint_opentail"
+    V2_HARD_V2_BOUNDARY = "v2_hard_v2_boundary"
 
 
 class Region(IntEnum):
@@ -36,6 +38,28 @@ GENERATION_REGIONS = (*HARD_REGIONS, Region.OPEN_TAIL)
 
 
 @dataclass(frozen=True)
+class NewlineTokenInfo:
+    token_id: int
+    decoded_text: str
+    normalized_text: str
+    left_text: str
+    left_token_ids: tuple[int, ...]
+    right_text: str
+    newline_count: int
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "token_id": self.token_id,
+            "decoded_text": self.decoded_text,
+            "normalized_text": self.normalized_text,
+            "left_text": self.left_text,
+            "left_token_ids": list(self.left_token_ids),
+            "right_text": self.right_text,
+            "newline_count": self.newline_count,
+        }
+
+
+@dataclass(frozen=True)
 class TokenizerSpec:
     bos_id: int
     eos_id: int
@@ -43,6 +67,7 @@ class TokenizerSpec:
     mask_id: int
     expand_id: int
     newline_token_ids: frozenset[int]
+    newline_token_map: Mapping[int, NewlineTokenInfo]
     literal_newline_ids: tuple[int, ...]
 
 
@@ -77,6 +102,51 @@ class SelectedUpdate:
     proposal_token_id: int
     unconstrained_proposal_token_id: int
     confidence: float
+
+
+@dataclass(frozen=True)
+class ActionResult:
+    action: str
+    details: dict[str, Any]
+
+
+class ExactTransitionCycleDetector:
+    def __init__(self) -> None:
+        self._seen: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._history: list[dict[str, Any]] = []
+
+    def observe(
+        self,
+        signature: tuple[Any, ...],
+        forward_index: int,
+        region_lengths: Mapping[str, int],
+    ) -> dict[str, Any] | None:
+        record = {
+            "signature": signature,
+            "forward_index": int(forward_index),
+            "region_lengths": dict(region_lengths),
+            "action": signature[4],
+        }
+        previous = self._seen.get(signature)
+        self._history.append(record)
+        if previous is None:
+            self._seen[signature] = record
+            return None
+        first_index = int(previous["forward_index"])
+        actions = [
+            item["action"]
+            for item in self._history
+            if first_index <= int(item["forward_index"]) <= int(forward_index)
+        ]
+        return {
+            "cycle_length": int(forward_index) - first_index,
+            "first_forward_index": first_index,
+            "repeat_forward_index": int(forward_index),
+            "first_region_lengths": previous["region_lengths"],
+            "repeat_region_lengths": dict(region_lengths),
+            "action_sequence": actions,
+            "transition_signature": list(signature),
+        }
 
 
 @dataclass
@@ -168,6 +238,30 @@ class CanvasState:
         self.attention_mask[last] = False
         self.real_length -= 1
 
+    def replace_real_sequence(
+        self, token_ids: Sequence[int], region_ids: Sequence[int]
+    ) -> None:
+        if len(token_ids) != len(region_ids):
+            raise ProtocolError("replacement_parallel_lengths_differ")
+        if len(token_ids) > self.capacity:
+            raise ProtocolError("context_capacity_exceeded")
+        new_input_ids = torch.full_like(self.input_ids, self.tokenizer_spec.pad_id)
+        new_region_ids = torch.full_like(self.region_id, int(Region.PAD))
+        new_attention = torch.zeros_like(self.attention_mask)
+        if token_ids:
+            length = len(token_ids)
+            new_input_ids[:length] = torch.tensor(
+                list(map(int, token_ids)), dtype=torch.long, device=self.input_ids.device
+            )
+            new_region_ids[:length] = torch.tensor(
+                list(map(int, region_ids)), dtype=torch.long, device=self.region_id.device
+            )
+            new_attention[:length] = True
+        self.input_ids.copy_(new_input_ids)
+        self.region_id.copy_(new_region_ids)
+        self.attention_mask.copy_(new_attention)
+        self.real_length = len(token_ids)
+
     def _assert_real_generation_position(self, position: int) -> None:
         if not 0 <= position < self.real_length or not bool(self.attention_mask[position]):
             raise ProtocolError("selected_position_is_not_real")
@@ -176,8 +270,43 @@ class CanvasState:
             raise ProtocolError("selected_region_is_not_generation_eligible")
 
 
+def state_hash(state: CanvasState) -> str:
+    payload = {
+        "method": state.method.value,
+        "input_ids": [int(item) for item in state.input_ids[: state.real_length]],
+        "region_id": [int(item) for item in state.region_id[: state.real_length]],
+        "attention_visible_real_length": int(
+            state.attention_mask[: state.real_length].sum().item()
+        ),
+        "real_length": int(state.real_length),
+        "active_region": None if state.active_region is None else state.active_region.name,
+    }
+    encoded = json.dumps(
+        payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def transition_signature(
+    pre_state_hash: str,
+    selected_position: int,
+    selected_region: Region,
+    proposal_token_id: int,
+    action: str,
+    post_state_hash: str,
+) -> tuple[Any, ...]:
+    return (
+        pre_state_hash,
+        int(selected_position),
+        selected_region.name,
+        int(proposal_token_id),
+        action,
+        post_state_hash,
+    )
+
+
 def sequential_regions(method: Method) -> tuple[Region, ...]:
-    if method == Method.V2_HARD:
+    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2)
     if method == Method.V2_OPENTAIL:
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
@@ -187,13 +316,16 @@ def sequential_regions(method: Method) -> tuple[Region, ...]:
 
 
 def method_generation_regions(method: Method) -> tuple[Region, ...]:
-    if method == Method.V2_HARD:
+    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
         return sequential_regions(method)
     return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
 
 
-def scan_newline_token_ids(tokenizer) -> tuple[list[int], dict[str, Any]]:
-    token_ids: list[int] = []
+def scan_newline_token_metadata(
+    tokenizer,
+) -> tuple[dict[int, NewlineTokenInfo], dict[str, Any]]:
+    started = time.perf_counter()
+    mapping: dict[int, NewlineTokenInfo] = {}
     examples: list[dict[str, Any]] = []
     for token_id in range(len(tokenizer)):
         decoded = tokenizer.decode(
@@ -202,16 +334,57 @@ def scan_newline_token_ids(tokenizer) -> tuple[list[int], dict[str, Any]]:
             clean_up_tokenization_spaces=False,
         )
         if "\n" in decoded or "\r" in decoded:
-            token_ids.append(token_id)
+            normalized = decoded.replace("\r\n", "\n").replace("\r", "\n")
+            boundary_index = normalized.index("\n")
+            left_text = normalized[:boundary_index]
+            right_text = normalized[boundary_index + 1 :]
+            left_token_ids = tuple(
+                int(item)
+                for item in tokenizer.encode(left_text, add_special_tokens=False)
+            )
+            round_trip = tokenizer.decode(
+                list(left_token_ids),
+                skip_special_tokens=False,
+                clean_up_tokenization_spaces=False,
+            )
+            if round_trip != left_text:
+                raise ProtocolError(
+                    f"newline_left_retokenization_mismatch:{token_id}"
+                )
+            info = NewlineTokenInfo(
+                token_id=int(token_id),
+                decoded_text=decoded,
+                normalized_text=normalized,
+                left_text=left_text,
+                left_token_ids=left_token_ids,
+                right_text=right_text,
+                newline_count=normalized.count("\n"),
+            )
+            mapping[int(token_id)] = info
             if len(examples) < 20:
-                examples.append({"token_id": token_id, "decoded": decoded})
-    digest = hashlib.sha256("\n".join(map(str, token_ids)).encode("utf-8")).hexdigest()
-    return token_ids, {
+                examples.append(info.as_dict())
+    records = [mapping[token_id].as_dict() for token_id in sorted(mapping)]
+    encoded = json.dumps(
+        records, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    token_ids = sorted(mapping)
+    id_digest = hashlib.sha256("\n".join(map(str, token_ids)).encode("utf-8")).hexdigest()
+    mapping_digest = hashlib.sha256(encoded).hexdigest()
+    elapsed = time.perf_counter() - started
+    return mapping, {
         "vocab_size": len(tokenizer),
         "newline_token_count": len(token_ids),
-        "newline_token_ids_sha256": digest,
+        "newline_token_ids_sha256": id_digest,
+        "newline_token_mapping_count": len(mapping),
+        "newline_token_mapping_sha256": mapping_digest,
+        "preprocessing_seconds": elapsed,
         "examples": examples,
     }
+
+
+def scan_newline_token_ids(tokenizer) -> tuple[list[int], dict[str, Any]]:
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+    return sorted(mapping), metadata
 
 
 def _initial_middle(method: Method, spec: TokenizerSpec, masks: int) -> tuple[list[int], list[int]]:
@@ -230,7 +403,7 @@ def _initial_middle(method: Method, spec: TokenizerSpec, masks: int) -> tuple[li
     add_newline()
     add_region(Region.HARD_SLOT_1)
     add_newline()
-    if method == Method.V2_HARD:
+    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
         add_region(Region.HARD_SLOT_2)
         add_newline()
     else:
@@ -403,14 +576,8 @@ def constrained_active_logits(
         raise ProtocolError("topk_requested_without_active_mask")
     position_tensor = torch.tensor(positions, dtype=torch.long, device=full_logits.device)
     active_logits = full_logits[position_tensor].float().clone()
-    vocab_size = active_logits.shape[-1]
-    newline_ids = [
-        token_id for token_id in state.tokenizer_spec.newline_token_ids if token_id < vocab_size
-    ]
     for row, position in enumerate(positions):
         region = Region(int(state.region_id[position]))
-        if region in HARD_REGIONS and newline_ids:
-            active_logits[row, newline_ids] = float("-inf")
         if not _expand_allowed(state, region, config):
             active_logits[row, state.tokenizer_spec.expand_id] = float("-inf")
     return active_logits, positions
@@ -439,32 +606,204 @@ def select_update(
     )
 
 
+def _candidate_middle_length(region_ids: Sequence[int]) -> int:
+    middle_regions = {int(region) for region in GENERATION_REGIONS} | {
+        int(Region.LOCKED_NEWLINE)
+    }
+    return sum(int(region_id) in middle_regions for region_id in region_ids)
+
+
+def _validate_candidate_caps(
+    token_ids: Sequence[int],
+    region_ids: Sequence[int],
+    region: Region,
+    config: SlotGeneratorConfig,
+) -> None:
+    if len(token_ids) > config.max_context_tokens:
+        raise ProtocolError("boundary_context_cap_exceeded")
+    if _candidate_middle_length(region_ids) > config.max_global_middle_tokens:
+        raise ProtocolError("boundary_global_cap_exceeded")
+    if region in HARD_REGIONS:
+        slot_length = sum(int(item) == int(region) for item in region_ids)
+        if slot_length > config.max_hard_slot_tokens:
+            raise ProtocolError("boundary_slot_cap_exceeded")
+
+
+def _resolved_segments(
+    state: CanvasState, positions: Sequence[int], tokenizer
+) -> list[dict[str, Any]]:
+    segments: list[list[int]] = []
+    current: list[int] = []
+    for position in positions:
+        token_id = int(state.input_ids[position])
+        if token_id == state.tokenizer_spec.mask_id:
+            if current:
+                segments.append(current)
+                current = []
+        else:
+            current.append(token_id)
+    if current:
+        segments.append(current)
+    return [
+        {"token_ids": segment, "text": _decode(tokenizer, segment)}
+        for segment in segments
+    ]
+
+
+def _discarded_contiguous_segments(
+    state: CanvasState,
+    right_text: str,
+    positions: Sequence[int],
+    tokenizer,
+) -> list[str]:
+    segments: list[str] = []
+    current = right_text
+    for position in positions:
+        token_id = int(state.input_ids[position])
+        if token_id == state.tokenizer_spec.mask_id:
+            if current:
+                segments.append(current)
+                current = ""
+        else:
+            current += _decode(tokenizer, [token_id])
+    if current:
+        segments.append(current)
+    return segments
+
+
+def _apply_line_boundary(
+    state: CanvasState,
+    position: int,
+    region: Region,
+    info: NewlineTokenInfo,
+    config: SlotGeneratorConfig,
+    tokenizer,
+) -> ActionResult:
+    if tokenizer is None:
+        raise ProtocolError("line_boundary_requires_tokenizer")
+    region_positions = state.positions_for_region(region)
+    right_positions = [item for item in region_positions if item > position]
+    discarded_masks = sum(
+        int(state.input_ids[item]) == state.tokenizer_spec.mask_id
+        for item in right_positions
+    )
+    discarded_resolved_ids = [
+        int(state.input_ids[item])
+        for item in right_positions
+        if int(state.input_ids[item]) != state.tokenizer_spec.mask_id
+    ]
+    resolved_segments = _resolved_segments(state, right_positions, tokenizer)
+    contiguous_segments = _discarded_contiguous_segments(
+        state, info.right_text, right_positions, tokenizer
+    )
+    removed = set(right_positions)
+    old_ids = [int(item) for item in state.input_ids[: state.real_length]]
+    old_regions = [int(item) for item in state.region_id[: state.real_length]]
+    new_ids: list[int] = []
+    new_regions: list[int] = []
+    for index, (token_id, region_id) in enumerate(zip(old_ids, old_regions)):
+        if index == position:
+            new_ids.extend(info.left_token_ids)
+            new_regions.extend([int(region)] * len(info.left_token_ids))
+        elif index in removed:
+            continue
+        else:
+            new_ids.append(token_id)
+            new_regions.append(region_id)
+    _validate_candidate_caps(new_ids, new_regions, region, config)
+    before_length = len(region_positions)
+    state.replace_real_sequence(new_ids, new_regions)
+    left_masks_remaining = bool(state.unresolved_positions(region))
+    return ActionResult(
+        action="line_boundary",
+        details={
+            "proposal_token_id": info.token_id,
+            "decoded_text": info.decoded_text,
+            "normalized_text": info.normalized_text,
+            "left_text": info.left_text,
+            "left_token_ids": list(info.left_token_ids),
+            "right_text": info.right_text,
+            "newline_count": info.newline_count,
+            "boundary_retokenized_left_token_count": len(info.left_token_ids),
+            "discarded_internal_right_text": info.right_text,
+            "discarded_masks_after_boundary": int(discarded_masks),
+            "discarded_resolved_token_ids_after_boundary": discarded_resolved_ids,
+            "discarded_resolved_segments_after_boundary": resolved_segments,
+            "discarded_resolved_tokens_after_boundary": len(discarded_resolved_ids),
+            "discarded_contiguous_segments": contiguous_segments,
+            "discarded_complete_text": (
+                "".join(contiguous_segments) if discarded_masks == 0 else None
+            ),
+            "boundary_event_with_left_masks_remaining": left_masks_remaining,
+            "region_length_before": before_length,
+            "region_length_after": state.region_length(region),
+        },
+    )
+
+
+def _apply_region_local_eos(
+    state: CanvasState, position: int, region: Region
+) -> ActionResult:
+    region_positions = state.positions_for_region(region)
+    delete_positions = [
+        item
+        for item in region_positions
+        if item >= position
+        and int(state.input_ids[item]) == state.tokenizer_spec.mask_id
+    ]
+    if position not in delete_positions:
+        raise ProtocolError("region_local_eos_selected_position_not_deleted")
+    delete_set = set(delete_positions)
+    old_ids = [int(item) for item in state.input_ids[: state.real_length]]
+    old_regions = [int(item) for item in state.region_id[: state.real_length]]
+    new_ids = [token_id for index, token_id in enumerate(old_ids) if index not in delete_set]
+    new_regions = [
+        region_id for index, region_id in enumerate(old_regions) if index not in delete_set
+    ]
+    before_length = len(region_positions)
+    state.replace_real_sequence(new_ids, new_regions)
+    return ActionResult(
+        action="region_local_eos",
+        details={
+            "deleted_positions": len(delete_positions),
+            "deleted_masks": len(delete_positions),
+            "deleted_original_positions": delete_positions,
+            "region_length_before": before_length,
+            "region_length_after": state.region_length(region),
+            "cross_region_delete_attempts": 0,
+        },
+    )
+
+
 def apply_selected_action(
     state: CanvasState,
     position: int,
     proposal_token_id: int,
     config: SlotGeneratorConfig,
-) -> str:
+    tokenizer=None,
+) -> ActionResult:
     state._assert_real_generation_position(position)
     if int(state.input_ids[position]) != state.tokenizer_spec.mask_id:
         raise ProtocolError("selected_position_is_not_unresolved")
     region = Region(int(state.region_id[position]))
     if state.method != Method.JOINT_OPENTAIL and region != state.active_region:
         raise ProtocolError("selected_region_is_not_active_region")
-    if region in HARD_REGIONS and proposal_token_id in state.tokenizer_spec.newline_token_ids:
-        raise ProtocolError("forbidden_newline_selected_in_hard_slot")
+    newline_info = state.tokenizer_spec.newline_token_map.get(int(proposal_token_id))
+    if region in HARD_REGIONS and newline_info is not None:
+        return _apply_line_boundary(
+            state, position, region, newline_info, config, tokenizer
+        )
     if proposal_token_id == state.tokenizer_spec.expand_id:
         if not _expand_allowed(state, region, config):
             raise ProtocolError("expand_selected_at_cap")
         state.expand_at(position)
-        return "expand"
+        return ActionResult("expand", {})
     if proposal_token_id == state.tokenizer_spec.eos_id:
-        state.delete_at(position)
-        return "delete"
+        return _apply_region_local_eos(state, position, region)
     if proposal_token_id == state.tokenizer_spec.mask_id:
-        return "mask_noop"
+        return ActionResult("mask_noop", {})
     state.replace_token(position, proposal_token_id)
-    return "normal"
+    return ActionResult("normal", {})
 
 
 def validate_state(state: CanvasState, method: Method) -> None:
@@ -589,6 +928,7 @@ def run_slot_generation(
     suffix_ids: Sequence[int],
     config: SlotGeneratorConfig,
     save_trace: bool,
+    task_id: str | None = None,
 ) -> dict[str, Any]:
     device = next(model.parameters()).device
     state = build_canvas(method, prefix_ids, suffix_ids, tokenizer_spec, config, device)
@@ -610,6 +950,23 @@ def run_slot_generation(
     joint_updates_before_slot0_complete = 0
     first_selected_region: str | None = None
     active_region_history: list[str] = []
+    newline_boundary_event_details: list[dict[str, Any]] = []
+    region_local_eos_event_details: list[dict[str, Any]] = []
+    exact_cycle_events: list[dict[str, Any]] = []
+    transition_detector = ExactTransitionCycleDetector()
+    mixed_newline_token_events = 0
+    pure_newline_token_events = 0
+    multiple_newline_token_events = 0
+    boundary_retokenized_left_token_count = 0
+    discarded_internal_right_text: list[str] = []
+    discarded_masks_after_boundary = 0
+    discarded_resolved_token_ids_after_boundary: list[int] = []
+    discarded_resolved_segments_after_boundary: list[dict[str, Any]] = []
+    discarded_resolved_tokens_after_boundary = 0
+    boundary_events_with_left_masks_remaining = 0
+    region_local_eos_deleted_masks = 0
+    max_masks_deleted_by_one_eos = 0
+    cross_region_delete_attempts = 0
     start = time.perf_counter()
     if device.type == "cuda":
         torch.cuda.synchronize(device)
@@ -654,6 +1011,8 @@ def run_slot_generation(
             ):
                 joint_updates_before_slot0_complete += 1
             if (
+                method != Method.V2_HARD_V2_BOUNDARY
+                and
                 selected.region in HARD_REGIONS
                 and selected.unconstrained_proposal_token_id
                 in tokenizer_spec.newline_token_ids
@@ -667,22 +1026,122 @@ def run_slot_generation(
             if state.global_middle_length() >= config.max_global_middle_tokens:
                 global_cap_hits += 1
 
-            action = apply_selected_action(
-                state, selected.position, selected.proposal_token_id, config
+            pre_action_hash = state_hash(state)
+            pre_region_lengths = {
+                region.name: state.region_length(region)
+                for region in method_generation_regions(method)
+            }
+            action_result = apply_selected_action(
+                state,
+                selected.position,
+                selected.proposal_token_id,
+                config,
+                tokenizer=tokenizer,
+            )
+            if method != Method.JOINT_OPENTAIL:
+                advance_active_region(state, method)
+            validate_state(state, method)
+            post_action_hash = state_hash(state)
+            post_region_lengths = {
+                region.name: state.region_length(region)
+                for region in method_generation_regions(method)
+            }
+            action = action_result.action
+            signature = transition_signature(
+                pre_action_hash,
+                selected.position,
+                selected.region,
+                selected.proposal_token_id,
+                action,
+                post_action_hash,
             )
             selected_updates[selected.region.name] += 1
             if action == "normal":
                 normal_updates[selected.region.name] += 1
             elif action == "expand":
                 expand_counts[selected.region.name] += 1
-            elif action == "delete":
+            elif action == "region_local_eos":
                 delete_counts[selected.region.name] += 1
+                eos_event = {
+                    "task_id": task_id,
+                    "slot": selected.region.name,
+                    "original_position": selected.position,
+                    "proposal_token_id": selected.proposal_token_id,
+                    "pre_state_hash": pre_action_hash,
+                    "post_state_hash": post_action_hash,
+                    "region_lengths_before": pre_region_lengths,
+                    "region_lengths_after": post_region_lengths,
+                    **action_result.details,
+                }
+                region_local_eos_event_details.append(eos_event)
+                deleted_masks = int(action_result.details["deleted_masks"])
+                region_local_eos_deleted_masks += deleted_masks
+                max_masks_deleted_by_one_eos = max(
+                    max_masks_deleted_by_one_eos, deleted_masks
+                )
+                cross_region_delete_attempts += int(
+                    action_result.details["cross_region_delete_attempts"]
+                )
+            elif action == "line_boundary":
+                boundary_event = {
+                    "task_id": task_id,
+                    "slot": selected.region.name,
+                    "original_position": selected.position,
+                    "proposal_token_id": selected.proposal_token_id,
+                    "pre_state_hash": pre_action_hash,
+                    "post_state_hash": post_action_hash,
+                    "region_lengths_before": pre_region_lengths,
+                    "region_lengths_after": post_region_lengths,
+                    **action_result.details,
+                }
+                newline_boundary_event_details.append(boundary_event)
+                normalized = str(action_result.details["normalized_text"])
+                if normalized.strip("\n"):
+                    mixed_newline_token_events += 1
+                else:
+                    pure_newline_token_events += 1
+                if int(action_result.details["newline_count"]) > 1:
+                    multiple_newline_token_events += 1
+                boundary_retokenized_left_token_count += int(
+                    action_result.details["boundary_retokenized_left_token_count"]
+                )
+                discarded_internal_right_text.append(
+                    str(action_result.details["discarded_internal_right_text"])
+                )
+                discarded_masks_after_boundary += int(
+                    action_result.details["discarded_masks_after_boundary"]
+                )
+                discarded_resolved_token_ids_after_boundary.extend(
+                    action_result.details[
+                        "discarded_resolved_token_ids_after_boundary"
+                    ]
+                )
+                discarded_resolved_segments_after_boundary.extend(
+                    action_result.details[
+                        "discarded_resolved_segments_after_boundary"
+                    ]
+                )
+                discarded_resolved_tokens_after_boundary += int(
+                    action_result.details[
+                        "discarded_resolved_tokens_after_boundary"
+                    ]
+                )
+                boundary_events_with_left_masks_remaining += int(
+                    action_result.details[
+                        "boundary_event_with_left_masks_remaining"
+                    ]
+                )
             elif action == "mask_noop":
                 mask_noops[selected.region.name] += 1
             else:
                 raise AssertionError(f"Unknown action: {action}")
 
-            validate_state(state, method)
+            cycle = transition_detector.observe(
+                signature, len(forward_lengths), post_region_lengths
+            )
+            if cycle is not None:
+                exact_cycle_events.append(cycle)
+                raise ProtocolError("exact_deterministic_cycle")
             if save_trace:
                 next_positions = eligible_positions(state, method)
                 next_active_region = (
@@ -698,6 +1157,10 @@ def run_slot_generation(
                         "unconstrained_proposal_token_id": selected.unconstrained_proposal_token_id,
                         "confidence": selected.confidence,
                         "action": action,
+                        "action_details": action_result.details,
+                        "pre_state_hash": pre_action_hash,
+                        "post_state_hash": post_action_hash,
+                        "transition_signature": list(signature),
                         "active_region": next_active_region,
                         "active_mask_count": len(next_positions),
                         "global_middle_length": state.global_middle_length(),
@@ -755,6 +1218,24 @@ def run_slot_generation(
         "delete_counts": delete_counts,
         "mask_noop_counts": mask_noops,
         "hard_forbidden_newline_attempts": hard_forbidden_attempts,
+        "newline_boundary_events": len(newline_boundary_event_details),
+        "newline_boundary_event_details": newline_boundary_event_details,
+        "mixed_newline_token_events": mixed_newline_token_events,
+        "pure_newline_token_events": pure_newline_token_events,
+        "multiple_newline_token_events": multiple_newline_token_events,
+        "boundary_retokenized_left_token_count": boundary_retokenized_left_token_count,
+        "discarded_internal_right_text": discarded_internal_right_text,
+        "discarded_masks_after_boundary": discarded_masks_after_boundary,
+        "discarded_resolved_token_ids_after_boundary": discarded_resolved_token_ids_after_boundary,
+        "discarded_resolved_segments_after_boundary": discarded_resolved_segments_after_boundary,
+        "discarded_resolved_tokens_after_boundary": discarded_resolved_tokens_after_boundary,
+        "boundary_events_with_left_masks_remaining": boundary_events_with_left_masks_remaining,
+        "region_local_eos_events": len(region_local_eos_event_details),
+        "region_local_eos_event_details": region_local_eos_event_details,
+        "region_local_eos_deleted_masks": region_local_eos_deleted_masks,
+        "max_masks_deleted_by_one_eos": max_masks_deleted_by_one_eos,
+        "cross_region_delete_attempts": cross_region_delete_attempts,
+        "exact_cycle_events": exact_cycle_events,
         "slot_expand_cap_hits": slot_cap_hits,
         "global_expand_cap_hits": global_cap_hits,
         "unresolved_mask_count": len(state.unresolved_positions()),

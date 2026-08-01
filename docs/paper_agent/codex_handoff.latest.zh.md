@@ -1,5 +1,13 @@
 # Codex Handoff Latest
 
+## 2026-08-01 DreamOn V2 scoped iteration
+
+- Scoped branch：`codex/dreamon-progressive-v2-slots`；iteration starting HEAD `0cf2e9bd47590629fdde31ab1028b59044e63cef`。
+- Decision：`iterate`。旧 V2-Hard-v1 是 decoder/protocol failure diagnostic，不是 progressive-slot efficacy 的 clean test；原始 `7/642` 结果不得覆盖。
+- V2-OpenTail-v1 partial357 已移入 `repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357/`，`resumable:false`；Joint-v1 未启动。
+- 本轮只执行 `v2_hard_v2_boundary` protocol version 2，严格 smoke/pilot gate；完成或 gate 失败后停止，不启动 OpenTail-v2/Joint-v2。
+- Active protocol：`repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`。
+
 更新日期：2026-07-11 UTC
 
 ## Phase 5 恢复入口（authoritative）

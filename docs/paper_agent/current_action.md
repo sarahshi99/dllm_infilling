@@ -2,38 +2,44 @@
 
 Timestamp: 2026-08-01 UTC
 
-Action: execute `v2_opentail` after the completed V2-Hard negative full result.
+Research decision: `iterate`.
 
-Methods, in fixed order:
-
-1. `v2_hard`
-2. `v2_opentail`
-3. `joint_opentail`
+Action: implement and evaluate only `v2_hard_v2_boundary`, then stop for independent review. Do not resume V2-OpenTail protocol-v1 and do not start V2-OpenTail-v2 or Joint-OpenTail-v2 in this round.
 
 Branch/worktree:
 
 - branch: `codex/dreamon-progressive-v2-slots`
 - worktree: `/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots`
-- base HEAD: `45bead22e3d21daa707be724cf2bdcbbf776592a`
+- iteration starting HEAD: `0cf2e9bd47590629fdde31ab1028b59044e63cef`
 
 Frozen evidence:
 
-- manifest: `/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/manifest.jsonl`
-- SHA256: `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`
+- manifest SHA256: `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`
 - population: 642 rows, 642 unique task IDs, 115 base problems
+- role: exact-three-line development/mechanism population, not held-out test
 - model snapshot: `8ccc74750e43177327f29dab9e91882ba759e194`
-- DreamOn commit: `8a0a54918412eda9402a327646f7f067f7160ec8`
-- HumanEval Infilling commit: `88062ff9859c875d04db115b698ed4b0f0395170`
 
-Completed:
+Superseded protocol-v1 evidence:
 
-- protocol/public implementation commit `f15749e` and audit-fix commit `4205475` are pushed;
-- V2-Hard completed 642/642 with 7 passes, 421 explicit forward-cap failures, and zero disallowed protocol violations.
+- V2-Hard-v1 remains immutable at 642/642, Pass@1 `7/642`, compile `46/642`, and 421 forward-cap failures.
+- Required label: `V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy`.
+- V2-OpenTail-v1 partial357 is abandoned with `resumable:false` at `repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357/`.
+- Joint-OpenTail-v1 was never started.
 
-Current execution gate: V2-OpenTail unit tests -> smoke 5 -> pilot 30 -> full 642 -> score/completeness audit -> focused commit/push.
+Protocol-v2 decoder revisions:
 
-Scientific stop rule: stop and report if the frozen method definition must change. Ordinary engineering fixes rerun the affected method from smoke in fresh outputs.
+1. newline-containing hard-slot proposals become online `line_boundary` actions;
+2. EOS deletes selected/right unresolved masks only within the active region;
+3. a repeated exact full transition terminates immediately as `exact_deterministic_cycle`.
 
-Detailed plan: `docs/superpowers/plans/2026-08-01-dreamon-progressive-v2-slots.md`.
+Execution gate:
 
-Experiment brief: `docs/paper_agent/experiments/20260801_dreamon_progressive_v2_slots.md`.
+1. focused tests, runner tests, py_compile, shell and source scan;
+2. Smoke 5 requires 5/5 completed and zero error/cycle/invariant/cross-region-delete rows;
+3. Pilot 30 requires 30/30 completed, compile at least 24/30, Pass@1 at least 10/30, and complete discard/reference diagnostics;
+4. Full 642 runs only if the pilot gate passes, with preregistered non-completion early stops;
+5. stop after V2-Hard-v2 result or any failed gate.
+
+Protocol: `repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`.
+
+Command: `bash repro_scripts/run_dreamon_progressive_v2_hard_v2.sh {verify|smoke|pilot|full}`.

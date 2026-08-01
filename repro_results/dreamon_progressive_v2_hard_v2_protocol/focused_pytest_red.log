@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+___________ ERROR collecting tests/test_dreamon_hard_v2_boundary.py ____________
+ImportError while importing test module '/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots/tests/test_dreamon_hard_v2_boundary.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/shx/miniconda3/envs/dllm_env/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_dreamon_hard_v2_boundary.py:8: in <module>
+    from repro_scripts.dreamon_slot_generator import (
+E   ImportError: cannot import name 'ExactTransitionCycleDetector' from 'repro_scripts.dreamon_slot_generator' (/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots/repro_scripts/dreamon_slot_generator.py)
+=========================== short test summary info ============================
+ERROR tests/test_dreamon_hard_v2_boundary.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.13s

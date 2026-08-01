@@ -4,6 +4,28 @@ Updated: 2026-07-11 UTC
 
 Only selected, executable experiments belong here. Frozen test remains sealed unless a validation gate explicitly passes.
 
+## EXP-010: DreamOn V2-Hard-v2 boundary decoder diagnostic
+
+Status: implementation_verification
+
+Decision: `iterate`.
+
+Hypothesis: Correct online interpretation of newline proposals, region-local EOS broadcast deletion, and exact deterministic-cycle stopping removes the catastrophic termination/compile failure caused by V2-Hard-v1 decoder defects.
+
+Inputs: frozen 642-row / 115-base-problem exact-three-line development/mechanism population; DreamOn-v0-7B snapshot `8ccc74750e43177327f29dab9e91882ba759e194`; protocol version 2.
+
+Command: `bash repro_scripts/run_dreamon_progressive_v2_hard_v2.sh {verify|smoke|pilot|full}`.
+
+Smoke gate: 5/5 completed; zero unresolved/runtime/protocol/cycle/invariant/cross-region-delete rows; sequential activation and direct extraction.
+
+Pilot gate: 30/30 completed, compile at least 24/30, Pass@1 at least 10/30, zero errors/cycles, complete oracle discard/reference diagnostic.
+
+Full early stop: at least 5 non-completed rows in the first 50, cumulative non-completed rate above 5% after 100, or any runtime/invariant damage.
+
+Stop condition: stop after V2-Hard-v2 or any failed gate. Do not run V2-OpenTail-v2 or Joint-OpenTail-v2.
+
+Expected outputs: `repro_results/dreamon_progressive_v2_hard_v2_{smoke5,pilot30,all642}/` and a protocol-v2 experiment report.
+
 ## EXP-007: Phase 5 full RandomSpanLight shared candidate bank
 
 Linked idea: IDEA-011, IDEA-015

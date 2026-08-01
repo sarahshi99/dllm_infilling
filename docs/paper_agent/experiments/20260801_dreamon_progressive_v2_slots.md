@@ -1,5 +1,7 @@
 # DreamOn Progressive Infilling V2 Slot Experiments
 
+> Status: protocol version 1 is superseded for decoder evaluation. V2-Hard-v1 is retained as a decoder/protocol failure diagnostic, V2-OpenTail-v1 partial357 is abandoned, and Joint-v1 was not started. The active iteration is only `v2_hard_v2_boundary` under protocol version 2.
+
 Timestamp: 2026-08-01 UTC
 
 ## Action

@@ -1,0 +1,810 @@
+............................FEEEEEEEEEEEEEEEEEEEEEEEEEEEF............    [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_full_forward_contains_prefix_future_masks_locked_newlines_and_suffix _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b63daa40>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b63daa40>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_____ ERROR at setup of test_active_selection_only_returns_current_region ______
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58613f0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58613f0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+___ ERROR at setup of test_future_higher_confidence_still_cannot_be_selected ___
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c3430>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c3430>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_progressive_action_rejects_future_region_even_if_called_directly _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5863a00>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5863a00>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+________ ERROR at setup of test_slot_zero_completion_activates_slot_one ________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c29b0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c29b0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_slot_one_completion_activates_expected_final_region[v2_hard-Region.HARD_SLOT_2] _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e0b1a80>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e0b1a80>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_slot_one_completion_activates_expected_final_region[v2_opentail-Region.OPEN_TAIL] _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5861e40>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5861e40>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_____ ERROR at setup of test_completed_active_region_switches_before_topk ______
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58822f0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58822f0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+___________ ERROR at setup of test_normal_update_preserves_region_id ___________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f3b20>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f3b20>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_expand_in_middle_inherits_region_and_shifts_separator _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5883070>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5883070>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_expand_immediately_before_separator_does_not_cross_it _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5766d10>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5766d10>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+____ ERROR at setup of test_expand_shifts_future_region_without_mutating_it ____
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c09a0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c09a0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+____ ERROR at setup of test_delete_in_middle_only_removes_selected_position ____
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e0b1870>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e0b1870>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_________ ERROR at setup of test_delete_last_mask_preserves_separator __________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c35e0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c35e0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+________ ERROR at setup of test_delete_entire_slot_keeps_locked_newline ________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b589b910>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b589b910>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_________ ERROR at setup of test_delete_does_not_mutate_future_region __________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b6b58b80>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b6b58b80>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_____________ ERROR at setup of test_pad_mask_id_is_never_eligible _____________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5880f40>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5880f40>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+___ ERROR at setup of test_every_hard_slot_masks_all_newline_tokens[v2_hard] ___
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58691b0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b58691b0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_every_hard_slot_masks_all_newline_tokens[v2_opentail] _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5861480>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5861480>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_every_hard_slot_masks_all_newline_tokens[joint_opentail] _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f25c0>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f25c0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+____________ ERROR at setup of test_opentail_allows_newline_tokens _____________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5764b20>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5764b20>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_________ ERROR at setup of test_hard_slot_32_token_cap_blocks_expand __________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c0a00>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c0a00>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+___________ ERROR at setup of test_global_64_token_cap_blocks_expand ___________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5880f40>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5880f40>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+__ ERROR at setup of test_forward_cap_with_unresolved_masks_is_protocol_error __
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5899600>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5899600>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_prefix_suffix_and_separators_remain_exact_after_dynamic_updates _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c2890>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b57c2890>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_ ERROR at setup of test_dynamic_output_extraction_uses_regions_not_prefix_length _
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f2260>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f270e2f2260>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_____ ERROR at setup of test_same_task_method_and_config_are_deterministic _____
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5868d30>
+
+    @pytest.fixture()
+    def spec(tokenizer):
+>       newline_ids, _ = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b5868d30>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+=================================== FAILURES ===================================
+__ test_newline_scan_finds_every_single_token_with_newline_or_carriage_return __
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b589a3e0>
+
+    def test_newline_scan_finds_every_single_token_with_newline_or_carriage_return(tokenizer):
+>       newline_ids, metadata = scan_newline_token_ids(tokenizer)
+
+tests/test_dreamon_slot_generator.py:124:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+repro_scripts/dreamon_slot_generator.py:386: in scan_newline_token_ids
+    mapping, metadata = scan_newline_token_metadata(tokenizer)
+repro_scripts/dreamon_slot_generator.py:343: in scan_newline_token_metadata
+    for item in tokenizer.encode(left_text, add_special_tokens=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f25b589a3e0>
+text = '', add_special_tokens = False
+
+    def encode(self, text: str, add_special_tokens: bool = False):
+        assert not add_special_tokens
+        if text == "\n":
+            return [4]
+>       raise AssertionError(f"Unexpected fake encode input: {text!r}")
+E       AssertionError: Unexpected fake encode input: ''
+
+tests/test_dreamon_slot_generator.py:64: AssertionError
+_______ test_source_contains_no_first_line_truncation_or_posthoc_repair ________
+
+    def test_source_contains_no_first_line_truncation_or_posthoc_repair():
+        root = Path(__file__).resolve().parents[1]
+        paths = [
+            root / "repro_scripts/dreamon_slot_generator.py",
+            root / "repro_scripts/run_dreamon_progressive_v2.py",
+        ]
+        source = "\n".join(path.read_text(encoding="utf-8") for path in paths)
+        forbidden = [
+            ".partition(\"\\n\")",
+            ".partition('\\n')",
+            "splitlines()[0]",
+            "discarded_after_first_line",
+            "accept_first_physical_line",
+        ]
+>       assert not any(pattern in source for pattern in forbidden)
+E       assert not True
+E        +  where True = any(<generator object test_source_contains_no_first_line_truncation_or_posthoc_repair.<locals>.<genexpr> at 0x7f25b57e2180>)
+
+tests/test_dreamon_slot_generator.py:449: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dreamon_slot_generator.py::test_newline_scan_finds_every_single_token_with_newline_or_carriage_return
+FAILED tests/test_dreamon_slot_generator.py::test_source_contains_no_first_line_truncation_or_posthoc_repair
+ERROR tests/test_dreamon_slot_generator.py::test_full_forward_contains_prefix_future_masks_locked_newlines_and_suffix
+ERROR tests/test_dreamon_slot_generator.py::test_active_selection_only_returns_current_region
+ERROR tests/test_dreamon_slot_generator.py::test_future_higher_confidence_still_cannot_be_selected
+ERROR tests/test_dreamon_slot_generator.py::test_progressive_action_rejects_future_region_even_if_called_directly
+ERROR tests/test_dreamon_slot_generator.py::test_slot_zero_completion_activates_slot_one
+ERROR tests/test_dreamon_slot_generator.py::test_slot_one_completion_activates_expected_final_region[v2_hard-Region.HARD_SLOT_2]
+ERROR tests/test_dreamon_slot_generator.py::test_slot_one_completion_activates_expected_final_region[v2_opentail-Region.OPEN_TAIL]
+ERROR tests/test_dreamon_slot_generator.py::test_completed_active_region_switches_before_topk
+ERROR tests/test_dreamon_slot_generator.py::test_normal_update_preserves_region_id
+ERROR tests/test_dreamon_slot_generator.py::test_expand_in_middle_inherits_region_and_shifts_separator
+ERROR tests/test_dreamon_slot_generator.py::test_expand_immediately_before_separator_does_not_cross_it
+ERROR tests/test_dreamon_slot_generator.py::test_expand_shifts_future_region_without_mutating_it
+ERROR tests/test_dreamon_slot_generator.py::test_delete_in_middle_only_removes_selected_position
+ERROR tests/test_dreamon_slot_generator.py::test_delete_last_mask_preserves_separator
+ERROR tests/test_dreamon_slot_generator.py::test_delete_entire_slot_keeps_locked_newline
+ERROR tests/test_dreamon_slot_generator.py::test_delete_does_not_mutate_future_region
+ERROR tests/test_dreamon_slot_generator.py::test_pad_mask_id_is_never_eligible
+ERROR tests/test_dreamon_slot_generator.py::test_every_hard_slot_masks_all_newline_tokens[v2_hard]
+ERROR tests/test_dreamon_slot_generator.py::test_every_hard_slot_masks_all_newline_tokens[v2_opentail]
+ERROR tests/test_dreamon_slot_generator.py::test_every_hard_slot_masks_all_newline_tokens[joint_opentail]
+ERROR tests/test_dreamon_slot_generator.py::test_opentail_allows_newline_tokens
+ERROR tests/test_dreamon_slot_generator.py::test_hard_slot_32_token_cap_blocks_expand
+ERROR tests/test_dreamon_slot_generator.py::test_global_64_token_cap_blocks_expand
+ERROR tests/test_dreamon_slot_generator.py::test_forward_cap_with_unresolved_masks_is_protocol_error
+ERROR tests/test_dreamon_slot_generator.py::test_prefix_suffix_and_separators_remain_exact_after_dynamic_updates
+ERROR tests/test_dreamon_slot_generator.py::test_dynamic_output_extraction_uses_regions_not_prefix_length
+ERROR tests/test_dreamon_slot_generator.py::test_same_task_method_and_config_are_deterministic
+2 failed, 40 passed, 27 errors in 2.11s

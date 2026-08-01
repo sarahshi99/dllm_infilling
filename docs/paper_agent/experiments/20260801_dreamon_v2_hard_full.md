@@ -1,5 +1,7 @@
 # DreamOn V2-Hard Full Result
 
+> Superseded-protocol interpretation: **V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy.** The raw 642-row result remains immutable and must not be overwritten. Protocol-v2 separately tests corrected newline-boundary, local-EOS, and exact-cycle decoding.
+
 Timestamp: 2026-08-01 UTC
 
 Method label: `oracle exact-three-line structural diagnostic`
@@ -38,8 +40,8 @@ Paired against historical V1 progressive: 2 wins, 311 losses, 5 both pass, 324 b
 
 ## Interpretation
 
-V2-Hard is a strong negative result. Future-mask visibility and strict local updates do eliminate V1's wrapper truncation mechanism, but the deterministic selected-position birth/death process frequently enters expand/delete cycles. `421/642` rows exhaust the 256-forward cap without a legal completion. The result weakens the hypothesis that exact-three-line hard slots alone provide a stable progressive DreamOn decoder.
+V2-Hard-v1 is a strong decoder/protocol failure diagnostic. Future-mask visibility and strict local updates eliminate V1's wrapper truncation mechanism, but the implementation blanket-banned newline proposals, treated EOS as a one-mask deletion, and lacked exact deterministic-transition cycle detection. The selected-position birth/death process consequently entered repeated expand/delete behavior and `421/642` rows exhausted the 256-forward cap. This result is not a clean test of progressive-slot efficacy and cannot isolate the value of slot conditioning.
 
-It does not isolate whether open-tail capacity or sequential freezing is responsible. Those questions remain assigned to the already frozen `v2_opentail` and `joint_opentail` comparisons.
+The old V2-OpenTail-v1 partial run is abandoned rather than resumed. OpenTail and Joint comparisons are not authorized in the current protocol-v2 round.
 
 Raw result directory: `repro_results/dreamon_progressive_v2_hard_all642/`.

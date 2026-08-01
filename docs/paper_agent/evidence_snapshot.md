@@ -1,5 +1,7 @@
 # Paper-Agent Evidence Snapshot
 
+DreamOn decoder iteration note, 2026-08-01 UTC: V2-Hard-v1 remains immutable at Pass@1 `7/642`, compile `46/642`, with `421` forward-cap failures, but is now explicitly classified as `V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy`. V2-OpenTail-v1 partial357 is abandoned with `resumable:false`, and Joint-v1 was never started. The only active DreamOn experiment is protocol-v2 method `v2_hard_v2_boundary`; it must pass strict 5-row and 30-row preregistered gates before any 642-row run. No protocol-v2 empirical result exists yet.
+
 Phase 5 update, 2026-07-12 UTC: authoritative starting HEAD for the resumed correction is `3315ed82d42770e3ed7d8ae20e9d5f1570940ff6`. The original pass-trained F3 OOF score is now explicitly `supervised_probe_diagnostic` and cannot authorize or enter deployable selection. The current deployable mechanism is `AST/def-use bridge proxy V0`, using a fixed deterministic formula and a corrected within-task/cross-canvas gate. It is not full Semantic Bridge Projection. Focused correction tests currently pass (`18` tests before final verification). No new empirical candidate/pass evidence exists yet; frozen test remains sealed and `test_evaluation_count=0`.
 
 Generated from existing local `results.jsonl` files. Raw outputs are not copied here.

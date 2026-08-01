@@ -44,3 +44,12 @@ Updated: 2026-07-11 UTC
 - No checkpoint, cache, token, SSH key, large raw trace, or raw generated-code dump should be committed. Commit compact CSV/JSON/Markdown artifacts only.
 - Every new experiment must have a stop condition, success/failure rule, input manifest, and expected report path before GPU execution.
 - Current top immediate work is web review and paper drafting from consolidated evidence, not new second-regime GPU work or Controller V4.
+
+## 2026-08-01 DreamOn V2 decoder iteration
+
+- Decision: `iterate` on the decoder protocol, not advance the original V2 sequence.
+- V2-Hard-v1 remains immutable at `7/642` Pass@1 and is relabeled `V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy` because blanket newline suppression, one-mask EOS deletion, and absent exact-cycle detection confound the slot-efficacy hypothesis.
+- V2-OpenTail-v1 partial357 is abandoned with `resumable:false`; its rows must not be mixed with protocol-v2 output. Joint-OpenTail-v1 was never started.
+- The only authorized new method is `v2_hard_v2_boundary`, protocol version 2. It interprets newline proposals as online boundaries, restores region-local EOS broadcast deletion, and stops repeated exact transitions.
+- Smoke and pilot use preregistered quality/termination gates. A failed gate stops the round; thresholds and failure labels may not be changed after observation.
+- No V2-OpenTail-v2 or Joint-OpenTail-v2 run is authorized before independent review of V2-Hard-v2.

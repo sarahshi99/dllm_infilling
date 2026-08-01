@@ -1,0 +1,29 @@
+.....................................................F................   [100%]
+=================================== FAILURES ===================================
+___________ test_forward_cap_with_unresolved_masks_is_protocol_error ___________
+
+tokenizer = <test_dreamon_slot_generator.FakeTokenizer object at 0x7f01e62e9db0>
+spec = TokenizerSpec(bos_id=10, eos_id=11, pad_id=11, mask_id=12, expand_id=13, newline_token_ids=frozenset({4, 5, 6}), newli...normalized_text=':\n', left_text=':', left_token_ids=(14,), right_text='', newline_count=1)}, literal_newline_ids=(4,))
+config = SlotGeneratorConfig(initial_masks_per_region=4, max_context_tokens=64, max_total_forwards=256, max_global_middle_tokens=64, max_hard_slot_tokens=32, temperature=0.0, top_p=0.9, top_k=None)
+
+    def test_forward_cap_with_unresolved_masks_is_protocol_error(tokenizer, spec, config):
+        tiny = SlotGeneratorConfig(**{**config.__dict__, "max_total_forwards": 2})
+        result = run_slot_generation(
+            model=AlwaysMaskModel(spec),
+            tokenizer=tokenizer,
+            tokenizer_spec=spec,
+            method=Method.V2_HARD,
+            prefix_ids=[spec.bos_id, 0],
+            suffix_ids=[1, spec.eos_id],
+            config=tiny,
+            save_trace=True,
+        )
+        assert result["status"] == "protocol_error"
+        assert result["unresolved_mask_count"] > 0
+>       assert "forward_cap_with_unresolved_masks" in result["protocol_flags"]
+E       AssertionError: assert 'forward_cap_with_unresolved_masks' in ['exact_deterministic_cycle']
+
+tests/test_dreamon_slot_generator.py:373: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dreamon_slot_generator.py::test_forward_cap_with_unresolved_masks_is_protocol_error
+1 failed, 69 passed in 1.30s

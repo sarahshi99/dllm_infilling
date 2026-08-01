@@ -33,7 +33,7 @@ from dreamon_slot_generator import (  # noqa: E402
     SlotGeneratorConfig,
     TokenizerSpec,
     run_slot_generation,
-    scan_newline_token_ids,
+    scan_newline_token_metadata,
 )
 
 
@@ -43,6 +43,10 @@ DEFAULT_MODEL = (
     / "snapshots/8ccc74750e43177327f29dab9e91882ba759e194"
 )
 DEFAULT_PROTOCOL = REPO_ROOT / "repro_results/dreamon_progressive_v2_protocol/protocol.json"
+V2_HARD_V2_PROTOCOL = (
+    REPO_ROOT
+    / "repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json"
+)
 DEFAULT_POPULATION = (
     REPO_ROOT
     / "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl"
@@ -130,15 +134,24 @@ def git_head() -> str:
 
 
 def build_method_config(
-    method: Method, stage: str, runner_commit: str
+    method: Method,
+    stage: str,
+    runner_commit: str,
+    protocol_path: Path = DEFAULT_PROTOCOL,
+    population_path: Path = DEFAULT_POPULATION,
 ) -> dict[str, Any]:
     if stage not in STAGE_SIZES:
         raise ValueError(f"Unknown stage: {stage}")
-    protocol_sha = sha256(DEFAULT_PROTOCOL) if DEFAULT_PROTOCOL.exists() else "missing"
-    population_sha = sha256(DEFAULT_POPULATION) if DEFAULT_POPULATION.exists() else "missing"
+    protocol_sha = sha256(protocol_path) if protocol_path.exists() else "missing"
+    population_sha = sha256(population_path) if population_path.exists() else "missing"
+    is_boundary_v2 = method == Method.V2_HARD_V2_BOUNDARY
     return {
-        "protocol_name": "dreamon_progressive_v2_slots",
-        "protocol_version": 1,
+        "protocol_name": (
+            "dreamon_progressive_v2_hard_boundary"
+            if is_boundary_v2
+            else "dreamon_progressive_v2_slots"
+        ),
+        "protocol_version": 2 if is_boundary_v2 else 1,
         "protocol_sha256": protocol_sha,
         "method": method.value,
         "stage": stage,
@@ -161,6 +174,9 @@ def build_method_config(
         "max_global_middle_tokens": 64,
         "max_hard_slot_tokens": 32,
         "seed": 42,
+        "newline_boundary_action": is_boundary_v2,
+        "region_local_eos_broadcast": is_boundary_v2,
+        "exact_transition_cycle_detection": is_boundary_v2,
     }
 
 
@@ -189,6 +205,16 @@ def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
     unresolved = int(row["unresolved_mask_count"])
     if status == "completed" and not flags and unresolved == 0:
         return "completed"
+    if row.get("method") == Method.V2_HARD_V2_BOUNDARY.value:
+        if (
+            status == "protocol_error"
+            and len(flags) == 1
+            and flags[0]
+            in {"forward_cap_with_unresolved_masks", "exact_deterministic_cycle"}
+            and row["completion"] == ""
+        ):
+            return "terminal_method_failure"
+        return "protocol_violation"
     if (
         status == "protocol_error"
         and flags == ["forward_cap_with_unresolved_masks"]
@@ -226,7 +252,11 @@ def base_problem_id(task_id: str) -> str:
     return match.group(1) if match else task_id
 
 
-def environment_payload(args: argparse.Namespace, config_hash: str) -> dict[str, Any]:
+def environment_payload(
+    args: argparse.Namespace,
+    config_hash: str,
+    tokenizer_metadata: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     import transformers
 
     gpu = None
@@ -248,16 +278,31 @@ def environment_payload(args: argparse.Namespace, config_hash: str) -> dict[str,
         "population_path": str(args.population.resolve()),
         "protocol_path": str(args.protocol.resolve()),
         "device": args.device,
+        "tokenizer_newline_mapping": dict(tokenizer_metadata or {}),
     }
 
 
-def tokenizer_spec_from_hf(tokenizer, protocol: Mapping[str, Any]) -> TokenizerSpec:
-    newline_ids, metadata = scan_newline_token_ids(tokenizer)
+def tokenizer_spec_from_hf(
+    tokenizer, protocol: Mapping[str, Any]
+) -> tuple[TokenizerSpec, dict[str, Any]]:
+    newline_map, metadata = scan_newline_token_metadata(tokenizer)
+    newline_ids = sorted(newline_map)
     expected = protocol["tokenizer"]
     if metadata["newline_token_count"] != expected["newline_token_count"]:
         raise RuntimeError("Tokenizer newline-token count differs from frozen protocol")
     if metadata["newline_token_ids_sha256"] != expected["newline_token_ids_sha256"]:
         raise RuntimeError("Tokenizer newline-token hash differs from frozen protocol")
+    if "newline_token_mapping_count" in expected:
+        if (
+            metadata["newline_token_mapping_count"]
+            != expected["newline_token_mapping_count"]
+        ):
+            raise RuntimeError("Tokenizer newline mapping count differs from protocol")
+        if (
+            metadata["newline_token_mapping_sha256"]
+            != expected["newline_token_mapping_sha256"]
+        ):
+            raise RuntimeError("Tokenizer newline mapping hash differs from protocol")
     literal_newline_ids = tuple(tokenizer.encode("\n", add_special_tokens=False))
     if list(literal_newline_ids) != expected["literal_newline_token_ids"]:
         raise RuntimeError("Literal newline tokenization differs from frozen protocol")
@@ -268,8 +313,9 @@ def tokenizer_spec_from_hf(tokenizer, protocol: Mapping[str, Any]) -> TokenizerS
         mask_id=int(tokenizer.mask_token_id),
         expand_id=int(expected["expand_token_id"]),
         newline_token_ids=frozenset(newline_ids),
+        newline_token_map=newline_map,
         literal_newline_ids=literal_newline_ids,
-    )
+    ), metadata
 
 
 def encode_problem(row: Mapping[str, str], tokenizer, spec: TokenizerSpec):
@@ -283,13 +329,15 @@ def encode_problem(row: Mapping[str, str], tokenizer, spec: TokenizerSpec):
 def error_result(method: Method, error: BaseException) -> dict[str, Any]:
     region_names = (
         ["HARD_SLOT_0", "HARD_SLOT_1", "HARD_SLOT_2"]
-        if method == Method.V2_HARD
+        if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY)
         else ["HARD_SLOT_0", "HARD_SLOT_1", "OPEN_TAIL"]
     )
     zero = {name: 0 for name in region_names}
     return {
         "completion": "",
         "completion_token_ids": [],
+        "region_token_ids": {name: [] for name in region_names},
+        "region_text": {name: "" for name in region_names},
         "regions": {name: {"token_ids": [], "text": ""} for name in region_names},
         "region_lengths": {"initial": zero, "final": zero},
         "region_forward_counts": zero,
@@ -305,6 +353,24 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
         "tail_newline_count": 0,
         "completion_physical_line_count": 0,
         "hard_forbidden_newline_attempts": 0,
+        "newline_boundary_events": 0,
+        "newline_boundary_event_details": [],
+        "mixed_newline_token_events": 0,
+        "pure_newline_token_events": 0,
+        "multiple_newline_token_events": 0,
+        "boundary_retokenized_left_token_count": 0,
+        "discarded_internal_right_text": [],
+        "discarded_masks_after_boundary": 0,
+        "discarded_resolved_token_ids_after_boundary": [],
+        "discarded_resolved_segments_after_boundary": [],
+        "discarded_resolved_tokens_after_boundary": 0,
+        "boundary_events_with_left_masks_remaining": 0,
+        "region_local_eos_events": 0,
+        "region_local_eos_event_details": [],
+        "region_local_eos_deleted_masks": 0,
+        "max_masks_deleted_by_one_eos": 0,
+        "cross_region_delete_attempts": 0,
+        "exact_cycle_events": [],
         "slot_expand_cap_hits": 0,
         "global_expand_cap_hits": 0,
         "unresolved_mask_count": 0,
@@ -355,6 +421,10 @@ def update_progress(
                 classify_protocol_outcome(row) == "allowed_terminal_protocol_failure"
                 for row in rows
             ),
+            "terminal_method_failure_count": sum(
+                classify_protocol_outcome(row) == "terminal_method_failure"
+                for row in rows
+            ),
             "protocol_violation_count": sum(
                 classify_protocol_outcome(row) == "protocol_violation" for row in rows
             ),
@@ -371,8 +441,19 @@ def run_generation(args: argparse.Namespace) -> None:
     selected = population[: STAGE_SIZES[args.stage]]
     selected_task_ids = [row["task_id"] for row in selected]
     method = Method(args.method)
+    if method == Method.V2_HARD_V2_BOUNDARY:
+        if protocol.get("protocol_version") != 2:
+            raise RuntimeError("V2-Hard-v2 requires protocol version 2")
+        if protocol.get("method") != method.value:
+            raise RuntimeError("Protocol method does not match V2-Hard-v2")
     runner_commit = git_head()
-    method_config = build_method_config(method, args.stage, runner_commit)
+    method_config = build_method_config(
+        method,
+        args.stage,
+        runner_commit,
+        protocol_path=args.protocol,
+        population_path=args.population,
+    )
     config_hash = stable_json_hash(method_config)
     config_record = {**method_config, "config_hash": config_hash}
 
@@ -381,9 +462,6 @@ def run_generation(args: argparse.Namespace) -> None:
     if config_path.exists() and read_json(config_path) != config_record:
         raise RuntimeError("Existing output config differs from requested config")
     atomic_write_json(config_path, config_record)
-    atomic_write_json(
-        args.output_dir / "environment.json", environment_payload(args, config_hash)
-    )
     (args.output_dir / "manifest.sha256").write_text(
         protocol["population"]["manifest_sha256"] + "\n", encoding="utf-8"
     )
@@ -416,7 +494,14 @@ def run_generation(args: argparse.Namespace) -> None:
     hf_tokenizer = AutoTokenizer.from_pretrained(
         args.model_path, trust_remote_code=True, local_files_only=True
     )
-    tokenizer_spec = tokenizer_spec_from_hf(hf_tokenizer, protocol)
+    tokenizer_spec, tokenizer_metadata = tokenizer_spec_from_hf(hf_tokenizer, protocol)
+    atomic_write_json(
+        args.output_dir / "tokenizer_metadata.json", tokenizer_metadata
+    )
+    atomic_write_json(
+        args.output_dir / "environment.json",
+        environment_payload(args, config_hash, tokenizer_metadata),
+    )
     model = AutoModel.from_pretrained(
         args.model_path,
         torch_dtype=torch.bfloat16,
@@ -442,6 +527,7 @@ def run_generation(args: argparse.Namespace) -> None:
                 suffix_ids=suffix_ids,
                 config=generator_config,
                 save_trace=args.stage == "smoke",
+                task_id=task_id,
             )
         except Exception as error:  # explicit row-level runtime failure, never silent
             result = error_result(method, error)
@@ -473,6 +559,74 @@ def run_generation(args: argparse.Namespace) -> None:
             f"token_forwards={row['token_forwards']} wall={row['wall_time_seconds']:.3f}s",
             flush=True,
         )
+        if method == Method.V2_HARD_V2_BOUNDARY:
+            invariant_flags = {
+                "prefix_tokens_mutated",
+                "suffix_tokens_mutated",
+                "locked_separator_tokens_mutated",
+                "future_region_mutated_before_activation",
+                "cross_region_delete_attempt",
+                "parallel_state_lengths_differ",
+                "pad_region_inside_real_sequence",
+                "non_pad_region_in_right_padding",
+            }
+            if row["status"] == "runtime_error" or invariant_flags.intersection(
+                row["protocol_flags"]
+            ):
+                atomic_write_json(
+                    args.output_dir / "early_stop.json",
+                    {
+                        "reason": "runtime_or_invariant_damage",
+                        "task_id": task_id,
+                        "completed_rows": len(generated_rows),
+                        "protocol_flags": row["protocol_flags"],
+                        "recorded_at_utc": utc_now(),
+                    },
+                )
+                update_progress(
+                    args.output_dir / "progress.json",
+                    method,
+                    args.stage,
+                    generated_rows,
+                    len(selected),
+                    task_id,
+                    "paused_early_stop",
+                )
+                raise RuntimeError("V2-Hard-v2 stopped on runtime/invariant damage")
+            if args.stage == "full":
+                noncompleted = sum(
+                    item["status"] != "completed" for item in generated_rows
+                )
+                stop_reason = None
+                if len(generated_rows) <= 50 and noncompleted >= 5:
+                    stop_reason = "first_50_noncompleted_at_least_5"
+                elif (
+                    len(generated_rows) >= 100
+                    and noncompleted / len(generated_rows) > 0.05
+                ):
+                    stop_reason = "post_100_noncompleted_rate_above_5_percent"
+                if stop_reason is not None:
+                    atomic_write_json(
+                        args.output_dir / "early_stop.json",
+                        {
+                            "reason": stop_reason,
+                            "task_id": task_id,
+                            "completed_rows": len(generated_rows),
+                            "noncompleted_rows": noncompleted,
+                            "noncompleted_rate": noncompleted / len(generated_rows),
+                            "recorded_at_utc": utc_now(),
+                        },
+                    )
+                    update_progress(
+                        args.output_dir / "progress.json",
+                        method,
+                        args.stage,
+                        generated_rows,
+                        len(selected),
+                        task_id,
+                        "paused_early_stop",
+                    )
+                    raise RuntimeError(f"V2-Hard-v2 full early stop: {stop_reason}")
         if positions[task_id] % 25 == 0 or positions[task_id] == len(selected):
             average_wall = statistics.mean(
                 float(item["wall_time_seconds"]) for item in generated_rows
@@ -489,12 +643,17 @@ def run_generation(args: argparse.Namespace) -> None:
                 == "allowed_terminal_protocol_failure"
                 for item in generated_rows
             )
+            method_failures = sum(
+                classify_protocol_outcome(item) == "terminal_method_failure"
+                for item in generated_rows
+            )
             eta = average_wall * (len(selected) - len(generated_rows))
             print(
                 f"progress completed={len(generated_rows)}/{len(selected)} "
                 f"avg_wall={average_wall:.3f}s avg_forwards={average_forwards:.2f} "
                 f"token_forwards={sum(int(item['token_forwards']) for item in generated_rows)} "
-                f"terminal_failures={terminal_failures} violations={violations} "
+                f"terminal_failures={terminal_failures} method_failures={method_failures} "
+                f"violations={violations} "
                 f"eta_seconds={eta:.1f}",
                 flush=True,
             )
@@ -556,6 +715,275 @@ def mean(values: Iterable[float]) -> float | None:
     return statistics.mean(values) if values else None
 
 
+def _normalize_diagnostic_text(text: str) -> str:
+    return text.replace("\r\n", "\n").replace("\r", "\n").rstrip("\n")
+
+
+def _edit_similarity(left: str, right: str) -> float:
+    left = _normalize_diagnostic_text(left)
+    right = _normalize_diagnostic_text(right)
+    if not left and not right:
+        return 1.0
+    previous = list(range(len(right) + 1))
+    for left_index, left_char in enumerate(left, start=1):
+        current = [left_index]
+        for right_index, right_char in enumerate(right, start=1):
+            current.append(
+                min(
+                    current[-1] + 1,
+                    previous[right_index] + 1,
+                    previous[right_index - 1] + (left_char != right_char),
+                )
+            )
+        previous = current
+    distance = previous[-1]
+    return 1.0 - distance / max(len(left), len(right), 1)
+
+
+def _token_lcs_similarity(left: str, right: str, tokenizer) -> float:
+    left_ids = tokenizer.encode(left, add_special_tokens=False)
+    right_ids = tokenizer.encode(right, add_special_tokens=False)
+    if not left_ids and not right_ids:
+        return 1.0
+    previous = [0] * (len(right_ids) + 1)
+    for left_id in left_ids:
+        current = [0]
+        for right_index, right_id in enumerate(right_ids, start=1):
+            if left_id == right_id:
+                current.append(previous[right_index - 1] + 1)
+            else:
+                current.append(max(current[-1], previous[right_index]))
+        previous = current
+    return previous[-1] / max(len(left_ids), len(right_ids), 1)
+
+
+def _similarity_metrics(
+    candidate: str | None, target: str, tokenizer
+) -> dict[str, Any]:
+    if candidate is None:
+        return {
+            "available": False,
+            "exact_match": False,
+            "candidate_is_target_prefix": False,
+            "candidate_is_target_substring": False,
+            "character_edit_similarity": None,
+            "token_lcs_similarity": None,
+        }
+    normalized_candidate = _normalize_diagnostic_text(candidate)
+    normalized_target = _normalize_diagnostic_text(target)
+    return {
+        "available": True,
+        "exact_match": normalized_candidate == normalized_target,
+        "candidate_is_target_prefix": bool(normalized_candidate)
+        and normalized_target.startswith(normalized_candidate),
+        "candidate_is_target_substring": bool(normalized_candidate)
+        and normalized_candidate in normalized_target,
+        "character_edit_similarity": _edit_similarity(
+            normalized_candidate, normalized_target
+        ),
+        "token_lcs_similarity": _token_lcs_similarity(
+            normalized_candidate, normalized_target, tokenizer
+        ),
+    }
+
+
+def _group_score_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    return {
+        "rows": len(rows),
+        "passed": sum(bool(row["score"]["passed"]) for row in rows),
+        "pass_rate": mean(float(row["score"]["passed"]) for row in rows),
+        "compile_passed": sum(
+            bool(row["score"]["compile_passed"]) for row in rows
+        ),
+        "compile_pass_rate": mean(
+            float(row["score"]["compile_passed"]) for row in rows
+        ),
+    }
+
+
+def write_discard_reference_diagnostics(
+    output_dir: Path,
+    scored_rows: Sequence[Mapping[str, Any]],
+    problems: Mapping[str, Mapping[str, Any]],
+    tokenizer,
+) -> dict[str, Any]:
+    event_rows: list[dict[str, Any]] = []
+    rows_with_resolved_discard: set[str] = set()
+    total_discarded_tokens = 0
+    total_normal_generated_tokens = sum(
+        sum(int(value) for value in row["normal_update_counts"].values())
+        + int(row.get("boundary_retokenized_left_token_count", 0))
+        for row in scored_rows
+    )
+    for row in scored_rows:
+        problem = problems[row["task_id"]]
+        reference_lines = _normalize_diagnostic_text(
+            problem["canonical_solution"]
+        ).split("\n")
+        for event_index, event in enumerate(
+            row.get("newline_boundary_event_details", [])
+        ):
+            slot_name = event["slot"]
+            if slot_name not in ("HARD_SLOT_0", "HARD_SLOT_1"):
+                continue
+            slot_index = int(slot_name.rsplit("_", 1)[1])
+            next_slot = f"HARD_SLOT_{slot_index + 1}"
+            reference_next = (
+                reference_lines[slot_index + 1]
+                if slot_index + 1 < len(reference_lines)
+                else ""
+            )
+            actual_next = row["region_text"][next_slot]
+            contiguous_segments = list(event.get("discarded_contiguous_segments", []))
+            leading_segment = contiguous_segments[0] if contiguous_segments else ""
+            complete_text = event.get("discarded_complete_text")
+            resolved_segments = list(
+                event.get("discarded_resolved_segments_after_boundary", [])
+            )
+            resolved_count = int(
+                event.get("discarded_resolved_tokens_after_boundary", 0)
+            )
+            internal_token_count = len(
+                tokenizer.encode(event.get("right_text", ""), add_special_tokens=False)
+            )
+            event_discarded_tokens = internal_token_count + resolved_count
+            total_discarded_tokens += event_discarded_tokens
+            if resolved_count:
+                rows_with_resolved_discard.add(row["task_id"])
+            event_rows.append(
+                {
+                    "task_id": row["task_id"],
+                    "base_problem_id": row["base_problem_id"],
+                    "event_index": event_index,
+                    "slot": slot_name,
+                    "boundary_proposal": {
+                        "token_id": event["proposal_token_id"],
+                        "decoded_text": event["decoded_text"],
+                        "left_text": event["left_text"],
+                        "right_text": event["right_text"],
+                    },
+                    "discarded_contiguous_segments": contiguous_segments,
+                    "discarded_resolved_segments": resolved_segments,
+                    "discarded_masks": event["discarded_masks_after_boundary"],
+                    "discarded_token_count": event_discarded_tokens,
+                    "reference_next_line": reference_next,
+                    "final_next_slot_line": actual_next,
+                    "complete_vs_reference": _similarity_metrics(
+                        complete_text, reference_next, tokenizer
+                    ),
+                    "leading_segment_vs_reference": _similarity_metrics(
+                        leading_segment, reference_next, tokenizer
+                    ),
+                    "complete_vs_final_next_slot": _similarity_metrics(
+                        complete_text, actual_next, tokenizer
+                    ),
+                    "leading_segment_vs_final_next_slot": _similarity_metrics(
+                        leading_segment, actual_next, tokenizer
+                    ),
+                    "oracle_mechanism_diagnostic": True,
+                }
+            )
+    atomic_write_jsonl(output_dir / "discard_reference_events.jsonl", event_rows)
+    resolved_cases = [
+        event
+        for event in event_rows
+        if event["discarded_resolved_segments"]
+    ][:10]
+    atomic_write_jsonl(
+        output_dir / "discard_reference_cases_top10.jsonl", resolved_cases
+    )
+    rows_with = [
+        row for row in scored_rows if row["task_id"] in rows_with_resolved_discard
+    ]
+    rows_without = [
+        row for row in scored_rows if row["task_id"] not in rows_with_resolved_discard
+    ]
+    complete_available = [
+        event for event in event_rows if event["complete_vs_reference"]["available"]
+    ]
+    leading_nonempty = [
+        event
+        for event in event_rows
+        if event["discarded_contiguous_segments"]
+    ]
+    discard_counts = [event["discarded_token_count"] for event in event_rows]
+    summary = {
+        "oracle_mechanism_diagnostic": True,
+        "event_count": len(event_rows),
+        "rows_with_boundary_event": len(
+            {event["task_id"] for event in event_rows}
+        ),
+        "resolved_discard_events": sum(
+            bool(event["discarded_resolved_segments"]) for event in event_rows
+        ),
+        "rows_with_resolved_discard": len(rows_with_resolved_discard),
+        "row_fraction_with_resolved_discard": (
+            len(rows_with_resolved_discard) / len(scored_rows)
+        ),
+        "discarded_tokens": {
+            "total": total_discarded_tokens,
+            "mean_per_event": mean(discard_counts),
+            "median_per_event": (
+                statistics.median(discard_counts) if discard_counts else None
+            ),
+            "fraction_of_all_normal_generated_tokens": (
+                total_discarded_tokens / total_normal_generated_tokens
+                if total_normal_generated_tokens
+                else None
+            ),
+            "normal_generated_token_denominator": total_normal_generated_tokens,
+        },
+        "complete_text_reference": {
+            "available_events": len(complete_available),
+            "exact_match_rate": mean(
+                float(event["complete_vs_reference"]["exact_match"])
+                for event in complete_available
+            ),
+            "prefix_rate": mean(
+                float(
+                    event["complete_vs_reference"][
+                        "candidate_is_target_prefix"
+                    ]
+                )
+                for event in complete_available
+            ),
+            "substring_rate": mean(
+                float(
+                    event["complete_vs_reference"][
+                        "candidate_is_target_substring"
+                    ]
+                )
+                for event in complete_available
+            ),
+        },
+        "leading_segment_reference": {
+            "available_events": len(leading_nonempty),
+            "prefix_rate": mean(
+                float(
+                    event["leading_segment_vs_reference"][
+                        "candidate_is_target_prefix"
+                    ]
+                )
+                for event in leading_nonempty
+            ),
+            "substring_rate": mean(
+                float(
+                    event["leading_segment_vs_reference"][
+                        "candidate_is_target_substring"
+                    ]
+                )
+                for event in leading_nonempty
+            ),
+        },
+        "score_groups": {
+            "with_resolved_discard": _group_score_summary(rows_with),
+            "without_resolved_discard": _group_score_summary(rows_without),
+        },
+    }
+    atomic_write_json(output_dir / "discard_reference_diagnostics.json", summary)
+    return summary
+
+
 def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     scores = [row["score"] for row in scored_rows]
     by_base: dict[str, list[float]] = defaultdict(list)
@@ -565,6 +993,8 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     token_forward_values = [int(row["token_forwards"]) for row in scored_rows]
     wall_values = [float(row["wall_time_seconds"]) for row in scored_rows]
     peak_values = [int(row["peak_cuda_memory_bytes"]) for row in scored_rows]
+    completed_rows = [row for row in scored_rows if row["status"] == "completed"]
+    completed_scores = [row["score"] for row in completed_rows]
     return {
         "num_samples": len(scored_rows),
         "num_base_problems": len(by_base),
@@ -575,6 +1005,24 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "exact_matches": sum(bool(score["exact_match"]) for score in scores),
         "exact_match_rate": mean(float(score["exact_match"]) for score in scores),
         "task_macro_pass_rate": mean(mean(values) for values in by_base.values()),
+        "completion_rate": len(completed_rows) / len(scored_rows),
+        "completed_rows": len(completed_rows),
+        "completed_only": {
+            "passed": sum(bool(score["passed"]) for score in completed_scores),
+            "pass_rate": mean(float(score["passed"]) for score in completed_scores),
+            "compile_passed": sum(
+                bool(score["compile_passed"]) for score in completed_scores
+            ),
+            "compile_pass_rate": mean(
+                float(score["compile_passed"]) for score in completed_scores
+            ),
+            "exact_matches": sum(
+                bool(score["exact_match"]) for score in completed_scores
+            ),
+            "exact_match_rate": mean(
+                float(score["exact_match"]) for score in completed_scores
+            ),
+        },
         "completion_tokens": {
             "mean": mean(len(row["completion_token_ids"]) for row in scored_rows),
             "median": statistics.median(
@@ -602,6 +1050,46 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "unresolved_mask_count": sum(row["unresolved_mask_count"] for row in scored_rows),
         "protocol_error_count": sum(row["status"] == "protocol_error" for row in scored_rows),
         "runtime_error_count": sum(row["status"] == "runtime_error" for row in scored_rows),
+        "exact_cycle_count": sum(
+            "exact_deterministic_cycle" in row["protocol_flags"]
+            for row in scored_rows
+        ),
+        "forward_cap_count": sum(
+            "forward_cap_with_unresolved_masks" in row["protocol_flags"]
+            for row in scored_rows
+        ),
+        "newline_boundary_events": sum(
+            int(row.get("newline_boundary_events", 0)) for row in scored_rows
+        ),
+        "mixed_newline_token_events": sum(
+            int(row.get("mixed_newline_token_events", 0)) for row in scored_rows
+        ),
+        "pure_newline_token_events": sum(
+            int(row.get("pure_newline_token_events", 0)) for row in scored_rows
+        ),
+        "multiple_newline_token_events": sum(
+            int(row.get("multiple_newline_token_events", 0)) for row in scored_rows
+        ),
+        "discarded_masks_after_boundary": sum(
+            int(row.get("discarded_masks_after_boundary", 0)) for row in scored_rows
+        ),
+        "discarded_resolved_tokens_after_boundary": sum(
+            int(row.get("discarded_resolved_tokens_after_boundary", 0))
+            for row in scored_rows
+        ),
+        "region_local_eos_events": sum(
+            int(row.get("region_local_eos_events", 0)) for row in scored_rows
+        ),
+        "region_local_eos_deleted_masks": sum(
+            int(row.get("region_local_eos_deleted_masks", 0))
+            for row in scored_rows
+        ),
+        "max_masks_deleted_by_one_eos": max(
+            int(row.get("max_masks_deleted_by_one_eos", 0)) for row in scored_rows
+        ),
+        "cross_region_delete_attempts": sum(
+            int(row.get("cross_region_delete_attempts", 0)) for row in scored_rows
+        ),
         "forwards": {
             "mean": mean(forward_values),
             "median": statistics.median(forward_values),
@@ -660,6 +1148,16 @@ def run_scoring(args: argparse.Namespace) -> None:
     atomic_write_jsonl(args.output_dir / "scored.jsonl", scored_rows)
     summary = method_summary(scored_rows)
     atomic_write_json(args.output_dir / "summary.json", summary)
+    discard_reference_summary = None
+    if method == Method.V2_HARD_V2_BOUNDARY:
+        from transformers import AutoTokenizer
+
+        diagnostic_tokenizer = AutoTokenizer.from_pretrained(
+            args.model_path, trust_remote_code=True, local_files_only=True
+        )
+        discard_reference_summary = write_discard_reference_diagnostics(
+            args.output_dir, scored_rows, problems, diagnostic_tokenizer
+        )
     diagnostics = {
         "method": method.value,
         "stage": args.stage,
@@ -677,6 +1175,51 @@ def run_scoring(args: argparse.Namespace) -> None:
         "hard_forbidden_newline_attempts": sum(
             row["hard_forbidden_newline_attempts"] for row in scored_rows
         ),
+        "newline_boundary_events": sum(
+            row.get("newline_boundary_events", 0) for row in scored_rows
+        ),
+        "mixed_newline_token_events": sum(
+            row.get("mixed_newline_token_events", 0) for row in scored_rows
+        ),
+        "pure_newline_token_events": sum(
+            row.get("pure_newline_token_events", 0) for row in scored_rows
+        ),
+        "multiple_newline_token_events": sum(
+            row.get("multiple_newline_token_events", 0) for row in scored_rows
+        ),
+        "boundary_retokenized_left_token_count": sum(
+            row.get("boundary_retokenized_left_token_count", 0)
+            for row in scored_rows
+        ),
+        "discarded_masks_after_boundary": sum(
+            row.get("discarded_masks_after_boundary", 0) for row in scored_rows
+        ),
+        "discarded_resolved_tokens_after_boundary": sum(
+            row.get("discarded_resolved_tokens_after_boundary", 0)
+            for row in scored_rows
+        ),
+        "boundary_events_with_left_masks_remaining": sum(
+            row.get("boundary_events_with_left_masks_remaining", 0)
+            for row in scored_rows
+        ),
+        "region_local_eos_events": sum(
+            row.get("region_local_eos_events", 0) for row in scored_rows
+        ),
+        "region_local_eos_deleted_masks": sum(
+            row.get("region_local_eos_deleted_masks", 0)
+            for row in scored_rows
+        ),
+        "max_masks_deleted_by_one_eos": max(
+            row.get("max_masks_deleted_by_one_eos", 0) for row in scored_rows
+        ),
+        "cross_region_delete_attempts": sum(
+            row.get("cross_region_delete_attempts", 0) for row in scored_rows
+        ),
+        "exact_cycle_rows": sum(
+            "exact_deterministic_cycle" in row["protocol_flags"]
+            for row in scored_rows
+        ),
+        "discard_reference_summary": discard_reference_summary,
         "region_final_length_distributions": {
             region: dict(
                 sorted(
@@ -736,6 +1279,10 @@ def write_completeness_audit(
             classify_protocol_outcome(row) == "allowed_terminal_protocol_failure"
             for row in predictions
         ),
+        "terminal_method_failure_rows": sum(
+            classify_protocol_outcome(row) == "terminal_method_failure"
+            for row in predictions
+        ),
         "disallowed_protocol_violation_rows": sum(
             classify_protocol_outcome(row) == "protocol_violation"
             for row in predictions
@@ -745,7 +1292,16 @@ def write_completeness_audit(
             for row in predictions
         ),
         "posthoc_truncation_fields_present": any(
-            any("discard" in key or "first_line" in key for key in row)
+            any(
+                key
+                in {
+                    "discarded_after_" + "first_line",
+                    "accepted_first_line",
+                    "first_line_only",
+                    "posthoc_truncated_completion",
+                }
+                for key in row
+            )
             for row in predictions
         ),
     }
@@ -774,6 +1330,7 @@ def run_audit(args: argparse.Namespace) -> None:
     violations = read_jsonl(args.output_dir / "protocol_violations.jsonl")
     expected_flagged = (
         audit["allowed_terminal_protocol_failure_rows"]
+        + audit.get("terminal_method_failure_rows", 0)
         + audit["disallowed_protocol_violation_rows"]
     )
     if len(violations) != expected_flagged:
@@ -784,9 +1341,167 @@ def run_audit(args: argparse.Namespace) -> None:
     print(json.dumps(audit, indent=2, ensure_ascii=False), flush=True)
 
 
+def _compressed_activation_history(row: Mapping[str, Any]) -> list[str]:
+    compressed: list[str] = []
+    for region in row.get("active_region_history", []):
+        if not compressed or compressed[-1] != region:
+            compressed.append(region)
+    return compressed
+
+
+def run_gate(args: argparse.Namespace) -> None:
+    if args.method != Method.V2_HARD_V2_BOUNDARY.value:
+        raise RuntimeError("Strict v2 gate is only defined for V2-Hard-v2")
+    predictions = read_jsonl(args.output_dir / "predictions.jsonl")
+    scored = read_jsonl(args.output_dir / "scored.jsonl")
+    summary = read_json(args.output_dir / "summary.json")
+    audit = read_json(args.output_dir / "completeness_audit.json")
+    expected = STAGE_SIZES[args.stage]
+    invariant_flags = {
+        "prefix_tokens_mutated",
+        "suffix_tokens_mutated",
+        "locked_separator_tokens_mutated",
+        "future_region_mutated_before_activation",
+        "cross_region_delete_attempt",
+        "parallel_state_lengths_differ",
+        "pad_region_inside_real_sequence",
+        "non_pad_region_in_right_padding",
+    }
+    required_diagnostic_fields = {
+        "newline_boundary_events",
+        "mixed_newline_token_events",
+        "pure_newline_token_events",
+        "multiple_newline_token_events",
+        "boundary_retokenized_left_token_count",
+        "discarded_internal_right_text",
+        "discarded_masks_after_boundary",
+        "discarded_resolved_token_ids_after_boundary",
+        "discarded_resolved_segments_after_boundary",
+        "discarded_resolved_tokens_after_boundary",
+        "boundary_events_with_left_masks_remaining",
+        "region_local_eos_events",
+        "region_local_eos_deleted_masks",
+        "max_masks_deleted_by_one_eos",
+        "cross_region_delete_attempts",
+        "exact_cycle_events",
+    }
+    checks: dict[str, bool] = {
+        "expected_prediction_rows": len(predictions) == expected,
+        "expected_score_rows": len(scored) == expected,
+        "completeness_audit": bool(audit.get("complete")),
+        "all_required_diagnostic_fields": all(
+            required_diagnostic_fields.issubset(row) for row in predictions
+        ),
+        "zero_unresolved_rows": all(
+            int(row["unresolved_mask_count"]) == 0 for row in predictions
+        ),
+        "zero_runtime_errors": all(
+            row["status"] != "runtime_error" for row in predictions
+        ),
+        "zero_protocol_errors": all(
+            row["status"] != "protocol_error" for row in predictions
+        ),
+        "zero_exact_cycles": all(
+            "exact_deterministic_cycle" not in row["protocol_flags"]
+            for row in predictions
+        ),
+        "zero_invariant_errors": all(
+            not invariant_flags.intersection(row["protocol_flags"])
+            for row in predictions
+        ),
+        "zero_cross_region_delete_attempts": all(
+            int(row["cross_region_delete_attempts"]) == 0 for row in predictions
+        ),
+    }
+    if args.stage == "smoke":
+        expected_activation = [
+            "HARD_SLOT_0",
+            "HARD_SLOT_1",
+            "HARD_SLOT_2",
+        ]
+        checks.update(
+            {
+                "five_of_five_completed": sum(
+                    row["status"] == "completed" for row in predictions
+                )
+                == 5,
+                "sequential_activation_all_rows": all(
+                    _compressed_activation_history(row) == expected_activation
+                    for row in predictions
+                ),
+                "full_step_trace_present": all(
+                    isinstance(row.get("step_trace"), list)
+                    and len(row["step_trace"]) == row["total_forwards"]
+                    for row in predictions
+                ),
+                "no_posthoc_truncation": not audit[
+                    "posthoc_truncation_fields_present"
+                ],
+            }
+        )
+    elif args.stage == "pilot":
+        discard_path = args.output_dir / "discard_reference_diagnostics.json"
+        cases_path = args.output_dir / "discard_reference_cases_top10.jsonl"
+        checks.update(
+            {
+                "thirty_of_thirty_completed": sum(
+                    row["status"] == "completed" for row in predictions
+                )
+                == 30,
+                "compile_at_least_24": int(summary["compile_passed"]) >= 24,
+                "pass_at_least_10": int(summary["passed"]) >= 10,
+                "discard_reference_diagnostic_complete": (
+                    discard_path.exists()
+                    and cases_path.exists()
+                    and read_json(discard_path).get(
+                        "oracle_mechanism_diagnostic"
+                    )
+                    is True
+                ),
+            }
+        )
+    else:
+        checks.update(
+            {
+                "full_642_complete": len(predictions) == 642,
+                "no_early_stop_file": not (
+                    args.output_dir / "early_stop.json"
+                ).exists(),
+                "discard_reference_diagnostic_complete": (
+                    args.output_dir / "discard_reference_diagnostics.json"
+                ).exists(),
+            }
+        )
+    passed = all(checks.values())
+    payload = {
+        "method": args.method,
+        "stage": args.stage,
+        "passed": passed,
+        "checks": checks,
+        "summary": {
+            "predictions": len(predictions),
+            "completed": sum(
+                row["status"] == "completed" for row in predictions
+            ),
+            "passed": summary["passed"],
+            "compile_passed": summary["compile_passed"],
+            "exact_cycles": summary.get("exact_cycle_count", 0),
+            "forward_caps": summary.get("forward_cap_count", 0),
+        },
+        "recorded_at_utc": utc_now(),
+    }
+    atomic_write_json(args.output_dir / "gate.json", payload)
+    print(json.dumps(payload, indent=2, ensure_ascii=False), flush=True)
+    if not passed:
+        failed = [name for name, value in checks.items() if not value]
+        raise RuntimeError(f"V2-Hard-v2 {args.stage} gate failed: {failed}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["generate", "score", "audit"], required=True)
+    parser.add_argument(
+        "--mode", choices=["generate", "score", "audit", "gate"], required=True
+    )
     parser.add_argument("--method", choices=[method.value for method in Method], required=True)
     parser.add_argument("--stage", choices=list(STAGE_SIZES), required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -806,8 +1521,10 @@ def main() -> None:
         run_generation(args)
     elif args.mode == "score":
         run_scoring(args)
-    else:
+    elif args.mode == "audit":
         run_audit(args)
+    else:
+        run_gate(args)
 
 
 if __name__ == "__main__":

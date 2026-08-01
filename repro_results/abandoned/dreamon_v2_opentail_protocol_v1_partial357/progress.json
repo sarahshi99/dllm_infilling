@@ -1,0 +1,15 @@
+{
+  "allowed_terminal_protocol_failure_count": 169,
+  "average_forwards": 154.56022408963585,
+  "average_wall_time_seconds": 14.401102939397566,
+  "completed": 357,
+  "current_task_id": "MultiLineInfilling/HumanEval/108/L2_L4",
+  "eta_seconds": 4104.314337728306,
+  "method": "v2_opentail",
+  "protocol_violation_count": 0,
+  "stage": "full",
+  "status": "running",
+  "total": 642,
+  "total_token_forwards": 14503032,
+  "updated_at_utc": "2026-08-01T17:27:59.492722+00:00"
+}

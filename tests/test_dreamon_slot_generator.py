@@ -21,6 +21,7 @@ from repro_scripts.dreamon_slot_generator import (
     forward_inputs,
     run_slot_generation,
     scan_newline_token_ids,
+    scan_newline_token_metadata,
     select_update,
     validate_state,
 )
@@ -47,7 +48,7 @@ class FakeTokenizer:
         11: "<eos>",
         12: "<mask>",
         13: "<expand>",
-        14: "r",
+        14: ":",
         15: "s",
     }
 
@@ -59,8 +60,9 @@ class FakeTokenizer:
 
     def encode(self, text: str, add_special_tokens: bool = False):
         assert not add_special_tokens
-        if text == "\n":
-            return [4]
+        encodings = {"": [], "\n": [4], ":": [14]}
+        if text in encodings:
+            return encodings[text]
         raise AssertionError(f"Unexpected fake encode input: {text!r}")
 
 
@@ -72,6 +74,7 @@ def tokenizer():
 @pytest.fixture()
 def spec(tokenizer):
     newline_ids, _ = scan_newline_token_ids(tokenizer)
+    newline_map, _ = scan_newline_token_metadata(tokenizer)
     return TokenizerSpec(
         bos_id=tokenizer.bos_token_id,
         eos_id=tokenizer.eos_token_id,
@@ -79,6 +82,7 @@ def spec(tokenizer):
         mask_id=tokenizer.mask_token_id,
         expand_id=13,
         newline_token_ids=frozenset(newline_ids),
+        newline_token_map=newline_map,
         literal_newline_ids=(4,),
     )
 
@@ -236,13 +240,13 @@ def test_expand_shifts_future_region_without_mutating_it(spec, config):
     assert all(int(state.input_ids[p]) == spec.mask_id for p in future_after)
 
 
-def test_delete_in_middle_only_removes_selected_position(spec, config):
+def test_region_local_eos_in_middle_removes_selected_and_right_masks(spec, config):
     state = make_state(Method.V2_HARD, spec, config)
     positions = state.positions_for_region(Region.HARD_SLOT_0)
     state.replace_token(positions[0], 0)
     state.replace_token(positions[1], 1)
     apply_selected_action(state, positions[2], spec.eos_id, config)
-    assert state.region_length(Region.HARD_SLOT_0) == 3
+    assert state.region_length(Region.HARD_SLOT_0) == 2
     assert [int(state.input_ids[p]) for p in state.positions_for_region(Region.HARD_SLOT_0)[:2]] == [0, 1]
 
 
@@ -289,15 +293,23 @@ def test_pad_mask_id_is_never_eligible(spec, config):
     assert pad_position not in eligible_positions(state, Method.V2_HARD)
 
 
-@pytest.mark.parametrize("method", [Method.V2_HARD, Method.V2_OPENTAIL, Method.JOINT_OPENTAIL])
-def test_every_hard_slot_masks_all_newline_tokens(method, spec, config):
+@pytest.mark.parametrize(
+    "method",
+    [
+        Method.V2_HARD,
+        Method.V2_OPENTAIL,
+        Method.JOINT_OPENTAIL,
+        Method.V2_HARD_V2_BOUNDARY,
+    ],
+)
+def test_hard_slots_do_not_blanket_mask_newline_boundary_proposals(method, spec, config):
     state = make_state(method, spec, config)
     logits = logits_for_state(state)
     active_logits, positions = constrained_active_logits(state, method, logits, config)
     for row, position in enumerate(positions):
         region = Region(int(state.region_id[position]))
         if region in {Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2}:
-            assert torch.isneginf(active_logits[row, list(spec.newline_token_ids)]).all()
+            assert not torch.isneginf(active_logits[row, list(spec.newline_token_ids)]).any()
 
 
 def test_opentail_allows_newline_tokens(spec, config):
@@ -331,7 +343,7 @@ def test_global_64_token_cap_blocks_expand(spec, config):
     assert torch.isneginf(active_logits[:, spec.expand_id]).all()
 
 
-class AlwaysMaskModel(torch.nn.Module):
+class AlwaysNormalModel(torch.nn.Module):
     def __init__(self, spec: TokenizerSpec):
         super().__init__()
         self.anchor = torch.nn.Parameter(torch.zeros(()))
@@ -340,14 +352,14 @@ class AlwaysMaskModel(torch.nn.Module):
     def forward(self, input_ids, attention_mask=None, position_ids=None, **_kwargs):
         batch, length = input_ids.shape
         logits = torch.full((batch, length, 16), -9.0, device=input_ids.device)
-        logits[..., self.spec.mask_id] = 9.0
+        logits[..., 0] = 9.0
         return SimpleNamespace(logits=logits)
 
 
 def test_forward_cap_with_unresolved_masks_is_protocol_error(tokenizer, spec, config):
     tiny = SlotGeneratorConfig(**{**config.__dict__, "max_total_forwards": 2})
     result = run_slot_generation(
-        model=AlwaysMaskModel(spec),
+        model=AlwaysNormalModel(spec),
         tokenizer=tokenizer,
         tokenizer_spec=spec,
         method=Method.V2_HARD,
