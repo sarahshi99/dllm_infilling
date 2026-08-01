@@ -34,3 +34,7 @@ analysis_outputs/long_underestimate_detector/**/sweep.json
 *.safetensors
 *.gguf
 *.ckpt
+
+# DreamOn V2 smoke/pilot traces stay local; full 642 outputs are tracked explicitly.
+repro_results/*_smoke5_v1/
+repro_results/*_pilot30_v1/

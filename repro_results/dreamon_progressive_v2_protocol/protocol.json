@@ -1,0 +1,234 @@
+{
+  "protocol_name": "dreamon_progressive_v2_slots",
+  "protocol_version": 1,
+  "frozen_at_utc": "2026-08-01",
+  "population": {
+    "role": "development/mechanism population",
+    "not_held_out_test": true,
+    "selection_note": "Reference-selected exact-three-nonempty-newline-terminated physical-line population; V2-Hard is an oracle structural diagnostic.",
+    "manifest_path": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/manifest.jsonl",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "rows": 642,
+    "unique_task_ids": 642,
+    "base_problems": 115,
+    "generation_population_path": "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+    "generation_population_sha256": "ffaac8a367103ee50893542bf5deb368232d40a904509db4708173994427731d",
+    "generation_allowed_fields": [
+      "task_id",
+      "base_problem_id",
+      "prompt",
+      "suffix"
+    ],
+    "generation_forbidden_fields": [
+      "canonical_solution",
+      "reference_middle",
+      "reference_lines",
+      "reference token counts",
+      "reference indentation",
+      "test results"
+    ]
+  },
+  "model": {
+    "repository": "Dream-org/DreamOn-v0-7B",
+    "snapshot": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "dtype": "bfloat16",
+    "device": "cuda:0",
+    "batch_size": 1,
+    "dreamon_repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "official_generator_sha256": "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858",
+    "tokenizer_revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "tokenizer": {
+    "runtime_tokenizer_size": 151668,
+    "model_vocab_size": 152064,
+    "bos_token_id": 151665,
+    "eos_and_pad_token_id": 151643,
+    "mask_token_id": 151666,
+    "expand_token_id": 151667,
+    "literal_newline_token_ids": [
+      198
+    ],
+    "newline_token_definition": "All tokenizer IDs whose single-token decode contains newline or carriage return.",
+    "newline_token_count": 2179,
+    "newline_token_ids_sha256": "b9be6f30d56789763a9005ff3a1563c0025e05fee4601ac74103595009f607df",
+    "newline_examples": [
+      [198, "\\n"],
+      [201, "\\r"],
+      [271, "\\n\\n"],
+      [319, "\\r\\n"],
+      [510, ":\\n"],
+      [624, ".\\n"]
+    ]
+  },
+  "common_generation": {
+    "initial_masks_per_region": 4,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "top_k": null,
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "number_transfer_tokens": 1,
+    "max_context_tokens": 2048,
+    "max_prompt_tokens": 2048,
+    "max_total_forwards_per_sample_method": 256,
+    "max_global_middle_tokens_including_locked_newlines": 64,
+    "max_hard_slot_content_tokens": 32,
+    "official_logits_shift": "concat(logits[:, :1], logits[:, :-1])",
+    "attention": "Every real prefix, generation, future-mask, locked-separator, and suffix token attends in the full forward; only right PAD is excluded.",
+    "selection": "After full forward, select only eligible unresolved generation positions; choose one position with largest negative entropy confidence.",
+    "mask_noop": "An official-compatible mask-token proposal consumes a forward and remains unresolved; it is counted explicitly.",
+    "canvas_length_accounting": "Generation-region tokens, masks, and locked newline tokens only; prefix, suffix, and right PAD excluded."
+  },
+  "methods": {
+    "v2_hard": {
+      "label": "oracle exact-three-line structural diagnostic",
+      "initial_regions": [
+        "HARD_SLOT_0:MASKx4",
+        "LOCKED_NEWLINE",
+        "HARD_SLOT_1:MASKx4",
+        "LOCKED_NEWLINE",
+        "HARD_SLOT_2:MASKx4",
+        "LOCKED_NEWLINE"
+      ],
+      "activation": [
+        "HARD_SLOT_0",
+        "HARD_SLOT_1",
+        "HARD_SLOT_2"
+      ],
+      "newline_policy": "All generated hard-slot tokens containing newline or carriage return are forbidden at vocabulary-logit level.",
+      "completion": "Direct token extraction of three hard slots and three locked newline separators; no string truncation or repair."
+    },
+    "v2_opentail": {
+      "label": "primary progressive version",
+      "initial_regions": [
+        "HARD_SLOT_0:MASKx4",
+        "LOCKED_NEWLINE",
+        "HARD_SLOT_1:MASKx4",
+        "LOCKED_NEWLINE",
+        "OPEN_TAIL:MASKx4"
+      ],
+      "activation": [
+        "HARD_SLOT_0",
+        "HARD_SLOT_1",
+        "OPEN_TAIL"
+      ],
+      "newline_policy": "Hard slots forbid every newline-containing token; OPEN_TAIL permits them.",
+      "completion": "Direct token extraction of slot 0, locked newline, slot 1, locked newline, and tail; no trailing locked newline and no repair."
+    },
+    "joint_opentail": {
+      "label": "matched-canvas joint-denoising mechanism control",
+      "initial_canvas_matches": "v2_opentail",
+      "activation": "HARD_SLOT_0, HARD_SLOT_1, and OPEN_TAIL are jointly eligible from the first forward.",
+      "newline_policy": "Selected hard-slot logits forbid every newline-containing token; selected OPEN_TAIL logits permit them.",
+      "completion": "Same direct extraction as v2_opentail."
+    }
+  },
+  "expand_delete": {
+    "normal": "Replace only the selected mask; preserve region ID.",
+    "expand": "Replace only the selected mask with two masks inheriting its region ID; recompute all masks and positions after mutation.",
+    "expand_caps": "Forbid expand at vocabulary-logit level when a selected hard slot has length 32, global middle has length 64, or real context would exceed 2048.",
+    "delete": "An EOS proposal deletes only the selected unresolved generation position; shift synchronized arrays left and right-pad one PAD.",
+    "broadcast_delete": false,
+    "locked_regions_mutable": false,
+    "completed_regions_mutable": false,
+    "future_regions_mutable_before_activation": false
+  },
+  "failure_policy": {
+    "unresolved_at_forward_cap": "protocol_error",
+    "silent_mask_removal": false,
+    "context_truncation": false,
+    "posthoc_first_line_truncation": false,
+    "posthoc_structural_repair": false,
+    "nan_or_all_invalid_logits": "protocol_error"
+  },
+  "stages": {
+    "smoke": {
+      "rows": 5,
+      "selection": "first five frozen-manifest rows",
+      "save_step_trace": true
+    },
+    "pilot": {
+      "rows": 30,
+      "selection": "first thirty frozen-manifest rows",
+      "promotion_gate": "protocol correctness only"
+    },
+    "full": {
+      "rows": 642,
+      "selection": "all frozen-manifest rows in frozen order"
+    }
+  },
+  "evaluator": {
+    "repository_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "execution_py_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "execution_note": "The preserved local evaluator checkout differs from upstream only by enabling the documented exec(check_program, exec_globals) line used by the historical V1 scoring.",
+    "timeout_seconds": 3.0,
+    "workers": 8,
+    "functional_metric": "HumanEval Infilling check_correctness Pass@1",
+    "compile_metric": "ast.parse plus compile over prompt + completion + suffix",
+    "exact_match": "completion equals canonical_solution"
+  },
+  "output_schema": {
+    "prediction_key": [
+      "task_id",
+      "method",
+      "config_hash"
+    ],
+    "required_prediction_fields": [
+      "task_id",
+      "base_problem_id",
+      "method",
+      "config_hash",
+      "runner_commit",
+      "model_revision",
+      "completion",
+      "completion_token_ids",
+      "regions",
+      "region_lengths",
+      "region_forward_counts",
+      "total_forwards",
+      "forward_sequence_lengths",
+      "token_forwards",
+      "normal_update_counts",
+      "expand_counts",
+      "delete_counts",
+      "mask_noop_counts",
+      "blank_region_flags",
+      "tail_newline_count",
+      "completion_physical_line_count",
+      "hard_forbidden_newline_attempts",
+      "slot_expand_cap_hits",
+      "global_expand_cap_hits",
+      "unresolved_mask_count",
+      "protocol_flags",
+      "context_token_count",
+      "wall_time_seconds",
+      "peak_cuda_memory_bytes",
+      "status"
+    ],
+    "status_values": [
+      "completed",
+      "runtime_error",
+      "protocol_error",
+      "unsupported"
+    ]
+  },
+  "statistics": {
+    "row_unit": "infilling row",
+    "cluster_unit": "base_problem_id",
+    "task_macro_group": "base_problem_id",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 42,
+    "primary_interval": "cluster bootstrap 95% CI",
+    "secondary_interval": "row paired bootstrap 95% CI",
+    "paired_test": "two-sided exact McNemar"
+  },
+  "baseline_reuse": {
+    "one_shot_accuracy_source": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/scored.jsonl",
+    "v1_accuracy_source": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/scored.jsonl",
+    "one_shot_passed": 301,
+    "v1_progressive_passed": 316,
+    "timing_status": "mixed CPU/GPU historical timing; excluded from pure-H200 compute comparison",
+    "pure_h200_baseline_available": false
+  }
+}

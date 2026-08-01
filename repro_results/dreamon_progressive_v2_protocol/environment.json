@@ -1,0 +1,50 @@
+{
+  "recorded_at_utc": "2026-08-01T09:43:28Z",
+  "repository": {
+    "worktree": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots",
+    "branch": "codex/dreamon-progressive-v2-slots",
+    "base_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
+    "remote_head_branch": "main",
+    "remote_head": "22094636b0079efb9a22c26e59907a8079ad36d0",
+    "source_checkout_had_user_untracked_files": true,
+    "clean_worktree_created": true
+  },
+  "dependencies": {
+    "dreamon_path": "/home/shx/projects/dllm_infilling/DreamOn",
+    "dreamon_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "dreamon_dirty_file_preserved": "eval/evaluate.py",
+    "human_eval_infilling_path": "/home/shx/projects/dllm_infilling/human-eval-infilling",
+    "human_eval_infilling_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "human_eval_infilling_user_changes_preserved": true,
+    "human_eval_execution_py_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "model_snapshot": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "software": {
+    "python": "3.10.20",
+    "pytorch": "2.5.1+cu121",
+    "transformers": "4.46.2",
+    "pytorch_cuda_runtime": "12.1",
+    "nvidia_driver": "580.173.02",
+    "nvidia_reported_cuda": "13.0"
+  },
+  "gpu": {
+    "model": "NVIDIA H200 NVL",
+    "total_memory_mib": 143771,
+    "used_memory_mib_at_record": 16901,
+    "utilization_percent_at_record": 0,
+    "other_job_policy": "Do not stop or preempt other user jobs.",
+    "observed_other_gpu_processes": [
+      {
+        "pid": 1718067,
+        "command": "python temp_FedMend.py --dataset lanl --encoder GCN --rnn GRU --seed 42",
+        "memory_mib": 16890
+      }
+    ]
+  },
+  "tmux_sessions_at_record": [
+    "0",
+    "2",
+    "31",
+    "34"
+  ]
+}

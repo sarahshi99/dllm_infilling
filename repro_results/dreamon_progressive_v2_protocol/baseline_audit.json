@@ -1,0 +1,54 @@
+{
+  "audited_at_utc": "2026-08-01",
+  "historical_directory": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642",
+  "historical_runner_sha256": "7919f46c5aefe5d33144c6658b30a1e8f39643020653031cc5a4148f5d53aee3",
+  "historical_predictions_sha256": "0bcbbb028cd0f69372d108b140062d5654881bb8c1a95830cbdef72984bfc81b",
+  "historical_scored_sha256": "9d2916ca37a9e7c30b0102d9db17455101d92b0b3d1b4cfc37457958056c299d",
+  "historical_summary_sha256": "8969916ab7655f6e73f6161dc841cdfef8ef8c0c9728a0f82191c2ae778fcfe9",
+  "coverage": {
+    "manifest_rows": 642,
+    "prediction_rows": 642,
+    "score_rows": 642,
+    "unique_task_ids": 642,
+    "base_problems": 115,
+    "task_sets_equal": true,
+    "manifest_prediction_score_order_equal": true
+  },
+  "one_shot_baseline": {
+    "initial_masks": 4,
+    "max_generation_tokens": 64,
+    "steps": 256,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "top_k": null,
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "model_snapshot": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "passed": 301,
+    "pass_rate": 0.4688473520249221,
+    "accuracy_reuse_allowed": true
+  },
+  "historical_v1_progressive": {
+    "round_steps": [85, 85, 86],
+    "passed": 316,
+    "pass_rate": 0.49221183800623053,
+    "discarded_nonempty_rounds": 812,
+    "empty_accepted_rounds": 337,
+    "comparison_to_v2_hard_is_multifactor": true
+  },
+  "prompt_suffix_source": "/home/shx/projects/dllm_infilling/human-eval-infilling/data/HumanEval-MultiLineInfilling.jsonl.gz",
+  "evaluator": {
+    "repository_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "execution_py_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "timeout_seconds": 3.0,
+    "workers": 8,
+    "matches_v2": true
+  },
+  "timing": {
+    "historical_population_contains_mixed_execution": true,
+    "evidence": "The first 30 rows of the first 321-row shard predate the GPU resume; remaining rows and the second shard were GPU runs.",
+    "pure_h200_baseline_found": false,
+    "historical_average_seconds_must_not_be_reported_as_pure_h200": true,
+    "pure_h200_baseline_rerun": "not scheduled; accuracy reuse is valid and the user limited scope to the three V2 methods"
+  }
+}
