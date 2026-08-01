@@ -262,6 +262,32 @@
       "loss_rows": []
     }
   },
+  "dreamon_progressive_v2": {
+    "updated_at_utc": "2026-08-01",
+    "population_role": "exact-three-line development/mechanism population; not held-out test",
+    "v2_hard_v1": {
+      "interpretation": "decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy",
+      "rows": 642,
+      "passed": 7,
+      "compile_passed": 46,
+      "forward_cap_failures": 421,
+      "immutable": true
+    },
+    "v2_hard_v2_boundary_pilot": {
+      "rows": 30,
+      "completed": 25,
+      "passed": 11,
+      "compile_passed": 19,
+      "exact_matches": 5,
+      "exact_cycles": 5,
+      "forward_caps": 0,
+      "pilot_gate_passed": false,
+      "decision": "stop_before_full"
+    },
+    "v2_opentail_v1": "abandoned_partial357_resumable_false",
+    "v2_opentail_v2_started": false,
+    "joint_v2_started": false
+  },
   "current_checkpoint": "midcons",
   "current_checkpoint_long_failures": {
     "long_total": 113,

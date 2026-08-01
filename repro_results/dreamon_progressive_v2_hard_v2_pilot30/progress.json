@@ -1,0 +1,16 @@
+{
+  "allowed_terminal_protocol_failure_count": 0,
+  "average_forwards": 30.666666666666668,
+  "average_wall_time_seconds": 1.5196620476897806,
+  "completed": 30,
+  "current_task_id": null,
+  "eta_seconds": 0.0,
+  "method": "v2_hard_v2_boundary",
+  "protocol_violation_count": 0,
+  "stage": "pilot",
+  "status": "gate_failed",
+  "terminal_method_failure_count": 5,
+  "total": 30,
+  "total_token_forwards": 158513,
+  "updated_at_utc": "2026-08-01T19:15:39.667435+00:00"
+}

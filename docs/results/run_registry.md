@@ -110,3 +110,12 @@ Phase 2 frozen-controller note, 2026-07-03: compact controller artifacts are tra
 | `full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` | `superseded` | 1033 | 762 | 73.77% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` |
 | `full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` |
 | `full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` |
+
+## DreamOn V2-Hard-v2 scoped runs
+
+| Run | Status | Rows | Completed | Pass | Compile | Model | Output |
+|---|---|---:|---:|---:|---:|---|---|
+| `dreamon_progressive_v2_hard_v2_smoke5_20260801` | `diagnostic_gate_passed` | 5 | 5 | 2 | 3 | `DreamOn-v0-7B` | `repro_results/dreamon_progressive_v2_hard_v2_smoke5/` |
+| `dreamon_progressive_v2_hard_v2_pilot30_20260801` | `stopped_pilot_gate_failed` | 30 | 25 | 11 | 19 | `DreamOn-v0-7B` | `repro_results/dreamon_progressive_v2_hard_v2_pilot30/` |
+
+The pilot has five exact deterministic cycles and fails the preregistered completion/compile gate. Full 642 was not started.

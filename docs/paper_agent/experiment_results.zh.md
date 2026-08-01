@@ -889,4 +889,5 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - 解释修正为：`V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy`。
 - 已确认混杂：hard newline proposal blanket ban、EOS 仅删除 selected mask、缺少 exact deterministic transition cycle detection。
 - V2-OpenTail-v1 full partial357 已封存为 abandoned，`resumable:false`；Joint-v1 未启动。
-- 当前仅授权 `v2_hard_v2_boundary` protocol version 2；尚无新 empirical result，必须先通过 smoke/pilot 预注册门禁。
+- `v2_hard_v2_boundary` verification 与 Smoke 5 通过；Pilot 30 为 25/30 completed、5 exact cycles、Pass@1 11/30、compile 19/30、exact 5/30。
+- Pilot 仅达到 Pass@1 floor，未达到 completion/zero-cycle/zero-unresolved/zero-protocol/compile 门禁；decision=`stop_before_full`，未运行 full。

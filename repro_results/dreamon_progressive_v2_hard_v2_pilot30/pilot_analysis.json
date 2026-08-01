@@ -1,0 +1,130 @@
+{
+  "method": "v2_hard_v2_boundary",
+  "protocol_version": 2,
+  "stage": "pilot",
+  "population_role": "first 30 rows of exact-three-line development/mechanism population; not held-out test",
+  "gate_passed": false,
+  "failed_gate_checks": [
+    "zero_unresolved_rows",
+    "zero_protocol_errors",
+    "zero_exact_cycles",
+    "thirty_of_thirty_completed",
+    "compile_at_least_24"
+  ],
+  "result": {
+    "rows": 30,
+    "completed": 25,
+    "completion_rate": 0.8333333333333334,
+    "passed": 11,
+    "pass_rate": 0.36666666666666664,
+    "compile_passed": 19,
+    "compile_pass_rate": 0.6333333333333333,
+    "exact_matches": 5,
+    "exact_match_rate": 0.16666666666666666,
+    "task_macro_pass_rate": 0.3267195767195767,
+    "completed_only_passed": 11,
+    "completed_only_pass_rate": 0.44,
+    "completed_only_compile_passed": 19,
+    "completed_only_compile_pass_rate": 0.76,
+    "runtime_errors": 0,
+    "forward_caps": 0,
+    "exact_cycles": 5,
+    "unresolved_masks_at_terminal_failures": 10
+  },
+  "historical_first30": {
+    "one_shot": {
+      "passed": 19,
+      "compile_passed": 30,
+      "candidate_wins": 2,
+      "candidate_losses": 10,
+      "both_pass": 9,
+      "both_fail": 9,
+      "net_wins": -8,
+      "mcnemar_exact_p": 0.03857421875,
+      "compile_help": 0,
+      "compile_harm": 11,
+      "control_task_macro_pass_rate": 0.6031746031746033
+    },
+    "v1_progressive": {
+      "passed": 16,
+      "compile_passed": 25,
+      "candidate_wins": 1,
+      "candidate_losses": 6,
+      "both_pass": 10,
+      "both_fail": 13,
+      "net_wins": -5,
+      "mcnemar_exact_p": 0.125,
+      "compile_help": 2,
+      "compile_harm": 8,
+      "control_task_macro_pass_rate": 0.5092592592592592
+    }
+  },
+  "cycle_diagnostic": {
+    "rows": 5,
+    "all_cycles_in_region": "HARD_SLOT_2",
+    "cycle_length_distribution": {
+      "2": 4,
+      "6": 1
+    },
+    "expand_local_eos_cycle_rows": 4,
+    "expand_boundary_cycle_rows": 1,
+    "interpretation": "Exact detection prevents wasting the remaining 256-forward budget, but the corrected local EOS action does not eliminate deterministic birth/death loops."
+  },
+  "boundary_diagnostic": {
+    "all_slot_boundary_events": 45,
+    "mixed_newline_token_events": 39,
+    "pure_newline_token_events": 6,
+    "multiple_newline_token_events": 0,
+    "boundary_events_with_left_masks_remaining": 16,
+    "discarded_masks_all_slots": 165,
+    "discarded_resolved_tokens_all_slots": 47,
+    "oracle_slot0_slot1_events": 33,
+    "oracle_resolved_discard_events": 18,
+    "oracle_rows_with_resolved_discard": 15,
+    "oracle_row_fraction_with_resolved_discard": 0.5,
+    "oracle_analyzed_discarded_tokens": 42,
+    "oracle_discarded_fraction_of_normal_generated_tokens": 0.07865168539325842,
+    "complete_text_available_events": 3,
+    "complete_text_exact_reference_rate": 0.6666666666666666,
+    "leading_segment_reference_prefix_rate": 0.16666666666666666,
+    "leading_segment_reference_substring_rate": 0.5555555555555556,
+    "resolved_discard_group": {
+      "rows": 15,
+      "passed": 7,
+      "compile_passed": 10
+    },
+    "no_resolved_discard_group": {
+      "rows": 15,
+      "passed": 4,
+      "compile_passed": 9
+    },
+    "interpretation": "Some discarded resolved content is exactly or partially next-line-like, but the small complete-text denominator and frequent fragmentary segments do not authorize BoundaryShift."
+  },
+  "local_eos_diagnostic": {
+    "events": 10,
+    "deleted_masks": 17,
+    "max_masks_deleted_by_one_eos": 4,
+    "cross_region_delete_attempts": 0,
+    "rows_with_local_eos": 7,
+    "rows_with_local_eos_passed": 1,
+    "rows_with_local_eos_compiled": 3
+  },
+  "compile_failure_taxonomy": {
+    "protocol_exact_cycle": 5,
+    "completed_missing_colon": 2,
+    "completed_indentation_or_unclosed_suite": 4,
+    "completed_compile_failures_with_blank_slot": 3
+  },
+  "compute": {
+    "mean_forwards": 30.666666666666668,
+    "total_forwards": 920,
+    "mean_token_forwards": 5283.766666666666,
+    "total_token_forwards": 158513,
+    "mean_wall_time_seconds": 1.5196620476897806,
+    "total_wall_time_seconds": 45.58986143069342,
+    "max_peak_cuda_memory_bytes": 15506802688,
+    "newline_mapping_preprocessing_seconds": 0.8439384259982035
+  },
+  "decision": "stop_before_full",
+  "decision_reason": "The preregistered pilot gate failed. Thresholds and failure labels remain unchanged; no full run is authorized."
+}

@@ -1046,6 +1046,44 @@
     "test_lock": "analysis_outputs/frozen_controller_20260703_phase2_freeze/test_lock.json",
     "test_status": "sealed"
   },
+  "dreamon_progressive_v2": {
+    "branch": "codex/dreamon-progressive-v2-slots",
+    "iteration_starting_head": "0cf2e9bd47590629fdde31ab1028b59044e63cef",
+    "protocol_v2_implementation_head": "3929986cd6e897e4a21c12fe91758539ea522e3e",
+    "decision": "stop_before_full",
+    "population_role": "exact-three-line development/mechanism population; not held-out test",
+    "v2_hard_v1": {
+      "status": "decoder_protocol_failure_diagnostic_not_clean_slot_efficacy_test",
+      "rows": 642,
+      "passed": 7,
+      "compile_passed": 46,
+      "forward_cap_failures": 421,
+      "raw_results_immutable": true
+    },
+    "v2_opentail_v1": {
+      "status": "abandoned_partial357",
+      "resumable": false,
+      "archive": "repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357"
+    },
+    "v2_hard_v2_boundary": {
+      "protocol_version": 2,
+      "protocol": "repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json",
+      "smoke_gate_passed": true,
+      "smoke_completed": 5,
+      "pilot_gate_passed": false,
+      "pilot_rows": 30,
+      "pilot_completed": 25,
+      "pilot_passed": 11,
+      "pilot_compile_passed": 19,
+      "pilot_exact_matches": 5,
+      "pilot_exact_cycles": 5,
+      "pilot_forward_caps": 0,
+      "full_started": false,
+      "opentail_v2_started": false,
+      "joint_v2_started": false,
+      "report": "docs/paper_agent/experiments/20260801_dreamon_v2_hard_v2_boundary.md"
+    }
+  },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
   "task_type": "phase5_independent_method_falsification",
   "test_evaluation_count": 0,

@@ -1,0 +1,21 @@
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "e94d95b53fd93c374afe856e8a0b997beeb0f27d3ba347a0ebdee54d4d2296b8",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 5,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v2_hard_v2_boundary",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 5,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 5,
+  "score_rows": 5,
+  "score_unique_task_ids": 5,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "smoke",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}

@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "all_required_diagnostic_fields": true,
+    "completeness_audit": true,
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "five_of_five_completed": true,
+    "full_step_trace_present": true,
+    "no_posthoc_truncation": true,
+    "sequential_activation_all_rows": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_exact_cycles": true,
+    "zero_invariant_errors": true,
+    "zero_protocol_errors": true,
+    "zero_runtime_errors": true,
+    "zero_unresolved_rows": true
+  },
+  "method": "v2_hard_v2_boundary",
+  "passed": true,
+  "recorded_at_utc": "2026-08-01T19:15:38.387671+00:00",
+  "stage": "smoke",
+  "summary": {
+    "compile_passed": 3,
+    "completed": 5,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "passed": 2,
+    "predictions": 5
+  }
+}

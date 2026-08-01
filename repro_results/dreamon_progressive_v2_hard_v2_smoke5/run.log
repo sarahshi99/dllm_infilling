@@ -1,0 +1,146 @@
+stage_started_at=2026-08-01T19:06:46+00:00 method=v2_hard_v2_boundary stage=smoke head=3929986cd6e897e4a21c12fe91758539ea522e3e
+method=v2_hard_v2_boundary stage=smoke selected=5 completed=0 remaining=5 config_hash=e94d95b53fd93c374afe856e8a0b997beeb0f27d3ba347a0ebdee54d4d2296b8
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.55it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.69it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.75it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  9.61it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/5] MultiLineInfilling/HumanEval/0/L0_L2 start
+[1/5] MultiLineInfilling/HumanEval/0/L0_L2 done status=completed forwards=22 token_forwards=3533 wall=1.353s
+[2/5] MultiLineInfilling/HumanEval/0/L1_L3 start
+[2/5] MultiLineInfilling/HumanEval/0/L1_L3 done status=completed forwards=39 token_forwards=6481 wall=2.149s
+[3/5] MultiLineInfilling/HumanEval/0/L2_L4 start
+[3/5] MultiLineInfilling/HumanEval/0/L2_L4 done status=completed forwards=46 token_forwards=7853 wall=2.389s
+[4/5] MultiLineInfilling/HumanEval/0/L3_L5 start
+[4/5] MultiLineInfilling/HumanEval/0/L3_L5 done status=completed forwards=29 token_forwards=4973 wall=1.420s
+[5/5] MultiLineInfilling/HumanEval/1/L0_L2 start
+[5/5] MultiLineInfilling/HumanEval/1/L0_L2 done status=completed forwards=27 token_forwards=5425 wall=1.513s
+progress completed=5/5 avg_wall=1.765s avg_forwards=32.60 token_forwards=28265 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 5/5
+{
+  "num_samples": 5,
+  "num_base_problems": 2,
+  "passed": 2,
+  "pass_rate": 0.4,
+  "compile_passed": 3,
+  "compile_pass_rate": 0.6,
+  "exact_matches": 0,
+  "exact_match_rate": 0.0,
+  "task_macro_pass_rate": 0.625,
+  "completion_rate": 1.0,
+  "completed_rows": 5,
+  "completed_only": {
+    "passed": 2,
+    "pass_rate": 0.4,
+    "compile_passed": 3,
+    "compile_pass_rate": 0.6,
+    "exact_matches": 0,
+    "exact_match_rate": 0.0
+  },
+  "completion_tokens": {
+    "mean": 22.2,
+    "median": 20
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 5
+    }
+  },
+  "blank_region_count": 0,
+  "expand_count": 64,
+  "delete_count": 0,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "newline_boundary_events": 7,
+  "mixed_newline_token_events": 6,
+  "pure_newline_token_events": 1,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 25,
+  "discarded_resolved_tokens_after_boundary": 3,
+  "region_local_eos_events": 0,
+  "region_local_eos_deleted_masks": 0,
+  "max_masks_deleted_by_one_eos": 0,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 32.6,
+    "median": 29,
+    "max": 46,
+    "total": 163
+  },
+  "token_forwards": {
+    "mean": 5653,
+    "median": 5425,
+    "max": 7853,
+    "total": 28265
+  },
+  "wall_time_seconds": {
+    "mean": 1.7649111022241413,
+    "median": 1.513125239056535,
+    "max": 2.3891032150713727,
+    "total": 8.824555511120707
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15434576998.4,
+    "max": 15453701120
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "e94d95b53fd93c374afe856e8a0b997beeb0f27d3ba347a0ebdee54d4d2296b8",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 5,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v2_hard_v2_boundary",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 5,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 5,
+  "score_rows": 5,
+  "score_unique_task_ids": 5,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "smoke",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+{
+  "method": "v2_hard_v2_boundary",
+  "stage": "smoke",
+  "passed": true,
+  "checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_unresolved_rows": true,
+    "zero_runtime_errors": true,
+    "zero_protocol_errors": true,
+    "zero_exact_cycles": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "five_of_five_completed": true,
+    "sequential_activation_all_rows": true,
+    "full_step_trace_present": true,
+    "no_posthoc_truncation": true
+  },
+  "summary": {
+    "predictions": 5,
+    "completed": 5,
+    "passed": 2,
+    "compile_passed": 3,
+    "exact_cycles": 0,
+    "forward_caps": 0
+  },
+  "recorded_at_utc": "2026-08-01T19:07:07.565833+00:00"
+}
+method=v2_hard_v2_boundary stage=smoke selected=5 completed=5 remaining=0 config_hash=e94d95b53fd93c374afe856e8a0b997beeb0f27d3ba347a0ebdee54d4d2296b8
+smoke_deterministic_resume_equality=passed rows=5 sha256=fba361d2f27c77560ee8f99d8584e0a22526459f51e7cc81f7234a50e8632e55
+stage_finished_at=2026-08-01T19:07:09+00:00 method=v2_hard_v2_boundary stage=smoke

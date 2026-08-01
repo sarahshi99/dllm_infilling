@@ -269,11 +269,15 @@ def test_smoke_gate_requires_all_completed_and_sequential(tmp_path):
     for index in range(5):
         trace = [{"forward_index": item} for item in range(1, 4)]
         predictions.append(
-            {
-                "task_id": f"task-{index}",
-                "status": "completed",
-                "protocol_flags": [],
-                "unresolved_mask_count": 0,
+                {
+                    "task_id": f"task-{index}",
+                    "method": Method.V2_HARD_V2_BOUNDARY.value,
+                    "status": "completed",
+                    "protocol_flags": [],
+                    "unresolved_mask_count": 0,
+                    "completion": "code",
+                    "wall_time_seconds": 1.0,
+                    "token_forwards": 30,
                 "cross_region_delete_attempts": 0,
                 "active_region_history": [
                     "HARD_SLOT_0",

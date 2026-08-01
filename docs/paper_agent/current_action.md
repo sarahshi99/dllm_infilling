@@ -4,7 +4,7 @@ Timestamp: 2026-08-01 UTC
 
 Research decision: `iterate`.
 
-Action: implement and evaluate only `v2_hard_v2_boundary`, then stop for independent review. Do not resume V2-OpenTail protocol-v1 and do not start V2-OpenTail-v2 or Joint-OpenTail-v2 in this round.
+Action status: stopped after the `v2_hard_v2_boundary` pilot failed its preregistered gate. Await independent review; do not start full, V2-OpenTail-v2, or Joint-OpenTail-v2.
 
 Branch/worktree:
 
@@ -32,13 +32,13 @@ Protocol-v2 decoder revisions:
 2. EOS deletes selected/right unresolved masks only within the active region;
 3. a repeated exact full transition terminates immediately as `exact_deterministic_cycle`.
 
-Execution gate:
+Execution outcome:
 
-1. focused tests, runner tests, py_compile, shell and source scan;
-2. Smoke 5 requires 5/5 completed and zero error/cycle/invariant/cross-region-delete rows;
-3. Pilot 30 requires 30/30 completed, compile at least 24/30, Pass@1 at least 10/30, and complete discard/reference diagnostics;
-4. Full 642 runs only if the pilot gate passes, with preregistered non-completion early stops;
-5. stop after V2-Hard-v2 result or any failed gate.
+1. verification passed: 78 tests, py_compile, shell/source scan, real tokenizer mapping and 642-row static canvas audit;
+2. Smoke passed: 5/5 completed and zero errors/cycles/invariant violations;
+3. Pilot failed: 25/30 completed, 5 exact cycles, compile 19/30, Pass@1 11/30;
+4. full was not started and is not authorized;
+5. current state is `stop_before_full`.
 
 Protocol: `repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`.
 

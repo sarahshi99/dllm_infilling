@@ -6,7 +6,7 @@ Only selected, executable experiments belong here. Frozen test remains sealed un
 
 ## EXP-010: DreamOn V2-Hard-v2 boundary decoder diagnostic
 
-Status: implementation_verification
+Status: stopped_pilot_gate_failed
 
 Decision: `iterate`.
 
@@ -25,6 +25,8 @@ Full early stop: at least 5 non-completed rows in the first 50, cumulative non-c
 Stop condition: stop after V2-Hard-v2 or any failed gate. Do not run V2-OpenTail-v2 or Joint-OpenTail-v2.
 
 Expected outputs: `repro_results/dreamon_progressive_v2_hard_v2_{smoke5,pilot30,all642}/` and a protocol-v2 experiment report.
+
+Result: verification passed and Smoke 5 passed. Pilot 30 produced 25 completed rows, 5 exact cycles, Pass@1 11/30, compile 19/30, exact 5/30. The gate failed completion/cycle/unresolved/protocol/compile checks, so full was not started. Decision: `stop_before_full`.
 
 ## EXP-007: Phase 5 full RandomSpanLight shared candidate bank
 

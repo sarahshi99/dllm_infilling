@@ -14,4 +14,11 @@
 | `full_lcal_official_bounded_repair_union_s3_off6_9_delta1_8_susp16_a6000_control_20260528_163529` | `env_control` | 1033 | 787 | 76.19% | `GSAI-ML/LLaDA-8B-Base` | A6000 control。 |
 | `full_lcal_official_bounded_repair_union_midcons_off11_13_d3_7_r08_a6000_20260528_221626` | `candidate` | 1033 | 795 | 76.96% | `GSAI-ML/LLaDA-8B-Base` | 当前 A6000 最佳 checkpoint。 |
 
-Registry 的完整条目包括 49 个 runs。除 canonical runs 外，其他 runs 主要用于记录失败方向、参数敏感性和被 superseded 的实验路线，避免重复消耗 GPU。
+Registry 的机器可读条目现包括 51 个 runs。除 canonical runs 外，其他 runs 主要用于记录失败方向、参数敏感性和被 superseded 的实验路线，避免重复消耗 GPU。
+
+DreamOn V2-Hard-v2 scoped runs：
+
+| 运行 | 状态 | Rows | Completed | Pass | Compile | 结论 |
+|---|---|---:|---:|---:|---:|---|
+| `dreamon_progressive_v2_hard_v2_smoke5_20260801` | `diagnostic_gate_passed` | 5 | 5 | 2 | 3 | smoke 协议门禁通过。 |
+| `dreamon_progressive_v2_hard_v2_pilot30_20260801` | `stopped_pilot_gate_failed` | 30 | 25 | 11 | 19 | 5 个 exact cycle，未达到 completion/compile 门禁；full 未启动。 |

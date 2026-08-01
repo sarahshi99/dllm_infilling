@@ -53,3 +53,4 @@ Updated: 2026-07-11 UTC
 - The only authorized new method is `v2_hard_v2_boundary`, protocol version 2. It interprets newline proposals as online boundaries, restores region-local EOS broadcast deletion, and stops repeated exact transitions.
 - Smoke and pilot use preregistered quality/termination gates. A failed gate stops the round; thresholds and failure labels may not be changed after observation.
 - No V2-OpenTail-v2 or Joint-OpenTail-v2 run is authorized before independent review of V2-Hard-v2.
+- V2-Hard-v2 execution result: Smoke 5 passed, but Pilot 30 failed the frozen gate with 25/30 completed, 5 exact cycles, compile 19/30, and Pass@1 11/30. The Pass floor passed, but completion, zero-cycle, zero-unresolved, zero-protocol-error, and compile floors failed. Decision is `stop_before_full`; do not change thresholds or run full.

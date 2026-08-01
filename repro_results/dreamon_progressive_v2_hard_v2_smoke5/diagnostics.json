@@ -1,0 +1,87 @@
+{
+  "boundary_events_with_left_masks_remaining": 3,
+  "boundary_retokenized_left_token_count": 7,
+  "cross_region_delete_attempts": 0,
+  "discard_reference_summary": {
+    "complete_text_reference": {
+      "available_events": 1,
+      "exact_match_rate": 1.0,
+      "prefix_rate": 1.0,
+      "substring_rate": 1.0
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.030303030303030304,
+      "mean_per_event": 0.75,
+      "median_per_event": 0.0,
+      "normal_generated_token_denominator": 99,
+      "total": 3
+    },
+    "event_count": 4,
+    "leading_segment_reference": {
+      "available_events": 1,
+      "prefix_rate": 1.0,
+      "substring_rate": 1.0
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 1,
+    "row_fraction_with_resolved_discard": 0.2,
+    "rows_with_boundary_event": 4,
+    "rows_with_resolved_discard": 1,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 1.0,
+        "compile_passed": 1,
+        "pass_rate": 0.0,
+        "passed": 0,
+        "rows": 1
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.5,
+        "compile_passed": 2,
+        "pass_rate": 0.5,
+        "passed": 2,
+        "rows": 4
+      }
+    }
+  },
+  "discarded_masks_after_boundary": 25,
+  "discarded_resolved_tokens_after_boundary": 3,
+  "exact_cycle_rows": 0,
+  "first_selected_region_distribution": {
+    "HARD_SLOT_0": 5
+  },
+  "hard_forbidden_newline_attempts": 0,
+  "joint_updates_before_slot0_complete": 0,
+  "max_masks_deleted_by_one_eos": 0,
+  "method": "v2_hard_v2_boundary",
+  "mixed_newline_token_events": 6,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 7,
+  "protocol_flag_distribution": {},
+  "pure_newline_token_events": 1,
+  "region_final_length_distributions": {
+    "HARD_SLOT_0": {
+      "4": 1,
+      "5": 1,
+      "7": 2,
+      "10": 1
+    },
+    "HARD_SLOT_1": {
+      "6": 4,
+      "11": 1
+    },
+    "HARD_SLOT_2": {
+      "3": 1,
+      "5": 1,
+      "6": 2,
+      "8": 1
+    }
+  },
+  "region_local_eos_deleted_masks": 0,
+  "region_local_eos_events": 0,
+  "stage": "smoke",
+  "status_distribution": {
+    "completed": 5
+  },
+  "tail_multiline_rows": 0
+}

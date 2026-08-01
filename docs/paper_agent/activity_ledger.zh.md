@@ -321,3 +321,5 @@
 - archive：V2-Hard-v1 642-row 原始结果保持只读并标注为 decoder/protocol failure diagnostic；V2-OpenTail-v1 partial357 移入 `repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357/`，`resumable:false`；Joint-v1 未启动。
 - action：本轮只实现 `v2_hard_v2_boundary` protocol version 2，经过严格 smoke/pilot 门禁后才允许 full，并在该方法结束后停止。
 - protocol：`repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`。
+- execution：78 tests/static gates 通过；Smoke 5 为 5/5 completed、0 cycle/error；Pilot 30 为 25/30 completed、5 exact cycles、Pass@1 11/30、compile 19/30、exact 5/30。
+- gate：pilot 仅通过 Pass@1 floor；completion/zero-cycle/zero-unresolved/zero-protocol/compile floors 失败。按预注册规则 `stop_before_full`，未创建 full 结果，未启动 OpenTail-v2/Joint-v2。

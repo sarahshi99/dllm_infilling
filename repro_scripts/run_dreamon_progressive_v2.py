@@ -1491,6 +1491,15 @@ def run_gate(args: argparse.Namespace) -> None:
         "recorded_at_utc": utc_now(),
     }
     atomic_write_json(args.output_dir / "gate.json", payload)
+    update_progress(
+        args.output_dir / "progress.json",
+        Method(args.method),
+        args.stage,
+        predictions,
+        expected,
+        None,
+        "gate_passed" if passed else "gate_failed",
+    )
     print(json.dumps(payload, indent=2, ensure_ascii=False), flush=True)
     if not passed:
         failed = [name for name, value in checks.items() if not value]

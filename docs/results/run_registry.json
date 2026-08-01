@@ -883,5 +883,39 @@
     "mask_length_source": "cal_lite",
     "final_source_histogram": {},
     "oracle_bucket_pass_rates": {}
+  },
+  {
+    "run_id": "dreamon_progressive_v2_hard_v2_smoke5_20260801",
+    "experiment_name": "dreamon_progressive_v2_hard_v2_boundary_smoke",
+    "status": "diagnostic_gate_passed",
+    "raw_path": "repro_results/dreamon_progressive_v2_hard_v2_smoke5",
+    "has_summary": true,
+    "model": "Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194",
+    "sample_count": 5,
+    "pass_count": 2,
+    "pass_rate": 0.4,
+    "compile_count": 3,
+    "completion_count": 5,
+    "protocol_version": 2,
+    "gate_passed": true,
+    "population_role": "development/mechanism smoke"
+  },
+  {
+    "run_id": "dreamon_progressive_v2_hard_v2_pilot30_20260801",
+    "experiment_name": "dreamon_progressive_v2_hard_v2_boundary_pilot",
+    "status": "stopped_pilot_gate_failed",
+    "raw_path": "repro_results/dreamon_progressive_v2_hard_v2_pilot30",
+    "has_summary": true,
+    "model": "Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194",
+    "sample_count": 30,
+    "pass_count": 11,
+    "pass_rate": 0.36666666666666664,
+    "compile_count": 19,
+    "completion_count": 25,
+    "exact_cycle_count": 5,
+    "protocol_version": 2,
+    "gate_passed": false,
+    "full_started": false,
+    "population_role": "development/mechanism pilot"
   }
 ]
