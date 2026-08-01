@@ -183,6 +183,22 @@ def prediction_key(row: Mapping[str, Any]) -> tuple[str, str, str]:
     return row["task_id"], row["method"], row["config_hash"]
 
 
+def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
+    status = row["status"]
+    flags = list(row["protocol_flags"])
+    unresolved = int(row["unresolved_mask_count"])
+    if status == "completed" and not flags and unresolved == 0:
+        return "completed"
+    if (
+        status == "protocol_error"
+        and flags == ["forward_cap_with_unresolved_masks"]
+        and unresolved > 0
+        and row["completion"] == ""
+    ):
+        return "allowed_terminal_protocol_failure"
+    return "protocol_violation"
+
+
 def validate_resume_rows(
     rows: Sequence[Mapping[str, Any]],
     method: Method,
@@ -335,9 +351,12 @@ def update_progress(
             "average_wall_time_seconds": average_wall,
             "average_forwards": statistics.mean(forwards) if forwards else None,
             "total_token_forwards": sum(token_forwards),
-            "protocol_violation_count": sum(
-                row["status"] != "completed" or bool(row["protocol_flags"])
+            "allowed_terminal_protocol_failure_count": sum(
+                classify_protocol_outcome(row) == "allowed_terminal_protocol_failure"
                 for row in rows
+            ),
+            "protocol_violation_count": sum(
+                classify_protocol_outcome(row) == "protocol_violation" for row in rows
             ),
             "eta_seconds": eta,
         },
@@ -437,7 +456,7 @@ def run_generation(args: argparse.Namespace) -> None:
         }
         durable_append_jsonl(predictions_path, row)
         generated_rows.append(row)
-        if row["status"] != "completed" or row["protocol_flags"]:
+        if classify_protocol_outcome(row) != "completed":
             durable_append_jsonl(violations_path, row)
         update_progress(
             args.output_dir / "progress.json",
@@ -462,7 +481,12 @@ def run_generation(args: argparse.Namespace) -> None:
                 int(item["total_forwards"]) for item in generated_rows
             )
             violations = sum(
-                item["status"] != "completed" or bool(item["protocol_flags"])
+                classify_protocol_outcome(item) == "protocol_violation"
+                for item in generated_rows
+            )
+            terminal_failures = sum(
+                classify_protocol_outcome(item)
+                == "allowed_terminal_protocol_failure"
                 for item in generated_rows
             )
             eta = average_wall * (len(selected) - len(generated_rows))
@@ -470,7 +494,8 @@ def run_generation(args: argparse.Namespace) -> None:
                 f"progress completed={len(generated_rows)}/{len(selected)} "
                 f"avg_wall={average_wall:.3f}s avg_forwards={average_forwards:.2f} "
                 f"token_forwards={sum(int(item['token_forwards']) for item in generated_rows)} "
-                f"violations={violations} eta_seconds={eta:.1f}",
+                f"terminal_failures={terminal_failures} violations={violations} "
+                f"eta_seconds={eta:.1f}",
                 flush=True,
             )
 
@@ -707,8 +732,16 @@ def write_completeness_audit(
             row["method"] == args.method for row in predictions
         ),
         "manifest_sha256": (args.output_dir / "manifest.sha256").read_text().strip(),
-        "protocol_violation_rows": sum(
-            row["status"] != "completed" or bool(row["protocol_flags"])
+        "allowed_terminal_protocol_failure_rows": sum(
+            classify_protocol_outcome(row) == "allowed_terminal_protocol_failure"
+            for row in predictions
+        ),
+        "disallowed_protocol_violation_rows": sum(
+            classify_protocol_outcome(row) == "protocol_violation"
+            for row in predictions
+        ),
+        "silent_unresolved_acceptance_rows": sum(
+            row["status"] == "completed" and int(row["unresolved_mask_count"]) > 0
             for row in predictions
         ),
         "posthoc_truncation_fields_present": any(
@@ -726,7 +759,8 @@ def write_completeness_audit(
             audit["prediction_score_task_order_match"],
             audit["all_prediction_config_hashes_match"],
             audit["all_prediction_methods_match"],
-            audit["protocol_violation_rows"] == 0,
+            audit["disallowed_protocol_violation_rows"] == 0,
+            audit["silent_unresolved_acceptance_rows"] == 0,
             not audit["posthoc_truncation_fields_present"],
         ]
     )
@@ -738,8 +772,15 @@ def run_audit(args: argparse.Namespace) -> None:
     if not audit.get("complete"):
         raise RuntimeError(f"Completeness/protocol audit failed: {json.dumps(audit)}")
     violations = read_jsonl(args.output_dir / "protocol_violations.jsonl")
-    if violations:
-        raise RuntimeError(f"Protocol violations file contains {len(violations)} rows")
+    expected_flagged = (
+        audit["allowed_terminal_protocol_failure_rows"]
+        + audit["disallowed_protocol_violation_rows"]
+    )
+    if len(violations) != expected_flagged:
+        raise RuntimeError(
+            f"Protocol failure/violation file has {len(violations)} rows, "
+            f"expected {expected_flagged}"
+        )
     print(json.dumps(audit, indent=2, ensure_ascii=False), flush=True)
 
 

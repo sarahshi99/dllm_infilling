@@ -48,8 +48,8 @@ run_stage() {
     local stage=$1
     local output
     case "$stage" in
-        smoke) output="$ROOT/repro_results/${STEM}_smoke5_v1" ;;
-        pilot) output="$ROOT/repro_results/${STEM}_pilot30_v1" ;;
+        smoke) output="$ROOT/repro_results/${STEM}_smoke5_v2" ;;
+        pilot) output="$ROOT/repro_results/${STEM}_pilot30_v2" ;;
         full) output="$ROOT/repro_results/${STEM}_all642" ;;
     esac
     mkdir -p "$output"

@@ -10,6 +10,7 @@ from repro_scripts.run_dreamon_progressive_v2 import (
     STAGE_SIZES,
     atomic_write_json,
     build_method_config,
+    classify_protocol_outcome,
     load_generation_population,
     prediction_key,
     stable_json_hash,
@@ -103,6 +104,33 @@ def test_atomic_progress_write_round_trips(tmp_path):
     atomic_write_json(path, payload)
     assert json.loads(path.read_text(encoding="utf-8")) == payload
     assert not (tmp_path / "progress.json.tmp").exists()
+
+
+def test_forward_cap_is_explicit_terminal_failure_not_implementation_violation():
+    row = {
+        "status": "protocol_error",
+        "protocol_flags": ["forward_cap_with_unresolved_masks"],
+        "unresolved_mask_count": 3,
+        "completion": "",
+    }
+    assert classify_protocol_outcome(row) == "allowed_terminal_protocol_failure"
+
+
+def test_silent_unresolved_or_invariant_error_is_protocol_violation():
+    silent = {
+        "status": "completed",
+        "protocol_flags": [],
+        "unresolved_mask_count": 1,
+        "completion": "code",
+    }
+    invariant = {
+        "status": "protocol_error",
+        "protocol_flags": ["future_region_mutated_before_activation"],
+        "unresolved_mask_count": 1,
+        "completion": "",
+    }
+    assert classify_protocol_outcome(silent) == "protocol_violation"
+    assert classify_protocol_outcome(invariant) == "protocol_violation"
 
 
 def test_runner_source_has_no_reference_access_in_generation_function():
