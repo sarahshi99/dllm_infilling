@@ -1,0 +1,16 @@
+{
+  "a_config_hash": "9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c",
+  "a_manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "a_protocol_violations": 0,
+  "a_rows": 642,
+  "a_unique_task_ids": 642,
+  "b_config_hash": "d00683e664adb7d0687d2f91f5e13317ec41cb09abf79f45735edcaa575ccae0",
+  "b_manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "b_protocol_violations": 0,
+  "b_rows": 642,
+  "b_unique_task_ids": 642,
+  "base_problems": 115,
+  "complete": true,
+  "isolation_audit_passed": true,
+  "same_task_order": true
+}

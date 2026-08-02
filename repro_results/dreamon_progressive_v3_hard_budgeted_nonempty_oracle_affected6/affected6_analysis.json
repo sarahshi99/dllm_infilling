@@ -25,6 +25,8 @@
     "compile_harm": 1,
     "compile_help": 3,
     "control_task_macro_pass_rate": 0.0,
+    "exact_match_harm": 0,
+    "exact_match_help": 1,
     "mcnemar_exact_p": 0.125,
     "net_wins": 4,
     "row_bootstrap_95_ci": [

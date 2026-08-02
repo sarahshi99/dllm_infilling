@@ -125,5 +125,6 @@ The pilot has five exact deterministic cycles and fails the preregistered comple
 | Run | Status | Rows | Completed | Pass | Compile | Role |
 |---|---|---:|---:|---:|---:|---|
 | `v3_hard_budgeted_pilot30_20260802` | `engineering_pass_quality_fail` | 30 | 30 | 14 | 23 | official budget fidelity control; Full not authorized |
+| `v3_hard_budgeted_full642_posthoc_20260802` | `completed_posthoc_diagnostic` | 642 | 642 | 281 | 538 | later explicitly authorized; does not alter original Pilot gate; not held-out |
 | `v3_hard_budgeted_nonempty_oracle_pilot30_20260802` | `full_authorized` | 30 | 30 | 18 | 25 | oracle structural pilot |
 | `v3_hard_budgeted_nonempty_oracle_full642_20260802` | `completed_oracle_diagnostic` | 642 | 642 | 280 | 471 | not deployable or held-out |

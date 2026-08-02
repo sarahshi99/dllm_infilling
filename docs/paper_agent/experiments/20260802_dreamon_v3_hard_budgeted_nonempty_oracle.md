@@ -21,12 +21,14 @@ Pilot30 completed 30/30 with 18 Pass, 25 compile, 8 exact, and zero blank/termin
 | Task-macro Pass@1 | 42.46% |
 | Blank / cycle / forward cap / runtime / protocol | 0 / 0 / 0 / 0 / 0 |
 
-Paired versus one-shot: 94 wins / 115 losses, McNemar `p=0.1664`, clustered 95% CI `[-0.0858, 0.0237]`, task-macro delta `-1.49pp`. Versus historical V1: 66 wins / 102 losses, McNemar `p=0.00675`, clustered 95% CI `[-0.1017, -0.0103]`, task-macro delta `-4.00pp`. Versus V2-Hard-v1: 274 wins / 1 loss, but this is a multifactor comparison against a decoder/protocol failure diagnostic. A Full comparison is unavailable because A did not pass its Full gate.
+Paired versus one-shot: 94 wins / 115 losses, McNemar `p=0.1664`, clustered 95% CI `[-0.0858, 0.0237]`, task-macro delta `-1.49pp`. Versus historical V1: 66 wins / 102 losses, McNemar `p=0.00675`, clustered 95% CI `[-0.1017, -0.0103]`, task-macro delta `-4.00pp`. Versus V2-Hard-v1: 274 wins / 1 loss, but this is a multifactor comparison against a decoder/protocol failure diagnostic.
 
-Mechanism/cost: guard triggered on 137 rows (26 Pass, 53 compile), with 9009 candidate rejections and no no-valid-action terminal. Budget exhausted on 217 rows (76 Pass, 122 compile). Mean forwards 68.64; total forwards 44,067; total token-forwards 11,412,369; generation wall time 4,061.30 seconds; peak CUDA memory 15,819,467,264 bytes.
+A Full was later run by explicit user authorization after A failed its original Pilot30 performance gate. This post-hoc mechanism comparison gives B versus A: 15 wins / 16 losses / 265 both pass / 346 both fail, McNemar `p=1.0`, row bootstrap 95% CI `[-1.87pp, +1.56pp]`, clustered 95% CI `[-2.60pp, +2.09pp]`. B compile help/harm is `6/73`; exact-match help/harm is `9/0`. B task-macro is 1.29pp above A despite row-level Pass being one lower.
+
+Mechanism/cost: guard triggered on exactly the 137 rows where A produced at least one blank slot. The 505 inactive rows exactly match A. On the affected subgroup, A has 27 Pass / 120 compile while B has 26 Pass / 53 compile. B records 9009 candidate rejections and no no-valid-action terminal. Budget exhausted on 217 rows. B uses 44,067 forwards and 11,412,369 token-forwards, respectively 23.31% and 25.04% above A; generation wall time is 4,061.30 seconds and peak CUDA memory is 15,819,467,264 bytes.
 
 Failures comprise 171 compile failures and 191 compiled functional failures. These are residual errors not explained by cumulative budget or empty-slot termination. Boundary diagnostics find resolved discard on 356/642 rows; 51/164 complete discarded texts exactly match the oracle next line, but BoundaryShift was not implemented.
 
-Decision: `reframe`. Budget fidelity and nonempty termination repair real decoder failures, but the oracle Full remains below one-shot and historical V1. Stop this experiment family pending independent review.
+Decision: `reframe`. Budget fidelity repairs premature cycle classification, but the oracle nonempty guard does not improve Full Pass@1, substantially harms compilation, and increases compute. It improves surface exact match without functional gain. Stop this experiment family pending independent review.
 
-Artifacts: `repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_{protocol,affected6,pilot30,all642}/`.
+Artifacts: `repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_{protocol,affected6,pilot30,all642}/` and `repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/`.

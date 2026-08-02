@@ -1,0 +1,29 @@
+{
+  "a": {
+    "budget_exhausted_rows": 138,
+    "peak_cuda_memory_bytes": 15819467264,
+    "total_forwards": 35738,
+    "total_token_forwards": 9126663,
+    "total_wall_time_seconds": 2702.2321059975075
+  },
+  "b": {
+    "budget_exhausted_rows": 217,
+    "peak_cuda_memory_bytes": 15819467264,
+    "total_forwards": 44067,
+    "total_token_forwards": 11412369,
+    "total_wall_time_seconds": 4061.2976120876847
+  },
+  "b_minus_a": {
+    "budget_exhausted_rows": 79,
+    "peak_cuda_memory_bytes": 0,
+    "total_forwards": 8329,
+    "total_token_forwards": 2285706,
+    "total_wall_time_seconds": 1359.0655060901772
+  },
+  "b_over_a_ratio": {
+    "total_forwards": 1.2330572499860093,
+    "total_token_forwards": 1.2504426864451992,
+    "total_wall_time_seconds": 1.5029418098740592
+  },
+  "timing_caveat": "A and B used the same H200/model configuration but were run at different wall-clock times alongside unrelated user GPU processes; forwards and token-forwards are the cleaner compute comparison."
+}

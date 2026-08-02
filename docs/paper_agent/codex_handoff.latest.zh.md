@@ -362,7 +362,10 @@ Important ablation signals:
 ## 9. 2026-08-02 DreamOn V3 handoff
 
 - branch：`codex/dreamon-progressive-v3-budgeted`。
-- A Pilot30 `14/30`，Full 未授权；B Pilot30 `18/30`，Full642 `280/642` Pass、`471/642` compile、`106/642` exact，642/642 completed，0 terminal/protocol failure。
+- A Pilot30 `14/30`，未通过原始 Full 门槛；后续按用户明确授权完成 post-hoc A Full642：`281/642` Pass、`538/642` compile、`97/642` exact、137 个 blank rows，642/642 completed，0 terminal/protocol failure。
+- B Pilot30 `18/30`，B Full642 `280/642` Pass、`471/642` compile、`106/642` exact，642/642 completed，0 terminal/protocol failure。
+- B vs A：15/16 wins/losses，McNemar `p=1.0`，cluster CI `[-2.60pp,+2.09pp]`；compile help/harm `6/73`，exact help/harm `9/0`。Guard 恰好覆盖 A 的 137 个 blank rows，未触发的 505 条完全一致；B 多用 25.04% token-forwards。
 - B vs one-shot：94/115 wins/losses；vs V1：66/102。B 是 oracle structural diagnostic，非 deployable，非 held-out。
 - decision：`reframe`；停止新 DreamOn progressive 实验，等待独立复核。
 - analysis：`repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`。
+- A/B comparison：`repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md`。

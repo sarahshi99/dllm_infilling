@@ -238,4 +238,4 @@ Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and 
 
 ## EXP-007: DreamOn V3 cumulative budget and nonempty oracle
 
-Status: completed. A Pilot30 stopped before Full at 14/30. B Pilot30 reached 18/30 and authorized B Full642; Full completed 642/642 with 280 Pass and 471 compile, but paired net is `-21` versus one-shot and `-36` versus historical V1. Decision `reframe`; no further DreamOn progressive experiment is queued.
+Status: completed. A Pilot30 stopped under the original gate at 14/30; a later explicitly authorized post-hoc A Full completed at 281/642 Pass and 538/642 compile. B Full is 280/642 Pass and 471/642 compile. B versus A is 15 wins / 16 losses with compile help/harm 6/73 and 25.04% more token-forwards. Decision `reframe`; no further DreamOn progressive experiment is queued.

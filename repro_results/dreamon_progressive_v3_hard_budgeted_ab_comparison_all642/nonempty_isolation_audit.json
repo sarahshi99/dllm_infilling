@@ -1,0 +1,29 @@
+{
+  "a_blank_slot_rows": 137,
+  "b_blank_slot_rows": 0,
+  "guard_not_triggered_rows": 505,
+  "guard_triggered_exactly_on_a_blank_rows": true,
+  "guard_triggered_rows": 137,
+  "inactive_core_fields_checked": [
+    "completion",
+    "completion_token_ids",
+    "score",
+    "status",
+    "total_forwards",
+    "token_forwards",
+    "region_text",
+    "region_token_ids",
+    "region_lengths",
+    "normal_update_counts",
+    "expand_counts",
+    "delete_counts",
+    "newline_boundary_events",
+    "region_local_eos_events",
+    "expand_budget_consumed",
+    "remaining_expand_budget",
+    "blank_region_flags"
+  ],
+  "inactive_difference_rows": 0,
+  "inactive_differences": [],
+  "passed": true
+}

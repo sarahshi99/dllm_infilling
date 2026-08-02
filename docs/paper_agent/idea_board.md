@@ -193,5 +193,5 @@ Related files: `analysis_outputs/paper_evidence_consolidation_20260710_v1/`, `an
 Source: DreamOn V3 diagnostics
 Status: deferred after reframe
 Scientific question: Can next-line-like resolved text discarded by online boundaries be carried into the next slot without reference dependence or post-hoc truncation?
-Evidence: B Full has resolved discard on 356/642 rows; 51/164 complete discarded texts exactly match the oracle next line.
+Evidence: B Full has resolved discard on 356/642 rows; 51/164 complete discarded texts exactly match the oracle next line. The post-hoc A/B Full comparison shows nonempty guard alone does not improve Pass (B 15 wins / 16 losses versus A) and therefore does not explain the remaining boundary-related residual.
 Decision rule: Do not implement automatically. Require independent review and a fresh matched protocol.

@@ -1,0 +1,6 @@
+method,role,rows,completed,passed,pass_rate,compile_passed,compile_rate,exact_matches,exact_rate,task_macro_pass_rate
+one_shot,historical matched control,642,642,301,0.4688473520,638,0.9937694704,83,0.1292834891,0.4395271741
+v1_progressive,historical progressive with post-hoc first-line truncation,642,642,316,0.4922118380,585,0.9112149533,122,0.1900311526,0.4645887261
+v2_hard_v1,decoder/protocol failure diagnostic,642,221,7,0.0109034268,46,0.0716510903,3,0.0046728972,0.0141062802
+a_v3_budgeted,post-hoc Full; official cumulative-budget fidelity control,642,642,281,0.4376947040,538,0.8380062305,97,0.1510903427,0.4116894988
+b_v3_budgeted_nonempty_oracle,oracle structural diagnostic; not deployable,642,642,280,0.4361370717,471,0.7336448598,106,0.1651090343,0.4246305830

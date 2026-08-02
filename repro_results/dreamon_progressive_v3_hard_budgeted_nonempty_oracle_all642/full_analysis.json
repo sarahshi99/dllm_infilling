@@ -1,8 +1,34 @@
 {
   "a_full_comparison": {
-    "available": false,
-    "pilot_comparison_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v3-budgeted/repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_pilot30/pilot_analysis.json",
-    "reason": "A Pilot30 scored 14/30, below the preregistered 18/30 threshold, so A Full642 was not authorized."
+    "a_full_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v3-budgeted/repro_results/dreamon_progressive_v3_hard_budgeted_all642",
+    "available": true,
+    "paired": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 346,
+      "both_pass": 265,
+      "candidate_losses": 16,
+      "candidate_task_macro_pass_rate": 0.42463058301932993,
+      "candidate_wins": 15,
+      "cluster_bootstrap_95_ci": [
+        -0.02603389005870342,
+        0.020864441324010306
+      ],
+      "compile_harm": 73,
+      "compile_help": 6,
+      "control_task_macro_pass_rate": 0.4116894988122609,
+      "exact_match_harm": 0,
+      "exact_match_help": 9,
+      "mcnemar_exact_p": 1.0,
+      "net_wins": -1,
+      "row_bootstrap_95_ci": [
+        -0.018691588785046728,
+        0.01557632398753894
+      ],
+      "row_delta": -0.001557632398753894,
+      "task_macro_delta": 0.01294108420706902
+    },
+    "posthoc_note": "A Full642 was run later by explicit user authorization after A failed the original Pilot30 Full gate; this comparison is a development/mechanism diagnostic."
   },
   "discard_reference_diagnostic": {
     "complete_text_reference": {
@@ -78,6 +104,32 @@
     }
   },
   "paired": {
+    "vs_a_budgeted": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 346,
+      "both_pass": 265,
+      "candidate_losses": 16,
+      "candidate_task_macro_pass_rate": 0.42463058301932993,
+      "candidate_wins": 15,
+      "cluster_bootstrap_95_ci": [
+        -0.02603389005870342,
+        0.020864441324010306
+      ],
+      "compile_harm": 73,
+      "compile_help": 6,
+      "control_task_macro_pass_rate": 0.4116894988122609,
+      "exact_match_harm": 0,
+      "exact_match_help": 9,
+      "mcnemar_exact_p": 1.0,
+      "net_wins": -1,
+      "row_bootstrap_95_ci": [
+        -0.018691588785046728,
+        0.01557632398753894
+      ],
+      "row_delta": -0.001557632398753894,
+      "task_macro_delta": 0.01294108420706902
+    },
     "vs_one_shot": {
       "bootstrap_replicates": 10000,
       "bootstrap_seed": 42,
@@ -93,6 +145,8 @@
       "compile_harm": 169,
       "compile_help": 2,
       "control_task_macro_pass_rate": 0.439527174066816,
+      "exact_match_harm": 41,
+      "exact_match_help": 64,
       "mcnemar_exact_p": 0.1663794203232106,
       "net_wins": -21,
       "row_bootstrap_95_ci": [
@@ -117,6 +171,8 @@
       "compile_harm": 147,
       "compile_help": 33,
       "control_task_macro_pass_rate": 0.464588726136041,
+      "exact_match_harm": 47,
+      "exact_match_help": 31,
       "mcnemar_exact_p": 0.006751369163205467,
       "net_wins": -36,
       "row_bootstrap_95_ci": [
@@ -141,6 +197,8 @@
       "compile_harm": 12,
       "compile_help": 437,
       "control_task_macro_pass_rate": 0.014106280193236715,
+      "exact_match_harm": 0,
+      "exact_match_help": 103,
       "mcnemar_exact_p": 9.092645726036326e-81,
       "net_wins": 273,
       "row_bootstrap_95_ci": [

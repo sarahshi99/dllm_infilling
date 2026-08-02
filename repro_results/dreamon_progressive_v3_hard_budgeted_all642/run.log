@@ -1,0 +1,1529 @@
+stage_started_at=2026-08-02T12:36:18+00:00 method=v3_hard_budgeted stage=full head=34fc33c38280d055f9cc6734b4c897aaaffa13b6
+method=v3_hard_budgeted stage=full selected=642 completed=0 remaining=642 config_hash=9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 12.25it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 13.13it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.98it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/642] MultiLineInfilling/HumanEval/0/L0_L2 start
+[1/642] MultiLineInfilling/HumanEval/0/L0_L2 done status=completed forwards=22 token_forwards=3533 wall=1.359s
+[2/642] MultiLineInfilling/HumanEval/0/L1_L3 start
+[2/642] MultiLineInfilling/HumanEval/0/L1_L3 done status=completed forwards=39 token_forwards=6481 wall=2.212s
+[3/642] MultiLineInfilling/HumanEval/0/L2_L4 start
+[3/642] MultiLineInfilling/HumanEval/0/L2_L4 done status=completed forwards=46 token_forwards=7853 wall=2.465s
+[4/642] MultiLineInfilling/HumanEval/0/L3_L5 start
+[4/642] MultiLineInfilling/HumanEval/0/L3_L5 done status=completed forwards=29 token_forwards=4973 wall=1.474s
+[5/642] MultiLineInfilling/HumanEval/1/L0_L2 start
+[5/642] MultiLineInfilling/HumanEval/1/L0_L2 done status=completed forwards=27 token_forwards=5425 wall=1.588s
+[6/642] MultiLineInfilling/HumanEval/1/L4_L6 start
+[6/642] MultiLineInfilling/HumanEval/1/L4_L6 done status=completed forwards=44 token_forwards=8816 wall=2.810s
+[7/642] MultiLineInfilling/HumanEval/1/L5_L7 start
+[7/642] MultiLineInfilling/HumanEval/1/L5_L7 done status=completed forwards=28 token_forwards=5540 wall=1.610s
+[8/642] MultiLineInfilling/HumanEval/1/L6_L8 start
+[8/642] MultiLineInfilling/HumanEval/1/L6_L8 done status=completed forwards=139 token_forwards=27802 wall=7.578s
+[9/642] MultiLineInfilling/HumanEval/1/L7_L9 start
+[9/642] MultiLineInfilling/HumanEval/1/L7_L9 done status=completed forwards=40 token_forwards=7966 wall=2.390s
+[10/642] MultiLineInfilling/HumanEval/1/L8_L10 start
+[10/642] MultiLineInfilling/HumanEval/1/L8_L10 done status=completed forwards=29 token_forwards=5714 wall=1.589s
+[11/642] MultiLineInfilling/HumanEval/1/L12_L14 start
+[11/642] MultiLineInfilling/HumanEval/1/L12_L14 done status=completed forwards=42 token_forwards=8399 wall=2.588s
+[12/642] MultiLineInfilling/HumanEval/3/L2_L4 start
+[12/642] MultiLineInfilling/HumanEval/3/L2_L4 done status=completed forwards=22 token_forwards=3239 wall=1.125s
+[13/642] MultiLineInfilling/HumanEval/3/L3_L5 start
+[13/642] MultiLineInfilling/HumanEval/3/L3_L5 done status=completed forwards=26 token_forwards=3906 wall=1.236s
+[14/642] MultiLineInfilling/HumanEval/5/L5_L7 start
+[14/642] MultiLineInfilling/HumanEval/5/L5_L7 done status=completed forwards=134 token_forwards=17961 wall=5.922s
+[15/642] MultiLineInfilling/HumanEval/6/L0_L2 start
+[15/642] MultiLineInfilling/HumanEval/6/L0_L2 done status=completed forwards=31 token_forwards=5896 wall=1.700s
+[16/642] MultiLineInfilling/HumanEval/6/L1_L3 start
+[16/642] MultiLineInfilling/HumanEval/6/L1_L3 done status=completed forwards=20 token_forwards=3794 wall=1.155s
+[17/642] MultiLineInfilling/HumanEval/6/L2_L4 start
+[17/642] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=32 token_forwards=6099 wall=1.908s
+[18/642] MultiLineInfilling/HumanEval/6/L3_L5 start
+[18/642] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=88 token_forwards=16720 wall=5.047s
+[19/642] MultiLineInfilling/HumanEval/6/L4_L6 start
+[19/642] MultiLineInfilling/HumanEval/6/L4_L6 done status=completed forwards=23 token_forwards=4304 wall=1.292s
+[20/642] MultiLineInfilling/HumanEval/6/L5_L7 start
+[20/642] MultiLineInfilling/HumanEval/6/L5_L7 done status=completed forwards=38 token_forwards=7350 wall=2.113s
+[21/642] MultiLineInfilling/HumanEval/6/L6_L8 start
+[21/642] MultiLineInfilling/HumanEval/6/L6_L8 done status=completed forwards=39 token_forwards=7597 wall=2.320s
+[22/642] MultiLineInfilling/HumanEval/8/L3_L5 start
+[22/642] MultiLineInfilling/HumanEval/8/L3_L5 done status=completed forwards=26 token_forwards=3860 wall=1.288s
+[23/642] MultiLineInfilling/HumanEval/8/L4_L6 start
+[23/642] MultiLineInfilling/HumanEval/8/L4_L6 done status=completed forwards=22 token_forwards=3201 wall=1.001s
+[24/642] MultiLineInfilling/HumanEval/9/L3_L5 start
+[24/642] MultiLineInfilling/HumanEval/9/L3_L5 done status=completed forwards=26 token_forwards=3891 wall=1.251s
+[25/642] MultiLineInfilling/HumanEval/9/L4_L6 start
+[25/642] MultiLineInfilling/HumanEval/9/L4_L6 done status=completed forwards=139 token_forwards=21056 wall=6.515s
+progress completed=25/642 avg_wall=2.461s avg_forwards=46.04 token_forwards=201376 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1518.7
+[26/642] MultiLineInfilling/HumanEval/9/L5_L7 start
+[26/642] MultiLineInfilling/HumanEval/9/L5_L7 done status=completed forwards=28 token_forwards=4203 wall=1.348s
+[27/642] MultiLineInfilling/HumanEval/11/L0_L2 start
+[27/642] MultiLineInfilling/HumanEval/11/L0_L2 done status=completed forwards=31 token_forwards=3916 wall=1.459s
+[28/642] MultiLineInfilling/HumanEval/11/L1_L3 start
+[28/642] MultiLineInfilling/HumanEval/11/L1_L3 done status=completed forwards=136 token_forwards=17360 wall=5.900s
+[29/642] MultiLineInfilling/HumanEval/11/L2_L4 start
+[29/642] MultiLineInfilling/HumanEval/11/L2_L4 done status=completed forwards=9 token_forwards=1143 wall=0.367s
+[30/642] MultiLineInfilling/HumanEval/12/L3_L5 start
+[30/642] MultiLineInfilling/HumanEval/12/L3_L5 done status=completed forwards=43 token_forwards=5793 wall=2.292s
+[31/642] MultiLineInfilling/HumanEval/12/L4_L6 start
+[31/642] MultiLineInfilling/HumanEval/12/L4_L6 done status=completed forwards=43 token_forwards=6053 wall=2.217s
+[32/642] MultiLineInfilling/HumanEval/13/L0_L2 start
+[32/642] MultiLineInfilling/HumanEval/13/L0_L2 done status=completed forwards=26 token_forwards=2276 wall=0.972s
+[33/642] MultiLineInfilling/HumanEval/14/L2_L4 start
+[33/642] MultiLineInfilling/HumanEval/14/L2_L4 done status=completed forwards=35 token_forwards=2746 wall=1.387s
+[34/642] MultiLineInfilling/HumanEval/18/L2_L4 start
+[34/642] MultiLineInfilling/HumanEval/18/L2_L4 done status=completed forwards=32 token_forwards=3681 wall=1.376s
+[35/642] MultiLineInfilling/HumanEval/19/L0_L2 start
+[35/642] MultiLineInfilling/HumanEval/19/L0_L2 done status=completed forwards=107 token_forwards=22465 wall=7.949s
+[36/642] MultiLineInfilling/HumanEval/19/L1_L3 start
+[36/642] MultiLineInfilling/HumanEval/19/L1_L3 done status=completed forwards=28 token_forwards=5665 wall=1.591s
+[37/642] MultiLineInfilling/HumanEval/19/L2_L4 start
+[37/642] MultiLineInfilling/HumanEval/19/L2_L4 done status=completed forwards=28 token_forwards=5663 wall=1.542s
+[38/642] MultiLineInfilling/HumanEval/19/L3_L5 start
+[38/642] MultiLineInfilling/HumanEval/19/L3_L5 done status=completed forwards=24 token_forwards=4833 wall=1.354s
+[39/642] MultiLineInfilling/HumanEval/19/L4_L6 start
+[39/642] MultiLineInfilling/HumanEval/19/L4_L6 done status=completed forwards=140 token_forwards=29050 wall=8.222s
+[40/642] MultiLineInfilling/HumanEval/19/L5_L7 start
+[40/642] MultiLineInfilling/HumanEval/19/L5_L7 done status=completed forwards=41 token_forwards=8359 wall=2.401s
+[41/642] MultiLineInfilling/HumanEval/19/L6_L8 start
+[41/642] MultiLineInfilling/HumanEval/19/L6_L8 done status=completed forwards=28 token_forwards=5665 wall=1.602s
+[42/642] MultiLineInfilling/HumanEval/19/L7_L9 start
+[42/642] MultiLineInfilling/HumanEval/19/L7_L9 done status=completed forwards=24 token_forwards=4834 wall=1.300s
+[43/642] MultiLineInfilling/HumanEval/19/L8_L10 start
+[43/642] MultiLineInfilling/HumanEval/19/L8_L10 done status=completed forwards=33 token_forwards=6695 wall=1.824s
+[44/642] MultiLineInfilling/HumanEval/19/L9_L11 start
+[44/642] MultiLineInfilling/HumanEval/19/L9_L11 done status=completed forwards=11 token_forwards=2244 wall=0.584s
+[45/642] MultiLineInfilling/HumanEval/19/L10_L12 start
+[45/642] MultiLineInfilling/HumanEval/19/L10_L12 done status=completed forwards=40 token_forwards=7663 wall=2.577s
+[46/642] MultiLineInfilling/HumanEval/20/L3_L5 start
+[46/642] MultiLineInfilling/HumanEval/20/L3_L5 done status=completed forwards=48 token_forwards=12735 wall=3.726s
+[47/642] MultiLineInfilling/HumanEval/20/L4_L6 start
+[47/642] MultiLineInfilling/HumanEval/20/L4_L6 done status=completed forwards=39 token_forwards=10524 wall=3.097s
+[48/642] MultiLineInfilling/HumanEval/20/L5_L7 start
+[48/642] MultiLineInfilling/HumanEval/20/L5_L7 done status=completed forwards=39 token_forwards=10485 wall=2.835s
+[49/642] MultiLineInfilling/HumanEval/20/L6_L8 start
+[49/642] MultiLineInfilling/HumanEval/20/L6_L8 done status=completed forwards=26 token_forwards=6794 wall=1.756s
+[50/642] MultiLineInfilling/HumanEval/20/L7_L9 start
+[50/642] MultiLineInfilling/HumanEval/20/L7_L9 done status=completed forwards=17 token_forwards=4462 wall=1.088s
+progress completed=50/642 avg_wall=2.446s avg_forwards=44.14 token_forwards=396683 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1448.1
+[51/642] MultiLineInfilling/HumanEval/20/L8_L10 start
+[51/642] MultiLineInfilling/HumanEval/20/L8_L10 done status=completed forwards=27 token_forwards=7105 wall=1.949s
+[52/642] MultiLineInfilling/HumanEval/20/L9_L11 start
+[52/642] MultiLineInfilling/HumanEval/20/L9_L11 done status=completed forwards=105 token_forwards=29337 wall=8.871s
+[53/642] MultiLineInfilling/HumanEval/20/L10_L12 start
+[53/642] MultiLineInfilling/HumanEval/20/L10_L12 done status=completed forwards=35 token_forwards=9416 wall=2.391s
+[54/642] MultiLineInfilling/HumanEval/20/L11_L13 start
+[54/642] MultiLineInfilling/HumanEval/20/L11_L13 done status=completed forwards=29 token_forwards=7701 wall=2.081s
+[55/642] MultiLineInfilling/HumanEval/21/L0_L2 start
+[55/642] MultiLineInfilling/HumanEval/21/L0_L2 done status=completed forwards=93 token_forwards=13972 wall=5.731s
+[56/642] MultiLineInfilling/HumanEval/24/L0_L2 start
+[56/642] MultiLineInfilling/HumanEval/24/L0_L2 done status=completed forwards=73 token_forwards=5667 wall=2.716s
+[57/642] MultiLineInfilling/HumanEval/25/L0_L2 start
+[57/642] MultiLineInfilling/HumanEval/25/L0_L2 done status=completed forwards=14 token_forwards=2760 wall=0.753s
+[58/642] MultiLineInfilling/HumanEval/25/L1_L3 start
+[58/642] MultiLineInfilling/HumanEval/25/L1_L3 done status=completed forwards=136 token_forwards=26105 wall=7.515s
+[59/642] MultiLineInfilling/HumanEval/25/L2_L4 start
+[59/642] MultiLineInfilling/HumanEval/25/L2_L4 done status=completed forwards=44 token_forwards=8352 wall=2.687s
+[60/642] MultiLineInfilling/HumanEval/25/L3_L5 start
+[60/642] MultiLineInfilling/HumanEval/25/L3_L5 done status=completed forwards=40 token_forwards=7636 wall=2.512s
+[61/642] MultiLineInfilling/HumanEval/25/L4_L6 start
+[61/642] MultiLineInfilling/HumanEval/25/L4_L6 done status=completed forwards=32 token_forwards=6284 wall=1.799s
+[62/642] MultiLineInfilling/HumanEval/25/L5_L7 start
+[62/642] MultiLineInfilling/HumanEval/25/L5_L7 done status=completed forwards=138 token_forwards=27263 wall=7.672s
+[63/642] MultiLineInfilling/HumanEval/25/L6_L8 start
+[63/642] MultiLineInfilling/HumanEval/25/L6_L8 done status=completed forwards=11 token_forwards=2173 wall=0.587s
+[64/642] MultiLineInfilling/HumanEval/25/L10_L12 start
+[64/642] MultiLineInfilling/HumanEval/25/L10_L12 done status=completed forwards=22 token_forwards=4347 wall=1.228s
+[65/642] MultiLineInfilling/HumanEval/26/L0_L2 start
+[65/642] MultiLineInfilling/HumanEval/26/L0_L2 done status=completed forwards=14 token_forwards=1341 wall=0.566s
+[66/642] MultiLineInfilling/HumanEval/31/L0_L2 start
+[66/642] MultiLineInfilling/HumanEval/31/L0_L2 done status=completed forwards=53 token_forwards=7576 wall=2.850s
+[67/642] MultiLineInfilling/HumanEval/31/L1_L3 start
+[67/642] MultiLineInfilling/HumanEval/31/L1_L3 done status=completed forwards=125 token_forwards=17788 wall=6.506s
+[68/642] MultiLineInfilling/HumanEval/31/L2_L4 start
+[68/642] MultiLineInfilling/HumanEval/31/L2_L4 done status=completed forwards=69 token_forwards=9874 wall=3.686s
+[69/642] MultiLineInfilling/HumanEval/31/L3_L5 start
+[69/642] MultiLineInfilling/HumanEval/31/L3_L5 done status=completed forwards=24 token_forwards=3520 wall=1.140s
+[70/642] MultiLineInfilling/HumanEval/32/L0_L2 start
+[70/642] MultiLineInfilling/HumanEval/32/L0_L2 done status=completed forwards=37 token_forwards=12851 wall=3.258s
+[71/642] MultiLineInfilling/HumanEval/32/L1_L3 start
+[71/642] MultiLineInfilling/HumanEval/32/L1_L3 done status=completed forwards=16 token_forwards=5515 wall=1.281s
+[72/642] MultiLineInfilling/HumanEval/32/L2_L4 start
+[72/642] MultiLineInfilling/HumanEval/32/L2_L4 done status=completed forwards=12 token_forwards=4176 wall=0.932s
+[73/642] MultiLineInfilling/HumanEval/32/L3_L5 start
+[73/642] MultiLineInfilling/HumanEval/32/L3_L5 done status=completed forwards=46 token_forwards=16050 wall=4.297s
+[74/642] MultiLineInfilling/HumanEval/32/L4_L6 start
+[74/642] MultiLineInfilling/HumanEval/32/L4_L6 done status=completed forwards=112 token_forwards=39798 wall=13.958s
+[75/642] MultiLineInfilling/HumanEval/32/L5_L7 start
+[75/642] MultiLineInfilling/HumanEval/32/L5_L7 done status=completed forwards=43 token_forwards=15103 wall=4.092s
+progress completed=75/642 avg_wall=2.845s avg_forwards=47.43 token_forwards=688393 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1613.0
+[76/642] MultiLineInfilling/HumanEval/32/L6_L8 start
+[76/642] MultiLineInfilling/HumanEval/32/L6_L8 done status=completed forwards=38 token_forwards=13674 wall=3.564s
+[77/642] MultiLineInfilling/HumanEval/32/L7_L9 start
+[77/642] MultiLineInfilling/HumanEval/32/L7_L9 done status=completed forwards=12 token_forwards=4365 wall=0.958s
+[78/642] MultiLineInfilling/HumanEval/32/L8_L10 start
+[78/642] MultiLineInfilling/HumanEval/32/L8_L10 done status=completed forwards=14 token_forwards=5109 wall=1.147s
+[79/642] MultiLineInfilling/HumanEval/33/L0_L2 start
+[79/642] MultiLineInfilling/HumanEval/33/L0_L2 done status=completed forwards=31 token_forwards=5175 wall=1.508s
+[80/642] MultiLineInfilling/HumanEval/35/L0_L2 start
+[80/642] MultiLineInfilling/HumanEval/35/L0_L2 done status=completed forwards=125 token_forwards=14529 wall=5.571s
+[81/642] MultiLineInfilling/HumanEval/35/L1_L3 start
+[81/642] MultiLineInfilling/HumanEval/35/L1_L3 done status=completed forwards=31 token_forwards=3562 wall=1.333s
+[82/642] MultiLineInfilling/HumanEval/35/L2_L4 start
+[82/642] MultiLineInfilling/HumanEval/35/L2_L4 done status=completed forwards=19 token_forwards=2173 wall=0.839s
+[83/642] MultiLineInfilling/HumanEval/36/L0_L2 start
+[83/642] MultiLineInfilling/HumanEval/36/L0_L2 done status=completed forwards=86 token_forwards=12944 wall=5.277s
+[84/642] MultiLineInfilling/HumanEval/36/L1_L3 start
+[84/642] MultiLineInfilling/HumanEval/36/L1_L3 done status=completed forwards=41 token_forwards=5925 wall=2.369s
+[85/642] MultiLineInfilling/HumanEval/36/L2_L4 start
+[85/642] MultiLineInfilling/HumanEval/36/L2_L4 done status=completed forwards=64 token_forwards=9431 wall=3.486s
+[86/642] MultiLineInfilling/HumanEval/36/L3_L5 start
+[86/642] MultiLineInfilling/HumanEval/36/L3_L5 done status=completed forwards=36 token_forwards=5422 wall=1.751s
+[87/642] MultiLineInfilling/HumanEval/36/L4_L6 start
+[87/642] MultiLineInfilling/HumanEval/36/L4_L6 done status=completed forwards=21 token_forwards=3107 wall=1.014s
+[88/642] MultiLineInfilling/HumanEval/36/L5_L7 start
+[88/642] MultiLineInfilling/HumanEval/36/L5_L7 done status=completed forwards=53 token_forwards=8152 wall=2.816s
+[89/642] MultiLineInfilling/HumanEval/36/L6_L8 start
+[89/642] MultiLineInfilling/HumanEval/36/L6_L8 done status=completed forwards=136 token_forwards=21302 wall=7.065s
+[90/642] MultiLineInfilling/HumanEval/37/L0_L2 start
+[90/642] MultiLineInfilling/HumanEval/37/L0_L2 done status=completed forwards=42 token_forwards=7938 wall=2.315s
+[91/642] MultiLineInfilling/HumanEval/37/L1_L3 start
+[91/642] MultiLineInfilling/HumanEval/37/L1_L3 done status=completed forwards=133 token_forwards=25675 wall=7.329s
+[92/642] MultiLineInfilling/HumanEval/37/L2_L4 start
+[92/642] MultiLineInfilling/HumanEval/37/L2_L4 done status=completed forwards=44 token_forwards=8328 wall=3.215s
+[93/642] MultiLineInfilling/HumanEval/37/L3_L5 start
+[93/642] MultiLineInfilling/HumanEval/37/L3_L5 done status=completed forwards=11 token_forwards=1995 wall=0.757s
+[94/642] MultiLineInfilling/HumanEval/37/L4_L6 start
+[94/642] MultiLineInfilling/HumanEval/37/L4_L6 done status=completed forwards=47 token_forwards=8542 wall=2.946s
+[95/642] MultiLineInfilling/HumanEval/37/L5_L7 start
+[95/642] MultiLineInfilling/HumanEval/37/L5_L7 done status=completed forwards=9 token_forwards=1602 wall=0.456s
+[96/642] MultiLineInfilling/HumanEval/37/L6_L8 start
+[96/642] MultiLineInfilling/HumanEval/37/L6_L8 done status=completed forwards=136 token_forwards=24798 wall=7.187s
+[97/642] MultiLineInfilling/HumanEval/39/L2_L4 start
+[97/642] MultiLineInfilling/HumanEval/39/L2_L4 done status=completed forwards=29 token_forwards=6126 wall=1.716s
+[98/642] MultiLineInfilling/HumanEval/39/L3_L5 start
+[98/642] MultiLineInfilling/HumanEval/39/L3_L5 done status=completed forwards=113 token_forwards=22926 wall=7.411s
+[99/642] MultiLineInfilling/HumanEval/39/L4_L6 start
+[99/642] MultiLineInfilling/HumanEval/39/L4_L6 done status=completed forwards=127 token_forwards=25730 wall=8.206s
+[100/642] MultiLineInfilling/HumanEval/39/L5_L7 start
+[100/642] MultiLineInfilling/HumanEval/39/L5_L7 done status=completed forwards=86 token_forwards=17119 wall=6.009s
+progress completed=100/642 avg_wall=2.996s avg_forwards=50.41 token_forwards=954042 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1623.9
+[101/642] MultiLineInfilling/HumanEval/39/L6_L8 start
+[101/642] MultiLineInfilling/HumanEval/39/L6_L8 done status=completed forwards=28 token_forwards=5930 wall=1.653s
+[102/642] MultiLineInfilling/HumanEval/39/L7_L9 start
+[102/642] MultiLineInfilling/HumanEval/39/L7_L9 done status=completed forwards=18 token_forwards=3753 wall=1.128s
+[103/642] MultiLineInfilling/HumanEval/39/L8_L10 start
+[103/642] MultiLineInfilling/HumanEval/39/L8_L10 done status=completed forwards=30 token_forwards=6246 wall=1.902s
+[104/642] MultiLineInfilling/HumanEval/39/L9_L11 start
+[104/642] MultiLineInfilling/HumanEval/39/L9_L11 done status=completed forwards=41 token_forwards=8360 wall=2.851s
+[105/642] MultiLineInfilling/HumanEval/39/L10_L12 start
+[105/642] MultiLineInfilling/HumanEval/39/L10_L12 done status=completed forwards=87 token_forwards=18647 wall=7.415s
+[106/642] MultiLineInfilling/HumanEval/39/L11_L13 start
+[106/642] MultiLineInfilling/HumanEval/39/L11_L13 done status=completed forwards=63 token_forwards=13303 wall=4.309s
+[107/642] MultiLineInfilling/HumanEval/39/L12_L14 start
+[107/642] MultiLineInfilling/HumanEval/39/L12_L14 done status=completed forwards=138 token_forwards=29092 wall=8.443s
+[108/642] MultiLineInfilling/HumanEval/39/L13_L15 start
+[108/642] MultiLineInfilling/HumanEval/39/L13_L15 done status=completed forwards=25 token_forwards=5217 wall=1.443s
+[109/642] MultiLineInfilling/HumanEval/40/L0_L2 start
+[109/642] MultiLineInfilling/HumanEval/40/L0_L2 done status=completed forwards=96 token_forwards=20444 wall=7.754s
+[110/642] MultiLineInfilling/HumanEval/40/L1_L3 start
+[110/642] MultiLineInfilling/HumanEval/40/L1_L3 done status=completed forwards=93 token_forwards=19135 wall=6.982s
+[111/642] MultiLineInfilling/HumanEval/40/L2_L4 start
+[111/642] MultiLineInfilling/HumanEval/40/L2_L4 done status=completed forwards=73 token_forwards=15475 wall=5.295s
+[112/642] MultiLineInfilling/HumanEval/40/L3_L5 start
+[112/642] MultiLineInfilling/HumanEval/40/L3_L5 done status=completed forwards=45 token_forwards=9719 wall=2.969s
+[113/642] MultiLineInfilling/HumanEval/43/L0_L2 start
+[113/642] MultiLineInfilling/HumanEval/43/L0_L2 done status=completed forwards=57 token_forwards=10542 wall=3.815s
+[114/642] MultiLineInfilling/HumanEval/43/L1_L3 start
+[114/642] MultiLineInfilling/HumanEval/43/L1_L3 done status=completed forwards=59 token_forwards=11387 wall=3.782s
+[115/642] MultiLineInfilling/HumanEval/43/L2_L4 start
+[115/642] MultiLineInfilling/HumanEval/43/L2_L4 done status=completed forwards=30 token_forwards=5956 wall=1.718s
+[116/642] MultiLineInfilling/HumanEval/44/L0_L2 start
+[116/642] MultiLineInfilling/HumanEval/44/L0_L2 done status=completed forwards=37 token_forwards=4491 wall=1.662s
+[117/642] MultiLineInfilling/HumanEval/44/L1_L3 start
+[117/642] MultiLineInfilling/HumanEval/44/L1_L3 done status=completed forwards=31 token_forwards=3746 wall=1.306s
+[118/642] MultiLineInfilling/HumanEval/44/L2_L4 start
+[118/642] MultiLineInfilling/HumanEval/44/L2_L4 done status=completed forwards=32 token_forwards=4025 wall=1.333s
+[119/642] MultiLineInfilling/HumanEval/46/L0_L2 start
+[119/642] MultiLineInfilling/HumanEval/46/L0_L2 done status=completed forwards=63 token_forwards=15596 wall=5.743s
+[120/642] MultiLineInfilling/HumanEval/46/L4_L6 start
+[120/642] MultiLineInfilling/HumanEval/46/L4_L6 done status=completed forwards=95 token_forwards=22265 wall=8.259s
+[121/642] MultiLineInfilling/HumanEval/47/L0_L2 start
+[121/642] MultiLineInfilling/HumanEval/47/L0_L2 done status=completed forwards=73 token_forwards=9748 wall=3.905s
+[122/642] MultiLineInfilling/HumanEval/47/L1_L3 start
+[122/642] MultiLineInfilling/HumanEval/47/L1_L3 done status=completed forwards=139 token_forwards=19093 wall=6.807s
+[123/642] MultiLineInfilling/HumanEval/47/L2_L4 start
+[123/642] MultiLineInfilling/HumanEval/47/L2_L4 done status=completed forwards=71 token_forwards=9122 wall=3.605s
+[124/642] MultiLineInfilling/HumanEval/48/L0_L2 start
+[124/642] MultiLineInfilling/HumanEval/48/L0_L2 done status=completed forwards=117 token_forwards=11780 wall=5.682s
+[125/642] MultiLineInfilling/HumanEval/48/L1_L3 start
+[125/642] MultiLineInfilling/HumanEval/48/L1_L3 done status=completed forwards=36 token_forwards=3529 wall=1.540s
+progress completed=125/642 avg_wall=3.207s avg_forwards=52.94 token_forwards=1240643 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1658.1
+[126/642] MultiLineInfilling/HumanEval/49/L0_L2 start
+[126/642] MultiLineInfilling/HumanEval/49/L0_L2 done status=completed forwards=39 token_forwards=5316 wall=1.767s
+[127/642] MultiLineInfilling/HumanEval/49/L1_L3 start
+[127/642] MultiLineInfilling/HumanEval/49/L1_L3 done status=completed forwards=32 token_forwards=4376 wall=1.423s
+[128/642] MultiLineInfilling/HumanEval/52/L0_L2 start
+[128/642] MultiLineInfilling/HumanEval/52/L0_L2 done status=completed forwards=32 token_forwards=3353 wall=1.321s
+[129/642] MultiLineInfilling/HumanEval/52/L1_L3 start
+[129/642] MultiLineInfilling/HumanEval/52/L1_L3 done status=completed forwards=20 token_forwards=2088 wall=0.792s
+[130/642] MultiLineInfilling/HumanEval/55/L0_L2 start
+[130/642] MultiLineInfilling/HumanEval/55/L0_L2 done status=completed forwards=15 token_forwards=1358 wall=0.650s
+[131/642] MultiLineInfilling/HumanEval/55/L1_L3 start
+[131/642] MultiLineInfilling/HumanEval/55/L1_L3 done status=completed forwards=26 token_forwards=2403 wall=0.981s
+[132/642] MultiLineInfilling/HumanEval/55/L2_L4 start
+[132/642] MultiLineInfilling/HumanEval/55/L2_L4 done status=completed forwards=43 token_forwards=3705 wall=1.743s
+[133/642] MultiLineInfilling/HumanEval/56/L0_L2 start
+[133/642] MultiLineInfilling/HumanEval/56/L0_L2 done status=completed forwards=28 token_forwards=3960 wall=1.377s
+[134/642] MultiLineInfilling/HumanEval/56/L1_L3 start
+[134/642] MultiLineInfilling/HumanEval/56/L1_L3 done status=completed forwards=34 token_forwards=4839 wall=1.758s
+[135/642] MultiLineInfilling/HumanEval/56/L2_L4 start
+[135/642] MultiLineInfilling/HumanEval/56/L2_L4 done status=completed forwards=108 token_forwards=15789 wall=5.701s
+[136/642] MultiLineInfilling/HumanEval/56/L3_L5 start
+[136/642] MultiLineInfilling/HumanEval/56/L3_L5 done status=completed forwards=19 token_forwards=2687 wall=0.862s
+[137/642] MultiLineInfilling/HumanEval/56/L4_L6 start
+[137/642] MultiLineInfilling/HumanEval/56/L4_L6 done status=completed forwards=139 token_forwards=19768 wall=6.506s
+[138/642] MultiLineInfilling/HumanEval/56/L5_L7 start
+[138/642] MultiLineInfilling/HumanEval/56/L5_L7 done status=completed forwards=22 token_forwards=3107 wall=1.012s
+[139/642] MultiLineInfilling/HumanEval/56/L6_L8 start
+[139/642] MultiLineInfilling/HumanEval/56/L6_L8 done status=completed forwards=26 token_forwards=3651 wall=1.267s
+[140/642] MultiLineInfilling/HumanEval/57/L0_L2 start
+[140/642] MultiLineInfilling/HumanEval/57/L0_L2 done status=completed forwards=14 token_forwards=1445 wall=0.529s
+[141/642] MultiLineInfilling/HumanEval/58/L0_L2 start
+[141/642] MultiLineInfilling/HumanEval/58/L0_L2 done status=completed forwards=73 token_forwards=12181 wall=3.919s
+[142/642] MultiLineInfilling/HumanEval/58/L1_L3 start
+[142/642] MultiLineInfilling/HumanEval/58/L1_L3 done status=completed forwards=59 token_forwards=9588 wall=3.480s
+[143/642] MultiLineInfilling/HumanEval/58/L2_L4 start
+[143/642] MultiLineInfilling/HumanEval/58/L2_L4 done status=completed forwards=32 token_forwards=5077 wall=1.573s
+[144/642] MultiLineInfilling/HumanEval/58/L3_L5 start
+[144/642] MultiLineInfilling/HumanEval/58/L3_L5 done status=completed forwards=34 token_forwards=5504 wall=1.807s
+[145/642] MultiLineInfilling/HumanEval/59/L0_L2 start
+[145/642] MultiLineInfilling/HumanEval/59/L0_L2 done status=completed forwards=38 token_forwards=6152 wall=1.988s
+[146/642] MultiLineInfilling/HumanEval/59/L1_L3 start
+[146/642] MultiLineInfilling/HumanEval/59/L1_L3 done status=completed forwards=132 token_forwards=20684 wall=6.532s
+[147/642] MultiLineInfilling/HumanEval/59/L2_L4 start
+[147/642] MultiLineInfilling/HumanEval/59/L2_L4 done status=completed forwards=122 token_forwards=19096 wall=6.905s
+[148/642] MultiLineInfilling/HumanEval/59/L3_L5 start
+[148/642] MultiLineInfilling/HumanEval/59/L3_L5 done status=completed forwards=61 token_forwards=9613 wall=3.414s
+[149/642] MultiLineInfilling/HumanEval/59/L4_L6 start
+[149/642] MultiLineInfilling/HumanEval/59/L4_L6 done status=completed forwards=28 token_forwards=4504 wall=1.406s
+[150/642] MultiLineInfilling/HumanEval/59/L5_L7 start
+[150/642] MultiLineInfilling/HumanEval/59/L5_L7 done status=completed forwards=19 token_forwards=3035 wall=0.986s
+progress completed=150/642 avg_wall=3.071s avg_forwards=52.09 token_forwards=1413922 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1510.8
+[151/642] MultiLineInfilling/HumanEval/59/L6_L8 start
+[151/642] MultiLineInfilling/HumanEval/59/L6_L8 done status=completed forwards=18 token_forwards=2692 wall=0.846s
+[152/642] MultiLineInfilling/HumanEval/59/L7_L9 start
+[152/642] MultiLineInfilling/HumanEval/59/L7_L9 done status=completed forwards=36 token_forwards=5273 wall=2.132s
+[153/642] MultiLineInfilling/HumanEval/59/L8_L10 start
+[153/642] MultiLineInfilling/HumanEval/59/L8_L10 done status=completed forwards=32 token_forwards=4617 wall=1.658s
+[154/642] MultiLineInfilling/HumanEval/59/L9_L11 start
+[154/642] MultiLineInfilling/HumanEval/59/L9_L11 done status=completed forwards=21 token_forwards=3147 wall=1.052s
+[155/642] MultiLineInfilling/HumanEval/61/L0_L2 start
+[155/642] MultiLineInfilling/HumanEval/61/L0_L2 done status=completed forwards=30 token_forwards=4158 wall=1.456s
+[156/642] MultiLineInfilling/HumanEval/61/L1_L3 start
+[156/642] MultiLineInfilling/HumanEval/61/L1_L3 done status=completed forwards=32 token_forwards=4445 wall=1.846s
+[157/642] MultiLineInfilling/HumanEval/61/L2_L4 start
+[157/642] MultiLineInfilling/HumanEval/61/L2_L4 done status=completed forwards=137 token_forwards=19575 wall=7.151s
+[158/642] MultiLineInfilling/HumanEval/61/L3_L5 start
+[158/642] MultiLineInfilling/HumanEval/61/L3_L5 done status=completed forwards=20 token_forwards=2771 wall=0.913s
+[159/642] MultiLineInfilling/HumanEval/61/L4_L6 start
+[159/642] MultiLineInfilling/HumanEval/61/L4_L6 done status=completed forwards=31 token_forwards=4356 wall=1.562s
+[160/642] MultiLineInfilling/HumanEval/61/L5_L7 start
+[160/642] MultiLineInfilling/HumanEval/61/L5_L7 done status=completed forwards=22 token_forwards=3040 wall=0.995s
+[161/642] MultiLineInfilling/HumanEval/61/L6_L8 start
+[161/642] MultiLineInfilling/HumanEval/61/L6_L8 done status=completed forwards=26 token_forwards=3571 wall=1.166s
+[162/642] MultiLineInfilling/HumanEval/63/L0_L2 start
+[162/642] MultiLineInfilling/HumanEval/63/L0_L2 done status=completed forwards=139 token_forwards=29208 wall=8.335s
+[163/642] MultiLineInfilling/HumanEval/63/L1_L3 start
+[163/642] MultiLineInfilling/HumanEval/63/L1_L3 done status=completed forwards=21 token_forwards=4385 wall=1.270s
+[164/642] MultiLineInfilling/HumanEval/63/L2_L4 start
+[164/642] MultiLineInfilling/HumanEval/63/L2_L4 done status=completed forwards=138 token_forwards=28997 wall=8.836s
+[165/642] MultiLineInfilling/HumanEval/63/L3_L5 start
+[165/642] MultiLineInfilling/HumanEval/63/L3_L5 done status=completed forwards=22 token_forwards=4596 wall=1.280s
+[166/642] MultiLineInfilling/HumanEval/63/L4_L6 start
+[166/642] MultiLineInfilling/HumanEval/63/L4_L6 done status=completed forwards=57 token_forwards=11281 wall=3.765s
+[167/642] MultiLineInfilling/HumanEval/64/L0_L2 start
+[167/642] MultiLineInfilling/HumanEval/64/L0_L2 done status=completed forwards=70 token_forwards=11788 wall=4.755s
+[168/642] MultiLineInfilling/HumanEval/64/L1_L3 start
+[168/642] MultiLineInfilling/HumanEval/64/L1_L3 done status=completed forwards=67 token_forwards=11032 wall=3.686s
+[169/642] MultiLineInfilling/HumanEval/64/L2_L4 start
+[169/642] MultiLineInfilling/HumanEval/64/L2_L4 done status=completed forwards=11 token_forwards=1802 wall=0.528s
+[170/642] MultiLineInfilling/HumanEval/65/L0_L2 start
+[170/642] MultiLineInfilling/HumanEval/65/L0_L2 done status=completed forwards=41 token_forwards=5130 wall=1.953s
+[171/642] MultiLineInfilling/HumanEval/65/L1_L3 start
+[171/642] MultiLineInfilling/HumanEval/65/L1_L3 done status=completed forwards=137 token_forwards=17202 wall=5.951s
+[172/642] MultiLineInfilling/HumanEval/65/L2_L4 start
+[172/642] MultiLineInfilling/HumanEval/65/L2_L4 done status=completed forwards=38 token_forwards=4462 wall=2.165s
+[173/642] MultiLineInfilling/HumanEval/67/L0_L2 start
+[173/642] MultiLineInfilling/HumanEval/67/L0_L2 done status=completed forwards=101 token_forwards=26192 wall=7.637s
+[174/642] MultiLineInfilling/HumanEval/67/L1_L3 start
+[174/642] MultiLineInfilling/HumanEval/67/L1_L3 done status=completed forwards=31 token_forwards=7984 wall=2.378s
+[175/642] MultiLineInfilling/HumanEval/67/L2_L4 start
+[175/642] MultiLineInfilling/HumanEval/67/L2_L4 done status=completed forwards=19 token_forwards=4846 wall=1.315s
+progress completed=175/642 avg_wall=3.058s avg_forwards=52.06 token_forwards=1640472 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1428.3
+[176/642] MultiLineInfilling/HumanEval/68/L0_L2 start
+[176/642] MultiLineInfilling/HumanEval/68/L0_L2 done status=completed forwards=55 token_forwards=19499 wall=5.863s
+[177/642] MultiLineInfilling/HumanEval/68/L1_L3 start
+[177/642] MultiLineInfilling/HumanEval/68/L1_L3 done status=completed forwards=44 token_forwards=15449 wall=5.622s
+[178/642] MultiLineInfilling/HumanEval/69/L0_L2 start
+[178/642] MultiLineInfilling/HumanEval/69/L0_L2 done status=completed forwards=92 token_forwards=21310 wall=7.953s
+[179/642] MultiLineInfilling/HumanEval/69/L4_L6 start
+[179/642] MultiLineInfilling/HumanEval/69/L4_L6 done status=completed forwards=130 token_forwards=29587 wall=8.241s
+[180/642] MultiLineInfilling/HumanEval/69/L5_L7 start
+[180/642] MultiLineInfilling/HumanEval/69/L5_L7 done status=completed forwards=118 token_forwards=27705 wall=9.433s
+[181/642] MultiLineInfilling/HumanEval/70/L0_L2 start
+[181/642] MultiLineInfilling/HumanEval/70/L0_L2 done status=completed forwards=30 token_forwards=4707 wall=1.652s
+[182/642] MultiLineInfilling/HumanEval/70/L1_L3 start
+[182/642] MultiLineInfilling/HumanEval/70/L1_L3 done status=completed forwards=38 token_forwards=6087 wall=1.955s
+[183/642] MultiLineInfilling/HumanEval/70/L2_L4 start
+[183/642] MultiLineInfilling/HumanEval/70/L2_L4 done status=completed forwards=57 token_forwards=9166 wall=3.187s
+[184/642] MultiLineInfilling/HumanEval/70/L3_L5 start
+[184/642] MultiLineInfilling/HumanEval/70/L3_L5 done status=completed forwards=14 token_forwards=2234 wall=0.662s
+[185/642] MultiLineInfilling/HumanEval/71/L0_L2 start
+[185/642] MultiLineInfilling/HumanEval/71/L0_L2 done status=completed forwards=70 token_forwards=13552 wall=4.559s
+[186/642] MultiLineInfilling/HumanEval/71/L1_L3 start
+[186/642] MultiLineInfilling/HumanEval/71/L1_L3 done status=completed forwards=76 token_forwards=14043 wall=5.637s
+[187/642] MultiLineInfilling/HumanEval/71/L2_L4 start
+[187/642] MultiLineInfilling/HumanEval/71/L2_L4 done status=completed forwards=79 token_forwards=13916 wall=5.879s
+[188/642] MultiLineInfilling/HumanEval/71/L3_L5 start
+[188/642] MultiLineInfilling/HumanEval/71/L3_L5 done status=completed forwards=48 token_forwards=8825 wall=3.005s
+[189/642] MultiLineInfilling/HumanEval/72/L3_L5 start
+[189/642] MultiLineInfilling/HumanEval/72/L3_L5 done status=completed forwards=29 token_forwards=8032 wall=2.370s
+[190/642] MultiLineInfilling/HumanEval/72/L4_L6 start
+[190/642] MultiLineInfilling/HumanEval/72/L4_L6 done status=completed forwards=53 token_forwards=15281 wall=4.306s
+[191/642] MultiLineInfilling/HumanEval/72/L5_L7 start
+[191/642] MultiLineInfilling/HumanEval/72/L5_L7 done status=completed forwards=25 token_forwards=7136 wall=1.852s
+[192/642] MultiLineInfilling/HumanEval/72/L6_L8 start
+[192/642] MultiLineInfilling/HumanEval/72/L6_L8 done status=completed forwards=17 token_forwards=4853 wall=1.184s
+[193/642] MultiLineInfilling/HumanEval/72/L7_L9 start
+[193/642] MultiLineInfilling/HumanEval/72/L7_L9 done status=completed forwards=12 token_forwards=3420 wall=0.874s
+[194/642] MultiLineInfilling/HumanEval/73/L0_L2 start
+[194/642] MultiLineInfilling/HumanEval/73/L0_L2 done status=completed forwards=131 token_forwards=25349 wall=8.450s
+[195/642] MultiLineInfilling/HumanEval/73/L1_L3 start
+[195/642] MultiLineInfilling/HumanEval/73/L1_L3 done status=completed forwards=80 token_forwards=15274 wall=5.213s
+[196/642] MultiLineInfilling/HumanEval/73/L2_L4 start
+[196/642] MultiLineInfilling/HumanEval/73/L2_L4 done status=completed forwards=40 token_forwards=7795 wall=2.356s
+[197/642] MultiLineInfilling/HumanEval/74/L0_L2 start
+[197/642] MultiLineInfilling/HumanEval/74/L0_L2 done status=completed forwards=37 token_forwards=9475 wall=2.787s
+[198/642] MultiLineInfilling/HumanEval/74/L4_L6 start
+[198/642] MultiLineInfilling/HumanEval/74/L4_L6 done status=completed forwards=36 token_forwards=9204 wall=2.546s
+[199/642] MultiLineInfilling/HumanEval/74/L8_L10 start
+[199/642] MultiLineInfilling/HumanEval/74/L8_L10 done status=completed forwards=24 token_forwards=6182 wall=1.543s
+[200/642] MultiLineInfilling/HumanEval/74/L9_L11 start
+[200/642] MultiLineInfilling/HumanEval/74/L9_L11 done status=completed forwards=9 token_forwards=2313 wall=0.568s
+progress completed=200/642 avg_wall=3.165s avg_forwards=52.27 token_forwards=1940866 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1398.8
+[201/642] MultiLineInfilling/HumanEval/75/L0_L2 start
+[201/642] MultiLineInfilling/HumanEval/75/L0_L2 done status=completed forwards=64 token_forwards=12234 wall=4.234s
+[202/642] MultiLineInfilling/HumanEval/75/L1_L3 start
+[202/642] MultiLineInfilling/HumanEval/75/L1_L3 done status=completed forwards=129 token_forwards=24823 wall=8.012s
+[203/642] MultiLineInfilling/HumanEval/75/L2_L4 start
+[203/642] MultiLineInfilling/HumanEval/75/L2_L4 done status=completed forwards=26 token_forwards=5051 wall=1.474s
+[204/642] MultiLineInfilling/HumanEval/75/L6_L8 start
+[204/642] MultiLineInfilling/HumanEval/75/L6_L8 done status=completed forwards=50 token_forwards=9171 wall=3.235s
+[205/642] MultiLineInfilling/HumanEval/75/L7_L9 start
+[205/642] MultiLineInfilling/HumanEval/75/L7_L9 done status=completed forwards=24 token_forwards=4289 wall=1.317s
+[206/642] MultiLineInfilling/HumanEval/75/L8_L10 start
+[206/642] MultiLineInfilling/HumanEval/75/L8_L10 done status=completed forwards=140 token_forwards=26170 wall=8.356s
+[207/642] MultiLineInfilling/HumanEval/75/L9_L11 start
+[207/642] MultiLineInfilling/HumanEval/75/L9_L11 done status=completed forwards=52 token_forwards=9678 wall=3.169s
+[208/642] MultiLineInfilling/HumanEval/75/L10_L12 start
+[208/642] MultiLineInfilling/HumanEval/75/L10_L12 done status=completed forwards=26 token_forwards=4608 wall=1.378s
+[209/642] MultiLineInfilling/HumanEval/75/L11_L13 start
+[209/642] MultiLineInfilling/HumanEval/75/L11_L13 done status=completed forwards=32 token_forwards=5993 wall=1.707s
+[210/642] MultiLineInfilling/HumanEval/76/L0_L2 start
+[210/642] MultiLineInfilling/HumanEval/76/L0_L2 done status=completed forwards=26 token_forwards=4682 wall=1.312s
+[211/642] MultiLineInfilling/HumanEval/76/L1_L3 start
+[211/642] MultiLineInfilling/HumanEval/76/L1_L3 done status=completed forwards=23 token_forwards=4150 wall=1.180s
+[212/642] MultiLineInfilling/HumanEval/76/L2_L4 start
+[212/642] MultiLineInfilling/HumanEval/76/L2_L4 done status=completed forwards=29 token_forwards=5349 wall=1.584s
+[213/642] MultiLineInfilling/HumanEval/76/L3_L5 start
+[213/642] MultiLineInfilling/HumanEval/76/L3_L5 done status=completed forwards=28 token_forwards=5095 wall=1.492s
+[214/642] MultiLineInfilling/HumanEval/78/L0_L2 start
+[214/642] MultiLineInfilling/HumanEval/78/L0_L2 done status=completed forwards=44 token_forwards=15505 wall=3.825s
+[215/642] MultiLineInfilling/HumanEval/78/L1_L3 start
+[215/642] MultiLineInfilling/HumanEval/78/L1_L3 done status=completed forwards=136 token_forwards=49397 wall=11.458s
+[216/642] MultiLineInfilling/HumanEval/78/L2_L4 start
+[216/642] MultiLineInfilling/HumanEval/78/L2_L4 done status=completed forwards=36 token_forwards=13075 wall=3.329s
+[217/642] MultiLineInfilling/HumanEval/78/L3_L5 start
+[217/642] MultiLineInfilling/HumanEval/78/L3_L5 done status=completed forwards=31 token_forwards=11479 wall=2.813s
+[218/642] MultiLineInfilling/HumanEval/80/L5_L7 start
+[218/642] MultiLineInfilling/HumanEval/80/L5_L7 done status=completed forwards=44 token_forwards=7353 wall=2.376s
+[219/642] MultiLineInfilling/HumanEval/81/L2_L4 start
+[219/642] MultiLineInfilling/HumanEval/81/L2_L4 done status=completed forwards=121 token_forwards=61614 wall=14.997s
+[220/642] MultiLineInfilling/HumanEval/81/L3_L5 start
+[220/642] MultiLineInfilling/HumanEval/81/L3_L5 done status=completed forwards=115 token_forwards=58576 wall=15.262s
+[221/642] MultiLineInfilling/HumanEval/81/L4_L6 start
+[221/642] MultiLineInfilling/HumanEval/81/L4_L6 done status=completed forwards=90 token_forwards=45124 wall=11.908s
+[222/642] MultiLineInfilling/HumanEval/81/L5_L7 start
+[222/642] MultiLineInfilling/HumanEval/81/L5_L7 done status=completed forwards=104 token_forwards=52182 wall=11.775s
+[223/642] MultiLineInfilling/HumanEval/81/L6_L8 start
+[223/642] MultiLineInfilling/HumanEval/81/L6_L8 done status=completed forwards=34 token_forwards=17217 wall=5.406s
+[224/642] MultiLineInfilling/HumanEval/81/L7_L9 start
+[224/642] MultiLineInfilling/HumanEval/81/L7_L9 done status=completed forwards=103 token_forwards=51585 wall=11.401s
+[225/642] MultiLineInfilling/HumanEval/81/L8_L10 start
+[225/642] MultiLineInfilling/HumanEval/81/L8_L10 done status=completed forwards=104 token_forwards=52070 wall=13.456s
+progress completed=225/642 avg_wall=3.464s avg_forwards=53.62 token_forwards=2497336 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1444.5
+[226/642] MultiLineInfilling/HumanEval/81/L9_L11 start
+[226/642] MultiLineInfilling/HumanEval/81/L9_L11 done status=completed forwards=133 token_forwards=66546 wall=14.968s
+[227/642] MultiLineInfilling/HumanEval/81/L10_L12 start
+[227/642] MultiLineInfilling/HumanEval/81/L10_L12 done status=completed forwards=41 token_forwards=20899 wall=7.516s
+[228/642] MultiLineInfilling/HumanEval/81/L11_L13 start
+[228/642] MultiLineInfilling/HumanEval/81/L11_L13 done status=completed forwards=104 token_forwards=52182 wall=11.885s
+[229/642] MultiLineInfilling/HumanEval/81/L12_L14 start
+[229/642] MultiLineInfilling/HumanEval/81/L12_L14 done status=completed forwards=38 token_forwards=19219 wall=5.781s
+[230/642] MultiLineInfilling/HumanEval/81/L13_L15 start
+[230/642] MultiLineInfilling/HumanEval/81/L13_L15 done status=completed forwards=103 token_forwards=51584 wall=12.126s
+[231/642] MultiLineInfilling/HumanEval/81/L14_L16 start
+[231/642] MultiLineInfilling/HumanEval/81/L14_L16 done status=completed forwards=104 token_forwards=52069 wall=13.554s
+[232/642] MultiLineInfilling/HumanEval/81/L15_L17 start
+[232/642] MultiLineInfilling/HumanEval/81/L15_L17 done status=completed forwards=134 token_forwards=67045 wall=14.970s
+[233/642] MultiLineInfilling/HumanEval/81/L16_L18 start
+[233/642] MultiLineInfilling/HumanEval/81/L16_L18 done status=completed forwards=40 token_forwards=20334 wall=7.065s
+[234/642] MultiLineInfilling/HumanEval/81/L17_L19 start
+[234/642] MultiLineInfilling/HumanEval/81/L17_L19 done status=completed forwards=104 token_forwards=52179 wall=11.871s
+[235/642] MultiLineInfilling/HumanEval/81/L18_L20 start
+[235/642] MultiLineInfilling/HumanEval/81/L18_L20 done status=completed forwards=101 token_forwards=51256 wall=16.252s
+[236/642] MultiLineInfilling/HumanEval/81/L19_L21 start
+[236/642] MultiLineInfilling/HumanEval/81/L19_L21 done status=completed forwards=15 token_forwards=7496 wall=1.708s
+[237/642] MultiLineInfilling/HumanEval/81/L20_L22 start
+[237/642] MultiLineInfilling/HumanEval/81/L20_L22 done status=completed forwards=26 token_forwards=13011 wall=3.473s
+[238/642] MultiLineInfilling/HumanEval/81/L21_L23 start
+[238/642] MultiLineInfilling/HumanEval/81/L21_L23 done status=completed forwards=133 token_forwards=66545 wall=14.366s
+[239/642] MultiLineInfilling/HumanEval/81/L22_L24 start
+[239/642] MultiLineInfilling/HumanEval/81/L22_L24 done status=completed forwards=39 token_forwards=19842 wall=6.978s
+[240/642] MultiLineInfilling/HumanEval/81/L23_L25 start
+[240/642] MultiLineInfilling/HumanEval/81/L23_L25 done status=completed forwards=134 token_forwards=67178 wall=14.939s
+[241/642] MultiLineInfilling/HumanEval/81/L24_L26 start
+[241/642] MultiLineInfilling/HumanEval/81/L24_L26 done status=completed forwards=105 token_forwards=52669 wall=13.603s
+[242/642] MultiLineInfilling/HumanEval/81/L25_L27 start
+[242/642] MultiLineInfilling/HumanEval/81/L25_L27 done status=completed forwards=13 token_forwards=6485 wall=1.482s
+[243/642] MultiLineInfilling/HumanEval/81/L26_L28 start
+[243/642] MultiLineInfilling/HumanEval/81/L26_L28 done status=completed forwards=5 token_forwards=2497 wall=0.578s
+[244/642] MultiLineInfilling/HumanEval/81/L27_L29 start
+[244/642] MultiLineInfilling/HumanEval/81/L27_L29 done status=completed forwards=42 token_forwards=21446 wall=5.328s
+[245/642] MultiLineInfilling/HumanEval/81/L28_L30 start
+[245/642] MultiLineInfilling/HumanEval/81/L28_L30 done status=completed forwards=22 token_forwards=11190 wall=2.492s
+[246/642] MultiLineInfilling/HumanEval/82/L0_L2 start
+[246/642] MultiLineInfilling/HumanEval/82/L0_L2 done status=completed forwards=35 token_forwards=4364 wall=1.599s
+[247/642] MultiLineInfilling/HumanEval/82/L1_L3 start
+[247/642] MultiLineInfilling/HumanEval/82/L1_L3 done status=completed forwards=135 token_forwards=16685 wall=5.888s
+[248/642] MultiLineInfilling/HumanEval/82/L2_L4 start
+[248/642] MultiLineInfilling/HumanEval/82/L2_L4 done status=completed forwards=130 token_forwards=16692 wall=6.196s
+[249/642] MultiLineInfilling/HumanEval/82/L3_L5 start
+[249/642] MultiLineInfilling/HumanEval/82/L3_L5 done status=completed forwards=140 token_forwards=18067 wall=7.145s
+[250/642] MultiLineInfilling/HumanEval/82/L4_L6 start
+[250/642] MultiLineInfilling/HumanEval/82/L4_L6 done status=completed forwards=27 token_forwards=3507 wall=1.252s
+progress completed=250/642 avg_wall=3.930s avg_forwards=55.87 token_forwards=3278323 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1540.4
+[251/642] MultiLineInfilling/HumanEval/89/L0_L2 start
+[251/642] MultiLineInfilling/HumanEval/89/L0_L2 done status=completed forwards=19 token_forwards=3029 wall=0.896s
+[252/642] MultiLineInfilling/HumanEval/89/L1_L3 start
+[252/642] MultiLineInfilling/HumanEval/89/L1_L3 done status=completed forwards=102 token_forwards=16934 wall=5.827s
+[253/642] MultiLineInfilling/HumanEval/89/L2_L4 start
+[253/642] MultiLineInfilling/HumanEval/89/L2_L4 done status=completed forwards=49 token_forwards=7405 wall=2.613s
+[254/642] MultiLineInfilling/HumanEval/89/L3_L5 start
+[254/642] MultiLineInfilling/HumanEval/89/L3_L5 done status=completed forwards=137 token_forwards=20953 wall=6.618s
+[255/642] MultiLineInfilling/HumanEval/89/L4_L6 start
+[255/642] MultiLineInfilling/HumanEval/89/L4_L6 done status=completed forwards=33 token_forwards=5109 wall=1.720s
+[256/642] MultiLineInfilling/HumanEval/89/L5_L7 start
+[256/642] MultiLineInfilling/HumanEval/89/L5_L7 done status=completed forwards=14 token_forwards=2265 wall=0.673s
+[257/642] MultiLineInfilling/HumanEval/91/L0_L2 start
+[257/642] MultiLineInfilling/HumanEval/91/L0_L2 done status=completed forwards=16 token_forwards=1924 wall=0.630s
+[258/642] MultiLineInfilling/HumanEval/92/L1_L3 start
+[258/642] MultiLineInfilling/HumanEval/92/L1_L3 done status=completed forwards=33 token_forwards=5258 wall=1.633s
+[259/642] MultiLineInfilling/HumanEval/92/L2_L4 start
+[259/642] MultiLineInfilling/HumanEval/92/L2_L4 done status=completed forwards=34 token_forwards=5923 wall=1.819s
+[260/642] MultiLineInfilling/HumanEval/92/L3_L5 start
+[260/642] MultiLineInfilling/HumanEval/92/L3_L5 done status=completed forwards=12 token_forwards=2208 wall=0.600s
+[261/642] MultiLineInfilling/HumanEval/93/L0_L2 start
+[261/642] MultiLineInfilling/HumanEval/93/L0_L2 done status=completed forwards=54 token_forwards=8294 wall=3.006s
+[262/642] MultiLineInfilling/HumanEval/93/L1_L3 start
+[262/642] MultiLineInfilling/HumanEval/93/L1_L3 done status=completed forwards=75 token_forwards=10592 wall=4.508s
+[263/642] MultiLineInfilling/HumanEval/94/L0_L2 start
+[263/642] MultiLineInfilling/HumanEval/94/L0_L2 done status=completed forwards=106 token_forwards=45029 wall=12.973s
+[264/642] MultiLineInfilling/HumanEval/94/L1_L3 start
+[264/642] MultiLineInfilling/HumanEval/94/L1_L3 done status=completed forwards=85 token_forwards=36039 wall=11.223s
+[265/642] MultiLineInfilling/HumanEval/94/L5_L7 start
+[265/642] MultiLineInfilling/HumanEval/94/L5_L7 done status=completed forwards=14 token_forwards=5919 wall=1.252s
+[266/642] MultiLineInfilling/HumanEval/94/L6_L8 start
+[266/642] MultiLineInfilling/HumanEval/94/L6_L8 done status=completed forwards=16 token_forwards=6717 wall=1.536s
+[267/642] MultiLineInfilling/HumanEval/94/L7_L9 start
+[267/642] MultiLineInfilling/HumanEval/94/L7_L9 done status=completed forwards=30 token_forwards=12497 wall=3.038s
+[268/642] MultiLineInfilling/HumanEval/94/L8_L10 start
+[268/642] MultiLineInfilling/HumanEval/94/L8_L10 done status=completed forwards=57 token_forwards=24041 wall=6.363s
+[269/642] MultiLineInfilling/HumanEval/94/L9_L11 start
+[269/642] MultiLineInfilling/HumanEval/94/L9_L11 done status=completed forwards=49 token_forwards=20815 wall=5.413s
+[270/642] MultiLineInfilling/HumanEval/94/L10_L12 start
+[270/642] MultiLineInfilling/HumanEval/94/L10_L12 done status=completed forwards=137 token_forwards=57570 wall=13.128s
+[271/642] MultiLineInfilling/HumanEval/94/L11_L13 start
+[271/642] MultiLineInfilling/HumanEval/94/L11_L13 done status=completed forwards=45 token_forwards=18970 wall=5.208s
+[272/642] MultiLineInfilling/HumanEval/95/L0_L2 start
+[272/642] MultiLineInfilling/HumanEval/95/L0_L2 done status=completed forwards=24 token_forwards=7454 wall=1.844s
+[273/642] MultiLineInfilling/HumanEval/95/L1_L3 start
+[273/642] MultiLineInfilling/HumanEval/95/L1_L3 done status=completed forwards=15 token_forwards=4711 wall=1.110s
+[274/642] MultiLineInfilling/HumanEval/95/L2_L4 start
+[274/642] MultiLineInfilling/HumanEval/95/L2_L4 done status=completed forwards=90 token_forwards=28615 wall=7.202s
+[275/642] MultiLineInfilling/HumanEval/95/L6_L8 start
+[275/642] MultiLineInfilling/HumanEval/95/L6_L8 done status=completed forwards=21 token_forwards=6532 wall=1.587s
+progress completed=275/642 avg_wall=3.945s avg_forwards=55.40 token_forwards=3643126 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1447.7
+[276/642] MultiLineInfilling/HumanEval/95/L7_L9 start
+[276/642] MultiLineInfilling/HumanEval/95/L7_L9 done status=completed forwards=20 token_forwards=6242 wall=1.550s
+[277/642] MultiLineInfilling/HumanEval/95/L8_L10 start
+[277/642] MultiLineInfilling/HumanEval/95/L8_L10 done status=completed forwards=100 token_forwards=31596 wall=8.419s
+[278/642] MultiLineInfilling/HumanEval/95/L9_L11 start
+[278/642] MultiLineInfilling/HumanEval/95/L9_L11 done status=completed forwards=39 token_forwards=12265 wall=3.340s
+[279/642] MultiLineInfilling/HumanEval/95/L10_L12 start
+[279/642] MultiLineInfilling/HumanEval/95/L10_L12 done status=completed forwards=38 token_forwards=11952 wall=3.196s
+[280/642] MultiLineInfilling/HumanEval/95/L11_L13 start
+[280/642] MultiLineInfilling/HumanEval/95/L11_L13 done status=completed forwards=34 token_forwards=10673 wall=2.763s
+[281/642] MultiLineInfilling/HumanEval/95/L12_L14 start
+[281/642] MultiLineInfilling/HumanEval/95/L12_L14 done status=completed forwards=26 token_forwards=8214 wall=2.104s
+[282/642] MultiLineInfilling/HumanEval/95/L13_L15 start
+[282/642] MultiLineInfilling/HumanEval/95/L13_L15 done status=completed forwards=26 token_forwards=8248 wall=2.010s
+[283/642] MultiLineInfilling/HumanEval/95/L14_L16 start
+[283/642] MultiLineInfilling/HumanEval/95/L14_L16 done status=completed forwards=5 token_forwards=1462 wall=0.377s
+[284/642] MultiLineInfilling/HumanEval/95/L15_L17 start
+[284/642] MultiLineInfilling/HumanEval/95/L15_L17 done status=completed forwards=20 token_forwards=5836 wall=1.434s
+[285/642] MultiLineInfilling/HumanEval/95/L16_L18 start
+[285/642] MultiLineInfilling/HumanEval/95/L16_L18 done status=completed forwards=20 token_forwards=5896 wall=1.603s
+[286/642] MultiLineInfilling/HumanEval/95/L17_L19 start
+[286/642] MultiLineInfilling/HumanEval/95/L17_L19 done status=completed forwards=138 token_forwards=43439 wall=9.911s
+[287/642] MultiLineInfilling/HumanEval/95/L18_L20 start
+[287/642] MultiLineInfilling/HumanEval/95/L18_L20 done status=completed forwards=11 token_forwards=3478 wall=0.826s
+[288/642] MultiLineInfilling/HumanEval/95/L19_L21 start
+[288/642] MultiLineInfilling/HumanEval/95/L19_L21 done status=completed forwards=21 token_forwards=6472 wall=1.597s
+[289/642] MultiLineInfilling/HumanEval/96/L0_L2 start
+[289/642] MultiLineInfilling/HumanEval/96/L0_L2 done status=completed forwards=46 token_forwards=9926 wall=3.095s
+[290/642] MultiLineInfilling/HumanEval/96/L1_L3 start
+[290/642] MultiLineInfilling/HumanEval/96/L1_L3 done status=completed forwards=117 token_forwards=25389 wall=8.466s
+[291/642] MultiLineInfilling/HumanEval/96/L2_L4 start
+[291/642] MultiLineInfilling/HumanEval/96/L2_L4 done status=completed forwards=131 token_forwards=28222 wall=8.580s
+[292/642] MultiLineInfilling/HumanEval/96/L3_L5 start
+[292/642] MultiLineInfilling/HumanEval/96/L3_L5 done status=completed forwards=42 token_forwards=8941 wall=2.772s
+[293/642] MultiLineInfilling/HumanEval/96/L4_L6 start
+[293/642] MultiLineInfilling/HumanEval/96/L4_L6 done status=completed forwards=22 token_forwards=4718 wall=1.253s
+[294/642] MultiLineInfilling/HumanEval/96/L5_L7 start
+[294/642] MultiLineInfilling/HumanEval/96/L5_L7 done status=completed forwards=137 token_forwards=29526 wall=8.326s
+[295/642] MultiLineInfilling/HumanEval/96/L6_L8 start
+[295/642] MultiLineInfilling/HumanEval/96/L6_L8 done status=completed forwards=21 token_forwards=4548 wall=1.232s
+[296/642] MultiLineInfilling/HumanEval/96/L7_L9 start
+[296/642] MultiLineInfilling/HumanEval/96/L7_L9 done status=completed forwards=33 token_forwards=7246 wall=2.018s
+[297/642] MultiLineInfilling/HumanEval/98/L0_L2 start
+[297/642] MultiLineInfilling/HumanEval/98/L0_L2 done status=completed forwards=69 token_forwards=7531 wall=3.389s
+[298/642] MultiLineInfilling/HumanEval/98/L1_L3 start
+[298/642] MultiLineInfilling/HumanEval/98/L1_L3 done status=completed forwards=124 token_forwards=13126 wall=5.995s
+[299/642] MultiLineInfilling/HumanEval/98/L2_L4 start
+[299/642] MultiLineInfilling/HumanEval/98/L2_L4 done status=completed forwards=42 token_forwards=4583 wall=1.788s
+[300/642] MultiLineInfilling/HumanEval/99/L2_L4 start
+[300/642] MultiLineInfilling/HumanEval/99/L2_L4 done status=completed forwards=50 token_forwards=13411 wall=4.037s
+progress completed=300/642 avg_wall=3.916s avg_forwards=55.22 token_forwards=3956066 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1339.4
+[301/642] MultiLineInfilling/HumanEval/99/L3_L5 start
+[301/642] MultiLineInfilling/HumanEval/99/L3_L5 done status=completed forwards=13 token_forwards=3391 wall=0.844s
+[302/642] MultiLineInfilling/HumanEval/99/L7_L9 start
+[302/642] MultiLineInfilling/HumanEval/99/L7_L9 done status=completed forwards=40 token_forwards=10750 wall=3.319s
+[303/642] MultiLineInfilling/HumanEval/99/L8_L10 start
+[303/642] MultiLineInfilling/HumanEval/99/L8_L10 done status=completed forwards=78 token_forwards=21598 wall=8.160s
+[304/642] MultiLineInfilling/HumanEval/99/L9_L11 start
+[304/642] MultiLineInfilling/HumanEval/99/L9_L11 done status=completed forwards=134 token_forwards=36517 wall=9.172s
+[305/642] MultiLineInfilling/HumanEval/99/L10_L12 start
+[305/642] MultiLineInfilling/HumanEval/99/L10_L12 done status=completed forwards=17 token_forwards=4590 wall=1.126s
+[306/642] MultiLineInfilling/HumanEval/99/L11_L13 start
+[306/642] MultiLineInfilling/HumanEval/99/L11_L13 done status=completed forwards=128 token_forwards=35432 wall=11.840s
+[307/642] MultiLineInfilling/HumanEval/99/L12_L14 start
+[307/642] MultiLineInfilling/HumanEval/99/L12_L14 done status=completed forwards=30 token_forwards=7972 wall=2.085s
+[308/642] MultiLineInfilling/HumanEval/99/L13_L15 start
+[308/642] MultiLineInfilling/HumanEval/99/L13_L15 done status=completed forwards=38 token_forwards=10503 wall=3.891s
+[309/642] MultiLineInfilling/HumanEval/99/L14_L16 start
+[309/642] MultiLineInfilling/HumanEval/99/L14_L16 done status=completed forwards=13 token_forwards=3496 wall=0.898s
+[310/642] MultiLineInfilling/HumanEval/101/L5_L7 start
+[310/642] MultiLineInfilling/HumanEval/101/L5_L7 done status=completed forwards=94 token_forwards=16238 wall=5.025s
+[311/642] MultiLineInfilling/HumanEval/101/L6_L8 start
+[311/642] MultiLineInfilling/HumanEval/101/L6_L8 done status=completed forwards=60 token_forwards=10902 wall=4.574s
+[312/642] MultiLineInfilling/HumanEval/101/L7_L9 start
+[312/642] MultiLineInfilling/HumanEval/101/L7_L9 done status=completed forwards=35 token_forwards=6076 wall=1.793s
+[313/642] MultiLineInfilling/HumanEval/102/L0_L2 start
+[313/642] MultiLineInfilling/HumanEval/102/L0_L2 done status=completed forwards=130 token_forwards=18616 wall=6.361s
+[314/642] MultiLineInfilling/HumanEval/102/L1_L3 start
+[314/642] MultiLineInfilling/HumanEval/102/L1_L3 done status=completed forwards=27 token_forwards=3761 wall=1.309s
+[315/642] MultiLineInfilling/HumanEval/102/L2_L4 start
+[315/642] MultiLineInfilling/HumanEval/102/L2_L4 done status=completed forwards=134 token_forwards=19301 wall=6.611s
+[316/642] MultiLineInfilling/HumanEval/102/L3_L5 start
+[316/642] MultiLineInfilling/HumanEval/102/L3_L5 done status=completed forwards=28 token_forwards=3999 wall=1.294s
+[317/642] MultiLineInfilling/HumanEval/102/L4_L6 start
+[317/642] MultiLineInfilling/HumanEval/102/L4_L6 done status=completed forwards=6 token_forwards=812 wall=0.260s
+[318/642] MultiLineInfilling/HumanEval/103/L0_L2 start
+[318/642] MultiLineInfilling/HumanEval/103/L0_L2 done status=completed forwards=26 token_forwards=5120 wall=1.462s
+[319/642] MultiLineInfilling/HumanEval/103/L1_L3 start
+[319/642] MultiLineInfilling/HumanEval/103/L1_L3 done status=completed forwards=139 token_forwards=27553 wall=8.347s
+[320/642] MultiLineInfilling/HumanEval/103/L2_L4 start
+[320/642] MultiLineInfilling/HumanEval/103/L2_L4 done status=completed forwards=31 token_forwards=5975 wall=1.709s
+[321/642] MultiLineInfilling/HumanEval/103/L3_L5 start
+[321/642] MultiLineInfilling/HumanEval/103/L3_L5 done status=completed forwards=63 token_forwards=12065 wall=3.934s
+[322/642] MultiLineInfilling/HumanEval/104/L0_L2 start
+[322/642] MultiLineInfilling/HumanEval/104/L0_L2 done status=completed forwards=66 token_forwards=10063 wall=3.909s
+[323/642] MultiLineInfilling/HumanEval/104/L1_L3 start
+[323/642] MultiLineInfilling/HumanEval/104/L1_L3 done status=completed forwards=87 token_forwards=13484 wall=5.339s
+[324/642] MultiLineInfilling/HumanEval/104/L2_L4 start
+[324/642] MultiLineInfilling/HumanEval/104/L2_L4 done status=completed forwards=67 token_forwards=10215 wall=3.917s
+[325/642] MultiLineInfilling/HumanEval/105/L0_L2 start
+[325/642] MultiLineInfilling/HumanEval/105/L0_L2 done status=completed forwards=48 token_forwards=18816 wall=5.290s
+progress completed=325/642 avg_wall=3.930s avg_forwards=55.69 token_forwards=4273311 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1245.9
+[326/642] MultiLineInfilling/HumanEval/105/L1_L3 start
+[326/642] MultiLineInfilling/HumanEval/105/L1_L3 done status=completed forwards=40 token_forwards=15576 wall=4.269s
+[327/642] MultiLineInfilling/HumanEval/105/L2_L4 start
+[327/642] MultiLineInfilling/HumanEval/105/L2_L4 done status=completed forwards=36 token_forwards=13973 wall=3.541s
+[328/642] MultiLineInfilling/HumanEval/105/L3_L5 start
+[328/642] MultiLineInfilling/HumanEval/105/L3_L5 done status=completed forwards=36 token_forwards=13975 wall=3.552s
+[329/642] MultiLineInfilling/HumanEval/105/L4_L6 start
+[329/642] MultiLineInfilling/HumanEval/105/L4_L6 done status=completed forwards=37 token_forwards=14369 wall=3.680s
+[330/642] MultiLineInfilling/HumanEval/105/L5_L7 start
+[330/642] MultiLineInfilling/HumanEval/105/L5_L7 done status=completed forwards=36 token_forwards=13972 wall=3.528s
+[331/642] MultiLineInfilling/HumanEval/105/L6_L8 start
+[331/642] MultiLineInfilling/HumanEval/105/L6_L8 done status=completed forwards=36 token_forwards=13974 wall=3.538s
+[332/642] MultiLineInfilling/HumanEval/105/L7_L9 start
+[332/642] MultiLineInfilling/HumanEval/105/L7_L9 done status=completed forwards=39 token_forwards=15168 wall=4.018s
+[333/642] MultiLineInfilling/HumanEval/105/L8_L10 start
+[333/642] MultiLineInfilling/HumanEval/105/L8_L10 done status=completed forwards=33 token_forwards=12982 wall=3.418s
+[334/642] MultiLineInfilling/HumanEval/105/L9_L11 start
+[334/642] MultiLineInfilling/HumanEval/105/L9_L11 done status=completed forwards=28 token_forwards=10858 wall=2.583s
+[335/642] MultiLineInfilling/HumanEval/105/L10_L12 start
+[335/642] MultiLineInfilling/HumanEval/105/L10_L12 done status=completed forwards=21 token_forwards=8135 wall=2.001s
+[336/642] MultiLineInfilling/HumanEval/105/L11_L13 start
+[336/642] MultiLineInfilling/HumanEval/105/L11_L13 done status=completed forwards=33 token_forwards=12817 wall=3.701s
+[337/642] MultiLineInfilling/HumanEval/105/L12_L14 start
+[337/642] MultiLineInfilling/HumanEval/105/L12_L14 done status=completed forwards=129 token_forwards=50563 wall=11.723s
+[338/642] MultiLineInfilling/HumanEval/105/L13_L15 start
+[338/642] MultiLineInfilling/HumanEval/105/L13_L15 done status=completed forwards=33 token_forwards=12910 wall=3.407s
+[339/642] MultiLineInfilling/HumanEval/105/L14_L16 start
+[339/642] MultiLineInfilling/HumanEval/105/L14_L16 done status=completed forwards=30 token_forwards=11788 wall=2.951s
+[340/642] MultiLineInfilling/HumanEval/105/L15_L17 start
+[340/642] MultiLineInfilling/HumanEval/105/L15_L17 done status=completed forwards=23 token_forwards=9042 wall=2.127s
+[341/642] MultiLineInfilling/HumanEval/105/L16_L18 start
+[341/642] MultiLineInfilling/HumanEval/105/L16_L18 done status=completed forwards=18 token_forwards=7048 wall=1.564s
+[342/642] MultiLineInfilling/HumanEval/106/L0_L2 start
+[342/642] MultiLineInfilling/HumanEval/106/L0_L2 done status=completed forwards=55 token_forwards=11435 wall=3.908s
+[343/642] MultiLineInfilling/HumanEval/106/L1_L3 start
+[343/642] MultiLineInfilling/HumanEval/106/L1_L3 done status=completed forwards=44 token_forwards=9096 wall=2.790s
+[344/642] MultiLineInfilling/HumanEval/106/L2_L4 start
+[344/642] MultiLineInfilling/HumanEval/106/L2_L4 done status=completed forwards=52 token_forwards=10451 wall=3.053s
+[345/642] MultiLineInfilling/HumanEval/106/L3_L5 start
+[345/642] MultiLineInfilling/HumanEval/106/L3_L5 done status=completed forwards=32 token_forwards=6451 wall=1.820s
+[346/642] MultiLineInfilling/HumanEval/106/L4_L6 start
+[346/642] MultiLineInfilling/HumanEval/106/L4_L6 done status=completed forwards=139 token_forwards=29019 wall=8.190s
+[347/642] MultiLineInfilling/HumanEval/106/L5_L7 start
+[347/642] MultiLineInfilling/HumanEval/106/L5_L7 done status=completed forwards=24 token_forwards=5049 wall=1.395s
+[348/642] MultiLineInfilling/HumanEval/106/L6_L8 start
+[348/642] MultiLineInfilling/HumanEval/106/L6_L8 done status=completed forwards=35 token_forwards=7118 wall=2.048s
+[349/642] MultiLineInfilling/HumanEval/106/L7_L9 start
+[349/642] MultiLineInfilling/HumanEval/106/L7_L9 done status=completed forwards=32 token_forwards=6455 wall=1.894s
+[350/642] MultiLineInfilling/HumanEval/106/L8_L10 start
+[350/642] MultiLineInfilling/HumanEval/106/L8_L10 done status=completed forwards=42 token_forwards=8701 wall=2.521s
+progress completed=350/642 avg_wall=3.899s avg_forwards=54.75 token_forwards=4604236 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1138.5
+[351/642] MultiLineInfilling/HumanEval/107/L6_L8 start
+[351/642] MultiLineInfilling/HumanEval/107/L6_L8 done status=completed forwards=93 token_forwards=29236 wall=8.623s
+[352/642] MultiLineInfilling/HumanEval/107/L7_L9 start
+[352/642] MultiLineInfilling/HumanEval/107/L7_L9 done status=completed forwards=76 token_forwards=23370 wall=6.642s
+[353/642] MultiLineInfilling/HumanEval/107/L8_L10 start
+[353/642] MultiLineInfilling/HumanEval/107/L8_L10 done status=completed forwards=46 token_forwards=14271 wall=3.576s
+[354/642] MultiLineInfilling/HumanEval/107/L9_L11 start
+[354/642] MultiLineInfilling/HumanEval/107/L9_L11 done status=completed forwards=55 token_forwards=16860 wall=4.475s
+[355/642] MultiLineInfilling/HumanEval/108/L0_L2 start
+[355/642] MultiLineInfilling/HumanEval/108/L0_L2 done status=completed forwards=31 token_forwards=6155 wall=1.805s
+[356/642] MultiLineInfilling/HumanEval/108/L1_L3 start
+[356/642] MultiLineInfilling/HumanEval/108/L1_L3 done status=completed forwards=53 token_forwards=10418 wall=3.196s
+[357/642] MultiLineInfilling/HumanEval/108/L2_L4 start
+[357/642] MultiLineInfilling/HumanEval/108/L2_L4 done status=completed forwards=23 token_forwards=4223 wall=1.221s
+[358/642] MultiLineInfilling/HumanEval/108/L3_L5 start
+[358/642] MultiLineInfilling/HumanEval/108/L3_L5 done status=completed forwards=34 token_forwards=6727 wall=1.979s
+[359/642] MultiLineInfilling/HumanEval/108/L4_L6 start
+[359/642] MultiLineInfilling/HumanEval/108/L4_L6 done status=completed forwards=48 token_forwards=9302 wall=2.872s
+[360/642] MultiLineInfilling/HumanEval/109/L0_L2 start
+[360/642] MultiLineInfilling/HumanEval/109/L0_L2 done status=completed forwards=11 token_forwards=4099 wall=0.914s
+[361/642] MultiLineInfilling/HumanEval/109/L1_L3 start
+[361/642] MultiLineInfilling/HumanEval/109/L1_L3 done status=completed forwards=16 token_forwards=6013 wall=1.394s
+[362/642] MultiLineInfilling/HumanEval/109/L5_L7 start
+[362/642] MultiLineInfilling/HumanEval/109/L5_L7 done status=completed forwards=14 token_forwards=5045 wall=1.131s
+[363/642] MultiLineInfilling/HumanEval/109/L6_L8 start
+[363/642] MultiLineInfilling/HumanEval/109/L6_L8 done status=completed forwards=56 token_forwards=20548 wall=6.029s
+[364/642] MultiLineInfilling/HumanEval/109/L7_L9 start
+[364/642] MultiLineInfilling/HumanEval/109/L7_L9 done status=completed forwards=86 token_forwards=32045 wall=11.406s
+[365/642] MultiLineInfilling/HumanEval/109/L8_L10 start
+[365/642] MultiLineInfilling/HumanEval/109/L8_L10 done status=completed forwards=22 token_forwards=8161 wall=1.973s
+[366/642] MultiLineInfilling/HumanEval/109/L9_L11 start
+[366/642] MultiLineInfilling/HumanEval/109/L9_L11 done status=completed forwards=33 token_forwards=12471 wall=3.040s
+[367/642] MultiLineInfilling/HumanEval/110/L0_L2 start
+[367/642] MultiLineInfilling/HumanEval/110/L0_L2 done status=completed forwards=140 token_forwards=37525 wall=9.865s
+[368/642] MultiLineInfilling/HumanEval/110/L1_L3 start
+[368/642] MultiLineInfilling/HumanEval/110/L1_L3 done status=completed forwards=35 token_forwards=9307 wall=2.656s
+[369/642] MultiLineInfilling/HumanEval/110/L2_L4 start
+[369/642] MultiLineInfilling/HumanEval/110/L2_L4 done status=completed forwards=45 token_forwards=12055 wall=3.429s
+[370/642] MultiLineInfilling/HumanEval/110/L3_L5 start
+[370/642] MultiLineInfilling/HumanEval/110/L3_L5 done status=completed forwards=137 token_forwards=36807 wall=9.567s
+[371/642] MultiLineInfilling/HumanEval/110/L4_L6 start
+[371/642] MultiLineInfilling/HumanEval/110/L4_L6 done status=completed forwards=136 token_forwards=35429 wall=8.523s
+[372/642] MultiLineInfilling/HumanEval/110/L5_L7 start
+[372/642] MultiLineInfilling/HumanEval/110/L5_L7 done status=completed forwards=15 token_forwards=3906 wall=0.997s
+[373/642] MultiLineInfilling/HumanEval/110/L6_L8 start
+[373/642] MultiLineInfilling/HumanEval/110/L6_L8 done status=completed forwards=138 token_forwards=37216 wall=9.994s
+[374/642] MultiLineInfilling/HumanEval/110/L7_L9 start
+[374/642] MultiLineInfilling/HumanEval/110/L7_L9 done status=completed forwards=24 token_forwards=6442 wall=1.676s
+[375/642] MultiLineInfilling/HumanEval/110/L8_L10 start
+[375/642] MultiLineInfilling/HumanEval/110/L8_L10 done status=completed forwards=29 token_forwards=7839 wall=2.162s
+progress completed=375/642 avg_wall=3.930s avg_forwards=54.82 token_forwards=4999706 terminal_failures=0 method_failures=0 violations=0 eta_seconds=1049.3
+[376/642] MultiLineInfilling/HumanEval/111/L0_L2 start
+[376/642] MultiLineInfilling/HumanEval/111/L0_L2 done status=completed forwards=12 token_forwards=2712 wall=0.686s
+[377/642] MultiLineInfilling/HumanEval/111/L4_L6 start
+[377/642] MultiLineInfilling/HumanEval/111/L4_L6 done status=completed forwards=27 token_forwards=5919 wall=1.792s
+[378/642] MultiLineInfilling/HumanEval/111/L5_L7 start
+[378/642] MultiLineInfilling/HumanEval/111/L5_L7 done status=completed forwards=103 token_forwards=24012 wall=9.892s
+[379/642] MultiLineInfilling/HumanEval/111/L6_L8 start
+[379/642] MultiLineInfilling/HumanEval/111/L6_L8 done status=completed forwards=16 token_forwards=3563 wall=0.898s
+[380/642] MultiLineInfilling/HumanEval/111/L7_L9 start
+[380/642] MultiLineInfilling/HumanEval/111/L7_L9 done status=completed forwards=105 token_forwards=25197 wall=10.023s
+[381/642] MultiLineInfilling/HumanEval/113/L0_L2 start
+[381/642] MultiLineInfilling/HumanEval/113/L0_L2 done status=completed forwards=70 token_forwards=17479 wall=6.365s
+[382/642] MultiLineInfilling/HumanEval/113/L1_L3 start
+[382/642] MultiLineInfilling/HumanEval/113/L1_L3 done status=completed forwards=75 token_forwards=16036 wall=6.119s
+[383/642] MultiLineInfilling/HumanEval/113/L2_L4 start
+[383/642] MultiLineInfilling/HumanEval/113/L2_L4 done status=completed forwards=70 token_forwards=15276 wall=5.609s
+[384/642] MultiLineInfilling/HumanEval/114/L0_L2 start
+[384/642] MultiLineInfilling/HumanEval/114/L0_L2 done status=completed forwards=22 token_forwards=3643 wall=1.074s
+[385/642] MultiLineInfilling/HumanEval/114/L1_L3 start
+[385/642] MultiLineInfilling/HumanEval/114/L1_L3 done status=completed forwards=16 token_forwards=2646 wall=0.752s
+[386/642] MultiLineInfilling/HumanEval/114/L2_L4 start
+[386/642] MultiLineInfilling/HumanEval/114/L2_L4 done status=completed forwards=136 token_forwards=22722 wall=7.356s
+[387/642] MultiLineInfilling/HumanEval/114/L3_L5 start
+[387/642] MultiLineInfilling/HumanEval/114/L3_L5 done status=completed forwards=28 token_forwards=4629 wall=1.383s
+[388/642] MultiLineInfilling/HumanEval/114/L4_L6 start
+[388/642] MultiLineInfilling/HumanEval/114/L4_L6 done status=completed forwards=30 token_forwards=4881 wall=1.576s
+[389/642] MultiLineInfilling/HumanEval/114/L5_L7 start
+[389/642] MultiLineInfilling/HumanEval/114/L5_L7 done status=completed forwards=22 token_forwards=3532 wall=1.062s
+[390/642] MultiLineInfilling/HumanEval/114/L6_L8 start
+[390/642] MultiLineInfilling/HumanEval/114/L6_L8 done status=completed forwards=8 token_forwards=1218 wall=0.376s
+[391/642] MultiLineInfilling/HumanEval/114/L7_L9 start
+[391/642] MultiLineInfilling/HumanEval/114/L7_L9 done status=completed forwards=13 token_forwards=2024 wall=0.675s
+[392/642] MultiLineInfilling/HumanEval/114/L8_L10 start
+[392/642] MultiLineInfilling/HumanEval/114/L8_L10 done status=completed forwards=11 token_forwards=1730 wall=0.516s
+[393/642] MultiLineInfilling/HumanEval/117/L0_L2 start
+[393/642] MultiLineInfilling/HumanEval/117/L0_L2 done status=completed forwards=47 token_forwards=12108 wall=3.357s
+[394/642] MultiLineInfilling/HumanEval/117/L1_L3 start
+[394/642] MultiLineInfilling/HumanEval/117/L1_L3 done status=completed forwards=50 token_forwards=12557 wall=3.511s
+[395/642] MultiLineInfilling/HumanEval/117/L2_L4 start
+[395/642] MultiLineInfilling/HumanEval/117/L2_L4 done status=completed forwards=107 token_forwards=26566 wall=8.647s
+[396/642] MultiLineInfilling/HumanEval/117/L3_L5 start
+[396/642] MultiLineInfilling/HumanEval/117/L3_L5 done status=completed forwards=53 token_forwards=12640 wall=3.737s
+[397/642] MultiLineInfilling/HumanEval/117/L4_L6 start
+[397/642] MultiLineInfilling/HumanEval/117/L4_L6 done status=completed forwards=120 token_forwards=30058 wall=9.867s
+[398/642] MultiLineInfilling/HumanEval/117/L5_L7 start
+[398/642] MultiLineInfilling/HumanEval/117/L5_L7 done status=completed forwards=35 token_forwards=8922 wall=2.439s
+[399/642] MultiLineInfilling/HumanEval/117/L6_L8 start
+[399/642] MultiLineInfilling/HumanEval/117/L6_L8 done status=completed forwards=28 token_forwards=7273 wall=2.057s
+[400/642] MultiLineInfilling/HumanEval/118/L3_L5 start
+[400/642] MultiLineInfilling/HumanEval/118/L3_L5 done status=completed forwards=84 token_forwards=18557 wall=6.319s
+progress completed=400/642 avg_wall=3.925s avg_forwards=54.62 token_forwards=5285606 terminal_failures=0 method_failures=0 violations=0 eta_seconds=949.7
+[401/642] MultiLineInfilling/HumanEval/118/L4_L6 start
+[401/642] MultiLineInfilling/HumanEval/118/L4_L6 done status=completed forwards=108 token_forwards=24974 wall=9.668s
+[402/642] MultiLineInfilling/HumanEval/118/L5_L7 start
+[402/642] MultiLineInfilling/HumanEval/118/L5_L7 done status=completed forwards=24 token_forwards=5529 wall=1.646s
+[403/642] MultiLineInfilling/HumanEval/118/L6_L8 start
+[403/642] MultiLineInfilling/HumanEval/118/L6_L8 done status=completed forwards=14 token_forwards=3249 wall=0.883s
+[404/642] MultiLineInfilling/HumanEval/119/L0_L2 start
+[404/642] MultiLineInfilling/HumanEval/119/L0_L2 done status=completed forwards=21 token_forwards=5754 wall=1.420s
+[405/642] MultiLineInfilling/HumanEval/119/L1_L3 start
+[405/642] MultiLineInfilling/HumanEval/119/L1_L3 done status=completed forwards=30 token_forwards=8250 wall=2.187s
+[406/642] MultiLineInfilling/HumanEval/119/L2_L4 start
+[406/642] MultiLineInfilling/HumanEval/119/L2_L4 done status=completed forwards=35 token_forwards=9594 wall=2.626s
+[407/642] MultiLineInfilling/HumanEval/119/L3_L5 start
+[407/642] MultiLineInfilling/HumanEval/119/L3_L5 done status=completed forwards=136 token_forwards=37576 wall=9.212s
+[408/642] MultiLineInfilling/HumanEval/119/L4_L6 start
+[408/642] MultiLineInfilling/HumanEval/119/L4_L6 done status=completed forwards=17 token_forwards=4607 wall=1.169s
+[409/642] MultiLineInfilling/HumanEval/119/L5_L7 start
+[409/642] MultiLineInfilling/HumanEval/119/L5_L7 done status=completed forwards=136 token_forwards=37519 wall=9.944s
+[410/642] MultiLineInfilling/HumanEval/119/L6_L8 start
+[410/642] MultiLineInfilling/HumanEval/119/L6_L8 done status=completed forwards=31 token_forwards=8495 wall=2.121s
+[411/642] MultiLineInfilling/HumanEval/119/L7_L9 start
+[411/642] MultiLineInfilling/HumanEval/119/L7_L9 done status=completed forwards=20 token_forwards=5420 wall=1.414s
+[412/642] MultiLineInfilling/HumanEval/119/L11_L13 start
+[412/642] MultiLineInfilling/HumanEval/119/L11_L13 done status=completed forwards=95 token_forwards=24632 wall=8.922s
+[413/642] MultiLineInfilling/HumanEval/120/L0_L2 start
+[413/642] MultiLineInfilling/HumanEval/120/L0_L2 done status=completed forwards=27 token_forwards=6726 wall=1.810s
+[414/642] MultiLineInfilling/HumanEval/120/L1_L3 start
+[414/642] MultiLineInfilling/HumanEval/120/L1_L3 done status=completed forwards=124 token_forwards=31106 wall=10.110s
+[415/642] MultiLineInfilling/HumanEval/120/L2_L4 start
+[415/642] MultiLineInfilling/HumanEval/120/L2_L4 done status=completed forwards=133 token_forwards=33278 wall=9.352s
+[416/642] MultiLineInfilling/HumanEval/123/L0_L2 start
+[416/642] MultiLineInfilling/HumanEval/123/L0_L2 done status=completed forwards=99 token_forwards=32302 wall=10.595s
+[417/642] MultiLineInfilling/HumanEval/123/L1_L3 start
+[417/642] MultiLineInfilling/HumanEval/123/L1_L3 done status=completed forwards=32 token_forwards=10141 wall=2.720s
+[418/642] MultiLineInfilling/HumanEval/123/L2_L4 start
+[418/642] MultiLineInfilling/HumanEval/123/L2_L4 done status=completed forwards=42 token_forwards=13395 wall=3.713s
+[419/642] MultiLineInfilling/HumanEval/123/L3_L5 start
+[419/642] MultiLineInfilling/HumanEval/123/L3_L5 done status=completed forwards=63 token_forwards=19997 wall=6.604s
+[420/642] MultiLineInfilling/HumanEval/123/L4_L6 start
+[420/642] MultiLineInfilling/HumanEval/123/L4_L6 done status=completed forwards=130 token_forwards=40674 wall=11.025s
+[421/642] MultiLineInfilling/HumanEval/123/L5_L7 start
+[421/642] MultiLineInfilling/HumanEval/123/L5_L7 done status=completed forwards=140 token_forwards=44449 wall=11.201s
+[422/642] MultiLineInfilling/HumanEval/123/L6_L8 start
+[422/642] MultiLineInfilling/HumanEval/123/L6_L8 done status=completed forwards=24 token_forwards=7563 wall=1.886s
+[423/642] MultiLineInfilling/HumanEval/124/L0_L2 start
+[423/642] MultiLineInfilling/HumanEval/124/L0_L2 done status=completed forwards=26 token_forwards=11367 wall=2.663s
+[424/642] MultiLineInfilling/HumanEval/124/L1_L3 start
+[424/642] MultiLineInfilling/HumanEval/124/L1_L3 done status=completed forwards=88 token_forwards=38408 wall=11.092s
+[425/642] MultiLineInfilling/HumanEval/124/L2_L4 start
+[425/642] MultiLineInfilling/HumanEval/124/L2_L4 done status=completed forwards=60 token_forwards=25665 wall=6.928s
+progress completed=425/642 avg_wall=4.025s avg_forwards=55.30 token_forwards=5776276 terminal_failures=0 method_failures=0 violations=0 eta_seconds=873.5
+[426/642] MultiLineInfilling/HumanEval/124/L3_L5 start
+[426/642] MultiLineInfilling/HumanEval/124/L3_L5 done status=completed forwards=70 token_forwards=30329 wall=9.570s
+[427/642] MultiLineInfilling/HumanEval/124/L4_L6 start
+[427/642] MultiLineInfilling/HumanEval/124/L4_L6 done status=completed forwards=29 token_forwards=11944 wall=3.102s
+[428/642] MultiLineInfilling/HumanEval/124/L5_L7 start
+[428/642] MultiLineInfilling/HumanEval/124/L5_L7 done status=completed forwards=46 token_forwards=19283 wall=5.056s
+[429/642] MultiLineInfilling/HumanEval/124/L6_L8 start
+[429/642] MultiLineInfilling/HumanEval/124/L6_L8 done status=completed forwards=60 token_forwards=24715 wall=8.963s
+[430/642] MultiLineInfilling/HumanEval/124/L7_L9 start
+[430/642] MultiLineInfilling/HumanEval/124/L7_L9 done status=completed forwards=8 token_forwards=3356 wall=0.783s
+[431/642] MultiLineInfilling/HumanEval/124/L8_L10 start
+[431/642] MultiLineInfilling/HumanEval/124/L8_L10 done status=completed forwards=56 token_forwards=23669 wall=7.402s
+[432/642] MultiLineInfilling/HumanEval/124/L9_L11 start
+[432/642] MultiLineInfilling/HumanEval/124/L9_L11 done status=completed forwards=60 token_forwards=26073 wall=6.694s
+[433/642] MultiLineInfilling/HumanEval/124/L10_L12 start
+[433/642] MultiLineInfilling/HumanEval/124/L10_L12 done status=completed forwards=53 token_forwards=23338 wall=5.747s
+[434/642] MultiLineInfilling/HumanEval/124/L11_L13 start
+[434/642] MultiLineInfilling/HumanEval/124/L11_L13 done status=completed forwards=17 token_forwards=7551 wall=1.655s
+[435/642] MultiLineInfilling/HumanEval/125/L0_L2 start
+[435/642] MultiLineInfilling/HumanEval/125/L0_L2 done status=completed forwards=84 token_forwards=16922 wall=6.382s
+[436/642] MultiLineInfilling/HumanEval/125/L1_L3 start
+[436/642] MultiLineInfilling/HumanEval/125/L1_L3 done status=completed forwards=91 token_forwards=17979 wall=6.686s
+[437/642] MultiLineInfilling/HumanEval/125/L2_L4 start
+[437/642] MultiLineInfilling/HumanEval/125/L2_L4 done status=completed forwards=128 token_forwards=24628 wall=7.314s
+[438/642] MultiLineInfilling/HumanEval/125/L3_L5 start
+[438/642] MultiLineInfilling/HumanEval/125/L3_L5 done status=completed forwards=26 token_forwards=4549 wall=1.422s
+[439/642] MultiLineInfilling/HumanEval/126/L0_L2 start
+[439/642] MultiLineInfilling/HumanEval/126/L0_L2 done status=completed forwards=21 token_forwards=6631 wall=1.679s
+[440/642] MultiLineInfilling/HumanEval/126/L1_L3 start
+[440/642] MultiLineInfilling/HumanEval/126/L1_L3 done status=completed forwards=72 token_forwards=23337 wall=7.000s
+[441/642] MultiLineInfilling/HumanEval/126/L2_L4 start
+[441/642] MultiLineInfilling/HumanEval/126/L2_L4 done status=completed forwards=30 token_forwards=9630 wall=2.420s
+[442/642] MultiLineInfilling/HumanEval/126/L3_L5 start
+[442/642] MultiLineInfilling/HumanEval/126/L3_L5 done status=completed forwards=89 token_forwards=27732 wall=8.920s
+[443/642] MultiLineInfilling/HumanEval/126/L4_L6 start
+[443/642] MultiLineInfilling/HumanEval/126/L4_L6 done status=completed forwards=26 token_forwards=8204 wall=1.991s
+[444/642] MultiLineInfilling/HumanEval/126/L5_L7 start
+[444/642] MultiLineInfilling/HumanEval/126/L5_L7 done status=completed forwards=29 token_forwards=9167 wall=2.250s
+[445/642] MultiLineInfilling/HumanEval/126/L6_L8 start
+[445/642] MultiLineInfilling/HumanEval/126/L6_L8 done status=completed forwards=17 token_forwards=5656 wall=1.331s
+[446/642] MultiLineInfilling/HumanEval/127/L0_L2 start
+[446/642] MultiLineInfilling/HumanEval/127/L0_L2 done status=completed forwards=36 token_forwards=13104 wall=3.286s
+[447/642] MultiLineInfilling/HumanEval/127/L1_L3 start
+[447/642] MultiLineInfilling/HumanEval/127/L1_L3 done status=completed forwards=18 token_forwards=6493 wall=1.590s
+[448/642] MultiLineInfilling/HumanEval/127/L2_L4 start
+[448/642] MultiLineInfilling/HumanEval/127/L2_L4 done status=completed forwards=20 token_forwards=7369 wall=1.731s
+[449/642] MultiLineInfilling/HumanEval/127/L3_L5 start
+[449/642] MultiLineInfilling/HumanEval/127/L3_L5 done status=completed forwards=18 token_forwards=6516 wall=1.524s
+[450/642] MultiLineInfilling/HumanEval/127/L4_L6 start
+[450/642] MultiLineInfilling/HumanEval/127/L4_L6 done status=completed forwards=128 token_forwards=47450 wall=12.976s
+progress completed=450/642 avg_wall=4.063s avg_forwards=54.96 token_forwards=6181901 terminal_failures=0 method_failures=0 violations=0 eta_seconds=780.0
+[451/642] MultiLineInfilling/HumanEval/127/L5_L7 start
+[451/642] MultiLineInfilling/HumanEval/127/L5_L7 done status=completed forwards=81 token_forwards=29830 wall=8.186s
+[452/642] MultiLineInfilling/HumanEval/127/L6_L8 start
+[452/642] MultiLineInfilling/HumanEval/127/L6_L8 done status=completed forwards=28 token_forwards=10383 wall=2.485s
+[453/642] MultiLineInfilling/HumanEval/127/L10_L12 start
+[453/642] MultiLineInfilling/HumanEval/127/L10_L12 done status=completed forwards=26 token_forwards=9108 wall=2.141s
+[454/642] MultiLineInfilling/HumanEval/127/L11_L13 start
+[454/642] MultiLineInfilling/HumanEval/127/L11_L13 done status=completed forwards=84 token_forwards=30658 wall=9.048s
+[455/642] MultiLineInfilling/HumanEval/127/L12_L14 start
+[455/642] MultiLineInfilling/HumanEval/127/L12_L14 done status=completed forwards=60 token_forwards=22288 wall=7.246s
+[456/642] MultiLineInfilling/HumanEval/127/L13_L15 start
+[456/642] MultiLineInfilling/HumanEval/127/L13_L15 done status=completed forwards=46 token_forwards=16908 wall=4.658s
+[457/642] MultiLineInfilling/HumanEval/128/L0_L2 start
+[457/642] MultiLineInfilling/HumanEval/128/L0_L2 done status=completed forwards=17 token_forwards=2310 wall=0.813s
+[458/642] MultiLineInfilling/HumanEval/129/L0_L2 start
+[458/642] MultiLineInfilling/HumanEval/129/L0_L2 done status=completed forwards=20 token_forwards=11061 wall=2.417s
+[459/642] MultiLineInfilling/HumanEval/129/L1_L3 start
+[459/642] MultiLineInfilling/HumanEval/129/L1_L3 done status=completed forwards=33 token_forwards=18299 wall=4.207s
+[460/642] MultiLineInfilling/HumanEval/129/L2_L4 start
+[460/642] MultiLineInfilling/HumanEval/129/L2_L4 done status=completed forwards=63 token_forwards=35251 wall=10.528s
+[461/642] MultiLineInfilling/HumanEval/129/L3_L5 start
+[461/642] MultiLineInfilling/HumanEval/129/L3_L5 done status=completed forwards=42 token_forwards=23484 wall=5.935s
+[462/642] MultiLineInfilling/HumanEval/129/L4_L6 start
+[462/642] MultiLineInfilling/HumanEval/129/L4_L6 done status=completed forwards=134 token_forwards=75415 wall=17.430s
+[463/642] MultiLineInfilling/HumanEval/129/L5_L7 start
+[463/642] MultiLineInfilling/HumanEval/129/L5_L7 done status=completed forwards=10 token_forwards=5529 wall=1.237s
+[464/642] MultiLineInfilling/HumanEval/129/L20_L22 start
+[464/642] MultiLineInfilling/HumanEval/129/L20_L22 done status=completed forwards=45 token_forwards=25176 wall=6.552s
+[465/642] MultiLineInfilling/HumanEval/129/L21_L23 start
+[465/642] MultiLineInfilling/HumanEval/129/L21_L23 done status=completed forwards=45 token_forwards=24994 wall=6.040s
+[466/642] MultiLineInfilling/HumanEval/129/L22_L24 start
+[466/642] MultiLineInfilling/HumanEval/129/L22_L24 done status=completed forwards=106 token_forwards=60532 wall=19.652s
+[467/642] MultiLineInfilling/HumanEval/129/L23_L25 start
+[467/642] MultiLineInfilling/HumanEval/129/L23_L25 done status=completed forwards=126 token_forwards=72952 wall=27.105s
+[468/642] MultiLineInfilling/HumanEval/129/L24_L26 start
+[468/642] MultiLineInfilling/HumanEval/129/L24_L26 done status=completed forwards=22 token_forwards=12389 wall=2.773s
+[469/642] MultiLineInfilling/HumanEval/130/L0_L2 start
+[469/642] MultiLineInfilling/HumanEval/130/L0_L2 done status=completed forwards=40 token_forwards=13147 wall=3.689s
+[470/642] MultiLineInfilling/HumanEval/130/L1_L3 start
+[470/642] MultiLineInfilling/HumanEval/130/L1_L3 done status=completed forwards=119 token_forwards=38821 wall=11.002s
+[471/642] MultiLineInfilling/HumanEval/130/L2_L4 start
+[471/642] MultiLineInfilling/HumanEval/130/L2_L4 done status=completed forwards=118 token_forwards=38697 wall=12.545s
+[472/642] MultiLineInfilling/HumanEval/130/L3_L5 start
+[472/642] MultiLineInfilling/HumanEval/130/L3_L5 done status=completed forwards=84 token_forwards=27274 wall=9.480s
+[473/642] MultiLineInfilling/HumanEval/130/L4_L6 start
+[473/642] MultiLineInfilling/HumanEval/130/L4_L6 done status=completed forwards=132 token_forwards=43588 wall=13.325s
+[474/642] MultiLineInfilling/HumanEval/130/L5_L7 start
+[474/642] MultiLineInfilling/HumanEval/130/L5_L7 done status=completed forwards=90 token_forwards=28192 wall=10.159s
+[475/642] MultiLineInfilling/HumanEval/130/L6_L8 start
+[475/642] MultiLineInfilling/HumanEval/130/L6_L8 done status=completed forwards=64 token_forwards=20188 wall=6.352s
+progress completed=475/642 avg_wall=4.280s avg_forwards=55.51 token_forwards=6878375 terminal_failures=0 method_failures=0 violations=0 eta_seconds=714.8
+[476/642] MultiLineInfilling/HumanEval/131/L0_L2 start
+[476/642] MultiLineInfilling/HumanEval/131/L0_L2 done status=completed forwards=21 token_forwards=2926 wall=0.963s
+[477/642] MultiLineInfilling/HumanEval/131/L1_L3 start
+[477/642] MultiLineInfilling/HumanEval/131/L1_L3 done status=completed forwards=35 token_forwards=4882 wall=1.736s
+[478/642] MultiLineInfilling/HumanEval/131/L2_L4 start
+[478/642] MultiLineInfilling/HumanEval/131/L2_L4 done status=completed forwards=58 token_forwards=8089 wall=2.892s
+[479/642] MultiLineInfilling/HumanEval/131/L3_L5 start
+[479/642] MultiLineInfilling/HumanEval/131/L3_L5 done status=completed forwards=19 token_forwards=2564 wall=0.871s
+[480/642] MultiLineInfilling/HumanEval/131/L4_L6 start
+[480/642] MultiLineInfilling/HumanEval/131/L4_L6 done status=completed forwards=38 token_forwards=5278 wall=1.751s
+[481/642] MultiLineInfilling/HumanEval/131/L5_L7 start
+[481/642] MultiLineInfilling/HumanEval/131/L5_L7 done status=completed forwards=26 token_forwards=3624 wall=1.238s
+[482/642] MultiLineInfilling/HumanEval/131/L6_L8 start
+[482/642] MultiLineInfilling/HumanEval/131/L6_L8 done status=completed forwards=20 token_forwards=2833 wall=0.908s
+[483/642] MultiLineInfilling/HumanEval/131/L7_L9 start
+[483/642] MultiLineInfilling/HumanEval/131/L7_L9 done status=completed forwards=18 token_forwards=2596 wall=0.812s
+[484/642] MultiLineInfilling/HumanEval/131/L8_L10 start
+[484/642] MultiLineInfilling/HumanEval/131/L8_L10 done status=completed forwards=16 token_forwards=2320 wall=0.776s
+[485/642] MultiLineInfilling/HumanEval/132/L0_L2 start
+[485/642] MultiLineInfilling/HumanEval/132/L0_L2 done status=completed forwards=43 token_forwards=10744 wall=3.014s
+[486/642] MultiLineInfilling/HumanEval/132/L1_L3 start
+[486/642] MultiLineInfilling/HumanEval/132/L1_L3 done status=completed forwards=43 token_forwards=10731 wall=3.036s
+[487/642] MultiLineInfilling/HumanEval/132/L2_L4 start
+[487/642] MultiLineInfilling/HumanEval/132/L2_L4 done status=completed forwards=122 token_forwards=30728 wall=8.605s
+[488/642] MultiLineInfilling/HumanEval/132/L3_L5 start
+[488/642] MultiLineInfilling/HumanEval/132/L3_L5 done status=completed forwards=39 token_forwards=9871 wall=2.745s
+[489/642] MultiLineInfilling/HumanEval/132/L4_L6 start
+[489/642] MultiLineInfilling/HumanEval/132/L4_L6 done status=completed forwards=47 token_forwards=11955 wall=3.349s
+[490/642] MultiLineInfilling/HumanEval/132/L5_L7 start
+[490/642] MultiLineInfilling/HumanEval/132/L5_L7 done status=completed forwards=40 token_forwards=10245 wall=3.316s
+[491/642] MultiLineInfilling/HumanEval/132/L6_L8 start
+[491/642] MultiLineInfilling/HumanEval/132/L6_L8 done status=completed forwards=21 token_forwards=5214 wall=1.400s
+[492/642] MultiLineInfilling/HumanEval/132/L7_L9 start
+[492/642] MultiLineInfilling/HumanEval/132/L7_L9 done status=completed forwards=13 token_forwards=3213 wall=0.781s
+[493/642] MultiLineInfilling/HumanEval/132/L8_L10 start
+[493/642] MultiLineInfilling/HumanEval/132/L8_L10 done status=completed forwards=26 token_forwards=6401 wall=1.650s
+[494/642] MultiLineInfilling/HumanEval/132/L9_L11 start
+[494/642] MultiLineInfilling/HumanEval/132/L9_L11 done status=completed forwards=42 token_forwards=10419 wall=3.012s
+[495/642] MultiLineInfilling/HumanEval/132/L10_L12 start
+[495/642] MultiLineInfilling/HumanEval/132/L10_L12 done status=completed forwards=60 token_forwards=14750 wall=4.944s
+[496/642] MultiLineInfilling/HumanEval/132/L11_L13 start
+[496/642] MultiLineInfilling/HumanEval/132/L11_L13 done status=completed forwards=60 token_forwards=14810 wall=4.693s
+[497/642] MultiLineInfilling/HumanEval/132/L12_L14 start
+[497/642] MultiLineInfilling/HumanEval/132/L12_L14 done status=completed forwards=35 token_forwards=8587 wall=2.181s
+[498/642] MultiLineInfilling/HumanEval/132/L13_L15 start
+[498/642] MultiLineInfilling/HumanEval/132/L13_L15 done status=completed forwards=14 token_forwards=3462 wall=0.844s
+[499/642] MultiLineInfilling/HumanEval/133/L0_L2 start
+[499/642] MultiLineInfilling/HumanEval/133/L0_L2 done status=completed forwards=20 token_forwards=3772 wall=1.100s
+[500/642] MultiLineInfilling/HumanEval/133/L1_L3 start
+[500/642] MultiLineInfilling/HumanEval/133/L1_L3 done status=completed forwards=34 token_forwards=6319 wall=1.919s
+progress completed=500/642 avg_wall=4.184s avg_forwards=54.56 token_forwards=7074708 terminal_failures=0 method_failures=0 violations=0 eta_seconds=594.1
+[501/642] MultiLineInfilling/HumanEval/133/L2_L4 start
+[501/642] MultiLineInfilling/HumanEval/133/L2_L4 done status=completed forwards=32 token_forwards=6016 wall=1.872s
+[502/642] MultiLineInfilling/HumanEval/135/L0_L2 start
+[502/642] MultiLineInfilling/HumanEval/135/L0_L2 done status=completed forwards=139 token_forwards=19504 wall=6.471s
+[503/642] MultiLineInfilling/HumanEval/135/L1_L3 start
+[503/642] MultiLineInfilling/HumanEval/135/L1_L3 done status=completed forwards=107 token_forwards=15135 wall=5.147s
+[504/642] MultiLineInfilling/HumanEval/135/L2_L4 start
+[504/642] MultiLineInfilling/HumanEval/135/L2_L4 done status=completed forwards=43 token_forwards=6075 wall=2.207s
+[505/642] MultiLineInfilling/HumanEval/135/L3_L5 start
+[505/642] MultiLineInfilling/HumanEval/135/L3_L5 done status=completed forwards=30 token_forwards=4226 wall=1.469s
+[506/642] MultiLineInfilling/HumanEval/135/L4_L6 start
+[506/642] MultiLineInfilling/HumanEval/135/L4_L6 done status=completed forwards=14 token_forwards=1984 wall=0.614s
+[507/642] MultiLineInfilling/HumanEval/136/L0_L2 start
+[507/642] MultiLineInfilling/HumanEval/136/L0_L2 done status=completed forwards=14 token_forwards=2105 wall=0.644s
+[508/642] MultiLineInfilling/HumanEval/137/L0_L2 start
+[508/642] MultiLineInfilling/HumanEval/137/L0_L2 done status=completed forwards=14 token_forwards=2575 wall=0.698s
+[509/642] MultiLineInfilling/HumanEval/137/L1_L3 start
+[509/642] MultiLineInfilling/HumanEval/137/L1_L3 done status=completed forwards=9 token_forwards=1620 wall=0.505s
+[510/642] MultiLineInfilling/HumanEval/137/L2_L4 start
+[510/642] MultiLineInfilling/HumanEval/137/L2_L4 done status=completed forwards=84 token_forwards=16742 wall=5.854s
+[511/642] MultiLineInfilling/HumanEval/139/L0_L2 start
+[511/642] MultiLineInfilling/HumanEval/139/L0_L2 done status=completed forwards=36 token_forwards=4805 wall=1.677s
+[512/642] MultiLineInfilling/HumanEval/139/L1_L3 start
+[512/642] MultiLineInfilling/HumanEval/139/L1_L3 done status=completed forwards=34 token_forwards=4535 wall=1.596s
+[513/642] MultiLineInfilling/HumanEval/139/L2_L4 start
+[513/642] MultiLineInfilling/HumanEval/139/L2_L4 done status=completed forwards=36 token_forwards=4778 wall=1.664s
+[514/642] MultiLineInfilling/HumanEval/139/L3_L5 start
+[514/642] MultiLineInfilling/HumanEval/139/L3_L5 done status=completed forwards=18 token_forwards=2462 wall=0.762s
+[515/642] MultiLineInfilling/HumanEval/140/L0_L2 start
+[515/642] MultiLineInfilling/HumanEval/140/L0_L2 done status=completed forwards=23 token_forwards=5700 wall=1.452s
+[516/642] MultiLineInfilling/HumanEval/140/L1_L3 start
+[516/642] MultiLineInfilling/HumanEval/140/L1_L3 done status=completed forwards=26 token_forwards=6430 wall=1.816s
+[517/642] MultiLineInfilling/HumanEval/140/L2_L4 start
+[517/642] MultiLineInfilling/HumanEval/140/L2_L4 done status=completed forwards=31 token_forwards=7631 wall=2.264s
+[518/642] MultiLineInfilling/HumanEval/140/L3_L5 start
+[518/642] MultiLineInfilling/HumanEval/140/L3_L5 done status=completed forwards=40 token_forwards=10106 wall=3.017s
+[519/642] MultiLineInfilling/HumanEval/140/L4_L6 start
+[519/642] MultiLineInfilling/HumanEval/140/L4_L6 done status=completed forwards=137 token_forwards=34738 wall=8.682s
+[520/642] MultiLineInfilling/HumanEval/140/L5_L7 start
+[520/642] MultiLineInfilling/HumanEval/140/L5_L7 done status=completed forwards=14 token_forwards=3528 wall=0.913s
+[521/642] MultiLineInfilling/HumanEval/140/L6_L8 start
+[521/642] MultiLineInfilling/HumanEval/140/L6_L8 done status=completed forwards=103 token_forwards=26180 wall=7.542s
+[522/642] MultiLineInfilling/HumanEval/140/L7_L9 start
+[522/642] MultiLineInfilling/HumanEval/140/L7_L9 done status=completed forwards=15 token_forwards=3644 wall=0.981s
+[523/642] MultiLineInfilling/HumanEval/140/L8_L10 start
+[523/642] MultiLineInfilling/HumanEval/140/L8_L10 done status=completed forwards=26 token_forwards=6223 wall=1.641s
+[524/642] MultiLineInfilling/HumanEval/140/L9_L11 start
+[524/642] MultiLineInfilling/HumanEval/140/L9_L11 done status=completed forwards=139 token_forwards=33572 wall=8.403s
+[525/642] MultiLineInfilling/HumanEval/140/L10_L12 start
+[525/642] MultiLineInfilling/HumanEval/140/L10_L12 done status=completed forwards=39 token_forwards=9750 wall=2.717s
+progress completed=525/642 avg_wall=4.119s avg_forwards=54.25 token_forwards=7314772 terminal_failures=0 method_failures=0 violations=0 eta_seconds=481.9
+[526/642] MultiLineInfilling/HumanEval/140/L11_L13 start
+[526/642] MultiLineInfilling/HumanEval/140/L11_L13 done status=completed forwards=19 token_forwards=4654 wall=1.160s
+[527/642] MultiLineInfilling/HumanEval/140/L12_L14 start
+[527/642] MultiLineInfilling/HumanEval/140/L12_L14 done status=completed forwards=23 token_forwards=5640 wall=1.450s
+[528/642] MultiLineInfilling/HumanEval/140/L13_L15 start
+[528/642] MultiLineInfilling/HumanEval/140/L13_L15 done status=completed forwards=24 token_forwards=5827 wall=1.579s
+[529/642] MultiLineInfilling/HumanEval/140/L14_L16 start
+[529/642] MultiLineInfilling/HumanEval/140/L14_L16 done status=completed forwards=31 token_forwards=7843 wall=2.087s
+[530/642] MultiLineInfilling/HumanEval/140/L15_L17 start
+[530/642] MultiLineInfilling/HumanEval/140/L15_L17 done status=completed forwards=110 token_forwards=27451 wall=7.250s
+[531/642] MultiLineInfilling/HumanEval/140/L16_L18 start
+[531/642] MultiLineInfilling/HumanEval/140/L16_L18 done status=completed forwards=47 token_forwards=11942 wall=3.243s
+[532/642] MultiLineInfilling/HumanEval/140/L17_L19 start
+[532/642] MultiLineInfilling/HumanEval/140/L17_L19 done status=completed forwards=6 token_forwards=1478 wall=0.377s
+[533/642] MultiLineInfilling/HumanEval/141/L0_L2 start
+[533/642] MultiLineInfilling/HumanEval/141/L0_L2 done status=completed forwards=127 token_forwards=41619 wall=11.362s
+[534/642] MultiLineInfilling/HumanEval/141/L1_L3 start
+[534/642] MultiLineInfilling/HumanEval/141/L1_L3 done status=completed forwards=39 token_forwards=12747 wall=3.425s
+[535/642] MultiLineInfilling/HumanEval/141/L2_L4 start
+[535/642] MultiLineInfilling/HumanEval/141/L2_L4 done status=completed forwards=140 token_forwards=45912 wall=11.339s
+[536/642] MultiLineInfilling/HumanEval/141/L3_L5 start
+[536/642] MultiLineInfilling/HumanEval/141/L3_L5 done status=completed forwards=42 token_forwards=13899 wall=3.821s
+[537/642] MultiLineInfilling/HumanEval/141/L4_L6 start
+[537/642] MultiLineInfilling/HumanEval/141/L4_L6 done status=completed forwards=104 token_forwards=33763 wall=8.652s
+[538/642] MultiLineInfilling/HumanEval/141/L5_L7 start
+[538/642] MultiLineInfilling/HumanEval/141/L5_L7 done status=completed forwards=133 token_forwards=43153 wall=9.786s
+[539/642] MultiLineInfilling/HumanEval/141/L6_L8 start
+[539/642] MultiLineInfilling/HumanEval/141/L6_L8 done status=completed forwards=104 token_forwards=33634 wall=8.582s
+[540/642] MultiLineInfilling/HumanEval/141/L7_L9 start
+[540/642] MultiLineInfilling/HumanEval/141/L7_L9 done status=completed forwards=105 token_forwards=34008 wall=8.246s
+[541/642] MultiLineInfilling/HumanEval/141/L8_L10 start
+[541/642] MultiLineInfilling/HumanEval/141/L8_L10 done status=completed forwards=37 token_forwards=11725 wall=3.268s
+[542/642] MultiLineInfilling/HumanEval/141/L9_L11 start
+[542/642] MultiLineInfilling/HumanEval/141/L9_L11 done status=completed forwards=3 token_forwards=933 wall=0.261s
+[543/642] MultiLineInfilling/HumanEval/141/L10_L12 start
+[543/642] MultiLineInfilling/HumanEval/141/L10_L12 done status=completed forwards=5 token_forwards=1550 wall=0.393s
+[544/642] MultiLineInfilling/HumanEval/141/L11_L13 start
+[544/642] MultiLineInfilling/HumanEval/141/L11_L13 done status=completed forwards=32 token_forwards=10628 wall=2.791s
+[545/642] MultiLineInfilling/HumanEval/142/L0_L2 start
+[545/642] MultiLineInfilling/HumanEval/142/L0_L2 done status=completed forwards=120 token_forwards=28703 wall=8.081s
+[546/642] MultiLineInfilling/HumanEval/142/L1_L3 start
+[546/642] MultiLineInfilling/HumanEval/142/L1_L3 done status=completed forwards=67 token_forwards=15848 wall=4.913s
+[547/642] MultiLineInfilling/HumanEval/142/L2_L4 start
+[547/642] MultiLineInfilling/HumanEval/142/L2_L4 done status=completed forwards=127 token_forwards=29062 wall=8.767s
+[548/642] MultiLineInfilling/HumanEval/142/L3_L5 start
+[548/642] MultiLineInfilling/HumanEval/142/L3_L5 done status=completed forwards=29 token_forwards=6511 wall=2.006s
+[549/642] MultiLineInfilling/HumanEval/142/L4_L6 start
+[549/642] MultiLineInfilling/HumanEval/142/L4_L6 done status=completed forwards=139 token_forwards=32000 wall=8.947s
+[550/642] MultiLineInfilling/HumanEval/142/L5_L7 start
+[550/642] MultiLineInfilling/HumanEval/142/L5_L7 done status=completed forwards=30 token_forwards=7144 wall=1.919s
+progress completed=550/642 avg_wall=4.156s avg_forwards=54.77 token_forwards=7782446 terminal_failures=0 method_failures=0 violations=0 eta_seconds=382.4
+[551/642] MultiLineInfilling/HumanEval/142/L6_L8 start
+[551/642] MultiLineInfilling/HumanEval/142/L6_L8 done status=completed forwards=28 token_forwards=6698 wall=1.814s
+[552/642] MultiLineInfilling/HumanEval/143/L0_L2 start
+[552/642] MultiLineInfilling/HumanEval/143/L0_L2 done status=completed forwards=46 token_forwards=11076 wall=3.293s
+[553/642] MultiLineInfilling/HumanEval/143/L1_L3 start
+[553/642] MultiLineInfilling/HumanEval/143/L1_L3 done status=completed forwards=117 token_forwards=28888 wall=10.252s
+[554/642] MultiLineInfilling/HumanEval/143/L2_L4 start
+[554/642] MultiLineInfilling/HumanEval/143/L2_L4 done status=completed forwards=10 token_forwards=2310 wall=0.656s
+[555/642] MultiLineInfilling/HumanEval/143/L3_L5 start
+[555/642] MultiLineInfilling/HumanEval/143/L3_L5 done status=completed forwards=26 token_forwards=5992 wall=1.600s
+[556/642] MultiLineInfilling/HumanEval/143/L4_L6 start
+[556/642] MultiLineInfilling/HumanEval/143/L4_L6 done status=completed forwards=118 token_forwards=27770 wall=8.196s
+[557/642] MultiLineInfilling/HumanEval/143/L5_L7 start
+[557/642] MultiLineInfilling/HumanEval/143/L5_L7 done status=completed forwards=85 token_forwards=20349 wall=6.886s
+[558/642] MultiLineInfilling/HumanEval/143/L6_L8 start
+[558/642] MultiLineInfilling/HumanEval/143/L6_L8 done status=completed forwards=45 token_forwards=10370 wall=3.136s
+[559/642] MultiLineInfilling/HumanEval/143/L7_L9 start
+[559/642] MultiLineInfilling/HumanEval/143/L7_L9 done status=completed forwards=42 token_forwards=9672 wall=2.840s
+[560/642] MultiLineInfilling/HumanEval/143/L8_L10 start
+[560/642] MultiLineInfilling/HumanEval/143/L8_L10 done status=completed forwards=53 token_forwards=12278 wall=4.202s
+[561/642] MultiLineInfilling/HumanEval/144/L0_L2 start
+[561/642] MultiLineInfilling/HumanEval/144/L0_L2 done status=completed forwards=78 token_forwards=16806 wall=5.223s
+[562/642] MultiLineInfilling/HumanEval/144/L1_L3 start
+[562/642] MultiLineInfilling/HumanEval/144/L1_L3 done status=completed forwards=34 token_forwards=7032 wall=2.034s
+[563/642] MultiLineInfilling/HumanEval/144/L2_L4 start
+[563/642] MultiLineInfilling/HumanEval/144/L2_L4 done status=completed forwards=60 token_forwards=12264 wall=3.861s
+[564/642] MultiLineInfilling/HumanEval/144/L3_L5 start
+[564/642] MultiLineInfilling/HumanEval/144/L3_L5 done status=completed forwards=45 token_forwards=9317 wall=2.747s
+[565/642] MultiLineInfilling/HumanEval/144/L4_L6 start
+[565/642] MultiLineInfilling/HumanEval/144/L4_L6 done status=completed forwards=17 token_forwards=3521 wall=0.913s
+[566/642] MultiLineInfilling/HumanEval/145/L0_L2 start
+[566/642] MultiLineInfilling/HumanEval/145/L0_L2 done status=completed forwards=26 token_forwards=4631 wall=1.446s
+[567/642] MultiLineInfilling/HumanEval/145/L1_L3 start
+[567/642] MultiLineInfilling/HumanEval/145/L1_L3 done status=completed forwards=63 token_forwards=11194 wall=3.566s
+[568/642] MultiLineInfilling/HumanEval/145/L2_L4 start
+[568/642] MultiLineInfilling/HumanEval/145/L2_L4 done status=completed forwards=23 token_forwards=3767 wall=1.150s
+[569/642] MultiLineInfilling/HumanEval/145/L3_L5 start
+[569/642] MultiLineInfilling/HumanEval/145/L3_L5 done status=completed forwards=33 token_forwards=5875 wall=1.822s
+[570/642] MultiLineInfilling/HumanEval/145/L4_L6 start
+[570/642] MultiLineInfilling/HumanEval/145/L4_L6 done status=completed forwards=32 token_forwards=5828 wall=1.722s
+[571/642] MultiLineInfilling/HumanEval/146/L1_L3 start
+[571/642] MultiLineInfilling/HumanEval/146/L1_L3 done status=completed forwards=35 token_forwards=7256 wall=2.296s
+[572/642] MultiLineInfilling/HumanEval/146/L2_L4 start
+[572/642] MultiLineInfilling/HumanEval/146/L2_L4 done status=completed forwards=70 token_forwards=14458 wall=5.273s
+[573/642] MultiLineInfilling/HumanEval/146/L3_L5 start
+[573/642] MultiLineInfilling/HumanEval/146/L3_L5 done status=completed forwards=80 token_forwards=16156 wall=5.482s
+[574/642] MultiLineInfilling/HumanEval/146/L4_L6 start
+[574/642] MultiLineInfilling/HumanEval/146/L4_L6 done status=completed forwards=43 token_forwards=7939 wall=2.628s
+[575/642] MultiLineInfilling/HumanEval/146/L5_L7 start
+[575/642] MultiLineInfilling/HumanEval/146/L5_L7 done status=completed forwards=42 token_forwards=8300 wall=2.693s
+progress completed=575/642 avg_wall=4.125s avg_forwards=54.57 token_forwards=8052193 terminal_failures=0 method_failures=0 violations=0 eta_seconds=276.4
+[576/642] MultiLineInfilling/HumanEval/147/L0_L2 start
+[576/642] MultiLineInfilling/HumanEval/147/L0_L2 done status=completed forwards=110 token_forwards=27815 wall=9.590s
+[577/642] MultiLineInfilling/HumanEval/147/L1_L3 start
+[577/642] MultiLineInfilling/HumanEval/147/L1_L3 done status=completed forwards=62 token_forwards=15912 wall=5.239s
+[578/642] MultiLineInfilling/HumanEval/147/L2_L4 start
+[578/642] MultiLineInfilling/HumanEval/147/L2_L4 done status=completed forwards=77 token_forwards=19611 wall=6.495s
+[579/642] MultiLineInfilling/HumanEval/147/L3_L5 start
+[579/642] MultiLineInfilling/HumanEval/147/L3_L5 done status=completed forwards=88 token_forwards=21709 wall=7.406s
+[580/642] MultiLineInfilling/HumanEval/147/L4_L6 start
+[580/642] MultiLineInfilling/HumanEval/147/L4_L6 done status=completed forwards=72 token_forwards=17409 wall=5.640s
+[581/642] MultiLineInfilling/HumanEval/147/L5_L7 start
+[581/642] MultiLineInfilling/HumanEval/147/L5_L7 done status=completed forwards=73 token_forwards=18024 wall=5.028s
+[582/642] MultiLineInfilling/HumanEval/148/L0_L2 start
+[582/642] MultiLineInfilling/HumanEval/148/L0_L2 done status=completed forwards=95 token_forwards=30524 wall=10.639s
+[583/642] MultiLineInfilling/HumanEval/148/L1_L3 start
+[583/642] MultiLineInfilling/HumanEval/148/L1_L3 done status=completed forwards=55 token_forwards=17990 wall=5.752s
+[584/642] MultiLineInfilling/HumanEval/148/L2_L4 start
+[584/642] MultiLineInfilling/HumanEval/148/L2_L4 done status=completed forwards=94 token_forwards=32008 wall=11.221s
+[585/642] MultiLineInfilling/HumanEval/148/L3_L5 start
+[585/642] MultiLineInfilling/HumanEval/148/L3_L5 done status=completed forwards=93 token_forwards=31707 wall=11.341s
+[586/642] MultiLineInfilling/HumanEval/148/L4_L6 start
+[586/642] MultiLineInfilling/HumanEval/148/L4_L6 done status=completed forwards=55 token_forwards=18085 wall=5.566s
+[587/642] MultiLineInfilling/HumanEval/148/L5_L7 start
+[587/642] MultiLineInfilling/HumanEval/148/L5_L7 done status=completed forwards=123 token_forwards=40787 wall=11.141s
+[588/642] MultiLineInfilling/HumanEval/148/L6_L8 start
+[588/642] MultiLineInfilling/HumanEval/148/L6_L8 done status=completed forwards=133 token_forwards=43810 wall=11.069s
+[589/642] MultiLineInfilling/HumanEval/149/L0_L2 start
+[589/642] MultiLineInfilling/HumanEval/149/L0_L2 done status=completed forwards=135 token_forwards=30685 wall=7.888s
+[590/642] MultiLineInfilling/HumanEval/149/L1_L3 start
+[590/642] MultiLineInfilling/HumanEval/149/L1_L3 done status=completed forwards=123 token_forwards=28038 wall=8.047s
+[591/642] MultiLineInfilling/HumanEval/149/L2_L4 start
+[591/642] MultiLineInfilling/HumanEval/149/L2_L4 done status=completed forwards=49 token_forwards=11042 wall=3.312s
+[592/642] MultiLineInfilling/HumanEval/149/L3_L5 start
+[592/642] MultiLineInfilling/HumanEval/149/L3_L5 done status=completed forwards=42 token_forwards=9364 wall=2.762s
+[593/642] MultiLineInfilling/HumanEval/150/L0_L2 start
+[593/642] MultiLineInfilling/HumanEval/150/L0_L2 done status=completed forwards=22 token_forwards=2810 wall=0.938s
+[594/642] MultiLineInfilling/HumanEval/150/L1_L3 start
+[594/642] MultiLineInfilling/HumanEval/150/L1_L3 done status=completed forwards=60 token_forwards=7860 wall=3.082s
+[595/642] MultiLineInfilling/HumanEval/150/L2_L4 start
+[595/642] MultiLineInfilling/HumanEval/150/L2_L4 done status=completed forwards=45 token_forwards=6005 wall=2.455s
+[596/642] MultiLineInfilling/HumanEval/150/L3_L5 start
+[596/642] MultiLineInfilling/HumanEval/150/L3_L5 done status=completed forwards=26 token_forwards=3494 wall=1.209s
+[597/642] MultiLineInfilling/HumanEval/150/L4_L6 start
+[597/642] MultiLineInfilling/HumanEval/150/L4_L6 done status=completed forwards=12 token_forwards=1629 wall=0.540s
+[598/642] MultiLineInfilling/HumanEval/150/L5_L7 start
+[598/642] MultiLineInfilling/HumanEval/150/L5_L7 done status=completed forwards=10 token_forwards=1336 wall=0.436s
+[599/642] MultiLineInfilling/HumanEval/153/L0_L2 start
+[599/642] MultiLineInfilling/HumanEval/153/L0_L2 done status=completed forwards=107 token_forwards=39424 wall=10.860s
+[600/642] MultiLineInfilling/HumanEval/153/L1_L3 start
+[600/642] MultiLineInfilling/HumanEval/153/L1_L3 done status=completed forwards=57 token_forwards=19292 wall=5.794s
+progress completed=600/642 avg_wall=4.209s avg_forwards=55.32 token_forwards=8548563 terminal_failures=0 method_failures=0 violations=0 eta_seconds=176.8
+[601/642] MultiLineInfilling/HumanEval/153/L2_L4 start
+[601/642] MultiLineInfilling/HumanEval/153/L2_L4 done status=completed forwards=98 token_forwards=37126 wall=11.539s
+[602/642] MultiLineInfilling/HumanEval/153/L3_L5 start
+[602/642] MultiLineInfilling/HumanEval/153/L3_L5 done status=completed forwards=78 token_forwards=30501 wall=9.966s
+[603/642] MultiLineInfilling/HumanEval/153/L4_L6 start
+[603/642] MultiLineInfilling/HumanEval/153/L4_L6 done status=completed forwards=23 token_forwards=9323 wall=2.163s
+[604/642] MultiLineInfilling/HumanEval/154/L0_L2 start
+[604/642] MultiLineInfilling/HumanEval/154/L0_L2 done status=completed forwards=50 token_forwards=8967 wall=2.944s
+[605/642] MultiLineInfilling/HumanEval/154/L1_L3 start
+[605/642] MultiLineInfilling/HumanEval/154/L1_L3 done status=completed forwards=54 token_forwards=9706 wall=3.636s
+[606/642] MultiLineInfilling/HumanEval/154/L2_L4 start
+[606/642] MultiLineInfilling/HumanEval/154/L2_L4 done status=completed forwards=46 token_forwards=7903 wall=2.882s
+[607/642] MultiLineInfilling/HumanEval/154/L3_L5 start
+[607/642] MultiLineInfilling/HumanEval/154/L3_L5 done status=completed forwards=28 token_forwards=4943 wall=1.415s
+[608/642] MultiLineInfilling/HumanEval/154/L4_L6 start
+[608/642] MultiLineInfilling/HumanEval/154/L4_L6 done status=completed forwards=30 token_forwards=5500 wall=1.580s
+[609/642] MultiLineInfilling/HumanEval/155/L0_L2 start
+[609/642] MultiLineInfilling/HumanEval/155/L0_L2 done status=completed forwards=28 token_forwards=3281 wall=1.222s
+[610/642] MultiLineInfilling/HumanEval/155/L1_L3 start
+[610/642] MultiLineInfilling/HumanEval/155/L1_L3 done status=completed forwards=55 token_forwards=6532 wall=2.545s
+[611/642] MultiLineInfilling/HumanEval/155/L2_L4 start
+[611/642] MultiLineInfilling/HumanEval/155/L2_L4 done status=completed forwards=51 token_forwards=6000 wall=2.230s
+[612/642] MultiLineInfilling/HumanEval/155/L3_L5 start
+[612/642] MultiLineInfilling/HumanEval/155/L3_L5 done status=completed forwards=136 token_forwards=16766 wall=5.977s
+[613/642] MultiLineInfilling/HumanEval/155/L4_L6 start
+[613/642] MultiLineInfilling/HumanEval/155/L4_L6 done status=completed forwards=22 token_forwards=2678 wall=0.976s
+[614/642] MultiLineInfilling/HumanEval/155/L5_L7 start
+[614/642] MultiLineInfilling/HumanEval/155/L5_L7 done status=completed forwards=23 token_forwards=2716 wall=0.945s
+[615/642] MultiLineInfilling/HumanEval/156/L0_L2 start
+[615/642] MultiLineInfilling/HumanEval/156/L0_L2 done status=completed forwards=117 token_forwards=27203 wall=9.724s
+[616/642] MultiLineInfilling/HumanEval/156/L1_L3 start
+[616/642] MultiLineInfilling/HumanEval/156/L1_L3 done status=completed forwards=117 token_forwards=28623 wall=10.843s
+[617/642] MultiLineInfilling/HumanEval/156/L2_L4 start
+[617/642] MultiLineInfilling/HumanEval/156/L2_L4 done status=completed forwards=96 token_forwards=25024 wall=9.159s
+[618/642] MultiLineInfilling/HumanEval/156/L3_L5 start
+[618/642] MultiLineInfilling/HumanEval/156/L3_L5 done status=completed forwards=62 token_forwards=16579 wall=4.807s
+[619/642] MultiLineInfilling/HumanEval/156/L4_L6 start
+[619/642] MultiLineInfilling/HumanEval/156/L4_L6 done status=completed forwards=20 token_forwards=5441 wall=1.369s
+[620/642] MultiLineInfilling/HumanEval/156/L5_L7 start
+[620/642] MultiLineInfilling/HumanEval/156/L5_L7 done status=completed forwards=54 token_forwards=14868 wall=4.462s
+[621/642] MultiLineInfilling/HumanEval/156/L6_L8 start
+[621/642] MultiLineInfilling/HumanEval/156/L6_L8 done status=completed forwards=40 token_forwards=10838 wall=2.965s
+[622/642] MultiLineInfilling/HumanEval/156/L7_L9 start
+[622/642] MultiLineInfilling/HumanEval/156/L7_L9 done status=completed forwards=52 token_forwards=14221 wall=4.087s
+[623/642] MultiLineInfilling/HumanEval/156/L8_L10 start
+[623/642] MultiLineInfilling/HumanEval/156/L8_L10 done status=completed forwards=37 token_forwards=10078 wall=2.808s
+[624/642] MultiLineInfilling/HumanEval/156/L9_L11 start
+[624/642] MultiLineInfilling/HumanEval/156/L9_L11 done status=completed forwards=17 token_forwards=4598 wall=1.089s
+[625/642] MultiLineInfilling/HumanEval/156/L10_L12 start
+[625/642] MultiLineInfilling/HumanEval/156/L10_L12 done status=completed forwards=31 token_forwards=8420 wall=2.198s
+progress completed=625/642 avg_wall=4.206s avg_forwards=55.29 token_forwards=8866398 terminal_failures=0 method_failures=0 violations=0 eta_seconds=71.5
+[626/642] MultiLineInfilling/HumanEval/156/L11_L13 start
+[626/642] MultiLineInfilling/HumanEval/156/L11_L13 done status=completed forwards=20 token_forwards=5420 wall=1.328s
+[627/642] MultiLineInfilling/HumanEval/159/L0_L2 start
+[627/642] MultiLineInfilling/HumanEval/159/L0_L2 done status=completed forwards=137 token_forwards=43806 wall=10.997s
+[628/642] MultiLineInfilling/HumanEval/159/L1_L3 start
+[628/642] MultiLineInfilling/HumanEval/159/L1_L3 done status=completed forwards=14 token_forwards=4329 wall=0.989s
+[629/642] MultiLineInfilling/HumanEval/160/L0_L2 start
+[629/642] MultiLineInfilling/HumanEval/160/L0_L2 done status=completed forwards=37 token_forwards=8500 wall=2.643s
+[630/642] MultiLineInfilling/HumanEval/160/L1_L3 start
+[630/642] MultiLineInfilling/HumanEval/160/L1_L3 done status=completed forwards=57 token_forwards=13689 wall=4.084s
+[631/642] MultiLineInfilling/HumanEval/161/L0_L2 start
+[631/642] MultiLineInfilling/HumanEval/161/L0_L2 done status=completed forwards=20 token_forwards=3940 wall=1.107s
+[632/642] MultiLineInfilling/HumanEval/161/L1_L3 start
+[632/642] MultiLineInfilling/HumanEval/161/L1_L3 done status=completed forwards=139 token_forwards=27824 wall=7.495s
+[633/642] MultiLineInfilling/HumanEval/161/L2_L4 start
+[633/642] MultiLineInfilling/HumanEval/161/L2_L4 done status=completed forwards=106 token_forwards=21666 wall=6.676s
+[634/642] MultiLineInfilling/HumanEval/161/L3_L5 start
+[634/642] MultiLineInfilling/HumanEval/161/L3_L5 done status=completed forwards=76 token_forwards=15683 wall=5.573s
+[635/642] MultiLineInfilling/HumanEval/161/L4_L6 start
+[635/642] MultiLineInfilling/HumanEval/161/L4_L6 done status=completed forwards=47 token_forwards=9374 wall=2.687s
+[636/642] MultiLineInfilling/HumanEval/161/L5_L7 start
+[636/642] MultiLineInfilling/HumanEval/161/L5_L7 done status=completed forwards=28 token_forwards=5514 wall=1.546s
+[637/642] MultiLineInfilling/HumanEval/161/L6_L8 start
+[637/642] MultiLineInfilling/HumanEval/161/L6_L8 done status=completed forwards=140 token_forwards=28184 wall=7.565s
+[638/642] MultiLineInfilling/HumanEval/161/L7_L9 start
+[638/642] MultiLineInfilling/HumanEval/161/L7_L9 done status=completed forwards=138 token_forwards=27933 wall=8.087s
+[639/642] MultiLineInfilling/HumanEval/161/L8_L10 start
+[639/642] MultiLineInfilling/HumanEval/161/L8_L10 done status=completed forwards=22 token_forwards=4432 wall=1.193s
+[640/642] MultiLineInfilling/HumanEval/161/L9_L11 start
+[640/642] MultiLineInfilling/HumanEval/161/L9_L11 done status=completed forwards=139 token_forwards=28068 wall=7.985s
+[641/642] MultiLineInfilling/HumanEval/161/L10_L12 start
+[641/642] MultiLineInfilling/HumanEval/161/L10_L12 done status=completed forwards=27 token_forwards=5324 wall=1.540s
+[642/642] MultiLineInfilling/HumanEval/161/L11_L13 start
+[642/642] MultiLineInfilling/HumanEval/161/L11_L13 done status=completed forwards=33 token_forwards=6579 wall=1.958s
+progress completed=642/642 avg_wall=4.209s avg_forwards=55.67 token_forwards=9126663 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 100/642
+scored 200/642
+scored 300/642
+scored 400/642
+scored 500/642
+scored 600/642
+scored 642/642
+{
+  "num_samples": 642,
+  "num_base_problems": 115,
+  "passed": 281,
+  "pass_rate": 0.43769470404984423,
+  "compile_passed": 538,
+  "compile_pass_rate": 0.838006230529595,
+  "exact_matches": 97,
+  "exact_match_rate": 0.15109034267912771,
+  "task_macro_pass_rate": 0.41168949881226097,
+  "completion_rate": 1.0,
+  "completed_rows": 642,
+  "completed_only": {
+    "passed": 281,
+    "pass_rate": 0.43769470404984423,
+    "compile_passed": 538,
+    "compile_pass_rate": 0.838006230529595,
+    "exact_matches": 97,
+    "exact_match_rate": 0.15109034267912771
+  },
+  "completion_tokens": {
+    "mean": 21.121495327102803,
+    "median": 20.0
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 642
+    }
+  },
+  "blank_region_count": 187,
+  "blank_slot_rows": 137,
+  "expand_count": 17175,
+  "delete_count": 5081,
+  "slot_expand_cap_hits": 388,
+  "global_expand_cap_hits": 34,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 138,
+  "budget_draining_loop_rows": 129,
+  "budget_draining_loop_count": 10601,
+  "expand_logit_blocked_by_budget_count": 3865,
+  "expand_budget_consumed": {
+    "mean": 26.752336448598133,
+    "median": 18.0,
+    "max": 64,
+    "distribution": {
+      "0": 14,
+      "1": 18,
+      "2": 14,
+      "3": 12,
+      "4": 19,
+      "5": 16,
+      "6": 23,
+      "7": 23,
+      "8": 26,
+      "9": 19,
+      "10": 25,
+      "11": 17,
+      "12": 19,
+      "13": 13,
+      "14": 14,
+      "15": 18,
+      "16": 13,
+      "17": 9,
+      "18": 13,
+      "19": 19,
+      "20": 10,
+      "21": 13,
+      "22": 12,
+      "23": 4,
+      "24": 4,
+      "25": 12,
+      "26": 9,
+      "27": 3,
+      "28": 6,
+      "29": 8,
+      "30": 4,
+      "31": 7,
+      "32": 5,
+      "33": 7,
+      "34": 3,
+      "35": 3,
+      "36": 5,
+      "37": 1,
+      "38": 5,
+      "39": 4,
+      "41": 2,
+      "42": 1,
+      "43": 5,
+      "44": 2,
+      "45": 3,
+      "46": 3,
+      "48": 1,
+      "50": 2,
+      "51": 2,
+      "52": 2,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 4,
+      "58": 4,
+      "61": 1,
+      "64": 138
+    }
+  },
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_triggered_rows": 0,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "newline_boundary_events": 1221,
+  "mixed_newline_token_events": 1042,
+  "pure_newline_token_events": 179,
+  "multiple_newline_token_events": 13,
+  "discarded_masks_after_boundary": 4948,
+  "discarded_resolved_tokens_after_boundary": 1673,
+  "region_local_eos_events": 5081,
+  "region_local_eos_deleted_masks": 6449,
+  "max_masks_deleted_by_one_eos": 25,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 55.666666666666664,
+    "median": 40.0,
+    "max": 140,
+    "total": 35738
+  },
+  "token_forwards": {
+    "mean": 14215.985981308411,
+    "median": 9395.0,
+    "max": 75415,
+    "total": 9126663
+  },
+  "wall_time_seconds": {
+    "mean": 4.209084277254685,
+    "median": 2.8114737205323763,
+    "max": 27.10482344799675,
+    "total": 2702.2321059975075
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15521998197.233644,
+    "max": 15819467264
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 642,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_hard_budgeted",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 642,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 642,
+  "score_rows": 642,
+  "score_unique_task_ids": 642,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "full",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+{
+  "method": "v3_hard_budgeted",
+  "stage": "full",
+  "passed": true,
+  "engineering_gate_passed": true,
+  "pass_at_least_18": null,
+  "full_authorized": false,
+  "engineering_checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_runtime_errors": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_silent_unresolved_acceptance": true,
+    "terminal_failures_explicit_and_empty": true,
+    "budget_conservation_all_rows": true,
+    "budget_bounds_all_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "budget_draining_events_nonterminal": true,
+    "resume_dedup_config_audit": true
+  },
+  "diagnostic_only_checks": {
+    "completed_rows": 642,
+    "compile_passed": 538,
+    "passed": 281,
+    "exact_matches": 97,
+    "blank_slot_rows": 137,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "budget_exhausted_rows": 138,
+    "budget_draining_loop_count": 10601
+  },
+  "recorded_at_utc": "2026-08-02T13:22:02.709079+00:00"
+}
+method=v3_hard_budgeted stage=full selected=642 completed=642 remaining=0 config_hash=9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c
+deterministic_resume_equality=passed rows=642 sha256=bc9dbc78fadc59d82d5120a08104a28931e579d599398d8399fb693bccf3438c
+stage_finished_at=2026-08-02T13:22:05+00:00 method=v3_hard_budgeted stage=full

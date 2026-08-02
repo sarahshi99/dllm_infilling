@@ -1094,6 +1094,14 @@
       "pilot_passed": 14,
       "pilot_compile_passed": 23,
       "full_authorized": false,
+      "posthoc_full_later_explicitly_authorized": true,
+      "posthoc_full_rows": 642,
+      "posthoc_full_completed": 642,
+      "posthoc_full_passed": 281,
+      "posthoc_full_compile_passed": 538,
+      "posthoc_full_exact_matches": 97,
+      "posthoc_full_blank_slot_rows": 137,
+      "posthoc_full_analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_all642/full_analysis.json",
       "report": "docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted.md"
     },
     "b_nonempty_oracle": {
@@ -1108,6 +1116,25 @@
       "deployable": false,
       "report": "docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted_nonempty_oracle.md",
       "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json"
+    },
+    "ab_full_comparison": {
+      "b_wins": 15,
+      "b_losses": 16,
+      "both_pass": 265,
+      "both_fail": 346,
+      "mcnemar_exact_p": 1.0,
+      "cluster_bootstrap_95_ci": [
+        -0.02603389005870342,
+        0.020864441324010306
+      ],
+      "b_compile_help": 6,
+      "b_compile_harm": 73,
+      "b_exact_help": 9,
+      "b_exact_harm": 0,
+      "guard_triggered_exactly_on_a_blank_rows": true,
+      "inactive_rows_exactly_match": 505,
+      "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/comparison_summary.json",
+      "report": "repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md"
     }
   },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",

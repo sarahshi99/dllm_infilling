@@ -61,3 +61,6 @@ Updated: 2026-07-11 UTC
 - B adds only an oracle hard-slot nonempty guard. Pilot30 reaches 18/30 and Full642 completes at 280 Pass, 471 compile, 106 exact, with zero blank or terminal failures.
 - B Full is below one-shot (94 wins / 115 losses) and historical V1 progressive (66 wins / 102 losses). It is not deployable or held-out.
 - Decision: `reframe`; stop before OpenTail, Joint, BoundaryShift, AST repair, or another progressive variant.
+- On a later explicit user request, A Full642 was run post-hoc despite the original failed 18/30 Pilot gate; this does not alter the preregistered gate history. A completed 642/642 at 281 Pass, 538 compile, and 97 exact.
+- B versus A Full is 15 wins / 16 losses with McNemar `p=1.0` and clustered 95% CI `[-2.60pp,+2.09pp]`. The guard triggers exactly on A's 137 blank-slot rows, removes all blanks, but causes compile help/harm `6/73`, exact help/harm `9/0`, and 25.04% more token-forwards.
+- Updated decision remains `reframe`: the nonempty oracle constraint improves surface exactness but is not supported as a functional decoding improvement.

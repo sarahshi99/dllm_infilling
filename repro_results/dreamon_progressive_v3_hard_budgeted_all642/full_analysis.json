@@ -1,0 +1,297 @@
+{
+  "discard_reference_diagnostic": {
+    "complete_text_reference": {
+      "available_events": 146,
+      "exact_match_rate": 0.3561643835616438,
+      "prefix_rate": 0.4041095890410959,
+      "substring_rate": 0.4246575342465753
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.10445630119485985,
+      "mean_per_event": 1.6219369894982496,
+      "median_per_event": 1,
+      "normal_generated_token_denominator": 13307,
+      "total": 1390
+    },
+    "event_count": 857,
+    "leading_segment_reference": {
+      "available_events": 470,
+      "prefix_rate": 0.4553191489361702,
+      "substring_rate": 0.6446808510638298
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 468,
+    "row_fraction_with_resolved_discard": 0.5529595015576324,
+    "rows_with_boundary_event": 542,
+    "rows_with_resolved_discard": 355,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 0.847887323943662,
+        "compile_passed": 301,
+        "pass_rate": 0.49295774647887325,
+        "passed": 175,
+        "rows": 355
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.8257839721254355,
+        "compile_passed": 237,
+        "pass_rate": 0.3693379790940767,
+        "passed": 106,
+        "rows": 287
+      }
+    }
+  },
+  "full_authorization_note": "The original A Pilot30 result was 14/30, below the preregistered 18/30 Full threshold. This Full642 was subsequently requested explicitly and is a post-hoc development/mechanism diagnostic, not a preregistered performance claim.",
+  "paired": {
+    "vs_b_nonempty_oracle": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 346,
+      "both_pass": 265,
+      "candidate_losses": 15,
+      "candidate_task_macro_pass_rate": 0.4116894988122609,
+      "candidate_wins": 16,
+      "cluster_bootstrap_95_ci": [
+        -0.020864441324010306,
+        0.026033890058703418
+      ],
+      "compile_harm": 6,
+      "compile_help": 73,
+      "control_task_macro_pass_rate": 0.42463058301932993,
+      "exact_match_harm": 9,
+      "exact_match_help": 0,
+      "mcnemar_exact_p": 1.0,
+      "net_wins": 1,
+      "row_bootstrap_95_ci": [
+        -0.01557632398753894,
+        0.018691588785046728
+      ],
+      "row_delta": 0.001557632398753894,
+      "task_macro_delta": -0.01294108420706902
+    },
+    "vs_one_shot": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 247,
+      "both_pass": 187,
+      "candidate_losses": 114,
+      "candidate_task_macro_pass_rate": 0.4116894988122609,
+      "candidate_wins": 94,
+      "cluster_bootstrap_95_ci": [
+        -0.08739470036910163,
+        0.02473197249906728
+      ],
+      "compile_harm": 103,
+      "compile_help": 3,
+      "control_task_macro_pass_rate": 0.439527174066816,
+      "exact_match_harm": 43,
+      "exact_match_help": 57,
+      "mcnemar_exact_p": 0.18757084637406302,
+      "net_wins": -20,
+      "row_bootstrap_95_ci": [
+        -0.07476635514018691,
+        0.012461059190031152
+      ],
+      "row_delta": -0.03115264797507788,
+      "task_macro_delta": -0.027837675254555105
+    },
+    "vs_v1_progressive": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 266,
+      "both_pass": 221,
+      "candidate_losses": 95,
+      "candidate_task_macro_pass_rate": 0.4116894988122609,
+      "candidate_wins": 60,
+      "cluster_bootstrap_95_ci": [
+        -0.09683528282122904,
+        -0.01393188854489164
+      ],
+      "compile_harm": 77,
+      "compile_help": 30,
+      "control_task_macro_pass_rate": 0.464588726136041,
+      "exact_match_harm": 47,
+      "exact_match_help": 22,
+      "mcnemar_exact_p": 0.006132892626972144,
+      "net_wins": -35,
+      "row_bootstrap_95_ci": [
+        -0.09345794392523364,
+        -0.017133956386292833
+      ],
+      "row_delta": -0.05451713395638629,
+      "task_macro_delta": -0.05289922732378011
+    },
+    "vs_v2_hard_v1_multifactor": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 42,
+      "both_fail": 360,
+      "both_pass": 6,
+      "candidate_losses": 1,
+      "candidate_task_macro_pass_rate": 0.4116894988122609,
+      "candidate_wins": 275,
+      "cluster_bootstrap_95_ci": [
+        0.3760513961719811,
+        0.47972560048646995
+      ],
+      "compile_harm": 0,
+      "compile_help": 492,
+      "control_task_macro_pass_rate": 0.014106280193236715,
+      "exact_match_harm": 1,
+      "exact_match_help": 95,
+      "mcnemar_exact_p": 4.562795047304461e-81,
+      "net_wins": 274,
+      "row_bootstrap_95_ci": [
+        0.3878504672897196,
+        0.4657320872274143
+      ],
+      "row_delta": 0.42679127725856697,
+      "task_macro_delta": 0.3975832186190242
+    }
+  },
+  "population_role": "exact-three-line development/mechanism population; A Full was run post-hoc by explicit user authorization after failing the preregistered Pilot30 performance gate; not held-out",
+  "result": {
+    "blank_region_count": 187,
+    "blank_slot_rows": 137,
+    "budget_draining_loop_count": 10601,
+    "budget_draining_loop_rows": 129,
+    "budget_exhausted_rows": 138,
+    "compile_pass_rate": 0.838006230529595,
+    "compile_passed": 538,
+    "completed_only": {
+      "compile_pass_rate": 0.838006230529595,
+      "compile_passed": 538,
+      "exact_match_rate": 0.15109034267912771,
+      "exact_matches": 97,
+      "pass_rate": 0.43769470404984423,
+      "passed": 281
+    },
+    "completed_rows": 642,
+    "completion_physical_lines": {
+      "distribution": {
+        "3": 642
+      },
+      "mean": 3
+    },
+    "completion_rate": 1.0,
+    "completion_tokens": {
+      "mean": 21.121495327102803,
+      "median": 20.0
+    },
+    "cross_region_delete_attempts": 0,
+    "delete_count": 5081,
+    "discarded_masks_after_boundary": 4948,
+    "discarded_resolved_tokens_after_boundary": 1673,
+    "exact_cycle_count": 0,
+    "exact_match_rate": 0.15109034267912771,
+    "exact_matches": 97,
+    "expand_budget_consumed": {
+      "distribution": {
+        "0": 14,
+        "1": 18,
+        "10": 25,
+        "11": 17,
+        "12": 19,
+        "13": 13,
+        "14": 14,
+        "15": 18,
+        "16": 13,
+        "17": 9,
+        "18": 13,
+        "19": 19,
+        "2": 14,
+        "20": 10,
+        "21": 13,
+        "22": 12,
+        "23": 4,
+        "24": 4,
+        "25": 12,
+        "26": 9,
+        "27": 3,
+        "28": 6,
+        "29": 8,
+        "3": 12,
+        "30": 4,
+        "31": 7,
+        "32": 5,
+        "33": 7,
+        "34": 3,
+        "35": 3,
+        "36": 5,
+        "37": 1,
+        "38": 5,
+        "39": 4,
+        "4": 19,
+        "41": 2,
+        "42": 1,
+        "43": 5,
+        "44": 2,
+        "45": 3,
+        "46": 3,
+        "48": 1,
+        "5": 16,
+        "50": 2,
+        "51": 2,
+        "52": 2,
+        "53": 1,
+        "54": 1,
+        "55": 1,
+        "56": 4,
+        "58": 4,
+        "6": 23,
+        "61": 1,
+        "64": 138,
+        "7": 23,
+        "8": 26,
+        "9": 19
+      },
+      "max": 64,
+      "mean": 26.752336448598133,
+      "median": 18.0
+    },
+    "expand_count": 17175,
+    "expand_logit_blocked_by_budget_count": 3865,
+    "forward_cap_count": 0,
+    "forwards": {
+      "max": 140,
+      "mean": 55.666666666666664,
+      "median": 40.0,
+      "total": 35738
+    },
+    "global_expand_cap_hits": 34,
+    "max_masks_deleted_by_one_eos": 25,
+    "mixed_newline_token_events": 1042,
+    "multiple_newline_token_events": 13,
+    "newline_boundary_events": 1221,
+    "nonempty_guard_no_valid_action_rows": 0,
+    "nonempty_guard_rejection_count": 0,
+    "nonempty_guard_triggered_rows": 0,
+    "num_base_problems": 115,
+    "num_samples": 642,
+    "pass_rate": 0.43769470404984423,
+    "passed": 281,
+    "peak_cuda_memory_bytes": {
+      "max": 15819467264,
+      "mean": 15521998197.233644
+    },
+    "protocol_error_count": 0,
+    "pure_newline_token_events": 179,
+    "region_local_eos_deleted_masks": 6449,
+    "region_local_eos_events": 5081,
+    "runtime_error_count": 0,
+    "slot_expand_cap_hits": 388,
+    "task_macro_pass_rate": 0.41168949881226097,
+    "token_forwards": {
+      "max": 75415,
+      "mean": 14215.985981308411,
+      "median": 9395.0,
+      "total": 9126663
+    },
+    "unresolved_mask_count": 0,
+    "wall_time_seconds": {
+      "max": 27.10482344799675,
+      "mean": 4.209084277254685,
+      "median": 2.8114737205323763,
+      "total": 2702.2321059975075
+    }
+  }
+}

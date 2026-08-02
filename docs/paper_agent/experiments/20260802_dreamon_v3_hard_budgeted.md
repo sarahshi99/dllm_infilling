@@ -13,10 +13,10 @@ Pinned source: DreamOn commit `8a0a54918412eda9402a327646f7f067f7160ec8`, `eval/
 
 ## Verification
 
-- Focused and legacy suite: `106 passed`.
+- Fresh focused and legacy suite before post-hoc Full: `109 passed`.
 - `py_compile`: passed.
 - Shell syntax: passed.
-- Source scan: no BoundaryShift, AST repair, nonempty guard, retry, or fallback in A.
+- Source scan: no BoundaryShift, AST repair, retry, or fallback; the shared runner enables nonempty guard only for B, while A protocol/config keeps `nonempty_guard=false`.
 - Protocol SHA256: `8a54392fbbd136f243a485baeccbee8016a33d29a381cfdacf45adde69860dea`.
 - Cycle5 manifest SHA256: `9d4922c330937e0e685061d00006b58419e4bbcbe8b2a09f26add474ebe2d263`.
 
@@ -46,10 +46,32 @@ Five rows exhausted the budget; all five completed, four compiled, and three pas
 
 ## Gate decision
 
-Engineering gate passed. The only Full authorization criterion was overall `Pass@1 >= 18/30`; observed Pass@1 was `14/30`. Therefore A Full642 is not authorized and was not started. The next authorized action is B (`v3_hard_budgeted_nonempty_oracle`), derived from this frozen A implementation by adding only the nonempty guard.
+Engineering gate passed. The only preregistered Full authorization criterion was overall `Pass@1 >= 18/30`; observed Pass@1 was `14/30`. Therefore A Full642 was not authorized in the original A/B execution, and B (`v3_hard_budgeted_nonempty_oracle`) proceeded independently under its own gate.
+
+The user later explicitly requested A Full642 so that A and B could be compared on the complete frozen population. That later run is preserved as a post-hoc development/mechanism diagnostic; it does not retroactively change the failed Pilot30 gate or become a preregistered performance claim.
+
+## Post-hoc Full642
+
+| Metric | V3-Budgeted |
+|---|---:|
+| Completed | 642/642 |
+| Pass@1 | 281/642 (43.77%) |
+| Compile | 538/642 (83.80%) |
+| Exact match | 97/642 (15.11%) |
+| Task-macro Pass@1 | 41.17% |
+| Blank-slot rows | 137/642 |
+| Cycle / forward cap / runtime / protocol | 0 / 0 / 0 / 0 |
+
+Against one-shot, A has 94 wins / 114 losses, McNemar `p=0.1876`, clustered 95% CI `[-8.74pp, +2.47pp]`, and task-macro delta `-2.78pp`. Against historical V1 progressive, A has 60 wins / 95 losses, McNemar `p=0.00613`, clustered 95% CI `[-9.68pp, -1.39pp]`, and task-macro delta `-5.29pp`.
+
+B versus A is 15 wins / 16 losses, McNemar `p=1.0`, clustered 95% CI `[-2.60pp, +2.09pp]`. B removes all 137 A blank-slot rows but reduces compile from 538 to 471, raises exact match from 97 to 106, and changes overall Pass from 281 to 280. The other 505 rows match A exactly on completion, score, action counters, budget, forwards, and token-forwards.
+
+A used 35,738 forwards, 9,126,663 token-forwards, and 2,702.23 seconds generation wall time. These data support A as the cleaner budget-fidelity control, but A remains below one-shot and V1 on this development/mechanism population.
 
 ## Artifacts
 
 - Protocol: `repro_results/dreamon_progressive_v3_hard_budgeted_protocol/`
 - Cycle5: `repro_results/dreamon_progressive_v3_hard_budgeted_cycle5/`
 - Pilot30: `repro_results/dreamon_progressive_v3_hard_budgeted_pilot30/`
+- Post-hoc Full642: `repro_results/dreamon_progressive_v3_hard_budgeted_all642/`
+- A/B comparison: `repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/`

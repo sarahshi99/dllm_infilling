@@ -1,0 +1,21 @@
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 642,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_hard_budgeted",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 642,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 642,
+  "score_rows": 642,
+  "score_unique_task_ids": 642,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "full",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}

@@ -325,6 +325,20 @@
       "compile_passed": 23,
       "full_authorized": false
     },
+    "a_full_posthoc": {
+      "method": "v3_hard_budgeted",
+      "original_pilot_full_gate_passed": false,
+      "later_explicit_user_authorization": true,
+      "rows": 642,
+      "completed": 642,
+      "passed": 281,
+      "compile_passed": 538,
+      "exact_matches": 97,
+      "task_macro_pass_rate": 0.41168949881226097,
+      "blank_slot_rows": 137,
+      "protocol_runtime_terminal_failures": 0,
+      "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_all642/full_analysis.json"
+    },
     "b_full": {
       "method": "v3_hard_budgeted_nonempty_oracle",
       "oracle_structural_diagnostic": true,
@@ -339,6 +353,23 @@
       "paired_net_vs_one_shot": -21,
       "paired_net_vs_v1": -36,
       "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json"
+    },
+    "ab_full_comparison": {
+      "b_wins": 15,
+      "b_losses": 16,
+      "mcnemar_exact_p": 1.0,
+      "cluster_bootstrap_95_ci": [
+        -0.02603389005870342,
+        0.020864441324010306
+      ],
+      "b_compile_help": 6,
+      "b_compile_harm": 73,
+      "b_exact_help": 9,
+      "b_exact_harm": 0,
+      "a_blank_slot_rows": 137,
+      "guard_triggered_rows": 137,
+      "inactive_exact_match_rows": 505,
+      "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/comparison_summary.json"
     }
   },
   "current_checkpoint_long_sweep": {

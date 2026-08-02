@@ -935,6 +935,26 @@
     "population_role": "development/mechanism pilot"
   },
   {
+    "run_id": "v3_hard_budgeted_full642_posthoc_20260802",
+    "experiment_name": "dreamon_progressive_v3_hard_budgeted_full_posthoc",
+    "status": "completed_posthoc_diagnostic",
+    "raw_path": "repro_results/dreamon_progressive_v3_hard_budgeted_all642",
+    "has_summary": true,
+    "model": "Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194",
+    "sample_count": 642,
+    "pass_count": 281,
+    "pass_rate": 0.43769470404984423,
+    "compile_count": 538,
+    "completion_count": 642,
+    "exact_match_count": 97,
+    "protocol_version": 3,
+    "original_pilot_full_gate_passed": false,
+    "later_explicit_user_authorization": true,
+    "deployable": false,
+    "held_out": false,
+    "population_role": "post-hoc development/mechanism full"
+  },
+  {
     "run_id": "v3_hard_budgeted_nonempty_oracle_pilot30_20260802",
     "experiment_name": "dreamon_progressive_v3_hard_budgeted_nonempty_oracle_pilot",
     "status": "full_authorized",

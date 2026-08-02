@@ -1,0 +1,36 @@
+{
+  "diagnostic_only_checks": {
+    "blank_slot_rows": 137,
+    "budget_draining_loop_count": 10601,
+    "budget_exhausted_rows": 138,
+    "compile_passed": 538,
+    "completed_rows": 642,
+    "exact_cycles": 0,
+    "exact_matches": 97,
+    "forward_caps": 0,
+    "passed": 281
+  },
+  "engineering_checks": {
+    "all_required_diagnostic_fields": true,
+    "budget_bounds_all_rows": true,
+    "budget_conservation_all_rows": true,
+    "budget_draining_events_nonterminal": true,
+    "completeness_audit": true,
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "resume_dedup_config_audit": true,
+    "terminal_failures_explicit_and_empty": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_invariant_errors": true,
+    "zero_runtime_errors": true,
+    "zero_silent_unresolved_acceptance": true
+  },
+  "engineering_gate_passed": true,
+  "full_authorized": false,
+  "method": "v3_hard_budgeted",
+  "pass_at_least_18": null,
+  "passed": true,
+  "recorded_at_utc": "2026-08-02T13:22:02.709079+00:00",
+  "stage": "full"
+}

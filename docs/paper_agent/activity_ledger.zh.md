@@ -327,5 +327,6 @@
 ## 2026-08-02 UTC DreamOn V3 iterate_and_execute
 
 - action：完成 A official cumulative budget 与 B oracle nonempty guard 的测试、Cycle5/Affected6、Pilot 和获授权 Full。
-- result：A Pilot 14/30，未跑 Full；B Pilot 18/30；B Full 280/642 Pass、471/642 compile、642/642 completed、0 protocol/runtime failure。
-- interpretation：budget 解释旧 cycle 误终止，nonempty 解释部分 blank failure；剩余错误未被两者解释。B 低于 one-shot/V1，decision=`reframe`。
+- result：A Pilot 14/30，原始门槛未授权 Full；后续按用户明确授权补跑 post-hoc A Full，结果 281/642 Pass、538/642 compile。B Pilot 18/30；B Full 280/642 Pass、471/642 compile。两者均 642/642 completed、0 protocol/runtime failure。
+- comparison：B vs A 15/16 wins/losses，compile help/harm 6/73，exact help/harm 9/0；guard 恰好覆盖 A 的 137 个 blank rows，其余 505 条完全一致，B 多用 25.04% token-forwards。
+- interpretation：budget 解释旧 cycle 误终止；nonempty 修复表面空行但没有功能收益，并引入 compile/compute 代价。decision=`reframe`。
