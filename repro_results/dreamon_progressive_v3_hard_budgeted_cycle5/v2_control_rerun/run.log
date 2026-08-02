@@ -1,0 +1,123 @@
+method=v2_hard_v2_boundary stage=cycle5 selected=5 completed=0 remaining=5 config_hash=faa19f591b34ad1db9d48b126c18e670394db5e9063bdb0861dc101ec8d359f9
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 11.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 11.65it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 11.54it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/5] MultiLineInfilling/HumanEval/1/L6_L8 start
+[1/5] MultiLineInfilling/HumanEval/1/L6_L8 done status=protocol_error forwards=31 token_forwards=6148 wall=2.257s
+[2/5] MultiLineInfilling/HumanEval/5/L5_L7 start
+[2/5] MultiLineInfilling/HumanEval/5/L5_L7 done status=protocol_error forwards=40 token_forwards=5318 wall=2.023s
+[3/5] MultiLineInfilling/HumanEval/6/L3_L5 start
+[3/5] MultiLineInfilling/HumanEval/6/L3_L5 done status=protocol_error forwards=41 token_forwards=7769 wall=2.672s
+[4/5] MultiLineInfilling/HumanEval/9/L4_L6 start
+[4/5] MultiLineInfilling/HumanEval/9/L4_L6 done status=protocol_error forwards=21 token_forwards=3179 wall=1.119s
+[5/5] MultiLineInfilling/HumanEval/11/L1_L3 start
+[5/5] MultiLineInfilling/HumanEval/11/L1_L3 done status=protocol_error forwards=25 token_forwards=3207 wall=1.218s
+progress completed=5/5 avg_wall=1.858s avg_forwards=31.60 token_forwards=25621 terminal_failures=0 method_failures=5 violations=0 eta_seconds=0.0
+scored 5/5
+{
+  "num_samples": 5,
+  "num_base_problems": 5,
+  "passed": 0,
+  "pass_rate": 0.0,
+  "compile_passed": 0,
+  "compile_pass_rate": 0.0,
+  "exact_matches": 0,
+  "exact_match_rate": 0.0,
+  "task_macro_pass_rate": 0.0,
+  "completion_rate": 0.0,
+  "completed_rows": 0,
+  "completed_only": {
+    "passed": 0,
+    "pass_rate": null,
+    "compile_passed": 0,
+    "compile_pass_rate": null,
+    "exact_matches": 0,
+    "exact_match_rate": null
+  },
+  "completion_tokens": {
+    "mean": 0,
+    "median": 0
+  },
+  "completion_physical_lines": {
+    "mean": 0,
+    "distribution": {
+      "0": 5
+    }
+  },
+  "blank_region_count": 0,
+  "blank_slot_rows": 0,
+  "expand_count": 70,
+  "delete_count": 7,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 10,
+  "protocol_error_count": 5,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 5,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 0,
+  "budget_draining_loop_rows": 0,
+  "budget_draining_loop_count": 0,
+  "expand_logit_blocked_by_budget_count": 0,
+  "expand_budget_consumed": {
+    "mean": null,
+    "median": null,
+    "max": null,
+    "distribution": {}
+  },
+  "newline_boundary_events": 9,
+  "mixed_newline_token_events": 8,
+  "pure_newline_token_events": 1,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 31,
+  "discarded_resolved_tokens_after_boundary": 9,
+  "region_local_eos_events": 7,
+  "region_local_eos_deleted_masks": 8,
+  "max_masks_deleted_by_one_eos": 2,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 31.6,
+    "median": 31,
+    "max": 41,
+    "total": 158
+  },
+  "token_forwards": {
+    "mean": 5124.2,
+    "median": 5318,
+    "max": 7769,
+    "total": 25621
+  },
+  "wall_time_seconds": {
+    "mean": 1.8577038585906849,
+    "median": 2.0228162630228326,
+    "max": 2.672291329014115,
+    "total": 9.288519292953424
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15425259212.8,
+    "max": 15456385024
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "faa19f591b34ad1db9d48b126c18e670394db5e9063bdb0861dc101ec8d359f9",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 5,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v2_hard_v2_boundary",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 5,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 5,
+  "score_rows": 5,
+  "score_unique_task_ids": 5,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "cycle5",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 5
+}

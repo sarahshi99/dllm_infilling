@@ -1,0 +1,148 @@
+{
+  "boundary_events_with_left_masks_remaining": 24,
+  "boundary_retokenized_left_token_count": 52,
+  "budget_draining_loop_count": 475,
+  "budget_draining_loop_rows": 5,
+  "budget_exhausted_rows": 5,
+  "cross_region_delete_attempts": 0,
+  "discard_reference_summary": {
+    "complete_text_reference": {
+      "available_events": 3,
+      "exact_match_rate": 0.6666666666666666,
+      "prefix_rate": 0.6666666666666666,
+      "substring_rate": 0.6666666666666666
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.07664233576642336,
+      "mean_per_event": 1.2727272727272727,
+      "median_per_event": 1,
+      "normal_generated_token_denominator": 548,
+      "total": 42
+    },
+    "event_count": 33,
+    "leading_segment_reference": {
+      "available_events": 18,
+      "prefix_rate": 0.16666666666666666,
+      "substring_rate": 0.5555555555555556
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 18,
+    "row_fraction_with_resolved_discard": 0.5,
+    "rows_with_boundary_event": 25,
+    "rows_with_resolved_discard": 15,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 0.8666666666666667,
+        "compile_passed": 13,
+        "pass_rate": 0.6666666666666666,
+        "passed": 10,
+        "rows": 15
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.6666666666666666,
+        "compile_passed": 10,
+        "pass_rate": 0.26666666666666666,
+        "passed": 4,
+        "rows": 15
+      }
+    }
+  },
+  "discarded_masks_after_boundary": 197,
+  "discarded_resolved_tokens_after_boundary": 55,
+  "exact_cycle_rows": 0,
+  "expand_budget_conservation_failures": 0,
+  "expand_logit_blocked_by_budget_count": 20,
+  "first_selected_region_distribution": {
+    "HARD_SLOT_0": 30
+  },
+  "hard_forbidden_newline_attempts": 0,
+  "joint_updates_before_slot0_complete": 0,
+  "max_masks_deleted_by_one_eos": 4,
+  "method": "v3_hard_budgeted",
+  "mixed_newline_token_events": 51,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 57,
+  "protocol_flag_distribution": {},
+  "pure_newline_token_events": 6,
+  "region_final_length_distributions": {
+    "HARD_SLOT_0": {
+      "0": 1,
+      "3": 1,
+      "4": 3,
+      "5": 5,
+      "6": 11,
+      "7": 4,
+      "8": 3,
+      "10": 2
+    },
+    "HARD_SLOT_1": {
+      "0": 1,
+      "3": 2,
+      "4": 2,
+      "5": 7,
+      "6": 12,
+      "7": 2,
+      "9": 1,
+      "10": 1,
+      "11": 2
+    },
+    "HARD_SLOT_2": {
+      "0": 4,
+      "3": 4,
+      "4": 1,
+      "5": 6,
+      "6": 13,
+      "7": 1,
+      "8": 1
+    }
+  },
+  "region_local_eos_deleted_masks": 231,
+  "region_local_eos_events": 224,
+  "slot_expand_distributions": {
+    "HARD_SLOT_0": {
+      "0": 2,
+      "1": 5,
+      "2": 3,
+      "3": 1,
+      "4": 1,
+      "5": 4,
+      "6": 4,
+      "8": 3,
+      "9": 2,
+      "10": 1,
+      "11": 1,
+      "12": 2,
+      "18": 1
+    },
+    "HARD_SLOT_1": {
+      "0": 2,
+      "1": 5,
+      "2": 7,
+      "3": 1,
+      "4": 4,
+      "5": 1,
+      "6": 2,
+      "7": 4,
+      "8": 3,
+      "9": 1
+    },
+    "HARD_SLOT_2": {
+      "0": 3,
+      "1": 7,
+      "2": 7,
+      "3": 1,
+      "4": 3,
+      "6": 1,
+      "7": 3,
+      "50": 2,
+      "56": 1,
+      "58": 1,
+      "61": 1
+    }
+  },
+  "stage": "pilot",
+  "status_distribution": {
+    "completed": 30
+  },
+  "tail_multiline_rows": 0
+}

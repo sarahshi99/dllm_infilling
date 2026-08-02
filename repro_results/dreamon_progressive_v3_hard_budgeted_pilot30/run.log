@@ -1,0 +1,232 @@
+stage_started_at=2026-08-02T07:41:06+00:00 method=v3_hard_budgeted stage=pilot head=930b590efbcb7c673a4580ca5c1336e58b9e78da
+method=v3_hard_budgeted stage=pilot selected=30 completed=0 remaining=30 config_hash=54808ea22c02e9974fe6b19c254ce8523c3215dc3a7494a923edb59508f1b47e
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 12.07it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 13.10it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.92it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/30] MultiLineInfilling/HumanEval/0/L0_L2 start
+[1/30] MultiLineInfilling/HumanEval/0/L0_L2 done status=completed forwards=22 token_forwards=3533 wall=1.472s
+[2/30] MultiLineInfilling/HumanEval/0/L1_L3 start
+[2/30] MultiLineInfilling/HumanEval/0/L1_L3 done status=completed forwards=39 token_forwards=6481 wall=2.298s
+[3/30] MultiLineInfilling/HumanEval/0/L2_L4 start
+[3/30] MultiLineInfilling/HumanEval/0/L2_L4 done status=completed forwards=46 token_forwards=7853 wall=2.536s
+[4/30] MultiLineInfilling/HumanEval/0/L3_L5 start
+[4/30] MultiLineInfilling/HumanEval/0/L3_L5 done status=completed forwards=29 token_forwards=4973 wall=1.600s
+[5/30] MultiLineInfilling/HumanEval/1/L0_L2 start
+[5/30] MultiLineInfilling/HumanEval/1/L0_L2 done status=completed forwards=27 token_forwards=5425 wall=1.603s
+[6/30] MultiLineInfilling/HumanEval/1/L4_L6 start
+[6/30] MultiLineInfilling/HumanEval/1/L4_L6 done status=completed forwards=44 token_forwards=8816 wall=2.956s
+[7/30] MultiLineInfilling/HumanEval/1/L5_L7 start
+[7/30] MultiLineInfilling/HumanEval/1/L5_L7 done status=completed forwards=28 token_forwards=5540 wall=1.707s
+[8/30] MultiLineInfilling/HumanEval/1/L6_L8 start
+[8/30] MultiLineInfilling/HumanEval/1/L6_L8 done status=completed forwards=139 token_forwards=27802 wall=8.011s
+[9/30] MultiLineInfilling/HumanEval/1/L7_L9 start
+[9/30] MultiLineInfilling/HumanEval/1/L7_L9 done status=completed forwards=40 token_forwards=7966 wall=2.504s
+[10/30] MultiLineInfilling/HumanEval/1/L8_L10 start
+[10/30] MultiLineInfilling/HumanEval/1/L8_L10 done status=completed forwards=29 token_forwards=5714 wall=1.676s
+[11/30] MultiLineInfilling/HumanEval/1/L12_L14 start
+[11/30] MultiLineInfilling/HumanEval/1/L12_L14 done status=completed forwards=42 token_forwards=8399 wall=2.724s
+[12/30] MultiLineInfilling/HumanEval/3/L2_L4 start
+[12/30] MultiLineInfilling/HumanEval/3/L2_L4 done status=completed forwards=22 token_forwards=3239 wall=1.163s
+[13/30] MultiLineInfilling/HumanEval/3/L3_L5 start
+[13/30] MultiLineInfilling/HumanEval/3/L3_L5 done status=completed forwards=26 token_forwards=3906 wall=1.295s
+[14/30] MultiLineInfilling/HumanEval/5/L5_L7 start
+[14/30] MultiLineInfilling/HumanEval/5/L5_L7 done status=completed forwards=134 token_forwards=17961 wall=6.354s
+[15/30] MultiLineInfilling/HumanEval/6/L0_L2 start
+[15/30] MultiLineInfilling/HumanEval/6/L0_L2 done status=completed forwards=31 token_forwards=5896 wall=1.848s
+[16/30] MultiLineInfilling/HumanEval/6/L1_L3 start
+[16/30] MultiLineInfilling/HumanEval/6/L1_L3 done status=completed forwards=20 token_forwards=3794 wall=1.137s
+[17/30] MultiLineInfilling/HumanEval/6/L2_L4 start
+[17/30] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=32 token_forwards=6099 wall=2.050s
+[18/30] MultiLineInfilling/HumanEval/6/L3_L5 start
+[18/30] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=88 token_forwards=16720 wall=5.122s
+[19/30] MultiLineInfilling/HumanEval/6/L4_L6 start
+[19/30] MultiLineInfilling/HumanEval/6/L4_L6 done status=completed forwards=23 token_forwards=4304 wall=1.305s
+[20/30] MultiLineInfilling/HumanEval/6/L5_L7 start
+[20/30] MultiLineInfilling/HumanEval/6/L5_L7 done status=completed forwards=38 token_forwards=7350 wall=2.281s
+[21/30] MultiLineInfilling/HumanEval/6/L6_L8 start
+[21/30] MultiLineInfilling/HumanEval/6/L6_L8 done status=completed forwards=39 token_forwards=7597 wall=2.426s
+[22/30] MultiLineInfilling/HumanEval/8/L3_L5 start
+[22/30] MultiLineInfilling/HumanEval/8/L3_L5 done status=completed forwards=26 token_forwards=3860 wall=1.287s
+[23/30] MultiLineInfilling/HumanEval/8/L4_L6 start
+[23/30] MultiLineInfilling/HumanEval/8/L4_L6 done status=completed forwards=22 token_forwards=3201 wall=1.100s
+[24/30] MultiLineInfilling/HumanEval/9/L3_L5 start
+[24/30] MultiLineInfilling/HumanEval/9/L3_L5 done status=completed forwards=26 token_forwards=3891 wall=1.305s
+[25/30] MultiLineInfilling/HumanEval/9/L4_L6 start
+[25/30] MultiLineInfilling/HumanEval/9/L4_L6 done status=completed forwards=139 token_forwards=21056 wall=6.757s
+progress completed=25/30 avg_wall=2.581s avg_forwards=46.04 token_forwards=201376 terminal_failures=0 method_failures=0 violations=0 eta_seconds=12.9
+[26/30] MultiLineInfilling/HumanEval/9/L5_L7 start
+[26/30] MultiLineInfilling/HumanEval/9/L5_L7 done status=completed forwards=28 token_forwards=4203 wall=1.457s
+[27/30] MultiLineInfilling/HumanEval/11/L0_L2 start
+[27/30] MultiLineInfilling/HumanEval/11/L0_L2 done status=completed forwards=31 token_forwards=3916 wall=1.473s
+[28/30] MultiLineInfilling/HumanEval/11/L1_L3 start
+[28/30] MultiLineInfilling/HumanEval/11/L1_L3 done status=completed forwards=136 token_forwards=17360 wall=6.264s
+[29/30] MultiLineInfilling/HumanEval/11/L2_L4 start
+[29/30] MultiLineInfilling/HumanEval/11/L2_L4 done status=completed forwards=9 token_forwards=1143 wall=0.446s
+[30/30] MultiLineInfilling/HumanEval/12/L3_L5 start
+[30/30] MultiLineInfilling/HumanEval/12/L3_L5 done status=completed forwards=43 token_forwards=5793 wall=2.431s
+progress completed=30/30 avg_wall=2.553s avg_forwards=46.60 token_forwards=233791 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 30/30
+{
+  "num_samples": 30,
+  "num_base_problems": 9,
+  "passed": 14,
+  "pass_rate": 0.4666666666666667,
+  "compile_passed": 23,
+  "compile_pass_rate": 0.7666666666666667,
+  "exact_matches": 7,
+  "exact_match_rate": 0.23333333333333334,
+  "task_macro_pass_rate": 0.49074074074074076,
+  "completion_rate": 1.0,
+  "completed_rows": 30,
+  "completed_only": {
+    "passed": 14,
+    "pass_rate": 0.4666666666666667,
+    "compile_passed": 23,
+    "compile_pass_rate": 0.7666666666666667,
+    "exact_matches": 7,
+    "exact_match_rate": 0.23333333333333334
+  },
+  "completion_tokens": {
+    "mean": 19.433333333333334,
+    "median": 20.0
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 30
+    }
+  },
+  "blank_region_count": 6,
+  "blank_slot_rows": 6,
+  "expand_count": 621,
+  "delete_count": 224,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 5,
+  "budget_draining_loop_rows": 5,
+  "budget_draining_loop_count": 475,
+  "expand_logit_blocked_by_budget_count": 20,
+  "expand_budget_consumed": {
+    "mean": 20.7,
+    "median": 13.0,
+    "max": 64,
+    "distribution": {
+      "0": 1,
+      "5": 2,
+      "7": 3,
+      "8": 1,
+      "9": 5,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "14": 1,
+      "16": 1,
+      "17": 3,
+      "18": 1,
+      "19": 1,
+      "20": 1,
+      "21": 1,
+      "25": 1,
+      "64": 5
+    }
+  },
+  "newline_boundary_events": 57,
+  "mixed_newline_token_events": 51,
+  "pure_newline_token_events": 6,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 197,
+  "discarded_resolved_tokens_after_boundary": 55,
+  "region_local_eos_events": 224,
+  "region_local_eos_deleted_masks": 231,
+  "max_masks_deleted_by_one_eos": 4,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 46.6,
+    "median": 31.0,
+    "max": 139,
+    "total": 1398
+  },
+  "token_forwards": {
+    "mean": 7793.033333333334,
+    "median": 5753.5,
+    "max": 27802,
+    "total": 233791
+  },
+  "wall_time_seconds": {
+    "mean": 2.552815364371054,
+    "median": 1.777837521978654,
+    "max": 8.011333606089465,
+    "total": 76.58446093113162
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15435585416.533333,
+    "max": 15506802688
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "54808ea22c02e9974fe6b19c254ce8523c3215dc3a7494a923edb59508f1b47e",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 30,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_hard_budgeted",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 30,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 30,
+  "score_rows": 30,
+  "score_unique_task_ids": 30,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "pilot",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+{
+  "method": "v3_hard_budgeted",
+  "stage": "pilot",
+  "passed": true,
+  "engineering_gate_passed": true,
+  "pass_at_least_18": false,
+  "full_authorized": false,
+  "engineering_checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_runtime_errors": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_silent_unresolved_acceptance": true,
+    "terminal_failures_explicit_and_empty": true,
+    "budget_conservation_all_rows": true,
+    "budget_bounds_all_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "budget_draining_events_nonterminal": true,
+    "resume_dedup_config_audit": true
+  },
+  "diagnostic_only_checks": {
+    "completed_rows": 30,
+    "compile_passed": 23,
+    "passed": 14,
+    "exact_matches": 7,
+    "blank_slot_rows": 6,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "budget_exhausted_rows": 5,
+    "budget_draining_loop_count": 475
+  },
+  "recorded_at_utc": "2026-08-02T07:42:36.250317+00:00"
+}
+method=v3_hard_budgeted stage=pilot selected=30 completed=30 remaining=0 config_hash=54808ea22c02e9974fe6b19c254ce8523c3215dc3a7494a923edb59508f1b47e
+deterministic_resume_equality=passed rows=30 sha256=0b4c74198a54914812f9cf8cf61862f0584ee9e71d56b514abfa17fae59eb807
+stage_finished_at=2026-08-02T07:42:38+00:00 method=v3_hard_budgeted stage=pilot

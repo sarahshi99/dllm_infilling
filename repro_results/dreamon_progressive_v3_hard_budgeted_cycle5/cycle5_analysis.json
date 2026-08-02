@@ -1,0 +1,79 @@
+{
+  "method": "v3_hard_budgeted",
+  "stage": "cycle5",
+  "role": "post-hoc mechanism falsification diagnostic; not independent performance evidence",
+  "engineering_gate_passed": true,
+  "rows": 5,
+  "completed": 5,
+  "passed": 3,
+  "compile_passed": 4,
+  "exact_matches": 2,
+  "runtime_errors": 0,
+  "invariant_errors": 0,
+  "exact_cycles": 0,
+  "forward_caps": 0,
+  "budget_conservation_failures": 0,
+  "budget_exhausted_rows": 5,
+  "budget_draining_loop_rows": 5,
+  "budget_draining_loop_events": 475,
+  "all_v2_control_reruns_match_historical_v2_terminal_state": true,
+  "all_v3_trajectories_match_v2_through_old_stop": true,
+  "rows_detail": [
+    {
+      "task_id": "MultiLineInfilling/HumanEval/1/L6_L8",
+      "old_v2_stop_forward": 31,
+      "remaining_budget_at_old_stop": 54,
+      "budget_exhausted_forward": 138,
+      "v3_total_forwards": 139,
+      "first_budget_blocked_action": "line_boundary",
+      "completed": true,
+      "compile_passed": true,
+      "passed": true
+    },
+    {
+      "task_id": "MultiLineInfilling/HumanEval/5/L5_L7",
+      "old_v2_stop_forward": 40,
+      "remaining_budget_at_old_stop": 46,
+      "budget_exhausted_forward": 132,
+      "v3_total_forwards": 134,
+      "first_budget_blocked_action": "region_local_eos",
+      "completed": true,
+      "compile_passed": true,
+      "passed": true
+    },
+    {
+      "task_id": "MultiLineInfilling/HumanEval/6/L3_L5",
+      "old_v2_stop_forward": 41,
+      "remaining_budget_at_old_stop": 38,
+      "budget_exhausted_forward": 86,
+      "v3_total_forwards": 88,
+      "first_budget_blocked_action": "line_boundary",
+      "completed": true,
+      "compile_passed": true,
+      "passed": false
+    },
+    {
+      "task_id": "MultiLineInfilling/HumanEval/9/L4_L6",
+      "old_v2_stop_forward": 21,
+      "remaining_budget_at_old_stop": 58,
+      "budget_exhausted_forward": 137,
+      "v3_total_forwards": 139,
+      "first_budget_blocked_action": "region_local_eos",
+      "completed": true,
+      "compile_passed": false,
+      "passed": false
+    },
+    {
+      "task_id": "MultiLineInfilling/HumanEval/11/L1_L3",
+      "old_v2_stop_forward": 25,
+      "remaining_budget_at_old_stop": 54,
+      "budget_exhausted_forward": 133,
+      "v3_total_forwards": 136,
+      "first_budget_blocked_action": "normal",
+      "completed": true,
+      "compile_passed": true,
+      "passed": true
+    }
+  ],
+  "interpretation": "All five V2 exact-cycle terminations were premature under the restored official cumulative budget. The same canvas/action/proposal trajectory continued while remaining budget drained; after budget exhaustion, preselection expand masking exposed a non-expand action and every row completed. Three of five became functionally correct."
+}

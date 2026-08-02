@@ -1,0 +1,166 @@
+stage_started_at=2026-08-02T07:38:35+00:00 method=v3_hard_budgeted stage=cycle5 head=930b590efbcb7c673a4580ca5c1336e58b9e78da
+method=v3_hard_budgeted stage=cycle5 selected=5 completed=0 remaining=5 config_hash=3aa8fc1945d7343b594e8e302f40cfbe278b486cb7437a7ce9f4ba34ed2f800b
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 11.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.46it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.31it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/5] MultiLineInfilling/HumanEval/1/L6_L8 start
+[1/5] MultiLineInfilling/HumanEval/1/L6_L8 done status=completed forwards=139 token_forwards=27802 wall=8.735s
+[2/5] MultiLineInfilling/HumanEval/5/L5_L7 start
+[2/5] MultiLineInfilling/HumanEval/5/L5_L7 done status=completed forwards=134 token_forwards=17961 wall=6.532s
+[3/5] MultiLineInfilling/HumanEval/6/L3_L5 start
+[3/5] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=88 token_forwards=16720 wall=5.523s
+[4/5] MultiLineInfilling/HumanEval/9/L4_L6 start
+[4/5] MultiLineInfilling/HumanEval/9/L4_L6 done status=completed forwards=139 token_forwards=21056 wall=7.076s
+[5/5] MultiLineInfilling/HumanEval/11/L1_L3 start
+[5/5] MultiLineInfilling/HumanEval/11/L1_L3 done status=completed forwards=136 token_forwards=17360 wall=6.553s
+progress completed=5/5 avg_wall=6.884s avg_forwards=127.20 token_forwards=100899 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 5/5
+{
+  "num_samples": 5,
+  "num_base_problems": 5,
+  "passed": 3,
+  "pass_rate": 0.6,
+  "compile_passed": 4,
+  "compile_pass_rate": 0.8,
+  "exact_matches": 2,
+  "exact_match_rate": 0.4,
+  "task_macro_pass_rate": 0.6,
+  "completion_rate": 1.0,
+  "completed_rows": 5,
+  "completed_only": {
+    "passed": 3,
+    "pass_rate": 0.6,
+    "compile_passed": 4,
+    "compile_pass_rate": 0.8,
+    "exact_matches": 2,
+    "exact_match_rate": 0.4
+  },
+  "completion_tokens": {
+    "mean": 18.4,
+    "median": 17
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 5
+    }
+  },
+  "blank_region_count": 1,
+  "blank_slot_rows": 1,
+  "expand_count": 320,
+  "delete_count": 221,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 5,
+  "budget_draining_loop_rows": 5,
+  "budget_draining_loop_count": 475,
+  "expand_logit_blocked_by_budget_count": 20,
+  "expand_budget_consumed": {
+    "mean": 64,
+    "median": 64,
+    "max": 64,
+    "distribution": {
+      "64": 5
+    }
+  },
+  "newline_boundary_events": 21,
+  "mixed_newline_token_events": 20,
+  "pure_newline_token_events": 1,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 63,
+  "discarded_resolved_tokens_after_boundary": 17,
+  "region_local_eos_events": 221,
+  "region_local_eos_deleted_masks": 222,
+  "max_masks_deleted_by_one_eos": 2,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 127.2,
+    "median": 136,
+    "max": 139,
+    "total": 636
+  },
+  "token_forwards": {
+    "mean": 20179.8,
+    "median": 17961,
+    "max": 27802,
+    "total": 100899
+  },
+  "wall_time_seconds": {
+    "mean": 6.883735052798874,
+    "median": 6.552649457007647,
+    "max": 8.735248093027622,
+    "total": 34.41867526399437
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15425259212.8,
+    "max": 15456385024
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "3aa8fc1945d7343b594e8e302f40cfbe278b486cb7437a7ce9f4ba34ed2f800b",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 5,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_hard_budgeted",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 5,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 5,
+  "score_rows": 5,
+  "score_unique_task_ids": 5,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "cycle5",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+{
+  "method": "v3_hard_budgeted",
+  "stage": "cycle5",
+  "passed": true,
+  "engineering_gate_passed": true,
+  "pass_at_least_18": null,
+  "full_authorized": false,
+  "engineering_checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_runtime_errors": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_silent_unresolved_acceptance": true,
+    "terminal_failures_explicit_and_empty": true,
+    "budget_conservation_all_rows": true,
+    "budget_bounds_all_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "budget_draining_events_nonterminal": true,
+    "resume_dedup_config_audit": true,
+    "full_step_trace_present": true
+  },
+  "diagnostic_only_checks": {
+    "completed_rows": 5,
+    "compile_passed": 4,
+    "passed": 3,
+    "exact_matches": 2,
+    "blank_slot_rows": 1,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "budget_exhausted_rows": 5,
+    "budget_draining_loop_count": 475
+  },
+  "recorded_at_utc": "2026-08-02T07:39:21.777265+00:00"
+}
+method=v3_hard_budgeted stage=cycle5 selected=5 completed=5 remaining=0 config_hash=3aa8fc1945d7343b594e8e302f40cfbe278b486cb7437a7ce9f4ba34ed2f800b
+deterministic_resume_equality=passed rows=5 sha256=dcc92effcad71e445a5ab73973f3e14cdd027de39e242648bed07560cf00d472
+stage_finished_at=2026-08-02T07:39:23+00:00 method=v3_hard_budgeted stage=cycle5
