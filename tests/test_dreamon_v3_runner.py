@@ -10,6 +10,7 @@ from repro_scripts.run_dreamon_progressive_v2 import (
     build_method_config,
     classify_protocol_outcome,
     load_targeted_generation_population,
+    nonempty_isolation_audit,
     stable_json_hash,
     stage_size,
     validate_resume_rows,
@@ -26,7 +27,7 @@ def _row(task_id: str) -> dict[str, str]:
 
 
 def test_v3_targeted_stage_sizes_are_separate_from_frozen_main_stages():
-    assert TARGETED_STAGE_SIZES == {"cycle5": 5}
+    assert TARGETED_STAGE_SIZES == {"cycle5": 5, "affected6": 6}
     assert stage_size("cycle5") == 5
     assert stage_size("pilot") == 30
 
@@ -71,6 +72,20 @@ def test_v3_config_hash_changes_with_budget_semantics():
     assert stable_json_hash(budgeted) != stable_json_hash(changed)
 
 
+def test_nonempty_config_differs_only_by_identity_and_guard():
+    budgeted = build_method_config(
+        Method.V3_HARD_BUDGETED, "pilot", "runner-commit"
+    )
+    nonempty = build_method_config(
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE, "pilot", "runner-commit"
+    )
+    allowed_differences = {"protocol_name", "method", "nonempty_guard"}
+    assert {
+        key for key in budgeted if budgeted[key] != nonempty[key]
+    } == allowed_differences
+    assert nonempty["nonempty_guard"] is True
+
+
 def test_v3_resume_rejects_v2_row():
     with pytest.raises(RuntimeError, match="method/config mismatch"):
         validate_resume_rows(
@@ -110,3 +125,46 @@ def test_v3_invariant_failure_is_protocol_violation():
         "completion": "",
     }
     assert classify_protocol_outcome(row) == "protocol_violation"
+
+
+def test_nonempty_no_valid_action_is_controlled_terminal_failure():
+    row = {
+        "method": Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE.value,
+        "status": "protocol_error",
+        "protocol_flags": ["nonempty_guard_no_valid_action"],
+        "unresolved_mask_count": 1,
+        "completion": "",
+    }
+    assert classify_protocol_outcome(row) == "terminal_method_failure"
+
+
+def test_nonempty_isolation_audit_requires_exact_match_without_rejection():
+    control = [
+        {
+            "task_id": "same",
+            "completion": "x",
+            "score": {"passed": True, "compile_passed": True},
+            "total_forwards": 1,
+            "step_trace": [
+                {
+                    "selected_position": 1,
+                    "selected_region": "HARD_SLOT_0",
+                    "proposal_token_id": 7,
+                    "action": "normal",
+                }
+            ],
+        }
+    ]
+    candidate = [
+        {
+            **control[0],
+            "nonempty_guard_rejection_count": 0,
+        }
+    ]
+    audit = nonempty_isolation_audit(candidate, control)
+    assert audit["rows_without_guard_activation"] == 1
+    assert audit["all_inactive_rows_match"] is True
+    candidate[0]["completion"] = "different"
+    assert nonempty_isolation_audit(candidate, control)[
+        "all_inactive_rows_match"
+    ] is False

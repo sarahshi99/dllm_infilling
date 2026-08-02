@@ -1,0 +1,159 @@
+{
+  "protocol_name": "dreamon_progressive_v3_hard_budgeted_nonempty_oracle",
+  "protocol_version": 3,
+  "frozen_at_utc": "2026-08-02",
+  "research_decision": "iterate_and_execute",
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "method_role": "oracle structural diagnostic",
+  "deployable": false,
+  "not_held_out_test": true,
+  "parent_method": "v3_hard_budgeted",
+  "parent_implementation_commit": "930b590efbcb7c673a4580ca5c1336e58b9e78da",
+  "single_authorized_change": "Reject a candidate selected from the current forward if its simulated post-state would complete the active hard slot with decoded text.strip() == empty; reselect from the same cached logits without another model forward.",
+  "population": {
+    "role": "exact-three-nonempty-line development/mechanism population; oracle structural diagnostic",
+    "manifest_path": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/manifest.jsonl",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "rows": 642,
+    "unique_task_ids": 642,
+    "base_problems": 115,
+    "generation_population_path": "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+    "generation_population_sha256": "ffaac8a367103ee50893542bf5deb368232d40a904509db4708173994427731d",
+    "generation_allowed_fields": ["task_id", "base_problem_id", "prompt", "suffix"],
+    "generation_forbidden_fields": [
+      "canonical_solution",
+      "reference_middle",
+      "reference_lines",
+      "reference token counts",
+      "reference indentation",
+      "test results"
+    ]
+  },
+  "affected6_diagnostic": {
+    "role": "frozen mechanism diagnostic; not performance selection evidence",
+    "population_path": "repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_protocol/affected6_generation_population.jsonl",
+    "population_sha256": "cf17ba2d4685b4fb33db86d46b0408755846f4374f515fd59b2754698f3be9ae",
+    "rows": 6,
+    "task_ids": [
+      "MultiLineInfilling/HumanEval/3/L2_L4",
+      "MultiLineInfilling/HumanEval/6/L1_L3",
+      "MultiLineInfilling/HumanEval/6/L2_L4",
+      "MultiLineInfilling/HumanEval/11/L2_L4",
+      "MultiLineInfilling/HumanEval/12/L3_L5",
+      "MultiLineInfilling/HumanEval/6/L3_L5"
+    ]
+  },
+  "model": {
+    "repository": "Dream-org/DreamOn-v0-7B",
+    "snapshot": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "dtype": "bfloat16",
+    "device": "cuda:0",
+    "batch_size": 1,
+    "dreamon_repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "tokenizer_revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "tokenizer": {
+    "runtime_tokenizer_size": 151668,
+    "model_vocab_size": 152064,
+    "bos_token_id": 151665,
+    "eos_and_pad_token_id": 151643,
+    "mask_token_id": 151666,
+    "expand_token_id": 151667,
+    "literal_newline_token_ids": [198],
+    "newline_token_count": 2179,
+    "newline_token_ids_sha256": "b9be6f30d56789763a9005ff3a1563c0025e05fee4601ac74103595009f607df",
+    "newline_token_mapping_count": 2179,
+    "newline_token_mapping_sha256": "73ed6254e2f3199655b9a41143ba45b465484c5c45317e15e14b75da83d51042"
+  },
+  "generation": {
+    "initial_masks_per_region": 4,
+    "activation": ["HARD_SLOT_0", "HARD_SLOT_1", "HARD_SLOT_2"],
+    "locked_newline_separators": 3,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "top_k": null,
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "number_transfer_tokens": 1,
+    "seed": 42,
+    "max_context_tokens": 2048,
+    "max_prompt_tokens": 2048,
+    "max_total_forwards": 256,
+    "max_global_middle_tokens_instantaneous": 64,
+    "max_hard_slot_tokens_instantaneous": 32,
+    "initial_expand_budget": 64,
+    "expand_budget_scope": "per_sample_global",
+    "expand_budget_reset_per_slot": false,
+    "expand_budget_refund_on_delete": false,
+    "expand_budget_logit_mask_at_zero": true,
+    "nonempty_guard": true,
+    "unchanged_from_a": [
+      "canvas",
+      "attention",
+      "sequential activation",
+      "budget",
+      "boundary",
+      "region-local EOS",
+      "selection hyperparameters",
+      "caps",
+      "scorer",
+      "dataset"
+    ]
+  },
+  "decoder_revision": {
+    "nonempty_guard": true,
+    "nonempty_definition": "A hard slot is nonempty only when tokenizer-decoded region text has text.strip() != empty.",
+    "simulation": "Apply the candidate to a cloned full CanvasState, including budget and all parallel arrays, then inspect the hypothetical active-region text and unresolved count.",
+    "rejection_condition": "Reject only when the hypothetical action leaves zero unresolved masks in the active hard slot and the final decoded slot text is whitespace-only or empty.",
+    "reselection": "Set only the rejected (position, proposal_token_id) logit to -inf in the cached active logits, then recompute proposal/confidence and position choice without another model forward.",
+    "termination": "If no finite legal candidate remains, emit nonempty_guard_no_valid_action as an explicit controlled terminal method failure with empty completion.",
+    "forbidden": [
+      "inserting pass or an arbitrary token",
+      "reference-guided content",
+      "whole-row retry",
+      "extra model forward for guard retry",
+      "reactivating completed slots"
+    ]
+  },
+  "resume": {
+    "key": ["task_id", "method", "config_hash"],
+    "mid_row_checkpoint": false,
+    "cross_method_resume": false
+  },
+  "stage_gates": {
+    "affected6": {
+      "rows": 6,
+      "save_step_trace": true,
+      "engineering_only": true
+    },
+    "pilot": {
+      "rows": 30,
+      "engineering_gate_required": true,
+      "additional_engineering_checks": [
+        "zero completed blank slot",
+        "completed final nonempty invariant",
+        "no-guard-activation rows exactly match A",
+        "guard rejection does not add model forwards"
+      ],
+      "full_quality_authorization": "overall Pass@1 >= 18/30"
+    },
+    "full": {
+      "rows": 642,
+      "quality_early_stop": false,
+      "label": "oracle structural diagnostic; not deployable; not held-out"
+    }
+  },
+  "evaluator": {
+    "repository_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "timeout_seconds": 3,
+    "workers": 8,
+    "program": "prompt + completion + suffix"
+  },
+  "diagnostics": {
+    "primary_comparison": "B versus frozen A on the same first-30 rows",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 42,
+    "statistical_unit": "row with base_problem_id cluster"
+  }
+}

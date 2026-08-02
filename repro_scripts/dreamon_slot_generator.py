@@ -15,12 +15,19 @@ class ProtocolError(RuntimeError):
     pass
 
 
+class NonemptyGuardNoValidAction(ProtocolError):
+    def __init__(self, rejection_events: Sequence[Mapping[str, Any]]) -> None:
+        super().__init__("nonempty_guard_no_valid_action")
+        self.rejection_events = [dict(event) for event in rejection_events]
+
+
 class Method(str, Enum):
     V2_HARD = "v2_hard"
     V2_OPENTAIL = "v2_opentail"
     JOINT_OPENTAIL = "joint_opentail"
     V2_HARD_V2_BOUNDARY = "v2_hard_v2_boundary"
     V3_HARD_BUDGETED = "v3_hard_budgeted"
+    V3_HARD_BUDGETED_NONEMPTY_ORACLE = "v3_hard_budgeted_nonempty_oracle"
 
 
 class Region(IntEnum):
@@ -83,6 +90,7 @@ class SlotGeneratorConfig:
     top_p: float | None = 0.9
     top_k: int | None = None
     initial_expand_budget: int | None = None
+    nonempty_guard: bool = False
 
     def __post_init__(self) -> None:
         if self.initial_masks_per_region != 4:
@@ -368,6 +376,24 @@ class CanvasState:
             raise ProtocolError("selected_region_is_not_generation_eligible")
 
 
+def clone_canvas_state(state: CanvasState) -> CanvasState:
+    return CanvasState(
+        input_ids=state.input_ids.clone(),
+        region_id=state.region_id.clone(),
+        attention_mask=state.attention_mask.clone(),
+        real_length=int(state.real_length),
+        method=state.method,
+        tokenizer_spec=state.tokenizer_spec,
+        initial_prefix_ids=state.initial_prefix_ids,
+        initial_suffix_ids=state.initial_suffix_ids,
+        initial_locked_newline_ids=state.initial_locked_newline_ids,
+        active_region=state.active_region,
+        initial_expand_budget=state.initial_expand_budget,
+        remaining_expand_budget=state.remaining_expand_budget,
+        successful_expand_count=int(state.successful_expand_count),
+    )
+
+
 def _state_hash_payload(state: CanvasState) -> dict[str, Any]:
     return {
         "method": state.method.value,
@@ -414,13 +440,19 @@ def method_uses_boundary_decoder(method: Method) -> bool:
     return method in {
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     }
 
 
 def method_uses_expand_budget(method: Method) -> bool:
     return method in {
         Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     }
+
+
+def method_uses_nonempty_guard(method: Method) -> bool:
+    return method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
 
 
 def transition_signature(
@@ -446,6 +478,7 @@ def sequential_regions(method: Method) -> tuple[Region, ...]:
         Method.V2_HARD,
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     ):
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2)
     if method == Method.V2_OPENTAIL:
@@ -460,6 +493,7 @@ def method_generation_regions(method: Method) -> tuple[Region, ...]:
         Method.V2_HARD,
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     ):
         return sequential_regions(method)
     return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
@@ -551,6 +585,7 @@ def _initial_middle(method: Method, spec: TokenizerSpec, masks: int) -> tuple[li
         Method.V2_HARD,
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     ):
         add_region(Region.HARD_SLOT_2)
         add_newline()
@@ -572,6 +607,8 @@ def build_canvas(
             raise ProtocolError("v3_initial_expand_budget_must_equal_64")
     elif config.initial_expand_budget is not None:
         raise ProtocolError("expand_budget_configured_for_non_v3_method")
+    if config.nonempty_guard != method_uses_nonempty_guard(method):
+        raise ProtocolError("nonempty_guard_method_config_mismatch")
     middle_ids, middle_regions = _initial_middle(
         method, tokenizer_spec, config.initial_masks_per_region
     )
@@ -699,13 +736,26 @@ def _entropy_proposals(
     logits: torch.Tensor, config: SlotGeneratorConfig
 ) -> tuple[torch.Tensor, torch.Tensor]:
     filtered = _top_k_logits(_top_p_logits(logits, config.top_p), config.top_k)
-    probabilities = torch.softmax(filtered, dim=-1)
-    if not torch.isfinite(probabilities).all():
-        raise ProtocolError("nan_or_all_invalid_logits")
-    proposals = torch.argmax(filtered, dim=-1)
-    negative_entropy = torch.sum(
-        probabilities * torch.log(probabilities.clamp_min(1e-10)), dim=-1
+    valid_rows = torch.isfinite(filtered).any(dim=-1)
+    probabilities = torch.zeros_like(filtered)
+    proposals = torch.zeros(
+        filtered.shape[:-1], dtype=torch.long, device=filtered.device
     )
+    negative_entropy = torch.full(
+        filtered.shape[:-1], float("-inf"), dtype=filtered.dtype, device=filtered.device
+    )
+    if valid_rows.any():
+        valid_filtered = filtered[valid_rows]
+        valid_probabilities = torch.softmax(valid_filtered, dim=-1)
+        if not torch.isfinite(valid_probabilities).all():
+            raise ProtocolError("nan_logits")
+        probabilities[valid_rows] = valid_probabilities
+        proposals[valid_rows] = torch.argmax(valid_filtered, dim=-1)
+        negative_entropy[valid_rows] = torch.sum(
+            valid_probabilities
+            * torch.log(valid_probabilities.clamp_min(1e-10)),
+            dim=-1,
+        )
     return negative_entropy, proposals
 
 
@@ -746,11 +796,17 @@ def select_update(
     method: Method,
     full_logits: torch.Tensor,
     config: SlotGeneratorConfig,
+    rejected_candidates: set[tuple[int, int]] | None = None,
 ) -> SelectedUpdate:
     active_logits, positions = constrained_active_logits(state, method, full_logits, config)
+    position_rows = {position: row for row, position in enumerate(positions)}
+    for position, token_id in rejected_candidates or set():
+        row = position_rows.get(int(position))
+        if row is not None and 0 <= int(token_id) < active_logits.shape[-1]:
+            active_logits[row, int(token_id)] = float("-inf")
     confidence, proposals = _entropy_proposals(active_logits, config)
-    if confidence.numel() == 0:
-        raise ProtocolError("topk_requested_without_active_mask")
+    if confidence.numel() == 0 or not torch.isfinite(confidence).any():
+        raise ProtocolError("no_valid_proposal")
     selected_local = int(torch.topk(confidence, k=1, largest=True).indices[0].item())
     selected_position = positions[selected_local]
     unconstrained_logits = full_logits[selected_position].float().unsqueeze(0)
@@ -762,6 +818,96 @@ def select_update(
         unconstrained_proposal_token_id=int(unconstrained[0].item()),
         confidence=float(confidence[selected_local].item()),
     )
+
+
+def action_completes_blank_hard_slot(
+    candidate_state: CanvasState, region: Region, tokenizer
+) -> bool:
+    if region not in HARD_REGIONS or candidate_state.unresolved_positions(region):
+        return False
+    return not bool(_decode(tokenizer, candidate_state.tokens_for_region(region)).strip())
+
+
+def select_nonempty_guarded_update(
+    state: CanvasState,
+    method: Method,
+    full_logits: torch.Tensor,
+    config: SlotGeneratorConfig,
+    tokenizer,
+    *,
+    task_id: str | None,
+    forward_index: int,
+) -> tuple[SelectedUpdate, list[dict[str, Any]]]:
+    if not method_uses_nonempty_guard(method) or not config.nonempty_guard:
+        raise ProtocolError("nonempty_guard_not_enabled")
+    rejected: set[tuple[int, int]] = set()
+    rejection_events: list[dict[str, Any]] = []
+    pending_event: dict[str, Any] | None = None
+    while True:
+        try:
+            choice = select_update(
+                state,
+                method,
+                full_logits,
+                config,
+                rejected_candidates=rejected,
+            )
+        except ProtocolError as error:
+            if str(error) != "no_valid_proposal":
+                raise
+            if pending_event is not None:
+                pending_event.update(
+                    {
+                        "reselected_position": None,
+                        "reselected_proposal_token_id": None,
+                        "reselected_action": None,
+                    }
+                )
+                rejection_events.append(pending_event)
+            raise NonemptyGuardNoValidAction(rejection_events) from error
+
+        candidate = clone_canvas_state(state)
+        action_result = apply_selected_action(
+            candidate,
+            choice.position,
+            choice.proposal_token_id,
+            config,
+            tokenizer=tokenizer,
+        )
+        if candidate.method != Method.JOINT_OPENTAIL:
+            advance_active_region(candidate, method)
+        validate_state(candidate, method)
+        if pending_event is not None:
+            pending_event.update(
+                {
+                    "reselected_position": choice.position,
+                    "reselected_proposal_token_id": choice.proposal_token_id,
+                    "reselected_action": action_result.action,
+                }
+            )
+            rejection_events.append(pending_event)
+            pending_event = None
+        if not action_completes_blank_hard_slot(candidate, choice.region, tokenizer):
+            return choice, rejection_events
+
+        rejected.add((choice.position, choice.proposal_token_id))
+        pending_event = {
+            "task_id": task_id,
+            "slot": choice.region.name,
+            "forward_index": int(forward_index),
+            "position": choice.position,
+            "proposal_token_id": choice.proposal_token_id,
+            "decoded_proposal": _decode(tokenizer, [choice.proposal_token_id]),
+            "hypothetical_action": action_result.action,
+            "pre_state_hash": full_state_hash(state),
+            "remaining_budget": state.remaining_expand_budget,
+            "hypothetical_region_text": _decode(
+                tokenizer, candidate.tokens_for_region(choice.region)
+            ),
+            "hypothetical_unresolved_count": len(
+                candidate.unresolved_positions(choice.region)
+            ),
+        }
 
 
 def _candidate_middle_length(region_ids: Sequence[int]) -> int:
@@ -1107,6 +1253,20 @@ def _partial_regions(state: CanvasState, method: Method, tokenizer) -> dict[str,
     }
 
 
+def _record_nonempty_rejections(
+    events: Sequence[Mapping[str, Any]],
+    all_events: list[dict[str, Any]],
+    by_slot: dict[str, int],
+    by_action: dict[str, int],
+) -> None:
+    for event in events:
+        record = dict(event)
+        all_events.append(record)
+        by_slot[str(record["slot"])] += 1
+        action = str(record["hypothetical_action"])
+        by_action[action] = by_action.get(action, 0) + 1
+
+
 def run_slot_generation(
     model,
     tokenizer,
@@ -1162,6 +1322,10 @@ def run_slot_generation(
     cross_region_delete_attempts = 0
     expand_logit_blocked_by_budget_count = 0
     budget_exhausted_forward_index: int | None = None
+    nonempty_guard_rejection_events: list[dict[str, Any]] = []
+    nonempty_guard_rejections_by_slot = _empty_region_counter(method)
+    nonempty_guard_rejections_by_action: dict[str, int] = {}
+    nonempty_guard_no_valid_action_count = 0
     start = time.perf_counter()
     if device.type == "cuda":
         torch.cuda.synchronize(device)
@@ -1201,7 +1365,38 @@ def run_slot_generation(
             )
             if expand_logit_blocked_by_budget:
                 expand_logit_blocked_by_budget_count += len(positions)
-            selected = select_update(state, method, logits, config)
+            guard_rejections_this_forward: list[dict[str, Any]] = []
+            if method_uses_nonempty_guard(method):
+                try:
+                    selected, guard_rejections_this_forward = (
+                        select_nonempty_guarded_update(
+                            state,
+                            method,
+                            logits,
+                            config,
+                            tokenizer,
+                            task_id=task_id,
+                            forward_index=len(forward_lengths),
+                        )
+                    )
+                except NonemptyGuardNoValidAction as error:
+                    guard_rejections_this_forward = error.rejection_events
+                    _record_nonempty_rejections(
+                        guard_rejections_this_forward,
+                        nonempty_guard_rejection_events,
+                        nonempty_guard_rejections_by_slot,
+                        nonempty_guard_rejections_by_action,
+                    )
+                    nonempty_guard_no_valid_action_count += 1
+                    raise
+                _record_nonempty_rejections(
+                    guard_rejections_this_forward,
+                    nonempty_guard_rejection_events,
+                    nonempty_guard_rejections_by_slot,
+                    nonempty_guard_rejections_by_action,
+                )
+            else:
+                selected = select_update(state, method, logits, config)
             if first_selected_region is None:
                 first_selected_region = selected.region.name
             if (
@@ -1418,6 +1613,7 @@ def run_slot_generation(
                         "full_pre_state_hash": pre_full_hash,
                         "full_post_state_hash": post_full_hash,
                         "expand_logit_blocked_by_budget": expand_logit_blocked_by_budget,
+                        "nonempty_guard_rejection_events": guard_rejections_this_forward,
                         "transition_signature": list(signature),
                         "active_region": next_active_region,
                         "active_mask_count": len(next_positions),
@@ -1439,6 +1635,10 @@ def run_slot_generation(
             raise ProtocolError("generation_ended_with_unresolved_masks")
         validate_state(state, method)
         extracted = extract_completion(state, method, tokenizer)
+        if method_uses_nonempty_guard(method) and any(
+            extracted["blank_region_flags"].values()
+        ):
+            raise ProtocolError("completed_nonempty_invariant_failed")
     except ProtocolError as error:
         status = "protocol_error"
         protocol_flags.append(str(error))
@@ -1471,6 +1671,10 @@ def run_slot_generation(
         True
         if initial_expand_budget is None
         else expand_budget_consumed == state.successful_expand_count
+    )
+    final_nonempty_invariant_passed = bool(
+        status == "completed"
+        and not any(extracted.get("blank_region_flags", {}).values())
     )
     return {
         **extracted,
@@ -1517,6 +1721,12 @@ def run_slot_generation(
         "expand_logit_blocked_by_budget_count": expand_logit_blocked_by_budget_count,
         "budget_draining_loop_count": len(budget_draining_loop_events),
         "budget_draining_loop_events": budget_draining_loop_events,
+        "nonempty_guard_rejection_count": len(nonempty_guard_rejection_events),
+        "nonempty_guard_rejections_by_slot": nonempty_guard_rejections_by_slot,
+        "nonempty_guard_rejections_by_action": nonempty_guard_rejections_by_action,
+        "nonempty_guard_rejection_events": nonempty_guard_rejection_events,
+        "nonempty_guard_no_valid_action_count": nonempty_guard_no_valid_action_count,
+        "final_nonempty_invariant_passed": final_nonempty_invariant_passed,
         "slot_expand_cap_hits": slot_cap_hits,
         "global_expand_cap_hits": global_cap_hits,
         "unresolved_mask_count": len(state.unresolved_positions()),

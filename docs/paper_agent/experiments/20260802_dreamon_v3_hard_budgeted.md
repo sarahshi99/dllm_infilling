@@ -1,8 +1,8 @@
 # DreamOn V3-Hard Budgeted
 
-Date: 2026-08-02 UTC  
-Decision: `iterate_and_execute`  
-Method: `v3_hard_budgeted`  
+Date: 2026-08-02 UTC
+Decision: `iterate_and_execute`
+Method: `v3_hard_budgeted`
 Role: official-protocol-fidelity repair/control on the exact-three-line development/mechanism population; not held-out test.
 
 ## Protocol change

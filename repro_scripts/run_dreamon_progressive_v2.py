@@ -59,7 +59,7 @@ HISTORICAL_DIR = EXTERNAL_ROOT / "repro_results/dreamon_progressive_three_line_a
 HUMAN_EVAL_ROOT = EXTERNAL_ROOT / "human-eval-infilling"
 
 STAGE_SIZES = {"smoke": 5, "pilot": 30, "full": 642}
-TARGETED_STAGE_SIZES = {"cycle5": 5}
+TARGETED_STAGE_SIZES = {"cycle5": 5, "affected6": 6}
 ALL_STAGE_SIZES = {**STAGE_SIZES, **TARGETED_STAGE_SIZES}
 ALLOWED_GENERATION_FIELDS = {"task_id", "base_problem_id", "prompt", "suffix"}
 FORBIDDEN_GENERATION_FIELDS = {
@@ -143,7 +143,10 @@ def stage_size(stage: str) -> int:
 
 
 def is_v3_method(method: Method) -> bool:
-    return method == Method.V3_HARD_BUDGETED
+    return method in {
+        Method.V3_HARD_BUDGETED,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+    }
 
 
 def build_method_config(
@@ -157,10 +160,14 @@ def build_method_config(
     protocol_sha = sha256(protocol_path) if protocol_path.exists() else "missing"
     population_sha = sha256(population_path) if population_path.exists() else "missing"
     is_boundary_v2 = method == Method.V2_HARD_V2_BOUNDARY
-    is_v3_budgeted = method == Method.V3_HARD_BUDGETED
-    nonempty_guard = False
+    is_v3_budgeted = is_v3_method(method)
+    nonempty_guard = method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
     if is_v3_budgeted:
-        protocol_name = "dreamon_progressive_v3_hard_budgeted"
+        protocol_name = (
+            "dreamon_progressive_v3_hard_budgeted_nonempty_oracle"
+            if nonempty_guard
+            else "dreamon_progressive_v3_hard_budgeted"
+        )
     elif is_boundary_v2:
         protocol_name = "dreamon_progressive_v2_hard_boundary"
     else:
@@ -255,6 +262,7 @@ def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
     if row.get("method") in {
         Method.V2_HARD_V2_BOUNDARY.value,
         Method.V3_HARD_BUDGETED.value,
+        Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE.value,
     }:
         if (
             status == "protocol_error"
@@ -263,6 +271,7 @@ def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
             in {
                 "forward_cap_with_unresolved_masks",
                 "exact_deterministic_cycle",
+                "nonempty_guard_no_valid_action",
             }
             and row["completion"] == ""
         ):
@@ -387,6 +396,7 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
             Method.V2_HARD,
             Method.V2_HARD_V2_BOUNDARY,
             Method.V3_HARD_BUDGETED,
+            Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
         )
         else ["HARD_SLOT_0", "HARD_SLOT_1", "OPEN_TAIL"]
     )
@@ -432,14 +442,17 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
         "initial_expand_budget": (
             64
             if method
-            == Method.V3_HARD_BUDGETED
+            in {
+                Method.V3_HARD_BUDGETED,
+                Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+            }
             else None
         ),
         "remaining_expand_budget": (
-            64 if method == Method.V3_HARD_BUDGETED else None
+            64 if is_v3_method(method) else None
         ),
         "expand_budget_consumed": (
-            0 if method == Method.V3_HARD_BUDGETED else None
+            0 if is_v3_method(method) else None
         ),
         "expand_budget_conservation_passed": False,
         "budget_exhausted": False,
@@ -447,6 +460,12 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
         "expand_logit_blocked_by_budget_count": 0,
         "budget_draining_loop_count": 0,
         "budget_draining_loop_events": [],
+        "nonempty_guard_rejection_count": 0,
+        "nonempty_guard_rejections_by_slot": zero,
+        "nonempty_guard_rejections_by_action": {},
+        "nonempty_guard_rejection_events": [],
+        "nonempty_guard_no_valid_action_count": 0,
+        "final_nonempty_invariant_passed": False,
         "slot_expand_cap_hits": 0,
         "global_expand_cap_hits": 0,
         "unresolved_mask_count": 0,
@@ -526,7 +545,8 @@ def run_generation(args: argparse.Namespace) -> None:
             raise RuntimeError("V3 requires protocol version 3")
         if protocol.get("method") != method.value:
             raise RuntimeError("Protocol method does not match V3 method")
-        if bool(protocol.get("decoder_revision", {}).get("nonempty_guard", False)):
+        expected_nonempty = method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
+        if bool(protocol.get("decoder_revision", {}).get("nonempty_guard", False)) != expected_nonempty:
             raise RuntimeError("Protocol nonempty guard does not match V3 method")
     runner_commit = git_head()
     method_config = build_method_config(
@@ -593,6 +613,7 @@ def run_generation(args: argparse.Namespace) -> None:
     ).to(args.device).eval()
     generator_config = SlotGeneratorConfig(
         initial_expand_budget=64 if is_v3_method(method) else None,
+        nonempty_guard=method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
     )
     positions = {row["task_id"]: index for index, row in enumerate(selected, start=1)}
     generated_rows = list(existing)
@@ -610,7 +631,7 @@ def run_generation(args: argparse.Namespace) -> None:
                 prefix_ids=prefix_ids,
                 suffix_ids=suffix_ids,
                 config=generator_config,
-                save_trace=args.stage in {"smoke", "cycle5", "pilot"},
+                save_trace=args.stage in {"smoke", "cycle5", "pilot", "affected6"},
                 task_id=task_id,
             )
         except Exception as error:  # explicit row-level runtime failure, never silent
@@ -1196,6 +1217,18 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
                 )
             ),
         },
+        "nonempty_guard_rejection_count": sum(
+            int(row.get("nonempty_guard_rejection_count", 0))
+            for row in scored_rows
+        ),
+        "nonempty_guard_triggered_rows": sum(
+            int(row.get("nonempty_guard_rejection_count", 0)) > 0
+            for row in scored_rows
+        ),
+        "nonempty_guard_no_valid_action_rows": sum(
+            "nonempty_guard_no_valid_action" in row["protocol_flags"]
+            for row in scored_rows
+        ),
         "newline_boundary_events": sum(
             int(row.get("newline_boundary_events", 0)) for row in scored_rows
         ),
@@ -1253,6 +1286,58 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _observable_action_sequence(row: Mapping[str, Any]) -> list[tuple[Any, ...]]:
+    return [
+        (
+            step["selected_position"],
+            step["selected_region"],
+            step["proposal_token_id"],
+            step["action"],
+        )
+        for step in row.get("step_trace") or []
+    ]
+
+
+def nonempty_isolation_audit(
+    candidate_rows: Sequence[Mapping[str, Any]],
+    control_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    control_by_task = {row["task_id"]: row for row in control_rows}
+    missing_controls = [
+        row["task_id"] for row in candidate_rows if row["task_id"] not in control_by_task
+    ]
+    inactive = [
+        row
+        for row in candidate_rows
+        if int(row.get("nonempty_guard_rejection_count", 0)) == 0
+    ]
+    mismatches: list[dict[str, Any]] = []
+    for row in inactive:
+        control = control_by_task.get(row["task_id"])
+        if control is None:
+            continue
+        checks = {
+            "completion": row["completion"] == control["completion"],
+            "score": row["score"] == control["score"],
+            "action_sequence": _observable_action_sequence(row)
+            == _observable_action_sequence(control),
+            "total_forwards": row["total_forwards"] == control["total_forwards"],
+        }
+        if not all(checks.values()):
+            mismatches.append({"task_id": row["task_id"], "checks": checks})
+    return {
+        "control_method": Method.V3_HARD_BUDGETED.value,
+        "candidate_method": Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE.value,
+        "candidate_rows": len(candidate_rows),
+        "control_rows_available": len(control_rows),
+        "missing_control_task_ids": missing_controls,
+        "rows_without_guard_activation": len(inactive),
+        "matching_inactive_rows": len(inactive) - len(mismatches),
+        "mismatches": mismatches,
+        "all_inactive_rows_match": not missing_controls and not mismatches,
+    }
+
+
 def run_scoring(args: argparse.Namespace) -> None:
     method = Method(args.method)
     predictions = read_jsonl(args.output_dir / "predictions.jsonl")
@@ -1286,6 +1371,18 @@ def run_scoring(args: argparse.Namespace) -> None:
     atomic_write_jsonl(args.output_dir / "scored.jsonl", scored_rows)
     summary = method_summary(scored_rows)
     atomic_write_json(args.output_dir / "summary.json", summary)
+    if method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE and args.stage in {
+        "affected6",
+        "pilot",
+    }:
+        control_rows = read_jsonl(
+            REPO_ROOT
+            / "repro_results/dreamon_progressive_v3_hard_budgeted_pilot30/scored.jsonl"
+        )
+        atomic_write_json(
+            args.output_dir / "nonempty_isolation_audit.json",
+            nonempty_isolation_audit(scored_rows, control_rows),
+        )
     discard_reference_summary = None
     if method == Method.V2_HARD_V2_BOUNDARY or is_v3_method(method):
         from transformers import AutoTokenizer
@@ -1373,6 +1470,36 @@ def run_scoring(args: argparse.Namespace) -> None:
         ),
         "expand_budget_conservation_failures": sum(
             not bool(row.get("expand_budget_conservation_passed", True))
+            for row in scored_rows
+        ),
+        "nonempty_guard_rejection_count": sum(
+            int(row.get("nonempty_guard_rejection_count", 0))
+            for row in scored_rows
+        ),
+        "nonempty_guard_triggered_rows": sum(
+            int(row.get("nonempty_guard_rejection_count", 0)) > 0
+            for row in scored_rows
+        ),
+        "nonempty_guard_rejections_by_slot": dict(
+            sorted(
+                Counter(
+                    event["slot"]
+                    for row in scored_rows
+                    for event in row.get("nonempty_guard_rejection_events", [])
+                ).items()
+            )
+        ),
+        "nonempty_guard_rejections_by_action": dict(
+            sorted(
+                Counter(
+                    event["hypothetical_action"]
+                    for row in scored_rows
+                    for event in row.get("nonempty_guard_rejection_events", [])
+                ).items()
+            )
+        ),
+        "nonempty_guard_no_valid_action_rows": sum(
+            "nonempty_guard_no_valid_action" in row["protocol_flags"]
             for row in scored_rows
         ),
         "slot_expand_distributions": {
@@ -1546,6 +1673,8 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         "invalid_initial_expand_budget",
         "invalid_remaining_expand_budget",
         "missing_remaining_expand_budget",
+        "nonempty_guard_method_config_mismatch",
+        "completed_nonempty_invariant_failed",
     }
     required_fields = {
         "newline_boundary_events",
@@ -1562,6 +1691,17 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         "budget_draining_loop_count",
         "budget_draining_loop_events",
     }
+    if method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE:
+        required_fields.update(
+            {
+                "nonempty_guard_rejection_count",
+                "nonempty_guard_rejections_by_slot",
+                "nonempty_guard_rejections_by_action",
+                "nonempty_guard_rejection_events",
+                "nonempty_guard_no_valid_action_count",
+                "final_nonempty_invariant_passed",
+            }
+        )
     terminal_rows = [row for row in predictions if row["status"] != "completed"]
     engineering_checks = {
         "expected_prediction_rows": len(predictions) == expected,
@@ -1615,11 +1755,53 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         and bool(audit.get("all_prediction_config_hashes_match"))
         and bool(audit.get("task_order_matches_population")),
     }
-    if args.stage == "cycle5":
+    if args.stage in {"cycle5", "affected6"}:
         engineering_checks["full_step_trace_present"] = all(
             isinstance(row.get("step_trace"), list)
             and len(row["step_trace"]) == row["total_forwards"]
             for row in predictions
+        )
+    if method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE:
+        isolation_path = args.output_dir / "nonempty_isolation_audit.json"
+        engineering_checks.update(
+            {
+                "zero_completed_blank_slot": all(
+                    row["status"] != "completed"
+                    or not any(row["blank_region_flags"].values())
+                    for row in predictions
+                ),
+                "final_nonempty_invariant_all_completed": all(
+                    row["status"] != "completed"
+                    or bool(row.get("final_nonempty_invariant_passed"))
+                    for row in predictions
+                ),
+                "guard_rejections_are_unique_and_finite": all(
+                    len(
+                        {
+                            (
+                                event["forward_index"],
+                                event["position"],
+                                event["proposal_token_id"],
+                            )
+                            for event in row.get(
+                                "nonempty_guard_rejection_events", []
+                            )
+                        }
+                    )
+                    == int(row.get("nonempty_guard_rejection_count", 0))
+                    for row in predictions
+                ),
+                "inactive_rows_match_a": (
+                    args.stage == "full"
+                    or (
+                        isolation_path.exists()
+                        and read_json(isolation_path).get(
+                            "all_inactive_rows_match"
+                        )
+                        is True
+                    )
+                ),
+            }
         )
     engineering_gate_passed = all(engineering_checks.values())
     pass_at_least_18 = (
