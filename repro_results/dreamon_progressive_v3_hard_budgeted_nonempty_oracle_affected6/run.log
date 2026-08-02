@@ -1,0 +1,177 @@
+stage_started_at=2026-08-02T08:02:53+00:00 method=v3_hard_budgeted_nonempty_oracle stage=affected6 head=2830744ff7a56164da937bb39aa64e5ce74673b9
+method=v3_hard_budgeted_nonempty_oracle stage=affected6 selected=6 completed=0 remaining=6 config_hash=1616f110f4153033a0585a21d43f06ccd50479c0472c1d3ff3d6de5deb86e7dd
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 12.56it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 13.67it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 13.48it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/6] MultiLineInfilling/HumanEval/3/L2_L4 start
+[1/6] MultiLineInfilling/HumanEval/3/L2_L4 done status=completed forwards=138 token_forwards=20807 wall=12.461s
+[2/6] MultiLineInfilling/HumanEval/6/L1_L3 start
+[2/6] MultiLineInfilling/HumanEval/6/L1_L3 done status=completed forwards=138 token_forwards=26630 wall=11.673s
+[3/6] MultiLineInfilling/HumanEval/6/L2_L4 start
+[3/6] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=32 token_forwards=6157 wall=2.305s
+[4/6] MultiLineInfilling/HumanEval/11/L2_L4 start
+[4/6] MultiLineInfilling/HumanEval/11/L2_L4 done status=completed forwards=138 token_forwards=17203 wall=8.930s
+[5/6] MultiLineInfilling/HumanEval/12/L3_L5 start
+[5/6] MultiLineInfilling/HumanEval/12/L3_L5 done status=completed forwards=107 token_forwards=14738 wall=6.965s
+[6/6] MultiLineInfilling/HumanEval/6/L3_L5 start
+[6/6] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=30 token_forwards=5794 wall=2.430s
+progress completed=6/6 avg_wall=7.461s avg_forwards=97.17 token_forwards=91329 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 6/6
+{
+  "num_samples": 6,
+  "num_base_problems": 4,
+  "passed": 4,
+  "pass_rate": 0.6666666666666666,
+  "compile_passed": 5,
+  "compile_pass_rate": 0.8333333333333334,
+  "exact_matches": 1,
+  "exact_match_rate": 0.16666666666666666,
+  "task_macro_pass_rate": 0.5,
+  "completion_rate": 1.0,
+  "completed_rows": 6,
+  "completed_only": {
+    "passed": 4,
+    "pass_rate": 0.6666666666666666,
+    "compile_passed": 5,
+    "compile_pass_rate": 0.8333333333333334,
+    "exact_matches": 1,
+    "exact_match_rate": 0.16666666666666666
+  },
+  "completion_tokens": {
+    "mean": 20.333333333333332,
+    "median": 20.0
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 6
+    }
+  },
+  "blank_region_count": 0,
+  "blank_slot_rows": 0,
+  "expand_count": 281,
+  "delete_count": 195,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 4,
+  "budget_draining_loop_rows": 4,
+  "budget_draining_loop_count": 389,
+  "expand_logit_blocked_by_budget_count": 52,
+  "expand_budget_consumed": {
+    "mean": 46.833333333333336,
+    "median": 64.0,
+    "max": 64,
+    "distribution": {
+      "12": 1,
+      "13": 1,
+      "64": 4
+    }
+  },
+  "nonempty_guard_rejection_count": 446,
+  "nonempty_guard_triggered_rows": 6,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "newline_boundary_events": 5,
+  "mixed_newline_token_events": 5,
+  "pure_newline_token_events": 0,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 32,
+  "discarded_resolved_tokens_after_boundary": 3,
+  "region_local_eos_events": 195,
+  "region_local_eos_deleted_masks": 214,
+  "max_masks_deleted_by_one_eos": 3,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 97.16666666666667,
+    "median": 122.5,
+    "max": 138,
+    "total": 583
+  },
+  "token_forwards": {
+    "mean": 15221.5,
+    "median": 15970.5,
+    "max": 26630,
+    "total": 91329
+  },
+  "wall_time_seconds": {
+    "mean": 7.460535985980338,
+    "median": 7.9473644944955595,
+    "max": 12.460890387999825,
+    "total": 44.76321591588203
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15451348736,
+    "max": 15506802688
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "1616f110f4153033a0585a21d43f06ccd50479c0472c1d3ff3d6de5deb86e7dd",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 6,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 6,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 6,
+  "score_rows": 6,
+  "score_unique_task_ids": 6,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "affected6",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+{
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "stage": "affected6",
+  "passed": true,
+  "engineering_gate_passed": true,
+  "pass_at_least_18": null,
+  "full_authorized": false,
+  "engineering_checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_runtime_errors": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_silent_unresolved_acceptance": true,
+    "terminal_failures_explicit_and_empty": true,
+    "budget_conservation_all_rows": true,
+    "budget_bounds_all_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "budget_draining_events_nonterminal": true,
+    "resume_dedup_config_audit": true,
+    "full_step_trace_present": true,
+    "zero_completed_blank_slot": true,
+    "final_nonempty_invariant_all_completed": true,
+    "guard_rejections_are_unique_and_finite": true,
+    "inactive_rows_match_a": true
+  },
+  "diagnostic_only_checks": {
+    "completed_rows": 6,
+    "compile_passed": 5,
+    "passed": 4,
+    "exact_matches": 1,
+    "blank_slot_rows": 0,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "budget_exhausted_rows": 4,
+    "budget_draining_loop_count": 389
+  },
+  "recorded_at_utc": "2026-08-02T08:03:50.249488+00:00"
+}
+method=v3_hard_budgeted_nonempty_oracle stage=affected6 selected=6 completed=6 remaining=0 config_hash=1616f110f4153033a0585a21d43f06ccd50479c0472c1d3ff3d6de5deb86e7dd
+deterministic_resume_equality=passed rows=6 sha256=2b94ad26f5b000ee0523140d457fa66de6fef772ecfe31b41824e31785746158
+stage_finished_at=2026-08-02T08:03:52+00:00 method=v3_hard_budgeted_nonempty_oracle stage=affected6

@@ -1,0 +1,41 @@
+{
+  "diagnostic_only_checks": {
+    "blank_slot_rows": 0,
+    "budget_draining_loop_count": 389,
+    "budget_exhausted_rows": 4,
+    "compile_passed": 5,
+    "completed_rows": 6,
+    "exact_cycles": 0,
+    "exact_matches": 1,
+    "forward_caps": 0,
+    "passed": 4
+  },
+  "engineering_checks": {
+    "all_required_diagnostic_fields": true,
+    "budget_bounds_all_rows": true,
+    "budget_conservation_all_rows": true,
+    "budget_draining_events_nonterminal": true,
+    "completeness_audit": true,
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "final_nonempty_invariant_all_completed": true,
+    "full_step_trace_present": true,
+    "guard_rejections_are_unique_and_finite": true,
+    "inactive_rows_match_a": true,
+    "no_premature_exact_cycle_classification": true,
+    "resume_dedup_config_audit": true,
+    "terminal_failures_explicit_and_empty": true,
+    "zero_completed_blank_slot": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_invariant_errors": true,
+    "zero_runtime_errors": true,
+    "zero_silent_unresolved_acceptance": true
+  },
+  "engineering_gate_passed": true,
+  "full_authorized": false,
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "pass_at_least_18": null,
+  "passed": true,
+  "recorded_at_utc": "2026-08-02T08:03:50.249488+00:00",
+  "stage": "affected6"
+}

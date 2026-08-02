@@ -1,0 +1,16 @@
+{
+  "allowed_terminal_protocol_failure_count": 0,
+  "average_forwards": 97.16666666666667,
+  "average_wall_time_seconds": 7.460535985980338,
+  "completed": 6,
+  "current_task_id": null,
+  "eta_seconds": 0.0,
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "protocol_violation_count": 0,
+  "stage": "affected6",
+  "status": "generation_complete",
+  "terminal_method_failure_count": 0,
+  "total": 6,
+  "total_token_forwards": 91329,
+  "updated_at_utc": "2026-08-02T08:03:51.808389+00:00"
+}

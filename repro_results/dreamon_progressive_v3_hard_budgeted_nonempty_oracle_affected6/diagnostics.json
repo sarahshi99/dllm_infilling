@@ -1,0 +1,129 @@
+{
+  "boundary_events_with_left_masks_remaining": 4,
+  "boundary_retokenized_left_token_count": 5,
+  "budget_draining_loop_count": 389,
+  "budget_draining_loop_rows": 4,
+  "budget_exhausted_rows": 4,
+  "cross_region_delete_attempts": 0,
+  "discard_reference_summary": {
+    "complete_text_reference": {
+      "available_events": 0,
+      "exact_match_rate": null,
+      "prefix_rate": null,
+      "substring_rate": null
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.028037383177570093,
+      "mean_per_event": 0.75,
+      "median_per_event": 0.5,
+      "normal_generated_token_denominator": 107,
+      "total": 3
+    },
+    "event_count": 4,
+    "leading_segment_reference": {
+      "available_events": 2,
+      "prefix_rate": 0.0,
+      "substring_rate": 0.5
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 2,
+    "row_fraction_with_resolved_discard": 0.3333333333333333,
+    "rows_with_boundary_event": 4,
+    "rows_with_resolved_discard": 2,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 1.0,
+        "compile_passed": 2,
+        "pass_rate": 1.0,
+        "passed": 2,
+        "rows": 2
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.75,
+        "compile_passed": 3,
+        "pass_rate": 0.5,
+        "passed": 2,
+        "rows": 4
+      }
+    }
+  },
+  "discarded_masks_after_boundary": 32,
+  "discarded_resolved_tokens_after_boundary": 3,
+  "exact_cycle_rows": 0,
+  "expand_budget_conservation_failures": 0,
+  "expand_logit_blocked_by_budget_count": 52,
+  "first_selected_region_distribution": {
+    "HARD_SLOT_0": 6
+  },
+  "hard_forbidden_newline_attempts": 0,
+  "joint_updates_before_slot0_complete": 0,
+  "max_masks_deleted_by_one_eos": 3,
+  "method": "v3_hard_budgeted_nonempty_oracle",
+  "mixed_newline_token_events": 5,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 5,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 446,
+  "nonempty_guard_rejections_by_action": {
+    "line_boundary": 315,
+    "region_local_eos": 131
+  },
+  "nonempty_guard_rejections_by_slot": {
+    "HARD_SLOT_0": 5,
+    "HARD_SLOT_1": 1,
+    "HARD_SLOT_2": 440
+  },
+  "nonempty_guard_triggered_rows": 6,
+  "protocol_flag_distribution": {},
+  "pure_newline_token_events": 0,
+  "region_final_length_distributions": {
+    "HARD_SLOT_0": {
+      "4": 1,
+      "5": 1,
+      "6": 4
+    },
+    "HARD_SLOT_1": {
+      "4": 2,
+      "6": 3,
+      "11": 1
+    },
+    "HARD_SLOT_2": {
+      "1": 1,
+      "5": 1,
+      "6": 2,
+      "7": 1,
+      "9": 1
+    }
+  },
+  "region_local_eos_deleted_masks": 214,
+  "region_local_eos_events": 195,
+  "slot_expand_distributions": {
+    "HARD_SLOT_0": {
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "5": 1,
+      "10": 1,
+      "18": 1
+    },
+    "HARD_SLOT_1": {
+      "0": 2,
+      "2": 2,
+      "7": 1,
+      "8": 1
+    },
+    "HARD_SLOT_2": {
+      "1": 1,
+      "2": 1,
+      "39": 1,
+      "59": 1,
+      "61": 1,
+      "64": 1
+    }
+  },
+  "stage": "affected6",
+  "status_distribution": {
+    "completed": 6
+  },
+  "tail_multiline_rows": 0
+}

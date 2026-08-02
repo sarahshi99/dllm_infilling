@@ -1,0 +1,104 @@
+{
+  "blank_region_count": 0,
+  "blank_slot_rows": 0,
+  "budget_draining_loop_count": 818,
+  "budget_draining_loop_rows": 8,
+  "budget_exhausted_rows": 8,
+  "compile_pass_rate": 0.8333333333333334,
+  "compile_passed": 25,
+  "completed_only": {
+    "compile_pass_rate": 0.8333333333333334,
+    "compile_passed": 25,
+    "exact_match_rate": 0.26666666666666666,
+    "exact_matches": 8,
+    "pass_rate": 0.6,
+    "passed": 18
+  },
+  "completed_rows": 30,
+  "completion_physical_lines": {
+    "distribution": {
+      "3": 30
+    },
+    "mean": 3
+  },
+  "completion_rate": 1.0,
+  "completion_tokens": {
+    "mean": 20.566666666666666,
+    "median": 20.0
+  },
+  "cross_region_delete_attempts": 0,
+  "delete_count": 417,
+  "discarded_masks_after_boundary": 133,
+  "discarded_resolved_tokens_after_boundary": 42,
+  "exact_cycle_count": 0,
+  "exact_match_rate": 0.26666666666666666,
+  "exact_matches": 8,
+  "expand_budget_consumed": {
+    "distribution": {
+      "5": 2,
+      "7": 2,
+      "8": 1,
+      "9": 4,
+      "10": 1,
+      "11": 1,
+      "12": 2,
+      "13": 1,
+      "14": 1,
+      "16": 1,
+      "17": 2,
+      "18": 1,
+      "19": 1,
+      "20": 1,
+      "21": 1,
+      "64": 8
+    },
+    "max": 64,
+    "mean": 26,
+    "median": 15.0
+  },
+  "expand_count": 780,
+  "expand_logit_blocked_by_budget_count": 66,
+  "forward_cap_count": 0,
+  "forwards": {
+    "max": 139,
+    "mean": 58.9,
+    "median": 35.0,
+    "total": 1767
+  },
+  "global_expand_cap_hits": 0,
+  "max_masks_deleted_by_one_eos": 3,
+  "mixed_newline_token_events": 42,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 44,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 446,
+  "nonempty_guard_triggered_rows": 6,
+  "num_base_problems": 9,
+  "num_samples": 30,
+  "pass_rate": 0.6,
+  "passed": 18,
+  "peak_cuda_memory_bytes": {
+    "max": 15506802688,
+    "mean": 15436658090.666666
+  },
+  "protocol_error_count": 0,
+  "pure_newline_token_events": 2,
+  "region_local_eos_deleted_masks": 437,
+  "region_local_eos_events": 417,
+  "runtime_error_count": 0,
+  "slot_expand_cap_hits": 0,
+  "task_macro_pass_rate": 0.593915343915344,
+  "token_forwards": {
+    "max": 27802,
+    "mean": 9611.066666666668,
+    "median": 6319.0,
+    "total": 288332
+  },
+  "unresolved_mask_count": 0,
+  "wall_time_seconds": {
+    "max": 12.140256438986398,
+    "mean": 3.9984151221617745,
+    "median": 2.549346952000633,
+    "total": 119.95245366485324
+  }
+}
