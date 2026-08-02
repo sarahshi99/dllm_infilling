@@ -44,11 +44,13 @@ assert protocol["generation"]["initial_expand_budget"] == 64
 assert protocol["generation"]["nonempty_guard"] is False
 
 source = Path("repro_scripts/dreamon_slot_generator.py").read_text(encoding="utf-8")
+runner = Path("repro_scripts/run_dreamon_progressive_v2.py").read_text(encoding="utf-8")
 assert "BoundaryShift" not in source
 assert "ast.parse" not in source
-assert "nonempty_guard_no_valid_action" not in source
 assert "remaining_expand_budget == 0" in source
 assert "state.remaining_expand_budget = pre_budget - 1" in source
+assert "nonempty_guard = method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE" in runner
+assert "nonempty_guard=method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE" in runner
 PY
 }
 
