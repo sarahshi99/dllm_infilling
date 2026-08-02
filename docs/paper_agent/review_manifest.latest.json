@@ -1084,6 +1084,32 @@
       "report": "docs/paper_agent/experiments/20260801_dreamon_v2_hard_v2_boundary.md"
     }
   },
+  "dreamon_progressive_v3": {
+    "branch": "codex/dreamon-progressive-v3-budgeted",
+    "decision": "reframe",
+    "population_role": "exact-three-line development/mechanism; not held-out",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "a_budgeted": {
+      "pilot_rows": 30,
+      "pilot_passed": 14,
+      "pilot_compile_passed": 23,
+      "full_authorized": false,
+      "report": "docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted.md"
+    },
+    "b_nonempty_oracle": {
+      "pilot_passed": 18,
+      "full_rows": 642,
+      "full_completed": 642,
+      "full_passed": 280,
+      "full_compile_passed": 471,
+      "full_exact_matches": 106,
+      "full_protocol_violations": 0,
+      "oracle_structural_diagnostic": true,
+      "deployable": false,
+      "report": "docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted_nonempty_oracle.md",
+      "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json"
+    }
+  },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
   "task_type": "phase5_independent_method_falsification",
   "test_evaluation_count": 0,

@@ -91,3 +91,5 @@ Interpretation: the current evidence supports using `midcons` as a short/medium 
 - strict_heldout_pass: `False`
 
 Interpretation: the simple dependency-free multivariate score does not pass the offline GPU gate. GPU work remains blocked until a safer signal, trace-enabled evidence, dynamic canvas control, or length-regularized modeling plan is justified.
+
+DreamOn V3 note, 2026-08-02 UTC: A budget-fidelity Pilot30 stops before Full at 14/30. Oracle nonempty B reaches Pilot30 18/30 and Full642 280/642 Pass, 471/642 compile, 106/642 exact, with zero blank or terminal failures. Full paired net is -21 versus one-shot and -36 versus historical V1. Treat as development/mechanism oracle structural negative/mixed evidence; decision `reframe`.

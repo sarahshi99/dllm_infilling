@@ -314,6 +314,33 @@
       "21": 1
     }
   },
+  "dreamon_progressive_v3": {
+    "decision": "reframe",
+    "population_role": "exact-three-line development/mechanism; not held-out",
+    "a_pilot": {
+      "method": "v3_hard_budgeted",
+      "rows": 30,
+      "completed": 30,
+      "passed": 14,
+      "compile_passed": 23,
+      "full_authorized": false
+    },
+    "b_full": {
+      "method": "v3_hard_budgeted_nonempty_oracle",
+      "oracle_structural_diagnostic": true,
+      "deployable": false,
+      "rows": 642,
+      "completed": 642,
+      "passed": 280,
+      "compile_passed": 471,
+      "exact_matches": 106,
+      "task_macro_pass_rate": 0.4246305830193298,
+      "protocol_runtime_terminal_failures": 0,
+      "paired_net_vs_one_shot": -21,
+      "paired_net_vs_v1": -36,
+      "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json"
+    }
+  },
   "current_checkpoint_long_sweep": {
     "evaluated_rules": 16776,
     "strict_viable_rules": 0,

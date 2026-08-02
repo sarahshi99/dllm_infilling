@@ -891,3 +891,10 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - V2-OpenTail-v1 full partial357 已封存为 abandoned，`resumable:false`；Joint-v1 未启动。
 - `v2_hard_v2_boundary` verification 与 Smoke 5 通过；Pilot 30 为 25/30 completed、5 exact cycles、Pass@1 11/30、compile 19/30、exact 5/30。
 - Pilot 仅达到 Pass@1 floor，未达到 completion/zero-cycle/zero-unresolved/zero-protocol/compile 门禁；decision=`stop_before_full`，未运行 full。
+
+## 2026-08-02 UTC DreamOn V3 budget + nonempty oracle
+
+- A Pilot30：30/30 completed、14/30 Pass、23/30 compile；工程通过但低于 18/30，Full 未授权。
+- B Pilot30：18/30 Pass，恰好授权 Full。B Full642：280/642 Pass、471/642 compile、106/642 exact、task-macro 42.46%，0 blank/cycle/forward-cap/runtime/protocol error。
+- Full 配对：vs one-shot 94/115 wins/losses，cluster CI `[-8.58pp,+2.37pp]`；vs V1 66/102，cluster CI `[-10.17pp,-1.03pp]`。
+- 结论：budget 与 nonempty 修复真实 decoder failure，但不足以形成可靠提升。B 是 oracle structural diagnostic，decision=`reframe`。

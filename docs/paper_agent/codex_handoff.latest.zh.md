@@ -358,3 +358,11 @@ Important ablation signals:
 - `docs/paper_agent/frozen_controller_protocol.zh.md`
 - `docs/paper_agent/lrdllm_protocol_audit.zh.md`
 - `docs/paper_agent/review_manifest.latest.json`
+
+## 9. 2026-08-02 DreamOn V3 handoff
+
+- branch：`codex/dreamon-progressive-v3-budgeted`。
+- A Pilot30 `14/30`，Full 未授权；B Pilot30 `18/30`，Full642 `280/642` Pass、`471/642` compile、`106/642` exact，642/642 completed，0 terminal/protocol failure。
+- B vs one-shot：94/115 wins/losses；vs V1：66/102。B 是 oracle structural diagnostic，非 deployable，非 held-out。
+- decision：`reframe`；停止新 DreamOn progressive 实验，等待独立复核。
+- analysis：`repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`。

@@ -235,3 +235,7 @@ Failure criterion: Any frozen-controller-test row appears, policies are tuned af
 Stop condition: Stop after one full allowed Dream-Coder SingleLine run; do not add Dream-Coder E/F/G actions or tune policy after results.
 Expected report path: `analysis_outputs/dreamcoder_full_allowed_singleline_diagnostic_20260710_v1/report.md`
 Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and `2781` policy rows. Primary/control `735/927`, best simple length policy `744/927`, oracle-sufficient canvas `858/927`; oracle gain vs primary `137`, simple help/harm `25/16`, oracle harm vs primary `14`, rescue/non-canvas-limited `55`. Interpretation: optional full allowed second-backbone SingleLine diagnostic, not model-agnostic confirmation.
+
+## EXP-007: DreamOn V3 cumulative budget and nonempty oracle
+
+Status: completed. A Pilot30 stopped before Full at 14/30. B Pilot30 reached 18/30 and authorized B Full642; Full completed 642/642 with 280 Pass and 471 compile, but paired net is `-21` versus one-shot and `-36` versus historical V1. Decision `reframe`; no further DreamOn progressive experiment is queued.

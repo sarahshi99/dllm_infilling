@@ -22,3 +22,11 @@ DreamOn V2-Hard-v2 scoped runs：
 |---|---|---:|---:|---:|---:|---|
 | `dreamon_progressive_v2_hard_v2_smoke5_20260801` | `diagnostic_gate_passed` | 5 | 5 | 2 | 3 | smoke 协议门禁通过。 |
 | `dreamon_progressive_v2_hard_v2_pilot30_20260801` | `stopped_pilot_gate_failed` | 30 | 25 | 11 | 19 | 5 个 exact cycle，未达到 completion/compile 门禁；full 未启动。 |
+
+DreamOn V3 scoped runs：
+
+| 运行 | 状态 | Rows | Completed | Pass | Compile | 结论 |
+|---|---|---:|---:|---:|---:|---|
+| `v3_hard_budgeted_pilot30_20260802` | `engineering_pass_quality_fail` | 30 | 30 | 14 | 23 | 官方累计 budget control；Full 未授权。 |
+| `v3_hard_budgeted_nonempty_oracle_pilot30_20260802` | `full_authorized` | 30 | 30 | 18 | 25 | oracle structural pilot。 |
+| `v3_hard_budgeted_nonempty_oracle_full642_20260802` | `completed_oracle_diagnostic` | 642 | 642 | 280 | 471 | 不可部署、非 held-out。 |

@@ -323,3 +323,9 @@
 - protocol：`repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`。
 - execution：78 tests/static gates 通过；Smoke 5 为 5/5 completed、0 cycle/error；Pilot 30 为 25/30 completed、5 exact cycles、Pass@1 11/30、compile 19/30、exact 5/30。
 - gate：pilot 仅通过 Pass@1 floor；completion/zero-cycle/zero-unresolved/zero-protocol/compile floors 失败。按预注册规则 `stop_before_full`，未创建 full 结果，未启动 OpenTail-v2/Joint-v2。
+
+## 2026-08-02 UTC DreamOn V3 iterate_and_execute
+
+- action：完成 A official cumulative budget 与 B oracle nonempty guard 的测试、Cycle5/Affected6、Pilot 和获授权 Full。
+- result：A Pilot 14/30，未跑 Full；B Pilot 18/30；B Full 280/642 Pass、471/642 compile、642/642 completed、0 protocol/runtime failure。
+- interpretation：budget 解释旧 cycle 误终止，nonempty 解释部分 blank failure；剩余错误未被两者解释。B 低于 one-shot/V1，decision=`reframe`。

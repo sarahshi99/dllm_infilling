@@ -1,45 +1,25 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-08-01 UTC
+Timestamp: 2026-08-02 UTC
 
-Research decision: `iterate`.
+Research decision: `reframe`.
 
-Action status: stopped after the `v2_hard_v2_boundary` pilot failed its preregistered gate. Await independent review; do not start full, V2-OpenTail-v2, or Joint-OpenTail-v2.
+Action status: DreamOn V3 A/B execution is complete. Stop after independent review; do not start OpenTail, Joint-OpenTail, BoundaryShift, AST repair, or another progressive variant.
 
-Branch/worktree:
+Branch: `codex/dreamon-progressive-v3-budgeted`
 
-- branch: `codex/dreamon-progressive-v2-slots`
-- worktree: `/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v2-slots`
-- iteration starting HEAD: `0cf2e9bd47590629fdde31ab1028b59044e63cef`
+Frozen identity: 642 rows / 115 base problems, exact-three-line development/mechanism population; not held-out. Manifest SHA256 `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`; model snapshot `8ccc74750e43177327f29dab9e91882ba759e194`.
 
-Frozen evidence:
+Completed outcome:
 
-- manifest SHA256: `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`
-- population: 642 rows, 642 unique task IDs, 115 base problems
-- role: exact-three-line development/mechanism population, not held-out test
-- model snapshot: `8ccc74750e43177327f29dab9e91882ba759e194`
+- A `v3_hard_budgeted`: Pilot30 14/30 Pass and 23/30 compile; engineering gate passed, Full threshold failed, so A Full was not run.
+- B `v3_hard_budgeted_nonempty_oracle`: Pilot30 18/30 and Full642 authorized. Full completed 642/642 with 280 Pass, 471 compile, 106 exact, task-macro 42.46%, and zero blank/cycle/forward-cap/runtime/protocol failures.
+- B is an oracle structural diagnostic, not deployable and not held-out. Full paired net is `-21` versus one-shot and `-36` versus historical V1 progressive.
 
-Superseded protocol-v1 evidence:
+Primary artifacts:
 
-- V2-Hard-v1 remains immutable at 642/642, Pass@1 `7/642`, compile `46/642`, and 421 forward-cap failures.
-- Required label: `V2-Hard-v1 decoder/protocol failure diagnostic; not a clean test of progressive-slot efficacy`.
-- V2-OpenTail-v1 partial357 is abandoned with `resumable:false` at `repro_results/abandoned/dreamon_v2_opentail_protocol_v1_partial357/`.
-- Joint-OpenTail-v1 was never started.
+- `docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted.md`
+- `docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted_nonempty_oracle.md`
+- `repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`
 
-Protocol-v2 decoder revisions:
-
-1. newline-containing hard-slot proposals become online `line_boundary` actions;
-2. EOS deletes selected/right unresolved masks only within the active region;
-3. a repeated exact full transition terminates immediately as `exact_deterministic_cycle`.
-
-Execution outcome:
-
-1. verification passed: 78 tests, py_compile, shell/source scan, real tokenizer mapping and 642-row static canvas audit;
-2. Smoke passed: 5/5 completed and zero errors/cycles/invariant violations;
-3. Pilot failed: 25/30 completed, 5 exact cycles, compile 19/30, Pass@1 11/30;
-4. full was not started and is not authorized;
-5. current state is `stop_before_full`.
-
-Protocol: `repro_results/dreamon_progressive_v2_hard_v2_protocol/protocol.json`.
-
-Command: `bash repro_scripts/run_dreamon_progressive_v2_hard_v2.sh {verify|smoke|pilot|full}`.
+Next action: independent review and claim reframing only.

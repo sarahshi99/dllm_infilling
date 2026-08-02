@@ -54,3 +54,10 @@ Updated: 2026-07-11 UTC
 - Smoke and pilot use preregistered quality/termination gates. A failed gate stops the round; thresholds and failure labels may not be changed after observation.
 - No V2-OpenTail-v2 or Joint-OpenTail-v2 run is authorized before independent review of V2-Hard-v2.
 - V2-Hard-v2 execution result: Smoke 5 passed, but Pilot 30 failed the frozen gate with 25/30 completed, 5 exact cycles, compile 19/30, and Pass@1 11/30. The Pass floor passed, but completion, zero-cycle, zero-unresolved, zero-protocol-error, and compile floors failed. Decision is `stop_before_full`; do not change thresholds or run full.
+
+## 2026-08-02 DreamOn V3 budget/nonempty iteration
+
+- A restores only the official cumulative expand budget. It removes the five old premature cycles, but Pilot30 reaches 14/30, so A Full is not authorized.
+- B adds only an oracle hard-slot nonempty guard. Pilot30 reaches 18/30 and Full642 completes at 280 Pass, 471 compile, 106 exact, with zero blank or terminal failures.
+- B Full is below one-shot (94 wins / 115 losses) and historical V1 progressive (66 wins / 102 losses). It is not deployable or held-out.
+- Decision: `reframe`; stop before OpenTail, Joint, BoundaryShift, AST repair, or another progressive variant.

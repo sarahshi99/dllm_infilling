@@ -187,3 +187,11 @@ Cost: Low CPU, completed.
 Risks: Consolidation can accidentally mix A6000 historical and H200 current evidence; must preserve labels.
 Decision rule: Every table row must cite one compact artifact and carry status labels: H200 evidence, official diagnostic, hard-tail stress, blocked, validation-only, or sealed.
 Related files: `analysis_outputs/paper_evidence_consolidation_20260710_v1/`, `analysis_outputs/research_planning_20260708_cpu_claim_audit/`, `docs/paper_agent/codex_handoff.latest.zh.md`, `docs/results/run_registry.md`
+
+## IDEA-011: DreamOn boundary carry hypothesis
+
+Source: DreamOn V3 diagnostics
+Status: deferred after reframe
+Scientific question: Can next-line-like resolved text discarded by online boundaries be carried into the next slot without reference dependence or post-hoc truncation?
+Evidence: B Full has resolved discard on 356/642 rows; 51/164 complete discarded texts exactly match the oracle next line.
+Decision rule: Do not implement automatically. Require independent review and a fresh matched protocol.

@@ -119,3 +119,11 @@ Phase 2 frozen-controller note, 2026-07-03: compact controller artifacts are tra
 | `dreamon_progressive_v2_hard_v2_pilot30_20260801` | `stopped_pilot_gate_failed` | 30 | 25 | 11 | 19 | `DreamOn-v0-7B` | `repro_results/dreamon_progressive_v2_hard_v2_pilot30/` |
 
 The pilot has five exact deterministic cycles and fails the preregistered completion/compile gate. Full 642 was not started.
+
+## DreamOn V3 scoped runs
+
+| Run | Status | Rows | Completed | Pass | Compile | Role |
+|---|---|---:|---:|---:|---:|---|
+| `v3_hard_budgeted_pilot30_20260802` | `engineering_pass_quality_fail` | 30 | 30 | 14 | 23 | official budget fidelity control; Full not authorized |
+| `v3_hard_budgeted_nonempty_oracle_pilot30_20260802` | `full_authorized` | 30 | 30 | 18 | 25 | oracle structural pilot |
+| `v3_hard_budgeted_nonempty_oracle_full642_20260802` | `completed_oracle_diagnostic` | 642 | 642 | 280 | 471 | not deployable or held-out |
