@@ -1,0 +1,200 @@
+{
+  "protocol_name": "dreamon_progressive_v3_hard_budgeted",
+  "protocol_version": 3,
+  "frozen_at_utc": "2026-08-02",
+  "research_decision": "iterate_and_execute",
+  "method": "v3_hard_budgeted",
+  "method_role": "official-protocol-fidelity repair/control",
+  "label": "oracle exact-three-line development/mechanism diagnostic with official cumulative expansion budget restored",
+  "population": {
+    "role": "development/mechanism population",
+    "not_held_out_test": true,
+    "selection_note": "Reference-selected exact-three-nonempty-newline-terminated physical-line population; generation receives only sanitized fields.",
+    "manifest_path": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/manifest.jsonl",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "rows": 642,
+    "unique_task_ids": 642,
+    "base_problems": 115,
+    "generation_population_path": "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+    "generation_population_sha256": "ffaac8a367103ee50893542bf5deb368232d40a904509db4708173994427731d",
+    "generation_allowed_fields": ["task_id", "base_problem_id", "prompt", "suffix"],
+    "generation_forbidden_fields": [
+      "canonical_solution",
+      "reference_middle",
+      "reference_lines",
+      "reference token counts",
+      "reference indentation",
+      "test results"
+    ]
+  },
+  "cycle5_diagnostic": {
+    "role": "post-hoc mechanism falsification diagnostic; not independent performance evidence",
+    "population_path": "repro_results/dreamon_progressive_v3_hard_budgeted_protocol/cycle5_generation_population.jsonl",
+    "population_sha256": "9d4922c330937e0e685061d00006b58419e4bbcbe8b2a09f26add474ebe2d263",
+    "rows": 5,
+    "task_ids": [
+      "MultiLineInfilling/HumanEval/1/L6_L8",
+      "MultiLineInfilling/HumanEval/5/L5_L7",
+      "MultiLineInfilling/HumanEval/6/L3_L5",
+      "MultiLineInfilling/HumanEval/9/L4_L6",
+      "MultiLineInfilling/HumanEval/11/L1_L3"
+    ]
+  },
+  "model": {
+    "repository": "Dream-org/DreamOn-v0-7B",
+    "snapshot": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "dtype": "bfloat16",
+    "device": "cuda:0",
+    "batch_size": 1,
+    "dreamon_repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "tokenizer_revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "official_expand_budget_source": {
+    "repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "generator_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/generator.py",
+    "class": "MDMGenerator",
+    "initialization": "MDMGenerator.__init__: self.expand_budget = self.max_gen_len",
+    "per_sample_initialization": "batch_generate_with_expand_as_token: expand_budget = self.expand_budget",
+    "preselection_mask": "Before entropy/proposal/position selection, expansion logit is blocked when cur_generation_window_length == max_tokens or expand_budget == 0.",
+    "successful_expand_decrement": "After a selected expand token is replaced by two masks, num_generation_tokens increases by one and expand_budget decreases by one.",
+    "evaluation_shell_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/eval_humaneval_infilling.sh",
+    "evaluation_config_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/configs/eval_infill.yaml",
+    "max_gen_len_mapping": 64,
+    "local_semantics": "One global per-sample cumulative budget shared across all three sequential slots; no reset and no refund on deletion. No other official config difference is imported."
+  },
+  "tokenizer": {
+    "runtime_tokenizer_size": 151668,
+    "model_vocab_size": 152064,
+    "bos_token_id": 151665,
+    "eos_and_pad_token_id": 151643,
+    "mask_token_id": 151666,
+    "expand_token_id": 151667,
+    "literal_newline_token_ids": [198],
+    "newline_token_definition": "Every tokenizer ID whose single-token decode contains newline or carriage return.",
+    "newline_token_count": 2179,
+    "newline_token_ids_sha256": "b9be6f30d56789763a9005ff3a1563c0025e05fee4601ac74103595009f607df",
+    "newline_token_mapping_count": 2179,
+    "newline_token_mapping_sha256": "73ed6254e2f3199655b9a41143ba45b465484c5c45317e15e14b75da83d51042",
+    "mapping_normalization": "Replace CRLF and bare CR with LF; split at first LF; retokenize and strict-round-trip left text.",
+    "generation_lookup": "One vocabulary scan at tokenizer initialization followed by O(1) token-ID lookup."
+  },
+  "generation": {
+    "initial_masks_per_region": 4,
+    "activation": ["HARD_SLOT_0", "HARD_SLOT_1", "HARD_SLOT_2"],
+    "locked_newline_separators": 3,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "top_k": null,
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "number_transfer_tokens": 1,
+    "seed": 42,
+    "max_context_tokens": 2048,
+    "max_prompt_tokens": 2048,
+    "max_total_forwards": 256,
+    "max_global_middle_tokens_instantaneous": 64,
+    "max_hard_slot_tokens_instantaneous": 32,
+    "initial_expand_budget": 64,
+    "expand_budget_scope": "per_sample_global",
+    "expand_budget_reset_per_slot": false,
+    "expand_budget_refund_on_delete": false,
+    "expand_budget_logit_mask_at_zero": true,
+    "nonempty_guard": false,
+    "attention": "All real prefix, completed/current/future slots, locked separators, and suffix participate in every full forward; only right padding is hidden.",
+    "selection": "Only unresolved masks in the sequentially active hard slot are eligible; one position is selected by largest negative-entropy confidence.",
+    "completion": "Direct region/token extraction with locked separators; no post-hoc truncation, repair, retry, or fallback."
+  },
+  "decoder_revision": {
+    "nonempty_guard": false,
+    "newline_boundary": "Unchanged from V2-Hard-v2 online first-newline boundary action.",
+    "region_local_eos": "Unchanged from V2-Hard-v2 local unresolved-mask broadcast deletion.",
+    "expand_budget": {
+      "initial": 64,
+      "successful_expand_cost": 1,
+      "rejected_or_unselected_expand_cost": 0,
+      "delete_refund": 0,
+      "zero_budget_action": "Set eligible expand vocabulary logits to -inf before top-p, entropy confidence, proposal, and position selection."
+    },
+    "cycle_detection": {
+      "canvas_only_hash": [
+        "method",
+        "input_ids[:real_length]",
+        "region_id[:real_length]",
+        "attention-visible real_length",
+        "real_length",
+        "active_region"
+      ],
+      "full_budgeted_hash_additions": [
+        "initial_expand_budget",
+        "remaining_expand_budget",
+        "successful_expand_count"
+      ],
+      "budget_draining_loop": "Repeated canvas transition with strictly lower pre/post remaining budget is diagnostic only and does not terminate.",
+      "exact_deterministic_cycle": "Only the second occurrence of the same complete transition at the same full budgeted state is terminal."
+    }
+  },
+  "resume": {
+    "durability": "Atomic/durable append after each complete row.",
+    "key": ["task_id", "method", "config_hash"],
+    "mid_row_checkpoint": false,
+    "interrupted_row": "Deterministically rerun from remaining_expand_budget=64.",
+    "cross_protocol_resume": false
+  },
+  "failure_policy": {
+    "forward_cap_with_unresolved_masks": "controlled terminal method failure; empty completion; included in denominator",
+    "exact_deterministic_cycle": "controlled terminal method failure; empty completion; included in denominator",
+    "runtime_or_invariant_damage": "engineering gate failure and immediate stop",
+    "silent_mask_removal": false,
+    "context_truncation": false,
+    "posthoc_structural_repair": false
+  },
+  "stage_gates": {
+    "cycle5": {
+      "rows": 5,
+      "save_step_trace": true,
+      "engineering_only": true
+    },
+    "pilot": {
+      "rows": 30,
+      "engineering_gate_required": true,
+      "full_quality_authorization": "overall Pass@1 >= 18/30",
+      "compile_completed_blank_cycle_forward_cap": "diagnostic only"
+    },
+    "full": {
+      "rows": 642,
+      "quality_early_stop": false,
+      "stop_only_on": [
+        "invariant corruption",
+        "data leakage",
+        "duplicate or missing rows",
+        "systemic runtime damage"
+      ]
+    }
+  },
+  "evaluator": {
+    "repository_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "timeout_seconds": 3,
+    "workers": 8,
+    "program": "prompt + completion + suffix",
+    "functional_metric": "HumanEval Infilling check_correctness Pass@1",
+    "compile_metric": "ast.parse plus compile",
+    "exact_match": "completion equals canonical_solution"
+  },
+  "diagnostics": {
+    "discard_reference_analysis": "Oracle mechanism diagnostic performed only after generation.",
+    "historical_controls": {
+      "one_shot_pilot_passed": 19,
+      "one_shot_pilot_compiled": 30,
+      "v1_progressive_pilot_passed": 16,
+      "v1_progressive_pilot_compiled": 25,
+      "v2_hard_v2_pilot_passed": 11,
+      "v2_hard_v2_pilot_compiled": 19,
+      "v2_hard_v2_pilot_completed": 25,
+      "v2_hard_v2_pilot_exact_cycles": 5
+    },
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 42,
+    "statistical_unit": "row with base_problem_id cluster"
+  }
+}

@@ -59,6 +59,8 @@ HISTORICAL_DIR = EXTERNAL_ROOT / "repro_results/dreamon_progressive_three_line_a
 HUMAN_EVAL_ROOT = EXTERNAL_ROOT / "human-eval-infilling"
 
 STAGE_SIZES = {"smoke": 5, "pilot": 30, "full": 642}
+TARGETED_STAGE_SIZES = {"cycle5": 5}
+ALL_STAGE_SIZES = {**STAGE_SIZES, **TARGETED_STAGE_SIZES}
 ALLOWED_GENERATION_FIELDS = {"task_id", "base_problem_id", "prompt", "suffix"}
 FORBIDDEN_GENERATION_FIELDS = {
     "canonical_solution",
@@ -133,6 +135,17 @@ def git_head() -> str:
     ).strip()
 
 
+def stage_size(stage: str) -> int:
+    try:
+        return ALL_STAGE_SIZES[stage]
+    except KeyError as error:
+        raise ValueError(f"Unknown stage: {stage}") from error
+
+
+def is_v3_method(method: Method) -> bool:
+    return method == Method.V3_HARD_BUDGETED
+
+
 def build_method_config(
     method: Method,
     stage: str,
@@ -140,22 +153,25 @@ def build_method_config(
     protocol_path: Path = DEFAULT_PROTOCOL,
     population_path: Path = DEFAULT_POPULATION,
 ) -> dict[str, Any]:
-    if stage not in STAGE_SIZES:
-        raise ValueError(f"Unknown stage: {stage}")
+    selected_stage_size = stage_size(stage)
     protocol_sha = sha256(protocol_path) if protocol_path.exists() else "missing"
     population_sha = sha256(population_path) if population_path.exists() else "missing"
     is_boundary_v2 = method == Method.V2_HARD_V2_BOUNDARY
+    is_v3_budgeted = method == Method.V3_HARD_BUDGETED
+    nonempty_guard = False
+    if is_v3_budgeted:
+        protocol_name = "dreamon_progressive_v3_hard_budgeted"
+    elif is_boundary_v2:
+        protocol_name = "dreamon_progressive_v2_hard_boundary"
+    else:
+        protocol_name = "dreamon_progressive_v2_slots"
     return {
-        "protocol_name": (
-            "dreamon_progressive_v2_hard_boundary"
-            if is_boundary_v2
-            else "dreamon_progressive_v2_slots"
-        ),
-        "protocol_version": 2 if is_boundary_v2 else 1,
+        "protocol_name": protocol_name,
+        "protocol_version": 3 if is_v3_budgeted else (2 if is_boundary_v2 else 1),
         "protocol_sha256": protocol_sha,
         "method": method.value,
         "stage": stage,
-        "stage_size": STAGE_SIZES[stage],
+        "stage_size": selected_stage_size,
         "runner_commit": runner_commit,
         "population_sha256": population_sha,
         "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
@@ -174,9 +190,15 @@ def build_method_config(
         "max_global_middle_tokens": 64,
         "max_hard_slot_tokens": 32,
         "seed": 42,
-        "newline_boundary_action": is_boundary_v2,
-        "region_local_eos_broadcast": is_boundary_v2,
-        "exact_transition_cycle_detection": is_boundary_v2,
+        "newline_boundary_action": is_boundary_v2 or is_v3_budgeted,
+        "region_local_eos_broadcast": is_boundary_v2 or is_v3_budgeted,
+        "exact_transition_cycle_detection": is_boundary_v2 or is_v3_budgeted,
+        "initial_expand_budget": 64 if is_v3_budgeted else None,
+        "expand_budget_scope": "per_sample_global" if is_v3_budgeted else None,
+        "expand_budget_reset_per_slot": False if is_v3_budgeted else None,
+        "expand_budget_refund_on_delete": False if is_v3_budgeted else None,
+        "expand_budget_logit_mask_at_zero": True if is_v3_budgeted else None,
+        "nonempty_guard": nonempty_guard,
     }
 
 
@@ -195,6 +217,31 @@ def load_generation_population(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def load_targeted_generation_population(
+    path: Path, expected_rows: int
+) -> list[dict[str, Any]]:
+    rows = read_jsonl(path)
+    task_ids: list[str] = []
+    for row in rows:
+        forbidden = set(row) & FORBIDDEN_GENERATION_FIELDS
+        if forbidden:
+            raise RuntimeError(f"forbidden generation field(s): {sorted(forbidden)}")
+        if set(row) != ALLOWED_GENERATION_FIELDS:
+            raise RuntimeError(f"unexpected generation schema: {sorted(row)}")
+        task_ids.append(row["task_id"])
+    if len(task_ids) != expected_rows or len(set(task_ids)) != expected_rows:
+        raise RuntimeError(
+            f"Targeted generation population expected {expected_rows} unique tasks"
+        )
+    return rows
+
+
+def load_stage_population(path: Path, stage: str) -> list[dict[str, Any]]:
+    if stage in TARGETED_STAGE_SIZES:
+        return load_targeted_generation_population(path, stage_size(stage))
+    return load_generation_population(path)[: stage_size(stage)]
+
+
 def prediction_key(row: Mapping[str, Any]) -> tuple[str, str, str]:
     return row["task_id"], row["method"], row["config_hash"]
 
@@ -205,12 +252,18 @@ def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
     unresolved = int(row["unresolved_mask_count"])
     if status == "completed" and not flags and unresolved == 0:
         return "completed"
-    if row.get("method") == Method.V2_HARD_V2_BOUNDARY.value:
+    if row.get("method") in {
+        Method.V2_HARD_V2_BOUNDARY.value,
+        Method.V3_HARD_BUDGETED.value,
+    }:
         if (
             status == "protocol_error"
             and len(flags) == 1
             and flags[0]
-            in {"forward_cap_with_unresolved_masks", "exact_deterministic_cycle"}
+            in {
+                "forward_cap_with_unresolved_masks",
+                "exact_deterministic_cycle",
+            }
             and row["completion"] == ""
         ):
             return "terminal_method_failure"
@@ -329,7 +382,12 @@ def encode_problem(row: Mapping[str, str], tokenizer, spec: TokenizerSpec):
 def error_result(method: Method, error: BaseException) -> dict[str, Any]:
     region_names = (
         ["HARD_SLOT_0", "HARD_SLOT_1", "HARD_SLOT_2"]
-        if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY)
+        if method
+        in (
+            Method.V2_HARD,
+            Method.V2_HARD_V2_BOUNDARY,
+            Method.V3_HARD_BUDGETED,
+        )
         else ["HARD_SLOT_0", "HARD_SLOT_1", "OPEN_TAIL"]
     )
     zero = {name: 0 for name in region_names}
@@ -371,6 +429,24 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
         "max_masks_deleted_by_one_eos": 0,
         "cross_region_delete_attempts": 0,
         "exact_cycle_events": [],
+        "initial_expand_budget": (
+            64
+            if method
+            == Method.V3_HARD_BUDGETED
+            else None
+        ),
+        "remaining_expand_budget": (
+            64 if method == Method.V3_HARD_BUDGETED else None
+        ),
+        "expand_budget_consumed": (
+            0 if method == Method.V3_HARD_BUDGETED else None
+        ),
+        "expand_budget_conservation_passed": False,
+        "budget_exhausted": False,
+        "budget_exhausted_forward_index": None,
+        "expand_logit_blocked_by_budget_count": 0,
+        "budget_draining_loop_count": 0,
+        "budget_draining_loop_events": [],
         "slot_expand_cap_hits": 0,
         "global_expand_cap_hits": 0,
         "unresolved_mask_count": 0,
@@ -437,8 +513,7 @@ def run_generation(args: argparse.Namespace) -> None:
     from transformers import AutoModel, AutoTokenizer
 
     protocol = read_json(args.protocol)
-    population = load_generation_population(args.population)
-    selected = population[: STAGE_SIZES[args.stage]]
+    selected = load_stage_population(args.population, args.stage)
     selected_task_ids = [row["task_id"] for row in selected]
     method = Method(args.method)
     if method == Method.V2_HARD_V2_BOUNDARY:
@@ -446,6 +521,13 @@ def run_generation(args: argparse.Namespace) -> None:
             raise RuntimeError("V2-Hard-v2 requires protocol version 2")
         if protocol.get("method") != method.value:
             raise RuntimeError("Protocol method does not match V2-Hard-v2")
+    if is_v3_method(method):
+        if protocol.get("protocol_version") != 3:
+            raise RuntimeError("V3 requires protocol version 3")
+        if protocol.get("method") != method.value:
+            raise RuntimeError("Protocol method does not match V3 method")
+        if bool(protocol.get("decoder_revision", {}).get("nonempty_guard", False)):
+            raise RuntimeError("Protocol nonempty guard does not match V3 method")
     runner_commit = git_head()
     method_config = build_method_config(
         method,
@@ -509,7 +591,9 @@ def run_generation(args: argparse.Namespace) -> None:
         local_files_only=True,
         low_cpu_mem_usage=True,
     ).to(args.device).eval()
-    generator_config = SlotGeneratorConfig()
+    generator_config = SlotGeneratorConfig(
+        initial_expand_budget=64 if is_v3_method(method) else None,
+    )
     positions = {row["task_id"]: index for index, row in enumerate(selected, start=1)}
     generated_rows = list(existing)
 
@@ -526,7 +610,7 @@ def run_generation(args: argparse.Namespace) -> None:
                 prefix_ids=prefix_ids,
                 suffix_ids=suffix_ids,
                 config=generator_config,
-                save_trace=args.stage == "smoke",
+                save_trace=args.stage in {"smoke", "cycle5", "pilot"},
                 task_id=task_id,
             )
         except Exception as error:  # explicit row-level runtime failure, never silent
@@ -559,7 +643,7 @@ def run_generation(args: argparse.Namespace) -> None:
             f"token_forwards={row['token_forwards']} wall={row['wall_time_seconds']:.3f}s",
             flush=True,
         )
-        if method == Method.V2_HARD_V2_BOUNDARY:
+        if method == Method.V2_HARD_V2_BOUNDARY or is_v3_method(method):
             invariant_flags = {
                 "prefix_tokens_mutated",
                 "suffix_tokens_mutated",
@@ -593,7 +677,7 @@ def run_generation(args: argparse.Namespace) -> None:
                     "paused_early_stop",
                 )
                 raise RuntimeError("V2-Hard-v2 stopped on runtime/invariant damage")
-            if args.stage == "full":
+            if args.stage == "full" and method == Method.V2_HARD_V2_BOUNDARY:
                 noncompleted = sum(
                     item["status"] != "completed" for item in generated_rows
                 )
@@ -1039,6 +1123,10 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             sum(bool(value) for value in row["blank_region_flags"].values())
             for row in scored_rows
         ),
+        "blank_slot_rows": sum(
+            any(bool(value) for value in row["blank_region_flags"].values())
+            for row in scored_rows
+        ),
         "expand_count": sum(
             sum(row["expand_counts"].values()) for row in scored_rows
         ),
@@ -1058,6 +1146,56 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "forward_cap_with_unresolved_masks" in row["protocol_flags"]
             for row in scored_rows
         ),
+        "budget_exhausted_rows": sum(
+            bool(row.get("budget_exhausted", False)) for row in scored_rows
+        ),
+        "budget_draining_loop_rows": sum(
+            int(row.get("budget_draining_loop_count", 0)) > 0
+            for row in scored_rows
+        ),
+        "budget_draining_loop_count": sum(
+            int(row.get("budget_draining_loop_count", 0)) for row in scored_rows
+        ),
+        "expand_logit_blocked_by_budget_count": sum(
+            int(row.get("expand_logit_blocked_by_budget_count", 0))
+            for row in scored_rows
+        ),
+        "expand_budget_consumed": {
+            "mean": mean(
+                int(row["expand_budget_consumed"])
+                for row in scored_rows
+                if row.get("expand_budget_consumed") is not None
+            ),
+            "median": (
+                statistics.median(
+                    int(row["expand_budget_consumed"])
+                    for row in scored_rows
+                    if row.get("expand_budget_consumed") is not None
+                )
+                if any(
+                    row.get("expand_budget_consumed") is not None
+                    for row in scored_rows
+                )
+                else None
+            ),
+            "max": max(
+                (
+                    int(row["expand_budget_consumed"])
+                    for row in scored_rows
+                    if row.get("expand_budget_consumed") is not None
+                ),
+                default=None,
+            ),
+            "distribution": dict(
+                sorted(
+                    Counter(
+                        int(row["expand_budget_consumed"])
+                        for row in scored_rows
+                        if row.get("expand_budget_consumed") is not None
+                    ).items()
+                )
+            ),
+        },
         "newline_boundary_events": sum(
             int(row.get("newline_boundary_events", 0)) for row in scored_rows
         ),
@@ -1118,7 +1256,7 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 def run_scoring(args: argparse.Namespace) -> None:
     method = Method(args.method)
     predictions = read_jsonl(args.output_dir / "predictions.jsonl")
-    expected = STAGE_SIZES[args.stage]
+    expected = stage_size(args.stage)
     if len(predictions) != expected:
         raise RuntimeError(f"Expected {expected} predictions, found {len(predictions)}")
     config_record = read_json(args.output_dir / "config.json")
@@ -1149,7 +1287,7 @@ def run_scoring(args: argparse.Namespace) -> None:
     summary = method_summary(scored_rows)
     atomic_write_json(args.output_dir / "summary.json", summary)
     discard_reference_summary = None
-    if method == Method.V2_HARD_V2_BOUNDARY:
+    if method == Method.V2_HARD_V2_BOUNDARY or is_v3_method(method):
         from transformers import AutoTokenizer
 
         diagnostic_tokenizer = AutoTokenizer.from_pretrained(
@@ -1219,6 +1357,30 @@ def run_scoring(args: argparse.Namespace) -> None:
             "exact_deterministic_cycle" in row["protocol_flags"]
             for row in scored_rows
         ),
+        "budget_exhausted_rows": sum(
+            bool(row.get("budget_exhausted", False)) for row in scored_rows
+        ),
+        "budget_draining_loop_rows": sum(
+            int(row.get("budget_draining_loop_count", 0)) > 0
+            for row in scored_rows
+        ),
+        "budget_draining_loop_count": sum(
+            int(row.get("budget_draining_loop_count", 0)) for row in scored_rows
+        ),
+        "expand_logit_blocked_by_budget_count": sum(
+            int(row.get("expand_logit_blocked_by_budget_count", 0))
+            for row in scored_rows
+        ),
+        "expand_budget_conservation_failures": sum(
+            not bool(row.get("expand_budget_conservation_passed", True))
+            for row in scored_rows
+        ),
+        "slot_expand_distributions": {
+            region: dict(
+                sorted(Counter(row["expand_counts"][region] for row in scored_rows).items())
+            )
+            for region in scored_rows[0]["expand_counts"]
+        },
         "discard_reference_summary": discard_reference_summary,
         "region_final_length_distributions": {
             region: dict(
@@ -1255,12 +1417,12 @@ def write_completeness_audit(
     scored_ids = [row["task_id"] for row in scored_rows]
     selected_ids = [
         row["task_id"]
-        for row in load_generation_population(args.population)[: STAGE_SIZES[args.stage]]
+        for row in load_stage_population(args.population, args.stage)
     ]
     audit = {
         "method": args.method,
         "stage": args.stage,
-        "expected_rows": STAGE_SIZES[args.stage],
+        "expected_rows": stage_size(args.stage),
         "prediction_rows": len(predictions),
         "prediction_unique_task_ids": len(set(prediction_ids)),
         "score_rows": len(scored_rows),
@@ -1349,14 +1511,177 @@ def _compressed_activation_history(row: Mapping[str, Any]) -> list[str]:
     return compressed
 
 
+def _v3_exact_cycle_budget_consistent(row: Mapping[str, Any]) -> bool:
+    for event in row.get("exact_cycle_events", []):
+        if event.get("classification") != "exact_deterministic_cycle":
+            return False
+        if event.get("first_pre_remaining_budget") != event.get(
+            "repeat_pre_remaining_budget"
+        ):
+            return False
+        if event.get("first_post_remaining_budget") != event.get(
+            "repeat_post_remaining_budget"
+        ):
+            return False
+    return True
+
+
+def _run_v3_gate(args: argparse.Namespace) -> None:
+    method = Method(args.method)
+    predictions = read_jsonl(args.output_dir / "predictions.jsonl")
+    scored = read_jsonl(args.output_dir / "scored.jsonl")
+    summary = read_json(args.output_dir / "summary.json")
+    audit = read_json(args.output_dir / "completeness_audit.json")
+    expected = stage_size(args.stage)
+    invariant_flags = {
+        "prefix_tokens_mutated",
+        "suffix_tokens_mutated",
+        "locked_separator_tokens_mutated",
+        "future_region_mutated_before_activation",
+        "cross_region_delete_attempt",
+        "parallel_state_lengths_differ",
+        "pad_region_inside_real_sequence",
+        "non_pad_region_in_right_padding",
+        "expand_budget_conservation_failed",
+        "invalid_initial_expand_budget",
+        "invalid_remaining_expand_budget",
+        "missing_remaining_expand_budget",
+    }
+    required_fields = {
+        "newline_boundary_events",
+        "region_local_eos_events",
+        "cross_region_delete_attempts",
+        "exact_cycle_events",
+        "initial_expand_budget",
+        "remaining_expand_budget",
+        "expand_budget_consumed",
+        "expand_budget_conservation_passed",
+        "budget_exhausted",
+        "budget_exhausted_forward_index",
+        "expand_logit_blocked_by_budget_count",
+        "budget_draining_loop_count",
+        "budget_draining_loop_events",
+    }
+    terminal_rows = [row for row in predictions if row["status"] != "completed"]
+    engineering_checks = {
+        "expected_prediction_rows": len(predictions) == expected,
+        "expected_score_rows": len(scored) == expected,
+        "completeness_audit": bool(audit.get("complete")),
+        "all_required_diagnostic_fields": all(
+            required_fields.issubset(row) for row in predictions
+        ),
+        "zero_runtime_errors": all(
+            row["status"] != "runtime_error" for row in predictions
+        ),
+        "zero_invariant_errors": all(
+            not invariant_flags.intersection(row["protocol_flags"])
+            for row in predictions
+        ),
+        "zero_cross_region_delete_attempts": all(
+            int(row["cross_region_delete_attempts"]) == 0 for row in predictions
+        ),
+        "zero_silent_unresolved_acceptance": all(
+            row["status"] != "completed" or int(row["unresolved_mask_count"]) == 0
+            for row in predictions
+        ),
+        "terminal_failures_explicit_and_empty": all(
+            classify_protocol_outcome(row) == "terminal_method_failure"
+            and row["completion"] == ""
+            for row in terminal_rows
+        ),
+        "budget_conservation_all_rows": all(
+            bool(row["expand_budget_conservation_passed"])
+            for row in predictions
+        ),
+        "budget_bounds_all_rows": all(
+            int(row["initial_expand_budget"]) == 64
+            and 0 <= int(row["remaining_expand_budget"]) <= 64
+            and int(row["expand_budget_consumed"])
+            == 64 - int(row["remaining_expand_budget"])
+            for row in predictions
+        ),
+        "no_premature_exact_cycle_classification": all(
+            _v3_exact_cycle_budget_consistent(row) for row in predictions
+        ),
+        "budget_draining_events_nonterminal": all(
+            all(
+                event.get("classification") == "budget_draining_loop"
+                and event.get("terminal") is False
+                for event in row.get("budget_draining_loop_events", [])
+            )
+            for row in predictions
+        ),
+        "resume_dedup_config_audit": bool(audit.get("complete"))
+        and bool(audit.get("all_prediction_config_hashes_match"))
+        and bool(audit.get("task_order_matches_population")),
+    }
+    if args.stage == "cycle5":
+        engineering_checks["full_step_trace_present"] = all(
+            isinstance(row.get("step_trace"), list)
+            and len(row["step_trace"]) == row["total_forwards"]
+            for row in predictions
+        )
+    engineering_gate_passed = all(engineering_checks.values())
+    pass_at_least_18 = (
+        int(summary["passed"]) >= 18 if args.stage == "pilot" else None
+    )
+    full_authorized = bool(
+        args.stage == "pilot" and engineering_gate_passed and pass_at_least_18
+    )
+    payload = {
+        "method": args.method,
+        "stage": args.stage,
+        "passed": engineering_gate_passed,
+        "engineering_gate_passed": engineering_gate_passed,
+        "pass_at_least_18": pass_at_least_18,
+        "full_authorized": full_authorized,
+        "engineering_checks": engineering_checks,
+        "diagnostic_only_checks": {
+            "completed_rows": summary["completed_rows"],
+            "compile_passed": summary["compile_passed"],
+            "passed": summary["passed"],
+            "exact_matches": summary["exact_matches"],
+            "blank_slot_rows": summary.get("blank_slot_rows", 0),
+            "exact_cycles": summary.get("exact_cycle_count", 0),
+            "forward_caps": summary.get("forward_cap_count", 0),
+            "budget_exhausted_rows": summary.get("budget_exhausted_rows", 0),
+            "budget_draining_loop_count": summary.get(
+                "budget_draining_loop_count", 0
+            ),
+        },
+        "recorded_at_utc": utc_now(),
+    }
+    atomic_write_json(args.output_dir / "gate.json", payload)
+    update_progress(
+        args.output_dir / "progress.json",
+        method,
+        args.stage,
+        predictions,
+        expected,
+        None,
+        "engineering_gate_passed"
+        if engineering_gate_passed
+        else "engineering_gate_failed",
+    )
+    print(json.dumps(payload, indent=2, ensure_ascii=False), flush=True)
+    if not engineering_gate_passed:
+        failed = [
+            name for name, value in engineering_checks.items() if not value
+        ]
+        raise RuntimeError(f"V3 {args.stage} engineering gate failed: {failed}")
+
+
 def run_gate(args: argparse.Namespace) -> None:
+    if is_v3_method(Method(args.method)):
+        _run_v3_gate(args)
+        return
     if args.method != Method.V2_HARD_V2_BOUNDARY.value:
         raise RuntimeError("Strict v2 gate is only defined for V2-Hard-v2")
     predictions = read_jsonl(args.output_dir / "predictions.jsonl")
     scored = read_jsonl(args.output_dir / "scored.jsonl")
     summary = read_json(args.output_dir / "summary.json")
     audit = read_json(args.output_dir / "completeness_audit.json")
-    expected = STAGE_SIZES[args.stage]
+    expected = stage_size(args.stage)
     invariant_flags = {
         "prefix_tokens_mutated",
         "suffix_tokens_mutated",
@@ -1512,7 +1837,7 @@ def parse_args() -> argparse.Namespace:
         "--mode", choices=["generate", "score", "audit", "gate"], required=True
     )
     parser.add_argument("--method", choices=[method.value for method in Method], required=True)
-    parser.add_argument("--stage", choices=list(STAGE_SIZES), required=True)
+    parser.add_argument("--stage", choices=list(ALL_STAGE_SIZES), required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--model-path", type=Path, default=DEFAULT_MODEL)
     parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL)

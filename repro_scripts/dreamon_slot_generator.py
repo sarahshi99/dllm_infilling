@@ -20,6 +20,7 @@ class Method(str, Enum):
     V2_OPENTAIL = "v2_opentail"
     JOINT_OPENTAIL = "joint_opentail"
     V2_HARD_V2_BOUNDARY = "v2_hard_v2_boundary"
+    V3_HARD_BUDGETED = "v3_hard_budgeted"
 
 
 class Region(IntEnum):
@@ -81,6 +82,7 @@ class SlotGeneratorConfig:
     temperature: float = 0.0
     top_p: float | None = 0.9
     top_k: int | None = None
+    initial_expand_budget: int | None = None
 
     def __post_init__(self) -> None:
         if self.initial_masks_per_region != 4:
@@ -93,6 +95,8 @@ class SlotGeneratorConfig:
             raise ValueError("max_global_middle_tokens must be positive")
         if self.max_hard_slot_tokens <= 0:
             raise ValueError("max_hard_slot_tokens must be positive")
+        if self.initial_expand_budget is not None and self.initial_expand_budget < 0:
+            raise ValueError("initial_expand_budget must be nonnegative")
 
 
 @dataclass(frozen=True)
@@ -149,6 +153,97 @@ class ExactTransitionCycleDetector:
         }
 
 
+class BudgetedTransitionCycleDetector:
+    def __init__(self) -> None:
+        self._full_seen: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._canvas_seen: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._history: list[dict[str, Any]] = []
+
+    def observe(
+        self,
+        *,
+        full_signature: tuple[Any, ...],
+        canvas_signature: tuple[Any, ...],
+        pre_remaining_budget: int,
+        post_remaining_budget: int,
+        forward_index: int,
+        region_lengths: Mapping[str, int],
+    ) -> dict[str, Any] | None:
+        record = {
+            "full_signature": full_signature,
+            "canvas_signature": canvas_signature,
+            "forward_index": int(forward_index),
+            "region_lengths": dict(region_lengths),
+            "action": full_signature[4],
+            "pre_remaining_budget": int(pre_remaining_budget),
+            "post_remaining_budget": int(post_remaining_budget),
+        }
+        previous_full = self._full_seen.get(full_signature)
+        previous_canvas = self._canvas_seen.get(canvas_signature)
+        self._history.append(record)
+        if previous_full is not None:
+            first_index = int(previous_full["forward_index"])
+            return {
+                "classification": "exact_deterministic_cycle",
+                "terminal": True,
+                "cycle_length": int(forward_index) - first_index,
+                "first_forward_index": first_index,
+                "repeat_forward_index": int(forward_index),
+                "first_region_lengths": previous_full["region_lengths"],
+                "repeat_region_lengths": dict(region_lengths),
+                "first_pre_remaining_budget": int(
+                    previous_full["pre_remaining_budget"]
+                ),
+                "first_post_remaining_budget": int(
+                    previous_full["post_remaining_budget"]
+                ),
+                "repeat_pre_remaining_budget": int(pre_remaining_budget),
+                "repeat_post_remaining_budget": int(post_remaining_budget),
+                "action_sequence": self._actions_since(first_index, forward_index),
+                "transition_signature": list(full_signature),
+            }
+        self._full_seen[full_signature] = record
+        if previous_canvas is None:
+            self._canvas_seen[canvas_signature] = record
+            return None
+        if (
+            int(pre_remaining_budget)
+            < int(previous_canvas["pre_remaining_budget"])
+            and int(post_remaining_budget)
+            < int(previous_canvas["post_remaining_budget"])
+        ):
+            first_index = int(previous_canvas["forward_index"])
+            return {
+                "classification": "budget_draining_loop",
+                "terminal": False,
+                "cycle_length": int(forward_index) - first_index,
+                "first_forward_index": first_index,
+                "repeat_forward_index": int(forward_index),
+                "first_region_lengths": previous_canvas["region_lengths"],
+                "repeat_region_lengths": dict(region_lengths),
+                "first_pre_remaining_budget": int(
+                    previous_canvas["pre_remaining_budget"]
+                ),
+                "first_post_remaining_budget": int(
+                    previous_canvas["post_remaining_budget"]
+                ),
+                "repeat_pre_remaining_budget": int(pre_remaining_budget),
+                "repeat_post_remaining_budget": int(post_remaining_budget),
+                "budget_delta": int(pre_remaining_budget)
+                - int(previous_canvas["pre_remaining_budget"]),
+                "action_sequence": self._actions_since(first_index, forward_index),
+                "canvas_transition_signature": list(canvas_signature),
+            }
+        return None
+
+    def _actions_since(self, first_index: int, repeat_index: int) -> list[str]:
+        return [
+            item["action"]
+            for item in self._history
+            if first_index <= int(item["forward_index"]) <= repeat_index
+        ]
+
+
 @dataclass
 class CanvasState:
     input_ids: torch.Tensor
@@ -161,6 +256,9 @@ class CanvasState:
     initial_suffix_ids: tuple[int, ...]
     initial_locked_newline_ids: tuple[int, ...]
     active_region: Region | None
+    initial_expand_budget: int | None
+    remaining_expand_budget: int | None
+    successful_expand_count: int = 0
 
     @property
     def capacity(self) -> int:
@@ -270,8 +368,8 @@ class CanvasState:
             raise ProtocolError("selected_region_is_not_generation_eligible")
 
 
-def state_hash(state: CanvasState) -> str:
-    payload = {
+def _state_hash_payload(state: CanvasState) -> dict[str, Any]:
+    return {
         "method": state.method.value,
         "input_ids": [int(item) for item in state.input_ids[: state.real_length]],
         "region_id": [int(item) for item in state.region_id[: state.real_length]],
@@ -281,10 +379,48 @@ def state_hash(state: CanvasState) -> str:
         "real_length": int(state.real_length),
         "active_region": None if state.active_region is None else state.active_region.name,
     }
+
+
+def _hash_payload(payload: Mapping[str, Any]) -> str:
     encoded = json.dumps(
         payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
     ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def canvas_only_state_hash(state: CanvasState) -> str:
+    return _hash_payload(_state_hash_payload(state))
+
+
+def full_state_hash(state: CanvasState) -> str:
+    payload = _state_hash_payload(state)
+    if state.remaining_expand_budget is not None:
+        payload.update(
+            {
+                "initial_expand_budget": int(state.initial_expand_budget),
+                "remaining_expand_budget": int(state.remaining_expand_budget),
+                "successful_expand_count": int(state.successful_expand_count),
+            }
+        )
+    return _hash_payload(payload)
+
+
+def state_hash(state: CanvasState) -> str:
+    """Backward-compatible V2 canvas hash."""
+    return canvas_only_state_hash(state)
+
+
+def method_uses_boundary_decoder(method: Method) -> bool:
+    return method in {
+        Method.V2_HARD_V2_BOUNDARY,
+        Method.V3_HARD_BUDGETED,
+    }
+
+
+def method_uses_expand_budget(method: Method) -> bool:
+    return method in {
+        Method.V3_HARD_BUDGETED,
+    }
 
 
 def transition_signature(
@@ -306,7 +442,11 @@ def transition_signature(
 
 
 def sequential_regions(method: Method) -> tuple[Region, ...]:
-    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
+    if method in (
+        Method.V2_HARD,
+        Method.V2_HARD_V2_BOUNDARY,
+        Method.V3_HARD_BUDGETED,
+    ):
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2)
     if method == Method.V2_OPENTAIL:
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
@@ -316,7 +456,11 @@ def sequential_regions(method: Method) -> tuple[Region, ...]:
 
 
 def method_generation_regions(method: Method) -> tuple[Region, ...]:
-    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
+    if method in (
+        Method.V2_HARD,
+        Method.V2_HARD_V2_BOUNDARY,
+        Method.V3_HARD_BUDGETED,
+    ):
         return sequential_regions(method)
     return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
 
@@ -403,7 +547,11 @@ def _initial_middle(method: Method, spec: TokenizerSpec, masks: int) -> tuple[li
     add_newline()
     add_region(Region.HARD_SLOT_1)
     add_newline()
-    if method in (Method.V2_HARD, Method.V2_HARD_V2_BOUNDARY):
+    if method in (
+        Method.V2_HARD,
+        Method.V2_HARD_V2_BOUNDARY,
+        Method.V3_HARD_BUDGETED,
+    ):
         add_region(Region.HARD_SLOT_2)
         add_newline()
     else:
@@ -419,6 +567,11 @@ def build_canvas(
     config: SlotGeneratorConfig,
     device: torch.device,
 ) -> CanvasState:
+    if method_uses_expand_budget(method):
+        if config.initial_expand_budget != 64:
+            raise ProtocolError("v3_initial_expand_budget_must_equal_64")
+    elif config.initial_expand_budget is not None:
+        raise ProtocolError("expand_budget_configured_for_non_v3_method")
     middle_ids, middle_regions = _initial_middle(
         method, tokenizer_spec, config.initial_masks_per_region
     )
@@ -459,6 +612,9 @@ def build_canvas(
         initial_suffix_ids=tuple(map(int, suffix_ids)),
         initial_locked_newline_ids=tuple(locked),
         active_region=None,
+        initial_expand_budget=config.initial_expand_budget,
+        remaining_expand_budget=config.initial_expand_budget,
+        successful_expand_count=0,
     )
     advance_active_region(state, method)
     validate_state(state, method)
@@ -556,6 +712,8 @@ def _entropy_proposals(
 def _expand_allowed(
     state: CanvasState, region: Region, config: SlotGeneratorConfig
 ) -> bool:
+    if state.remaining_expand_budget is not None and state.remaining_expand_budget == 0:
+        return False
     if state.real_length >= config.max_context_tokens:
         return False
     if state.global_middle_length() >= config.max_global_middle_tokens:
@@ -796,8 +954,20 @@ def apply_selected_action(
     if proposal_token_id == state.tokenizer_spec.expand_id:
         if not _expand_allowed(state, region, config):
             raise ProtocolError("expand_selected_at_cap")
+        pre_budget = state.remaining_expand_budget
         state.expand_at(position)
-        return ActionResult("expand", {})
+        if pre_budget is not None:
+            if pre_budget <= 0:
+                raise ProtocolError("expand_budget_underflow")
+            state.remaining_expand_budget = pre_budget - 1
+            state.successful_expand_count += 1
+        return ActionResult(
+            "expand",
+            {
+                "pre_expand_budget": pre_budget,
+                "post_expand_budget": state.remaining_expand_budget,
+            },
+        )
     if proposal_token_id == state.tokenizer_spec.eos_id:
         return _apply_region_local_eos(state, position, region)
     if proposal_token_id == state.tokenizer_spec.mask_id:
@@ -831,6 +1001,24 @@ def validate_state(state: CanvasState, method: Method) -> None:
         raise ProtocolError("locked_separator_tokens_mutated")
     if state.global_middle_length() > state.capacity:
         raise ProtocolError("middle_length_exceeds_context_capacity")
+    if method_uses_expand_budget(method):
+        if state.initial_expand_budget != 64:
+            raise ProtocolError("invalid_initial_expand_budget")
+        if state.remaining_expand_budget is None:
+            raise ProtocolError("missing_remaining_expand_budget")
+        if not 0 <= state.remaining_expand_budget <= state.initial_expand_budget:
+            raise ProtocolError("invalid_remaining_expand_budget")
+        if (
+            state.initial_expand_budget - state.remaining_expand_budget
+            != state.successful_expand_count
+        ):
+            raise ProtocolError("expand_budget_conservation_failed")
+    elif (
+        state.initial_expand_budget is not None
+        or state.remaining_expand_budget is not None
+        or state.successful_expand_count != 0
+    ):
+        raise ProtocolError("unexpected_expand_budget_state")
     if method != Method.JOINT_OPENTAIL:
         order = sequential_regions(method)
         active = state.active_region
@@ -953,7 +1141,12 @@ def run_slot_generation(
     newline_boundary_event_details: list[dict[str, Any]] = []
     region_local_eos_event_details: list[dict[str, Any]] = []
     exact_cycle_events: list[dict[str, Any]] = []
-    transition_detector = ExactTransitionCycleDetector()
+    budget_draining_loop_events: list[dict[str, Any]] = []
+    transition_detector = (
+        BudgetedTransitionCycleDetector()
+        if method_uses_expand_budget(method)
+        else ExactTransitionCycleDetector()
+    )
     mixed_newline_token_events = 0
     pure_newline_token_events = 0
     multiple_newline_token_events = 0
@@ -967,6 +1160,8 @@ def run_slot_generation(
     region_local_eos_deleted_masks = 0
     max_masks_deleted_by_one_eos = 0
     cross_region_delete_attempts = 0
+    expand_logit_blocked_by_budget_count = 0
+    budget_exhausted_forward_index: int | None = None
     start = time.perf_counter()
     if device.type == "cuda":
         torch.cuda.synchronize(device)
@@ -1001,6 +1196,11 @@ def run_slot_generation(
                 )
             forward_lengths.append(real_length)
             logits = shifted_logits(output.logits)[0]
+            expand_logit_blocked_by_budget = bool(
+                state.remaining_expand_budget == 0
+            )
+            if expand_logit_blocked_by_budget:
+                expand_logit_blocked_by_budget_count += len(positions)
             selected = select_update(state, method, logits, config)
             if first_selected_region is None:
                 first_selected_region = selected.region.name
@@ -1011,7 +1211,7 @@ def run_slot_generation(
             ):
                 joint_updates_before_slot0_complete += 1
             if (
-                method != Method.V2_HARD_V2_BOUNDARY
+                not method_uses_boundary_decoder(method)
                 and
                 selected.region in HARD_REGIONS
                 and selected.unconstrained_proposal_token_id
@@ -1026,7 +1226,12 @@ def run_slot_generation(
             if state.global_middle_length() >= config.max_global_middle_tokens:
                 global_cap_hits += 1
 
-            pre_action_hash = state_hash(state)
+            pre_canvas_hash = canvas_only_state_hash(state)
+            pre_full_hash = full_state_hash(state)
+            pre_action_hash = (
+                pre_full_hash if method_uses_expand_budget(method) else pre_canvas_hash
+            )
+            pre_expand_budget = state.remaining_expand_budget
             pre_region_lengths = {
                 region.name: state.region_length(region)
                 for region in method_generation_regions(method)
@@ -1041,7 +1246,19 @@ def run_slot_generation(
             if method != Method.JOINT_OPENTAIL:
                 advance_active_region(state, method)
             validate_state(state, method)
-            post_action_hash = state_hash(state)
+            post_canvas_hash = canvas_only_state_hash(state)
+            post_full_hash = full_state_hash(state)
+            post_action_hash = (
+                post_full_hash if method_uses_expand_budget(method) else post_canvas_hash
+            )
+            post_expand_budget = state.remaining_expand_budget
+            if (
+                pre_expand_budget is not None
+                and pre_expand_budget > 0
+                and post_expand_budget == 0
+                and budget_exhausted_forward_index is None
+            ):
+                budget_exhausted_forward_index = len(forward_lengths)
             post_region_lengths = {
                 region.name: state.region_length(region)
                 for region in method_generation_regions(method)
@@ -1054,6 +1271,14 @@ def run_slot_generation(
                 selected.proposal_token_id,
                 action,
                 post_action_hash,
+            )
+            canvas_signature = transition_signature(
+                pre_canvas_hash,
+                selected.position,
+                selected.region,
+                selected.proposal_token_id,
+                action,
+                post_canvas_hash,
             )
             selected_updates[selected.region.name] += 1
             if action == "normal":
@@ -1136,12 +1361,38 @@ def run_slot_generation(
             else:
                 raise AssertionError(f"Unknown action: {action}")
 
-            cycle = transition_detector.observe(
-                signature, len(forward_lengths), post_region_lengths
-            )
-            if cycle is not None:
-                exact_cycle_events.append(cycle)
-                raise ProtocolError("exact_deterministic_cycle")
+            terminal_cycle = False
+            if method_uses_expand_budget(method):
+                cycle = transition_detector.observe(
+                    full_signature=signature,
+                    canvas_signature=canvas_signature,
+                    pre_remaining_budget=int(pre_expand_budget),
+                    post_remaining_budget=int(post_expand_budget),
+                    forward_index=len(forward_lengths),
+                    region_lengths=post_region_lengths,
+                )
+                if cycle is not None:
+                    event = {
+                        "task_id": task_id,
+                        "slot": selected.region.name,
+                        "canvas_only_pre_state_hash": pre_canvas_hash,
+                        "canvas_only_post_state_hash": post_canvas_hash,
+                        "full_pre_state_hash": pre_full_hash,
+                        "full_post_state_hash": post_full_hash,
+                        **cycle,
+                    }
+                    if cycle["classification"] == "budget_draining_loop":
+                        budget_draining_loop_events.append(event)
+                    else:
+                        exact_cycle_events.append(event)
+                        terminal_cycle = True
+            else:
+                cycle = transition_detector.observe(
+                    signature, len(forward_lengths), post_region_lengths
+                )
+                if cycle is not None:
+                    exact_cycle_events.append(cycle)
+                    terminal_cycle = True
             if save_trace:
                 next_positions = eligible_positions(state, method)
                 next_active_region = (
@@ -1160,6 +1411,13 @@ def run_slot_generation(
                         "action_details": action_result.details,
                         "pre_state_hash": pre_action_hash,
                         "post_state_hash": post_action_hash,
+                        "pre_expand_budget": pre_expand_budget,
+                        "post_expand_budget": post_expand_budget,
+                        "canvas_only_pre_state_hash": pre_canvas_hash,
+                        "canvas_only_post_state_hash": post_canvas_hash,
+                        "full_pre_state_hash": pre_full_hash,
+                        "full_post_state_hash": post_full_hash,
+                        "expand_logit_blocked_by_budget": expand_logit_blocked_by_budget,
                         "transition_signature": list(signature),
                         "active_region": next_active_region,
                         "active_mask_count": len(next_positions),
@@ -1174,6 +1432,8 @@ def run_slot_generation(
                         ),
                     }
                 )
+            if terminal_cycle:
+                raise ProtocolError("exact_deterministic_cycle")
 
         if state.unresolved_positions():
             raise ProtocolError("generation_ended_with_unresolved_masks")
@@ -1200,6 +1460,18 @@ def run_slot_generation(
     final_lengths = {
         region.name: state.region_length(region) for region in method_generation_regions(method)
     }
+    initial_expand_budget = state.initial_expand_budget
+    remaining_expand_budget = state.remaining_expand_budget
+    expand_budget_consumed = (
+        None
+        if initial_expand_budget is None or remaining_expand_budget is None
+        else initial_expand_budget - remaining_expand_budget
+    )
+    expand_budget_conservation_passed = (
+        True
+        if initial_expand_budget is None
+        else expand_budget_consumed == state.successful_expand_count
+    )
     return {
         **extracted,
         "method": method.value,
@@ -1236,6 +1508,15 @@ def run_slot_generation(
         "max_masks_deleted_by_one_eos": max_masks_deleted_by_one_eos,
         "cross_region_delete_attempts": cross_region_delete_attempts,
         "exact_cycle_events": exact_cycle_events,
+        "initial_expand_budget": initial_expand_budget,
+        "remaining_expand_budget": remaining_expand_budget,
+        "expand_budget_consumed": expand_budget_consumed,
+        "expand_budget_conservation_passed": expand_budget_conservation_passed,
+        "budget_exhausted": remaining_expand_budget == 0,
+        "budget_exhausted_forward_index": budget_exhausted_forward_index,
+        "expand_logit_blocked_by_budget_count": expand_logit_blocked_by_budget_count,
+        "budget_draining_loop_count": len(budget_draining_loop_events),
+        "budget_draining_loop_events": budget_draining_loop_events,
         "slot_expand_cap_hits": slot_cap_hits,
         "global_expand_cap_hits": global_cap_hits,
         "unresolved_mask_count": len(state.unresolved_positions()),
