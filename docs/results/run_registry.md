@@ -128,3 +128,4 @@ The pilot has five exact deterministic cycles and fails the preregistered comple
 | `v3_hard_budgeted_full642_posthoc_20260802` | `completed_posthoc_diagnostic` | 642 | 642 | 281 | 538 | later explicitly authorized; does not alter original Pilot gate; not held-out |
 | `v3_hard_budgeted_nonempty_oracle_pilot30_20260802` | `full_authorized` | 30 | 30 | 18 | 25 | oracle structural pilot |
 | `v3_hard_budgeted_nonempty_oracle_full642_20260802` | `completed_oracle_diagnostic` | 642 | 642 | 280 | 471 | not deployable or held-out |
+| `v3_pure_newline_blank30_manifest_20260803` | `sealed_posthoc_mechanism_manifest` | 30 | 30 | 3 (A) | 22 (A) | A-trace-only targeted gate population for C0/C |

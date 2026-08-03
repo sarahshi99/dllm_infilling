@@ -1,0 +1,835 @@
+{
+  "a_baseline": {
+    "compiled": 22,
+    "exact": 0,
+    "passed": 3
+  },
+  "base_problems": 21,
+  "construction_script": "repro_scripts/prepare_dreamon_v3c_targeted_manifest.py",
+  "construction_script_version": 1,
+  "manifests": {
+    "early_slot01_18": {
+      "path": "manifests/v3_pure_newline_early_slot01_18.jsonl",
+      "rows": 18,
+      "sha256": "60504fc2861d8ba7c1060c4070494cc4ce4e73597ebf2dfb6d785d857758995c"
+    },
+    "pure30": {
+      "path": "manifests/v3_pure_newline_blank30.jsonl",
+      "rows": 30,
+      "sha256": "5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f"
+    },
+    "slot2_12": {
+      "path": "manifests/v3_pure_newline_slot2_12.jsonl",
+      "rows": 12,
+      "sha256": "37535ed030a85bba0152a9a71a792a0b61453b3109ca3cf50b541fd7afa8545a"
+    }
+  },
+  "nonwhitespace_resolved_right_token_rows": 17,
+  "population": {
+    "path": "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+    "rows": 642,
+    "sha256": "ffaac8a367103ee50893542bf5deb368232d40a904509db4708173994427731d"
+  },
+  "posthoc_mechanism_diagnostic": true,
+  "pure_newline_token_id_observed": 198,
+  "resolved_right_token_rows": 23,
+  "rows": 30,
+  "schema_version": 1,
+  "selection_predicate": {
+    "earliest_blank_event": "exactly one strict event per selected row",
+    "final_slot_blank": true,
+    "left_edge_proof": "1 selected + discarded masks + discarded resolved tokens equals pre-region length",
+    "left_text": "",
+    "normalized_proposal": "\\n",
+    "right_text": "",
+    "would_immediately_blank": "region_length_after == 0"
+  },
+  "selection_rows": [
+    {
+      "base_problem_id": "3",
+      "discarded_masks": 6,
+      "discarded_resolved_segments": [
+        {
+          "text": " balance",
+          "token_ids": [
+            8172
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 11,
+      "post_state_hash": "6664c2e51350c4a22e0c33f233c6a187e5215761c02381339f2f79be4905d7ac",
+      "pre_state_hash": "c6399d2f554aeedb42e88928ad4f92db8bdb85b994bac85507c4d281d47d912f",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 8,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/3/L2_L4"
+    },
+    {
+      "base_problem_id": "6",
+      "discarded_masks": 6,
+      "discarded_resolved_segments": [
+        {
+          "text": "       ",
+          "token_ids": [
+            286
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 15,
+      "post_state_hash": "8f3616ad166633c21203efcb371c00626be21f540690cff4866e36e353e04641",
+      "pre_state_hash": "d92d4def03e9123096eea58b865b20239bdffef0f327da09c497c0e7e679ba64",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 8,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/6/L1_L3"
+    },
+    {
+      "base_problem_id": "6",
+      "discarded_masks": 9,
+      "discarded_resolved_segments": [
+        {
+          "text": " == '('",
+          "token_ids": [
+            621,
+            37880
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 2,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 16,
+      "post_state_hash": "2e9b45bdd68da279d49d686973c9b2f38b2d6b0d5b810eeae9fe992eef819bb7",
+      "pre_state_hash": "69b5850c033c568c702d0b7e79f4cf5e7a1d353712b0852df1f438d278df508f",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 12,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/6/L2_L4"
+    },
+    {
+      "base_problem_id": "6",
+      "discarded_masks": 9,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 17,
+      "post_state_hash": "7f7c01085d80435b3e3c9f6039feb2a092dea7540caba7bd63d1a0954ced0113",
+      "pre_state_hash": "904a37b637d42014b503f8c6ad9beec00ffb9858ba48e13dfc14d3a1a35b1a2b",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 10,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/6/L3_L5"
+    },
+    {
+      "base_problem_id": "13",
+      "discarded_masks": 3,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 31,
+      "post_state_hash": "ff135e7aeec2239b820244d7ceb683a8f94a027086b7a5b48e878e7f88413c27",
+      "pre_state_hash": "822ec490905263f334eb248e2f4547ee5b32aa30bfe2eaea1c8232745170e61f",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/13/L0_L2"
+    },
+    {
+      "base_problem_id": "25",
+      "discarded_masks": 2,
+      "discarded_resolved_segments": [
+        {
+          "text": " math",
+          "token_ids": [
+            6888
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 56,
+      "post_state_hash": "a69f1ae831ca3617c11619a4e068cc6906c54e4232f4856c7a789c754555e7c7",
+      "pre_state_hash": "a1b0923208fb4f05cf1e7d70fd70eb2e86084b8a368fef861956845c8ea27c28",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/25/L0_L2"
+    },
+    {
+      "base_problem_id": "26",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return result",
+          "token_ids": [
+            262,
+            470,
+            1102
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 64,
+      "post_state_hash": "7d016e1689b23efa70713cc839c98e4da3367b7a803fdb35f831e51dbe35bf6d",
+      "pre_state_hash": "30a82a073420e9fe258d593d84b22a761cc68dff8e3ab48173e9a76a2133e233",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/26/L0_L2"
+    },
+    {
+      "base_problem_id": "39",
+      "discarded_masks": 4,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 2,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 101,
+      "post_state_hash": "fcd01241af941007499d5912dcff9e863d15d28e4a76c6b350cecc3dbf64ac96",
+      "pre_state_hash": "5c8bb56d206e967fe9a676b8026c264a827c07a669cbe9674081a36fa0823212",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 5,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/39/L7_L9"
+    },
+    {
+      "base_problem_id": "39",
+      "discarded_masks": 5,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 102,
+      "post_state_hash": "0fb357fb1545db695c9f6250f56c81952ae0e97e2d9ab91261cc7a93163b2786",
+      "pre_state_hash": "f7d61be814a2c281095215408ad4ea2d2c3b5210076d27938d8806092a1cf775",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 6,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/39/L8_L10"
+    },
+    {
+      "base_problem_id": "39",
+      "discarded_masks": 5,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 103,
+      "post_state_hash": "6e6b69ddf176f3b26b8b86c2c1a91e6a061a32a0d44de079acd1b35d227170b5",
+      "pre_state_hash": "a172aac1cdf32765ee3d5db7e89e8b591d5fad88e5a57c4bc062ffaaf3bb0e7d",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 6,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/39/L9_L11"
+    },
+    {
+      "base_problem_id": "46",
+      "discarded_masks": 9,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 118,
+      "post_state_hash": "1dda7cdf369733a57e8be669046721fb64644c3daf6b142ae71f32cc6384bc2b",
+      "pre_state_hash": "903f20e3dbc99ce06d00e372befa0442fa8e0e31e67841469ff17a4658d0fa72",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 10,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/46/L0_L2"
+    },
+    {
+      "base_problem_id": "59",
+      "discarded_masks": 3,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 2,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 149,
+      "post_state_hash": "45680b1ac122115b1c785ef20d9b382b9df35d7635627741932e92aa6fdf15eb",
+      "pre_state_hash": "b8458281e5c289c607ba5b0e8363a98e702adce31e6ba216041f2ea4ae49bf31",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 5,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/59/L5_L7"
+    },
+    {
+      "base_problem_id": "59",
+      "discarded_masks": 3,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 150,
+      "post_state_hash": "ff7f479d40377a3ab9f3a261e27ef8d85efb37dabdfa4f9a968ddad2414382c4",
+      "pre_state_hash": "b459e0ca9ff4654c7dcbb1f10727f4f404da756c85b9307e35cc51bb1cff87f7",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 5,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/59/L6_L8"
+    },
+    {
+      "base_problem_id": "59",
+      "discarded_masks": 3,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 151,
+      "post_state_hash": "302134d76682c6559b054dcb85a8ed6bc39665317672479520da3045123e11c2",
+      "pre_state_hash": "02c61f6ee2cc71c483ab604ac5233d6d7da96233d72e75c1f9dc9d9b78814816",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 5,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/59/L7_L9"
+    },
+    {
+      "base_problem_id": "70",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return res",
+          "token_ids": [
+            262,
+            470,
+            592
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 183,
+      "post_state_hash": "783a5701042f342f9a5791735ce7b7c8ca38d21b5ab894810af9de4ae3b57cd2",
+      "pre_state_hash": "1c2ed41a3c24bf901b945d73dfaaecc51b500809c40fb990f5e973cc37cf9b64",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/70/L3_L5"
+    },
+    {
+      "base_problem_id": "71",
+      "discarded_masks": 6,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        },
+        {
+          "text": "2",
+          "token_ids": [
+            17
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 2,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 186,
+      "post_state_hash": "764cc77535b89c8189e1046761635f0afa5b675553f7d148eed1a731e1b98f2c",
+      "pre_state_hash": "d27a9c82cc2b3566287baff0d31921d47b5d7b92350a6e06bf245f3a65fb31f1",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 9,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/71/L2_L4"
+    },
+    {
+      "base_problem_id": "72",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return True",
+          "token_ids": [
+            262,
+            470,
+            3007
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 192,
+      "post_state_hash": "bdefd271eebd7b73133414fa52cf237d63aca285d37d3ceea86acf97f378a56a",
+      "pre_state_hash": "b4d9702497f92232da3a4e7f53245cc025f04d79177a4f18b7dea6c86295ecac",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/72/L7_L9"
+    },
+    {
+      "base_problem_id": "75",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "            return True",
+          "token_ids": [
+            310,
+            470,
+            3007
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 207,
+      "post_state_hash": "700ca30836c3094a471e2b8765f809c5626691c944972b5be4754f37aff551d3",
+      "pre_state_hash": "025708ef52f5340e5bf7b033a4ece3ddbc197c260f985e8931e19d24c9bed1fc",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/75/L10_L12"
+    },
+    {
+      "base_problem_id": "75",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return False",
+          "token_ids": [
+            262,
+            470,
+            3557
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 208,
+      "post_state_hash": "9955e8169783e75d567f3c0c5354a75c295548a11e277396b6e5ed3905728c61",
+      "pre_state_hash": "9f7d4ed14e6ce5fe6d3d3e944ab2d516c51791c2de456a0e2dff6c0c97f6f2d4",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/75/L11_L13"
+    },
+    {
+      "base_problem_id": "91",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return count",
+          "token_ids": [
+            262,
+            470,
+            1760
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 256,
+      "post_state_hash": "bf248d3f3197e891ee3bf2ef05aee805b3b308074b1e445e2afc08eb23ddb8ba",
+      "pre_state_hash": "b027cb6c67fc073adab2e592b2c9224b8cd40f06deb4e034c960b70c2d8e5a15",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/91/L0_L2"
+    },
+    {
+      "base_problem_id": "95",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "        return False",
+          "token_ids": [
+            286,
+            470,
+            3557
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 271,
+      "post_state_hash": "19b8db508503a6d547899b13ca674b3d27896ddd39abd7ea75ea2a1fe9852a52",
+      "pre_state_hash": "3b29c3772fd3db4242866e3c12d402afeb057f1ba050d98c914320a72681eca3",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/95/L0_L2"
+    },
+    {
+      "base_problem_id": "120",
+      "discarded_masks": 10,
+      "discarded_resolved_segments": [],
+      "discarded_resolved_tokens": 0,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": false,
+      "population_index": 413,
+      "post_state_hash": "15729ff57c708ce5e183c61235e1eaef820f64aa6c8cd0f73c65a8328dd0a246",
+      "pre_state_hash": "9b76ab9bbab038a38ff769e77d6341869d3949d4aad8f43781365cea44e52763",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 11,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/120/L1_L3"
+    },
+    {
+      "base_problem_id": "123",
+      "discarded_masks": 6,
+      "discarded_resolved_segments": [
+        {
+          "text": "    odd_collatz =",
+          "token_ids": [
+            262,
+            10322,
+            43597,
+            20175,
+            284
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 5,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 416,
+      "post_state_hash": "572acf71cd30bd0d227286b1efeb6ee98485181bbbd9eebaffb23b212e7a427b",
+      "pre_state_hash": "5ed4252f7da975be160413f854f5f8611519ea6ac0384a2c13e6586e955289b9",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 12,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/123/L1_L3"
+    },
+    {
+      "base_problem_id": "123",
+      "discarded_masks": 4,
+      "discarded_resolved_segments": [
+        {
+          "text": "    while n",
+          "token_ids": [
+            262,
+            1393,
+            308
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 2,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 417,
+      "post_state_hash": "1734261d8990a93d69687d0bf1e2cf2ead3c0f12097e9e674563613ec81dacb2",
+      "pre_state_hash": "2098fe29554fc776e706408e26641b7800d39de5e32f246ac3795b8c60070859",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 8,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+    },
+    {
+      "base_problem_id": "123",
+      "discarded_masks": 10,
+      "discarded_resolved_segments": [
+        {
+          "text": "    while n",
+          "token_ids": [
+            262,
+            1393,
+            308
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 418,
+      "post_state_hash": "0fb08859d5635b7fff7583fbef074ed298eee15b2e9c9b6332295189d0ca44b8",
+      "pre_state_hash": "1680b95a124ce106958b789bdd8b874a467c3c0d60edad6b42116b725a1a9ffb",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 14,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/123/L3_L5"
+    },
+    {
+      "base_problem_id": "129",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return ans",
+          "token_ids": [
+            262,
+            470,
+            8099
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 2,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 467,
+      "post_state_hash": "2d4beb82f50721fea36fee0d797113def909308f903c27ae6fffc7907ca175bb",
+      "pre_state_hash": "7a676a188ad0a3ecc23bf57f5db82cb76f49be8bc0208a34e3ec74bafcdc9dd6",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_2",
+      "task_id": "MultiLineInfilling/HumanEval/129/L24_L26"
+    },
+    {
+      "base_problem_id": "148",
+      "discarded_masks": 18,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 2,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 583,
+      "post_state_hash": "af087f00b0d0696608d32b884692386ede9c799948a5ee3e3f0487cf6c69d36b",
+      "pre_state_hash": "18bb19db9f618cc1812af3c6cee06cad5086cd2309d6af7c69223a8bcd2b6cfd",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 20,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/148/L2_L4"
+    },
+    {
+      "base_problem_id": "150",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "    return x",
+          "token_ids": [
+            262,
+            470,
+            856
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 597,
+      "post_state_hash": "6963d9f481bced6fb755e88d99ad5335f0eb8a15bbe962b27517cbb1e11fe63d",
+      "pre_state_hash": "315b7daaa539c4e0d38852a99a6797f16b1c06c8a54c84ec67685b03b1f2a90e",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/150/L5_L7"
+    },
+    {
+      "base_problem_id": "153",
+      "discarded_masks": 16,
+      "discarded_resolved_segments": [
+        {
+          "text": "   ",
+          "token_ids": [
+            262
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 1,
+      "event_index": 0,
+      "has_nonwhitespace_resolved_right_token": false,
+      "has_resolved_right_token": true,
+      "population_index": 600,
+      "post_state_hash": "7fd3bd34333a3ef9a8a4150fb10f5c3a650f12484a938cd5c579d00ac57a6f0d",
+      "pre_state_hash": "64b5dc1096c9cf1286fd147c9078a0eedac8ba172ef4c7594a9f7e036f1e03d5",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 18,
+      "slot": "HARD_SLOT_0",
+      "task_id": "MultiLineInfilling/HumanEval/153/L2_L4"
+    },
+    {
+      "base_problem_id": "154",
+      "discarded_masks": 0,
+      "discarded_resolved_segments": [
+        {
+          "text": "            return True",
+          "token_ids": [
+            310,
+            470,
+            3007
+          ]
+        }
+      ],
+      "discarded_resolved_tokens": 3,
+      "event_index": 1,
+      "has_nonwhitespace_resolved_right_token": true,
+      "has_resolved_right_token": true,
+      "population_index": 606,
+      "post_state_hash": "74a60172ff23877cb1ea2a3f723e859763364aa088d473a1e87b30599e13b73b",
+      "pre_state_hash": "7c99917014f2e8afa6b1dc858e52b7ef48e420883c4349d064a6e9b18abc9d93",
+      "proposal_decoded": "\n",
+      "proposal_token_id": 198,
+      "region_length_after": 0,
+      "region_length_before": 4,
+      "slot": "HARD_SLOT_1",
+      "task_id": "MultiLineInfilling/HumanEval/154/L3_L5"
+    }
+  ],
+  "selection_source": "V3-A Full newline_boundary_event_details only; B outcomes are not read",
+  "slot_distribution": {
+    "HARD_SLOT_0": 6,
+    "HARD_SLOT_1": 12,
+    "HARD_SLOT_2": 12
+  },
+  "source_a": {
+    "config_hash": "9d60773601ab0b763ab99f6dbe864603e45fdd357b393b27e4d00af92c55cb6c",
+    "config_path": "repro_results/dreamon_progressive_v3_hard_budgeted_all642/config.json",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "predictions_path": "repro_results/dreamon_progressive_v3_hard_budgeted_all642/predictions.jsonl",
+    "predictions_sha256": "bc9dbc78fadc59d82d5120a08104a28931e579d599398d8399fb693bccf3438c",
+    "runner_commits": [
+      "34fc33c38280d055f9cc6734b4c897aaaffa13b6"
+    ],
+    "scored_path": "repro_results/dreamon_progressive_v3_hard_budgeted_all642/scored.jsonl",
+    "scored_sha256": "a24ac734240c38c085320bba8da07921971dcaeb33e5594a11bed8abf972d171"
+  },
+  "task_order": [
+    "MultiLineInfilling/HumanEval/3/L2_L4",
+    "MultiLineInfilling/HumanEval/6/L1_L3",
+    "MultiLineInfilling/HumanEval/6/L2_L4",
+    "MultiLineInfilling/HumanEval/6/L3_L5",
+    "MultiLineInfilling/HumanEval/13/L0_L2",
+    "MultiLineInfilling/HumanEval/25/L0_L2",
+    "MultiLineInfilling/HumanEval/26/L0_L2",
+    "MultiLineInfilling/HumanEval/39/L7_L9",
+    "MultiLineInfilling/HumanEval/39/L8_L10",
+    "MultiLineInfilling/HumanEval/39/L9_L11",
+    "MultiLineInfilling/HumanEval/46/L0_L2",
+    "MultiLineInfilling/HumanEval/59/L5_L7",
+    "MultiLineInfilling/HumanEval/59/L6_L8",
+    "MultiLineInfilling/HumanEval/59/L7_L9",
+    "MultiLineInfilling/HumanEval/70/L3_L5",
+    "MultiLineInfilling/HumanEval/71/L2_L4",
+    "MultiLineInfilling/HumanEval/72/L7_L9",
+    "MultiLineInfilling/HumanEval/75/L10_L12",
+    "MultiLineInfilling/HumanEval/75/L11_L13",
+    "MultiLineInfilling/HumanEval/91/L0_L2",
+    "MultiLineInfilling/HumanEval/95/L0_L2",
+    "MultiLineInfilling/HumanEval/120/L1_L3",
+    "MultiLineInfilling/HumanEval/123/L1_L3",
+    "MultiLineInfilling/HumanEval/123/L2_L4",
+    "MultiLineInfilling/HumanEval/123/L3_L5",
+    "MultiLineInfilling/HumanEval/129/L24_L26",
+    "MultiLineInfilling/HumanEval/148/L2_L4",
+    "MultiLineInfilling/HumanEval/150/L5_L7",
+    "MultiLineInfilling/HumanEval/153/L2_L4",
+    "MultiLineInfilling/HumanEval/154/L3_L5"
+  ]
+}

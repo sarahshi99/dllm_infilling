@@ -330,3 +330,10 @@
 - result：A Pilot 14/30，原始门槛未授权 Full；后续按用户明确授权补跑 post-hoc A Full，结果 281/642 Pass、538/642 compile。B Pilot 18/30；B Full 280/642 Pass、471/642 compile。两者均 642/642 completed、0 protocol/runtime failure。
 - comparison：B vs A 15/16 wins/losses，compile help/harm 6/73，exact help/harm 9/0；guard 恰好覆盖 A 的 137 个 blank rows，其余 505 条完全一致，B 多用 25.04% token-forwards。
 - interpretation：budget 解释旧 cycle 误终止；nonempty 修复表面空行但没有功能收益，并引入 compile/compute 代价。decision=`reframe`。
+
+## 2026-08-03 UTC DreamOn V3-C targeted iteration
+
+- decision：`iterate_v3c_targeted`，只授权 C0 one-shot pure-newline veto 与 C nonconsuming locked blank-line insertion。
+- manifest：仅由 A Full trace 构造 Pure30，30 rows / 21 base problems，slot0/1/2=`6/12/12`，A Pass=`3/30`，SHA256 `5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`。
+- gate：Smoke5/Pure30/Pilot30 工程隔离全部通过，且各方法 Pure30 Pass `>=6/30` 才独立授权 Full642。
+- exclusions：不实现 compile gate、blanket nonempty、BoundaryShift/carry、AST repair、OpenTail、Joint-OpenTail 或 held-out run。

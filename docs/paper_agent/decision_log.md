@@ -64,3 +64,12 @@ Updated: 2026-07-11 UTC
 - On a later explicit user request, A Full642 was run post-hoc despite the original failed 18/30 Pilot gate; this does not alter the preregistered gate history. A completed 642/642 at 281 Pass, 538 compile, and 97 exact.
 - B versus A Full is 15 wins / 16 losses with McNemar `p=1.0` and clustered 95% CI `[-2.60pp,+2.09pp]`. The guard triggers exactly on A's 137 blank-slot rows, removes all blanks, but causes compile help/harm `6/73`, exact help/harm `9/0`, and 25.04% more token-forwards.
 - Updated decision remains `reframe`: the nonempty oracle constraint improves surface exactness but is not supported as a functional decoding improvement.
+
+## 2026-08-03 DreamOn V3-C targeted iteration
+
+- Decision changes from stopping all V3 variants to `iterate_v3c_targeted` for exactly two bounded mechanism tests: one-shot pure-newline veto (C0) and nonconsuming locked blank-line insertion (C).
+- This does not revise the A/B result: A remains the budget-fidelity control; B remains an overall ineffective, compile-harming oracle nonempty diagnostic.
+- Pure30 is sealed solely from A Full trace at 30 rows / 21 base problems / slot distribution 6/12/12, SHA256 `5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`. B outcomes are not a selection input.
+- Each method receives one pure-newline guard opportunity per slot and at most three globally. C0 preserves the canvas and masks one exact candidate on the next forward; C inserts one locked physical newline and keeps the content slot active.
+- Full642 requires all engineering/isolation gates plus Pure30 Pass at least 6/30. Pilot30 has no separate Pass threshold. Do not lower the threshold after observation.
+- Compile gate, general nonempty guard, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, random retries, and held-out evaluation remain unauthorized.

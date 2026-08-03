@@ -369,3 +369,11 @@ Important ablation signals:
 - decision：`reframe`；停止新 DreamOn progressive 实验，等待独立复核。
 - analysis：`repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`。
 - A/B comparison：`repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md`。
+
+## 10. 2026-08-03 DreamOn V3-C targeted handoff
+
+- decision：`iterate_v3c_targeted`；保留 A/B 负面证据，不恢复 blanket nonempty，也不启动 OpenTail/Joint/BoundaryShift/AST repair。
+- frozen Pure30：只从 A Full boundary trace 构造，30 rows / 21 base problems，slot0/1/2=`6/12/12`，A Pass=`3/30`，manifest SHA256 `5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`。
+- methods：`v3_c0_budgeted_oneshot_pure_newline_veto` 与 `v3_c_budgeted_nonconsuming_blankline`。
+- Full gate：工程隔离全部通过，且各方法 Pure30 Pass `>=6/30`；独立判断，不得降低。
+- protocol：`docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md`。

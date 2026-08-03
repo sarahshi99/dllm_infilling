@@ -899,3 +899,10 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - Full 配对：vs one-shot 94/115 wins/losses，cluster CI `[-8.58pp,+2.37pp]`；vs V1 66/102，cluster CI `[-10.17pp,-1.03pp]`。
 - B vs A Full：15/16 wins/losses，McNemar `p=1.0`，cluster CI `[-2.60pp,+2.09pp]`；compile help/harm `6/73`，exact help/harm `9/0`。Guard 恰好覆盖 A 的 137 个 blank rows，其余 505 条完全隔离一致。
 - 结论：budget 修复真实 cycle 误终止；nonempty 消除空槽位并提高 exact，但没有功能收益、明显伤害 compile，并增加 25.04% token-forwards。B 是 oracle structural diagnostic，decision=`reframe`。
+
+## 2026-08-03 UTC DreamOn V3-C targeted protocol seal
+
+- 研究决策更新为 `iterate_v3c_targeted`，但不修改 A/B 的负面结论。
+- Pure30 只从 A Full 的 strict leading pure-newline blank boundary trace 构造：30 rows、21 base problems、slot0/1/2=`6/12/12`；A 在该子集为 3 Pass、22 compile、0 exact。
+- Pure30 SHA256：`5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`。
+- 后续只评估 C0 与 C；Full 门槛冻结为各方法 Pure30 Pass 至少 6/30，并要求完整工程/隔离门禁。

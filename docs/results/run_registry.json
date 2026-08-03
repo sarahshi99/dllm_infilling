@@ -988,5 +988,23 @@
     "deployable": false,
     "held_out": false,
     "population_role": "development/mechanism full"
+  },
+  {
+    "run_id": "v3_pure_newline_blank30_manifest_20260803",
+    "experiment_name": "dreamon_v3c_pure_newline_targeted_manifest",
+    "status": "sealed_posthoc_mechanism_manifest",
+    "raw_path": "manifests/v3_pure_newline_blank30.jsonl",
+    "has_summary": true,
+    "summary_path": "manifests/v3_pure_newline_blank30.meta.json",
+    "model": "Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194",
+    "sample_count": 30,
+    "base_problem_count": 21,
+    "source_method": "v3_hard_budgeted",
+    "source_pass_count": 3,
+    "source_compile_count": 22,
+    "manifest_sha256": "5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f",
+    "posthoc_mechanism_diagnostic": true,
+    "held_out": false,
+    "population_role": "targeted development/mechanism gate population"
   }
 ]

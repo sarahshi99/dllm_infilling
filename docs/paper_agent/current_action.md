@@ -1,10 +1,10 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-08-02 UTC
+Timestamp: 2026-08-03 UTC
 
-Research decision: `reframe`.
+Research decision: `iterate_v3c_targeted`.
 
-Action status: DreamOn V3 A/B execution is complete. Stop after independent review; do not start OpenTail, Joint-OpenTail, BoundaryShift, AST repair, or another progressive variant.
+Action status: execute only the frozen V3-C0/V3-C pure-newline targeted protocol. Do not start compile gate, general nonempty guard, OpenTail, Joint-OpenTail, BoundaryShift, carry-and-remask, AST repair, random sampling, or held-out evaluation.
 
 Branch: `codex/dreamon-progressive-v3-budgeted`
 
@@ -23,5 +23,14 @@ Primary artifacts:
 - `docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted_nonempty_oracle.md`
 - `repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`
 - `repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md`
+- `docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md`
+- `manifests/v3_pure_newline_blank30.meta.json`
 
-Next action: independent review and claim reframing only.
+Frozen V3-C target:
+
+- Pure30 is sealed from A Full trace only: 30 rows / 21 base problems / slot0-1-2 distribution 6/12/12; A baseline Pass is 3/30.
+- C0 vetoes one exact leading pure-newline blank termination without canvas mutation.
+- C inserts one locked physical blank newline without consuming the content slot.
+- Each method must pass Smoke5, Pure30, and Pilot30 engineering isolation; Full642 is authorized only when Pure30 Pass is at least 6/30.
+
+Next action: implement and execute only this frozen targeted protocol, then stop for independent review.

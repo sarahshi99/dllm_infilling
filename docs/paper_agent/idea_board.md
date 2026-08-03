@@ -195,3 +195,12 @@ Status: deferred after reframe
 Scientific question: Can next-line-like resolved text discarded by online boundaries be carried into the next slot without reference dependence or post-hoc truncation?
 Evidence: B Full has resolved discard on 356/642 rows; 51/164 complete discarded texts exactly match the oracle next line. The post-hoc A/B Full comparison shows nonempty guard alone does not improve Pass (B 15 wins / 16 losses versus A) and therefore does not explain the remaining boundary-related residual.
 Decision rule: Do not implement automatically. Require independent review and a fresh matched protocol.
+
+## IDEA-012: Pure-newline termination versus blank-line reconditioning
+
+Source: V3-A blank-slot trace audit
+Status: executing frozen targeted protocol
+Scientific question: Is the narrow B subgroup effect explained by vetoing one exact erroneous pure-newline termination, or does inserting a real locked blank physical line provide useful reconditioning while preserving the content canvas?
+Evidence before execution: A Full contains exactly 30 strict leading pure-newline events that immediately blank the final slot; A passes 3/30. Twenty-three events discard resolved right tokens and seventeen discard non-whitespace resolved right tokens.
+Decision rule: C0/C independently require Pure30 Pass at least 6/30 plus complete engineering isolation before Full642. Frozen-future logits are observational diagnostics only and cannot enter selection.
+Forbidden expansion: no blanket nonempty, compile gate, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, or held-out run.

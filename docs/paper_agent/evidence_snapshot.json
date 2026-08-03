@@ -315,7 +315,7 @@
     }
   },
   "dreamon_progressive_v3": {
-    "decision": "reframe",
+    "decision": "iterate_v3c_targeted",
     "population_role": "exact-three-line development/mechanism; not held-out",
     "a_pilot": {
       "method": "v3_hard_budgeted",
@@ -370,6 +370,26 @@
       "guard_triggered_rows": 137,
       "inactive_exact_match_rows": 505,
       "analysis": "repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/comparison_summary.json"
+    },
+    "c_targeted_protocol": {
+      "status": "manifest_sealed_implementation_pending",
+      "methods": [
+        "v3_c0_budgeted_oneshot_pure_newline_veto",
+        "v3_c_budgeted_nonconsuming_blankline"
+      ],
+      "posthoc_mechanism_diagnostic": true,
+      "pure30_rows": 30,
+      "base_problems": 21,
+      "slot_distribution": {
+        "HARD_SLOT_0": 6,
+        "HARD_SLOT_1": 12,
+        "HARD_SLOT_2": 12
+      },
+      "a_baseline_passed": 3,
+      "a_baseline_compiled": 22,
+      "pure30_sha256": "5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f",
+      "full_gate_pure30_pass_minimum": 6,
+      "report": "docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md"
     }
   },
   "current_checkpoint_long_sweep": {
