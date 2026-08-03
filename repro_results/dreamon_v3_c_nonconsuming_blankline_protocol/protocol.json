@@ -1,0 +1,295 @@
+{
+  "decoder_revision": {
+    "budget": {
+      "expand_budget_interaction": "none",
+      "global": 3,
+      "per_slot": 1,
+      "second_request": "fall back to unchanged V3-A boundary behavior"
+    },
+    "c0_veto": null,
+    "c_blankline": {
+      "action": "insert_locked_blank_newline",
+      "active_slot": "remains active",
+      "cap_fallback": "no insertion; execute original A boundary without truncation",
+      "insert_before": "active content slot",
+      "length_accounting": "counts global/context; not hard-slot or expand budget",
+      "selected_and_right_content": "preserved"
+    },
+    "cycle_detection": {
+      "full_state_additions": [
+        "per-slot pure-newline guard remaining",
+        "global pure-newline guard remaining",
+        "pending exact C0 ban",
+        "inserted blank-line count"
+      ],
+      "rule": "Canvas equality with changed guard state is not an exact cycle; identical full transition at stable guard and expand budgets remains terminal."
+    },
+    "nonempty_guard": false,
+    "pure_newline_guard_mode": "nonconsuming_blankline",
+    "trigger": {
+      "budget_required": true,
+      "hypothetical_a_boundary": "immediately completes an empty slot",
+      "left_text": "",
+      "normalized_proposal": "\\n",
+      "right_text": "",
+      "selected_position": "active region left edge"
+    },
+    "unchanged_from_a": [
+      "attention",
+      "sequential activation",
+      "entropy selection",
+      "newline boundary outside the one targeted intervention",
+      "region-local EOS",
+      "official cumulative expand budget",
+      "caps",
+      "cycle detection",
+      "model/tokenizer/scorer/population"
+    ]
+  },
+  "diagnostics": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 42,
+    "discard_reference_analysis": "Oracle mechanism diagnostic performed only after generation.",
+    "future_slot_logits": {
+      "action_classes": [
+        "normal",
+        "expand",
+        "EOS",
+        "pure_newline",
+        "other_newline",
+        "special/sentinel"
+      ],
+      "interpretation": "observational mechanism evidence, not causal proof",
+      "selection_inert": true,
+      "source": "same trigger forward; no extra model call"
+    },
+    "historical_controls": {
+      "one_shot_pilot_compiled": 30,
+      "one_shot_pilot_passed": 19,
+      "v1_progressive_pilot_compiled": 25,
+      "v1_progressive_pilot_passed": 16,
+      "v2_hard_v2_pilot_compiled": 19,
+      "v2_hard_v2_pilot_completed": 25,
+      "v2_hard_v2_pilot_exact_cycles": 5,
+      "v2_hard_v2_pilot_passed": 11
+    },
+    "statistical_unit": "row with base_problem_id cluster"
+  },
+  "evaluator": {
+    "compile_metric": "ast.parse plus compile",
+    "exact_match": "completion equals canonical_solution",
+    "functional_metric": "HumanEval Infilling check_correctness Pass@1",
+    "program": "prompt + completion + suffix",
+    "repository_commit": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "timeout_seconds": 3,
+    "workers": 8
+  },
+  "failure_policy": {
+    "context_truncation": false,
+    "exact_deterministic_cycle": "controlled terminal method failure; empty completion; included in denominator",
+    "forward_cap_with_unresolved_masks": "controlled terminal method failure; empty completion; included in denominator",
+    "posthoc_structural_repair": false,
+    "runtime_or_invariant_damage": "engineering gate failure and immediate stop",
+    "silent_mask_removal": false
+  },
+  "forbidden": [
+    "compile gate",
+    "BoundaryShift or carry-and-remask",
+    "AST repair",
+    "general nonempty guard",
+    "random sampling",
+    "multiple retries",
+    "OpenTail",
+    "Joint-OpenTail",
+    "reference/test access during generation",
+    "post-hoc first-line truncation or string repair"
+  ],
+  "frozen_at_utc": "2026-08-03",
+  "generation": {
+    "activation": [
+      "HARD_SLOT_0",
+      "HARD_SLOT_1",
+      "HARD_SLOT_2"
+    ],
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "attention": "All real prefix, completed/current/future slots, locked separators, and suffix participate in every full forward; only right padding is hidden.",
+    "completion": "Direct extraction of the three content slots, three fixed separators, and any inserted locked blank newlines. Four to six physical lines are allowed; no post-hoc truncation or repair.",
+    "expand_budget_logit_mask_at_zero": true,
+    "expand_budget_refund_on_delete": false,
+    "expand_budget_reset_per_slot": false,
+    "expand_budget_scope": "per_sample_global",
+    "future_slot_logit_diagnostics": "recorded on trigger forward only; observational and selection-inert",
+    "initial_expand_budget": 64,
+    "initial_masks_per_region": 4,
+    "locked_newline_separators": 3,
+    "max_context_tokens": 2048,
+    "max_global_middle_tokens_instantaneous": 64,
+    "max_hard_slot_tokens_instantaneous": 32,
+    "max_prompt_tokens": 2048,
+    "max_total_forwards": 256,
+    "nonempty_guard": false,
+    "number_transfer_tokens": 1,
+    "pure_newline_guard_budget_per_slot": 1,
+    "pure_newline_guard_global_budget": 3,
+    "pure_newline_guard_mode": "nonconsuming_blankline",
+    "seed": 42,
+    "selection": "Only unresolved masks in the sequentially active hard slot are eligible; one position is selected by largest negative-entropy confidence.",
+    "temperature": 0.0,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "label": "post-hoc pure-newline targeted development/mechanism diagnostic; not held-out",
+  "method": "v3_c_budgeted_nonconsuming_blankline",
+  "method_role": "targeted mechanism method: insert one locked physical blank line and retain the content canvas",
+  "model": {
+    "batch_size": 1,
+    "device": "cuda:0",
+    "dreamon_repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "dtype": "bfloat16",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "repository": "Dream-org/DreamOn-v0-7B",
+    "snapshot": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "tokenizer_revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "official_expand_budget_source": {
+    "class": "MDMGenerator",
+    "evaluation_config_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/configs/eval_infill.yaml",
+    "evaluation_shell_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/eval_humaneval_infilling.sh",
+    "generator_path": "/home/shx/projects/dllm_infilling/DreamOn/eval/generator.py",
+    "initialization": "MDMGenerator.__init__: self.expand_budget = self.max_gen_len",
+    "local_semantics": "One global per-sample cumulative budget shared across all three sequential slots; no reset and no refund on deletion. No other official config difference is imported.",
+    "max_gen_len_mapping": 64,
+    "per_sample_initialization": "batch_generate_with_expand_as_token: expand_budget = self.expand_budget",
+    "preselection_mask": "Before entropy/proposal/position selection, expansion logit is blocked when cur_generation_window_length == max_tokens or expand_budget == 0.",
+    "repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "successful_expand_decrement": "After a selected expand token is replaced by two masks, num_generation_tokens increases by one and expand_budget decreases by one."
+  },
+  "parent_method": "v3_hard_budgeted",
+  "parent_result_commit": "2e731ede15b2e6e536c86ec24e0263433d6573f9",
+  "population": {
+    "base_problems": 115,
+    "generation_allowed_fields": [
+      "task_id",
+      "base_problem_id",
+      "prompt",
+      "suffix"
+    ],
+    "generation_forbidden_fields": [
+      "canonical_solution",
+      "reference_middle",
+      "reference_lines",
+      "reference token counts",
+      "reference indentation",
+      "test results"
+    ],
+    "generation_population_path": "repro_results/dreamon_progressive_v2_protocol/generation_population.jsonl",
+    "generation_population_sha256": "ffaac8a367103ee50893542bf5deb368232d40a904509db4708173994427731d",
+    "manifest_path": "/home/shx/projects/dllm_infilling/repro_results/dreamon_progressive_three_line_all642/manifest.jsonl",
+    "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+    "not_held_out_test": true,
+    "role": "development/mechanism population",
+    "rows": 642,
+    "selection_note": "Reference-selected exact-three-nonempty-newline-terminated physical-line population; generation receives only sanitized fields.",
+    "unique_task_ids": 642
+  },
+  "protocol_name": "dreamon_v3_c_budgeted_nonconsuming_blankline",
+  "protocol_version": 4,
+  "research_decision": "iterate_v3c_targeted",
+  "resume": {
+    "checkpoint_fields": [
+      "canvas arrays",
+      "active region",
+      "expand budget",
+      "pure-newline guard budgets",
+      "pending C0 ban",
+      "inserted blank-line count"
+    ],
+    "cross_protocol_resume": false,
+    "durability": "Atomic/durable append after each complete row.",
+    "generator_state_checkpoint_schema": 1,
+    "interrupted_row": "Deterministically rerun from initial expand budget 64 and fresh pure-newline budgets 1/slot, 3/global; completed rows resume only under identical method/config hash.",
+    "key": [
+      "task_id",
+      "method",
+      "config_hash"
+    ],
+    "mid_row_checkpoint": false
+  },
+  "stage_gates": {
+    "full": {
+      "quality_early_stop": false,
+      "requires": "Smoke5, Pure30, and Pilot engineering gates plus Pure30 Pass >= 6/30",
+      "rows": 642,
+      "run_authorization_field": "executed_after_preregistered_gate"
+    },
+    "pilot": {
+      "engineering_only": true,
+      "pass_threshold": null,
+      "population": "unchanged first 30 rows of the frozen 642 population",
+      "rows": 30,
+      "save_step_trace": true
+    },
+    "pure30": {
+      "engineering_gate_required": true,
+      "full_quality_authorization": "overall Pass@1 >= 6/30",
+      "rows": 30,
+      "save_step_trace": true
+    },
+    "v3c_smoke": {
+      "engineering_only": true,
+      "population": "first five frozen Pure30 rows",
+      "rows": 5,
+      "save_step_trace": true
+    }
+  },
+  "targeted_pure30": {
+    "a_baseline": {
+      "compiled": 22,
+      "exact": 0,
+      "passed": 3
+    },
+    "base_problems": 21,
+    "nonwhitespace_resolved_right_token_rows": 17,
+    "population_path": "manifests/v3_pure_newline_blank30.jsonl",
+    "population_sha256": "5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f",
+    "posthoc_mechanism_diagnostic": true,
+    "pure_newline_token_id_observed": 198,
+    "resolved_right_token_rows": 23,
+    "rows": 30,
+    "selection_predicate": {
+      "earliest_blank_event": "exactly one strict event per selected row",
+      "final_slot_blank": true,
+      "left_edge_proof": "1 selected + discarded masks + discarded resolved tokens equals pre-region length",
+      "left_text": "",
+      "normalized_proposal": "\\n",
+      "right_text": "",
+      "would_immediately_blank": "region_length_after == 0"
+    },
+    "selection_source": "V3-A Full newline_boundary_event_details only; B outcomes are not read",
+    "slot_distribution": {
+      "HARD_SLOT_0": 6,
+      "HARD_SLOT_1": 12,
+      "HARD_SLOT_2": 12
+    },
+    "smoke_selection": "first five rows in frozen Pure30 order"
+  },
+  "tokenizer": {
+    "bos_token_id": 151665,
+    "eos_and_pad_token_id": 151643,
+    "expand_token_id": 151667,
+    "generation_lookup": "One vocabulary scan at tokenizer initialization followed by O(1) token-ID lookup.",
+    "literal_newline_token_ids": [
+      198
+    ],
+    "mapping_normalization": "Replace CRLF and bare CR with LF; split at first LF; retokenize and strict-round-trip left text.",
+    "mask_token_id": 151666,
+    "model_vocab_size": 152064,
+    "newline_token_count": 2179,
+    "newline_token_definition": "Every tokenizer ID whose single-token decode contains newline or carriage return.",
+    "newline_token_ids_sha256": "b9be6f30d56789763a9005ff3a1563c0025e05fee4601ac74103595009f607df",
+    "newline_token_mapping_count": 2179,
+    "newline_token_mapping_sha256": "73ed6254e2f3199655b9a41143ba45b465484c5c45317e15e14b75da83d51042",
+    "runtime_tokenizer_size": 151668
+  }
+}

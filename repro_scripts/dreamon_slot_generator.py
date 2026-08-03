@@ -4,7 +4,7 @@ import hashlib
 import json
 import math
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, IntEnum
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -28,6 +28,12 @@ class Method(str, Enum):
     V2_HARD_V2_BOUNDARY = "v2_hard_v2_boundary"
     V3_HARD_BUDGETED = "v3_hard_budgeted"
     V3_HARD_BUDGETED_NONEMPTY_ORACLE = "v3_hard_budgeted_nonempty_oracle"
+    V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO = (
+        "v3_c0_budgeted_oneshot_pure_newline_veto"
+    )
+    V3_C_BUDGETED_NONCONSUMING_BLANKLINE = (
+        "v3_c_budgeted_nonconsuming_blankline"
+    )
 
 
 class Region(IntEnum):
@@ -39,6 +45,7 @@ class Region(IntEnum):
     LOCKED_NEWLINE = 5
     CONTEXT_SUFFIX = 6
     PAD = 7
+    INSERTED_BLANK_NEWLINE = 8
 
 
 HARD_REGIONS = (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2)
@@ -91,6 +98,8 @@ class SlotGeneratorConfig:
     top_k: int | None = None
     initial_expand_budget: int | None = None
     nonempty_guard: bool = False
+    pure_newline_guard_budget_per_slot: int = 0
+    pure_newline_guard_global_budget: int = 0
 
     def __post_init__(self) -> None:
         if self.initial_masks_per_region != 4:
@@ -105,6 +114,10 @@ class SlotGeneratorConfig:
             raise ValueError("max_hard_slot_tokens must be positive")
         if self.initial_expand_budget is not None and self.initial_expand_budget < 0:
             raise ValueError("initial_expand_budget must be nonnegative")
+        if self.pure_newline_guard_budget_per_slot not in {0, 1}:
+            raise ValueError("pure_newline_guard_budget_per_slot must be 0 or 1")
+        if self.pure_newline_guard_global_budget not in {0, 3}:
+            raise ValueError("pure_newline_guard_global_budget must be 0 or 3")
 
 
 @dataclass(frozen=True)
@@ -267,6 +280,10 @@ class CanvasState:
     initial_expand_budget: int | None
     remaining_expand_budget: int | None
     successful_expand_count: int = 0
+    pure_newline_guard_remaining: dict[str, int] = field(default_factory=dict)
+    pure_newline_guard_global_remaining: int = 0
+    pending_pure_newline_veto: dict[str, Any] | None = None
+    inserted_blankline_count: int = 0
 
     @property
     def capacity(self) -> int:
@@ -296,7 +313,10 @@ class CanvasState:
         return len(self.positions_for_region(region))
 
     def global_middle_length(self) -> int:
-        generation_or_separator = set(GENERATION_REGIONS) | {Region.LOCKED_NEWLINE}
+        generation_or_separator = set(GENERATION_REGIONS) | {
+            Region.LOCKED_NEWLINE,
+            Region.INSERTED_BLANK_NEWLINE,
+        }
         return sum(
             Region(int(region)) in generation_or_separator
             for region in self.region_id[: self.real_length]
@@ -368,6 +388,23 @@ class CanvasState:
         self.attention_mask.copy_(new_attention)
         self.real_length = len(token_ids)
 
+    def insert_locked_tokens(
+        self, position: int, token_ids: Sequence[int], region: Region
+    ) -> None:
+        if not 0 <= position <= self.real_length:
+            raise ProtocolError("insert_position_is_not_real_boundary")
+        if region != Region.INSERTED_BLANK_NEWLINE:
+            raise ProtocolError("inserted_tokens_require_blank_newline_region")
+        old_ids = [int(item) for item in self.input_ids[: self.real_length]]
+        old_regions = [int(item) for item in self.region_id[: self.real_length]]
+        new_ids = old_ids[:position] + list(map(int, token_ids)) + old_ids[position:]
+        new_regions = (
+            old_regions[:position]
+            + [int(region)] * len(token_ids)
+            + old_regions[position:]
+        )
+        self.replace_real_sequence(new_ids, new_regions)
+
     def _assert_real_generation_position(self, position: int) -> None:
         if not 0 <= position < self.real_length or not bool(self.attention_mask[position]):
             raise ProtocolError("selected_position_is_not_real")
@@ -391,7 +428,109 @@ def clone_canvas_state(state: CanvasState) -> CanvasState:
         initial_expand_budget=state.initial_expand_budget,
         remaining_expand_budget=state.remaining_expand_budget,
         successful_expand_count=int(state.successful_expand_count),
+        pure_newline_guard_remaining=dict(state.pure_newline_guard_remaining),
+        pure_newline_guard_global_remaining=int(
+            state.pure_newline_guard_global_remaining
+        ),
+        pending_pure_newline_veto=(
+            None
+            if state.pending_pure_newline_veto is None
+            else dict(state.pending_pure_newline_veto)
+        ),
+        inserted_blankline_count=int(state.inserted_blankline_count),
     )
+
+
+def canvas_checkpoint_payload(state: CanvasState) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "method": state.method.value,
+        "capacity": state.capacity,
+        "input_ids": [int(item) for item in state.input_ids[: state.real_length]],
+        "region_id": [int(item) for item in state.region_id[: state.real_length]],
+        "real_length": int(state.real_length),
+        "initial_prefix_ids": list(state.initial_prefix_ids),
+        "initial_suffix_ids": list(state.initial_suffix_ids),
+        "initial_locked_newline_ids": list(state.initial_locked_newline_ids),
+        "active_region": (
+            None if state.active_region is None else state.active_region.name
+        ),
+        "initial_expand_budget": state.initial_expand_budget,
+        "remaining_expand_budget": state.remaining_expand_budget,
+        "successful_expand_count": int(state.successful_expand_count),
+        "pure_newline_guard_remaining": dict(
+            sorted(state.pure_newline_guard_remaining.items())
+        ),
+        "pure_newline_guard_global_remaining": int(
+            state.pure_newline_guard_global_remaining
+        ),
+        "pending_pure_newline_veto": state.pending_pure_newline_veto,
+        "inserted_blankline_count": int(state.inserted_blankline_count),
+    }
+
+
+def restore_canvas_checkpoint(
+    payload: Mapping[str, Any],
+    tokenizer_spec: TokenizerSpec,
+    device: torch.device,
+) -> CanvasState:
+    if int(payload.get("schema_version", -1)) != 1:
+        raise ProtocolError("unsupported_canvas_checkpoint_schema")
+    real_ids = list(map(int, payload["input_ids"]))
+    real_regions = list(map(int, payload["region_id"]))
+    if len(real_ids) != len(real_regions) or len(real_ids) != int(payload["real_length"]):
+        raise ProtocolError("checkpoint_parallel_lengths_differ")
+    capacity = int(payload["capacity"])
+    if len(real_ids) > capacity:
+        raise ProtocolError("checkpoint_real_length_exceeds_capacity")
+    input_ids = torch.full(
+        (capacity,), tokenizer_spec.pad_id, dtype=torch.long, device=device
+    )
+    region_id = torch.full(
+        (capacity,), int(Region.PAD), dtype=torch.long, device=device
+    )
+    attention_mask = torch.zeros(capacity, dtype=torch.bool, device=device)
+    if real_ids:
+        input_ids[: len(real_ids)] = torch.tensor(real_ids, dtype=torch.long, device=device)
+        region_id[: len(real_regions)] = torch.tensor(
+            real_regions, dtype=torch.long, device=device
+        )
+        attention_mask[: len(real_ids)] = True
+    active_name = payload.get("active_region")
+    state = CanvasState(
+        input_ids=input_ids,
+        region_id=region_id,
+        attention_mask=attention_mask,
+        real_length=len(real_ids),
+        method=Method(str(payload["method"])),
+        tokenizer_spec=tokenizer_spec,
+        initial_prefix_ids=tuple(map(int, payload["initial_prefix_ids"])),
+        initial_suffix_ids=tuple(map(int, payload["initial_suffix_ids"])),
+        initial_locked_newline_ids=tuple(
+            map(int, payload["initial_locked_newline_ids"])
+        ),
+        active_region=None if active_name is None else Region[str(active_name)],
+        initial_expand_budget=payload.get("initial_expand_budget"),
+        remaining_expand_budget=payload.get("remaining_expand_budget"),
+        successful_expand_count=int(payload.get("successful_expand_count", 0)),
+        pure_newline_guard_remaining={
+            str(key): int(value)
+            for key, value in payload.get(
+                "pure_newline_guard_remaining", {}
+            ).items()
+        },
+        pure_newline_guard_global_remaining=int(
+            payload.get("pure_newline_guard_global_remaining", 0)
+        ),
+        pending_pure_newline_veto=(
+            None
+            if payload.get("pending_pure_newline_veto") is None
+            else dict(payload["pending_pure_newline_veto"])
+        ),
+        inserted_blankline_count=int(payload.get("inserted_blankline_count", 0)),
+    )
+    validate_state(state, state.method)
+    return state
 
 
 def _state_hash_payload(state: CanvasState) -> dict[str, Any]:
@@ -428,6 +567,19 @@ def full_state_hash(state: CanvasState) -> str:
                 "successful_expand_count": int(state.successful_expand_count),
             }
         )
+    if method_uses_pure_newline_guard(state.method):
+        payload.update(
+            {
+                "pure_newline_guard_remaining": dict(
+                    sorted(state.pure_newline_guard_remaining.items())
+                ),
+                "pure_newline_guard_global_remaining": int(
+                    state.pure_newline_guard_global_remaining
+                ),
+                "pending_pure_newline_veto": state.pending_pure_newline_veto,
+                "inserted_blankline_count": int(state.inserted_blankline_count),
+            }
+        )
     return _hash_payload(payload)
 
 
@@ -441,6 +593,8 @@ def method_uses_boundary_decoder(method: Method) -> bool:
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     }
 
 
@@ -448,11 +602,28 @@ def method_uses_expand_budget(method: Method) -> bool:
     return method in {
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     }
 
 
 def method_uses_nonempty_guard(method: Method) -> bool:
     return method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
+
+
+def method_uses_pure_newline_guard(method: Method) -> bool:
+    return method in {
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
+    }
+
+
+def pure_newline_guard_mode(method: Method) -> str | None:
+    if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+        return "oneshot_veto"
+    if method == Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE:
+        return "nonconsuming_blankline"
+    return None
 
 
 def transition_signature(
@@ -479,6 +650,8 @@ def sequential_regions(method: Method) -> tuple[Region, ...]:
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     ):
         return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.HARD_SLOT_2)
     if method == Method.V2_OPENTAIL:
@@ -494,6 +667,8 @@ def method_generation_regions(method: Method) -> tuple[Region, ...]:
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     ):
         return sequential_regions(method)
     return (Region.HARD_SLOT_0, Region.HARD_SLOT_1, Region.OPEN_TAIL)
@@ -586,6 +761,8 @@ def _initial_middle(method: Method, spec: TokenizerSpec, masks: int) -> tuple[li
         Method.V2_HARD_V2_BOUNDARY,
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     ):
         add_region(Region.HARD_SLOT_2)
         add_newline()
@@ -609,6 +786,12 @@ def build_canvas(
         raise ProtocolError("expand_budget_configured_for_non_v3_method")
     if config.nonempty_guard != method_uses_nonempty_guard(method):
         raise ProtocolError("nonempty_guard_method_config_mismatch")
+    expected_guard_budget = 1 if method_uses_pure_newline_guard(method) else 0
+    expected_global_guard_budget = 3 if method_uses_pure_newline_guard(method) else 0
+    if config.pure_newline_guard_budget_per_slot != expected_guard_budget:
+        raise ProtocolError("pure_newline_guard_per_slot_config_mismatch")
+    if config.pure_newline_guard_global_budget != expected_global_guard_budget:
+        raise ProtocolError("pure_newline_guard_global_config_mismatch")
     middle_ids, middle_regions = _initial_middle(
         method, tokenizer_spec, config.initial_masks_per_region
     )
@@ -652,6 +835,21 @@ def build_canvas(
         initial_expand_budget=config.initial_expand_budget,
         remaining_expand_budget=config.initial_expand_budget,
         successful_expand_count=0,
+        pure_newline_guard_remaining=(
+            {
+                region.name: config.pure_newline_guard_budget_per_slot
+                for region in HARD_REGIONS
+            }
+            if method_uses_pure_newline_guard(method)
+            else {}
+        ),
+        pure_newline_guard_global_remaining=(
+            config.pure_newline_guard_global_budget
+            if method_uses_pure_newline_guard(method)
+            else 0
+        ),
+        pending_pure_newline_veto=None,
+        inserted_blankline_count=0,
     )
     advance_active_region(state, method)
     validate_state(state, method)
@@ -820,6 +1018,193 @@ def select_update(
     )
 
 
+def select_update_with_pending_veto(
+    state: CanvasState,
+    method: Method,
+    full_logits: torch.Tensor,
+    config: SlotGeneratorConfig,
+) -> tuple[SelectedUpdate, bool, bool]:
+    pending = state.pending_pure_newline_veto
+    if pending is None:
+        return select_update(state, method, full_logits, config), False, False
+    if method != Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+        raise ProtocolError("pending_pure_newline_veto_on_wrong_method")
+    if str(pending["pre_canvas_hash"]) != canvas_only_state_hash(state):
+        raise ProtocolError("pending_pure_newline_veto_canvas_mismatch")
+    position = int(pending["selected_position"])
+    token_id = int(pending["proposal_token_id"])
+    try:
+        selected = select_update(
+            state,
+            method,
+            full_logits,
+            config,
+            rejected_candidates={(position, token_id)},
+        )
+        fallback = False
+    except ProtocolError as error:
+        if str(error) != "no_valid_proposal":
+            raise
+        if (
+            position not in state.unresolved_positions(state.active_region)
+            or int(state.input_ids[position]) != state.tokenizer_spec.mask_id
+        ):
+            raise ProtocolError("pending_pure_newline_veto_position_invalid") from error
+        selected = SelectedUpdate(
+            position=position,
+            region=Region(int(state.region_id[position])),
+            proposal_token_id=token_id,
+            unconstrained_proposal_token_id=token_id,
+            confidence=float("-inf"),
+        )
+        fallback = True
+    state.pending_pure_newline_veto = None
+    return selected, True, fallback
+
+
+def classify_action_token(token_id: int, spec: TokenizerSpec) -> str:
+    token_id = int(token_id)
+    if token_id == spec.expand_id:
+        return "expand"
+    if token_id == spec.eos_id:
+        return "EOS"
+    newline = spec.newline_token_map.get(token_id)
+    if newline is not None:
+        if (
+            newline.normalized_text == "\n"
+            and newline.left_text == ""
+            and newline.right_text == ""
+        ):
+            return "pure_newline"
+        return "other_newline"
+    if token_id in {spec.bos_id, spec.pad_id, spec.mask_id}:
+        return "special/sentinel"
+    return "normal"
+
+
+def _position_logit_diagnostic(
+    state: CanvasState,
+    position: int,
+    full_logits: torch.Tensor,
+    config: SlotGeneratorConfig,
+    tokenizer,
+    *,
+    eligible: bool,
+    region_offset: int,
+) -> dict[str, Any]:
+    region = Region(int(state.region_id[position]))
+    logits = full_logits[position].float().clone()
+    if not _expand_allowed(state, region, config):
+        logits[state.tokenizer_spec.expand_id] = float("-inf")
+    filtered = _top_k_logits(_top_p_logits(logits.unsqueeze(0), config.top_p), config.top_k)[0]
+    finite = torch.isfinite(filtered)
+    if not finite.any():
+        raise ProtocolError("future_diagnostic_no_finite_proposal")
+    probabilities = torch.softmax(filtered, dim=-1)
+    entropy = float(
+        -torch.sum(probabilities * torch.log(probabilities.clamp_min(1e-10))).item()
+    )
+    top1 = int(torch.argmax(filtered).item())
+    finite_indices = finite.nonzero(as_tuple=False).flatten()
+    k = min(5, int(finite_indices.numel()))
+    finite_logits = filtered[finite_indices]
+    top_local = torch.topk(finite_logits, k=k, largest=True).indices
+    top_ids = [int(finite_indices[index].item()) for index in top_local]
+    return {
+        "region": region.name,
+        "position": int(position),
+        "region_offset": int(region_offset),
+        "eligible": bool(eligible),
+        "entropy": entropy,
+        "top1_probability": float(probabilities[top1].item()),
+        "top5_token_ids": top_ids,
+        "top5_decoded_texts": [
+            _decode(tokenizer, [token_id]) for token_id in top_ids
+        ],
+        "top5_probabilities": [
+            float(probabilities[token_id].item()) for token_id in top_ids
+        ],
+        "top5_logits": [float(filtered[token_id].item()) for token_id in top_ids],
+        "top1_action_class": classify_action_token(top1, state.tokenizer_spec),
+    }
+
+
+def collect_future_slot_diagnostics(
+    state: CanvasState,
+    method: Method,
+    full_logits: torch.Tensor,
+    config: SlotGeneratorConfig,
+    tokenizer,
+    selected: SelectedUpdate,
+) -> dict[str, Any]:
+    if state.active_region is None or method == Method.JOINT_OPENTAIL:
+        raise ProtocolError("future_diagnostic_requires_sequential_active_region")
+    order = sequential_regions(method)
+    active_index = order.index(state.active_region)
+    inspected = order[active_index:]
+    position_rows: list[dict[str, Any]] = []
+    regions: dict[str, Any] = {}
+    for region in inspected:
+        region_positions = state.positions_for_region(region)
+        unresolved = state.unresolved_positions(region)
+        details = [
+            _position_logit_diagnostic(
+                state,
+                position,
+                full_logits,
+                config,
+                tokenizer,
+                eligible=region == state.active_region,
+                region_offset=region_positions.index(position),
+            )
+            for position in unresolved
+        ]
+        position_rows.extend(details)
+        normal = [row for row in details if row["top1_action_class"] == "normal"]
+        terminating = [
+            row
+            for row in details
+            if row["top1_action_class"]
+            in {"EOS", "pure_newline", "other_newline", "special/sentinel"}
+        ]
+        most_confident = min(details, key=lambda row: row["entropy"])
+        regions[region.name] = {
+            "eligible": region == state.active_region,
+            "positions": details,
+            "minimum_entropy": min(row["entropy"] for row in details),
+            "maximum_top1_probability": max(
+                row["top1_probability"] for row in details
+            ),
+            "normal_top1_position_count": len(normal),
+            "termination_top1_position_count": len(terminating),
+            "most_confident_position": most_confident,
+        }
+    selected_row = next(
+        row for row in position_rows if row["position"] == selected.position
+    )
+    future_normal = [
+        row
+        for row in position_rows
+        if not row["eligible"] and row["top1_action_class"] == "normal"
+    ]
+    return {
+        "active_region": state.active_region.name,
+        "selected_position": selected.position,
+        "selected_region_offset": selected_row["region_offset"],
+        "selected_entropy": selected_row["entropy"],
+        "selected_top1_probability": selected_row["top1_probability"],
+        "selected_top1_action_class": selected_row["top1_action_class"],
+        "regions": regions,
+        "future_has_lower_entropy_normal_candidate": any(
+            row["entropy"] < selected_row["entropy"] for row in future_normal
+        ),
+        "future_has_higher_top1_probability_normal_candidate": any(
+            row["top1_probability"] > selected_row["top1_probability"]
+            for row in future_normal
+        ),
+    }
+
+
 def action_completes_blank_hard_slot(
     candidate_state: CanvasState, region: Region, tokenizer
 ) -> bool:
@@ -912,7 +1297,8 @@ def select_nonempty_guarded_update(
 
 def _candidate_middle_length(region_ids: Sequence[int]) -> int:
     middle_regions = {int(region) for region in GENERATION_REGIONS} | {
-        int(Region.LOCKED_NEWLINE)
+        int(Region.LOCKED_NEWLINE),
+        int(Region.INSERTED_BLANK_NEWLINE),
     }
     return sum(int(region_id) in middle_regions for region_id in region_ids)
 
@@ -1045,6 +1431,194 @@ def _apply_line_boundary(
     )
 
 
+def _strict_pure_newline_blank_request(
+    state: CanvasState,
+    selected: SelectedUpdate,
+    config: SlotGeneratorConfig,
+    tokenizer,
+    *,
+    require_budget: bool,
+) -> bool:
+    if not method_uses_pure_newline_guard(state.method):
+        return False
+    if selected.region not in HARD_REGIONS or selected.region != state.active_region:
+        return False
+    info = state.tokenizer_spec.newline_token_map.get(selected.proposal_token_id)
+    if info is None:
+        return False
+    if not (
+        info.normalized_text == "\n"
+        and info.left_text == ""
+        and info.right_text == ""
+    ):
+        return False
+    region_positions = state.positions_for_region(selected.region)
+    if not region_positions or selected.position != region_positions[0]:
+        return False
+    if require_budget:
+        if state.pure_newline_guard_global_remaining <= 0:
+            return False
+        if state.pure_newline_guard_remaining.get(selected.region.name, 0) <= 0:
+            return False
+    candidate = clone_canvas_state(state)
+    _apply_line_boundary(
+        candidate,
+        selected.position,
+        selected.region,
+        info,
+        config,
+        tokenizer,
+    )
+    return (
+        candidate.region_length(selected.region) == 0
+        and not candidate.unresolved_positions(selected.region)
+        and not _decode(tokenizer, candidate.tokens_for_region(selected.region)).strip()
+    )
+
+
+def is_strict_pure_newline_blank_trigger(
+    state: CanvasState,
+    selected: SelectedUpdate,
+    config: SlotGeneratorConfig,
+    tokenizer,
+) -> bool:
+    return _strict_pure_newline_blank_request(
+        state, selected, config, tokenizer, require_budget=True
+    )
+
+
+def _consume_pure_newline_guard(state: CanvasState, region: Region) -> None:
+    remaining = state.pure_newline_guard_remaining.get(region.name)
+    if remaining is None or remaining <= 0:
+        raise ProtocolError("pure_newline_guard_slot_budget_exhausted")
+    if state.pure_newline_guard_global_remaining <= 0:
+        raise ProtocolError("pure_newline_guard_global_budget_exhausted")
+    state.pure_newline_guard_remaining[region.name] = remaining - 1
+    state.pure_newline_guard_global_remaining -= 1
+
+
+def apply_pure_newline_intervention(
+    state: CanvasState,
+    selected: SelectedUpdate,
+    config: SlotGeneratorConfig,
+    tokenizer,
+) -> ActionResult:
+    if not is_strict_pure_newline_blank_trigger(
+        state, selected, config, tokenizer
+    ):
+        raise ProtocolError("pure_newline_intervention_without_trigger")
+    pre_canvas_hash = canvas_only_state_hash(state)
+    pre_full_hash = full_state_hash(state)
+    info = state.tokenizer_spec.newline_token_map[selected.proposal_token_id]
+    pre_slot_budget = state.pure_newline_guard_remaining[selected.region.name]
+    pre_global_budget = state.pure_newline_guard_global_remaining
+
+    if state.method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+        _consume_pure_newline_guard(state, selected.region)
+        state.pending_pure_newline_veto = {
+            "pre_canvas_hash": pre_canvas_hash,
+            "selected_position": int(selected.position),
+            "proposal_token_id": int(selected.proposal_token_id),
+            "action": "line_boundary",
+        }
+        return ActionResult(
+            "pure_newline_veto",
+            {
+                "slot": selected.region.name,
+                "pre_canvas_hash": pre_canvas_hash,
+                "post_canvas_hash": canvas_only_state_hash(state),
+                "pre_state_hash": pre_full_hash,
+                "post_state_hash": full_state_hash(state),
+                "pre_slot_guard_budget": pre_slot_budget,
+                "post_slot_guard_budget": state.pure_newline_guard_remaining[
+                    selected.region.name
+                ],
+                "pre_global_guard_budget": pre_global_budget,
+                "post_global_guard_budget": state.pure_newline_guard_global_remaining,
+                "pending_signature": dict(state.pending_pure_newline_veto),
+            },
+        )
+
+    if state.method != Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE:
+        raise ProtocolError("unknown_pure_newline_guard_method")
+
+    insert_ids = list(state.tokenizer_spec.literal_newline_ids)
+    if _decode(tokenizer, insert_ids) != "\n":
+        raise ProtocolError("literal_newline_ids_do_not_decode_to_one_newline")
+    insert_position = state.positions_for_region(selected.region)[0]
+    old_ids = [int(item) for item in state.input_ids[: state.real_length]]
+    old_regions = [int(item) for item in state.region_id[: state.real_length]]
+    candidate_ids = old_ids[:insert_position] + insert_ids + old_ids[insert_position:]
+    candidate_regions = (
+        old_regions[:insert_position]
+        + [int(Region.INSERTED_BLANK_NEWLINE)] * len(insert_ids)
+        + old_regions[insert_position:]
+    )
+    cap_fallback = False
+    try:
+        _validate_candidate_caps(
+            candidate_ids, candidate_regions, selected.region, config
+        )
+    except ProtocolError as error:
+        if str(error) not in {
+            "boundary_context_cap_exceeded",
+            "boundary_global_cap_exceeded",
+        }:
+            raise
+        cap_fallback = True
+
+    _consume_pure_newline_guard(state, selected.region)
+    if cap_fallback:
+        fallback = _apply_line_boundary(
+            state,
+            selected.position,
+            selected.region,
+            info,
+            config,
+            tokenizer,
+        )
+        return ActionResult(
+            fallback.action,
+            {
+                **fallback.details,
+                "blankline_insert_cap_fallback": True,
+                "blankline_insert_slot": selected.region.name,
+                "pre_insert_state_hash": pre_full_hash,
+                "post_insert_state_hash": full_state_hash(state),
+                "inserted_newline_positions": [],
+                "pre_slot_guard_budget": pre_slot_budget,
+                "post_slot_guard_budget": state.pure_newline_guard_remaining[
+                    selected.region.name
+                ],
+                "pre_global_guard_budget": pre_global_budget,
+                "post_global_guard_budget": state.pure_newline_guard_global_remaining,
+            },
+        )
+
+    state.insert_locked_tokens(
+        insert_position, insert_ids, Region.INSERTED_BLANK_NEWLINE
+    )
+    state.inserted_blankline_count += 1
+    return ActionResult(
+        "insert_locked_blank_newline",
+        {
+            "blankline_insert_cap_fallback": False,
+            "blankline_insert_slot": selected.region.name,
+            "inserted_newline_positions": list(
+                range(insert_position, insert_position + len(insert_ids))
+            ),
+            "pre_insert_state_hash": pre_full_hash,
+            "post_insert_state_hash": full_state_hash(state),
+            "pre_slot_guard_budget": pre_slot_budget,
+            "post_slot_guard_budget": state.pure_newline_guard_remaining[
+                selected.region.name
+            ],
+            "pre_global_guard_budget": pre_global_budget,
+            "post_global_guard_budget": state.pure_newline_guard_global_remaining,
+        },
+    )
+
+
 def _apply_region_local_eos(
     state: CanvasState, position: int, region: Region
 ) -> ActionResult:
@@ -1145,6 +1719,12 @@ def validate_state(state: CanvasState, method: Method) -> None:
         state.initial_locked_newline_ids
     ):
         raise ProtocolError("locked_separator_tokens_mutated")
+    inserted_ids = state.tokens_for_region(Region.INSERTED_BLANK_NEWLINE)
+    expected_inserted_ids = list(state.tokenizer_spec.literal_newline_ids) * int(
+        state.inserted_blankline_count
+    )
+    if inserted_ids != expected_inserted_ids:
+        raise ProtocolError("inserted_blank_newline_tokens_mutated")
     if state.global_middle_length() > state.capacity:
         raise ProtocolError("middle_length_exceeds_context_capacity")
     if method_uses_expand_budget(method):
@@ -1165,6 +1745,50 @@ def validate_state(state: CanvasState, method: Method) -> None:
         or state.successful_expand_count != 0
     ):
         raise ProtocolError("unexpected_expand_budget_state")
+    if method_uses_pure_newline_guard(method):
+        if set(state.pure_newline_guard_remaining) != {
+            region.name for region in HARD_REGIONS
+        }:
+            raise ProtocolError("pure_newline_guard_region_state_invalid")
+        if any(
+            value not in {0, 1}
+            for value in state.pure_newline_guard_remaining.values()
+        ):
+            raise ProtocolError("pure_newline_guard_slot_budget_invalid")
+        consumed = sum(
+            1 - int(state.pure_newline_guard_remaining[region.name])
+            for region in HARD_REGIONS
+        )
+        if state.pure_newline_guard_global_remaining != 3 - consumed:
+            raise ProtocolError("pure_newline_guard_budget_conservation_failed")
+        if not 0 <= state.pure_newline_guard_global_remaining <= 3:
+            raise ProtocolError("pure_newline_guard_global_budget_invalid")
+        if state.pending_pure_newline_veto is not None:
+            if method != Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+                raise ProtocolError("pending_pure_newline_veto_on_wrong_method")
+            if (
+                state.pending_pure_newline_veto.get("pre_canvas_hash")
+                != canvas_only_state_hash(state)
+            ):
+                raise ProtocolError("pending_pure_newline_veto_canvas_mismatch")
+        if (
+            method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO
+            and state.inserted_blankline_count != 0
+        ):
+            raise ProtocolError("c0_contains_inserted_blankline")
+        if (
+            method == Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE
+            and state.pending_pure_newline_veto is not None
+        ):
+            raise ProtocolError("c_contains_pending_veto")
+    elif (
+        state.pure_newline_guard_remaining
+        or state.pure_newline_guard_global_remaining != 0
+        or state.pending_pure_newline_veto is not None
+        or state.inserted_blankline_count != 0
+        or inserted_ids
+    ):
+        raise ProtocolError("unexpected_pure_newline_guard_state")
     if method != Method.JOINT_OPENTAIL:
         order = sequential_regions(method)
         active = state.active_region
@@ -1202,7 +1826,8 @@ def extract_completion(state: CanvasState, method: Method, tokenizer) -> dict[st
         position
         for position in range(state.real_length)
         if Region(int(state.region_id[position]))
-        in set(generation_regions) | {Region.LOCKED_NEWLINE}
+        in set(generation_regions)
+        | {Region.LOCKED_NEWLINE, Region.INSERTED_BLANK_NEWLINE}
     ]
     completion_ids = [int(state.input_ids[position]) for position in completion_positions]
     forbidden_final = {
@@ -1326,6 +1951,19 @@ def run_slot_generation(
     nonempty_guard_rejections_by_slot = _empty_region_counter(method)
     nonempty_guard_rejections_by_action: dict[str, int] = {}
     nonempty_guard_no_valid_action_count = 0
+    pure_newline_guard_events: list[dict[str, Any]] = []
+    future_slot_diagnostic_events: list[dict[str, Any]] = []
+    pure_newline_veto_triggers = 0
+    pure_newline_veto_fallbacks = 0
+    pure_newline_veto_extra_forwards = 0
+    pure_newline_veto_reselected_action: list[str] = []
+    blankline_insert_triggers = 0
+    blankline_insert_slots: list[str] = []
+    blankline_insert_cap_fallbacks = 0
+    inserted_newline_positions: list[list[int]] = []
+    pre_insert_state_hashes: list[str] = []
+    post_insert_state_hashes: list[str] = []
+    repeated_blankline_requests = 0
     start = time.perf_counter()
     if device.type == "cuda":
         torch.cuda.synchronize(device)
@@ -1349,6 +1987,29 @@ def run_slot_generation(
             if state.active_region is not None:
                 active_region_history.append(state.active_region.name)
 
+            pending_retry_forward = state.pending_pure_newline_veto is not None
+            pre_canvas_hash = canvas_only_state_hash(state)
+            pre_full_hash = full_state_hash(state)
+            pre_action_hash = (
+                pre_full_hash if method_uses_expand_budget(method) else pre_canvas_hash
+            )
+            pre_expand_budget = state.remaining_expand_budget
+            pre_pure_newline_guard_remaining = dict(
+                state.pure_newline_guard_remaining
+            )
+            pre_pure_newline_guard_global_remaining = int(
+                state.pure_newline_guard_global_remaining
+            )
+            pre_pending_pure_newline_veto = (
+                None
+                if state.pending_pure_newline_veto is None
+                else dict(state.pending_pure_newline_veto)
+            )
+            pre_region_lengths = {
+                region.name: state.region_length(region)
+                for region in method_generation_regions(method)
+            }
+
             input_ids, attention_mask, position_ids = forward_inputs(state)
             real_length = state.real_length
             with torch.no_grad():
@@ -1359,6 +2020,8 @@ def run_slot_generation(
                     use_cache=False,
                 )
             forward_lengths.append(real_length)
+            if pending_retry_forward:
+                pure_newline_veto_extra_forwards += 1
             logits = shifted_logits(output.logits)[0]
             expand_logit_blocked_by_budget = bool(
                 state.remaining_expand_budget == 0
@@ -1366,6 +2029,8 @@ def run_slot_generation(
             if expand_logit_blocked_by_budget:
                 expand_logit_blocked_by_budget_count += len(positions)
             guard_rejections_this_forward: list[dict[str, Any]] = []
+            pending_veto_used = False
+            pending_veto_fallback = False
             if method_uses_nonempty_guard(method):
                 try:
                     selected, guard_rejections_this_forward = (
@@ -1395,6 +2060,15 @@ def run_slot_generation(
                     nonempty_guard_rejections_by_slot,
                     nonempty_guard_rejections_by_action,
                 )
+            elif (
+                method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO
+                and state.pending_pure_newline_veto is not None
+            ):
+                selected, pending_veto_used, pending_veto_fallback = (
+                    select_update_with_pending_veto(
+                        state, method, logits, config
+                    )
+                )
             else:
                 selected = select_update(state, method, logits, config)
             if first_selected_region is None:
@@ -1421,23 +2095,92 @@ def run_slot_generation(
             if state.global_middle_length() >= config.max_global_middle_tokens:
                 global_cap_hits += 1
 
-            pre_canvas_hash = canvas_only_state_hash(state)
-            pre_full_hash = full_state_hash(state)
-            pre_action_hash = (
-                pre_full_hash if method_uses_expand_budget(method) else pre_canvas_hash
+            trigger = (
+                method_uses_pure_newline_guard(method)
+                and is_strict_pure_newline_blank_trigger(
+                    state, selected, config, tokenizer
+                )
             )
-            pre_expand_budget = state.remaining_expand_budget
-            pre_region_lengths = {
-                region.name: state.region_length(region)
-                for region in method_generation_regions(method)
-            }
-            action_result = apply_selected_action(
-                state,
-                selected.position,
-                selected.proposal_token_id,
-                config,
-                tokenizer=tokenizer,
-            )
+            trigger_event: dict[str, Any] | None = None
+            if trigger:
+                right_positions = [
+                    position
+                    for position in state.positions_for_region(selected.region)
+                    if position > selected.position
+                ]
+                resolved_segments = _resolved_segments(
+                    state, right_positions, tokenizer
+                )
+                diagnostic = collect_future_slot_diagnostics(
+                    state,
+                    method,
+                    logits,
+                    config,
+                    tokenizer,
+                    selected,
+                )
+                diagnostic_event = {
+                    "task_id": task_id,
+                    "forward_index": len(forward_lengths),
+                    "slot": selected.region.name,
+                    **diagnostic,
+                }
+                future_slot_diagnostic_events.append(diagnostic_event)
+                trigger_event = {
+                    "task_id": task_id,
+                    "forward_index": len(forward_lengths),
+                    "slot": selected.region.name,
+                    "selected_position": selected.position,
+                    "proposal_token_id": selected.proposal_token_id,
+                    "decoded_proposal": _decode(
+                        tokenizer, [selected.proposal_token_id]
+                    ),
+                    "pre_canvas_hash": pre_canvas_hash,
+                    "pre_full_state_hash": pre_full_hash,
+                    "resolved_right_token_ids": [
+                        int(state.input_ids[position])
+                        for position in right_positions
+                        if int(state.input_ids[position])
+                        != state.tokenizer_spec.mask_id
+                    ],
+                    "resolved_right_segments": resolved_segments,
+                    "has_resolved_right_token": bool(resolved_segments),
+                    "has_nonwhitespace_resolved_right_token": any(
+                        segment["text"].strip() for segment in resolved_segments
+                    ),
+                    "future_slot_diagnostic_index": len(
+                        future_slot_diagnostic_events
+                    )
+                    - 1,
+                }
+                action_result = apply_pure_newline_intervention(
+                    state, selected, config, tokenizer
+                )
+                if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+                    pure_newline_veto_triggers += 1
+                else:
+                    blankline_insert_triggers += 1
+                    blankline_insert_slots.append(selected.region.name)
+            else:
+                if method_uses_pure_newline_guard(method) and _strict_pure_newline_blank_request(
+                    state,
+                    selected,
+                    config,
+                    tokenizer,
+                    require_budget=False,
+                ):
+                    repeated_blankline_requests += 1
+                action_result = apply_selected_action(
+                    state,
+                    selected.position,
+                    selected.proposal_token_id,
+                    config,
+                    tokenizer=tokenizer,
+                )
+            if pending_veto_used:
+                pure_newline_veto_reselected_action.append(action_result.action)
+                if pending_veto_fallback:
+                    pure_newline_veto_fallbacks += 1
             if method != Method.JOINT_OPENTAIL:
                 advance_active_region(state, method)
             validate_state(state, method)
@@ -1459,6 +2202,16 @@ def run_slot_generation(
                 for region in method_generation_regions(method)
             }
             action = action_result.action
+            if trigger_event is not None:
+                trigger_event.update(
+                    {
+                        "action": action,
+                        "action_details": action_result.details,
+                        "post_canvas_hash": post_canvas_hash,
+                        "post_full_state_hash": post_full_hash,
+                    }
+                )
+                pure_newline_guard_events.append(trigger_event)
             signature = transition_signature(
                 pre_action_hash,
                 selected.position,
@@ -1480,6 +2233,18 @@ def run_slot_generation(
                 normal_updates[selected.region.name] += 1
             elif action == "expand":
                 expand_counts[selected.region.name] += 1
+            elif action == "pure_newline_veto":
+                pass
+            elif action == "insert_locked_blank_newline":
+                inserted_newline_positions.append(
+                    list(action_result.details["inserted_newline_positions"])
+                )
+                pre_insert_state_hashes.append(
+                    str(action_result.details["pre_insert_state_hash"])
+                )
+                post_insert_state_hashes.append(
+                    str(action_result.details["post_insert_state_hash"])
+                )
             elif action == "region_local_eos":
                 delete_counts[selected.region.name] += 1
                 eos_event = {
@@ -1503,6 +2268,15 @@ def run_slot_generation(
                     action_result.details["cross_region_delete_attempts"]
                 )
             elif action == "line_boundary":
+                if bool(action_result.details.get("blankline_insert_cap_fallback")):
+                    blankline_insert_cap_fallbacks += 1
+                    inserted_newline_positions.append([])
+                    pre_insert_state_hashes.append(
+                        str(action_result.details["pre_insert_state_hash"])
+                    )
+                    post_insert_state_hashes.append(
+                        str(action_result.details["post_insert_state_hash"])
+                    )
                 boundary_event = {
                     "task_id": task_id,
                     "slot": selected.region.name,
@@ -1614,6 +2388,22 @@ def run_slot_generation(
                         "full_post_state_hash": post_full_hash,
                         "expand_logit_blocked_by_budget": expand_logit_blocked_by_budget,
                         "nonempty_guard_rejection_events": guard_rejections_this_forward,
+                        "pre_pure_newline_guard_remaining": pre_pure_newline_guard_remaining,
+                        "post_pure_newline_guard_remaining": dict(
+                            state.pure_newline_guard_remaining
+                        ),
+                        "pre_pure_newline_guard_global_remaining": pre_pure_newline_guard_global_remaining,
+                        "post_pure_newline_guard_global_remaining": state.pure_newline_guard_global_remaining,
+                        "pre_pending_pure_newline_veto": pre_pending_pure_newline_veto,
+                        "post_pending_pure_newline_veto": (
+                            None
+                            if state.pending_pure_newline_veto is None
+                            else dict(state.pending_pure_newline_veto)
+                        ),
+                        "pending_veto_retry_forward": pending_retry_forward,
+                        "pending_veto_used": pending_veto_used,
+                        "pending_veto_fallback": pending_veto_fallback,
+                        "pure_newline_triggered": trigger,
                         "transition_signature": list(signature),
                         "active_region": next_active_region,
                         "active_mask_count": len(next_positions),
@@ -1727,6 +2517,35 @@ def run_slot_generation(
         "nonempty_guard_rejection_events": nonempty_guard_rejection_events,
         "nonempty_guard_no_valid_action_count": nonempty_guard_no_valid_action_count,
         "final_nonempty_invariant_passed": final_nonempty_invariant_passed,
+        "pure_newline_guard_trigger_count": len(pure_newline_guard_events),
+        "pure_newline_guard_events": pure_newline_guard_events,
+        "future_slot_diagnostic_events": future_slot_diagnostic_events,
+        "pure_newline_guard_budget_remaining": dict(
+            state.pure_newline_guard_remaining
+        ),
+        "pure_newline_guard_global_budget_remaining": state.pure_newline_guard_global_remaining,
+        "pure_newline_veto_triggers": pure_newline_veto_triggers,
+        "pure_newline_veto_budget_remaining": dict(
+            state.pure_newline_guard_remaining
+        ),
+        "pure_newline_veto_pending_signature": state.pending_pure_newline_veto,
+        "pure_newline_veto_reselected_action": pure_newline_veto_reselected_action,
+        "pure_newline_veto_fallbacks": pure_newline_veto_fallbacks,
+        "pure_newline_veto_extra_forwards": pure_newline_veto_extra_forwards,
+        "blankline_insert_triggers": blankline_insert_triggers,
+        "blankline_inserted_count": state.inserted_blankline_count,
+        "blankline_insert_slot": blankline_insert_slots,
+        "blankline_guard_budget_remaining": dict(
+            state.pure_newline_guard_remaining
+        ),
+        "repeated_blankline_requests": repeated_blankline_requests,
+        "blankline_insert_cap_fallbacks": blankline_insert_cap_fallbacks,
+        "inserted_newline_positions": inserted_newline_positions,
+        "final_inserted_newline_positions": state.positions_for_region(
+            Region.INSERTED_BLANK_NEWLINE
+        ),
+        "pre_insert_state_hash": pre_insert_state_hashes,
+        "post_insert_state_hash": post_insert_state_hashes,
         "slot_expand_cap_hits": slot_cap_hits,
         "global_expand_cap_hits": global_cap_hits,
         "unresolved_mask_count": len(state.unresolved_positions()),

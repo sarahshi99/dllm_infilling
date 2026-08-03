@@ -59,8 +59,16 @@ HISTORICAL_DIR = EXTERNAL_ROOT / "repro_results/dreamon_progressive_three_line_a
 HUMAN_EVAL_ROOT = EXTERNAL_ROOT / "human-eval-infilling"
 
 STAGE_SIZES = {"smoke": 5, "pilot": 30, "full": 642}
-TARGETED_STAGE_SIZES = {"cycle5": 5, "affected6": 6}
-ALL_STAGE_SIZES = {**STAGE_SIZES, **TARGETED_STAGE_SIZES}
+TARGETED_STAGE_SIZES = {"cycle5": 5, "affected6": 6, "pure30": 30}
+TARGETED_PREFIX_STAGES = {"v3c_smoke": {"population_rows": 30, "selected_rows": 5}}
+ALL_STAGE_SIZES = {
+    **STAGE_SIZES,
+    **TARGETED_STAGE_SIZES,
+    **{
+        stage: values["selected_rows"]
+        for stage, values in TARGETED_PREFIX_STAGES.items()
+    },
+}
 ALLOWED_GENERATION_FIELDS = {"task_id", "base_problem_id", "prompt", "suffix"}
 FORBIDDEN_GENERATION_FIELDS = {
     "canonical_solution",
@@ -146,6 +154,15 @@ def is_v3_method(method: Method) -> bool:
     return method in {
         Method.V3_HARD_BUDGETED,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
+    }
+
+
+def is_v3c_method(method: Method) -> bool:
+    return method in {
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
     }
 
 
@@ -162,7 +179,11 @@ def build_method_config(
     is_boundary_v2 = method == Method.V2_HARD_V2_BOUNDARY
     is_v3_budgeted = is_v3_method(method)
     nonempty_guard = method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
-    if is_v3_budgeted:
+    if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+        protocol_name = "dreamon_v3_c0_budgeted_oneshot_pure_newline_veto"
+    elif method == Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE:
+        protocol_name = "dreamon_v3_c_budgeted_nonconsuming_blankline"
+    elif is_v3_budgeted:
         protocol_name = (
             "dreamon_progressive_v3_hard_budgeted_nonempty_oracle"
             if nonempty_guard
@@ -174,7 +195,9 @@ def build_method_config(
         protocol_name = "dreamon_progressive_v2_slots"
     return {
         "protocol_name": protocol_name,
-        "protocol_version": 3 if is_v3_budgeted else (2 if is_boundary_v2 else 1),
+        "protocol_version": (
+            4 if is_v3c_method(method) else (3 if is_v3_budgeted else (2 if is_boundary_v2 else 1))
+        ),
         "protocol_sha256": protocol_sha,
         "method": method.value,
         "stage": stage,
@@ -206,6 +229,21 @@ def build_method_config(
         "expand_budget_refund_on_delete": False if is_v3_budgeted else None,
         "expand_budget_logit_mask_at_zero": True if is_v3_budgeted else None,
         "nonempty_guard": nonempty_guard,
+        "pure_newline_guard_mode": (
+            "oneshot_veto"
+            if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO
+            else "nonconsuming_blankline"
+            if method == Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE
+            else None
+        ),
+        "pure_newline_guard_budget_per_slot": 1 if is_v3c_method(method) else 0,
+        "pure_newline_guard_global_budget": 3 if is_v3c_method(method) else 0,
+        "future_slot_logit_diagnostics": is_v3c_method(method),
+        "run_authorization": (
+            "preregistered_full_gate_authorized"
+            if is_v3c_method(method) and stage == "full"
+            else "stage_execution_authorized"
+        ),
     }
 
 
@@ -244,6 +282,11 @@ def load_targeted_generation_population(
 
 
 def load_stage_population(path: Path, stage: str) -> list[dict[str, Any]]:
+    if stage in TARGETED_PREFIX_STAGES:
+        values = TARGETED_PREFIX_STAGES[stage]
+        return load_targeted_generation_population(
+            path, int(values["population_rows"])
+        )[: int(values["selected_rows"])]
     if stage in TARGETED_STAGE_SIZES:
         return load_targeted_generation_population(path, stage_size(stage))
     return load_generation_population(path)[: stage_size(stage)]
@@ -263,6 +306,8 @@ def classify_protocol_outcome(row: Mapping[str, Any]) -> str:
         Method.V2_HARD_V2_BOUNDARY.value,
         Method.V3_HARD_BUDGETED.value,
         Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE.value,
+        Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO.value,
+        Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE.value,
     }:
         if (
             status == "protocol_error"
@@ -397,6 +442,8 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
             Method.V2_HARD_V2_BOUNDARY,
             Method.V3_HARD_BUDGETED,
             Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+            Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+            Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
         )
         else ["HARD_SLOT_0", "HARD_SLOT_1", "OPEN_TAIL"]
     )
@@ -445,6 +492,8 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
             in {
                 Method.V3_HARD_BUDGETED,
                 Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+                Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO,
+                Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE,
             }
             else None
         ),
@@ -466,6 +515,33 @@ def error_result(method: Method, error: BaseException) -> dict[str, Any]:
         "nonempty_guard_rejection_events": [],
         "nonempty_guard_no_valid_action_count": 0,
         "final_nonempty_invariant_passed": False,
+        "pure_newline_guard_trigger_count": 0,
+        "pure_newline_guard_events": [],
+        "future_slot_diagnostic_events": [],
+        "pure_newline_guard_budget_remaining": (
+            {name: 1 for name in region_names} if is_v3c_method(method) else {}
+        ),
+        "pure_newline_guard_global_budget_remaining": 3 if is_v3c_method(method) else 0,
+        "pure_newline_veto_triggers": 0,
+        "pure_newline_veto_budget_remaining": (
+            {name: 1 for name in region_names} if is_v3c_method(method) else {}
+        ),
+        "pure_newline_veto_pending_signature": None,
+        "pure_newline_veto_reselected_action": [],
+        "pure_newline_veto_fallbacks": 0,
+        "pure_newline_veto_extra_forwards": 0,
+        "blankline_insert_triggers": 0,
+        "blankline_inserted_count": 0,
+        "blankline_insert_slot": [],
+        "blankline_guard_budget_remaining": (
+            {name: 1 for name in region_names} if is_v3c_method(method) else {}
+        ),
+        "repeated_blankline_requests": 0,
+        "blankline_insert_cap_fallbacks": 0,
+        "inserted_newline_positions": [],
+        "final_inserted_newline_positions": [],
+        "pre_insert_state_hash": [],
+        "post_insert_state_hash": [],
         "slot_expand_cap_hits": 0,
         "global_expand_cap_hits": 0,
         "unresolved_mask_count": 0,
@@ -541,13 +617,27 @@ def run_generation(args: argparse.Namespace) -> None:
         if protocol.get("method") != method.value:
             raise RuntimeError("Protocol method does not match V2-Hard-v2")
     if is_v3_method(method):
-        if protocol.get("protocol_version") != 3:
-            raise RuntimeError("V3 requires protocol version 3")
+        expected_version = 4 if is_v3c_method(method) else 3
+        if protocol.get("protocol_version") != expected_version:
+            raise RuntimeError(
+                f"V3 method requires protocol version {expected_version}"
+            )
         if protocol.get("method") != method.value:
             raise RuntimeError("Protocol method does not match V3 method")
         expected_nonempty = method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE
         if bool(protocol.get("decoder_revision", {}).get("nonempty_guard", False)) != expected_nonempty:
             raise RuntimeError("Protocol nonempty guard does not match V3 method")
+        expected_guard_mode = (
+            "oneshot_veto"
+            if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO
+            else "nonconsuming_blankline"
+            if method == Method.V3_C_BUDGETED_NONCONSUMING_BLANKLINE
+            else None
+        )
+        if protocol.get("decoder_revision", {}).get(
+            "pure_newline_guard_mode"
+        ) != expected_guard_mode:
+            raise RuntimeError("Protocol pure-newline guard mode does not match method")
     runner_commit = git_head()
     method_config = build_method_config(
         method,
@@ -614,6 +704,8 @@ def run_generation(args: argparse.Namespace) -> None:
     generator_config = SlotGeneratorConfig(
         initial_expand_budget=64 if is_v3_method(method) else None,
         nonempty_guard=method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE,
+        pure_newline_guard_budget_per_slot=1 if is_v3c_method(method) else 0,
+        pure_newline_guard_global_budget=3 if is_v3c_method(method) else 0,
     )
     positions = {row["task_id"]: index for index, row in enumerate(selected, start=1)}
     generated_rows = list(existing)
@@ -631,7 +723,8 @@ def run_generation(args: argparse.Namespace) -> None:
                 prefix_ids=prefix_ids,
                 suffix_ids=suffix_ids,
                 config=generator_config,
-                save_trace=args.stage in {"smoke", "cycle5", "pilot", "affected6"},
+                save_trace=args.stage
+                in {"smoke", "cycle5", "pilot", "affected6", "v3c_smoke", "pure30"},
                 task_id=task_id,
             )
         except Exception as error:  # explicit row-level runtime failure, never silent
@@ -674,6 +767,17 @@ def run_generation(args: argparse.Namespace) -> None:
                 "parallel_state_lengths_differ",
                 "pad_region_inside_real_sequence",
                 "non_pad_region_in_right_padding",
+                "inserted_blank_newline_tokens_mutated",
+                "pure_newline_guard_region_state_invalid",
+                "pure_newline_guard_budget_conservation_failed",
+                "pure_newline_guard_slot_budget_invalid",
+                "pure_newline_guard_global_budget_invalid",
+                "pending_pure_newline_veto_on_wrong_method",
+                "pending_pure_newline_veto_canvas_mismatch",
+                "pending_pure_newline_veto_position_invalid",
+                "c0_contains_inserted_blankline",
+                "c_contains_pending_veto",
+                "unexpected_pure_newline_guard_state",
             }
             if row["status"] == "runtime_error" or invariant_flags.intersection(
                 row["protocol_flags"]
@@ -1229,6 +1333,37 @@ def method_summary(scored_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "nonempty_guard_no_valid_action" in row["protocol_flags"]
             for row in scored_rows
         ),
+        "pure_newline_guard_trigger_rows": sum(
+            int(row.get("pure_newline_guard_trigger_count", 0)) > 0
+            for row in scored_rows
+        ),
+        "pure_newline_guard_trigger_count": sum(
+            int(row.get("pure_newline_guard_trigger_count", 0))
+            for row in scored_rows
+        ),
+        "pure_newline_veto_triggers": sum(
+            int(row.get("pure_newline_veto_triggers", 0)) for row in scored_rows
+        ),
+        "pure_newline_veto_fallbacks": sum(
+            int(row.get("pure_newline_veto_fallbacks", 0)) for row in scored_rows
+        ),
+        "pure_newline_veto_extra_forwards": sum(
+            int(row.get("pure_newline_veto_extra_forwards", 0))
+            for row in scored_rows
+        ),
+        "blankline_insert_triggers": sum(
+            int(row.get("blankline_insert_triggers", 0)) for row in scored_rows
+        ),
+        "blankline_inserted_count": sum(
+            int(row.get("blankline_inserted_count", 0)) for row in scored_rows
+        ),
+        "blankline_insert_cap_fallbacks": sum(
+            int(row.get("blankline_insert_cap_fallbacks", 0))
+            for row in scored_rows
+        ),
+        "repeated_blankline_requests": sum(
+            int(row.get("repeated_blankline_requests", 0)) for row in scored_rows
+        ),
         "newline_boundary_events": sum(
             int(row.get("newline_boundary_events", 0)) for row in scored_rows
         ),
@@ -1338,6 +1473,91 @@ def nonempty_isolation_audit(
     }
 
 
+def _compact_action_signature(row: Mapping[str, Any]) -> dict[str, Any]:
+    boundary_fields = (
+        "slot",
+        "original_position",
+        "proposal_token_id",
+        "normalized_text",
+        "left_text",
+        "right_text",
+        "discarded_masks_after_boundary",
+        "discarded_resolved_token_ids_after_boundary",
+        "region_length_before",
+        "region_length_after",
+    )
+    eos_fields = (
+        "slot",
+        "original_position",
+        "proposal_token_id",
+        "deleted_original_positions",
+        "region_length_before",
+        "region_length_after",
+    )
+    return {
+        "completion_token_ids": row.get("completion_token_ids"),
+        "region_token_ids": row.get("region_token_ids"),
+        "forward_sequence_lengths": row.get("forward_sequence_lengths"),
+        "selected_update_counts": row.get("selected_update_counts"),
+        "normal_update_counts": row.get("normal_update_counts"),
+        "expand_counts": row.get("expand_counts"),
+        "delete_counts": row.get("delete_counts"),
+        "mask_noop_counts": row.get("mask_noop_counts"),
+        "boundary_events": [
+            {field: event.get(field) for field in boundary_fields}
+            for event in row.get("newline_boundary_event_details", [])
+        ],
+        "eos_events": [
+            {field: event.get(field) for field in eos_fields}
+            for event in row.get("region_local_eos_event_details", [])
+        ],
+    }
+
+
+def pure_newline_isolation_audit(
+    candidate_rows: Sequence[Mapping[str, Any]],
+    control_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    control_by_task = {row["task_id"]: row for row in control_rows}
+    missing_controls = [
+        row["task_id"] for row in candidate_rows if row["task_id"] not in control_by_task
+    ]
+    inactive = [
+        row
+        for row in candidate_rows
+        if int(row.get("pure_newline_guard_trigger_count", 0)) == 0
+    ]
+    mismatches: list[dict[str, Any]] = []
+    for row in inactive:
+        control = control_by_task.get(row["task_id"])
+        if control is None:
+            continue
+        checks = {
+            "completion": row["completion"] == control["completion"],
+            "score": row["score"] == control["score"],
+            "compact_actions": _compact_action_signature(row)
+            == _compact_action_signature(control),
+            "total_forwards": row["total_forwards"] == control["total_forwards"],
+            "token_forwards": row["token_forwards"] == control["token_forwards"],
+        }
+        if not all(checks.values()):
+            mismatches.append({"task_id": row["task_id"], "checks": checks})
+    return {
+        "control_method": Method.V3_HARD_BUDGETED.value,
+        "candidate_method": (
+            candidate_rows[0]["method"] if candidate_rows else None
+        ),
+        "candidate_rows": len(candidate_rows),
+        "control_rows_available": len(control_rows),
+        "missing_control_task_ids": missing_controls,
+        "rows_without_trigger": len(inactive),
+        "matching_inactive_rows": len(inactive) - len(mismatches),
+        "mismatches": mismatches,
+        "all_inactive_rows_match": not missing_controls and not mismatches,
+        "action_comparison": "compact deterministic action signature because A Full did not save per-forward traces",
+    }
+
+
 def run_scoring(args: argparse.Namespace) -> None:
     method = Method(args.method)
     predictions = read_jsonl(args.output_dir / "predictions.jsonl")
@@ -1382,6 +1602,15 @@ def run_scoring(args: argparse.Namespace) -> None:
         atomic_write_json(
             args.output_dir / "nonempty_isolation_audit.json",
             nonempty_isolation_audit(scored_rows, control_rows),
+        )
+    if is_v3c_method(method):
+        control_rows = read_jsonl(
+            REPO_ROOT
+            / "repro_results/dreamon_progressive_v3_hard_budgeted_all642/scored.jsonl"
+        )
+        atomic_write_json(
+            args.output_dir / "pure_newline_isolation_audit.json",
+            pure_newline_isolation_audit(scored_rows, control_rows),
         )
     discard_reference_summary = None
     if method == Method.V2_HARD_V2_BOUNDARY or is_v3_method(method):
@@ -1501,6 +1730,36 @@ def run_scoring(args: argparse.Namespace) -> None:
         "nonempty_guard_no_valid_action_rows": sum(
             "nonempty_guard_no_valid_action" in row["protocol_flags"]
             for row in scored_rows
+        ),
+        "pure_newline_guard_trigger_count": sum(
+            int(row.get("pure_newline_guard_trigger_count", 0))
+            for row in scored_rows
+        ),
+        "pure_newline_veto_triggers": sum(
+            int(row.get("pure_newline_veto_triggers", 0)) for row in scored_rows
+        ),
+        "pure_newline_veto_fallbacks": sum(
+            int(row.get("pure_newline_veto_fallbacks", 0)) for row in scored_rows
+        ),
+        "pure_newline_veto_extra_forwards": sum(
+            int(row.get("pure_newline_veto_extra_forwards", 0))
+            for row in scored_rows
+        ),
+        "blankline_insert_triggers": sum(
+            int(row.get("blankline_insert_triggers", 0)) for row in scored_rows
+        ),
+        "blankline_inserted_count": sum(
+            int(row.get("blankline_inserted_count", 0)) for row in scored_rows
+        ),
+        "blankline_insert_cap_fallbacks": sum(
+            int(row.get("blankline_insert_cap_fallbacks", 0))
+            for row in scored_rows
+        ),
+        "repeated_blankline_requests": sum(
+            int(row.get("repeated_blankline_requests", 0)) for row in scored_rows
+        ),
+        "future_slot_diagnostic_events": sum(
+            len(row.get("future_slot_diagnostic_events", [])) for row in scored_rows
         ),
         "slot_expand_distributions": {
             region: dict(
@@ -1675,6 +1934,17 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         "missing_remaining_expand_budget",
         "nonempty_guard_method_config_mismatch",
         "completed_nonempty_invariant_failed",
+        "inserted_blank_newline_tokens_mutated",
+        "pure_newline_guard_region_state_invalid",
+        "pure_newline_guard_budget_conservation_failed",
+        "pure_newline_guard_slot_budget_invalid",
+        "pure_newline_guard_global_budget_invalid",
+        "pending_pure_newline_veto_on_wrong_method",
+        "pending_pure_newline_veto_canvas_mismatch",
+        "pending_pure_newline_veto_position_invalid",
+        "c0_contains_inserted_blankline",
+        "c_contains_pending_veto",
+        "unexpected_pure_newline_guard_state",
     }
     required_fields = {
         "newline_boundary_events",
@@ -1700,6 +1970,31 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
                 "nonempty_guard_rejection_events",
                 "nonempty_guard_no_valid_action_count",
                 "final_nonempty_invariant_passed",
+            }
+        )
+    if is_v3c_method(method):
+        required_fields.update(
+            {
+                "pure_newline_guard_trigger_count",
+                "pure_newline_guard_events",
+                "future_slot_diagnostic_events",
+                "pure_newline_guard_budget_remaining",
+                "pure_newline_guard_global_budget_remaining",
+                "pure_newline_veto_triggers",
+                "pure_newline_veto_budget_remaining",
+                "pure_newline_veto_pending_signature",
+                "pure_newline_veto_reselected_action",
+                "pure_newline_veto_fallbacks",
+                "pure_newline_veto_extra_forwards",
+                "blankline_insert_triggers",
+                "blankline_inserted_count",
+                "blankline_insert_slot",
+                "blankline_guard_budget_remaining",
+                "repeated_blankline_requests",
+                "blankline_insert_cap_fallbacks",
+                "inserted_newline_positions",
+                "pre_insert_state_hash",
+                "post_insert_state_hash",
             }
         )
     terminal_rows = [row for row in predictions if row["status"] != "completed"]
@@ -1755,12 +2050,145 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         and bool(audit.get("all_prediction_config_hashes_match"))
         and bool(audit.get("task_order_matches_population")),
     }
-    if args.stage in {"cycle5", "affected6"}:
+    if args.stage in {"cycle5", "affected6", "v3c_smoke", "pure30"} or (
+        is_v3c_method(method) and args.stage == "pilot"
+    ):
         engineering_checks["full_step_trace_present"] = all(
             isinstance(row.get("step_trace"), list)
             and len(row["step_trace"]) == row["total_forwards"]
             for row in predictions
         )
+    if is_v3c_method(method):
+        isolation_path = args.output_dir / "pure_newline_isolation_audit.json"
+        engineering_checks.update(
+            {
+                "pure_newline_guard_budget_conservation": all(
+                    set(row["pure_newline_guard_budget_remaining"])
+                    == {"HARD_SLOT_0", "HARD_SLOT_1", "HARD_SLOT_2"}
+                    and all(
+                        int(value) in {0, 1}
+                        for value in row[
+                            "pure_newline_guard_budget_remaining"
+                        ].values()
+                    )
+                    and int(row["pure_newline_guard_global_budget_remaining"])
+                    == 3
+                    - sum(
+                        1 - int(value)
+                        for value in row[
+                            "pure_newline_guard_budget_remaining"
+                        ].values()
+                    )
+                    and int(row["pure_newline_guard_trigger_count"])
+                    == sum(
+                        1 - int(value)
+                        for value in row[
+                            "pure_newline_guard_budget_remaining"
+                        ].values()
+                    )
+                    for row in predictions
+                ),
+                "pending_veto_cleared_at_completion": all(
+                    row["status"] != "completed"
+                    or row["pure_newline_veto_pending_signature"] is None
+                    for row in predictions
+                ),
+                "future_diagnostics_complete": all(
+                    len(row["future_slot_diagnostic_events"])
+                    == int(row["pure_newline_guard_trigger_count"])
+                    and all(
+                        event.get("selected_top1_action_class")
+                        == "pure_newline"
+                        and "regions" in event
+                        for event in row["future_slot_diagnostic_events"]
+                    )
+                    for row in predictions
+                ),
+                "inactive_rows_match_a": isolation_path.exists()
+                and read_json(isolation_path).get("all_inactive_rows_match") is True,
+            }
+        )
+        if args.stage != "full":
+            engineering_checks.update(
+                {
+                    "all_rows_completed": all(
+                        row["status"] == "completed" for row in predictions
+                    ),
+                    "zero_unresolved_masks": all(
+                        int(row["unresolved_mask_count"]) == 0
+                        for row in predictions
+                    ),
+                    "zero_exact_cycles": all(
+                        "exact_deterministic_cycle" not in row["protocol_flags"]
+                        for row in predictions
+                    ),
+                }
+            )
+        if args.stage == "v3c_smoke":
+            deterministic_path = args.output_dir / "deterministic_rerun_audit.json"
+            resume_path = args.output_dir / "checkpoint_resume_audit.json"
+            engineering_checks.update(
+                {
+                    "deterministic_fresh_rerun_equal": deterministic_path.exists()
+                    and read_json(deterministic_path).get("passed") is True,
+                    "durable_checkpoint_resume_equal": resume_path.exists()
+                    and read_json(resume_path).get("passed") is True,
+                }
+            )
+        if method == Method.V3_C0_BUDGETED_ONESHOT_PURE_NEWLINE_VETO:
+            engineering_checks.update(
+                {
+                    "c0_trigger_canvas_unchanged": all(
+                        all(
+                            event["action"] == "pure_newline_veto"
+                            and event["pre_canvas_hash"]
+                            == event["post_canvas_hash"]
+                            for event in row["pure_newline_guard_events"]
+                        )
+                        for row in predictions
+                    ),
+                    "c0_no_inserted_blankline": all(
+                        int(row["blankline_inserted_count"]) == 0
+                        for row in predictions
+                    ),
+                }
+            )
+        else:
+            engineering_checks.update(
+                {
+                    "c_insertions_are_single_locked_newlines": all(
+                        int(row["blankline_inserted_count"])
+                        == sum(
+                            event["action"] == "insert_locked_blank_newline"
+                            for event in row["pure_newline_guard_events"]
+                        )
+                        and all(
+                            (
+                                event["action"] == "line_boundary"
+                                and event["action_details"].get(
+                                    "blankline_insert_cap_fallback"
+                                )
+                            )
+                            or (
+                                event["action"]
+                                == "insert_locked_blank_newline"
+                                and len(
+                                    event["action_details"][
+                                        "inserted_newline_positions"
+                                    ]
+                                )
+                                == 1
+                            )
+                            for event in row["pure_newline_guard_events"]
+                        )
+                        for row in predictions
+                    ),
+                    "c_no_pending_veto": all(
+                        not row["pure_newline_veto_reselected_action"]
+                        for row in predictions
+                    ),
+                }
+            )
     if method == Method.V3_HARD_BUDGETED_NONEMPTY_ORACLE:
         isolation_path = args.output_dir / "nonempty_isolation_audit.json"
         engineering_checks.update(
@@ -1805,18 +2233,38 @@ def _run_v3_gate(args: argparse.Namespace) -> None:
         )
     engineering_gate_passed = all(engineering_checks.values())
     pass_at_least_18 = (
-        int(summary["passed"]) >= 18 if args.stage == "pilot" else None
+        int(summary["passed"]) >= 18
+        if args.stage == "pilot" and not is_v3c_method(method)
+        else None
     )
-    full_authorized = bool(
-        args.stage == "pilot" and engineering_gate_passed and pass_at_least_18
+    pass_at_least_6 = (
+        int(summary["passed"]) >= 6
+        if args.stage == "pure30" and is_v3c_method(method)
+        else None
     )
+    authorizes_full = (
+        bool(engineering_gate_passed and pass_at_least_6)
+        if args.stage == "pure30" and is_v3c_method(method)
+        else bool(engineering_gate_passed and pass_at_least_18)
+        if args.stage == "pilot" and not is_v3c_method(method)
+        else None
+    )
+    legacy_full_authorized = authorizes_full
     payload = {
         "method": args.method,
         "stage": args.stage,
         "passed": engineering_gate_passed,
         "engineering_gate_passed": engineering_gate_passed,
         "pass_at_least_18": pass_at_least_18,
-        "full_authorized": full_authorized,
+        "pass_at_least_6": pass_at_least_6,
+        "authorizes_full": authorizes_full,
+        "full_authorized": legacy_full_authorized,
+        "full_authorized_semantics": "legacy alias of authorizes_full; null on stages that do not make a Full authorization decision",
+        "run_authorization": (
+            "executed_after_preregistered_gate"
+            if args.stage == "full" and is_v3c_method(method)
+            else "stage_execution_authorized"
+        ),
         "engineering_checks": engineering_checks,
         "diagnostic_only_checks": {
             "completed_rows": summary["completed_rows"],
