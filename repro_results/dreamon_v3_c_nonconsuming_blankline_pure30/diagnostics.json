@@ -1,0 +1,177 @@
+{
+  "blankline_insert_cap_fallbacks": 0,
+  "blankline_insert_triggers": 31,
+  "blankline_inserted_count": 31,
+  "boundary_events_with_left_masks_remaining": 21,
+  "boundary_retokenized_left_token_count": 35,
+  "budget_draining_loop_count": 31,
+  "budget_draining_loop_rows": 1,
+  "budget_exhausted_rows": 2,
+  "cross_region_delete_attempts": 0,
+  "discard_reference_summary": {
+    "complete_text_reference": {
+      "available_events": 7,
+      "exact_match_rate": 0.14285714285714285,
+      "prefix_rate": 0.14285714285714285,
+      "substring_rate": 0.42857142857142855
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.17708333333333334,
+      "mean_per_event": 2.4285714285714284,
+      "median_per_event": 1.0,
+      "normal_generated_token_denominator": 576,
+      "total": 102
+    },
+    "event_count": 42,
+    "leading_segment_reference": {
+      "available_events": 34,
+      "prefix_rate": 0.29411764705882354,
+      "substring_rate": 0.47058823529411764
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 32,
+    "row_fraction_with_resolved_discard": 0.7,
+    "rows_with_boundary_event": 24,
+    "rows_with_resolved_discard": 21,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 0.8095238095238095,
+        "compile_passed": 17,
+        "pass_rate": 0.42857142857142855,
+        "passed": 9,
+        "rows": 21
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.8888888888888888,
+        "compile_passed": 8,
+        "pass_rate": 0.5555555555555556,
+        "passed": 5,
+        "rows": 9
+      }
+    }
+  },
+  "discarded_masks_after_boundary": 280,
+  "discarded_resolved_tokens_after_boundary": 118,
+  "exact_cycle_rows": 0,
+  "expand_budget_conservation_failures": 0,
+  "expand_logit_blocked_by_budget_count": 534,
+  "first_selected_region_distribution": {
+    "HARD_SLOT_0": 30
+  },
+  "future_slot_diagnostic_events": 31,
+  "hard_forbidden_newline_attempts": 0,
+  "joint_updates_before_slot0_complete": 0,
+  "max_masks_deleted_by_one_eos": 4,
+  "method": "v3_c_budgeted_nonconsuming_blankline",
+  "mixed_newline_token_events": 35,
+  "multiple_newline_token_events": 8,
+  "newline_boundary_events": 62,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_rejections_by_action": {},
+  "nonempty_guard_rejections_by_slot": {},
+  "nonempty_guard_triggered_rows": 0,
+  "protocol_flag_distribution": {},
+  "pure_newline_guard_trigger_count": 31,
+  "pure_newline_token_events": 27,
+  "pure_newline_veto_extra_forwards": 0,
+  "pure_newline_veto_fallbacks": 0,
+  "pure_newline_veto_triggers": 0,
+  "region_final_length_distributions": {
+    "HARD_SLOT_0": {
+      "0": 3,
+      "3": 7,
+      "4": 3,
+      "5": 8,
+      "6": 3,
+      "8": 2,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "15": 1
+    },
+    "HARD_SLOT_1": {
+      "0": 7,
+      "3": 3,
+      "4": 5,
+      "5": 4,
+      "6": 5,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 2,
+      "12": 1
+    },
+    "HARD_SLOT_2": {
+      "0": 3,
+      "1": 1,
+      "3": 10,
+      "4": 2,
+      "5": 3,
+      "6": 2,
+      "7": 1,
+      "8": 2,
+      "9": 2,
+      "12": 2,
+      "14": 1,
+      "26": 1
+    }
+  },
+  "region_local_eos_deleted_masks": 37,
+  "region_local_eos_events": 21,
+  "repeated_blankline_requests": 12,
+  "slot_expand_distributions": {
+    "HARD_SLOT_0": {
+      "0": 2,
+      "1": 6,
+      "2": 4,
+      "3": 1,
+      "4": 4,
+      "5": 2,
+      "6": 1,
+      "7": 3,
+      "9": 1,
+      "10": 1,
+      "12": 1,
+      "14": 1,
+      "22": 1,
+      "25": 1,
+      "29": 1
+    },
+    "HARD_SLOT_1": {
+      "0": 8,
+      "1": 1,
+      "2": 3,
+      "4": 2,
+      "5": 1,
+      "6": 3,
+      "7": 1,
+      "8": 3,
+      "9": 2,
+      "10": 1,
+      "13": 1,
+      "16": 2,
+      "28": 2
+    },
+    "HARD_SLOT_2": {
+      "0": 10,
+      "1": 3,
+      "2": 3,
+      "3": 2,
+      "4": 3,
+      "5": 2,
+      "10": 1,
+      "11": 1,
+      "13": 1,
+      "17": 1,
+      "18": 1,
+      "22": 1,
+      "43": 1
+    }
+  },
+  "stage": "pure30",
+  "status_distribution": {
+    "completed": 30
+  },
+  "tail_multiline_rows": 0
+}
