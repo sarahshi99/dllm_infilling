@@ -1,0 +1,126 @@
+{
+  "blankline_insert_cap_fallbacks": 0,
+  "blankline_insert_triggers": 0,
+  "blankline_inserted_count": 0,
+  "boundary_events_with_left_masks_remaining": 12,
+  "boundary_retokenized_left_token_count": 14,
+  "budget_draining_loop_count": 45,
+  "budget_draining_loop_rows": 1,
+  "budget_exhausted_rows": 1,
+  "cross_region_delete_attempts": 0,
+  "discard_reference_summary": {
+    "complete_text_reference": {
+      "available_events": 0,
+      "exact_match_rate": null,
+      "prefix_rate": null,
+      "substring_rate": null
+    },
+    "discarded_tokens": {
+      "fraction_of_all_normal_generated_tokens": 0.047058823529411764,
+      "mean_per_event": 0.8,
+      "median_per_event": 1,
+      "normal_generated_token_denominator": 85,
+      "total": 4
+    },
+    "event_count": 5,
+    "leading_segment_reference": {
+      "available_events": 3,
+      "prefix_rate": 0.0,
+      "substring_rate": 0.6666666666666666
+    },
+    "oracle_mechanism_diagnostic": true,
+    "resolved_discard_events": 3,
+    "row_fraction_with_resolved_discard": 0.6,
+    "rows_with_boundary_event": 4,
+    "rows_with_resolved_discard": 3,
+    "score_groups": {
+      "with_resolved_discard": {
+        "compile_pass_rate": 0.6666666666666666,
+        "compile_passed": 2,
+        "pass_rate": 0.3333333333333333,
+        "passed": 1,
+        "rows": 3
+      },
+      "without_resolved_discard": {
+        "compile_pass_rate": 0.5,
+        "compile_passed": 1,
+        "pass_rate": 0.0,
+        "passed": 0,
+        "rows": 2
+      }
+    }
+  },
+  "discarded_masks_after_boundary": 73,
+  "discarded_resolved_tokens_after_boundary": 20,
+  "exact_cycle_rows": 0,
+  "expand_budget_conservation_failures": 0,
+  "expand_logit_blocked_by_budget_count": 5,
+  "first_selected_region_distribution": {
+    "HARD_SLOT_0": 5
+  },
+  "future_slot_diagnostic_events": 5,
+  "hard_forbidden_newline_attempts": 0,
+  "joint_updates_before_slot0_complete": 0,
+  "max_masks_deleted_by_one_eos": 0,
+  "method": "v3_c0_budgeted_oneshot_pure_newline_veto",
+  "mixed_newline_token_events": 14,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 18,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_rejections_by_action": {},
+  "nonempty_guard_rejections_by_slot": {},
+  "nonempty_guard_triggered_rows": 0,
+  "protocol_flag_distribution": {},
+  "pure_newline_guard_trigger_count": 5,
+  "pure_newline_token_events": 4,
+  "pure_newline_veto_extra_forwards": 5,
+  "pure_newline_veto_fallbacks": 0,
+  "pure_newline_veto_triggers": 5,
+  "region_final_length_distributions": {
+    "HARD_SLOT_0": {
+      "0": 1,
+      "4": 1,
+      "5": 1,
+      "6": 2
+    },
+    "HARD_SLOT_1": {
+      "4": 1,
+      "6": 3,
+      "10": 1
+    },
+    "HARD_SLOT_2": {
+      "0": 3,
+      "6": 2
+    }
+  },
+  "region_local_eos_deleted_masks": 0,
+  "region_local_eos_events": 0,
+  "repeated_blankline_requests": 4,
+  "slot_expand_distributions": {
+    "HARD_SLOT_0": {
+      "1": 1,
+      "2": 1,
+      "4": 1,
+      "5": 1,
+      "7": 1
+    },
+    "HARD_SLOT_1": {
+      "0": 1,
+      "2": 1,
+      "6": 1,
+      "8": 2
+    },
+    "HARD_SLOT_2": {
+      "0": 1,
+      "2": 1,
+      "4": 2,
+      "49": 1
+    }
+  },
+  "stage": "v3c_smoke",
+  "status_distribution": {
+    "completed": 5
+  },
+  "tail_multiline_rows": 0
+}

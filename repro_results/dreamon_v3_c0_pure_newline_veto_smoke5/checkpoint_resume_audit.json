@@ -1,0 +1,14 @@
+{
+  "candidate_dir": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v3-budgeted/repro_results/dreamon_v3_c0_pure_newline_veto_smoke5/checkpoint_resume_rerun",
+  "candidate_rows": 5,
+  "excluded_nondeterministic_fields": [
+    "peak_cuda_memory_bytes",
+    "wall_time_seconds"
+  ],
+  "label": "durable_row_checkpoint_resume",
+  "mismatch_task_ids": [],
+  "passed": true,
+  "reference_dir": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-progressive-v3-budgeted/repro_results/dreamon_v3_c0_pure_newline_veto_smoke5",
+  "reference_rows": 5,
+  "task_order_matches": true
+}

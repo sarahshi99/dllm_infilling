@@ -1,0 +1,102 @@
+{
+  "blank_region_count": 4,
+  "blank_slot_rows": 4,
+  "blankline_insert_cap_fallbacks": 0,
+  "blankline_insert_triggers": 0,
+  "blankline_inserted_count": 0,
+  "budget_draining_loop_count": 45,
+  "budget_draining_loop_rows": 1,
+  "budget_exhausted_rows": 1,
+  "compile_pass_rate": 0.6,
+  "compile_passed": 3,
+  "completed_only": {
+    "compile_pass_rate": 0.6,
+    "compile_passed": 3,
+    "exact_match_rate": 0.0,
+    "exact_matches": 0,
+    "pass_rate": 0.2,
+    "passed": 1
+  },
+  "completed_rows": 5,
+  "completion_physical_lines": {
+    "distribution": {
+      "3": 5
+    },
+    "mean": 3
+  },
+  "completion_rate": 1.0,
+  "completion_tokens": {
+    "mean": 16,
+    "median": 15
+  },
+  "cross_region_delete_attempts": 0,
+  "delete_count": 0,
+  "discarded_masks_after_boundary": 73,
+  "discarded_resolved_tokens_after_boundary": 20,
+  "exact_cycle_count": 0,
+  "exact_match_rate": 0.0,
+  "exact_matches": 0,
+  "expand_budget_consumed": {
+    "distribution": {
+      "7": 1,
+      "9": 1,
+      "10": 1,
+      "12": 1,
+      "64": 1
+    },
+    "max": 64,
+    "mean": 20.4,
+    "median": 10
+  },
+  "expand_count": 102,
+  "expand_logit_blocked_by_budget_count": 5,
+  "forward_cap_count": 0,
+  "forwards": {
+    "max": 89,
+    "mean": 39.2,
+    "median": 28,
+    "total": 196
+  },
+  "global_expand_cap_hits": 0,
+  "max_masks_deleted_by_one_eos": 0,
+  "mixed_newline_token_events": 14,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 18,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_triggered_rows": 0,
+  "num_base_problems": 3,
+  "num_samples": 5,
+  "pass_rate": 0.2,
+  "passed": 1,
+  "peak_cuda_memory_bytes": {
+    "max": 15472910336,
+    "mean": 15433052262.4
+  },
+  "protocol_error_count": 0,
+  "pure_newline_guard_trigger_count": 5,
+  "pure_newline_guard_trigger_rows": 5,
+  "pure_newline_token_events": 4,
+  "pure_newline_veto_extra_forwards": 5,
+  "pure_newline_veto_fallbacks": 0,
+  "pure_newline_veto_triggers": 5,
+  "region_local_eos_deleted_masks": 0,
+  "region_local_eos_events": 0,
+  "repeated_blankline_requests": 4,
+  "runtime_error_count": 0,
+  "slot_expand_cap_hits": 0,
+  "task_macro_pass_rate": 0.1111111111111111,
+  "token_forwards": {
+    "max": 16917,
+    "mean": 6689.6,
+    "median": 4182,
+    "total": 33448
+  },
+  "unresolved_mask_count": 0,
+  "wall_time_seconds": {
+    "max": 5.564627325045876,
+    "mean": 2.3900436936179177,
+    "median": 1.6504778639646247,
+    "total": 11.950218468089588
+  }
+}

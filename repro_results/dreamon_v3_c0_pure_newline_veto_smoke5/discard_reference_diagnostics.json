@@ -1,0 +1,42 @@
+{
+  "complete_text_reference": {
+    "available_events": 0,
+    "exact_match_rate": null,
+    "prefix_rate": null,
+    "substring_rate": null
+  },
+  "discarded_tokens": {
+    "fraction_of_all_normal_generated_tokens": 0.047058823529411764,
+    "mean_per_event": 0.8,
+    "median_per_event": 1,
+    "normal_generated_token_denominator": 85,
+    "total": 4
+  },
+  "event_count": 5,
+  "leading_segment_reference": {
+    "available_events": 3,
+    "prefix_rate": 0.0,
+    "substring_rate": 0.6666666666666666
+  },
+  "oracle_mechanism_diagnostic": true,
+  "resolved_discard_events": 3,
+  "row_fraction_with_resolved_discard": 0.6,
+  "rows_with_boundary_event": 4,
+  "rows_with_resolved_discard": 3,
+  "score_groups": {
+    "with_resolved_discard": {
+      "compile_pass_rate": 0.6666666666666666,
+      "compile_passed": 2,
+      "pass_rate": 0.3333333333333333,
+      "passed": 1,
+      "rows": 3
+    },
+    "without_resolved_discard": {
+      "compile_pass_rate": 0.5,
+      "compile_passed": 1,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "rows": 2
+    }
+  }
+}

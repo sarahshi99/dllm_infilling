@@ -1,0 +1,227 @@
+stage_started_at=2026-08-03T08:07:23+00:00 method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke head=3f971b6f91e5fb21345b44b515a0727962c8106a
+method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke selected=5 completed=0 remaining=5 config_hash=563f54bf6866b20e9460ee826d4dc4997e78469aa15bdde7e1af63ac44895df8
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.28it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.93it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.89it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.54it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/5] MultiLineInfilling/HumanEval/3/L2_L4 start
+[1/5] MultiLineInfilling/HumanEval/3/L2_L4 done status=completed forwards=24 token_forwards=3539 wall=1.650s
+[2/5] MultiLineInfilling/HumanEval/6/L1_L3 start
+[2/5] MultiLineInfilling/HumanEval/6/L1_L3 done status=completed forwards=22 token_forwards=4182 wall=1.382s
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 start
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=33 token_forwards=6354 wall=2.177s
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 start
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=89 token_forwards=16917 wall=5.565s
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 start
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 done status=completed forwards=28 token_forwards=2456 wall=1.176s
+progress completed=5/5 avg_wall=2.390s avg_forwards=39.20 token_forwards=33448 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+scored 5/5
+{
+  "num_samples": 5,
+  "num_base_problems": 3,
+  "passed": 1,
+  "pass_rate": 0.2,
+  "compile_passed": 3,
+  "compile_pass_rate": 0.6,
+  "exact_matches": 0,
+  "exact_match_rate": 0.0,
+  "task_macro_pass_rate": 0.1111111111111111,
+  "completion_rate": 1.0,
+  "completed_rows": 5,
+  "completed_only": {
+    "passed": 1,
+    "pass_rate": 0.2,
+    "compile_passed": 3,
+    "compile_pass_rate": 0.6,
+    "exact_matches": 0,
+    "exact_match_rate": 0.0
+  },
+  "completion_tokens": {
+    "mean": 16,
+    "median": 15
+  },
+  "completion_physical_lines": {
+    "mean": 3,
+    "distribution": {
+      "3": 5
+    }
+  },
+  "blank_region_count": 4,
+  "blank_slot_rows": 4,
+  "expand_count": 102,
+  "delete_count": 0,
+  "slot_expand_cap_hits": 0,
+  "global_expand_cap_hits": 0,
+  "unresolved_mask_count": 0,
+  "protocol_error_count": 0,
+  "runtime_error_count": 0,
+  "exact_cycle_count": 0,
+  "forward_cap_count": 0,
+  "budget_exhausted_rows": 1,
+  "budget_draining_loop_rows": 1,
+  "budget_draining_loop_count": 45,
+  "expand_logit_blocked_by_budget_count": 5,
+  "expand_budget_consumed": {
+    "mean": 20.4,
+    "median": 10,
+    "max": 64,
+    "distribution": {
+      "7": 1,
+      "9": 1,
+      "10": 1,
+      "12": 1,
+      "64": 1
+    }
+  },
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_triggered_rows": 0,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "pure_newline_guard_trigger_rows": 5,
+  "pure_newline_guard_trigger_count": 5,
+  "pure_newline_veto_triggers": 5,
+  "pure_newline_veto_fallbacks": 0,
+  "pure_newline_veto_extra_forwards": 5,
+  "blankline_insert_triggers": 0,
+  "blankline_inserted_count": 0,
+  "blankline_insert_cap_fallbacks": 0,
+  "repeated_blankline_requests": 4,
+  "newline_boundary_events": 18,
+  "mixed_newline_token_events": 14,
+  "pure_newline_token_events": 4,
+  "multiple_newline_token_events": 0,
+  "discarded_masks_after_boundary": 73,
+  "discarded_resolved_tokens_after_boundary": 20,
+  "region_local_eos_events": 0,
+  "region_local_eos_deleted_masks": 0,
+  "max_masks_deleted_by_one_eos": 0,
+  "cross_region_delete_attempts": 0,
+  "forwards": {
+    "mean": 39.2,
+    "median": 28,
+    "max": 89,
+    "total": 196
+  },
+  "token_forwards": {
+    "mean": 6689.6,
+    "median": 4182,
+    "max": 16917,
+    "total": 33448
+  },
+  "wall_time_seconds": {
+    "mean": 2.3900436936179177,
+    "median": 1.6504778639646247,
+    "max": 5.564627325045876,
+    "total": 11.950218468089588
+  },
+  "peak_cuda_memory_bytes": {
+    "mean": 15433052262.4,
+    "max": 15472910336
+  }
+}
+{
+  "all_prediction_config_hashes_match": true,
+  "all_prediction_methods_match": true,
+  "allowed_terminal_protocol_failure_rows": 0,
+  "complete": true,
+  "config_hash": "563f54bf6866b20e9460ee826d4dc4997e78469aa15bdde7e1af63ac44895df8",
+  "disallowed_protocol_violation_rows": 0,
+  "expected_rows": 5,
+  "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
+  "method": "v3_c0_budgeted_oneshot_pure_newline_veto",
+  "posthoc_truncation_fields_present": false,
+  "prediction_rows": 5,
+  "prediction_score_task_order_match": true,
+  "prediction_unique_task_ids": 5,
+  "score_rows": 5,
+  "score_unique_task_ids": 5,
+  "silent_unresolved_acceptance_rows": 0,
+  "stage": "v3c_smoke",
+  "task_order_matches_population": true,
+  "terminal_method_failure_rows": 0
+}
+method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke selected=5 completed=5 remaining=0 config_hash=563f54bf6866b20e9460ee826d4dc4997e78469aa15bdde7e1af63ac44895df8
+durable_resume_equality=passed rows=5 sha256=303105f2e03c0e1d2b1af93579027cb131213e656511fbe0f6373f11ff8d2583
+method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke selected=5 completed=0 remaining=5 config_hash=563f54bf6866b20e9460ee826d4dc4997e78469aa15bdde7e1af63ac44895df8
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.76it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.73it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.36it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.79it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.77it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[1/5] MultiLineInfilling/HumanEval/3/L2_L4 start
+[1/5] MultiLineInfilling/HumanEval/3/L2_L4 done status=completed forwards=24 token_forwards=3539 wall=1.642s
+[2/5] MultiLineInfilling/HumanEval/6/L1_L3 start
+[2/5] MultiLineInfilling/HumanEval/6/L1_L3 done status=completed forwards=22 token_forwards=4182 wall=1.385s
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 start
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=33 token_forwards=6354 wall=2.179s
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 start
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=89 token_forwards=16917 wall=5.542s
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 start
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 done status=completed forwards=28 token_forwards=2456 wall=1.160s
+progress completed=5/5 avg_wall=2.382s avg_forwards=39.20 token_forwards=33448 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke selected=5 completed=2 remaining=3 config_hash=563f54bf6866b20e9460ee826d4dc4997e78469aa15bdde7e1af63ac44895df8
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00, 11.86it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.94it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 12.76it/s]
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 start
+[3/5] MultiLineInfilling/HumanEval/6/L2_L4 done status=completed forwards=33 token_forwards=6354 wall=2.421s
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 start
+[4/5] MultiLineInfilling/HumanEval/6/L3_L5 done status=completed forwards=89 token_forwards=16917 wall=5.314s
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 start
+[5/5] MultiLineInfilling/HumanEval/13/L0_L2 done status=completed forwards=28 token_forwards=2456 wall=1.127s
+progress completed=5/5 avg_wall=2.379s avg_forwards=39.20 token_forwards=33448 terminal_failures=0 method_failures=0 violations=0 eta_seconds=0.0
+{
+  "method": "v3_c0_budgeted_oneshot_pure_newline_veto",
+  "stage": "v3c_smoke",
+  "passed": true,
+  "engineering_gate_passed": true,
+  "pass_at_least_18": null,
+  "pass_at_least_6": null,
+  "authorizes_full": null,
+  "full_authorized": null,
+  "full_authorized_semantics": "legacy alias of authorizes_full; null on stages that do not make a Full authorization decision",
+  "run_authorization": "stage_execution_authorized",
+  "engineering_checks": {
+    "expected_prediction_rows": true,
+    "expected_score_rows": true,
+    "completeness_audit": true,
+    "all_required_diagnostic_fields": true,
+    "zero_runtime_errors": true,
+    "zero_invariant_errors": true,
+    "zero_cross_region_delete_attempts": true,
+    "zero_silent_unresolved_acceptance": true,
+    "terminal_failures_explicit_and_empty": true,
+    "budget_conservation_all_rows": true,
+    "budget_bounds_all_rows": true,
+    "no_premature_exact_cycle_classification": true,
+    "budget_draining_events_nonterminal": true,
+    "resume_dedup_config_audit": true,
+    "full_step_trace_present": true,
+    "pure_newline_guard_budget_conservation": true,
+    "pending_veto_cleared_at_completion": true,
+    "future_diagnostics_complete": true,
+    "inactive_rows_match_a": true,
+    "all_rows_completed": true,
+    "zero_unresolved_masks": true,
+    "zero_exact_cycles": true,
+    "deterministic_fresh_rerun_equal": true,
+    "durable_checkpoint_resume_equal": true,
+    "c0_trigger_canvas_unchanged": true,
+    "c0_no_inserted_blankline": true
+  },
+  "diagnostic_only_checks": {
+    "completed_rows": 5,
+    "compile_passed": 3,
+    "passed": 1,
+    "exact_matches": 0,
+    "blank_slot_rows": 4,
+    "exact_cycles": 0,
+    "forward_caps": 0,
+    "budget_exhausted_rows": 1,
+    "budget_draining_loop_count": 45
+  },
+  "recorded_at_utc": "2026-08-03T08:08:26.101714+00:00"
+}
+stage_finished_at=2026-08-03T08:08:26+00:00 method=v3_c0_budgeted_oneshot_pure_newline_veto stage=v3c_smoke
