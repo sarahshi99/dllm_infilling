@@ -2,35 +2,31 @@
 
 Timestamp: 2026-08-03 UTC
 
-Research decision: `iterate_v3c_targeted`.
+Research decision: `advance`.
 
-Action status: execute only the frozen V3-C0/V3-C pure-newline targeted protocol. Do not start compile gate, general nonempty guard, OpenTail, Joint-OpenTail, BoundaryShift, carry-and-remask, AST repair, random sampling, or held-out evaluation.
+Action status: V3-C targeted execution is complete. Stop all DreamOn experiment execution and wait for independent review. The only supported next step is a separately preregistered held-out validation of V3-C; do not run it automatically.
 
 Branch: `codex/dreamon-progressive-v3-budgeted`
 
 Frozen identity: 642 rows / 115 base problems, exact-three-line development/mechanism population; not held-out. Manifest SHA256 `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`; model snapshot `8ccc74750e43177327f29dab9e91882ba759e194`.
 
-Completed outcome:
+Completed V3 outcomes:
 
-- A `v3_hard_budgeted`: Pilot30 14/30 Pass and 23/30 compile; the original Full threshold failed. A Full was later run only by explicit user authorization as a post-hoc mechanism diagnostic: 281/642 Pass, 538/642 compile, 97/642 exact, task-macro 41.17%, 137 blank-slot rows, and zero terminal/protocol failures.
-- B `v3_hard_budgeted_nonempty_oracle`: Pilot30 18/30 and Full642 authorized. Full completed 642/642 with 280 Pass, 471 compile, 106 exact, task-macro 42.46%, and zero blank/cycle/forward-cap/runtime/protocol failures.
-- B vs post-hoc A Full: 15 wins / 16 losses, McNemar `p=1.0`, clustered CI `[-2.60pp,+2.09pp]`; compile help/harm `6/73`, exact help/harm `9/0`. The nonempty guard removes all A blank slots but does not improve functional Pass and uses 25.04% more token-forwards.
-- B is an oracle structural diagnostic, not deployable and not held-out. Full paired net is `-21` versus one-shot and `-36` versus historical V1 progressive.
+- A `v3_hard_budgeted`: post-hoc explicitly authorized Full642, 281 Pass / 538 compile / 97 exact, 137 blank-slot rows.
+- B `v3_hard_budgeted_nonempty_oracle`: Full642, 280 Pass / 471 compile / 106 exact. Blanket nonempty removes blanks but does not improve Pass and substantially harms compile; retain as negative oracle diagnostic.
+- C0 `v3_c0_budgeted_oneshot_pure_newline_veto`: Smoke5 passed; Pure30 was 5/30 Pass and failed the frozen 6/30 Full gate. C0 Full was not run.
+- C `v3_c_budgeted_nonconsuming_blankline`: Smoke5 passed; Pure30 14/30; Pilot30 17/30 with all engineering/isolation checks passing; Full642 completed 642/642 at 292 Pass / 541 compile / 97 exact / task-macro 43.54%.
+- C vs A Full: 12 wins / 1 loss / 280 both-pass / 349 both-fail; McNemar `p=0.00341797`; 115-base-problem cluster bootstrap CI `[+0.50pp,+3.17pp]`; compile help/harm 4/1. No-trigger isolation passed for all 612 rows.
+- C vs one-shot is net -9 and C vs historical V1 is net -24, with clustered intervals including zero. This development population does not establish superiority to those controls.
+- C vs C0 on Pure30: 10 wins / 1 loss; cluster CI `[+8.33pp,+53.57pp]`. The evidence favors physical blank-line reconditioning over a simple one-shot veto.
+- Frozen-future normal confidence was higher in only 2/31 trigger events by either entropy or top1-probability comparison. This does not support a general future-slot-confidence explanation.
 
 Primary artifacts:
 
-- `docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted.md`
-- `docs/paper_agent/experiments/20260802_dreamon_v3_hard_budgeted_nonempty_oracle.md`
-- `repro_results/dreamon_progressive_v3_hard_budgeted_nonempty_oracle_all642/full_analysis.json`
-- `repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md`
 - `docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md`
-- `manifests/v3_pure_newline_blank30.meta.json`
+- `docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_results.md`
+- `repro_results/dreamon_v3c_targeted_analysis/report.zh.md`
+- `repro_results/dreamon_v3c_targeted_analysis/analysis.json`
+- `repro_results/dreamon_v3_c_nonconsuming_blankline_all642/`
 
-Frozen V3-C target:
-
-- Pure30 is sealed from A Full trace only: 30 rows / 21 base problems / slot0-1-2 distribution 6/12/12; A baseline Pass is 3/30.
-- C0 vetoes one exact leading pure-newline blank termination without canvas mutation.
-- C inserts one locked physical blank newline without consuming the content slot.
-- Each method must pass Smoke5, Pure30, and Pilot30 engineering isolation; Full642 is authorized only when Pure30 Pass is at least 6/30.
-
-Next action: implement and execute only this frozen targeted protocol, then stop for independent review.
+Next action: independent review. If accepted, preregister one held-out V3-C validation with no method changes. Do not restart C0, blanket nonempty, compile gate, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, random retries, or another development-population variant.

@@ -377,3 +377,16 @@ Important ablation signals:
 - methods：`v3_c0_budgeted_oneshot_pure_newline_veto` 与 `v3_c_budgeted_nonconsuming_blankline`。
 - Full gate：工程隔离全部通过，且各方法 Pure30 Pass `>=6/30`；独立判断，不得降低。
 - protocol：`docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md`。
+
+## 11. 2026-08-03 DreamOn V3-C execution handoff
+
+- branch：`codex/dreamon-progressive-v3-budgeted`；本轮起点 `2e731ede15b2e6e536c86ec24e0263433d6573f9`。
+- C0：Smoke5 工程门禁通过；Pure30 `5/30` Pass、`22/30` compile、`1/30` exact，低于冻结 Full 门槛，未运行 Full。
+- C：Smoke5 工程门禁通过；Pure30 `14/30` Pass、`25/30` compile；Pilot30 `17/30` Pass、`25/30` compile、`7/30` exact，工程与 no-trigger 隔离门禁通过。
+- C Full642：`642/642` completed，`292/642` Pass、`541/642` compile、`97/642` exact、task-macro `43.54%`；0 runtime/protocol/cycle/forward-cap，0 unresolved。
+- C vs A：12 wins / 1 loss / 280 both-pass / 349 both-fail；McNemar `p=0.00341797`；cluster CI `[+0.50pp,+3.17pp]`；compile help/harm `4/1`。612 个 no-trigger rows 与 A completion/actions/score/forwards 全部一致。
+- C vs C0（Pure30）：10 wins / 1 loss；支持插入真实物理空行后的重新条件化，而不是仅 veto 一次终止。
+- future frozen slot diagnostic：31 个 trigger events 中仅 2 个出现更低 entropy 的 normal candidate，也仅 2 个出现更高 top1 probability 的 normal candidate；这是 observational evidence，不支持通用 future-confidence 机制。
+- compute：C Full `35796` forwards、`9132622` token-forwards、`2647.45s` recorded wall、peak `15819467264` bytes；相对 A 为 `+58` forwards、`+5959` token-forwards。
+- decision：`advance` 到独立复核和单独预注册 held-out validation；本轮停止，不运行 held-out、compile gate、BoundaryShift、AST repair、OpenTail 或 Joint。
+- analysis：`repro_results/dreamon_v3c_targeted_analysis/analysis.json`；报告：`repro_results/dreamon_v3c_targeted_analysis/report.zh.md`。

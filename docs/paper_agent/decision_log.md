@@ -73,3 +73,12 @@ Updated: 2026-07-11 UTC
 - Each method receives one pure-newline guard opportunity per slot and at most three globally. C0 preserves the canvas and masks one exact candidate on the next forward; C inserts one locked physical newline and keeps the content slot active.
 - Full642 requires all engineering/isolation gates plus Pure30 Pass at least 6/30. Pilot30 has no separate Pass threshold. Do not lower the threshold after observation.
 - Compile gate, general nonempty guard, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, random retries, and held-out evaluation remain unauthorized.
+
+## 2026-08-03 DreamOn V3-C targeted result
+
+- C0 passed all engineering gates but reached only 5/30 Pass on Pure30, below the frozen 6/30 Full threshold. C0 Full was not run.
+- C reached 14/30 on Pure30 and passed Pilot30 engineering/isolation checks, so C Full642 was automatically authorized and completed 642/642 with 292 Pass, 541 compile, 97 exact, and zero runtime/protocol/cycle/forward-cap failures.
+- C vs A is 12 wins / 1 loss with McNemar `p=0.00341797` and 115-cluster CI `[+0.50pp,+3.17pp]`; all 612 no-trigger rows exactly match A.
+- C vs C0 on Pure30 is 10 wins / 1 loss. Since both preserve the right-side content canvas, the observed additional gain supports physical blank-line reconditioning rather than a simple veto.
+- Only 2/31 trigger events have a future frozen slot with a more confident normal top1 under the preregistered entropy/probability diagnostics; the future-confidence hypothesis is not supported as a general mechanism.
+- Decision: `advance` to independent review and a separately preregistered held-out validation. Do not claim superiority to one-shot/V1 and do not automatically run held-out or any new DreamOn variant.

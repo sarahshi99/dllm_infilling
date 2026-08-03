@@ -1086,7 +1086,7 @@
   },
   "dreamon_progressive_v3": {
     "branch": "codex/dreamon-progressive-v3-budgeted",
-    "decision": "iterate_v3c_targeted",
+    "decision": "advance",
     "population_role": "exact-three-line development/mechanism; not held-out",
     "manifest_sha256": "aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc",
     "a_budgeted": {
@@ -1137,7 +1137,7 @@
       "report": "repro_results/dreamon_progressive_v3_hard_budgeted_ab_comparison_all642/report.zh.md"
     },
     "c_targeted_protocol": {
-      "status": "manifest_sealed_implementation_pending",
+      "status": "execution_complete_independent_review",
       "methods": [
         "v3_c0_budgeted_oneshot_pure_newline_veto",
         "v3_c_budgeted_nonconsuming_blankline"
@@ -1154,12 +1154,59 @@
       "a_baseline_compiled": 22,
       "pure30_sha256": "5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f",
       "full_gate_pure30_pass_minimum": 6,
-      "report": "docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md"
+      "c0": {
+        "smoke_gate_passed": true,
+        "pure30_passed": 5,
+        "pure30_compiled": 22,
+        "pure30_exact": 1,
+        "pure30_engineering_gate_passed": true,
+        "pure30_authorizes_full": false,
+        "pilot_passed": 15,
+        "pilot_compiled": 24,
+        "full_started": false
+      },
+      "c": {
+        "smoke_gate_passed": true,
+        "pure30_passed": 14,
+        "pure30_compiled": 25,
+        "pure30_engineering_gate_passed": true,
+        "pure30_authorizes_full": true,
+        "pilot_passed": 17,
+        "pilot_compiled": 25,
+        "pilot_engineering_gate_passed": true,
+        "full_rows": 642,
+        "full_completed": 642,
+        "full_passed": 292,
+        "full_compile_passed": 541,
+        "full_exact_matches": 97,
+        "full_protocol_violations": 0,
+        "full_config_hash": "5a029e8448dd85fe17e1a7dba4c48d92941ddd87bcfe2be85f5fff8061b66de9"
+      },
+      "c_vs_a": {
+        "wins": 12,
+        "losses": 1,
+        "both_pass": 280,
+        "both_fail": 349,
+        "mcnemar_exact_p": 0.00341796875,
+        "cluster_bootstrap_95_ci": [
+          0.0049833887043189366,
+          0.03165696014616874
+        ],
+        "inactive_rows_exactly_match": 612
+      },
+      "future_slot_diagnostic": {
+        "events": 31,
+        "future_lower_entropy_normal_events": 2,
+        "future_higher_top1_probability_normal_events": 2,
+        "observational_only": true
+      },
+      "report": "docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_results.md",
+      "analysis": "repro_results/dreamon_v3c_targeted_analysis/analysis.json"
     }
   },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
   "task_type": "phase5_independent_method_falsification",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-11"
+  "updated_at_cst": "2026-08-03"
 }

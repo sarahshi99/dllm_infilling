@@ -129,3 +129,10 @@ The pilot has five exact deterministic cycles and fails the preregistered comple
 | `v3_hard_budgeted_nonempty_oracle_pilot30_20260802` | `full_authorized` | 30 | 30 | 18 | 25 | oracle structural pilot |
 | `v3_hard_budgeted_nonempty_oracle_full642_20260802` | `completed_oracle_diagnostic` | 642 | 642 | 280 | 471 | not deployable or held-out |
 | `v3_pure_newline_blank30_manifest_20260803` | `sealed_posthoc_mechanism_manifest` | 30 | 30 | 3 (A) | 22 (A) | A-trace-only targeted gate population for C0/C |
+| `v3_c0_pure_newline_veto_smoke5_20260803` | `engineering_gate_passed` | 5 | 5 | 1 | 3 | C0 deterministic/resume smoke |
+| `v3_c_nonconsuming_blankline_smoke5_20260803` | `engineering_gate_passed` | 5 | 5 | 4 | 4 | C deterministic/resume smoke |
+| `v3_c0_pure_newline_veto_pure30_20260803` | `engineering_pass_quality_fail` | 30 | 30 | 5 | 22 | below frozen 6/30 Full gate; no Full |
+| `v3_c_nonconsuming_blankline_pure30_20260803` | `full_quality_gate_passed` | 30 | 30 | 14 | 25 | authorized C Full |
+| `v3_c0_pure_newline_veto_pilot30_20260803` | `engineering_gate_passed_full_not_authorized` | 30 | 30 | 15 | 24 | regression pilot; C0 Pure30 gate failed |
+| `v3_c_nonconsuming_blankline_pilot30_20260803` | `engineering_gate_passed` | 30 | 30 | 17 | 25 | regression pilot |
+| `v3_c_nonconsuming_blankline_full642_20260803` | `completed_gate_authorized_development_diagnostic` | 642 | 642 | 292 | 541 | 97 exact; C vs A 12/1 wins/losses; not held-out |

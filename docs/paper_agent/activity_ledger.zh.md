@@ -337,3 +337,12 @@
 - manifest：仅由 A Full trace 构造 Pure30，30 rows / 21 base problems，slot0/1/2=`6/12/12`，A Pass=`3/30`，SHA256 `5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`。
 - gate：Smoke5/Pure30/Pilot30 工程隔离全部通过，且各方法 Pure30 Pass `>=6/30` 才独立授权 Full642。
 - exclusions：不实现 compile gate、blanket nonempty、BoundaryShift/carry、AST repair、OpenTail、Joint-OpenTail 或 held-out run。
+
+## 2026-08-03 UTC DreamOn V3-C targeted execution complete
+
+- implementation：protocol v4、C0 one-shot exact veto、C locked blank-line insertion、guard-aware hash/checkpoint、future frozen logits diagnostics；150 tests 通过。
+- gates：C0/C Smoke5 全部通过 fresh deterministic rerun 与 partial durable-resume equality。C0 Pure30 `5/30`，未授权 Full；C Pure30 `14/30`，Pilot `17/30` 且工程隔离通过，自动授权 C Full。
+- full：C `642/642` completed，Pass `292`、compile `541`、exact `97`，0 runtime/protocol/cycle/forward-cap；config hash `5a029e8448dd85fe17e1a7dba4c48d92941ddd87bcfe2be85f5fff8061b66de9`。
+- paired：C vs A `12/1` wins/losses，cluster CI `[+0.50pp,+3.17pp]`；C vs C0 Pure30 `10/1`。No-trigger 612 rows 完全一致。
+- mechanism：physical blank-line reconditioning 获得支持；simple veto 不足；future-slot normal confidence 仅 2/31 events，通用 future-confidence 假设被削弱。
+- stop：decision=`advance` 到独立复核/单独预注册 held-out；不自动运行任何后续实验。

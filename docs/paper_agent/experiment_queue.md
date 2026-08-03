@@ -241,3 +241,5 @@ Result: Completed on 2026-07-10. Manifest has `927` cases, frozen rows `0`, and 
 Status: A/B completed and preserved. A Pilot30 stopped under the original gate at 14/30; a later explicitly authorized post-hoc A Full completed at 281/642 Pass and 538/642 compile. B Full is 280/642 Pass and 471/642 compile. B versus A is 15 wins / 16 losses with compile help/harm 6/73 and 25.04% more token-forwards.
 
 Targeted continuation: `iterate_v3c_targeted`. Run only C0 one-shot pure-newline veto and C nonconsuming locked blank-line insertion on the sealed Pure30, historical Pilot30, and any independently authorized Full642. Pure30 Full gate is Pass `>=6/30`; no other new DreamOn method is queued.
+
+Result: completed. C0 Pure30 was 5/30 and did not authorize Full. C Pure30 was 14/30; Pilot engineering/isolation passed; C Full642 completed at 292 Pass / 541 compile / 97 exact. C vs A was 12 wins / 1 loss with positive clustered uncertainty bounds. Queue state is now `independent_review`; no additional DreamOn run is authorized. A future held-out V3-C validation requires a new preregistration and explicit approval.

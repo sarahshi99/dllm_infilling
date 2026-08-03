@@ -199,8 +199,10 @@ Decision rule: Do not implement automatically. Require independent review and a 
 ## IDEA-012: Pure-newline termination versus blank-line reconditioning
 
 Source: V3-A blank-slot trace audit
-Status: executing frozen targeted protocol
+Status: completed; advance to independent review
 Scientific question: Is the narrow B subgroup effect explained by vetoing one exact erroneous pure-newline termination, or does inserting a real locked blank physical line provide useful reconditioning while preserving the content canvas?
 Evidence before execution: A Full contains exactly 30 strict leading pure-newline events that immediately blank the final slot; A passes 3/30. Twenty-three events discard resolved right tokens and seventeen discard non-whitespace resolved right tokens.
 Decision rule: C0/C independently require Pure30 Pass at least 6/30 plus complete engineering isolation before Full642. Frozen-future logits are observational diagnostics only and cannot enter selection.
 Forbidden expansion: no blanket nonempty, compile gate, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, or held-out run.
+
+Result: C0 reached 5/30 on Pure30 and failed its Full gate. C reached 14/30, then completed Full642 at 292/642 versus A 281/642. C vs A was 12 wins / 1 loss; C vs C0 on Pure30 was 10 wins / 1 loss. No-trigger isolation passed on 612/612 Full rows. Physical blank-line reconditioning is supported over simple veto on this post-hoc development diagnostic, while the frozen-future confidence hypothesis is weakened by only 2/31 positive events. Next step is independent review and a separately preregistered held-out validation, not another development variant.

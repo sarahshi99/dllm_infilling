@@ -906,3 +906,15 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - Pure30 只从 A Full 的 strict leading pure-newline blank boundary trace 构造：30 rows、21 base problems、slot0/1/2=`6/12/12`；A 在该子集为 3 Pass、22 compile、0 exact。
 - Pure30 SHA256：`5946c7d6e6642861d2e4738616f5b39dcafa5feb5081983d9a8edf23dc55ad4f`。
 - 后续只评估 C0 与 C；Full 门槛冻结为各方法 Pure30 Pass 至少 6/30，并要求完整工程/隔离门禁。
+
+## 2026-08-03 UTC DreamOn V3-C targeted results
+
+- C0：Smoke5 通过；Pure30 `5/30` Pass、`22/30` compile、`1/30` exact。工程门禁通过，但未达到 `6/30` Full 阈值，因此 C0 Full 未运行。
+- C：Smoke5 通过；Pure30 `14/30` Pass、`25/30` compile；Pilot30 `17/30` Pass、`25/30` compile、`7/30` exact。工程、deterministic rerun、durable resume 和 no-trigger 隔离全部通过。
+- C Full642：`292/642` Pass (`45.48%`)、`541/642` compile (`84.27%`)、`97/642` exact (`15.11%`)、task-macro `43.54%`；642/642 completed，0 runtime/protocol/cycle/forward-cap。
+- C vs A：12 wins / 1 loss，McNemar `p=0.00341797`，row bootstrap CI `[+0.62pp,+2.80pp]`，115-cluster CI `[+0.50pp,+3.17pp]`，task-macro delta `+2.37pp`。No-trigger 612/612 完全一致。
+- C vs C0 on Pure30：10 wins / 1 loss，cluster CI `[+8.33pp,+53.57pp]`。这支持真实物理空行上下文提供额外重新条件化价值；单纯 veto 不足。
+- C vs one-shot：96 wins / 105 losses；vs V1：68 wins / 92 losses。聚类区间均包含 0；不得写成 C 已优于历史 baseline。
+- Future frozen slots：31 个 trigger events 中只有 2 个存在更低 entropy 的 normal candidate、2 个存在更高 top1 probability 的 normal candidate；不支持通用 future-slot confidence 假设。
+- Compute：35796 forwards、9132622 token-forwards、recorded wall 2647.45 秒、peak 15,819,467,264 bytes；相对 A 仅 `+58` forwards、`+5959` token-forwards。
+- decision：`advance` 到独立复核与单独预注册 held-out validation。本轮停止，不继续其他 DreamOn 实验。
