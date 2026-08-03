@@ -1,0 +1,114 @@
+{
+  "blank_region_count": 5,
+  "blank_slot_rows": 5,
+  "blankline_insert_cap_fallbacks": 0,
+  "blankline_insert_triggers": 0,
+  "blankline_inserted_count": 0,
+  "budget_draining_loop_count": 474,
+  "budget_draining_loop_rows": 5,
+  "budget_exhausted_rows": 5,
+  "compile_pass_rate": 0.8,
+  "compile_passed": 24,
+  "completed_only": {
+    "compile_pass_rate": 0.8,
+    "compile_passed": 24,
+    "exact_match_rate": 0.23333333333333334,
+    "exact_matches": 7,
+    "pass_rate": 0.5,
+    "passed": 15
+  },
+  "completed_rows": 30,
+  "completion_physical_lines": {
+    "distribution": {
+      "3": 30
+    },
+    "mean": 3
+  },
+  "completion_rate": 1.0,
+  "completion_tokens": {
+    "mean": 19.633333333333333,
+    "median": 20.0
+  },
+  "cross_region_delete_attempts": 0,
+  "delete_count": 224,
+  "discarded_masks_after_boundary": 185,
+  "discarded_resolved_tokens_after_boundary": 57,
+  "exact_cycle_count": 0,
+  "exact_match_rate": 0.23333333333333334,
+  "exact_matches": 7,
+  "expand_budget_consumed": {
+    "distribution": {
+      "0": 1,
+      "5": 2,
+      "7": 3,
+      "8": 1,
+      "9": 5,
+      "10": 1,
+      "11": 1,
+      "12": 2,
+      "14": 1,
+      "16": 1,
+      "17": 2,
+      "18": 1,
+      "19": 1,
+      "20": 1,
+      "21": 1,
+      "25": 1,
+      "64": 5
+    },
+    "max": 64,
+    "mean": 20.533333333333335,
+    "median": 12.0
+  },
+  "expand_count": 616,
+  "expand_logit_blocked_by_budget_count": 19,
+  "forward_cap_count": 0,
+  "forwards": {
+    "max": 139,
+    "mean": 46.8,
+    "median": 31.0,
+    "total": 1404
+  },
+  "global_expand_cap_hits": 0,
+  "max_masks_deleted_by_one_eos": 4,
+  "mixed_newline_token_events": 51,
+  "multiple_newline_token_events": 0,
+  "newline_boundary_events": 56,
+  "nonempty_guard_no_valid_action_rows": 0,
+  "nonempty_guard_rejection_count": 0,
+  "nonempty_guard_triggered_rows": 0,
+  "num_base_problems": 9,
+  "num_samples": 30,
+  "pass_rate": 0.5,
+  "passed": 15,
+  "peak_cuda_memory_bytes": {
+    "max": 15506802688,
+    "mean": 15435850717.866667
+  },
+  "protocol_error_count": 0,
+  "pure_newline_guard_trigger_count": 4,
+  "pure_newline_guard_trigger_rows": 4,
+  "pure_newline_token_events": 5,
+  "pure_newline_veto_extra_forwards": 4,
+  "pure_newline_veto_fallbacks": 0,
+  "pure_newline_veto_triggers": 4,
+  "region_local_eos_deleted_masks": 231,
+  "region_local_eos_events": 224,
+  "repeated_blankline_requests": 3,
+  "runtime_error_count": 0,
+  "slot_expand_cap_hits": 0,
+  "task_macro_pass_rate": 0.5066137566137566,
+  "token_forwards": {
+    "max": 27802,
+    "mean": 7831.033333333334,
+    "median": 5753.5,
+    "total": 234931
+  },
+  "unresolved_mask_count": 0,
+  "wall_time_seconds": {
+    "max": 8.199420342920348,
+    "mean": 2.639447075151838,
+    "median": 1.801382155972533,
+    "total": 79.18341225455515
+  }
+}

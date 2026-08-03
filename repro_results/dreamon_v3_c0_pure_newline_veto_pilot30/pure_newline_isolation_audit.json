@@ -1,0 +1,12 @@
+{
+  "action_comparison": "compact deterministic action signature because A Full did not save per-forward traces",
+  "all_inactive_rows_match": true,
+  "candidate_method": "v3_c0_budgeted_oneshot_pure_newline_veto",
+  "candidate_rows": 30,
+  "control_method": "v3_hard_budgeted",
+  "control_rows_available": 642,
+  "matching_inactive_rows": 26,
+  "mismatches": [],
+  "missing_control_task_ids": [],
+  "rows_without_trigger": 26
+}

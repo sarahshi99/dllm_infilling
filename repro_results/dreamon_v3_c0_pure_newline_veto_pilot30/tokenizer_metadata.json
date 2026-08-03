@@ -1,0 +1,222 @@
+{
+  "examples": [
+    {
+      "decoded_text": "\n",
+      "left_text": "",
+      "left_token_ids": [],
+      "newline_count": 1,
+      "normalized_text": "\n",
+      "right_text": "",
+      "token_id": 198
+    },
+    {
+      "decoded_text": "\r",
+      "left_text": "",
+      "left_token_ids": [],
+      "newline_count": 1,
+      "normalized_text": "\n",
+      "right_text": "",
+      "token_id": 201
+    },
+    {
+      "decoded_text": "\n\n",
+      "left_text": "",
+      "left_token_ids": [],
+      "newline_count": 2,
+      "normalized_text": "\n\n",
+      "right_text": "\n",
+      "token_id": 271
+    },
+    {
+      "decoded_text": ";\n",
+      "left_text": ";",
+      "left_token_ids": [
+        26
+      ],
+      "newline_count": 1,
+      "normalized_text": ";\n",
+      "right_text": "",
+      "token_id": 280
+    },
+    {
+      "decoded_text": ");\n",
+      "left_text": ");",
+      "left_token_ids": [
+        1215
+      ],
+      "newline_count": 1,
+      "normalized_text": ");\n",
+      "right_text": "",
+      "token_id": 317
+    },
+    {
+      "decoded_text": "\r\n",
+      "left_text": "",
+      "left_token_ids": [],
+      "newline_count": 1,
+      "normalized_text": "\n",
+      "right_text": "",
+      "token_id": 319
+    },
+    {
+      "decoded_text": ")\n",
+      "left_text": ")",
+      "left_token_ids": [
+        8
+      ],
+      "newline_count": 1,
+      "normalized_text": ")\n",
+      "right_text": "",
+      "token_id": 340
+    },
+    {
+      "decoded_text": " {\n",
+      "left_text": " {",
+      "left_token_ids": [
+        314
+      ],
+      "newline_count": 1,
+      "normalized_text": " {\n",
+      "right_text": "",
+      "token_id": 341
+    },
+    {
+      "decoded_text": ",\n",
+      "left_text": ",",
+      "left_token_ids": [
+        11
+      ],
+      "newline_count": 1,
+      "normalized_text": ",\n",
+      "right_text": "",
+      "token_id": 345
+    },
+    {
+      "decoded_text": ".\n\n",
+      "left_text": ".",
+      "left_token_ids": [
+        13
+      ],
+      "newline_count": 2,
+      "normalized_text": ".\n\n",
+      "right_text": "\n",
+      "token_id": 382
+    },
+    {
+      "decoded_text": ">\n",
+      "left_text": ">",
+      "left_token_ids": [
+        29
+      ],
+      "newline_count": 1,
+      "normalized_text": ">\n",
+      "right_text": "",
+      "token_id": 397
+    },
+    {
+      "decoded_text": ";\n\n",
+      "left_text": ";",
+      "left_token_ids": [
+        26
+      ],
+      "newline_count": 2,
+      "normalized_text": ";\n\n",
+      "right_text": "\n",
+      "token_id": 401
+    },
+    {
+      "decoded_text": " }\n",
+      "left_text": " }",
+      "left_token_ids": [
+        335
+      ],
+      "newline_count": 1,
+      "normalized_text": " }\n",
+      "right_text": "",
+      "token_id": 456
+    },
+    {
+      "decoded_text": ";\r\n",
+      "left_text": ";",
+      "left_token_ids": [
+        26
+      ],
+      "newline_count": 1,
+      "normalized_text": ";\n",
+      "right_text": "",
+      "token_id": 463
+    },
+    {
+      "decoded_text": ":\n",
+      "left_text": ":",
+      "left_token_ids": [
+        25
+      ],
+      "newline_count": 1,
+      "normalized_text": ":\n",
+      "right_text": "",
+      "token_id": 510
+    },
+    {
+      "decoded_text": "{\n",
+      "left_text": "{",
+      "left_token_ids": [
+        90
+      ],
+      "newline_count": 1,
+      "normalized_text": "{\n",
+      "right_text": "",
+      "token_id": 515
+    },
+    {
+      "decoded_text": "}\n",
+      "left_text": "}",
+      "left_token_ids": [
+        92
+      ],
+      "newline_count": 1,
+      "normalized_text": "}\n",
+      "right_text": "",
+      "token_id": 532
+    },
+    {
+      "decoded_text": "();\n",
+      "left_text": "();",
+      "left_token_ids": [
+        2129
+      ],
+      "newline_count": 1,
+      "normalized_text": "();\n",
+      "right_text": "",
+      "token_id": 543
+    },
+    {
+      "decoded_text": " }\n\n",
+      "left_text": " }",
+      "left_token_ids": [
+        335
+      ],
+      "newline_count": 2,
+      "normalized_text": " }\n\n",
+      "right_text": "\n",
+      "token_id": 555
+    },
+    {
+      "decoded_text": ".\n",
+      "left_text": ".",
+      "left_token_ids": [
+        13
+      ],
+      "newline_count": 1,
+      "normalized_text": ".\n",
+      "right_text": "",
+      "token_id": 624
+    }
+  ],
+  "newline_token_count": 2179,
+  "newline_token_ids_sha256": "b9be6f30d56789763a9005ff3a1563c0025e05fee4601ac74103595009f607df",
+  "newline_token_mapping_count": 2179,
+  "newline_token_mapping_sha256": "73ed6254e2f3199655b9a41143ba45b465484c5c45317e15e14b75da83d51042",
+  "preprocessing_seconds": 0.8437011090572923,
+  "vocab_size": 151668
+}

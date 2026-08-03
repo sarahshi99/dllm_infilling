@@ -1,0 +1,16 @@
+{
+  "allowed_terminal_protocol_failure_count": 0,
+  "average_forwards": 45.3,
+  "average_wall_time_seconds": 2.4238397002375374,
+  "completed": 30,
+  "current_task_id": null,
+  "eta_seconds": 0.0,
+  "method": "v3_c_budgeted_nonconsuming_blankline",
+  "protocol_violation_count": 0,
+  "stage": "pilot",
+  "status": "engineering_gate_passed",
+  "terminal_method_failure_count": 0,
+  "total": 30,
+  "total_token_forwards": 225857,
+  "updated_at_utc": "2026-08-03T08:17:48.485863+00:00"
+}
