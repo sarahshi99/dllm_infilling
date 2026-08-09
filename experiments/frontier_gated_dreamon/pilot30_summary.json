@@ -1,0 +1,77 @@
+{
+  "stage": "pilot30",
+  "role": "development/mechanism population",
+  "manifest_id": "pilot30:99ab1af2cd7cd68ecd848864cf76731340f47402c4afb8d4e753ccc6ad3163b9",
+  "manifest_sha256": "99ab1af2cd7cd68ecd848864cf76731340f47402c4afb8d4e753ccc6ad3163b9",
+  "gate": "Pass@1 >= 16/30",
+  "widths": {
+    "1": {
+      "denominator": 30,
+      "passed": 28,
+      "pass_rate": 0.9333333333333333,
+      "compiled": 30,
+      "compile_rate": 1.0,
+      "completed": 30,
+      "completion_rate": 1.0,
+      "mean_forwards": 20.766666666666666,
+      "mean_wall_time_seconds": 0.3991508141858503,
+      "frontier_violations": 0
+    },
+    "4": {
+      "denominator": 30,
+      "passed": 27,
+      "pass_rate": 0.9,
+      "compiled": 30,
+      "compile_rate": 1.0,
+      "completed": 30,
+      "completion_rate": 1.0,
+      "mean_forwards": 20.233333333333334,
+      "mean_wall_time_seconds": 0.37903813130687924,
+      "frontier_violations": 0
+    },
+    "8": {
+      "denominator": 30,
+      "passed": 27,
+      "pass_rate": 0.9,
+      "compiled": 30,
+      "compile_rate": 1.0,
+      "completed": 30,
+      "completion_rate": 1.0,
+      "mean_forwards": 20.233333333333334,
+      "mean_wall_time_seconds": 0.37841964395095906,
+      "frontier_violations": 0
+    },
+    "16": {
+      "denominator": 30,
+      "passed": 27,
+      "pass_rate": 0.9,
+      "compiled": 30,
+      "compile_rate": 1.0,
+      "completed": 30,
+      "completion_rate": 1.0,
+      "mean_forwards": 20.233333333333334,
+      "mean_wall_time_seconds": 0.379245627609392,
+      "frontier_violations": 0
+    },
+    "inf": {
+      "denominator": 30,
+      "passed": 27,
+      "pass_rate": 0.9,
+      "compiled": 30,
+      "compile_rate": 1.0,
+      "completed": 30,
+      "completion_rate": 1.0,
+      "mean_forwards": 20.233333333333334,
+      "mean_wall_time_seconds": 0.37945649510559937,
+      "frontier_violations": 0
+    }
+  },
+  "promoted": [
+    "1",
+    "4",
+    "8",
+    "16",
+    "inf"
+  ],
+  "rows": 150
+}
