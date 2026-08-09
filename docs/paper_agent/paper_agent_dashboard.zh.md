@@ -220,3 +220,11 @@ DLLM 代码 infilling 的 inference-time length control 不能简化为单一长
 ## 需要用户决策的问题
 
 目前没有正在运行的 GPU 实验需要接管。Phase 1b 不支持继续当前 generation family 的 9-case expansion。下一步需要研究者决定：是先做 hard-case error analysis，还是批准一个新的、预注册的 candidate generator；同时建议尽快建立 grouped split protocol。
+
+## 2026-08-09 Frontier-Gated DreamOn V0 更新
+
+- 独立分支 `codex/frontier-gated-dreamon-64` 已完成实现、55-case 原生等价、Pilot-30 与 fixed-full-1000 development/validation。
+- Pilot：`w=1 28/30`，其余四个窗口均 `27/30`；全部自动晋级。
+- Fixed 1000：Pass `555,555,554,553,553`；有限窗口相对 infinity 仅净增 `+2,+2,+1,0`，cluster CI 不支持稳健优越性。
+- 5000/5000 completed，0 exception，0 frontier violation；未运行 5815，未打开任何 frozen test。
+- 当前 decision：`completed_near_tie_no_5815_expansion`。旧逐行 DreamOn 路线保持 frozen/superseded，负面证据保留。

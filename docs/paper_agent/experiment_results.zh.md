@@ -918,3 +918,15 @@ Interpretation：简单 dependency-free multivariate probe-curve score 未通过
 - Future frozen slots：31 个 trigger events 中只有 2 个存在更低 entropy 的 normal candidate、2 个存在更高 top1 probability 的 normal candidate；不支持通用 future-slot confidence 假设。
 - Compute：35796 forwards、9132622 token-forwards、recorded wall 2647.45 秒、peak 15,819,467,264 bytes；相对 A 仅 `+58` forwards、`+5959` token-forwards。
 - decision：`advance` 到独立复核与单独预注册 held-out validation。本轮停止，不继续其他 DreamOn 实验。
+
+## 2026-08-09 UTC Frontier-Gated DreamOn V0
+
+- 路线：独立的连续 64-mask DreamOn 解码，不继承旧逐行 slot/line-wise 实现。唯一改动是从最左 unresolved frontier 起，只有宽度 `w in {1,4,8,16,infinity}` 内的 mask 可参与位置排序与提交；换行保持普通 token。
+- 冻结边界：V1/V2/V3、Hard3、OpenTail、Nonempty、compile gate、slot、BoundaryShift 与 expansion-budget 路线均标为 frozen/superseded experiment；旧负向/混合证据保留。
+- 原生等价：`w=infinity` 在 55 条真实样本上与未经修改的官方 DreamOn final tokens/text、逐步 commit position/action、stop reason 全部一致；覆盖 normal、newline 后继续、expand、delete。
+- Pilot-30 development/mechanism：`w=1 28/30`；`w=4 27/30`；`w=8 27/30`；`w=16 27/30`；`w=infinity 27/30`。五个配置均超过固定 `16/30` 门槛并自动晋级。
+- Fixed-full-1000 development/validation：Pass@1 分别为 `555/1000`、`555/1000`、`554/1000`、`553/1000`、`553/1000`；compile 分别为 `973`、`975`、`972`、`972`、`972`；全部 1000/1000 completed，0 exception，0 frontier violation。
+- 配对有限窗口 vs infinity：`w=1` help/harm `24/22`，差值 `+0.20pp`，cluster CI `[-1.12,+1.50]pp`；`w=4` `4/2`，`+0.20pp`，CI `[-0.28,+0.73]pp`；`w=8` `1/0`，`+0.10pp`，CI `[0.00,+0.34]pp`；`w=16` `1/1`，`0.00pp`，CI `[-0.30,+0.29]pp`。
+- 广播删除：有限窗口未显示系统性 broadcast-delete 提前终止 harm；“更多 broadcast 且 baseline pass 变 fail”仅 `w=1` 有 1 条，其余为 0。
+- 结论：finite frontier 与原生 DreamOn 在该固定开发/验证集上近似持平，最高仅净增 2/1000，不能支持 robust superiority。未运行 5815 full；本结果不是 frozen test。
+- 证据：`experiments/frontier_gated_dreamon/report.zh.md`、`fixed_full_1000_summary.json`、`review_manifest.latest.json`。

@@ -206,3 +206,13 @@ Decision rule: C0/C independently require Pure30 Pass at least 6/30 plus complet
 Forbidden expansion: no blanket nonempty, compile gate, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, or held-out run.
 
 Result: C0 reached 5/30 on Pure30 and failed its Full gate. C reached 14/30, then completed Full642 at 292/642 versus A 281/642. C vs A was 12 wins / 1 loss; C vs C0 on Pure30 was 10 wins / 1 loss. No-trigger isolation passed on 612/612 Full rows. Physical blank-line reconditioning is supported over simple veto on this post-hoc development diagnostic, while the frozen-future confidence hypothesis is weakened by only 2/31 positive events. Next step is independent review and a separately preregistered held-out validation, not another development variant.
+
+## IDEA-020: Frontier-Gated DreamOn
+
+Scientific question: does restricting only DreamOn's commit-position ranking to a left frontier improve continuous multi-line infilling while preserving native action semantics?
+
+Result (2026-08-09 UTC): executed as independent V0. `w=infinity` native equivalence passed on 55 samples. Fixed-full-1000 Pass@1 for `w=1,4,8,16,infinity` was `555,555,554,553,553`; paired net gains were `+2,+2,+1,0`, with clustered uncertainty not supporting robust superiority.
+
+Decision: `closed_near_tie`. Retain as a clean ablation and negative/mixed mechanism result; do not expand to 5815 or tune additional windows.
+
+Related files: `experiments/frontier_gated_dreamon/report.zh.md`, `docs/paper_agent/experiments/20260809_frontier_gated_dreamon_v0.md`.

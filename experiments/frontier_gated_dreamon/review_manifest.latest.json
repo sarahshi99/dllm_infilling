@@ -103,6 +103,7 @@
       "experiments/frontier_gated_dreamon/results/fixed_full_1000_w8_results.jsonl",
       "experiments/frontier_gated_dreamon/results/fixed_full_1000_winf_results.jsonl",
       "experiments/frontier_gated_dreamon/results/pilot30_results.jsonl",
+      "experiments/frontier_gated_dreamon/review_manifest.latest.json",
       "experiments/frontier_gated_dreamon/run_manifest.json",
       "experiments/frontier_gated_dreamon/runner.py",
       "experiments/frontier_gated_dreamon/schema.py",
@@ -162,5 +163,5 @@
     "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/equivalence_summary.json"
   ],
   "equivalence_results_rows": 55,
-  "git_head": "c083e0108a652b2579436dd211fd9195fa36162b"
+  "git_head": "a6ffbac38098ef5698b5601b5de86af4fa088f98"
 }

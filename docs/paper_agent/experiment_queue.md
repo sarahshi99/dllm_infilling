@@ -243,3 +243,13 @@ Status: A/B completed and preserved. A Pilot30 stopped under the original gate a
 Targeted continuation: `iterate_v3c_targeted`. Run only C0 one-shot pure-newline veto and C nonconsuming locked blank-line insertion on the sealed Pure30, historical Pilot30, and any independently authorized Full642. Pure30 Full gate is Pass `>=6/30`; no other new DreamOn method is queued.
 
 Result: completed. C0 Pure30 was 5/30 and did not authorize Full. C Pure30 was 14/30; Pilot engineering/isolation passed; C Full642 completed at 292 Pass / 541 compile / 97 exact. C vs A was 12 wins / 1 loss with positive clustered uncertainty bounds. Queue state is now `independent_review`; no additional DreamOn run is authorized. A future held-out V3-C validation requires a new preregistration and explicit approval.
+
+## EXP-011: Frontier-Gated DreamOn V0
+
+Status: `completed_near_tie_no_5815_expansion` on 2026-08-09 UTC.
+
+Independent method: continuous initial 64-mask middle; only frontier position eligibility changes for `w={1,4,8,16,infinity}`; no newline/slot/compile/retry/repair mechanism.
+
+Gates: 55-sample native equivalence passed; Pilot-30 pass counts `28,27,27,27,27`, so all five configurations automatically advanced. Fixed-full-1000 development/validation completed with pass counts `555,555,554,553,553` and zero exceptions/violations.
+
+Decision: close this queue item as near-tie/mixed development evidence. Do not run 5815, add windows, tune parameters, or combine mechanisms. Any held-out follow-up requires a new preregistration.

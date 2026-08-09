@@ -1,5 +1,15 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-08-09 Frontier-Gated DreamOn Authoritative Resume Point
+
+- Branch: `codex/frontier-gated-dreamon-64`.
+- Status: implementation, equivalence, Pilot-30, fixed-full-1000, analysis, audit, commits, and push are the current completed action.
+- Results: fixed-full-1000 Pass for `w=1,4,8,16,infinity` is `555,555,554,553,553`; all 5000 rows completed with zero exceptions and zero frontier violations.
+- Interpretation: near-tie/mixed development evidence; no robust superiority claim, no official 5815 full, no frozen test.
+- Resume artifacts: `experiments/frontier_gated_dreamon/report.zh.md`, `fixed_full_1000_summary.json`, `review_manifest.latest.json`, and `docs/paper_agent/codex_handoff_frontier_gated_dreamon_20260809.zh.md`.
+- Frozen boundary: historical line-wise DreamOn V1/V2/V3 and related mechanisms remain read-only frozen/superseded experiments.
+- Next action requires a new user decision; do not automatically expand this route.
+
 ## Phase 5 Authoritative Resume Point
 
 Timestamp: 2026-07-11 UTC

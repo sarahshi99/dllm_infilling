@@ -346,3 +346,12 @@
 - paired：C vs A `12/1` wins/losses，cluster CI `[+0.50pp,+3.17pp]`；C vs C0 Pure30 `10/1`。No-trigger 612 rows 完全一致。
 - mechanism：physical blank-line reconditioning 获得支持；simple veto 不足；future-slot normal confidence 仅 2/31 events，通用 future-confidence 假设被削弱。
 - stop：decision=`advance` 到独立复核/单独预注册 held-out；不自动运行任何后续实验。
+
+## 2026-08-09 UTC Frontier-Gated DreamOn V0 complete
+
+- action：在独立 clean worktree/branch 中，从官方 DreamOn 动态画布实现出发，仅加入 frontier commit-position eligibility；封存 Pilot-30 与 fixed-full-1000 后依次完成 equivalence、pilot、自动 full、汇总与审计。
+- equivalence：55 条真实样本全部匹配 native final tokens/text、逐步位置/动作与 stop reason；覆盖 normal、newline 后继续、expand、delete。
+- pilot：`28/30,27/30,27/30,27/30,27/30`，五个窗口全部自动晋级。
+- fixed：Pass `555,555,554,553,553`；compile `973,975,972,972,972`；5000/5000 completed，0 exception，0 frontier violation。
+- paired：有限窗口 vs infinity help/harm 为 `24/22,4/2,1/0,1/1`；cluster CI 不支持稳健优越性。
+- decision：`complete_near_tie_no_5815_expansion`；结果只属于 development/validation，不是官方 5815 full 或 frozen test。

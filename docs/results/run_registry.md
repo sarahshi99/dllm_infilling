@@ -136,3 +136,12 @@ The pilot has five exact deterministic cycles and fails the preregistered comple
 | `v3_c0_pure_newline_veto_pilot30_20260803` | `engineering_gate_passed_full_not_authorized` | 30 | 30 | 15 | 24 | regression pilot; C0 Pure30 gate failed |
 | `v3_c_nonconsuming_blankline_pilot30_20260803` | `engineering_gate_passed` | 30 | 30 | 17 | 25 | regression pilot |
 | `v3_c_nonconsuming_blankline_full642_20260803` | `completed_gate_authorized_development_diagnostic` | 642 | 642 | 292 | 541 | 97 exact; C vs A 12/1 wins/losses; not held-out |
+
+## 2026-08-09 Frontier-Gated DreamOn V0
+
+Independent branch `codex/frontier-gated-dreamon-64`; config hash `4193b34fef25c08357bc488f33a59ab62c474a40862e1ddd85060549e3dd6b78`; model revision `8ccc74750e43177327f29dab9e91882ba759e194`; H200 GPU0. Pilot-30 pass counts for `w=1,4,8,16,infinity` were `28,27,27,27,27`; all crossed the fixed 16/30 gate. The fixed-full-1000 development/validation run completed 5000/5000 rows with pass counts `555,555,554,553,553`, compile counts `973,975,972,972,972`, zero exceptions, and zero frontier violations. Raw versioned results are under `experiments/frontier_gated_dreamon/results/`; report and audit are `report.zh.md` and `review_manifest.latest.json`. This is not the official 5815 full and not a frozen test.
+
+| Run | Status | Rows | Completed | Pass | Compile | Notes |
+|---|---|---:|---:|---:|---:|---|
+| `frontier_gated_dreamon_pilot30_20260809` | `completed_development_mechanism` | 150 | 150 | `28/27/27/27/27` | `30/30` each | all five widths promoted |
+| `frontier_gated_dreamon_fixed_full_1000_20260809` | `completed_development_validation_near_tie` | 5000 | 5000 | `555/555/554/553/553` | `973/975/972/972/972` | finite vs inf help/harm `24/22,4/2,1/0,1/1`; not 5815/frozen test |

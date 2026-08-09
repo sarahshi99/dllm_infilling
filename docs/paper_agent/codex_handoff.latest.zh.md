@@ -390,3 +390,11 @@ Important ablation signals:
 - compute：C Full `35796` forwards、`9132622` token-forwards、`2647.45s` recorded wall、peak `15819467264` bytes；相对 A 为 `+58` forwards、`+5959` token-forwards。
 - decision：`advance` 到独立复核和单独预注册 held-out validation；本轮停止，不运行 held-out、compile gate、BoundaryShift、AST repair、OpenTail 或 Joint。
 - analysis：`repro_results/dreamon_v3c_targeted_analysis/analysis.json`；报告：`repro_results/dreamon_v3c_targeted_analysis/report.zh.md`。
+
+## 12. 2026-08-09 Frontier-Gated DreamOn V0 handoff
+
+- 独立分支 `codex/frontier-gated-dreamon-64` 已完成 continuous-64-mask frontier-only 路线。
+- 55-case `w=infinity` native equivalence 全通过；Pilot `28,27,27,27,27 / 30`；Fixed 1000 Pass `555,555,554,553,553`。
+- 配对有限窗口 vs infinity help/harm `24/22,4/2,1/0,1/1`；结论 near-tie/mixed，不支持稳健 superiority。
+- 5000/5000 completed，0 exception，0 frontier violation；未跑 5815，非 frozen test。
+- 完整 handoff：`docs/paper_agent/codex_handoff_frontier_gated_dreamon_20260809.zh.md`。

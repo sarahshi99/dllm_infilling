@@ -82,3 +82,10 @@ Updated: 2026-07-11 UTC
 - C vs C0 on Pure30 is 10 wins / 1 loss. Since both preserve the right-side content canvas, the observed additional gain supports physical blank-line reconditioning rather than a simple veto.
 - Only 2/31 trigger events have a future frozen slot with a more confident normal top1 under the preregistered entropy/probability diagnostics; the future-confidence hypothesis is not supported as a general mechanism.
 - Decision: `advance` to independent review and a separately preregistered held-out validation. Do not claim superiority to one-shot/V1 and do not automatically run held-out or any new DreamOn variant.
+
+## 2026-08-09 Frontier-Gated DreamOn V0
+
+- User-authorized independent route supersedes further iteration on frozen line-wise V1/V2/V3 implementations; those artifacts remain immutable evidence.
+- Native-equivalence gate passed on 55 real samples with full action coverage. Pilot-30 automatically promoted all five widths.
+- Fixed-full-1000 Pass@1 was `555,555,554,553,553`; paired finite-window net changes vs infinity were `+2,+2,+1,0` with cluster intervals mostly crossing zero.
+- Decision: `complete_near_tie_no_robust_superiority`. Keep the result as development/validation ablation evidence. Do not run the 5815 population, add windows, tune parameters, or combine mechanisms without a new decision.
