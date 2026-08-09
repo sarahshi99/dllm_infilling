@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "samples": 55,
+  "all_matched": true,
+  "behavior_coverage": {
+    "normal": true,
+    "newline": true,
+    "newline_followed_by_commit": true,
+    "expand": true,
+    "delete": true
+  },
+  "native_source": "/home/shx/projects/dllm_infilling/DreamOn/eval/generator.py",
+  "native_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "config_hash": "4193b34fef25c08357bc488f33a59ab62c474a40862e1ddd85060549e3dd6b78"
+}

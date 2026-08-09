@@ -1,0 +1,31 @@
+{
+  "generation": {
+    "experiment": "Frontier-Gated DreamOn V0",
+    "model_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "dreamon_repository_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "dtype": "bfloat16",
+    "initial_mask_count": 64,
+    "max_new_tokens": 64,
+    "number_transfer_tokens": 1,
+    "max_forwards": 256,
+    "max_context_tokens": 2048,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "top_k": null,
+    "algorithm": "entropy",
+    "algorithm_temperature": 0.0,
+    "delete_eos_token": true,
+    "pad_eos_to_right": true,
+    "full_sequence_attention": true,
+    "widths": [
+      "1",
+      "4",
+      "8",
+      "16",
+      "inf"
+    ],
+    "seed_namespace": "frontier-gated-dreamon-v0-seed-20260809"
+  },
+  "config_hash": "4193b34fef25c08357bc488f33a59ab62c474a40862e1ddd85060549e3dd6b78"
+}

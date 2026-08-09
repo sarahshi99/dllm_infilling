@@ -1,32 +1,75 @@
 # Current Paper-Agent Action
 
-Timestamp: 2026-08-03 UTC
+Timestamp: 2026-08-09 UTC
 
-Research decision: `advance`.
+Research decision: `execute_frontier_gated_dreamon_v0`.
 
-Action status: V3-C targeted execution is complete. Stop all DreamOn experiment execution and wait for independent review. The only supported next step is a separately preregistered held-out validation of V3-C; do not run it automatically.
+Action status: implement and execute an independent `Frontier-Gated DreamOn V0` route. The historical DreamOn V1/V2/V3, Hard3, OpenTail, Nonempty, compile-gate, slot, line-wise, BoundaryShift, and V3 expansion-budget routes are frozen/superseded experiments and remain immutable negative/mixed evidence.
 
-Branch: `codex/dreamon-progressive-v3-budgeted`
+Branch: `codex/frontier-gated-dreamon-64`
 
-Frozen identity: 642 rows / 115 base problems, exact-three-line development/mechanism population; not held-out. Manifest SHA256 `aab2ea784635e7827c5851bcd5a7ccdc3437fdb4be45f185aa012e504b92f7bc`; model snapshot `8ccc74750e43177327f29dab9e91882ba759e194`.
+Starting HEAD: `3eac683fcfdb2d8936e3d88416848b553ed4f69a`
 
-Completed V3 outcomes:
+Method scope:
 
-- A `v3_hard_budgeted`: post-hoc explicitly authorized Full642, 281 Pass / 538 compile / 97 exact, 137 blank-slot rows.
-- B `v3_hard_budgeted_nonempty_oracle`: Full642, 280 Pass / 471 compile / 106 exact. Blanket nonempty removes blanks but does not improve Pass and substantially harms compile; retain as negative oracle diagnostic.
-- C0 `v3_c0_budgeted_oneshot_pure_newline_veto`: Smoke5 passed; Pure30 was 5/30 Pass and failed the frozen 6/30 Full gate. C0 Full was not run.
-- C `v3_c_budgeted_nonconsuming_blankline`: Smoke5 passed; Pure30 14/30; Pilot30 17/30 with all engineering/isolation checks passing; Full642 completed 642/642 at 292 Pass / 541 compile / 97 exact / task-macro 43.54%.
-- C vs A Full: 12 wins / 1 loss / 280 both-pass / 349 both-fail; McNemar `p=0.00341797`; 115-base-problem cluster bootstrap CI `[+0.50pp,+3.17pp]`; compile help/harm 4/1. No-trigger isolation passed for all 612 rows.
-- C vs one-shot is net -9 and C vs historical V1 is net -24, with clustered intervals including zero. This development population does not establish superiority to those controls.
-- C vs C0 on Pure30: 10 wins / 1 loss; cluster CI `[+8.33pp,+53.57pp]`. The evidence favors physical blank-line reconditioning over a simple one-shot veto.
-- Frozen-future normal confidence was higher in only 2/31 trigger events by either entropy or top1-probability comparison. This does not support a general future-slot-confidence explanation.
+- State is one continuous `prefix + dynamic_middle + suffix` canvas.
+- `dynamic_middle` starts with exactly 64 mask tokens.
+- The only method change is position eligibility: unresolved masks from the leftmost frontier through width `w` may be ranked/committed.
+- Compare `w in {1,4,8,16,infinity}` with otherwise unchanged verified native DreamOn decoding.
+- Newline is an ordinary token. No line slots, newline boundary logic, truncation, retries, guards, compile-time generation gates, blacklists, or repairs are allowed.
 
-Primary artifacts:
+Population and automatic gate:
 
-- `docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_protocol.md`
-- `docs/paper_agent/experiments/20260803_dreamon_v3c_targeted_results.md`
-- `repro_results/dreamon_v3c_targeted_analysis/report.zh.md`
-- `repro_results/dreamon_v3c_targeted_analysis/analysis.json`
-- `repro_results/dreamon_v3_c_nonconsuming_blankline_all642/`
+- Seal a frozen Pilot-30 before generation and run all five widths, exactly 150 rows.
+- Before observing pilot outcomes, seal a proportional fixed 1000-row development/validation population from all 5815 MultiLine rows, excluding Pilot-30.
+- Each width independently advances at Pilot Pass@1 at least `16/30`.
+- If any finite width advances, run every advancing finite width and the paired `w=infinity` native baseline on the same fixed-full-1000.
+- Never run the complete 5815-row population in this action.
 
-Next action: independent review. If accepted, preregister one held-out V3-C validation with no method changes. Do not restart C0, blanket nonempty, compile gate, BoundaryShift/carry, AST repair, OpenTail, Joint-OpenTail, random retries, or another development-population variant.
+Implementation/output scope:
+
+- New code and raw/compact outputs: `experiments/frontier_gated_dreamon/` only.
+- Authoritative compact research records may be updated after evidence exists.
+- Frozen historical code, manifests, and results are read-only inputs.
+
+Environment and baseline:
+
+- GPU: idle NVIDIA H200 NVL, `CUDA_VISIBLE_DEVICES=0`.
+- Python: `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python`.
+- Model: `Dream-org/DreamOn-v0-7B`, snapshot `8ccc74750e43177327f29dab9e91882ba759e194`.
+- Official DreamOn source: commit `8a0a54918412eda9402a327646f7f067f7160ec8`.
+- Dataset: `/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl`, 5815 rows.
+- Generation baseline: initial masks 64, max new tokens 64, 256 forward cap, entropy ordering, temperature 0.2, top-p 0.9, top-k null, algorithm temperature 0, one transfer token, full-sequence attention, native expand/delete/broadcast/stop behavior.
+
+Planned commands:
+
+```bash
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m pytest -q tests/test_frontier_gated_dreamon.py
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.build_manifests
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.runner equivalence
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.runner pilot
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.runner fixed-full-auto
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.analyze
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.frontier_gated_dreamon.audit
+```
+
+Success criteria:
+
+- `w=infinity` matches the unmodified native DreamOn implementation on final tokens/text, every selected position/action, and stop reason for at least five real samples, with ordinary/newline/expand/delete coverage.
+- Every trace begins with exactly 64 middle masks; all frontier assertions pass and `frontier_violation=0`.
+- Manifest checksums, counts, dedup keys, seeds, config hashes, JSON/JSONL parse, result counts, and frozen-file audit pass.
+- Pilot and every automatically authorized fixed-full run complete or, if external GPU/runtime failure prevents completion, retain an exact resumable command and evidence-backed progress record.
+
+Kill criteria:
+
+- Stop before pilot if native equivalence, initial-state, frontier, ordinary-newline, resume/dedup, or schema gates fail.
+- Stop any stage on config/manifest hash mismatch, duplicate unique key, unexpected population size, frozen-file mutation, or invariant assertion failure.
+- Do not change generation parameters or add mechanisms to recover accuracy.
+
+Known risks:
+
+- Initial length 64 equals max-new-token budget 64, so expansion can only occur after native deletion frees dynamic length; equivalence coverage may require scanning more than five predeclared gate candidates.
+- Per-step traces are compact but can still be large if several fixed-full configurations advance.
+- This is development/validation evidence, not an official 5815 full result and not a frozen test.
+
+Review policy: `reviewer_gate_disabled`; use local diff review plus fresh verification before experiment launch and before commit/push.

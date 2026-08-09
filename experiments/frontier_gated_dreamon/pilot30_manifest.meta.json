@@ -1,0 +1,13 @@
+{
+  "manifest_id": "pilot30:99ab1af2cd7cd68ecd848864cf76731340f47402c4afb8d4e753ccc6ad3163b9",
+  "role": "development/mechanism population",
+  "not_frozen_test": true,
+  "rows": 30,
+  "construction": "Exact task-ID reuse of the previously frozen DreamOn V2-Hard-v2 mechanism Pilot-30; no selection used Frontier-Gated DreamOn outcomes.",
+  "source_results_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/repro_results/dreamon_progressive_v2_hard_v2_pilot30/predictions.jsonl",
+  "source_results_sha256": "62eda9afc4c5a0bcf5e9b16cd88ce6bed9b1077a50f82c6a1e632a637e64c1d1",
+  "population_path": "/home/shx/projects/dllm_infilling/git_workspace/data/HumanEval-MultiLineInfilling.jsonl",
+  "population_rows": 5815,
+  "population_sha256": "3a1cb133597ff699fde9dba92788ef8dabf46f273f44477195b36639bd908306",
+  "manifest_sha256": "99ab1af2cd7cd68ecd848864cf76731340f47402c4afb8d4e753ccc6ad3163b9"
+}
