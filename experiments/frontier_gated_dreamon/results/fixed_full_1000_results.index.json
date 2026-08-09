@@ -1,0 +1,32 @@
+{
+  "source_path": "results/fixed_full_1000_results.jsonl",
+  "source_rows": 5000,
+  "source_sha256": "1cc2f5106d803218556f4dbfbb05d502e57ff5fa373724789ca32be773be3e4b",
+  "shards": {
+    "1": {
+      "path": "results/fixed_full_1000_w1_results.jsonl",
+      "rows": 1000,
+      "sha256": "0ab01a78b1591d6120699f3981ca94d5098e28d81a4fb8e2f126e54d67d59138"
+    },
+    "4": {
+      "path": "results/fixed_full_1000_w4_results.jsonl",
+      "rows": 1000,
+      "sha256": "f22be5a48d4f45a4f002d14af0614283a583e410a77b729d3d463c378fc157bc"
+    },
+    "8": {
+      "path": "results/fixed_full_1000_w8_results.jsonl",
+      "rows": 1000,
+      "sha256": "2f59fab7ea774cd40b5aa40685994f1d0206de9595f6687f163b7d11cfc942d4"
+    },
+    "16": {
+      "path": "results/fixed_full_1000_w16_results.jsonl",
+      "rows": 1000,
+      "sha256": "10a82bfba1d1d8f4e7eb618d60853d2eae938a7eb05d8886c84e520136e54e44"
+    },
+    "inf": {
+      "path": "results/fixed_full_1000_winf_results.jsonl",
+      "rows": 1000,
+      "sha256": "fd3adaf2e8ddd6f8df383f3d9e785d67549c556c1b15eb180f78b276aae341f0"
+    }
+  }
+}

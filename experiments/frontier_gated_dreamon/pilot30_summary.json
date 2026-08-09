@@ -15,7 +15,25 @@
       "completion_rate": 1.0,
       "mean_forwards": 20.766666666666666,
       "mean_wall_time_seconds": 0.3991508141858503,
-      "frontier_violations": 0
+      "frontier_violations": 0,
+      "rows": 30,
+      "pass_at_1": 28,
+      "mean_gpu_time_seconds": 0.39917554219563806,
+      "total_wall_time_seconds": 11.97452442557551,
+      "total_gpu_time_seconds": 11.97526626586914,
+      "total_token_forwards": 134104,
+      "normal_tokens": 593,
+      "expand": 0,
+      "delete_actions": 30,
+      "single_point_delete": 0,
+      "broadcast_delete": 30,
+      "broadcast_delete_rows": 30,
+      "incomplete": 0,
+      "cycle_rows": 0,
+      "failure_categories": {
+        "passed": 28,
+        "functional_failure_after_compile": 2
+      }
     },
     "4": {
       "denominator": 30,
@@ -27,7 +45,25 @@
       "completion_rate": 1.0,
       "mean_forwards": 20.233333333333334,
       "mean_wall_time_seconds": 0.37903813130687924,
-      "frontier_violations": 0
+      "frontier_violations": 0,
+      "rows": 30,
+      "pass_at_1": 27,
+      "mean_gpu_time_seconds": 0.3790650767008464,
+      "total_wall_time_seconds": 11.371143939206377,
+      "total_gpu_time_seconds": 11.371952301025392,
+      "total_token_forwards": 130748,
+      "normal_tokens": 577,
+      "expand": 0,
+      "delete_actions": 30,
+      "single_point_delete": 0,
+      "broadcast_delete": 30,
+      "broadcast_delete_rows": 30,
+      "incomplete": 0,
+      "cycle_rows": 0,
+      "failure_categories": {
+        "passed": 27,
+        "functional_failure_after_compile": 3
+      }
     },
     "8": {
       "denominator": 30,
@@ -39,7 +75,25 @@
       "completion_rate": 1.0,
       "mean_forwards": 20.233333333333334,
       "mean_wall_time_seconds": 0.37841964395095906,
-      "frontier_violations": 0
+      "frontier_violations": 0,
+      "rows": 30,
+      "pass_at_1": 27,
+      "mean_gpu_time_seconds": 0.37844337768554687,
+      "total_wall_time_seconds": 11.352589318528771,
+      "total_gpu_time_seconds": 11.353301330566406,
+      "total_token_forwards": 130748,
+      "normal_tokens": 577,
+      "expand": 0,
+      "delete_actions": 30,
+      "single_point_delete": 0,
+      "broadcast_delete": 30,
+      "broadcast_delete_rows": 30,
+      "incomplete": 0,
+      "cycle_rows": 0,
+      "failure_categories": {
+        "passed": 27,
+        "functional_failure_after_compile": 3
+      }
     },
     "16": {
       "denominator": 30,
@@ -51,7 +105,25 @@
       "completion_rate": 1.0,
       "mean_forwards": 20.233333333333334,
       "mean_wall_time_seconds": 0.379245627609392,
-      "frontier_violations": 0
+      "frontier_violations": 0,
+      "rows": 30,
+      "pass_at_1": 27,
+      "mean_gpu_time_seconds": 0.379269873046875,
+      "total_wall_time_seconds": 11.37736882828176,
+      "total_gpu_time_seconds": 11.37809619140625,
+      "total_token_forwards": 130702,
+      "normal_tokens": 577,
+      "expand": 0,
+      "delete_actions": 30,
+      "single_point_delete": 0,
+      "broadcast_delete": 30,
+      "broadcast_delete_rows": 30,
+      "incomplete": 0,
+      "cycle_rows": 0,
+      "failure_categories": {
+        "passed": 27,
+        "functional_failure_after_compile": 3
+      }
     },
     "inf": {
       "denominator": 30,
@@ -63,7 +135,25 @@
       "completion_rate": 1.0,
       "mean_forwards": 20.233333333333334,
       "mean_wall_time_seconds": 0.37945649510559937,
-      "frontier_violations": 0
+      "frontier_violations": 0,
+      "rows": 30,
+      "pass_at_1": 27,
+      "mean_gpu_time_seconds": 0.3794782521565755,
+      "total_wall_time_seconds": 11.383694853167981,
+      "total_gpu_time_seconds": 11.384347564697265,
+      "total_token_forwards": 130702,
+      "normal_tokens": 577,
+      "expand": 0,
+      "delete_actions": 30,
+      "single_point_delete": 0,
+      "broadcast_delete": 30,
+      "broadcast_delete_rows": 30,
+      "incomplete": 0,
+      "cycle_rows": 0,
+      "failure_categories": {
+        "passed": 27,
+        "functional_failure_after_compile": 3
+      }
     }
   },
   "promoted": [

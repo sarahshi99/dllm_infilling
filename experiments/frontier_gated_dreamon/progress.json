@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-08-09T14:54:57.874805+00:00",
+  "stage": "fixed-full-1000",
+  "status": "completed",
+  "completed": 5000,
+  "expected": 5000,
+  "remaining": 0,
+  "elapsed_seconds": 3319.508551120758,
+  "rows_per_second": 1.5062470612741339,
+  "eta_seconds": 0.0,
+  "current": null
+}

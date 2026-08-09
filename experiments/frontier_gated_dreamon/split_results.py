@@ -11,7 +11,7 @@ def main() -> None:
     rows = read_jsonl(FIXED_RESULTS_PATH)
     widths = ["1", "4", "8", "16", "inf"]
     index = {
-        "source_path": str(FIXED_RESULTS_PATH),
+        "source_path": "results/fixed_full_1000_results.jsonl",
         "source_rows": len(rows),
         "source_sha256": sha256_file(FIXED_RESULTS_PATH),
         "shards": {},
@@ -25,7 +25,7 @@ def main() -> None:
         path = EXPERIMENT_DIR / f"results/fixed_full_1000_w{width}_results.jsonl"
         write_jsonl(path, selected)
         index["shards"][width] = {
-            "path": str(path),
+            "path": f"results/{path.name}",
             "rows": len(selected),
             "sha256": sha256_file(path),
         }

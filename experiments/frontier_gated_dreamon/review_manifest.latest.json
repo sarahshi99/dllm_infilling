@@ -1,0 +1,166 @@
+{
+  "status": "passed",
+  "reviewer_gate": "disabled; local diff review + fresh verification fallback",
+  "manifests": {
+    "pilot30": {
+      "path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/pilot30_manifest.jsonl",
+      "rows": 30,
+      "sha256": "99ab1af2cd7cd68ecd848864cf76731340f47402c4afb8d4e753ccc6ad3163b9"
+    },
+    "fixed_full_1000": {
+      "path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/fixed_full_1000_manifest.jsonl",
+      "rows": 1000,
+      "sha256": "5ca4fc25ac5ca5dbb9623e25f93a440ac883ff76c15ed019effeb17d597cec2d"
+    }
+  },
+  "equivalence": {
+    "status": "passed",
+    "samples": 55,
+    "all_matched": true,
+    "behavior_coverage": {
+      "normal": true,
+      "newline": true,
+      "newline_followed_by_commit": true,
+      "expand": true,
+      "delete": true
+    },
+    "native_source": "/home/shx/projects/dllm_infilling/DreamOn/eval/generator.py",
+    "native_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "config_hash": "4193b34fef25c08357bc488f33a59ab62c474a40862e1ddd85060549e3dd6b78"
+  },
+  "pilot_results": {
+    "path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/results/pilot30_results.jsonl",
+    "rows": 150,
+    "sha256": "d050d659c10d025f4b56833a11de9b2ae2b175ac8c8488738e233bde1f01c07b",
+    "width_counts": {
+      "1": 30,
+      "4": 30,
+      "8": 30,
+      "16": 30,
+      "inf": 30
+    },
+    "duplicates": 0,
+    "frontier_violations": 0,
+    "exceptions": 0
+  },
+  "fixed_results": {
+    "path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/results/fixed_full_1000_results.jsonl",
+    "rows": 5000,
+    "sha256": "1cc2f5106d803218556f4dbfbb05d502e57ff5fa373724789ca32be773be3e4b",
+    "width_counts": {
+      "1": 1000,
+      "4": 1000,
+      "8": 1000,
+      "16": 1000,
+      "inf": 1000
+    },
+    "duplicates": 0,
+    "frontier_violations": 0,
+    "exceptions": 0
+  },
+  "frozen_paths": {
+    "starting_head": "3eac683fcfdb2d8936e3d88416848b553ed4f69a",
+    "changed_paths": [
+      ".gitignore",
+      "docs/paper_agent/activity_ledger.zh.md",
+      "docs/paper_agent/codex_handoff.latest.zh.md",
+      "docs/paper_agent/current_action.md",
+      "docs/paper_agent/decision_log.md",
+      "docs/paper_agent/evidence_snapshot.json",
+      "docs/paper_agent/evidence_snapshot.md",
+      "docs/paper_agent/experiment_queue.md",
+      "docs/paper_agent/experiment_results.zh.md",
+      "docs/paper_agent/experiments/20260809_frontier_gated_dreamon_v0.md",
+      "docs/paper_agent/idea_board.md",
+      "docs/paper_agent/paper_agent_dashboard.zh.md",
+      "docs/paper_agent/pause_checkpoint.current.md",
+      "docs/results/run_registry.md",
+      "experiments/frontier_gated_dreamon/__init__.py",
+      "experiments/frontier_gated_dreamon/analyze.py",
+      "experiments/frontier_gated_dreamon/audit.py",
+      "experiments/frontier_gated_dreamon/build_manifests.py",
+      "experiments/frontier_gated_dreamon/config.json",
+      "experiments/frontier_gated_dreamon/core.py",
+      "experiments/frontier_gated_dreamon/equivalence_summary.json",
+      "experiments/frontier_gated_dreamon/fixed_full_1000_manifest.jsonl",
+      "experiments/frontier_gated_dreamon/fixed_full_1000_manifest.meta.json",
+      "experiments/frontier_gated_dreamon/fixed_full_1000_manifest.sha256",
+      "experiments/frontier_gated_dreamon/fixed_full_1000_summary.json",
+      "experiments/frontier_gated_dreamon/manifests.py",
+      "experiments/frontier_gated_dreamon/native_reference.py",
+      "experiments/frontier_gated_dreamon/pilot30_manifest.jsonl",
+      "experiments/frontier_gated_dreamon/pilot30_manifest.meta.json",
+      "experiments/frontier_gated_dreamon/pilot30_manifest.sha256",
+      "experiments/frontier_gated_dreamon/pilot30_summary.json",
+      "experiments/frontier_gated_dreamon/progress.json",
+      "experiments/frontier_gated_dreamon/protocol.py",
+      "experiments/frontier_gated_dreamon/report.zh.md",
+      "experiments/frontier_gated_dreamon/results/equivalence_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_results.index.json",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_w16_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_w1_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_w4_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_w8_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/fixed_full_1000_winf_results.jsonl",
+      "experiments/frontier_gated_dreamon/results/pilot30_results.jsonl",
+      "experiments/frontier_gated_dreamon/run_manifest.json",
+      "experiments/frontier_gated_dreamon/runner.py",
+      "experiments/frontier_gated_dreamon/schema.py",
+      "experiments/frontier_gated_dreamon/split_results.py",
+      "tests/test_frontier_gated_dreamon.py"
+    ],
+    "frozen_path_modifications": [],
+    "official_generator_unmodified": true,
+    "official_dreamon_head": "8a0a54918412eda9402a327646f7f067f7160ec8"
+  },
+  "decoder_source": {
+    "path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/core.py",
+    "sha256": "48c42c52a72ad1c144bc9450289c4086074b2458f68c8ce59cc049fc8786ecdc",
+    "forbidden_mechanism_hits": [],
+    "newline_control_flow": "none; newline inspection occurs only in final diagnostics/counting",
+    "full_forward": true
+  },
+  "result_shards": {
+    "source_path": "results/fixed_full_1000_results.jsonl",
+    "source_rows": 5000,
+    "source_sha256": "1cc2f5106d803218556f4dbfbb05d502e57ff5fa373724789ca32be773be3e4b",
+    "shards": {
+      "1": {
+        "path": "results/fixed_full_1000_w1_results.jsonl",
+        "rows": 1000,
+        "sha256": "0ab01a78b1591d6120699f3981ca94d5098e28d81a4fb8e2f126e54d67d59138"
+      },
+      "4": {
+        "path": "results/fixed_full_1000_w4_results.jsonl",
+        "rows": 1000,
+        "sha256": "f22be5a48d4f45a4f002d14af0614283a583e410a77b729d3d463c378fc157bc"
+      },
+      "8": {
+        "path": "results/fixed_full_1000_w8_results.jsonl",
+        "rows": 1000,
+        "sha256": "2f59fab7ea774cd40b5aa40685994f1d0206de9595f6687f163b7d11cfc942d4"
+      },
+      "16": {
+        "path": "results/fixed_full_1000_w16_results.jsonl",
+        "rows": 1000,
+        "sha256": "10a82bfba1d1d8f4e7eb618d60853d2eae938a7eb05d8886c84e520136e54e44"
+      },
+      "inf": {
+        "path": "results/fixed_full_1000_winf_results.jsonl",
+        "rows": 1000,
+        "sha256": "fd3adaf2e8ddd6f8df383f3d9e785d67549c556c1b15eb180f78b276aae341f0"
+      }
+    }
+  },
+  "json_parse_checks": [
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/config.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/run_manifest.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/pilot30_manifest.meta.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/fixed_full_1000_manifest.meta.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/pilot30_summary.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/fixed_full_1000_summary.json",
+    "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/frontier-gated-dreamon-64/experiments/frontier_gated_dreamon/equivalence_summary.json"
+  ],
+  "equivalence_results_rows": 55,
+  "git_head": "c083e0108a652b2579436dd211fd9195fa36162b"
+}

@@ -13,8 +13,10 @@ from .protocol import (
     BOOTSTRAP_SEED,
     EXPERIMENT_DIR,
     FIXED_FULL_ROWS,
+    FIXED_METADATA_PATH,
     PILOT_GATE_PASSES,
     PILOT_ROWS,
+    PILOT_METADATA_PATH,
 )
 from .runner import (
     FIXED_RESULTS_PATH,
@@ -154,6 +156,7 @@ def paired_comparison(
 
 def enrich_pilot() -> dict[str, Any]:
     rows = read_jsonl(PILOT_RESULTS_PATH)
+    metadata = json.loads(PILOT_METADATA_PATH.read_text(encoding="utf-8"))
     by_width = summarize(rows, PILOT_ROWS)
     for width, summary in by_width.items():
         selected = [row for row in rows if row["w"] == width]
@@ -163,6 +166,8 @@ def enrich_pilot() -> dict[str, Any]:
     value = {
         "stage": "pilot30",
         "role": "development/mechanism population",
+        "manifest_id": metadata["manifest_id"],
+        "manifest_sha256": metadata["manifest_sha256"],
         "gate": f"Pass@1 >= {PILOT_GATE_PASSES}/{PILOT_ROWS}",
         "widths": by_width,
         "promoted": promoted,
@@ -176,6 +181,7 @@ def enrich_fixed() -> dict[str, Any] | None:
     if not FIXED_RESULTS_PATH.exists():
         return None
     rows = read_jsonl(FIXED_RESULTS_PATH)
+    metadata = json.loads(FIXED_METADATA_PATH.read_text(encoding="utf-8"))
     widths = sorted({str(row["w"]) for row in rows}, key=lambda value: ["1", "4", "8", "16", "inf"].index(value))
     if any(len([row for row in rows if row["w"] == width]) != FIXED_FULL_ROWS for width in widths):
         raise RuntimeError("fixed-full results are not complete")
@@ -201,6 +207,8 @@ def enrich_fixed() -> dict[str, Any] | None:
         "stage": "fixed-full-1000",
         "status": "completed",
         "role": "fixed-full-1000 development/validation population",
+        "manifest_id": metadata["manifest_id"],
+        "manifest_sha256": metadata["manifest_sha256"],
         "not_official_5815_full": True,
         "not_frozen_test": True,
         "executed_widths": widths,
@@ -308,7 +316,6 @@ def render_report(pilot: Mapping[str, Any], fixed: Mapping[str, Any] | None) -> 
             f"更少 {paired['broadcast_delete_less']}，相同 {paired['broadcast_delete_same']}；"
             f"其中“更多 broadcast 且由 baseline pass 变为 fail” {paired['broadcast_delete_more_and_pass_harm']}。"
         )
-    lines.append("")
     return "\n".join(lines) + "\n"
 
 

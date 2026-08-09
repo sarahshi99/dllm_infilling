@@ -39,3 +39,5 @@ analysis_outputs/long_underestimate_detector/**/sweep.json
 repro_results/*_smoke5_v*/
 repro_results/*_pilot30_v*/
 repro_results/*_orchestrator.log
+experiments/frontier_gated_dreamon/logs/
+experiments/frontier_gated_dreamon/results/fixed_full_1000_results.jsonl

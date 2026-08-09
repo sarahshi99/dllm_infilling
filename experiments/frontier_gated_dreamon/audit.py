@@ -155,6 +155,25 @@ def audit_decoder_source() -> dict[str, Any]:
     }
 
 
+def audit_result_shards() -> dict[str, Any]:
+    index_path = EXPERIMENT_DIR / "results/fixed_full_1000_results.index.json"
+    index = _json(index_path)
+    total = 0
+    for width, item in index["shards"].items():
+        path = EXPERIMENT_DIR / str(item["path"])
+        rows = read_jsonl(path)
+        if len(rows) != FIXED_FULL_ROWS:
+            raise AssertionError(f"w={width} shard row mismatch")
+        if sha256_file(path) != item["sha256"]:
+            raise AssertionError(f"w={width} shard checksum mismatch")
+        if any(str(row["w"]) != width for row in rows):
+            raise AssertionError(f"w={width} shard contains another width")
+        total += len(rows)
+    if total != int(index["source_rows"]):
+        raise AssertionError("shards do not cover the combined result count")
+    return index
+
+
 def main() -> None:
     pilot_manifest = audit_manifest(PILOT_MANIFEST_PATH, PILOT_CHECKSUM_PATH, PILOT_ROWS)
     fixed_manifest = audit_manifest(FIXED_MANIFEST_PATH, FIXED_CHECKSUM_PATH, FIXED_FULL_ROWS)
@@ -186,6 +205,7 @@ def main() -> None:
         )
     frozen = audit_frozen_paths()
     decoder = audit_decoder_source()
+    result_shards = audit_result_shards()
     required_json = [
         EXPERIMENT_DIR / "config.json",
         RUN_MANIFEST_PATH,
@@ -206,6 +226,7 @@ def main() -> None:
         "fixed_results": fixed_results,
         "frozen_paths": frozen,
         "decoder_source": decoder,
+        "result_shards": result_shards,
         "json_parse_checks": [str(path) for path in required_json],
         "equivalence_results_rows": len(read_jsonl(EQUIVALENCE_RESULTS_PATH)),
         "git_head": _git("rev-parse", "HEAD"),
