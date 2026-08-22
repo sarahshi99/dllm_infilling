@@ -6,7 +6,7 @@
 
 Action name：`DREAMON-SINGLELINE-ORDER-PARALLEL-MARKOV-DIAGNOSTIC-V1`。
 
-状态：`implementation_in_progress`。
+状态：`smoke_running_then_auto_full`。
 
 目标：在 DreamOn released-source SingleLine protocol 上比较官方 global-confidence 与硬 left-to-right frontier，requested K=`1/2/4`；逐步记录真实并行度和 stale→fresh 右邻分布变化。本轮不训练 Markov head，不使用 reference 或 evaluator 影响生成。
 
@@ -15,6 +15,8 @@ Action name：`DREAMON-SINGLELINE-ORDER-PARALLEL-MARKOV-DIAGNOSTIC-V1`。
 实现：复用 `experiments/dreamon_singleline_adapter.py` 的 pinned source/model/tokenizer/prompt/evaluator 兼容层；新增独立的 trace-enabled decoder、分析器和单元测试。官方 C1/C2/C4 保持全局 active-mask confidence top-K 语义；L1/L2/L4 只选从最左 unresolved mask 开始的连续位置，并在最早 structural action 后强制 fresh forward。
 
 GPU/运行：physical GPU=`0`，`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false`；在单元测试、12-case smoke、resume 和 C1 协议回归完成后，使用独立 `tmux` 启动六臂 full。输出目录为 `analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260822_v1/`；原始生成和完整 trace 保留在该目录下且不提交 Git。
+
+2026-08-22 launch：C1 real-model one-case equality against the unmodified generator passed. The six-arm 12-case smoke started as PID `1909182`; at handoff it had written 47/72 rows with no failure journal. Background chain PID `1910477` waits for that PID, requires exactly 72 smoke rows and an empty failure journal, then resumes the same output directory through the full 1,033-row population. Full log: `logs/paper_agent/20260822_dreamon_order_parallel_full.log`.
 
 Success criteria：六臂使用同一 1033-row loader population；C 系列保持官方选择语义；L 系列不跨 gap、不复用 structural action 后旧 logits；trace 可聚合真实 commits/forward、top-K 空间结构、Markov offset `1/2/3`；每臂可恢复且无重复 case。
 
