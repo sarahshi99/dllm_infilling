@@ -2,6 +2,24 @@
 
 更新时间：2026-07-31 UTC
 
+## 2026-08-22 DreamOn SingleLine order × parallelism × Markov premise diagnostic
+
+Action name：`DREAMON-SINGLELINE-ORDER-PARALLEL-MARKOV-DIAGNOSTIC-V1`。
+
+状态：`implementation_in_progress`。
+
+目标：在 DreamOn released-source SingleLine protocol 上比较官方 global-confidence 与硬 left-to-right frontier，requested K=`1/2/4`；逐步记录真实并行度和 stale→fresh 右邻分布变化。本轮不训练 Markov head，不使用 reference 或 evaluator 影响生成。
+
+比较边界：官方 `read_problems("single-line")` loader 在当前 pinned HumanEval-Infilling 数据源返回 `1033` 个唯一 task id；该 1033 条为 development/full-allowed population，非 held-out/frozen-test 证据。此前 `927` 是项目内部 non-frozen common manifest，不能作为本轮官方对照分母。
+
+实现：复用 `experiments/dreamon_singleline_adapter.py` 的 pinned source/model/tokenizer/prompt/evaluator 兼容层；新增独立的 trace-enabled decoder、分析器和单元测试。官方 C1/C2/C4 保持全局 active-mask confidence top-K 语义；L1/L2/L4 只选从最左 unresolved mask 开始的连续位置，并在最早 structural action 后强制 fresh forward。
+
+GPU/运行：physical GPU=`0`，`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false`；在单元测试、12-case smoke、resume 和 C1 协议回归完成后，使用独立 `tmux` 启动六臂 full。输出目录为 `analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260822_v1/`；原始生成和完整 trace 保留在该目录下且不提交 Git。
+
+Success criteria：六臂使用同一 1033-row loader population；C 系列保持官方选择语义；L 系列不跨 gap、不复用 structural action 后旧 logits；trace 可聚合真实 commits/forward、top-K 空间结构、Markov offset `1/2/3`；每臂可恢复且无重复 case。
+
+Known risk：official released source hard-codes `number_transfer_tokens=1`，因此需要在不改变 C 系列选择含义的前提下将其参数化，并由 C1 与原始 generator 路径进行逐例/轨迹回归。常规测试、Git revision 和完整 case key 足以覆盖本轮可恢复性；不新增额外 hash/frozen contract/gate。
+
 ## 2026-07-31 CAL SingleLine 838 smoke→full（覆盖上一动作）
 
 Action name：`CAL-PHASE1B-SINGLELINE-838`。
