@@ -121,6 +121,16 @@ def _apply_one_delete(x: torch.Tensor, index: int, mask_id: int) -> torch.Tensor
     )
 
 
+def _distribution_summary(probabilities: torch.Tensor) -> dict[str, float | int]:
+    values, token_ids = torch.topk(probabilities, 2)
+    return {
+        "entropy": float(-(probabilities * probabilities.clamp_min(1e-12).log()).sum().item()),
+        "margin": float((values[0] - values[1]).item()),
+        "top1_token_id": int(token_ids[0].item()),
+        "top1_probability": float(values[0].item()),
+    }
+
+
 @torch.inference_mode()
 def decode_with_policy(
     *,
@@ -157,6 +167,8 @@ def decode_with_policy(
     x = F.pad(torch.tensor([input_ids], device=device), (0, maximum - len(input_ids)), value=mask_id)
     dynamic_length = int(min_gen_len)
     traces: list[dict[str, Any]] = []
+    markov_pending: list[dict[str, Any]] = []
+    markov_transitions: list[dict[str, Any]] = []
     total_normal = total_expand = total_delete = 0
     for step in range(int(steps)):
         real_length = prefix_length + dynamic_length + len(suffix)
@@ -182,6 +194,47 @@ def decode_with_policy(
         confidence, predictions = sample_tokens_fn(
             logits, temperature=temperature, top_p=top_p, top_k=top_k, neg_entropy=True
         )
+        probabilities = torch.softmax(logits.float(), dim=-1)
+        still_pending: list[dict[str, Any]] = []
+        for pending in markov_pending:
+            if int(pending["remaining_predecessors"]) != 0:
+                still_pending.append(pending)
+                continue
+            target = int(pending["target_position"])
+            if target not in absolute_positions:
+                continue
+            fresh = probabilities[absolute_positions.index(target)]
+            stale = pending["stale_probabilities"]
+            fresh_summary = _distribution_summary(fresh)
+            stale_summary = pending["stale_summary"]
+            fresh_top1 = int(fresh_summary["top1_token_id"])
+            markov_transitions.append(
+                {
+                    "offset": int(pending["offset"]),
+                    "source_step_index": int(pending["source_step_index"]),
+                    "fresh_step_index": step,
+                    "target_position": target - prefix_length,
+                    "top1_agreement": fresh_top1 == int(stale_summary["top1_token_id"]),
+                    "total_variation": float(0.5 * torch.abs(stale - fresh.cpu()).sum().item()),
+                    "stale_entropy": stale_summary["entropy"],
+                    "fresh_entropy": fresh_summary["entropy"],
+                    "stale_margin": stale_summary["margin"],
+                    "fresh_margin": fresh_summary["margin"],
+                    "fresh_top1_stale_rank": int((stale > stale[fresh_top1]).sum().item()) + 1,
+                    "fresh_top1_stale_probability": float(stale[fresh_top1].item()),
+                }
+            )
+        markov_pending = still_pending
+        top4_ranks = _global_ranks(confidence, min(4, len(absolute_positions)))
+        top4 = [
+            {
+                "position": int(absolute_positions[rank] - prefix_length),
+                "token_id": int(predictions[rank].item()),
+                "confidence": float(confidence[rank].item()),
+                "token_type": token_type(int(predictions[rank].item()), eos_id=eos_id, expand_id=expand_id, mask_id=mask_id),
+            }
+            for rank in top4_ranks
+        ]
         if policy == GLOBAL_CONFIDENCE:
             selected_ranks = _global_ranks(confidence, requested_k)
         else:
@@ -209,13 +262,17 @@ def decode_with_policy(
         x[mask_index] = committed_tokens
         normal_count = sum(proposal.token_type == "normal" for proposal in committed)
         expand_count = delete_count = 0
-        if policy == GLOBAL_CONFIDENCE:
+        broadcast_delete = policy == GLOBAL_CONFIDENCE or (
+            barrier_action is not None and barrier_action.token_type == "delete"
+        )
+        if broadcast_delete:
             x_seq = x[0]
             first_eos = (x_seq == eos_id).nonzero(as_tuple=True)[0]
             if first_eos.numel():
                 tail = torch.arange(x_seq.size(0), device=x.device) >= int(first_eos[0].item())
                 x_seq.masked_fill_(tail & mask_index[0], eos_id)
                 x = x_seq.unsqueeze(0)
+        if policy == GLOBAL_CONFIDENCE:
             expand_indices = (x[0] == expand_id).nonzero(as_tuple=False).squeeze(1).tolist()
             for index in sorted(expand_indices, reverse=True):
                 x = _apply_one_expand(x, int(index), mask_id)
@@ -224,11 +281,6 @@ def decode_with_policy(
                 if x.shape[1] > maximum:
                     x = x[:, :maximum]
             expand_count = len(expand_indices)
-            delete_indices = (((x[0] == eos_id) & mask_index[0]).nonzero(as_tuple=False).squeeze(1).tolist())
-            for index in sorted(delete_indices, reverse=True):
-                x = _apply_one_delete(x, int(index), mask_id)
-                dynamic_length -= 1
-            delete_count = len(delete_indices)
         elif barrier_action is not None and barrier_action.token_type == "expand":
             x = _apply_one_expand(x, barrier_action.position, mask_id)
             dynamic_length += 1
@@ -236,18 +288,54 @@ def decode_with_policy(
             if x.shape[1] > maximum:
                 x = x[:, :maximum]
             expand_count = 1
-        elif barrier_action is not None and barrier_action.token_type == "delete":
-            x = _apply_one_delete(x, barrier_action.position, mask_id)
-            dynamic_length -= 1
-            delete_count = 1
+        if broadcast_delete:
+            delete_indices = (
+                ((x[0] == eos_id) & mask_index[0])
+                .nonzero(as_tuple=False)
+                .squeeze(1)
+                .tolist()
+            )
+            for index in sorted(delete_indices, reverse=True):
+                x = _apply_one_delete(x, int(index), mask_id)
+                dynamic_length -= 1
+            delete_count = len(delete_indices)
         total_normal += normal_count
         total_expand += expand_count
         total_delete += delete_count
+        if policy == LEFT_TO_RIGHT_FRONTIER and requested_k == 1 and normal_count == 1 and barrier_action is None:
+            committed_position = committed[0].position
+            advanced_pending: list[dict[str, Any]] = []
+            for pending in markov_pending:
+                if int(pending["next_predecessor_position"]) == committed_position:
+                    pending["remaining_predecessors"] = int(pending["remaining_predecessors"]) - 1
+                    pending["next_predecessor_position"] = committed_position + 1
+                    advanced_pending.append(pending)
+            markov_pending = advanced_pending
+            for offset in (1, 2, 3):
+                target = committed_position + offset
+                if target not in absolute_positions:
+                    continue
+                stale = probabilities[absolute_positions.index(target)].detach().cpu()
+                markov_pending.append(
+                    {
+                        "offset": offset,
+                        "source_step_index": step,
+                        "target_position": target,
+                        "remaining_predecessors": offset - 1,
+                        "next_predecessor_position": committed_position + 1,
+                        "stale_probabilities": stale,
+                        "stale_summary": _distribution_summary(stale),
+                    }
+                )
+        elif policy == LEFT_TO_RIGHT_FRONTIER:
+            markov_pending = []
         unresolved_after = int((x[0, prefix_length : prefix_length + dynamic_length] == mask_id).sum().item())
         traces.append(
             {
                 "step_index": step,
                 "active_mask_positions": local_positions,
+                "confidence_top4": top4,
+                "leftmost_contiguous_positions": left_frontier_positions(local_positions, requested_k=4),
                 "requested_k": requested_k,
                 "selected_candidate_count": len(proposals),
                 "selected_positions": [proposal.position - prefix_length for proposal in proposals],
@@ -271,4 +359,5 @@ def decode_with_policy(
         "expand_count": total_expand,
         "delete_count": total_delete,
         "step_trace": traces,
+        "markov_transitions": markov_transitions,
     }

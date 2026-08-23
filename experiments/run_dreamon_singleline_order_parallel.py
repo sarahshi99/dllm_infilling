@@ -82,6 +82,7 @@ def run(args: argparse.Namespace) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     cases_path = output_dir / "per_case_results.jsonl"
     traces_path = output_dir / "per_step_trace.jsonl"
+    markov_path = output_dir / "markov_transitions.jsonl"
     progress_path = output_dir / "progress.json"
     existing = read_jsonl(cases_path)
     completed_by_variant = {
@@ -166,6 +167,7 @@ def run(args: argparse.Namespace) -> int:
                 completion = str(decoded.pop("completion"))
                 evaluation = check_correctness(source_row, completion, 3.0, 0)
                 trace = decoded.pop("step_trace")
+                markov_transitions = decoded.pop("markov_transitions")
                 append_jsonl(
                     cases_path,
                     {
@@ -185,6 +187,8 @@ def run(args: argparse.Namespace) -> int:
                 )
                 for step in trace:
                     append_jsonl(traces_path, {"case_key": case_key(task_id, variant), "task_id": task_id, "variant": variant, "seed": int(args.seed), **step})
+                for transition in markov_transitions:
+                    append_jsonl(markov_path, {"case_key": case_key(task_id, variant), "task_id": task_id, "task_group": task_id.split("/")[2], "variant": variant, "seed": int(args.seed), **transition})
                 completed_by_variant[variant].add(task_id)
             except Exception as exc:
                 append_jsonl(output_dir / "failure_journal.jsonl", {"task_id": task_id, "variant": variant, "error_type": type(exc).__name__, "error": str(exc), "traceback": traceback.format_exc()})
