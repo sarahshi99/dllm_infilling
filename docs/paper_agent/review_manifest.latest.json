@@ -1,4 +1,13 @@
 {
+  "dreamon_order_parallelism_markov_diagnostic_20260823_v2": {
+    "status": "completed_valid_v2_reframe",
+    "branch": "codex/dreamon-singleline-order-parallel-markov-diagnostic-v1",
+    "population": {"rows": 1033, "task_groups": 164, "label": "user-authorized development/mechanism population; not frozen-test/controller evidence"},
+    "variants": {"C1": "951/1033", "C2": "901/1033", "C4": "814/1033", "L1": "942/1033", "L2": "877/1033", "L4": "713/1033"},
+    "decision": "do_not_train_markov_head_or_fixed_order_controller",
+    "report": "analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/report.zh.md",
+    "v1_status": "invalidated_delete_semantics_drift"
+  },
   "execution_sprint_20260717": {
     "authoritative_branch": "codex/ccfa-execution-sprint-v1",
     "operational_decision": "execute_and_monitor",

@@ -6,7 +6,7 @@
 
 Action name：`DREAMON-SINGLELINE-ORDER-PARALLEL-MARKOV-DIAGNOSTIC-V1`。
 
-状态：`v2_smoke_running_then_auto_full`。
+状态：`completed_valid_v2_reframe`。
 
 目标：在 DreamOn released-source SingleLine protocol 上比较官方 global-confidence 与硬 left-to-right frontier，requested K=`1/2/4`；逐步记录真实并行度和 stale→fresh 右邻分布变化。本轮不训练 Markov head，不使用 reference 或 evaluator 影响生成。
 
@@ -19,6 +19,8 @@ GPU/运行：physical GPU=`0`，`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=f
 2026-08-22 launch：C1 real-model one-case equality against the unmodified generator passed. The six-arm 12-case smoke started as PID `1909182`; at handoff it had written 47/72 rows with no failure journal. Background chain PID `1910477` waits for that PID, requires exactly 72 smoke rows and an empty failure journal, then resumes the same output directory through the full 1,033-row population. Full log: `logs/paper_agent/20260822_dreamon_order_parallel_full.log`.
 
 2026-08-23 audit and replacement launch: v1 completed `6198/6198`, but its L-series omitted released `pad_eos_to_right` broadcast-delete semantics after a selected delete action. The resulting L1 mean forward count (`65.4` versus C1 `9.9`) was an implementation artifact, so v1 is retained only as an invalidated audit artifact. Commit `742b6b0` restores the released delete behavior, adds fresh-state top-4 trace fields, and computes L1 offset `1/2/3` stale-to-fresh distribution transitions online. One-case v2 smoke matched C1/L1 `10` forwards, C2/L2 `5`, C4/L4 `3`, and emitted 24 Markov transitions. Persistent tmux session `dreamon_order_parallel_20260823_v2` now runs 12-case smoke then automatic full to `analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/`; log=`logs/paper_agent/20260823_dreamon_order_parallel_v2.log`.
+
+2026-08-23 final v2 analysis: v2 completed `6198/6198`, 0 duplicate/error, 164 task groups, with C1=`951/1033`. The valid conclusion is reframe/stop: global confidence is usually locally left-clustered and K>1 has real parallelism, but L2 does not establish a same-K advantage and L4 is materially worse than C4. L1 stale→fresh TV grows with offset, but oracle correctness direction and fresh global-rank promotion were not collected; no Markov-head training is authorized. Report=`analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/report.zh.md`.
 
 Success criteria：六臂使用同一 1033-row loader population；C 系列保持官方选择语义；L 系列不跨 gap、不复用 structural action 后旧 logits；trace 可聚合真实 commits/forward、top-K 空间结构、Markov offset `1/2/3`；每臂可恢复且无重复 case。
 

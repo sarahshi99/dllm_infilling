@@ -216,6 +216,19 @@ Related files: `analysis_outputs/paper_evidence_consolidation_20260710_v1/`, `an
 
 ## IDEA-011: Candidate portfolio before method promotion
 
+## IDEA-012: DreamOn fixed-order parallel blocks with Markov premise
+
+Source: user
+Status: completed / reframe
+
+Scientific question: Do released DreamOn global-confidence proposals already form a left-to-right block often enough that fixed contiguous K can improve practical parallelism, and does stale→fresh neighbor movement justify a Markov head?
+
+Result: On the user-authorized 1033-row development population, global top-2/top-4 equal the left contiguous prefix on `89.49%/76.40%` of C1 states, so selection is usually locally clustered but not equivalent to fixed order. K>1 has genuine normal-token parallelism, but L2 does not beat C2 and L4 is substantially worse than C4. Stale→fresh TV grows from 0.103 (offset1) to 0.365 (offset3), but oracle correctness direction and fresh global-rank promotion are absent.
+
+Decision rule: Do not train a Markov head, do not add a fixed-K controller, and do not retune on this population. Revive only with separately authorized offline oracle diagnostics that prove correctly directed neighbor improvement without entering deployment selection.
+
+Related files: `analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/`.
+
 Status: active, no primary selected.
 
 Question: Can independently implemented M1--M4 improve over fixed64 under task-group-aware uncertainty and matched standalone compute?

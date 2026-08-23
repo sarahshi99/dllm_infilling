@@ -2,6 +2,14 @@
 
 更新时间：2026-07-31 UTC
 
+## DreamOn SingleLine order × parallelism × Markov premise diagnostic（2026-08-23）
+
+- 用户授权的 released-loader `1033` 条 development/full-allowed population，164 task groups；不是 held-out/frozen-test/controller 结果。valid v2=`analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/`，六臂完成`6198/6198`、0 duplicate/error。
+- C1/C2/C4 Pass@1=`951/1033=92.06%`、`901/1033=87.22%`、`814/1033=78.80%`；L1/L2/L4=`942/1033=91.19%`、`877/1033=84.90%`、`713/1033=69.02%`。C1复现历史951参考。
+- cluster inference：L1−C1=`-0.93pp`，CI=`[-2.86,+0.97]`；L2−C2=`-2.72pp`，CI=`[-5.98,+0.37]`；L4−C4=`-10.42pp`，CI=`[-13.53,-7.62]`。固定 left-to-right 没有相同 K 的质量优势，L4 显著更差。
+- C1 global top-2/top-4 与左连续前缀相同的比例为`89.49%/76.40%`，表明 global selection 通常左侧局部成簇但并非等同左到右。K>1 的实际提交保持明显大于1，不支持“有效并行度必坍缩”的说法。
+- Markov：L1 offset 1/2/3 TV mean=`0.103/0.261/0.365`，但本 run 无 reference-direction 与 fresh global promotion oracle 字段；只支持 stale-distribution update opportunity，禁止以此训练 Markov head。完整报告=`analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/report.zh.md`。
+
 ## DreamCoder MultiLine matched controls / execution-only status
 
 - `DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine` 的launcher/test/action/matrix已在`497737e`冻结并push；CPU preflight验证source/checkpoint/evaluator/tokenizer与`5079/148`、`12/12` manifest hashes。

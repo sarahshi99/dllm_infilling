@@ -6,6 +6,8 @@
 
 中央 claim 保持 diagnostic/mixed：数据支持 canvas adequacy 与 rescue adequacy 应分开测量，但不授权单一因果归因。“当前 oracle action 未恢复”不得改写成“backbone 已被证明无能力”。早期 1033 rows 为 development；6707 spans 对应 148 个 base-task clusters；P1/P2/P4 仍 open。
 
+2026-08-23 补充边界：DreamOn 官方 loader 1033-row development 机制诊断显示，global top-K 通常左侧成簇且 K>1 具有真实并行度，但硬 left-to-right 并未形成同 K 质量优势；L4 明确退化。L1 stale→fresh 分布变化随 offset 增大，但未测量正确方向，不得改写为 Markov head 可训练或新 controller 证据。该结果加强“机制诊断优先于未验证控制器”的 framing，不改变外部泛化或 held-out 证据边界。
+
 创建时间：2026-05-31 12:36 CST
 
 ## Phase 5 更新（2026-07-11）

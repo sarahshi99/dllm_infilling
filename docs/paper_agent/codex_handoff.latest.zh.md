@@ -2,6 +2,14 @@
 
 更新日期：2026-07-31 UTC
 
+## 2026-08-23 DreamOn SingleLine order × parallelism × Markov diagnostic
+
+- 分支：`codex/dreamon-singleline-order-parallel-markov-diagnostic-v1`；valid output=`analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/`。这是用户授权的 DreamOn 官方 loader `1033` 条 development/full-allowed population 机制诊断，不是 held-out/frozen-test/controller 证据。
+- v2 完成 `1033×6=6198`、0 duplicate、164 task groups、39,686 step traces、25,467 L1 Markov transitions，exit=0。C1=`951/1033=92.06%`，复现历史参考；C2/C4=`901/814`，L1/L2/L4=`942/877/713`。
+- 官方 global top-K 通常是左侧局部簇但不等于固定前缀：C1 top-2/top-4 等于左连续前缀的比例为`89.49%/76.40%`。K>1 实际并行没有坍缩：C2/L2 normal commits/forward=`1.64/1.71`，C4/L4=`1.96/3.10`。
+- 质量结论：L1−C1 task-group delta=`-0.93pp`，CI=`[-2.86,+0.97]`；L2−C2=`-2.72pp`，CI=`[-5.98,+0.37]`；L4−C4=`-10.42pp`，CI=`[-13.53,-7.62]`。不支持硬 left-to-right 是更优 Markov scaffold；固定 K=4 明确受损。
+- L1 stale→fresh 分布变化随 offset 增大（TV mean=`0.103/0.261/0.365`），但没有 reference-direction 或 fresh global-rank-promotion 字段；结论仅为 stale 有修正空间，**不授权训练 Markov head**。v1 因 L delete 漏掉 released broadcast-delete 语义而作废，仅留 audit，不参与统计。
+
 - DreamCoder MultiLine matched controls：freeze commit=`497737e`已push；CPU preflight通过，5 smoke/resume + 5 full predecessor/60GiB-gated tmux watchers已建立。Fixed64 smoke queue=`dreamcoder_dreamon_fixed64_ml_smoke_queue_20260731` pane=`2773397`；其余PIDs见runtime。未读partial accuracy。
 - LR MultiLine paired analyzer watcher=`lrdllm_multiline_paired_analyzer_wait_20260731` pane=`2857187`；只在Fixed64 exact completion后生成10,000-bootstrap same-key analysis。最新`18:04:15Z` progress=`3542/5079`，failure=0。
 

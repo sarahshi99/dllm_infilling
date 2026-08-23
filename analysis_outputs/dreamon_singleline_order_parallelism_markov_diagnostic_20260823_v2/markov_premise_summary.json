@@ -1,0 +1,46 @@
+{
+  "by_offset": [
+    {
+      "cases": 1027,
+      "entropy_delta_fresh_minus_stale_mean": -0.2606469811404323,
+      "fresh_top1_stale_probability_mean": 0.8317118823670209,
+      "fresh_top1_stale_rank_mean": 1.175283732660782,
+      "margin_delta_fresh_minus_stale_mean": 0.07317355660601868,
+      "offset": 1,
+      "task_groups": 164,
+      "top1_agreement_fraction": 0.9396805380411938,
+      "transitions": 9516,
+      "tv_mean": 0.10272188763883223,
+      "tv_median": 0.029029016382992268
+    },
+    {
+      "cases": 1027,
+      "entropy_delta_fresh_minus_stale_mean": -0.8265744703701158,
+      "fresh_top1_stale_probability_mean": 0.6766472675757617,
+      "fresh_top1_stale_rank_mean": 1.4180704441041347,
+      "margin_delta_fresh_minus_stale_mean": 0.26022780294296305,
+      "offset": 2,
+      "task_groups": 164,
+      "top1_agreement_fraction": 0.8797267051478384,
+      "transitions": 8489,
+      "tv_mean": 0.260987412015977,
+      "tv_median": 0.19148693978786469
+    },
+    {
+      "cases": 1026,
+      "entropy_delta_fresh_minus_stale_mean": -1.1444685808226918,
+      "fresh_top1_stale_probability_mean": 0.5763134863132265,
+      "fresh_top1_stale_rank_mean": 2.1106941838649154,
+      "margin_delta_fresh_minus_stale_mean": 0.35958284751445463,
+      "offset": 3,
+      "task_groups": 164,
+      "top1_agreement_fraction": 0.8209595282766015,
+      "transitions": 7462,
+      "tv_mean": 0.3650623980225135,
+      "tv_median": 0.30828285217285156
+    }
+  ],
+  "interpretation_constraint": "Distribution movement alone does not demonstrate correctness-direction improvement; this run cannot authorize Markov-head training.",
+  "oracle_direction_available": false,
+  "scope": "L1 only; online full-vocabulary stale-to-fresh distribution comparisons"
+}

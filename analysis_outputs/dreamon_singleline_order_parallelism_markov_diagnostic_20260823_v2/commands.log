@@ -1,0 +1,4 @@
+2026-08-23 valid-v2 analysis command
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/analyze_dreamon_order_parallel.py --output-dir analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2
+
+Generation command is recorded in logs/paper_agent/20260823_dreamon_order_parallel_v2.log and docs/paper_agent/current_action.md.

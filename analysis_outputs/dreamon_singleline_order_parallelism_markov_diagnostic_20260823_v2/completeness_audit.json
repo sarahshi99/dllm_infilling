@@ -1,0 +1,19 @@
+{
+  "case_rows": 6198,
+  "common_task_count": 1033,
+  "duplicate_case_variant_keys": 0,
+  "failure_journal_present": false,
+  "markov_transition_rows": 25467,
+  "note": "The v2 output is the only valid experiment population; 20260822 v1 is excluded due to audited delete-semantics drift.",
+  "status": "passed",
+  "task_group_count": 164,
+  "trace_rows": 39686,
+  "variant_counts": {
+    "C1": 1033,
+    "C2": 1033,
+    "C4": 1033,
+    "L1": 1033,
+    "L2": 1033,
+    "L4": 1033
+  }
+}

@@ -114,6 +114,12 @@ Expected report path: `analysis_outputs/research_planning_20260708_cpu_claim_aud
 
 ## EXP-002: Dream-Coder expanded oracle-sufficient diagnostic on bounded non-test manifest
 
+## DreamOn order × parallelism × Markov premise diagnostic（completed）
+
+Status: completed / reframe. Output: `analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/`.
+
+Decision: Do not train a Markov head or a fixed-K left-to-right controller from this evidence. C1 reproduces `951/1033`; top-K is often locally left-clustered, and K>1 has real parallelism, but L2 does not beat C2 while L4 is materially worse than C4. Online stale→fresh changes increase strongly with offset, but correctness-direction and fresh global-rank promotion were not measured. A future, separately authorized oracle-only diagnostic would need those fields before any training proposal.
+
 Linked idea: IDEA-002, IDEA-005
 Status: completed
 Hypothesis: Dream-Coder's 15-case mixed result will remain oracle-canvas recoverable on a larger non-test manifest, but its missed-vs-triggered split may differ from LLaDA H200.
