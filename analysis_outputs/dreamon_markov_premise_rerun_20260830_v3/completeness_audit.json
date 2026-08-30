@@ -1,0 +1,64 @@
+{
+  "actual_decode_distribution_available": true,
+  "case_rows": 2066,
+  "common_task_count": 1033,
+  "compressed_artifacts": {
+    "per_case_results": {
+      "exists": true,
+      "expected_rows": 2066,
+      "parse_valid": true,
+      "path": "per_case_results.jsonl.zst",
+      "rows": 2066
+    },
+    "per_transition_diagnostics": {
+      "exists": true,
+      "expected_rows": 64418,
+      "parse_valid": true,
+      "path": "per_transition_diagnostics.jsonl.zst",
+      "rows": 64418
+    }
+  },
+  "duplicate_count": 0,
+  "duplicate_transition_chain_count": 0,
+  "eligible_transition_rows": 47750,
+  "error_count": 0,
+  "fresh_global_rank_available": true,
+  "global_neighbor_observation_rows": 9135,
+  "hard_assertions": {
+    "case_rows_eq_2066": true,
+    "common_task_count_eq_1033": true,
+    "compressed_artifacts_valid": true,
+    "duplicate_eq_0": true,
+    "each_diagnostic_eq_1033": true,
+    "global_pass_eq_951": true,
+    "left_pass_eq_942": true,
+    "missing_error_eq_0": true,
+    "required_fields_complete": true,
+    "task_group_count_eq_164": true
+  },
+  "missing_count": 0,
+  "mode": "full",
+  "non_evaluable_reason_counts": {
+    "reference_non_evaluable": {
+      "target_reference_token_out_of_range": 11306
+    },
+    "transition_ineligible": {
+      "gap_or_nonconsecutive_commit": 1414,
+      "structural_or_coordinate_change": 6119
+    }
+  },
+  "pass_counts": {
+    "C1": 951,
+    "L1": 942
+  },
+  "raw_model_distribution_available": true,
+  "reference_direction_available": true,
+  "required_field_errors": [],
+  "status": "completed",
+  "task_group_count": 164,
+  "transition_attempt_rows": 55283,
+  "variant_counts": {
+    "C1": 1033,
+    "L1": 1033
+  }
+}

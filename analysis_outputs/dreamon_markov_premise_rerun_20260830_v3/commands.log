@@ -1,0 +1,41 @@
+DreamOn SingleLine Markov premise rerun v3 command record
+Date: 2026-08-30 UTC
+Base: 5d5d5f2eb9c550e77327e35e827a9ed2ca27b34d
+Branch: codex/dreamon-markov-premise-rerun-v3
+
+1. Baseline verification
+git ls-remote origin refs/heads/codex/dreamon-singleline-order-parallel-markov-diagnostic-v1
+# observed: 5d5d5f2eb9c550e77327e35e827a9ed2ca27b34d
+
+2. Unit and regression tests
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest tests.test_dreamon_markov_premise tests.test_dreamon_order_parallelism tests.test_dreamon_singleline_adapter
+# observed: 23 tests, OK
+
+3. Fixed smoke12 generation (24 case x variant rows)
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_markov_premise.py --source-root /home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --output-dir analysis_outputs/dreamon_markov_premise_rerun_20260830_v3_smoke12 --device cuda --seed 42 --case-limit 12
+# observed runner progress: 24/24, generation_completed, 8.78 sec
+# operational note: the first outer tee returned 1 because logs/paper_agent did not yet exist; the runner itself completed 24/24. The log directory was then created and all subsequent commands returned 0.
+
+4. Smoke analysis and v2 trajectory alignment
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/analyze_dreamon_markov_premise.py --output-dir analysis_outputs/dreamon_markov_premise_rerun_20260830_v3_smoke12 --mode smoke --expected-population 12 --bootstrap-replicates 500 --v2-reference-dir /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-singleline-order-parallel-markov-v1/analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2
+# observed: completed; 24 cases; 462 eligible transitions; required fields complete; v2 case/step mismatches 0/0; compressed rows 24 and 623 parsed
+
+5. Smoke resume/dedup no-op
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_markov_premise.py --source-root /home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --output-dir analysis_outputs/dreamon_markov_premise_rerun_20260830_v3_smoke12 --device cuda --seed 42 --case-limit 12
+# observed SHA-256 unchanged for per_case_results.jsonl, per_step_trace.jsonl, and per_transition_diagnostics.jsonl; line counts remained 24/202/623
+
+6. Full generation
+CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_markov_premise.py --source-root /home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --output-dir analysis_outputs/dreamon_markov_premise_rerun_20260830_v3 --device cuda --seed 42
+# tmux: dreamon_markov_premise_v3_full_20260830
+# observed: 2066/2066, generation_completed, 856.86 sec, exit 0, GPU ECC 0
+
+7. Full grouped analysis and hard audit
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/analyze_dreamon_markov_premise.py --output-dir analysis_outputs/dreamon_markov_premise_rerun_20260830_v3 --mode full --bootstrap-replicates 10000
+# observed: completed; all hard assertions true; compressed rows 2066 and 64418 parsed; eligible transitions 47750
+
+8. Fresh verification before commit/push
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest tests.test_dreamon_markov_premise tests.test_dreamon_order_parallelism tests.test_dreamon_singleline_adapter
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m py_compile experiments/dreamon_singleline_order_parallel.py experiments/run_dreamon_markov_premise.py analysis/analyze_dreamon_markov_premise.py
+git diff --check
+zstd -t analysis_outputs/dreamon_markov_premise_rerun_20260830_v3/per_case_results.jsonl.zst analysis_outputs/dreamon_markov_premise_rerun_20260830_v3/per_transition_diagnostics.jsonl.zst
+# observed: 23 tests OK; py_compile OK; both zstd files tested; JSON/CSV parse OK; all hard assertions true; full v2 alignment 2,066 cases and 20,741 comparable steps with zero mismatches; git diff --check OK

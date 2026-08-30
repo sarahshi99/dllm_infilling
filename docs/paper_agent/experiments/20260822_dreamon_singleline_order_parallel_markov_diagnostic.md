@@ -11,3 +11,7 @@ Arms: `C1/C2/C4` use released global-confidence selection over all active masks.
 The runner will reuse the released source's model, tokenizer wrapper, prompt construction, logits alignment, entropy confidence, sampling parameters, expansion budget, delete behavior, and functional evaluator. Generation decisions never receive reference code, tests, evaluator verdicts, or oracle diagnostics.
 
 Execution sequence: selection/alignment/action-barrier tests; 12-case smoke across six arms; C1 regression against the unmodified source route; then resumable six-arm full execution on GPU 0. Full reporting will include grouped uncertainty by base HumanEval task, paired comparisons, effective parallelism, top-K spatial summaries, and offline stale-to-fresh Markov premise diagnostics.
+
+## 2026-08-30 authoritative follow-up
+
+The 2026-08-23 valid-v2 six-arm quality and efficiency results remain valid. Its Markov stop judgment is not retained as authoritative because reference-direction and fresh global-rank promotion were not collected; missing fields are not negative evidence. The two-field gap is superseded by the completed v3 supplemental diagnostic in `analysis_outputs/dreamon_markov_premise_rerun_20260830_v3/`. v3 did not rerun C2/C4/L2/L4 and did not train a Markov head.

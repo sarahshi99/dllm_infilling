@@ -1,0 +1,64 @@
+{
+  "device": "cuda",
+  "evaluator": {
+    "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "evaluator_mode": "upstream_documented_local_enablement_overlay",
+    "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
+  },
+  "evaluator_root": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff",
+  "full_population_rows": 1033,
+  "markov_head_training": false,
+  "model_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "official_protocol": {
+    "alg": "entropy",
+    "alg_temp": 0.0,
+    "batch_size": 1,
+    "delete_eos_token": true,
+    "device": "cuda",
+    "dtype": "bf16",
+    "eps": 0.001,
+    "mask_expansion": true,
+    "max_gen_len": 64,
+    "max_prompt_len": 2048,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "pad_eos_to_right": true,
+    "pad_to_max_len": false,
+    "show_progress": false,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "population": "official DreamOn HumanEval-Infilling SingleLine development/full-allowed",
+  "population_rows": 1033,
+  "reference_usage": "offline diagnostics only; never used by selection, sampling, actions, canvas, or output",
+  "run_date_utc": "2026-08-30",
+  "seed": 42,
+  "source_provenance": {
+    "omegaconf_compatibility": "import-only shim; pinned generator never references OmegaConf after import",
+    "source_evaluate_sha256": "d8cf3ce89a23b182444d42f270d4b3bd030a9dc7e752e075b92919fb1a1da57c",
+    "source_generator_sha256": "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858",
+    "source_license": "Apache-2.0",
+    "source_license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "source_repository": "DreamLM/DreamOn",
+    "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8"
+  },
+  "source_root": "/home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549",
+  "task_group_count_expected": 164,
+  "variants": {
+    "C1": {
+      "diagnostic_name_zh": "全局置信度逐词刷新诊断",
+      "policy": "confidence_global",
+      "requested_k": 1,
+      "scientific_purpose_zh": "服务于未来 global top-K 内连续短链 + Markov 设计"
+    },
+    "L1": {
+      "diagnostic_name_zh": "固定左前沿逐词刷新诊断",
+      "policy": "left_to_right_frontier",
+      "requested_k": 1,
+      "scientific_purpose_zh": "服务于未来强制固定左到右 + Markov 设计"
+    }
+  }
+}
