@@ -377,6 +377,8 @@ def decode_with_policy(
     markov_pending: list[PendingTransition] = []
     markov_transitions: list[dict[str, Any]] = []
     global_neighbor_observations: list[dict[str, Any]] = []
+    replay_transitions: list[dict[str, Any]] = []
+    replay_exclusion_counts: dict[str, int] = {}
     next_chain_id = 0
     total_normal = total_expand = total_delete = 0
     for step in range(int(steps)):
@@ -396,6 +398,7 @@ def decode_with_policy(
         pairwise_attention = torch.logical_and(
             attention_1d.unsqueeze(1).unsqueeze(-2), attention_1d.unsqueeze(1).unsqueeze(-1)
         )
+        stale_canvas_before = x[0, :real_length].detach().cpu().tolist()
         raw_logits = model(x, pairwise_attention, tok_idx).logits
         logits = shift_logits_to_targets(raw_logits)[mask_index]
         if real_length == maximum or expand_budget == 0:
@@ -628,6 +631,66 @@ def decode_with_policy(
         total_delete += delete_count
         ordinary_commit = normal_count == 1 and barrier_action is None and not expand_count and not delete_count
         committed_position = committed[0].position if ordinary_commit else None
+        if requested_k == 1 and ordinary_commit and committed_position is not None:
+            target_position = committed_position + 1
+            fresh_canvas = x[0, :real_length].detach().cpu().tolist()
+            if (
+                target_position in absolute_positions
+                and int(fresh_canvas[target_position]) == mask_id
+                and len(fresh_canvas) == len(stale_canvas_before)
+            ):
+                predecessor_local = committed_position - prefix_length
+                target_local = target_position - prefix_length
+                reference_token_id = -1
+                predecessor_matches_reference = False
+                reference_prefix_aligned = False
+                if reference is not None and 0 <= target_local < len(reference):
+                    reference_token_id = int(reference[target_local])
+                    predecessor_matches_reference = (
+                        0 <= predecessor_local < len(reference)
+                        and int(fresh_canvas[committed_position])
+                        == int(reference[predecessor_local])
+                    )
+                    generated_prefix = fresh_canvas[
+                        prefix_length : committed_position + 1
+                    ]
+                    reference_prefix_aligned = (
+                        generated_prefix == reference[: predecessor_local + 1]
+                    )
+                active_count = len(absolute_positions)
+                generation_stage = (
+                    "early" if active_count > 42 else "middle" if active_count > 21 else "late"
+                )
+                replay_transitions.append(
+                    {
+                        "record_type": "replay_transition",
+                        "source_step_index": step,
+                        "trajectory_policy": policy,
+                        "stale_input_ids": stale_canvas_before,
+                        "fresh_input_ids": fresh_canvas,
+                        "previous_token_id": int(fresh_canvas[committed_position]),
+                        "target_position": int(target_position),
+                        "target_local_position": int(target_local),
+                        "reference_token_id": reference_token_id,
+                        "predecessor_token_matches_reference": predecessor_matches_reference,
+                        "reference_prefix_aligned_through_predecessor": reference_prefix_aligned,
+                        "active_mask_count": active_count,
+                        "generation_stage": generation_stage,
+                        "canvas_length": real_length,
+                        "expand_action_masked": real_length == maximum or expand_budget == 0,
+                    }
+                )
+            else:
+                replay_exclusion_counts["right_neighbor_not_fresh_active_mask"] = (
+                    replay_exclusion_counts.get("right_neighbor_not_fresh_active_mask", 0) + 1
+                )
+        elif requested_k == 1:
+            reason = (
+                "structural_or_coordinate_change"
+                if barrier_action is not None or expand_count or delete_count
+                else "non_single_ordinary_commit"
+            )
+            replay_exclusion_counts[reason] = replay_exclusion_counts.get(reason, 0) + 1
         if policy == GLOBAL_CONFIDENCE and ordinary_commit and committed_position is not None:
             right_neighbor = committed_position + 1
             observation: dict[str, Any] = {
@@ -794,4 +857,6 @@ def decode_with_policy(
         "step_trace": traces,
         "markov_transitions": markov_transitions,
         "global_neighbor_observations": global_neighbor_observations,
+        "replay_transitions": replay_transitions,
+        "replay_exclusion_counts": replay_exclusion_counts,
     }

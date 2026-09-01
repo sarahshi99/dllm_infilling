@@ -1,22 +1,21 @@
-# Current action: DreamOn SingleLine Markov premise rerun v3
+# Current action: DreamOn external Markov-head training v1
 
-- Date: 2026-08-30 UTC
-- Branch/base: `codex/dreamon-markov-premise-rerun-v3` from `5d5d5f2eb9c550e77327e35e827a9ed2ca27b34d`
-- Stage: completed locally; focused commit and GitHub push pending
-- Reviewer motivation: v2 measured stale-to-fresh distribution movement but omitted reference direction and fresh global-rank promotion, so its Markov stop verdict is superseded rather than treated as negative evidence.
-- Hypothesis: one-token fresh forwards may improve reference-token probability/rank and preserve or promote the committed token's right neighbor among global top-K candidates; offsets 2/3 quantify longer-block risk.
-- Diagnostics: global-confidence single-token refresh and fixed-left-frontier single-token refresh only. No C2/C4/L2/L4 rerun and no Markov-head training.
-- Population/protocol: official DreamOn HumanEval-Infilling SingleLine development/full-allowed 1033 rows, 164 task groups, seed 42, DreamOn-v0-7B, max64, entropy, temperature 0.2, top-p 0.9, official prompt/evaluator/expand/delete/EOS broadcast-delete semantics.
-- Files to change: `experiments/dreamon_singleline_order_parallel.py`, a v3 runner/analyzer, focused tests, this action record, and the new result directory.
-- GPU/env: physical GPU 0 (H200 NVL); `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro`; `TOKENIZERS_PARALLELISM=false`.
-- Smoke output/log: `analysis_outputs/dreamon_markov_premise_rerun_20260830_v3_smoke12/`, `logs/paper_agent/20260830_dreamon_markov_premise_v3_smoke12.log`.
-- Full output/log: `analysis_outputs/dreamon_markov_premise_rerun_20260830_v3/`, `logs/paper_agent/20260830_dreamon_markov_premise_v3_full.log`.
-- Success criteria: all requested unit/regression tests pass; smoke12 has complete nonempty reference/promotion diagnostics and exact v2 C1/L1 trajectories; full hard gates equal 2066 rows, 1033 per diagnostic, common tasks 1033, 164 groups, no duplicates/missing/errors, exact Pass@1 951 and 942, both distributions and reference/global-rank fields available, compressed artifacts parse and match audited counts.
-- Kill criteria: any trajectory change caused by oracle diagnostics, RNG consumption, protocol mismatch, unavailable required field, GPU ECC error, or inability to reproduce v2 C1/L1 outcomes. Such a run remains `incomplete` or `protocol_failed` and is fixed/resumed, never interpreted scientifically.
-- Expected outputs: required compressed raw artifacts, CSV summaries, `summary.json`, `completeness_audit.json`, `implementation_audit.md`, `report.zh.md`, `commands.log`, and a focused Git commit/push.
-- Known risks: exact full-vocabulary raw and top-p TV/ranks increase compute/memory pressure; reference absolute-position interpretation is only primary when the generated prefix is exactly reference-aligned; transition chains must terminate on every structural or coordinate-changing event.
-- Result: all hard gates passed. Full=`2066/2066`; C1/L1 Pass@1=`951/1033` and `942/1033`; eligible transitions=`47,750`; compressed case/transition rows=`2,066/64,418`, both parse-valid.
-- Primary evidence: reference-prefix aligned offset-1 raw ΔlogP=`+0.0676 [0.0402,0.0966]` for global confidence and `+0.0778 [0.0516,0.1057]` for fixed left frontier. Actual-decode finite ΔlogP is positive in point estimate but its offset-1 CI crosses zero in both diagnostics.
-- Global-neighbor evidence: ordinary-step i+1 exists=`95.52%`; among existing neighbors source top-2/top-4=`93.24%/93.26%`; source candidates retained after fresh forward=`97.17%/97.71%`.
-- Decision: mixed-positive premise evidence supports only a future separately preregistered lightweight design validation. No Markov head was trained and no next stage is automatically authorized.
-- Authoritative output: `analysis_outputs/dreamon_markov_premise_rerun_20260830_v3/`.
+- Date: 2026-09-01 UTC
+- Branch/base: `codex/dreamon-markov-head-training-v1` from `77f0572b1ca4fe031ab6bbf29b3a4d8740f38802`
+- Decision: `advance_to_external_markov_training`
+- Reviewer motivation: test whether a rank-256 first-order token head can approximate the fresh DreamOn right-neighbor distribution without changing the frozen DreamOn backbone.
+- Scientific comparison: identical `TV-head` and `KL-head`; the only scientific difference is full-vocabulary L1/TV versus forward-KL distribution matching.
+- Dataset: only `OpenCoder-LLM/opc-sft-stage2`, config `educational_instruct`, pinned revision `7d28f40d579edd7c24402d17d0c7639f991e6f8d`, MIT, advertised rows `118278`; actual rows and post-dedup rows will be audited.
+- Isolation: normalize and deduplicate raw OpenCoder records, strictly remove HumanEval prompt/reference/test overlaps, group duplicates before deterministic hash split seed `20260901`, then freeze train/validation/external-test manifests before trajectory generation.
+- Model: `Dream-org/DreamOn-v0-7B@8ccc74750e43177327f29dab9e91882ba759e194`, source `DreamLM/DreamOn@8a0a54918412eda9402a327646f7f067f7160ec8`, bf16 frozen inference; Markov losses and softmax in float32.
+- Head: `Embedding(152064,256)` plus bias-free `Linear(256,152064)`, expected and programmatically checked parameters `77,856,768`; structural-token correction is zero.
+- Shared bank: offset-1 only, global-confidence and fixed-left-frontier trajectories mixed as close to 1:1 as legal samples permit; no full-vocabulary logits are serialized.
+- GPU/env: physical H200 index `0`; `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro`; one unrelated `lyx` process was observed using about 1.6 GiB and will not be interrupted.
+- Local run root: `/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/`
+- Git result root: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`
+- Log: `logs/paper_agent/20260901_dreamon_markov_head_training_v1.log`
+- Execution order: implementation/tests -> data manifest -> shared replay bank -> TV smoke/pilot/full/validation and process exit -> GPU release audit -> KL smoke/pilot/full/validation from the common initialization -> lambda calibration -> one conditional external-test opening -> analysis/docs/commits/push.
+- Success criteria: all requested numerical, leakage, replay, frozen-backbone, gradient/update, structural-token, common-init, resume, and overfit tests pass; each pilot/full gate is applied exactly; external test remains unopened unless at least one full-validation gate passes.
+- Kill criteria: leakage, reference poison changing trajectories, structural/coordinate transition admitted, DreamOn weight drift, NaN/Inf, irrecoverable checkpoint, protocol mismatch, or resource OOM not resolved by lowering the common micro-batch for both heads.
+- Scope boundary: no HumanEval generation/results, no K=2/K=4 decoding, no controller/RNN/backbone modification/MultiLine/long-block experiment.
+- Expected outputs: the user-required result files, compressed diagnostics, checkpoint registry with absolute local paths and sizes, research-record updates, five focused commit stages, and push to this branch.

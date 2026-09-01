@@ -237,6 +237,8 @@ def run(args: argparse.Namespace) -> int:
                 trace = decoded.pop("step_trace")
                 transitions = decoded.pop("markov_transitions")
                 neighbors = decoded.pop("global_neighbor_observations")
+                decoded.pop("replay_transitions", None)
+                decoded.pop("replay_exclusion_counts", None)
                 common = {
                     "case_key": key,
                     "task_id": task_id,

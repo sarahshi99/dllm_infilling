@@ -170,6 +170,34 @@ class DreamOnMarkovPremiseTest(unittest.TestCase):
         right = run([7, 7, 7, 7])
         self.assertEqual(trajectory_view(left), trajectory_view(right))
         self.assertNotEqual(left["markov_transitions"], right["markov_transitions"])
+        replay_fields = (
+            "source_step_index",
+            "trajectory_policy",
+            "stale_input_ids",
+            "fresh_input_ids",
+            "previous_token_id",
+            "target_position",
+            "active_mask_count",
+            "generation_stage",
+            "canvas_length",
+            "expand_action_masked",
+        )
+        self.assertEqual(
+            [{field: row[field] for field in replay_fields} for row in left["replay_transitions"]],
+            [{field: row[field] for field in replay_fields} for row in right["replay_transitions"]],
+        )
+        for row in left["replay_transitions"]:
+            self.assertEqual(
+                row["target_position"],
+                row["stale_input_ids"].index(TinyTokenizer.mask_id, row["target_position"]),
+            )
+            self.assertEqual(
+                row["fresh_input_ids"][row["target_position"]], TinyTokenizer.mask_id
+            )
+            self.assertEqual(
+                row["fresh_input_ids"][row["target_position"] - 1],
+                row["previous_token_id"],
+            )
 
     def test_structure_action_aborts_pending_chain(self) -> None:
         torch.manual_seed(4)
