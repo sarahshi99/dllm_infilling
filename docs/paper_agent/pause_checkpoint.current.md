@@ -1,5 +1,17 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-09-01 DreamOn Markov-head training v1 running override
+
+- Branch/base/current implementation commit: `codex/dreamon-markov-head-training-v1` / `77f0572b1ca4fe031ab6bbf29b3a4d8740f38802` / `987979d`.
+- tmux: `dreamon_markov_head_training_v1`; launcher PID=`2209172`; formal bank PID at launch audit=`2211662`.
+- Log: `logs/paper_agent/20260901_dreamon_markov_head_training_v1.log`; result dir: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`; local root: `/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/`.
+- Current phase: formal shared transition-bank generation on physical H200 GPU 0. Launch audit used/free/util=`16571/126586 MiB/73%`.
+- Frozen data: OpenCoder `educational_instruct@7d28f40d579edd7c24402d17d0c7639f991e6f8d`, seed `20260901`, train/validation/external-test=`85426/10738/10776`, external-test manifest SHA-256=`f179a671b37879bd60a0fb47c0c33f30f662a9b8bcade386b51ea0c98b1a1ab9`.
+- Prelaunch verification: 33 tests OK; real bank smoke `240/240`; rank-256 parameters=`77,856,768`; micro-batch=`16`, effective batch=`128`; real 32-transition TV loss `0.2163 -> 0.1088`; smoke released GPU to `0 MiB`.
+- Automatic sequence: bank -> common init/config -> data commit -> TV -> release audit -> KL -> release audit -> conditional one-time external test -> final audit/commit/push.
+- Resume: `tmux attach -t dreamon_markov_head_training_v1`; log tail: `tail -n 100 logs/paper_agent/20260901_dreamon_markov_head_training_v1.log`.
+- Scope: no HumanEval generation/results, K=2/K=4, RNN, controller, MultiLine, long block, or backbone training.
+
 ## 2026-07-31 DreamCoder MultiLine Matched-Control Freeze Override
 
 - `DreamCoder Fixed4/8/16/32/64 under DreamOn sampling/decoder, MultiLine` 复用现有adapter的`dreamcoder_fixed + multiline`组合；没有新算法分支。

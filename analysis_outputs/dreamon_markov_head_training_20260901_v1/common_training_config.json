@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "micro_batch": 16,
+      "status": "passed"
+    }
+  ],
+  "effective_batch": 128,
+  "gradient_accumulation": 8,
+  "micro_batch": 16,
+  "peak_memory_bytes": 17429506048
+}

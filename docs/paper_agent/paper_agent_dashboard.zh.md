@@ -1,5 +1,14 @@
 # Paper Agent Dashboard
 
+## 2026-09-01 运行中：DreamOn 外部 Markov 头训练 v1
+
+- 状态：`running_in_tmux`；session=`dreamon_markov_head_training_v1`，实现 commit=`987979d`。
+- 当前阶段：共享 OpenCoder transition bank 正式生成；H200 launch audit used/free/util=`16571/126586 MiB/73%`。
+- 数据已冻结：revision=`7d28f40d...`，seed=`20260901`，train/validation/external-test=`85426/10738/10776`，HumanEval 仅去重。
+- 工程 smoke：33 tests OK；真实 bank=`240/240`；micro-batch=`16`；32-transition loss=`0.2163 -> 0.1088`；DreamOn 未变化。
+- launcher 将自动串行执行 TV、释放显存、KL、条件外部测试、审计、后续 commits 与 push。日志：`logs/paper_agent/20260901_dreamon_markov_head_training_v1.log`。
+- 当前不支持任何 HumanEval Pass@1 或 K=2 改善主张。
+
 更新时间：2026-07-31 UTC
 
 ## 2026-07-31 DreamCoder MultiLine Matched-Control Freeze Override

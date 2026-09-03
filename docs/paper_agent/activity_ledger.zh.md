@@ -1,5 +1,12 @@
 # Paper-Agent Activity Ledger
 
+## 2026-09-01 UTC DreamOn Markov-head training v1 launch
+
+- fetched/verified base=`77f0572b1ca4fe031ab6bbf29b3a4d8740f38802`; isolated branch/worktree preserved the dirty user workspace.
+- implementation/tests commit=`987979d`; 33 focused tests, py_compile, bash syntax, diff check, real 240-transition bank smoke, common-init and H200 micro-batch smoke passed.
+- frozen OpenCoder revision=`7d28f40d579edd7c24402d17d0c7639f991e6f8d`; tokenized split=`85426/10738/10776`; external test remains unopened.
+- formal tmux=`dreamon_markov_head_training_v1`, launcher PID=`2209172`, log=`logs/paper_agent/20260901_dreamon_markov_head_training_v1.log`; formal shared-bank GPU process started successfully.
+
 ## 2026-07-31 UTC
 
 - DreamCoder MultiLine matched-control freeze：复用`dreamcoder_fixed + multiline`现有adapter组合，新增namespace/paired-seed test、launcher、action与matrix条目；population=`5079/148`，smoke=`12/12`，先commit/push再进入GPU gate。

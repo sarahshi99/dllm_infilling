@@ -1,0 +1,122 @@
+[
+  {
+    "problem_group_id": "0007dd7c0d4a0694afd945b148597f7a8c8c4b334d6ad109d6797ec344f7f06d",
+    "record_id": "1e522c92244991cf69c803439b3abb16731e4d490d4fb49981e336d0f2cc1a79",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 26,
+      "prefix": 139,
+      "suffix": 37
+    }
+  },
+  {
+    "problem_group_id": "0007dd7c0d4a0694afd945b148597f7a8c8c4b334d6ad109d6797ec344f7f06d",
+    "record_id": "7ebb2f9eb16134678ec764c32ef939bcdbf9c3c6c1a94406e240b4541a25049b",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 8,
+      "prefix": 177,
+      "suffix": 18
+    }
+  },
+  {
+    "problem_group_id": "0007dd7c0d4a0694afd945b148597f7a8c8c4b334d6ad109d6797ec344f7f06d",
+    "record_id": "b63fc755ba65ef1b03d0c617ab5285bf94ba1aaf8754bcde88034442528592be",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 21,
+      "prefix": 113,
+      "suffix": 65
+    }
+  },
+  {
+    "problem_group_id": "000eb9b75e264892a92d71d2ba2fb429b1b0c9b924fb52d07c97e3b059a6b4ad",
+    "record_id": "b86a103ca1f712d377d75b2c0394746e87a032ae2d15cfd7b80c39b2bf066bc6",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 25,
+      "prefix": 68,
+      "suffix": 9
+    }
+  },
+  {
+    "problem_group_id": "001468ed477eeb04e81f4cbd9ddc0c68735a8fbed58fb365a2c24fa01b344566",
+    "record_id": "f94094f0e2588e3ff21f817cd0527e8e7ebc88b9146c23e2a40fd6e5846825f3",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 11,
+      "prefix": 90,
+      "suffix": 6
+    }
+  },
+  {
+    "problem_group_id": "0021cda099ba3a8f8bc41e784c9ffbe48f720f3383b525385ae7b8a0071237b2",
+    "record_id": "eb0aee448217133c1105d3674793820e7614435774b2a7a7519ecf41eb1d13a2",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 10,
+      "prefix": 149,
+      "suffix": 13
+    }
+  },
+  {
+    "problem_group_id": "002438c314fc0701ca96e00a05537383fd728d3939391ff2ab7aec4e3af931c3",
+    "record_id": "09c7190d6886473c4d6ba5a4aaa758594a8248de05dea9d115ac31123141fd9a",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 37,
+      "prefix": 82,
+      "suffix": 7
+    }
+  },
+  {
+    "problem_group_id": "00294932f84457d0cb05779bcbcd01dca941f18bf625679fbd9f8cdebe423bda",
+    "record_id": "a1459242d5d52efc4d82b3046f0ad0c53041058109d2a8b042ee557298027f4d",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 37,
+      "prefix": 243,
+      "suffix": 7
+    }
+  },
+  {
+    "problem_group_id": "00294932f84457d0cb05779bcbcd01dca941f18bf625679fbd9f8cdebe423bda",
+    "record_id": "ae765f1f9b3546c465a872346bb4708ec0e2dbf8596ad414c67068bb42cbdf18",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 5,
+      "prefix": 218,
+      "suffix": 58
+    }
+  },
+  {
+    "problem_group_id": "00340fc9e83c3c7adf0937cfb8babeda650e7c1bb118a863acb542fe032f7532",
+    "record_id": "f4bc3643e4abadff320d84d2dea79d515d6d6967816bf2218c4e62a8ca54dca2",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 15,
+      "prefix": 61,
+      "suffix": 55
+    }
+  },
+  {
+    "problem_group_id": "0036e9780bb987fca704ea9d774cd509e7a13e8630452c3231650c3c173e7a57",
+    "record_id": "7cb77046cf4ab509db689bbbc83c4b01be63fc4ba432a9576e61c1050c6487e1",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 20,
+      "prefix": 128,
+      "suffix": 141
+    }
+  },
+  {
+    "problem_group_id": "003df76d9bc0936fcb60a09a383ab0604afdaf7080224cd404fa3221bd2c2b73",
+    "record_id": "d6abcd396ece0926920f996ad75309bacda554177b37c64de5f5b2d169c2e174",
+    "split": "external_test",
+    "token_counts": {
+      "middle": 22,
+      "prefix": 131,
+      "suffix": 15
+    }
+  }
+]

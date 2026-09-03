@@ -1,0 +1,31 @@
+{
+  "actual_source_rows": 118278,
+  "advertised_rows": 118278,
+  "available_rows_after_normalize_dedup_decontam_tokenize": 106940,
+  "dataset_config": "educational_instruct",
+  "dataset_id": "OpenCoder-LLM/opc-sft-stage2",
+  "dataset_revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
+  "external_test_frozen_before_training": true,
+  "external_test_manifest": "external_test_manifest.jsonl.zst",
+  "external_test_manifest_sha256": "f179a671b37879bd60a0fb47c0c33f30f662a9b8bcade386b51ea0c98b1a1ab9",
+  "fields": [
+    "seq_id",
+    "instruction",
+    "output",
+    "code",
+    "entry_point",
+    "testcase"
+  ],
+  "human_eval_usage": "strict decontamination only; no labels, results, or tuning",
+  "license": "mit",
+  "local_prepared_records": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/data/prepared_records.jsonl.gz",
+  "local_prepared_records_size": 31023796,
+  "split_counts": {
+    "external_test": 10776,
+    "train": 85426,
+    "validation": 10738
+  },
+  "split_manifest": "split_manifest.jsonl.zst",
+  "split_manifest_sha256": "fc2113fd64c6cad27e41e9bbbd5ef128f3f8e3003e3200baaa4b8668032ebb30",
+  "split_seed": 20260901
+}

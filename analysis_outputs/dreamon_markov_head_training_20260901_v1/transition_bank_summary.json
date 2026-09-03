@@ -1,0 +1,338 @@
+{
+  "bank_db": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/transition_bank.sqlite",
+  "bank_db_sha256": "b3c10bc6bad7c70111292c0113cca4150f911018dd59c6481da5501b9cafdd62",
+  "bank_db_size": 429584384,
+  "candidate_counts": [
+    {
+      "count": 96312,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 7778,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 27117,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 98282,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 7705,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 27665,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 958509,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 74045,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 274879,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 978507,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 75180,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 280869,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 95118,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 7298,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 26813,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 97080,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 7322,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 27535,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    }
+  ],
+  "dreamon_parameter_versions_unchanged": true,
+  "dreamon_requires_grad_false": true,
+  "elapsed_seconds": 110425.54258966446,
+  "exclusion_counts": [
+    {
+      "count": 2912,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "external_test"
+    },
+    {
+      "count": 7876,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "external_test"
+    },
+    {
+      "count": 157,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "external_test"
+    },
+    {
+      "count": 6254,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "external_test"
+    },
+    {
+      "count": 28711,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "train"
+    },
+    {
+      "count": 75722,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "train"
+    },
+    {
+      "count": 1422,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "train"
+    },
+    {
+      "count": 62035,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "train"
+    },
+    {
+      "count": 2788,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "validation"
+    },
+    {
+      "count": 7360,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "validation"
+    },
+    {
+      "count": 133,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "validation"
+    },
+    {
+      "count": 6176,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "validation"
+    }
+  ],
+  "maximum_selected_per_problem_policy": 16,
+  "model_forwards": 3369560,
+  "no_full_vocabulary_logits_serialized": true,
+  "oversample_factor": 1.25,
+  "per_problem_cap": 16,
+  "records_processed": {
+    "external_test": 6411,
+    "train": 63457,
+    "validation": 6309
+  },
+  "selected_counts": [
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 33334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    }
+  ],
+  "source_provenance": {
+    "omegaconf_compatibility": "import-only shim; pinned generator never references OmegaConf after import",
+    "source_evaluate_sha256": "d8cf3ce89a23b182444d42f270d4b3bd030a9dc7e752e075b92919fb1a1da57c",
+    "source_generator_sha256": "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858",
+    "source_license": "Apache-2.0",
+    "source_license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "source_repository": "DreamLM/DreamOn",
+    "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8"
+  },
+  "status": "completed",
+  "targets": {
+    "external_test": 20000,
+    "train": 200000,
+    "validation": 20000
+  },
+  "total_selected": 240000,
+  "vocabulary": {
+    "config_vocab_size": 152064,
+    "eos_token_id": 151643,
+    "expand_token_id": 151667,
+    "expected_rank256_parameter_count": 77856768,
+    "mask_token_id": 151666,
+    "reserved_model_rows": 396,
+    "tokenizer_length": 151668,
+    "tokenizer_max_id": 151667
+  }
+}

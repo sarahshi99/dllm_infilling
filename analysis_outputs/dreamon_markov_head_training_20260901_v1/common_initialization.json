@@ -1,0 +1,15 @@
+{
+  "parameter_count": 77856768,
+  "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/common_initialization.pt",
+  "rank": 256,
+  "seed": 42,
+  "sha256": "f6bb98830a5edd97decbb89b68fc5dca0a7474baa6ad0957b8983dcb013b9274",
+  "size": 312037643,
+  "structural_token_ids": [
+    151643,
+    151666,
+    151667
+  ],
+  "vocab_size": 152064,
+  "w2_all_zero": true
+}
