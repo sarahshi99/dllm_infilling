@@ -273,3 +273,8 @@ Current M1--M4 statuses are centralized in `docs/paper_agent/method_portfolio.cu
 2. **official CAL** — smoke `12/12` passed with success-only canonical raw, separate failure journal, documented evaluator enablement provenance, frozen seal and resume checks. The official 4,990-case CAL-Rest common full is running; do not inspect partial accuracy or label it as 5,715/5,079 exact evaluation.
 3. **M4** — remains independent: a persistent non-destructive supervisor waits for CAL t+10 growth, ECC=0, `>=25GiB` free memory and no third GPU research process before repair `12→148`. M2 remains completed/reviewed and not promoted.
 4. **P2.1** completed; **P4 ExecRepoBench** remains final-method-freeze only. Historical 40632 bank score-only analysis is complete and explicitly non-M1-full.
+
+<!-- dreamon-markov-head-training-20260901-v1 -->
+## 2026-09-01 DreamOn external Markov-head training v1
+
+Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.

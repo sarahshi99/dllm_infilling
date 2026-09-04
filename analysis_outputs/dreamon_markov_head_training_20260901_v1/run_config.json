@@ -1,0 +1,16 @@
+{
+  "base_head": "77f0572b1ca4fe031ab6bbf29b3a4d8740f38802",
+  "branch": "codex/dreamon-markov-head-training-v1",
+  "dataset_revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
+  "effective_batch": 128,
+  "external_test_open_count": 1,
+  "head_seed": 42,
+  "learning_rate": 0.0003,
+  "max_epochs": 5,
+  "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+  "patience": 2,
+  "rank": 256,
+  "run_date_utc": "2026-09-01",
+  "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "split_seed": 20260901
+}

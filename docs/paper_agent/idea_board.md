@@ -236,3 +236,8 @@ Question: Can independently implemented M1--M4 improve over fixed64 under task-g
 Guardrails: do not fuse methods; 148 RandomSpanLight is development evidence; only up to two methods may move to 296/927; 5079 is selected-method-only; frozen test stays sealed.
 
 Current evidence: historical Phase6 score-only precursor has a positive fixed Phase5 combined proxy point/CI against fixed64, while the fixed abductive score-only selector is weak; neither is true M1 full and neither selects the paper method.
+
+<!-- dreamon-markov-head-training-20260901-v1 -->
+## 2026-09-01 DreamOn external Markov-head training v1
+
+Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.

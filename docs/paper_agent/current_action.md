@@ -19,3 +19,8 @@
 - Kill criteria: leakage, reference poison changing trajectories, structural/coordinate transition admitted, DreamOn weight drift, NaN/Inf, irrecoverable checkpoint, protocol mismatch, or resource OOM not resolved by lowering the common micro-batch for both heads.
 - Scope boundary: no HumanEval generation/results, no K=2/K=4 decoding, no controller/RNN/backbone modification/MultiLine/long-block experiment.
 - Expected outputs: the user-required result files, compressed diagnostics, checkpoint registry with absolute local paths and sizes, research-record updates, five focused commit stages, and push to this branch.
+
+<!-- dreamon-markov-head-training-20260901-v1 -->
+## 2026-09-01 DreamOn external Markov-head training v1
+
+Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.

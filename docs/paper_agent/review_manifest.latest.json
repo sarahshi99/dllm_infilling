@@ -1,21 +1,4 @@
 {
-  "dreamon_order_parallelism_markov_diagnostic_20260823_v2": {
-    "status": "completed_valid_v2_reframe",
-    "branch": "codex/dreamon-singleline-order-parallel-markov-diagnostic-v1",
-    "population": {"rows": 1033, "task_groups": 164, "label": "user-authorized development/mechanism population; not frozen-test/controller evidence"},
-    "variants": {"C1": "951/1033", "C2": "901/1033", "C4": "814/1033", "L1": "942/1033", "L2": "877/1033", "L4": "713/1033"},
-    "decision": "do_not_train_markov_head_or_fixed_order_controller",
-    "report": "analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/report.zh.md",
-    "v1_status": "invalidated_delete_semantics_drift"
-  },
-  "execution_sprint_20260717": {
-    "authoritative_branch": "codex/ccfa-execution-sprint-v1",
-    "operational_decision": "execute_and_monitor",
-    "method_portfolio_register": "docs/paper_agent/method_portfolio.current.json",
-    "method_status": {"M1": "reviewed_not_promoted_v0", "M2": "reviewed_not_promoted_v0", "M3": "reviewed_not_promoted_v0", "M4": "gpu_repair_pending_safe_slot_supervised"},
-    "official_cal": {"status": "full_running_after_12_case_integrity_smoke", "population": 4990, "partial_accuracy_inspected": false, "evaluator_execution_mode": "upstream_documented_local_enablement_overlay"},
-    "frozen_test": {"status": "sealed", "test_evaluation_count": 0}
-  },
   "ablation_status": {
     "benefit_only_vs_benefit_plus_harm": "completed_validation_all_zero_after_risk_calibration",
     "binary_keep_32_vs_multi_action": "completed via always_expand_32 and action-bank variants",
@@ -84,8 +67,8 @@
     "sufficient_canvas_effect": 29
   },
   "branch": "codex/ccfa-execution-sprint-v1",
-  "ccfa_submission_ready": false,
   "canonical_roadmap": {
+    "a1_status": "stopped_completed_negative_auxiliary",
     "active_work": [
       "FAST-SPRINT-01",
       "P1.1-official-CAL",
@@ -96,68 +79,32 @@
       "P4.1-ExecRepoBench"
     ],
     "base_task_groups_behind_6707_spans": 148,
-    "document": "docs/paper_agent/ccfa_master_roadmap.zh.md",
-    "formal_methods_completed": 2,
-    "method_ids": [
-      "M1_abductive_program_state_bridge",
-      "M2_constraint_homotopy_infilling",
-      "M3_birth_death_canvas_diffusion",
-      "M4_semantic_particle_assembly"
-    ],
-    "open_highest_priority": [
-      "P1_protocol_matched_external_baselines",
-      "P2_group_aware_statistics",
-      "P4_non_humaneval_external_evaluation"
-    ],
-    "phase5_diagnostic_mapping": {
-      "F1": "M4-D0",
-      "F2": "A1_completed_negative_auxiliary",
-      "F3_F4": "M1-D0_killed_fixed_proxy"
-    },
     "baseline_order": [
       "official_CAL",
       "DreamOn",
       "rho_EOS_faithful_infilling_compatibility"
     ],
-    "official_cal_upstream": {
-      "repository": "https://github.com/NiuHechang/Calibrated_Adaptive_Length",
-      "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
-      "status": "corrected_protocol_cpu_audited_4990_common_smoke_pending_scipy_and_host_gpu_authorization"
-    },
+    "document": "docs/paper_agent/ccfa_master_roadmap.zh.md",
+    "formal_methods_completed": 2,
+    "full_run_integrity": "resume_dedup_missing_duplicate_error_audit_required",
+    "gpu_full_order": [
+      "official_CAL_full",
+      "M1_MultiLine_full",
+      "DreamOn_official_full"
+    ],
     "lrdllm_scope": "blocker_audit_only",
-    "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
-    "p2_span_micro_role": "descriptive_only",
-    "p4_first_external_benchmark": "ExecRepoBench",
-    "m1_status": "historical_5079_safely_paused_resumable_new_randomspanlight_raw_complete_no_outcome_analysis",
-    "m1_smoke": {
-      "cases": 12,
-      "rows": 132,
-      "missing_duplicate_error": "0/0/0",
-      "frozen_test_evaluation_count": 0,
-      "second_stage_64_forward_audit": "passed"
-    },
-    "m2_status": "completed_reviewed_constraints_activated_no_reliable_grouped_advantage",
-    "m3_status": "technical_full_completed_equal_forward_only_outcome_analysis_pending",
-    "p4_pinned_provenance": {
-      "dataset_commit": "fa61028ce495c9ceff58398b8a7c47b5ae9f5276",
-      "qwen_evaluator_commit": "33bc6aabd7791ad7b32f7e92104f11f2359ba890",
-      "status": "smoke_plan_audit_ready_checkout_network_blocked_no_external_result"
-    },
     "m1_protocol": {
-      "dataset": "HumanEval-MultiLineInfilling",
       "allowed_non_frozen_spans": 5079,
-      "stage1_grid": "16/32/64/128 x seeds 0/1; 64 steps; 8 candidates per span",
-      "oracle_ceiling": "one offline-only diagnostic row per span",
-      "stage2": "generic low-confidence remask and dependency-cone targeted remask each run an additional 64 forwards",
-      "safe_fallback": "M1 returns fixed64 only when no suffix-derived dependency cone is deployably mappable",
-      "smoke_cases": 12,
+      "dataset": "HumanEval-MultiLineInfilling",
       "full_gate": "technical integrity only; automatic full after smoke; no performance gate",
-      "raw_rows_expected_full": 55869,
+      "oracle_ceiling": "one offline-only diagnostic row per span",
       "raw_row_breakdown": {
-        "stage1_grid": 40632,
         "oracle_diagnostic": 5079,
-        "real_refinements": 10158
+        "real_refinements": 10158,
+        "stage1_grid": 40632
       },
+      "raw_rows_expected_full": 55869,
+      "safe_fallback": "M1 returns fixed64 only when no suffix-derived dependency cone is deployably mappable",
       "selection_forbidden": [
         "reference code",
         "oracle length",
@@ -166,19 +113,55 @@
         "task ID",
         "task group",
         "split label"
-      ]
+      ],
+      "smoke_cases": 12,
+      "stage1_grid": "16/32/64/128 x seeds 0/1; 64 steps; 8 candidates per span",
+      "stage2": "generic low-confidence remask and dependency-cone targeted remask each run an additional 64 forwards"
     },
+    "m1_smoke": {
+      "cases": 12,
+      "frozen_test_evaluation_count": 0,
+      "missing_duplicate_error": "0/0/0",
+      "rows": 132,
+      "second_stage_64_forward_audit": "passed"
+    },
+    "m1_status": "historical_5079_safely_paused_resumable_new_randomspanlight_raw_complete_no_outcome_analysis",
     "m2_m3_status": "cheap_diagnostics_not_prerequisites",
+    "m2_status": "completed_reviewed_constraints_activated_no_reliable_grouped_advantage",
+    "m3_status": "technical_full_completed_equal_forward_only_outcome_analysis_pending",
     "m4_status": "downgraded",
-    "a1_status": "stopped_completed_negative_auxiliary",
-    "p3_status": "deferred_until_official_CAL",
-    "gpu_full_order": [
-      "official_CAL_full",
-      "M1_MultiLine_full",
-      "DreamOn_official_full"
+    "method_ids": [
+      "M1_abductive_program_state_bridge",
+      "M2_constraint_homotopy_infilling",
+      "M3_birth_death_canvas_diffusion",
+      "M4_semantic_particle_assembly"
     ],
-    "full_run_integrity": "resume_dedup_missing_duplicate_error_audit_required"
+    "official_cal_upstream": {
+      "commit": "741e8418a88a732b4c92812424d4f03cab1f7b1f",
+      "repository": "https://github.com/NiuHechang/Calibrated_Adaptive_Length",
+      "status": "corrected_protocol_cpu_audited_4990_common_smoke_pending_scipy_and_host_gpu_authorization"
+    },
+    "open_highest_priority": [
+      "P1_protocol_matched_external_baselines",
+      "P2_group_aware_statistics",
+      "P4_non_humaneval_external_evaluation"
+    ],
+    "p2_primary_estimand": "equal_weight_base_task_macro_accuracy",
+    "p2_span_micro_role": "descriptive_only",
+    "p3_status": "deferred_until_official_CAL",
+    "p4_first_external_benchmark": "ExecRepoBench",
+    "p4_pinned_provenance": {
+      "dataset_commit": "fa61028ce495c9ceff58398b8a7c47b5ae9f5276",
+      "qwen_evaluator_commit": "33bc6aabd7791ad7b32f7e92104f11f2359ba890",
+      "status": "smoke_plan_audit_ready_checkout_network_blocked_no_external_result"
+    },
+    "phase5_diagnostic_mapping": {
+      "F1": "M4-D0",
+      "F2": "A1_completed_negative_auxiliary",
+      "F3_F4": "M1-D0_killed_fixed_proxy"
+    }
   },
+  "ccfa_submission_ready": false,
   "central_claim": "Unknown-length DLLM infilling exhibits a measurable distinction between canvas adequacy and action-specific rescue adequacy under the registered model, seed, decoding, budget, oracle-length, and evaluator settings. Oracle-sufficient canvas recovers many failures, while deployable selection remains harm-prone; non-recovery does not uniquely prove a backbone cause.",
   "controller": {
     "calibration_harm_budget_upper95": 0.05,
@@ -243,6 +226,53 @@
   "current_pushed_head_before_exp002_exp003_coordination": "99bfd08d67df48090824bb57ff7f7581ad7a1d2c",
   "current_pushed_head_before_exp003_round": "99bfd08d67df48090824bb57ff7f7581ad7a1d2c",
   "current_pushed_head_before_hard_tail_round": "d9d741f0061b456ffdc43e5fd5f7233fb478a25a",
+  "dreamon_markov_head_training_20260901_v1": {
+    "human_eval_used_for_training": false,
+    "result_dir": "analysis_outputs/dreamon_markov_head_training_20260901_v1",
+    "status": "completed_external_test_opened",
+    "winner": "kl"
+  },
+  "dreamon_order_parallelism_markov_diagnostic_20260823_v2": {
+    "branch": "codex/dreamon-singleline-order-parallel-markov-diagnostic-v1",
+    "decision": "do_not_train_markov_head_or_fixed_order_controller",
+    "population": {
+      "label": "user-authorized development/mechanism population; not frozen-test/controller evidence",
+      "rows": 1033,
+      "task_groups": 164
+    },
+    "report": "analysis_outputs/dreamon_singleline_order_parallelism_markov_diagnostic_20260823_v2/report.zh.md",
+    "status": "completed_valid_v2_reframe",
+    "v1_status": "invalidated_delete_semantics_drift",
+    "variants": {
+      "C1": "951/1033",
+      "C2": "901/1033",
+      "C4": "814/1033",
+      "L1": "942/1033",
+      "L2": "877/1033",
+      "L4": "713/1033"
+    }
+  },
+  "execution_sprint_20260717": {
+    "authoritative_branch": "codex/ccfa-execution-sprint-v1",
+    "frozen_test": {
+      "status": "sealed",
+      "test_evaluation_count": 0
+    },
+    "method_portfolio_register": "docs/paper_agent/method_portfolio.current.json",
+    "method_status": {
+      "M1": "reviewed_not_promoted_v0",
+      "M2": "reviewed_not_promoted_v0",
+      "M3": "reviewed_not_promoted_v0",
+      "M4": "gpu_repair_pending_safe_slot_supervised"
+    },
+    "official_cal": {
+      "evaluator_execution_mode": "upstream_documented_local_enablement_overlay",
+      "partial_accuracy_inspected": false,
+      "population": 4990,
+      "status": "full_running_after_12_case_integrity_smoke"
+    },
+    "operational_decision": "execute_and_monitor"
+  },
   "feature_schema": {
     "forbidden_features": [
       "oracle_length",
@@ -274,12 +304,12 @@
   },
   "frozen_test_status": "sealed",
   "h200_evidence_base_accepted": true,
+  "h200_material_drift_no_longer_blocks_controller_v2": true,
   "hardware_evidence_boundary": {
     "a6000_historical": "802/1033",
     "h200_evidence_base": "796/1033",
     "pooling_rule": "do_not_silently_pool_or_relabel_as_heldout"
   },
-  "h200_material_drift_no_longer_blocks_controller_v2": true,
   "lrdllm": {
     "audit_doc": "docs/paper_agent/lrdllm_protocol_audit.zh.md",
     "final_attempt_dir": "analysis_outputs/lrdllm_final_attempt_20260708_phase4_v4",
@@ -743,6 +773,11 @@
     },
     "candidate_bank": {
       "alpha_auxiliary_separately_counted": true,
+      "alpha_rows_error": 0,
+      "alpha_rows_observed": 728,
+      "alpha_verified_tasks": 91,
+      "base_rows_error": 0,
+      "base_rows_observed": 1332,
       "canvas_lengths": [
         16,
         32,
@@ -763,16 +798,25 @@
       ],
       "smoke_cases": 12,
       "smoke_expected_base_rows": 108,
-      "status": "completed",
-      "base_rows_observed": 1332,
-      "base_rows_error": 0,
-      "alpha_verified_tasks": 91,
-      "alpha_rows_observed": 728,
-      "alpha_rows_error": 0
+      "status": "completed"
     },
     "ccfa_gap_ledger": "analysis_outputs/phase5_method_portfolio_20260711_v1/ccfa_gap_ledger.csv",
     "clean_isolated_worktree": ".worktrees/phase5-method-falsification",
     "combination_authorized": false,
+    "completed_result": {
+      "baseline_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
+      "combined_cross_canvas_within_task_accuracy": 0.6273062730627307,
+      "f2_delta_auc": 0.014293639053254426,
+      "f2_delta_auc_ci_high": 0.08286532790327428,
+      "f2_delta_auc_ci_low": -0.05496102368573791,
+      "failed_gate_conditions": [
+        "positive_primary_delta_vs_all_baselines"
+      ],
+      "result_report": "docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md",
+      "selection_net_vs_confidence": 14,
+      "selection_net_vs_fixed64": 15,
+      "supervised_probe_scores_used_for_selection": false
+    },
     "correction_commit": "5aa86c7a3368e8024449ccf421febfbf9eb78dd2",
     "correction_push": "success: 3315ed8..5aa86c7",
     "f1_status": "completed_diagnostic_only",
@@ -813,20 +857,6 @@
       "test_derived_statistic"
     ],
     "frozen_test_status": "sealed",
-    "completed_result": {
-      "baseline_head": "45bead22e3d21daa707be724cf2bdcbbf776592a",
-      "combined_cross_canvas_within_task_accuracy": 0.6273062730627307,
-      "f2_delta_auc": 0.014293639053254426,
-      "f2_delta_auc_ci_low": -0.05496102368573791,
-      "f2_delta_auc_ci_high": 0.08286532790327428,
-      "failed_gate_conditions": [
-        "positive_primary_delta_vs_all_baselines"
-      ],
-      "selection_net_vs_fixed64": 15,
-      "selection_net_vs_confidence": 14,
-      "supervised_probe_scores_used_for_selection": false,
-      "result_report": "docs/paper_agent/experiments/20260712_phase5_h200_candidate_bank_result.md"
-    },
     "gpu_blocker": {
       "authorized_retry_count": 1,
       "broad_sandbox_bypass_used": false,

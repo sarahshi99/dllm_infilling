@@ -423,3 +423,8 @@ Important ablation signals:
 - official CAL smoke 已 `12/12` technical integrity pass，随后自动启动 4,990-case common-population full。canonical raw 是 success-only，failure journal 独立；CAL partial accuracy 必须保持未读。实时 PID/tmux/进度/GPU snapshot 见 `runtime_status.current.json`。
 - M4 没有被放弃。`ccfa-execution-sprint-supervisor-v1` 是非破坏性 tmux supervisor：它只在 CAL t+10 持续增长、ECC=0、>=25GiB free、且没有第三个 GPU research process 时启动；绝不停止 CAL/外部 PID、覆盖 raw output 或使用 SIGKILL。
 - Frozen controller test 仍为 `sealed`，`test_evaluation_count=0`；不提交 raw generated code。现有未跟踪 compact 目录 `analysis_outputs/m1_randomspanlight_20260715_v1/` 与 `analysis_outputs/m2_constraint_homotopy_20260715_sprint_v1/` 是用户工作，保持不动。
+
+<!-- dreamon-markov-head-training-20260901-v1 -->
+## 2026-09-01 DreamOn external Markov-head training v1
+
+Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.

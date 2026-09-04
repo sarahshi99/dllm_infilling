@@ -112,3 +112,8 @@ Phase 2 frozen-controller note, 2026-07-03: compact controller artifacts are tra
 | `full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` | `superseded` | 1033 | 762 | 73.77% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_relaxed_plus_alpha006_compact_sl_20260421_172500` |
 | `full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_compact_sl_20260422_193927` |
 | `full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` | `superseded` | 1033 | 769 | 74.44% | `GSAI-ML/LLaDA-8B-Base` | `/home/shx/projects/dllm_infilling/outputs_clean/202604/full_stop_safe_conservative_alpha006_fullgrid_sl_20260423_184441` |
+
+<!-- dreamon-markov-head-training-20260901-v1 -->
+## 2026-09-01 DreamOn external Markov-head training v1
+
+Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.
