@@ -1,11 +1,36 @@
 {
+  "corrected_training_code_retrained": false,
+  "data_isolation_status": "cross_split_source_overlap_confirmed; actual bank membership pending",
+  "diagnostic_files": {
+    "external_test_diagnostics_kl.jsonl.gz": {
+      "rows": 20000,
+      "unique_keys": 20000
+    },
+    "external_test_diagnostics_tv.jsonl.gz": {
+      "rows": 20000,
+      "unique_keys": 20000
+    },
+    "validation_diagnostics_kl.jsonl.gz": {
+      "rows": 20000,
+      "unique_keys": 20000
+    },
+    "validation_diagnostics_tv.jsonl.gz": {
+      "rows": 20000,
+      "unique_keys": 20000
+    }
+  },
+  "external_test_retained_transitions": 13387,
+  "historically_reported_test_open_count": 1,
   "kl_status_present": true,
-  "local_diff_review_required_before_final_push": true,
+  "lifetime_test_open_count_independently_verified": false,
+  "loss_normalization_of_existing_weights": "microbatch_aligned_mean_v1",
   "missing_required_files": [],
-  "reviewer_gate_disabled": true,
-  "status": "completed_external_test_opened",
-  "test_open_count": 1,
-  "test_open_gate_satisfied": true,
+  "models_or_checkpoints_loaded": false,
+  "new_test_inference_count": 0,
+  "reanalysis_only": true,
+  "status": "completed_with_protocol_deviations",
   "tv_status_present": true,
-  "winner": "kl"
+  "validation_retained_transitions": 13123,
+  "winner": "kl",
+  "winner_basis": "original validation only; sensitivity did not reselect"
 }

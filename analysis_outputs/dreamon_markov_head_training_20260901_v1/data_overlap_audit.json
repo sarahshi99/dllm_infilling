@@ -1,0 +1,59 @@
+{
+  "actual_training_sample_overlap": "not verified; server SQLite sample membership required",
+  "audit_date_utc": "2026-09-08",
+  "audit_type": "retrospective_source_manifest",
+  "conservative_cross_split_components": 2596,
+  "conservative_cross_split_rows": 29825,
+  "dataset_revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
+  "direct_equality": {
+    "code": {
+      "cross_split_groups": 1239,
+      "cross_split_rows": 3506,
+      "rows_by_split": {
+        "external_test": 778,
+        "train": 1976,
+        "validation": 752
+      }
+    },
+    "instruction": {
+      "cross_split_groups": 3102,
+      "cross_split_rows": 18372,
+      "rows_by_split": {
+        "external_test": 2620,
+        "train": 13021,
+        "validation": 2731
+      }
+    },
+    "response_code": {
+      "cross_split_groups": 1239,
+      "cross_split_rows": 3506,
+      "rows_by_split": {
+        "external_test": 778,
+        "train": 1976,
+        "validation": 752
+      }
+    }
+  },
+  "frozen_split_changed": false,
+  "humaneval_base_tasks": 164,
+  "humaneval_candidate_records": 80,
+  "humaneval_candidates_by_split": {
+    "external_test": 8,
+    "train": 69,
+    "validation": 3
+  },
+  "limitations": [
+    "Exact text/AST/test checks do not prove absence of semantic or renamed duplicates.",
+    "One matching assert is a candidate for manual review, not proof of benchmark copying.",
+    "Sensitivity exclusions use the full training/validation pool, not the unavailable sampled bank.",
+    "Existing test was already opened; filtered results are post-hoc sensitivity, not a new held-out test."
+  ],
+  "missing_source_ids": 0,
+  "next_action": "join candidate record/group IDs to actual training bank before HumanEval generation",
+  "prepared_manifest_rows": 106940,
+  "response_code_ast_parse_failures": {},
+  "response_code_differs_from_code_field": 0,
+  "sensitivity_excluded_old_problem_groups": 5605,
+  "source_rows": 118278,
+  "training_bank_available_here": false
+}

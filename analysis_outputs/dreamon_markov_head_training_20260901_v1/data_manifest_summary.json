@@ -16,10 +16,11 @@
     "entry_point",
     "testcase"
   ],
-  "human_eval_usage": "strict decontamination only; no labels, results, or tuning",
+  "human_eval_usage": "not an explicit training source; prior decontamination was insufficient; actual bank membership pending",
   "license": "mit",
   "local_prepared_records": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/data/prepared_records.jsonl.gz",
   "local_prepared_records_size": 31023796,
+  "retrospective_audit": "data_overlap_audit.json",
   "split_counts": {
     "external_test": 10776,
     "train": 85426,

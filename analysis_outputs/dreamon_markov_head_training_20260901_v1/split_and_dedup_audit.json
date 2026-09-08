@@ -12,6 +12,11 @@
   "model_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
   "normalized_duplicate_rows_removed": 373,
   "problem_group_count": 103274,
+  "retrospective_audit_20260908": {
+    "original_split_preserved": true,
+    "source_overlap_audit": "data_overlap_audit.json",
+    "status": "old_group_id_check_insufficient"
+  },
   "source_rows": 118278,
   "split_counts": {
     "external_test": 11923,

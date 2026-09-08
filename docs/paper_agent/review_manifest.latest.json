@@ -227,10 +227,17 @@
   "current_pushed_head_before_exp003_round": "99bfd08d67df48090824bb57ff7f7581ad7a1d2c",
   "current_pushed_head_before_hard_tail_round": "d9d741f0061b456ffdc43e5fd5f7233fb478a25a",
   "dreamon_markov_head_training_20260901_v1": {
-    "human_eval_used_for_training": false,
+    "data_isolation": "cross_split_source_overlap_confirmed_actual_training_membership_pending",
+    "decision": "iterate_bank_membership_then_k2",
+    "human_eval_explicit_training_source": false,
+    "human_eval_used_for_training": null,
+    "loss_normalization_of_existing_weights": "microbatch_aligned_mean_v1",
+    "report": "analysis_outputs/dreamon_markov_head_training_20260901_v1/report.zh.md",
     "result_dir": "analysis_outputs/dreamon_markov_head_training_20260901_v1",
-    "status": "completed_external_test_opened",
-    "winner": "kl"
+    "sensitivity_external_test_transitions": 13387,
+    "status": "completed_with_protocol_deviations",
+    "winner": "kl",
+    "winner_basis": "original validation; not reselected after audit"
   },
   "dreamon_order_parallelism_markov_diagnostic_20260823_v2": {
     "branch": "codex/dreamon-singleline-order-parallel-markov-diagnostic-v1",

@@ -1,11 +1,11 @@
-# Implementation audit
+# 实现审计：2026-09-08 修正版
 
-- DreamOn is frozen bf16 inference; Markov softmax/loss is float32.
-- Target logits use the released one-position shift by selecting hidden state `target-1` before `lm_head`.
-- Markov correction is applied after action masking and before temperature/top-p.
-- Structural token correction is exactly zero.
-- TV and KL use the same bank, initialization, optimizer, schedule, batch, seed, GPU, and gates.
-- TV and KL ran in separate sequential processes.
-- No HumanEval outcome or generation was used; HumanEval was decontamination-only.
-- No full-vocabulary logits were serialized.
-- Reviewer/subagent gate is disabled by repository policy; local diff review and fresh verification are used.
+本文件取代原先只有通过声明的清单。完整证据、数据口径和下一步见 [中文报告](report.zh.md)。
+
+- 已核对：两个头顺序执行、共享初始值与样本配置；逐条验证/测试主键匹配，各 20,000 条，无重复；两个头的无头分布数值一致。
+- 已修复：无头汇总继承头改善量；正确答案损失跨小批次的归一化；未来数据准备的同题连接分组与 HumanEval 匹配。
+- 历史限制：旧权重使用小批次参考均值，未重新训练；冻结源清单存在真实跨集重复。原“全部按计划且严格去重”不成立。
+- 结构位置的加性偏置为零，不等于结构词元概率不变（普通词元修正会改变归一化分母）。未来解码仍须执行结构动作屏障。
+- 完整性 JSON 只证明本轮检查过的文件/记录；旧测试次数为自报单次调用计数。
+- 未在本环境核验：服务器训练 SQLite 的实际成员、检查点当前存在性、真实 DreamOn GPU 数值等价与推理延迟。
+- 没有读取模型权重，没有新的模型测试，没有重跑训练，没有修改冻结清单或原始逐条诊断。

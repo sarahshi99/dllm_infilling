@@ -1,0 +1,1050 @@
+[
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "213209a3fd26b465cf7443a75af90283f40b157566bd812313eef3f496fbf699",
+    "record_id": "21b83edb27648c3dbdd93a5e1821fc4f39c9e09f9b9b035070adb7c05b0da1c3",
+    "source_seq_id": 19999085879,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "46e851efbf0223b6d85fce58f5edb6c8903a169d83b52880d680e5741be78e51",
+    "record_id": "9c71d0cf040578ffc3d6605da9f26789ab6678484e774c590e59de21d3a3e373",
+    "source_seq_id": 40123925310,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "even_odd_count",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/155"
+      }
+    ],
+    "problem_group_id": "77454d17ac357dddd488dfe017612dc49471bfca52ecb56cea5b3b8a4f1fd91d",
+    "record_id": "e61cf85321b8ae09ab254d921790668a378be4de5ffae5b29709cf10114313e1",
+    "source_seq_id": 40085076076,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "make_palindrome",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/10"
+      }
+    ],
+    "problem_group_id": "b3193fa1238218db3cb88025357945e44e955f52583113e6a2869dfd6aa0c2d2",
+    "record_id": "a779d5954e9f21b1b385992a1c6831d65e05540b4b232e3e2759608edd6f0239",
+    "source_seq_id": 39620215980,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "make_palindrome",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/10"
+      }
+    ],
+    "problem_group_id": "b3193fa1238218db3cb88025357945e44e955f52583113e6a2869dfd6aa0c2d2",
+    "record_id": "d4acea73dfb9d1f027f9a4cb2a28b9da214bf7101265c7211244872d3a1c68ef",
+    "source_seq_id": 13672647512,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "bc15cdb702927221c8c036c9e81703134f72b071f1438853dfe0fa6ceb0ae18b",
+    "record_id": "2eb94cf5c4a5b80418d6ce2acecdf180ea64a2a44a642b10328ab70c87b7a3c4",
+    "source_seq_id": 31969577575,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "largest_divisor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/24"
+      }
+    ],
+    "problem_group_id": "c645edb2a7d762c205829bd009a87c2b6e77a46d1ed1938b4bbf7c8de2530218",
+    "record_id": "c3bf7c14a5f97872a09523eff38b7cc551231e8578ff1fa452995d7754288891",
+    "source_seq_id": 23476140558,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "df88c8cbf63f199935ce34cd34e2e261835eebfc2cc926c08a76abee9f00ba50",
+    "record_id": "92735f1503aad793cc46b73a34098cf4da811d2c93765622ebb4adb580e69f8a",
+    "source_seq_id": 21558734992,
+    "split": "external_test"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "0a80f75a60ab6adfe11ee9c0f2e535d2469a6237b0685f76c8b22a813b35812d",
+    "record_id": "7aae91eeb711d9c9276cae193715b8af3161d45da360961d559e1c343858c2c4",
+    "source_seq_id": 24814236753,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "0a80f75a60ab6adfe11ee9c0f2e535d2469a6237b0685f76c8b22a813b35812d",
+    "record_id": "da94a511a2ffa094a06409d97c1d1385165706c0a06d875f95cea4c6919e1d2f",
+    "source_seq_id": 1233790387,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "0eaba313c02bde622dd0985cf1b0c62830dc395e181b62e340382c74344267e6",
+    "record_id": "1a1dca88bc123229cc42417d75be00e8cb8920457463ad524664c2730f884c38",
+    "source_seq_id": 20235772719,
+    "split": "train"
+  },
+  {
+    "entry_point": "euclidean_gcd",
+    "matches": [
+      {
+        "reason": "code_ast_no_doc_entry_normalized",
+        "task_id": "SingleLineInfilling/HumanEval/13"
+      },
+      {
+        "reason": "response_code_ast_no_doc_entry_normalized",
+        "task_id": "SingleLineInfilling/HumanEval/13"
+      }
+    ],
+    "problem_group_id": "0f714dc5cd34d87bee0b3d016cb896603d400824090d0c071ddd1299dbfe1f53",
+    "record_id": "4ebb602b07dd65afa972b5f4fc407dae0705f2803c3d35010fd2f6774fdfe56b",
+    "source_seq_id": 15931894609,
+    "split": "train"
+  },
+  {
+    "entry_point": "factorize",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/25"
+      }
+    ],
+    "problem_group_id": "0f7ba4185fa432d907da4915187ff1e4a4003a33de7a157862cc5fb6070cbb9a",
+    "record_id": "723090049ed7599b3f4c926d2c7f2ac6dc31052922a6097bdf49ce746bdaaeb1",
+    "source_seq_id": 23520926667,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "1052503e1c8a12b7aa8065ea8919e30aff34722c8d5e887fe9dbf754e8c578bf",
+    "record_id": "4a4971a65f5789e8b8c5099d13c762754244229c6f31c066d4f8403a03825f27",
+    "source_seq_id": 15355901648,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "1052503e1c8a12b7aa8065ea8919e30aff34722c8d5e887fe9dbf754e8c578bf",
+    "record_id": "8a3a3b8bcbb5950b0d7fe0130c0a04e84a872cbaacfe4abc9b0f9b8c3317e358",
+    "source_seq_id": 70095545909,
+    "split": "train"
+  },
+  {
+    "entry_point": "right_angle_triangle",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/157"
+      }
+    ],
+    "problem_group_id": "1c7d32d4c4a39a01273a3063d30f1c4be551f5a7da92486a74c1276dfa81c0ff",
+    "record_id": "3318c0cc2c9ecc9188c584a73c45c741cec503fcb155c667daa57b4b13fbf1a3",
+    "source_seq_id": 70490496789,
+    "split": "train"
+  },
+  {
+    "entry_point": "hex_key",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/78"
+      }
+    ],
+    "problem_group_id": "1e98680d87dd3f9968c49495b063e4328defb4f5c13d30551ddf2e590ee37a0b",
+    "record_id": "35d7dc65f130fbfebcaee94ee1a390251eddda777b5c93d232339c8a1df48943",
+    "source_seq_id": 39349891337,
+    "split": "train"
+  },
+  {
+    "entry_point": "triangle_area",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/71"
+      }
+    ],
+    "problem_group_id": "2048b5ff0718263d2669be20d21dc6036c521ba8c13aca9d8342a4d85a79d232",
+    "record_id": "b1ecadf04e76b77acc2a94a4d0a13a4f048a5ff0b2e898256530a32bd95df180",
+    "source_seq_id": 72655522767,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "2171a02a7257241769dc4b2abd25d030cc1f65fba0db6c4e3583830099b1df2c",
+    "record_id": "4ca8e6120c4ce37f433ad9ed626ce11fd1bc879a2a1bae5b72ed58b3939542bb",
+    "source_seq_id": 72916114904,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "237a47ceadf23336da7a257d79745d65f18a1d2d076f208d9a9e4e660258c7a2",
+    "record_id": "3b90a7942bd7267d3f4a76f0fa62789ee8e4c951b7b4e98fc95d0b55b0cd3ff8",
+    "source_seq_id": 72685980157,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "31d2cf0ecf84d948e94cc1847d224d444cb367d73e124d99908114db15ba2d59",
+    "record_id": "0f219d212f0623ce685091b134e84b585954b181006a856bb484d1dceefd059c",
+    "source_seq_id": 3998918027,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "431d60515f0f019d482a8c43ace1d85a7cd05a53de1aed711ebc99d39296e1ce",
+    "record_id": "b10f464f544160290a4d8c3edb62f04f13210ddd6944f3a7dccec9fdd0186a02",
+    "source_seq_id": 27046075887,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "4b8a3fefc291a5458c9d0d7b77fea93263f56a4485b78d01dcaa4a2dab4ed1da",
+    "record_id": "b5876043e154f99c68b92b6f2504cf68594a8fe8f9e88657c497b3dbc9452883",
+    "source_seq_id": 10565970549,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "4de4e17b5cdaa00911eea7346c8f21830073ce8f4ea4551e8a9bb56efc4b1fdf",
+    "record_id": "1fffab21b2370057949528f612c23deb726b238fea0b7d948bf1da8c10a71f91",
+    "source_seq_id": 14977501996,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "4de4e17b5cdaa00911eea7346c8f21830073ce8f4ea4551e8a9bb56efc4b1fdf",
+    "record_id": "22727e442f4b7c144a1e3156d5949541bf5480fc50fcbf26eb2691be92af4acf",
+    "source_seq_id": 18479426472,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "4de4e17b5cdaa00911eea7346c8f21830073ce8f4ea4551e8a9bb56efc4b1fdf",
+    "record_id": "5f9109e4eb6d58404aa2e0a5d125627ad922c829c1f9132e1e87e17a3634eb22",
+    "source_seq_id": 18958606070,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "4de4e17b5cdaa00911eea7346c8f21830073ce8f4ea4551e8a9bb56efc4b1fdf",
+    "record_id": "9e5c037fd407c10f97dee4fe4b05ba70dd09c3bdd0a9f9c5a99e697b1771cf93",
+    "source_seq_id": 39469167117,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "4de4e17b5cdaa00911eea7346c8f21830073ce8f4ea4551e8a9bb56efc4b1fdf",
+    "record_id": "bd0031bacb73302544885e2a17057d2547d8bf3a0c6954c6b54ca61cf5f4753e",
+    "source_seq_id": 23428746011,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "5075be490589fdedfb8cf03bbb8451e6f9124be98f0dd749bf8c62c0185af8e0",
+    "record_id": "391f7519ef18169056b287e83e24860bb91d8f62782c18bb0f010137e39e47f6",
+    "source_seq_id": 38729778845,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "5075be490589fdedfb8cf03bbb8451e6f9124be98f0dd749bf8c62c0185af8e0",
+    "record_id": "3e9e76f9954c2767669b8c0b1d35f5604deb771365190437d61fd2d8ed819637",
+    "source_seq_id": 38425776551,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "5075be490589fdedfb8cf03bbb8451e6f9124be98f0dd749bf8c62c0185af8e0",
+    "record_id": "400f1cbc5343e09f92a7d57dcf787b0e41b4f1bdd7ee4f861bb8cfb1caa650fc",
+    "source_seq_id": 5809004561,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "5075be490589fdedfb8cf03bbb8451e6f9124be98f0dd749bf8c62c0185af8e0",
+    "record_id": "74a17bc2435819f07cb1f9e614ed8f2054836376c74d765572456203626fe26b",
+    "source_seq_id": 3707981004,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "5075be490589fdedfb8cf03bbb8451e6f9124be98f0dd749bf8c62c0185af8e0",
+    "record_id": "cd2ecfdb1eaf646d83a3761bcab2d3c04b55f7eea9b0f591a15ca8aa1fa8009e",
+    "source_seq_id": 27238756137,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "582e7c040e8b5c04162525637feee792bbc04fdf9ed17db5821811dc3ffccdff",
+    "record_id": "916f17381b61fc056ba6ba6f6f39eea54cd256ae9f941369eaac45f6b57162a8",
+    "source_seq_id": 40677007626,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "582e7c040e8b5c04162525637feee792bbc04fdf9ed17db5821811dc3ffccdff",
+    "record_id": "c04a83524c3db0321249f097c5e713e37bf11ea3a7ff25f8a71a1415c0429f77",
+    "source_seq_id": 32729926576,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "5bf0404e26271dc66a6388232a18bd94ee546a3b58e732fc1784095e38a6380c",
+    "record_id": "aad80d0bec48c16d658c53268283a30d330bb1c6299f666efe5d518fe3de92ec",
+    "source_seq_id": 43654617394,
+    "split": "train"
+  },
+  {
+    "entry_point": "monotonic",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/57"
+      }
+    ],
+    "problem_group_id": "5c9dba1c02162c7a8106df6258f64be4dd8d6e8ad12a81403d3de4f3e91d3029",
+    "record_id": "1be421ccb52adce29bc3a4372b6dc50963515f6a0a32e32045d927c65e38518f",
+    "source_seq_id": 4323227822,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "5d4d2b808ccf636d60afe605cfe89341ddbb2e669164694ea5bb7fdd786c6018",
+    "record_id": "48d4c72cdf4f2c9be25919ea55aac00dfcdfe17f663a7e852b372f89eceb54a9",
+    "source_seq_id": 27551285275,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "664141009a39bfb874ae5b19acf298dc6a5c2b689be2fa4adfa2e1352ac86774",
+    "record_id": "272b73b7c17b69fbc679204b5d4123d7e94e26e958ad7504c420ca0c9c197b4b",
+    "source_seq_id": 72799227976,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "667f067805853e9a891227c141f6f8a71b64c209a929496b61a72c285637002b",
+    "record_id": "2988daed85cfb2f48d982c6557bfec00174f078a706fbdfcc811f69aa1068987",
+    "source_seq_id": 17271706636,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "667f067805853e9a891227c141f6f8a71b64c209a929496b61a72c285637002b",
+    "record_id": "adceae0b803fdd0eb62b046cc3fdeaecbda0e3b87e0c8d00ff5a9ea40f971152",
+    "source_seq_id": 21821002999,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "667f067805853e9a891227c141f6f8a71b64c209a929496b61a72c285637002b",
+    "record_id": "cf0dbd010bcafded0674acf0b2fb013b79aaa6823ad3b3b09c50467707872d9f",
+    "source_seq_id": 1184882124,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "75c6c0b537bc9be42fddcb0031a408a085ab334e031e0aa25972bda4fa5143e4",
+    "record_id": "d9f519357083ec3d89870bb229156ab4895a6a7fe33939b34dad0e9c00d50fd0",
+    "source_seq_id": 27438868721,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "78875d5ed110ff411e350c93a8aba47a33425277dae006d718d0bf99c098c624",
+    "record_id": "6257208ef2f42e6a7e9a87235bbde3c5df1b981d0f66e85e64a44d6c502aafe3",
+    "source_seq_id": 10786949275,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "78875d5ed110ff411e350c93a8aba47a33425277dae006d718d0bf99c098c624",
+    "record_id": "da97a99077fcff8dc4a826dd72c342ee111123525771bd7727ace599c6d52925",
+    "source_seq_id": 41699161798,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "7a624012b113a851963e4b4d23759581cda93b51d9150f95a607719efc1c7c89",
+    "record_id": "83dedb855e48a62fe54093eaa9fbc290bd3aa0c60fffef5ae990e405baa56bdc",
+    "source_seq_id": 26862790441,
+    "split": "train"
+  },
+  {
+    "entry_point": "add",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/53"
+      }
+    ],
+    "problem_group_id": "7f7325f3eee298d826be012f0896b70053c6a34fcd43b97d7a7577a9f8605b8a",
+    "record_id": "1fcd482ad54b8f9d957e8db92d9c5811aa6798ea41166b09492f5242fb6711de",
+    "source_seq_id": 28214294705,
+    "split": "train"
+  },
+  {
+    "entry_point": "sum_product",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/8"
+      }
+    ],
+    "problem_group_id": "8691391115e1f9d70dcab36342648c39565840822755079d5daf25f123343e95",
+    "record_id": "d9ba9a20c759aea33512d655cd7bd9c1609345322d06be51efa45b4a67737eaa",
+    "source_seq_id": 73076019935,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_prime_factor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/59"
+      }
+    ],
+    "problem_group_id": "96e7de4ecfcd5a09fee70109cb1a4b9f18b39b2d9c63a3d5364f5a5c2a932d97",
+    "record_id": "c5c830929c13f928e8ed2250da6ee465e2e172b37b10ab0c281121b14432342d",
+    "source_seq_id": 71656100156,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "971e2dc2361815bf6ec13d95046838c192965cd2d933cf7bae2657f7b699e106",
+    "record_id": "b54f81b9ebe83c74e0c74793115b0b667e0e6ac1becffee04244569fc22d9a59",
+    "source_seq_id": 17870627881,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_divisor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/24"
+      }
+    ],
+    "problem_group_id": "9d8b1ec778ab9272aa2bffb632f198c3d4f46b4a034900531ea1a0664d1e738e",
+    "record_id": "27085377dfee6885e49175841c06b99e9c8bda92a214faab3a9a1443e332801d",
+    "source_seq_id": 2926951405,
+    "split": "train"
+  },
+  {
+    "entry_point": "median",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/47"
+      }
+    ],
+    "problem_group_id": "a2f865808b4cc605732e2da7290982cbdff83b78102af0cbcf9fd2f6e5eefc23",
+    "record_id": "152b5459fa1fcaf577991ee0a4b478d01d5af244a36072074dd40a0a53626874",
+    "source_seq_id": 25459417027,
+    "split": "train"
+  },
+  {
+    "entry_point": "median",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/47"
+      }
+    ],
+    "problem_group_id": "a2f865808b4cc605732e2da7290982cbdff83b78102af0cbcf9fd2f6e5eefc23",
+    "record_id": "441394e91d929f1d69cc178c4051fbbcb01a646dfcd37f5f66fb942ff5441fbf",
+    "source_seq_id": 29236805762,
+    "split": "train"
+  },
+  {
+    "entry_point": "triangle_area",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/45"
+      }
+    ],
+    "problem_group_id": "a68d97c8c8bb659985f423a62cb300c1ffeb6fee6f6df0b8261c54f854d49e5e",
+    "record_id": "41dab403860641f3220a63cbaf6fc1f2355e8344d7807b109466ffb7782b046e",
+    "source_seq_id": 29663932721,
+    "split": "train"
+  },
+  {
+    "entry_point": "prime_fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/39"
+      }
+    ],
+    "problem_group_id": "b6afcf7e329caab1915da2bb18a33a2029c122993ee6c95ffbbbba915e175a93",
+    "record_id": "e4b143f6762111dedbe546e02b9f1b8160c5ecf6cf24f587b91618573d578857",
+    "source_seq_id": 16798607960,
+    "split": "train"
+  },
+  {
+    "entry_point": "triangle_area",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/71"
+      }
+    ],
+    "problem_group_id": "bc41f5d0e0be61283f89c575d8669cc20aaba7079e3ca09063b2250e06f60274",
+    "record_id": "0d40b1047efb1e1277de546023267b646e50b2a40f6bab9f56d4ac8ce5e7d197",
+    "source_seq_id": 8464582360,
+    "split": "train"
+  },
+  {
+    "entry_point": "calculate_gcd",
+    "matches": [
+      {
+        "reason": "code_ast_no_doc_entry_normalized",
+        "task_id": "SingleLineInfilling/HumanEval/13"
+      },
+      {
+        "reason": "response_code_ast_no_doc_entry_normalized",
+        "task_id": "SingleLineInfilling/HumanEval/13"
+      }
+    ],
+    "problem_group_id": "d652bb419740d5090f00727a626517155bc35eb1cfcfab7f7fbd58094fb92012",
+    "record_id": "65775eaef6f41ae5f54b53a45fd88ef6201c19d083230cfa04e50a0fd89d13f0",
+    "source_seq_id": 69976241793,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "d751e21d1dc09833cb4ce182ac9077ecd8129deb1caaa2bf1a0aae9d50df0a8c",
+    "record_id": "2ccef67ea34a54e1e9a024123344f0ef2bff9e4cc99d7c06d048d5f73279796d",
+    "source_seq_id": 7834644810,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_prime",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/31"
+      }
+    ],
+    "problem_group_id": "d751e21d1dc09833cb4ce182ac9077ecd8129deb1caaa2bf1a0aae9d50df0a8c",
+    "record_id": "eabd52d97eea28a46a2170df51cc183e86079bdad08a757ac697fc25deded744",
+    "source_seq_id": 26380386972,
+    "split": "train"
+  },
+  {
+    "entry_point": "strange_sort_list",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/70"
+      }
+    ],
+    "problem_group_id": "dcc732ee7874392e234f93ebae51e97fc42fb0b40cad42729bd6a624a7aaadd4",
+    "record_id": "4f5fb24cd19a64188960812d9e959ee56db37139705ecf43c8060ad5c33de30c",
+    "source_seq_id": 4837016335,
+    "split": "train"
+  },
+  {
+    "entry_point": "next_smallest",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/90"
+      }
+    ],
+    "problem_group_id": "de7adbab49c07216796f206d2d09686a509a067a007ed0863c8f9514d2bc4fd0",
+    "record_id": "b42b7b54edfd30cb09d63afe88d37dcd4d4e240b69489c3a070c94f751b2b1e5",
+    "source_seq_id": 2958975674,
+    "split": "train"
+  },
+  {
+    "entry_point": "next_smallest",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/90"
+      }
+    ],
+    "problem_group_id": "de7adbab49c07216796f206d2d09686a509a067a007ed0863c8f9514d2bc4fd0",
+    "record_id": "ca58833542dba965ac3a1f8b93d1a91f4c3a397f07cad96e8c94ac768eb373c0",
+    "source_seq_id": 20800053729,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_divisor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/24"
+      }
+    ],
+    "problem_group_id": "e424a6b2a120155205f89e8f598e2b8db81f7b2055a2068b98b3ef1ba2791008",
+    "record_id": "3dce93d67c159e0d17f470f08675656fe406085921e49c805dcb4d68237fb408",
+    "source_seq_id": 28290029274,
+    "split": "train"
+  },
+  {
+    "entry_point": "remove_vowels",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/51"
+      }
+    ],
+    "problem_group_id": "e93318ea030dd20bdb89f5777367470e17ae8255fcb8f35895a540245e8f5cda",
+    "record_id": "f620d16d1680c7a1767b13c92b2480a5e1aaa06ae457cd1f34a2a09c15a9ebbc",
+    "source_seq_id": 28617372173,
+    "split": "train"
+  },
+  {
+    "entry_point": "fib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/55"
+      }
+    ],
+    "problem_group_id": "ec1a3cf2682d05cf59556df8f5faa23ec604aae64bafb5888a989902afb5be4e",
+    "record_id": "317377f95e4acf6207aa6a726ee665f9bd2be4725d13e2c95552f1732f0c60ce",
+    "source_seq_id": 6785163060,
+    "split": "train"
+  },
+  {
+    "entry_point": "largest_divisor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/24"
+      }
+    ],
+    "problem_group_id": "f0cecb5a7a0b41191e7b494782e27dbd9494e6243bc20154374f2a7c3343173e",
+    "record_id": "d1463cf7166088ebd473fe385ffbd8a5ad1df85a1a77781b26b5c8a062b12894",
+    "source_seq_id": 36160270067,
+    "split": "train"
+  },
+  {
+    "entry_point": "is_sorted",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/126"
+      }
+    ],
+    "problem_group_id": "f4ebf3d643dc4fb5ff49638ae2966ce9a0fa0fa77b63580d60b41ec48d785ad4",
+    "record_id": "cf136bedbdf23b149a0ba53e3e0d43f8c009b82a5ce00405949c99accb5f1cca",
+    "source_seq_id": 13160229257,
+    "split": "train"
+  },
+  {
+    "entry_point": "minSubArraySum",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/114"
+      }
+    ],
+    "problem_group_id": "f594204a7e35c655d0bb41d66b153b10c33224d4e9e9f3d57f629eeab9060793",
+    "record_id": "3ed2d55bab7bf40ebdb15d87a658c4ac6c8724237a0193bacce2dcaa6d508aab",
+    "source_seq_id": 43022080901,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "0c2d880b182ef65ee64fef453fbc726c5ff3cc95110f5785213c485c140de0f3",
+    "source_seq_id": 36293549126,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "1e9adfc23924b243398dac191e321fe4ebaf8221767f619a0c854e14db4ee978",
+    "source_seq_id": 71656343199,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "34beef7697514d43eb1b0fbebd7a2f05807e910871363742dcf7107751ba2072",
+    "source_seq_id": 24488451677,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "56fad85d6413cbdaf4d5c0f96b77b309b3063e94df8394d076187dfea1db44f9",
+    "source_seq_id": 36322030221,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "b7fec954a6fdb345794dc0ada36404c36989c40c2ae73e2ef2316910169f08b7",
+    "source_seq_id": 30721266939,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "be280ad426cbdb803e4113e985eed6af494ce6ec54d856dd0cb4c5fa418a7507",
+    "source_seq_id": 35128075379,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "c9a0d3394f71b0d75bba0a39e72f3ca9bb7147ef6cd5d5ee6b67c4a460df5184",
+    "source_seq_id": 39756036636,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "cdbd7516a68876e2eff0595fb3384d0ad33af03a9dbbd419b5a77c9ea0d1be43",
+    "source_seq_id": 38436448009,
+    "split": "train"
+  },
+  {
+    "entry_point": "fibfib",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/63"
+      }
+    ],
+    "problem_group_id": "f77a6fb511114c465bb8e2950bb4addb392d3a4af37ec2115c5dd6dae56aad0b",
+    "record_id": "d332ff9ef1814f0d8a7c2a6fa7c7e100ed8c364a677addef76a97b945f411077",
+    "source_seq_id": 74160176743,
+    "split": "train"
+  },
+  {
+    "entry_point": "monotonic",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/57"
+      }
+    ],
+    "problem_group_id": "2ab1ffb6183c894f06dd8f46d98c096f197d489d86e0e0aa07089a1567122f46",
+    "record_id": "005a0b6328d9ea7549dca325e52ed1561e63982cf982cab123ba382d2041e289",
+    "source_seq_id": 14544553112,
+    "split": "validation"
+  },
+  {
+    "entry_point": "triangle_area",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/71"
+      }
+    ],
+    "problem_group_id": "4d2d2b8a7791fa341bc02073985503ea513cb4b416e9453c24771dacfea06ca5",
+    "record_id": "0e9934501f3d0ab8b9f968947275cf71cb156539566a84d504009c678b7abfa1",
+    "source_seq_id": 7211884040,
+    "split": "validation"
+  },
+  {
+    "entry_point": "largest_divisor",
+    "matches": [
+      {
+        "reason": "same_entry_normalized_assert_candidate",
+        "task_id": "SingleLineInfilling/HumanEval/24"
+      }
+    ],
+    "problem_group_id": "571f457d3950fbaba266b571841e4c0141b89a01de6680ada5e07f6bcecd8557",
+    "record_id": "dbac6a1993986f2a1f400cff1e31f9824b9a3777bd3d1ca927ff5df20b97dc1c",
+    "source_seq_id": 2310677624,
+    "split": "validation"
+  }
+]
