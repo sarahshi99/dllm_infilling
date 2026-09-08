@@ -30,12 +30,16 @@ from experiments.dreamon_markov_head_training import (
     HEAD_SEED,
     MarkovHead,
     aligned_cross_entropy,
+    accumulated_markov_loss,
     atomic_save_checkpoint,
     distribution_loss,
     freeze_module,
     load_checkpoint,
     replay_target_logits,
 )
+
+
+from analysis.markov_head_metrics import clustered_ci, summarize
 
 
 MODEL_REVISION = "8ccc74750e43177327f29dab9e91882ba759e194"
@@ -242,14 +246,21 @@ def batch_metrics(
     kind: str,
     lambda_value: float,
     extended: bool = False,
+    loss_normalizers: tuple[int, int] | None = None,
 ) -> tuple[torch.Tensor, list[dict[str, Any]]]:
     bias = head(batch["previous_token_ids"]).float()
     q_logits = stale_logits.float() + float(lambda_value) * bias
     p_fresh = torch.softmax(fresh_logits.float(), dim=-1)
     q = torch.softmax(q_logits, dim=-1)
-    loss = 0.9 * distribution_loss(q, p_fresh, kind=kind) + 0.1 * aligned_cross_entropy(
-        q_logits, batch["reference_token_ids"], batch["aligned"]
-    )
+    if loss_normalizers is None:
+        loss = 0.9 * distribution_loss(q, p_fresh, kind=kind) + 0.1 * aligned_cross_entropy(
+            q_logits, batch["reference_token_ids"], batch["aligned"]
+        )
+    else:
+        loss = accumulated_markov_loss(
+            q, p_fresh, q_logits, batch["reference_token_ids"], batch["aligned"],
+            kind=kind, total_rows=loss_normalizers[0], total_aligned=loss_normalizers[1],
+        )
     stale = torch.softmax(stale_logits.float(), dim=-1)
     baseline_tv = 0.5 * torch.abs(stale - p_fresh).sum(-1)
     head_tv = 0.5 * torch.abs(q - p_fresh).sum(-1)
@@ -323,58 +334,6 @@ def batch_metrics(
         diagnostics.append(item)
     return loss, diagnostics
 
-
-def clustered_ci(rows: Sequence[Mapping[str, Any]], field: str, *, seed: int, reps: int) -> tuple[float, float, float]:
-    groups: dict[str, list[float]] = defaultdict(list)
-    for row in rows:
-        value = row.get(field)
-        if value is not None:
-            groups[str(row["problem_group_id"])].append(float(value))
-    values = np.asarray([np.mean(items) for items in groups.values()], dtype=np.float64)
-    if not len(values):
-        return float("nan"), float("nan"), float("nan")
-    rng = np.random.default_rng(seed)
-    indexes = rng.integers(0, len(values), size=(reps, len(values)))
-    bootstrap = values[indexes].mean(1)
-    return float(values.mean()), float(np.quantile(bootstrap, 0.025)), float(np.quantile(bootstrap, 0.975))
-
-
-def summarize(rows: Sequence[Mapping[str, Any]], *, bootstrap_reps: int) -> dict[str, Any]:
-    baseline = float(np.mean([row["baseline_tv"] for row in rows]))
-    head = float(np.mean([row["head_tv"] for row in rows]))
-    improvement, low, high = clustered_ci(
-        rows, "tv_improvement", seed=20260901, reps=bootstrap_reps
-    )
-    aligned = [row for row in rows if row["reference_aligned"]]
-    mismatch = [row for row in rows if not row["baseline_top1_agreement"]]
-    stable = [row for row in rows if row["baseline_top1_agreement"]]
-    return {
-        "transitions": len(rows),
-        "problem_groups": len({row["problem_group_id"] for row in rows}),
-        "baseline_raw_tv": baseline,
-        "head_raw_tv": head,
-        "relative_raw_tv_improvement": (baseline - head) / baseline if baseline else 0.0,
-        "cluster_tv_improvement": improvement,
-        "cluster_tv_improvement_ci95_low": low,
-        "cluster_tv_improvement_ci95_high": high,
-        "baseline_top1_agreement": float(np.mean([row["baseline_top1_agreement"] for row in rows])),
-        "head_top1_agreement": float(np.mean([row["head_top1_agreement"] for row in rows])),
-        "mismatch_transitions": len(mismatch),
-        "stable_transitions": len(stable),
-        "mismatch_recovery": (
-            float(np.mean([row["mismatch_recovery"] for row in mismatch])) if mismatch else 0.0
-        ),
-        "stable_corruption": (
-            float(np.mean([row["stable_corruption"] for row in stable])) if stable else 0.0
-        ),
-        "aligned_transitions": len(aligned),
-        "baseline_reference_nll": (
-            float(np.mean([row["baseline_reference_nll"] for row in aligned])) if aligned else None
-        ),
-        "head_reference_nll": (
-            float(np.mean([row["head_reference_nll"] for row in aligned])) if aligned else None
-        ),
-    }
 
 
 def gate(metrics: Mapping[str, Any]) -> tuple[bool, list[str]]:
@@ -480,6 +439,10 @@ def train_phase(
     global_step = 0
     start_epoch = 0
     if last_path.exists():
+        metadata = torch.load(last_path, map_location="cpu", weights_only=False)
+        if metadata.get("extra", {}).get("loss_normalization") != "optimizer_batch_v2":
+            raise RuntimeError("Legacy checkpoint uses microbatch CE; use a new training directory, or the original code to resume that version.")
+        del metadata
         resumed = load_checkpoint(
             last_path, head=head, optimizer=optimizer, scheduler=scheduler
         )
@@ -491,23 +454,27 @@ def train_phase(
         order = list(train_keys)
         random.Random(HEAD_SEED + epoch).shuffle(order)
         optimizer.zero_grad(set_to_none=True)
-        accumulated = 0
         losses = []
-        for start in range(0, len(order), micro_batch):
-            rows = bank.rows(order[start : start + micro_batch])
-            batch = collate(rows, pad_id=int(config.pad_token_id), device=device)
-            stale, fresh = teacher_logits(model, batch, expand_id=int(config.expand_token_id))
-            loss, _ = batch_metrics(stale, fresh, head, batch, kind=kind, lambda_value=1.0)
-            (loss * len(rows) / EFFECTIVE_BATCH).backward()
-            accumulated += len(rows)
-            losses.append(float(loss.item()))
-            if accumulated >= EFFECTIVE_BATCH or start + micro_batch >= len(order):
-                torch.nn.utils.clip_grad_norm_(head.parameters(), CLIP)
-                optimizer.step()
-                optimizer.zero_grad(set_to_none=True)
-                scheduler.step()
-                accumulated = 0
-                global_step += 1
+        for start in range(0, len(order), EFFECTIVE_BATCH):
+            window = bank.rows(order[start : start + EFFECTIVE_BATCH])
+            aligned_count = sum(bool(r["reference_prefix_aligned_through_predecessor"]) for r in window)
+            window_loss = 0.0
+            for offset in range(0, len(window), micro_batch):
+                rows = window[offset : offset + micro_batch]
+                batch = collate(rows, pad_id=int(config.pad_token_id), device=device)
+                stale, fresh = teacher_logits(model, batch, expand_id=int(config.expand_token_id))
+                loss, _ = batch_metrics(
+                    stale, fresh, head, batch, kind=kind, lambda_value=1.0,
+                    loss_normalizers=(len(window), aligned_count),
+                )
+                loss.backward()
+                window_loss += float(loss.item())
+            losses.append(window_loss)
+            torch.nn.utils.clip_grad_norm_(head.parameters(), CLIP)
+            optimizer.step()
+            optimizer.zero_grad(set_to_none=True)
+            scheduler.step()
+            global_step += 1
         validation, _ = evaluate(
             bank,
             validation_keys,
@@ -549,6 +516,7 @@ def train_phase(
                 "phase": phase,
                 "validation": validation,
                 "no_improve": no_improve,
+                "loss_normalization": "optimizer_batch_v2",
             },
         )
         if metric > best_metric:
@@ -568,6 +536,7 @@ def train_phase(
                     "phase": phase,
                     "validation": validation,
                     "no_improve": no_improve,
+                    "loss_normalization": "optimizer_batch_v2",
                 },
             )
         else:

@@ -15,6 +15,7 @@ import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
+from experiments.markov_data_identity import connected_groups, human_index, human_matches
 
 
 SPLIT_SEED = 20260901
@@ -175,6 +176,7 @@ def deduplicate_and_split_records(
     split_seed: int = SPLIT_SEED,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     human_eval = build_humaneval_fingerprints(human_eval_rows)
+    stronger_human_eval = human_index(human_eval_rows)
     exact_seen: dict[str, dict[str, Any]] = {}
     duplicate_count = 0
     invalid_count = 0
@@ -199,6 +201,9 @@ def deduplicate_and_split_records(
             exact_seen[exact_key]["duplicate_source_seq_ids"].append(record["source_seq_id"])
             continue
         contaminated, reason = _contaminated_by_humaneval(record, human_eval)
+        matches = human_matches(record, stronger_human_eval)
+        if matches:
+            contaminated, reason = True, matches[0]["reason"]
         if contaminated:
             contamination_reasons[str(reason)] = contamination_reasons.get(str(reason), 0) + 1
             continue
@@ -207,19 +212,12 @@ def deduplicate_and_split_records(
         exact_seen[exact_key] = record
 
     output: list[dict[str, Any]] = []
-    for record in exact_seen.values():
-        tests_key = _canonical_json(record["testcase"])
-        if tests_key != "[]":
-            problem_material = {
-                "entry_point": record["entry_point"],
-                "testcase": record["testcase"],
-            }
-        else:
-            problem_material = {
-                "entry_point": record["entry_point"],
-                "instruction": record["instruction"],
-            }
-        problem_key = _sha256_text(_canonical_json(problem_material))
+    records = sorted(exact_seen.values(), key=lambda r: r["record_id"])
+    groups = connected_groups(records)
+    for record, representative in zip(records, groups):
+        # Existing record IDs suffice. Never regenerate a completed v1 manifest:
+        # this corrected grouping applies only to newly versioned datasets.
+        problem_key = records[representative]["record_id"]
         record["problem_group_id"] = problem_key
         record["split"] = deterministic_split(problem_key, seed=split_seed)
         output.append(record)
@@ -228,6 +226,7 @@ def deduplicate_and_split_records(
     for record in output:
         split_counts[record["split"]] += 1
     audit = {
+        "grouping_version": "connected_instruction_code_tests_v2",
         "source_rows": len(rows),
         "normalized_duplicate_rows_removed": duplicate_count,
         "invalid_rows_removed": invalid_count,
@@ -343,6 +342,25 @@ def markov_total_loss(
     )
 
 
+def accumulated_markov_loss(
+    q: torch.Tensor, p_fresh: torch.Tensor, q_logits: torch.Tensor,
+    reference_token_ids: torch.Tensor, aligned_mask: torch.Tensor, *,
+    kind: str, total_rows: int, total_aligned: int,
+) -> torch.Tensor:
+    """One microbatch contribution to a whole optimizer-batch mean.
+
+    Distribution and reference losses have different denominators. The latter
+    counts only aligned rows, including across microbatches with zero such rows.
+    """
+    count = int(aligned_mask.bool().sum().item())
+    if total_rows < len(q) or total_aligned < count or total_aligned > total_rows:
+        raise ValueError("invalid optimizer-batch denominators")
+    dist = distribution_loss(q, p_fresh, kind=kind) * (len(q) / total_rows)
+    ce = aligned_cross_entropy(q_logits, reference_token_ids, aligned_mask)
+    ce = ce * (count / total_aligned if total_aligned else 0.0)
+    return 0.9 * dist + 0.1 * ce
+
+
 def replay_target_logits(
     hidden_states: torch.Tensor, lm_head: nn.Module, target_positions: torch.Tensor
 ) -> torch.Tensor:
@@ -436,4 +454,3 @@ def load_checkpoint(
     scheduler.load_state_dict(state["scheduler"])
     _restore_rng_state(state["rng_state"])
     return state
-

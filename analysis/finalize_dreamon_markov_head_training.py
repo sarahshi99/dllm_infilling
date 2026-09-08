@@ -18,6 +18,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from analysis.markov_head_metrics import no_head_summary
 from experiments.dreamon_markov_head_training import freeze_module
 from experiments.train_dreamon_markov_head import (
     ReplayBank,
@@ -68,6 +69,8 @@ def subgroup_rows(rows: Sequence[Mapping[str, Any]], *, policy: str | None, alig
 
 def extended_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     summary = summarize(rows, bootstrap_reps=10000)
+    summary["recovered_count"] = sum(bool(row["mismatch_recovery"]) for row in rows)
+    summary["corrupted_count"] = sum(bool(row["stable_corruption"]) for row in rows)
     aligned = [row for row in rows if row["reference_aligned"]]
     summary.update(
         {
@@ -131,7 +134,8 @@ def update_research_records(
         "status": verdict,
         "winner": winner,
         "result_dir": str(result_dir.relative_to(REPO)),
-        "human_eval_used_for_training": False,
+        "human_eval_used_for_training": None,
+        "human_eval_explicit_training_source": False,
     }
     atomic_json(review_path, review)
     evidence_path = REPO / "docs/paper_agent/evidence_snapshot.json"
@@ -186,6 +190,8 @@ def run(args: argparse.Namespace) -> int:
     external_rows = []
     test_open_count = 0
     if eligible:
+        if list(result_dir.glob("external_test_diagnostics_*.jsonl.gz")):
+            raise RuntimeError("External diagnostics already exist; use analysis/repair_markov_training_reports.py for CPU reanalysis.")
         test_open_count = 1
         config = AutoConfig.from_pretrained(
             Path(args.model_snapshot).resolve(), trust_remote_code=True, local_files_only=True
@@ -236,22 +242,7 @@ def run(args: argparse.Namespace) -> int:
                                 "method": "no_head",
                                 "scope": scope,
                                 "lambda": 0.0,
-                                **{
-                                    **summary,
-                                    "head_raw_tv": summary["baseline_raw_tv"],
-                                    "relative_raw_tv_improvement": 0.0,
-                                    "head_top1_agreement": summary[
-                                        "baseline_top1_agreement"
-                                    ],
-                                    "head_reference_nll": summary[
-                                        "baseline_reference_nll"
-                                    ],
-                                    "head_reference_rank": summary[
-                                        "baseline_reference_rank"
-                                    ],
-                                    "top_p_support_enter_count_mean": 0.0,
-                                    "top_p_support_exit_count_mean": 0.0,
-                                },
+                                **no_head_summary(summary),
                             }
                         )
                         baseline_written.add(scope)
@@ -323,12 +314,14 @@ def run(args: argparse.Namespace) -> int:
     atomic_json(result_dir / "run_config.json", run_config)
     completeness = {
         "status": verdict,
-        "tv_status_present": True,
-        "kl_status_present": True,
+        "tv_status_present": (result_dir / "tv_training_status.json").is_file(),
+        "kl_status_present": (result_dir / "kl_training_status.json").is_file(),
         "test_open_count": test_open_count,
         "test_open_gate_satisfied": bool(eligible) == bool(test_open_count),
         "winner": winner,
-        "missing_required_files": [],
+        "missing_required_files": [name for name in ("tv_training_status.json", "kl_training_status.json", "validation_comparison.csv", "split_manifest.jsonl.zst", "transition_bank_summary.json") if not (result_dir / name).is_file()],
+        "test_open_count_scope": "this invocation only; not a durable lifetime counter",
+        "data_isolation_status": "requires independent source/code overlap audit",
         "reviewer_gate_disabled": True,
         "local_diff_review_required_before_final_push": True,
     }
@@ -341,7 +334,7 @@ def run(args: argparse.Namespace) -> int:
         "- Structural token correction is exactly zero.\n"
         "- TV and KL use the same bank, initialization, optimizer, schedule, batch, seed, GPU, and gates.\n"
         "- TV and KL ran in separate sequential processes.\n"
-        "- No HumanEval outcome or generation was used; HumanEval was decontamination-only.\n"
+        "- HumanEval was not an explicit training source; actual source overlap requires an independent audit.\n"
         "- No full-vocabulary logits were serialized.\n"
         "- Reviewer/subagent gate is disabled by repository policy; local diff review and fresh verification are used.\n",
         encoding="utf-8",
@@ -352,8 +345,8 @@ def run(args: argparse.Namespace) -> int:
 
 1. TV-head 是一个只看刚提交左邻 token 的 rank-256 加性头，用全词表 L1/TV 匹配 fresh DreamOn。
 2. KL-head 结构完全相同，唯一差异是使用正向 KL 匹配 fresh DreamOn。
-3. 数据仅来自 OpenCoder `educational_instruct`；HumanEval 只用于严格去重，没有用于训练、验证、超参数或结果选择。
-4. 两个头从同一个零输出初始化和同一个冻结 transition bank 开始；共同初始化 SHA-256 见 `common_initialization.json`。
+3. 数据仅来自 OpenCoder `educational_instruct`；HumanEval 没有被显式选择作训练集；实际重叠应以独立数据审计为准，不能由旧分组编号不重叠推断严格隔离。
+4. 两个头从同一个零输出初始化和同一个冻结 transition bank 开始；共同初始化记录见 `common_initialization.json`。
 5. TV pilot/full=`{tv['pilot']['passed']}/{bool(tv.get('full') and tv['full']['passed'])}`；KL pilot/full=`{kl['pilot']['passed']}/{bool(kl.get('full') and kl['full']['passed'])}`。
 6. 学习目标是 stale→fresh 的 DreamOn 原始分布变化，不是 HumanEval 正确标签。
 7. 困难 mismatch transition 的 recovery 与总体 TV 改善见 `validation_comparison.csv`。
@@ -361,7 +354,7 @@ def run(args: argparse.Namespace) -> int:
 9. winner=`{winner}`；按验证 raw TV、stable corruption、aligned reference NLL 的预注册顺序决定。
 10. 本轮不自动授权 HumanEval K=2；只有外部训练比较完成后由下一次研究决策决定。
 
-外部测试打开次数：`{test_open_count}`。本报告不声明 HumanEval Pass@1 改善。
+本次脚本调用执行外部测试：`{test_open_count}` 次；这不是跨调用的历史计数。本报告不声明 HumanEval Pass@1 改善。
 """
     (result_dir / "report.zh.md").write_text(report, encoding="utf-8")
     update_research_records(result_dir=result_dir, tv=tv, kl=kl, verdict=verdict, winner=winner)

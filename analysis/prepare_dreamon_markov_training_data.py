@@ -141,6 +141,8 @@ def tokenize_record(record: Mapping[str, Any], tokenizer: Any) -> tuple[dict[str
 def run(args: argparse.Namespace) -> int:
     result_dir = Path(args.result_dir).resolve()
     cache_dir = Path(args.cache_dir).resolve()
+    if (result_dir / "split_manifest.jsonl.zst").exists() or (cache_dir / "prepared_records.jsonl.gz").exists():
+        raise RuntimeError("Existing data are immutable; use new result/cache directories for corrected grouping.")
     result_dir.mkdir(parents=True, exist_ok=True)
     cache_dir.mkdir(parents=True, exist_ok=True)
     dataset = load_dataset(
