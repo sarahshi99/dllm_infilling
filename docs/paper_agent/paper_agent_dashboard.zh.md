@@ -1,5 +1,14 @@
 # Paper Agent Dashboard
 
+<!-- dreamon-markov-v2-training-20260910 -->
+## 2026-09-10 DreamOn Markov v2 运行中
+
+- `prepared_data_reaudit.json` 已通过：OpenCoder `118278`，prepared `106491`，split=`86019/10547/9925`，HumanEval 候选关联组交集 `0`，group 跨 split `0`，逐 token 复算 mismatch `0`。
+- 实现/恢复 commit=`f40241c` 已 push；相关 27 tests 通过。transition bank 在 `dreamon_markov_v2_k2_eval:bank-v2` 使用 H200 GPU0 运行，训练 watcher 在同 session 的 `train-v2` 等待。
+- 自动链：bank exact `200000/20000/20000` → actual-bank audit → TV → KL → validation 选共同 head/λ → 非零 deployable gain 才打开外部分布测试。
+- 2026-09-10T04:59Z：train processed=`858`，selected=`20248`，GPU util约`75%`、ECC=`0`，无 OOM/traceback。
+- K=2 两设计与六组 1033 条评测尚未完成；训练门通过后继续，不把本状态写成实验全部完成。
+
 <!-- markov-training-audit-20260908 -->
 ## 2026-09-08 当前状态：训练完成，协议偏差已确认
 

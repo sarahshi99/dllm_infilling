@@ -1,5 +1,13 @@
 # Paper-Agent Activity Ledger
 
+## 2026-09-10 UTC DreamOn Markov v2 数据复算与 GPU 启动
+
+- 从固定 OpenCoder/HumanEval 源重新计算全部 identity/group/split/tokenization，`prepared_data_reaudit.json` 通过且 `errors=[]`：source/prepared=`118278/106491`，HumanEval candidate/group/record exclusion=`88/39/559`，prepared intersection=`0`，跨 split group=`0`，token mismatch=`0`。
+- 修复 bank 中断恢复的重复喂样风险，增加事务化 record progress；修复训练 patience checkpoint、curve 幂等和诊断原子写入；finalizer 支持 v2 metadata、detached runner 与完整诊断复用。27 tests、py_compile、bash syntax、diff check通过。
+- commits `3ccac69`、`3fcf782`、`f40241c` 已 push 到 `codex/dreamon-markov-k2-eval-v1`。
+- tmux `dreamon_markov_v2_k2_eval`：`bank-v2` 从固定 `3fcf782` 运行 GPU bank；`train-v2` 从固定 `f40241c` 等待并将在 bank audit 后串行 TV/KL/finalize。2026-09-10T04:59Z bank progress=`858 source / 20248 selected`，GPU约75%，ECC=0，无错误。
+- 本节点没有 HumanEval Pass@1 结果；K=2 实现和六组 full evaluation 仍待训练门通过后完成。
+
 ## 2026-09-01 UTC DreamOn Markov-head training v1 launch
 
 - fetched/verified base=`77f0572b1ca4fe031ab6bbf29b3a4d8740f38802`; isolated branch/worktree preserved the dirty user workspace.

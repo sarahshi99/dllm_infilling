@@ -1,5 +1,19 @@
 # Paper Agent Pause Checkpoint
 
+<!-- dreamon-markov-v2-training-20260910 -->
+## 2026-09-10 当前状态：v2 数据复算通过，GPU bank 与训练 watcher 已启动
+
+- 分支/远端：`codex/dreamon-markov-k2-eval-v1@f40241cbb2d8e05217e0ef1db43eb2640cfe409a`，remote 已核对一致。
+- 数据复算：`prepared_data_reaudit.json` 状态 `passed`、`errors=[]`。固定 OpenCoder=`118278`，去重后基准排除前=`117346`，prepared=`106491`；split=`86019/10547/9925`，record/source 主键均唯一，`69516` groups、零跨 split。
+- HumanEval 排除：`1033/164` 变体/基础题，解析失败/组内差异=`0/0`；直接候选 `88`，排除关联组 `39`、记录 `559`；prepared 实际交集 `0`。该检查不证明基础模型预训练未见过 HumanEval。
+- tokenization 复算：全部 `117346` 条重新执行，保留内容逐 token 完全一致，mismatch=`0`；排除=`10846` 条无合法 line middle、`9` 条超过 1024，总计 `10855`，与既有审计一致。
+- 恢复修复：transition reservoir 现按源记录事务提交 `progress`，中断回滚后从精确 next index 恢复；训练 curve epoch 幂等，patience 保存当前 epoch 更新后的值，诊断 gzip 原子替换。相关 `27` tests 通过。
+- GPU bank：tmux=`dreamon_markov_v2_k2_eval:bank-v2`；execution commit=`3fcf7828fcf00e80dc0e19fb4e5b27a6f9f195c0`；PID=`1583582`；DB=`/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/transition_bank.sqlite`；log=`logs/paper_agent/20260910_dreamon_markov_v2_bank.log`。
+- 2026-09-10T04:59Z 健康快照：train source progress=`858`，selected transitions=`20248`；H200 util约`75%`、ECC=`0`，无 traceback/OOM。早期 strata 当前占多数；v1 同构造在处理 train `63457` 条后满足全部 early/middle/late 配额，故继续观察，不据启动阶段比例提前停止。
+- 自动训练链：tmux=`dreamon_markov_v2_k2_eval:train-v2`；execution commit=`f40241c...`；log=`logs/paper_agent/20260910_dreamon_markov_v2_training.log`。bank 完成后自动执行全量 SQLite 成员审计→共同零初始化→microbatch→TV→KL→验证选头/λ→有非零 deployable gain 时外部分布测试。
+- 后续未完成：两个 K=2 推理设计、实现等价性/结构动作测试、六组 1033 条 SingleLine 完整开发/机制评测与统计分析。只有训练门通过才进入完整方法评测。
+- 恢复命令：`tmux attach -t dreamon_markov_v2_k2_eval`；快速状态：`tail -n 80 logs/paper_agent/20260910_dreamon_markov_v2_bank.log` 和 `tail -n 80 logs/paper_agent/20260910_dreamon_markov_v2_training.log`。
+
 <!-- markov-training-audit-20260908 -->
 ## 2026-09-08 当前状态：训练完成，协议偏差已确认
 
