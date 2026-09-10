@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import csv
 import tempfile
 import unittest
 from pathlib import Path
@@ -23,6 +24,7 @@ from experiments.dreamon_markov_head_training import (
     normalize_text,
     replay_target_logits,
 )
+from experiments.train_dreamon_markov_head import advance_early_stopping, append_csv
 
 
 class MarkovDataIsolationTest(unittest.TestCase):
@@ -171,6 +173,23 @@ class MarkovHeadNumericsTest(unittest.TestCase):
 
 
 class MarkovTrainingSafetyTest(unittest.TestCase):
+    def test_curve_append_is_idempotent_for_same_epoch(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "curve.csv"
+            row = {"head": "tv", "phase": "pilot", "epoch": 1, "train_loss": 0.4}
+            append_csv(path, row)
+            append_csv(path, {**row, "train_loss": 0.3})
+            with path.open(newline="", encoding="utf-8") as handle:
+                saved = list(csv.DictReader(handle))
+            self.assertEqual(len(saved), 1)
+            self.assertEqual(saved[0]["train_loss"], "0.4")
+
+    def test_early_stopping_state_saved_after_current_epoch(self) -> None:
+        best, patience, improved = advance_early_stopping(0.2, 0.1, 1)
+        self.assertEqual((best, patience, improved), (0.2, 0, True))
+        best, patience, improved = advance_early_stopping(0.19, best, patience)
+        self.assertEqual((best, patience, improved), (0.2, 1, False))
+
     def test_backbone_is_frozen_and_head_updates(self) -> None:
         torch.manual_seed(5)
         backbone = torch.nn.Sequential(torch.nn.Embedding(13, 6), torch.nn.Linear(6, 13))

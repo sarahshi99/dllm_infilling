@@ -30,6 +30,15 @@
 - success：SQLite 精确达到 train/validation/external=`200000/20000/20000`，每个 policy/stage stratum 达到固定容量，最大每题每策略不超过 16；随后必须执行实际成员审计。
 - pause/kill：CUDA/OOM/ECC、模型/词表/官方源码版本不符、任一 split 配额真实不足、数据主键或坐标断言失败。不得重复采样凑数。
 
+### 2026-09-10 bank 后自动训练链
+
+- action：独立 tmux watcher 等待 bank 完整结束，先做 240000 条 SQLite 全量成员审计；通过后建立共同零初始化、测定 microbatch、依次运行 TV 与 KL，并按既有验证规则决定是否打开一次新的外部分布测试。
+- exact command：`tmux new-window -t dreamon_markov_v2_k2_eval -n train-v2 'bash scripts/manual_continue_dreamon_markov_v2_training_20260910.sh'`。
+- failure isolation：TV 运行错误不会阻止 KL 的一次既定尝试；两个 status 都存在后才 finalize。诊断文件原子写入，恢复时复用完整已有诊断，不重做已完成外部样本。
+- shared protocol：同一 bank、共同 seed=42 零输出初始化、rank=256、lr=3e-4、effective batch=128、最多5轮/patience2；pilot 20000/4000，随后重新从共同初始化开始 full。
+- outputs：服务器 checkpoint root `/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/`；日志 `logs/paper_agent/20260910_dreamon_markov_v2_training.log`。
+- success：实际 bank audit 通过；TV/KL 各完成既定 pilot/full 尝试；若至少一个头有有效非零修正，按 validation 选定一个共同 checkpoint/λ，再执行外部分布测试。两个头都失败则记录负结果，不进入 SingleLine 方法评测。
+
 ## 2026-09-10 当前行动：服务器实际成员核查
 
 - action：只读关联已保存的 transition bank、HumanEval 候选 record_id 与现有验证/外部诊断 sample_key；命令为 `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/audit_markov_bank_membership.py --result-dir analysis_outputs/dreamon_markov_head_training_20260901_v1 --bank-db /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/transition_bank.sqlite`。

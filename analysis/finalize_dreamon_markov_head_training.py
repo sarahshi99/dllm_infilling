@@ -53,9 +53,18 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_diagnostics(path: Path) -> list[dict[str, Any]]:
+    with gzip.open(path, "rt", encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
 def load_best_head(head: Any, checkpoint: Path) -> None:
     state = torch.load(checkpoint, map_location="cpu", weights_only=False)
     head.load_state_dict(state["head"])
+
+
+def eligible_heads(statuses: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    return [kind for kind, status in statuses.items() if status.get("deployable_gain")]
 
 
 def subgroup_rows(rows: Sequence[Mapping[str, Any]], *, policy: str | None, aligned: bool | None):
@@ -103,12 +112,20 @@ def append_once(path: Path, marker: str, text: str) -> None:
 
 
 def update_research_records(
-    *, result_dir: Path, tv: Mapping[str, Any], kl: Mapping[str, Any], verdict: str, winner: str
+    *,
+    result_dir: Path,
+    tv: Mapping[str, Any],
+    kl: Mapping[str, Any],
+    verdict: str,
+    winner: str,
+    run_id: str,
+    run_date_utc: str,
+    result_document: Path,
 ) -> None:
-    marker = "dreamon-markov-head-training-20260901-v1"
+    marker = run_id
     compact = (
         f"<!-- {marker} -->\n"
-        "## 2026-09-01 DreamOn external Markov-head training v1\n\n"
+        f"## {run_date_utc} DreamOn external Markov-head training `{run_id}`\n\n"
         f"Status: `{verdict}`. TV pilot/full=`{tv['pilot']['passed']}/{bool(tv.get('full') and tv['full']['passed'])}`; "
         f"KL pilot/full=`{kl['pilot']['passed']}/{bool(kl.get('full') and kl['full']['passed'])}`; winner=`{winner}`. "
         "This is external OpenCoder training/validation evidence, not a HumanEval method result. "
@@ -123,14 +140,16 @@ def update_research_records(
         "docs/paper_agent/current_action.md",
     ):
         append_once(REPO / relative, marker, compact)
-    result_doc = REPO / "docs/paper_agent/experiments/20260901_dreamon_markov_head_training_result.zh.md"
-    result_doc.write_text(
-        "# DreamOn 外部一阶 Markov 头训练 v1：结果\n\n" + compact.split("\n", 2)[-1] + "\n",
+    result_document.parent.mkdir(parents=True, exist_ok=True)
+    result_document.write_text(
+        f"# DreamOn 外部一阶 Markov 头训练 `{run_id}`：结果\n\n"
+        + compact.split("\n", 2)[-1]
+        + "\n",
         encoding="utf-8",
     )
     review_path = REPO / "docs/paper_agent/review_manifest.latest.json"
     review = load_json(review_path)
-    review["dreamon_markov_head_training_20260901_v1"] = {
+    review[run_id] = {
         "status": verdict,
         "winner": winner,
         "result_dir": str(result_dir.relative_to(REPO)),
@@ -142,7 +161,7 @@ def update_research_records(
     evidence = load_json(evidence_path)
     runs = evidence.setdefault("runs", {})
     if isinstance(runs, dict):
-        runs["dreamon_markov_head_training_20260901_v1"] = {
+        runs[run_id] = {
             "status": verdict,
             "winner": winner,
             "result_dir": str(result_dir.relative_to(REPO)),
@@ -182,15 +201,15 @@ def run(args: argparse.Namespace) -> int:
             )
     write_csv(result_dir / "validation_comparison.csv", validation_rows)
 
-    eligible = [
-        kind
-        for kind, status in statuses.items()
-        if status.get("full") and status["full"]["passed"]
-    ]
+    eligible = eligible_heads(statuses)
     external_rows = []
     test_open_count = 0
+    reused_external_diagnostics = []
     if eligible:
-        if list(result_dir.glob("external_test_diagnostics_*.jsonl.gz")):
+        if (
+            list(result_dir.glob("external_test_diagnostics_*.jsonl.gz"))
+            and not args.resume_existing_external_diagnostics
+        ):
             raise RuntimeError("External diagnostics already exist; use analysis/repair_markov_training_reports.py for CPU reanalysis.")
         test_open_count = 1
         config = AutoConfig.from_pretrained(
@@ -213,20 +232,30 @@ def run(args: argparse.Namespace) -> int:
                 continue
             head = make_head(config, args.device)
             load_best_head(head, Path(checkpoint))
-            metrics, diagnostics = evaluate(
-                bank,
-                keys,
-                model=model,
-                head=head,
-                config=config,
-                micro_batch=micro,
-                kind=kind,
-                lambda_value=float(status["chosen_lambda"]),
-                device=args.device,
-                bootstrap_reps=10000,
-                diagnostic_path=result_dir / f"external_test_diagnostics_{kind}.jsonl.gz",
-                extended=True,
-            )
+            diagnostic_path = result_dir / f"external_test_diagnostics_{kind}.jsonl.gz"
+            if diagnostic_path.exists():
+                diagnostics = load_diagnostics(diagnostic_path)
+                if len(diagnostics) != len(keys):
+                    raise RuntimeError(
+                        f"Existing {kind} external diagnostics are incomplete: "
+                        f"{len(diagnostics)} != {len(keys)}"
+                    )
+                reused_external_diagnostics.append(kind)
+            else:
+                _, diagnostics = evaluate(
+                    bank,
+                    keys,
+                    model=model,
+                    head=head,
+                    config=config,
+                    micro_batch=micro,
+                    kind=kind,
+                    lambda_value=float(status["chosen_lambda"]),
+                    device=args.device,
+                    bootstrap_reps=10000,
+                    diagnostic_path=diagnostic_path,
+                    extended=True,
+                )
             for policy in (None, "confidence_global", "left_to_right_frontier"):
                 for aligned in (None, True):
                     subset = subgroup_rows(diagnostics, policy=policy, aligned=aligned)
@@ -296,9 +325,10 @@ def run(args: argparse.Namespace) -> int:
                 )
     atomic_json(result_dir / "checkpoint_registry.json", checkpoints)
     run_config = {
-        "run_date_utc": "2026-09-01",
-        "branch": "codex/dreamon-markov-head-training-v1",
-        "base_head": "77f0572b1ca4fe031ab6bbf29b3a4d8740f38802",
+        "run_id": args.run_id,
+        "run_date_utc": args.run_date_utc,
+        "branch": args.branch,
+        "base_head": args.base_head,
         "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
         "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
         "dataset_revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
@@ -310,6 +340,7 @@ def run(args: argparse.Namespace) -> int:
         "max_epochs": 5,
         "patience": 2,
         "external_test_open_count": test_open_count,
+        "reused_external_diagnostics": reused_external_diagnostics,
     }
     atomic_json(result_dir / "run_config.json", run_config)
     completeness = {
@@ -321,7 +352,7 @@ def run(args: argparse.Namespace) -> int:
         "winner": winner,
         "missing_required_files": [name for name in ("tv_training_status.json", "kl_training_status.json", "validation_comparison.csv", "split_manifest.jsonl.zst", "transition_bank_summary.json") if not (result_dir / name).is_file()],
         "test_open_count_scope": "this invocation only; not a durable lifetime counter",
-        "data_isolation_status": "requires independent source/code overlap audit",
+        "data_isolation_status": args.data_isolation_status,
         "reviewer_gate_disabled": True,
         "local_diff_review_required_before_final_push": True,
     }
@@ -334,18 +365,18 @@ def run(args: argparse.Namespace) -> int:
         "- Structural token correction is exactly zero.\n"
         "- TV and KL use the same bank, initialization, optimizer, schedule, batch, seed, GPU, and gates.\n"
         "- TV and KL ran in separate sequential processes.\n"
-        "- HumanEval was not an explicit training source; actual source overlap requires an independent audit.\n"
+        f"- {args.data_isolation_note}\n"
         "- No full-vocabulary logits were serialized.\n"
         "- Reviewer/subagent gate is disabled by repository policy; local diff review and fresh verification are used.\n",
         encoding="utf-8",
     )
-    report = f"""# DreamOn 外部一阶 Markov 头训练 v1
+    report = f"""# {args.report_title}
 
 状态：`{verdict}`。
 
 1. TV-head 是一个只看刚提交左邻 token 的 rank-256 加性头，用全词表 L1/TV 匹配 fresh DreamOn。
 2. KL-head 结构完全相同，唯一差异是使用正向 KL 匹配 fresh DreamOn。
-3. 数据仅来自 OpenCoder `educational_instruct`；HumanEval 没有被显式选择作训练集；实际重叠应以独立数据审计为准，不能由旧分组编号不重叠推断严格隔离。
+3. {args.data_isolation_note}
 4. 两个头从同一个零输出初始化和同一个冻结 transition bank 开始；共同初始化记录见 `common_initialization.json`。
 5. TV pilot/full=`{tv['pilot']['passed']}/{bool(tv.get('full') and tv['full']['passed'])}`；KL pilot/full=`{kl['pilot']['passed']}/{bool(kl.get('full') and kl['full']['passed'])}`。
 6. 学习目标是 stale→fresh 的 DreamOn 原始分布变化，不是 HumanEval 正确标签。
@@ -357,7 +388,20 @@ def run(args: argparse.Namespace) -> int:
 本次脚本调用执行外部测试：`{test_open_count}` 次；这不是跨调用的历史计数。本报告不声明 HumanEval Pass@1 改善。
 """
     (result_dir / "report.zh.md").write_text(report, encoding="utf-8")
-    update_research_records(result_dir=result_dir, tv=tv, kl=kl, verdict=verdict, winner=winner)
+    if not args.skip_research_record_updates:
+        result_document = Path(args.result_document)
+        if not result_document.is_absolute():
+            result_document = REPO / result_document
+        update_research_records(
+            result_dir=result_dir,
+            tv=tv,
+            kl=kl,
+            verdict=verdict,
+            winner=winner,
+            run_id=args.run_id,
+            run_date_utc=args.run_date_utc,
+            result_document=result_document,
+        )
     print(json.dumps({"status": verdict, "winner": winner, "test_open_count": test_open_count}))
     return 0
 
@@ -369,6 +413,27 @@ def parser() -> argparse.ArgumentParser:
     parser.add_argument("--model-snapshot", required=True)
     parser.add_argument("--common-training-config", required=True)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument("--run-id", default="dreamon_markov_head_training_20260901_v1")
+    parser.add_argument("--run-date-utc", default="2026-09-01")
+    parser.add_argument("--branch", default="codex/dreamon-markov-head-training-v1")
+    parser.add_argument("--base-head", default="77f0572b1ca4fe031ab6bbf29b3a4d8740f38802")
+    parser.add_argument(
+        "--result-document",
+        default="docs/paper_agent/experiments/20260901_dreamon_markov_head_training_result.zh.md",
+    )
+    parser.add_argument("--report-title", default="DreamOn 外部一阶 Markov 头训练 v1")
+    parser.add_argument(
+        "--data-isolation-status", default="requires independent source/code overlap audit"
+    )
+    parser.add_argument(
+        "--data-isolation-note",
+        default=(
+            "HumanEval was not an explicit training source; actual source overlap requires an "
+            "independent audit."
+        ),
+    )
+    parser.add_argument("--skip-research-record-updates", action="store_true")
+    parser.add_argument("--resume-existing-external-diagnostics", action="store_true")
     return parser
 
 

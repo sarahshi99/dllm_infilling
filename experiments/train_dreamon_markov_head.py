@@ -68,7 +68,13 @@ def atomic_json(path: Path, payload: Any) -> None:
 
 def append_csv(path: Path, row: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    exists = path.exists()
+    exists = path.exists() and path.stat().st_size > 0
+    identity = tuple(str(row.get(key)) for key in ("head", "phase", "epoch"))
+    if exists:
+        with path.open(newline="", encoding="utf-8") as handle:
+            for saved in csv.DictReader(handle):
+                if tuple(str(saved.get(key)) for key in ("head", "phase", "epoch")) == identity:
+                    return
     with path.open("a", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(row), lineterminator="\n")
         if not exists:
@@ -386,9 +392,11 @@ def evaluate(
         rows_out.extend(diagnostics)
     if diagnostic_path is not None:
         diagnostic_path.parent.mkdir(parents=True, exist_ok=True)
-        with gzip.open(diagnostic_path, "wt", encoding="utf-8") as handle:
+        temporary = diagnostic_path.with_suffix(diagnostic_path.suffix + ".tmp")
+        with gzip.open(temporary, "wt", encoding="utf-8") as handle:
             for row in rows_out:
                 handle.write(json.dumps(row, sort_keys=True) + "\n")
+        os.replace(temporary, diagnostic_path)
     return summarize(rows_out, bootstrap_reps=bootstrap_reps), rows_out
 
 
@@ -408,6 +416,14 @@ def load_common(head: MarkovHead, path: Path) -> str:
     state = torch.load(path, map_location="cpu", weights_only=False)
     head.load_state_dict(state["head"])
     return file_sha256(path)
+
+
+def advance_early_stopping(
+    metric: float, best_metric: float, no_improve: int
+) -> tuple[float, int, bool]:
+    if metric > best_metric:
+        return metric, 0, True
+    return best_metric, no_improve + 1, False
 
 
 def train_phase(
@@ -502,26 +518,10 @@ def train_phase(
             "learning_rate": optimizer.param_groups[0]["lr"],
         }
         append_csv(curve_path, curve)
-        atomic_save_checkpoint(
-            last_path,
-            head=head,
-            optimizer=optimizer,
-            scheduler=scheduler,
-            global_step=global_step,
-            epoch=epoch + 1,
-            best_metric=max(best_metric, metric),
-            manifest_version=manifest_version,
-            extra={
-                "kind": kind,
-                "phase": phase,
-                "validation": validation,
-                "no_improve": no_improve,
-                "loss_normalization": "optimizer_batch_v2",
-            },
+        best_metric, no_improve, improved = advance_early_stopping(
+            metric, best_metric, no_improve
         )
-        if metric > best_metric:
-            best_metric = metric
-            no_improve = 0
+        if improved:
             atomic_save_checkpoint(
                 best_path,
                 head=head,
@@ -539,10 +539,25 @@ def train_phase(
                     "loss_normalization": "optimizer_batch_v2",
                 },
             )
-        else:
-            no_improve += 1
-            if no_improve >= PATIENCE:
-                break
+        atomic_save_checkpoint(
+            last_path,
+            head=head,
+            optimizer=optimizer,
+            scheduler=scheduler,
+            global_step=global_step,
+            epoch=epoch + 1,
+            best_metric=best_metric,
+            manifest_version=manifest_version,
+            extra={
+                "kind": kind,
+                "phase": phase,
+                "validation": validation,
+                "no_improve": no_improve,
+                "loss_normalization": "optimizer_batch_v2",
+            },
+        )
+        if not improved and no_improve >= PATIENCE:
+            break
     load_checkpoint(best_path, head=head, optimizer=optimizer, scheduler=scheduler)
     final_validation, _ = evaluate(
         bank,
