@@ -1,0 +1,47 @@
+{
+  "available_rows_after_filters": 117346,
+  "config_vocab_size": 152064,
+  "cross_split_problem_groups": 0,
+  "eos_token_id": 151643,
+  "expand_token_id": 151667,
+  "grouping_version": "connected_instruction_code_tests_v2",
+  "humaneval_base_tasks": 164,
+  "humaneval_decontaminated_rows": 559,
+  "humaneval_decontamination_reasons": {
+    "code_ast_no_doc_entry_normalized": 2,
+    "response_code_ast_no_doc_entry_normalized": 2,
+    "same_entry_normalized_assert_candidate": 86
+  },
+  "humaneval_direct_candidate_rows": 88,
+  "humaneval_excluded_groups": 39,
+  "humaneval_variant_consistency": {
+    "base_tasks": 164,
+    "inconsistent_base_tasks": [],
+    "parse_failures": [],
+    "variants": 1033
+  },
+  "invalid_rows_removed": 0,
+  "mask_token_id": 151666,
+  "model_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "normalized_duplicate_rows_removed": 373,
+  "problem_group_count": 75484,
+  "source_rows": 118278,
+  "split_counts": {
+    "external_test": 10879,
+    "train": 94896,
+    "validation": 11571
+  },
+  "split_seed": 20260901,
+  "tokenization_exclusions": {
+    "context_over_1024": 9,
+    "split_or_tokenize:ValueError": 10846
+  },
+  "tokenized_available_rows": 106491,
+  "tokenized_split_counts": {
+    "external_test": 9925,
+    "train": 86019,
+    "validation": 10547
+  },
+  "tokenizer_class": "Qwen2TokenizerFast",
+  "tokenizer_length": 151668
+}

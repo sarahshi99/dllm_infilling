@@ -164,6 +164,17 @@ def run(args: argparse.Namespace) -> int:
         human_eval_rows=human_eval_rows,
         split_seed=int(args.split_seed),
     )
+    exclusion_details = audit.pop("humaneval_exclusion_details")
+    atomic_json(
+        result_dir / "humaneval_exclusion_audit.json",
+        {
+            "matching_policy": "existing_conservative_text_ast_and_same_entry_assert_candidates",
+            "excluded_groups": len(exclusion_details),
+            "excluded_group_records": sum(len(row["member_record_ids"]) for row in exclusion_details),
+            "groups": exclusion_details,
+            "scope_note": "Conservative benchmark exclusion; candidate membership is not a claim of copying.",
+        },
+    )
     tokenizer = AutoTokenizer.from_pretrained(
         Path(args.model_snapshot).resolve(),
         trust_remote_code=True,
@@ -266,6 +277,7 @@ def run(args: argparse.Namespace) -> int:
         "local_prepared_records": str(local_records),
         "local_prepared_records_size": local_records.stat().st_size,
         "human_eval_usage": "strict decontamination only; no labels, results, or tuning",
+        "human_eval_exclusion_audit": "humaneval_exclusion_audit.json",
     }
     atomic_json(result_dir / "data_manifest_summary.json", summary)
     atomic_json(

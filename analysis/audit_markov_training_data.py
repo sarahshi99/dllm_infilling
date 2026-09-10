@@ -125,6 +125,7 @@ def run(args):
         "conservative_cross_split_rows": sum(map(len, cross_components)),
         "sensitivity_excluded_old_problem_groups": len(excluded),
         "humaneval_base_tasks": human["base_tasks"],
+        "humaneval_variant_consistency": human["variant_consistency"],
         "humaneval_candidate_records": len(candidates),
         "humaneval_candidates_by_split": dict(Counter(r["split"] for r in candidates)),
         "response_code_differs_from_code_field": response_diff,

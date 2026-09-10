@@ -1,0 +1,2725 @@
+{
+  "excluded_group_records": 559,
+  "excluded_groups": 39,
+  "groups": [
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/57"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "005a0b6328d9ea7549dca325e52ed1561e63982cf982cab123ba382d2041e289",
+          "source_seq_id": 14544553112
+        }
+      ],
+      "member_record_ids": [
+        "005a0b6328d9ea7549dca325e52ed1561e63982cf982cab123ba382d2041e289"
+      ],
+      "member_source_seq_ids": [
+        14544553112
+      ],
+      "problem_group_id": "005a0b6328d9ea7549dca325e52ed1561e63982cf982cab123ba382d2041e289"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/25"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "723090049ed7599b3f4c926d2c7f2ac6dc31052922a6097bdf49ce746bdaaeb1",
+          "source_seq_id": 23520926667
+        }
+      ],
+      "member_record_ids": [
+        "00ea428f802604e42c17f750fdbf1d083bf87e4ee847e68726fe006d1b741428",
+        "02d3e6c51787a264f253d26983b99679f4fa8db1ab976401e910833b651c8039",
+        "0c4e220634c0525e48ea05d34eb5c5020856a8025a604a4e15a13406ee91d839",
+        "16f79e0883993835e1ec0cbd5da69f403c44de809d826af3f80dbf770e50a65d",
+        "175d97498d25f9e8156126b14cd050b3006a106b1b2cadc6ffeacf372b72ee8b",
+        "23d94ddb75dc20a00fbfccfa128a78e5be8291389e31f0d91a77ddaa1e998227",
+        "3619563ae27b1e39fdbdc7cfb54daa9be54d706652d364787967792c2af4d167",
+        "36478f29bd5ba5234764827babe54a6f39fdba572c8609b8e42b77e646ac0ab4",
+        "3de24aa858392516e2aca5b50dac0da86d1484317420eefb2f8502a78782c858",
+        "40777438f968251691f5a0b657c148e5687635c59318ed5bbc5011b38d839ba9",
+        "53418ec9fc72d26ecd40d1e82b6b98c234fb4ffa7ef22a2a037385a0a34784fa",
+        "6017df8cae0f6d33db6a66b1bfe61b73a135202419e939f9fa3417900e8e4d31",
+        "6111f22af6df4df7c6c9747408b98dae6768547d104881f1a8af1810bbba0e99",
+        "63c18417a32e191a48f308a3b9b8a221736bd1a4d86e01a893d12e66c9df226d",
+        "6519b3e7eeea29d987750b85b7f5ebba623cee43382d71bbcacae436edfaa2da",
+        "6f36bce686123143ef00d3a230315165663a29f7f1979e4a037076cc01c7b9e3",
+        "723090049ed7599b3f4c926d2c7f2ac6dc31052922a6097bdf49ce746bdaaeb1",
+        "73ba68b3dbb7a25c1269c594e61382a30b3b501bd111f34d7e7428f009617371",
+        "821234dd5462df547537fbaf8e85ca95529bac881c6b9121e6032657fcea4860",
+        "8bb002926873b21b3b360c9a9381cf4731a784561747e66ec4ad83084d3955d7",
+        "9b8fcc6f636ae40e1f8215518ec9099010446888b1771df6577359378a3bb17b",
+        "9c01c0ed8819df9d106a8f6db8b9f4745da7c6e194a174b1b33008c2427c405f",
+        "9ef46acd49133bb1bbf5f81f155fcc9987b7aa39c820f0152b866e8492836755",
+        "a74b7486cbf58875e85c674f724d10c1c0a1da47e00d108cd52f5c8d53a0b74c",
+        "bd41bb07ad44f991397b125e5602bc2f04b4f5343d0c9e69e7da6b5ec7bf782a",
+        "cc8db47b072b8a78fdc12a5924bb2e7347508d95a7d7c4c59a3fb033431dcbce",
+        "ccfe0a330eff9706153ba7943a98136b9172a06146986d8f7b01fe178e49e0c7",
+        "d3628e4da1924abdccb0828015f245160a102b7528e63906e2ee8b17f83dee96",
+        "d55a00aedaebfd7a0ddb50827071e57c4b8fa75b55981186a29ba129eb457f8b",
+        "e4f671580659ba551fafe1e90a0d66f41d7ba136ad9cb7539e1d1deca4661bd2",
+        "e7762df37aff50f44e907d349a92a2a82997eebf4df8c7d99ba701712b5df878",
+        "e95b7e25d71645e0ec36b98f583997a3ffa76427f4f03c5a6602d3ad2bf31e71",
+        "f766d7a287438bf05c3450cc556d7d63ad895b703efa19399e7f5a341359868d",
+        "fcd81bfe5247d25cf2451be25d99a9b8304177b0270f53c994fe6525b046ac66"
+      ],
+      "member_source_seq_ids": [
+        70991380298,
+        28338530282,
+        33742092895,
+        7710149216,
+        8347487441,
+        1642301988,
+        39620200473,
+        24156520041,
+        30362942074,
+        28247664667,
+        41956224783,
+        22300323337,
+        18498875059,
+        2614743088,
+        16969623151,
+        31476085028,
+        23520926667,
+        36035004751,
+        40214957796,
+        4021649030,
+        29539399653,
+        21697465781,
+        70676322697,
+        22548103523,
+        30414688168,
+        657253125,
+        70576361707,
+        24857790519,
+        3998672016,
+        71483630199,
+        42082907762,
+        36343632941,
+        20603542093,
+        19952161319
+      ],
+      "problem_group_id": "00ea428f802604e42c17f750fdbf1d083bf87e4ee847e68726fe006d1b741428"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "2ccef67ea34a54e1e9a024123344f0ef2bff9e4cc99d7c06d048d5f73279796d",
+          "source_seq_id": 7834644810
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "48d4c72cdf4f2c9be25919ea55aac00dfcdfe17f663a7e852b372f89eceb54a9",
+          "source_seq_id": 27551285275
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "4a4971a65f5789e8b8c5099d13c762754244229c6f31c066d4f8403a03825f27",
+          "source_seq_id": 15355901648
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "6257208ef2f42e6a7e9a87235bbde3c5df1b981d0f66e85e64a44d6c502aafe3",
+          "source_seq_id": 10786949275
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "8a3a3b8bcbb5950b0d7fe0130c0a04e84a872cbaacfe4abc9b0f9b8c3317e358",
+          "source_seq_id": 70095545909
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "9c71d0cf040578ffc3d6605da9f26789ab6678484e774c590e59de21d3a3e373",
+          "source_seq_id": 40123925310
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b10f464f544160290a4d8c3edb62f04f13210ddd6944f3a7dccec9fdd0186a02",
+          "source_seq_id": 27046075887
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "da97a99077fcff8dc4a826dd72c342ee111123525771bd7727ace599c6d52925",
+          "source_seq_id": 41699161798
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/31"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "eabd52d97eea28a46a2170df51cc183e86079bdad08a757ac697fc25deded744",
+          "source_seq_id": 26380386972
+        }
+      ],
+      "member_record_ids": [
+        "01315753804bf89d9e0d909c18f4e6c3a4f05f4a0cb157fbaa09f3335c426d83",
+        "0525b7ad02db7cfa18816b7838979ad1832d895814237fc216dfcb07e64263de",
+        "06ade10fb2f8fa3ed40dad6381c685eb0eb451f235d70d1be7249174c56ec99e",
+        "103e369c6d2c7de06e8108c6adafd49f73eeb99c52619931704255c847b3f9fc",
+        "1456765899acb057fcd2c32389c507fa7accc3908d765bf2a27de2f3184576d2",
+        "19ea93298e168316f9d7ee9577bae51a323b6fda04cea0ae38832f3c62ee91ca",
+        "1a3fc167cc17b38972e8d9e25789735cc4d92e377c84e7044dc7b6360e5e7c92",
+        "235b7bc99a5949dd53751335f6f8555c8d97d57e1f82688ee864fc1ea2f5b918",
+        "271d8249da22243dd939f7a068b45d3c4ca688eed6d53c4ee1d081a43a4d3737",
+        "2b7e08d319ed1f14163c08d7e7e8b3e21607ff35d270f4a833b6e07deb35d998",
+        "2c02cb45a921b4499d400cd47c4c4734d952c2d63d8c884bfd4526a335b71e74",
+        "2ccef67ea34a54e1e9a024123344f0ef2bff9e4cc99d7c06d048d5f73279796d",
+        "2ee137f6a2e560968de75bcdacdbae0a6805cfc4b14636f1abb7274abd3740c6",
+        "3cb6e78d3de17eb4468257f80011b679dd5d4bf3deec0a8eebcb5ddca117f45a",
+        "40b5043a24fba9e60532f347715ad226a4256fc3107ea7a4232d483cb31de30a",
+        "47a35db821b48df25f9861e0656dc8d21cbd1021fef68ec4ba0f8344329b9639",
+        "48d4c72cdf4f2c9be25919ea55aac00dfcdfe17f663a7e852b372f89eceb54a9",
+        "4a4971a65f5789e8b8c5099d13c762754244229c6f31c066d4f8403a03825f27",
+        "4eb97ab547dd27d5ff8c4e05b99f10dc2affe9578f069d7b90b60609061697e3",
+        "5473990543b39330337c273d6a6e0e88a5f4c910d6f44035cc191f9011fa196b",
+        "561130b88be2af13d7683b47fa8206fbe67d9d6d37f42a914b041d55e8373c0a",
+        "5988f55b91febe880eb1295a2d6139e187a00c17e52ed21daeceb599d48b2d73",
+        "5ab071d05cd4734a2ff70d20586883b2582082c989d88edcc72093aeacf33927",
+        "5eadd22d057dbcca9fbb3fe8942f4d8632575e8de0db1f41fa4b33460aa51848",
+        "6257208ef2f42e6a7e9a87235bbde3c5df1b981d0f66e85e64a44d6c502aafe3",
+        "631a43c14bbed6f2ad4aef14fb52de5dc8a500ab54a818a9ea81f9bbd87d7eb6",
+        "66f57b2c784cd0aa14bc3c50d1dc612a38d520307409bce3d88657654baa7537",
+        "757a369f09d3082105f6697971bb3d2566696a037104c3ede3b9e5e3638cb185",
+        "78e7be66921f496b4cd2da3347a32b8c070ceed5bb93a98acb9819ab2715b8ac",
+        "7a32f29e9a52e7ab17eee427d2bca33b3ae969626793f9038cdf6248176b568a",
+        "7f597a397565f342c5353475208f7d0abd30d74d7a2de092074f4afe07550cce",
+        "7f95e138f25a5957a660d79305c62d895cebbe8ed422ece771c24e35ffc63df7",
+        "807c6ce3d43d54821abf3db19c289ca217c53c6fb1bfea13d21e1b7dd29a6211",
+        "8a3a3b8bcbb5950b0d7fe0130c0a04e84a872cbaacfe4abc9b0f9b8c3317e358",
+        "8a8b0536fcd3c09e1939e1ed531c3ca0ab2ee5d3be913eb869f59f946b8a49f0",
+        "8dcf894b08c307866104672a3ae7200fda429d78cea9b093a094be4d52044862",
+        "8e08cd6e0dc4be9e4df4385af71d6e3f4ff92464150fd49310920aaeda0ac974",
+        "8e70e7bfa9214df14625302735a545edbed8dcbaf37702f6357b58e4087e1413",
+        "8eebb74cf21c9d1288693bdfbe857ff53681211f6354b04bb9d4403db398a051",
+        "8fa56d2d5149d909a9ac539753cd5f3442e43fb742ba0e11fab60f2da533e148",
+        "95cef5b3e943f8ea1ea7b2fb1d9f2571654d4afb64b7f979247f45b683bdc5f4",
+        "9761f3e28762d5c78b4ecd42592fe7b5846275456bcd6c0f2b968316b83c3f16",
+        "97d8b62a5e04b3a004659a7aebe88e87836776f5f4317b7227705a2f3a760a21",
+        "9acfde075670fbcc333db6f95d870a2da82e72aabb9189b9b46203b2b5142121",
+        "9b00c8ee87138c8e5ff7a38cb5e2d87d6f9e2e895710d0ed1d4ffac6a1fe9393",
+        "9c71d0cf040578ffc3d6605da9f26789ab6678484e774c590e59de21d3a3e373",
+        "9d2bc09c943c87c17c4cc00123caa0c02d76a49fed6064f195fc12f69c8a2935",
+        "9e6fb25bbbb921274a62b7466c3ae4eaa25270d879e3ecf052493e5eb040f3b5",
+        "a03cbee399df79789def2f20339f723665b6be6359b509b43ea5c4c7fe613ec6",
+        "a35cf699d03b91cf7567a3bda1e0deb666a2e70c6ef736649582e7e8ec1f6600",
+        "ac697cf6735b6f63a43d1b8118e7e6006f9d3b4beb6f6469c2191d422e52d937",
+        "af21d295a98a6ff0eb67edce904a8450c100872633ac3b038d69d29ab8cd16ce",
+        "b0a6ea27b56f280a5eb5b902ecd779c0d0d5c06ae706ffd86bc9f9e0354c33fd",
+        "b10f464f544160290a4d8c3edb62f04f13210ddd6944f3a7dccec9fdd0186a02",
+        "b1eabeabd457481ed5aa4c08b6bd75d720d6098468b7ef5d865b2a70d4b33b08",
+        "b90f41178ed2f6755967d22d3af038f0ade302a3c24cd00c3ab0009232ec45a1",
+        "c85e9280babaa2d16c2b0bb87f34f8d2ad082bf1bc7ae6e6753085c34002c122",
+        "cb77012e39fc1722d42cc83c5b200ba84deca4a5db57dcab89749f3028e4c3fb",
+        "ccb9101f7e936964f8f1fedf341e90f59c013594908ebd65749e3060ca54a725",
+        "cd208b25230d0c03ef05e8f887dbf33f3570be519157f7941387fbf05e55365e",
+        "d80292ed32cc0e45e2133f00d6bbe04b59629b6bba3ca3fc3c850736465f4b4c",
+        "d8b5afd098322c683d3c3de9510cc15fe886323cb2b798862fca0cbb2654a208",
+        "da97a99077fcff8dc4a826dd72c342ee111123525771bd7727ace599c6d52925",
+        "dad5f9921f8f64e9e75bd17613af54e1024572325b2538c0a6c937e87cd18665",
+        "e359a6bff0f2fe153ca9c8fdb7616dec87e3d4c8efe2f92cb0100c49445018ca",
+        "e6ac9833dd1f5fdd861e64c08b8b9f65bc462a2b8ba82f982c2b00f26ebf8285",
+        "e9acfdb6c37b39b650bba79278bf3b43ffec8cd8edc813faa3d4060894ee697a",
+        "ea081553ee0a791d41a9977dbcbc47a622a8502e4e8d053bf7166ed2bebd38cf",
+        "eabd52d97eea28a46a2170df51cc183e86079bdad08a757ac697fc25deded744",
+        "f8813adae40cbc54777211c4a7d82cbb08cf462e52af53450f6de013686c1a7c",
+        "f8ab6b173a38e7c0338111d7f259f987bfe61a55069bc2cac9da088db81fdd84"
+      ],
+      "member_source_seq_ids": [
+        29336502894,
+        7899988392,
+        15185423162,
+        70704957862,
+        18113843330,
+        6726390120,
+        73679527975,
+        72565163714,
+        29467857227,
+        30615162795,
+        32322821394,
+        7834644810,
+        1699482273,
+        35602787597,
+        7244494343,
+        18856693658,
+        27551285275,
+        15355901648,
+        36458936465,
+        70512456389,
+        8509412785,
+        72183193401,
+        70175378217,
+        30574680882,
+        10786949275,
+        18274710375,
+        40040726365,
+        23011357382,
+        71840502362,
+        17225659548,
+        27880299803,
+        23986493408,
+        36528433280,
+        70095545909,
+        21221987737,
+        34687039144,
+        40439218434,
+        31224532653,
+        32421623651,
+        22633456924,
+        4837236915,
+        2867440924,
+        21128744822,
+        31329913402,
+        74376864750,
+        40123925310,
+        11190049223,
+        10738886676,
+        72056499766,
+        477575833,
+        20940844092,
+        35552662791,
+        7529181285,
+        27046075887,
+        74587086301,
+        70903462695,
+        30331934091,
+        30021936756,
+        4280680296,
+        31005112027,
+        3984953022,
+        33835798630,
+        41699161798,
+        11114076242,
+        36694485061,
+        26627825829,
+        1789495478,
+        9869406798,
+        26380386972,
+        27570226270,
+        40791588167
+      ],
+      "problem_group_id": "01315753804bf89d9e0d909c18f4e6c3a4f05f4a0cb157fbaa09f3335c426d83"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [
+            42879327594
+          ],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "391f7519ef18169056b287e83e24860bb91d8f62782c18bb0f010137e39e47f6",
+          "source_seq_id": 38729778845
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "3e9e76f9954c2767669b8c0b1d35f5604deb771365190437d61fd2d8ed819637",
+          "source_seq_id": 38425776551
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "400f1cbc5343e09f92a7d57dcf787b0e41b4f1bdd7ee4f861bb8cfb1caa650fc",
+          "source_seq_id": 5809004561
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "74a17bc2435819f07cb1f9e614ed8f2054836376c74d765572456203626fe26b",
+          "source_seq_id": 3707981004
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "c5c830929c13f928e8ed2250da6ee465e2e172b37b10ab0c281121b14432342d",
+          "source_seq_id": 71656100156
+        },
+        {
+          "duplicate_source_seq_ids": [
+            25564655670,
+            32430299812,
+            72077039224
+          ],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/59"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "cd2ecfdb1eaf646d83a3761bcab2d3c04b55f7eea9b0f591a15ca8aa1fa8009e",
+          "source_seq_id": 27238756137
+        }
+      ],
+      "member_record_ids": [
+        "0136aff93abc3199df0a1ddbd7582bfc35e2570feb1aaafe474887f4133b5c76",
+        "07b8b78d104423f0f0f6a255a9b5ce73808c50fda7b369ce0bebad77adecac53",
+        "0d30b4f110e3e211a27ec76644df69b30ba9c7043fb60c9bf246731a1bd27049",
+        "0d710de412ddbfa14aa1d5508bca7835535f475e6afd5e532f562220e6fc9996",
+        "130d2252199526e958fcc8c8295580a1c89f8252983c8b3cb75fbc47763bbcc7",
+        "17e3b01d557ec0c4d8f6298643c6e12b102ee53745dadca903050ed5ba9bcb4c",
+        "2363dadd5948d9d057dcc116dd1377d110873cf6a96fb95790daf75ccb12aa39",
+        "2fb286143c33408ff8b77dcb2235a3083d1f1ceeb085d50d60ca4cd7dcd3f2e2",
+        "310041bc4df9464a5f8d03ad22f139cdce3b3be0fd9dcb344fb1553ece3e6198",
+        "317fbd7afa6a9142bfbbeb60de46cf6bc4f5033861f616b284343c72c594a671",
+        "391f7519ef18169056b287e83e24860bb91d8f62782c18bb0f010137e39e47f6",
+        "3a80ab0742a5c0fe2d63fb29350a4e2694c6027af70b2dbe5c9b712022c17788",
+        "3e9e76f9954c2767669b8c0b1d35f5604deb771365190437d61fd2d8ed819637",
+        "400f1cbc5343e09f92a7d57dcf787b0e41b4f1bdd7ee4f861bb8cfb1caa650fc",
+        "405bc20219dce1cbeb74127c541dc58c111b373e03a7db936c904e9e1fd12521",
+        "4c7c35f490f874d218fe5f2ab1185031e23e694d386579fe48211f3c0b6ac6fe",
+        "4d45e40d8995a80f92a1ecdbada047f7e12be8e4205b255fa5618400c38939fb",
+        "500aac6c5e37447c45359da647152bc7da73b8daf398d396114d417a15b1b334",
+        "5199cd798ff5ff6030835e4b617bccec51aafb609334d7cd72e4cf3bbe60a153",
+        "52147d6f0c56e643283e25ef282fee61052fb79d3aa43dec5ec5a6782c69aa7a",
+        "5214e108213420dc33a7f083333403955d6a91f3c92fc9f5cfc3a0abbb426a5c",
+        "536de3d6590cd2b41c251f65b276821c0c1776a35c07c38c778708b3a90a1294",
+        "58cb993e02702a14575c2022b10042d04c126c3e8d5b831ef2507fb8f42e34d8",
+        "5a62995a2d53d41c92638396b32d046df8bb6f3e2d3d6ae9b01240568ef635d0",
+        "65caf922483090e26f923870e9197bcd61a86452ca4f025353fc21441cc31dc3",
+        "68f67f49949552995cb33318472dffd77b3c103a6196b2ec5a82397f6298f81a",
+        "6b7e4b61c56a429d7ee34bb12548b43dcacbdeb387c6f22653446e2fb7515498",
+        "6e8cf73783377efa9b421813f26faaf7d294191e240491a4130592747893f1df",
+        "74a17bc2435819f07cb1f9e614ed8f2054836376c74d765572456203626fe26b",
+        "77b740f0a534d5dacd5712462bf87472f5b1c2225067ed69dc822b16a906aabe",
+        "7a87e015edcc2b46e9c40184483de1f2df32444c9e9d99bb1466fbf40add79ab",
+        "81263124f6a01107a1894ac848b5db9f338b7a4b09f3af7bd23f2a3fcbd11de3",
+        "86f2915fccb37ae4c20d0171427044d774c42a41d6f03ce204ed3f275e3a312e",
+        "8ffae848781a5ae268b360e2cf7f8b6bc0e171a89b7e05a87541089fca73603b",
+        "92b70f0439153df5f708acf170f631ef2d1242be6f3a79725021e3f64fc6f7a0",
+        "933cde96baf6a0703ee31e2dfdcb73cb01321c5efeca79c69257917f8061862d",
+        "989e4267e758b65ebd313c0a1d5478c8f07998a39c66a6628d621db17ae95745",
+        "9c165862214a244661f57a267dcab416184ccf5b3a60662412e8ba549eda72f2",
+        "a4b05e313c903ec121d05f97be4ca378e91ac22b9936fb1b6473cc18ac2d3c70",
+        "ac9c51d7c91b8cb41a2afe993f0a9b7d9e4b036b0b4361b04962f7988d13555a",
+        "b9adb70100108ddceec602925c8c6bcf285b37e2cad1db5403e451adbc9f8e90",
+        "c5c830929c13f928e8ed2250da6ee465e2e172b37b10ab0c281121b14432342d",
+        "c6e7bac632a6d698f5e4e1991f852ab5dd6e9d13bb3e0bbfc552953630ea22b7",
+        "cbd138de0292844d133dff1ff99416c73ecf464996d1bab85d50b5a707993f91",
+        "cd2ecfdb1eaf646d83a3761bcab2d3c04b55f7eea9b0f591a15ca8aa1fa8009e",
+        "cfc36701e141d28fe1c69abc1b447e7b36462f7b2688fbf2403d1fae03ddf8a8",
+        "e6e7a12cf3aee48c5c382cb26197876f6dcf432f87f2a4dc54404918398361b5",
+        "e72afed51c2f734d8b6e87f58e8bd6daf6868fe027a76473a6ca77e44fed6e6c",
+        "ee7b18f6c0dbead607df9e06c7742642cce792e967fb76a9cf86bf5a7fb4c741",
+        "f29519e1dcdc541635c05cddb0aa606d8aef45d227efa2d59ef88417d2db49a0",
+        "fa8bb6cb747bae8a85aae3e215d97ca8ee2cd7219d489f06c3bca6f61d24fb4e"
+      ],
+      "member_source_seq_ids": [
+        33198113221,
+        17120793405,
+        29863765334,
+        32608063537,
+        10926318864,
+        41628792348,
+        24917964939,
+        29336067911,
+        38208891609,
+        40876839492,
+        38729778845,
+        71602268156,
+        38425776551,
+        5809004561,
+        22817824906,
+        36480937375,
+        30913525535,
+        34328120678,
+        14359819590,
+        33813023942,
+        38226393660,
+        30502539652,
+        39484168508,
+        14396856980,
+        73348316823,
+        21109033876,
+        13332816570,
+        71224119244,
+        3707981004,
+        30131378643,
+        16998748945,
+        15774054918,
+        38385124451,
+        13383604979,
+        34388381205,
+        23541822773,
+        11620815546,
+        382847558,
+        36706906106,
+        42933146259,
+        11097047424,
+        71656100156,
+        33149135825,
+        10105629201,
+        27238756137,
+        39830159440,
+        33731261579,
+        7054986184,
+        22853261896,
+        73087829505,
+        24333631016
+      ],
+      "problem_group_id": "0136aff93abc3199df0a1ddbd7582bfc35e2570feb1aaafe474887f4133b5c76"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "21b83edb27648c3dbdd93a5e1821fc4f39c9e09f9b9b035070adb7c05b0da1c3",
+          "source_seq_id": 19999085879
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "2988daed85cfb2f48d982c6557bfec00174f078a706fbdfcc811f69aa1068987",
+          "source_seq_id": 17271706636
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "317377f95e4acf6207aa6a726ee665f9bd2be4725d13e2c95552f1732f0c60ce",
+          "source_seq_id": 6785163060
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "3b90a7942bd7267d3f4a76f0fa62789ee8e4c951b7b4e98fc95d0b55b0cd3ff8",
+          "source_seq_id": 72685980157
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "7aae91eeb711d9c9276cae193715b8af3161d45da360961d559e1c343858c2c4",
+          "source_seq_id": 24814236753
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "adceae0b803fdd0eb62b046cc3fdeaecbda0e3b87e0c8d00ff5a9ea40f971152",
+          "source_seq_id": 21821002999
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b5876043e154f99c68b92b6f2504cf68594a8fe8f9e88657c497b3dbc9452883",
+          "source_seq_id": 10565970549
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "cf0dbd010bcafded0674acf0b2fb013b79aaa6823ad3b3b09c50467707872d9f",
+          "source_seq_id": 1184882124
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "da94a511a2ffa094a06409d97c1d1385165706c0a06d875f95cea4c6919e1d2f",
+          "source_seq_id": 1233790387
+        }
+      ],
+      "member_record_ids": [
+        "017988dbbcc44256ae7b63c2a0b05435dfa2244c8d54853c0470c2689a2148f1",
+        "022bfdceae24b38813234a8b5f02f7cca72c9afedf6c95b52e49cd52e990b0ee",
+        "03c6ef3cdfe2f3715e1b389673b67164cd8d7b4f892f0715140079a83a555741",
+        "052f45bd7d39c6cf34eea33f207053636103d9daf14b3d1a4eb829dd46548200",
+        "05e4da1408aef7f3fec3292359431fd15fb3922eb81e2425ca44d7572ad817f9",
+        "06a9303eeb1f8fef637c13af3b4ecd7142379dcf94dbde71b93d7f749905604a",
+        "0b370588dd42a84cc673cfe559ac97a45350d2ed6806fd47ddd6f8ae779975c2",
+        "0b99ceba36a991ff7c9067f01fa8ea690a1331740d7a1a95fb24b35242921375",
+        "0cf80a3aad75ce4a28960fbb78d6f41c5faeca02949a9c3d8d1092555009767e",
+        "0df57c7aa90383fab934ab3ff80c33132854f0f5d311434906670163996c2513",
+        "0fea4b9d68aad8d59ba7fadfa4dd138377b1ee2c6aed15c694f33d09d7061068",
+        "1120a28fda577d6c6594c7ea511e3075f57cf9f9859c790b4666bebc348fc52c",
+        "145eea7939d76408f079e4b992579ea08c02c0ab6c2409befbb9a76857ae5bef",
+        "173680c784dbe31983cb3f1e15de20db94326be239c44cc782a06c26ba6eb1e3",
+        "181703d1541ce2b8525877ee2cf4efe831daf003102c429af76f28886f5c57e4",
+        "18888c9f894f15695e39a8798c8611b7653caa80e943551c7421d4f0e05da172",
+        "190224bf447608ea95acd8f8fd14d5ccc95948f513a70625e0cbaca1d067daef",
+        "197fccca0f3a536d07fccd7e26c66e49be2614db5b42d5b4f3f7d4681bf9dc8b",
+        "1b304512249bbe3a573eeeb2d17f2cf8f3cfebd6c3e700f01f4d799a2493b82b",
+        "1f7d7ba3854e8761d6943aeb3cb13d6d6d6446a000228d7ae3abce86a914606c",
+        "21b83edb27648c3dbdd93a5e1821fc4f39c9e09f9b9b035070adb7c05b0da1c3",
+        "21f5cd531afbdff8de907ced62a081144b20c0bdea1bd4b31f7bd561c0f269e0",
+        "2444e2b2a0d67d34e1b0ebee1188968339557aa6ffd6610f9678d15bd01080ab",
+        "2569485a2e77199961189940e7c4b0b1e310a431987fcdce34fef725ce1ce958",
+        "26b730c9c59bc5b32a82b8ede7299c83a1ac724d35039410e6047e8a0c572617",
+        "26c9099af14f259e90467abb065913eb98b024ea419c0bf7ed936dbc7620fb75",
+        "28f3f3a4af5ce11e18c00188b19a258bb0510b07ea3611d4ad444cae63b0e16f",
+        "2988daed85cfb2f48d982c6557bfec00174f078a706fbdfcc811f69aa1068987",
+        "298f363cd90f631bb9c39ca89386da998922b10e9a5d570db3c58f5961573b5c",
+        "2a084ee05dd0e2644ad04255a7997a613d9d25dbd8d820a222d56a2c6fc04c99",
+        "2a20718b2248f823d4fa1d479bd3a8370898c24d0e64553765d75bbd155fdf69",
+        "2ab3f1b7a17d24b7e312ad2dd8cad8598e21f0cb412641ad5dd318cf254954a8",
+        "2b4a66811632692aeedbf876eb4c29c17c5693a91e5d129cd554731e600fb5e7",
+        "2b6fcc374e4ad9444e9670802b165051c03c05fb43f08c43ea1ebdacb37d8e2c",
+        "2ea3c9d7cf2a0a7db499e359a5499377f15ce935d473588fc9e249a2ae6c8cf1",
+        "2fc38372502b92a37e349a63542fa7ad7688ce5a83a6a9e97468bd0af659fd6c",
+        "2fdff0d2fdeafeb0b430679c3c4c430e3ec33725f6375808674f3ea87dd496b0",
+        "312db9bbeffc6c4b5b5f5942e93b52399200db49fc9b735dcf4664cea1903160",
+        "317377f95e4acf6207aa6a726ee665f9bd2be4725d13e2c95552f1732f0c60ce",
+        "335b8c5b062bf19fd96b9d1bd7ad29608a1df69d84d6ded60a94c7b3d67be0f4",
+        "35c3339efd4febb19d11dccee23aae9c436d79440580ed90e83db32889e54144",
+        "3a2bb637bb0f747e7f0d61a5c9b9ede8f445c9461e6c947245d6325ad9b8a05a",
+        "3b90a7942bd7267d3f4a76f0fa62789ee8e4c951b7b4e98fc95d0b55b0cd3ff8",
+        "3d47d2144cef7bdfcbe3b23d92245b1d6c24c5ac41ad38c27fd04458e073db9c",
+        "3df144d62c0d3b9984ec077a07f382a2110c1c5add0d0e37275ac6e0760d78d0",
+        "400896150054722d993a72fc1e1a896c758c4c87f0b59dc39914a27ffc575235",
+        "41c8fc4577f0f47be50695274844aac2a4b2926e64eed663838aecedc4d3cc48",
+        "41deadb6117816be05ff55aa1d31b2f2e44b7710cf5b0335d42f6b3206811f88",
+        "446f6c883db138c1a22d03a2a1abd8eacca5107c15c30f06dadda319857e85ae",
+        "44b5b0360bb499e7523ecc501762370576413fbd1ef235e10417bf92a3e7190f",
+        "45d5210af37374549ffde42f87a20bcb538ffe9befe37c4b187aaa352eb02c12",
+        "47d0849fb5d8e6f645dddb6901f1a23be1f334f588602801fb08127baef10d49",
+        "4a6394f9f61a0d334617e6121a3e20be11885031bcfdb59a4f7f3740c02bd19a",
+        "4b182cf5a1f93c5b12b83cf4d692539f31be1cee40886d50204f935c04aa5733",
+        "4b5e398b5fe91147a6ac4b199a8745b5f6132dd6f79a5182d26b4789f18c4acf",
+        "4c512f5e863a154a86a19e9f6ed8589e628d34d3eeb3b867d8ee933107f75c8c",
+        "4ce05bd6212219e8c8b1c22bd17ecc27d004ea2cb463cdaa556efe9339df2202",
+        "4d50a453b49726cbd2edf7beece77ae8c51474f33abc4ad320ad0657f39cda9b",
+        "517570c2e25158c7a011fb5a298e781979b5049c8f2370b98e68739420abb2a4",
+        "52e41d98ea2718765523ba03f91d580aa63dbb74636c7e65ee2d752098cf888f",
+        "537ceda00a4041b6ebedd8be47a15aa70e77e3a54783f76ade2243034e8aaf8b",
+        "55fd9a79efc92edb2b016230bf2e27915b75c1cf6ab7c946e329e021659d6a17",
+        "5af10a8d77eafdcf4562eaf16134a0a59fe54df389f1d88bad0f7cb9c7c83cb0",
+        "5b1e8dcc70d95dfe0e4990eaaa92031ba075e6b761c292b1b4a302635f9763cc",
+        "5b72311ab4e5df51faff472eb936f699ca3c6f0a866bcbf84b85eb8b84edc5b9",
+        "5b74689e44c606647e079cfbb1897df60f5986510bbc8b2473c5a2b29a3bf3c4",
+        "5b9e2a133ae220572a9a4b8e928f88a99a924ea4dd2adb6c917001a8cd7e3885",
+        "5cc39b7f1915f21ff71bd668a1fd2263029f5fcd024773a1988a358e257285e6",
+        "5cf5b2315cbf7ddb582a1dfbc4b0b8343536dc579c499a3377a724a466abb656",
+        "5d59c0a19a7f41a97073613781dd297dc051c50c33cfc1c00ae147a65d104d06",
+        "5e619e7f855dcbf4c0b47b922a7c07deea0dbbf9d15fcd7eccffc1ea34156d00",
+        "5f73592621c9fa1db9efbcebc2f43ea89df5beed47f68e6453e77f2412f98cc9",
+        "61efa13780688111802e28c21c21c7ce6ad99176b57ee7c3bad4bba43a79933a",
+        "634034461fb19b3f20c83437146df705ecfd2cda964fdb628424f28fd31994fe",
+        "637f37996c65b8d6374b5b2b174a4a6538bd1461c86da77c914d3fcd908d9a2f",
+        "63fb8a6ceeed0d734404439145b53e5128dc46a073d7614360c5c33d42e75746",
+        "66dcc7aa0c51a709aac952ef5ea0bc0bc596ab93ee8c413c57b7c0f6a3d758d0",
+        "69d980d76d5461079aa61c543791d3fb50965ff517356a9da0eee27b4ab9760e",
+        "6e994355cb475ecc9def01d5e391ff3690284056174fcedcebb31c6e752f05a7",
+        "7045d610396decc0bcbf34831f9f742168523f33344e3a24571f781f598ecd77",
+        "70b317a64deeb4723a7b5b90e6d6976f63d8eed15022818347d30166e89ee48e",
+        "760fb6cb11b2d8c870fe909333fbcfa7eb57cc8b1f67c6ed88f0fc2b2137f6c5",
+        "76b08c2b22678609d1c918fac58b71fb7cc8dc7b68d37d5c4ad60bb0b7392e6c",
+        "775bc376f28f45479197250669d1ade0a353cbffa8c5d170fc524c47c47e3959",
+        "783a3f64f6bc6857d6f51d38249ed6577644294a82823969f2bc90dbdaf4108b",
+        "7aae91eeb711d9c9276cae193715b8af3161d45da360961d559e1c343858c2c4",
+        "7d5cece63b24cecdbc8417eb4853d4c08255f5c8671bc7e7d6f87addc4992dba",
+        "7eab6788cb81e2cb436d45791cfff154992bd030e1dedf6c3eaba131749bb2af",
+        "825a7ff94d024486971e5897f1c2d723085e57f09fb8101c733bcc30e3047cda",
+        "83fdaab9aef27e30237147a32a38d3d0e160aea49aa34907add8d30d3c5696ee",
+        "875b5718d353d6ebb6f89be43879ff471db2a246e9a5292256561aa122e8d176",
+        "883654b2889f1fa236bb3d9bef32d50e6ef311321cf272348ed3309483aa4ae7",
+        "89c4d2d60f6136288b8ced6a2cac96acc12a80cb8be74e5122bb056f8e199bff",
+        "8b1f859d7e61be6cbb0992dfe8860fcdfa0371b4b09e99c0ff551c223c9a7a00",
+        "8b265ee4eec9f421ee16e4d371978e08d727f1f36f360329f25c57e825cd8765",
+        "8bce72f86e4371f90dd2533dda92fb113fe35af8baff158e6a5e31150b88f1f4",
+        "8cf407e3ddb300ca9f45f4242e87c0d96de8d20260f51c593345578b2687a117",
+        "8df9197ef51d9dbbc6f8ff8ab0e557c1a460706296deb2eb7ab0eb5685877fa1",
+        "94ee8bd357cb74fb3740a781087de2574d434f2ab8becbd9c8bab364c252ada9",
+        "965ce60178650dc43bb91d9dcc779773cda1bf572007a5bcf2dfd4d6adc481ed",
+        "9685e60137b7c0b4f5335bf49ceee80164aa0026b13c03fbb769dc18b58dc1fa",
+        "97ab3dffb94922da4abb0d9b49d7c28db199de328ac815af84e0395978dc0cde",
+        "9d933417f893cb64af448f06000cab6861f70141bf53f4dcbd81e9780b972506",
+        "9f10f432d195d98ab228d75437729df2a4c17b71edd824f725e443e87815df96",
+        "9f44aa40bc7443c2d6f73caef97665192147892be2309824d0414100c81f60c0",
+        "a425765e5bc157f1818ed0d0d28bae34467179dba56cfd3564874d822fe8c7b1",
+        "a430058e2ee9e2edc0877ff82c7d23803d39cf8e4270b82d38ec94f4fdebcb58",
+        "a58e592bc3e40dfb334109ca23b994918f6d44d6b124b84163d5367dc93f5ee4",
+        "ad5e8361a1cf5c2d744e1427134974618cc039f9f02f7b1cb0539ba35df2d74c",
+        "adceae0b803fdd0eb62b046cc3fdeaecbda0e3b87e0c8d00ff5a9ea40f971152",
+        "ae38a5337a0abcd1a9f82ae6fc1ea5889d5fb7da1628533ffb49906ce843189c",
+        "b172d0f557f1821ed854b64da5fb1ea243f28bf304af22169cb5b8bf7b4842fc",
+        "b1ab214dfd43b1e175fb210627f6970157c469e223609fcc85db59702a5526e0",
+        "b404f52a22d01ef100594a0edd3f768dabc849b5a77c064697f9f78cf7353d3f",
+        "b51049a590f072c60206378f23fc15e7fc02359e9907f422cbb7a0fd0c754f19",
+        "b5137d88644980da5d76f5d415df7132d68fca4beddcf5a88d5b49e5102a431b",
+        "b5876043e154f99c68b92b6f2504cf68594a8fe8f9e88657c497b3dbc9452883",
+        "b5ea2cd42b895a95c6824a21c6cfd8d61128b8cbb0a3f84d86409a94f405ba58",
+        "b66e2a4e74c22ddea7d33ee6ae75cd455fd63e98ce3aea85bd3ee766d9814392",
+        "b83c2cc30c799093ecba1f578d4210926e19ba17d32e1abaee6b462d348a9efc",
+        "b98f2243d856f22f755eba352786615f2c7c83674433d3945b6e00d3af518aa3",
+        "b9bee72f69345929f9f79352178f0976815782b24338cc7a4f9a221816ae2239",
+        "ba0afa3509d88ada6402cb561fc8e8cf526943506fadff3e638363914c8f6be6",
+        "bb7a7474a6a15f1c606b9ee81ecb04bee5f23e95a182d7fbcbb7f364d6ac82cc",
+        "bf847b56b8bd75b5b3e47a0ee90601b3ad3a950594f2c15b1a677f78dc99793a",
+        "bfb25ff096b222f16690c2005c63881699052e46e13ef7fee959691caba03a64",
+        "c15e7cdbad6969c0d1e747c198432ae45556ae7283f90ed6e6568407f661fc10",
+        "c20c6a895db63cd6580c165d4a00712e12f67ecf0a9dccdd0aff772f62c5b3c9",
+        "c294102be5c670a8374a074171c76f7f16d61b057ef270e0fa86a98a24b05b95",
+        "c29c1e830ae3be3c3eaf3c4ddfc0947d38f70a3f7e562d21f47a7a6ce1302d53",
+        "c355ebda54f8214fa5e9f7d0c968fc6ddbee595726a5875ece82e37d68bc61ed",
+        "c4842223a415d8f1e96d318e7e057d1357724a6c3517f9abe3c4d02be2e5ad84",
+        "c7b2feb91fb84fb34ccbc2c2f377de8e87a2e849d78e86c3341b67c589eeb213",
+        "c7d6ade5b4592c6cf64b5801c90afc284b6ac0ebfe9cf36c0c506d372a461131",
+        "c9a661a058005e75558466cef6f98e1ff36efb026d7f470916d0d8419ea54da3",
+        "cc89a4a199408bf1c63930d250cb98db4f341006c3e1a66fbde9ca563bf4c27c",
+        "ccbc38e12cd2de43c9e1bc5e9e540c6db467fb9d7564b0999ce64d635f6d6fdb",
+        "cf0dbd010bcafded0674acf0b2fb013b79aaa6823ad3b3b09c50467707872d9f",
+        "d053d638b830e33ae1bc7f176f4665587c062ea09701719cc26586cfd580285b",
+        "d24020da8e6e6b73e7d56726e9f9f3a82db3111e93f208dcc2a6053f3fd78fcf",
+        "d5715a894192f169beee05a6338edd00e67dd1749121272f34c09e807acc37ed",
+        "d6c123bafb27f7d82abc8f6fe697a45f3d68a39bdabfc2e7ff1325d9f4b2531a",
+        "d8539d62f32c92e217992e01ced206d71de1bffd8849f049c1b9949a29520828",
+        "da94a511a2ffa094a06409d97c1d1385165706c0a06d875f95cea4c6919e1d2f",
+        "dadcbe34c62f0ca6e79445cbccaa76532f827583ec0952fa4520fac701aa322d",
+        "df19d65dccaead18eeca63251631a72a1fbd3762274d673f1ceb048865179ac2",
+        "dfb1699eee40985b35358fb4da3b0f93217f40b4caad275dc556ea5e43836521",
+        "e0777acbb45a380c9c065f1a6348b063dd594bc69727fe8f3c56fe7f68667781",
+        "e369d9b4d824cd38223a900bcb392a6ba8c6becd72600ea73eb965bff82c6e8d",
+        "e491ef54c52512c110d4405eac4794b5acf77950a1a72dfc67f6e878ce880fcb",
+        "e4ee7b398a83cb6ddaaf45f9ab9feacd17c6d253cec1169ce60e9d8bb7a37ae6",
+        "e5bd761ce12846e655b36fbb9397ad88f348c4aff541d8921124e3b1e29c1734",
+        "e5f242851522e1a2bc8ed71be779764bbdb55c5257cbcdd259521d7ff72e9f91",
+        "e637e842a08ba7bf0cfe5311b3d0c70c611549f3b326ca2fff80bf295b284dcc",
+        "e651c1f1d039a4dc9cc23aa7df478014a7147b5e00f239eb261c5bc0e20c6421",
+        "e6e1d2f620c3332bb88b1c9450ee95aa7d33bda603fec3bf81372349976df9e6",
+        "eb743d33ccf0b3229e58dc615eef06d0029396802fd51744f526deffb8eb4974",
+        "eba7ed3d3b4a29f54fb757b1ab87afcd8c7dedbdb805d4f71b018cd41cce165e",
+        "ed250d6ac2699adf777c6c9aba01f1a9a26643b71fc185c5239aa78d71898c04",
+        "eddd98370eb8150d416b39dfd435a713e97a59c2fe2cca1cf3f952a3541f8247",
+        "f1e1c2bdc2bb5bb3a1dc1005f28acb2871501c8f956ebccea0e63bf6e86fbea1",
+        "f2f142e0c9960b80b278048e56cbb9df46c5af6f32a600040b577476f5e63446",
+        "f45ca0ef38e4209650b968975150bed927f0b7031bcccbb5e6ea3cee03e7988f",
+        "f5de5e55d73e0fda441f8e2d8680e8a40df23804a2571153ac7eff6e3b340722",
+        "f746e5b4db625c15e4303adf695225cf180fe4d8aa3b26a7b15a335e2b4fd427",
+        "fe143f79c4573e633a244ee298124ab6b23983d25182dfe0a89bdf4312c546d5",
+        "fff1626219d3fdaebc93c931c93053520fb67fcde02b5aa759e2bd2d6fe681a6"
+      ],
+      "member_source_seq_ids": [
+        36159331257,
+        42130378736,
+        39437905642,
+        16544942907,
+        74289943627,
+        21543607844,
+        19826021040,
+        21301101543,
+        38875518608,
+        16233244329,
+        12914802410,
+        19736473577,
+        73032342494,
+        74455269713,
+        32752663370,
+        22773439756,
+        39858076489,
+        4356496645,
+        1646309888,
+        44878149694,
+        19999085879,
+        42873084547,
+        39268556318,
+        12209928377,
+        554871631,
+        44311695447,
+        33812714592,
+        17271706636,
+        73028868283,
+        38478858429,
+        72797875547,
+        72612415722,
+        43947671723,
+        31676466550,
+        36293570646,
+        34249050551,
+        73570093725,
+        5431118123,
+        6785163060,
+        12628650202,
+        20725183105,
+        16779580794,
+        72685980157,
+        29611686248,
+        26740450560,
+        30532322395,
+        30974218324,
+        74222716008,
+        9428238891,
+        36415538424,
+        21844185603,
+        7833996520,
+        1618181039,
+        1876810732,
+        14979586432,
+        34536627587,
+        21944749992,
+        7584782639,
+        37155069797,
+        12140194614,
+        20855333120,
+        13580165084,
+        28345000977,
+        10600161222,
+        32686494911,
+        25819081680,
+        24256426827,
+        32549380386,
+        5272174188,
+        11959109722,
+        24213994316,
+        16877338937,
+        30906648937,
+        11495256544,
+        14287343321,
+        21280898909,
+        3548003974,
+        8940242192,
+        22056996590,
+        17232517906,
+        3383058741,
+        19856375819,
+        14380450291,
+        10534714970,
+        4352976312,
+        24814236753,
+        2880917277,
+        8077185756,
+        38688303621,
+        5003712819,
+        10576300061,
+        847060568,
+        4405407503,
+        11607391547,
+        6835336798,
+        14488356849,
+        42092470692,
+        7821273946,
+        2293583421,
+        73971138066,
+        70339629334,
+        71069383749,
+        72922171124,
+        4416629292,
+        7146864021,
+        23047306202,
+        29644319055,
+        40864854808,
+        21911443857,
+        21821002999,
+        41628795915,
+        13244623771,
+        74078258461,
+        28485903098,
+        33686603426,
+        21091719662,
+        10565970549,
+        71551180887,
+        3285610637,
+        71667757105,
+        1850593984,
+        20085340270,
+        37706128380,
+        12054161917,
+        16106683851,
+        18875007988,
+        13017276752,
+        26706759326,
+        13361446399,
+        11284731903,
+        44003404932,
+        12006340605,
+        2165129779,
+        21258156451,
+        40532223789,
+        8575873332,
+        70134977187,
+        1184882124,
+        2426813818,
+        36260626979,
+        17125845562,
+        19396329086,
+        38218047489,
+        1233790387,
+        37833025847,
+        12454682558,
+        15390111286,
+        40289471191,
+        15611626211,
+        29036911034,
+        40338679935,
+        25911270448,
+        21153894265,
+        17525643545,
+        27769705931,
+        26268261950,
+        72757520493,
+        41558793272,
+        992990206,
+        7729272854,
+        11190043843,
+        33949550854,
+        36891524221,
+        15204689839,
+        27873479919,
+        13854398031,
+        6839435839
+      ],
+      "problem_group_id": "017988dbbcc44256ae7b63c2a0b05435dfa2244c8d54853c0470c2689a2148f1"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/60"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "a40f139c0445d124e29ac43d78554fb12211edfbfc75f981ce911ced5f5e92e3",
+          "source_seq_id": 41879267251
+        }
+      ],
+      "member_record_ids": [
+        "01aabf53c02403726e5e13c9b08e29f0d07bc4692361719f7f88664dca384e15",
+        "2f515cc9bb674b4047512725842a4672bf88051f9d5fe8bc393e8dd668db8e1f",
+        "a40f139c0445d124e29ac43d78554fb12211edfbfc75f981ce911ced5f5e92e3",
+        "e32359e6312f01e512047d0041971cd3bd4b34cae3d7b1a4fa935d12ad19985a"
+      ],
+      "member_source_seq_ids": [
+        3124042932,
+        21480691404,
+        41879267251,
+        1546230826
+      ],
+      "problem_group_id": "01aabf53c02403726e5e13c9b08e29f0d07bc4692361719f7f88664dca384e15"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/53"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "186d7c4429cfe2f5a3b822d39d39f015c69100d61e41f74d28eb8f78bda79e28",
+          "source_seq_id": 13419243964
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/53"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d76dc83b35c91cd07a61f18b399987fedebc65609dffdfec092362cbc8c20c01",
+          "source_seq_id": 13319809437
+        }
+      ],
+      "member_record_ids": [
+        "045757cd894de96cbc63e235a0e6cc826c5bbb1a0d41fa788b0ad99ea4dd9b89",
+        "186d7c4429cfe2f5a3b822d39d39f015c69100d61e41f74d28eb8f78bda79e28",
+        "18cd54dac120df3bdbab67be570d782b3d733523c3b756ac5c96f23a0536c60f",
+        "1ec2ad8c9b8c2c9f9d3bf9b63b897f4fd6fa514673711a8da809778dddef884e",
+        "283d4ca58e61c55f21b95c3ecd5d7295979f5804953bf3a53ed698c15113431c",
+        "2d09ec8329fd95dc6c9bfcd25177d1da291bd9b37986e48701dbc5890c7afa67",
+        "2fa42fa098c671a68bace2b2e77d36501df572e6666383a0454035b19a288882",
+        "30c15a6868a23a3cd124b6be646dd56dab27ef5635f77177a6a443236fabcd01",
+        "529f580e9eeba5fabced77c880af646786491a4afd93decd6d60344f9da0c280",
+        "54585955b6aaed22e62af44d461ac499961c251d7a4133d74b6f9fd6317f1f2f",
+        "56ad1b43b202d105b03fe4c7777ea68eaf56541e50fbaec93b0128ac6826155f",
+        "6d0ba3da971bd4bd8d1946eb828a21137ef992c4011656d263e13f74621154cf",
+        "6d172e90695d8b10cd13c74ada0c806faeb81a04520403183a5759bddf11998b",
+        "6e1f0ff67eaec18503d5079258f438c5ddb6d69f985e567bf13718e70dcdd4fa",
+        "7b0dd909dc1d26a2a07671f3a2d391bcd9cef709eaca772d6bd2aba0c134e7cb",
+        "7c461184782751efb5728cef02763c2a13538ab87031605f7c1bd5e38e7d9045",
+        "800dd1c5912007b094453fc91200a8a91af09254926fc697bc8bd5eb84bc349f",
+        "94eacae1206c2cf4380444d4fb47a56876354a66df8a3aa7c9fe9eef75ea3947",
+        "99fda020fdac3eed2a0d1d0eac8db9195fd1f2ad0c6694c517f7cc00fddfb073",
+        "aaa7efd7929a333ca7c6178241c6f858ed9f73b67f4b1b1b42326193ad8ae9dc",
+        "b53a7a393cdfcd7e3bc93bebc2a52f48f173b49cc60aba87e7b211d29066ff76",
+        "b9bd6cc1194333227cf450686cbcabc51648adf9a8260b5e890d8ebab8c4c179",
+        "ba2c158f795dab5aeaa80ffe9028fcfe05edf3d254a74eb860f7a3e5277f2d35",
+        "cdaeef8430f325d795d54bb00861da67c27d21639b79958ef3cdc43cf8b56510",
+        "cdd1bdb0d4f5593ce64fe425780248137aab0b0d58fa419839444c374926e5a8",
+        "d6a163989f679b5f469bd63fa8499129ae43434bacd76268743f6ff5835cd303",
+        "d76dc83b35c91cd07a61f18b399987fedebc65609dffdfec092362cbc8c20c01",
+        "f4155869a97b758461fa47dccb4584c76d3d91f31fcf6847ae488df2e0b9c7ce",
+        "fe8aa3a8cdf6c998b983f168f572f3fbecccc97b4ca32fa1015e90beef087b45",
+        "fed02f34015a8144e70b45228665c28d97ea4e8270c3aee80eb18dde483d03ab",
+        "ff3ba66d874266d4f249bc5d36c832b525180c2783cdbe7af93a921ea7347c52"
+      ],
+      "member_source_seq_ids": [
+        315227072,
+        13419243964,
+        14117181576,
+        38646168468,
+        13878113760,
+        32225254797,
+        9793568933,
+        20154535543,
+        38549460527,
+        39900993232,
+        10877198381,
+        74893204561,
+        72229827436,
+        1193086205,
+        74182650365,
+        18308759848,
+        19860345195,
+        3331598106,
+        24510352045,
+        42815072250,
+        41643207219,
+        18527363665,
+        43766286075,
+        24913014806,
+        19078152940,
+        34518549872,
+        13319809437,
+        22058647890,
+        30787649252,
+        34753754712,
+        9312730452
+      ],
+      "problem_group_id": "045757cd894de96cbc63e235a0e6cc826c5bbb1a0d41fa788b0ad99ea4dd9b89"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "0f219d212f0623ce685091b134e84b585954b181006a856bb484d1dceefd059c",
+          "source_seq_id": 3998918027
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "272b73b7c17b69fbc679204b5d4123d7e94e26e958ad7504c420ca0c9c197b4b",
+          "source_seq_id": 72799227976
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "92735f1503aad793cc46b73a34098cf4da811d2c93765622ebb4adb580e69f8a",
+          "source_seq_id": 21558734992
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b54f81b9ebe83c74e0c74793115b0b667e0e6ac1becffee04244569fc22d9a59",
+          "source_seq_id": 17870627881
+        }
+      ],
+      "member_record_ids": [
+        "061176cc644614fbf2c1651f39f61c62ce9c0f789f424e8d2a13267170286ca2",
+        "0cab004e7a660b961323bdabf2f701b45269960b3d39bd35ca027a91d47f059b",
+        "0f219d212f0623ce685091b134e84b585954b181006a856bb484d1dceefd059c",
+        "272b73b7c17b69fbc679204b5d4123d7e94e26e958ad7504c420ca0c9c197b4b",
+        "286932a600f144a409c0d9809ceaaeaf64128a4f33219f322d52dc5904614746",
+        "43287cfeca93bd61914ce41a42a49bda618033bce06868153d87d8334761927b",
+        "5b7479b8cc2823ffbc92b003a48c6ac08cc764db34e27e5af7f41d7511799134",
+        "61eb08cdd607c609c7ad9850b980cd1373aad7b58e9e17e03b5a82efe9f64143",
+        "6876740544c4dd389cf40727d670894a31c007c04335a9a2043c1b2c86d9ef26",
+        "6c4454218da07627fb8caf00cd2555efb34a5cea88e04a506ad38f25daa60abd",
+        "6e39a7887da65fb638238348121f7fbb833e9b3546fc76b75258e30a77a5b3c7",
+        "6f0cd24c4cd0767551197a3f837a475db17a35303e4e492da0f64ac9fd02949a",
+        "810b0aea53d15497c57126cc95acddb1d59ec17bcde314b35db4e866d04fa965",
+        "811cf38547da743c10017c3def649c1fa000397742940506148c50783b160af0",
+        "8258bf6d794b0660632f3ee067bf716821082ffebc22158156eb6a9e76af1199",
+        "86276d949e226a115d4fb85a5ad414dff3cfeb8632191094d13664a47d1bbe07",
+        "92735f1503aad793cc46b73a34098cf4da811d2c93765622ebb4adb580e69f8a",
+        "93361ae348c65bf27f3cffaec914f1a6dc97e3aab35145fc7078ecede023920b",
+        "94f08408e083303b2e8d1b47d4d37b6cf057fc62dd982ee547e2c0118c2547bf",
+        "979afa0490caf8dabfe6f6531eda08d7057239c70db30c92150fa95acf2bd8f0",
+        "a38ce385da9d433047752e252957e67abdb30aec196b1da5f5823db33aa3aaa4",
+        "ab5cce2bcdcf7ba38c9c51c1497dbd517ef266fba1f9ed392a52ff78e0884193",
+        "afd4b76d503fca4a6adb6059a19e1a8db30622b3bfd64950257a2113199f0823",
+        "b40773feeb04851415223a7ad330a0145f7f7dc81948d12f6c2336411ca69809",
+        "b54f81b9ebe83c74e0c74793115b0b667e0e6ac1becffee04244569fc22d9a59",
+        "cc15f1ef5f7b7363eae493d9c2ab3971e93a0b5364f05a9f8d9a554aba3a1295",
+        "ced85edaec76b4996088adc7181fb0948c9a52a05c9f65703b6865b96a93a1be",
+        "d523947cafeb350d59eabf23db2f66a4cb1d40c274c4bd8e5e058d5ebbeda214",
+        "e814051b6331428384cfd7976ccb6577c042e273cd521a185ed5415a3e1fd6cc",
+        "e9d3636a2386dc4972a798c4ef8b23940e2872d171b8898aa482b0ceefb8994b"
+      ],
+      "member_source_seq_ids": [
+        44884355617,
+        7995088261,
+        3998918027,
+        72799227976,
+        37669941021,
+        8281395992,
+        73784284050,
+        18735573519,
+        17718424874,
+        34445795423,
+        12982671643,
+        18634241951,
+        29188718110,
+        30418557127,
+        37305769875,
+        19453978009,
+        21558734992,
+        23375903183,
+        3898108542,
+        11798175237,
+        1498315456,
+        36982535728,
+        71229477775,
+        33339870071,
+        17870627881,
+        18969924648,
+        12833126286,
+        30554945031,
+        27688018631,
+        22958265323
+      ],
+      "problem_group_id": "061176cc644614fbf2c1651f39f61c62ce9c0f789f424e8d2a13267170286ca2"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/45"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "41dab403860641f3220a63cbaf6fc1f2355e8344d7807b109466ffb7782b046e",
+          "source_seq_id": 29663932721
+        }
+      ],
+      "member_record_ids": [
+        "0673e354fdb466405a28288ed3302066afe20b150c1756b77539ec0c26955ea5",
+        "191c5f8aaa957c982d083f3acacd0b1bef4bab2160a145d10959d2de54a8c12a",
+        "230a23cd33529b9766eb035c5446f8b9ce1c95c0321896a2f365f900a8ef5836",
+        "41dab403860641f3220a63cbaf6fc1f2355e8344d7807b109466ffb7782b046e",
+        "47733633b79547800d63c6f49663f30d3b509e8216c93ed40f67a148e7d23b5d",
+        "9105bd82ddf439e6e8f57233f39945fb332a3bc9ed54f27ec0c49b638ad976db",
+        "fb5c95e70ff0351b88fcb928fab32ae2dc4d3cde76df6488a725cab4bc4a614f"
+      ],
+      "member_source_seq_ids": [
+        32401760110,
+        22573973899,
+        23911426887,
+        29663932721,
+        21021571262,
+        14709426724,
+        2881493964
+      ],
+      "problem_group_id": "0673e354fdb466405a28288ed3302066afe20b150c1756b77539ec0c26955ea5"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/48"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b5972d05d8a7517c520c780990d7009cb0c04949a01a7723b70b187d778b18ac",
+          "source_seq_id": 20383115464
+        }
+      ],
+      "member_record_ids": [
+        "0819beea0a50650d8b45cf246895831c243c5e94e955889b15b4492d7d8a8144",
+        "0ad5ba2c4a5e0d6958af2b340e23a71406067c4344acf531f4a1d3d72b1bd46b",
+        "0b5f9d704b8c559ad215e1f5e25e86d42837de15f2da52067cd94386e0d183f7",
+        "174fafeb033451839c22a1d6eaa4f1dc957321e3b4498dcbbb886261a202c624",
+        "1856ed40856a6671dab047b308413761f9851eb2595a273bbaad45781663d3a0",
+        "189aede1f0a4fa20615635e72046106bfc68969a9dcad938e597c77febee8227",
+        "1a1e5c418d82a2b6af201b5fb51351a8e47bc99263b3156f32b91ef3bbb25cfe",
+        "1ca8cd0cf40f80af42c190c05a59c281aafc4e448d03e548574128a071662192",
+        "1d57db14b976ee40d217d9d467e9d18e21211596fcd26bfa563ea52f708ee4b5",
+        "20db9d4ef6729e60a7233555f7fed809956ec9a5db16d70b92d1e8fcaa2b8920",
+        "250575c48b5c6800b3fd49e5a92056a51c6df0a959929912e0bd8485f92041c6",
+        "250cb0ac8f788a3a88e85a9ec4a089e9f106a2dc876018cfa2b96120ee29c9a8",
+        "25d0523e313f60b3a61cb747520b846c2a1f6dd2dda123a6a089c310bbf1015a",
+        "25f6debd89e345d50f380e00d1de4af8df0aec5d0ed84dd698388aaebc2c235d",
+        "26305f9eae9a9f15f99011e8ad596c5f34d1f130015a5b8982092fa505d9975f",
+        "2648b4fc87c8d6e127911d5dcddabcfcb362631b3132299b600201514b67d960",
+        "2e2ea8510f65bcc49b29964cb322f3f1451f2d9af65eabb3b86fe08c61c8c927",
+        "2f0f911e80ff24f81918d184c32d96ebea3743cdad34a3dca29449f5910e8fcc",
+        "32ead08e5c455e7e8922994f20c8133139527ede39ab5e6f006d573e7c0b0d9e",
+        "33d601ee7b8865725d382a69f356e2cf4c3257c892dd5e0049821a88f6c12165",
+        "3fcb01f4343be3c2ee78a055d2a5d03f5274e03496ff66d402300e52c31d3f0d",
+        "42e973d1f97ef540f2c803d619d98b6251f6ba4b6abca5688fdf9239cd8b94cb",
+        "4eac1a89795e13d6bd9bb5f5cc677e19b884367e4f95314b3be7a6a8f27d3a13",
+        "4ee3bf1ddab44ece25b68ed5cc4aacd939ff67abeb3d89f24030302ee094f287",
+        "50e782751331ee5221a22292052d9f53016bd10874db4588001d26b25e6ea440",
+        "53b18e203e51614b5037231e8f0987e15b27a433cc3eab5d15dc76e355584f99",
+        "573543b42d28cfcdec9fda100a3d58f7aab377012b4cee8a9d06812c14539fcb",
+        "5d3ff81dc2e4e2769e48e506372825b174496b0b6f4542a4c9a4e8d696924be3",
+        "6e4d12dd7f6ae22b9a70d24502993e990b335f9a5b48239ca1d9990e2ef67076",
+        "765edc52220169680b4bd154748dd3184774e15246571a903e964ad6719799d0",
+        "786bf662644ed28fe6219257dd13dab495468243e126135d08c23ff85eff62b0",
+        "7adcdaf30cbe4bf595189bf0c91a35c4e78383e68a2a9646a805041857f54c53",
+        "8161ba8b9459d1f589966ae7bd318764eb07938b479ae360130217ab31d7e257",
+        "83c70ecf4a72b511a86376fcc146034557c13f461abdcab2d93e7d38dc39f999",
+        "8e8fd3d794b5aebf78da49e8688f73e176373fe474d1576d5ffb6f3848b95f7e",
+        "90894aa044a9249303e6586fdf9faefd70c1230fb006bfdca0525aaec6a9d6d7",
+        "90c941f5314a6b301f9e348c81b72d4a188f8d5f3c162de1f4119caf76e821b4",
+        "9353cfc86dbea97b3db04e96ca8ca37f62a39b6542a20ce0de319969d1ea5c16",
+        "9518a647cac6d789c37ad5ede06a2cbc237a6d9bf9f8d8a8d3a611cef8b32aa9",
+        "9ba6defc781f3f6765bd01dcf54b476a7c5b049d53b823cce2dba0923e37e702",
+        "9f240736cc54f461cf8d95df47503a6cf2ec3ba0991d31875fcff82a33428dde",
+        "a964c0f3b7c72090818acb0f62f1949788cb231e3f1252036840138a05e7deba",
+        "b104a76846aa59086e0119ca0a2f7347381f9a31c305e78fedab3b004d1628c8",
+        "b44f808edecaa131e5cd03bcb5a8ec7dc55df3ed0660e58c0aa367281ab6ec68",
+        "b5972d05d8a7517c520c780990d7009cb0c04949a01a7723b70b187d778b18ac",
+        "b88241ce17cb372894ee2e534ee1133c66377dbb52b19d342fba843b2fa465b3",
+        "bbcbbe70ac9166c220d3806af26aa8091364da977db5e470fb3e3d0d19fe58de",
+        "bd5ab1f28eeaf0fee56d4493723f5a06f54b76a0de14d7704440455addbc84e6",
+        "c23a4751f716e66d3dc9e2fa9e5a752401403288b9904640d7fccf0207ff91c8",
+        "c262fddf933f683ba4d126cb0c4f2a1fd8a50808f7a9950a166412b985eece1d",
+        "c51e82bd57c5c24833ce5f261bd65d13adb2982e0db1028c89d5fd65b90b7069",
+        "ca38cbdf361fa6f8e8ba336094c708b35b3bef0388524fcb8294096378938c10",
+        "cf3ff57f3f7ac19f561b2dd208a6ec0f6b6113f581a50f8a60a11e722b11c2db",
+        "d59391b455298e8df6c3d6dd7084b786ff3381114ecf43b81165eca988b6741c",
+        "d9a13bf434bbd334c802ac1e6cfe2cf5c30b962ead4d3e9fc3015b7eeb12ed6c",
+        "da0624001a96ca3d7e3996ed97d220f08a267bee810a0d909de892d4254cfd31",
+        "da886c87219d9c3d5858f5bbd67140ab2336863554849f4302ca4d3f9a5a1180",
+        "dc689c8fdb7eda65068512d34053af63250137ac6a72673c6ecb2e993c0323a2",
+        "e0ad709bef94d3a2058aad7b59a0c2bc24cd3d567aa2238fe5fad2482259d084",
+        "e26ed477b7db8b7963127bb0d3dc1a99203b60f5c213ea5caf15ffb8e0ea4f90",
+        "e684325d8af85814148cb05d9c58dc1779f67f029d840913cf98719e3facd2e3",
+        "e729d99ed8e3dbfbdd0bf8e769281d304fbdfc40dafe23bae243d4a2b3b7bb74",
+        "ed5b0f3126d38ce9406eb3bbc146c3dffe47650d17f9f54250707591925d7fc7",
+        "ee2e8d912ed4a4b6563125e6f88a03fbfa1a744cb0d2e71d63260a237b33be15",
+        "efccc1fda6d67613ef0e085457ee1ef3dc3bf1473bbb927a29132d993d680eb1",
+        "f0cb7d3e937602f719595206e6a5829024ada410aa3ccffe8c67956ae3059c25",
+        "f154a10e0c05d8cbc749da80b058821737310fc247e012843e88de83a905810c",
+        "febf5997a861ce062c7f0dbd89828a130f136e8aeebba293fea8d74aae4bd209"
+      ],
+      "member_source_seq_ids": [
+        25812547040,
+        4608982013,
+        74485212238,
+        34035770029,
+        35617313078,
+        38241368643,
+        25939233517,
+        25126206334,
+        26569605484,
+        30611462816,
+        15529924747,
+        74117174936,
+        74096328943,
+        25157129238,
+        32397520577,
+        22706619695,
+        16429740737,
+        684409747,
+        73504003032,
+        7602195725,
+        37339627295,
+        14308102297,
+        22632855450,
+        11009846972,
+        37390248487,
+        5310428787,
+        13958249814,
+        37797191773,
+        28443291165,
+        31357867331,
+        24460490963,
+        11468840958,
+        32016848995,
+        13954327036,
+        26939964452,
+        35638831303,
+        325245864,
+        46308459655,
+        73504004952,
+        73444611414,
+        23590177192,
+        34595336263,
+        8663133598,
+        28744085263,
+        20383115464,
+        40324481777,
+        41371903028,
+        28259544020,
+        72925351036,
+        34602087561,
+        70721233822,
+        72441842352,
+        12306829075,
+        41281390702,
+        26125522266,
+        27118669524,
+        32348792102,
+        36000834012,
+        40444310524,
+        37284366908,
+        70726596281,
+        73121085305,
+        15104006689,
+        71229487055,
+        43748178312,
+        3645900835,
+        5056789188,
+        24756681488
+      ],
+      "problem_group_id": "0819beea0a50650d8b45cf246895831c243c5e94e955889b15b4492d7d8a8144"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "0c2d880b182ef65ee64fef453fbc726c5ff3cc95110f5785213c485c140de0f3",
+          "source_seq_id": 36293549126
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "1a1dca88bc123229cc42417d75be00e8cb8920457463ad524664c2730f884c38",
+          "source_seq_id": 20235772719
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "1e9adfc23924b243398dac191e321fe4ebaf8221767f619a0c854e14db4ee978",
+          "source_seq_id": 71656343199
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "34beef7697514d43eb1b0fbebd7a2f05807e910871363742dcf7107751ba2072",
+          "source_seq_id": 24488451677
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "56fad85d6413cbdaf4d5c0f96b77b309b3063e94df8394d076187dfea1db44f9",
+          "source_seq_id": 36322030221
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b7fec954a6fdb345794dc0ada36404c36989c40c2ae73e2ef2316910169f08b7",
+          "source_seq_id": 30721266939
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "be280ad426cbdb803e4113e985eed6af494ce6ec54d856dd0cb4c5fa418a7507",
+          "source_seq_id": 35128075379
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "c9a0d3394f71b0d75bba0a39e72f3ca9bb7147ef6cd5d5ee6b67c4a460df5184",
+          "source_seq_id": 39756036636
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "cdbd7516a68876e2eff0595fb3384d0ad33af03a9dbbd419b5a77c9ea0d1be43",
+          "source_seq_id": 38436448009
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/63"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d332ff9ef1814f0d8a7c2a6fa7c7e100ed8c364a677addef76a97b945f411077",
+          "source_seq_id": 74160176743
+        }
+      ],
+      "member_record_ids": [
+        "0c2d880b182ef65ee64fef453fbc726c5ff3cc95110f5785213c485c140de0f3",
+        "1a1dca88bc123229cc42417d75be00e8cb8920457463ad524664c2730f884c38",
+        "1e9adfc23924b243398dac191e321fe4ebaf8221767f619a0c854e14db4ee978",
+        "34beef7697514d43eb1b0fbebd7a2f05807e910871363742dcf7107751ba2072",
+        "56fad85d6413cbdaf4d5c0f96b77b309b3063e94df8394d076187dfea1db44f9",
+        "b7fec954a6fdb345794dc0ada36404c36989c40c2ae73e2ef2316910169f08b7",
+        "be280ad426cbdb803e4113e985eed6af494ce6ec54d856dd0cb4c5fa418a7507",
+        "c9a0d3394f71b0d75bba0a39e72f3ca9bb7147ef6cd5d5ee6b67c4a460df5184",
+        "cdbd7516a68876e2eff0595fb3384d0ad33af03a9dbbd419b5a77c9ea0d1be43",
+        "d332ff9ef1814f0d8a7c2a6fa7c7e100ed8c364a677addef76a97b945f411077"
+      ],
+      "member_source_seq_ids": [
+        36293549126,
+        20235772719,
+        71656343199,
+        24488451677,
+        36322030221,
+        30721266939,
+        35128075379,
+        39756036636,
+        38436448009,
+        74160176743
+      ],
+      "problem_group_id": "0c2d880b182ef65ee64fef453fbc726c5ff3cc95110f5785213c485c140de0f3"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/71"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "0d40b1047efb1e1277de546023267b646e50b2a40f6bab9f56d4ac8ce5e7d197",
+          "source_seq_id": 8464582360
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/71"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "0e9934501f3d0ab8b9f968947275cf71cb156539566a84d504009c678b7abfa1",
+          "source_seq_id": 7211884040
+        }
+      ],
+      "member_record_ids": [
+        "0d40b1047efb1e1277de546023267b646e50b2a40f6bab9f56d4ac8ce5e7d197",
+        "0e9934501f3d0ab8b9f968947275cf71cb156539566a84d504009c678b7abfa1",
+        "16ea15a321447619089b49c2227c442317e0cd4fc11064ccce7294cf271e97ea",
+        "2f7d5fdecb1a1eb19b0fd7129f9b1378994b3dd0f883899fd0b7386e50c89b6b",
+        "5973326e62f347778c834504f9245ec322dd5ae92845bffa964c4aba0f22ce86",
+        "972303e025307e8cf9db8719b8d55eb6e93b15983cec8de0791184298c8f70f3",
+        "9c98337d46f6fce4d824673c05ba1f26cac1433420e650914aeba4020aa2cf4b"
+      ],
+      "member_source_seq_ids": [
+        8464582360,
+        7211884040,
+        21585056639,
+        42460289389,
+        8477624214,
+        22836542713,
+        73250986265
+      ],
+      "problem_group_id": "0d40b1047efb1e1277de546023267b646e50b2a40f6bab9f56d4ac8ce5e7d197"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/53"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "1fcd482ad54b8f9d957e8db92d9c5811aa6798ea41166b09492f5242fb6711de",
+          "source_seq_id": 28214294705
+        }
+      ],
+      "member_record_ids": [
+        "1003cab304118fc1414d0adcddc8bbf1ca71c5029df9f650eddf9a6df6801571",
+        "1543523332609a079699be11d94861097c5c8a4c490c41873172005eca3a5314",
+        "1fcd482ad54b8f9d957e8db92d9c5811aa6798ea41166b09492f5242fb6711de",
+        "26b9446248afd84b5eca7fc6fe7bf8b09add375168a1057e51f62bf099426aae",
+        "283ac157ad14d7c590fae4f2fa0c3c7be3bf0c52944f9851d391b241869df70a",
+        "2f4b6363341508cb66ad0b186cc9a2a6b8e2b60c9162452a36cc64e1e69639fd",
+        "324bb2dfff8549bc7a35d852e5ec8ff0b30e3a08928f9181d3088e8f4590ba5a",
+        "3f9753ab71c8f9115402b4fbe60335b927dfbc37e82d2226ccd3d257b6499c1a",
+        "5a9309c967a3f874363df6fd8f165bc8c4ba32083ed3aef8fcfc8f4cfb16f435",
+        "5ee27495a141dd318ee290b81c956ebe250ce99f706df31bc4b0aceb51cd5ddc",
+        "63ed4946a44f47ef7ba7a3be7aa668b3b8be3bf43e9738ef97e169be166221e1",
+        "7c53f71da2b29121fea347f5a2de99ca43e93717891b7b221e58674fc28bc85f",
+        "81732ee9f335ea24cf6cd5c04201342a7b5ae2a654ce90b16c5c88aa53878f9f",
+        "8808ca3cb3ce506c261307e3895df7706cd6051b4cd52f1a61481d46a71daaa6",
+        "982f093a1434c7fda00ff1ed478e3041fd6ae3edd877caa6ac7c7f2bee04d16d",
+        "a8d6d2edf633890003c604b37ecc00411f6c413f12edd021a6d4305ff554521d",
+        "ad786998cf5a433e86030db259369e0d1bb245a42c9f03ec3df1893f76bfc10b",
+        "ae9e6c20709b247e0fb87e563cbdc232162995f8e7563db841d76ce16e40d82a",
+        "b2e363303c73940c8efe23e3a03e4e7b9095945d135def1b72fc6b11ae09b13e",
+        "bbfe95b4ea980d1b00b203b9e228d0966c5595eac65bb100baa86bb4ac27e5fe",
+        "d78535612343856414ecc93f6958217966035bf570399dd7af77b39dc5e73ff3"
+      ],
+      "member_source_seq_ids": [
+        36863484066,
+        44314802470,
+        28214294705,
+        24074510349,
+        73096112378,
+        25022808798,
+        1118927982,
+        2491479230,
+        10298326213,
+        74229116512,
+        10114995801,
+        6955396293,
+        26962389815,
+        19631272067,
+        37339342155,
+        41792594925,
+        25998706491,
+        4296305641,
+        29601717439,
+        1453606451,
+        6706864304
+      ],
+      "problem_group_id": "1003cab304118fc1414d0adcddc8bbf1ca71c5029df9f650eddf9a6df6801571"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/47"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "152b5459fa1fcaf577991ee0a4b478d01d5af244a36072074dd40a0a53626874",
+          "source_seq_id": 25459417027
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/47"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "441394e91d929f1d69cc178c4051fbbcb01a646dfcd37f5f66fb942ff5441fbf",
+          "source_seq_id": 29236805762
+        }
+      ],
+      "member_record_ids": [
+        "152b5459fa1fcaf577991ee0a4b478d01d5af244a36072074dd40a0a53626874",
+        "441394e91d929f1d69cc178c4051fbbcb01a646dfcd37f5f66fb942ff5441fbf"
+      ],
+      "member_source_seq_ids": [
+        25459417027,
+        29236805762
+      ],
+      "problem_group_id": "152b5459fa1fcaf577991ee0a4b478d01d5af244a36072074dd40a0a53626874"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/57"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "1be421ccb52adce29bc3a4372b6dc50963515f6a0a32e32045d927c65e38518f",
+          "source_seq_id": 4323227822
+        }
+      ],
+      "member_record_ids": [
+        "1be421ccb52adce29bc3a4372b6dc50963515f6a0a32e32045d927c65e38518f"
+      ],
+      "member_source_seq_ids": [
+        4323227822
+      ],
+      "problem_group_id": "1be421ccb52adce29bc3a4372b6dc50963515f6a0a32e32045d927c65e38518f"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/24"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "27085377dfee6885e49175841c06b99e9c8bda92a214faab3a9a1443e332801d",
+          "source_seq_id": 2926951405
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/24"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "3dce93d67c159e0d17f470f08675656fe406085921e49c805dcb4d68237fb408",
+          "source_seq_id": 28290029274
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/24"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d1463cf7166088ebd473fe385ffbd8a5ad1df85a1a77781b26b5c8a062b12894",
+          "source_seq_id": 36160270067
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/24"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "dbac6a1993986f2a1f400cff1e31f9824b9a3777bd3d1ca927ff5df20b97dc1c",
+          "source_seq_id": 2310677624
+        }
+      ],
+      "member_record_ids": [
+        "1e9bcc633c82a1d0cdfe490d16ad66d4edca859641733e1042ae6eb689d99187",
+        "206c4dc85fea8beff05828346638f916abd96e3c4ca50d6a5b1dd14368a3fd2b",
+        "25dea18645eda2693f1f12366207d297a477d449b760a6a1b2ce3ad0509abf64",
+        "27085377dfee6885e49175841c06b99e9c8bda92a214faab3a9a1443e332801d",
+        "3dce93d67c159e0d17f470f08675656fe406085921e49c805dcb4d68237fb408",
+        "6739f656b058427dbbbd2f249a53722b5a0661b382dba393180cd12b27b51df2",
+        "6c15bc7d7e190aac9a515691b3145d713f2c142c113f6b1c4285d63b2c8896db",
+        "7d28c13bd871976cb0ada89af5f9b50b78fdba92285e299ef873645e42d1a921",
+        "bf8ae6523434d88457c1420900407c5132a29efae0394be51f225f7abe6969fd",
+        "d1463cf7166088ebd473fe385ffbd8a5ad1df85a1a77781b26b5c8a062b12894",
+        "d1cf47065a1407bca0dfbb6d6f8d3b799478d75f8927bf9e6f769927bc70cd5f",
+        "dbac6a1993986f2a1f400cff1e31f9824b9a3777bd3d1ca927ff5df20b97dc1c",
+        "df40f85ca38a23c5af242a096dae5676343a0822e48f27e39aa41ac4aca74a86",
+        "e6a5178963e61ebbf6fe35c5d8f31fdaa61d0ce692dd353dba5d3fa9fdf12e56"
+      ],
+      "member_source_seq_ids": [
+        31623039248,
+        4322707883,
+        13762419370,
+        2926951405,
+        28290029274,
+        38160047428,
+        72788285583,
+        17411824814,
+        69831522784,
+        36160270067,
+        70425255257,
+        2310677624,
+        22840101364,
+        22800654505
+      ],
+      "problem_group_id": "1e9bcc633c82a1d0cdfe490d16ad66d4edca859641733e1042ae6eb689d99187"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "1fffab21b2370057949528f612c23deb726b238fea0b7d948bf1da8c10a71f91",
+          "source_seq_id": 14977501996
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "22727e442f4b7c144a1e3156d5949541bf5480fc50fcbf26eb2691be92af4acf",
+          "source_seq_id": 18479426472
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "5f9109e4eb6d58404aa2e0a5d125627ad922c829c1f9132e1e87e17a3634eb22",
+          "source_seq_id": 18958606070
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "83dedb855e48a62fe54093eaa9fbc290bd3aa0c60fffef5ae990e405baa56bdc",
+          "source_seq_id": 26862790441
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "916f17381b61fc056ba6ba6f6f39eea54cd256ae9f941369eaac45f6b57162a8",
+          "source_seq_id": 40677007626
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "9e5c037fd407c10f97dee4fe4b05ba70dd09c3bdd0a9f9c5a99e697b1771cf93",
+          "source_seq_id": 39469167117
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "bd0031bacb73302544885e2a17057d2547d8bf3a0c6954c6b54ca61cf5f4753e",
+          "source_seq_id": 23428746011
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "c04a83524c3db0321249f097c5e713e37bf11ea3a7ff25f8a71a1415c0429f77",
+          "source_seq_id": 32729926576
+        }
+      ],
+      "member_record_ids": [
+        "1fffab21b2370057949528f612c23deb726b238fea0b7d948bf1da8c10a71f91",
+        "22727e442f4b7c144a1e3156d5949541bf5480fc50fcbf26eb2691be92af4acf",
+        "5f9109e4eb6d58404aa2e0a5d125627ad922c829c1f9132e1e87e17a3634eb22",
+        "83dedb855e48a62fe54093eaa9fbc290bd3aa0c60fffef5ae990e405baa56bdc",
+        "916f17381b61fc056ba6ba6f6f39eea54cd256ae9f941369eaac45f6b57162a8",
+        "9e5c037fd407c10f97dee4fe4b05ba70dd09c3bdd0a9f9c5a99e697b1771cf93",
+        "bd0031bacb73302544885e2a17057d2547d8bf3a0c6954c6b54ca61cf5f4753e",
+        "c04a83524c3db0321249f097c5e713e37bf11ea3a7ff25f8a71a1415c0429f77"
+      ],
+      "member_source_seq_ids": [
+        14977501996,
+        18479426472,
+        18958606070,
+        26862790441,
+        40677007626,
+        39469167117,
+        23428746011,
+        32729926576
+      ],
+      "problem_group_id": "1fffab21b2370057949528f612c23deb726b238fea0b7d948bf1da8c10a71f91"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/133"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "2e30e261083d3ee1d7e685d61d3aff6816fff03d9f692a5f8e425979d1e5d1b8",
+          "source_seq_id": 2824703061
+        }
+      ],
+      "member_record_ids": [
+        "2e30e261083d3ee1d7e685d61d3aff6816fff03d9f692a5f8e425979d1e5d1b8",
+        "35ebe66106c1d4bc2224b2cef27c4b4ebfd193b6b06529fd081af271736f06f1",
+        "7387955967d765018bfae34f019af5c12b50c7762937f5acd2e18efe51478b2b",
+        "cd0d8f42d3375307217e4f03414bfa78a1d1752325e084d0292a615ceb8a453d"
+      ],
+      "member_source_seq_ids": [
+        2824703061,
+        14750853773,
+        70452262932,
+        71241936702
+      ],
+      "problem_group_id": "2e30e261083d3ee1d7e685d61d3aff6816fff03d9f692a5f8e425979d1e5d1b8"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/55"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "2eb94cf5c4a5b80418d6ce2acecdf180ea64a2a44a642b10328ab70c87b7a3c4",
+          "source_seq_id": 31969577575
+        }
+      ],
+      "member_record_ids": [
+        "2eb94cf5c4a5b80418d6ce2acecdf180ea64a2a44a642b10328ab70c87b7a3c4"
+      ],
+      "member_source_seq_ids": [
+        31969577575
+      ],
+      "problem_group_id": "2eb94cf5c4a5b80418d6ce2acecdf180ea64a2a44a642b10328ab70c87b7a3c4"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/133"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "31f1b24d844b8d006471d6dfccd7a877f92bd0e062e9071de657a698e6883fcb",
+          "source_seq_id": 18551926319
+        }
+      ],
+      "member_record_ids": [
+        "31f1b24d844b8d006471d6dfccd7a877f92bd0e062e9071de657a698e6883fcb"
+      ],
+      "member_source_seq_ids": [
+        18551926319
+      ],
+      "problem_group_id": "31f1b24d844b8d006471d6dfccd7a877f92bd0e062e9071de657a698e6883fcb"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/157"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "3318c0cc2c9ecc9188c584a73c45c741cec503fcb155c667daa57b4b13fbf1a3",
+          "source_seq_id": 70490496789
+        }
+      ],
+      "member_record_ids": [
+        "3318c0cc2c9ecc9188c584a73c45c741cec503fcb155c667daa57b4b13fbf1a3"
+      ],
+      "member_source_seq_ids": [
+        70490496789
+      ],
+      "problem_group_id": "3318c0cc2c9ecc9188c584a73c45c741cec503fcb155c667daa57b4b13fbf1a3"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "33989f247cb8fa47e1173705ca242f875544be5986fa311fe9cf42203da4b01f",
+          "source_seq_id": 6978845718
+        }
+      ],
+      "member_record_ids": [
+        "33989f247cb8fa47e1173705ca242f875544be5986fa311fe9cf42203da4b01f"
+      ],
+      "member_source_seq_ids": [
+        6978845718
+      ],
+      "problem_group_id": "33989f247cb8fa47e1173705ca242f875544be5986fa311fe9cf42203da4b01f"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/78"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "35d7dc65f130fbfebcaee94ee1a390251eddda777b5c93d232339c8a1df48943",
+          "source_seq_id": 39349891337
+        }
+      ],
+      "member_record_ids": [
+        "35d7dc65f130fbfebcaee94ee1a390251eddda777b5c93d232339c8a1df48943"
+      ],
+      "member_source_seq_ids": [
+        39349891337
+      ],
+      "problem_group_id": "35d7dc65f130fbfebcaee94ee1a390251eddda777b5c93d232339c8a1df48943"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/71"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b1ecadf04e76b77acc2a94a4d0a13a4f048a5ff0b2e898256530a32bd95df180",
+          "source_seq_id": 72655522767
+        }
+      ],
+      "member_record_ids": [
+        "39ff656a10bbb668c7a06e4b30b949aa2b0230e94c8e93a86e46fa6d55c03d84",
+        "9c5b1e46df9b6e2dac4804ce8c1b77ccfcb06e52c6eda60726de65da35db4ae0",
+        "b1ecadf04e76b77acc2a94a4d0a13a4f048a5ff0b2e898256530a32bd95df180",
+        "eab911bec210094c64f7253a97c369360037f66077e4b77d6d6dcdaa0670bd10"
+      ],
+      "member_source_seq_ids": [
+        19765937541,
+        19592188383,
+        72655522767,
+        15097937207
+      ],
+      "problem_group_id": "39ff656a10bbb668c7a06e4b30b949aa2b0230e94c8e93a86e46fa6d55c03d84"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/114"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "3ed2d55bab7bf40ebdb15d87a658c4ac6c8724237a0193bacce2dcaa6d508aab",
+          "source_seq_id": 43022080901
+        }
+      ],
+      "member_record_ids": [
+        "3ed2d55bab7bf40ebdb15d87a658c4ac6c8724237a0193bacce2dcaa6d508aab"
+      ],
+      "member_source_seq_ids": [
+        43022080901
+      ],
+      "problem_group_id": "3ed2d55bab7bf40ebdb15d87a658c4ac6c8724237a0193bacce2dcaa6d508aab"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "4ca8e6120c4ce37f433ad9ed626ce11fd1bc879a2a1bae5b72ed58b3939542bb",
+          "source_seq_id": 72916114904
+        }
+      ],
+      "member_record_ids": [
+        "4ca8e6120c4ce37f433ad9ed626ce11fd1bc879a2a1bae5b72ed58b3939542bb"
+      ],
+      "member_source_seq_ids": [
+        72916114904
+      ],
+      "problem_group_id": "4ca8e6120c4ce37f433ad9ed626ce11fd1bc879a2a1bae5b72ed58b3939542bb"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "code_ast_no_doc_entry_normalized",
+              "task_id": "SingleLineInfilling/HumanEval/13"
+            },
+            {
+              "reason": "response_code_ast_no_doc_entry_normalized",
+              "task_id": "SingleLineInfilling/HumanEval/13"
+            }
+          ],
+          "reasons": [
+            "code_ast_no_doc_entry_normalized",
+            "response_code_ast_no_doc_entry_normalized"
+          ],
+          "record_id": "4ebb602b07dd65afa972b5f4fc407dae0705f2803c3d35010fd2f6774fdfe56b",
+          "source_seq_id": 15931894609
+        }
+      ],
+      "member_record_ids": [
+        "4ebb602b07dd65afa972b5f4fc407dae0705f2803c3d35010fd2f6774fdfe56b"
+      ],
+      "member_source_seq_ids": [
+        15931894609
+      ],
+      "problem_group_id": "4ebb602b07dd65afa972b5f4fc407dae0705f2803c3d35010fd2f6774fdfe56b"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "4f5fb24cd19a64188960812d9e959ee56db37139705ecf43c8060ad5c33de30c",
+          "source_seq_id": 4837016335
+        }
+      ],
+      "member_record_ids": [
+        "4f5fb24cd19a64188960812d9e959ee56db37139705ecf43c8060ad5c33de30c"
+      ],
+      "member_source_seq_ids": [
+        4837016335
+      ],
+      "problem_group_id": "4f5fb24cd19a64188960812d9e959ee56db37139705ecf43c8060ad5c33de30c"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "code_ast_no_doc_entry_normalized",
+              "task_id": "SingleLineInfilling/HumanEval/13"
+            },
+            {
+              "reason": "response_code_ast_no_doc_entry_normalized",
+              "task_id": "SingleLineInfilling/HumanEval/13"
+            }
+          ],
+          "reasons": [
+            "code_ast_no_doc_entry_normalized",
+            "response_code_ast_no_doc_entry_normalized"
+          ],
+          "record_id": "65775eaef6f41ae5f54b53a45fd88ef6201c19d083230cfa04e50a0fd89d13f0",
+          "source_seq_id": 69976241793
+        }
+      ],
+      "member_record_ids": [
+        "65775eaef6f41ae5f54b53a45fd88ef6201c19d083230cfa04e50a0fd89d13f0"
+      ],
+      "member_source_seq_ids": [
+        69976241793
+      ],
+      "problem_group_id": "65775eaef6f41ae5f54b53a45fd88ef6201c19d083230cfa04e50a0fd89d13f0"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/10"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "a779d5954e9f21b1b385992a1c6831d65e05540b4b232e3e2759608edd6f0239",
+          "source_seq_id": 39620215980
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/10"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d4acea73dfb9d1f027f9a4cb2a28b9da214bf7101265c7211244872d3a1c68ef",
+          "source_seq_id": 13672647512
+        }
+      ],
+      "member_record_ids": [
+        "a779d5954e9f21b1b385992a1c6831d65e05540b4b232e3e2759608edd6f0239",
+        "d4acea73dfb9d1f027f9a4cb2a28b9da214bf7101265c7211244872d3a1c68ef"
+      ],
+      "member_source_seq_ids": [
+        39620215980,
+        13672647512
+      ],
+      "problem_group_id": "a779d5954e9f21b1b385992a1c6831d65e05540b4b232e3e2759608edd6f0239"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/70"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "aad80d0bec48c16d658c53268283a30d330bb1c6299f666efe5d518fe3de92ec",
+          "source_seq_id": 43654617394
+        }
+      ],
+      "member_record_ids": [
+        "aad80d0bec48c16d658c53268283a30d330bb1c6299f666efe5d518fe3de92ec"
+      ],
+      "member_source_seq_ids": [
+        43654617394
+      ],
+      "problem_group_id": "aad80d0bec48c16d658c53268283a30d330bb1c6299f666efe5d518fe3de92ec"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/133"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "ab1d2768faa82cfa7e84949761ad5770c8cac4cc001d369fa513ac9af5b6e953",
+          "source_seq_id": 40514594938
+        }
+      ],
+      "member_record_ids": [
+        "ab1d2768faa82cfa7e84949761ad5770c8cac4cc001d369fa513ac9af5b6e953",
+        "ec0b3125013c2f4d5de100dd77623e9a54bf69bb310724193147a8770e68ff6a"
+      ],
+      "member_source_seq_ids": [
+        40514594938,
+        8682246956
+      ],
+      "problem_group_id": "ab1d2768faa82cfa7e84949761ad5770c8cac4cc001d369fa513ac9af5b6e953"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/90"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "b42b7b54edfd30cb09d63afe88d37dcd4d4e240b69489c3a070c94f751b2b1e5",
+          "source_seq_id": 2958975674
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/90"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "ca58833542dba965ac3a1f8b93d1a91f4c3a397f07cad96e8c94ac768eb373c0",
+          "source_seq_id": 20800053729
+        }
+      ],
+      "member_record_ids": [
+        "b42b7b54edfd30cb09d63afe88d37dcd4d4e240b69489c3a070c94f751b2b1e5",
+        "ca58833542dba965ac3a1f8b93d1a91f4c3a397f07cad96e8c94ac768eb373c0"
+      ],
+      "member_source_seq_ids": [
+        2958975674,
+        20800053729
+      ],
+      "problem_group_id": "b42b7b54edfd30cb09d63afe88d37dcd4d4e240b69489c3a070c94f751b2b1e5"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/24"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "c3bf7c14a5f97872a09523eff38b7cc551231e8578ff1fa452995d7754288891",
+          "source_seq_id": 23476140558
+        }
+      ],
+      "member_record_ids": [
+        "c3bf7c14a5f97872a09523eff38b7cc551231e8578ff1fa452995d7754288891"
+      ],
+      "member_source_seq_ids": [
+        23476140558
+      ],
+      "problem_group_id": "c3bf7c14a5f97872a09523eff38b7cc551231e8578ff1fa452995d7754288891"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "cf136bedbdf23b149a0ba53e3e0d43f8c009b82a5ce00405949c99accb5f1cca",
+          "source_seq_id": 13160229257
+        },
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/126"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d9f519357083ec3d89870bb229156ab4895a6a7fe33939b34dad0e9c00d50fd0",
+          "source_seq_id": 27438868721
+        }
+      ],
+      "member_record_ids": [
+        "cf136bedbdf23b149a0ba53e3e0d43f8c009b82a5ce00405949c99accb5f1cca",
+        "d9f519357083ec3d89870bb229156ab4895a6a7fe33939b34dad0e9c00d50fd0"
+      ],
+      "member_source_seq_ids": [
+        13160229257,
+        27438868721
+      ],
+      "problem_group_id": "cf136bedbdf23b149a0ba53e3e0d43f8c009b82a5ce00405949c99accb5f1cca"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/8"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "d9ba9a20c759aea33512d655cd7bd9c1609345322d06be51efa45b4a67737eaa",
+          "source_seq_id": 73076019935
+        }
+      ],
+      "member_record_ids": [
+        "d9ba9a20c759aea33512d655cd7bd9c1609345322d06be51efa45b4a67737eaa"
+      ],
+      "member_source_seq_ids": [
+        73076019935
+      ],
+      "problem_group_id": "d9ba9a20c759aea33512d655cd7bd9c1609345322d06be51efa45b4a67737eaa"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/39"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "e4b143f6762111dedbe546e02b9f1b8160c5ecf6cf24f587b91618573d578857",
+          "source_seq_id": 16798607960
+        }
+      ],
+      "member_record_ids": [
+        "e4b143f6762111dedbe546e02b9f1b8160c5ecf6cf24f587b91618573d578857"
+      ],
+      "member_source_seq_ids": [
+        16798607960
+      ],
+      "problem_group_id": "e4b143f6762111dedbe546e02b9f1b8160c5ecf6cf24f587b91618573d578857"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/155"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "e61cf85321b8ae09ab254d921790668a378be4de5ffae5b29709cf10114313e1",
+          "source_seq_id": 40085076076
+        }
+      ],
+      "member_record_ids": [
+        "e61cf85321b8ae09ab254d921790668a378be4de5ffae5b29709cf10114313e1"
+      ],
+      "member_source_seq_ids": [
+        40085076076
+      ],
+      "problem_group_id": "e61cf85321b8ae09ab254d921790668a378be4de5ffae5b29709cf10114313e1"
+    },
+    {
+      "direct_matches": [
+        {
+          "duplicate_source_seq_ids": [],
+          "matches": [
+            {
+              "reason": "same_entry_normalized_assert_candidate",
+              "task_id": "SingleLineInfilling/HumanEval/51"
+            }
+          ],
+          "reasons": [
+            "same_entry_normalized_assert_candidate"
+          ],
+          "record_id": "f620d16d1680c7a1767b13c92b2480a5e1aaa06ae457cd1f34a2a09c15a9ebbc",
+          "source_seq_id": 28617372173
+        }
+      ],
+      "member_record_ids": [
+        "f620d16d1680c7a1767b13c92b2480a5e1aaa06ae457cd1f34a2a09c15a9ebbc"
+      ],
+      "member_source_seq_ids": [
+        28617372173
+      ],
+      "problem_group_id": "f620d16d1680c7a1767b13c92b2480a5e1aaa06ae457cd1f34a2a09c15a9ebbc"
+    }
+  ],
+  "matching_policy": "existing_conservative_text_ast_and_same_entry_assert_candidates",
+  "scope_note": "Conservative benchmark exclusion; candidate membership is not a claim of copying."
+}

@@ -77,6 +77,53 @@ class AuditFixTests(unittest.TestCase):
                 dict(instruction="B", code="x=2", output="```python\nx=9\n```")]
         self.assertEqual(len(set(connected_groups(rows))), 1)
 
+    def test_humaneval_13_different_entry_names_match_complete_program(self):
+        human = [{
+            "task_id": "SingleLineInfilling/HumanEval/13/L0",
+            "entry_point": "greatest_common_divisor",
+            "prompt": '\n\ndef greatest_common_divisor(a: int, b: int) -> int:\n    """GCD."""\n\n',
+            "canonical_solution": "    while b:\n",
+            "suffix": "        a, b = b, a % b\n    return a\n",
+            "test": "",
+        }]
+        record = {
+            "instruction": "Implement Euclidean GCD.",
+            "code": "def euclidean_gcd(a: int, b: int) -> int:\n    while b:\n        a, b = b, a % b\n    return a",
+            "output": "",
+            "entry_point": "euclidean_gcd",
+            "testcase": [],
+        }
+        reasons = {match["reason"] for match in human_matches(record, human_index(human))}
+        self.assertIn("code_ast_no_doc_entry_normalized", reasons)
+
+    def test_humaneval_variant_reconstruction_mismatch_is_not_silent(self):
+        human = [
+            {"task_id": "SingleLineInfilling/HumanEval/13/L0", "entry_point": "gcd",
+             "prompt": "def gcd(a, b):\n", "canonical_solution": "    return a\n", "suffix": "", "test": ""},
+            {"task_id": "SingleLineInfilling/HumanEval/13/L1", "entry_point": "gcd",
+             "prompt": "def gcd(a, b):\n", "canonical_solution": "    return b\n", "suffix": "", "test": ""},
+        ]
+        with self.assertRaisesRegex(ValueError, "HumanEval/13"):
+            human_index(human)
+
+    def test_humaneval_candidate_excludes_entire_connected_group(self):
+        human = [{
+            "task_id": "SingleLineInfilling/HumanEval/0/L0", "entry_point": "target",
+            "prompt": "def target(x):\n", "canonical_solution": "    return x + 1\n",
+            "suffix": "", "test": "",
+        }]
+        rows = [
+            {"seq_id": 1, "instruction": "shared", "code": "def other(x):\n    return x + 1",
+             "output": "", "entry_point": "other", "testcase": []},
+            {"seq_id": 2, "instruction": "shared", "code": "def unrelated(x):\n    return x - 1",
+             "output": "", "entry_point": "unrelated", "testcase": []},
+        ]
+        records, audit = deduplicate_and_split_records(rows, human_eval_rows=human)
+        self.assertEqual(records, [])
+        self.assertEqual(audit["humaneval_direct_candidate_rows"], 1)
+        self.assertEqual(audit["humaneval_excluded_groups"], 1)
+        self.assertEqual(audit["humaneval_decontaminated_rows"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

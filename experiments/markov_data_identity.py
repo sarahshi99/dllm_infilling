@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import ast
 import unicodedata
+from collections import defaultdict
 from typing import Any, Mapping, Sequence
 
 
@@ -69,6 +70,43 @@ def assert_keys(source: str, entry: str) -> set[str]:
     return {ast.dump(n.test, include_attributes=False) for n in ast.walk(tree) if isinstance(n, ast.Assert)}
 
 
+def human_base_task(row: Mapping[str, Any]) -> str:
+    return "/".join(str(row["task_id"]).split("/")[:3])
+
+
+def human_full_source(row: Mapping[str, Any]) -> str:
+    """Reconstruct the complete program before any normalization."""
+    return (
+        str(row.get("prompt") or "")
+        + str(row.get("canonical_solution") or "")
+        + str(row.get("suffix") or "")
+    )
+
+
+def human_variant_consistency(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    grouped: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in rows:
+        grouped[human_base_task(row)].append(row)
+    parse_failures = []
+    inconsistent = []
+    for task, variants in sorted(grouped.items()):
+        keys = []
+        for row in variants:
+            key = code_key(human_full_source(row), str(row.get("entry_point") or ""))
+            if key is None:
+                parse_failures.append(str(row["task_id"]))
+            else:
+                keys.append((str(row["task_id"]), key))
+        if len({key for _, key in keys}) > 1:
+            inconsistent.append({"base_task": task, "variant_ids": [task_id for task_id, _ in keys]})
+    return {
+        "base_tasks": len(grouped),
+        "variants": len(rows),
+        "parse_failures": parse_failures,
+        "inconsistent_base_tasks": inconsistent,
+    }
+
+
 def identity_keys(record: Mapping[str, Any]) -> list[tuple[str, str]]:
     """Same instructions OR same code connect records despite changed tests.
 
@@ -115,21 +153,27 @@ def connected_groups(records: Sequence[Mapping[str, Any]]) -> list[int]:
 
 
 def human_index(rows: Sequence[Mapping[str, Any]]) -> dict:
+    consistency = human_variant_consistency(rows)
+    if consistency["parse_failures"] or consistency["inconsistent_base_tasks"]:
+        raise ValueError(f"HumanEval variant reconstruction mismatch: {consistency}")
     codes, assertions = {}, {}
     seen = set()
     for row in rows:
-        task = "/".join(str(row["task_id"]).split("/")[:3])
+        task = human_base_task(row)
         if task in seen:
             continue
         seen.add(task)
         entry = str(row.get("entry_point") or "")
-        source = str(row.get("prompt") or "") + str(row.get("canonical_solution") or "") + str(row.get("suffix") or "")
-        key = code_key(source, entry)
-        if key:
-            codes.setdefault(key, set()).add(task)
+        key = code_key(human_full_source(row), entry)
+        codes.setdefault(key, set()).add(task)
         for key in assert_keys(str(row.get("test") or ""), entry):
             assertions.setdefault((entry, key), set()).add(task)
-    return {"codes": codes, "assertions": assertions, "base_tasks": len(seen)}
+    return {
+        "codes": codes,
+        "assertions": assertions,
+        "base_tasks": len(seen),
+        "variant_consistency": consistency,
+    }
 
 
 def human_matches(record: Mapping[str, Any], index: Mapping) -> list[dict]:

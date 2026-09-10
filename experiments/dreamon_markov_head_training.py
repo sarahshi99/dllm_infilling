@@ -180,7 +180,6 @@ def deduplicate_and_split_records(
     exact_seen: dict[str, dict[str, Any]] = {}
     duplicate_count = 0
     invalid_count = 0
-    contamination_reasons: dict[str, int] = {}
     for source in rows:
         record = _normalize_record(source)
         if not record["code"] or not record["instruction"]:
@@ -200,13 +199,6 @@ def deduplicate_and_split_records(
             duplicate_count += 1
             exact_seen[exact_key]["duplicate_source_seq_ids"].append(record["source_seq_id"])
             continue
-        contaminated, reason = _contaminated_by_humaneval(record, human_eval)
-        matches = human_matches(record, stronger_human_eval)
-        if matches:
-            contaminated, reason = True, matches[0]["reason"]
-        if contaminated:
-            contamination_reasons[str(reason)] = contamination_reasons.get(str(reason), 0) + 1
-            continue
         record["record_id"] = exact_key
         record["duplicate_source_seq_ids"] = []
         exact_seen[exact_key] = record
@@ -214,7 +206,51 @@ def deduplicate_and_split_records(
     output: list[dict[str, Any]] = []
     records = sorted(exact_seen.values(), key=lambda r: r["record_id"])
     groups = connected_groups(records)
+    direct_matches: dict[str, dict[str, Any]] = {}
+    contamination_reasons: dict[str, int] = {}
+    for record in records:
+        legacy_contaminated, legacy_reason = _contaminated_by_humaneval(record, human_eval)
+        matches = human_matches(record, stronger_human_eval)
+        reasons = {match["reason"] for match in matches}
+        if legacy_contaminated and legacy_reason:
+            reasons.add(str(legacy_reason))
+        if not reasons:
+            continue
+        for reason in reasons:
+            contamination_reasons[reason] = contamination_reasons.get(reason, 0) + 1
+        direct_matches[record["record_id"]] = {
+            "record_id": record["record_id"],
+            "source_seq_id": record["source_seq_id"],
+            "duplicate_source_seq_ids": record["duplicate_source_seq_ids"],
+            "reasons": sorted(reasons),
+            "matches": matches,
+        }
+    members_by_group: dict[int, list[dict[str, Any]]] = {}
     for record, representative in zip(records, groups):
+        members_by_group.setdefault(representative, []).append(record)
+    excluded_groups = {
+        representative
+        for representative, members in members_by_group.items()
+        if any(record["record_id"] in direct_matches for record in members)
+    }
+    exclusion_details = []
+    for representative in sorted(excluded_groups):
+        members = members_by_group[representative]
+        exclusion_details.append(
+            {
+                "problem_group_id": records[representative]["record_id"],
+                "member_record_ids": [record["record_id"] for record in members],
+                "member_source_seq_ids": [record["source_seq_id"] for record in members],
+                "direct_matches": [
+                    direct_matches[record["record_id"]]
+                    for record in members
+                    if record["record_id"] in direct_matches
+                ],
+            }
+        )
+    for record, representative in zip(records, groups):
+        if representative in excluded_groups:
+            continue
         # Existing record IDs suffice. Never regenerate a completed v1 manifest:
         # this corrected grouping applies only to newly versioned datasets.
         problem_key = records[representative]["record_id"]
@@ -231,8 +267,14 @@ def deduplicate_and_split_records(
         "normalized_duplicate_rows_removed": duplicate_count,
         "invalid_rows_removed": invalid_count,
         "humaneval_base_tasks": human_eval["base_task_count"],
-        "humaneval_decontaminated_rows": sum(contamination_reasons.values()),
+        "humaneval_variant_consistency": stronger_human_eval["variant_consistency"],
+        "humaneval_direct_candidate_rows": len(direct_matches),
+        "humaneval_excluded_groups": len(excluded_groups),
+        "humaneval_decontaminated_rows": sum(
+            len(members_by_group[representative]) for representative in excluded_groups
+        ),
         "humaneval_decontamination_reasons": contamination_reasons,
+        "humaneval_exclusion_details": exclusion_details,
         "available_rows_after_filters": len(output),
         "problem_group_count": len({row["problem_group_id"] for row in output}),
         "split_seed": int(split_seed),
