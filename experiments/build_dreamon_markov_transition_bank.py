@@ -98,8 +98,18 @@ class ReservoirBank:
                 seen INTEGER NOT NULL,
                 PRIMARY KEY (split, policy, stage)
             );
+            CREATE TABLE IF NOT EXISTS progress (
+                split TEXT PRIMARY KEY,
+                next_record_index INTEGER NOT NULL
+            );
             """
         )
+        sample_count = int(self.connection.execute("SELECT COUNT(*) FROM samples").fetchone()[0])
+        progress_count = int(self.connection.execute("SELECT COUNT(*) FROM progress").fetchone()[0])
+        if sample_count and not progress_count:
+            raise RuntimeError(
+                "existing partial bank has no exact-resume progress; use a fresh versioned database"
+            )
         self.per_problem_cap = int(per_problem_cap)
         self.oversample = float(oversample)
         self.seen: dict[tuple[str, str, str], int] = defaultdict(int)
@@ -112,7 +122,6 @@ class ReservoirBank:
             "SELECT split, policy, problem_group_id, COUNT(*) FROM samples GROUP BY split, policy, problem_group_id"
         ):
             self.selected_counts[(split, policy, problem)] = int(count)
-        self.pending = 0
 
     def _deterministic_slot(self, sample_key: str, seen: int) -> int:
         value = int.from_bytes(hashlib.sha256(sample_key.encode("utf-8")).digest()[:8], "big")
@@ -172,19 +181,25 @@ class ReservoirBank:
             self.selected_counts[(split, policy, old_problem)] -= 1
         if old_problem != problem_key[2]:
             self.selected_counts[problem_key] += 1
-        self.pending += 1
-        if self.pending >= 256:
-            self.flush()
         return True
 
-    def flush(self) -> None:
+    def checkpoint(self, progress_split: str, next_record_index: int) -> None:
         for (split, policy, stage), seen in self.seen.items():
             self.connection.execute(
                 "INSERT OR REPLACE INTO counters(split,policy,stage,seen) VALUES(?,?,?,?)",
                 (split, policy, stage, int(seen)),
             )
+        self.connection.execute(
+            "INSERT OR REPLACE INTO progress(split,next_record_index) VALUES(?,?)",
+            (str(progress_split), int(next_record_index)),
+        )
         self.connection.commit()
-        self.pending = 0
+
+    def next_record_index(self, split: str) -> int:
+        row = self.connection.execute(
+            "SELECT next_record_index FROM progress WHERE split=?", (str(split),)
+        ).fetchone()
+        return int(row[0]) if row else 0
 
     def complete(self, split: str, split_capacities: Mapping[tuple[str, str], int]) -> bool:
         for (policy, stage), capacity in split_capacities.items():
@@ -200,7 +215,6 @@ class ReservoirBank:
         return True
 
     def counts(self) -> list[dict[str, Any]]:
-        self.flush()
         rows = []
         for split, policy, stage, selected in self.connection.execute(
             "SELECT split,policy,stage,COUNT(*) FROM samples GROUP BY split,policy,stage ORDER BY split,policy,stage"
@@ -217,7 +231,7 @@ class ReservoirBank:
         return rows
 
     def close(self) -> None:
-        self.flush()
+        self.connection.commit()
         self.connection.execute("PRAGMA wal_checkpoint(TRUNCATE)")
         self.connection.close()
 
@@ -290,7 +304,11 @@ def run(args: argparse.Namespace) -> int:
         raise ValueError("all split targets must be positive even numbers")
     split_caps = {split: capacities(target) for split, target in targets.items()}
     for split in ("train", "validation", "external_test"):
-        for record in records_by_split[split]:
+        start_index = bank.next_record_index(split)
+        processed[split] = start_index
+        for record_index, record in enumerate(
+            records_by_split[split][start_index:], start=start_index
+        ):
             if bank.complete(split, split_caps[split]):
                 break
             processed[split] += 1
@@ -347,6 +365,7 @@ def run(args: argparse.Namespace) -> int:
                     candidate_counts[(split, policy, transition["generation_stage"])] += 1
                     capacity = split_caps[split][(policy, transition["generation_stage"])]
                     selected_writes += int(bank.add(row, capacity))
+            bank.checkpoint(split, record_index + 1)
             if processed[split] % 100 == 0:
                 print(
                     json.dumps(

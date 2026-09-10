@@ -1,0 +1,65 @@
+{
+  "errors": [],
+  "gpu_used": false,
+  "human_eval": {
+    "base_tasks": 164,
+    "direct_candidate_rows": 88,
+    "excluded_groups": 39,
+    "excluded_records": 559,
+    "prepared_intersection": 0,
+    "variant_consistency": {
+      "base_tasks": 164,
+      "inconsistent_base_tasks": [],
+      "parse_failures": [],
+      "variants": 1033
+    },
+    "variants": 1033
+  },
+  "manifests": {
+    "external_rows": 9925,
+    "manifest_record_id_match": true,
+    "split_rows": 106491
+  },
+  "prepared": {
+    "cross_split_groups": {},
+    "model_vocab_size": 152064,
+    "problem_groups": 69516,
+    "rows": 106491,
+    "split_counts": {
+      "external_test": 9925,
+      "train": 86019,
+      "validation": 10547
+    },
+    "token_id_max": 151645,
+    "token_id_min": 0,
+    "tokenization_mismatch_count": 0,
+    "tokenizer_vocab_size": 151668,
+    "unique_record_ids": 106491,
+    "unique_source_seq_ids": 106491
+  },
+  "rebuild": {
+    "available_rows_before_tokenization": 117346,
+    "invalid_rows_removed": 0,
+    "normalized_duplicate_rows_removed": 373,
+    "problem_group_count": 75484,
+    "records_omitted_by_tokenization": 10855,
+    "split_counts_before_tokenization": {
+      "external_test": 10879,
+      "train": 94896,
+      "validation": 11571
+    },
+    "tokenization_exclusions": {
+      "context_over_1024": 9,
+      "split_or_tokenize:ValueError": 10846
+    }
+  },
+  "source": {
+    "config": "educational_instruct",
+    "dataset_id": "OpenCoder-LLM/opc-sft-stage2",
+    "revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
+    "rows": 118278,
+    "unique_seq_ids": 118278
+  },
+  "source_artifacts_unchanged": true,
+  "status": "passed"
+}

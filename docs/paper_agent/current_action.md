@@ -10,6 +10,15 @@
 - kill/pause：排除后任一既定 bank 配额不足、两个头均失败、数据或主键完整性错误、或 GPU 被其他任务占用且无法安全串行。禁止缩小规模、重复样本凑数或覆盖 v1。
 - outputs：Git 结果目录 `analysis_outputs/dreamon_markov_head_training_20260910_v2/`；服务器数据/权重 `/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/`；运行日志 `logs/paper_agent/20260910_dreamon_markov_v2_k2_eval.log`。
 
+### 2026-09-10 启动前复算审计
+
+- action：从固定 OpenCoder 源数据和 HumanEval 1033 条记录重新计算标准化去重、候选匹配、传递关联组和确定性 split；逐条对照服务器 `prepared_records.jsonl.gz`、完整 split manifest 与 external-test manifest。
+- reviewer motivation：防止把数据准备脚本成功退出误当成候选排除、组隔离和 tokenized artifact 均正确。
+- exact command：`HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/audit_dreamon_markov_prepared_data.py --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --prepared-records /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/data/prepared_records.jsonl.gz --split-manifest analysis_outputs/dreamon_markov_head_training_20260910_v2/split_manifest.jsonl.zst --external-test-manifest analysis_outputs/dreamon_markov_head_training_20260910_v2/external_test_manifest.jsonl.zst --exclusion-audit analysis_outputs/dreamon_markov_head_training_20260910_v2/humaneval_exclusion_audit.json --data-summary analysis_outputs/dreamon_markov_head_training_20260910_v2/data_manifest_summary.json --preparation-audit analysis_outputs/dreamon_markov_head_training_20260910_v2/split_and_dedup_audit.json --output analysis_outputs/dreamon_markov_head_training_20260910_v2/prepared_data_reaudit.json`。
+- success：源数据 118278、HumanEval 1033/164；实际 prepared 主键唯一且与 manifest 完全一致；HumanEval 直接候选及其 39 个关联组与 prepared 交集为零；group 零跨 split；token 计数、长度、row seed、词表边界全部一致。
+- pause/kill：任一主键、候选排除、group split、token 长度或词表边界不一致；失败时不启动 GPU bank。
+- resources：CPU only；不修改源数据或既有 v1/v2 artifact。GPU bank 仍需后续真实生成并做 200000/20000/20000 的 SQLite 成员审计。
+
 ## 2026-09-10 当前行动：服务器实际成员核查
 
 - action：只读关联已保存的 transition bank、HumanEval 候选 record_id 与现有验证/外部诊断 sample_key；命令为 `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/audit_markov_bank_membership.py --result-dir analysis_outputs/dreamon_markov_head_training_20260901_v1 --bank-db /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/transition_bank.sqlite`。
