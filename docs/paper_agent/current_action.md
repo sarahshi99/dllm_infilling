@@ -19,6 +19,17 @@
 - pause/kill：任一主键、候选排除、group split、token 长度或词表边界不一致；失败时不启动 GPU bank。
 - resources：CPU only；不修改源数据或既有 v1/v2 artifact。GPU bank 仍需后续真实生成并做 200000/20000/20000 的 SQLite 成员审计。
 
+### 2026-09-10 GPU transition bank 启动
+
+- action：在独立 detached execution worktree 中，从通过复算审计的 v2 prepared records 生成共享 transition bank；两种轨迹各半，early/middle/late 固定配额，offset=1，每题每策略最多 16。
+- exact command：`tmux new-window -t dreamon_markov_v2_k2_eval -n bank-v2 'bash scripts/manual_launch_dreamon_markov_v2_bank_20260910.sh'`。
+- GPU/env：物理 H200 GPU 0；`CUDA_VISIBLE_DEVICES=0`；`dreamon-repro`；允许与当前外部低占用进程共享，但不 kill、不抢占或修改对方任务。
+- input：`/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/data/prepared_records.jsonl.gz`。
+- output：`/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/transition_bank.sqlite`；compact summary 写入 v2 result dir。
+- log：`logs/paper_agent/20260910_dreamon_markov_v2_bank.log`。
+- success：SQLite 精确达到 train/validation/external=`200000/20000/20000`，每个 policy/stage stratum 达到固定容量，最大每题每策略不超过 16；随后必须执行实际成员审计。
+- pause/kill：CUDA/OOM/ECC、模型/词表/官方源码版本不符、任一 split 配额真实不足、数据主键或坐标断言失败。不得重复采样凑数。
+
 ## 2026-09-10 当前行动：服务器实际成员核查
 
 - action：只读关联已保存的 transition bank、HumanEval 候选 record_id 与现有验证/外部诊断 sample_key；命令为 `/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python analysis/audit_markov_bank_membership.py --result-dir analysis_outputs/dreamon_markov_head_training_20260901_v1 --bank-db /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260901_v1/transition_bank.sqlite`。
