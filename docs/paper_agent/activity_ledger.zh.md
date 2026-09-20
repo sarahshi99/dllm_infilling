@@ -1,5 +1,12 @@
 # Paper-Agent Activity Ledger
 
+## 2026-09-20 UTC 机器重启后的 v2 恢复审计
+
+- 检查发现 v2 bank 已在 2026-09-11 完成 `240000/240000`，但训练 watcher 在审计入口因 detached worktree 未加入 `sys.path` 报 `ModuleNotFoundError: experiments`，未进入 TV/KL。
+- 修复 `analysis/audit_dreamon_markov_v2_bank.py` 的 repo path 注入，并允许 bank 设计中合法的 `reference_token_id=-1` sentinel。
+- 对全 SQLite 逐条复核通过：`errors=[]`、`quick_check=ok`、unique sample keys=`240000`、payload decode errors=`0`、excluded intersection=`0`、最大每题每策略=`16`、18 个 strata exact counts。
+- 下一步：从新提交启动可恢复 v2 training watcher，直接进入 audit 后的 TV/KL，不重建样本库或加载 v1 权重。
+
 ## 2026-09-10 UTC DreamOn Markov v2 数据复算与 GPU 启动
 
 - 从固定 OpenCoder/HumanEval 源重新计算全部 identity/group/split/tokenization，`prepared_data_reaudit.json` 通过且 `errors=[]`：source/prepared=`118278/106491`，HumanEval candidate/group/record exclusion=`88/39/559`，prepared intersection=`0`，跨 split group=`0`，token mismatch=`0`。

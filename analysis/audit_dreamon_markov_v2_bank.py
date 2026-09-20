@@ -7,10 +7,15 @@ import gzip
 import json
 import math
 import sqlite3
+import sys
 import zlib
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
+
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
 
 from experiments.build_dreamon_markov_transition_bank import (
     MODEL_REVISION,
@@ -206,6 +211,8 @@ def run(args: argparse.Namespace) -> int:
         previous = payload.get("previous_token_id")
         reference = payload.get("reference_token_id")
         for name, token in (("previous_token_id", previous), ("reference_token_id", reference)):
+            if name == "reference_token_id" and token == -1:
+                continue
             if not isinstance(token, int) or not 0 <= token < MODEL_VOCAB_SIZE:
                 error("token_outside_model_vocabulary", sample_key=sample_key, field=name, token=token)
         if previous in {MASK_TOKEN_ID, EXPAND_TOKEN_ID, EOS_TOKEN_ID}:

@@ -1,5 +1,11 @@
 # Paper Agent Dashboard
 
+## 2026-09-20 机器重启后的 v2 恢复
+
+- v2 transition bank 已完成 `240000/240000`；机器重启后重新执行全量 SQLite 审计并通过：`errors=[]`、SQLite `quick_check=ok`、18 个 strata 配额正确、unique sample keys=`240000`、excluded intersection=`0`、per-problem-policy max=`16`。
+- 上一轮自动 watcher 只在审计入口因 `ModuleNotFoundError: experiments` 退出，TV/KL 尚未开始；已修复导入路径和 `reference_token_id=-1` 合法 sentinel 判断。
+- 当前恢复入口：新 tmux 中运行 bank 后续 watcher，直接进入 common init/microbatch/TV/KL；不重建 bank、不复用旧 v1 权重。
+
 <!-- dreamon-markov-v2-training-20260910 -->
 ## 2026-09-10 DreamOn Markov v2 运行中
 

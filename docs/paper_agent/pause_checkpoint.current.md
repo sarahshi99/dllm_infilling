@@ -1,5 +1,12 @@
 # Paper Agent Pause Checkpoint
 
+## 2026-09-20 机器重启恢复入口
+
+- v2 transition bank 已于 2026-09-11 16:38 UTC 完成：`240000/240000`，原 SQLite 保留在 `/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/transition_bank.sqlite`。
+- 2026-09-20 重新执行全库审计后通过：`actual_bank_membership_audit_v2.json` status=`passed`，errors=`[]`，SQLite `quick_check=ok`，18 个配额 strata 全部正确，unique sample keys=`240000`，excluded intersection=`0`，最大每题每策略=`16`。
+- 上次 watcher 未进入 TV/KL；唯一错误是审计脚本直接执行时缺少 worktree import path。合法 `reference_token_id=-1` sentinel 也已纳入审计规则。
+- 恢复应从 v2 bank 后自动链开始，不重新生成 bank、不加载旧 v1 权重；入口为 `scripts/manual_continue_dreamon_markov_v2_training_20260910.sh`。
+
 <!-- dreamon-markov-v2-training-20260910 -->
 ## 2026-09-10 当前状态：v2 数据复算通过，GPU bank 与训练 watcher 已启动
 

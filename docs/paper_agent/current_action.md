@@ -1,5 +1,13 @@
 # 当前行动：Markov 训练审计修正与双词元推理准备
 
+### 2026-09-20 机器重启后的 v2 恢复
+
+- action：复用 2026-09-11 已完成的 v2 transition bank，不重建样本库；修复全量 SQLite 审计脚本的 worktree 导入路径和合法 `reference_token_id=-1` sentinel 判断。
+- evidence：`transition_bank_summary.json`=`completed`，总数=`240000`；全量审计 `actual_bank_membership_audit_v2.json`=`passed`，errors=`[]`，SQLite quick_check=`ok`，unique sample keys=`240000`，排除交集=`0`，每题每策略上限=`16`。
+- previous interruption：旧训练 watcher 在审计入口因 `ModuleNotFoundError: experiments` 退出，未开始 TV/KL，不是样本库或训练数值错误。
+- next exact command：在新的 detached worktree 中运行 `bash scripts/manual_continue_dreamon_markov_v2_training_20260910.sh`；脚本将从 bank summary 直接进入已通过的 audit 后恢复 common init/microbatch/TV/KL。
+- GPU policy：沿用 CUDA GPU0，允许与现有任务共享；不 kill、不覆盖 v1、显存不足时由已有 microbatch 探测和 checkpoint 恢复处理。
+
 <!-- markov-training-audit-20260908 -->
 ## 2026-09-10 当前行动：无基准候选的 v2 数据与训练
 
