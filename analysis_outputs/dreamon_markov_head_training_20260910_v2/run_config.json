@@ -1,0 +1,18 @@
+{
+  "base_head": "fdbd12296234b95d58ed52c3f068c3d94a1c63d6",
+  "branch": "codex/dreamon-markov-k2-eval-v1",
+  "dataset_revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d",
+  "effective_batch": 128,
+  "external_test_open_count": 1,
+  "head_seed": 42,
+  "learning_rate": 0.0003,
+  "max_epochs": 5,
+  "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+  "patience": 2,
+  "rank": 256,
+  "reused_external_diagnostics": [],
+  "run_date_utc": "2026-09-10",
+  "run_id": "dreamon_markov_head_training_20260910_v2",
+  "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "split_seed": 20260901
+}

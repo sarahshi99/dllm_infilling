@@ -1,0 +1,338 @@
+{
+  "bank_db": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/transition_bank.sqlite",
+  "bank_db_sha256": "a8446623a5b4f420d4e32dc90a400a42a6e350758faa36eb19ca4f4c53a7ee94",
+  "bank_db_size": 423882752,
+  "candidate_counts": [
+    {
+      "count": 108107,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 8187,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 30062,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 110241,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 8350,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 30510,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 1171193,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 90813,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 334703,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 1196042,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 92108,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 342166,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 114621,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 8882,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 33182,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 117012,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 8864,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 33986,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    }
+  ],
+  "dreamon_parameter_versions_unchanged": true,
+  "dreamon_requires_grad_false": true,
+  "elapsed_seconds": 129436.58391284943,
+  "exclusion_counts": [
+    {
+      "count": 3349,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "external_test"
+    },
+    {
+      "count": 8579,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "external_test"
+    },
+    {
+      "count": 177,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "external_test"
+    },
+    {
+      "count": 7103,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "external_test"
+    },
+    {
+      "count": 34943,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "train"
+    },
+    {
+      "count": 93417,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "train"
+    },
+    {
+      "count": 1746,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "train"
+    },
+    {
+      "count": 75889,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "train"
+    },
+    {
+      "count": 3445,
+      "policy": "confidence_global",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "validation"
+    },
+    {
+      "count": 8944,
+      "policy": "confidence_global",
+      "reason": "structural_or_coordinate_change",
+      "split": "validation"
+    },
+    {
+      "count": 157,
+      "policy": "left_to_right_frontier",
+      "reason": "right_neighbor_not_fresh_active_mask",
+      "split": "validation"
+    },
+    {
+      "count": 7370,
+      "policy": "left_to_right_frontier",
+      "reason": "structural_or_coordinate_change",
+      "split": "validation"
+    }
+  ],
+  "maximum_selected_per_problem_policy": 16,
+  "model_forwards": 4084148,
+  "no_full_vocabulary_logits_serialized": true,
+  "oversample_factor": 1.25,
+  "per_problem_cap": 16,
+  "records_processed": {
+    "external_test": 7280,
+    "train": 77635,
+    "validation": 7527
+  },
+  "selected_counts": [
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "external_test"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "external_test"
+    },
+    {
+      "count": 33334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "train"
+    },
+    {
+      "count": 33334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 33333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "train"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "confidence_global",
+      "split": "validation"
+    },
+    {
+      "count": 3334,
+      "generation_stage": "early",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "late",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    },
+    {
+      "count": 3333,
+      "generation_stage": "middle",
+      "policy": "left_to_right_frontier",
+      "split": "validation"
+    }
+  ],
+  "source_provenance": {
+    "omegaconf_compatibility": "import-only shim; pinned generator never references OmegaConf after import",
+    "source_evaluate_sha256": "d8cf3ce89a23b182444d42f270d4b3bd030a9dc7e752e075b92919fb1a1da57c",
+    "source_generator_sha256": "7709f1ef5b465ae135c12a3dcd34faeae49e09e5cfb99b29606b4e925aa18858",
+    "source_license": "Apache-2.0",
+    "source_license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "source_repository": "DreamLM/DreamOn",
+    "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8"
+  },
+  "status": "completed",
+  "targets": {
+    "external_test": 20000,
+    "train": 200000,
+    "validation": 20000
+  },
+  "total_selected": 240000,
+  "vocabulary": {
+    "config_vocab_size": 152064,
+    "eos_token_id": 151643,
+    "expand_token_id": 151667,
+    "expected_rank256_parameter_count": 77856768,
+    "mask_token_id": 151666,
+    "reserved_model_rows": 396,
+    "tokenizer_length": 151668,
+    "tokenizer_max_id": 151667
+  }
+}

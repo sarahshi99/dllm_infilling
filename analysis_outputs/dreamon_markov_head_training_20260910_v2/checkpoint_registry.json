@@ -1,0 +1,82 @@
+[
+  {
+    "exists": true,
+    "head": "tv",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/tv/pilot/best.pt",
+    "phase": "pilot",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind tv --common arguments from commands.log",
+    "sha256": "5a13ee863cbc7ade8d7d7452629de9005b5f7abc029eeb03efb3618498b918a2",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "tv",
+    "label": "last",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/tv/pilot/last.pt",
+    "phase": "pilot",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind tv --common arguments from commands.log",
+    "sha256": "533fdd44700cedc32799d5f2fc0cccb9d8cd37b99f0628f2e1d695ede1a1ceb9",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "tv",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/tv/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind tv --common arguments from commands.log",
+    "sha256": "674895504a17f199e43ce380a485298c6fa9aa7764ef12d6a91e91d5869a61cd",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "tv",
+    "label": "last",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/tv/full/last.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind tv --common arguments from commands.log",
+    "sha256": "3b35761afa2ea9b099d47068c56745856cd0ae205d9bf5acfe58f213f2d1d637",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/pilot/best.pt",
+    "phase": "pilot",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "942c5100f8ec35d000a10eed012ca9d8ad594c6c09be13d94db9f2af9f1f459f",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "kl",
+    "label": "last",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/pilot/last.pt",
+    "phase": "pilot",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "cae71afe7741f1440f9c811addf946cf7d419dbe181d0d24248e730e19cacb1d",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  {
+    "exists": true,
+    "head": "kl",
+    "label": "last",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/last.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "195ea2c29f5d0f84447a6d589e84a6c398c05538f623e0f804a7ec67559a1355",
+    "size": 934907317
+  }
+]

@@ -1,4 +1,12 @@
-# 当前行动：Markov 训练审计修正与双词元推理准备
+# 当前行动：Markov v2 训练结果归档与 K=2 推理实现
+
+<!-- dreamon-markov-k2-implementation-20261010 -->
+## 2026-10-10 v2 训练已完成；进入 K=2 代码与等价性检查
+
+- 已完成：v2 prepared-data 与 SQLite bank 审计通过；TV/KL 已从共同零输出初始化完成 pilot/full；验证和外部分布测试均选择 KL、`lambda=1`。这些是分布拟合结果，不是 HumanEval Pass@1。
+- 当前动作：提交精简、可复核的 v2 训练摘要/配置；实现固定左前沿相邻双词元和 global 原 top-2 相邻短链，并先运行合成与真实小样本等价性检查。
+- 不做：不重训、不重建 bank、不调 lambda、不启动 1033 条正式生成、不修改历史 v1。
+- 行动说明：`docs/paper_agent/experiments/20261010_markov_k2_implementation_action.zh.md`。
 
 ### 2026-09-20 机器重启后的 v2 恢复
 
