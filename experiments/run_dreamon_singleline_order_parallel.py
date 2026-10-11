@@ -28,10 +28,13 @@ from experiments.dreamon_singleline_adapter import (
 )
 from experiments.dreamon_singleline_order_parallel import (
     GLOBAL_CONFIDENCE,
+    K2_LEGACY_ACTIONS,
+    K2_SEQUENTIAL_ACTIONS,
     LEFT_TO_RIGHT_FRONTIER,
     decode_with_policy,
     validate_resume_rows,
 )
+from experiments.train_dreamon_markov_head import make_head
 from experiments.lrdllm_dreamcoder_adapter import (
     append_jsonl,
     atomic_write_json,
@@ -48,6 +51,16 @@ VARIANTS = {
     "L1": (LEFT_TO_RIGHT_FRONTIER, 1),
     "L2": (LEFT_TO_RIGHT_FRONTIER, 2),
     "L4": (LEFT_TO_RIGHT_FRONTIER, 4),
+}
+
+
+MARKOV_K2_VARIANTS = {
+    "全局置信度、逐词刷新、无头": (GLOBAL_CONFIDENCE, 1, False, K2_LEGACY_ACTIONS),
+    "全局置信度、每轮最多两个、无头": (GLOBAL_CONFIDENCE, 2, False, K2_SEQUENTIAL_ACTIONS),
+    "全局置信度、top-2 相邻时加 KL 头": (GLOBAL_CONFIDENCE, 2, True, K2_SEQUENTIAL_ACTIONS),
+    "固定左前沿、逐词刷新、无头": (LEFT_TO_RIGHT_FRONTIER, 1, False, K2_LEGACY_ACTIONS),
+    "固定左前沿、每轮最多两个、无头": (LEFT_TO_RIGHT_FRONTIER, 2, False, K2_SEQUENTIAL_ACTIONS),
+    "固定左前沿、第二词元加 KL 头": (LEFT_TO_RIGHT_FRONTIER, 2, True, K2_SEQUENTIAL_ACTIONS),
 }
 
 
@@ -85,6 +98,9 @@ def run(args: argparse.Namespace) -> int:
     markov_path = output_dir / "markov_transitions.jsonl"
     progress_path = output_dir / "progress.json"
     existing = read_jsonl(cases_path)
+    variants = MARKOV_K2_VARIANTS if args.markov_k2 else {
+        name: (policy, k, False, K2_LEGACY_ACTIONS) for name, (policy, k) in VARIANTS.items()
+    }
     completed_by_variant = {
         variant: validate_resume_rows(
             [
@@ -95,7 +111,7 @@ def run(args: argparse.Namespace) -> int:
             variant=variant,
             seed=int(args.seed),
         )
-        for variant in VARIANTS
+        for variant in variants
     }
     evaluator_root = Path(args.evaluator_root).resolve()
     rows = load_dataset_rows(evaluator_root, "HumanEval-SingleLineInfilling")
@@ -116,6 +132,16 @@ def run(args: argparse.Namespace) -> int:
             snapshot, trust_remote_code=True, local_files_only=True, torch_dtype=torch.bfloat16
         ).to(args.device).eval()
     ).eval()
+    markov_head = None
+    if args.markov_k2:
+        if not args.markov_checkpoint:
+            raise RuntimeError("--markov-k2 requires --markov-checkpoint")
+        markov_head = make_head(model.model.config, args.device)
+        checkpoint = torch.load(Path(args.markov_checkpoint).resolve(), map_location="cpu", weights_only=False)
+        markov_head.load_state_dict(checkpoint["head"])
+        markov_head.eval()
+        for parameter in markov_head.parameters():
+            parameter.requires_grad_(False)
     config = protocol_config(64)
     atomic_write_json(
         output_dir / "run_config.json",
@@ -126,18 +152,28 @@ def run(args: argparse.Namespace) -> int:
             "model_snapshot": str(snapshot),
             "device": args.device,
             "seed": int(args.seed),
-            "variants": {name: {"policy": policy, "requested_k": k} for name, (policy, k) in VARIANTS.items()},
+            "variants": {
+                name: {
+                    "policy": policy,
+                    "requested_k": k,
+                    "markov_enabled": enabled,
+                    "k2_action_mode": action_mode,
+                }
+                for name, (policy, k, enabled, action_mode) in variants.items()
+            },
+            "markov_checkpoint": str(Path(args.markov_checkpoint).resolve()) if args.markov_checkpoint else None,
+            "markov_lambda": float(args.markov_lambda) if args.markov_k2 else 0.0,
             "official_protocol": config,
             "evaluator": evaluator_info,
         },
     )
     started = time.perf_counter()
-    expected = len(selected_rows) * len(VARIANTS)
+    expected = len(selected_rows) * len(variants)
     for row_index, source_row in enumerate(selected_rows):
         safe = selection_view(source_row)
         prefix = tokenizer.encode(safe["prefix"], add_bos=True, add_eos=False)
         suffix = tokenizer.encode(safe["suffix"], add_bos=False, add_eos=True)
-        for variant, (policy, requested_k) in VARIANTS.items():
+        for variant, (policy, requested_k, use_markov, action_mode) in variants.items():
             task_id = str(source_row["task_id"])
             if task_id in completed_by_variant[variant]:
                 continue
@@ -163,6 +199,10 @@ def run(args: argparse.Namespace) -> int:
                     requested_k=requested_k,
                     policy=policy,
                     device=args.device,
+                    markov_head=markov_head if use_markov else None,
+                    markov_lambda=float(args.markov_lambda) if use_markov else 0.0,
+                    k2_action_mode=action_mode,
+                    markov_sampling_seed=row_seed,
                 )
                 completion = str(decoded.pop("completion"))
                 evaluation = check_correctness(source_row, completion, 3.0, 0)
@@ -208,6 +248,9 @@ def parser() -> argparse.ArgumentParser:
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--case-limit", type=int)
+    parser.add_argument("--markov-k2", action="store_true")
+    parser.add_argument("--markov-checkpoint")
+    parser.add_argument("--markov-lambda", type=float, default=1.0)
     return parser
 
 

@@ -9,6 +9,8 @@ from torch.nn import functional as F
 
 GLOBAL_CONFIDENCE = "confidence_global"
 LEFT_TO_RIGHT_FRONTIER = "left_to_right_frontier"
+K2_LEGACY_ACTIONS = "legacy"
+K2_SEQUENTIAL_ACTIONS = "sequential_pair"
 
 
 @dataclass(frozen=True)
@@ -23,6 +25,43 @@ class PreparedDistribution:
     probabilities: torch.Tensor
     filtered_logits: torch.Tensor
     retained_mask: torch.Tensor
+
+
+@dataclass(frozen=True)
+class K2PairDecision:
+    """One same-forward K=2 decision before canvas mutation."""
+
+    selected_ranks: list[int]
+    left_rank: int | None
+    right_rank: int | None
+    sequential_actions: bool
+    markov_eligible: bool
+
+
+def k2_pair_decision(
+    *,
+    selected_ranks: Sequence[int],
+    absolute_positions: Sequence[int],
+    policy: str,
+) -> K2PairDecision:
+    """Fix the original candidates, then identify an adjacent spatial pair."""
+    ranks = [int(rank) for rank in selected_ranks]
+    if len(ranks) != 2:
+        return K2PairDecision(ranks, None, None, False, False)
+    ordered = sorted(ranks, key=lambda rank: int(absolute_positions[rank]))
+    adjacent = int(absolute_positions[ordered[1]]) == int(absolute_positions[ordered[0]]) + 1
+    if not adjacent:
+        # Global non-adjacent top-2 must remain the released parallel behavior.
+        return K2PairDecision(ranks, None, None, False, False)
+    if policy not in {GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER}:
+        raise ValueError(f"unknown policy: {policy}")
+    return K2PairDecision(
+        ranks,
+        ordered[0],
+        ordered[1],
+        True,
+        True,
+    )
 
 
 @dataclass
@@ -356,12 +395,22 @@ def decode_with_policy(
     requested_k: int,
     policy: str,
     device: str,
+    markov_head: Any | None = None,
+    markov_lambda: float = 0.0,
+    k2_action_mode: str = K2_LEGACY_ACTIONS,
+    markov_sampling_seed: int = 0,
 ) -> dict[str, Any]:
     """Decode one case with official C semantics or the L structural barrier."""
     if policy not in {GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER}:
         raise ValueError(f"unknown policy: {policy}")
     if requested_k not in {1, 2, 4}:
         raise ValueError("requested_k must be one of 1, 2, or 4")
+    if k2_action_mode not in {K2_LEGACY_ACTIONS, K2_SEQUENTIAL_ACTIONS}:
+        raise ValueError(f"unknown K=2 action mode: {k2_action_mode}")
+    if markov_lambda < 0:
+        raise ValueError("markov_lambda must be non-negative")
+    if markov_lambda and markov_head is None:
+        raise ValueError("a nonzero Markov lambda requires a head")
     mask_id, eos_id, expand_id = map(
         int, (tokenizer.mask_id, tokenizer.eos_id, tokenizer.expand_id)
     )
@@ -381,6 +430,8 @@ def decode_with_policy(
     replay_exclusion_counts: dict[str, int] = {}
     next_chain_id = 0
     total_normal = total_expand = total_delete = 0
+    markov_enabled_count = adjacent_opportunity_count = nonadjacent_fallback_count = 0
+    corrected_structural_stop_count = 0
     for step in range(int(steps)):
         real_length = prefix_length + dynamic_length + len(suffix)
         attention_1d = F.pad(
@@ -566,6 +617,20 @@ def decode_with_policy(
             selected_ranks = _global_ranks(confidence, requested_k)
         else:
             selected_ranks = _left_frontier_ranks(local_positions, requested_k)
+        pair = k2_pair_decision(
+            selected_ranks=selected_ranks,
+            absolute_positions=absolute_positions,
+            policy=policy,
+        )
+        sequential_pair = bool(
+            requested_k == 2
+            and k2_action_mode == K2_SEQUENTIAL_ACTIONS
+            and pair.sequential_actions
+        )
+        if requested_k == 2 and policy == GLOBAL_CONFIDENCE and len(selected_ranks) == 2 and not pair.sequential_actions:
+            nonadjacent_fallback_count += 1
+        if sequential_pair:
+            adjacent_opportunity_count += 1
         proposals = [
             Proposal(
                 position=int(absolute_positions[rank]),
@@ -574,22 +639,106 @@ def decode_with_policy(
             )
             for rank in selected_ranks
         ]
+        if sequential_pair and pair.left_rank is not None and pair.right_rank is not None:
+            proposals = [
+                Proposal(
+                    position=int(absolute_positions[rank]),
+                    token_id=int(predictions[rank].item()),
+                    token_type=token_type(
+                        int(predictions[rank].item()),
+                        eos_id=eos_id,
+                        expand_id=expand_id,
+                        mask_id=mask_id,
+                    ),
+                )
+                for rank in (pair.left_rank, pair.right_rank)
+            ]
+        corrected_structural_stop = False
+        markov_enabled = False
+        if (
+            sequential_pair
+            and markov_head is not None
+            and float(markov_lambda) != 0.0
+            and pair.left_rank is not None
+            and pair.right_rank is not None
+        ):
+            left_rank, right_rank = pair.left_rank, pair.right_rank
+            left_token = int(predictions[left_rank].item())
+            base_right_token = int(predictions[right_rank].item())
+            left_type = token_type(left_token, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id)
+            base_right_type = token_type(base_right_token, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id)
+            # Never correct the first token. A structural first action is handled by
+            # the sequential barrier below; a structural base second action stays
+            # on the matched no-head structural path.
+            if left_type == "normal" and base_right_type == "normal":
+                previous = torch.tensor([left_token], device=logits.device, dtype=torch.long)
+                correction = markov_head(previous)[0].to(dtype=logits.dtype)
+                # The correction needs one genuine sample, but it may not consume
+                # the base decoder's RNG stream for later rounds or diagnostics.
+                # This local seed is recoverable from the fixed per-row seed and
+                # the same-forward step/coordinates.
+                rng_devices = [torch.cuda.current_device()] if logits.is_cuda else []
+                local_seed = (
+                    int(markov_sampling_seed)
+                    + 1_000_003 * int(step)
+                    + 10_007 * int(absolute_positions[left_rank])
+                    + int(absolute_positions[right_rank])
+                ) % ((1 << 63) - 1)
+                with torch.random.fork_rng(devices=rng_devices, enabled=True):
+                    torch.manual_seed(local_seed)
+                    if logits.is_cuda:
+                        torch.cuda.manual_seed_all(local_seed)
+                    _, corrected_token = sample_tokens_fn(
+                        logits[right_rank : right_rank + 1] + float(markov_lambda) * correction,
+                        temperature=temperature,
+                        top_p=top_p,
+                        top_k=top_k,
+                        neg_entropy=True,
+                    )
+                corrected_id = int(corrected_token[0].item())
+                corrected_type = token_type(
+                    corrected_id, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id
+                )
+                markov_enabled = True
+                markov_enabled_count += 1
+                left_proposal = Proposal(
+                    position=int(absolute_positions[left_rank]),
+                    token_id=left_token,
+                    token_type=left_type,
+                )
+                if corrected_type == "normal":
+                    proposals = [
+                        left_proposal,
+                        Proposal(
+                            position=int(absolute_positions[right_rank]),
+                            token_id=corrected_id,
+                            token_type=corrected_type,
+                        ),
+                    ]
+                else:
+                    # The old logits may not execute an action which only became
+                    # structural after correction. Keep the left token and refresh.
+                    proposals = [left_proposal]
+                    corrected_structural_stop = True
+                    corrected_structural_stop_count += 1
         barrier_action: Proposal | None = None
         discarded = 0
         committed = proposals
-        if policy == LEFT_TO_RIGHT_FRONTIER:
+        if policy == LEFT_TO_RIGHT_FRONTIER or sequential_pair:
             committed, barrier_action, discarded = apply_left_frontier_barrier(proposals)
+        committed_by_position = {proposal.position: proposal for proposal in committed}
         commit_ranks = [absolute_positions.index(proposal.position) for proposal in committed]
         if barrier_action is not None:
             action_rank = absolute_positions.index(barrier_action.position)
             commit_ranks.append(action_rank)
+            committed_by_position[barrier_action.position] = barrier_action
         committed_tokens = torch.full_like(predictions, mask_id)
         for rank in commit_ranks:
-            committed_tokens[rank] = predictions[rank]
+            committed_tokens[rank] = committed_by_position[absolute_positions[rank]].token_id
         x[mask_index] = committed_tokens
         normal_count = sum(proposal.token_type == "normal" for proposal in committed)
         expand_count = delete_count = 0
-        broadcast_delete = policy == GLOBAL_CONFIDENCE or (
+        broadcast_delete = (policy == GLOBAL_CONFIDENCE and not sequential_pair) or (
             barrier_action is not None and barrier_action.token_type == "delete"
         )
         if broadcast_delete:
@@ -599,7 +748,7 @@ def decode_with_policy(
                 tail = torch.arange(x_seq.size(0), device=x.device) >= int(first_eos[0].item())
                 x_seq.masked_fill_(tail & mask_index[0], eos_id)
                 x = x_seq.unsqueeze(0)
-        if policy == GLOBAL_CONFIDENCE:
+        if policy == GLOBAL_CONFIDENCE and not sequential_pair:
             expand_indices = (x[0] == expand_id).nonzero(as_tuple=False).squeeze(1).tolist()
             for index in sorted(expand_indices, reverse=True):
                 x = _apply_one_expand(x, int(index), mask_id)
@@ -817,6 +966,10 @@ def decode_with_policy(
                 "confidence_top4": top4,
                 "leftmost_contiguous_positions": left_frontier_positions(local_positions, requested_k=4),
                 "requested_k": requested_k,
+                "k2_action_mode": k2_action_mode,
+                "k2_adjacent_pair": sequential_pair,
+                "markov_enabled": markov_enabled,
+                "corrected_structural_stop": corrected_structural_stop,
                 "selected_candidate_count": len(proposals),
                 "selected_positions": [proposal.position - prefix_length for proposal in proposals],
                 "selected_token_ids": [proposal.token_id for proposal in proposals],
@@ -854,6 +1007,10 @@ def decode_with_policy(
         "normal_token_count": total_normal,
         "expand_count": total_expand,
         "delete_count": total_delete,
+        "markov_enabled_count": markov_enabled_count,
+        "adjacent_opportunity_count": adjacent_opportunity_count,
+        "nonadjacent_fallback_count": nonadjacent_fallback_count,
+        "corrected_structural_stop_count": corrected_structural_stop_count,
         "step_trace": traces,
         "markov_transitions": markov_transitions,
         "global_neighbor_observations": global_neighbor_observations,
