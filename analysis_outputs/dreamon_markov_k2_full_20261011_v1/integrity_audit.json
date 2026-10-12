@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "errors": [],
+  "row_count": 6198,
+  "expected_row_count": 6198,
+  "task_count": 1033,
+  "expected_task_count": 1033,
+  "base_task_group_count": 164,
+  "expected_base_task_group_count": 164,
+  "variant_counts": {
+    "全局置信度、逐词刷新、无头": 1033,
+    "全局置信度、每轮最多两个、无头": 1033,
+    "全局置信度、top-2 相邻时加 KL 头": 1033,
+    "固定左前沿、逐词刷新、无头": 1033,
+    "固定左前沿、每轮最多两个、无头": 1033,
+    "固定左前沿、第二词元加 KL 头": 1033
+  },
+  "unique_case_keys": 6198,
+  "duplicate_case_keys": 0,
+  "missing_case_keys": 0,
+  "failure_journal_present": false,
+  "progress": {
+    "completed": 6198,
+    "elapsed_sec": 2527.370364791248,
+    "expected": 6198,
+    "status": "completed"
+  }
+}

@@ -1,11 +1,14 @@
 # 当前行动：Markov v2 训练结果归档与 K=2 推理实现
 
 <!-- dreamon-markov-k2-implementation-20261010 -->
-## 2026-10-10 v2 训练已完成；进入 K=2 代码与等价性检查
+## 2026-10-12 v2 训练与 K=2 完整评测已完成
 
 - 已完成：v2 prepared-data 与 SQLite bank 审计通过；TV/KL 已从共同零输出初始化完成 pilot/full；验证和外部分布测试均选择 KL、`lambda=1`。这些是分布拟合结果，不是 HumanEval Pass@1。
-- 当前动作：两种 K=2 与匹配无头对照、36 项合成检查及真实模型 1 条小样本均已完成，等待用户审阅后再启动完整 1033 条评测。
-- 不做：不重训、不重建 bank、不调 lambda、不启动 1033 条正式生成、不修改历史 v1，直至审阅确认。
+- 六组生成：`6198/6198`，退出码 `0`；六组各 `1033` 条，基础题组 `164` 个，重复/缺失/错误记录为 `0`。
+- 结果：四个无头方案精确复现历史 `951/901/942/877`；全局 KL=`910/1033`，左前沿 KL=`890/1033`。KL 相对对应 K=2 无头分别净增 `9/13`，全局分组 CI 为正，左前沿 CI 跨零；两者仍低于逐词刷新。
+- exact command：`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_singleline_order_parallel.py --markov-k2 --source-root /home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --markov-checkpoint /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt --markov-lambda 1 --output-dir analysis_outputs/dreamon_markov_k2_full_20261011_v1 --device cuda`
+- tmux/log：`dreamon_markov_k2_full_20261011` / `logs/paper_agent/20261011_dreamon_markov_k2_full.log`；汇总脚本为 `analysis/analyze_dreamon_markov_k2_full.py`。
+- GitHub：本地实现提交 `25503d8`，SSH 推送仍因 `github.com` 超时未核验；远端已确认的上一提交为 `110229b`。
 - 行动说明：`docs/paper_agent/experiments/20261010_markov_k2_implementation_action.zh.md`。
 
 ### 2026-09-20 机器重启后的 v2 恢复
