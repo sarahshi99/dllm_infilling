@@ -54,14 +54,17 @@ VARIANTS = {
 }
 
 
-MARKOV_K2_VARIANTS = {
-    "全局置信度、逐词刷新、无头": (GLOBAL_CONFIDENCE, 1, False, K2_LEGACY_ACTIONS),
-    "全局置信度、每轮最多两个、无头": (GLOBAL_CONFIDENCE, 2, False, K2_SEQUENTIAL_ACTIONS),
-    "全局置信度、top-2 相邻时加 KL 头": (GLOBAL_CONFIDENCE, 2, True, K2_SEQUENTIAL_ACTIONS),
-    "固定左前沿、逐词刷新、无头": (LEFT_TO_RIGHT_FRONTIER, 1, False, K2_LEGACY_ACTIONS),
-    "固定左前沿、每轮最多两个、无头": (LEFT_TO_RIGHT_FRONTIER, 2, False, K2_SEQUENTIAL_ACTIONS),
-    "固定左前沿、第二词元加 KL 头": (LEFT_TO_RIGHT_FRONTIER, 2, True, K2_SEQUENTIAL_ACTIONS),
-}
+def markov_k2_variants(head_name: str) -> dict[str, tuple[str, int, bool, str]]:
+    if head_name not in {"KL", "TV"}:
+        raise ValueError(f"unknown Markov head name: {head_name}")
+    return {
+        "全局置信度、逐词刷新、无头": (GLOBAL_CONFIDENCE, 1, False, K2_LEGACY_ACTIONS),
+        "全局置信度、每轮最多两个、无头": (GLOBAL_CONFIDENCE, 2, False, K2_SEQUENTIAL_ACTIONS),
+        f"全局置信度、top-2 相邻时加 {head_name} 头": (GLOBAL_CONFIDENCE, 2, True, K2_SEQUENTIAL_ACTIONS),
+        "固定左前沿、逐词刷新、无头": (LEFT_TO_RIGHT_FRONTIER, 1, False, K2_LEGACY_ACTIONS),
+        "固定左前沿、每轮最多两个、无头": (LEFT_TO_RIGHT_FRONTIER, 2, False, K2_SEQUENTIAL_ACTIONS),
+        f"固定左前沿、第二词元加 {head_name} 头": (LEFT_TO_RIGHT_FRONTIER, 2, True, K2_SEQUENTIAL_ACTIONS),
+    }
 
 
 def load_generator_module(source_root: Path) -> Any:
@@ -98,7 +101,7 @@ def run(args: argparse.Namespace) -> int:
     markov_path = output_dir / "markov_transitions.jsonl"
     progress_path = output_dir / "progress.json"
     existing = read_jsonl(cases_path)
-    variants = MARKOV_K2_VARIANTS if args.markov_k2 else {
+    variants = markov_k2_variants(args.markov_head_name) if args.markov_k2 else {
         name: (policy, k, False, K2_LEGACY_ACTIONS) for name, (policy, k) in VARIANTS.items()
     }
     completed_by_variant = {
@@ -162,6 +165,7 @@ def run(args: argparse.Namespace) -> int:
                 for name, (policy, k, enabled, action_mode) in variants.items()
             },
             "markov_checkpoint": str(Path(args.markov_checkpoint).resolve()) if args.markov_checkpoint else None,
+            "markov_head_name": args.markov_head_name if args.markov_k2 else None,
             "markov_lambda": float(args.markov_lambda) if args.markov_k2 else 0.0,
             "official_protocol": config,
             "evaluator": evaluator_info,
@@ -250,6 +254,7 @@ def parser() -> argparse.ArgumentParser:
     parser.add_argument("--case-limit", type=int)
     parser.add_argument("--markov-k2", action="store_true")
     parser.add_argument("--markov-checkpoint")
+    parser.add_argument("--markov-head-name", choices=("KL", "TV"), default="KL")
     parser.add_argument("--markov-lambda", type=float, default=1.0)
     return parser
 

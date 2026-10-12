@@ -9,6 +9,7 @@
 - exact command：`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_singleline_order_parallel.py --markov-k2 --source-root /home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549 --evaluator-root /home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff --model-snapshot /home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194 --markov-checkpoint /home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt --markov-lambda 1 --output-dir analysis_outputs/dreamon_markov_k2_full_20261011_v1 --device cuda`
 - tmux/log：`dreamon_markov_k2_full_20261011` / `logs/paper_agent/20261011_dreamon_markov_k2_full.log`；汇总脚本为 `analysis/analyze_dreamon_markov_k2_full.py`。
 - GitHub：本地实现提交 `25503d8`，SSH 推送仍因 `github.com` 超时未核验；远端已确认的上一提交为 `110229b`。
+- 新增用户授权：评测 TV 头。入口已增加明确的 `--markov-head-name TV` 标签，避免把 TV 结果写成 KL；沿用相同 1033 条、模型、采样和逐题 seed。输出目录：`analysis_outputs/dreamon_markov_k2_tv_full_20261012_v1/`，tmux：`dreamon_markov_k2_tv_full_20261012`。
 - 行动说明：`docs/paper_agent/experiments/20261010_markov_k2_implementation_action.zh.md`。
 
 ### 2026-09-20 机器重启后的 v2 恢复
