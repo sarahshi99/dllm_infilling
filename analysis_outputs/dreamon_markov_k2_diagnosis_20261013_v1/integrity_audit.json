@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "errors": [],
+  "row_count": 10330,
+  "expected_row_count": 10330,
+  "unique_case_count": 10330,
+  "duplicate_case_count": 0,
+  "missing_case_count": 0,
+  "unexpected_case_count": 0,
+  "base_task_count": 164,
+  "counts": {
+    "global_confidence/A": 1033,
+    "global_confidence/B": 1033,
+    "global_confidence/C": 1033,
+    "global_confidence/D": 1033,
+    "global_confidence/E": 1033,
+    "left_to_right_frontier/A": 1033,
+    "left_to_right_frontier/B": 1033,
+    "left_to_right_frontier/C": 1033,
+    "left_to_right_frontier/D": 1033,
+    "left_to_right_frontier/E": 1033
+  },
+  "smoke_status": "passed",
+  "historical_failure_events": 0,
+  "unrecovered_failure_keys": 0,
+  "no_new_sealed_test_access": true
+}

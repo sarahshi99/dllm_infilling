@@ -217,9 +217,15 @@ def analyze(out: Path) -> dict:
     for policy in POLICIES:
         trained = comparisons[policy, "D-C"]
         path = comparisons[policy, "C-B"]
-        certainty = "方向为正，但区间包含零，不能称稳定额外贡献" if trained["net"] > 0 and trained["line_ci95_low"] <= 0 else (
-            "支持训练修正有额外贡献" if trained["line_ci95_low"] > 0 else "本轮未支持稳定的正向额外贡献")
-        lines.append(f"{policy}：D−C 净 {trained['net']:+d}，C−B 净 {path['net']:+d}；{certainty}。D−B 的变化不能全归训练修正，也不能据此说过去所有收益都是假的。")
+        if trained["net"] > 0:
+            certainty = "本轮配对点估计支持训练修正有额外贡献"
+            if trained["line_ci95_low"] <= 0:
+                certainty += "；行加权95%区间包含零，稳定性仍不确定"
+            if trained["base_task_equal_ci95_low"] <= 0:
+                certainty += "；基础题等权95%区间包含零，稳定性仍不确定"
+        else:
+            certainty = "本轮未支持正向额外贡献"
+        lines.append(f"{policy}：D−C 净 {trained['net']:+d}，C−B 净 {path['net']:+d}；{certainty}。本轮 D−B 净变化为这两项之和，不能只凭旧 D−B 分配归因，也不能据此说过去所有收益都是假的。")
     lines += ["", "公平计时后到底快多少？"]
     for policy in POLICIES:
         for arm in "BCD":
@@ -230,6 +236,10 @@ def analyze(out: Path) -> dict:
         ec, ed = comparisons[policy, "E-C"], comparisons[policy, "E-D"]
         clear = ec["line_ci95_low"] > 0 and ed["line_ci95_low"] > 0
         lines.append(f"{policy}：E−C 净 {ec['net']:+d}，E−D 净 {ed['net']:+d}；" + ("这两项行加权区间均在零以上，支持本轮覆盖右位仍有恢复空间。" if clear else "尚不能确认明显恢复；效果小或区间跨零时应保留不确定性。"))
+        if ec["base_task_equal_ci95_low"] <= 0 or ed["base_task_equal_ci95_low"] <= 0:
+            lines.append("按基础题等权时至少一项95%区间包含零，因此不能把行加权证据称为对所有题目权重都稳定的改善。")
+        else:
+            lines.append("两项基础题等权95%区间也均在零以上，基础题等权结果同样支持恢复空间。")
     lines += ["", "|策略|方法|A正确/B错误人口救回|其他人口新增伤害（相对B）|", "|---|---|---|---|"]
     for r in paired:
         if "rescue_denominator" in r:

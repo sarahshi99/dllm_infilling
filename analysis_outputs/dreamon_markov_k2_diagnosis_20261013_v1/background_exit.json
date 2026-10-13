@@ -1,0 +1,9 @@
+{
+  "finished_utc": "2026-10-13T02:32:58.796268+00:00",
+  "exit_code": 0,
+  "completed": true,
+  "status": "completed_generation",
+  "row_count": 10330,
+  "automatic_finalization_error": "git diff --check: extra blank line at ledger EOF",
+  "finalization_recovery": "fixed whitespace and clarified both bootstrap weightings; results committed manually on follow-up"
+}

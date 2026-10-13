@@ -31,7 +31,7 @@ for name in ("pause_checkpoint.current.md", "paper_agent_dashboard.zh.md", "expe
     path.write_text(first + "\n\n" + section + rest.lstrip("\n"))
     paths.append(str(path.relative_to(REPO)))
 ledger = REPO / "docs/paper_agent/activity_ledger.zh.md"
-ledger.write_text(ledger.read_text() + "\n" + section)
+ledger.write_text(ledger.read_text().rstrip() + "\n\n" + section.rstrip() + "\n")
 paths.append(str(ledger.relative_to(REPO)))
 for name in ("run_manifest.json", "integrity_audit.json", "report.zh.md", "summary.csv", "paired_comparisons.csv", "smoke_checks.json"):
     path = OUT / name
