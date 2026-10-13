@@ -399,6 +399,9 @@ def decode_with_policy(
     markov_lambda: float = 0.0,
     k2_action_mode: str = K2_LEGACY_ACTIONS,
     markov_sampling_seed: int = 0,
+    diagnostics: bool = True,
+    capture_actions: bool = False,
+    right_recompute: bool = False,
 ) -> dict[str, Any]:
     """Decode one case with official C semantics or the L structural barrier."""
     if policy not in {GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER}:
@@ -409,6 +412,8 @@ def decode_with_policy(
         raise ValueError(f"unknown K=2 action mode: {k2_action_mode}")
     if markov_lambda < 0:
         raise ValueError("markov_lambda must be non-negative")
+    if right_recompute and (markov_head is not None or markov_lambda):
+        raise ValueError("recompute must not stack a Markov correction")
     if markov_lambda and markov_head is None:
         raise ValueError("a nonzero Markov lambda requires a head")
     mask_id, eos_id, expand_id = map(
@@ -422,6 +427,9 @@ def decode_with_policy(
     x = F.pad(torch.tensor([input_ids], device=device), (0, maximum - len(input_ids)), value=mask_id)
     dynamic_length = int(min_gen_len)
     traces: list[dict[str, Any]] = []
+    action_trace: list[dict[str, Any]] = []
+    base_forward_count = recompute_forward_count = recompute_enabled_count = 0
+    structural_stop_count = 0
     reference = None if reference_ids is None else list(map(int, reference_ids))
     markov_pending: list[PendingTransition] = []
     markov_transitions: list[dict[str, Any]] = []
@@ -449,170 +457,172 @@ def decode_with_policy(
         pairwise_attention = torch.logical_and(
             attention_1d.unsqueeze(1).unsqueeze(-2), attention_1d.unsqueeze(1).unsqueeze(-1)
         )
-        stale_canvas_before = x[0, :real_length].detach().cpu().tolist()
+        stale_canvas_before = x[0, :real_length].detach().cpu().tolist() if diagnostics else None
         raw_logits = model(x, pairwise_attention, tok_idx).logits
+        base_forward_count += 1
         logits = shift_logits_to_targets(raw_logits)[mask_index]
         if real_length == maximum or expand_budget == 0:
             logits[:, expand_id] -= 1e9
         confidence, predictions = sample_tokens_fn(
             logits, temperature=temperature, top_p=top_p, top_k=top_k, neg_entropy=True
         )
-        raw_probabilities = torch.softmax(logits.float(), dim=-1)
-        actual = prepare_decode_distribution(
-            logits, temperature=temperature, top_p=top_p, top_k=top_k
-        )
-        still_pending: list[PendingTransition] = []
-        for pending in markov_pending:
-            if pending.remaining_predecessors != 0:
-                still_pending.append(pending)
-                continue
-            target = pending.target_position
-            if target not in absolute_positions:
-                markov_transitions.append(
-                    _aborted_transition(pending, "target_not_active_on_fresh_forward", step)
+        if diagnostics:
+            raw_probabilities = torch.softmax(logits.float(), dim=-1)
+            actual = prepare_decode_distribution(
+                logits, temperature=temperature, top_p=top_p, top_k=top_k
+            )
+            still_pending: list[PendingTransition] = []
+            for pending in markov_pending:
+                if pending.remaining_predecessors != 0:
+                    still_pending.append(pending)
+                    continue
+                target = pending.target_position
+                if target not in absolute_positions:
+                    markov_transitions.append(
+                        _aborted_transition(pending, "target_not_active_on_fresh_forward", step)
+                    )
+                    if pending.neighbor_observation_index is not None:
+                        global_neighbor_observations[pending.neighbor_observation_index].update(
+                            {
+                                "fresh_global_rank_available": False,
+                                "fresh_global_rank_unavailable_reason": "target_not_active_on_fresh_forward",
+                            }
+                        )
+                    continue
+                target_rank = absolute_positions.index(target)
+                fresh_rank_fields = _global_rank_fields(confidence, target_rank)
+                target_local = target - prefix_length
+                predecessor_local = target_local - 1
+                reference_evaluable = pending.reference_evaluable
+                reference_token_id = pending.reference_token_id
+                fresh_raw_reference_log_probability = None
+                fresh_actual_reference_log_probability = None
+                fresh_actual_reference_retained = None
+                predecessor_correct = False
+                prefix_aligned = False
+                if reference_evaluable and reference is not None and reference_token_id is not None:
+                    fresh_raw_reference_log_probability = _stable_log_probability(
+                        logits[target_rank], reference_token_id
+                    )
+                    fresh_actual_reference_retained = bool(
+                        actual.retained_mask[target_rank, reference_token_id].item()
+                    )
+                    if fresh_actual_reference_retained:
+                        fresh_actual_reference_log_probability = _stable_log_probability(
+                            actual.filtered_logits[target_rank], reference_token_id
+                        )
+                    predecessor_token = int(x[0, prefix_length + predecessor_local].item())
+                    predecessor_correct = predecessor_token == int(reference[predecessor_local])
+                    generated_prefix = x[
+                        0, prefix_length : prefix_length + predecessor_local + 1
+                    ].detach().cpu().tolist()
+                    prefix_aligned = generated_prefix == reference[: predecessor_local + 1]
+                row: dict[str, Any] = {
+                    "record_type": "stale_fresh_transition",
+                    "chain_id": pending.chain_id,
+                    "offset": pending.offset,
+                    "source_step_index": pending.source_step_index,
+                    "fresh_step_index": step,
+                    "source_position": pending.source_position,
+                    "target_position": target_local,
+                    "source_active_mask_count": pending.source_active_mask_count,
+                    "source_canvas_length": pending.source_canvas_length,
+                    "transition_eligible": True,
+                    "transition_ineligible_reason": None,
+                    "reference_evaluable": reference_evaluable,
+                    "reference_non_evaluable_reason": pending.reference_non_evaluable_reason,
+                    "target_reference_token_id": reference_token_id,
+                    "predecessor_token_matches_reference": predecessor_correct
+                    if reference_evaluable
+                    else None,
+                    "reference_prefix_aligned_through_predecessor": prefix_aligned
+                    if reference_evaluable
+                    else None,
+                    "stale_global_rank": pending.stale_global_rank_fields["global_rank"],
+                    "fresh_global_rank": fresh_rank_fields["global_rank"],
+                    "stale_global_confidence": pending.stale_global_rank_fields[
+                        "global_confidence"
+                    ],
+                    "fresh_global_confidence": fresh_rank_fields["global_confidence"],
+                    "stale_global_confidence_tie_count": pending.stale_global_rank_fields[
+                        "global_confidence_tie_count"
+                    ],
+                    "fresh_global_confidence_tie_count": fresh_rank_fields[
+                        "global_confidence_tie_count"
+                    ],
+                    "stale_in_top2": pending.stale_global_rank_fields["in_top2"],
+                    "fresh_in_top2": fresh_rank_fields["in_top2"],
+                    "stale_in_top4": pending.stale_global_rank_fields["in_top4"],
+                    "fresh_in_top4": fresh_rank_fields["in_top4"],
+                    "global_rank_improvement": pending.stale_global_rank_fields["global_rank"]
+                    - fresh_rank_fields["global_rank"],
+                    "outside_to_top2": not pending.stale_global_rank_fields["in_top2"]
+                    and fresh_rank_fields["in_top2"],
+                    "outside_to_top4": not pending.stale_global_rank_fields["in_top4"]
+                    and fresh_rank_fields["in_top4"],
+                    "top2_retained": pending.stale_global_rank_fields["in_top2"]
+                    and fresh_rank_fields["in_top2"],
+                    "top4_retained": pending.stale_global_rank_fields["in_top4"]
+                    and fresh_rank_fields["in_top4"],
+                }
+                row.update(
+                    _distribution_pair_metrics(
+                        name="raw",
+                        stale_probabilities=pending.stale_raw_probabilities,
+                        fresh_probabilities=raw_probabilities[target_rank],
+                        reference_token_id=reference_token_id,
+                        stale_reference_log_probability=pending.stale_raw_reference_log_probability,
+                        fresh_reference_log_probability=fresh_raw_reference_log_probability,
+                        stale_reference_retained=True if reference_evaluable else None,
+                        fresh_reference_retained=True if reference_evaluable else None,
+                    )
                 )
+                row.update(
+                    _distribution_pair_metrics(
+                        name="actual",
+                        stale_probabilities=pending.stale_actual_probabilities,
+                        fresh_probabilities=actual.probabilities[target_rank],
+                        reference_token_id=reference_token_id,
+                        stale_reference_log_probability=pending.stale_actual_reference_log_probability,
+                        fresh_reference_log_probability=fresh_actual_reference_log_probability,
+                        stale_reference_retained=pending.stale_actual_reference_retained,
+                        fresh_reference_retained=fresh_actual_reference_retained,
+                    )
+                )
+                markov_transitions.append(row)
                 if pending.neighbor_observation_index is not None:
                     global_neighbor_observations[pending.neighbor_observation_index].update(
                         {
-                            "fresh_global_rank_available": False,
-                            "fresh_global_rank_unavailable_reason": "target_not_active_on_fresh_forward",
+                            "fresh_global_rank_available": True,
+                            "fresh_global_rank_unavailable_reason": None,
+                            "fresh_global_rank": fresh_rank_fields["global_rank"],
+                            "fresh_in_top2": fresh_rank_fields["in_top2"],
+                            "fresh_in_top4": fresh_rank_fields["in_top4"],
+                            "global_rank_improvement": pending.stale_global_rank_fields[
+                                "global_rank"
+                            ]
+                            - fresh_rank_fields["global_rank"],
+                            "outside_to_top2": not pending.stale_global_rank_fields["in_top2"]
+                            and fresh_rank_fields["in_top2"],
+                            "outside_to_top4": not pending.stale_global_rank_fields["in_top4"]
+                            and fresh_rank_fields["in_top4"],
+                            "top2_retained": pending.stale_global_rank_fields["in_top2"]
+                            and fresh_rank_fields["in_top2"],
+                            "top4_retained": pending.stale_global_rank_fields["in_top4"]
+                            and fresh_rank_fields["in_top4"],
                         }
                     )
-                continue
-            target_rank = absolute_positions.index(target)
-            fresh_rank_fields = _global_rank_fields(confidence, target_rank)
-            target_local = target - prefix_length
-            predecessor_local = target_local - 1
-            reference_evaluable = pending.reference_evaluable
-            reference_token_id = pending.reference_token_id
-            fresh_raw_reference_log_probability = None
-            fresh_actual_reference_log_probability = None
-            fresh_actual_reference_retained = None
-            predecessor_correct = False
-            prefix_aligned = False
-            if reference_evaluable and reference is not None and reference_token_id is not None:
-                fresh_raw_reference_log_probability = _stable_log_probability(
-                    logits[target_rank], reference_token_id
-                )
-                fresh_actual_reference_retained = bool(
-                    actual.retained_mask[target_rank, reference_token_id].item()
-                )
-                if fresh_actual_reference_retained:
-                    fresh_actual_reference_log_probability = _stable_log_probability(
-                        actual.filtered_logits[target_rank], reference_token_id
-                    )
-                predecessor_token = int(x[0, prefix_length + predecessor_local].item())
-                predecessor_correct = predecessor_token == int(reference[predecessor_local])
-                generated_prefix = x[
-                    0, prefix_length : prefix_length + predecessor_local + 1
-                ].detach().cpu().tolist()
-                prefix_aligned = generated_prefix == reference[: predecessor_local + 1]
-            row: dict[str, Any] = {
-                "record_type": "stale_fresh_transition",
-                "chain_id": pending.chain_id,
-                "offset": pending.offset,
-                "source_step_index": pending.source_step_index,
-                "fresh_step_index": step,
-                "source_position": pending.source_position,
-                "target_position": target_local,
-                "source_active_mask_count": pending.source_active_mask_count,
-                "source_canvas_length": pending.source_canvas_length,
-                "transition_eligible": True,
-                "transition_ineligible_reason": None,
-                "reference_evaluable": reference_evaluable,
-                "reference_non_evaluable_reason": pending.reference_non_evaluable_reason,
-                "target_reference_token_id": reference_token_id,
-                "predecessor_token_matches_reference": predecessor_correct
-                if reference_evaluable
-                else None,
-                "reference_prefix_aligned_through_predecessor": prefix_aligned
-                if reference_evaluable
-                else None,
-                "stale_global_rank": pending.stale_global_rank_fields["global_rank"],
-                "fresh_global_rank": fresh_rank_fields["global_rank"],
-                "stale_global_confidence": pending.stale_global_rank_fields[
-                    "global_confidence"
-                ],
-                "fresh_global_confidence": fresh_rank_fields["global_confidence"],
-                "stale_global_confidence_tie_count": pending.stale_global_rank_fields[
-                    "global_confidence_tie_count"
-                ],
-                "fresh_global_confidence_tie_count": fresh_rank_fields[
-                    "global_confidence_tie_count"
-                ],
-                "stale_in_top2": pending.stale_global_rank_fields["in_top2"],
-                "fresh_in_top2": fresh_rank_fields["in_top2"],
-                "stale_in_top4": pending.stale_global_rank_fields["in_top4"],
-                "fresh_in_top4": fresh_rank_fields["in_top4"],
-                "global_rank_improvement": pending.stale_global_rank_fields["global_rank"]
-                - fresh_rank_fields["global_rank"],
-                "outside_to_top2": not pending.stale_global_rank_fields["in_top2"]
-                and fresh_rank_fields["in_top2"],
-                "outside_to_top4": not pending.stale_global_rank_fields["in_top4"]
-                and fresh_rank_fields["in_top4"],
-                "top2_retained": pending.stale_global_rank_fields["in_top2"]
-                and fresh_rank_fields["in_top2"],
-                "top4_retained": pending.stale_global_rank_fields["in_top4"]
-                and fresh_rank_fields["in_top4"],
-            }
-            row.update(
-                _distribution_pair_metrics(
-                    name="raw",
-                    stale_probabilities=pending.stale_raw_probabilities,
-                    fresh_probabilities=raw_probabilities[target_rank],
-                    reference_token_id=reference_token_id,
-                    stale_reference_log_probability=pending.stale_raw_reference_log_probability,
-                    fresh_reference_log_probability=fresh_raw_reference_log_probability,
-                    stale_reference_retained=True if reference_evaluable else None,
-                    fresh_reference_retained=True if reference_evaluable else None,
-                )
-            )
-            row.update(
-                _distribution_pair_metrics(
-                    name="actual",
-                    stale_probabilities=pending.stale_actual_probabilities,
-                    fresh_probabilities=actual.probabilities[target_rank],
-                    reference_token_id=reference_token_id,
-                    stale_reference_log_probability=pending.stale_actual_reference_log_probability,
-                    fresh_reference_log_probability=fresh_actual_reference_log_probability,
-                    stale_reference_retained=pending.stale_actual_reference_retained,
-                    fresh_reference_retained=fresh_actual_reference_retained,
-                )
-            )
-            markov_transitions.append(row)
-            if pending.neighbor_observation_index is not None:
-                global_neighbor_observations[pending.neighbor_observation_index].update(
-                    {
-                        "fresh_global_rank_available": True,
-                        "fresh_global_rank_unavailable_reason": None,
-                        "fresh_global_rank": fresh_rank_fields["global_rank"],
-                        "fresh_in_top2": fresh_rank_fields["in_top2"],
-                        "fresh_in_top4": fresh_rank_fields["in_top4"],
-                        "global_rank_improvement": pending.stale_global_rank_fields[
-                            "global_rank"
-                        ]
-                        - fresh_rank_fields["global_rank"],
-                        "outside_to_top2": not pending.stale_global_rank_fields["in_top2"]
-                        and fresh_rank_fields["in_top2"],
-                        "outside_to_top4": not pending.stale_global_rank_fields["in_top4"]
-                        and fresh_rank_fields["in_top4"],
-                        "top2_retained": pending.stale_global_rank_fields["in_top2"]
-                        and fresh_rank_fields["in_top2"],
-                        "top4_retained": pending.stale_global_rank_fields["in_top4"]
-                        and fresh_rank_fields["in_top4"],
-                    }
-                )
-        markov_pending = still_pending
-        top4_ranks = _global_ranks(confidence, min(4, len(absolute_positions)))
-        top4 = [
-            {
-                "position": int(absolute_positions[rank] - prefix_length),
-                "token_id": int(predictions[rank].item()),
-                "confidence": float(confidence[rank].item()),
-                "token_type": token_type(int(predictions[rank].item()), eos_id=eos_id, expand_id=expand_id, mask_id=mask_id),
-            }
-            for rank in top4_ranks
-        ]
+            markov_pending = still_pending
+            top4_ranks = _global_ranks(confidence, min(4, len(absolute_positions)))
+            top4 = [
+                {
+                    "position": int(absolute_positions[rank] - prefix_length),
+                    "token_id": int(predictions[rank].item()),
+                    "confidence": float(confidence[rank].item()),
+                    "token_type": token_type(int(predictions[rank].item()), eos_id=eos_id, expand_id=expand_id, mask_id=mask_id),
+                }
+                for rank in top4_ranks
+            ]
         if policy == GLOBAL_CONFIDENCE:
             selected_ranks = _global_ranks(confidence, requested_k)
         else:
@@ -657,8 +667,7 @@ def decode_with_policy(
         markov_enabled = False
         if (
             sequential_pair
-            and markov_head is not None
-            and float(markov_lambda) != 0.0
+            and (right_recompute or (markov_head is not None and float(markov_lambda) != 0.0))
             and pair.left_rank is not None
             and pair.right_rank is not None
         ):
@@ -671,8 +680,6 @@ def decode_with_policy(
             # the sequential barrier below; a structural base second action stays
             # on the matched no-head structural path.
             if left_type == "normal" and base_right_type == "normal":
-                previous = torch.tensor([left_token], device=logits.device, dtype=torch.long)
-                correction = markov_head(previous)[0].to(dtype=logits.dtype)
                 # The correction needs one genuine sample, but it may not consume
                 # the base decoder's RNG stream for later rounds or diagnostics.
                 # This local seed is recoverable from the fixed per-row seed and
@@ -688,8 +695,24 @@ def decode_with_policy(
                     torch.manual_seed(local_seed)
                     if logits.is_cuda:
                         torch.cuda.manual_seed_all(local_seed)
+                    if right_recompute:
+                        # x contains committed history and masks, never draft predictions.
+                        # Fix the original pair; neither coordinates nor attention change.
+                        fresh_canvas = x.clone()
+                        fresh_canvas[0, absolute_positions[left_rank]] = left_token
+                        fresh_raw = model(fresh_canvas, pairwise_attention, tok_idx).logits
+                        recompute_forward_count += 1
+                        right_logits = shift_logits_to_targets(fresh_raw)[
+                            :, absolute_positions[right_rank], :
+                        ].clone()
+                        if real_length == maximum or expand_budget == 0:
+                            right_logits[:, expand_id] -= 1e9
+                    else:
+                        previous = torch.tensor([left_token], device=logits.device, dtype=torch.long)
+                        correction = markov_head(previous)[0].to(dtype=logits.dtype)
+                        right_logits = logits[right_rank : right_rank + 1] + float(markov_lambda) * correction
                     _, corrected_token = sample_tokens_fn(
-                        logits[right_rank : right_rank + 1] + float(markov_lambda) * correction,
+                        right_logits,
                         temperature=temperature,
                         top_p=top_p,
                         top_k=top_k,
@@ -699,8 +722,9 @@ def decode_with_policy(
                 corrected_type = token_type(
                     corrected_id, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id
                 )
-                markov_enabled = True
-                markov_enabled_count += 1
+                markov_enabled = not right_recompute
+                markov_enabled_count += int(not right_recompute)
+                recompute_enabled_count += int(right_recompute)
                 left_proposal = Proposal(
                     position=int(absolute_positions[left_rank]),
                     token_id=left_token,
@@ -726,6 +750,7 @@ def decode_with_policy(
         committed = proposals
         if policy == LEFT_TO_RIGHT_FRONTIER or sequential_pair:
             committed, barrier_action, discarded = apply_left_frontier_barrier(proposals)
+        structural_stop_count += int(barrier_action is not None or corrected_structural_stop)
         committed_by_position = {proposal.position: proposal for proposal in committed}
         commit_ranks = [absolute_positions.index(proposal.position) for proposal in committed]
         if barrier_action is not None:
@@ -778,214 +803,225 @@ def decode_with_policy(
         total_normal += normal_count
         total_expand += expand_count
         total_delete += delete_count
-        ordinary_commit = normal_count == 1 and barrier_action is None and not expand_count and not delete_count
-        committed_position = committed[0].position if ordinary_commit else None
-        if requested_k == 1 and ordinary_commit and committed_position is not None:
-            target_position = committed_position + 1
-            fresh_canvas = x[0, :real_length].detach().cpu().tolist()
-            if (
-                target_position in absolute_positions
-                and int(fresh_canvas[target_position]) == mask_id
-                and len(fresh_canvas) == len(stale_canvas_before)
-            ):
-                predecessor_local = committed_position - prefix_length
-                target_local = target_position - prefix_length
-                reference_token_id = -1
-                predecessor_matches_reference = False
-                reference_prefix_aligned = False
-                if reference is not None and 0 <= target_local < len(reference):
-                    reference_token_id = int(reference[target_local])
-                    predecessor_matches_reference = (
-                        0 <= predecessor_local < len(reference)
-                        and int(fresh_canvas[committed_position])
-                        == int(reference[predecessor_local])
+        if diagnostics:
+            ordinary_commit = normal_count == 1 and barrier_action is None and not expand_count and not delete_count
+            committed_position = committed[0].position if ordinary_commit else None
+            if requested_k == 1 and ordinary_commit and committed_position is not None:
+                target_position = committed_position + 1
+                fresh_canvas = x[0, :real_length].detach().cpu().tolist()
+                if (
+                    target_position in absolute_positions
+                    and int(fresh_canvas[target_position]) == mask_id
+                    and len(fresh_canvas) == len(stale_canvas_before)
+                ):
+                    predecessor_local = committed_position - prefix_length
+                    target_local = target_position - prefix_length
+                    reference_token_id = -1
+                    predecessor_matches_reference = False
+                    reference_prefix_aligned = False
+                    if reference is not None and 0 <= target_local < len(reference):
+                        reference_token_id = int(reference[target_local])
+                        predecessor_matches_reference = (
+                            0 <= predecessor_local < len(reference)
+                            and int(fresh_canvas[committed_position])
+                            == int(reference[predecessor_local])
+                        )
+                        generated_prefix = fresh_canvas[
+                            prefix_length : committed_position + 1
+                        ]
+                        reference_prefix_aligned = (
+                            generated_prefix == reference[: predecessor_local + 1]
+                        )
+                    active_count = len(absolute_positions)
+                    generation_stage = (
+                        "early" if active_count > 42 else "middle" if active_count > 21 else "late"
                     )
-                    generated_prefix = fresh_canvas[
-                        prefix_length : committed_position + 1
-                    ]
-                    reference_prefix_aligned = (
-                        generated_prefix == reference[: predecessor_local + 1]
+                    replay_transitions.append(
+                        {
+                            "record_type": "replay_transition",
+                            "source_step_index": step,
+                            "trajectory_policy": policy,
+                            "stale_input_ids": stale_canvas_before,
+                            "fresh_input_ids": fresh_canvas,
+                            "previous_token_id": int(fresh_canvas[committed_position]),
+                            "target_position": int(target_position),
+                            "target_local_position": int(target_local),
+                            "reference_token_id": reference_token_id,
+                            "predecessor_token_matches_reference": predecessor_matches_reference,
+                            "reference_prefix_aligned_through_predecessor": reference_prefix_aligned,
+                            "active_mask_count": active_count,
+                            "generation_stage": generation_stage,
+                            "canvas_length": real_length,
+                            "expand_action_masked": real_length == maximum or expand_budget == 0,
+                        }
                     )
-                active_count = len(absolute_positions)
-                generation_stage = (
-                    "early" if active_count > 42 else "middle" if active_count > 21 else "late"
-                )
-                replay_transitions.append(
-                    {
-                        "record_type": "replay_transition",
-                        "source_step_index": step,
-                        "trajectory_policy": policy,
-                        "stale_input_ids": stale_canvas_before,
-                        "fresh_input_ids": fresh_canvas,
-                        "previous_token_id": int(fresh_canvas[committed_position]),
-                        "target_position": int(target_position),
-                        "target_local_position": int(target_local),
-                        "reference_token_id": reference_token_id,
-                        "predecessor_token_matches_reference": predecessor_matches_reference,
-                        "reference_prefix_aligned_through_predecessor": reference_prefix_aligned,
-                        "active_mask_count": active_count,
-                        "generation_stage": generation_stage,
-                        "canvas_length": real_length,
-                        "expand_action_masked": real_length == maximum or expand_budget == 0,
-                    }
-                )
-            else:
-                replay_exclusion_counts["right_neighbor_not_fresh_active_mask"] = (
-                    replay_exclusion_counts.get("right_neighbor_not_fresh_active_mask", 0) + 1
-                )
-        elif requested_k == 1:
-            reason = (
-                "structural_or_coordinate_change"
-                if barrier_action is not None or expand_count or delete_count
-                else "non_single_ordinary_commit"
-            )
-            replay_exclusion_counts[reason] = replay_exclusion_counts.get(reason, 0) + 1
-        if policy == GLOBAL_CONFIDENCE and ordinary_commit and committed_position is not None:
-            right_neighbor = committed_position + 1
-            observation: dict[str, Any] = {
-                "record_type": "global_right_neighbor_observation",
-                "source_step_index": step,
-                "source_position": committed_position - prefix_length,
-                "source_active_mask_count": len(absolute_positions),
-                "source_canvas_length": dynamic_length,
-                "committed_position_is_ordinary": True,
-                "right_neighbor_still_mask": right_neighbor in absolute_positions,
-                "left_to_right_contiguous_short_chain": right_neighbor in absolute_positions,
-                "source_right_neighbor_in_top2": False,
-                "source_right_neighbor_in_top4": False,
-                "fresh_global_rank_available": False,
-                "fresh_global_rank_unavailable_reason": "right_neighbor_not_active_mask",
-            }
-            if right_neighbor in absolute_positions:
-                right_rank = absolute_positions.index(right_neighbor)
-                right_fields = _global_rank_fields(confidence, right_rank)
-                observation.update(
-                    {
-                        "source_right_neighbor_global_rank": right_fields["global_rank"],
-                        "source_right_neighbor_in_top2": right_fields["in_top2"],
-                        "source_right_neighbor_in_top4": right_fields["in_top4"],
-                        "fresh_global_rank_unavailable_reason": "pending_fresh_forward",
-                    }
-                )
-            global_neighbor_observations.append(observation)
-        if requested_k == 1 and ordinary_commit and committed_position is not None:
-            committed_position = committed[0].position
-            advanced_pending: list[PendingTransition] = []
-            for pending in markov_pending:
-                if pending.next_predecessor_position == committed_position:
-                    pending.remaining_predecessors -= 1
-                    pending.next_predecessor_position = committed_position + 1
-                    advanced_pending.append(pending)
                 else:
+                    replay_exclusion_counts["right_neighbor_not_fresh_active_mask"] = (
+                        replay_exclusion_counts.get("right_neighbor_not_fresh_active_mask", 0) + 1
+                    )
+            elif requested_k == 1:
+                reason = (
+                    "structural_or_coordinate_change"
+                    if barrier_action is not None or expand_count or delete_count
+                    else "non_single_ordinary_commit"
+                )
+                replay_exclusion_counts[reason] = replay_exclusion_counts.get(reason, 0) + 1
+            if policy == GLOBAL_CONFIDENCE and ordinary_commit and committed_position is not None:
+                right_neighbor = committed_position + 1
+                observation: dict[str, Any] = {
+                    "record_type": "global_right_neighbor_observation",
+                    "source_step_index": step,
+                    "source_position": committed_position - prefix_length,
+                    "source_active_mask_count": len(absolute_positions),
+                    "source_canvas_length": dynamic_length,
+                    "committed_position_is_ordinary": True,
+                    "right_neighbor_still_mask": right_neighbor in absolute_positions,
+                    "left_to_right_contiguous_short_chain": right_neighbor in absolute_positions,
+                    "source_right_neighbor_in_top2": False,
+                    "source_right_neighbor_in_top4": False,
+                    "fresh_global_rank_available": False,
+                    "fresh_global_rank_unavailable_reason": "right_neighbor_not_active_mask",
+                }
+                if right_neighbor in absolute_positions:
+                    right_rank = absolute_positions.index(right_neighbor)
+                    right_fields = _global_rank_fields(confidence, right_rank)
+                    observation.update(
+                        {
+                            "source_right_neighbor_global_rank": right_fields["global_rank"],
+                            "source_right_neighbor_in_top2": right_fields["in_top2"],
+                            "source_right_neighbor_in_top4": right_fields["in_top4"],
+                            "fresh_global_rank_unavailable_reason": "pending_fresh_forward",
+                        }
+                    )
+                global_neighbor_observations.append(observation)
+            if requested_k == 1 and ordinary_commit and committed_position is not None:
+                committed_position = committed[0].position
+                advanced_pending: list[PendingTransition] = []
+                for pending in markov_pending:
+                    if pending.next_predecessor_position == committed_position:
+                        pending.remaining_predecessors -= 1
+                        pending.next_predecessor_position = committed_position + 1
+                        advanced_pending.append(pending)
+                    else:
+                        markov_transitions.append(
+                            _aborted_transition(pending, "gap_or_nonconsecutive_commit", step)
+                        )
+                        if pending.neighbor_observation_index is not None:
+                            global_neighbor_observations[pending.neighbor_observation_index].update(
+                                {
+                                    "fresh_global_rank_available": False,
+                                    "fresh_global_rank_unavailable_reason": "gap_or_nonconsecutive_commit",
+                                }
+                            )
+                markov_pending = advanced_pending
+                for offset in (1, 2, 3):
+                    target = committed_position + offset
+                    if target not in absolute_positions:
+                        continue
+                    target_rank = absolute_positions.index(target)
+                    target_local = target - prefix_length
+                    reference_evaluable = reference is not None and target_local < len(reference)
+                    reference_reason = None
+                    reference_token_id = None
+                    stale_raw_reference_log_probability = None
+                    stale_actual_reference_log_probability = None
+                    stale_actual_reference_retained = None
+                    if reference is None:
+                        reference_reason = "reference_not_provided"
+                    elif target_local >= len(reference):
+                        reference_reason = "target_reference_token_out_of_range"
+                    else:
+                        reference_token_id = int(reference[target_local])
+                        stale_raw_reference_log_probability = _stable_log_probability(
+                            logits[target_rank], reference_token_id
+                        )
+                        stale_actual_reference_retained = bool(
+                            actual.retained_mask[target_rank, reference_token_id].item()
+                        )
+                        if stale_actual_reference_retained:
+                            stale_actual_reference_log_probability = _stable_log_probability(
+                                actual.filtered_logits[target_rank], reference_token_id
+                            )
+                    neighbor_index = None
+                    if policy == GLOBAL_CONFIDENCE and offset == 1:
+                        neighbor_index = len(global_neighbor_observations) - 1
+                    markov_pending.append(
+                        PendingTransition(
+                            chain_id=next_chain_id,
+                            offset=offset,
+                            source_step_index=step,
+                            source_position=committed_position - prefix_length,
+                            target_position=target,
+                            remaining_predecessors=offset - 1,
+                            next_predecessor_position=committed_position + 1,
+                            source_active_mask_count=len(absolute_positions),
+                            source_canvas_length=dynamic_length,
+                            stale_raw_probabilities=raw_probabilities[target_rank].detach().clone(),
+                            stale_actual_probabilities=actual.probabilities[target_rank]
+                            .detach()
+                            .clone(),
+                            stale_raw_reference_log_probability=stale_raw_reference_log_probability,
+                            stale_actual_reference_log_probability=stale_actual_reference_log_probability,
+                            stale_actual_reference_retained=stale_actual_reference_retained,
+                            reference_evaluable=reference_evaluable,
+                            reference_non_evaluable_reason=reference_reason,
+                            reference_token_id=reference_token_id,
+                            stale_global_rank_fields=_global_rank_fields(confidence, target_rank),
+                            neighbor_observation_index=neighbor_index,
+                        )
+                    )
+                    next_chain_id += 1
+            else:
+                for pending in markov_pending:
                     markov_transitions.append(
-                        _aborted_transition(pending, "gap_or_nonconsecutive_commit", step)
+                        _aborted_transition(pending, "structural_or_coordinate_change", step)
                     )
                     if pending.neighbor_observation_index is not None:
                         global_neighbor_observations[pending.neighbor_observation_index].update(
                             {
                                 "fresh_global_rank_available": False,
-                                "fresh_global_rank_unavailable_reason": "gap_or_nonconsecutive_commit",
+                                "fresh_global_rank_unavailable_reason": "structural_or_coordinate_change",
                             }
                         )
-            markov_pending = advanced_pending
-            for offset in (1, 2, 3):
-                target = committed_position + offset
-                if target not in absolute_positions:
-                    continue
-                target_rank = absolute_positions.index(target)
-                target_local = target - prefix_length
-                reference_evaluable = reference is not None and target_local < len(reference)
-                reference_reason = None
-                reference_token_id = None
-                stale_raw_reference_log_probability = None
-                stale_actual_reference_log_probability = None
-                stale_actual_reference_retained = None
-                if reference is None:
-                    reference_reason = "reference_not_provided"
-                elif target_local >= len(reference):
-                    reference_reason = "target_reference_token_out_of_range"
-                else:
-                    reference_token_id = int(reference[target_local])
-                    stale_raw_reference_log_probability = _stable_log_probability(
-                        logits[target_rank], reference_token_id
-                    )
-                    stale_actual_reference_retained = bool(
-                        actual.retained_mask[target_rank, reference_token_id].item()
-                    )
-                    if stale_actual_reference_retained:
-                        stale_actual_reference_log_probability = _stable_log_probability(
-                            actual.filtered_logits[target_rank], reference_token_id
-                        )
-                neighbor_index = None
-                if policy == GLOBAL_CONFIDENCE and offset == 1:
-                    neighbor_index = len(global_neighbor_observations) - 1
-                markov_pending.append(
-                    PendingTransition(
-                        chain_id=next_chain_id,
-                        offset=offset,
-                        source_step_index=step,
-                        source_position=committed_position - prefix_length,
-                        target_position=target,
-                        remaining_predecessors=offset - 1,
-                        next_predecessor_position=committed_position + 1,
-                        source_active_mask_count=len(absolute_positions),
-                        source_canvas_length=dynamic_length,
-                        stale_raw_probabilities=raw_probabilities[target_rank].detach().clone(),
-                        stale_actual_probabilities=actual.probabilities[target_rank]
-                        .detach()
-                        .clone(),
-                        stale_raw_reference_log_probability=stale_raw_reference_log_probability,
-                        stale_actual_reference_log_probability=stale_actual_reference_log_probability,
-                        stale_actual_reference_retained=stale_actual_reference_retained,
-                        reference_evaluable=reference_evaluable,
-                        reference_non_evaluable_reason=reference_reason,
-                        reference_token_id=reference_token_id,
-                        stale_global_rank_fields=_global_rank_fields(confidence, target_rank),
-                        neighbor_observation_index=neighbor_index,
-                    )
-                )
-                next_chain_id += 1
-        else:
-            for pending in markov_pending:
-                markov_transitions.append(
-                    _aborted_transition(pending, "structural_or_coordinate_change", step)
-                )
-                if pending.neighbor_observation_index is not None:
-                    global_neighbor_observations[pending.neighbor_observation_index].update(
-                        {
-                            "fresh_global_rank_available": False,
-                            "fresh_global_rank_unavailable_reason": "structural_or_coordinate_change",
-                        }
-                    )
-            markov_pending = []
-        unresolved_after = int((x[0, prefix_length : prefix_length + dynamic_length] == mask_id).sum().item())
-        traces.append(
-            {
-                "step_index": step,
-                "active_mask_positions": local_positions,
-                "confidence_top4": top4,
-                "leftmost_contiguous_positions": left_frontier_positions(local_positions, requested_k=4),
-                "requested_k": requested_k,
-                "k2_action_mode": k2_action_mode,
-                "k2_adjacent_pair": sequential_pair,
-                "markov_enabled": markov_enabled,
-                "corrected_structural_stop": corrected_structural_stop,
-                "selected_candidate_count": len(proposals),
-                "selected_positions": [proposal.position - prefix_length for proposal in proposals],
-                "selected_token_ids": [proposal.token_id for proposal in proposals],
-                "selected_token_types": [proposal.token_type for proposal in proposals],
-                "actual_committed_normal_tokens": normal_count,
-                "executed_expand_count": expand_count,
-                "executed_delete_count": delete_count,
-                "barrier_truncated_proposals": discarded,
-                "earliest_structural_action_position": None if barrier_action is None else barrier_action.position - prefix_length,
-                "unresolved_after": unresolved_after,
-                "canvas_length": dynamic_length,
-                "canvas_state_after": x[
-                    0, prefix_length : prefix_length + dynamic_length
-                ].detach().cpu().tolist(),
-            }
-        )
+                markov_pending = []
+            unresolved_after = int((x[0, prefix_length : prefix_length + dynamic_length] == mask_id).sum().item())
+            traces.append(
+                {
+                    "step_index": step,
+                    "active_mask_positions": local_positions,
+                    "confidence_top4": top4,
+                    "leftmost_contiguous_positions": left_frontier_positions(local_positions, requested_k=4),
+                    "requested_k": requested_k,
+                    "k2_action_mode": k2_action_mode,
+                    "k2_adjacent_pair": sequential_pair,
+                    "markov_enabled": markov_enabled,
+                    "corrected_structural_stop": corrected_structural_stop,
+                    "selected_candidate_count": len(proposals),
+                    "selected_positions": [proposal.position - prefix_length for proposal in proposals],
+                    "selected_token_ids": [proposal.token_id for proposal in proposals],
+                    "selected_token_types": [proposal.token_type for proposal in proposals],
+                    "actual_committed_normal_tokens": normal_count,
+                    "executed_expand_count": expand_count,
+                    "executed_delete_count": delete_count,
+                    "barrier_truncated_proposals": discarded,
+                    "earliest_structural_action_position": None if barrier_action is None else barrier_action.position - prefix_length,
+                    "unresolved_after": unresolved_after,
+                    "canvas_length": dynamic_length,
+                    "canvas_state_after": x[
+                        0, prefix_length : prefix_length + dynamic_length
+                    ].detach().cpu().tolist(),
+                }
+            )
+        if capture_actions:
+            action_trace.append({
+                "positions": [p.position - prefix_length for p in proposals],
+                "tokens": [p.token_id for p in proposals],
+                "normal": normal_count, "expand": expand_count, "delete": delete_count,
+                "corrected_stop": corrected_structural_stop,
+                "barrier": None if barrier_action is None else
+                    [barrier_action.position - prefix_length, barrier_action.token_id],
+            })
+
     for pending in markov_pending:
         markov_transitions.append(
             _aborted_transition(pending, "case_terminated_before_fresh_forward", len(traces))
@@ -1003,7 +1039,13 @@ def decode_with_policy(
         "completion_token_ids": completion_ids,
         "final_dynamic_length": dynamic_length,
         "final_remaining_masks": int(sum(token == mask_id for token in completion_ids)),
-        "forward_count": len(traces),
+        "forward_count": base_forward_count + recompute_forward_count,
+        "base_forward_count": base_forward_count,
+        "recompute_forward_count": recompute_forward_count,
+        "outer_round_count": base_forward_count,
+        "recompute_enabled_count": recompute_enabled_count,
+        "structural_stop_count": structural_stop_count,
+        "action_trace": action_trace,
         "normal_token_count": total_normal,
         "expand_count": total_expand,
         "delete_count": total_delete,
