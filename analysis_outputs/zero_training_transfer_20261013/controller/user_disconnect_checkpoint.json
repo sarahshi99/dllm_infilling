@@ -1,0 +1,15 @@
+{
+  "time_utc": "2026-10-13T11:06:06.692706+00:00",
+  "supervision": "stopped_by_user_request_keep_existing_evaluation_running",
+  "tmux": "zero_transfer_dreamcoder_20261013",
+  "gpu_python_pid": 832663,
+  "completed": 983,
+  "expected": 8264,
+  "gpu_job_hours_so_far": 0.5419341771417142,
+  "full_batch_estimate_hours": 3.858143304344857,
+  "no_new_gpu_jobs": true,
+  "training": false,
+  "stopped_read_only_monitor_pids": [
+    931028
+  ]
+}

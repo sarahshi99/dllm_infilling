@@ -817,3 +817,10 @@ Continue the paper-agent work in /home/shx/projects/dllm_infilling/git_workspace
 ### 2026-10-13 两目标下载阻塞及原生差异追加
 
 Dream Base和DiffuCoder Base均因持续下载错误、0完整shard停在GPU前，片段与恢复命令已保存；来源/CPU兼容及专用原生参考patch完成。当前仅DreamCoder PID832663在完整8264行，按启动代码475ea4c执行。后续通用runner增加target profile选择（Dream/DiffuCoder无EOS penalty），不改变该Python已载版本。恢复DreamCoder应恢复475ea4c runner blob后focused commit并用同一输出/全局账本；不丢用户改动、不重置12h累计成本。
+
+
+### 2026-10-13T11:06:06.692706+00:00 用户要求停止持续监督，保留已启动测试
+
+当前是零训练迁移测试，不是训练；主模型/Markov头均冻结。DreamCoder固定64完整8264行矩阵在服务器tmux `zero_transfer_dreamcoder_20261013` 运行，Python PID 832663，当前 983/8264，本轮累计GPU成本 0.5419h。按16条技术检查全量估计 3.86h（不是承诺）；共享负载会变化。用户电脑将断网，明确无需继续监督；只停止本轮只读monitor，未停止GPU作业。不会新增GPU作业/训练/下载。
+
+脚本自身仍有全局12h预算、技术错误退出、SQLite去重恢复、完成后本地配对分析与exit.json。当前脚本不会自动commit/push最终结果；用户回来后读取输出、做完整性审计、更新最终报告并focused commit/push。Dream和DiffuCoder下载阻塞、GPU未运行。恢复时先读 `analysis_outputs/zero_training_transfer_20261013/controller/user_disconnect_checkpoint.json`、目标run_manifest/progress/exit及全局gpu_budget；不要重跑既有DreamOn。

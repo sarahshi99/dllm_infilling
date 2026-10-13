@@ -455,3 +455,10 @@
 ### 2026-10-13 DreamCoder固定64技术检查通过并进入全量
 
 固定16条×8配置=128检查完成；A/B无头与官方局部K/顺序补丁参考token IDs一致，无非法输出或剩余mask，C/D同类同秩λ1二次抽样路径。预计全量13889.316秒（3.858h），1.5余量20833.974秒（5.787h），在本轮12h累计预算内；质量正负均继续8264行，不按smoke正确率筛选。PID832663，manifest代码475ea4c，当前已进入running_full。另两Base仍下载恢复中；缺失DreamOn主表不以Base替代。
+
+
+### 2026-10-13T11:06:06.692706+00:00 用户要求停止持续监督，保留已启动测试
+
+当前是零训练迁移测试，不是训练；主模型/Markov头均冻结。DreamCoder固定64完整8264行矩阵在服务器tmux `zero_transfer_dreamcoder_20261013` 运行，Python PID 832663，当前 983/8264，本轮累计GPU成本 0.5419h。按16条技术检查全量估计 3.86h（不是承诺）；共享负载会变化。用户电脑将断网，明确无需继续监督；只停止本轮只读monitor，未停止GPU作业。不会新增GPU作业/训练/下载。
+
+脚本自身仍有全局12h预算、技术错误退出、SQLite去重恢复、完成后本地配对分析与exit.json。当前脚本不会自动commit/push最终结果；用户回来后读取输出、做完整性审计、更新最终报告并focused commit/push。Dream和DiffuCoder下载阻塞、GPU未运行。恢复时先读 `analysis_outputs/zero_training_transfer_20261013/controller/user_disconnect_checkpoint.json`、目标run_manifest/progress/exit及全局gpu_budget；不要重跑既有DreamOn。
