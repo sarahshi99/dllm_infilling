@@ -29,7 +29,7 @@ def write_csv(path: Path, rows: list[dict]) -> None:
     with path.open("w", newline="", encoding="utf-8") as handle:
         fields = list(rows[0]) if rows else (["policy", "arm", "passed", "denominator", "generation_sec_total"]
                                            if path.name == "summary.csv" else ["policy", "comparison", "help", "harm", "net"])
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
