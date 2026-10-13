@@ -5,3 +5,5 @@ failure_journal.jsonl
 runner_failures.jsonl
 progress.json
 launch.log
+background.log
+smoke_progress.json

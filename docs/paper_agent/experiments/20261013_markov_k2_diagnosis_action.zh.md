@@ -28,3 +28,11 @@
 - 最终 CPU verification：46 tests OK（新增合成 10330 行分析链检验，临时 fixture 不进入真实结果目录）。py_compile、bash -n、git diff --check 通过。
 - `bash scripts/manual_run_dreamon_markov_k2_diagnosis_20261013.sh` 实际执行，退出码 3；唯一 H200 被 6 个其他进程占用，模型加载前阻塞。结果=0/10330、smoke=not_run、GPU=0h、预计全批耗时=null。
 - 已保存 compact report/manifest/audit/CSV 表头和本地空 per_case。未来恢复先资源检查，再16行估时，不能把旧 wall 当预测或速度结果。
+
+## 2026-10-13 用户授权共享 H200 后台执行
+
+- 本条取代之前“有其他进程即停止”的资源限制；不抢占、不终止其他进程。等待可用显存至少32GiB后开始，等待阶段不加载模型、不计GPU预算。
+- exact command：`tmux new-session -d -s dreamon_markov_k2_diagnosis_20261013 'bash scripts/background_dreamon_markov_k2_diagnosis_20261013.sh > analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/background.log 2>&1'`（diagnosis 工作树内）。
+- 47项CPU检查通过。后台顺序：16行开关检查→估时/12h预算→10330行→聚类分析/完整性审计→更新compact记录→focused commit/push→停止。协议差异/预算/异常会保存阻塞，不改参数或范围。
+- tmux=`dreamon_markov_k2_diagnosis_20261013`；日志与结果目录=`analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/`。无需持续人工监督。共享背景负载记录保留，报告明确计时限制。
+- 旧阻塞产物移入同目录 `before_shared_gpu_authorization/`；原人口、头、种子和方法不变。

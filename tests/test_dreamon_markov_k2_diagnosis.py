@@ -171,6 +171,17 @@ class DiagnosisPersistenceAndStatisticsTest(unittest.TestCase):
             require_idle(snapshot)
         require_idle(snapshot, own_pid=123)
 
+    def test_shared_gpu_authorization_allows_other_processes(self):
+        from experiments.run_dreamon_markov_k2_diagnosis import require_idle, has_start_capacity
+        snapshot = dict(gpus="0, GPU-test, NVIDIA H200 NVL, 91761, 143771, 0, 35",
+                        compute_processes="123, other-python, 91761")
+        require_idle(snapshot, allow_shared=True)
+        self.assertTrue(has_start_capacity(snapshot, min_free_gib=32))
+        self.assertFalse(has_start_capacity(snapshot, min_free_gib=60))
+        with self.assertRaises(RuntimeError):
+            require_idle(dict(gpus="0, GPU-test, NVIDIA A100, 0, 80000, 0, 35",
+                              compute_processes=""), allow_shared=True)
+
     def test_rotation_and_stable_ids_are_outcome_independent(self):
         from experiments.run_dreamon_markov_k2_diagnosis import rotated_arms, stable_smoke, ARMS
         rows = [dict(task_id=f"id{i:04d}", passed=i % 2) for i in range(1033)]

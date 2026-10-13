@@ -79,13 +79,20 @@ def gpu_snapshot() -> dict:
             "gpus": query, "compute_processes": processes}
 
 
-def require_idle(snapshot: dict, *, own_pid: int | None = None) -> None:
+def require_idle(snapshot: dict, *, own_pid: int | None = None, allow_shared: bool = False) -> None:
     gpus = snapshot["gpus"].splitlines()
     if len(gpus) != 1 or "H200" not in gpus[0]:
         raise RuntimeError("requires the single currently authorized H200")
+    if allow_shared:
+        return
     for line in snapshot["compute_processes"].splitlines():
         if line.strip() and int(line.split(",")[0]) != own_pid:
             raise RuntimeError("H200 is occupied by other compute processes; no GPU job launched/continued")
+
+
+def has_start_capacity(snapshot: dict, *, min_free_gib: float) -> bool:
+    fields = [part.strip() for part in snapshot["gpus"].split(",")]
+    return float(fields[4]) - float(fields[3]) >= min_free_gib * 1024
 
 
 def open_store(path: Path) -> sqlite3.Connection:
@@ -168,7 +175,9 @@ def prepare(args: argparse.Namespace) -> tuple[dict, list[dict]]:
         "dtype": "bfloat16 model, float32 rank-256 heads (same as previous)", "batch_size": 1,
         "device": "cuda:0", "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "budget_gpu_hours": args.budget_gpu_hours,
-        "budget_accounting": "cumulative exclusive GPU session wall including loading/warmup/smoke/evaluator/writes; conservative upper bound",
+        "allow_shared_gpu": args.allow_shared_gpu, "min_start_free_gib": args.min_free_gib,
+        "timing_environment": "shared H200; external load recorded, ten configurations interleaved" if args.allow_shared_gpu else "exclusive H200",
+        "budget_accounting": "cumulative GPU job session wall including loading/warmup/smoke/evaluator/writes; conservative upper bound",
         "arms": [{"policy": p, "arm": a, "k": 1 if a == "A" else 2,
                   "right_mode": {"A": "none", "B": "none", "C": "zero_output_same_head", "D": "v2_kl", "E": "fresh_model_fixed_right"}[a]}
                  for p, a in ARMS],
@@ -188,7 +197,7 @@ def prepare(args: argparse.Namespace) -> tuple[dict, list[dict]]:
     path = out / "run_manifest.json"
     if path.exists():
         previous = json.loads(path.read_text())
-        for key in ("original_config", "head_registry_entry", "arms", "smoke_task_ids", "generation_parameters", "budget_gpu_hours", "code_versions"):
+        for key in ("original_config", "head_registry_entry", "arms", "smoke_task_ids", "generation_parameters", "budget_gpu_hours", "code_versions", "allow_shared_gpu", "min_start_free_gib"):
             if previous[key] != manifest[key]:
                 raise RuntimeError(f"resume manifest differs: {key}; use a separate output directory for changed code/protocol")
         current_commit = manifest["code_commit"]
@@ -207,7 +216,7 @@ def run(args: argparse.Namespace) -> int:
     snapshot = gpu_snapshot()
     append_jsonl(out / "gpu_background.jsonl", snapshot)
     try:
-        require_idle(snapshot)
+        require_idle(snapshot, allow_shared=args.allow_shared_gpu)
     except RuntimeError as exc:
         manifest.update(status="blocked_gpu_busy", blocker=str(exc), gpu_snapshot=snapshot,
                         full_batch_estimate_sec=None, estimate_status="16-line GPU check not run: GPU busy")
@@ -216,8 +225,24 @@ def run(args: argparse.Namespace) -> int:
         return 3
     # Lock is per physical GPU, shared across invocations; never kill another process.
     lock = open("/tmp/dllm_infilling_h200_diagnosis.lock", "a")
-    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    require_idle(gpu_snapshot())
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    require_idle(gpu_snapshot(), allow_shared=args.allow_shared_gpu)
+    # Wait without loading CUDA or charging GPU time. No other process is touched.
+    waiting_started = time.perf_counter()
+    while args.allow_shared_gpu:
+        snapshot = gpu_snapshot()
+        append_jsonl(out / "gpu_background.jsonl", snapshot)
+        require_idle(snapshot, allow_shared=True)
+        if has_start_capacity(snapshot, min_free_gib=args.min_free_gib):
+            break
+        manifest.update(status="waiting_gpu_capacity", gpu_snapshot=snapshot,
+                        queue_wait_sec=time.perf_counter() - waiting_started)
+        atomic_write_json(out / "run_manifest.json", manifest)
+        print(f"Waiting for {args.min_free_gib:g} GiB free on authorized shared H200", flush=True)
+        time.sleep(30)
+    manifest["queue_wait_sec"] = time.perf_counter() - waiting_started
+    manifest.pop("blocker", None)
+    manifest["initial_gpu_snapshot"] = snapshot
     db = open_store(out / "per_case.sqlite")
     prior_elapsed = float((db.execute("SELECT value FROM state WHERE key='gpu_session_sec'").fetchone() or [0])[0])
     session_started = time.perf_counter()
@@ -260,6 +285,7 @@ def run(args: argparse.Namespace) -> int:
         manifest.update(status="running_smoke", actual_device=torch.cuda.get_device_name(0),
                         torch_version=torch.__version__, cuda_version=torch.version.cuda,
                         model_load_sec=loading_sec, actual_head_dtype=str(next(trained_head.parameters()).dtype))
+        atomic_write_json(out / "run_manifest.json", manifest)
         def decode(row: dict, policy: str, arm: str, *, diagnostics: bool, actions: bool = False) -> tuple[dict, float]:
             safe = selection_view(row)
             prefix = tokenizer.encode(safe["prefix"], add_bos=True, add_eos=False)
@@ -295,9 +321,10 @@ def run(args: argparse.Namespace) -> int:
         if not smoke_path.exists() or json.loads(smoke_path.read_text())["status"] != "passed":
             checks, sample_costs = [], []
             for index, row in enumerate(stable_smoke(rows)):
+                print(f"smoke {index + 1}/16", flush=True)
                 background = gpu_snapshot()
                 append_jsonl(out / "gpu_background.jsonl", background)
-                require_idle(background, own_pid=os.getpid())
+                require_idle(background, own_pid=os.getpid(), allow_shared=args.allow_shared_gpu)
                 for policy, arm in rotated_arms(index):
                     budget_check()
                     on, _ = decode(row, policy, arm, diagnostics=True, actions=True)
@@ -314,6 +341,7 @@ def run(args: argparse.Namespace) -> int:
                                    "generation_sec": elapsed, "forward_count": off["forward_count"],
                                    "base_forward_count": off["base_forward_count"],
                                    "recompute_forward_count": off["recompute_forward_count"]})
+                atomic_write_json(out / "smoke_progress.json", {"completed": len(checks), "expected": 160})
             estimate = sum(sample_costs) / 16 * 1033
             atomic_write_json(smoke_path, {"status": "passed", "checks": checks, "count": len(checks),
                                           "full_batch_estimate_sec": estimate, "estimate_margin": 1.5})
@@ -333,7 +361,7 @@ def run(args: argparse.Namespace) -> int:
         for index, row in enumerate(rows):
             snapshot = gpu_snapshot()
             append_jsonl(out / "gpu_background.jsonl", snapshot)
-            require_idle(snapshot, own_pid=os.getpid())
+            require_idle(snapshot, own_pid=os.getpid(), allow_shared=args.allow_shared_gpu)
             for policy, arm in rotated_arms(index):
                 if (policy, arm, row["task_id"]) in completed:
                     continue
@@ -361,11 +389,13 @@ def run(args: argparse.Namespace) -> int:
                     raise
                 atomic_write_json(out / "progress.json", {"status": "running", "completed": len(completed), "expected": 10330,
                                                          "gpu_session_sec": persist_budget()})
-        require_idle(gpu_snapshot(), own_pid=os.getpid())
+        require_idle(gpu_snapshot(), own_pid=os.getpid(), allow_shared=args.allow_shared_gpu)
         manifest["status"] = "completed_generation"
         atomic_write_json(out / "run_manifest.json", manifest)
         from analysis.analyze_dreamon_markov_k2_diagnosis import analyze
-        analyze(out)
+        audit = analyze(out)
+        if audit["status"] != "passed":
+            raise RuntimeError("final integrity audit did not pass")
         return 0
     except Exception as exc:
         manifest.update(status="blocked", blocker=str(exc))
@@ -386,6 +416,8 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--original-config", required=True)
     result.add_argument("--output-dir", required=True)
     result.add_argument("--budget-gpu-hours", type=float, default=12)
+    result.add_argument("--allow-shared-gpu", action="store_true")
+    result.add_argument("--min-free-gib", type=float, default=32)
     return result
 
 

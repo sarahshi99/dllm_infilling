@@ -1,5 +1,13 @@
 # 当前行动：Markov v2 训练结果归档与 K=2 推理实现
 
+## 2026-10-13 用户授权共享 H200 后台执行
+
+- 本条取代之前“有其他进程即停止”的资源限制；不抢占、不终止其他进程。等待可用显存至少32GiB后开始，等待阶段不加载模型、不计GPU预算。
+- exact command：`tmux new-session -d -s dreamon_markov_k2_diagnosis_20261013 'bash scripts/background_dreamon_markov_k2_diagnosis_20261013.sh > analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/background.log 2>&1'`（diagnosis 工作树内）。
+- 47项CPU检查通过。后台顺序：16行开关检查→估时/12h预算→10330行→聚类分析/完整性审计→更新compact记录→focused commit/push→停止。协议差异/预算/异常会保存阻塞，不改参数或范围。
+- tmux=`dreamon_markov_k2_diagnosis_20261013`；日志与结果目录=`analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/`。无需持续人工监督。共享背景负载记录保留，报告明确计时限制。
+- 旧阻塞产物移入同目录 `before_shared_gpu_authorization/`；原人口、头、种子和方法不变。
+
 ## 2026-10-13 DreamOn + Markov K2 诊断：代码已保存，GPU 资源阻塞
 
 - 分支 `codex/dreamon-markov-k2-diagnosis-v1`；实现提交 `66c5c2b`，结果目录 `analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/`。从已审阅 `b8d6e58` 后最新 `0e97f61` 复用，原工作区和旧结果未改动。
