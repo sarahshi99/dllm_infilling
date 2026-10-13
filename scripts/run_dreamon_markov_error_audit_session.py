@@ -25,8 +25,16 @@ def save(name, value):
 
 def git(*args):
     try:
+        command = ["git", "-C", str(ROOT)]
+        if args and args[0] == "ls-remote":
+            # This session's port-22 push/verification timed out. Port 443
+            # succeeded with the existing key and known-host verification.
+            # Keep the runner's final read on that transport; no config edit.
+            command += ["-c", "core.sshCommand=ssh -p 443 -o Hostname=ssh.github.com "
+                        "-o HostKeyAlias=github.com -o ConnectTimeout=10 "
+                        "-o BatchMode=yes -o StrictHostKeyChecking=yes"]
         return subprocess.check_output(
-            ["git", "-C", str(ROOT), *args], text=True, timeout=30,
+            [*command, *args], text=True, timeout=30,
             stderr=subprocess.DEVNULL,
         ).strip()
     except (subprocess.SubprocessError, OSError):
