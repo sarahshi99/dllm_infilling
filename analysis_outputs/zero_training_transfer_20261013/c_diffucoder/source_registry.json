@@ -1,0 +1,59 @@
+{
+  "date_utc": "2026-10-13T10:34:01Z",
+  "exact_dreamon_target": {
+    "initialization": "DiffuCoder-7B",
+    "id": null,
+    "revision": null,
+    "local_path": null,
+    "weight_kind": "exact_dreamon_finetuned",
+    "status": "未找到可验证公开权重",
+    "searched": [
+      "https://github.com/DreamLM/DreamOn/tree/8a0a54918412eda9402a327646f7f067f7160ec8",
+      "https://github.com/DreamLM/DreamOn/issues/6",
+      "https://huggingface.co/api/models?author=Dream-org&limit=100",
+      "https://huggingface.co/api/models?search=DreamOn&limit=100"
+    ],
+    "evidence_files": [
+      "hf_dream_org.json",
+      "hf_search_dreamon.json",
+      "github_issue6.json"
+    ]
+  },
+  "auxiliary_target": {
+    "id": "apple/DiffuCoder-7B-Base",
+    "revision": "a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+    "local_path": "/home/shx/.cache/dllm_infilling/model_snapshots/apple--DiffuCoder-7B-Base/a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+    "weight_kind": "original_base_fixed_length_auxiliary",
+    "provider": "Apple official HF repository",
+    "initialization_evidence": "Pinned model card identifies foundational masked diffusion LLM; official Apple model card/repository and formal DreamOn paper identify the DiffuCoder starting point. This is not evidence of DreamOn length finetuning.",
+    "direct_transfer_status": "passed",
+    "validation_scope": "CPU full ordinary mapping, identical merges/tokenization code, six representative encodings, dimensions and output-column semantics only; strict head load source agent A; GPU 16 pending",
+    "tokenizer_path": "/home/shx/.cache/dllm_infilling/model_snapshots/apple--DiffuCoder-7B-Base/a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+    "tokenizer_revision": "a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+    "generation_code": "/home/shx/.cache/dllm_infilling/model_snapshots/apple--DiffuCoder-7B-Base/a2c33054cbe99b9ab7af074f09b1d13943157ff1/generation_utils.py",
+    "generation_code_revision": "a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+    "model_logit_shift_count": 0,
+    "decoder_logit_shift_count": 1,
+    "canvas_length": 64,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "weights_status": "download_in_progress_resumable",
+    "weight_bytes": 15231271528,
+    "old_cache_path": "/tmp/diffucoder_base_repo_probe_20260609",
+    "old_cache_exists_now": false,
+    "current_hf_apple_cache_exists": false,
+    "old_adapter": "clean_scripts/run_dreamcoder_official_infilling.py",
+    "old_adapter_exists": true,
+    "old_cal_source": "/home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/diffucoder_cal",
+    "old_cal_source_exists": true,
+    "old_cal_source_is_frozen_protocol_adapter": false
+  },
+  "gpu_cost_hours": 0,
+  "quality_rows_produced": 0,
+  "not_claimed": [
+    "cross-model success",
+    "DreamOn DiffuCoder main-table result",
+    "speedup",
+    "16-row GPU technical check pass"
+  ]
+}

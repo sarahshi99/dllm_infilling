@@ -1,0 +1,188 @@
+{
+  "model_id": "apple/DiffuCoder-7B-Base",
+  "revision": "a2c33054cbe99b9ab7af074f09b1d13943157ff1",
+  "model_vocab_size": 152064,
+  "source_full_vocab_count": 151668,
+  "target_full_vocab_count": 151667,
+  "source_ordinary_count": 151664,
+  "target_ordinary_count": 151664,
+  "ordinary_mapping_equal": true,
+  "source_only_mapping": {
+    "<|expand|>": 151667
+  },
+  "target_only_mapping": {},
+  "source_special": {
+    "<|beginoftext|>": 151665,
+    "<|endoftext|>": 151643,
+    "<|mask|>": 151666,
+    "<|expand|>": 151667
+  },
+  "target_special": {
+    "<|beginoftext|>": 151665,
+    "<|endoftext|>": 151643,
+    "<|mask|>": 151666
+  },
+  "representative_tokenization": [
+    {
+      "text": "def f(x):\n    return x + 1\n",
+      "source": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ],
+      "target": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ]
+    },
+    {
+      "text": "    return True\r\n\t# comment",
+      "source": [
+        262,
+        470,
+        3007,
+        319,
+        197,
+        2,
+        3980
+      ],
+      "target": [
+        262,
+        470,
+        3007,
+        319,
+        197,
+        2,
+        3980
+      ]
+    },
+    {
+      "text": "\"中文🙂 café é\"",
+      "source": [
+        1,
+        104811,
+        145080,
+        51950,
+        3958,
+        1
+      ],
+      "target": [
+        1,
+        104811,
+        145080,
+        51950,
+        3958,
+        1
+      ]
+    },
+    {
+      "text": "x != 3 and y <= 10; foo_bar(1.23)",
+      "source": [
+        87,
+        961,
+        220,
+        18,
+        323,
+        379,
+        2651,
+        220,
+        16,
+        15,
+        26,
+        15229,
+        14388,
+        7,
+        16,
+        13,
+        17,
+        18,
+        8
+      ],
+      "target": [
+        87,
+        961,
+        220,
+        18,
+        323,
+        379,
+        2651,
+        220,
+        16,
+        15,
+        26,
+        15229,
+        14388,
+        7,
+        16,
+        13,
+        17,
+        18,
+        8
+      ]
+    },
+    {
+      "text": "<tool_call></tool_call><|fim_prefix|>",
+      "source": [
+        151657,
+        151658,
+        151659
+      ],
+      "target": [
+        151657,
+        151658,
+        151659
+      ]
+    },
+    {
+      "text": " trailing  spaces  \n\n",
+      "source": [
+        27748,
+        220,
+        12621,
+        18611
+      ],
+      "target": [
+        27748,
+        220,
+        12621,
+        18611
+      ]
+    }
+  ],
+  "representative_all_equal": true,
+  "file_equality": {
+    "vocab.json": false,
+    "merges.txt": true,
+    "tokenization_dream.py": true
+  },
+  "source_config_special": {
+    "bos_token_id": 151643,
+    "eos_token_id": 151643,
+    "expand_token_id": 151667,
+    "mask_token_id": 151666,
+    "pad_token_id": 151643
+  },
+  "target_config_special": {
+    "bos_token_id": 151643,
+    "eos_token_id": 151643,
+    "mask_token_id": 151666,
+    "pad_token_id": 151643
+  }
+}

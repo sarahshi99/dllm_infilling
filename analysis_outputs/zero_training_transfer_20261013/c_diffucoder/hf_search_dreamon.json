@@ -1,0 +1,269 @@
+[
+  {
+    "_id": "64713b531c2bfd5b7bfc75af",
+    "id": "dreamonkey/spine",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 0,
+    "tags": [
+      "license:openrail",
+      "region:us"
+    ],
+    "createdAt": "2023-05-26T23:05:55.000Z",
+    "modelId": "dreamonkey/spine"
+  },
+  {
+    "_id": "64713d801c2bfd5b7bfc9dfb",
+    "id": "dreamonkey/spinre",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 0,
+    "tags": [
+      "license:cc0-1.0",
+      "region:us"
+    ],
+    "createdAt": "2023-05-26T23:15:12.000Z",
+    "modelId": "dreamonkey/spinre"
+  },
+  {
+    "_id": "66194b36796f7b5e07b176c8",
+    "id": "DreamOnRain/mamba-1.4b-hf-quotes",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 5,
+    "tags": [
+      "peft",
+      "safetensors",
+      "en",
+      "dataset:Abirate/english_quotes",
+      "arxiv:1910.09700",
+      "base_model:state-spaces/mamba-1.4b-hf",
+      "base_model:adapter:state-spaces/mamba-1.4b-hf",
+      "region:us"
+    ],
+    "library_name": "peft",
+    "createdAt": "2024-04-12T14:54:46.000Z",
+    "modelId": "DreamOnRain/mamba-1.4b-hf-quotes"
+  },
+  {
+    "_id": "662809bed4eee72ab62ff99b",
+    "id": "DreamOnRain/mamba-130m-mathqa",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 19,
+    "tags": [
+      "transformers",
+      "safetensors",
+      "mamba",
+      "text-generation",
+      "arxiv:1910.09700",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "pipeline_tag": "text-generation",
+    "library_name": "transformers",
+    "createdAt": "2024-04-23T19:19:26.000Z",
+    "modelId": "DreamOnRain/mamba-130m-mathqa"
+  },
+  {
+    "_id": "662b28734659c5d6310b8f05",
+    "id": "DreamOnRain/mamba-130m-msmath",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 22,
+    "tags": [
+      "transformers",
+      "safetensors",
+      "mamba",
+      "text-generation",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "pipeline_tag": "text-generation",
+    "library_name": "transformers",
+    "createdAt": "2024-04-26T04:07:15.000Z",
+    "modelId": "DreamOnRain/mamba-130m-msmath"
+  },
+  {
+    "_id": "662bf3e1bf294785d1ac2ebc",
+    "id": "DreamOnRain/mamba-1.4b-msmath",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 18,
+    "tags": [
+      "transformers",
+      "safetensors",
+      "mamba",
+      "text-generation",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "pipeline_tag": "text-generation",
+    "library_name": "transformers",
+    "createdAt": "2024-04-26T18:35:13.000Z",
+    "modelId": "DreamOnRain/mamba-1.4b-msmath"
+  },
+  {
+    "_id": "6630a29d64b627c0b9a5a3d9",
+    "id": "DreamOnRain/mamba-370m-msmath",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 18,
+    "tags": [
+      "transformers",
+      "safetensors",
+      "mamba",
+      "text-generation",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "pipeline_tag": "text-generation",
+    "library_name": "transformers",
+    "createdAt": "2024-04-30T07:49:49.000Z",
+    "modelId": "DreamOnRain/mamba-370m-msmath"
+  },
+  {
+    "_id": "6875e502b38be9b4012737de",
+    "id": "Dream-org/DreamOn-v0-7B",
+    "likes": 21,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 174,
+    "tags": [
+      "transformers",
+      "safetensors",
+      "Dream",
+      "feature-extraction",
+      "text-generation",
+      "conversational",
+      "custom_code",
+      "arxiv:2202.04200",
+      "arxiv:2502.06768",
+      "license:apache-2.0",
+      "region:us"
+    ],
+    "pipeline_tag": "text-generation",
+    "library_name": "transformers",
+    "createdAt": "2025-07-15T05:20:02.000Z",
+    "modelId": "Dream-org/DreamOn-v0-7B"
+  },
+  {
+    "_id": "687a41a403d818c91b46ddbf",
+    "id": "mradermacher/DreamOn-v0-7B-GGUF",
+    "likes": 1,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 522,
+    "tags": [
+      "transformers",
+      "gguf",
+      "en",
+      "base_model:Dream-org/DreamOn-v0-7B",
+      "base_model:quantized:Dream-org/DreamOn-v0-7B",
+      "license:apache-2.0",
+      "endpoints_compatible",
+      "region:us",
+      "conversational"
+    ],
+    "library_name": "transformers",
+    "createdAt": "2025-07-18T12:44:20.000Z",
+    "modelId": "mradermacher/DreamOn-v0-7B-GGUF"
+  },
+  {
+    "_id": "687a478ccbc47e68e89679c0",
+    "id": "mradermacher/DreamOn-v0-7B-i1-GGUF",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 433,
+    "tags": [
+      "transformers",
+      "gguf",
+      "en",
+      "base_model:Dream-org/DreamOn-v0-7B",
+      "base_model:quantized:Dream-org/DreamOn-v0-7B",
+      "license:apache-2.0",
+      "endpoints_compatible",
+      "region:us",
+      "imatrix",
+      "conversational"
+    ],
+    "library_name": "transformers",
+    "createdAt": "2025-07-18T13:09:32.000Z",
+    "modelId": "mradermacher/DreamOn-v0-7B-i1-GGUF"
+  },
+  {
+    "_id": "68fae288551469b5795f1d62",
+    "id": "o-1-o/dreamon-re",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 0,
+    "tags": [
+      "license:apache-2.0",
+      "region:us"
+    ],
+    "createdAt": "2025-10-24T02:20:56.000Z",
+    "modelId": "o-1-o/dreamon-re"
+  },
+  {
+    "_id": "690f6667ed5ac2e2e4cbab0f",
+    "id": "Kojun1108/Dream_Only_train",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 1,
+    "tags": [
+      "diffusers",
+      "safetensors",
+      "diffusers:StableDiffusionInstructPix2PixPipeline",
+      "region:us"
+    ],
+    "library_name": "diffusers",
+    "createdAt": "2025-11-08T15:48:55.000Z",
+    "modelId": "Kojun1108/Dream_Only_train"
+  },
+  {
+    "_id": "6a21d6cc45017db129711428",
+    "id": "AISE-TUDelft/dreamon-0.5b-Java-Identifiers",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 14,
+    "tags": [
+      "safetensors",
+      "Dream",
+      "custom_code",
+      "region:us"
+    ],
+    "createdAt": "2026-06-04T19:49:32.000Z",
+    "modelId": "AISE-TUDelft/dreamon-0.5b-Java-Identifiers"
+  },
+  {
+    "_id": "6a21e0b52185a047be57c64b",
+    "id": "AISE-TUDelft/dreamon-7b-Java-Identifiers",
+    "likes": 0,
+    "trendingScore": 0,
+    "private": false,
+    "downloads": 12,
+    "tags": [
+      "safetensors",
+      "Dream",
+      "custom_code",
+      "region:us"
+    ],
+    "createdAt": "2026-06-04T20:31:49.000Z",
+    "modelId": "AISE-TUDelft/dreamon-7b-Java-Identifiers"
+  }
+]
