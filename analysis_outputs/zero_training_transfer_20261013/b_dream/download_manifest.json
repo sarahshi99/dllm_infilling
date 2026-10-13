@@ -1,0 +1,71 @@
+{
+  "snapshot": "/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "files": [
+    {
+      "file": "README.md",
+      "status": "ok",
+      "bytes": 401
+    },
+    {
+      "file": "config.json",
+      "status": "ok",
+      "bytes": 874
+    },
+    {
+      "file": "generation_config.json",
+      "status": "ok",
+      "bytes": 147
+    },
+    {
+      "file": "generation_utils.py",
+      "status": "ok",
+      "bytes": 22332
+    },
+    {
+      "file": "modeling_dream.py",
+      "status": "ok",
+      "bytes": 36763
+    },
+    {
+      "file": "configuration_dream.py",
+      "status": "ok",
+      "bytes": 3197
+    },
+    {
+      "file": "tokenization_dream.py",
+      "status": "ok",
+      "bytes": 14028
+    },
+    {
+      "file": "tokenizer_config.json",
+      "status": "ok",
+      "bytes": 7486
+    },
+    {
+      "file": "special_tokens_map.json",
+      "status": "ok",
+      "bytes": 661
+    },
+    {
+      "file": "added_tokens.json",
+      "status": "ok",
+      "bytes": 656
+    },
+    {
+      "file": "vocab.json",
+      "status": "ok",
+      "bytes": 3383407
+    },
+    {
+      "file": "merges.txt",
+      "status": "ok",
+      "bytes": 1671853
+    },
+    {
+      "file": "model.safetensors.index.json",
+      "status": "ok",
+      "bytes": 27752
+    }
+  ]
+}

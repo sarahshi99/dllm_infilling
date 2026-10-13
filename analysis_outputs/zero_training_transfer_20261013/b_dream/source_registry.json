@@ -1,0 +1,119 @@
+{
+  "checked_at_utc": "2026-10-13T10:35:24.364894+00:00",
+  "id": "Dream-org/Dream-v0-Base-7B",
+  "revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "local_path": "/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "initialization_evidence": "Official model card identifies Dream 7B Base; not certified from directory/config names",
+  "weight_kind": "original_base_fixed_length_auxiliary",
+  "official": true,
+  "license": "apache-2.0",
+  "tokenizer_revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "generation_code_revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "direct_transfer_status": "passed",
+  "validation_scope": "cpu_tokenizer_mapping_rules_representative_text_and_output_columns_only",
+  "gpu_technical_check": "pending",
+  "weight_download_status": "running_bounded_curl_after_xet_requests_timeout",
+  "gpu_job_hours": 0,
+  "dream_to_dreamon_weight_status": "未找到可验证公开权重",
+  "source_urls": [
+    "https://huggingface.co/Dream-org/Dream-v0-Base-7B",
+    "https://huggingface.co/Dream-org/Dream-v0-Base-7B/commit/6572adb5535263e4d1a337b56942ba48b6dee2a9",
+    "https://github.com/DreamLM/DreamOn/issues/6",
+    "https://github.com/DreamLM/DreamOn/tree/8a0a54918412eda9402a327646f7f067f7160ec8"
+  ],
+  "official_org_model_ids": [
+    "Dream-org/Dream-v0-Base-7B",
+    "Dream-org/Dream-v0-Instruct-7B",
+    "Dream-org/Dream-Coder-v0-Base-7B",
+    "Dream-org/Dream-Coder-v0-Instruct-7B",
+    "Dream-org/DreamOn-v0-7B",
+    "Dream-org/Dream-VL-7B",
+    "Dream-org/Dream-VLA-7B",
+    "Dream-org/DreamReasoner-8B-Base",
+    "Dream-org/DreamReasoner-8B"
+  ],
+  "dreamon_search_model_ids": [
+    "dreamonkey/spine",
+    "dreamonkey/spinre",
+    "DreamOnRain/mamba-1.4b-hf-quotes",
+    "DreamOnRain/mamba-130m-mathqa",
+    "DreamOnRain/mamba-130m-msmath",
+    "DreamOnRain/mamba-1.4b-msmath",
+    "DreamOnRain/mamba-370m-msmath",
+    "Dream-org/DreamOn-v0-7B",
+    "mradermacher/DreamOn-v0-7B-GGUF",
+    "mradermacher/DreamOn-v0-7B-i1-GGUF",
+    "o-1-o/dreamon-re",
+    "Kojun1108/Dream_Only_train",
+    "AISE-TUDelft/dreamon-0.5b-Java-Identifiers",
+    "AISE-TUDelft/dreamon-7b-Java-Identifiers"
+  ],
+  "official_lfs_shards": [
+    {
+      "rfilename": "model-00001-of-00004.safetensors",
+      "blobId": "c6edc2f169bd46f892bdfa98fa561fa4635cd32d",
+      "size": 4877660776,
+      "lfs": {
+        "sha256": "e5de28bbee93bdf27aeaa9e8f3655ae1b631be145472e913fce49b2d79d4ca14",
+        "size": 4877660776,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00002-of-00004.safetensors",
+      "blobId": "ea669e22d82dee6952f73efca8927141cef5fb6a",
+      "size": 4932751008,
+      "lfs": {
+        "sha256": "816f7622e7100d8edfed376802179366aad97a7938323e6ba9e831e68ebec5e1",
+        "size": 4932751008,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00003-of-00004.safetensors",
+      "blobId": "0b824d04438f892ae0c253ec5584604d6fb84d99",
+      "size": 4330865200,
+      "lfs": {
+        "sha256": "fd48645ac8655e197a7ba0b0937436afd63dab4c69e1ef56150b2a4e3e7e5d45",
+        "size": 4330865200,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00004-of-00004.safetensors",
+      "blobId": "b603f64e64737342204db034ed1b68d38619aea9",
+      "size": 1089994880,
+      "lfs": {
+        "sha256": "2f74a68ffee4e4a1c0605cf0b1b8c55ee86f41c3bae74e1e5872771307de12f6",
+        "size": 1089994880,
+        "pointerSize": 135
+      }
+    }
+  ],
+  "population_count": 1033,
+  "base_task_count": 164,
+  "seed": 42,
+  "smoke_task_ids": [
+    "SingleLineInfilling/HumanEval/0/L0",
+    "SingleLineInfilling/HumanEval/105/L3",
+    "SingleLineInfilling/HumanEval/111/L5",
+    "SingleLineInfilling/HumanEval/123/L1",
+    "SingleLineInfilling/HumanEval/129/L21",
+    "SingleLineInfilling/HumanEval/137/L1",
+    "SingleLineInfilling/HumanEval/143/L9",
+    "SingleLineInfilling/HumanEval/154/L3",
+    "SingleLineInfilling/HumanEval/19/L3",
+    "SingleLineInfilling/HumanEval/32/L7",
+    "SingleLineInfilling/HumanEval/46/L2",
+    "SingleLineInfilling/HumanEval/59/L9",
+    "SingleLineInfilling/HumanEval/71/L3",
+    "SingleLineInfilling/HumanEval/81/L12",
+    "SingleLineInfilling/HumanEval/93/L0",
+    "SingleLineInfilling/HumanEval/99/L9"
+  ],
+  "native_logit_shift": "forward raw, _sample shifts exactly once before hook",
+  "head_rule": "Use original rank256 v2 KL best class and strict all-parameter load, original output_mask; lambda1; no training",
+  "base_canvas_length": 64,
+  "native_schedule_difference": "Official timestep-proportional schedule needs A minimal fixed-K/frontier reference patch; no invented length control",
+  "adapter_file": "experiments/dreamcoder_fixed_transfer_adapter.py (A; main controller integration)"
+}

@@ -1,0 +1,236 @@
+{
+  "model_id": "Dream-org/Dream-v0-Base-7B",
+  "model_revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "target_snapshot": "/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9",
+  "source_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "ordinary_vocab_mapping_equal": true,
+  "ordinary_vocab_count": 151643,
+  "common_mapping_count": 151667,
+  "common_mapping_mismatch_count": 0,
+  "rules_byte_equal": {
+    "merges.txt": true,
+    "tokenization_dream.py": true
+  },
+  "runtime_rules": {
+    "pretokenization_regex_equal": true,
+    "bpe_ranks_equal": true,
+    "byte_encoder_equal": true,
+    "byte_decoder_equal": true,
+    "errors_equal": true,
+    "source_fast_regex_equal": true,
+    "source_fast_nfc_matches_target_code": true
+  },
+  "tokenizer_classes": [
+    "Qwen2TokenizerFast",
+    "DreamTokenizer"
+  ],
+  "source_only_tokens": {
+    "<|expand|>": 151667
+  },
+  "target_only_tokens": {},
+  "source_special_ids": [
+    151665,
+    151643,
+    151666,
+    151667
+  ],
+  "target_special_ids": [
+    151665,
+    151643,
+    151666
+  ],
+  "tokenizer_bos_ids": [
+    151665,
+    151665
+  ],
+  "config_bos_ids": [
+    151643,
+    151643
+  ],
+  "model_output_widths": [
+    152064,
+    152064
+  ],
+  "representative_tokenizations": [
+    {
+      "text": "def f(x):\n    return x + 1\n",
+      "source_ids": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ],
+      "target_ids": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ],
+      "equal": true
+    },
+    {
+      "text": "    # 中文 café\n    s = 'Hello world'\n",
+      "source_ids": [
+        262,
+        671,
+        72858,
+        16744,
+        51950,
+        198,
+        262,
+        274,
+        284,
+        364,
+        9707,
+        1879,
+        1248
+      ],
+      "target_ids": [
+        262,
+        671,
+        72858,
+        16744,
+        51950,
+        198,
+        262,
+        274,
+        284,
+        364,
+        9707,
+        1879,
+        1248
+      ],
+      "equal": true
+    },
+    {
+      "text": "\treturn [i**2 for i in range(10)]\r\n",
+      "source_ids": [
+        853,
+        508,
+        72,
+        334,
+        17,
+        369,
+        600,
+        304,
+        2088,
+        7,
+        16,
+        15,
+        29529
+      ],
+      "target_ids": [
+        853,
+        508,
+        72,
+        334,
+        17,
+        369,
+        600,
+        304,
+        2088,
+        7,
+        16,
+        15,
+        29529
+      ],
+      "equal": true
+    },
+    {
+      "text": "Hello world",
+      "source_ids": [
+        9707,
+        1879
+      ],
+      "target_ids": [
+        9707,
+        1879
+      ],
+      "equal": true
+    },
+    {
+      "text": " Hello world",
+      "source_ids": [
+        21927,
+        1879
+      ],
+      "target_ids": [
+        21927,
+        1879
+      ],
+      "equal": true
+    },
+    {
+      "text": "é ≠ é\n",
+      "source_ids": [
+        963,
+        94304,
+        3958,
+        198
+      ],
+      "target_ids": [
+        963,
+        94304,
+        3958,
+        198
+      ],
+      "equal": true
+    },
+    {
+      "text": "<|beginoftext|><|mask|><|endoftext|>",
+      "source_ids": [
+        151665,
+        151666,
+        151643
+      ],
+      "target_ids": [
+        151665,
+        151666,
+        151643
+      ],
+      "equal": true
+    }
+  ],
+  "tokenizer_status": "compatible_for_fixed_canvas_with_original_head_mask",
+  "output_column_semantics": {
+    "151643": "EOS/pad in both; fixed canvas never deletes EOS",
+    "151665": "tokenizer BOS in both; use tokenizer BOS, not stale config BOS",
+    "151666": "mask in both",
+    "151667": "source expand; target unassigned. Preserve original head output_mask zero, no expand action",
+    "151668_to_152063": "unassigned output columns in both; invalid-token checks remain required"
+  },
+  "weight_shards": [
+    {
+      "name": "model-00001-of-00004.safetensors",
+      "exists": false
+    },
+    {
+      "name": "model-00002-of-00004.safetensors",
+      "exists": false
+    },
+    {
+      "name": "model-00003-of-00004.safetensors",
+      "exists": false
+    },
+    {
+      "name": "model-00004-of-00004.safetensors",
+      "exists": false
+    }
+  ],
+  "weights_complete": false,
+  "gpu_used": false
+}
