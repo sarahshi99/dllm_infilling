@@ -5,6 +5,7 @@
 - 本条取代之前“有其他进程即停止”的资源限制；不抢占、不终止其他进程。等待可用显存至少32GiB后开始，等待阶段不加载模型、不计GPU预算。
 - exact command：`tmux new-session -d -s dreamon_markov_k2_diagnosis_20261013 'bash scripts/background_dreamon_markov_k2_diagnosis_20261013.sh > analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/background.log 2>&1'`（diagnosis 工作树内）。
 - 47项CPU检查通过。后台顺序：16行开关检查→估时/12h预算→10330行→聚类分析/完整性审计→更新compact记录→focused commit/push→停止。协议差异/预算/异常会保存阻塞，不改参数或范围。
+- 已确认实际启动：Python PID=`3535957`，tmux pane PID=`3535950`，模型加载约6.16秒，当前进入 `running_smoke`，新增GPU占用约17GiB。实现提交 `a55b1fd` 已push。
 - tmux=`dreamon_markov_k2_diagnosis_20261013`；日志与结果目录=`analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/`。无需持续人工监督。共享背景负载记录保留，报告明确计时限制。
 - 旧阻塞产物移入同目录 `before_shared_gpu_authorization/`；原人口、头、种子和方法不变。
 

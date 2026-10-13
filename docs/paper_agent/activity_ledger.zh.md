@@ -418,3 +418,8 @@
 - 实现同路径零头、固定右位 fresh 重算、诊断关闭公平计时、SQLite 断点恢复和基础题聚类统计；46 项 CPU 检查通过。reviewer_gate_disabled，完成 local diff review + fresh verification。
 - 实际运行入口在模型加载前发现唯一 H200 有 6 个其他进程并退出 3；16 行 GPU 检查未运行，full=0/10330，GPU budget used=0h。阻塞与版本/参数已写结果目录，不把空表当测量结果。
 - 保存 report、manifest、integrity audit、summary/paired 表头；原始逐行表保留本地。更新 checkpoint/dashboard/current_action/queue，保留旧判断。恢复仅限本轮原命令，完成后停止。
+
+## 2026-10-13 UTC：共享 H200 后台启动确认
+
+- 用户允许其他进程共存并要求无人值守。实现 `a55b1fd` 已push，47项CPU检查通过；tmux=`dreamon_markov_k2_diagnosis_20261013`，pane/Python PID=`3535950/3535957`。
+- 已确认模型加载成功，H200新增约17GiB占用，进入 running_smoke；其他进程未被干预。后台依序检查/估时/full/analyze/finalize/push后停止；日志和启动元数据在本轮结果目录。
