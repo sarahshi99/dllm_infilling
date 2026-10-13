@@ -60,6 +60,10 @@ python scripts/download_diffucoder_transfer_20261013.py \
 
 网络补充验证：mirror Git-LFS batch 返回 HTTP200 和 `us.aws.cdn.hf-mirror.org` 下载域名，但该备用 CDN 的小范围 direct 下载 ConnectionError、proxy 下载 SSLError，仍未解除权重恢复阻塞。只登记响应域名和错误类型，不保存签名 URL。
 
+### 2026-10-13 10:43 UTC 有限恢复收尾
+
+权重恢复仍为 `blocked_incomplete_weights`：未得到任何完整 shard，所有已落盘片段保留。正常HF代理TLS EOF、mirror/Xet直连timeout、两段式代理部分字节恢复后持续不增长、Git-LFS备用CDN两种路径失败。第二次恢复会话约六分钟、连续数分钟字节数不变后停止C自己新增的CPU下载 PID843727；没有触碰其他GPU/进程。`model_download.json` 保留每个片段大小、官方LFS/size登记、完整shard计数和恢复命令。GPU成本0；预固定16条技术检查、1033×8矩阵均未运行，收益未知，不能解释为迁移失败。解除条件是完整恢复精确revision权重，再由主控统一调度既定技术检查。
+
 ## 仅准备的后续重建信息
 
 向作者索取：DiffuCoder→DreamOn 精确 HF ID/revision/checksums、初始化 Base revision、tokenizer/生成代码 revision、训练与数据处理 commit、OpenCoder 数据 revision/筛选划分、epochs与有效batch/优化器日程、合并/删除构造参数及官方评测配置。此处没有主动联系作者。

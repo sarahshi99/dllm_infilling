@@ -37,7 +37,7 @@
     "canvas_length": 64,
     "temperature": 0.2,
     "top_p": 0.9,
-    "weights_status": "download_in_progress_resumable",
+    "weights_status": "blocked_incomplete_weights",
     "weight_bytes": 15231271528,
     "old_cache_path": "/tmp/diffucoder_base_repo_probe_20260609",
     "old_cache_exists_now": false,
@@ -46,7 +46,10 @@
     "old_adapter_exists": true,
     "old_cal_source": "/home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/diffucoder_cal",
     "old_cal_source_exists": true,
-    "old_cal_source_is_frozen_protocol_adapter": false
+    "old_cal_source_is_frozen_protocol_adapter": false,
+    "gpu_technical_check_status": "not_run",
+    "quality_matrix_status": "not_run",
+    "head_transfer_interpretation": "CPU-compatible; transfer gain remains unknown because weights unavailable locally"
   },
   "gpu_cost_hours": 0,
   "quality_rows_produced": 0,
