@@ -13,3 +13,17 @@
 成功条件：来源精确revision可验证、完整普通token映射及规则一致、来源定义strict加载全部参数、一次shift；16行原生K1与无头adapter对齐、C/D同路径、无非法token/未恢复错误；估时可容纳则收益正负均完成1033×8，配对帮助/伤害与164题cluster CI。停止条件：技术错误、接口不兼容、预算不足、明确资源阻塞。质量低本身不停止，不更参。
 
 运行前在对话显示exact command，运行清单保存命令、环境、版本、PID、日志、输出、预算和恢复入口。最终本地diff review+fresh verification；reviewer_gate_disabled只指不另开reviewer，用户明确要求的A/B/C照常执行。提交只含本轮独占文件并push新分支。
+
+## 2026-10-13 DreamCoder GPU执行动作
+
+CPU实测5项通过：官方原生局部补丁参考两顺序K1/K2一致、C/D相同二次抽样路径、全局预算不重复累计心跳且跨session相加、目标/种子主键去重。头严格加载all keys，来源output_mask不变。max_length为prefix+64+suffix，无右端额外pad；原生日程被显式min(K,remaining)替代，两顺序仅改变选位，不创造新长度控制。EOS罚项3沿用该Base原生默认，两组头λ恒1。
+
+Exact command（主控工作树）：
+
+```bash
+nohup bash scripts/run_zero_training_transfer_dreamcoder_20261013.sh > analysis_outputs/zero_training_transfer_20261013/controller/dreamcoder_launch.log 2>&1 &
+```
+
+内部命令：`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_zero_training_transfer.py --target dreamcoder_base --target-registry analysis_outputs/zero_training_transfer_20261013/controller/target_registry.json --output-dir analysis_outputs/zero_training_transfer_20261013/dreamcoder_base`。
+
+共享卡实测仍有>32GiB可用才加载；互斥锁不等待其他作业，资源不足退出并保存阻塞。16条固定ID先校验A/B原生参考一致、C/D路径/非法token；全量估时以16条成本×1033/16，1.5余量与全局剩余预算比较。若技术错误立即停该目标，修复后重做16条。共享耗时只计成本，不生成正式加速比。输出包含原子progress、SQLite成功事务、failure journal、compact gzip、配对/cluster CI、exit及账本。

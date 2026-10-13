@@ -63,15 +63,16 @@ class NativeAgreementTest(unittest.TestCase):
         return dict(model=self.make_model(), tokenizer=Tokenizer(), prefix_ids=[5, 1],
                     suffix_ids=[2, 6], requested_k=k, policy=policy, row_seed=4242)
 
-    def test_both_orders_match_explicitly_patched_native_k1(self):
+    def test_both_orders_match_explicitly_patched_native_k1_and_k2(self):
         for policy in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER):
-            args = self.kwargs(policy)
-            actual = decode_fixed_transfer(**args, sample_tokens_fn=self.native.sample_tokens)
-            reference = native_fixed_reference(**args)
-            self.assertEqual(actual['completion_token_ids'], reference['completion_token_ids'])
-            self.assertEqual(actual['completion'], reference['completion'])
-            self.assertEqual(actual['forward_count'], 64)
-            self.assertEqual(actual['final_dynamic_length'], 64)
+            for k in (1, 2):
+                args = self.kwargs(policy, k)
+                actual = decode_fixed_transfer(**args, sample_tokens_fn=self.native.sample_tokens)
+                reference = native_fixed_reference(**args)
+                self.assertEqual(actual['completion_token_ids'], reference['completion_token_ids'])
+                self.assertEqual(actual['completion'], reference['completion'])
+                self.assertEqual(actual['forward_count'], 64 // k)
+                self.assertEqual(actual['final_dynamic_length'], 64)
 
     def test_zero_head_and_nonzero_head_use_same_sampling_path(self):
         class Head(torch.nn.Module):

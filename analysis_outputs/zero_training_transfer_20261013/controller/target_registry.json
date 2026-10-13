@@ -1,0 +1,14 @@
+{
+  "dreamcoder_base": {
+    "id": "Dream-org/Dream-Coder-v0-Base-7B",
+    "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--Dream-Coder-v0-Base-7B/snapshots/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "weight_kind": "original_base_fixed_length_auxiliary",
+    "direct_transfer_status": "passed",
+    "validation_scope": "CPU complete tokenizer and source head strict load; GPU16 pending",
+    "tokenizer_code_revision": "same as weight revision",
+    "generation_code_revision": "same as weight revision",
+    "official": true,
+    "compatibility_audit": "analysis_outputs/zero_training_transfer_20261013/a_dreamcoder/tokenizer_audit.json"
+  }
+}
