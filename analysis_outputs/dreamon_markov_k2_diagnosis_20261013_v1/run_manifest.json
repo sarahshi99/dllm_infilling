@@ -1,0 +1,248 @@
+{
+  "arms": [
+    {
+      "arm": "A",
+      "k": 1,
+      "policy": "global_confidence",
+      "right_mode": "none"
+    },
+    {
+      "arm": "B",
+      "k": 2,
+      "policy": "global_confidence",
+      "right_mode": "none"
+    },
+    {
+      "arm": "C",
+      "k": 2,
+      "policy": "global_confidence",
+      "right_mode": "zero_output_same_head"
+    },
+    {
+      "arm": "D",
+      "k": 2,
+      "policy": "global_confidence",
+      "right_mode": "v2_kl"
+    },
+    {
+      "arm": "E",
+      "k": 2,
+      "policy": "global_confidence",
+      "right_mode": "fresh_model_fixed_right"
+    },
+    {
+      "arm": "A",
+      "k": 1,
+      "policy": "left_to_right_frontier",
+      "right_mode": "none"
+    },
+    {
+      "arm": "B",
+      "k": 2,
+      "policy": "left_to_right_frontier",
+      "right_mode": "none"
+    },
+    {
+      "arm": "C",
+      "k": 2,
+      "policy": "left_to_right_frontier",
+      "right_mode": "zero_output_same_head"
+    },
+    {
+      "arm": "D",
+      "k": 2,
+      "policy": "left_to_right_frontier",
+      "right_mode": "v2_kl"
+    },
+    {
+      "arm": "E",
+      "k": 2,
+      "policy": "left_to_right_frontier",
+      "right_mode": "fresh_model_fixed_right"
+    }
+  ],
+  "base_task_count": 164,
+  "batch_size": 1,
+  "blocker": "H200 is occupied by other compute processes; no GPU job launched/continued",
+  "bootstrap": {
+    "cluster": "base task",
+    "replicates": 10000,
+    "scope": "conditional on single generation seed 42",
+    "seed": 20261013,
+    "weights": [
+      "line",
+      "base_task_equal"
+    ]
+  },
+  "branch": "codex/dreamon-markov-k2-diagnosis-v1",
+  "budget_accounting": "cumulative exclusive GPU session wall including loading/warmup/smoke/evaluator/writes; conservative upper bound",
+  "budget_gpu_hours": 12.0,
+  "code_commit": "66c5c2bd66e8b7cfe6afdb4706d7b341f2247f82",
+  "code_versions": {
+    "analysis/analyze_dreamon_markov_k2_diagnosis.py": "f3731feb2032724c3ad29ba69f7c1a77b4db13ec",
+    "experiments/dreamon_markov_head_training.py": "b73095691601be61048818cee90e3ef29a8f61dc",
+    "experiments/dreamon_singleline_adapter.py": "0701dd8bfb57e0c70e0fc95aa997358893653f9d",
+    "experiments/dreamon_singleline_order_parallel.py": "e12a8d6f7a27fbd4e8f1f719125136568dc8b690",
+    "experiments/lrdllm_dreamcoder_adapter.py": "5695ff94f7ff463bb9671c915901d798a74a0133",
+    "experiments/run_dreamon_markov_k2_diagnosis.py": "51e7e3687f94a20206a2e95e24a9140cd589f09d",
+    "experiments/run_dreamon_singleline_order_parallel.py": "7df69aebb44a7e1b652af1deca51bb162e2a2f3f",
+    "experiments/train_dreamon_markov_head.py": "1a1a89d51d528edcbd33bf3cc8c28f747e54795d"
+  },
+  "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_dreamon_markov_k2_diagnosis.py --original-config /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-eval-v1/analysis_outputs/dreamon_markov_k2_full_20261011_v1/run_config.json --output-dir analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1 --budget-gpu-hours 12",
+  "cuda_visible_devices": "0",
+  "device": "cuda:0",
+  "dtype": "bfloat16 model, float32 rank-256 heads (same as previous)",
+  "estimate_status": "16-line GPU check not run: GPU busy",
+  "evaluation_args_source": "reviewed experiments/run_dreamon_singleline_order_parallel.py: check_correctness(source_row, completion, 3.0, 0)",
+  "evaluation_timeout_sec": 3.0,
+  "evaluator_args": [
+    3.0,
+    0
+  ],
+  "expand_budget": 64,
+  "expand_budget_source": "pinned eval/generator.py: self.expand_budget = self.max_gen_len",
+  "full_batch_estimate_sec": null,
+  "generation_parameters": {
+    "max_gen_len": 64,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "gpu_snapshot": {
+    "compute_processes": "3443406, /home/lwt/miniconda3/envs/rpent_env/bin/python, 8120\n717897, /home/lwt/miniconda3/envs/rpent_env/bin/python, 6130\n1359435, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 3824\n1453296, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 19044\n1856809, .venv/bin/python, 36412\n1908720, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 18186",
+    "gpus": "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 91761, 143771, 0, 34",
+    "time_utc": "2026-10-13T01:38:09Z"
+  },
+  "head_lambda": 1.0,
+  "head_rank": 256,
+  "head_registry_entry": {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "head_registry_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-diagnosis-v1/analysis_outputs/dreamon_markov_head_training_20260910_v2/checkpoint_registry.json",
+  "head_version_verification": "registry version and size; existing digest reused, no new large-file hash scan",
+  "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+  "order": "per-row rotate ten configurations by row_index % 10",
+  "original_config": {
+    "device": "cuda",
+    "evaluator": {
+      "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+      "evaluator_mode": "upstream_documented_local_enablement_overlay",
+      "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+      "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
+    },
+    "evaluator_root": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff",
+    "markov_checkpoint": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "markov_lambda": 1.0,
+    "model_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "official_protocol": {
+      "alg": "entropy",
+      "alg_temp": 0.0,
+      "batch_size": 1,
+      "delete_eos_token": true,
+      "device": "cuda",
+      "dtype": "bf16",
+      "eps": 0.001,
+      "mask_expansion": true,
+      "max_gen_len": 64,
+      "max_prompt_len": 2048,
+      "max_tokens": 2048,
+      "min_gen_len": 64,
+      "pad_eos_to_right": true,
+      "pad_to_max_len": false,
+      "show_progress": false,
+      "steps": 256,
+      "temperature": 0.2,
+      "top_k": null,
+      "top_p": 0.9
+    },
+    "population": "HumanEval-Infilling SingleLine full 1033 development population",
+    "seed": 42,
+    "source_root": "/home/shx/projects/dllm_infilling/.worktrees/dreamon-source-8a0a549",
+    "variants": {
+      "全局置信度、top-2 相邻时加 KL 头": {
+        "k2_action_mode": "sequential_pair",
+        "markov_enabled": true,
+        "policy": "confidence_global",
+        "requested_k": 2
+      },
+      "全局置信度、每轮最多两个、无头": {
+        "k2_action_mode": "sequential_pair",
+        "markov_enabled": false,
+        "policy": "confidence_global",
+        "requested_k": 2
+      },
+      "全局置信度、逐词刷新、无头": {
+        "k2_action_mode": "legacy",
+        "markov_enabled": false,
+        "policy": "confidence_global",
+        "requested_k": 1
+      },
+      "固定左前沿、每轮最多两个、无头": {
+        "k2_action_mode": "sequential_pair",
+        "markov_enabled": false,
+        "policy": "left_to_right_frontier",
+        "requested_k": 2
+      },
+      "固定左前沿、第二词元加 KL 头": {
+        "k2_action_mode": "sequential_pair",
+        "markov_enabled": true,
+        "policy": "left_to_right_frontier",
+        "requested_k": 2
+      },
+      "固定左前沿、逐词刷新、无头": {
+        "k2_action_mode": "legacy",
+        "markov_enabled": false,
+        "policy": "left_to_right_frontier",
+        "requested_k": 1
+      }
+    }
+  },
+  "original_config_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-eval-v1/analysis_outputs/dreamon_markov_k2_full_20261011_v1/run_config.json",
+  "population": "reused development/mechanism population, not independent sealed test",
+  "population_count": 1033,
+  "reviewer_gate_disabled": true,
+  "right_sample_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
+  "rng_isolation": "fork_rng around head/recompute and right sampling; no additional generation seeds",
+  "row_seed_derivation": "existing derive_row_seed(42, task_id)",
+  "seed": 42,
+  "smoke_selection": "16 evenly spaced lexicographically sorted stable IDs, no outcome selection",
+  "smoke_task_ids": [
+    "SingleLineInfilling/HumanEval/0/L0",
+    "SingleLineInfilling/HumanEval/105/L3",
+    "SingleLineInfilling/HumanEval/111/L5",
+    "SingleLineInfilling/HumanEval/123/L1",
+    "SingleLineInfilling/HumanEval/129/L21",
+    "SingleLineInfilling/HumanEval/137/L1",
+    "SingleLineInfilling/HumanEval/143/L9",
+    "SingleLineInfilling/HumanEval/154/L3",
+    "SingleLineInfilling/HumanEval/19/L3",
+    "SingleLineInfilling/HumanEval/32/L7",
+    "SingleLineInfilling/HumanEval/46/L2",
+    "SingleLineInfilling/HumanEval/59/L9",
+    "SingleLineInfilling/HumanEval/71/L3",
+    "SingleLineInfilling/HumanEval/81/L12",
+    "SingleLineInfilling/HumanEval/93/L0",
+    "SingleLineInfilling/HumanEval/99/L9"
+  ],
+  "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "status": "blocked_gpu_busy",
+  "tokenizer_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "gpu_session_sec": 0.0,
+  "model_load_sec": null,
+  "cpu_verification": {
+    "status": "passed",
+    "test_count": 46,
+    "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest tests.test_dreamon_markov_k2_diagnosis tests.test_dreamon_markov_k2 tests.test_dreamon_order_parallelism tests.test_dreamon_markov_premise tests.test_dreamon_singleline_adapter -q",
+    "scope": "CPU unit and synthetic full analyzer only; no real model inference"
+  }
+}

@@ -22,3 +22,9 @@
 - 测试先红（新增参数尚未实现），后绿；当前 45 项 CPU 检查通过。覆盖 C/D 同类同秩/同采样路径、E 画布/对齐/扩展禁用/结构屏障/非相邻回退/RNG 隔离、两策略随机采样的诊断开关一致、事务恢复/重复拒绝、cluster 权重和稳定 smoke 选样。
 - 本地 `git diff -w` review 确认原诊断计算只增加条件保护，生成选择和原结构变换保留。reviewer_gate_disabled；CPU 合成测试不能替代 16 行真实模型验证。
 - 固定入口：`bash scripts/manual_run_dreamon_markov_k2_diagnosis_20261013.sh`。日志重定向到本轮结果目录；不启动资源 watcher，不启动新方法。
+
+## 实际执行状态
+
+- 最终 CPU verification：46 tests OK（新增合成 10330 行分析链检验，临时 fixture 不进入真实结果目录）。py_compile、bash -n、git diff --check 通过。
+- `bash scripts/manual_run_dreamon_markov_k2_diagnosis_20261013.sh` 实际执行，退出码 3；唯一 H200 被 6 个其他进程占用，模型加载前阻塞。结果=0/10330、smoke=not_run、GPU=0h、预计全批耗时=null。
+- 已保存 compact report/manifest/audit/CSV 表头和本地空 per_case。未来恢复先资源检查，再16行估时，不能把旧 wall 当预测或速度结果。

@@ -1,5 +1,15 @@
 # 当前行动：Markov v2 训练结果归档与 K=2 推理实现
 
+## 2026-10-13 DreamOn + Markov K2 诊断：代码已保存，GPU 资源阻塞
+
+- 分支 `codex/dreamon-markov-k2-diagnosis-v1`；实现提交 `66c5c2b`，结果目录 `analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/`。从已审阅 `b8d6e58` 后最新 `0e97f61` 复用，原工作区和旧结果未改动。
+- A/B/C/D/E × 两策略 runner/analyzer 已实现；C 为同类同秩零输出投影、lambda=1；E 只填原左词、保留原右位与未来 mask；真正关闭概率/排名/replay/画布诊断，分离 CUDA 同步生成、评测、写盘计时。
+- 46 项 CPU 检查通过（含随机采样 RNG/诊断一致性、事务恢复与去重、合成十组完整统计链）；真实模型 16 行检查 **未运行**，正式批次 **0/10330**，完整性 **incomplete_or_invalid**。CPU 检查不是实验完成。
+- 已实际执行 `bash scripts/manual_run_dreamon_markov_k2_diagnosis_20261013.sh`，退出 `3` / `blocked_gpu_busy`：唯一 H200 上仍有 6 个其他进程、约 91761 MiB 占用。没有加载模型、消耗 GPU 预算或抢占进程。
+- 当前结论收窄：旧 D−B 的 +9/+13 净行数尚未隔离路径贡献，不能全归训练头；旧 wall 不能回答公平纯生成速度；E 恢复能力未测量。旧报告保留作为历史证据，不宣称过去所有收益都是假的。
+- 唯一恢复项：空闲 H200 上运行同一入口，先固定稳定 ID 的 16 行开关等价性/估时，通过且不超过累计 12h 后自动全量十组。若资源仍忙，入口退出；不缩小人口，不留下 watcher。
+- 下一方法建议等待 D−C / C−B / E−C,D 证据后决定。本轮不启动训练、上下文头、正式验证器、K4/K8 或其他新方法。
+
 <!-- dreamon-markov-k2-implementation-20261010 -->
 ## 2026-10-12 v2 训练与 K=2 完整评测已完成
 

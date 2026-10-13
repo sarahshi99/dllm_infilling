@@ -1,0 +1,30 @@
+{
+  "status": "incomplete_or_invalid",
+  "errors": [
+    "missing or unexpected case identities",
+    "16-line real-model diagnostics equivalence not passed"
+  ],
+  "row_count": 0,
+  "expected_row_count": 10330,
+  "unique_case_count": 0,
+  "duplicate_case_count": 0,
+  "missing_case_count": 10330,
+  "unexpected_case_count": 0,
+  "base_task_count": 0,
+  "counts": {
+    "global_confidence/A": 0,
+    "global_confidence/B": 0,
+    "global_confidence/C": 0,
+    "global_confidence/D": 0,
+    "global_confidence/E": 0,
+    "left_to_right_frontier/A": 0,
+    "left_to_right_frontier/B": 0,
+    "left_to_right_frontier/C": 0,
+    "left_to_right_frontier/D": 0,
+    "left_to_right_frontier/E": 0
+  },
+  "smoke_status": "not_run",
+  "historical_failure_events": 0,
+  "unrecovered_failure_keys": 0,
+  "no_new_sealed_test_access": true
+}

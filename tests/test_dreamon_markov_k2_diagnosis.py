@@ -209,6 +209,58 @@ class DiagnosisPersistenceAndStatisticsTest(unittest.TestCase):
         self.assertEqual(signatures[0], signatures[1])
         self.assertEqual(signatures[0], (["head"], [(2, 8), (1, 8)], 1))
 
+    def test_complete_analyzer_exports_all_ten_arms_and_paired_rescues(self):
+        import json
+        import sqlite3
+        import tempfile
+        from pathlib import Path
+        from analysis.analyze_dreamon_markov_k2_diagnosis import analyze, POLICIES
+        from experiments.dreamon_singleline_adapter import derive_row_seed
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            ids = [f"SingleLineInfilling/HumanEval/{i % 164}/L{i // 164}" for i in range(1033)]
+            (out / "paired_deltas.csv").write_text("task_id\n" + "\n".join(ids) + "\n")
+            manifest = dict(code_commit="synthetic_fixture", status="completed_generation", branch="fixture",
+                            original_config_path=str(out / "original.json"), smoke_task_ids=ids[:16],
+                            dtype="fixture", command="unit-test-only")
+            (out / "run_manifest.json").write_text(json.dumps(manifest))
+            smoke = dict(status="passed", checks=[dict(policy=p, arm=a, task_id=t)
+                        for p in POLICIES for a in "ABCDE" for t in ids[:16]])
+            (out / "smoke_checks.json").write_text(json.dumps(smoke))
+            with sqlite3.connect(out / "per_case.sqlite") as db:
+                db.execute("CREATE TABLE cases (policy TEXT, arm TEXT, task_id TEXT, payload TEXT)")
+                values = []
+                for policy in POLICIES:
+                    for arm in "ABCDE":
+                        for i, task_id in enumerate(ids):
+                            row = dict(policy=policy, arm=arm, task_id=task_id,
+                                       base_task_id=task_id.split("/")[2], row_seed=derive_row_seed(42, task_id),
+                                       code_commit="synthetic_fixture", seed=42, passed=not (arm == "B" and i == 0),
+                                       failure_reason="fixture", generation_sec=.1, evaluator_sec=.01,
+                                       file_write_sec=.001, output_tokens=2, output_chars=4,
+                                       forward_count=2 if arm == "E" else 1, base_forward_count=1,
+                                       recompute_forward_count=int(arm == "E"), outer_round_count=1,
+                                       normal_token_count=2, expand_count=0, delete_count=0,
+                                       adjacent_opportunity_count=int(arm != "A"), markov_enabled_count=int(arm in "CD"),
+                                       recompute_enabled_count=int(arm == "E"), structural_stop_count=0,
+                                       corrected_structural_stop_count=0, nonadjacent_fallback_count=0)
+                            values.append((policy, arm, task_id, json.dumps(row)))
+                db.executemany("INSERT INTO cases VALUES (?,?,?,?)", values)
+            audit = analyze(out)
+            self.assertEqual(audit["status"], "passed")
+            self.assertEqual(audit["row_count"], 10330)
+            self.assertEqual(audit["base_task_count"], 164)
+            import csv
+            with (out / "summary.csv").open() as handle:
+                self.assertEqual(len(list(csv.DictReader(handle))), 10)
+            with (out / "paired_comparisons.csv").open() as handle:
+                pairs = list(csv.DictReader(handle))
+            self.assertEqual(len(pairs), 22)
+            change = next(r for r in pairs if r["comparison"] == "C-B")
+            self.assertEqual((change["help"], change["harm"]), ("1", "0"))
+            rescued = next(r for r in pairs if r["comparison"] == "D rescue on A-pass/B-fail")
+            self.assertEqual((rescued["help"], rescued["rescue_denominator"]), ("1", "1"))
+
 
 if __name__ == "__main__":
     unittest.main()

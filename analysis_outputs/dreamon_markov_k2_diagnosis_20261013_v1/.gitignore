@@ -1,0 +1,7 @@
+per_case.sqlite*
+per_case.jsonl
+gpu_background.jsonl
+failure_journal.jsonl
+runner_failures.jsonl
+progress.json
+launch.log
