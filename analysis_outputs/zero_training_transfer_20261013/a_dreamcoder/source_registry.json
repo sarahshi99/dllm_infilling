@@ -1,0 +1,94 @@
+[
+  {
+    "id": "Dream-org/DreamOn-v0-7B",
+    "revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "api_id": "Dream-org/DreamOn-v0-7B",
+    "api_sha": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "metadata_read_error": null,
+    "official": true,
+    "metadata_api_url": "https://hf-mirror.com/api/models/Dream-org/DreamOn-v0-7B/revision/8ccc74750e43177327f29dab9e91882ba759e194",
+    "canonical_url": "https://huggingface.co/Dream-org/DreamOn-v0-7B/tree/8ccc74750e43177327f29dab9e91882ba759e194",
+    "snapshot_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+    "kind": "DreamOn length fine-tuned",
+    "initialization_evidence": [
+      "https://hkunlp.github.io/blog/2025/dreamon/",
+      "https://github.com/DreamLM/DreamOn/issues/6"
+    ],
+    "exact_training_initial_revision": "not published/verified; evaluated original Base revision is independently pinned",
+    "generation_and_tokenizer_code_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "config_special_ids": {
+      "bos_token_id": 151643,
+      "eos_token_id": 151643,
+      "expand_token_id": 151667,
+      "mask_token_id": 151666,
+      "pad_token_id": 151643
+    },
+    "cached_weight_files": [
+      {
+        "name": "model-00001-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4877660776
+      },
+      {
+        "name": "model-00002-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4932751008
+      },
+      {
+        "name": "model-00003-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4330865200
+      },
+      {
+        "name": "model-00004-of-00004.safetensors",
+        "exists": true,
+        "bytes": 1089994880
+      }
+    ]
+  },
+  {
+    "id": "Dream-org/Dream-Coder-v0-Base-7B",
+    "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "api_id": "Dream-org/Dream-Coder-v0-Base-7B",
+    "api_sha": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "metadata_read_error": null,
+    "official": true,
+    "metadata_api_url": "https://hf-mirror.com/api/models/Dream-org/Dream-Coder-v0-Base-7B/revision/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "canonical_url": "https://huggingface.co/Dream-org/Dream-Coder-v0-Base-7B/tree/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "snapshot_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--Dream-Coder-v0-Base-7B/snapshots/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "kind": "original Base fixed-length auxiliary",
+    "initialization_evidence": [
+      "https://huggingface.co/Dream-org/Dream-Coder-v0-Base-7B"
+    ],
+    "exact_training_initial_revision": "not published/verified; evaluated original Base revision is independently pinned",
+    "generation_and_tokenizer_code_revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "config_special_ids": {
+      "bos_token_id": 151643,
+      "eos_token_id": 151643,
+      "mask_token_id": 151666,
+      "pad_token_id": 151643
+    },
+    "cached_weight_files": [
+      {
+        "name": "model-00001-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4877660776
+      },
+      {
+        "name": "model-00002-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4932751008
+      },
+      {
+        "name": "model-00003-of-00004.safetensors",
+        "exists": true,
+        "bytes": 4330865200
+      },
+      {
+        "name": "model-00004-of-00004.safetensors",
+        "exists": true,
+        "bytes": 1089994880
+      }
+    ]
+  }
+]
