@@ -55,3 +55,11 @@ python scripts/download_dream_base_transfer.py > analysis_outputs/zero_training_
 四个 shard 均已耗尽3次有界尝试，下载器退出1，无后台B下载作业；没有完整可加载的Base权重。另测Git-LFS batch返回备用 `us.aws.cdn.hf-mirror.org` 链接成功，但该CDN的1MiB Range经代理出现TLS EOF，未解除阻塞。`lfs_route_probe.json`保存紧凑错误，省略临时签名下载URL。
 
 `execution_status.json` 与 `weight_download_manifest.json`保存最终状态、每个 `.part` 字节数和恢复命令；部分权重未认证，不能加载评测。初次来源登记中的 `weight_download_status=running...` 是当时快照，以本节点和最终执行状态为准。CPU兼容结论仍为通过，GPU 16行技术检查与1033×8全矩阵均**未运行**；该结果不能解释为已训练头迁移失败，也不触发重训。B累计GPU作业小时=0。解除下载阻塞后，先完整核对LFS摘要，再由主控用A统一适配安排16条技术检查与预算估时。
+
+## 2026-10-13 实现补齐：B 独立适配与 CPU 原生参考检查
+
+新增 `experiments/dream_base_zero_training_adapter.py`，导出精确 `PROFILE`、BOS/prefix/固定64/suffix/EOS画布输入构造、统一名称 `decode_fixed_transfer` 和 `native_fixed_reference`。公共decode由主控合入，B只包装调用，显式绑定 `eos_penalty=0.0`；若传非零值即报错。Base原生源码没有penalty项，公共实现乘零的有限log项保持logits数值等价。
+
+Base独立reference保留本版本官方 `_sample`，只将比例transfer count替换为fixed K，并在frontier顺序插入位置选择。此版本只有一处 `x_` marker，不能硬套DreamCoder reference的两处marker要求。entropy是官方支持分支与项目既有Base评测默认，区别于官方生成类默认origin及model card示例maskgit_plus；本轮不声称运行官方默认策略。温度0.2/top_p0.9/steps64/EPS1e-3冻结，结束与截取同公共四组规则。
+
+`scripts/check_dream_base_adapter_cpu.py`用精确Base生成源与小型确定性CPU假模型运行两个顺序×K1/K2：**4/4 token-ID完全相等**、残mask0。结果在 `adapter_cpu_checks.json`，明确仅为CPU假模型，并非真实Base16条GPU检查或质量结果。exact command：`/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python scripts/check_dream_base_adapter_cpu.py --common-adapter /home/shx/projects/dllm_infilling/git_workspace/.worktrees/transfer-dreamcoder-20261013/experiments/dreamcoder_fixed_transfer_adapter.py --output analysis_outputs/zero_training_transfer_20261013/b_dream/adapter_cpu_checks.json`。主控合入后可将common adapter路径改为合入文件；不覆盖历史证据。
