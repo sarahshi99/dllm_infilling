@@ -1,0 +1,11 @@
+{
+  "scope": "all three agents and controller, all resumed sessions in this round",
+  "limit_gpu_job_sec": 43200,
+  "used_gpu_job_sec": 0,
+  "prior_diagnosis_sec": 2886.023884361144,
+  "prior_diagnosis_charged_this_round": false,
+  "max_concurrent_jobs": 1,
+  "lock_path": "/tmp/dllm_infilling_h200_diagnosis.lock",
+  "sessions": [],
+  "formal_speed_measurement": "not authorized on shared GPU; record cost only"
+}
