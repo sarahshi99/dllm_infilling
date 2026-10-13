@@ -46,10 +46,10 @@ def download(item):
 
 
 def main():
-    metadata = json.loads((OUT / "dream_base_api.json").read_text())
-    if metadata["sha"] != SNAPSHOT.name:
+    metadata = json.loads((OUT / "source_registry.json").read_text())
+    if metadata["revision"] != SNAPSHOT.name:
         raise RuntimeError("model revision differs")
-    items = [row for row in metadata["siblings"] if row["rfilename"].endswith(".safetensors")]
+    items = metadata["official_lfs_shards"]
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         rows = list(pool.map(download, items))
     (OUT / "weight_download_manifest.json").write_text(json.dumps(rows, indent=2) + "\n")
