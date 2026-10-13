@@ -27,6 +27,8 @@ CPU 完整比较（不是仅比较 vocab size）：
 | BOS 差异 | 两者 tokenizer BOS=151665，而 config BOS=151643；固定画布使用 tokenizer BOS |
 | logits 对齐 | 模型 `forward` 输出原生 logits；官方 `_sample` 第 411 行进行一位 shift，适配器只 shift 一次 |
 
+实际 transformers 4.52.3 加载类为 source `Qwen2TokenizerFast` / target remote `DreamTokenizer`，并非只凭相同 remote 文件认证运行规则。已核查实际 fast backend 正则与 target `pat.pattern` 完全相同、两者 NFC normalization、byte-level BPE、所有共享 added-token 元数据完全相同；source 的 chat template 不参与 infilling。literal `<|expand|>` 的分词差异单独登记为已知 special 差异，不冒充普通 token 相同。
+
 详细比较见 `tokenizer_compatibility.json`。`direct_transfer_status=passed` 的范围明确是 CPU tokenizer/维度/代码兼容；来源头的严格加载由 A/主控统一核对，GPU 16 条技术检查尚未通过。原头必须从**来源 DreamOn 配置**构造并 strict load；用 Base 配置调用 `make_head` 缺少 expand 字段，不能靠新造随机参数回避。
 
 ## 固定画布适配差异和最小补丁
@@ -47,10 +49,10 @@ CPU 原生参考发现不可忽略的不一致：官方浮点时间日程 `int(n
 python scripts/download_diffucoder_transfer_20261013.py \
   --output-dir analysis_outputs/zero_training_transfer_20261013/c_diffucoder \
   --model-path /home/shx/.cache/dllm_infilling/model_snapshots/apple--DiffuCoder-7B-Base/a2c33054cbe99b9ab7af074f09b1d13943157ff1 \
-  --workers 8
+  --workers 8 --max-wall-sec 1200
 ```
 
-命令只下载，GPU成本0。日志 `analysis_outputs/zero_training_transfer_20261013/c_diffucoder/download.log`、最终状态 `model_download.json`；分片持久保存在模型目录 `.download_chunks`，重复命令复用已完整范围。签名 CDN URL 不写入证据。下载完成后由主控统一锁调度预固定均匀16条、两顺序/四组技术检查，才能估计 1033×8 全批时间；现阶段不存在可信的全批 GPU 时间预测或质量成绩。当前阻塞是确切 DreamOn 权重缺失、Base 权重恢复与公共适配/GPU检查待完成。
+命令只下载，GPU成本0。初次日志 `analysis_outputs/zero_training_transfer_20261013/c_diffucoder/download.log`，补充范围内恢复的当前日志 `download_resume.log`，最终状态 `model_download.json`；分片持久保存在模型目录 `.download_chunks`，重复命令复用已完整范围和范围内partial。每次墙钟上限1200秒（正在阻塞的网络请求还受30/90秒timeout约束），不无限等待。最终拼接同时流式算sha256并与精确HF LFS登记比较，不额外重扫大文件。签名 CDN URL 不写入证据。下载完成后由主控统一锁调度预固定均匀16条、两顺序/四组技术检查，才能估计 1033×8 全批时间；现阶段不存在可信的全批 GPU 时间预测或质量成绩。当前阻塞是确切 DreamOn 权重缺失、Base 权重恢复与公共适配/GPU检查待完成。
 
 本地验证：两脚本 `py_compile` 成功；tokenizer 全映射 CPU审计完成；官方 `_sample` fake-model日程验证完成。环境：`dllm_env` 加 `PYTHONPATH=/home/shx/miniconda3/envs/llmxy/lib/python3.10/site-packages` 可导入较新版 transformers；不加时旧 transformers 缺少 `is_torchdynamo_compiling`，需采用已登记兼容环境。共享卡时间不能作正式加速比。
 

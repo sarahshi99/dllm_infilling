@@ -8,8 +8,8 @@ Existing partial downloads are preserved. No GPU or head files are touched.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
-import shutil
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -25,9 +25,13 @@ def main():
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--model-path", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--max-wall-sec", type=int, default=1200)
     args = parser.parse_args()
     if not 1 <= args.workers <= 8:
         raise ValueError("bounded at eight CPU download workers")
+    if args.max_wall_sec <= 0:
+        raise ValueError("download wall time must be positive")
+    deadline = time.monotonic() + args.max_wall_sec
     args.output_dir.mkdir(parents=True, exist_ok=True)
     args.model_path.mkdir(parents=True, exist_ok=True)
     chunks = args.model_path / ".download_chunks"
@@ -59,6 +63,12 @@ def main():
         last_error = None
         for attempt in range(3):
             try:
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("bounded download session wall time exhausted")
+                current = path.stat().st_size if path.exists() else 0
+                if current > expected:
+                    raise RuntimeError("existing range is larger than requested")
+                range_start = start + current
                 resolver = requests.Session()
                 resolver.trust_env = False
                 # Cache-busting avoids an expired signed CDN redirect on retries.
@@ -67,19 +77,23 @@ def main():
                 r.raise_for_status()
                 if r.status_code not in (302, 303, 307):
                     raise RuntimeError("resolver did not return a CDN redirect")
-                with requests.get(r.headers["Location"], headers={"Range": f"bytes={start}-{end}"},
+                with requests.get(r.headers["Location"], headers={"Range": f"bytes={range_start}-{end}"},
                                   stream=True, timeout=(30, 90)) as data:
                     data.raise_for_status()
-                    if data.status_code != 206 or not data.headers.get("Content-Range", "").startswith(f"bytes {start}-{end}/"):
+                    if data.status_code != 206 or not data.headers.get("Content-Range", "").startswith(f"bytes {range_start}-{end}/"):
                         raise RuntimeError("CDN did not honor the exact requested range")
-                    with path.open("wb") as handle:
+                    with path.open("ab" if current else "wb") as handle:
                         for block in data.iter_content(1024 * 1024):
+                            if time.monotonic() >= deadline:
+                                raise TimeoutError("bounded download session wall time exhausted")
                             handle.write(block)
                 if path.stat().st_size != expected:
                     raise RuntimeError("downloaded range size mismatch")
                 return
             except Exception as exc:
                 last_error = f"{type(exc).__name__}: download/range failure on attempt {attempt + 1}"
+                if time.monotonic() >= deadline:
+                    break
         raise RuntimeError(f"{name} range {start}-{end}: {last_error}")
 
     started = time.time()
@@ -106,18 +120,25 @@ def main():
         if not all(path.exists() and path.stat().st_size == min(chunk_bytes, entry["size"] - int(path.name.split(".")[-1].split("-")[0])) for path in required):
             continue
         assembling = destination.with_suffix(".assembling")
+        digest = hashlib.sha256()
         with assembling.open("wb") as target:
             for path in required:
                 with path.open("rb") as source:
-                    shutil.copyfileobj(source, target, 8 * 1024 * 1024)
+                    while block := source.read(8 * 1024 * 1024):
+                        target.write(block)
+                        digest.update(block)
         if assembling.stat().st_size != entry["size"]:
             raise RuntimeError("assembled weight size mismatch")
+        if digest.hexdigest() != entry["lfs"]["sha256"]:
+            raise RuntimeError("assembled weight differs from exact HF LFS sha256")
+        entry["assembled_sha256_verified"] = True
         assembling.rename(destination)
     state = {"id": MODEL_ID, "revision": REVISION, "local_path": str(args.model_path),
              "elapsed_cpu_download_sec": time.time() - started, "gpu_hours": 0,
              "completed_ranges_this_run": completed, "errors": errors,
              "shards": [{"name": e["rfilename"], "expected_size": e["size"],
-                         "complete": (args.model_path / e["rfilename"]).exists(), "lfs": e.get("lfs")} for e in entries]}
+                         "complete": (args.model_path / e["rfilename"]).exists(), "lfs": e.get("lfs"),
+                         "assembled_sha256_verified_this_run": e.get("assembled_sha256_verified", False)} for e in entries]}
     (args.output_dir / "model_download.json").write_text(json.dumps(state, indent=2))
     print(json.dumps(state), flush=True)
     return int(bool(errors))
