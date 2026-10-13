@@ -413,3 +413,18 @@ DLLM 代码 infilling 的 inference-time length control 不能简化为单一长
 ## 需要用户决策的问题
 
 目前没有正在运行的 GPU 实验需要接管。Phase 1b 不支持继续当前 generation family 的 9-case expansion。下一步需要研究者决定：是先做 hard-case error analysis，还是批准一个新的、预注册的 candidate generator；同时建议尽快建立 grouped split protocol。
+
+
+## 2026-10-13 三起点现有头零训练迁移（追加节点）
+
+- 主控分支 `codex/dreamon-zero-training-transfer-20261013`，隔离工作树 `.worktrees/dreamon-zero-training-transfer-20261013`；从核查提交340170ce创建，原dirty产物未改。
+- A/B/C按用户明确授权并行来源/CPU适配；所有GPU只由主控串行持锁，合计12GPU作业小时，新账本 `analysis_outputs/zero_training_transfer_20261013/controller/gpu_budget.json`。历史诊断约0.802h只保留历史成本，不充抵/扩大本轮12h。
+- 已保全DreamOn十组10330行无损gzip，完整性passed，来源头CPU strict加载全参数/屏蔽列passed。普通token与三个Base兼容，Base没有expand/EOS删除语义。
+- DreamCoder原始Base辅助正在运行；tmux `zero_transfer_dreamcoder_20261013`，Python PID832663，脚本 `scripts/run_zero_training_transfer_dreamcoder_20261013.sh`，输出 `analysis_outputs/zero_training_transfer_20261013/dreamcoder_base/`。先固定16行检查，通过且估时预算可容纳再全量8264行。共享GPU只计成本，不测正式加速比。
+- Dream和DiffuCoder对应DreamOn权重尚未找到可验证公开地址；Base原/tmp缓存失效，精确revision已定位并在恢复权重，GPU检查仍pending，不能把CPU兼容当评测完成。
+- 无训练、新封存测试、K4或新头；后续重建准备只写文档 `docs/paper_agent/transfer_20261013/future_training_preparation.md`。当前恢复入口和行动说明见同目录controller_action.md；旧结论与旧思维导图未覆盖。
+
+
+### 2026-10-13 DreamCoder固定64技术检查通过并进入全量
+
+固定16条×8配置=128检查完成；A/B无头与官方局部K/顺序补丁参考token IDs一致，无非法输出或剩余mask，C/D同类同秩λ1二次抽样路径。预计全量13889.316秒（3.858h），1.5余量20833.974秒（5.787h），在本轮12h累计预算内；质量正负均继续8264行，不按smoke正确率筛选。PID832663，manifest代码475ea4c，当前已进入running_full。另两Base仍下载恢复中；缺失DreamOn主表不以Base替代。

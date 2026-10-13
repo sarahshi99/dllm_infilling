@@ -1,0 +1,31 @@
+{
+  "dispatch_owner": "controller only",
+  "max_concurrent_gpu_jobs": 1,
+  "order": [
+    "dreamcoder_base",
+    "dream_base",
+    "diffucoder_base"
+  ],
+  "lock_path": "/tmp/dllm_infilling_h200_diagnosis.lock",
+  "jobs": [
+    {
+      "target": "dreamcoder_base",
+      "status": "running_full_8264_after_16_passed",
+      "pid": 832663,
+      "tmux": "zero_transfer_dreamcoder_20261013",
+      "full_batch_estimate_sec": 13889.315895641485
+    },
+    {
+      "target": "dream_base",
+      "status": "waiting_complete_exact_weights_CPU_download_bounded",
+      "gpu_job_started": false
+    },
+    {
+      "target": "diffucoder_base",
+      "status": "waiting_complete_exact_weights_CPU_download_bounded",
+      "gpu_job_started": false
+    }
+  ],
+  "do_not_auto_train": true,
+  "no_exclusive_speed_wait": true
+}

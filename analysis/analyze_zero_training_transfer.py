@@ -60,7 +60,8 @@ def analyze(out):
             pair_rounds=opportunities+entry['nonadjacent_fallback_count']
             entry['head_trigger_rate_per_adjacent_opportunity']=entry['markov_enabled_count']/opportunities if opportunities else None
             entry['nonadjacent_fallback_rate_per_pair_round']=entry['nonadjacent_fallback_count']/pair_rounds if pair_rounds else None
-            entry['structural_stop_rate_per_pair_round']=0 if pair_rounds else None
+            entry['structural_action_opportunity_count']=0
+            entry['structural_stop_rate']=None  # Base has no structural actions; denominator is zero.
             summary.append(entry)
         for left,right in PAIRS:
             help_count=sum(by_id[left,t]['passed'] and not by_id[right,t]['passed'] for t in ids)

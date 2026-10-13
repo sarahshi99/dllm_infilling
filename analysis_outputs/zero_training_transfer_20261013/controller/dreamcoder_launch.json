@@ -1,0 +1,8 @@
+{
+  "pid": 829579,
+  "started_utc": "2026-10-13T10:32:30.678676+00:00",
+  "script": "scripts/run_zero_training_transfer_dreamcoder_20261013.sh",
+  "first_attempt_status": "nohup_not_surviving_no_gpu_used",
+  "tmux_session": "zero_transfer_dreamcoder_20261013",
+  "tmux_started_utc": "2026-10-13T10:33:33.104946+00:00"
+}

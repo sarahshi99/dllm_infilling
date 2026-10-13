@@ -27,3 +27,5 @@ nohup bash scripts/run_zero_training_transfer_dreamcoder_20261013.sh > analysis_
 内部命令：`CUDA_VISIBLE_DEVICES=0 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_zero_training_transfer.py --target dreamcoder_base --target-registry analysis_outputs/zero_training_transfer_20261013/controller/target_registry.json --output-dir analysis_outputs/zero_training_transfer_20261013/dreamcoder_base`。
 
 共享卡实测仍有>32GiB可用才加载；互斥锁不等待其他作业，资源不足退出并保存阻塞。16条固定ID先校验A/B原生参考一致、C/D路径/非法token；全量估时以16条成本×1033/16，1.5余量与全局剩余预算比较。若技术错误立即停该目标，修复后重做16条。共享耗时只计成本，不生成正式加速比。输出包含原子progress、SQLite成功事务、failure journal、compact gzip、配对/cluster CI、exit及账本。
+
+启动修正：首次nohup未存活（0 GPU成本、未生成manifest），改用 `tmux new-session -d -s zero_transfer_dreamcoder_20261013 'bash scripts/run_zero_training_transfer_dreamcoder_20261013.sh'`；方法、数据、参数不变。
