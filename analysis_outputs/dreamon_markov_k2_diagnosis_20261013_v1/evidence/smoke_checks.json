@@ -1,0 +1,1448 @@
+{
+  "checks": [
+    {
+      "arm": "A",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.18695122096687555,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09386145509779453,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09751193085685372,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09753939881920815,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.16222065314650536,
+      "policy": "global_confidence",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.1855417601764202,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09406688110902905,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09901207592338324,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09799469169229269,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.16182115022093058,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09685724973678589,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09962040139362216,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09961550403386354,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.16374253015965223,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.1905476739630103,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09669646481052041,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09963813936337829,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09955987008288503,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.16349151404574513,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.19219042407348752,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.1084526446647942,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.10810274677351117,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.18154702987521887,
+      "policy": "global_confidence",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.2063730233348906,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.10456941416487098,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.10799250984564424,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.10821855114772916,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.1813420569524169,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.20793096907436848,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.10465809889137745,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09729908592998981,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.16012825025245547,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.16346923261880875,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09461588505655527,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09717572527006269,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09725487604737282,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.1596992239356041,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.16471730405464768,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.0946579989977181,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09748880099505186,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.21849662205204368,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.25190579425543547,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.12723514577373862,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.13010963005945086,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.1299195559695363,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.21893820818513632,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.25385277392342687,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.12741686077788472,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.13021514099091291,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.13051657006144524,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 18,
+      "forward_count": 18,
+      "generation_sec": 0.3666780008934438,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.20476399920880795,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.21326847793534398,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.21326267067342997,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 10,
+      "forward_count": 19,
+      "generation_sec": 0.37780118780210614,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 9,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 18,
+      "forward_count": 18,
+      "generation_sec": 0.3696553078480065,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.20476496685296297,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.2115430529229343,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 10,
+      "forward_count": 10,
+      "generation_sec": 0.21157229412347078,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 10,
+      "forward_count": 18,
+      "generation_sec": 0.357542403973639,
+      "policy": "global_confidence",
+      "recompute_forward_count": 8,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08408797485753894,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08677153801545501,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.0866281297057867,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.1414810949936509,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.14653953490778804,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08416372491046786,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.0869186925701797,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08703402290120721,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.14160240069031715,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.14521755557507277,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09742550877854228,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09721494792029262,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 8,
+      "forward_count": 15,
+      "generation_sec": 0.26662348210811615,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 7,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 15,
+      "forward_count": 15,
+      "generation_sec": 0.27813837910071015,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.14924353081732988,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.1541281370446086,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.15400207415223122,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 8,
+      "forward_count": 13,
+      "generation_sec": 0.23414854519069195,
+      "policy": "global_confidence",
+      "recompute_forward_count": 5,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 15,
+      "forward_count": 15,
+      "generation_sec": 0.2765020104125142,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09398657269775867,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08654760802164674,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.141022183932364,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.16653083311393857,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08431365201249719,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08673413097858429,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08652822114527225,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.14109218772500753,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.16560331778600812,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08389969728887081,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.08659120416268706,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 3,
+      "forward_count": 5,
+      "generation_sec": 0.1171462838537991,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 2,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.14368657628074288,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.0726859332062304,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.07457101112231612,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.07449926529079676,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 3,
+      "forward_count": 5,
+      "generation_sec": 0.11731411889195442,
+      "policy": "global_confidence",
+      "recompute_forward_count": 2,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.14267782401293516,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.0727070402354002,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.07446233741939068,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.0744258570484817,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.12764214305207133,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.06474230624735355,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.06652424996718764,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.06644955603405833,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 3,
+      "forward_count": 5,
+      "generation_sec": 0.10377034172415733,
+      "policy": "global_confidence",
+      "recompute_forward_count": 2,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.12701574014499784,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.0645765676163137,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.06643211795017123,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 3,
+      "forward_count": 3,
+      "generation_sec": 0.066466866992414,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 3,
+      "forward_count": 5,
+      "generation_sec": 0.10371231799945235,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 2,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13099020812660456,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13538194308057427,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13510934403166175,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 7,
+      "forward_count": 12,
+      "generation_sec": 0.2155372747220099,
+      "policy": "global_confidence",
+      "recompute_forward_count": 5,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 14,
+      "forward_count": 14,
+      "generation_sec": 0.25839359406381845,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13051394699141383,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13565271394327283,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 7,
+      "forward_count": 7,
+      "generation_sec": 0.13601902965456247,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 7,
+      "forward_count": 13,
+      "generation_sec": 0.2323006703518331,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 6,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 14,
+      "forward_count": 14,
+      "generation_sec": 0.26052953116595745,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.15334450313821435,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 9,
+      "forward_count": 9,
+      "generation_sec": 0.1728758979588747,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 9,
+      "forward_count": 14,
+      "generation_sec": 0.25277481228113174,
+      "policy": "global_confidence",
+      "recompute_forward_count": 5,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 30,
+      "forward_count": 30,
+      "generation_sec": 0.5504884351976216,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 12,
+      "forward_count": 12,
+      "generation_sec": 0.2211997751146555,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 14,
+      "forward_count": 14,
+      "generation_sec": 0.26870090002194047,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 17,
+      "forward_count": 17,
+      "generation_sec": 0.3248242507688701,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 15,
+      "forward_count": 29,
+      "generation_sec": 0.5143789751455188,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 14,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 17,
+      "forward_count": 17,
+      "generation_sec": 0.3155219629406929,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.14940536813810468,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.18594829738140106,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 6,
+      "forward_count": 11,
+      "generation_sec": 0.3243737290613353,
+      "policy": "global_confidence",
+      "recompute_forward_count": 5,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 11,
+      "forward_count": 11,
+      "generation_sec": 0.32898033782839775,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.1807435960508883,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.18535648612305522,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.18518546782433987,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 6,
+      "forward_count": 11,
+      "generation_sec": 0.32415551878511906,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 5,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 11,
+      "forward_count": 11,
+      "generation_sec": 0.3312874473631382,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.18102317489683628,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.18570746388286352,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.16291986592113972,
+      "policy": "global_confidence",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.1490685069002211,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09452396305277944,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09731529094278812,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.09821571316570044,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 5,
+      "forward_count": 9,
+      "generation_sec": 0.16190289985388517,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 4,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.15037037199363112,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.11160722095519304,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 6,
+      "forward_count": 6,
+      "generation_sec": 0.11553370300680399,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 5,
+      "forward_count": 5,
+      "generation_sec": 0.0974708590656519,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.18301324918866158,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.0929263080470264,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09561279183253646,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09539595525711775,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.1570111270993948,
+      "policy": "left_to_right_frontier",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "A",
+      "base_forward_count": 8,
+      "forward_count": 8,
+      "generation_sec": 0.18437694711610675,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "B",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.0930729522369802,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "C",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09567414782941341,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "D",
+      "base_forward_count": 4,
+      "forward_count": 4,
+      "generation_sec": 0.09571365220472217,
+      "policy": "global_confidence",
+      "recompute_forward_count": 0,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "E",
+      "base_forward_count": 4,
+      "forward_count": 7,
+      "generation_sec": 0.15692735835909843,
+      "policy": "global_confidence",
+      "recompute_forward_count": 3,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    }
+  ],
+  "count": 160,
+  "estimate_margin": 1.5,
+  "full_batch_estimate_sec": 2553.576458879892,
+  "status": "passed"
+}

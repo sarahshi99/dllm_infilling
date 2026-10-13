@@ -1,0 +1,653 @@
+policy,arm,failure_reason,count
+global_confidence,A,failed: ,37
+global_confidence,A,failed: 'int' object is not iterable,1
+global_confidence,A,failed: Error,1
+global_confidence,A,"failed: Second test error: ('Mercury', 'Venus')",1
+global_confidence,A,failed: Second test error: True,1
+global_confidence,A,failed: Test 1,4
+global_confidence,A,failed: Test 2,3
+global_confidence,A,failed: Test 3,2
+global_confidence,A,failed: Test 5,1
+global_confidence,A,failed: This prints if this assert fails 1 (good for debugging!),7
+global_confidence,A,failed: This prints if this assert fails 2 (good for debugging!),3
+global_confidence,A,failed: This prints if this assert fails 3 (good for debugging!),1
+global_confidence,A,failed: This prints if this assert fails 4 (good for debugging!),1
+global_confidence,A,failed: This prints if this assert fails 7 (also good for debugging!),1
+global_confidence,A,failed: This prints if this assert fails 7 (good for debugging!),1
+global_confidence,A,failed: if you give only one argument to maketrans it must be a dict,1
+global_confidence,A,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 24)",1
+global_confidence,A,failed: list index out of range,2
+global_confidence,A,failed: max() arg is an empty sequence,1
+global_confidence,A,failed: name '_index' is not defined,1
+global_confidence,A,failed: name 'math' is not defined,1
+global_confidence,A,failed: name 'md5' is not defined,1
+global_confidence,A,failed: t2,1
+global_confidence,A,failed: type complex doesn't define __round__ method,1
+global_confidence,A,"failed: unmatched ')' (<string>, line 16)",1
+global_confidence,A,"failed: unmatched ']' (<string>, line 16)",1
+global_confidence,A,failed: unsupported operand type(s) for %: 'list' and 'int',1
+global_confidence,A,failed: unsupported operand type(s) for /: 'list' and 'int',1
+global_confidence,A,failed: xyy,1
+global_confidence,A,passed,951
+global_confidence,A,timed out,2
+global_confidence,B,failed: ,35
+global_confidence,B,"failed: '(' was never closed (<string>, line 17)",1
+global_confidence,B,"failed: '[' was never closed (<string>, line 19)",1
+global_confidence,B,"failed: '[' was never closed (<string>, line 23)",1
+global_confidence,B,"failed: '[' was never closed (<string>, line 36)",1
+global_confidence,B,failed: 'int' object is not callable,1
+global_confidence,B,failed: 'list' object is not callable,1
+global_confidence,B,failed: Error,3
+global_confidence,B,failed: First test error: False,1
+global_confidence,B,failed: Test 1,2
+global_confidence,B,failed: Test 2,1
+global_confidence,B,failed: Test 3,1
+global_confidence,B,failed: This prints if this assert fails 1 (good for debugging!),5
+global_confidence,B,failed: This prints if this assert fails 2 (good for debugging!),1
+global_confidence,B,failed: This prints if this assert fails 4 (good for debugging!),1
+global_confidence,B,failed: This prints if this assert fails 7 (also good for debugging!),1
+global_confidence,B,failed: This prints if this assert fails 7 (good for debugging!),1
+global_confidence,B,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+global_confidence,B,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+global_confidence,B,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 13)",1
+global_confidence,B,"failed: expected an indented block after 'if' statement on line 13 (<string>, line 17)",1
+global_confidence,B,"failed: expected an indented block after 'if' statement on line 22 (<string>, line 23)",1
+global_confidence,B,"failed: expected an indented block after 'if' statement on line 27 (<string>, line 28)",1
+global_confidence,B,"failed: expected an indented block after 'while' statement on line 28 (<string>, line 29)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 12)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 17)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 18)",2
+global_confidence,B,"failed: invalid syntax (<string>, line 19)",2
+global_confidence,B,"failed: invalid syntax (<string>, line 20)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 21)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 35)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 38)",1
+global_confidence,B,"failed: invalid syntax (<string>, line 9)",1
+global_confidence,B,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 17)",1
+global_confidence,B,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+global_confidence,B,failed: list index out of range,3
+global_confidence,B,failed: local variable 'val' referenced before assignment,1
+global_confidence,B,failed: max() arg is an empty sequence,1
+global_confidence,B,failed: multiple repeat at position 9,1
+global_confidence,B,failed: name 'cing_bracket_index' is not defined,1
+global_confidence,B,failed: name 'math' is not defined,1
+global_confidence,B,failed: name 'new_distance' is not defined,1
+global_confidence,B,failed: name 'sorted_lst' is not defined,1
+global_confidence,B,failed: name 'strels' is not defined,1
+global_confidence,B,failed: name 'temp' is not defined,1
+global_confidence,B,failed: name 'x_integer' is not defined,1
+global_confidence,B,failed: not all arguments converted during string formatting,1
+global_confidence,B,"failed: replace expected at least 2 arguments, got 1",1
+global_confidence,B,failed: t1,1
+global_confidence,B,failed: type complex doesn't define __round__ method,1
+global_confidence,B,"failed: unexpected indent (<string>, line 15)",1
+global_confidence,B,"failed: unexpected indent (<string>, line 20)",1
+global_confidence,B,"failed: unexpected indent (<string>, line 21)",1
+global_confidence,B,"failed: unexpected indent (<string>, line 27)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 12)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 14)",2
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 15)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 17)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 20)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 21)",2
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 23)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 24)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 25)",1
+global_confidence,B,"failed: unindent does not match any outer indentation level (<string>, line 35)",1
+global_confidence,B,"failed: unmatched ')' (<string>, line 15)",1
+global_confidence,B,"failed: unmatched ')' (<string>, line 16)",2
+global_confidence,B,"failed: unmatched ')' (<string>, line 18)",1
+global_confidence,B,"failed: unmatched ')' (<string>, line 20)",1
+global_confidence,B,"failed: unmatched ']' (<string>, line 16)",1
+global_confidence,B,"failed: unmatched ']' (<string>, line 18)",1
+global_confidence,B,"failed: unmatched ']' (<string>, line 23)",1
+global_confidence,B,"failed: unterminated string literal (detected at line 10) (<string>, line 10)",1
+global_confidence,B,"failed: unterminated string literal (detected at line 15) (<string>, line 15)",1
+global_confidence,B,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",3
+global_confidence,B,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",2
+global_confidence,B,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+global_confidence,B,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",2
+global_confidence,B,"failed: unterminated triple-quoted string literal (detected at line 41) (<string>, line 14)",1
+global_confidence,B,"failed: unterminated triple-quoted string literal (detected at line 42) (<string>, line 20)",1
+global_confidence,B,passed,901
+global_confidence,C,failed: ,35
+global_confidence,C,"failed: '(' was never closed (<string>, line 17)",1
+global_confidence,C,"failed: '[' was never closed (<string>, line 19)",1
+global_confidence,C,"failed: '[' was never closed (<string>, line 23)",1
+global_confidence,C,"failed: '[' was never closed (<string>, line 36)",1
+global_confidence,C,failed: 'int' object is not callable,1
+global_confidence,C,failed: 'list' object is not callable,1
+global_confidence,C,failed: Error,3
+global_confidence,C,failed: First test error: False,1
+global_confidence,C,failed: Test 1,2
+global_confidence,C,failed: Test 2,1
+global_confidence,C,failed: Test 3,1
+global_confidence,C,failed: This prints if this assert fails 1 (good for debugging!),5
+global_confidence,C,failed: This prints if this assert fails 2 (good for debugging!),1
+global_confidence,C,failed: This prints if this assert fails 4 (good for debugging!),1
+global_confidence,C,failed: This prints if this assert fails 7 (also good for debugging!),1
+global_confidence,C,failed: This prints if this assert fails 7 (good for debugging!),1
+global_confidence,C,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+global_confidence,C,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+global_confidence,C,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 13)",1
+global_confidence,C,"failed: expected an indented block after 'if' statement on line 13 (<string>, line 17)",1
+global_confidence,C,"failed: expected an indented block after 'if' statement on line 22 (<string>, line 23)",1
+global_confidence,C,"failed: expected an indented block after 'if' statement on line 27 (<string>, line 28)",1
+global_confidence,C,"failed: expected an indented block after 'while' statement on line 28 (<string>, line 29)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 12)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 17)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 18)",2
+global_confidence,C,"failed: invalid syntax (<string>, line 19)",2
+global_confidence,C,"failed: invalid syntax (<string>, line 20)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 21)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 35)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 38)",1
+global_confidence,C,"failed: invalid syntax (<string>, line 9)",1
+global_confidence,C,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 17)",1
+global_confidence,C,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+global_confidence,C,failed: list index out of range,3
+global_confidence,C,failed: local variable 'val' referenced before assignment,1
+global_confidence,C,failed: max() arg is an empty sequence,1
+global_confidence,C,failed: multiple repeat at position 9,1
+global_confidence,C,failed: name 'cing_bracket_index' is not defined,1
+global_confidence,C,failed: name 'math' is not defined,1
+global_confidence,C,failed: name 'new_distance' is not defined,1
+global_confidence,C,failed: name 'sorted_lst' is not defined,1
+global_confidence,C,failed: name 'strels' is not defined,1
+global_confidence,C,failed: name 'temp' is not defined,1
+global_confidence,C,failed: name 'x_integer' is not defined,1
+global_confidence,C,failed: not all arguments converted during string formatting,1
+global_confidence,C,"failed: replace expected at least 2 arguments, got 1",1
+global_confidence,C,failed: t1,1
+global_confidence,C,failed: type complex doesn't define __round__ method,1
+global_confidence,C,"failed: unexpected indent (<string>, line 15)",1
+global_confidence,C,"failed: unexpected indent (<string>, line 20)",1
+global_confidence,C,"failed: unexpected indent (<string>, line 21)",1
+global_confidence,C,"failed: unexpected indent (<string>, line 27)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 12)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 14)",2
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 15)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 17)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 20)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 21)",2
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 23)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 24)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 25)",1
+global_confidence,C,"failed: unindent does not match any outer indentation level (<string>, line 35)",1
+global_confidence,C,"failed: unmatched ')' (<string>, line 15)",1
+global_confidence,C,"failed: unmatched ')' (<string>, line 16)",2
+global_confidence,C,"failed: unmatched ')' (<string>, line 18)",1
+global_confidence,C,"failed: unmatched ')' (<string>, line 20)",1
+global_confidence,C,"failed: unmatched ']' (<string>, line 16)",1
+global_confidence,C,"failed: unmatched ']' (<string>, line 18)",1
+global_confidence,C,"failed: unmatched ']' (<string>, line 23)",1
+global_confidence,C,"failed: unterminated string literal (detected at line 10) (<string>, line 10)",1
+global_confidence,C,"failed: unterminated string literal (detected at line 15) (<string>, line 15)",1
+global_confidence,C,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",3
+global_confidence,C,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",2
+global_confidence,C,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+global_confidence,C,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",2
+global_confidence,C,"failed: unterminated triple-quoted string literal (detected at line 41) (<string>, line 14)",1
+global_confidence,C,"failed: unterminated triple-quoted string literal (detected at line 42) (<string>, line 20)",1
+global_confidence,C,passed,901
+global_confidence,D,failed: ,38
+global_confidence,D,"failed: '(' was never closed (<string>, line 17)",1
+global_confidence,D,"failed: '(' was never closed (<string>, line 23)",1
+global_confidence,D,"failed: '[' was never closed (<string>, line 19)",1
+global_confidence,D,"failed: '[' was never closed (<string>, line 36)",1
+global_confidence,D,failed: 'list' object is not callable,1
+global_confidence,D,failed: Error,3
+global_confidence,D,failed: First test error: False,1
+global_confidence,D,failed: Test 1,2
+global_confidence,D,failed: Test 3,1
+global_confidence,D,failed: This prints if this assert fails 1 (good for debugging!),6
+global_confidence,D,failed: This prints if this assert fails 2 (good for debugging!),3
+global_confidence,D,failed: This prints if this assert fails 4 (good for debugging!),1
+global_confidence,D,failed: This prints if this assert fails 7 (also good for debugging!),1
+global_confidence,D,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+global_confidence,D,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+global_confidence,D,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 15)",1
+global_confidence,D,"failed: expected an indented block after 'if' statement on line 13 (<string>, line 17)",1
+global_confidence,D,"failed: expected an indented block after 'if' statement on line 22 (<string>, line 23)",1
+global_confidence,D,"failed: expected an indented block after 'if' statement on line 27 (<string>, line 28)",1
+global_confidence,D,"failed: expected an indented block after 'while' statement on line 28 (<string>, line 29)",1
+global_confidence,D,failed: invalid literal for int() with base 10: '-',1
+global_confidence,D,"failed: invalid syntax (<string>, line 17)",1
+global_confidence,D,"failed: invalid syntax (<string>, line 18)",3
+global_confidence,D,"failed: invalid syntax (<string>, line 19)",2
+global_confidence,D,"failed: invalid syntax (<string>, line 20)",1
+global_confidence,D,"failed: invalid syntax (<string>, line 28)",1
+global_confidence,D,"failed: invalid syntax (<string>, line 35)",1
+global_confidence,D,"failed: invalid syntax (<string>, line 38)",1
+global_confidence,D,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+global_confidence,D,failed: list index out of range,3
+global_confidence,D,failed: local variable 'i' referenced before assignment,1
+global_confidence,D,failed: local variable 'val' referenced before assignment,1
+global_confidence,D,failed: max() arg is an empty sequence,1
+global_confidence,D,failed: name 'cing_bracket_index' is not defined,1
+global_confidence,D,failed: name 'math' is not defined,1
+global_confidence,D,failed: name 'new_distance' is not defined,1
+global_confidence,D,failed: name 'sorted_lst' is not defined,1
+global_confidence,D,failed: name 'x_integer' is not defined,1
+global_confidence,D,"failed: replace expected at least 2 arguments, got 1",1
+global_confidence,D,failed: string index out of range,1
+global_confidence,D,failed: t1,1
+global_confidence,D,failed: type complex doesn't define __round__ method,2
+global_confidence,D,"failed: unexpected indent (<string>, line 15)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 14)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 15)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 16)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 20)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 21)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 23)",1
+global_confidence,D,"failed: unindent does not match any outer indentation level (<string>, line 26)",1
+global_confidence,D,"failed: unmatched ')' (<string>, line 16)",3
+global_confidence,D,"failed: unmatched ')' (<string>, line 18)",1
+global_confidence,D,"failed: unmatched ')' (<string>, line 19)",1
+global_confidence,D,"failed: unmatched ')' (<string>, line 20)",1
+global_confidence,D,"failed: unmatched ']' (<string>, line 16)",1
+global_confidence,D,"failed: unterminated string literal (detected at line 10) (<string>, line 10)",1
+global_confidence,D,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",4
+global_confidence,D,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",1
+global_confidence,D,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+global_confidence,D,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",2
+global_confidence,D,"failed: unterminated triple-quoted string literal (detected at line 41) (<string>, line 14)",1
+global_confidence,D,passed,910
+global_confidence,D,timed out,1
+global_confidence,E,failed: ,40
+global_confidence,E,"failed: '(' was never closed (<string>, line 17)",1
+global_confidence,E,"failed: '[' was never closed (<string>, line 19)",1
+global_confidence,E,failed: 'int' object is not iterable,1
+global_confidence,E,failed: Error,3
+global_confidence,E,failed: First test error: False,1
+global_confidence,E,failed: Test 1,2
+global_confidence,E,failed: Test 2,3
+global_confidence,E,failed: Test 3,1
+global_confidence,E,failed: Test 5,1
+global_confidence,E,failed: This prints if this assert fails 1 (good for debugging!),6
+global_confidence,E,failed: This prints if this assert fails 2 (good for debugging!),4
+global_confidence,E,failed: This prints if this assert fails 3 (good for debugging!),1
+global_confidence,E,failed: This prints if this assert fails 4 (good for debugging!),1
+global_confidence,E,failed: This prints if this assert fails 7 (also good for debugging!),1
+global_confidence,E,failed: This prints if this assert fails 7 (good for debugging!),1
+global_confidence,E,"failed: expected an indented block after 'if' statement on line 13 (<string>, line 17)",1
+global_confidence,E,"failed: expected an indented block after 'if' statement on line 22 (<string>, line 23)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 17)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 18)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 19)",2
+global_confidence,E,"failed: invalid syntax (<string>, line 20)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 28)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 35)",1
+global_confidence,E,"failed: invalid syntax (<string>, line 36)",1
+global_confidence,E,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 19)",1
+global_confidence,E,failed: list index out of range,2
+global_confidence,E,failed: max() arg is an empty sequence,1
+global_confidence,E,failed: name 'math' is not defined,1
+global_confidence,E,failed: name 'md5' is not defined,1
+global_confidence,E,failed: t1,1
+global_confidence,E,failed: type complex doesn't define __round__ method,1
+global_confidence,E,"failed: unexpected indent (<string>, line 15)",1
+global_confidence,E,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+global_confidence,E,"failed: unindent does not match any outer indentation level (<string>, line 15)",1
+global_confidence,E,"failed: unmatched ')' (<string>, line 16)",2
+global_confidence,E,"failed: unmatched ')' (<string>, line 20)",1
+global_confidence,E,"failed: unmatched ']' (<string>, line 16)",1
+global_confidence,E,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",2
+global_confidence,E,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",1
+global_confidence,E,"failed: unterminated triple-quoted string literal (detected at line 41) (<string>, line 14)",1
+global_confidence,E,passed,935
+global_confidence,E,timed out,1
+left_to_right_frontier,A,failed: ,42
+left_to_right_frontier,A,failed: 'int' object has no attribute 'is_integer',1
+left_to_right_frontier,A,failed: 'int' object is not iterable,1
+left_to_right_frontier,A,failed: Error,2
+left_to_right_frontier,A,failed: First test error: False,2
+left_to_right_frontier,A,"failed: Second test error: ('Mercury', 'Venus')",1
+left_to_right_frontier,A,failed: Second test error: True,1
+left_to_right_frontier,A,failed: Test 1,4
+left_to_right_frontier,A,failed: Test 2,2
+left_to_right_frontier,A,failed: Test 3,2
+left_to_right_frontier,A,failed: Test 5,1
+left_to_right_frontier,A,failed: This prints if this assert fails 1 (good for debugging!),9
+left_to_right_frontier,A,failed: This prints if this assert fails 2 (good for debugging!),4
+left_to_right_frontier,A,failed: This prints if this assert fails 3 (good for debugging!),1
+left_to_right_frontier,A,failed: This prints if this assert fails 4 (good for debugging!),1
+left_to_right_frontier,A,failed: This prints if this assert fails 7 (also good for debugging!),1
+left_to_right_frontier,A,failed: This prints if this assert fails 7 (good for debugging!),1
+left_to_right_frontier,A,failed: aabb,1
+left_to_right_frontier,A,failed: could not convert string to float: '14500.0.',1
+left_to_right_frontier,A,"failed: expected an indented block after 'if' statement on line 25 (<string>, line 26)",1
+left_to_right_frontier,A,failed: if you give only one argument to maketrans it must be a dict,1
+left_to_right_frontier,A,"failed: invalid syntax (<string>, line 10)",1
+left_to_right_frontier,A,failed: list index out of range,2
+left_to_right_frontier,A,failed: min() arg is an empty sequence,1
+left_to_right_frontier,A,failed: t2,1
+left_to_right_frontier,A,failed: type complex doesn't define __round__ method,1
+left_to_right_frontier,A,"failed: unmatched ')' (<string>, line 17)",1
+left_to_right_frontier,A,failed: unsupported operand type(s) for +: 'int' and 'NoneType',1
+left_to_right_frontier,A,passed,942
+left_to_right_frontier,A,timed out,3
+left_to_right_frontier,B,failed: ,31
+left_to_right_frontier,B,"failed: '[' was never closed (<string>, line 23)",1
+left_to_right_frontier,B,failed: 'int' object is not callable,1
+left_to_right_frontier,B,failed: 'int' object is not iterable,1
+left_to_right_frontier,B,failed: 'list' object is not callable,1
+left_to_right_frontier,B,failed: 't',1
+left_to_right_frontier,B,failed: Error,2
+left_to_right_frontier,B,failed: Fifth test error: False,1
+left_to_right_frontier,B,failed: First test error: False,2
+left_to_right_frontier,B,failed: Second test error: True,1
+left_to_right_frontier,B,failed: Test 1,1
+left_to_right_frontier,B,failed: Test 3,1
+left_to_right_frontier,B,failed: Test 4,1
+left_to_right_frontier,B,failed: Test 5,1
+left_to_right_frontier,B,failed: This prints if this assert fails 1 (good for debugging!),6
+left_to_right_frontier,B,failed: This prints if this assert fails 7 (also good for debugging!),1
+left_to_right_frontier,B,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+left_to_right_frontier,B,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+left_to_right_frontier,B,"failed: expected an indented block after 'for' statement on line 27 (<string>, line 28)",1
+left_to_right_frontier,B,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 13)",1
+left_to_right_frontier,B,"failed: expected an indented block after 'if' statement on line 15 (<string>, line 16)",1
+left_to_right_frontier,B,"failed: expected an indented block after 'if' statement on line 30 (<string>, line 31)",1
+left_to_right_frontier,B,"failed: f-string: empty expression not allowed (<string>, line 17)",1
+left_to_right_frontier,B,"failed: invalid decimal literal (<string>, line 16)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 10)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 12)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 13)",3
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 15)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 16)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 17)",3
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 18)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 20)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 21)",2
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 22)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 26)",1
+left_to_right_frontier,B,"failed: invalid syntax (<string>, line 27)",1
+left_to_right_frontier,B,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 21)",1
+left_to_right_frontier,B,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+left_to_right_frontier,B,failed: list index out of range,1
+left_to_right_frontier,B,failed: local variable 'begin' referenced before assignment,1
+left_to_right_frontier,B,failed: local variable 'val' referenced before assignment,1
+left_to_right_frontier,B,failed: name 'aa' is not defined,1
+left_to_right_frontier,B,failed: name 'cing_bracket_index' is not defined,1
+left_to_right_frontier,B,failed: name 'distance' is not defined,1
+left_to_right_frontier,B,failed: name 'i_palindrome' is not defined,1
+left_to_right_frontier,B,failed: name 'idx_bracket_index' is not defined,1
+left_to_right_frontier,B,failed: name 'math' is not defined,1
+left_to_right_frontier,B,failed: name 'my' is not defined,1
+left_to_right_frontier,B,failed: name 'new_distance' is not defined,1
+left_to_right_frontier,B,failed: name 'sorted_lst' is not defined,1
+left_to_right_frontier,B,failed: name 'temp' is not defined,2
+left_to_right_frontier,B,failed: not all arguments converted during string formatting,1
+left_to_right_frontier,B,"failed: replace expected at least 2 arguments, got 1",1
+left_to_right_frontier,B,failed: t2,1
+left_to_right_frontier,B,failed: type complex doesn't define __round__ method,1
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 15)",2
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 17)",2
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 19)",1
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 20)",2
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 21)",2
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 23)",1
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 34)",1
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 35)",1
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 36)",3
+left_to_right_frontier,B,"failed: unexpected indent (<string>, line 37)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 12)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 13)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 14)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 17)",4
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 19)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 20)",4
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 21)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 22)",2
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 23)",3
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 24)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 25)",2
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 26)",1
+left_to_right_frontier,B,"failed: unindent does not match any outer indentation level (<string>, line 9)",1
+left_to_right_frontier,B,"failed: unmatched ')' (<string>, line 13)",1
+left_to_right_frontier,B,"failed: unmatched ')' (<string>, line 19)",1
+left_to_right_frontier,B,"failed: unmatched ')' (<string>, line 21)",1
+left_to_right_frontier,B,"failed: unmatched ')' (<string>, line 25)",1
+left_to_right_frontier,B,"failed: unmatched ')' (<string>, line 38)",1
+left_to_right_frontier,B,"failed: unmatched ']' (<string>, line 18)",1
+left_to_right_frontier,B,"failed: unmatched ']' (<string>, line 23)",1
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 16) (<string>, line 16)",2
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",3
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",2
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 25) (<string>, line 25)",1
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",1
+left_to_right_frontier,B,"failed: unterminated string literal (detected at line 32) (<string>, line 32)",1
+left_to_right_frontier,B,passed,877
+left_to_right_frontier,C,failed: ,30
+left_to_right_frontier,C,"failed: '[' was never closed (<string>, line 23)",1
+left_to_right_frontier,C,failed: 'float' object is not callable,1
+left_to_right_frontier,C,failed: 'int' object is not iterable,1
+left_to_right_frontier,C,failed: 'list' object is not callable,1
+left_to_right_frontier,C,failed: Error,2
+left_to_right_frontier,C,failed: Fifth test error: False,1
+left_to_right_frontier,C,failed: First test error: False,2
+left_to_right_frontier,C,"failed: Second test error: ('Mercury', 'Venus')",1
+left_to_right_frontier,C,failed: Second test error: True,1
+left_to_right_frontier,C,failed: Test 1,1
+left_to_right_frontier,C,failed: Test 3,1
+left_to_right_frontier,C,failed: Test 4,1
+left_to_right_frontier,C,failed: Test 5,1
+left_to_right_frontier,C,failed: This prints if this assert fails 1 (good for debugging!),5
+left_to_right_frontier,C,failed: This prints if this assert fails 2 (good for debugging!),1
+left_to_right_frontier,C,failed: This prints if this assert fails 7 (also good for debugging!),1
+left_to_right_frontier,C,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+left_to_right_frontier,C,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+left_to_right_frontier,C,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 13)",1
+left_to_right_frontier,C,"failed: expected an indented block after 'if' statement on line 15 (<string>, line 16)",1
+left_to_right_frontier,C,"failed: expected an indented block after 'if' statement on line 24 (<string>, line 25)",1
+left_to_right_frontier,C,"failed: expected an indented block after 'if' statement on line 30 (<string>, line 31)",1
+left_to_right_frontier,C,"failed: f-string: empty expression not allowed (<string>, line 17)",1
+left_to_right_frontier,C,"failed: invalid decimal literal (<string>, line 16)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 10)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 12)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 13)",3
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 15)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 16)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 17)",2
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 18)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 19)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 20)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 21)",2
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 22)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 26)",1
+left_to_right_frontier,C,"failed: invalid syntax (<string>, line 27)",1
+left_to_right_frontier,C,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 21)",1
+left_to_right_frontier,C,failed: iopaxioi,1
+left_to_right_frontier,C,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+left_to_right_frontier,C,failed: list index out of range,1
+left_to_right_frontier,C,failed: local variable 'val' referenced before assignment,1
+left_to_right_frontier,C,failed: name 'aa' is not defined,1
+left_to_right_frontier,C,failed: name 'c' is not defined,1
+left_to_right_frontier,C,failed: name 'cing_bracket_index' is not defined,1
+left_to_right_frontier,C,failed: name 'distance' is not defined,1
+left_to_right_frontier,C,failed: name 'i_palindrome' is not defined,1
+left_to_right_frontier,C,failed: name 'idx_bracket_index' is not defined,1
+left_to_right_frontier,C,failed: name 'my' is not defined,1
+left_to_right_frontier,C,failed: name 'new_distance' is not defined,1
+left_to_right_frontier,C,failed: name 'numbers_map' is not defined,1
+left_to_right_frontier,C,failed: name 'sorted_lst' is not defined,1
+left_to_right_frontier,C,failed: name 'temp' is not defined,2
+left_to_right_frontier,C,failed: not all arguments converted during string formatting,1
+left_to_right_frontier,C,"failed: replace expected at least 2 arguments, got 1",1
+left_to_right_frontier,C,failed: t2,1
+left_to_right_frontier,C,failed: type complex doesn't define __round__ method,1
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 15)",2
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 17)",2
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 18)",1
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 20)",2
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 21)",3
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 23)",2
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 28)",1
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 34)",1
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 35)",1
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 36)",3
+left_to_right_frontier,C,"failed: unexpected indent (<string>, line 37)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 11)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 12)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 13)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 14)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 16)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 17)",4
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 18)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 20)",3
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 21)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 22)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 23)",3
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 24)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 25)",2
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 26)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 29)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 36)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 58)",1
+left_to_right_frontier,C,"failed: unindent does not match any outer indentation level (<string>, line 9)",1
+left_to_right_frontier,C,"failed: unmatched ')' (<string>, line 13)",1
+left_to_right_frontier,C,"failed: unmatched ')' (<string>, line 19)",1
+left_to_right_frontier,C,"failed: unmatched ')' (<string>, line 25)",1
+left_to_right_frontier,C,"failed: unmatched ')' (<string>, line 38)",1
+left_to_right_frontier,C,"failed: unmatched ']' (<string>, line 18)",1
+left_to_right_frontier,C,"failed: unmatched ']' (<string>, line 23)",1
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 16) (<string>, line 16)",2
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",3
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",2
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 21) (<string>, line 21)",1
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",1
+left_to_right_frontier,C,"failed: unterminated string literal (detected at line 32) (<string>, line 32)",1
+left_to_right_frontier,C,passed,872
+left_to_right_frontier,C,timed out,1
+left_to_right_frontier,D,failed: ,40
+left_to_right_frontier,D,failed: '>' not supported between instances of 'int' and 'str',1
+left_to_right_frontier,D,failed: 'int' object has no attribute 'is_integer',1
+left_to_right_frontier,D,failed: 'int' object is not iterable,1
+left_to_right_frontier,D,failed: 'list' object is not callable,1
+left_to_right_frontier,D,failed: 't',1
+left_to_right_frontier,D,failed: Error,3
+left_to_right_frontier,D,failed: Fifth test error: False,1
+left_to_right_frontier,D,failed: First test error: 6,1
+left_to_right_frontier,D,failed: First test error: False,2
+left_to_right_frontier,D,failed: Test 1,2
+left_to_right_frontier,D,failed: Test 3,1
+left_to_right_frontier,D,failed: Test 4,1
+left_to_right_frontier,D,failed: Test 5,1
+left_to_right_frontier,D,failed: This prints if this assert fails 1 (good for debugging!),5
+left_to_right_frontier,D,failed: This prints if this assert fails 2 (good for debugging!),1
+left_to_right_frontier,D,failed: This prints if this assert fails 4 (good for debugging!),1
+left_to_right_frontier,D,failed: This prints if this assert fails 7 (also good for debugging!),1
+left_to_right_frontier,D,failed: This prints if this assert fails 7 (good for debugging!),1
+left_to_right_frontier,D,"failed: closing parenthesis ')' does not match opening parenthesis '[' (<string>, line 18)",1
+left_to_right_frontier,D,"failed: closing parenthesis ')' does not match opening parenthesis '[' (<string>, line 24)",1
+left_to_right_frontier,D,"failed: closing parenthesis ']' does not match opening parenthesis '(' (<string>, line 28)",1
+left_to_right_frontier,D,failed: could not convert string to float: '',1
+left_to_right_frontier,D,"failed: expected an indented block after 'elif' statement on line 33 (<string>, line 35)",1
+left_to_right_frontier,D,"failed: expected an indented block after 'except' statement on line 40 (<string>, line 41)",1
+left_to_right_frontier,D,"failed: expected an indented block after 'if' statement on line 12 (<string>, line 15)",1
+left_to_right_frontier,D,"failed: f-string: empty expression not allowed (<string>, line 17)",1
+left_to_right_frontier,D,"failed: invalid decimal literal (<string>, line 18)",1
+left_to_right_frontier,D,failed: invalid literal for int() with base 10: '-',1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 15)",2
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 17)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 18)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 19)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 20)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 22)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 26)",1
+left_to_right_frontier,D,"failed: invalid syntax (<string>, line 27)",1
+left_to_right_frontier,D,"failed: invalid syntax. Perhaps you forgot a comma? (<string>, line 38)",1
+left_to_right_frontier,D,failed: iopaxioi,1
+left_to_right_frontier,D,"failed: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<string>, line 13)",1
+left_to_right_frontier,D,failed: list index out of range,2
+left_to_right_frontier,D,failed: local variable 'i' referenced before assignment,1
+left_to_right_frontier,D,failed: local variable 'val' referenced before assignment,1
+left_to_right_frontier,D,failed: min() arg is an empty sequence,1
+left_to_right_frontier,D,failed: name 'cing_bracket_index' is not defined,1
+left_to_right_frontier,D,failed: name 'distance' is not defined,1
+left_to_right_frontier,D,failed: name 'i_palindrome' is not defined,1
+left_to_right_frontier,D,failed: name 'idx_bracket_index' is not defined,1
+left_to_right_frontier,D,failed: name 'new_distance' is not defined,1
+left_to_right_frontier,D,failed: name 'sorted_lst' is not defined,1
+left_to_right_frontier,D,"failed: replace expected at least 2 arguments, got 1",1
+left_to_right_frontier,D,failed: t2,1
+left_to_right_frontier,D,failed: type complex doesn't define __round__ method,2
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 15)",1
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 17)",2
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 18)",1
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 34)",1
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 35)",1
+left_to_right_frontier,D,"failed: unexpected indent (<string>, line 36)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 13)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 14)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 16)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 17)",2
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 20)",2
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 23)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 24)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 25)",2
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 26)",2
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 36)",1
+left_to_right_frontier,D,"failed: unindent does not match any outer indentation level (<string>, line 9)",1
+left_to_right_frontier,D,"failed: unmatched ')' (<string>, line 13)",1
+left_to_right_frontier,D,"failed: unmatched ')' (<string>, line 16)",1
+left_to_right_frontier,D,"failed: unmatched ')' (<string>, line 17)",1
+left_to_right_frontier,D,"failed: unmatched ')' (<string>, line 21)",1
+left_to_right_frontier,D,"failed: unmatched ')' (<string>, line 25)",1
+left_to_right_frontier,D,"failed: unmatched ']' (<string>, line 16)",1
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 16) (<string>, line 16)",2
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 17) (<string>, line 17)",3
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 18) (<string>, line 18)",2
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 23) (<string>, line 23)",1
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 25) (<string>, line 25)",1
+left_to_right_frontier,D,"failed: unterminated string literal (detected at line 30) (<string>, line 30)",1
+left_to_right_frontier,D,passed,890
+left_to_right_frontier,D,timed out,2
+left_to_right_frontier,E,failed: ,42
+left_to_right_frontier,E,failed: 'int' object has no attribute 'is_integer',1
+left_to_right_frontier,E,failed: 'int' object is not iterable,1
+left_to_right_frontier,E,failed: Error,1
+left_to_right_frontier,E,failed: First test error: 6,1
+left_to_right_frontier,E,failed: First test error: False,2
+left_to_right_frontier,E,"failed: Second test error: ('Mercury', 'Venus')",1
+left_to_right_frontier,E,failed: Test 1,4
+left_to_right_frontier,E,failed: Test 2,3
+left_to_right_frontier,E,failed: Test 3,1
+left_to_right_frontier,E,failed: Test 5,1
+left_to_right_frontier,E,failed: This prints if this assert fails 1 (good for debugging!),8
+left_to_right_frontier,E,failed: This prints if this assert fails 2 (good for debugging!),4
+left_to_right_frontier,E,failed: This prints if this assert fails 3 (good for debugging!),1
+left_to_right_frontier,E,failed: This prints if this assert fails 4 (good for debugging!),1
+left_to_right_frontier,E,failed: This prints if this assert fails 7 (also good for debugging!),1
+left_to_right_frontier,E,failed: This prints if this assert fails 7 (good for debugging!),1
+left_to_right_frontier,E,"failed: expected an indented block after 'if' statement on line 25 (<string>, line 26)",1
+left_to_right_frontier,E,failed: if you give only one argument to maketrans it must be a dict,1
+left_to_right_frontier,E,"failed: invalid syntax (<string>, line 10)",1
+left_to_right_frontier,E,"failed: invalid syntax (<string>, line 20)",1
+left_to_right_frontier,E,"failed: invalid syntax (<string>, line 27)",1
+left_to_right_frontier,E,failed: iopaxioi,1
+left_to_right_frontier,E,failed: list index out of range,3
+left_to_right_frontier,E,failed: local variable 'depth' referenced before assignment,1
+left_to_right_frontier,E,failed: min() arg is an empty sequence,1
+left_to_right_frontier,E,failed: name 'c' is not defined,1
+left_to_right_frontier,E,failed: t2,1
+left_to_right_frontier,E,failed: type complex doesn't define __round__ method,1
+left_to_right_frontier,E,"failed: unexpected indent (<string>, line 15)",1
+left_to_right_frontier,E,"failed: unexpected indent (<string>, line 17)",2
+left_to_right_frontier,E,"failed: unexpected indent (<string>, line 34)",1
+left_to_right_frontier,E,"failed: unexpected indent (<string>, line 35)",1
+left_to_right_frontier,E,"failed: unindent does not match any outer indentation level (<string>, line 13)",1
+left_to_right_frontier,E,"failed: unindent does not match any outer indentation level (<string>, line 20)",1
+left_to_right_frontier,E,"failed: unindent does not match any outer indentation level (<string>, line 25)",1
+left_to_right_frontier,E,"failed: unindent does not match any outer indentation level (<string>, line 26)",1
+left_to_right_frontier,E,"failed: unmatched ')' (<string>, line 17)",1
+left_to_right_frontier,E,failed: unsupported operand type(s) for +: 'int' and 'NoneType',1
+left_to_right_frontier,E,passed,931
+left_to_right_frontier,E,timed out,3

@@ -10,6 +10,14 @@ REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1"
 if subprocess.check_output(["git", "branch", "--show-current"], cwd=REPO, text=True).strip() != "codex/dreamon-markov-k2-diagnosis-v1":
     raise RuntimeError("finalization branch changed; leave results local")
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+from analysis.dreamon_k2_evidence import export_evidence, redact_manifest_gpu_snapshots
+
+# Archive original success rows and anonymized historical load before committing.
+# This only reads existing results; no evaluator/model/GPU work is started.
+redacted_paths = redact_manifest_gpu_snapshots(OUT)
+export_evidence(OUT, source_head=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, text=True).strip())
 status = int(sys.argv[1])
 manifest = json.loads((OUT / "run_manifest.json").read_text())
 audit = json.loads((OUT / "integrity_audit.json").read_text())
@@ -24,7 +32,7 @@ section = (
     f"- 代码 `{manifest['code_commit']}`；报告 `analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/report.zh.md`，全部配对结论见报告。\n"
     f"- {'本轮全部完成；没有后续 GPU 作业。方法建议只写入报告，不自动运行。' if completed else '阻塞：' + manifest.get('blocker', '详见日志和完整性审计') + '。保留逐行数据库和失败日志，未自动改范围或参数。'}\n\n"
 )
-paths = []
+paths = [str((OUT / name).relative_to(REPO)) for name in redacted_paths]
 for name in ("pause_checkpoint.current.md", "paper_agent_dashboard.zh.md", "experiment_queue.md", "current_action.md"):
     path = REPO / "docs/paper_agent" / name
     first, rest = path.read_text().split("\n", 1)
@@ -40,6 +48,7 @@ for name in ("run_manifest.json", "integrity_audit.json", "report.zh.md", "summa
 (OUT / "background_exit.json").write_text(json.dumps({"finished_utc": when, "exit_code": status,
     "completed": completed, "status": manifest["status"], "row_count": audit["row_count"]}, indent=2) + "\n")
 paths.append(str((OUT / "background_exit.json").relative_to(REPO)))
+paths.extend(str(path.relative_to(REPO)) for path in sorted((OUT / "evidence").iterdir()) if path.is_file())
 print("Finalization staged paths:\n" + "\n".join(paths), flush=True)
 subprocess.run(["git", "diff", "--check"], cwd=REPO, check=True)
 subprocess.run(["git", "add", "--", *paths], cwd=REPO, check=True)

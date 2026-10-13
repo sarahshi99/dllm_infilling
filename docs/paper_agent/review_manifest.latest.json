@@ -66,7 +66,7 @@
     "status": "completed",
     "sufficient_canvas_effect": 29
   },
-  "branch": "codex/ccfa-execution-sprint-v1",
+  "branch": "codex/dreamon-markov-k2-diagnosis-v1",
   "canonical_roadmap": {
     "a1_status": "stopped_completed_negative_auxiliary",
     "active_work": [
@@ -218,6 +218,7 @@
   ],
   "controller_v3_output_dir": "analysis_outputs/controller_v3_h200_20260708_v3_candidate_screen_v3",
   "controller_v3_started": true,
+  "current_evidence_index": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/INDEX.zh.md",
   "current_head_before_exp003_commit": "aeea238f5c9752d4e1df60ca29a101eb52f4c211",
   "current_head_before_full104_commit": "4bd1e54827ca37c69acb80ed3deb608c28c1faa8",
   "current_head_before_full_allowed_commit": "1547ed087e9e1eff68ddb14999e0fe40cb5b6d87",
@@ -238,6 +239,38 @@
     "status": "completed_with_protocol_deviations",
     "winner": "kl",
     "winner_basis": "original validation; not reselected after audit"
+  },
+  "dreamon_markov_k2_diagnosis_20261013_v1": {
+    "E_scope": "fixed original right position; commit left only then fresh forward; not K1 equivalent, mathematical upper bound, or a validated verifier",
+    "base_task_count": 164,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261013,
+    "compared_cells": 1588,
+    "different_cells": 0,
+    "errata": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/errata.20261013.zh.md",
+    "exclusive_fair_speed_status": "not_measured; rotation does not replace exclusive timing",
+    "final_head_reference": "the Git commit containing this entry; exact pushed HEAD is reported in the task final response",
+    "generation_head": "a55b1fd78795ae5f83845302a76f31780dda8cd2",
+    "net_parallel_loss_recovered_D_vs_B": [
+      0.18,
+      0.2
+    ],
+    "portable_evidence": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/evidence/evidence_manifest.json",
+    "recorded_evaluator_timeouts": 13,
+    "reproduction_audit": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/reproduction_audit.json",
+    "review_index": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/INDEX.zh.md",
+    "review_report": "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/report.zh.md",
+    "row_count": 10330,
+    "shared_h200_speed_observations": [
+      1.6574071168924984,
+      1.8183690897242977
+    ],
+    "source_generation_seed": 42,
+    "source_results_head": "340170ce6ae44477027dd7e94ec7a9c0f0910384",
+    "starting_head": "340170ce6ae44477027dd7e94ec7a9c0f0910384",
+    "status": "completed_cpu_review",
+    "this_review_scope": "CPU only; no generation, evaluation rerun, training, GPU job, or process termination",
+    "timeout_base_task": "32"
   },
   "dreamon_order_parallelism_markov_diagnostic_20260823_v2": {
     "branch": "codex/dreamon-singleline-order-parallel-markov-diagnostic-v1",
@@ -328,7 +361,7 @@
     "sanity_verdict": "protocol_mismatch_blocked"
   },
   "minimum_acceptance_met": true,
-  "phase": "phase4_generalization_and_paper_skeleton",
+  "phase": "completed_k2_cpu_evidence_review",
   "phase4_generalization": {
     "accepted_head_for_full_allowed": "1547ed087e9e1eff68ddb14999e0fe40cb5b6d87",
     "ccfa_blocking_gaps_remaining": [
@@ -918,7 +951,12 @@
       "py_compile": "passed"
     }
   },
+  "previous_latest_manifest_snapshot": "docs/paper_agent/review_manifests/review_manifest.before_k2_cpu_review_20261013.json",
   "recommended_read_order": [
+    "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/INDEX.zh.md",
+    "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/report.zh.md",
+    "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/errata.20261013.zh.md",
+    "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/evidence/README.zh.md",
     "analysis_outputs/paper_evidence_consolidation_20260710_v1/paper_claim_rewrite.md",
     "analysis_outputs/paper_evidence_consolidation_20260710_v1/claim_matrix.md",
     "analysis_outputs/paper_evidence_consolidation_20260710_v1/main_results_table.md",
@@ -1222,8 +1260,9 @@
     "test_status": "sealed"
   },
   "starting_commit": "b8ae031cf3b430833613aaf29083535edc0738f6",
-  "task_type": "ccfa_roadmap_reconciliation_after_phase5",
+  "task_type": "completed_k2_diagnosis_cpu_reproducibility_audit",
   "test_evaluation_count": 0,
   "test_status": "sealed",
-  "updated_at_cst": "2026-07-15"
+  "updated_at_cst": "2026-07-15",
+  "updated_at_utc": "2026-10-13"
 }

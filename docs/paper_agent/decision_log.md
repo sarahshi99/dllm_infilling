@@ -100,3 +100,13 @@ Updated: 2026-07-16 UTC
 ## 2026-09-01 DreamOn external Markov-head training v1
 
 Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/full=`True/True`; winner=`kl`. This is external OpenCoder training/validation evidence, not a HumanEval method result. Artifacts: `analysis_outputs/dreamon_markov_head_training_20260901_v1/`.
+
+## 2026-10-13 K2诊断CPU复核完成（追加，旧判断保留）
+
+- 起点HEAD `340170ce6ae44477027dd7e94ec7a9c0f0910384`；SQLite只读与JSONL的10330个payload逐字段一致，原库未修改；全部32字段/完整输出导出约940KiB gzip，可随仓库复算。
+- 隔离临时目录不含SQLite/作者数据/模型，且禁止SQLite连接和torch/transformers导入；相对路径分析通过。独立聚合与10000次基础题整组bootstrap（seed20261013）复算，与两份原表/原报告数值表共1588单元格一致；无数值差异。
+- 新发现并澄清：原未恢复运行错误0不等于评测无超时。13次timed out全部集中HumanEval/32；共享资源对墙钟超时的影响无法排除，缺CPU负载、评测起止UTC、子进程CPU/退出码/超时来源。仅超时标签未知的敏感性边界不改变原标签，D−C净增范围[9,10]/[17,20]。
+- 1052个GPU历史快照全部有6个其他任务，已仅导出匿名数值。1.657×/1.818×只称共享H200观测；轮换不能替代独占计时。旧report保留，新日期勘误另存。
+- D−B净+9/+13追回B相对A并行净损失的18%/20%，不混用A对/B错子组救回比例。E仍是固定原右位只填左后重算的机制诊断，不是K1等价、数学上界或成功验证算法。
+- 当前复核入口：`analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/INDEX.zh.md`；review_manifest.latest.json已引用，旧manifest快照和旧条目保留。最终归档脚本后续自动纳入紧凑证据并去除GPU进程身份信息。
+- 本轮CPU工作到提交推送即停止；没有生成/评测重跑、训练、GPU实验或停止其他进程。后续最小CPU超时检查/独占计时均仅写条件和命令，未排队，不自动推进新方法。

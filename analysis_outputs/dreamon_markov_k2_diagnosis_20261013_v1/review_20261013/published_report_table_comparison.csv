@@ -1,0 +1,221 @@
+table,key,field,published,recomputed,difference,status
+published_report_table,global_confidence|A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|A,1,A,A,,matched
+published_report_table,global_confidence|A,2,951/1033,951/1033,,matched
+published_report_table,global_confidence|A,3,92.06%,92.06%,,matched
+published_report_table,global_confidence|A,4,215.98,215.98,,matched
+published_report_table,global_confidence|A,5,0.1706/0.4355,0.1706/0.4355,,matched
+published_report_table,global_confidence|A,6,9135,9135,,matched
+published_report_table,global_confidence|A,7,10192/0/10192,10192/0/10192,,matched
+published_report_table,global_confidence|A,8,0.896,0.896,,matched
+published_report_table,global_confidence|A,9,1.000×,1.000×,,matched
+published_report_table,global_confidence|B,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|B,1,B,B,,matched
+published_report_table,global_confidence|B,2,901/1033,901/1033,,matched
+published_report_table,global_confidence|B,3,87.22%,87.22%,,matched
+published_report_table,global_confidence|B,4,126.17,126.17,,matched
+published_report_table,global_confidence|B,5,0.0968/0.2306,0.0968/0.2306,,matched
+published_report_table,global_confidence|B,6,9268,9268,,matched
+published_report_table,global_confidence|B,7,5921/0/5921,5921/0/5921,,matched
+published_report_table,global_confidence|B,8,1.549,1.549,,matched
+published_report_table,global_confidence|B,9,1.712×,1.712×,,matched
+published_report_table,global_confidence|C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C,1,C,C,,matched
+published_report_table,global_confidence|C,2,901/1033,901/1033,,matched
+published_report_table,global_confidence|C,3,87.22%,87.22%,,matched
+published_report_table,global_confidence|C,4,129.75,129.75,,matched
+published_report_table,global_confidence|C,5,0.0993/0.2403,0.0993/0.2403,,matched
+published_report_table,global_confidence|C,6,9268,9268,,matched
+published_report_table,global_confidence|C,7,5921/0/5921,5921/0/5921,,matched
+published_report_table,global_confidence|C,8,1.549,1.549,,matched
+published_report_table,global_confidence|C,9,1.665×,1.665×,,matched
+published_report_table,global_confidence|D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D,1,D,D,,matched
+published_report_table,global_confidence|D,2,910/1033,910/1033,,matched
+published_report_table,global_confidence|D,3,88.09%,88.09%,,matched
+published_report_table,global_confidence|D,4,130.31,130.31,,matched
+published_report_table,global_confidence|D,5,0.0997/0.2367,0.0997/0.2367,,matched
+published_report_table,global_confidence|D,6,9287,9287,,matched
+published_report_table,global_confidence|D,7,5947/0/5947,5947/0/5947,,matched
+published_report_table,global_confidence|D,8,1.548,1.548,,matched
+published_report_table,global_confidence|D,9,1.657×,1.657×,,matched
+published_report_table,global_confidence|E,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E,1,E,E,,matched
+published_report_table,global_confidence|E,2,935/1033,935/1033,,matched
+published_report_table,global_confidence|E,3,90.51%,90.51%,,matched
+published_report_table,global_confidence|E,4,200.37,200.37,,matched
+published_report_table,global_confidence|E,5,0.1607/0.3815,0.1607/0.3815,,matched
+published_report_table,global_confidence|E,6,9161,9161,,matched
+published_report_table,global_confidence|E,7,5834/3902/9736,5834/3902/9736,,matched
+published_report_table,global_confidence|E,8,0.933,0.933,,matched
+published_report_table,global_confidence|E,9,1.078×,1.078×,,matched
+published_report_table,left_to_right_frontier|A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|A,1,A,A,,matched
+published_report_table,left_to_right_frontier|A,2,942/1033,942/1033,,matched
+published_report_table,left_to_right_frontier|A,3,91.19%,91.19%,,matched
+published_report_table,left_to_right_frontier|A,4,221.08,221.08,,matched
+published_report_table,left_to_right_frontier|A,5,0.1703/0.4531,0.1703/0.4531,,matched
+published_report_table,left_to_right_frontier|A,6,9517,9517,,matched
+published_report_table,left_to_right_frontier|A,7,10549/0/10549,10549/0/10549,,matched
+published_report_table,left_to_right_frontier|A,8,0.902,0.902,,matched
+published_report_table,left_to_right_frontier|A,9,1.000×,1.000×,,matched
+published_report_table,left_to_right_frontier|B,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|B,1,B,B,,matched
+published_report_table,left_to_right_frontier|B,2,877/1033,877/1033,,matched
+published_report_table,left_to_right_frontier|B,3,84.90%,84.90%,,matched
+published_report_table,left_to_right_frontier|B,4,116.43,116.43,,matched
+published_report_table,left_to_right_frontier|B,5,0.0964/0.2192,0.0964/0.2192,,matched
+published_report_table,left_to_right_frontier|B,6,9265,9265,,matched
+published_report_table,left_to_right_frontier|B,7,5428/0/5428,5428/0/5428,,matched
+published_report_table,left_to_right_frontier|B,8,1.707,1.707,,matched
+published_report_table,left_to_right_frontier|B,9,1.899×,1.899×,,matched
+published_report_table,left_to_right_frontier|C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C,1,C,C,,matched
+published_report_table,left_to_right_frontier|C,2,872/1033,872/1033,,matched
+published_report_table,left_to_right_frontier|C,3,84.41%,84.41%,,matched
+published_report_table,left_to_right_frontier|C,4,120.94,120.94,,matched
+published_report_table,left_to_right_frontier|C,5,0.1003/0.2289,0.1003/0.2289,,matched
+published_report_table,left_to_right_frontier|C,6,9298,9298,,matched
+published_report_table,left_to_right_frontier|C,7,5449/0/5449,5449/0/5449,,matched
+published_report_table,left_to_right_frontier|C,8,1.706,1.706,,matched
+published_report_table,left_to_right_frontier|C,9,1.828×,1.828×,,matched
+published_report_table,left_to_right_frontier|D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D,1,D,D,,matched
+published_report_table,left_to_right_frontier|D,2,890/1033,890/1033,,matched
+published_report_table,left_to_right_frontier|D,3,86.16%,86.16%,,matched
+published_report_table,left_to_right_frontier|D,4,121.58,121.58,,matched
+published_report_table,left_to_right_frontier|D,5,0.1002/0.2300,0.1002/0.2300,,matched
+published_report_table,left_to_right_frontier|D,6,9316,9316,,matched
+published_report_table,left_to_right_frontier|D,7,5477/0/5477,5477/0/5477,,matched
+published_report_table,left_to_right_frontier|D,8,1.701,1.701,,matched
+published_report_table,left_to_right_frontier|D,9,1.818×,1.818×,,matched
+published_report_table,left_to_right_frontier|E,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E,1,E,E,,matched
+published_report_table,left_to_right_frontier|E,2,931/1033,931/1033,,matched
+published_report_table,left_to_right_frontier|E,3,90.13%,90.13%,,matched
+published_report_table,left_to_right_frontier|E,4,201.89,201.89,,matched
+published_report_table,left_to_right_frontier|E,5,0.1615/0.4114,0.1615/0.4114,,matched
+published_report_table,left_to_right_frontier|E,6,9209,9209,,matched
+published_report_table,left_to_right_frontier|E,7,5446/4413/9859,5446/4413/9859,,matched
+published_report_table,left_to_right_frontier|E,8,0.934,0.934,,matched
+published_report_table,left_to_right_frontier|E,9,1.095×,1.095×,,matched
+published_report_table,global_confidence|D-C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D-C,1,D-C,D-C,,matched
+published_report_table,global_confidence|D-C,2,15/6,15/6,,matched
+published_report_table,global_confidence|D-C,3,+9,+9,,matched
+published_report_table,global_confidence|D-C,4,"+0.87 [+0.00,+1.79]","+0.87 [+0.00,+1.79]",,matched
+published_report_table,global_confidence|D-C,5,"+1.16 [+0.21,+2.28]","+1.16 [+0.21,+2.28]",,matched
+published_report_table,global_confidence|C-B,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C-B,1,C-B,C-B,,matched
+published_report_table,global_confidence|C-B,2,0/0,0/0,,matched
+published_report_table,global_confidence|C-B,3,+0,+0,,matched
+published_report_table,global_confidence|C-B,4,"+0.00 [+0.00,+0.00]","+0.00 [+0.00,+0.00]",,matched
+published_report_table,global_confidence|C-B,5,"+0.00 [+0.00,+0.00]","+0.00 [+0.00,+0.00]",,matched
+published_report_table,global_confidence|E-C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-C,1,E-C,E-C,,matched
+published_report_table,global_confidence|E-C,2,35/1,35/1,,matched
+published_report_table,global_confidence|E-C,3,+34,+34,,matched
+published_report_table,global_confidence|E-C,4,"+3.29 [+2.20,+4.41]","+3.29 [+2.20,+4.41]",,matched
+published_report_table,global_confidence|E-C,5,"+2.46 [+0.61,+4.07]","+2.46 [+0.61,+4.07]",,matched
+published_report_table,global_confidence|E-D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-D,1,E-D,E-D,,matched
+published_report_table,global_confidence|E-D,2,28/3,28/3,,matched
+published_report_table,global_confidence|E-D,3,+25,+25,,matched
+published_report_table,global_confidence|E-D,4,"+2.42 [+1.35,+3.50]","+2.42 [+1.35,+3.50]",,matched
+published_report_table,global_confidence|E-D,5,"+1.30 [-0.38,+2.65]","+1.30 [-0.38,+2.65]",,matched
+published_report_table,global_confidence|B-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|B-A,1,B-A,B-A,,matched
+published_report_table,global_confidence|B-A,2,5/55,5/55,,matched
+published_report_table,global_confidence|B-A,3,-50,-50,,matched
+published_report_table,global_confidence|B-A,4,"-4.84 [-6.37,-3.42]","-4.84 [-6.37,-3.42]",,matched
+published_report_table,global_confidence|B-A,5,"-4.57 [-7.12,-2.13]","-4.57 [-7.12,-2.13]",,matched
+published_report_table,global_confidence|C-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C-A,1,C-A,C-A,,matched
+published_report_table,global_confidence|C-A,2,5/55,5/55,,matched
+published_report_table,global_confidence|C-A,3,-50,-50,,matched
+published_report_table,global_confidence|C-A,4,"-4.84 [-6.37,-3.42]","-4.84 [-6.37,-3.42]",,matched
+published_report_table,global_confidence|C-A,5,"-4.57 [-7.12,-2.13]","-4.57 [-7.12,-2.13]",,matched
+published_report_table,global_confidence|D-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D-A,1,D-A,D-A,,matched
+published_report_table,global_confidence|D-A,2,9/50,9/50,,matched
+published_report_table,global_confidence|D-A,3,-41,-41,,matched
+published_report_table,global_confidence|D-A,4,"-3.97 [-5.42,-2.54]","-3.97 [-5.42,-2.54]",,matched
+published_report_table,global_confidence|D-A,5,"-3.42 [-5.81,-1.06]","-3.42 [-5.81,-1.06]",,matched
+published_report_table,global_confidence|E-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-A,1,E-A,E-A,,matched
+published_report_table,global_confidence|E-A,2,7/23,7/23,,matched
+published_report_table,global_confidence|E-A,3,-16,-16,,matched
+published_report_table,global_confidence|E-A,4,"-1.55 [-2.55,-0.59]","-1.55 [-2.55,-0.59]",,matched
+published_report_table,global_confidence|E-A,5,"-2.11 [-4.72,+0.23]","-2.11 [-4.72,+0.23]",,matched
+published_report_table,left_to_right_frontier|D-C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D-C,1,D-C,D-C,,matched
+published_report_table,left_to_right_frontier|D-C,2,29/11,29/11,,matched
+published_report_table,left_to_right_frontier|D-C,3,+18,+18,,matched
+published_report_table,left_to_right_frontier|D-C,4,"+1.74 [+0.62,+2.94]","+1.74 [+0.62,+2.94]",,matched
+published_report_table,left_to_right_frontier|D-C,5,"+1.04 [-1.03,+3.05]","+1.04 [-1.03,+3.05]",,matched
+published_report_table,left_to_right_frontier|C-B,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C-B,1,C-B,C-B,,matched
+published_report_table,left_to_right_frontier|C-B,2,6/11,6/11,,matched
+published_report_table,left_to_right_frontier|C-B,3,-5,-5,,matched
+published_report_table,left_to_right_frontier|C-B,4,"-0.48 [-1.31,+0.36]","-0.48 [-1.31,+0.36]",,matched
+published_report_table,left_to_right_frontier|C-B,5,"+0.11 [-1.12,+1.70]","+0.11 [-1.12,+1.70]",,matched
+published_report_table,left_to_right_frontier|E-C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-C,1,E-C,E-C,,matched
+published_report_table,left_to_right_frontier|E-C,2,64/5,64/5,,matched
+published_report_table,left_to_right_frontier|E-C,3,+59,+59,,matched
+published_report_table,left_to_right_frontier|E-C,4,"+5.71 [+4.00,+7.60]","+5.71 [+4.00,+7.60]",,matched
+published_report_table,left_to_right_frontier|E-C,5,"+5.35 [+2.20,+8.69]","+5.35 [+2.20,+8.69]",,matched
+published_report_table,left_to_right_frontier|E-D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-D,1,E-D,E-D,,matched
+published_report_table,left_to_right_frontier|E-D,2,48/7,48/7,,matched
+published_report_table,left_to_right_frontier|E-D,3,+41,+41,,matched
+published_report_table,left_to_right_frontier|E-D,4,"+3.97 [+2.61,+5.40]","+3.97 [+2.61,+5.40]",,matched
+published_report_table,left_to_right_frontier|E-D,5,"+4.31 [+1.24,+7.61]","+4.31 [+1.24,+7.61]",,matched
+published_report_table,left_to_right_frontier|B-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|B-A,1,B-A,B-A,,matched
+published_report_table,left_to_right_frontier|B-A,2,10/75,10/75,,matched
+published_report_table,left_to_right_frontier|B-A,3,-65,-65,,matched
+published_report_table,left_to_right_frontier|B-A,4,"-6.29 [-8.24,-4.44]","-6.29 [-8.24,-4.44]",,matched
+published_report_table,left_to_right_frontier|B-A,5,"-6.36 [-9.91,-2.98]","-6.36 [-9.91,-2.98]",,matched
+published_report_table,left_to_right_frontier|C-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C-A,1,C-A,C-A,,matched
+published_report_table,left_to_right_frontier|C-A,2,11/81,11/81,,matched
+published_report_table,left_to_right_frontier|C-A,3,-70,-70,,matched
+published_report_table,left_to_right_frontier|C-A,4,"-6.78 [-8.80,-4.88]","-6.78 [-8.80,-4.88]",,matched
+published_report_table,left_to_right_frontier|C-A,5,"-6.25 [-10.07,-2.57]","-6.25 [-10.07,-2.57]",,matched
+published_report_table,left_to_right_frontier|D-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D-A,1,D-A,D-A,,matched
+published_report_table,left_to_right_frontier|D-A,2,10/62,10/62,,matched
+published_report_table,left_to_right_frontier|D-A,3,-52,-52,,matched
+published_report_table,left_to_right_frontier|D-A,4,"-5.03 [-6.67,-3.48]","-5.03 [-6.67,-3.48]",,matched
+published_report_table,left_to_right_frontier|D-A,5,"-5.21 [-8.64,-2.11]","-5.21 [-8.64,-2.11]",,matched
+published_report_table,left_to_right_frontier|E-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-A,1,E-A,E-A,,matched
+published_report_table,left_to_right_frontier|E-A,2,7/18,7/18,,matched
+published_report_table,left_to_right_frontier|E-A,3,-11,-11,,matched
+published_report_table,left_to_right_frontier|E-A,4,"-1.06 [-2.05,-0.10]","-1.06 [-2.05,-0.10]",,matched
+published_report_table,left_to_right_frontier|E-A,5,"-0.90 [-2.76,+0.96]","-0.90 [-2.76,+0.96]",,matched
+published_report_table,global_confidence|C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C,1,C,C,,matched
+published_report_table,global_confidence|C,2,0/55,0/55,,matched
+published_report_table,global_confidence|C,3,0/978,0/978,,matched
+published_report_table,global_confidence|D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D,1,D,D,,matched
+published_report_table,global_confidence|D,2,11/55,11/55,,matched
+published_report_table,global_confidence|D,3,6/978,6/978,,matched
+published_report_table,global_confidence|E,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E,1,E,E,,matched
+published_report_table,global_confidence|E,2,33/55,33/55,,matched
+published_report_table,global_confidence|E,3,1/978,1/978,,matched
+published_report_table,left_to_right_frontier|C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C,1,C,C,,matched
+published_report_table,left_to_right_frontier|C,2,3/75,3/75,,matched
+published_report_table,left_to_right_frontier|C,3,11/958,11/958,,matched
+published_report_table,left_to_right_frontier|D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D,1,D,D,,matched
+published_report_table,left_to_right_frontier|D,2,21/75,21/75,,matched
+published_report_table,left_to_right_frontier|D,3,11/958,11/958,,matched
+published_report_table,left_to_right_frontier|E,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E,1,E,E,,matched
+published_report_table,left_to_right_frontier|E,2,59/75,59/75,,matched
+published_report_table,left_to_right_frontier|E,3,6/958,6/958,,matched

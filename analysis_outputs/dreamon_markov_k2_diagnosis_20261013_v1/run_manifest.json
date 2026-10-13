@@ -129,9 +129,17 @@
   "head_registry_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-diagnosis-v1/analysis_outputs/dreamon_markov_head_training_20260910_v2/checkpoint_registry.json",
   "head_version_verification": "registry version and size; existing digest reused, no new large-file hash scan",
   "initial_gpu_snapshot": {
-    "compute_processes": "3443406, /home/lwt/miniconda3/envs/rpent_env/bin/python, 8120\n717897, /home/lwt/miniconda3/envs/rpent_env/bin/python, 6130\n1359435, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 3824\n1453296, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 19044\n1856809, .venv/bin/python, 36412\n1908720, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 18186",
-    "gpus": "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 91761, 143771, 0, 34",
-    "time_utc": "2026-10-13T01:44:50Z"
+    "time_utc": "2026-10-13T01:44:50Z",
+    "gpu_index": 0,
+    "gpu_name": "NVIDIA H200 NVL",
+    "memory_used_mib": 91761.0,
+    "memory_total_mib": 143771.0,
+    "utilization_gpu_pct": 0.0,
+    "temperature_c": 34.0,
+    "own_task_count": 0,
+    "other_task_count": 6,
+    "own_memory_mib": 0,
+    "other_memory_mib": 91716.0
   },
   "min_start_free_gib": 32.0,
   "model_load_sec": 6.157228935044259,
@@ -246,5 +254,6 @@
   "timing_environment": "shared H200; external load recorded, ten configurations interleaved",
   "tokenizer_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
   "torch_version": "2.5.1+cu121",
-  "warmup_sec": 1.7110558492131531
+  "warmup_sec": 1.7110558492131531,
+  "gpu_snapshot_privacy": "process identities/paths removed; numeric load retained; original kept locally, not in portable bundle"
 }

@@ -1,0 +1,3 @@
+policy,D_minus_B_net,A_minus_B_net,parallel_net_loss_recovered_fraction,denominator_warning
+global_confidence,9,50,0.18,"net pass gap, not A-pass/B-fail subset size"
+left_to_right_frontier,13,65,0.2,"net pass gap, not A-pass/B-fail subset size"

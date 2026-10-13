@@ -1,0 +1,14 @@
+policy,arm,task_id,base_task_id,line_id,evaluator_sec,identical_text_records,identical_text_passes
+global_confidence,A,SingleLineInfilling/HumanEval/32/L0,32,L0,3.110459302086383,2,0
+global_confidence,A,SingleLineInfilling/HumanEval/32/L4,32,L4,3.106661854311824,1,0
+global_confidence,D,SingleLineInfilling/HumanEval/32/L0,32,L0,3.1097093359567225,1,0
+global_confidence,E,SingleLineInfilling/HumanEval/32/L0,32,L0,3.091632405295968,2,0
+left_to_right_frontier,A,SingleLineInfilling/HumanEval/32/L0,32,L0,3.099721639882773,1,0
+left_to_right_frontier,A,SingleLineInfilling/HumanEval/32/L2,32,L2,3.110453562811017,1,0
+left_to_right_frontier,A,SingleLineInfilling/HumanEval/32/L4,32,L4,3.0916701979003847,2,0
+left_to_right_frontier,C,SingleLineInfilling/HumanEval/32/L4,32,L4,3.112066067289561,2,0
+left_to_right_frontier,D,SingleLineInfilling/HumanEval/32/L0,32,L0,3.091100870165974,2,0
+left_to_right_frontier,D,SingleLineInfilling/HumanEval/32/L4,32,L4,3.112306724768132,2,0
+left_to_right_frontier,E,SingleLineInfilling/HumanEval/32/L0,32,L0,3.1126905786804855,2,0
+left_to_right_frontier,E,SingleLineInfilling/HumanEval/32/L1,32,L1,3.1155516440048814,1,0
+left_to_right_frontier,E,SingleLineInfilling/HumanEval/32/L4,32,L4,3.1081184139475226,2,0

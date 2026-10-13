@@ -1,0 +1,1589 @@
+table,key,field,published,recomputed,difference,status
+summary.csv:independent,global_confidence|A,policy,global_confidence,global_confidence,,matched
+summary.csv:independent,global_confidence|A,arm,A,A,,matched
+summary.csv:independent,global_confidence|A,passed,951,951,0.0,matched
+summary.csv:independent,global_confidence|A,denominator,1033,1033,0.0,matched
+summary.csv:independent,global_confidence|A,pass_rate,0.920619554695063,0.920619554695063,0.0,matched
+summary.csv:independent,global_confidence|A,base_task_equal_pass_rate,0.8593728003026784,0.8593728003026784,0.0,matched
+summary.csv:independent,global_confidence|A,generation_sec_total,215.98022315092385,215.98022315092385,0.0,matched
+summary.csv:independent,global_confidence|A,generation_sec_median,0.17058572731912136,0.17058572731912136,0.0,matched
+summary.csv:independent,global_confidence|A,generation_sec_p95,0.43554217340424656,0.43554217340424656,0.0,matched
+summary.csv:independent,global_confidence|A,evaluator_sec_total,101.52110873069614,101.52110873069614,0.0,matched
+summary.csv:independent,global_confidence|A,file_write_sec_total,5.3898933585733175,5.3898933585733175,0.0,matched
+summary.csv:independent,global_confidence|A,output_tokens_total,9135,9135,0.0,matched
+summary.csv:independent,global_confidence|A,output_tokens_mean,8.843175217812197,8.843175217812197,0.0,matched
+summary.csv:independent,global_confidence|A,output_chars_total,31482,31482,0.0,matched
+summary.csv:independent,global_confidence|A,forward_count,10192,10192,0.0,matched
+summary.csv:independent,global_confidence|A,base_forward_count,10192,10192,0.0,matched
+summary.csv:independent,global_confidence|A,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,outer_round_count,10192,10192,0.0,matched
+summary.csv:independent,global_confidence|A,normal_token_count,9135,9135,0.0,matched
+summary.csv:independent,global_confidence|A,expand_count,4,4,0.0,matched
+summary.csv:independent,global_confidence|A,delete_count,56981,56981,0.0,matched
+summary.csv:independent,global_confidence|A,adjacent_opportunity_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,structural_stop_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|A,ordinary_commits_per_total_forward,0.8962912087912088,0.8962912087912088,0.0,matched
+summary.csv:independent,global_confidence|A,speed_ratio_vs_A,1.0,1.0,0.0,matched
+summary.csv:independent,global_confidence|A,time_reduction_fraction_vs_A,0.0,0.0,0.0,matched
+summary.csv:independent,global_confidence|A,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,global_confidence|B,policy,global_confidence,global_confidence,,matched
+summary.csv:independent,global_confidence|B,arm,B,B,,matched
+summary.csv:independent,global_confidence|B,passed,901,901,0.0,matched
+summary.csv:independent,global_confidence|B,denominator,1033,1033,0.0,matched
+summary.csv:independent,global_confidence|B,pass_rate,0.872216844143272,0.872216844143272,0.0,matched
+summary.csv:independent,global_confidence|B,base_task_equal_pass_rate,0.8136229855581588,0.8136229855581588,0.0,matched
+summary.csv:independent,global_confidence|B,generation_sec_total,126.16701101558283,126.16701101558283,0.0,matched
+summary.csv:independent,global_confidence|B,generation_sec_median,0.09680244931951165,0.09680244931951165,0.0,matched
+summary.csv:independent,global_confidence|B,generation_sec_p95,0.23056008061394095,0.23056008061394095,0.0,matched
+summary.csv:independent,global_confidence|B,evaluator_sec_total,94.98800857923925,94.98800857923925,0.0,matched
+summary.csv:independent,global_confidence|B,file_write_sec_total,5.280890945810825,5.280890945810825,0.0,matched
+summary.csv:independent,global_confidence|B,output_tokens_total,9268,9268,0.0,matched
+summary.csv:independent,global_confidence|B,output_tokens_mean,8.97192642787996,8.97192642787996,0.0,matched
+summary.csv:independent,global_confidence|B,output_chars_total,31490,31490,0.0,matched
+summary.csv:independent,global_confidence|B,forward_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|B,base_forward_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|B,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|B,outer_round_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|B,normal_token_count,9170,9170,0.0,matched
+summary.csv:independent,global_confidence|B,expand_count,458,458,0.0,matched
+summary.csv:independent,global_confidence|B,delete_count,57302,57302,0.0,matched
+summary.csv:independent,global_confidence|B,adjacent_opportunity_count,5173,5173,0.0,matched
+summary.csv:independent,global_confidence|B,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|B,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|B,structural_stop_count,1259,1259,0.0,matched
+summary.csv:independent,global_confidence|B,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|B,nonadjacent_fallback_count,621,621,0.0,matched
+summary.csv:independent,global_confidence|B,ordinary_commits_per_total_forward,1.548724877554467,1.548724877554467,0.0,matched
+summary.csv:independent,global_confidence|B,speed_ratio_vs_A,1.7118597120783676,1.7118597120783676,0.0,matched
+summary.csv:independent,global_confidence|B,time_reduction_fraction_vs_A,0.41583998212920104,0.41583998212920104,0.0,matched
+summary.csv:independent,global_confidence|B,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,global_confidence|C,policy,global_confidence,global_confidence,,matched
+summary.csv:independent,global_confidence|C,arm,C,C,,matched
+summary.csv:independent,global_confidence|C,passed,901,901,0.0,matched
+summary.csv:independent,global_confidence|C,denominator,1033,1033,0.0,matched
+summary.csv:independent,global_confidence|C,pass_rate,0.872216844143272,0.872216844143272,0.0,matched
+summary.csv:independent,global_confidence|C,base_task_equal_pass_rate,0.8136229855581588,0.8136229855581588,0.0,matched
+summary.csv:independent,global_confidence|C,generation_sec_total,129.75327245192602,129.75327245192602,0.0,matched
+summary.csv:independent,global_confidence|C,generation_sec_median,0.0993143911473453,0.0993143911473453,0.0,matched
+summary.csv:independent,global_confidence|C,generation_sec_p95,0.2402613025158643,0.2402613025158643,0.0,matched
+summary.csv:independent,global_confidence|C,evaluator_sec_total,94.79262459976599,94.79262459976599,0.0,matched
+summary.csv:independent,global_confidence|C,file_write_sec_total,4.94427549932152,4.94427549932152,0.0,matched
+summary.csv:independent,global_confidence|C,output_tokens_total,9268,9268,0.0,matched
+summary.csv:independent,global_confidence|C,output_tokens_mean,8.97192642787996,8.97192642787996,0.0,matched
+summary.csv:independent,global_confidence|C,output_chars_total,31490,31490,0.0,matched
+summary.csv:independent,global_confidence|C,forward_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|C,base_forward_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|C,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|C,outer_round_count,5921,5921,0.0,matched
+summary.csv:independent,global_confidence|C,normal_token_count,9170,9170,0.0,matched
+summary.csv:independent,global_confidence|C,expand_count,458,458,0.0,matched
+summary.csv:independent,global_confidence|C,delete_count,57302,57302,0.0,matched
+summary.csv:independent,global_confidence|C,adjacent_opportunity_count,5173,5173,0.0,matched
+summary.csv:independent,global_confidence|C,markov_enabled_count,3914,3914,0.0,matched
+summary.csv:independent,global_confidence|C,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|C,structural_stop_count,1259,1259,0.0,matched
+summary.csv:independent,global_confidence|C,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|C,nonadjacent_fallback_count,621,621,0.0,matched
+summary.csv:independent,global_confidence|C,ordinary_commits_per_total_forward,1.548724877554467,1.548724877554467,0.0,matched
+summary.csv:independent,global_confidence|C,speed_ratio_vs_A,1.664545479813969,1.664545479813969,0.0,matched
+summary.csv:independent,global_confidence|C,time_reduction_fraction_vs_A,0.3992353996168606,0.3992353996168606,0.0,matched
+summary.csv:independent,global_confidence|C,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,global_confidence|D,policy,global_confidence,global_confidence,,matched
+summary.csv:independent,global_confidence|D,arm,D,D,,matched
+summary.csv:independent,global_confidence|D,passed,910,910,0.0,matched
+summary.csv:independent,global_confidence|D,denominator,1033,1033,0.0,matched
+summary.csv:independent,global_confidence|D,pass_rate,0.8809293320425944,0.8809293320425944,0.0,matched
+summary.csv:independent,global_confidence|D,base_task_equal_pass_rate,0.825176523483648,0.825176523483648,0.0,matched
+summary.csv:independent,global_confidence|D,generation_sec_total,130.31211278727278,130.31211278727278,0.0,matched
+summary.csv:independent,global_confidence|D,generation_sec_median,0.09974841075018048,0.09974841075018048,0.0,matched
+summary.csv:independent,global_confidence|D,generation_sec_p95,0.23667589183896776,0.23667589183896776,0.0,matched
+summary.csv:independent,global_confidence|D,evaluator_sec_total,98.43816295173019,98.43816295173019,0.0,matched
+summary.csv:independent,global_confidence|D,file_write_sec_total,5.239738085772842,5.239738085772842,0.0,matched
+summary.csv:independent,global_confidence|D,output_tokens_total,9287,9287,0.0,matched
+summary.csv:independent,global_confidence|D,output_tokens_mean,8.990319457889642,8.990319457889642,0.0,matched
+summary.csv:independent,global_confidence|D,output_chars_total,31663,31663,0.0,matched
+summary.csv:independent,global_confidence|D,forward_count,5947,5947,0.0,matched
+summary.csv:independent,global_confidence|D,base_forward_count,5947,5947,0.0,matched
+summary.csv:independent,global_confidence|D,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|D,outer_round_count,5947,5947,0.0,matched
+summary.csv:independent,global_confidence|D,normal_token_count,9208,9208,0.0,matched
+summary.csv:independent,global_confidence|D,expand_count,455,455,0.0,matched
+summary.csv:independent,global_confidence|D,delete_count,57280,57280,0.0,matched
+summary.csv:independent,global_confidence|D,adjacent_opportunity_count,5219,5219,0.0,matched
+summary.csv:independent,global_confidence|D,markov_enabled_count,3938,3938,0.0,matched
+summary.csv:independent,global_confidence|D,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|D,structural_stop_count,1293,1293,0.0,matched
+summary.csv:independent,global_confidence|D,corrected_structural_stop_count,12,12,0.0,matched
+summary.csv:independent,global_confidence|D,nonadjacent_fallback_count,595,595,0.0,matched
+summary.csv:independent,global_confidence|D,ordinary_commits_per_total_forward,1.5483437027072473,1.5483437027072473,0.0,matched
+summary.csv:independent,global_confidence|D,speed_ratio_vs_A,1.6574071168924984,1.6574071168924984,0.0,matched
+summary.csv:independent,global_confidence|D,time_reduction_fraction_vs_A,0.39664793893553596,0.39664793893553596,0.0,matched
+summary.csv:independent,global_confidence|D,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,global_confidence|E,policy,global_confidence,global_confidence,,matched
+summary.csv:independent,global_confidence|E,arm,E,E,,matched
+summary.csv:independent,global_confidence|E,passed,935,935,0.0,matched
+summary.csv:independent,global_confidence|E,denominator,1033,1033,0.0,matched
+summary.csv:independent,global_confidence|E,pass_rate,0.9051306873184899,0.9051306873184899,0.0,matched
+summary.csv:independent,global_confidence|E,base_task_equal_pass_rate,0.8382240726752921,0.8382240726752921,0.0,matched
+summary.csv:independent,global_confidence|E,generation_sec_total,200.3674152782187,200.3674152782187,0.0,matched
+summary.csv:independent,global_confidence|E,generation_sec_median,0.16065748035907745,0.16065748035907745,0.0,matched
+summary.csv:independent,global_confidence|E,generation_sec_p95,0.38151361495256414,0.38151361495256414,0.0,matched
+summary.csv:independent,global_confidence|E,evaluator_sec_total,98.60139756882563,98.60139756882563,0.0,matched
+summary.csv:independent,global_confidence|E,file_write_sec_total,5.646945142652839,5.646945142652839,0.0,matched
+summary.csv:independent,global_confidence|E,output_tokens_total,9161,9161,0.0,matched
+summary.csv:independent,global_confidence|E,output_tokens_mean,8.868344627299129,8.868344627299129,0.0,matched
+summary.csv:independent,global_confidence|E,output_chars_total,31389,31389,0.0,matched
+summary.csv:independent,global_confidence|E,forward_count,9736,9736,0.0,matched
+summary.csv:independent,global_confidence|E,base_forward_count,5834,5834,0.0,matched
+summary.csv:independent,global_confidence|E,recompute_forward_count,3902,3902,0.0,matched
+summary.csv:independent,global_confidence|E,outer_round_count,5834,5834,0.0,matched
+summary.csv:independent,global_confidence|E,normal_token_count,9082,9082,0.0,matched
+summary.csv:independent,global_confidence|E,expand_count,385,385,0.0,matched
+summary.csv:independent,global_confidence|E,delete_count,57336,57336,0.0,matched
+summary.csv:independent,global_confidence|E,adjacent_opportunity_count,5119,5119,0.0,matched
+summary.csv:independent,global_confidence|E,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,global_confidence|E,recompute_enabled_count,3902,3902,0.0,matched
+summary.csv:independent,global_confidence|E,structural_stop_count,1255,1255,0.0,matched
+summary.csv:independent,global_confidence|E,corrected_structural_stop_count,38,38,0.0,matched
+summary.csv:independent,global_confidence|E,nonadjacent_fallback_count,587,587,0.0,matched
+summary.csv:independent,global_confidence|E,ordinary_commits_per_total_forward,0.9328266228430567,0.9328266228430567,0.0,matched
+summary.csv:independent,global_confidence|E,speed_ratio_vs_A,1.0779208927311166,1.0779208927311166,0.0,matched
+summary.csv:independent,global_confidence|E,time_reduction_fraction_vs_A,0.07228813659385458,0.07228813659385458,0.0,matched
+summary.csv:independent,global_confidence|E,speed_interpretation,diagnostic_cost_only,diagnostic_cost_only,,matched
+summary.csv:independent,left_to_right_frontier|A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:independent,left_to_right_frontier|A,arm,A,A,,matched
+summary.csv:independent,left_to_right_frontier|A,passed,942,942,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,denominator,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,pass_rate,0.9119070667957405,0.9119070667957405,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,base_task_equal_pass_rate,0.8500926918609845,0.8500926918609846,1.1102230246251565e-16,matched
+summary.csv:independent,left_to_right_frontier|A,generation_sec_total,221.08094186568633,221.08094186568633,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,generation_sec_median,0.17030656430870295,0.17030656430870295,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,generation_sec_p95,0.4530922869220375,0.4530922869220375,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,evaluator_sec_total,104.76546498714015,104.76546498714015,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,file_write_sec_total,5.626404558308423,5.626404558308423,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,output_tokens_total,9517,9517,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,output_tokens_mean,9.21297192642788,9.21297192642788,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,output_chars_total,32917,32917,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,forward_count,10549,10549,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,base_forward_count,10549,10549,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,outer_round_count,10549,10549,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,normal_token_count,9517,9517,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,expand_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,delete_count,56595,56595,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,adjacent_opportunity_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,structural_stop_count,1032,1032,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,ordinary_commits_per_total_forward,0.9021708218788511,0.9021708218788511,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,speed_ratio_vs_A,1.0,1.0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,time_reduction_fraction_vs_A,0.0,0.0,0.0,matched
+summary.csv:independent,left_to_right_frontier|A,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,left_to_right_frontier|B,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:independent,left_to_right_frontier|B,arm,B,B,,matched
+summary.csv:independent,left_to_right_frontier|B,passed,877,877,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,denominator,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,pass_rate,0.8489835430784124,0.8489835430784124,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,base_task_equal_pass_rate,0.7864579873485522,0.7864579873485522,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,generation_sec_total,116.4283465789631,116.4283465789631,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,generation_sec_median,0.09637634316459298,0.09637634316459298,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,generation_sec_p95,0.21915021380409597,0.21915021380409597,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,evaluator_sec_total,94.8085223804228,94.8085223804228,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,file_write_sec_total,4.769866588991135,4.769866588991135,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,output_tokens_total,9265,9265,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,output_tokens_mean,8.969022265246855,8.969022265246855,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,output_chars_total,31842,31842,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,forward_count,5428,5428,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,base_forward_count,5428,5428,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,outer_round_count,5428,5428,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,normal_token_count,9265,9265,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,expand_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,delete_count,56847,56847,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,adjacent_opportunity_count,5428,5428,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,structural_stop_count,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,ordinary_commits_per_total_forward,1.7068901989683125,1.7068901989683125,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,speed_ratio_vs_A,1.8988583825309808,1.8988583825309808,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,time_reduction_fraction_vs_A,0.4733677828743058,0.4733677828743058,0.0,matched
+summary.csv:independent,left_to_right_frontier|B,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,left_to_right_frontier|C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:independent,left_to_right_frontier|C,arm,C,C,,matched
+summary.csv:independent,left_to_right_frontier|C,passed,872,872,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,denominator,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,pass_rate,0.8441432720232332,0.8441432720232332,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,base_task_equal_pass_rate,0.7875660848743327,0.7875660848743327,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,generation_sec_total,120.94414873607457,120.94414873607457,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,generation_sec_median,0.1002658479847014,0.1002658479847014,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,generation_sec_p95,0.2288870522752404,0.2288870522752404,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,evaluator_sec_total,98.4021292864345,98.4021292864345,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,file_write_sec_total,5.367227142676711,5.367227142676711,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,output_tokens_total,9298,9298,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,output_tokens_mean,9.000968054211036,9.000968054211036,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,output_chars_total,31997,31997,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,forward_count,5449,5449,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,base_forward_count,5449,5449,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,outer_round_count,5449,5449,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,normal_token_count,9298,9298,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,expand_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,delete_count,56814,56814,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,adjacent_opportunity_count,5449,5449,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,markov_enabled_count,4416,4416,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,structural_stop_count,1043,1043,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,corrected_structural_stop_count,10,10,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,ordinary_commits_per_total_forward,1.7063681409432923,1.7063681409432923,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,speed_ratio_vs_A,1.8279589726009084,1.8279589726009084,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,time_reduction_fraction_vs_A,0.45294177003483205,0.45294177003483205,0.0,matched
+summary.csv:independent,left_to_right_frontier|C,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,left_to_right_frontier|D,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:independent,left_to_right_frontier|D,arm,D,D,,matched
+summary.csv:independent,left_to_right_frontier|D,passed,890,890,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,denominator,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,pass_rate,0.861568247821878,0.861568247821878,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,base_task_equal_pass_rate,0.7979603823113129,0.7979603823113129,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,generation_sec_total,121.58199515985325,121.58199515985325,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,generation_sec_median,0.10015696985647082,0.10015696985647082,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,generation_sec_p95,0.2299955183640122,0.2299955183640122,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,evaluator_sec_total,101.42321797134355,101.42321797134355,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,file_write_sec_total,5.371146251447499,5.371146251447499,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,output_tokens_total,9316,9316,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,output_tokens_mean,9.01839303000968,9.01839303000968,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,output_chars_total,32113,32113,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,forward_count,5477,5477,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,base_forward_count,5477,5477,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,recompute_forward_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,outer_round_count,5477,5477,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,normal_token_count,9316,9316,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,expand_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,delete_count,56796,56796,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,adjacent_opportunity_count,5477,5477,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,markov_enabled_count,4445,4445,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,recompute_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,structural_stop_count,1062,1062,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,corrected_structural_stop_count,30,30,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,ordinary_commits_per_total_forward,1.700931166697097,1.700931166697097,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,speed_ratio_vs_A,1.8183690897242977,1.8183690897242977,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,time_reduction_fraction_vs_A,0.4500566438073248,0.4500566438073248,0.0,matched
+summary.csv:independent,left_to_right_frontier|D,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:independent,left_to_right_frontier|E,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:independent,left_to_right_frontier|E,arm,E,E,,matched
+summary.csv:independent,left_to_right_frontier|E,passed,931,931,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,denominator,1033,1033,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,pass_rate,0.9012584704743466,0.9012584704743466,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,base_task_equal_pass_rate,0.8410590541607872,0.8410590541607872,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,generation_sec_total,201.8885251735337,201.8885251735337,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,generation_sec_median,0.1614703801460564,0.1614703801460564,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,generation_sec_p95,0.4113765123300254,0.4113765123300254,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,evaluator_sec_total,105.01188155636191,105.01188155636191,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,file_write_sec_total,6.002899667713791,6.002899667713791,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,output_tokens_total,9209,9209,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,output_tokens_mean,8.914811229428848,8.914811229428848,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,output_chars_total,31783,31783,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,forward_count,9859,9859,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,base_forward_count,5446,5446,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,recompute_forward_count,4413,4413,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,outer_round_count,5446,5446,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,normal_token_count,9209,9209,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,expand_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,delete_count,56903,56903,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,adjacent_opportunity_count,5446,5446,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,markov_enabled_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,recompute_enabled_count,4413,4413,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,structural_stop_count,1100,1100,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,corrected_structural_stop_count,67,67,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,ordinary_commits_per_total_forward,0.9340703925347398,0.9340703925347398,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,speed_ratio_vs_A,1.095064425655969,1.095064425655969,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,time_reduction_fraction_vs_A,0.08681171941004584,0.08681171941004584,0.0,matched
+summary.csv:independent,left_to_right_frontier|E,speed_interpretation,diagnostic_cost_only,diagnostic_cost_only,,matched
+summary.csv:isolated_portable,global_confidence|A,policy,global_confidence,global_confidence,,matched
+summary.csv:isolated_portable,global_confidence|A,arm,A,A,,matched
+summary.csv:isolated_portable,global_confidence|A,passed,951,951,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,pass_rate,0.920619554695063,0.920619554695063,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,base_task_equal_pass_rate,0.8593728003026784,0.8593728003026784,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,generation_sec_total,215.98022315092385,215.98022315092385,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,generation_sec_median,0.17058572731912136,0.17058572731912136,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,generation_sec_p95,0.43554217340424656,0.43554217340424656,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,evaluator_sec_total,101.52110873069614,101.52110873069614,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,file_write_sec_total,5.3898933585733175,5.3898933585733175,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,output_tokens_total,9135,9135,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,output_tokens_mean,8.843175217812197,8.843175217812197,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,output_chars_total,31482,31482,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,forward_count,10192,10192,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,base_forward_count,10192,10192,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,outer_round_count,10192,10192,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,normal_token_count,9135,9135,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,expand_count,4,4,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,delete_count,56981,56981,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,adjacent_opportunity_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,ordinary_commits_per_total_forward,0.8962912087912088,0.8962912087912088,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,speed_ratio_vs_A,1.0,1.0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,time_reduction_fraction_vs_A,0.0,0.0,0.0,matched
+summary.csv:isolated_portable,global_confidence|A,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,global_confidence|B,policy,global_confidence,global_confidence,,matched
+summary.csv:isolated_portable,global_confidence|B,arm,B,B,,matched
+summary.csv:isolated_portable,global_confidence|B,passed,901,901,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,pass_rate,0.872216844143272,0.872216844143272,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,base_task_equal_pass_rate,0.8136229855581588,0.8136229855581588,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,generation_sec_total,126.16701101558283,126.16701101558283,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,generation_sec_median,0.09680244931951165,0.09680244931951165,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,generation_sec_p95,0.23056008061394095,0.23056008061394095,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,evaluator_sec_total,94.98800857923925,94.98800857923925,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,file_write_sec_total,5.280890945810825,5.280890945810825,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,output_tokens_total,9268,9268,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,output_tokens_mean,8.97192642787996,8.97192642787996,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,output_chars_total,31490,31490,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,forward_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,base_forward_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,outer_round_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,normal_token_count,9170,9170,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,expand_count,458,458,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,delete_count,57302,57302,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,adjacent_opportunity_count,5173,5173,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,structural_stop_count,1259,1259,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,nonadjacent_fallback_count,621,621,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,ordinary_commits_per_total_forward,1.548724877554467,1.548724877554467,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,speed_ratio_vs_A,1.7118597120783676,1.7118597120783676,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,time_reduction_fraction_vs_A,0.41583998212920104,0.41583998212920104,0.0,matched
+summary.csv:isolated_portable,global_confidence|B,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,global_confidence|C,policy,global_confidence,global_confidence,,matched
+summary.csv:isolated_portable,global_confidence|C,arm,C,C,,matched
+summary.csv:isolated_portable,global_confidence|C,passed,901,901,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,pass_rate,0.872216844143272,0.872216844143272,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,base_task_equal_pass_rate,0.8136229855581588,0.8136229855581588,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,generation_sec_total,129.75327245192602,129.75327245192602,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,generation_sec_median,0.0993143911473453,0.0993143911473453,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,generation_sec_p95,0.2402613025158643,0.2402613025158643,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,evaluator_sec_total,94.79262459976599,94.79262459976599,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,file_write_sec_total,4.94427549932152,4.94427549932152,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,output_tokens_total,9268,9268,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,output_tokens_mean,8.97192642787996,8.97192642787996,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,output_chars_total,31490,31490,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,forward_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,base_forward_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,outer_round_count,5921,5921,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,normal_token_count,9170,9170,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,expand_count,458,458,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,delete_count,57302,57302,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,adjacent_opportunity_count,5173,5173,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,markov_enabled_count,3914,3914,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,structural_stop_count,1259,1259,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,nonadjacent_fallback_count,621,621,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,ordinary_commits_per_total_forward,1.548724877554467,1.548724877554467,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,speed_ratio_vs_A,1.664545479813969,1.664545479813969,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,time_reduction_fraction_vs_A,0.3992353996168606,0.3992353996168606,0.0,matched
+summary.csv:isolated_portable,global_confidence|C,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,global_confidence|D,policy,global_confidence,global_confidence,,matched
+summary.csv:isolated_portable,global_confidence|D,arm,D,D,,matched
+summary.csv:isolated_portable,global_confidence|D,passed,910,910,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,pass_rate,0.8809293320425944,0.8809293320425944,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,base_task_equal_pass_rate,0.825176523483648,0.825176523483648,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,generation_sec_total,130.31211278727278,130.31211278727278,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,generation_sec_median,0.09974841075018048,0.09974841075018048,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,generation_sec_p95,0.23667589183896776,0.23667589183896776,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,evaluator_sec_total,98.43816295173019,98.43816295173019,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,file_write_sec_total,5.239738085772842,5.239738085772842,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,output_tokens_total,9287,9287,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,output_tokens_mean,8.990319457889642,8.990319457889642,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,output_chars_total,31663,31663,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,forward_count,5947,5947,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,base_forward_count,5947,5947,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,outer_round_count,5947,5947,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,normal_token_count,9208,9208,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,expand_count,455,455,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,delete_count,57280,57280,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,adjacent_opportunity_count,5219,5219,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,markov_enabled_count,3938,3938,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,structural_stop_count,1293,1293,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,corrected_structural_stop_count,12,12,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,nonadjacent_fallback_count,595,595,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,ordinary_commits_per_total_forward,1.5483437027072473,1.5483437027072473,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,speed_ratio_vs_A,1.6574071168924984,1.6574071168924984,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,time_reduction_fraction_vs_A,0.39664793893553596,0.39664793893553596,0.0,matched
+summary.csv:isolated_portable,global_confidence|D,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,global_confidence|E,policy,global_confidence,global_confidence,,matched
+summary.csv:isolated_portable,global_confidence|E,arm,E,E,,matched
+summary.csv:isolated_portable,global_confidence|E,passed,935,935,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,pass_rate,0.9051306873184899,0.9051306873184899,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,base_task_equal_pass_rate,0.8382240726752921,0.8382240726752921,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,generation_sec_total,200.3674152782187,200.3674152782187,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,generation_sec_median,0.16065748035907745,0.16065748035907745,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,generation_sec_p95,0.38151361495256414,0.38151361495256414,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,evaluator_sec_total,98.60139756882563,98.60139756882563,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,file_write_sec_total,5.646945142652839,5.646945142652839,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,output_tokens_total,9161,9161,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,output_tokens_mean,8.868344627299129,8.868344627299129,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,output_chars_total,31389,31389,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,forward_count,9736,9736,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,base_forward_count,5834,5834,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,recompute_forward_count,3902,3902,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,outer_round_count,5834,5834,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,normal_token_count,9082,9082,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,expand_count,385,385,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,delete_count,57336,57336,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,adjacent_opportunity_count,5119,5119,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,recompute_enabled_count,3902,3902,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,structural_stop_count,1255,1255,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,corrected_structural_stop_count,38,38,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,nonadjacent_fallback_count,587,587,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,ordinary_commits_per_total_forward,0.9328266228430567,0.9328266228430567,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,speed_ratio_vs_A,1.0779208927311166,1.0779208927311166,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,time_reduction_fraction_vs_A,0.07228813659385458,0.07228813659385458,0.0,matched
+summary.csv:isolated_portable,global_confidence|E,speed_interpretation,diagnostic_cost_only,diagnostic_cost_only,,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,arm,A,A,,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,passed,942,942,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,pass_rate,0.9119070667957405,0.9119070667957405,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,base_task_equal_pass_rate,0.8500926918609845,0.8500926918609845,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,generation_sec_total,221.08094186568633,221.08094186568633,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,generation_sec_median,0.17030656430870295,0.17030656430870295,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,generation_sec_p95,0.4530922869220375,0.4530922869220375,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,evaluator_sec_total,104.76546498714015,104.76546498714015,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,file_write_sec_total,5.626404558308423,5.626404558308423,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,output_tokens_total,9517,9517,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,output_tokens_mean,9.21297192642788,9.21297192642788,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,output_chars_total,32917,32917,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,forward_count,10549,10549,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,base_forward_count,10549,10549,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,outer_round_count,10549,10549,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,normal_token_count,9517,9517,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,expand_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,delete_count,56595,56595,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,adjacent_opportunity_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,structural_stop_count,1032,1032,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,ordinary_commits_per_total_forward,0.9021708218788511,0.9021708218788511,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,speed_ratio_vs_A,1.0,1.0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,time_reduction_fraction_vs_A,0.0,0.0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|A,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,arm,B,B,,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,passed,877,877,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,pass_rate,0.8489835430784124,0.8489835430784124,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,base_task_equal_pass_rate,0.7864579873485522,0.7864579873485522,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,generation_sec_total,116.4283465789631,116.4283465789631,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,generation_sec_median,0.09637634316459298,0.09637634316459298,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,generation_sec_p95,0.21915021380409597,0.21915021380409597,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,evaluator_sec_total,94.8085223804228,94.8085223804228,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,file_write_sec_total,4.769866588991135,4.769866588991135,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,output_tokens_total,9265,9265,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,output_tokens_mean,8.969022265246855,8.969022265246855,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,output_chars_total,31842,31842,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,forward_count,5428,5428,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,base_forward_count,5428,5428,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,outer_round_count,5428,5428,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,normal_token_count,9265,9265,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,expand_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,delete_count,56847,56847,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,adjacent_opportunity_count,5428,5428,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,structural_stop_count,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,corrected_structural_stop_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,ordinary_commits_per_total_forward,1.7068901989683125,1.7068901989683125,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,speed_ratio_vs_A,1.8988583825309808,1.8988583825309808,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,time_reduction_fraction_vs_A,0.4733677828743058,0.4733677828743058,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|B,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,arm,C,C,,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,passed,872,872,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,pass_rate,0.8441432720232332,0.8441432720232332,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,base_task_equal_pass_rate,0.7875660848743327,0.7875660848743327,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,generation_sec_total,120.94414873607457,120.94414873607457,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,generation_sec_median,0.1002658479847014,0.1002658479847014,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,generation_sec_p95,0.2288870522752404,0.2288870522752404,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,evaluator_sec_total,98.4021292864345,98.4021292864345,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,file_write_sec_total,5.367227142676711,5.367227142676711,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,output_tokens_total,9298,9298,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,output_tokens_mean,9.000968054211036,9.000968054211036,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,output_chars_total,31997,31997,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,forward_count,5449,5449,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,base_forward_count,5449,5449,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,outer_round_count,5449,5449,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,normal_token_count,9298,9298,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,expand_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,delete_count,56814,56814,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,adjacent_opportunity_count,5449,5449,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,markov_enabled_count,4416,4416,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,structural_stop_count,1043,1043,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,corrected_structural_stop_count,10,10,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,ordinary_commits_per_total_forward,1.7063681409432923,1.7063681409432923,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,speed_ratio_vs_A,1.8279589726009084,1.8279589726009084,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,time_reduction_fraction_vs_A,0.45294177003483205,0.45294177003483205,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|C,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,arm,D,D,,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,passed,890,890,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,pass_rate,0.861568247821878,0.861568247821878,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,base_task_equal_pass_rate,0.7979603823113129,0.7979603823113129,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,generation_sec_total,121.58199515985325,121.58199515985325,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,generation_sec_median,0.10015696985647082,0.10015696985647082,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,generation_sec_p95,0.2299955183640122,0.2299955183640122,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,evaluator_sec_total,101.42321797134355,101.42321797134355,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,file_write_sec_total,5.371146251447499,5.371146251447499,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,output_tokens_total,9316,9316,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,output_tokens_mean,9.01839303000968,9.01839303000968,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,output_chars_total,32113,32113,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,forward_count,5477,5477,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,base_forward_count,5477,5477,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,recompute_forward_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,outer_round_count,5477,5477,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,normal_token_count,9316,9316,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,expand_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,delete_count,56796,56796,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,adjacent_opportunity_count,5477,5477,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,markov_enabled_count,4445,4445,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,recompute_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,structural_stop_count,1062,1062,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,corrected_structural_stop_count,30,30,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,ordinary_commits_per_total_forward,1.700931166697097,1.700931166697097,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,speed_ratio_vs_A,1.8183690897242977,1.8183690897242977,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,time_reduction_fraction_vs_A,0.4500566438073248,0.4500566438073248,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|D,speed_interpretation,pure_generation,pure_generation,,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,policy,left_to_right_frontier,left_to_right_frontier,,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,arm,E,E,,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,passed,931,931,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,denominator,1033,1033,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,pass_rate,0.9012584704743466,0.9012584704743466,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,base_task_equal_pass_rate,0.8410590541607872,0.8410590541607872,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,generation_sec_total,201.8885251735337,201.8885251735337,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,generation_sec_median,0.1614703801460564,0.1614703801460564,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,generation_sec_p95,0.4113765123300254,0.4113765123300254,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,evaluator_sec_total,105.01188155636191,105.01188155636191,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,file_write_sec_total,6.002899667713791,6.002899667713791,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,output_tokens_total,9209,9209,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,output_tokens_mean,8.914811229428848,8.914811229428848,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,output_chars_total,31783,31783,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,forward_count,9859,9859,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,base_forward_count,5446,5446,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,recompute_forward_count,4413,4413,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,outer_round_count,5446,5446,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,normal_token_count,9209,9209,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,expand_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,delete_count,56903,56903,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,adjacent_opportunity_count,5446,5446,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,markov_enabled_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,recompute_enabled_count,4413,4413,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,structural_stop_count,1100,1100,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,corrected_structural_stop_count,67,67,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,nonadjacent_fallback_count,0,0,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,ordinary_commits_per_total_forward,0.9340703925347398,0.9340703925347398,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,speed_ratio_vs_A,1.095064425655969,1.095064425655969,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,time_reduction_fraction_vs_A,0.08681171941004584,0.08681171941004584,0.0,matched
+summary.csv:isolated_portable,left_to_right_frontier|E,speed_interpretation,diagnostic_cost_only,diagnostic_cost_only,,matched
+paired_comparisons.csv:independent,global_confidence|D-C,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|D-C,comparison,D-C,D-C,,matched
+paired_comparisons.csv:independent,global_confidence|D-C,help,15,15,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,harm,6,6,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,net,9,9,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,line_delta,0.008712487899322363,0.008712487899322363,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,base_task_equal_delta,0.011553537925489145,0.011553537925489145,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,line_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,line_ci95_high,0.01794616151545364,0.01794616151545364,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,base_task_equal_ci95_low,0.0020831903530074258,0.0020831903530074258,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,base_task_equal_ci95_high,0.02277200145721486,0.02277200145721486,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-C,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|D-C,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|D-C,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-B,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|C-B,comparison,C-B,C-B,,matched
+paired_comparisons.csv:independent,global_confidence|C-B,help,0,0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,harm,0,0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,net,0,0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,line_delta,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,base_task_equal_delta,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,line_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,line_ci95_high,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,base_task_equal_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,base_task_equal_ci95_high,0.0,0.0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-B,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-B,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-B,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-C,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|E-C,comparison,E-C,E-C,,matched
+paired_comparisons.csv:independent,global_confidence|E-C,help,35,35,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,harm,1,1,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,net,34,34,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,line_delta,0.03291384317521781,0.03291384317521781,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,base_task_equal_delta,0.02460108711713333,0.02460108711713333,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,line_ci95_low,0.021987445272405697,0.021987445272405697,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,line_ci95_high,0.04413242418320624,0.04413242418320624,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,base_task_equal_ci95_low,0.006114180223214242,0.006114180223214242,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,base_task_equal_ci95_high,0.040659172253363525,0.040659172253363525,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-C,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-C,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-C,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-D,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|E-D,comparison,E-D,E-D,,matched
+paired_comparisons.csv:independent,global_confidence|E-D,help,28,28,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,harm,3,3,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,net,25,25,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,line_delta,0.02420135527589545,0.02420135527589545,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,base_task_equal_delta,0.013047549191644183,0.013047549191644183,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,line_ci95_low,0.013527550307399197,0.013527550307399197,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,line_ci95_high,0.03499102209944751,0.03499102209944751,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,base_task_equal_ci95_low,-0.0038378185740589456,-0.0038378185740589456,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,base_task_equal_ci95_high,0.026512390316145135,0.026512390316145135,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-D,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-D,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-D,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|B-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|B-A,comparison,B-A,B-A,,matched
+paired_comparisons.csv:independent,global_confidence|B-A,help,5,5,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,harm,55,55,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,net,-50,-50,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,line_delta,-0.0484027105517909,-0.0484027105517909,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,base_task_equal_delta,-0.045749814744519494,-0.045749814744519494,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,line_ci95_low,-0.06368175756199988,-0.06368175756199988,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,line_ci95_high,-0.034196669766617956,-0.034196669766617956,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,base_task_equal_ci95_low,-0.07116273521310028,-0.07116273521310028,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,base_task_equal_ci95_high,-0.021327379284796655,-0.021327379284796655,0.0,matched
+paired_comparisons.csv:independent,global_confidence|B-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|B-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|B-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|C-A,comparison,C-A,C-A,,matched
+paired_comparisons.csv:independent,global_confidence|C-A,help,5,5,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,harm,55,55,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,net,-50,-50,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,line_delta,-0.0484027105517909,-0.0484027105517909,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,base_task_equal_delta,-0.045749814744519494,-0.045749814744519494,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,line_ci95_low,-0.06368175756199988,-0.06368175756199988,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,line_ci95_high,-0.034196669766617956,-0.034196669766617956,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,base_task_equal_ci95_low,-0.07116273521310028,-0.07116273521310028,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,base_task_equal_ci95_high,-0.021327379284796655,-0.021327379284796655,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|C-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|D-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|D-A,comparison,D-A,D-A,,matched
+paired_comparisons.csv:independent,global_confidence|D-A,help,9,9,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,harm,50,50,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,net,-41,-41,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,line_delta,-0.03969022265246854,-0.03969022265246854,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,base_task_equal_delta,-0.03419627681903035,-0.03419627681903035,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,line_ci95_low,-0.05415870435290397,-0.05415870435290397,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,line_ci95_high,-0.025390377141497465,-0.025390377141497465,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,base_task_equal_ci95_low,-0.058132710952130885,-0.058132710952130885,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,base_task_equal_ci95_high,-0.010587863142420273,-0.010587863142420273,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|D-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|D-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|E-A,comparison,E-A,E-A,,matched
+paired_comparisons.csv:independent,global_confidence|E-A,help,7,7,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,harm,23,23,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,net,-16,-16,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,line_delta,-0.015488867376573089,-0.015488867376573089,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,base_task_equal_delta,-0.021148727627386163,-0.021148727627386163,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,line_ci95_low,-0.02554097271834256,-0.02554097271834256,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,line_ci95_high,-0.005934718100890208,-0.005934718100890208,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,base_task_equal_ci95_low,-0.04716950372628727,-0.04716950372628727,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,base_task_equal_ci95_high,0.0022987232533726435,0.0022987232533726435,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,global_confidence|E-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,comparison,C rescue on A-pass/B-fail,C rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,help,0,0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,harm,0,0,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:independent,global_confidence|C rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,comparison,D rescue on A-pass/B-fail,D rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,help,11,11,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,harm,6,6,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:independent,global_confidence|D rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,comparison,E rescue on A-pass/B-fail,E rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,help,33,33,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,harm,1,1,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:independent,global_confidence|E rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,comparison,D-C,D-C,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,help,29,29,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,harm,11,11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,net,18,18,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,line_delta,0.017424975798644726,0.017424975798644726,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,base_task_equal_delta,0.010394297436980365,0.010394297436980364,-1.734723475976807e-18,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,line_ci95_low,0.006233072719412659,0.006233072719412659,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,line_ci95_high,0.029412486289903585,0.029412486289903585,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,base_task_equal_ci95_low,-0.010347251833532321,-0.010347251833532321,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,base_task_equal_ci95_high,0.03045249423679301,0.03045249423679301,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-C,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,comparison,C-B,C-B,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,help,6,6,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,harm,11,11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,net,-5,-5,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,line_delta,-0.00484027105517909,-0.00484027105517909,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,base_task_equal_delta,0.0011080975257804528,0.0011080975257804528,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,line_ci95_low,-0.013096658293129846,-0.013096658293129846,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,line_ci95_high,0.003620155866339273,0.003620155866339273,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,base_task_equal_ci95_low,-0.011168462719529792,-0.011168462719529792,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,base_task_equal_ci95_high,0.017040469481399357,0.017040469481399357,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-B,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,comparison,E-C,E-C,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,help,64,64,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,harm,5,5,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,net,59,59,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,line_delta,0.057115198451113264,0.057115198451113264,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,base_task_equal_delta,0.053492969286454514,0.05349296928645453,1.3877787807814457e-17,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,line_ci95_low,0.039956773491417026,0.039956773491417026,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,line_ci95_high,0.07601184600197433,0.07601184600197433,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,base_task_equal_ci95_low,0.021991360236807124,0.021991360236807124,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,base_task_equal_ci95_high,0.08686215012745419,0.08686215012745419,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-C,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,comparison,E-D,E-D,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,help,48,48,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,harm,7,7,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,net,41,41,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,line_delta,0.03969022265246854,0.03969022265246854,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,base_task_equal_delta,0.043098671849474156,0.04309867184947416,6.938893903907228e-18,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,line_ci95_low,0.026136107698607698,0.026136107698607698,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,line_ci95_high,0.05402650356778797,0.05402650356778797,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,base_task_equal_ci95_low,0.012442893798096783,0.012442893798096783,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,base_task_equal_ci95_high,0.07613783918130436,0.07613783918130436,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-D,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,comparison,B-A,B-A,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,help,10,10,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,harm,75,75,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,net,-65,-65,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,line_delta,-0.06292352371732816,-0.06292352371732816,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,base_task_equal_delta,-0.06363470451243237,-0.06363470451243237,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,line_ci95_low,-0.0824381997561246,-0.0824381997561246,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,line_ci95_high,-0.04436229205175601,-0.04436229205175601,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,base_task_equal_ci95_low,-0.09910481322628308,-0.09910481322628308,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,base_task_equal_ci95_high,-0.029815996543571963,-0.029815996543571963,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|B-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,comparison,C-A,C-A,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,help,11,11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,harm,81,81,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,net,-70,-70,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,line_delta,-0.06776379477250725,-0.06776379477250725,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,base_task_equal_delta,-0.06252660698665191,-0.06252660698665191,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,line_ci95_low,-0.08799171842650104,-0.08799171842650104,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,line_ci95_high,-0.048826248631026664,-0.048826248631026664,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,base_task_equal_ci95_low,-0.10069050988057728,-0.10069050988057728,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,base_task_equal_ci95_high,-0.025748662307953075,-0.025748662307953075,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,comparison,D-A,D-A,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,help,10,10,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,harm,62,62,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,net,-52,-52,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,line_delta,-0.05033881897386254,-0.05033881897386254,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,base_task_equal_delta,-0.05213230954967155,-0.05213230954967155,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,line_ci95_low,-0.06673412754058987,-0.06673412754058987,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,line_ci95_high,-0.03483031679366686,-0.03483031679366686,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,base_task_equal_ci95_low,-0.08635971328806694,-0.08635971328806694,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,base_task_equal_ci95_high,-0.021071442230480263,-0.021071442230480263,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,comparison,E-A,E-A,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,help,7,7,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,harm,18,18,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,net,-11,-11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,line_delta,-0.010648596321393998,-0.010648596321393998,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,base_task_equal_delta,-0.009033637700197392,-0.009033637700197392,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,line_ci95_low,-0.020452424462412695,-0.020452424462412695,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,line_ci95_high,-0.0009871424927617503,-0.0009871424927617503,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,base_task_equal_ci95_low,-0.027627113739918618,-0.027627113739918618,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,base_task_equal_ci95_high,0.009561446923850643,0.009561446923850643,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,rescue_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,other_population_denominator,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E-A,other_harm_vs,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,comparison,C rescue on A-pass/B-fail,C rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,help,3,3,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,harm,11,11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|C rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,comparison,D rescue on A-pass/B-fail,D rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,help,21,21,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,harm,11,11,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|D rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,comparison,E rescue on A-pass/B-fail,E rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,help,59,59,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,harm,6,6,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:independent,left_to_right_frontier|E rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,comparison,D-C,D-C,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,help,15,15,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,harm,6,6,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,net,9,9,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,line_delta,0.008712487899322363,0.008712487899322363,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,base_task_equal_delta,0.011553537925489145,0.011553537925489145,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,line_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,line_ci95_high,0.01794616151545364,0.01794616151545364,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,base_task_equal_ci95_low,0.0020831903530074258,0.0020831903530074258,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,base_task_equal_ci95_high,0.02277200145721486,0.02277200145721486,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-C,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,comparison,C-B,C-B,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,help,0,0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,harm,0,0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,net,0,0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,line_delta,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,base_task_equal_delta,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,line_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,line_ci95_high,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,base_task_equal_ci95_low,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,base_task_equal_ci95_high,0.0,0.0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-B,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,comparison,E-C,E-C,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,help,35,35,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,harm,1,1,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,net,34,34,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,line_delta,0.03291384317521781,0.03291384317521781,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,base_task_equal_delta,0.02460108711713333,0.02460108711713333,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,line_ci95_low,0.021987445272405697,0.021987445272405697,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,line_ci95_high,0.04413242418320624,0.04413242418320624,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,base_task_equal_ci95_low,0.006114180223214242,0.006114180223214242,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,base_task_equal_ci95_high,0.040659172253363525,0.040659172253363525,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-C,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,comparison,E-D,E-D,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,help,28,28,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,harm,3,3,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,net,25,25,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,line_delta,0.02420135527589545,0.02420135527589545,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,base_task_equal_delta,0.013047549191644183,0.013047549191644183,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,line_ci95_low,0.013527550307399197,0.013527550307399197,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,line_ci95_high,0.03499102209944751,0.03499102209944751,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,base_task_equal_ci95_low,-0.0038378185740589456,-0.0038378185740589456,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,base_task_equal_ci95_high,0.026512390316145135,0.026512390316145135,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-D,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,comparison,B-A,B-A,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,help,5,5,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,harm,55,55,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,net,-50,-50,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,line_delta,-0.0484027105517909,-0.0484027105517909,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,base_task_equal_delta,-0.045749814744519494,-0.045749814744519494,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,line_ci95_low,-0.06368175756199988,-0.06368175756199988,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,line_ci95_high,-0.034196669766617956,-0.034196669766617956,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,base_task_equal_ci95_low,-0.07116273521310028,-0.07116273521310028,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,base_task_equal_ci95_high,-0.021327379284796655,-0.021327379284796655,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|B-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,comparison,C-A,C-A,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,help,5,5,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,harm,55,55,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,net,-50,-50,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,line_delta,-0.0484027105517909,-0.0484027105517909,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,base_task_equal_delta,-0.045749814744519494,-0.045749814744519494,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,line_ci95_low,-0.06368175756199988,-0.06368175756199988,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,line_ci95_high,-0.034196669766617956,-0.034196669766617956,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,base_task_equal_ci95_low,-0.07116273521310028,-0.07116273521310028,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,base_task_equal_ci95_high,-0.021327379284796655,-0.021327379284796655,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,comparison,D-A,D-A,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,help,9,9,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,harm,50,50,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,net,-41,-41,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,line_delta,-0.03969022265246854,-0.03969022265246854,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,base_task_equal_delta,-0.03419627681903035,-0.03419627681903035,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,line_ci95_low,-0.05415870435290397,-0.05415870435290397,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,line_ci95_high,-0.025390377141497465,-0.025390377141497465,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,base_task_equal_ci95_low,-0.058132710952130885,-0.058132710952130885,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,base_task_equal_ci95_high,-0.010587863142420273,-0.010587863142420273,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,comparison,E-A,E-A,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,help,7,7,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,harm,23,23,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,net,-16,-16,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,line_delta,-0.015488867376573089,-0.015488867376573089,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,base_task_equal_delta,-0.021148727627386163,-0.021148727627386163,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,line_ci95_low,-0.02554097271834256,-0.02554097271834256,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,line_ci95_high,-0.005934718100890208,-0.005934718100890208,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,base_task_equal_ci95_low,-0.04716950372628727,-0.04716950372628727,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,base_task_equal_ci95_high,0.0022987232533726435,0.0022987232533726435,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,comparison,C rescue on A-pass/B-fail,C rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,help,0,0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,harm,0,0,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|C rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,comparison,D rescue on A-pass/B-fail,D rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,help,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,harm,6,6,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|D rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,policy,global_confidence,global_confidence,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,comparison,E rescue on A-pass/B-fail,E rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,help,33,33,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,harm,1,1,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,rescue_denominator,55,55,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,other_population_denominator,978,978,0.0,matched
+paired_comparisons.csv:isolated_portable,global_confidence|E rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,comparison,D-C,D-C,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,help,29,29,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,harm,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,net,18,18,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,line_delta,0.017424975798644726,0.017424975798644726,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,base_task_equal_delta,0.010394297436980365,0.010394297436980365,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,line_ci95_low,0.006233072719412659,0.006233072719412659,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,line_ci95_high,0.029412486289903585,0.029412486289903585,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,base_task_equal_ci95_low,-0.010347251833532321,-0.010347251833532321,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,base_task_equal_ci95_high,0.03045249423679301,0.03045249423679301,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-C,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,comparison,C-B,C-B,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,help,6,6,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,harm,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,net,-5,-5,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,line_delta,-0.00484027105517909,-0.00484027105517909,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,base_task_equal_delta,0.0011080975257804528,0.0011080975257804528,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,line_ci95_low,-0.013096658293129846,-0.013096658293129846,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,line_ci95_high,0.003620155866339273,0.003620155866339273,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,base_task_equal_ci95_low,-0.011168462719529792,-0.011168462719529792,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,base_task_equal_ci95_high,0.017040469481399357,0.017040469481399357,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-B,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,comparison,E-C,E-C,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,help,64,64,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,harm,5,5,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,net,59,59,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,line_delta,0.057115198451113264,0.057115198451113264,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,base_task_equal_delta,0.053492969286454514,0.053492969286454514,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,line_ci95_low,0.039956773491417026,0.039956773491417026,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,line_ci95_high,0.07601184600197433,0.07601184600197433,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,base_task_equal_ci95_low,0.021991360236807124,0.021991360236807124,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,base_task_equal_ci95_high,0.08686215012745419,0.08686215012745419,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-C,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,comparison,E-D,E-D,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,help,48,48,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,harm,7,7,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,net,41,41,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,line_delta,0.03969022265246854,0.03969022265246854,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,base_task_equal_delta,0.043098671849474156,0.043098671849474156,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,line_ci95_low,0.026136107698607698,0.026136107698607698,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,line_ci95_high,0.05402650356778797,0.05402650356778797,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,base_task_equal_ci95_low,0.012442893798096783,0.012442893798096783,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,base_task_equal_ci95_high,0.07613783918130436,0.07613783918130436,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-D,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,comparison,B-A,B-A,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,help,10,10,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,harm,75,75,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,net,-65,-65,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,line_delta,-0.06292352371732816,-0.06292352371732816,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,base_task_equal_delta,-0.06363470451243237,-0.06363470451243237,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,line_ci95_low,-0.0824381997561246,-0.0824381997561246,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,line_ci95_high,-0.04436229205175601,-0.04436229205175601,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,base_task_equal_ci95_low,-0.09910481322628308,-0.09910481322628308,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,base_task_equal_ci95_high,-0.029815996543571963,-0.029815996543571963,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|B-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,comparison,C-A,C-A,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,help,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,harm,81,81,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,net,-70,-70,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,line_delta,-0.06776379477250725,-0.06776379477250725,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,base_task_equal_delta,-0.06252660698665191,-0.06252660698665191,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,line_ci95_low,-0.08799171842650104,-0.08799171842650104,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,line_ci95_high,-0.048826248631026664,-0.048826248631026664,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,base_task_equal_ci95_low,-0.10069050988057728,-0.10069050988057728,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,base_task_equal_ci95_high,-0.025748662307953075,-0.025748662307953075,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,comparison,D-A,D-A,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,help,10,10,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,harm,62,62,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,net,-52,-52,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,line_delta,-0.05033881897386254,-0.05033881897386254,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,base_task_equal_delta,-0.05213230954967155,-0.05213230954967155,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,line_ci95_low,-0.06673412754058987,-0.06673412754058987,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,line_ci95_high,-0.03483031679366686,-0.03483031679366686,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,base_task_equal_ci95_low,-0.08635971328806694,-0.08635971328806694,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,base_task_equal_ci95_high,-0.021071442230480263,-0.021071442230480263,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,comparison,E-A,E-A,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,help,7,7,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,harm,18,18,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,net,-11,-11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,line_delta,-0.010648596321393998,-0.010648596321393998,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,base_task_equal_delta,-0.009033637700197392,-0.009033637700197392,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,cluster_count,164,164,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,bootstrap_replicates,10000,10000,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,bootstrap_seed,20261013,20261013,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,line_ci95_low,-0.020452424462412695,-0.020452424462412695,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,line_ci95_high,-0.0009871424927617503,-0.0009871424927617503,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,base_task_equal_ci95_low,-0.027627113739918618,-0.027627113739918618,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,base_task_equal_ci95_high,0.009561446923850643,0.009561446923850643,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,rescue_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,other_population_denominator,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E-A,other_harm_vs,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,comparison,C rescue on A-pass/B-fail,C rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,help,3,3,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,harm,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|C rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,comparison,D rescue on A-pass/B-fail,D rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,help,21,21,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,harm,11,11,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|D rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,policy,left_to_right_frontier,left_to_right_frontier,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,comparison,E rescue on A-pass/B-fail,E rescue on A-pass/B-fail,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,help,59,59,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,harm,6,6,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,net,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,line_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_delta,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,cluster_count,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,bootstrap_replicates,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,bootstrap_seed,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,line_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,line_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_ci95_low,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,base_task_equal_ci95_high,,,,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,rescue_denominator,75,75,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,other_population_denominator,958,958,0.0,matched
+paired_comparisons.csv:isolated_portable,left_to_right_frontier|E rescue on A-pass/B-fail,other_harm_vs,B,B,,matched
+published_report_table,global_confidence|A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|A,1,A,A,,matched
+published_report_table,global_confidence|A,2,951/1033,951/1033,,matched
+published_report_table,global_confidence|A,3,92.06%,92.06%,,matched
+published_report_table,global_confidence|A,4,215.98,215.98,,matched
+published_report_table,global_confidence|A,5,0.1706/0.4355,0.1706/0.4355,,matched
+published_report_table,global_confidence|A,6,9135,9135,,matched
+published_report_table,global_confidence|A,7,10192/0/10192,10192/0/10192,,matched
+published_report_table,global_confidence|A,8,0.896,0.896,,matched
+published_report_table,global_confidence|A,9,1.000×,1.000×,,matched
+published_report_table,global_confidence|B,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|B,1,B,B,,matched
+published_report_table,global_confidence|B,2,901/1033,901/1033,,matched
+published_report_table,global_confidence|B,3,87.22%,87.22%,,matched
+published_report_table,global_confidence|B,4,126.17,126.17,,matched
+published_report_table,global_confidence|B,5,0.0968/0.2306,0.0968/0.2306,,matched
+published_report_table,global_confidence|B,6,9268,9268,,matched
+published_report_table,global_confidence|B,7,5921/0/5921,5921/0/5921,,matched
+published_report_table,global_confidence|B,8,1.549,1.549,,matched
+published_report_table,global_confidence|B,9,1.712×,1.712×,,matched
+published_report_table,global_confidence|C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C,1,C,C,,matched
+published_report_table,global_confidence|C,2,901/1033,901/1033,,matched
+published_report_table,global_confidence|C,3,87.22%,87.22%,,matched
+published_report_table,global_confidence|C,4,129.75,129.75,,matched
+published_report_table,global_confidence|C,5,0.0993/0.2403,0.0993/0.2403,,matched
+published_report_table,global_confidence|C,6,9268,9268,,matched
+published_report_table,global_confidence|C,7,5921/0/5921,5921/0/5921,,matched
+published_report_table,global_confidence|C,8,1.549,1.549,,matched
+published_report_table,global_confidence|C,9,1.665×,1.665×,,matched
+published_report_table,global_confidence|D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D,1,D,D,,matched
+published_report_table,global_confidence|D,2,910/1033,910/1033,,matched
+published_report_table,global_confidence|D,3,88.09%,88.09%,,matched
+published_report_table,global_confidence|D,4,130.31,130.31,,matched
+published_report_table,global_confidence|D,5,0.0997/0.2367,0.0997/0.2367,,matched
+published_report_table,global_confidence|D,6,9287,9287,,matched
+published_report_table,global_confidence|D,7,5947/0/5947,5947/0/5947,,matched
+published_report_table,global_confidence|D,8,1.548,1.548,,matched
+published_report_table,global_confidence|D,9,1.657×,1.657×,,matched
+published_report_table,global_confidence|E,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E,1,E,E,,matched
+published_report_table,global_confidence|E,2,935/1033,935/1033,,matched
+published_report_table,global_confidence|E,3,90.51%,90.51%,,matched
+published_report_table,global_confidence|E,4,200.37,200.37,,matched
+published_report_table,global_confidence|E,5,0.1607/0.3815,0.1607/0.3815,,matched
+published_report_table,global_confidence|E,6,9161,9161,,matched
+published_report_table,global_confidence|E,7,5834/3902/9736,5834/3902/9736,,matched
+published_report_table,global_confidence|E,8,0.933,0.933,,matched
+published_report_table,global_confidence|E,9,1.078×,1.078×,,matched
+published_report_table,left_to_right_frontier|A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|A,1,A,A,,matched
+published_report_table,left_to_right_frontier|A,2,942/1033,942/1033,,matched
+published_report_table,left_to_right_frontier|A,3,91.19%,91.19%,,matched
+published_report_table,left_to_right_frontier|A,4,221.08,221.08,,matched
+published_report_table,left_to_right_frontier|A,5,0.1703/0.4531,0.1703/0.4531,,matched
+published_report_table,left_to_right_frontier|A,6,9517,9517,,matched
+published_report_table,left_to_right_frontier|A,7,10549/0/10549,10549/0/10549,,matched
+published_report_table,left_to_right_frontier|A,8,0.902,0.902,,matched
+published_report_table,left_to_right_frontier|A,9,1.000×,1.000×,,matched
+published_report_table,left_to_right_frontier|B,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|B,1,B,B,,matched
+published_report_table,left_to_right_frontier|B,2,877/1033,877/1033,,matched
+published_report_table,left_to_right_frontier|B,3,84.90%,84.90%,,matched
+published_report_table,left_to_right_frontier|B,4,116.43,116.43,,matched
+published_report_table,left_to_right_frontier|B,5,0.0964/0.2192,0.0964/0.2192,,matched
+published_report_table,left_to_right_frontier|B,6,9265,9265,,matched
+published_report_table,left_to_right_frontier|B,7,5428/0/5428,5428/0/5428,,matched
+published_report_table,left_to_right_frontier|B,8,1.707,1.707,,matched
+published_report_table,left_to_right_frontier|B,9,1.899×,1.899×,,matched
+published_report_table,left_to_right_frontier|C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C,1,C,C,,matched
+published_report_table,left_to_right_frontier|C,2,872/1033,872/1033,,matched
+published_report_table,left_to_right_frontier|C,3,84.41%,84.41%,,matched
+published_report_table,left_to_right_frontier|C,4,120.94,120.94,,matched
+published_report_table,left_to_right_frontier|C,5,0.1003/0.2289,0.1003/0.2289,,matched
+published_report_table,left_to_right_frontier|C,6,9298,9298,,matched
+published_report_table,left_to_right_frontier|C,7,5449/0/5449,5449/0/5449,,matched
+published_report_table,left_to_right_frontier|C,8,1.706,1.706,,matched
+published_report_table,left_to_right_frontier|C,9,1.828×,1.828×,,matched
+published_report_table,left_to_right_frontier|D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D,1,D,D,,matched
+published_report_table,left_to_right_frontier|D,2,890/1033,890/1033,,matched
+published_report_table,left_to_right_frontier|D,3,86.16%,86.16%,,matched
+published_report_table,left_to_right_frontier|D,4,121.58,121.58,,matched
+published_report_table,left_to_right_frontier|D,5,0.1002/0.2300,0.1002/0.2300,,matched
+published_report_table,left_to_right_frontier|D,6,9316,9316,,matched
+published_report_table,left_to_right_frontier|D,7,5477/0/5477,5477/0/5477,,matched
+published_report_table,left_to_right_frontier|D,8,1.701,1.701,,matched
+published_report_table,left_to_right_frontier|D,9,1.818×,1.818×,,matched
+published_report_table,left_to_right_frontier|E,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E,1,E,E,,matched
+published_report_table,left_to_right_frontier|E,2,931/1033,931/1033,,matched
+published_report_table,left_to_right_frontier|E,3,90.13%,90.13%,,matched
+published_report_table,left_to_right_frontier|E,4,201.89,201.89,,matched
+published_report_table,left_to_right_frontier|E,5,0.1615/0.4114,0.1615/0.4114,,matched
+published_report_table,left_to_right_frontier|E,6,9209,9209,,matched
+published_report_table,left_to_right_frontier|E,7,5446/4413/9859,5446/4413/9859,,matched
+published_report_table,left_to_right_frontier|E,8,0.934,0.934,,matched
+published_report_table,left_to_right_frontier|E,9,1.095×,1.095×,,matched
+published_report_table,global_confidence|D-C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D-C,1,D-C,D-C,,matched
+published_report_table,global_confidence|D-C,2,15/6,15/6,,matched
+published_report_table,global_confidence|D-C,3,+9,+9,,matched
+published_report_table,global_confidence|D-C,4,"+0.87 [+0.00,+1.79]","+0.87 [+0.00,+1.79]",,matched
+published_report_table,global_confidence|D-C,5,"+1.16 [+0.21,+2.28]","+1.16 [+0.21,+2.28]",,matched
+published_report_table,global_confidence|C-B,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C-B,1,C-B,C-B,,matched
+published_report_table,global_confidence|C-B,2,0/0,0/0,,matched
+published_report_table,global_confidence|C-B,3,+0,+0,,matched
+published_report_table,global_confidence|C-B,4,"+0.00 [+0.00,+0.00]","+0.00 [+0.00,+0.00]",,matched
+published_report_table,global_confidence|C-B,5,"+0.00 [+0.00,+0.00]","+0.00 [+0.00,+0.00]",,matched
+published_report_table,global_confidence|E-C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-C,1,E-C,E-C,,matched
+published_report_table,global_confidence|E-C,2,35/1,35/1,,matched
+published_report_table,global_confidence|E-C,3,+34,+34,,matched
+published_report_table,global_confidence|E-C,4,"+3.29 [+2.20,+4.41]","+3.29 [+2.20,+4.41]",,matched
+published_report_table,global_confidence|E-C,5,"+2.46 [+0.61,+4.07]","+2.46 [+0.61,+4.07]",,matched
+published_report_table,global_confidence|E-D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-D,1,E-D,E-D,,matched
+published_report_table,global_confidence|E-D,2,28/3,28/3,,matched
+published_report_table,global_confidence|E-D,3,+25,+25,,matched
+published_report_table,global_confidence|E-D,4,"+2.42 [+1.35,+3.50]","+2.42 [+1.35,+3.50]",,matched
+published_report_table,global_confidence|E-D,5,"+1.30 [-0.38,+2.65]","+1.30 [-0.38,+2.65]",,matched
+published_report_table,global_confidence|B-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|B-A,1,B-A,B-A,,matched
+published_report_table,global_confidence|B-A,2,5/55,5/55,,matched
+published_report_table,global_confidence|B-A,3,-50,-50,,matched
+published_report_table,global_confidence|B-A,4,"-4.84 [-6.37,-3.42]","-4.84 [-6.37,-3.42]",,matched
+published_report_table,global_confidence|B-A,5,"-4.57 [-7.12,-2.13]","-4.57 [-7.12,-2.13]",,matched
+published_report_table,global_confidence|C-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C-A,1,C-A,C-A,,matched
+published_report_table,global_confidence|C-A,2,5/55,5/55,,matched
+published_report_table,global_confidence|C-A,3,-50,-50,,matched
+published_report_table,global_confidence|C-A,4,"-4.84 [-6.37,-3.42]","-4.84 [-6.37,-3.42]",,matched
+published_report_table,global_confidence|C-A,5,"-4.57 [-7.12,-2.13]","-4.57 [-7.12,-2.13]",,matched
+published_report_table,global_confidence|D-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D-A,1,D-A,D-A,,matched
+published_report_table,global_confidence|D-A,2,9/50,9/50,,matched
+published_report_table,global_confidence|D-A,3,-41,-41,,matched
+published_report_table,global_confidence|D-A,4,"-3.97 [-5.42,-2.54]","-3.97 [-5.42,-2.54]",,matched
+published_report_table,global_confidence|D-A,5,"-3.42 [-5.81,-1.06]","-3.42 [-5.81,-1.06]",,matched
+published_report_table,global_confidence|E-A,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E-A,1,E-A,E-A,,matched
+published_report_table,global_confidence|E-A,2,7/23,7/23,,matched
+published_report_table,global_confidence|E-A,3,-16,-16,,matched
+published_report_table,global_confidence|E-A,4,"-1.55 [-2.55,-0.59]","-1.55 [-2.55,-0.59]",,matched
+published_report_table,global_confidence|E-A,5,"-2.11 [-4.72,+0.23]","-2.11 [-4.72,+0.23]",,matched
+published_report_table,left_to_right_frontier|D-C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D-C,1,D-C,D-C,,matched
+published_report_table,left_to_right_frontier|D-C,2,29/11,29/11,,matched
+published_report_table,left_to_right_frontier|D-C,3,+18,+18,,matched
+published_report_table,left_to_right_frontier|D-C,4,"+1.74 [+0.62,+2.94]","+1.74 [+0.62,+2.94]",,matched
+published_report_table,left_to_right_frontier|D-C,5,"+1.04 [-1.03,+3.05]","+1.04 [-1.03,+3.05]",,matched
+published_report_table,left_to_right_frontier|C-B,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C-B,1,C-B,C-B,,matched
+published_report_table,left_to_right_frontier|C-B,2,6/11,6/11,,matched
+published_report_table,left_to_right_frontier|C-B,3,-5,-5,,matched
+published_report_table,left_to_right_frontier|C-B,4,"-0.48 [-1.31,+0.36]","-0.48 [-1.31,+0.36]",,matched
+published_report_table,left_to_right_frontier|C-B,5,"+0.11 [-1.12,+1.70]","+0.11 [-1.12,+1.70]",,matched
+published_report_table,left_to_right_frontier|E-C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-C,1,E-C,E-C,,matched
+published_report_table,left_to_right_frontier|E-C,2,64/5,64/5,,matched
+published_report_table,left_to_right_frontier|E-C,3,+59,+59,,matched
+published_report_table,left_to_right_frontier|E-C,4,"+5.71 [+4.00,+7.60]","+5.71 [+4.00,+7.60]",,matched
+published_report_table,left_to_right_frontier|E-C,5,"+5.35 [+2.20,+8.69]","+5.35 [+2.20,+8.69]",,matched
+published_report_table,left_to_right_frontier|E-D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-D,1,E-D,E-D,,matched
+published_report_table,left_to_right_frontier|E-D,2,48/7,48/7,,matched
+published_report_table,left_to_right_frontier|E-D,3,+41,+41,,matched
+published_report_table,left_to_right_frontier|E-D,4,"+3.97 [+2.61,+5.40]","+3.97 [+2.61,+5.40]",,matched
+published_report_table,left_to_right_frontier|E-D,5,"+4.31 [+1.24,+7.61]","+4.31 [+1.24,+7.61]",,matched
+published_report_table,left_to_right_frontier|B-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|B-A,1,B-A,B-A,,matched
+published_report_table,left_to_right_frontier|B-A,2,10/75,10/75,,matched
+published_report_table,left_to_right_frontier|B-A,3,-65,-65,,matched
+published_report_table,left_to_right_frontier|B-A,4,"-6.29 [-8.24,-4.44]","-6.29 [-8.24,-4.44]",,matched
+published_report_table,left_to_right_frontier|B-A,5,"-6.36 [-9.91,-2.98]","-6.36 [-9.91,-2.98]",,matched
+published_report_table,left_to_right_frontier|C-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C-A,1,C-A,C-A,,matched
+published_report_table,left_to_right_frontier|C-A,2,11/81,11/81,,matched
+published_report_table,left_to_right_frontier|C-A,3,-70,-70,,matched
+published_report_table,left_to_right_frontier|C-A,4,"-6.78 [-8.80,-4.88]","-6.78 [-8.80,-4.88]",,matched
+published_report_table,left_to_right_frontier|C-A,5,"-6.25 [-10.07,-2.57]","-6.25 [-10.07,-2.57]",,matched
+published_report_table,left_to_right_frontier|D-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D-A,1,D-A,D-A,,matched
+published_report_table,left_to_right_frontier|D-A,2,10/62,10/62,,matched
+published_report_table,left_to_right_frontier|D-A,3,-52,-52,,matched
+published_report_table,left_to_right_frontier|D-A,4,"-5.03 [-6.67,-3.48]","-5.03 [-6.67,-3.48]",,matched
+published_report_table,left_to_right_frontier|D-A,5,"-5.21 [-8.64,-2.11]","-5.21 [-8.64,-2.11]",,matched
+published_report_table,left_to_right_frontier|E-A,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E-A,1,E-A,E-A,,matched
+published_report_table,left_to_right_frontier|E-A,2,7/18,7/18,,matched
+published_report_table,left_to_right_frontier|E-A,3,-11,-11,,matched
+published_report_table,left_to_right_frontier|E-A,4,"-1.06 [-2.05,-0.10]","-1.06 [-2.05,-0.10]",,matched
+published_report_table,left_to_right_frontier|E-A,5,"-0.90 [-2.76,+0.96]","-0.90 [-2.76,+0.96]",,matched
+published_report_table,global_confidence|C,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|C,1,C,C,,matched
+published_report_table,global_confidence|C,2,0/55,0/55,,matched
+published_report_table,global_confidence|C,3,0/978,0/978,,matched
+published_report_table,global_confidence|D,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|D,1,D,D,,matched
+published_report_table,global_confidence|D,2,11/55,11/55,,matched
+published_report_table,global_confidence|D,3,6/978,6/978,,matched
+published_report_table,global_confidence|E,0,global_confidence,global_confidence,,matched
+published_report_table,global_confidence|E,1,E,E,,matched
+published_report_table,global_confidence|E,2,33/55,33/55,,matched
+published_report_table,global_confidence|E,3,1/978,1/978,,matched
+published_report_table,left_to_right_frontier|C,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|C,1,C,C,,matched
+published_report_table,left_to_right_frontier|C,2,3/75,3/75,,matched
+published_report_table,left_to_right_frontier|C,3,11/958,11/958,,matched
+published_report_table,left_to_right_frontier|D,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|D,1,D,D,,matched
+published_report_table,left_to_right_frontier|D,2,21/75,21/75,,matched
+published_report_table,left_to_right_frontier|D,3,11/958,11/958,,matched
+published_report_table,left_to_right_frontier|E,0,left_to_right_frontier,left_to_right_frontier,,matched
+published_report_table,left_to_right_frontier|E,1,E,E,,matched
+published_report_table,left_to_right_frontier|E,2,59/75,59/75,,matched
+published_report_table,left_to_right_frontier|E,3,6/958,6/958,,matched

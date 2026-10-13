@@ -112,9 +112,17 @@
     "top_p": 0.9
   },
   "gpu_snapshot": {
-    "compute_processes": "3443406, /home/lwt/miniconda3/envs/rpent_env/bin/python, 8120\n717897, /home/lwt/miniconda3/envs/rpent_env/bin/python, 6130\n1359435, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 3824\n1453296, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 19044\n1856809, .venv/bin/python, 36412\n1908720, /home/lwt/so101-lerobot-runtime/.venv/bin/python, 18186",
-    "gpus": "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 91761, 143771, 0, 34",
-    "time_utc": "2026-10-13T01:38:09Z"
+    "time_utc": "2026-10-13T01:38:09Z",
+    "gpu_index": 0,
+    "gpu_name": "NVIDIA H200 NVL",
+    "memory_used_mib": 91761.0,
+    "memory_total_mib": 143771.0,
+    "utilization_gpu_pct": 0.0,
+    "temperature_c": 34.0,
+    "own_task_count": 0,
+    "other_task_count": 6,
+    "own_memory_mib": 0,
+    "other_memory_mib": 91716.0
   },
   "head_lambda": 1.0,
   "head_rank": 256,
@@ -244,5 +252,6 @@
     "test_count": 46,
     "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest tests.test_dreamon_markov_k2_diagnosis tests.test_dreamon_markov_k2 tests.test_dreamon_order_parallelism tests.test_dreamon_markov_premise tests.test_dreamon_singleline_adapter -q",
     "scope": "CPU unit and synthetic full analyzer only; no real model inference"
-  }
+  },
+  "gpu_snapshot_privacy": "process identities/paths removed; numeric load retained; original kept locally, not in portable bundle"
 }

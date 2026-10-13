@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import sqlite3
 import sys
@@ -64,9 +65,8 @@ def integrity(rows: list[dict], manifest: dict, expected_ids: set[str]) -> dict:
         errors.append("missing or unexpected case identities")
     if any(n != 1 for n in observed.values()):
         errors.append("duplicate case identities")
-    from experiments.dreamon_singleline_adapter import derive_row_seed
     for row in rows:
-        if row["base_task_id"] != row["task_id"].split("/")[2] or row["row_seed"] != derive_row_seed(42, row["task_id"]):
+        if row["base_task_id"] != row["task_id"].split("/")[2] or row["row_seed"] != (int.from_bytes(hashlib.sha256(f"42\0{row['task_id']}".encode()).digest()[:8], "big") & ((1 << 63) - 1)):
             errors.append("case grouping or row seed mismatch")
         if row["forward_count"] != row["base_forward_count"] + row["recompute_forward_count"]:
             errors.append("total forward accounting mismatch")
@@ -92,30 +92,42 @@ def integrity(rows: list[dict], manifest: dict, expected_ids: set[str]) -> dict:
             "counts": {f"{p}/{a}": sum(r["policy"] == p and r["arm"] == a for r in rows) for p in POLICIES for a in "ABCDE"}}
 
 
-def analyze(out: Path) -> dict:
-    manifest = json.loads((out / "run_manifest.json").read_text())
-    db_path = out / "per_case.sqlite"
-    rows = []
-    if db_path.exists():
-        with sqlite3.connect(f"file:{db_path}?mode=ro", uri=True) as db:
-            rows = [json.loads(r[0]) for r in db.execute("SELECT payload FROM cases ORDER BY policy,arm,task_id")]
-    with (Path(manifest["original_config_path"]).parent / "paired_deltas.csv").open() as handle:
-        expected_ids = {r["task_id"] for r in csv.DictReader(handle)}
+def analyze(out: Path, *, evidence_dir: Path | None = None, output_dir: Path | None = None) -> dict:
+    evidence_dir = evidence_dir or out / "evidence"
+    if (evidence_dir / "evidence_manifest.json").exists():
+        from analysis.dreamon_k2_evidence import load_bundle
+        rows, manifest, expected_ids, smoke, failures = load_bundle(evidence_dir)
+    else:
+        if evidence_dir != out / "evidence":
+            raise FileNotFoundError("explicit portable evidence bundle is missing")
+        manifest = json.loads((out / "run_manifest.json").read_text())
+        db_path = out / "per_case.sqlite"
+        rows = []
+        if db_path.exists():
+            with sqlite3.connect(db_path.resolve().as_uri() + "?mode=ro", uri=True) as db:
+                rows = [json.loads(r[0]) for r in db.execute("SELECT payload FROM cases ORDER BY policy,arm,task_id")]
+        with (Path(manifest["original_config_path"]).parent / "paired_deltas.csv").open() as handle:
+            expected_ids = {r["task_id"] for r in csv.DictReader(handle)}
+        smoke_path = out / "smoke_checks.json"
+        smoke = json.loads(smoke_path.read_text()) if smoke_path.exists() else {"status": "not_run"}
+        failures_path = out / "failure_journal.jsonl"
+        failures = [json.loads(s) for s in failures_path.read_text().splitlines() if s] if failures_path.exists() else []
+    out = output_dir or out
+    out.mkdir(parents=True, exist_ok=True)
     audit = integrity(rows, manifest, expected_ids)
-    smoke_path = out / "smoke_checks.json"
-    smoke = json.loads(smoke_path.read_text()) if smoke_path.exists() else {"status": "not_run"}
     audit["smoke_status"] = smoke["status"]
     smoke_identities = {(r["policy"], r["arm"], r["task_id"]) for r in smoke.get("checks", [])}
     expected_smoke = {(p, a, t) for p in POLICIES for a in "ABCDE" for t in manifest["smoke_task_ids"]}
     if smoke["status"] != "passed" or smoke_identities != expected_smoke or len(smoke.get("checks", [])) != 160:
         audit["status"] = "incomplete_or_invalid"
         audit["errors"].append("16-line real-model diagnostics equivalence not passed")
-    failures_path = out / "failure_journal.jsonl"
-    failures = [json.loads(s) for s in failures_path.read_text().splitlines() if s] if failures_path.exists() else []
     successful = {(r["policy"], r["arm"], r["task_id"]) for r in rows}
     audit["historical_failure_events"] = len(failures)
     audit["unrecovered_failure_keys"] = len({(r["policy"], r["arm"], r["task_id"]) for r in failures} - successful)
     audit["no_new_sealed_test_access"] = True
+    if audit["base_task_count"] != 164:
+        audit["errors"].append("base task count differs from 164")
+        audit["status"] = "incomplete_or_invalid"
     write_json(out / "integrity_audit.json", audit)
     # Compact per-case export is local evidence, not model/diagnostic tensors.
     with (out / "per_case.jsonl").open("w") as handle:
@@ -130,7 +142,7 @@ def analyze(out: Path) -> dict:
             f"已完成 `{len(rows)}/10330` 行；16 行真实模型检查 `{smoke['status']}`。"
             "未产生完整实验结论；空表表示未测量，不能解读为零收益。\n\n"
             "训练出的头究竟有没有帮忙？尚不能归因；旧 D−B 包含路径变化，必须测 D−C。\n\n"
-            "公平计时后到底快多少？尚未测量；旧 wall 含评测和不对称诊断，不能复用。\n\n"
+            "共享 H200 上观测到多大纯生成速度比？尚未测量；旧 wall 含评测和不对称诊断，不能复用。\n\n"
             "让模型重新算，能不能明显救回来？尚未测量。E 实现和 CPU 检查不能替代真实模型结果。\n\n"
             "下一轮最值得改哪一件事，为什么？先完成本轮固定协议，"
             "获得归因和机制证据后再选算法改动。不得凭缺失结果选新方法。\n\n"
@@ -226,7 +238,7 @@ def analyze(out: Path) -> dict:
         else:
             certainty = "本轮未支持正向额外贡献"
         lines.append(f"{policy}：D−C 净 {trained['net']:+d}，C−B 净 {path['net']:+d}；{certainty}。本轮 D−B 净变化为这两项之和，不能只凭旧 D−B 分配归因，也不能据此说过去所有收益都是假的。")
-    lines += ["", "公平计时后到底快多少？"]
+    lines += ["", "共享 H200 上观测到多大纯生成速度比？"]
     for policy in POLICIES:
         for arm in "BCD":
             r = totals[policy, arm]
@@ -262,6 +274,19 @@ def analyze(out: Path) -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--result-dir", required=True)
+    parser.add_argument("--result-dir", type=Path)
+    parser.add_argument("--evidence-dir", type=Path)
+    parser.add_argument("--output-dir", type=Path)
     args = parser.parse_args()
-    analyze(Path(args.result_dir).resolve())
+    if args.result_dir is None and args.evidence_dir is None:
+        parser.error("provide --result-dir or --evidence-dir")
+    source = (args.result_dir or args.evidence_dir.parent).resolve()
+    bundle = (args.evidence_dir or source / "evidence").resolve()
+    # CLI offline reproduction always gets a separate destination, preserving
+    # published tables/report. Legacy live-run analyze(out) remains supported.
+    destination = (args.output_dir or source / "recomputed").resolve()
+    if destination == source:
+        parser.error("--output-dir must differ from source; keep published evidence unchanged")
+    audit = analyze(source, evidence_dir=bundle, output_dir=destination)
+    print(json.dumps(audit, ensure_ascii=False))
+    raise SystemExit(0 if audit["status"] == "passed" else 2)

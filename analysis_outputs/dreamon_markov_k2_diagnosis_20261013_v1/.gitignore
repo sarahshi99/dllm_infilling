@@ -7,3 +7,4 @@ progress.json
 launch.log
 background.log
 smoke_progress.json
+.private_original_manifests/
