@@ -1,0 +1,10 @@
+session_events.jsonl
+session_stderr.log
+session_final.zh.md
+session.lock
+session_launch.json
+runner_exit.json
+completion.json
+*.tmp
+*_progress.log
+push_result.json

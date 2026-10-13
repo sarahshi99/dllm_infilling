@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "method": "Node executes exact page JavaScript with minimal DOM API harness",
+  "limitations": "No installed browser; visual layout/native browser rendering not verified",
+  "checks": [
+    "default326",
+    "both policies",
+    "all2066",
+    "all-pass1740",
+    "five-bit and eight-class filters",
+    "error/level/base filters",
+    "code search",
+    "pagination",
+    "stable-ID navigation",
+    "expanded Chinese/quotes/newlines",
+    "inert adversarial text",
+    "switchable final text diff"
+  ],
+  "utc": "2026-10-13T13:04:45.263Z"
+}

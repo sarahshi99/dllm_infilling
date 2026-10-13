@@ -1,0 +1,34 @@
+{
+  "time_utc": "2026-10-13T12:22:32.062431+00:00",
+  "source_commit": "c84384752819d217b930d373421a348c450797ad",
+  "remote_fetched": true,
+  "remote_newer_commit": false,
+  "newer_error_audit_branch_found": false,
+  "record_count": 10330,
+  "unique_record_count": 10330,
+  "per_group_counts": {
+    "global_confidence/A": 1033,
+    "global_confidence/B": 1033,
+    "global_confidence/C": 1033,
+    "global_confidence/D": 1033,
+    "global_confidence/E": 1033,
+    "left_to_right_frontier/A": 1033,
+    "left_to_right_frontier/B": 1033,
+    "left_to_right_frontier/C": 1033,
+    "left_to_right_frontier/D": 1033,
+    "left_to_right_frontier/E": 1033
+  },
+  "base_task_count": 164,
+  "review_queue_total": 326,
+  "review_queue_by_policy": {
+    "global_confidence": 144,
+    "left_to_right_frontier": 182
+  },
+  "review_queue_task_ids": 198,
+  "review_queue_base_tasks": 100,
+  "failed_output_count": 1220,
+  "invalid_passed_records": 0,
+  "prior_statistics_recomputed": false,
+  "prior_statistics_reference": "../dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/reproduction_audit.json",
+  "semantic_reviews_completed": 0
+}

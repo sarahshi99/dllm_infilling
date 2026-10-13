@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'">
+<title>DreamOn + Markov K2 · 326例错误审计</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#192f42;background:#f1f5f8}body{margin:0}header,main{max-width:1250px;margin:auto;padding:22px}header{background:#102e43;color:white}h1{font-size:25px}p{line-height:1.7}.controls{display:flex;gap:10px;flex-wrap:wrap;padding:16px;background:white;position:sticky;top:0;z-index:2;border-bottom:1px solid #bcd}label{display:flex;flex-direction:column;font-size:12px}input,select,button{font:inherit;padding:8px;border:1px solid #abc;border-radius:5px}input{min-width:230px}button{cursor:pointer}details{background:white;border:1px solid #ccd;border-radius:7px;margin:12px 0;padding:14px}summary{cursor:pointer;font-weight:600;word-break:break-all}.bits{font-family:monospace;color:#176b77}pre{background:#102b3c;color:#e4eff6;padding:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;tab-size:4;font-size:13px}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}.badge{border-radius:4px;background:#dcecf3;padding:3px 6px;margin-right:5px}mark{background:#ffd66e;color:#172936}nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.note{background:#eef5e8;padding:14px}h2{font-size:19px}h3{font-size:16px}a{color:#0b658a}#count{padding:10px}footer{padding:20px}.muted{color:#526573}
+</style>
+<header><h1>DreamOn + Markov K2：逐条代码错误案例集</h1>
+<p>2026-10-13 · 单个 Codex 人工代码审阅 326/326（global 144、frontier 182；198挖空、100基础题），覆盖1,220个失败输出。未审阅0、缺关键语义证据0。五组全对的1,740个策略行保留，标“无需失败分析”。</p>
+<p>A=同策略无头K1；B=无头K2；C=同路径零输出头；D=v2 KL λ=1；E=固定原右位、仅提交左词后真实重算。通过位均为历史结果。两策略分别分析；1033行/164基础题是重复开发人口、种子42。E不是K1、正式验证器或上界；共享H200速度不是独占测量。</p>
+<p>最终代码错误尽量有编译或隔离CPU证据；326例首次生成分歧均 unknown。没有新增生成、训练或GPU工作。13个历史超时各用原3秒复评一次，仍超时。插桩不改断言、不为记录额外调用候选；另与原测试运行对照一致。JSON快照对tuple/list统一成数组，完整代码和断言保留实际类型语义。</p></header>
+<main><div class="controls">
+<label>搜索稳定ID / 代码 / 中文解释<input id="search" placeholder="例如 HumanEval/101 或 return return"></label>
+<label>策略<select id="policy"><option value="">全部</option><option>global_confidence</option><option>left_to_right_frontier</option></select></label>
+<label>A/B/D八类<select id="abd"><option value="">全部</option></select></label>
+<label>A/B/C/D/E状态<select id="bits"><option value="">全部</option></select></label>
+<label>基础题<select id="base"><option value="">全部</option></select></label>
+<label>错误类型<select id="error"><option value="">全部</option></select></label>
+<label>证据等级<select id="level"><option value="">全部</option><option>直接观察</option><option>有限支持</option><option>待验证假设</option><option>无法判断</option></select></label>
+<label>审阅状态<select id="status"><option value="">全部</option><option>reviewed</option><option>missing_evidence</option><option>pending</option><option>failed_infrastructure</option><option>无需失败分析</option></select></label>
+<label>范围<select id="scope"><option value="failures">默认326失败案例</option><option value="all">全部2066策略行</option></select></label>
+<button id="reset">清除筛选</button></div>
+<p class="muted">位序始终A/B/C/D/E，1=原通过、0=原失败、?=unknown。基础题数不可跨格相加。选全量范围可查看全对行。代码只作文本显示；离线页面从不执行候选。</p>
+<div id="count" aria-live="polite"></div><nav><button id="prev">上一页</button><span id="page"></span><button id="next">下一页</button></nav><div id="cases"></div>
+<footer>数据来源：c843847 补证，340170c 原结果；字段原值与 gzip 逐字段一致。配对、32格/八类、覆盖和报告见同目录文件。页面全量数据内嵌，不依赖CDN/服务。</footer></main>
+<script type="application/json" id="audit-data">__AUDIT_JSON__</script>
+<script>
+'use strict';
+const DATA=JSON.parse(document.getElementById('audit-data').textContent), CASES=DATA.cases;
+const $=id=>document.getElementById(id);let page=0,filtered=[];const pageSize=25;
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+function pre(text){return el('pre',text)}
+function fill(id,values){for(const v of values)$(id).append(el('option',v))}
+fill('abd',Array.from({length:8},(_,i)=>i.toString(2).padStart(3,'0')));
+fill('bits',Array.from({length:32},(_,i)=>i.toString(2).padStart(5,'0')));
+fill('base',[...new Set(CASES.map(c=>c.base_task_id))].sort((a,b)=>+a-+b));
+fill('error',[...new Set(CASES.flatMap(c=>c.error_types))].sort());
+for(const c of CASES)c.searchText=(c.stable_id+' '+Object.values(c.arms).map(a=>a.output).join(' ')+' '+Object.values(c.failures).map(f=>f.explanation_zh).join(' ')).toLowerCase();
+function matches(c){const q=$('search').value.toLowerCase();return ($('scope').value==='all'||c.status!=='无需失败分析')&&(!q||c.searchText.includes(q))&&['policy','abd','bits'].every(id=>!$(id).value||c[id]===$(id).value)&&(!$('base').value||c.base_task_id===$('base').value)&&(!$('status').value||c.status===$('status').value)&&(!$('error').value||c.error_types.includes($('error').value))&&(!$('level').value||c.evidence_levels.includes($('level').value))}
+function filter(){page=0;filtered=CASES.filter(matches);render()}
+function program(c,a){const p=DATA.contexts[c.task_id];return p.prompt+c.arms[a].output+p.suffix+'\n'+p.test+'\ncheck('+p.entry_point+')'}
+function diffView(box,left,right){box.replaceChildren();let start=0;while(start<left.length&&start<right.length&&left[start]===right[start])start++;let end=0;while(end<left.length-start&&end<right.length-start&&left[left.length-1-end]===right[right.length-1-end])end++;box.append(el('p',left===right?'两份最终文本完全一致':'最终文本首差异字符偏移='+start+'；这是最终文本位置，不是生成首次决策。'));const cols=el('div',undefined,'columns');for(const s of [left,right]){const p=el('pre');p.append(document.createTextNode(s.slice(0,start)),el('mark',s.slice(start,end?s.length-end:s.length)),document.createTextNode(end?s.slice(s.length-end):''));cols.append(p)}box.append(cols)}
+function detail(c,container){const context=DATA.contexts[c.task_id];const permalink=el('a','此案例固定链接');permalink.href='#'+encodeURIComponent(c.stable_id);container.append(el('p',c.stable_id),permalink,el('p','检查：'+(c.checked.join('、')||'五组历史全对，未做错误归因')));
+const same=el('button','同基础题相关行');same.onclick=()=>{$('base').value=c.base_task_id;filter()};container.append(same);
+const ctx=el('details');ctx.append(el('summary','题意 / 原prefix / 原suffix / 官方测试 / 参考实现（不是唯一答案）'));
+for(const [name,key] of [['Prefix（含原题说明）','prompt'],['Suffix','suffix'],['原官方测试','test'],['参考补全','canonical_solution']])ctx.append(el('h3',name),pre(context[key]));container.append(ctx);
+const diff=el('details');diff.append(el('summary','切换两组最终输出差异'));const l=el('select'),r=el('select');for(const a of 'ABCDE'){l.append(el('option',a));r.append(el('option',a))}l.value='C';r.value='D';const view=el('div');const update=()=>diffView(view,c.arms[l.value].output,c.arms[r.value].output);l.onchange=r.onchange=update;diff.append(l,r,view);update();container.append(diff);
+for(const a of 'ABCDE'){const arm=c.arms[a],f=c.failures[a],d=el('details');d.append(el('summary',a+' · '+(arm.passed?'原通过':'原失败')+' · '+arm.failure_reason));d.append(el('h3','原始输出（缩进/换行保留）'),pre(arm.output));if(f){d.append(el('p',f.observable_label+' / 直接代码证据；首次生成分歧unknown'),el('p',f.explanation_zh,'note'));if(f.relevant_snippet)d.append(el('p','完整候选行号 '+f.failure_position),pre(f.relevant_snippet));const evidence=el('details');evidence.append(el('summary','原评分 / 编译或安全CPU取证 / 官方断言与调用值'),pre(JSON.stringify(f.test_evidence,null,2)));d.append(evidence)}else d.append(el('p','保留历史通过对照；未用参考文本差异判错。'));
+const full=el('details');full.append(el('summary','完整官方拼接候选程序'),pre(program(c,a)));d.append(full);const fields=el('details');fields.append(el('summary','全部原字段 / token IDs / 计数'),pre(JSON.stringify(arm,null,2)));d.append(fields);container.append(d)}
+const mech=el('details');mech.append(el('summary','事实、机制推测、值得检查的层与未知'));for(const m of c.mechanisms)mech.append(el('p',m.layer+' · '+m.level+'：'+m.fact));mech.append(el('p','反例：E也可新增错误；A失败不代表模型上限；头调用不代表失败位置被覆盖。'),el('p','未知：'+c.unknowns.join('；')),el('p','审阅出处：'+(c.review_source||'无需失败分析')+'；原字段per_case_compact.jsonl；候选/测试task_contexts.json和candidates.jsonl；CPU official_test_replay.jsonl。'));container.append(mech)}
+function render(){const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.max(0,Math.min(page,pages-1));$('cases').replaceChildren();$('count').textContent='筛选结果 '+filtered.length+' / '+CASES.length+' 策略行；326已审，0未审，0缺关键语义证据';$('page').textContent=(page+1)+' / '+pages;$('prev').disabled=page===0;$('next').disabled=page===pages-1;
+for(const c of filtered.slice(page*pageSize,(page+1)*pageSize)){const d=el('details');d.dataset.id=c.stable_id;const s=el('summary',c.stable_id+' · '+c.status+' · ');s.append(el('span',c.bits+' (ABD '+c.abd+')','bits'));d.append(s);let loaded=false;d.addEventListener('toggle',()=>{if(d.open&&!loaded){detail(c,d);loaded=true}});$('cases').append(d)}}
+for(const id of ['search','policy','abd','bits','base','error','level','status','scope'])$(id).addEventListener(id==='search'?'input':'change',filter);
+$('prev').onclick=()=>{page--;render()};$('next').onclick=()=>{page++;render()};$('reset').onclick=()=>{for(const id of ['search','policy','abd','bits','base','error','level','status'])$(id).value='';$('scope').value='failures';filter()};
+function navigate(){if(!location.hash)return;const id=decodeURIComponent(location.hash.slice(1));$('reset').onclick();$('scope').value='all';$('search').value=id;filter();const d=$('cases').firstElementChild;if(d)d.open=true}window.addEventListener('hashchange',navigate);filter();navigate();
+</script></html>

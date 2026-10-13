@@ -1,0 +1,25 @@
+{
+  "samples": 1052,
+  "first_sample_utc": "2026-10-13T01:38:09Z",
+  "last_sample_utc": "2026-10-13T02:32:52Z",
+  "other_task_count_range": [
+    6,
+    6
+  ],
+  "all_samples_have_other_tasks": true,
+  "utilization_pct_min_median_max": [
+    0.0,
+    0.0,
+    96.0
+  ],
+  "memory_used_mib_min_max": [
+    91761.0,
+    109505.0
+  ],
+  "time_alignment_limit": "no case/evaluator UTC timestamps or host CPU load; row-boundary snapshots cannot establish timeout cause",
+  "source": "../dreamon_markov_k2_diagnosis_20261013_v1/evidence/gpu_background.csv",
+  "shared_h200": true,
+  "new_gpu_measurements": 0,
+  "summary_reference": "../dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/report.zh.md",
+  "limitation": "row-boundary snapshots; not continuous; no evaluator UTC to align; no other users PID/path/command reproduced"
+}

@@ -17,3 +17,7 @@ python analysis/review_dreamon_markov_k2_diagnosis.py \
 ```
 
 起点HEAD `340170ce6ae44477027dd7e94ec7a9c0f0910384`；最后归档HEAD由包含本索引的Git提交及最终回复标明。本轮CPU工作完成后停止。
+
+## 2026-10-13 后续全量语义审阅完成节点（追加）
+
+[新的错误审计索引](../../dreamon_markov_error_audit_20261013_v1/INDEX.zh.md)：326/326策略行、198挖空/100基础题、全部1220失败输出逐条解释；[离线HTML](../../dreamon_markov_error_audit_20261013_v1/casebook.html)。13个历史超时各一次同3秒隔离CPU复评仍超时；原评分、原表和本复核报告保留。新分支`codex/dreamon-markov-error-audit-v1`，无GPU/训练/生成。首次生成分歧缺trace仍unknown，未审阅0。

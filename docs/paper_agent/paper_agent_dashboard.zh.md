@@ -423,3 +423,13 @@ DLLM 代码 infilling 的 inference-time length control 不能简化为单一长
 - D−B净+9/+13追回B相对A并行净损失的18%/20%，不混用A对/B错子组救回比例。E仍是固定原右位只填左后重算的机制诊断，不是K1等价、数学上界或成功验证算法。
 - 当前复核入口：`analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/INDEX.zh.md`；review_manifest.latest.json已引用，旧manifest快照和旧条目保留。最终归档脚本后续自动纳入紧凑证据并去除GPU进程身份信息。
 - 本轮CPU工作到提交推送即停止；没有生成/评测重跑、训练、GPU实验或停止其他进程。后续最小CPU超时检查/独占计时均仅写条件和命令，未排队，不自动推进新方法。
+
+<!-- dreamon-markov-error-audit-20261013-v1-completed -->
+## 2026-10-13 DreamOn + Markov 全量错误审计完成（追加）
+
+- 单个持久Codex实际审阅326/326策略行（global144/frontier182），198挖空、100基础题；1220失败输出全部逐组解释；unreviewed/missing_evidence/failed_infrastructure=0。全对1740策略行只保留，未冒充错误归因已审。
+- 全部10330原字段/输出/词元与c843847补证gzip精确一致；新32格/ABD八类/对称四格连接通过，复用旧1588格审核与CI。原报告、通过位、历史日期均保留。
+- 447失败程序编译定位；773失败取证记录（248次新官方执行，其余同程序证据复用），13历史超时各一次同3秒隔离CPU复评仍超时。bwrap/空环境/只读运行时/seccomp/资源限/关闭网络/凭据不可见，单并发，不使用GPU。760条插桩与原测试结果一致；早期清理故障单独保留并修复，原官方结果不改。
+- D-C救44行中37为原语法/缩进失败；D-B伤害6/11，含语法、边界、覆盖、类型和逻辑条件；D失败/E通过28/48，D/E都失败95/95。A/B/D都失败73/78。首次生成分歧326行均unknown，未将最终差异或动作总数倒推成因果。
+- 报告/单文件离线HTML/逐条人工记录/coverage完整入口：[审计索引](../../analysis_outputs/dreamon_markov_error_audit_20261013_v1/INDEX.zh.md)。HTML默认326，支持全2066策略行；数据与DOM/实际JS交互验证通过，无原生浏览器视觉验证。
+- 分支`codex/dreamon-markov-error-audit-v1`；reviewer_gate_disabled，本地diff+fresh verification。commit/push完成标志在ignored本地completion.json，启动器退出另存runner_exit.json；没有自动重启、子智能体或后续GPU研究。

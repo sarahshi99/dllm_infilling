@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "verified_utc": "2026-10-13T13:04:45.002532+00:00",
+  "compact_exact": true,
+  "joins_and_labels": true,
+  "joint_cells": 80,
+  "paired_tables": 10,
+  "symmetric_pairs": true,
+  "failures": 1220,
+  "reviewed": 326,
+  "timeout_replays_once": 13,
+  "instrumentation_disagreements": 0,
+  "historical_replay_differences": [],
+  "html_embedded_cases": 2066,
+  "html_output_records": 10330,
+  "browser": "no browser tool/binary or playwright/puppeteer installed; Node DOM interaction verification separately recorded",
+  "static_html_safety": "all data escaped in application/json; DOM textContent; no eval/innerHTML/CDN"
+}

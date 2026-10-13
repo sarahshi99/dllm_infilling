@@ -1,0 +1,141 @@
+{
+  "audit_version": 1,
+  "source_branch": "codex/dreamon-markov-k2-diagnosis-v1",
+  "source_commit": "c84384752819d217b930d373421a348c450797ad",
+  "original_result_commit": "340170ce6ae44477027dd7e94ec7a9c0f0910384",
+  "dataset_root": "/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff",
+  "dataset_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+  "dataset_file": "data/HumanEval-SingleLineInfilling.jsonl.gz",
+  "fields": [
+    "policy",
+    "arm",
+    "task_id",
+    "base_task_id",
+    "line_id",
+    "seed",
+    "row_seed",
+    "code_commit",
+    "output",
+    "passed",
+    "failure_reason",
+    "generation_sec",
+    "evaluator_sec",
+    "output_chars",
+    "output_tokens",
+    "completion_token_ids",
+    "final_dynamic_length",
+    "final_remaining_masks",
+    "forward_count",
+    "base_forward_count",
+    "recompute_forward_count",
+    "outer_round_count",
+    "recompute_enabled_count",
+    "structural_stop_count",
+    "normal_token_count",
+    "expand_count",
+    "delete_count",
+    "markov_enabled_count",
+    "adjacent_opportunity_count",
+    "nonadjacent_fallback_count",
+    "corrected_structural_stop_count",
+    "file_write_sec"
+  ],
+  "original_evidence": "../dreamon_markov_k2_diagnosis_20261013_v1/evidence/per_case.jsonl.gz",
+  "reused": [
+    "1588-cell reproduction audit",
+    "original summary/paired/cluster CI",
+    "anonymous GPU background"
+  ],
+  "missing": [
+    "matching generation traces",
+    "historical evaluation traceback/CPU/exitcode"
+  ],
+  "concatenation": "prompt + output + suffix + '\\n' + test + '\\n' + 'check(entry_point)'",
+  "evaluator_enablement": "uncomment exact exec line only; same pinned evaluator",
+  "no_gpu": true,
+  "run_context": {
+    "code_commit": "a55b1fd78795ae5f83845302a76f31780dda8cd2",
+    "branch": "codex/dreamon-markov-k2-diagnosis-v1",
+    "seed": 42,
+    "smoke_task_ids": [
+      "SingleLineInfilling/HumanEval/0/L0",
+      "SingleLineInfilling/HumanEval/105/L3",
+      "SingleLineInfilling/HumanEval/111/L5",
+      "SingleLineInfilling/HumanEval/123/L1",
+      "SingleLineInfilling/HumanEval/129/L21",
+      "SingleLineInfilling/HumanEval/137/L1",
+      "SingleLineInfilling/HumanEval/143/L9",
+      "SingleLineInfilling/HumanEval/154/L3",
+      "SingleLineInfilling/HumanEval/19/L3",
+      "SingleLineInfilling/HumanEval/32/L7",
+      "SingleLineInfilling/HumanEval/46/L2",
+      "SingleLineInfilling/HumanEval/59/L9",
+      "SingleLineInfilling/HumanEval/71/L3",
+      "SingleLineInfilling/HumanEval/81/L12",
+      "SingleLineInfilling/HumanEval/93/L0",
+      "SingleLineInfilling/HumanEval/99/L9"
+    ],
+    "dtype": "bfloat16 model, float32 rank-256 heads (same as previous)",
+    "actual_device": "NVIDIA H200 NVL",
+    "allow_shared_gpu": true,
+    "status": "completed_generation",
+    "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+    "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+    "head_rank": 256,
+    "head_lambda": 1.0,
+    "generation_parameters": {
+      "max_gen_len": 64,
+      "max_tokens": 2048,
+      "min_gen_len": 64,
+      "steps": 256,
+      "temperature": 0.2,
+      "top_k": null,
+      "top_p": 0.9
+    },
+    "right_sample_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
+    "bootstrap": {
+      "cluster": "base task",
+      "replicates": 10000,
+      "scope": "conditional on single generation seed 42",
+      "seed": 20261013,
+      "weights": [
+        "line",
+        "base_task_equal"
+      ]
+    },
+    "gpu_session_sec": 2886.023884361144,
+    "evaluation_timeout_sec": 3.0,
+    "command": "python analysis/analyze_dreamon_markov_k2_diagnosis.py --result-dir RESULT_DIR --output-dir RECOMPUTED_DIR",
+    "evaluator": {
+      "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+      "evaluator_mode": "upstream_documented_local_enablement_overlay",
+      "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+      "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
+    },
+    "head": {
+      "head": "kl",
+      "phase": "full",
+      "label": "best",
+      "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+      "size": 934907317
+    }
+  },
+  "cpu_environment": {
+    "python": "/usr/bin/python3 (Python 3.10)",
+    "parent_python": "3.9.23",
+    "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+    "gpu_set": [],
+    "concurrency": 1,
+    "timeout_sec": 3.0
+  },
+  "audit_code_version": "Git commit containing audit scripts; actual full commit in local completion.json",
+  "restored_problem_fields": [
+    "task_id",
+    "entry_point",
+    "prompt",
+    "suffix",
+    "canonical_solution",
+    "test"
+  ],
+  "no_new_sealed_test_access": true
+}

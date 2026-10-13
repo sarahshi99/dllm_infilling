@@ -1,0 +1,29 @@
+{
+  "result": {
+    "probe": {
+      "network": true,
+      "shell": true,
+      "host_write": true,
+      "credential": true
+    },
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "PWD": "/tmp",
+      "LC_CTYPE": "C.UTF-8"
+    },
+    "child_exitcode": 0,
+    "child_signal": null,
+    "start_utc": "2026-10-13T12:27:10.750078+00:00",
+    "end_utc": "2026-10-13T12:27:10.804963+00:00",
+    "parent_wall_sec": 0.05489779682829976,
+    "host_load": [
+      2.82275390625,
+      2.87548828125,
+      2.83740234375
+    ]
+  },
+  "constraints": "bwrap unshare-all, empty env, only readonly runtime/input, private tmp, seccomp deny networking/process/exec/system calls, RLIMIT_AS/CPU/FSIZE/NOFILE/CORE, parent 7s wall",
+  "exact_command": "python analysis/audit_dreamon_markov_errors.py replay",
+  "candidate_execution_before_probe": false
+}

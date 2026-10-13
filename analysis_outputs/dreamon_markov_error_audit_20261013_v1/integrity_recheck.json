@@ -1,0 +1,27 @@
+{
+  "records": 10330,
+  "unique_records": 10330,
+  "cases": 2066,
+  "review_cases": 326,
+  "context_ids": 198,
+  "context_join_missing": [],
+  "duplicate_keys": [],
+  "invalid_passed": [],
+  "incomplete_cases": [],
+  "per_group": {
+    "global_confidence/A": 1033,
+    "global_confidence/B": 1033,
+    "global_confidence/C": 1033,
+    "global_confidence/D": 1033,
+    "global_confidence/E": 1033,
+    "left_to_right_frontier/A": 1033,
+    "left_to_right_frontier/B": 1033,
+    "left_to_right_frontier/C": 1033,
+    "left_to_right_frontier/D": 1033,
+    "left_to_right_frontier/E": 1033
+  },
+  "compact_equals_published": true,
+  "prior_audit": "../dreamon_markov_k2_diagnosis_20261013_v1/review_20261013/reproduction_audit.json",
+  "prior_1588_cells_recomputed": false,
+  "differences": []
+}
