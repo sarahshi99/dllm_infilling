@@ -1,0 +1,56 @@
+{
+  "observed_at_utc": "2026-10-13T10:45:01.278326+00:00",
+  "status": "blocked_download_incomplete_final",
+  "reason": "All four official shards exhausted three bounded attempts; low-speed and Xet read timeouts. Git-LFS batch alternate succeeded but CDN proxy TLS EOF. No complete weight shard.",
+  "download_session_id": 88758,
+  "download_pid": 836684,
+  "gpu_job_hours": 0,
+  "gpu_technical_check": "not_run_weights_incomplete",
+  "files": [
+    {
+      "name": "model-00001-of-00004.safetensors",
+      "expected_bytes": 4877660776,
+      "final_exists": false,
+      "partial_bytes": 6310653,
+      "sha256_verified": false
+    },
+    {
+      "name": "model-00002-of-00004.safetensors",
+      "expected_bytes": 4932751008,
+      "final_exists": false,
+      "partial_bytes": 69262797,
+      "sha256_verified": false
+    },
+    {
+      "name": "model-00003-of-00004.safetensors",
+      "expected_bytes": 4330865200,
+      "final_exists": false,
+      "partial_bytes": 17564964,
+      "sha256_verified": false
+    },
+    {
+      "name": "model-00004-of-00004.safetensors",
+      "expected_bytes": 1089994880,
+      "final_exists": false,
+      "partial_bytes": 45401449,
+      "sha256_verified": false
+    }
+  ],
+  "recovery_command": "python scripts/download_dream_base_transfer.py",
+  "compatibility_result": "CPU audit passed; generation semantics/quality unmeasured",
+  "download_exit_code": 1,
+  "download_running": false,
+  "observations": [
+    {
+      "at": "2026-10-13T10:38:36.807824+00:00",
+      "status": "blocked_download_incomplete",
+      "download_running": true
+    },
+    {
+      "at": "2026-10-13T10:45:01.278326+00:00",
+      "status": "blocked_download_incomplete_final",
+      "download_running": false,
+      "exit_code": 1
+    }
+  ]
+}

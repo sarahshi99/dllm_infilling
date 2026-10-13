@@ -49,3 +49,9 @@ python scripts/download_dream_base_transfer.py > analysis_outputs/zero_training_
 ```
 
 首次requests流式下载在Xet重定向后停滞并出现read timeout；本智能体停止自己的下载进程，保留 `.part`，未触及其他进程。下载器已改为curl两分片并行、最多3次重试，每次180秒总时限和连续30秒低于128KiB/s的低速停止，`.part`保留且Range恢复；四个shard总计15231271864字节。完成下载后核对官方LFS大小与摘要，成功才重命名为最终文件。运行状态见 `weight_download.log`、最终 `weight_download_manifest.json`；不在Git提交权重。主控最终registry/运行清单登记GPU检查和实际质量状态。本轮未另行训练；缺失DreamOn权重的自行重建与分别训练头保持未来方案。
+
+## 2026-10-13 最终节点：下载阻塞，B 路停止 GPU 前准备
+
+四个 shard 均已耗尽3次有界尝试，下载器退出1，无后台B下载作业；没有完整可加载的Base权重。另测Git-LFS batch返回备用 `us.aws.cdn.hf-mirror.org` 链接成功，但该CDN的1MiB Range经代理出现TLS EOF，未解除阻塞。`lfs_route_probe.json`保存紧凑错误，省略临时签名下载URL。
+
+`execution_status.json` 与 `weight_download_manifest.json`保存最终状态、每个 `.part` 字节数和恢复命令；部分权重未认证，不能加载评测。初次来源登记中的 `weight_download_status=running...` 是当时快照，以本节点和最终执行状态为准。CPU兼容结论仍为通过，GPU 16行技术检查与1033×8全矩阵均**未运行**；该结果不能解释为已训练头迁移失败，也不触发重训。B累计GPU作业小时=0。解除下载阻塞后，先完整核对LFS摘要，再由主控用A统一适配安排16条技术检查与预算估时。

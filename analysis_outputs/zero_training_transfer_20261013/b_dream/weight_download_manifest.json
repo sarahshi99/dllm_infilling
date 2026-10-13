@@ -1,0 +1,22 @@
+[
+  {
+    "name": "model-00001-of-00004.safetensors",
+    "status": "blocked",
+    "error": "Command '['curl', '--fail', '--location', '--silent', '--show-error', '--noproxy', '*', '--connect-timeout', '20', '--max-time', '180', '--speed-limit', '131072', '--speed-time', '30', '--continue-at', '-', '--output', '/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00001-of-00004.safetensors.part', 'https://hf-mirror.com/Dream-org/Dream-v0-Base-7B/resolve/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00001-of-00004.safetensors']' returned non-zero exit status 28."
+  },
+  {
+    "name": "model-00002-of-00004.safetensors",
+    "status": "blocked",
+    "error": "Command '['curl', '--fail', '--location', '--silent', '--show-error', '--noproxy', '*', '--connect-timeout', '20', '--max-time', '180', '--speed-limit', '131072', '--speed-time', '30', '--continue-at', '-', '--output', '/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00002-of-00004.safetensors.part', 'https://hf-mirror.com/Dream-org/Dream-v0-Base-7B/resolve/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00002-of-00004.safetensors']' returned non-zero exit status 28."
+  },
+  {
+    "name": "model-00003-of-00004.safetensors",
+    "status": "blocked",
+    "error": "Command '['curl', '--fail', '--location', '--silent', '--show-error', '--noproxy', '*', '--connect-timeout', '20', '--max-time', '180', '--speed-limit', '131072', '--speed-time', '30', '--continue-at', '-', '--output', '/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00003-of-00004.safetensors.part', 'https://hf-mirror.com/Dream-org/Dream-v0-Base-7B/resolve/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00003-of-00004.safetensors']' returned non-zero exit status 28."
+  },
+  {
+    "name": "model-00004-of-00004.safetensors",
+    "status": "blocked",
+    "error": "Command '['curl', '--fail', '--location', '--silent', '--show-error', '--noproxy', '*', '--connect-timeout', '20', '--max-time', '180', '--speed-limit', '131072', '--speed-time', '30', '--continue-at', '-', '--output', '/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00004-of-00004.safetensors.part', 'https://hf-mirror.com/Dream-org/Dream-v0-Base-7B/resolve/6572adb5535263e4d1a337b56942ba48b6dee2a9/model-00004-of-00004.safetensors']' returned non-zero exit status 28."
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "route": "git_lfs_batch_then_proxy",
+  "error": "SSLError: CDN proxy TLS/SSL connection closed (EOF); signed public download URL omitted",
+  "seconds": 21.8829288482666
+}
