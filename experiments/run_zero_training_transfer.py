@@ -5,6 +5,7 @@ import argparse
 import copy
 import fcntl
 import gzip
+import importlib
 import json
 import os
 from pathlib import Path
@@ -59,7 +60,6 @@ def charge(ledger, session_id, started, target, *, status='running'):
 
 
 def run(args):
-    from experiments.dreamcoder_fixed_transfer_adapter import decode_fixed_transfer, native_fixed_reference
     out = Path(args.output_dir).resolve()
     out.mkdir(parents=True, exist_ok=True)
     original = json.loads(DIAG.read_text())
@@ -67,6 +67,10 @@ def run(args):
     target = registered[args.target]
     if target['direct_transfer_status'] != 'passed' or target['weight_kind'] != 'original_base_fixed_length_auxiliary':
         raise RuntimeError('target has not passed direct transfer compatibility or is not a Base auxiliary')
+    adapter_name=target.get('adapter_module','experiments.dreamcoder_fixed_transfer_adapter')
+    adapter=importlib.import_module(adapter_name)
+    decode_fixed_transfer=adapter.decode_fixed_transfer
+    native_fixed_reference=adapter.native_fixed_reference
     snapshot_path = Path(target['local_path'])
     if not snapshot_path.is_dir() or snapshot_path.name != target['revision']:
         raise RuntimeError('exact target snapshot missing')
@@ -80,13 +84,15 @@ def run(args):
     if smoke_ids != original['smoke_task_ids']:
         raise RuntimeError('fixed smoke IDs mismatch')
     code_paths = ['experiments/run_zero_training_transfer.py', 'experiments/dreamcoder_fixed_transfer_adapter.py', 'experiments/dreamon_singleline_order_parallel.py', 'experiments/dreamon_markov_head_training.py', 'experiments/train_dreamon_markov_head.py']
+    adapter_path=adapter_name.replace('.','/')+'.py'
+    if adapter_path not in code_paths: code_paths.append(adapter_path)
     manifest = {'target': args.target, 'target_registry_entry': target, 'head_registry_entry': original['head_registry_entry'],
                 'source_model_snapshot': original['original_config']['model_snapshot'], 'head_rank':256, 'head_lambda':1,
-                'seed':42, 'smoke_task_ids':smoke_ids, 'population_count':1033, 'base_task_count':164,
+                'seed':42, 'native_reference_eps':target.get('native_eps',1e-3), 'smoke_task_ids':smoke_ids, 'population_count':1033, 'base_task_count':164,
                 'population':'reused development population, single generation seed; no sealed test access',
                 'arms':[{'policy':p,'arm':a,'k':1 if a=='A' else 2} for p,a in ARMS],
-                'parameters':{'canvas_length':64,'steps':64,'eps':1e-3,'temperature':.2,'top_p':.9,'top_k':None,'eos_penalty':3.0},
-                'differences_from_dreamon':'fixed canvas64, no expand/delete; native Base EOS penalty3; fixed K schedule patch in native reference; steps64 safety bound vs DreamOn256; same rules for all arms',
+                'parameters':{'canvas_length':64,'steps':64,'eps':1e-3,'temperature':.2,'top_p':.9,'top_k':None,'eos_penalty':target.get('native_eos_penalty',3.0)},
+                'differences_from_dreamon':f"fixed canvas64, no expand/delete; native Base EOS penalty {target.get('native_eos_penalty',3.0)}; target-specific native reference plus fixed K/order patch; steps64 safety bound vs DreamOn256; same rules for all arms",
                 'timing':'shared H200 cost only; no formal speed ratio', 'command':shlex.join([sys.executable,*sys.argv]),
                 'code_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
                 'code_versions':{p:subprocess.check_output(['git','rev-parse','HEAD:'+p],cwd=REPO,text=True).strip() for p in code_paths}}
@@ -145,7 +151,7 @@ def run(args):
             if model.model.config.vocab_size != trained.vocab_size:
                 raise RuntimeError('model output vocabulary differs from source head')
             # Use this target's native sampler, not DreamOn's dynamic generation code.
-            sample_tokens_fn=sys.modules[model.model.__class__.__module__.rsplit('.',1)[0]+'.generation_utils'].sample_tokens
+            sample_tokens_fn=type(model.model)._sample.__globals__['sample_tokens']
             check_correctness,evaluator_info=load_pinned_evaluator(Path(original['original_config']['evaluator_root']))
             if evaluator_info != original['original_config']['evaluator']:
                 raise RuntimeError('pinned evaluator mismatch')
@@ -155,7 +161,8 @@ def run(args):
                 kwargs=dict(model=model,tokenizer=tokenizer,sample_tokens_fn=sample_tokens_fn,
                             prefix_ids=[tokenizer.bos_token_id]+tokenizer.encode(safe['prefix'],add_special_tokens=False),
                             suffix_ids=tokenizer.encode(safe['suffix'],add_special_tokens=False)+[tokenizer.eos_token_id],
-                            requested_k=1 if a=='A' else 2,policy=POLICIES[p],row_seed=derive_row_seed(42,row['task_id']))
+                            requested_k=1 if a=='A' else 2,policy=POLICIES[p],row_seed=derive_row_seed(42,row['task_id']),
+                            **{k:v for k,v in manifest['parameters'].items() if k!='canvas_length'})
                 torch.manual_seed(kwargs['row_seed']); torch.cuda.manual_seed_all(kwargs['row_seed'])
                 torch.cuda.synchronize(); t=time.perf_counter()
                 before=model.forward_calls

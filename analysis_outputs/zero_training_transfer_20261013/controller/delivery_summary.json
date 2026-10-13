@@ -1,6 +1,6 @@
 {
   "date": "2026-10-13",
-  "verification_head": "d9d19cca9e7bc946fd4719a8fc21590b69eb6db0",
+  "verification_head": "893e2862639265f8bbbc6c4aedd3420294f94184",
   "source_code_commit": "8a0a54918412eda9402a327646f7f067f7160ec8",
   "exact_dreamon_matrix": [
     {
@@ -43,7 +43,7 @@
       "weight_kind": "original_base_fixed_length_auxiliary",
       "status": "running_full",
       "blocker": null,
-      "rows": 72,
+      "rows": 536,
       "expected_rows": 8264,
       "integrity_status": "not_complete",
       "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--Dream-Coder-v0-Base-7B/snapshots/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
@@ -55,7 +55,7 @@
       "revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
       "weight_kind": "original_base_fixed_length_auxiliary",
       "status": "blocked_weights_not_ready",
-      "blocker": "weight download incomplete; GPU technical check pending",
+      "blocker": "weight download blocked after bounded attempts; GPU16/full not run",
       "rows": 0,
       "expected_rows": 8264,
       "integrity_status": "not_complete",
@@ -68,7 +68,7 @@
       "revision": "a2c33054cbe99b9ab7af074f09b1d13943157ff1",
       "weight_kind": "original_base_fixed_length_auxiliary",
       "status": "blocked_weights_not_ready",
-      "blocker": "weight download incomplete; GPU technical check pending",
+      "blocker": "weight download blocked after bounded attempts; GPU16/full not run",
       "rows": 0,
       "expected_rows": 8264,
       "integrity_status": "not_complete",
@@ -78,7 +78,7 @@
   ],
   "preserved_diagnosis_rows": 10330,
   "calibration_rows_in_requested_ABCD": 8264,
-  "gpu_job_cost_hours_this_round": 0.13400431805730073,
+  "gpu_job_cost_hours_this_round": 0.337056598158993,
   "budget_hours_this_round": 12.0,
   "historical_diagnosis_cost_hours": 0.8016733012114289,
   "formal_speedup": null,

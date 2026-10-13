@@ -128,7 +128,10 @@
     "head_rule": "Use original rank256 v2 KL best class and strict all-parameter load, original output_mask; lambda1; no training",
     "base_canvas_length": 64,
     "native_schedule_difference": "Official timestep-proportional schedule needs A minimal fixed-K/frontier reference patch; no invented length control",
-    "adapter_file": "experiments/dreamcoder_fixed_transfer_adapter.py (A; main controller integration)"
+    "adapter_file": "experiments/dreamcoder_fixed_transfer_adapter.py (A; main controller integration)",
+    "adapter_module": "experiments.dream_base_zero_training_adapter",
+    "native_eos_penalty": 0.0,
+    "native_eps": 1e-12
   },
   "diffucoder_base": {
     "id": "apple/DiffuCoder-7B-Base",
@@ -158,6 +161,9 @@
     "old_cal_source": "/home/shx/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/diffucoder_cal",
     "old_cal_source_exists": true,
     "old_cal_source_is_frozen_protocol_adapter": false,
-    "compatibility_audit": "analysis_outputs/zero_training_transfer_20261013/c_diffucoder/tokenizer_compatibility.json"
+    "compatibility_audit": "analysis_outputs/zero_training_transfer_20261013/c_diffucoder/tokenizer_compatibility.json",
+    "adapter_module": "experiments.diffucoder_zero_training_adapter",
+    "native_eos_penalty": 0.0,
+    "native_eps": 1e-12
   }
 }

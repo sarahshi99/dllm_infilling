@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "scope": "CPU fake model only, no actual Base weight inference",
+  "common_adapter": "experiments/dreamcoder_fixed_transfer_adapter.py",
+  "profile": {
+    "model_id": "Dream-org/Dream-v0-Base-7B",
+    "revision": "6572adb5535263e4d1a337b56942ba48b6dee2a9",
+    "local_path": "/home/shx/.cache/dllm_infilling/zero_training_transfer_20261013/dream_base/6572adb5535263e4d1a337b56942ba48b6dee2a9",
+    "weight_kind": "original_base_fixed_length_auxiliary",
+    "canvas_length": 64,
+    "steps": 64,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "alg": "entropy",
+    "eos_penalty": 0.0,
+    "alg_scope": "supported native entropy; existing project Base setting, not native default",
+    "eos_scope": "native Base has no EOS penalty; public decode binds zero"
+  },
+  "checks": [
+    {
+      "policy": "confidence_global",
+      "k": 1,
+      "token_ids_equal": true,
+      "forward_count": 64,
+      "remaining_masks": 0
+    },
+    {
+      "policy": "confidence_global",
+      "k": 2,
+      "token_ids_equal": true,
+      "forward_count": 32,
+      "remaining_masks": 0
+    },
+    {
+      "policy": "left_to_right_frontier",
+      "k": 1,
+      "token_ids_equal": true,
+      "forward_count": 64,
+      "remaining_masks": 0
+    },
+    {
+      "policy": "left_to_right_frontier",
+      "k": 2,
+      "token_ids_equal": true,
+      "forward_count": 32,
+      "remaining_masks": 0
+    }
+  ],
+  "gpu_job_hours": 0
+}

@@ -17,6 +17,25 @@ def main():
     keys={(r['policy'],r['arm'],r['task_id'],r['seed']) for r in calibration}
     if len(calibration)!=10330 or len(keys)!=10330: raise RuntimeError('preserved diagnosis not complete/unique')
     if len({r['base_task_id'] for r in calibration})!=164: raise RuntimeError('wrong preserved clusters')
+    calibration_summary=[]
+    for policy in ('global_confidence','left_to_right_frontier'):
+        for arm in 'ABCD':
+            subset=[r for r in calibration if r['policy']==policy and r['arm']==arm]
+            totals={k:sum(r[k] for r in subset) for k in ('outer_round_count','adjacent_opportunity_count','nonadjacent_fallback_count','markov_enabled_count','structural_stop_count','corrected_structural_stop_count')}
+            pair_denominator=totals['adjacent_opportunity_count']+totals['nonadjacent_fallback_count']
+            calibration_summary.append({'policy':policy,'arm':arm,'passed':sum(r['passed'] for r in subset),'denominator':1033,
+                'quality_failures':sum(not r['passed'] for r in subset),
+                'evaluation_timeouts':sum('timed out' in r['failure_reason'].lower() or 'timeout' in r['failure_reason'].lower() for r in subset),
+                'technical_unrecovered_failures':0, **totals,
+                'head_trigger_rate_per_adjacent_opportunity':totals['markov_enabled_count']/totals['adjacent_opportunity_count'] if totals['adjacent_opportunity_count'] else None,
+                'nonadjacent_fallback_pair_denominator':pair_denominator,
+                'nonadjacent_fallback_rate':totals['nonadjacent_fallback_count']/pair_denominator if pair_denominator else None,
+                'structural_stop_round_denominator':totals['outer_round_count'],
+                'structural_stop_rate_per_outer_round':totals['structural_stop_count']/totals['outer_round_count'],
+                'corrected_structural_stop_head_denominator':totals['markov_enabled_count'],
+                'generation_cost_sec':sum(r['generation_sec'] for r in subset),'formal_speedup':None})
+    with (ROOT/'controller/dreamon_calibration_summary.csv').open('w',newline='') as handle:
+        writer=csv.DictWriter(handle,fieldnames=list(calibration_summary[0]),lineterminator='\n');writer.writeheader();writer.writerows(calibration_summary)
     registry=read(ROOT/'controller/target_registry.json')
     budget=read(ROOT/'controller/gpu_budget.json')
     source=[{'start':'DreamCoder-7B','weight_kind':'exact_dreamon_finetuned','id':'Dream-org/DreamOn-v0-7B','revision':'8ccc74750e43177327f29dab9e91882ba759e194',
@@ -30,7 +49,7 @@ def main():
         audit=read(path/'integrity_audit.json') if (path/'integrity_audit.json').exists() else {}
         progress=read(path/'progress.json') if (path/'progress.json').exists() else {}
         auxiliary.append({'target':target,'id':entry['id'],'revision':entry['revision'],'weight_kind':'original_base_fixed_length_auxiliary',
-                          'status':manifest.get('status','blocked_weights_not_ready'),'blocker':manifest.get('blocker') if manifest else 'weight download incomplete; GPU technical check pending',
+                          'status':manifest.get('status','blocked_weights_not_ready'),'blocker':manifest.get('blocker') if manifest else 'weight download blocked after bounded attempts; GPU16/full not run',
                           'rows':audit.get('rows',progress.get('completed',0)),'expected_rows':8264,'integrity_status':audit.get('status','not_complete'),
                           'local_path':entry['local_path'],'direct_transfer_scope':entry.get('validation_scope')})
     result={'date':'2026-10-13','verification_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
@@ -54,7 +73,7 @@ def main():
             '|DreamOn自身校准顺序|A|B|C|D|D−C帮助/伤害|C−B帮助/伤害|D−B净|D−A净|','|---|---|---|---|---|---|---|---|---|',
             '|global_confidence|951|901|901|910|15/6|0/0|+9|−41|',
             '|left_to_right_frontier|942|877|872|890|29/11|6/11|+13|−52|','',
-            '以上分母均1033；来源校准D−C净+9/+18。global行加权区间含0，frontier基础题等权区间跨0；单种子重复开发人口，不能推广独立测试或跨模型成功。完整D−C/C−B/D−B和相对K1的帮助/伤害、164题cluster 95%CI见a_dreamcoder/dreamon_reuse_paired.json；保全10330行含历史E机制组，无重跑、无改写旧报告。','',
+            '以上分母均1033；来源校准D−C净+9/+18。global行加权区间含0，frontier基础题等权区间跨0；单种子重复开发人口，不能推广独立测试或跨模型成功。完整D−C/C−B/D−B和相对K1的帮助/伤害、164题cluster 95%CI见a_dreamcoder/dreamon_reuse_paired.json；触发率、结构停止/总轮次、非相邻回退/双位机会和失败/超时见controller/dreamon_calibration_summary.csv；保全10330行含历史E机制组，无重跑、无改写旧报告。','',
             'Base若完整，逐目标report.zh.md/paired_comparisons.csv给出六个配对和两种权重cluster区间，summary.csv给触发、结构/非相邻回退分母、失败/超时。兼容但无增益只表示现有头本次迁移未成功；只优于无头但不优于零头不能归因为学习；固定长度失败可能受长度误差主导，不自动否定逐模型重训。','',
             f"本轮累计GPU作业成本 {result['gpu_job_cost_hours_this_round']:.6f}h / {result['budget_hours_this_round']:.1f}h；另存历史诊断成本 {result['historical_diagnosis_cost_hours']:.6f}h。共享H200计时只作成本，没有正式加速比。互斥锁和所有session在controller/gpu_budget.json，GPU背景/命令/版本/PID/恢复状态在目标manifest及controller清单。下载不计GPU。",'',
             '后续仅准备材料：future_training_preparation.md列索取信息、论文/代码差异、选择10epochs重建、有效batch128梯度累积、显存理论范围及以后授权pilot估时方法。没有启动任何主模型微调、头训练、K4或隐藏状态头。','',

@@ -812,3 +812,8 @@ Continue the paper-agent work in /home/shx/projects/dllm_infilling/git_workspace
 ### 2026-10-13 DreamCoder固定64技术检查通过并进入全量
 
 固定16条×8配置=128检查完成；A/B无头与官方局部K/顺序补丁参考token IDs一致，无非法输出或剩余mask，C/D同类同秩λ1二次抽样路径。预计全量13889.316秒（3.858h），1.5余量20833.974秒（5.787h），在本轮12h累计预算内；质量正负均继续8264行，不按smoke正确率筛选。PID832663，manifest代码475ea4c，当前已进入running_full。另两Base仍下载恢复中；缺失DreamOn主表不以Base替代。
+
+
+### 2026-10-13 两目标下载阻塞及原生差异追加
+
+Dream Base和DiffuCoder Base均因持续下载错误、0完整shard停在GPU前，片段与恢复命令已保存；来源/CPU兼容及专用原生参考patch完成。当前仅DreamCoder PID832663在完整8264行，按启动代码475ea4c执行。后续通用runner增加target profile选择（Dream/DiffuCoder无EOS penalty），不改变该Python已载版本。恢复DreamCoder应恢复475ea4c runner blob后focused commit并用同一输出/全局账本；不丢用户改动、不重置12h累计成本。

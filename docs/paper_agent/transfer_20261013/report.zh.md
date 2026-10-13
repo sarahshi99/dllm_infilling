@@ -12,7 +12,7 @@
 
 |原始Base固定64辅助|revision|当前状态|完整行数|
 |---|---|---|---|
-|Dream-org/Dream-Coder-v0-Base-7B|2346ccd3be517d0d314152b988a3b9bafa7d6d63|running_full|72/8264|
+|Dream-org/Dream-Coder-v0-Base-7B|2346ccd3be517d0d314152b988a3b9bafa7d6d63|running_full|536/8264|
 |Dream-org/Dream-v0-Base-7B|6572adb5535263e4d1a337b56942ba48b6dee2a9|blocked_weights_not_ready|0/8264|
 |apple/DiffuCoder-7B-Base|a2c33054cbe99b9ab7af074f09b1d13943157ff1|blocked_weights_not_ready|0/8264|
 
@@ -27,14 +27,14 @@ Base原生日程不是严格每轮K；局部参考只补min(K,remaining)与front
 |global_confidence|951|901|901|910|15/6|0/0|+9|−41|
 |left_to_right_frontier|942|877|872|890|29/11|6/11|+13|−52|
 
-以上分母均1033；来源校准D−C净+9/+18。global行加权区间含0，frontier基础题等权区间跨0；单种子重复开发人口，不能推广独立测试或跨模型成功。完整D−C/C−B/D−B和相对K1的帮助/伤害、164题cluster 95%CI见a_dreamcoder/dreamon_reuse_paired.json；保全10330行含历史E机制组，无重跑、无改写旧报告。
+以上分母均1033；来源校准D−C净+9/+18。global行加权区间含0，frontier基础题等权区间跨0；单种子重复开发人口，不能推广独立测试或跨模型成功。完整D−C/C−B/D−B和相对K1的帮助/伤害、164题cluster 95%CI见a_dreamcoder/dreamon_reuse_paired.json；触发率、结构停止/总轮次、非相邻回退/双位机会和失败/超时见controller/dreamon_calibration_summary.csv；保全10330行含历史E机制组，无重跑、无改写旧报告。
 
 Base若完整，逐目标report.zh.md/paired_comparisons.csv给出六个配对和两种权重cluster区间，summary.csv给触发、结构/非相邻回退分母、失败/超时。兼容但无增益只表示现有头本次迁移未成功；只优于无头但不优于零头不能归因为学习；固定长度失败可能受长度误差主导，不自动否定逐模型重训。
 
-本轮累计GPU作业成本 0.134004h / 12.0h；另存历史诊断成本 0.801673h。共享H200计时只作成本，没有正式加速比。互斥锁和所有session在controller/gpu_budget.json，GPU背景/命令/版本/PID/恢复状态在目标manifest及controller清单。下载不计GPU。
+本轮累计GPU作业成本 0.337057h / 12.0h；另存历史诊断成本 0.801673h。共享H200计时只作成本，没有正式加速比。互斥锁和所有session在controller/gpu_budget.json，GPU背景/命令/版本/PID/恢复状态在目标manifest及controller清单。下载不计GPU。
 
 后续仅准备材料：future_training_preparation.md列索取信息、论文/代码差异、选择10epochs重建、有效batch128梯度累积、显存理论范围及以后授权pilot估时方法。没有启动任何主模型微调、头训练、K4或隐藏状态头。
 
 命令：scripts/run_zero_training_transfer_dreamcoder_20261013.sh；通用runner支持已登记另两目标，必须先完成权重和技术检查；最终合并报告命令 python scripts/finalize_zero_training_transfer_20261013.py。原工作区未提交修改未动。
 
-验证时HEAD：`d9d19cca9e7bc946fd4719a8fc21590b69eb6db0`。最终交付HEAD见Git提交及最终回复（本文件无需自指未来commit）。
+验证时HEAD：`893e2862639265f8bbbc6c4aedd3420294f94184`。最终交付HEAD见Git提交及最终回复（本文件无需自指未来commit）。

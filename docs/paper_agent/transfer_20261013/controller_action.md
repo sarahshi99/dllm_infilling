@@ -29,3 +29,12 @@ nohup bash scripts/run_zero_training_transfer_dreamcoder_20261013.sh > analysis_
 共享卡实测仍有>32GiB可用才加载；互斥锁不等待其他作业，资源不足退出并保存阻塞。16条固定ID先校验A/B原生参考一致、C/D路径/非法token；全量估时以16条成本×1033/16，1.5余量与全局剩余预算比较。若技术错误立即停该目标，修复后重做16条。共享耗时只计成本，不生成正式加速比。输出包含原子progress、SQLite成功事务、failure journal、compact gzip、配对/cluster CI、exit及账本。
 
 启动修正：首次nohup未存活（0 GPU成本、未生成manifest），改用 `tmux new-session -d -s zero_transfer_dreamcoder_20261013 'bash scripts/run_zero_training_transfer_dreamcoder_20261013.sh'`；方法、数据、参数不变。
+
+
+## 2026-10-13 另外两目标的原生差异与下载阻塞
+
+B/C精确generation_utils均没有DreamCoder EOS罚项，只有一处selection marker（DreamCoder两处），native硬编码eps1e-12；固定K补丁后eps只影响已移除的比例调度，EOS罚项0因此不改变分布。专用模块分别experiments.dream_base_zero_training_adapter、experiments.diffucoder_zero_training_adapter，各自绑定penalty0/独立原生参考；entropy为项目既有Base设置、两原生版本均支持，不冒充官方默认maskgit_plus。两目标各两顺序×K1/K2完整CPU参考等价检查通过；C另用高概率EOS检测误罚项。
+
+通用runner后续版本改为按target registry选择独立模块，并记录本目标代码blob及native EOS参数；这是准备未运行目标。当前DreamCoder Python已加载475ea4c版本，全部行仍用该已存版本/manifest参数，无热重载或中途改变。若该运行需恢复，先将runner恢复为475ea4c中的同一blob并focused commit，再用原命令和同一主控目录的全局预算账本；旧源码在Git保留，不新建空预算或覆盖用户修改。
+
+Dream Base保留138539863 bytes .part、0完整shard；DiffuCoder保留300623137 bytes partial、0完整shard。两路官方/镜像resolver、Xet和备用Git-LFS CDN均遭持续TLS/低速/超时，有限重试已停止，仅停止本轮自己的CPU下载，没有触碰GPU服务。两路GPU16/full均未运行，迁移收益未知。恢复命令/精确revision/每shard LFS摘要/片段清单在b_dream和c_diffucoder专属输出目录，不以Base未测成绩填主表。

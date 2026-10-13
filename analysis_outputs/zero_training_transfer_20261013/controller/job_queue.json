@@ -17,13 +17,17 @@
     },
     {
       "target": "dream_base",
-      "status": "waiting_complete_exact_weights_CPU_download_bounded",
-      "gpu_job_started": false
+      "status": "blocked_download_incomplete_final",
+      "gpu_job_started": false,
+      "partial_bytes": 138539863,
+      "complete_shards": 0
     },
     {
       "target": "diffucoder_base",
-      "status": "waiting_complete_exact_weights_CPU_download_bounded",
-      "gpu_job_started": false
+      "status": "blocked_incomplete_weights",
+      "gpu_job_started": false,
+      "partial_bytes": 300623137,
+      "complete_shards": 0
     }
   ],
   "do_not_auto_train": true,
