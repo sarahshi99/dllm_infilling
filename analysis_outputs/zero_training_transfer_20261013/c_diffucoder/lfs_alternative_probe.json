@@ -1,0 +1,19 @@
+[
+  {
+    "host": "hf-mirror.com",
+    "status": 200,
+    "transfer": "basic",
+    "objects": [
+      {
+        "oid": "4fe8a57f2da4fcc1f2645f53372cd0304997c82a87c23a5c8d579230445d7a7d",
+        "size": 1089994880,
+        "download_host": "us.aws.cdn.hf-mirror.org",
+        "error": null
+      }
+    ]
+  },
+  {
+    "host": "huggingface.co",
+    "error": "ConnectionError"
+  }
+]

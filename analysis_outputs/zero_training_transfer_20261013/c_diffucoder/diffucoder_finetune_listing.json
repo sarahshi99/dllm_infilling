@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "686456f3f6dc1dbbc1e53558",
+    "id": "apple/DiffuCoder-7B-Instruct",
+    "likes": 63,
+    "trendingScore": 1,
+    "private": false,
+    "downloads": 802,
+    "tags": [
+      "safetensors",
+      "Dream",
+      "code",
+      "text-diffusion-model",
+      "diffusion large language model",
+      "custom_code",
+      "arxiv:2506.20639",
+      "base_model:apple/DiffuCoder-7B-Base",
+      "base_model:finetune:apple/DiffuCoder-7B-Base",
+      "license:apple-amlr",
+      "region:us"
+    ],
+    "createdAt": "2025-07-01T21:45:23.000Z",
+    "modelId": "apple/DiffuCoder-7B-Instruct"
+  }
+]

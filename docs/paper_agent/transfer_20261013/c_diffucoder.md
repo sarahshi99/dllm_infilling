@@ -10,6 +10,8 @@ DiffuCoder-7B 经 DreamOn 长度微调的确切目标：**未找到可验证公�
 
 下载/分词器/生成代码统一登记位置：`/home/shx/.cache/dllm_infilling/model_snapshots/apple--DiffuCoder-7B-Base/a2c33054cbe99b9ab7af074f09b1d13943157ff1`。完整 registry 与在线 API 摘要在 `analysis_outputs/zero_training_transfer_20261013/c_diffucoder/`。不能仅凭本目录名认证来源；registry 关联精确官方仓库 revision 和 HF 文件大小/LFS登记。
 
+补充候选审计：第三方 `o-1-o/dreamon-re@191717910d0eb26efe0b09fdfb66f93d48fc2a44` 公开文件只有 README/.gitattributes，没有可下载权重和初始化证据；不计可用目标。Apple Base 的 HF finetune 列表只列出 Instruct 类型，不能据此填 DreamOn 行。原始 API 摘要单独保存。
+
 ## 缓存现状与技术审计
 
 历史 `/tmp/diffucoder_base_repo_probe_20260609` 已不存在，HF hub 中也没有 apple 模型权重缓存。旧文档的四 shard 下载成功/1033 行 CAL 成绩仍保留，不能当作本轮固定长度迁移结果。旧 runner `clean_scripts/run_dreamcoder_official_infilling.py` 和持久 CAL 源码 `~/.cache/dllm_infilling/calibrated_adaptive_length-741e8418/diffucoder_cal` 尚在；CAL 的长度搜索、oracle 分支、旧 seed/截取不能混进当前矩阵。
@@ -55,6 +57,8 @@ python scripts/download_diffucoder_transfer_20261013.py \
 命令只下载，GPU成本0。初次日志 `analysis_outputs/zero_training_transfer_20261013/c_diffucoder/download.log`，补充范围内恢复的当前日志 `download_resume.log`，最终状态 `model_download.json`；分片持久保存在模型目录 `.download_chunks`，重复命令复用已完整范围和范围内partial。每次墙钟上限1200秒（正在阻塞的网络请求还受30/90秒timeout约束），不无限等待。最终拼接同时流式算sha256并与精确HF LFS登记比较，不额外重扫大文件。签名 CDN URL 不写入证据。下载完成后由主控统一锁调度预固定均匀16条、两顺序/四组技术检查，才能估计 1033×8 全批时间；现阶段不存在可信的全批 GPU 时间预测或质量成绩。当前阻塞是确切 DreamOn 权重缺失、Base 权重恢复与公共适配/GPU检查待完成。
 
 本地验证：两脚本 `py_compile` 成功；tokenizer 全映射 CPU审计完成；官方 `_sample` fake-model日程验证完成。环境：`dllm_env` 加 `PYTHONPATH=/home/shx/miniconda3/envs/llmxy/lib/python3.10/site-packages` 可导入较新版 transformers；不加时旧 transformers 缺少 `is_torchdynamo_compiling`，需采用已登记兼容环境。共享卡时间不能作正式加速比。
+
+网络补充验证：mirror Git-LFS batch 返回 HTTP200 和 `us.aws.cdn.hf-mirror.org` 下载域名，但该备用 CDN 的小范围 direct 下载 ConnectionError、proxy 下载 SSLError，仍未解除权重恢复阻塞。只登记响应域名和错误类型，不保存签名 URL。
 
 ## 仅准备的后续重建信息
 

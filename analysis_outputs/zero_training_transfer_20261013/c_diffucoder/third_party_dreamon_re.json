@@ -1,0 +1,33 @@
+{
+  "_id": "68fae288551469b5795f1d62",
+  "id": "o-1-o/dreamon-re",
+  "private": false,
+  "tags": [
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 0,
+  "likes": 0,
+  "modelId": "o-1-o/dreamon-re",
+  "author": "o-1-o",
+  "sha": "191717910d0eb26efe0b09fdfb66f93d48fc2a44",
+  "lastModified": "2025-10-24T02:20:56.000Z",
+  "gated": "auto",
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "README.md"
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2025-10-24T02:20:56.000Z",
+  "usedStorage": 0
+}

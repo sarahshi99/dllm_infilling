@@ -1,0 +1,12 @@
+[
+  {
+    "proxy": false,
+    "error": "ConnectionError",
+    "wall_sec": 1.0627057552337646
+  },
+  {
+    "proxy": true,
+    "error": "SSLError",
+    "wall_sec": 10.004327058792114
+  }
+]

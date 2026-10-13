@@ -55,5 +55,32 @@
     "DreamOn DiffuCoder main-table result",
     "speedup",
     "16-row GPU technical check pass"
+  ],
+  "additional_candidate_audit": [
+    {
+      "id": "o-1-o/dreamon-re",
+      "revision": "191717910d0eb26efe0b09fdfb66f93d48fc2a44",
+      "local_path": null,
+      "provider": "third_party",
+      "weight_kind": "no_weight_files_in_public_repository",
+      "initialization_evidence": "No initialized model provenance or weight artifact; only README.md/.gitattributes. Not a usable checkpoint.",
+      "eligible_for_main_matrix": false
+    }
+  ],
+  "network_alternative_audit": {
+    "git_lfs_batch": "mirror HTTP200, us.aws.cdn.hf-mirror.org",
+    "git_lfs_download": "direct ConnectionError, proxy SSLError",
+    "hf_mirror_xet": "partial bytes restored, persistent stalls; bounded 1200sec session"
+  },
+  "additional_search_exclusions": [
+    {
+      "id": "apple/DiffuCoder-7B-Instruct",
+      "revision": null,
+      "local_path": null,
+      "provider": "Apple",
+      "weight_kind": "instruct_not_DreamOn",
+      "initialization_evidence": "Only result of API finetune listing for DiffuCoder Base. Not a source candidate for this frozen three-origin matrix.",
+      "eligible_for_main_matrix": false
+    }
   ]
 }
