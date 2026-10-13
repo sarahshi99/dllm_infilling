@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "registry_entry": {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "digest_policy": "reuse registered sha256; size checked; no large-file rescan",
+  "strict": true,
+  "missing_keys": [],
+  "unexpected_keys": [],
+  "parameter_count": 77856768,
+  "rank": 256,
+  "vocab_size": 152064,
+  "head_keys": {
+    "output_mask": {
+      "shape": [
+        152064
+      ],
+      "dtype": "torch.float32"
+    },
+    "embedding.weight": {
+      "shape": [
+        152064,
+        256
+      ],
+      "dtype": "torch.float32"
+    },
+    "output.weight": {
+      "shape": [
+        152064,
+        256
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "masked_output_ids": [
+    151643,
+    151666,
+    151667
+  ],
+  "masked_meanings": {
+    "151643": "source EOS/delete, target EOS/pad; no Base delete",
+    "151666": "mask",
+    "151667": "source expand, target unnamed reserved column; no Base expansion"
+  },
+  "checkpoint_metadata": {
+    "global_step": 7815,
+    "epoch": 5,
+    "best_metric": 0.29020567009997333,
+    "manifest_version": "a8446623a5b4f420d4e32dc90a400a42a6e350758faa36eb19ca4f4c53a7ee94"
+  },
+  "gpu_used": false
+}

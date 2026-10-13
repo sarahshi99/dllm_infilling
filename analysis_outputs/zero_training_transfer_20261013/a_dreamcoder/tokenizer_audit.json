@@ -1,0 +1,196 @@
+{
+  "source": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "target": "/home/shx/.cache/huggingface/hub/models--Dream-org--Dream-Coder-v0-Base-7B/snapshots/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+  "mapping_sizes": [
+    151668,
+    151667
+  ],
+  "mapping_differences": [
+    [
+      "<|expand|>",
+      151667,
+      null
+    ]
+  ],
+  "source_special_ids": [
+    151665,
+    151643,
+    151666,
+    151667
+  ],
+  "target_special_ids": [
+    151665,
+    151643,
+    151666
+  ],
+  "source_special_tokens": {
+    "bos_token": "<|beginoftext|>",
+    "eos_token": "<|endoftext|>",
+    "pad_token": "<|endoftext|>",
+    "mask_token": "<|mask|>",
+    "additional_special_tokens": [
+      "<|beginoftext|>",
+      "<|mask|>",
+      "<|expand|>"
+    ]
+  },
+  "target_special_tokens": {
+    "bos_token": "<|beginoftext|>",
+    "eos_token": "<|endoftext|>",
+    "pad_token": "<|endoftext|>",
+    "mask_token": "<|mask|>",
+    "additional_special_tokens": [
+      "<|beginoftext|>",
+      "<|mask|>"
+    ]
+  },
+  "config_special_ids": [
+    {
+      "bos_token_id": 151643,
+      "eos_token_id": 151643,
+      "expand_token_id": 151667,
+      "mask_token_id": 151666,
+      "pad_token_id": 151643
+    },
+    {
+      "bos_token_id": 151643,
+      "eos_token_id": 151643,
+      "mask_token_id": 151666,
+      "pad_token_id": 151643
+    }
+  ],
+  "tokenization": [
+    {
+      "text": "def f(x):\n    return x + 1\n",
+      "source": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ],
+      "target": [
+        750,
+        282,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        488,
+        220,
+        16,
+        198
+      ]
+    },
+    {
+      "text": "    for i, value in enumerate(items):\n",
+      "source": [
+        262,
+        369,
+        600,
+        11,
+        897,
+        304,
+        13252,
+        24337,
+        982
+      ],
+      "target": [
+        262,
+        369,
+        600,
+        11,
+        897,
+        304,
+        13252,
+        24337,
+        982
+      ]
+    },
+    {
+      "text": "中文🙂\t \r\n",
+      "source": [
+        104811,
+        145080,
+        78355
+      ],
+      "target": [
+        104811,
+        145080,
+        78355
+      ]
+    },
+    {
+      "text": "<|mask|><|expand|><|endoftext|>",
+      "source": [
+        151666,
+        151667,
+        151643
+      ],
+      "target": [
+        151666,
+        27,
+        91,
+        32317,
+        91,
+        29,
+        151643
+      ]
+    },
+    {
+      "text": "a  b\n\n  c",
+      "source": [
+        64,
+        220,
+        293,
+        271,
+        220,
+        272
+      ],
+      "target": [
+        64,
+        220,
+        293,
+        271,
+        220,
+        272
+      ]
+    },
+    {
+      "text": "α = \"é\" # comentário",
+      "source": [
+        18945,
+        284,
+        330,
+        963,
+        1,
+        671,
+        132365
+      ],
+      "target": [
+        18945,
+        284,
+        330,
+        963,
+        1,
+        671,
+        132365
+      ]
+    }
+  ],
+  "tokenizer_rules_equal": {
+    "vocab.json": false,
+    "merges.txt": true,
+    "tokenization_dream.py": true,
+    "tokenizer_config.json": false,
+    "added_tokens.json": false,
+    "special_tokens_map.json": false
+  }
+}

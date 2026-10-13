@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "errors": [],
+  "row_count": 10330,
+  "expected_row_count": 10330,
+  "unique_case_count": 10330,
+  "duplicate_case_count": 0,
+  "missing_case_count": 0,
+  "unexpected_case_count": 0,
+  "base_task_count": 164,
+  "counts": {
+    "global_confidence/A": 1033,
+    "global_confidence/B": 1033,
+    "global_confidence/C": 1033,
+    "global_confidence/D": 1033,
+    "global_confidence/E": 1033,
+    "left_to_right_frontier/A": 1033,
+    "left_to_right_frontier/B": 1033,
+    "left_to_right_frontier/C": 1033,
+    "left_to_right_frontier/D": 1033,
+    "left_to_right_frontier/E": 1033
+  },
+  "source_sqlite": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-diagnosis-v1/analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/per_case.sqlite",
+  "source_manifest": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-markov-k2-diagnosis-v1/analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1/run_manifest.json",
+  "existing_smoke_status": "passed",
+  "gpu_job_sec": 2886.023884361144,
+  "gpu_executions_this_audit": 0
+}
