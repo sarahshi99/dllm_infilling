@@ -64,6 +64,14 @@ python scripts/download_diffucoder_transfer_20261013.py \
 
 权重恢复仍为 `blocked_incomplete_weights`：未得到任何完整 shard，所有已落盘片段保留。正常HF代理TLS EOF、mirror/Xet直连timeout、两段式代理部分字节恢复后持续不增长、Git-LFS备用CDN两种路径失败。第二次恢复会话约六分钟、连续数分钟字节数不变后停止C自己新增的CPU下载 PID843727；没有触碰其他GPU/进程。`model_download.json` 保留每个片段大小、官方LFS/size登记、完整shard计数和恢复命令。GPU成本0；预固定16条技术检查、1033×8矩阵均未运行，收益未知，不能解释为迁移失败。解除条件是完整恢复精确revision权重，再由主控统一调度既定技术检查。
 
+### 2026-10-13 独立固定K参考补齐
+
+主控发现不能把 DreamCoder 原生参考的源码形状用于所有 Base。重新核查本目标精确 HF revision：DiffuCoder `_sample` **没有 EOS penalty**、仅一个 `x_` 选择标记，且硬编码 `eps=1e-12`。DreamCoder 原生实现要求两个标记且默认 EOS penalty3，不能直接硬套。
+
+独占C模块现有两个明确入口：`decode_fixed_transfer` 仅复用 A 的普通固定长度解码计算，并强制本版本原生 `eos_penalty=0`；`native_fixed_reference` 从实际 DiffuCoder `_sample` 独立构造，只替换每轮 `min(K,remaining)` 和 frontier 的位置选择。保留全部原生 sampling/shift/temperature/top_p、原生硬编码eps；没有扩删、CAL或答案长度。旧 `released_native_reference` 保留用于原始浮点日程审计，不能混作矩阵固定K参考。
+
+使用精确缓存 `generation_utils.py` 与包含明显 EOS 概率、依赖位置/内容的 CPU fake model 校验：global/frontier × K1/K2 四组，完整64 token IDs及清理后文本与独立原生参考完全相等，forward分别64/32；零/非零头共用同一适配入口，调用计数与头触发计数一致；添加 penalty3 被显式拒绝。3项 unittest 通过（0.777秒），详细四组 token证据和命令见 `fixed_adapter_cpu_checks.json`。这是接口机制证据，**不是**1033开发人口的GPU质量结果；GPU16仍未运行、下载阻塞保持，CPU/GPU成本没有混算。没有恢复网络下载或GPU。
+
 ## 仅准备的后续重建信息
 
 向作者索取：DiffuCoder→DreamOn 精确 HF ID/revision/checksums、初始化 Base revision、tokenizer/生成代码 revision、训练与数据处理 commit、OpenCoder 数据 revision/筛选划分、epochs与有效batch/优化器日程、合并/删除构造参数及官方评测配置。此处没有主动联系作者。

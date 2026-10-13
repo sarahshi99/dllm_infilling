@@ -49,7 +49,11 @@
     "old_cal_source_is_frozen_protocol_adapter": false,
     "gpu_technical_check_status": "not_run",
     "quality_matrix_status": "not_run",
-    "head_transfer_interpretation": "CPU-compatible; transfer gain remains unknown because weights unavailable locally"
+    "head_transfer_interpretation": "CPU-compatible; transfer gain remains unknown because weights unavailable locally",
+    "eos_penalty": 0.0,
+    "native_eps": 1e-12,
+    "native_selection_marker_count": 1,
+    "fixed_adapter_cpu_status": "passed_actual_native_source_two_orders_K1_K2_with_probable_EOS"
   },
   "gpu_cost_hours": 0,
   "quality_rows_produced": 0,
