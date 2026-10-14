@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-10-14T02:14:14.839450+00:00",
+  "verdict": "local_only_not_pushed",
+  "branch": "codex/dreamon-zero-training-transfer-20261013",
+  "local_result_commit": "8d06cb65583fa21549580713e01ffdd6d33eeb9f",
+  "last_confirmed_remote_head": "585b6f342dc974cfc4499092d9a3c6039599ac85",
+  "attempts": [
+    {
+      "transport": "ssh port22",
+      "result": "connection timed out"
+    },
+    {
+      "transport": "ssh port443",
+      "result": "connection timed out"
+    },
+    {
+      "transport": "https noninteractive",
+      "result": "no available username/credential; terminal prompts disabled"
+    }
+  ],
+  "results_complete_and_committed": true,
+  "evaluation_affected": false,
+  "new_gpu_jobs_or_training": false
+}

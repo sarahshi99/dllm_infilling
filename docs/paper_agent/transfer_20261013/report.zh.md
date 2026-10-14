@@ -65,3 +65,8 @@ Base若完整，逐目标report.zh.md/paired_comparisons.csv给出六个配对�
 命令：scripts/run_zero_training_transfer_dreamcoder_20261013.sh；通用runner支持已登记另两目标，必须先完成权重和技术检查；最终合并报告命令 python scripts/finalize_zero_training_transfer_20261013.py。原工作区未提交修改未动。
 
 验证时HEAD：`585b6f342dc974cfc4499092d9a3c6039599ac85`。最终交付HEAD见Git提交及最终回复（本文件无需自指未来commit）。
+
+
+### 2026-10-14T02:14:14.839450+00:00 最终发布状态追加
+
+最终结果与完整紧凑证据已提交 `8d06cb65583fa21549580713e01ffdd6d33eeb9f`。GitHub visibility: `local_only_not_pushed`；SSH22/443均连接超时，HTTPS非交互尝试无可用用户名/凭据，三次有界尝试均失败。最后确认已推送HEAD为585b6f3（历史确认，不代表当前远端状态）。当前本地报告/全部8264行证据和统计完整，评测不受影响。没有启动新GPU、训练、下载或持续监督；停止发布重试，待网络/凭据恢复后可将当前分支普通push，不force、不重做评测。

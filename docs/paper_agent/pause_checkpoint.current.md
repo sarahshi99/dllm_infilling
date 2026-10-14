@@ -834,3 +834,8 @@ Dream Base和DiffuCoder Base均因持续下载错误、0完整shard停在GPU前�
 - 本轮共享H200作业成本3.541866h/12h，无正式加速比；GPU评测进程已退出。旧DreamOn十组10330行完整保留复用，只算自身校准；Dream/DiffuCoder对应DreamOn本轮未找到可验证公开权重，原始Base下载阻塞且GPU未运行，质量未知。
 - 完整证据：analysis_outputs/zero_training_transfer_20261013/dreamcoder_base/{per_case.jsonl.gz,summary.csv,paired_comparisons.csv,run_manifest.json,smoke_checks.json,integrity_audit.json,delivery_verification.json,exit.json}；SQLite/日志/背景负载原始数据本地保留。总报告docs/paper_agent/transfer_20261013/report.zh.md。
 - 决策：本轮完成或明确阻塞后停止。不重试下载、不启动GPU、训练、调参/K4/隐藏状态头或新测试集。单生成种子、重复开发人口的区间不等于独立测试泛化。以后取得另两份DreamOn可靠权重，或根据证据决定重建/逐模型训练，均等待用户下一轮研究决定。
+
+
+### 2026-10-14T02:14:14.839450+00:00 最终发布状态追加
+
+最终结果与完整紧凑证据已提交 `8d06cb65583fa21549580713e01ffdd6d33eeb9f`。GitHub visibility: `local_only_not_pushed`；SSH22/443均连接超时，HTTPS非交互尝试无可用用户名/凭据，三次有界尝试均失败。最后确认已推送HEAD为585b6f3（历史确认，不代表当前远端状态）。当前本地报告/全部8264行证据和统计完整，评测不受影响。没有启动新GPU、训练、下载或持续监督；停止发布重试，待网络/凭据恢复后可将当前分支普通push，不force、不重做评测。
