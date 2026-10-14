@@ -1,4 +1,5 @@
 {
+  "actual_device": "NVIDIA H200 NVL",
   "arms": [
     {
       "arm": "A",
@@ -42,6 +43,7 @@
     "scripts/run_k4_multiline_queue.py": "eb6918e933d263e4ad9106e6abc87b206eeb5d64"
   },
   "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -",
+  "cuda_version": "12.1",
   "dataset": "HumanEval-MultiLineInfilling",
   "dataset_repository": "loubnabnl/humaneval_infilling",
   "dataset_revision": "ad46002f24b153968a3d0949e6fa9576780530ba",
@@ -101,6 +103,7 @@
   },
   "population_count": 5815,
   "population_scope": "full authorized development population; single/multiline share 164 base tasks; no claim of independent unseen test; old test_lock untouched",
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
   "rank": 256,
   "reviewer_gate_disabled": true,
   "rng": "fork_rng around each local head/sample; base draft global stream isolated",
@@ -128,7 +131,8 @@
   "smoke_selection": "16 evenly spaced sorted stable IDs; fixed before outcomes",
   "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
   "stage": "C",
-  "status": "prepared",
+  "status": "completed",
   "timing": "CUDA synchronize before/after generation, excludes model loading, official execution, row writes; includes discrete trace buffering and CUDA event recording. Shared H200 observation only; no extra timing reruns.",
+  "torch_version": "2.5.1+cu121",
   "trace_coverage": "all newly generated rows/rounds: selected drafts/final submitted IDs, edges/edge seeds, actions/stop reasons; no full logits/hidden states; old reuse coverage in provenance"
 }

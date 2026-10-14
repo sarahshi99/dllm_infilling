@@ -34,5 +34,23 @@
     "reused": 0,
     "logical_aliases": 0,
     "technical_failures": 0
+  },
+  "C": {
+    "worker_exit": 0,
+    "analysis_exit": 0,
+    "status": "complete",
+    "logical_expected": 23260,
+    "records": 23260,
+    "evaluated": 23260,
+    "missing_count": 0,
+    "pending_evaluation_count": 0,
+    "duplicates": 0,
+    "exact_configuration_stable_id_sets": true,
+    "missing_ids": [],
+    "pending_ids": [],
+    "actual_new_generated": 23260,
+    "reused": 0,
+    "logical_aliases": 0,
+    "technical_failures": 0
   }
 }

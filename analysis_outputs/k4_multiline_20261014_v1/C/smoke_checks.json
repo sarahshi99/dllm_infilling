@@ -1,0 +1,972 @@
+{
+  "checks": [
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+      },
+      "generation_sec": 0.5738266059197485,
+      "head_calls": 0,
+      "nfe": 10,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+      },
+      "generation_sec": 0.11565839918330312,
+      "head_calls": 0,
+      "nfe": 5,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+      },
+      "generation_sec": 0.10387254087254405,
+      "head_calls": 4,
+      "nfe": 5,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+      },
+      "generation_sec": 0.09970049979165196,
+      "head_calls": 4,
+      "nfe": 5,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+      },
+      "generation_sec": 1.004243436269462,
+      "head_calls": 0,
+      "nfe": 43,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+      },
+      "generation_sec": 0.5125648682005703,
+      "head_calls": 0,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+      },
+      "generation_sec": 0.5343878460116684,
+      "head_calls": 21,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+      },
+      "generation_sec": 0.5339234243147075,
+      "head_calls": 21,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/105/L3_L8"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: 'int' object is not iterable",
+        "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+      },
+      "generation_sec": 0.9437592271715403,
+      "head_calls": 0,
+      "nfe": 52,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: expected an indented block after 'for' statement on line 23 (<string>, line 24)",
+        "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+      },
+      "generation_sec": 0.4537089727818966,
+      "head_calls": 0,
+      "nfe": 25,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: expected an indented block after 'for' statement on line 23 (<string>, line 24)",
+        "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+      },
+      "generation_sec": 0.46721064392477274,
+      "head_calls": 13,
+      "nfe": 25,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: This prints if this assert fails 2 (good for debugging!)",
+        "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+      },
+      "generation_sec": 0.41294433269649744,
+      "head_calls": 12,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/111/L0_L8"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+      },
+      "generation_sec": 0.46386158280074596,
+      "head_calls": 0,
+      "nfe": 20,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+      },
+      "generation_sec": 0.25485614594072104,
+      "head_calls": 0,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+      },
+      "generation_sec": 0.2632516440935433,
+      "head_calls": 7,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+      },
+      "generation_sec": 0.2620171080343425,
+      "head_calls": 7,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/123/L2_L4"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: min() arg is an empty sequence",
+        "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+      },
+      "generation_sec": 1.517043865751475,
+      "head_calls": 0,
+      "nfe": 52,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: min() arg is an empty sequence",
+        "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+      },
+      "generation_sec": 0.9248231882229447,
+      "head_calls": 0,
+      "nfe": 32,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: min() arg is an empty sequence",
+        "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+      },
+      "generation_sec": 0.9524636557325721,
+      "head_calls": 27,
+      "nfe": 32,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: min() arg is an empty sequence",
+        "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+      },
+      "generation_sec": 0.9537280010990798,
+      "head_calls": 27,
+      "nfe": 32,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/129/L10_L24"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: ",
+        "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+      },
+      "generation_sec": 1.2939541670493782,
+      "head_calls": 0,
+      "nfe": 64,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: invalid syntax (<string>, line 23)",
+        "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+      },
+      "generation_sec": 0.547027702908963,
+      "head_calls": 0,
+      "nfe": 27,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: invalid syntax (<string>, line 23)",
+        "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+      },
+      "generation_sec": 0.5735005582682788,
+      "head_calls": 25,
+      "nfe": 27,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: invalid syntax (<string>, line 23)",
+        "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+      },
+      "generation_sec": 0.5724876872263849,
+      "head_calls": 25,
+      "nfe": 27,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/132/L1_L8"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+        "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+      },
+      "generation_sec": 0.43422192009165883,
+      "head_calls": 0,
+      "nfe": 21,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+        "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+      },
+      "generation_sec": 0.2282184329815209,
+      "head_calls": 0,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+        "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+      },
+      "generation_sec": 0.23649416491389275,
+      "head_calls": 8,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+        "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+      },
+      "generation_sec": 0.2361451741307974,
+      "head_calls": 8,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/140/L9_L13"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+      },
+      "generation_sec": 0.6518718809820712,
+      "head_calls": 0,
+      "nfe": 28,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+      },
+      "generation_sec": 0.3256553150713444,
+      "head_calls": 0,
+      "nfe": 14,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+      },
+      "generation_sec": 0.33828884083777666,
+      "head_calls": 13,
+      "nfe": 14,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+      },
+      "generation_sec": 0.3383941790089011,
+      "head_calls": 13,
+      "nfe": 14,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/148/L5_L6"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: ",
+        "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+      },
+      "generation_sec": 0.49667000910267234,
+      "head_calls": 0,
+      "nfe": 27,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: invalid syntax (<string>, line 21)",
+        "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+      },
+      "generation_sec": 0.273853259626776,
+      "head_calls": 0,
+      "nfe": 15,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: invalid syntax (<string>, line 21)",
+        "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+      },
+      "generation_sec": 0.2897159061394632,
+      "head_calls": 14,
+      "nfe": 15,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: unmatched ')' (<string>, line 21)",
+        "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+      },
+      "generation_sec": 0.3217314020730555,
+      "head_calls": 13,
+      "nfe": 17,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/161/L6_L12"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+      },
+      "generation_sec": 0.3494608816690743,
+      "head_calls": 0,
+      "nfe": 19,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+      },
+      "generation_sec": 0.16663036588579416,
+      "head_calls": 0,
+      "nfe": 9,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+      },
+      "generation_sec": 0.17515195393934846,
+      "head_calls": 8,
+      "nfe": 9,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+      },
+      "generation_sec": 0.17468771012499928,
+      "head_calls": 8,
+      "nfe": 9,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/31/L3_L5"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+      },
+      "generation_sec": 0.09565876703709364,
+      "head_calls": 0,
+      "nfe": 5,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+      },
+      "generation_sec": 0.05845060991123319,
+      "head_calls": 0,
+      "nfe": 3,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+      },
+      "generation_sec": 0.060481433756649494,
+      "head_calls": 2,
+      "nfe": 3,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+      },
+      "generation_sec": 0.06059005809947848,
+      "head_calls": 2,
+      "nfe": 3,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/47/L0_L0"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+      },
+      "generation_sec": 0.6417681057937443,
+      "head_calls": 0,
+      "nfe": 35,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+      },
+      "generation_sec": 0.32858699187636375,
+      "head_calls": 0,
+      "nfe": 18,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+      },
+      "generation_sec": 0.345779862254858,
+      "head_calls": 17,
+      "nfe": 18,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+      },
+      "generation_sec": 0.3442311850376427,
+      "head_calls": 17,
+      "nfe": 18,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/63/L4_L6"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+      },
+      "generation_sec": 0.4516307679004967,
+      "head_calls": 0,
+      "nfe": 19,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+      },
+      "generation_sec": 0.2373995380476117,
+      "head_calls": 0,
+      "nfe": 10,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+      },
+      "generation_sec": 0.24644572800025344,
+      "head_calls": 9,
+      "nfe": 10,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+      },
+      "generation_sec": 0.24609478330239654,
+      "head_calls": 9,
+      "nfe": 10,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/78/L3_L5"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+      },
+      "generation_sec": 1.2800359739921987,
+      "head_calls": 0,
+      "nfe": 44,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+      },
+      "generation_sec": 0.6401907671242952,
+      "head_calls": 0,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+      },
+      "generation_sec": 0.662046757992357,
+      "head_calls": 21,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+      },
+      "generation_sec": 0.6596565889194608,
+      "head_calls": 21,
+      "nfe": 22,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/81/L5_L9"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: Second test error: True",
+        "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+      },
+      "generation_sec": 0.5254354360513389,
+      "head_calls": 0,
+      "nfe": 23,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: Second test error: True",
+        "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+      },
+      "generation_sec": 0.2518153181299567,
+      "head_calls": 0,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: Second test error: True",
+        "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+      },
+      "generation_sec": 0.2617299039848149,
+      "head_calls": 10,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": false,
+        "result": "failed: Second test error: True",
+        "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+      },
+      "generation_sec": 0.26355289900675416,
+      "head_calls": 10,
+      "nfe": 11,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/95/L12_L17"
+    },
+    {
+      "arm": "A",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+      },
+      "generation_sec": 0.18627128703519702,
+      "head_calls": 0,
+      "nfe": 8,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+    },
+    {
+      "arm": "B",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+      },
+      "generation_sec": 0.09436176810413599,
+      "head_calls": 0,
+      "nfe": 4,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+    },
+    {
+      "arm": "C",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+      },
+      "generation_sec": 0.09730518003925681,
+      "head_calls": 3,
+      "nfe": 4,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+    },
+    {
+      "arm": "D",
+      "evaluation": {
+        "completion_id": 0,
+        "passed": true,
+        "result": "passed",
+        "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+      },
+      "generation_sec": 0.09740287810564041,
+      "head_calls": 3,
+      "nfe": 4,
+      "policy": "global_confidence",
+      "reference_per_round": false,
+      "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+    }
+  ],
+  "frontier_alias_verified": [],
+  "native_reference_calls": 0,
+  "native_reference_steps": null,
+  "native_reference_trailing_noops": null,
+  "quality_gate": false,
+  "reuse_disabled_policies": [],
+  "status": "passed",
+  "technical_generation_calls": 64
+}
