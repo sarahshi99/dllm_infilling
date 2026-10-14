@@ -151,7 +151,7 @@
   "smoke_selection": "16 evenly spaced sorted stable IDs; fixed before outcomes",
   "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
   "stage": "A",
-  "status": "running_full",
+  "status": "completed",
   "timing": "CUDA synchronize before/after generation, excludes model loading, official execution, row writes; includes discrete trace buffering and CUDA event recording. Shared H200 observation only; no extra timing reruns.",
   "torch_version": "2.5.1+cu121",
   "trace_coverage": "all newly generated rows/rounds: selected drafts/final submitted IDs, edges/edge seeds, actions/stop reasons; no full logits/hidden states; old reuse coverage in provenance"

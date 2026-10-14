@@ -847,3 +847,7 @@ Dream Base和DiffuCoder Base均因持续下载错误、0完整shard停在GPU前�
 2026-10-14T04:00:28Z 队列已实际启动：tmux dreamon_k4_multiline_20261014_v1，controller PID3561967，首个GPUworker PID3561970；固定16行技术smoke自动进入全量。完整状态/恢复命令见本轮launch.json与recovery.zh.md。实现提交3b08182；旧迁移bf62fdf，审计最新63a8f7d。网络推送尚未成功核验，不声称已上传。
 
 2026-10-14 A固定16行128技术配置通过，frontier A/B逐轮等价16/16、历史复用核验通过，自动进入全量；首次新分支push成功（3b08182），其后提交与旧分支推送远端核验另存publication_initial_20261014.json。
+
+## 2026-10-14 批次A自动队列记录
+
+状态complete；评分8264；新生成5179，复用2052，别名1033。证据analysis_outputs/k4_multiline_20261014_v1/A/report.zh.md。未通过技术阶段的配置保留事务恢复点；普通评分失败不触发重生成。单worker继续下一独立阶段，无训练。

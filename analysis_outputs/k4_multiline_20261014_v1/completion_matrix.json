@@ -1,0 +1,20 @@
+{
+  "A": {
+    "worker_exit": 0,
+    "analysis_exit": 0,
+    "status": "complete",
+    "logical_expected": 8264,
+    "records": 8264,
+    "evaluated": 8264,
+    "missing_count": 0,
+    "pending_evaluation_count": 0,
+    "duplicates": 0,
+    "exact_configuration_stable_id_sets": true,
+    "missing_ids": [],
+    "pending_ids": [],
+    "actual_new_generated": 5179,
+    "reused": 2052,
+    "logical_aliases": 1033,
+    "technical_failures": 0
+  }
+}

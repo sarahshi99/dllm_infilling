@@ -13,5 +13,14 @@
   "audit_latest_commit": "63a8f7d",
   "initial_observation": "one model worker active; stageA technical smoke normal first8/16; other tasks untouched",
   "finish_policy": "automatic A/B/C finite queue, CPU analysis/archives/commit/push; exit without further experiments/training",
-  "publication_at_launch": "SSH22/443 timeouts; local commits saved, no successful upload claimed"
+  "publication_at_launch": "SSH22/443 timeouts; local commits saved, no successful upload claimed",
+  "initial_remote_head_verification": {
+    "time_utc": "2026-10-14T04:04:06Z",
+    "method": "successful git ls-remote after push; all three remote heads match local",
+    "heads": {
+      "codex/dreamon-k4-multiline-eval-20261014-v1": "d6bfa510715d7b64d145d18debbef1c2e28b8c30",
+      "codex/dreamon-markov-error-audit-v1": "63a8f7df1395b55f6cc4b0d97e9a8e7e11bcb7ad",
+      "codex/dreamon-zero-training-transfer-20261013": "bf62fdf008addef886e103fd9f181259e9608909"
+    }
+  }
 }
