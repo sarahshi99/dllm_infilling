@@ -453,4 +453,6 @@ DLLM 代码 infilling 的 inference-time length control 不能简化为单一长
 
 ## 2026-10-14 K4/多行单会话有限队列
 
-本轮已授权A DreamOn单行K4、B DreamCoder Base固定64单行K4、C DreamOn多行global K2，逻辑上限37722，seed42，冻结权重无训练。CPU修补错误审计和迁移可移植证据已保存；Base8264逐行复算global596/469/465/486、frontier592/362/387/482，完整1033人口，无K2重跑。完整5815多行与1033单行按官方normal loader取得，逐ID/字段等于loubnabnl test缓存，共享164题、旧test_lock不读不改。K4链路径与旧K1/K2回归CPU53项通过。历史A4候选2052行，14行因共享扩展边界修复重生成；frontierA/B逐轮等价后允许1033逻辑别名。证据/恢复入口analysis_outputs/k4_multiline_20261014_v1/recovery.zh.md。后台自动16行smoke→全量→官方评测→核验/分析→归档/提交推送；网络失败保留本地提交，不影响本地运行。最终状态以completion_matrix.json为准，不把启动写成全量完成。
+本轮已授权A DreamOn单行K4、B DreamCoder Base固定64单行K4、C DreamOn多行global K2，逻辑上限37722，seed42，冻结权重无训练。CPU修补错误审计和迁移可移植证据已保存；Base8264逐行复算global596/469/465/486、frontier592/362/387/482，完整1033人口，无K2重跑。完整5815多行与1033单行按官方normal loader取得，逐ID/字段等于loubnabnl test缓存，共享164题、旧test_lock不读不改。K4链路径与旧K1/K2回归CPU54项通过。历史A4候选2052行，14行因共享扩展边界修复重生成；frontierA/B逐轮等价后允许1033逻辑别名。证据/恢复入口analysis_outputs/k4_multiline_20261014_v1/recovery.zh.md。后台自动16行smoke→全量→官方评测→核验/分析→归档/提交推送；网络失败保留本地提交，不影响本地运行。最终状态以completion_matrix.json为准，不把启动写成全量完成。
+
+2026-10-14T04:00:28Z 队列已实际启动：tmux dreamon_k4_multiline_20261014_v1，controller PID3561967，首个GPUworker PID3561970；固定16行技术smoke自动进入全量。完整状态/恢复命令见本轮launch.json与recovery.zh.md。实现提交3b08182；旧迁移bf62fdf，审计最新63a8f7d。网络推送尚未成功核验，不声称已上传。

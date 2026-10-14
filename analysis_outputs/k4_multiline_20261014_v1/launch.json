@@ -1,0 +1,17 @@
+{
+  "start_utc": "2026-10-14T04:00:28Z",
+  "tmux_session": "dreamon_k4_multiline_20261014_v1",
+  "controller_pid": 3561967,
+  "initial_worker_pid": 3561970,
+  "command": "bash scripts/launch_k4_multiline_queue.sh",
+  "resume_command": "bash scripts/launch_k4_multiline_queue.sh",
+  "log": "analysis_outputs/k4_multiline_20261014_v1/queue.log",
+  "stage_logs": "A|B|C/runner.log",
+  "branch": "codex/dreamon-k4-multiline-eval-20261014-v1",
+  "implementation_commit": "3b081824e856dfc05049e816ad3ab9b3712dd6fa",
+  "transfer_commit": "bf62fdf",
+  "audit_latest_commit": "63a8f7d",
+  "initial_observation": "one model worker active; stageA technical smoke normal first8/16; other tasks untouched",
+  "finish_policy": "automatic A/B/C finite queue, CPU analysis/archives/commit/push; exit without further experiments/training",
+  "publication_at_launch": "SSH22/443 timeouts; local commits saved, no successful upload claimed"
+}
