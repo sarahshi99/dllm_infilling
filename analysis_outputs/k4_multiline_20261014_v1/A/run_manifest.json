@@ -1,0 +1,158 @@
+{
+  "actual_device": "NVIDIA H200 NVL",
+  "arms": [
+    {
+      "arm": "A",
+      "k": 4,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "B",
+      "k": 4,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "C",
+      "k": 4,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "D",
+      "k": 4,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "A",
+      "k": 4,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "B",
+      "k": 4,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "C",
+      "k": 4,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "D",
+      "k": 4,
+      "policy": "left_to_right_frontier"
+    }
+  ],
+  "base_parameters": null,
+  "base_schedule_confound": "steps64 unchanged for K1/K2/K4; K4 fills ~16 forwards at earlier timestep/EOS penalty progress than K2~32; not corrected by filled fraction",
+  "base_task_count": 164,
+  "code_commit": "3b081824e856dfc05049e816ad3ab9b3712dd6fa",
+  "code_versions": {
+    "analysis/analyze_k4_multiline_batch.py": "549d6d95734f42d4c4415517c152908a616d5007",
+    "experiments/dreamcoder_fixed_transfer_adapter.py": "6235970b4d5bd202b9a7c8b23220eb0e946f6c01",
+    "experiments/dreamon_markov_head_training.py": "b73095691601be61048818cee90e3ef29a8f61dc",
+    "experiments/dreamon_singleline_adapter.py": "0701dd8bfb57e0c70e0fc95aa997358893653f9d",
+    "experiments/dreamon_singleline_order_parallel.py": "4df0b2011c246df8be51254a9d50b4aa1dc72777",
+    "experiments/k4_batch_common.py": "e4d0df04b7729e3299432fd742f6dd374da910cf",
+    "experiments/k4_official_eval_worker.py": "dfe9858dd080efdae9d8b0851aa59506bda50d1f",
+    "experiments/lrdllm_dreamcoder_adapter.py": "5695ff94f7ff463bb9671c915901d798a74a0133",
+    "experiments/run_dreamon_singleline_order_parallel.py": "7df69aebb44a7e1b652af1deca51bb162e2a2f3f",
+    "experiments/run_k4_multiline_stage.py": "c1a3a801136acb0bf3f02b8b205be890e8dc4cb4",
+    "experiments/train_dreamon_markov_head.py": "1a1a89d51d528edcbd33bf3cc8c28f747e54795d",
+    "scripts/launch_k4_multiline_queue.sh": "bd1d7a07996769458f34b28247598dbc74df0772",
+    "scripts/prepare_k4_multiline_evidence.py": "b8736a8a543546801f9529ea43de0e488a67fc42",
+    "scripts/run_k4_multiline_queue.py": "eb6918e933d263e4ad9106e6abc87b206eeb5d64"
+  },
+  "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -",
+  "cuda_version": "12.1",
+  "dataset": "HumanEval-SingleLineInfilling",
+  "dataset_repository": "loubnabnl/humaneval_infilling",
+  "dataset_revision": "ad46002f24b153968a3d0949e6fa9576780530ba",
+  "dataset_split": "test",
+  "edge_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
+  "evaluator": {
+    "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "evaluator_mode": "upstream_documented_local_enablement_overlay",
+    "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
+  },
+  "evaluator_isolation": "bwrap private PID/filesystem/network, same Python runtime and official check_correctness; sequential CPU tests",
+  "evaluator_timeout_sec": 3.0,
+  "evidence_blobs": {
+    "analysis_outputs/k4_multiline_20261014_v1/historical_a4_candidates.jsonl.gz": "5b9b99cd4ff6a89f2b8f33c2e5020885c1c5e94e",
+    "analysis_outputs/k4_multiline_20261014_v1/single-line_contexts.jsonl.gz": "ad939301b7ab8f5d3a5294c5734ae0edd650f678"
+  },
+  "expand_budget_source": "max_gen_len=64; unchanged source semantics, dynamic length changes with deletion/expansion, not a no-expansion promise",
+  "frozen": true,
+  "head": {
+    "head": "kl",
+    "label": "best",
+    "phase": "full",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "head_dtype": "float32",
+  "head_lambda": 1,
+  "head_mapping": "direct shared token IDs, persistent output mask strict loaded; Base complete tokenizer audit: ../zero_training_transfer_20261013/a_dreamcoder/tokenizer_audit.json",
+  "head_timing": "head_projection_cuda_sec covers head forward only; head_serial_cuda_sec covers head plus local sampling; counters are actual calls, not nominal K",
+  "model": {
+    "id": "Dream-org/DreamOn-v0-7B",
+    "revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "model_dtype": "bfloat16",
+  "normal_loader": "pinned human_eval_infilling.data.read_problems",
+  "official_protocol": {
+    "alg": "entropy",
+    "alg_temp": 0.0,
+    "batch_size": 1,
+    "delete_eos_token": true,
+    "device": "cuda",
+    "dtype": "bf16",
+    "eps": 0.001,
+    "mask_expansion": true,
+    "max_gen_len": 64,
+    "max_prompt_len": 2048,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "pad_eos_to_right": true,
+    "pad_to_max_len": false,
+    "show_progress": false,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "population_count": 1033,
+  "population_scope": "full authorized development population; single/multiline share 164 base tasks; no claim of independent unseen test; old test_lock untouched",
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "rank": 256,
+  "reviewer_gate_disabled": true,
+  "rng": "fork_rng around each local head/sample; base draft global stream isolated",
+  "row_seed": "derive_row_seed(42, task_id)",
+  "seed": 42,
+  "shared_budget_fix": "parallel original expands clipped in released descending-coordinate execution order to remaining expansion budget and canvas capacity, shared by all controls; barrier paths reserve only one expansion slot; excess becomes mask_noop; K1/K2 unchanged when bound not exceeded",
+  "smoke_ids": [
+    "SingleLineInfilling/HumanEval/0/L0",
+    "SingleLineInfilling/HumanEval/105/L3",
+    "SingleLineInfilling/HumanEval/111/L5",
+    "SingleLineInfilling/HumanEval/123/L1",
+    "SingleLineInfilling/HumanEval/129/L21",
+    "SingleLineInfilling/HumanEval/137/L1",
+    "SingleLineInfilling/HumanEval/143/L9",
+    "SingleLineInfilling/HumanEval/154/L3",
+    "SingleLineInfilling/HumanEval/19/L3",
+    "SingleLineInfilling/HumanEval/32/L7",
+    "SingleLineInfilling/HumanEval/46/L2",
+    "SingleLineInfilling/HumanEval/59/L9",
+    "SingleLineInfilling/HumanEval/71/L3",
+    "SingleLineInfilling/HumanEval/81/L12",
+    "SingleLineInfilling/HumanEval/93/L0",
+    "SingleLineInfilling/HumanEval/99/L9"
+  ],
+  "smoke_selection": "16 evenly spaced sorted stable IDs; fixed before outcomes",
+  "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "stage": "A",
+  "status": "running_full",
+  "timing": "CUDA synchronize before/after generation, excludes model loading, official execution, row writes; includes discrete trace buffering and CUDA event recording. Shared H200 observation only; no extra timing reruns.",
+  "torch_version": "2.5.1+cu121",
+  "trace_coverage": "all newly generated rows/rounds: selected drafts/final submitted IDs, edges/edge seeds, actions/stop reasons; no full logits/hidden states; old reuse coverage in provenance"
+}
