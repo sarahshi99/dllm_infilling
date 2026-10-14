@@ -16,5 +16,23 @@
     "reused": 2052,
     "logical_aliases": 1033,
     "technical_failures": 0
+  },
+  "B": {
+    "worker_exit": 0,
+    "analysis_exit": 0,
+    "status": "complete",
+    "logical_expected": 6198,
+    "records": 6198,
+    "evaluated": 6198,
+    "missing_count": 0,
+    "pending_evaluation_count": 0,
+    "duplicates": 0,
+    "exact_configuration_stable_id_sets": true,
+    "missing_ids": [],
+    "pending_ids": [],
+    "actual_new_generated": 6198,
+    "reused": 0,
+    "logical_aliases": 0,
+    "technical_failures": 0
   }
 }
