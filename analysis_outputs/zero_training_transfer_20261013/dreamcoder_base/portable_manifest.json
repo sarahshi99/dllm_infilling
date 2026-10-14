@@ -1,0 +1,44 @@
+{
+  "model_id": "Dream-org/Dream-Coder-v0-Base-7B",
+  "model_revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+  "head": {
+    "head": "kl",
+    "phase": "full",
+    "label": "best",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "rank": 256,
+  "lambda": 1,
+  "seed": 42,
+  "parameters": {
+    "canvas_length": 64,
+    "eos_penalty": 3.0,
+    "eps": 0.001,
+    "steps": 64,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "code_commit": "475ea4cea6e2a5caee0bc188df50d262083ac154",
+  "code_versions": {
+    "experiments/dreamcoder_fixed_transfer_adapter.py": "cc1442eccd41abfdc8667a8718dbd7e7a841a3cb",
+    "experiments/dreamon_markov_head_training.py": "b73095691601be61048818cee90e3ef29a8f61dc",
+    "experiments/dreamon_singleline_order_parallel.py": "e12a8d6f7a27fbd4e8f1f719125136568dc8b690",
+    "experiments/run_zero_training_transfer.py": "fe4a0a3d581edebfc039fb7950da0563acfab54b",
+    "experiments/train_dreamon_markov_head.py": "1a1a89d51d528edcbd33bf3cc8c28f747e54795d"
+  },
+  "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+  "timeout_sec": 3,
+  "dataset": "HumanEval-SingleLineInfilling",
+  "population": 1033,
+  "base_tasks": 164,
+  "records": "per_case.jsonl.gz",
+  "contexts": "task_contexts.jsonl.gz",
+  "paired": "paired_comparisons.csv",
+  "summary": "summary.csv",
+  "row_seed": "derive_row_seed(42, task_id)",
+  "local_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
+  "evidence_check": "all 8264 payloads equal read-only SQLite; every configuration stable ID set equals contexts",
+  "generation_repeated": false
+}
