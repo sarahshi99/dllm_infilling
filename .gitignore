@@ -35,3 +35,14 @@ analysis_outputs/phase6_score_only_candidate_selection_20260715_v1/chunks/
 *.safetensors
 *.gguf
 *.ckpt
+
+# Finite 2026-10-14 queue: publish portable gzip, not local persistence/runtime logs.
+analysis_outputs/k4_multiline_20261014_v1/**/*.sqlite*
+analysis_outputs/k4_multiline_20261014_v1/**/*.log
+analysis_outputs/k4_multiline_20261014_v1/**/*.lock
+analysis_outputs/k4_multiline_20261014_v1/**/failure_journal.jsonl
+analysis_outputs/k4_multiline_20261014_v1/**/smoke_progress.json
+analysis_outputs/k4_multiline_20261014_v1/**/progress.json
+analysis_outputs/k4_multiline_20261014_v1/queue_status.json
+analysis_outputs/k4_multiline_20261014_v1/queue_failure.json
+analysis_outputs/k4_multiline_20261014_v1/publication_status.json

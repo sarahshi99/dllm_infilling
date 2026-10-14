@@ -472,3 +472,7 @@
 - 本轮共享H200作业成本3.541866h/12h，无正式加速比；GPU评测进程已退出。旧DreamOn十组10330行完整保留复用，只算自身校准；Dream/DiffuCoder对应DreamOn本轮未找到可验证公开权重，原始Base下载阻塞且GPU未运行，质量未知。
 - 完整证据：analysis_outputs/zero_training_transfer_20261013/dreamcoder_base/{per_case.jsonl.gz,summary.csv,paired_comparisons.csv,run_manifest.json,smoke_checks.json,integrity_audit.json,delivery_verification.json,exit.json}；SQLite/日志/背景负载原始数据本地保留。总报告docs/paper_agent/transfer_20261013/report.zh.md。
 - 决策：本轮完成或明确阻塞后停止。不重试下载、不启动GPU、训练、调参/K4/隐藏状态头或新测试集。单生成种子、重复开发人口的区间不等于独立测试泛化。以后取得另两份DreamOn可靠权重，或根据证据决定重建/逐模型训练，均等待用户下一轮研究决定。
+
+## 2026-10-14 K4/多行单会话有限队列
+
+本轮已授权A DreamOn单行K4、B DreamCoder Base固定64单行K4、C DreamOn多行global K2，逻辑上限37722，seed42，冻结权重无训练。CPU修补错误审计和迁移可移植证据已保存；Base8264逐行复算global596/469/465/486、frontier592/362/387/482，完整1033人口，无K2重跑。完整5815多行与1033单行按官方normal loader取得，逐ID/字段等于loubnabnl test缓存，共享164题、旧test_lock不读不改。K4链路径与旧K1/K2回归CPU53项通过。历史A4候选2052行，14行因共享扩展边界修复重生成；frontierA/B逐轮等价后允许1033逻辑别名。证据/恢复入口analysis_outputs/k4_multiline_20261014_v1/recovery.zh.md。后台自动16行smoke→全量→官方评测→核验/分析→归档/提交推送；网络失败保留本地提交，不影响本地运行。最终状态以completion_matrix.json为准，不把启动写成全量完成。

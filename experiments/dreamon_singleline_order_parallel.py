@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Callable, Iterable, Sequence
 
+import time
+
 import torch
 from torch.nn import functional as F
 
@@ -135,7 +137,7 @@ def apply_left_frontier_barrier(
     for index, proposal in enumerate(proposals):
         if proposal.token_type in {"expand", "delete"}:
             return list(proposals[:index]), proposal, len(proposals) - index - 1
-        if proposal.token_type != "normal":
+        if proposal.token_type not in {"normal", "mask_noop"}:
             raise ValueError(f"unknown proposal token type: {proposal.token_type}")
     return list(proposals), None, 0
 
@@ -375,6 +377,67 @@ def _aborted_transition(pending: PendingTransition, reason: str, step: int) -> d
     }
 
 
+def start_head_event(logits, events):
+    if not logits.is_cuda:
+        return None
+    before = torch.cuda.Event(enable_timing=True)
+    after = torch.cuda.Event(enable_timing=True)
+    before.record()
+    events.append((before, after))
+    return after
+
+
+def contiguous_selected_chains(selected_ranks, absolute_positions):
+    """Split original selected coordinates; never replace a candidate for adjacency."""
+    chains = []
+    for rank in sorted(selected_ranks, key=lambda r: absolute_positions[r]):
+        if not chains or absolute_positions[rank] != absolute_positions[chains[-1][-1]] + 1:
+            chains.append([])
+        chains[-1].append(rank)
+    return chains
+
+
+def k4_chain_proposals(*, selected_ranks, positions, predictions, logits, head,
+                       strength, row_seed, step, sample, temperature, top_p, top_k,
+                       mask_id, eos_id, expand_id, head_events):
+    proposals, edges = [], []
+    corrected_stop = False
+    for chain in contiguous_selected_chains(selected_ranks, positions):
+        previous = None
+        for rank in chain:
+            raw = int(predictions[rank])
+            kind = token_type(raw, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id)
+            # Original structural action executes once, then the whole round ends.
+            if kind in {"expand", "delete"}:
+                proposals.append(Proposal(positions[rank], raw, kind))
+                return proposals, edges, False
+            final = raw
+            if previous is not None and kind == "normal" and head is not None:
+                left_pos, left_final = previous
+                local_seed = (row_seed + 1_000_003 * step + 10_007 * left_pos + positions[rank]) % ((1 << 63) - 1)
+                devices = [logits.device.index or 0] if logits.is_cuda else []
+                head_end = start_head_event(logits, head_events)
+                with torch.random.fork_rng(devices=devices, enabled=True):
+                    torch.manual_seed(local_seed)
+                    if logits.is_cuda:
+                        torch.cuda.manual_seed_all(local_seed)
+                    bias = head(torch.tensor([left_final], device=logits.device))[0].to(logits.dtype)
+                    _, value = sample(logits[rank:rank+1] + strength * bias,
+                                      temperature=temperature, top_p=top_p, top_k=top_k, neg_entropy=True)
+                if head_end is not None:
+                    head_end.record()
+                final = int(value[0])
+                edges.append(dict(left=left_pos, right=positions[rank], predecessor_final=left_final,
+                                  raw=raw, final=final, local_seed=local_seed))
+                final_kind = token_type(final, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id)
+                if final_kind in {"expand", "delete"}:
+                    return proposals, edges, True
+                kind = final_kind
+            proposals.append(Proposal(positions[rank], final, kind))
+            previous = (positions[rank], final) if kind == "normal" else None
+    return proposals, edges, corrected_stop
+
+
 @torch.inference_mode()
 def decode_with_policy(
     *,
@@ -440,6 +503,8 @@ def decode_with_policy(
     total_normal = total_expand = total_delete = 0
     markov_enabled_count = adjacent_opportunity_count = nonadjacent_fallback_count = 0
     corrected_structural_stop_count = 0
+    trace_record_sec = 0.0
+    head_events = []
     for step in range(int(steps)):
         real_length = prefix_length + dynamic_length + len(suffix)
         attention_1d = F.pad(
@@ -627,6 +692,29 @@ def decode_with_policy(
             selected_ranks = _global_ranks(confidence, requested_k)
         else:
             selected_ranks = _left_frontier_ranks(local_positions, requested_k)
+        selected_drafts = dict(zip(selected_ranks, predictions[selected_ranks].detach().cpu().tolist()))
+        raw_selected = [(int(absolute_positions[r]), int(selected_drafts[r])) for r in selected_ranks] if capture_actions else []
+        available_expands = min(int(expand_budget), maximum - real_length)
+        structural_pair = k2_pair_decision(selected_ranks=selected_ranks,
+            absolute_positions=absolute_positions, policy=policy)
+        single_structure = policy == LEFT_TO_RIGHT_FRONTIER or (
+            k2_action_mode == K2_SEQUENTIAL_ACTIONS and (
+                requested_k == 4 or (requested_k == 2 and structural_pair.sequential_actions)))
+        # Barrier paths execute at most one original structural action. Do not
+        # let a later chain consume the earlier chain's single expansion slot.
+        # Native parallel expands run in descending coordinates in the release.
+        budget_order = selected_ranks if single_structure else sorted(
+            selected_ranks, key=lambda rank: absolute_positions[rank], reverse=True)
+        budget_clipped_positions = []
+        for rank in budget_order:
+            if selected_drafts[rank] == expand_id:
+                if available_expands <= 0:
+                    predictions[rank] = mask_id
+                    selected_drafts[rank] = mask_id
+                    budget_clipped_positions.append(int(absolute_positions[rank]))
+                elif not single_structure:
+                    available_expands -= 1
+        chain_edges = []
         pair = k2_pair_decision(
             selected_ranks=selected_ranks,
             absolute_positions=absolute_positions,
@@ -644,8 +732,8 @@ def decode_with_policy(
         proposals = [
             Proposal(
                 position=int(absolute_positions[rank]),
-                token_id=int(predictions[rank].item()),
-                token_type=token_type(int(predictions[rank].item()), eos_id=eos_id, expand_id=expand_id, mask_id=mask_id),
+                token_id=int(selected_drafts[rank]),
+                token_type=token_type(int(selected_drafts[rank]), eos_id=eos_id, expand_id=expand_id, mask_id=mask_id),
             )
             for rank in selected_ranks
         ]
@@ -691,6 +779,7 @@ def decode_with_policy(
                     + 10_007 * int(absolute_positions[left_rank])
                     + int(absolute_positions[right_rank])
                 ) % ((1 << 63) - 1)
+                head_end = start_head_event(logits, head_events)
                 with torch.random.fork_rng(devices=rng_devices, enabled=True):
                     torch.manual_seed(local_seed)
                     if logits.is_cuda:
@@ -718,7 +807,11 @@ def decode_with_policy(
                         top_k=top_k,
                         neg_entropy=True,
                     )
+                if head_end is not None:
+                    head_end.record()
                 corrected_id = int(corrected_token[0].item())
+                chain_edges.append(dict(left=int(absolute_positions[left_rank]), right=int(absolute_positions[right_rank]),
+                                        predecessor_final=left_token, raw=base_right_token, final=corrected_id, local_seed=local_seed))
                 corrected_type = token_type(
                     corrected_id, eos_id=eos_id, expand_id=expand_id, mask_id=mask_id
                 )
@@ -745,10 +838,21 @@ def decode_with_policy(
                     proposals = [left_proposal]
                     corrected_structural_stop = True
                     corrected_structural_stop_count += 1
+        k4_sequential = requested_k == 4 and k2_action_mode == K2_SEQUENTIAL_ACTIONS
+        if k4_sequential:
+            proposals, chain_edges, corrected_structural_stop = k4_chain_proposals(
+                selected_ranks=selected_ranks, positions=absolute_positions, predictions=predictions,
+                logits=logits, head=markov_head, strength=float(markov_lambda),
+                row_seed=int(markov_sampling_seed), step=step, sample=sample_tokens_fn,
+                temperature=temperature, top_p=top_p, top_k=top_k,
+                mask_id=mask_id, eos_id=eos_id, expand_id=expand_id, head_events=head_events)
+            markov_enabled_count += len(chain_edges)
+            adjacent_opportunity_count += sum(len(c)-1 for c in contiguous_selected_chains(selected_ranks, absolute_positions))
+            corrected_structural_stop_count += int(corrected_structural_stop)
         barrier_action: Proposal | None = None
         discarded = 0
         committed = proposals
-        if policy == LEFT_TO_RIGHT_FRONTIER or sequential_pair:
+        if policy == LEFT_TO_RIGHT_FRONTIER or sequential_pair or k4_sequential:
             committed, barrier_action, discarded = apply_left_frontier_barrier(proposals)
         structural_stop_count += int(barrier_action is not None or corrected_structural_stop)
         committed_by_position = {proposal.position: proposal for proposal in committed}
@@ -763,7 +867,7 @@ def decode_with_policy(
         x[mask_index] = committed_tokens
         normal_count = sum(proposal.token_type == "normal" for proposal in committed)
         expand_count = delete_count = 0
-        broadcast_delete = (policy == GLOBAL_CONFIDENCE and not sequential_pair) or (
+        broadcast_delete = (policy == GLOBAL_CONFIDENCE and not sequential_pair and not k4_sequential) or (
             barrier_action is not None and barrier_action.token_type == "delete"
         )
         if broadcast_delete:
@@ -773,7 +877,7 @@ def decode_with_policy(
                 tail = torch.arange(x_seq.size(0), device=x.device) >= int(first_eos[0].item())
                 x_seq.masked_fill_(tail & mask_index[0], eos_id)
                 x = x_seq.unsqueeze(0)
-        if policy == GLOBAL_CONFIDENCE and not sequential_pair:
+        if policy == GLOBAL_CONFIDENCE and not sequential_pair and not k4_sequential:
             expand_indices = (x[0] == expand_id).nonzero(as_tuple=False).squeeze(1).tolist()
             for index in sorted(expand_indices, reverse=True):
                 x = _apply_one_expand(x, int(index), mask_id)
@@ -1013,7 +1117,16 @@ def decode_with_policy(
                 }
             )
         if capture_actions:
+            trace_started = time.perf_counter()
             action_trace.append({
+                "step": step, "selected_raw_absolute": raw_selected, "chain_edges": chain_edges,
+                "selected_count": len(selected_ranks), "actual_submitted_count": sum(p.token_type != "mask_noop" for p in committed_by_position.values()),
+                "budget_clipped_positions": budget_clipped_positions,
+                "submitted_absolute": [[p.position, p.token_id] for p in committed_by_position.values() if p.token_type != "mask_noop"],
+                "stop_reason": "corrected_special_refresh" if corrected_structural_stop else
+                    ("original_structure_barrier" if barrier_action is not None else "selected_committed"),
+                "expand_budget_remaining": expand_budget,
+
                 "positions": [p.position - prefix_length for p in proposals],
                 "tokens": [p.token_id for p in proposals],
                 "normal": normal_count, "expand": expand_count, "delete": delete_count,
@@ -1021,6 +1134,8 @@ def decode_with_policy(
                 "barrier": None if barrier_action is None else
                     [barrier_action.position - prefix_length, barrier_action.token_id],
             })
+
+            trace_record_sec += time.perf_counter() - trace_started
 
     for pending in markov_pending:
         markov_transitions.append(
@@ -1046,6 +1161,9 @@ def decode_with_policy(
         "recompute_enabled_count": recompute_enabled_count,
         "structural_stop_count": structural_stop_count,
         "action_trace": action_trace,
+        "trace_record_cpu_sec": trace_record_sec,
+        "_head_serial_cuda_sec": sum(a.elapsed_time(b) for a, b in head_events) / 1000,
+        "expand_budget_remaining": expand_budget,
         "normal_token_count": total_normal,
         "expand_count": total_expand,
         "delete_count": total_delete,

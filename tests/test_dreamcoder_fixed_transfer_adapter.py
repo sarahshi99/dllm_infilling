@@ -65,7 +65,7 @@ class NativeAgreementTest(unittest.TestCase):
 
     def test_both_orders_match_explicitly_patched_native_k1_and_k2(self):
         for policy in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER):
-            for k in (1, 2):
+            for k in (1, 2, 4):
                 args = self.kwargs(policy, k)
                 actual = decode_fixed_transfer(**args, sample_tokens_fn=self.native.sample_tokens)
                 reference = native_fixed_reference(**args)
@@ -99,6 +99,30 @@ class NativeAgreementTest(unittest.TestCase):
             for result in (z, t):
                 self.assertEqual(result['expand_count'] + result['delete_count'], 0)
                 self.assertEqual(len(result['completion_token_ids']), 64)
+
+
+    def test_k4_native_rounds_match_and_head_eos_never_stops_round(self):
+        from tests.test_dreamon_markov_k2 import deterministic_sample
+        args=self.kwargs(LEFT_TO_RIGHT_FRONTIER,4)
+        nohead=decode_fixed_transfer(**args,sample_tokens_fn=self.native.sample_tokens,capture_actions=True)
+        reference=native_fixed_reference(**args,capture_actions=True)
+        canvas=[7]*64;snapshots=[]
+        for step in nohead['action_trace']:
+            for position,token in step['submitted']:canvas[position-2]=token
+            snapshots.append(list(canvas))
+        self.assertEqual(snapshots,reference['native_canvas_history'])
+        class EOSHead(torch.nn.Module):
+            def __init__(self):super().__init__();self.calls=0
+            def forward(self,ids):
+                self.calls+=1;out=torch.zeros((len(ids),8));out[:,6]=1000;return out
+        head=EOSHead()
+        result=decode_fixed_transfer(**args,sample_tokens_fn=deterministic_sample,markov_head=head,capture_actions=True)
+        self.assertEqual(result['forward_count'],16)
+        self.assertEqual(head.calls,result['markov_enabled_count'])
+        self.assertEqual(head.calls,32)
+        self.assertTrue(all(t['actual_submitted_count']==4 for t in result['action_trace']))
+        self.assertEqual(result['structural_stop_count'],0)
+        self.assertEqual(result['delete_count']+result['expand_count'],0)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,9 @@
+{
+  "base": "all1033 K1/K2 per policy; native selection/sampling/cleanup/clock unchanged, existing CPU native tests retained",
+  "base_source_commit": "bf62fdf",
+  "dreamon_k1": "all1033 per policy; single-action expansion cannot exceed one-slot capacity or remaining budget, all other K1 behavior unchanged",
+  "dreamon_k2": "only rows with original expand_count=0, because original K2 has no matching round trajectories to exclude changed expansion boundary; pair tables disclose actual subset N",
+  "dreamon_source_commit": "c843847",
+  "inputs": "same pinned loader fields and exact stable IDs checked; every row derive_row_seed42 checked; same model revision and bf16/head mapping/protocol",
+  "timing": "old anchor timing unchanged; reused rows do not count as new independent evidence"
+}

@@ -16,7 +16,7 @@ import torch
 
 from experiments.dreamon_singleline_order_parallel import (
     GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER, _global_ranks,
-    _left_frontier_ranks, k2_pair_decision, shift_logits_to_targets,
+    _left_frontier_ranks, k2_pair_decision, shift_logits_to_targets, contiguous_selected_chains, start_head_event,
 )
 
 
@@ -61,8 +61,8 @@ def decode_fixed_transfer(
     top_k: int | None = None, eos_penalty: float = 3.0,
     eps: float = 1e-3, steps: int = 64, capture_actions: bool = False,
 ) -> dict:
-    if requested_k not in (1, 2) or policy not in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER):
-        raise ValueError("only frozen K1/K2 and the two original orders are supported")
+    if requested_k not in (1, 2, 4) or policy not in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER):
+        raise ValueError("only frozen K1/K2/K4 and the two original orders are supported")
     if steps != 64:
         raise ValueError("frozen native Base schedule requires 64 steps")
     _seed(row_seed)
@@ -74,6 +74,7 @@ def decode_fixed_transfer(
     ordinary_ids = valid - special
     calls = adjacent = nonadjacent = enabled = ordinary = special_outputs = 0
     actions = []
+    head_events = []
     for step in range(steps):
         mask = x == mask_id
         if not bool(mask.any()):
@@ -97,21 +98,32 @@ def decode_fixed_transfer(
         pair = k2_pair_decision(selected_ranks=ranks, absolute_positions=positions, policy=policy)
         adjacent += int(pair.markov_eligible)
         nonadjacent += int(len(ranks) == 2 and not pair.markov_eligible)
-        if markov_head is not None and pair.markov_eligible:
-            left, right = pair.left_rank, pair.right_rank
-            left_id, right_id = int(predictions[left]), int(predictions[right])
-            if left_id in ordinary_ids and right_id in ordinary_ids:
-                local_seed = (row_seed + 1_000_003 * step + 10_007 * positions[left] + positions[right]) % ((1 << 63) - 1)
-                devices = [x.device.index or 0] if x.is_cuda else []
-                with torch.random.fork_rng(devices=devices, enabled=True):
-                    _seed(local_seed)
-                    previous = torch.tensor([left_id], device=x.device)
-                    correction = markov_head(previous)[0].to(dtype=logits.dtype)
-                    _, corrected = sample_tokens_fn(
-                        logits[right:right + 1] + correction, temperature=temperature,
-                        top_p=top_p, top_k=top_k, neg_entropy=True)
-                predictions[right] = corrected[0]
-                enabled += 1
+        raw_selected = [(positions[r], int(predictions[r])) for r in ranks] if capture_actions else []
+        edges = []
+        chains = contiguous_selected_chains(ranks, positions)
+        if requested_k == 4:
+            adjacent -= int(pair.markov_eligible)
+            adjacent += sum(len(c)-1 for c in chains)
+        if markov_head is not None:
+            for chain in chains:
+                for left, right in zip(chain, chain[1:]):
+                    left_id, right_id = int(predictions[left]), int(predictions[right])
+                    if left_id not in ordinary_ids or right_id not in ordinary_ids:
+                        continue
+                    local_seed = (row_seed + 1_000_003 * step + 10_007 * positions[left] + positions[right]) % ((1 << 63) - 1)
+                    devices = [x.device.index or 0] if x.is_cuda else []
+                    head_end = start_head_event(logits, head_events)
+                    with torch.random.fork_rng(devices=devices, enabled=True):
+                        _seed(local_seed)
+                        correction = markov_head(torch.tensor([left_id], device=x.device))[0].to(logits.dtype)
+                        _, corrected = sample_tokens_fn(logits[right:right+1] + correction,
+                            temperature=temperature, top_p=top_p, top_k=top_k, neg_entropy=True)
+                    if head_end is not None:
+                        head_end.record()
+                    predictions[right] = corrected[0]
+                    enabled += 1
+                    edges.append(dict(left=positions[left],right=positions[right],predecessor_final=left_id,
+                                      raw=right_id,final=int(corrected[0]),local_seed=local_seed))
         submitted = []
         for rank in ranks:
             token = int(predictions[rank])
@@ -122,12 +134,16 @@ def decode_fixed_transfer(
             special_outputs += int(token in special)
             submitted.append([positions[rank], token])
         if capture_actions:
-            actions.append(dict(step=step, submitted=submitted, head_eligible=pair.markov_eligible))
-    return _finish(x, start, tokenizer, forward_count=calls, base_forward_count=calls,
+            actions.append(dict(step=step, submitted=submitted, selected_raw_absolute=raw_selected, chain_edges=edges,
+                                actual_submitted_count=len(submitted), selected_count=len(ranks), stop_reason="fixed_canvas_commit",
+                                head_eligible=pair.markov_eligible))
+    result = _finish(x, start, tokenizer, forward_count=calls, base_forward_count=calls,
                    outer_round_count=calls, adjacent_opportunity_count=adjacent,
                    nonadjacent_fallback_count=nonadjacent, markov_enabled_count=enabled,
                    normal_token_count=ordinary, special_output_count=special_outputs,
                    action_trace=actions)
+    result["_head_serial_cuda_sec"] = sum(a.elapsed_time(b) for a,b in head_events)/1000
+    return result
 
 
 @torch.no_grad()
@@ -136,15 +152,15 @@ def native_fixed_reference(
     requested_k: int, policy: str, row_seed: int, temperature: float = 0.2,
     top_p: float | None = 0.9, top_k: int | None = None,
     eos_penalty: float = 3.0, eps: float = 1e-3, steps: int = 64,
-    sample_tokens_fn: Any | None = None,
+    sample_tokens_fn: Any | None = None, capture_actions: bool = False,
 ) -> dict:
     """Released native `_sample` plus explicit fixed-K/order patch, no head.
 
     No global file or model method is overwritten. `max_length` equals the
     existing prefix+64+suffix canvas, so no additional masks are appended.
     """
-    if requested_k not in (1, 2) or policy not in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER) or steps != 64:
-        raise ValueError("reference requires frozen K1/K2, order and 64-step settings")
+    if requested_k not in (1, 2, 4) or policy not in (GLOBAL_CONFIDENCE, LEFT_TO_RIGHT_FRONTIER) or steps != 64:
+        raise ValueError("reference requires frozen K1/K2/K4, order and 64-step settings")
     native_model = model if hasattr(model, "_sample") else model.model
     original = type(native_model)._sample
     source = textwrap.dedent(inspect.getsource(original))
@@ -168,7 +184,16 @@ def native_fixed_reference(
                              eps=eps, alg="entropy", alg_temp=0.0, eos_penalty=eos_penalty,
                              temperature=temperature, top_p=top_p, top_k=top_k)
     _seed(row_seed)
+    history = []
+    def tokens_hook(step, canvas, logits):
+        if capture_actions and step is not None:
+            state = canvas[0, start:start+64].detach().cpu().tolist()
+            # Native reference keeps its full 64-step loop; after canvas fill,
+            # trailing no-op rounds do not change submitted positions or tokens.
+            if not history or state != history[-1]:
+                history.append(state)
+        return canvas
     output = namespace[original.__name__](native_model, x, None, config,
-                                           lambda step, x, logits: x,
+                                           tokens_hook,
                                            lambda step, x, logits: logits)
-    return _finish(output.sequences, start, tokenizer)
+    return _finish(output.sequences, start, tokenizer, native_canvas_history=history, native_trailing_noop_rounds=steps-len(history) if capture_actions else None)

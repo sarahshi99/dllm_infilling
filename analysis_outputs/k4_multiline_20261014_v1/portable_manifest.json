@@ -1,0 +1,24 @@
+{
+  "version": "20261014-v1",
+  "stages": [
+    "A",
+    "B",
+    "C"
+  ],
+  "logical_cap": 37722,
+  "new_generation_initial_estimate": 34637,
+  "reuse_candidates": 2052,
+  "possible_frontier_aliases": 1033,
+  "counts_contingent_on_smoke_reuse_check": true,
+  "contexts": [
+    "single-line_contexts.jsonl.gz",
+    "multi-line_contexts.jsonl.gz"
+  ],
+  "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+  "results": "A|B|C/per_case.jsonl.gz",
+  "analysis_entry": "python analysis/analyze_k4_multiline_batch.py --stage A",
+  "same_population_warning": "1033/5815 infill rows, shared164 base tasks; development evidence, not independent test",
+  "audit_branch_commit": "f6ce43f",
+  "transfer_branch_commit": "bf62fdf",
+  "publication": "network attempts timed out; do not infer upload from local archive; final status in publication_status.json"
+}

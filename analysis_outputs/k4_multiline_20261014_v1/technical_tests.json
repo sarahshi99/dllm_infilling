@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "tests": 54,
+  "command": "python -m unittest tests.test_k4_multiline_batch tests.test_dreamon_order_parallelism tests.test_dreamon_markov_k2 tests.test_dreamon_markov_k2_diagnosis tests.test_dreamcoder_fixed_transfer_adapter -q",
+  "verified": [
+    "corrected predecessor used for word3/4",
+    "separate spatial chains",
+    "original/corrected structure barriers",
+    "corrected mask cuts dependency without round barrier",
+    "Base EOS stays on canvas and selected successors continue",
+    "zero head called",
+    "local RNG isolated",
+    "tail shorter than K",
+    "shared expansion budget bound",
+    "unchanged K1/K2 native reference",
+    "Base K4 reference actual submission rounds, trailing native no-op rounds disclosed",
+    "generated/evaluated transactions survive reopen",
+    "portable incomplete analysis does not report completion",
+    "later chain cannot consume earlier structural expansion slot"
+  ],
+  "official_evaluation_probe": "same runtime Python3.10.20, original pinned evaluator in bwrap; canonical completion passes, malformed completion fails; no change to official3s clock",
+  "reviewer_gate_disabled": true,
+  "gpu_smoke": "pending queue: fixed16 stable IDs per dataset, no quality threshold"
+}
