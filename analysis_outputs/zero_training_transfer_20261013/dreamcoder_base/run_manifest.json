@@ -1,0 +1,118 @@
+{
+  "actual_device": "NVIDIA H200 NVL",
+  "arms": [
+    {
+      "arm": "A",
+      "k": 1,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "B",
+      "k": 2,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "C",
+      "k": 2,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "D",
+      "k": 2,
+      "policy": "global_confidence"
+    },
+    {
+      "arm": "A",
+      "k": 1,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "B",
+      "k": 2,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "C",
+      "k": 2,
+      "policy": "left_to_right_frontier"
+    },
+    {
+      "arm": "D",
+      "k": 2,
+      "policy": "left_to_right_frontier"
+    }
+  ],
+  "base_task_count": 164,
+  "code_commit": "475ea4cea6e2a5caee0bc188df50d262083ac154",
+  "code_versions": {
+    "experiments/dreamcoder_fixed_transfer_adapter.py": "cc1442eccd41abfdc8667a8718dbd7e7a841a3cb",
+    "experiments/dreamon_markov_head_training.py": "b73095691601be61048818cee90e3ef29a8f61dc",
+    "experiments/dreamon_singleline_order_parallel.py": "e12a8d6f7a27fbd4e8f1f719125136568dc8b690",
+    "experiments/run_zero_training_transfer.py": "fe4a0a3d581edebfc039fb7950da0563acfab54b",
+    "experiments/train_dreamon_markov_head.py": "1a1a89d51d528edcbd33bf3cc8c28f747e54795d"
+  },
+  "command": "/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python experiments/run_zero_training_transfer.py --target dreamcoder_base --target-registry analysis_outputs/zero_training_transfer_20261013/controller/target_registry.json --output-dir analysis_outputs/zero_training_transfer_20261013/dreamcoder_base",
+  "differences_from_dreamon": "fixed canvas64, no expand/delete; native Base EOS penalty3; fixed K schedule patch in native reference; steps64 safety bound vs DreamOn256; same rules for all arms",
+  "full_batch_estimate_sec": 13889.315895641485,
+  "head_lambda": 1,
+  "head_rank": 256,
+  "head_registry_entry": {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "parameters": {
+    "canvas_length": 64,
+    "eos_penalty": 3.0,
+    "eps": 0.001,
+    "steps": 64,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "pid": 832663,
+  "population": "reused development population, single generation seed; no sealed test access",
+  "population_count": 1033,
+  "remaining_estimate_with_margin_sec": 20833.973843462227,
+  "seed": 42,
+  "smoke_task_ids": [
+    "SingleLineInfilling/HumanEval/0/L0",
+    "SingleLineInfilling/HumanEval/105/L3",
+    "SingleLineInfilling/HumanEval/111/L5",
+    "SingleLineInfilling/HumanEval/123/L1",
+    "SingleLineInfilling/HumanEval/129/L21",
+    "SingleLineInfilling/HumanEval/137/L1",
+    "SingleLineInfilling/HumanEval/143/L9",
+    "SingleLineInfilling/HumanEval/154/L3",
+    "SingleLineInfilling/HumanEval/19/L3",
+    "SingleLineInfilling/HumanEval/32/L7",
+    "SingleLineInfilling/HumanEval/46/L2",
+    "SingleLineInfilling/HumanEval/59/L9",
+    "SingleLineInfilling/HumanEval/71/L3",
+    "SingleLineInfilling/HumanEval/81/L12",
+    "SingleLineInfilling/HumanEval/93/L0",
+    "SingleLineInfilling/HumanEval/99/L9"
+  ],
+  "source_model_snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "status": "completed_generation",
+  "strict_head_load": "all parameters and persistent output_mask; no missing/unexpected keys",
+  "target": "dreamcoder_base",
+  "target_registry_entry": {
+    "compatibility_audit": "analysis_outputs/zero_training_transfer_20261013/a_dreamcoder/tokenizer_audit.json",
+    "direct_transfer_status": "passed",
+    "generation_code_revision": "same as weight revision",
+    "id": "Dream-org/Dream-Coder-v0-Base-7B",
+    "local_path": "/home/shx/.cache/huggingface/hub/models--Dream-org--Dream-Coder-v0-Base-7B/snapshots/2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "official": true,
+    "revision": "2346ccd3be517d0d314152b988a3b9bafa7d6d63",
+    "tokenizer_code_revision": "same as weight revision",
+    "validation_scope": "CPU complete tokenizer and source head strict load; GPU16 pending",
+    "weight_kind": "original_base_fixed_length_auxiliary"
+  },
+  "timing": "shared H200 cost only; no formal speed ratio"
+}

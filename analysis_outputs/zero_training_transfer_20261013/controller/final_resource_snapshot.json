@@ -1,0 +1,8 @@
+{
+  "verified_at_utc": "2026-10-14T02:06:30.798674+00:00",
+  "gpu": "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 91763, 143771, 0",
+  "own_evaluation_pid": 832663,
+  "own_evaluation_gpu_process_present": false,
+  "formal_speed_measurement": false,
+  "new_gpu_jobs_started": false
+}

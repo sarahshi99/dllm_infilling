@@ -464,3 +464,10 @@ The next result should be one of:
 - a safer diagnostic signal, trace-enabled evidence, or a smoke GPU run showing no short-bucket regression;
 - a full same-hardware run improving long buckets;
 - or a rigorous negative result that justifies pivoting toward dynamic canvas or length regularization.
+
+
+## 2026-10-14 final delivery: frozen DreamCoder Base transfer
+
+DreamCoder Base fixed64 auxiliary completed all8264 rows (1033 variants/164 base tasks, seed42), exit0 on2026-10-13 14:06UTC. Technical checks/integrity passed; no missing, duplicate or technical failure rows. SQLite and compact gzip payloads match. Generation commit475ea4c.
+Global A/B/C/D:596/469/465/486; frontier:592/362/387/482, all/1033. Learned head minus same-path zero head:net+21/+95, help/harm57/36 and169/74, row-weighted deltas+2.03pp [0.31,3.69] and+9.20pp [6.54,11.86]; both task-macro intervals positive. Head minus K1 is−110 rows in both orders:partial recovery only. Single-seed repeated development population, not independent generalization or the three-DreamOn matrix.
+Round cost3.541866 GPU-job hours of12; shared H200 cost only, no formal speedup. Historical DreamOn10330 rows reused as self-calibration. Other two DreamOn checkpoints were not verified in this search; Dream/DiffuCoder Base weights remain download-blocked, with no GPU evaluation. See docs/paper_agent/transfer_20261013/report.zh.md and target compact evidence. All evaluations have stopped; no training, new jobs, download retries or new tests. Await a new research decision.

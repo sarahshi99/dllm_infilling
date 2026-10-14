@@ -1,0 +1,15 @@
+{
+  "status": "completed_verified",
+  "verified_at_utc": "2026-10-14T02:09:09.269819+00:00",
+  "runner_exit": 0,
+  "completed": 8264,
+  "expected": 8264,
+  "missing": 0,
+  "duplicates": 0,
+  "technical_failure_events": 0,
+  "gpu_job_sec": 12750.719051531982,
+  "shared_gpu_cost_only": true,
+  "running_jobs_this_round": 0,
+  "new_jobs_started_during_review": false,
+  "training": false
+}

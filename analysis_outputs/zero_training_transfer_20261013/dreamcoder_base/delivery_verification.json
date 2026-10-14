@@ -1,0 +1,17 @@
+{
+  "verified_at_utc": "2026-10-14T02:04:00.845757+00:00",
+  "status": "passed",
+  "compact_sqlite_payloads_identical": true,
+  "row_count": 8264,
+  "all_registered_output_tokens": true,
+  "residual_mask_count": 0,
+  "fixed_canvas_tokens": 64,
+  "k1_forwards_per_case": 64,
+  "k2_forwards_per_case": 32,
+  "generation_code_commit": "475ea4cea6e2a5caee0bc188df50d262083ac154",
+  "registered_code_blobs_match_generation_commit": true,
+  "technical_checks": 128,
+  "technical_ids": 16,
+  "training_executed": false,
+  "new_gpu_jobs_started": false
+}

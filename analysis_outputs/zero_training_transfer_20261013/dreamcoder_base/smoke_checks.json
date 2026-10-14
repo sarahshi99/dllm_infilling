@@ -1,0 +1,903 @@
+{
+  "checks": [
+    {
+      "arm": "A",
+      "generation_sec": 2.56349569093436,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0879173073917627,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1815606928430498,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.1737997373566031,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.047719554975629,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0572069641202688,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.0911905798129737,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.088895516935736,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.5160011490806937,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.2579565048217773,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.379391668830067,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.3574175122193992,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.4917042939923704,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.2800242132507265,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.3568771132268012,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.3414947860874236,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/105/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.265738310292363,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1995194870978594,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2150469599291682,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.0483480459079146,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.25986218592152,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1568017760291696,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1890132408589125,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2669869782403111,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/111/L5"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.716682555153966,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.3014706149697304,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.3800535909831524,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.4124079910106957,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.4876400367356837,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.238267749082297,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.3359993849880993,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.3645318439230323,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/123/L1"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 3.3300179461948574,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.6137549206614494,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.811922344379127,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.702283297199756,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 3.1550336093641818,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.686511600855738,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.7981084208004177,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.7080229921266437,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/129/L21"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.267257950734347,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1458542072214186,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2498394837602973,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2174654048867524,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.215257949195802,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.153906632680446,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.188607310410589,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.204058633185923,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/137/L1"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.268021916039288,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1634629368782043,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2693726029247046,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2428314881399274,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.2650500629097223,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.2058297330513597,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1947736088186502,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2394571430049837,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/143/L9"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.102458966895938,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.075784589163959,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1046877563931048,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.1326345540583134,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.0794557193294168,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0646000681445003,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.0881437039934099,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.100783810019493,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/154/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.269519574008882,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1298644044436514,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.213334757834673,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2085241763852537,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.220151677262038,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1879743630997837,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1970890341326594,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2232153499498963,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/19/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.6177042722702026,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.3948648618534207,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.3877893248572946,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.3475895929150283,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.4796713567338884,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.327433462254703,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.350733415223658,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.348117869347334,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/32/L7"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.3146127150394022,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.17613571183756,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1828054888173938,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.1882170382887125,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.2662464599125087,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1408112300559878,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2002358492463827,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.236126933246851,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/46/L2"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.0763355968520045,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.069483001716435,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2055416172370315,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.219915946945548,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.0503578917123377,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0419167280197144,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1974482419900596,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2469816459342837,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/59/L9"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.1146265771239996,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.1046928809955716,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1448617349378765,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.1742010256275535,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 1.9914941480383277,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0235721808858216,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.255810247734189,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2785825268365443,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/71/L3"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 3.3653512308374047,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.6970211500301957,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.744751577731222,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.6953889951109886,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 3.3812556392513216,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.615125467069447,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.663250251673162,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.7635104409419,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/81/L12"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.0584900826215744,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0592566360719502,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.1051009679213166,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.1506058010272682,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 1.9988700202666223,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.0199881359003484,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.092175021301955,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.0831218548119068,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/93/L0"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.4432001868262887,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.2057229219935834,
+      "policy": "global_confidence",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.2636748310178518,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2712509888224304,
+      "policy": "global_confidence",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "A",
+      "generation_sec": 2.4283457030542195,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "B",
+      "generation_sec": 1.230392202269286,
+      "policy": "left_to_right_frontier",
+      "reference_checked": true,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "C",
+      "generation_sec": 1.300076651852578,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "arm": "D",
+      "generation_sec": 1.2960881600156426,
+      "policy": "left_to_right_frontier",
+      "reference_checked": false,
+      "task_id": "SingleLineInfilling/HumanEval/99/L9"
+    }
+  ],
+  "full_batch_estimate_sec": 13889.315895641485,
+  "reference": "official native fixed canvas with disclosed fixed-K/policy patch",
+  "status": "passed"
+}

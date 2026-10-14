@@ -3,6 +3,7 @@
 import csv
 import gzip
 import json
+import datetime
 from pathlib import Path
 import subprocess
 REPO=Path(__file__).resolve().parents[1]
@@ -38,6 +39,7 @@ def main():
         writer=csv.DictWriter(handle,fieldnames=list(calibration_summary[0]),lineterminator='\n');writer.writeheader();writer.writerows(calibration_summary)
     registry=read(ROOT/'controller/target_registry.json')
     budget=read(ROOT/'controller/gpu_budget.json')
+    queued={r['target']:r for r in read(ROOT/'controller/job_queue.json')['jobs']}
     source=[{'start':'DreamCoder-7B','weight_kind':'exact_dreamon_finetuned','id':'Dream-org/DreamOn-v0-7B','revision':'8ccc74750e43177327f29dab9e91882ba759e194',
              'status':'reused_complete_calibration','rows':8264,'cross_model':False,'exact_initial_base_revision':'not publicly specified','source_registry':'a_dreamcoder/source_registry.json'},
             {'start':'Dream-7B','weight_kind':'exact_dreamon_finetuned','id':None,'revision':None,'status':'未找到可验证公开权重','rows':None,'cross_model':None,'source_registry':'b_dream/source_registry.json'},
@@ -49,14 +51,25 @@ def main():
         audit=read(path/'integrity_audit.json') if (path/'integrity_audit.json').exists() else {}
         progress=read(path/'progress.json') if (path/'progress.json').exists() else {}
         auxiliary.append({'target':target,'id':entry['id'],'revision':entry['revision'],'weight_kind':'original_base_fixed_length_auxiliary',
-                          'status':manifest.get('status','blocked_weights_not_ready'),'blocker':manifest.get('blocker') if manifest else 'weight download blocked after bounded attempts; GPU16/full not run',
+                          'status':manifest.get('status',queued[target]['status']),'blocker':manifest.get('blocker') if manifest else 'weight download blocked after bounded attempts; GPU16/full not run',
                           'rows':audit.get('rows',progress.get('completed',0)),'expected_rows':8264,'integrity_status':audit.get('status','not_complete'),
-                          'local_path':entry['local_path'],'direct_transfer_scope':entry.get('validation_scope')})
-    result={'date':'2026-10-13','verification_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
+                          'local_path':entry['local_path'],'initial_compatibility_scope':entry.get('validation_scope'),
+                          'gpu_technical_check':audit.get('technical_check','not_run')})
+    completed_results={}
+    for row in auxiliary:
+        if row['integrity_status']!='passed': continue
+        path=ROOT/row['target']
+        with (path/'summary.csv').open() as f: summary=list(csv.DictReader(f))
+        with (path/'paired_comparisons.csv').open() as f: paired=list(csv.DictReader(f))
+        assert len(summary)==8 and all(int(r['denominator'])==1033 for r in summary)
+        assert len(paired)==12
+        completed_results[row['target']]={'summary':summary,'paired':paired,'verification':read(path/'delivery_verification.json')}
+    result={'date':'2026-10-13','reviewed_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'verification_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
             'source_code_commit':'8a0a54918412eda9402a327646f7f067f7160ec8','exact_dreamon_matrix':source,'base_auxiliary_matrix':auxiliary,
             'preserved_diagnosis_rows':len(calibration),'calibration_rows_in_requested_ABCD':sum(r['arm'] in 'ABCD' for r in calibration),
             'gpu_job_cost_hours_this_round':budget['used_gpu_job_sec']/3600,'budget_hours_this_round':budget['limit_gpu_job_sec']/3600,
-            'historical_diagnosis_cost_hours':budget['prior_diagnosis_sec']/3600,'formal_speedup':None,'training_executed':False,'new_sealed_test_access':False}
+            'historical_diagnosis_cost_hours':budget['prior_diagnosis_sec']/3600,'formal_speedup':None,'training_executed':False,'new_sealed_test_access':False,
+            'completed_auxiliary_results':completed_results}
     (ROOT/'controller/delivery_summary.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     lines=['# 2026-10-13 三起点来源与现有头零训练迁移','',
            '主线需要三个起点分别经过DreamOn长度微调后的权重。本轮冻结v2 KL best rank256/λ1，仅检验现有头直迁；没有训练。','',
@@ -67,6 +80,24 @@ def main():
            '|原始Base固定64辅助|revision|当前状态|完整行数|','|---|---|---|---|']
     for row in auxiliary:
         lines.append(f"|{row['id']}|{row['revision']}|{row['status']}|{row['rows']}/8264|")
+    if 'dreamcoder_base' in completed_results:
+        data=completed_results['dreamcoder_base']
+        lines+=['','## 2026-10-14 最终结果追加：DreamCoder Base 辅助迁移','',
+                '2026-10-13 14:06 UTC退出0；完整8264行，缺失/重复/历史技术失败/未恢复错误均0；SQLite与逐行gzip全部payload逐项一致。Dream和DiffuCoder两路仍为本轮下载阻塞，未做GPU评测。','',
+                '|顺序|K1无头 A|K2无头 B|K2零头 C|K2来源训练头 D|','|---|---|---|---|---|']
+        for policy in ('global_confidence','left_to_right_frontier'):
+            arms={r['arm']:r for r in data['summary'] if r['policy']==policy}
+            lines.append('|'+policy+'|'+'|'.join(f"{arms[a]['passed']}/1033 ({100*float(arms[a]['pass_rate']):.2f}%)" for a in 'ABCD')+'|')
+        lines+=['','|顺序|配对|帮助/伤害|净行数|行加权Δ95%CI(pp)|基础题等权Δ95%CI(pp)|','|---|---|---|---|---|---|']
+        for r in data['paired']:
+            if r['comparison'] not in ('D-C','C-B','D-B','D-A'): continue
+            lines.append(f"|{r['policy']}|{r['comparison']}|{r['help']}/{r['harm']}|{int(r['net']):+d}|{100*float(r['line_delta']):+.2f} [{100*float(r['line_ci95_low']):+.2f},{100*float(r['line_ci95_high']):+.2f}]|{100*float(r['base_task_equal_delta']):+.2f} [{100*float(r['base_task_equal_ci95_low']):+.2f},{100*float(r['base_task_equal_ci95_high']):+.2f}]|")
+        lines+=['',
+                '判断：本轮DreamOn来源头在原始DreamCoder Base辅助目标上，相对同路径零头显示可迁移的学习修正贡献，global净+21（+2.03pp）、frontier净+95（+9.20pp），两种权重的164题cluster区间均在0以上。global头−无头净+17的区间仍含0；frontier头−无头净+120包含路径净+25，不能全部归因学习。',
+                '但D相对K1两顺序均少110行（−10.65pp）；因此是K2质量损失的部分恢复，未达到K1质量，也不是三份确切DreamOn微调权重的跨模型验证成功。固定长度误差可能影响结果，本轮未做长度归因，不能把落后全部归于长度。单种子42、重复使用开发人口；区间仅反映本种子条件下基础题重采样，不是独立测试泛化证据。','',
+                '来源训练头触发：global 26444/26462相邻机会=99.93%，frontier 33030/33056=99.92%；global非相邻回退6594/(26462+6594)=19.95%，frontier0/33056。Base无结构动作，结构机会分母0、率不适用；所有画布始终64且无残mask/非法词元。',
+                '质量失败A/B/C/D分别global 437/564/568/547、frontier441/671/646/551；其中评测超时global6/4/4/5、frontier10/5/6/8，按原3秒评测规则计失败且不重测挑选。技术失败与评测不通过分开报告。',
+                '决策：本轮评测及阻塞交付完成，停止；不自动训练、重试下载、换参或开新实验。原始Base辅助增益支持保留现有头的迁移假设，主线仍需另两份可靠DreamOn权重。']
     lines+=['','完整普通token→ID、分词规则/文本、特殊词/输出列及一次logits shift审计已存各智能体目录。来源头按原定义strict加载全部参数；零头deepcopy且仅清零output.weight，λ仍1。未命名Base列不赋扩删语义，实际非法token会停目标。','',
             'Base原生日程不是严格每轮K；局部参考只补min(K,remaining)与frontier选位，固定64且不读答案长度，EOS留原位，所有组相同截取/skip special规则。现有DreamOn max_gen_len64与论文128分别登记，不能称同一复现。','',
             '人口固定1033行/164基础题、单生成种子42、原derive_row_seed；16条字典序等距ID不按正确率挑选。A=K1无头，B=K2无头，C=K2同类同秩零输出头λ1，D=K2来源头λ1。','',

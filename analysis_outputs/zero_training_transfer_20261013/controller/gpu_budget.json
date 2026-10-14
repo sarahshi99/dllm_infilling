@@ -8,13 +8,13 @@
   "scope": "all three agents and controller, all resumed sessions in this round",
   "sessions": [
     {
-      "elapsed_sec": 1981.2240753769875,
+      "elapsed_sec": 12750.719051531982,
       "pid": 832663,
       "session_id": "dreamcoder_base:1791887614511898407:832663",
       "started_utc": "2026-10-13T10:33:34Z",
-      "status": "running",
+      "status": "completed_generation",
       "target": "dreamcoder_base"
     }
   ],
-  "used_gpu_job_sec": 1981.2240753769875
+  "used_gpu_job_sec": 12750.719051531982
 }

@@ -824,3 +824,13 @@ Dream Base和DiffuCoder Base均因持续下载错误、0完整shard停在GPU前�
 当前是零训练迁移测试，不是训练；主模型/Markov头均冻结。DreamCoder固定64完整8264行矩阵在服务器tmux `zero_transfer_dreamcoder_20261013` 运行，Python PID 832663，当前 983/8264，本轮累计GPU成本 0.5419h。按16条技术检查全量估计 3.86h（不是承诺）；共享负载会变化。用户电脑将断网，明确无需继续监督；只停止本轮只读monitor，未停止GPU作业。不会新增GPU作业/训练/下载。
 
 脚本自身仍有全局12h预算、技术错误退出、SQLite去重恢复、完成后本地配对分析与exit.json。当前脚本不会自动commit/push最终结果；用户回来后读取输出、做完整性审计、更新最终报告并focused commit/push。Dream和DiffuCoder下载阻塞、GPU未运行。恢复时先读 `analysis_outputs/zero_training_transfer_20261013/controller/user_disconnect_checkpoint.json`、目标run_manifest/progress/exit及全局gpu_budget；不要重跑既有DreamOn。
+
+
+## 2026-10-14 最终交付追加：DreamCoder Base零训练迁移完成，其余两路阻塞
+
+- DreamCoder原始Base固定64辅助矩阵8264/8264行，1033/164开发人口、seed42；2026-10-13 14:06 UTC退出0，技术检查/完整性通过，缺失/重复/技术失败/未恢复错误均0。全部SQLite payload与压缩逐行证据一致，输出均合法、64词元且无残mask。生成代码475ea4cea6e2a5caee0bc188df50d262083ac154；当前通用runner后续适配不影响这些已存行。
+- global A/B/C/D=596/469/465/486；frontier=592/362/387/482（均/1033）。D−C净+21/+95，帮助/伤害57/36、169/74；行加权Δ=+2.03pp [0.31,3.69]、+9.20pp [6.54,11.86]，164题等权区间也均高于0。支持本辅助目标上的学习修正可迁移，不是三份DreamOn主线验证完成。
+- C−B净−4/+25；D−B净+17/+120，global D−B区间含0，frontier总增益不能全部归因学习。D−A两顺序均−110（−10.65pp），头只部分恢复K2质量损失，未追平K1。长度可能影响结果，本轮未作长度归因。
+- 本轮共享H200作业成本3.541866h/12h，无正式加速比；GPU评测进程已退出。旧DreamOn十组10330行完整保留复用，只算自身校准；Dream/DiffuCoder对应DreamOn本轮未找到可验证公开权重，原始Base下载阻塞且GPU未运行，质量未知。
+- 完整证据：analysis_outputs/zero_training_transfer_20261013/dreamcoder_base/{per_case.jsonl.gz,summary.csv,paired_comparisons.csv,run_manifest.json,smoke_checks.json,integrity_audit.json,delivery_verification.json,exit.json}；SQLite/日志/背景负载原始数据本地保留。总报告docs/paper_agent/transfer_20261013/report.zh.md。
+- 决策：本轮完成或明确阻塞后停止。不重试下载、不启动GPU、训练、调参/K4/隐藏状态头或新测试集。单生成种子、重复开发人口的区间不等于独立测试泛化。以后取得另两份DreamOn可靠权重，或根据证据决定重建/逐模型训练，均等待用户下一轮研究决定。
