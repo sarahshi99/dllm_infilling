@@ -13,7 +13,7 @@
       },
       "historical_static_interpreter": "parent Python 3.9.23 (source_manifest.cpu_environment.parent_python); compile(), not candidate execution",
       "official_original": "failed: unterminated string literal (detected at line 25) (<string>, line 25)",
-      "official_execution_interpreter": "DreamOn reproduction environment Python 3.10.19 (generation/evaluator runner)",
+      "official_execution_interpreter": "original DreamOn runner used dllm_env; exact historical Python patch version not preserved; original exception string retained",
       "additional_compile_only": {
         "interpreter": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
         "type": "SyntaxError",
@@ -34,7 +34,7 @@
       },
       "historical_static_interpreter": "parent Python 3.9.23 (source_manifest.cpu_environment.parent_python); compile(), not candidate execution",
       "official_original": "failed: unterminated string literal (detected at line 25) (<string>, line 25)",
-      "official_execution_interpreter": "DreamOn reproduction environment Python 3.10.19 (generation/evaluator runner)",
+      "official_execution_interpreter": "original DreamOn runner used dllm_env; exact historical Python patch version not preserved; original exception string retained",
       "additional_compile_only": {
         "interpreter": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
         "type": "SyntaxError",

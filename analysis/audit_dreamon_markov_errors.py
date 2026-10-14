@@ -20,7 +20,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "analysis_outputs/dreamon_markov_error_audit_20261013_v1"
 SOURCE = ROOT / "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1"
-DATA = None  # fallback must be explicitly supplied to bundle(dataset_root=...)
+DATA = Path("/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff")  # existing execution-only forensics; bundle fallback never reads this implicitly
 POLICIES = ("global_confidence", "left_to_right_frontier")
 
 
