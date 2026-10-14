@@ -39,6 +39,8 @@ def classify(record, candidate, replay):
 
 def build():
     records,problems,joined=bundle()
+    erratum_path=OUT/'erratum_20261014.json'
+    errata=json.loads(erratum_path.read_text())['records'] if erratum_path.exists() else []
     queue=read_jsonl(OUT/'review_queue.jsonl')
     reviews={r['index']:r for r in read_jsonl(OUT/'semantic_reviews.jsonl')}
     assert len(reviews)==len(queue)==326
@@ -74,7 +76,7 @@ def build():
                         failure_position=cand['compile_error'].get('line') if cand['compile_error'] else info.get('failure_line'),
                         relevant_snippet=cand['compile_error'].get('text') if cand['compile_error'] else info.get('failure_source'),
                         output=r['output'],candidate_program=cand['program'],official_passed=r['passed'],official_failure_reason=r['failure_reason'],
-                        test_evidence=ev,first_generation_divergence='unknown',mechanisms=c['mechanisms'],review_status='reviewed',
+                        test_evidence=ev,exception_source_errata=[e for e in errata if e['stable_id']==c['stable_id'] and e['arm']==arm],first_generation_divergence='unknown',mechanisms=c['mechanisms'],review_status='reviewed',
                         observed_head_calls=r['markov_enabled_count'],head_calls_evidence_level='直接观察',
                         known='代码/拼接/失败证据见本行；原评分不覆盖',
                         unknown='无匹配生成轨迹；动态记录没有重建历史资源调度；超时未记录卡住轮',

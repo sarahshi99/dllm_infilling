@@ -20,7 +20,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "analysis_outputs/dreamon_markov_error_audit_20261013_v1"
 SOURCE = ROOT / "analysis_outputs/dreamon_markov_k2_diagnosis_20261013_v1"
-DATA = Path("/home/shx/.cache/dllm_infilling/human-eval-infilling-88062ff")
+DATA = None  # fallback must be explicitly supplied to bundle(dataset_root=...)
 POLICIES = ("global_confidence", "left_to_right_frontier")
 
 
@@ -47,11 +47,19 @@ def write_csv(path, rows):
         w.writerows(rows)
 
 
-def bundle():
+def bundle(dataset_root=None):
     with gzip.open(SOURCE / "evidence/per_case.jsonl.gz", "rt") as f:
         records = [json.loads(x) for x in f]
-    with gzip.open(DATA / "data/HumanEval-SingleLineInfilling.jsonl.gz", "rt") as f:
-        problems = {r["task_id"]: r for r in map(json.loads, f)}
+    contexts = OUT / "task_contexts.json"
+    if contexts.is_file():
+        problems = json.loads(contexts.read_text())
+    elif dataset_root is not None:
+        with gzip.open(Path(dataset_root) / "data/HumanEval-SingleLineInfilling.jsonl.gz", "rt") as f:
+            problems = {r["task_id"]: r for r in map(json.loads, f)}
+    else:
+        raise FileNotFoundError("committed task_contexts.json missing; explicitly pass dataset_root for fallback")
+    if set(problems) != {r["task_id"] for r in records}:
+        raise ValueError("context stable ID set differs from the complete evidence population")
     joined = defaultdict(dict)
     for r in records:
         joined[r["policy"], r["task_id"]][r["arm"]] = r
@@ -65,7 +73,7 @@ def prepare():
                 if any(r["passed"] is False for r in arms.values())}
     assert expected == {q["stable_id"] for q in queue}
     assert len(records) == len({(r["policy"], r["arm"], r["task_id"]) for r in records}) == 10330
-    contexts = {t: problems[t] for t in sorted({q["task_id"] for q in queue})}
+    contexts = {t: problems[t] for t in sorted(problems)}
     write_json(OUT / "task_contexts.json", contexts)
     # Preserve original fields/values exactly; never strip completion text.
     write_jsonl(OUT / "per_case_compact.jsonl", records)

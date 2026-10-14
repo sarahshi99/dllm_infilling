@@ -90,3 +90,11 @@ node analysis/verify_dreamon_error_casebook.cjs
 初次恢复/安全取证命令是`python analysis/audit_dreamon_markov_errors.py prepare`及`... replay`；已有replay按键跳过完成行，13超时不会自动重复。读取批次用`... read --start N --count 15`，脚本不做语义审阅；semantic_reviews是本单个Codex逐行写入。prepare依赖已访问的原缓存数据，HTML本身和提交的证据可离线浏览。浏览器工具、二进制、playwright/puppeteer均不可用，已验证DOM/实际页面JS筛选、搜索、分页、stable-ID导航、展开、中文、换行/引号、惰性文本与差异切换，未验证原生视觉布局；见html_verification.json。
 
 覆盖、逐ID、字段和统计连接验证通过；本地diff review与fresh verification fallback（reviewer_gate_disabled），没有子智能体或额外Codex。最终提交/推送结果写本地ignored的completion.json及启动器runner_exit.json；提交后不会自动训练、生成、采GPU轨迹或修改算法。
+
+## 2026-10-14 可移植性与异常来源勘误（追加）
+
+bundle()优先读取已提交task_contexts.json；仅在显式传入dataset_root时使用备用缓存。完整1033上下文集合逐ID核对，casebook/verify无需模型或作者缓存，也不执行候选代码。
+
+frontier HumanEval/111/L9 的 B/D：历史父进程Python3.9.23静态compile记录IndentationError；原官方执行字符串报告未闭合字符串，另用系统Python3.10仅compile也报告SyntaxError。异常来源和实测版本见erratum_20261014.json。保留candidates、replay和历史分类，不统一改写。447解析失败和37/44语法或缩进救回合并计数不变。
+
+326案例有输出错误解释，但326均缺匹配生成轨迹；13超时缺卡点记录。生成机制没有因此查明；不存在的材料仍列缺失。

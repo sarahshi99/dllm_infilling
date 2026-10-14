@@ -460,3 +460,11 @@
 - D-C救44行中37为原语法/缩进失败；D-B伤害6/11，含语法、边界、覆盖、类型和逻辑条件；D失败/E通过28/48，D/E都失败95/95。A/B/D都失败73/78。首次生成分歧326行均unknown，未将最终差异或动作总数倒推成因果。
 - 报告/单文件离线HTML/逐条人工记录/coverage完整入口：[审计索引](../../analysis_outputs/dreamon_markov_error_audit_20261013_v1/INDEX.zh.md)。HTML默认326，支持全2066策略行；数据与DOM/实际JS交互验证通过，无原生浏览器视觉验证。
 - 分支`codex/dreamon-markov-error-audit-v1`；reviewer_gate_disabled，本地diff+fresh verification。commit/push完成标志在ignored本地completion.json，启动器退出另存runner_exit.json；没有自动重启、子智能体或后续GPU研究。
+
+## 2026-10-14 可移植性与异常来源勘误（追加）
+
+bundle()优先读取已提交task_contexts.json；仅在显式传入dataset_root时使用备用缓存。完整1033上下文集合逐ID核对，casebook/verify无需模型或作者缓存，也不执行候选代码。
+
+frontier HumanEval/111/L9 的 B/D：历史父进程Python3.9.23静态compile记录IndentationError；原官方执行字符串报告未闭合字符串，另用系统Python3.10仅compile也报告SyntaxError。异常来源和实测版本见erratum_20261014.json。保留candidates、replay和历史分类，不统一改写。447解析失败和37/44语法或缩进救回合并计数不变。
+
+326案例有输出错误解释，但326均缺匹配生成轨迹；13超时缺卡点记录。生成机制没有因此查明；不存在的材料仍列缺失。

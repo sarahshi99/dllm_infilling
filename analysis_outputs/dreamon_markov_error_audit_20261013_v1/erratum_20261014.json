@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-14",
+  "records": [
+    {
+      "stable_id": "left_to_right_frontier::SingleLineInfilling/HumanEval/111/L9",
+      "arm": "B",
+      "historical_static": {
+        "type": "IndentationError",
+        "line": 25,
+        "offset": 0,
+        "message": "expected an indented block",
+        "text": "':\n"
+      },
+      "historical_static_interpreter": "parent Python 3.9.23 (source_manifest.cpu_environment.parent_python); compile(), not candidate execution",
+      "official_original": "failed: unterminated string literal (detected at line 25) (<string>, line 25)",
+      "official_execution_interpreter": "DreamOn reproduction environment Python 3.10.19 (generation/evaluator runner)",
+      "additional_compile_only": {
+        "interpreter": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+        "type": "SyntaxError",
+        "message": "unterminated string literal (detected at line 25) (<string>, line 25)",
+        "line": 25
+      },
+      "conclusion": "both syntax/indentation parse failures; exception precedence depends on interpreter; no candidate executed and no original label overwritten"
+    },
+    {
+      "stable_id": "left_to_right_frontier::SingleLineInfilling/HumanEval/111/L9",
+      "arm": "D",
+      "historical_static": {
+        "type": "IndentationError",
+        "line": 25,
+        "offset": 0,
+        "message": "expected an indented block",
+        "text": "':\n"
+      },
+      "historical_static_interpreter": "parent Python 3.9.23 (source_manifest.cpu_environment.parent_python); compile(), not candidate execution",
+      "official_original": "failed: unterminated string literal (detected at line 25) (<string>, line 25)",
+      "official_execution_interpreter": "DreamOn reproduction environment Python 3.10.19 (generation/evaluator runner)",
+      "additional_compile_only": {
+        "interpreter": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+        "type": "SyntaxError",
+        "message": "unterminated string literal (detected at line 25) (<string>, line 25)",
+        "line": 25
+      },
+      "conclusion": "both syntax/indentation parse failures; exception precedence depends on interpreter; no candidate executed and no original label overwritten"
+    }
+  ],
+  "parse_failures_unchanged": 447,
+  "syntax_or_indent_rescues_unchanged": "37/44",
+  "missing_matching_generation_traces": 326,
+  "timeouts_without_blocked_iteration": 13
+}
