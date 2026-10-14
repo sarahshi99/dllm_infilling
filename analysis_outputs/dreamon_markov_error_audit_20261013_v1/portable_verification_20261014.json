@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "method": "git archive fa29d5c to independent temporary directory; HOME=temp; /usr/bin/python3 build_dreamon_error_casebook.py then verify_dreamon_error_audit.py",
+  "cache_or_models_needed": false,
+  "candidate_execution": false,
+  "records": 10330,
+  "reviewed": 326,
+  "failures": 1220,
+  "joint_cells": 80,
+  "paired_tables": 10
+}
