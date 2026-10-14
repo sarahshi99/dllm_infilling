@@ -1,0 +1,14 @@
+{
+  "codex/dreamon-zero-training-transfer-20261013": {
+    "status": "pushed_verified",
+    "local_commit": "bf62fdf008addef886e103fd9f181259e9608909",
+    "remote_head": "bf62fdf008addef886e103fd9f181259e9608909",
+    "retry_command": "git -c 'core.sshCommand=ssh -o BatchMode=yes -o ConnectTimeout=12' push origin codex/dreamon-zero-training-transfer-20261013"
+  },
+  "codex/dreamon-markov-error-audit-v1": {
+    "status": "pushed_verified",
+    "local_commit": "63a8f7df1395b55f6cc4b0d97e9a8e7e11bcb7ad",
+    "remote_head": "63a8f7df1395b55f6cc4b0d97e9a8e7e11bcb7ad",
+    "retry_command": "git -c 'core.sshCommand=ssh -o BatchMode=yes -o ConnectTimeout=12' push origin codex/dreamon-markov-error-audit-v1"
+  }
+}
