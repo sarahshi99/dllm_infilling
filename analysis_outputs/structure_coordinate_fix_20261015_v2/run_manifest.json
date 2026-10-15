@@ -1,0 +1,100 @@
+{
+  "baseline_commit": "dbdd0bd5cbbf21a049a989213136aa2650844aea",
+  "bootstrap": {
+    "cluster": "base task",
+    "replicates": 10000,
+    "seed": 20261013,
+    "weights": [
+      "line",
+      "base_task_equal"
+    ]
+  },
+  "code_versions": {
+    "analysis/analyze_structure_coordinate_fix.py": "d839a77c7547c734b377ea72ba67d3394724d850",
+    "analysis/dreamon_structure_replay.py": "c74e977efe7a8aee8001a751bd2d27ef0d13ed0d",
+    "experiments/dreamon_markov_head_training.py": "b73095691601be61048818cee90e3ef29a8f61dc",
+    "experiments/dreamon_singleline_adapter.py": "0701dd8bfb57e0c70e0fc95aa997358893653f9d",
+    "experiments/dreamon_singleline_order_parallel.py": "bf046ede702dadc0958b9d11e5e4a1a6eaa87487",
+    "experiments/k4_official_eval_worker.py": "dfe9858dd080efdae9d8b0851aa59506bda50d1f",
+    "experiments/run_k4_multiline_stage.py": "c1a3a801136acb0bf3f02b8b205be890e8dc4cb4",
+    "experiments/run_structure_coordinate_fix.py": "978c36bb6d2ca55de147c9e6295d9a665180de23",
+    "experiments/structure_coordinate_common.py": "1a71f3e7e463661a3a59c639b690e1b7b63b4a60",
+    "experiments/train_dreamon_markov_head.py": "1a1a89d51d528edcbd33bf3cc8c28f747e54795d",
+    "scripts/launch_structure_coordinate_queue.sh": "a6d085853145b8fbb2e42c43287cb3b4bb25e6b2",
+    "scripts/prepare_structure_coordinate_fix.py": "aee159b50cdf6f7c767ed5bb9ffe8ab3a4b1787b",
+    "scripts/run_structure_coordinate_queue.py": "462875a784eb7b22bc2866d01e3d68aa588105b3"
+  },
+  "edge_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
+  "encoded_inputs_sha256": "607d56258daffe9386fe86974f5d53e7036ee6c7d3d8a790ac813049f86f1a5f",
+  "evaluator": {
+    "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
+    "evaluator_mode": "upstream_documented_local_enablement_overlay",
+    "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
+  },
+  "evaluator_timeout_sec": 3.0,
+  "fix_commit": "560e98aa84667fbaad7ee0caae99e76fdca01275",
+  "frozen": true,
+  "full_logical_rows": 37722,
+  "head": {
+    "head": "kl",
+    "label": "best",
+    "phase": "full",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "head_dtype": "float32",
+  "head_lambda": 1,
+  "head_rank": 256,
+  "influence_sha256": "3a6ea47e12f5287eb43f6493b01169709acc82237e560e949fc4d16a2b4fb8c7",
+  "model": {
+    "id": "Dream-org/DreamOn-v0-7B",
+    "revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "model_dtype": "bfloat16",
+  "official_evaluator_python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "official_protocol": {
+    "alg": "entropy",
+    "alg_temp": 0.0,
+    "batch_size": 1,
+    "delete_eos_token": true,
+    "device": "cuda",
+    "dtype": "bf16",
+    "eps": 0.001,
+    "mask_expansion": true,
+    "max_gen_len": 64,
+    "max_prompt_len": 2048,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "pad_eos_to_right": true,
+    "pad_to_max_len": false,
+    "show_progress": false,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "old_results": "baseline relative ../k4_multiline_20261014_v1/A|B|C/per_case.jsonl.gz; SHA in frozen influence manifest",
+  "paired_union": {
+    "multiline": 38,
+    "singleline": 37
+  },
+  "proved_old_score_reuse": 37596,
+  "raw_context_sources": [
+    "../k4_multiline_20261014_v1/single-line_contexts.jsonl.gz",
+    "../k4_multiline_20261014_v1/multi-line_contexts.jsonl.gz"
+  ],
+  "required_new_rows": 126,
+  "resource": "single H200GPU0; existing global lock; wait>=32GiB free before model load; no arbitrary evaluation time cap",
+  "reviewer_gate_disabled": true,
+  "rng": "fork_rng around each local head/sample; base draft global stream isolated",
+  "row_seed": "unchanged derive_row_seed(42, actual full task_id); MultiLine keeps its own task_id",
+  "scope": "no mindmap/common-u/new head/model/seed/parameter search or old singleline K2 rerun",
+  "scorer": "unchanged experiments/run_k4_multiline_stage.py::official_evaluate and k4_official_eval_worker.py; identical Python/bwrap/concatenation/3s",
+  "seed": 42,
+  "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
+  "status": "prepared",
+  "technical_smoke": "14 affected formal rows, original pass/fail coverage per affected arm; six unaffected DreamOn GPU controls; Base CPU proof only",
+  "timing": "only affected-subset shared GPU observation; CUDA boundaries exclude loading/evaluation/writes; never mix old/new wall time for full-population acceleration",
+  "version": "structure coordinate v2"
+}

@@ -55,3 +55,4 @@ analysis_outputs/structure_coordinate_fix_20261015_v2/progress.json
 analysis_outputs/structure_coordinate_fix_20261015_v2/queue_status.json
 analysis_outputs/structure_coordinate_fix_20261015_v2/publication_status.json
 analysis_outputs/structure_coordinate_fix_20261015_v2/failure_retry_log.jsonl
+analysis_outputs/structure_coordinate_fix_20261015_v2/.*.tmp-*
