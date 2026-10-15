@@ -1,0 +1,5 @@
+stage,arm,regenerated_N,observed_subset_mean_generation_sec,head_serial_cuda_sec,scope
+A,A,37,0.4475156364182161,0.0,shared GPU affected subset only; not full population timing or fair speed ratio
+C,B,28,1.0329581212884347,0.0,shared GPU affected subset only; not full population timing or fair speed ratio
+C,C,28,1.0486695187033288,0.010612044568572723,shared GPU affected subset only; not full population timing or fair speed ratio
+C,D,33,1.0780348797667434,0.009399782782251183,shared GPU affected subset only; not full population timing or fair speed ratio

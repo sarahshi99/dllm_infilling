@@ -1,0 +1,37 @@
+{
+  "A": {
+    "duplicates": 0,
+    "logical_rows": 8264,
+    "missing": 0,
+    "new_generated": 37,
+    "proved_reused": 8227,
+    "status": "complete"
+  },
+  "B": {
+    "duplicates": 0,
+    "logical_rows": 6198,
+    "missing": 0,
+    "new_generated": 0,
+    "proved_reused": 6198,
+    "status": "complete"
+  },
+  "C": {
+    "duplicates": 0,
+    "logical_rows": 23260,
+    "missing": 0,
+    "new_generated": 89,
+    "proved_reused": 23171,
+    "status": "complete"
+  },
+  "analysis_exit": 0,
+  "fix_commit": "560e98aa84667fbaad7ee0caae99e76fdca01275",
+  "logical_rows": 37722,
+  "new_generated": 126,
+  "new_rows_sha256": "2d5e2506d3fd9e7a189c520a7c0cb960f81a6a39ae748823a49ac8f45ef43508",
+  "proved_reused": 37596,
+  "score_changed": 7,
+  "score_harm": 2,
+  "score_help": 5,
+  "status": "complete",
+  "worker_exit": 0
+}

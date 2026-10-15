@@ -1,0 +1,4067 @@
+{
+  "checks": [
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 4,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 4,
+          "positions": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              120,
+              369
+            ],
+            [
+              119,
+              262
+            ],
+            [
+              121,
+              7187
+            ],
+            [
+              122,
+              11
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              120,
+              369
+            ],
+            [
+              119,
+              262
+            ],
+            [
+              121,
+              7187
+            ],
+            [
+              122,
+              11
+            ]
+          ],
+          "tokens": [
+            369,
+            262,
+            7187,
+            11
+          ]
+        },
+        {
+          "actual_submitted_count": 4,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 4,
+          "positions": [
+            5,
+            4,
+            6,
+            7
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              124,
+              304
+            ],
+            [
+              123,
+              11750
+            ],
+            [
+              125,
+              13252
+            ],
+            [
+              126,
+              47207
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              124,
+              304
+            ],
+            [
+              123,
+              11750
+            ],
+            [
+              125,
+              13252
+            ],
+            [
+              126,
+              47207
+            ]
+          ],
+          "tokens": [
+            304,
+            11750,
+            13252,
+            47207
+          ]
+        },
+        {
+          "actual_submitted_count": 4,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 55,
+          "deleted_absolute": [
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            9,
+            8,
+            10,
+            11
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              128,
+              151643
+            ],
+            [
+              127,
+              982
+            ],
+            [
+              129,
+              151643
+            ],
+            [
+              130,
+              151643
+            ]
+          ],
+          "step": 2,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              128,
+              151643
+            ],
+            [
+              127,
+              982
+            ],
+            [
+              129,
+              151643
+            ],
+            [
+              130,
+              151643
+            ]
+          ],
+          "tokens": [
+            151643,
+            982,
+            151643,
+            151643
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          1499,
+          19496,
+          1159,
+          1759,
+          1406,
+          750,
+          702,
+          12704,
+          22801,
+          47207,
+          25,
+          1759,
+          95381,
+          1125,
+          12171,
+          25,
+          2224,
+          8,
+          1464,
+          1807,
+          510,
+          262,
+          4210,
+          4248,
+          421,
+          304,
+          2661,
+          1140,
+          315,
+          5109,
+          11,
+          525,
+          894,
+          1378,
+          5109,
+          12128,
+          311,
+          1817,
+          1008,
+          1091,
+          198,
+          262,
+          2661,
+          12171,
+          624,
+          262,
+          12109,
+          702,
+          12704,
+          22801,
+          2561,
+          16,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          15,
+          11,
+          220,
+          18,
+          13,
+          15,
+          1125,
+          220,
+          15,
+          13,
+          20,
+          340,
+          262,
+          3557,
+          198,
+          262,
+          12109,
+          702,
+          12704,
+          22801,
+          2561,
+          16,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          23,
+          11,
+          220,
+          18,
+          13,
+          15,
+          11,
+          220,
+          19,
+          13,
+          15,
+          11,
+          220,
+          20,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          15,
+          1125,
+          220,
+          15,
+          13,
+          18,
+          340,
+          262,
+          3007,
+          198,
+          262,
+          12431
+        ],
+        "stage": "A",
+        "suffix_ids": [
+          286,
+          369,
+          7187,
+          17,
+          11,
+          11750,
+          17,
+          304,
+          13252,
+          47207,
+          982,
+          310,
+          421,
+          7187,
+          961,
+          7187,
+          17,
+          510,
+          394,
+          6010,
+          284,
+          3647,
+          28880,
+          481,
+          11750,
+          17,
+          340,
+          394,
+          421,
+          6010,
+          366,
+          12171,
+          510,
+          503,
+          470,
+          3007,
+          271,
+          262,
+          470,
+          3557,
+          198,
+          151643
+        ],
+        "task_id": "SingleLineInfilling/HumanEval/0/L0"
+      },
+      "new_final_token_ids": [
+        262,
+        369,
+        7187,
+        11,
+        11750,
+        304,
+        13252,
+        47207,
+        982
+      ],
+      "old_final_token_ids": [
+        262,
+        369,
+        7187,
+        11,
+        11750,
+        304,
+        13252,
+        47207,
+        982
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              120,
+              369
+            ],
+            [
+              119,
+              262
+            ],
+            [
+              121,
+              7187
+            ],
+            [
+              122,
+              11
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              124,
+              304
+            ],
+            [
+              123,
+              11750
+            ],
+            [
+              125,
+              13252
+            ],
+            [
+              126,
+              47207
+            ]
+          ]
+        },
+        {
+          "canvas_length": 9,
+          "delete_indices": [
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182
+          ],
+          "full_canvas_equal": true,
+          "step": 2,
+          "submitted": [
+            [
+              128,
+              151643
+            ],
+            [
+              127,
+              982
+            ],
+            [
+              129,
+              151643
+            ],
+            [
+              130,
+              151643
+            ]
+          ]
+        }
+      ],
+      "stable_id": "A::global_confidence::A::SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 4,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 4,
+          "positions": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              146,
+              310
+            ],
+            [
+              147,
+              1482
+            ],
+            [
+              148,
+              3904
+            ],
+            [
+              149,
+              2057
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              146,
+              310
+            ],
+            [
+              147,
+              1482
+            ],
+            [
+              148,
+              3904
+            ],
+            [
+              149,
+              2057
+            ]
+          ],
+          "tokens": [
+            310,
+            1482,
+            3904,
+            2057
+          ]
+        },
+        {
+          "actual_submitted_count": 3,
+          "barrier": [
+            6,
+            151643
+          ],
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 58,
+          "deleted_absolute": [
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              150,
+              1337
+            ],
+            [
+              151,
+              340
+            ],
+            [
+              152,
+              151643
+            ],
+            [
+              153,
+              151643
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "original_structure_barrier",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              150,
+              1337
+            ],
+            [
+              151,
+              340
+            ],
+            [
+              152,
+              151643
+            ]
+          ],
+          "tokens": [
+            1337,
+            340,
+            151643,
+            151643
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          1499,
+          19496,
+          1159,
+          1759,
+          1406,
+          750,
+          8651,
+          620,
+          9151,
+          21148,
+          49622,
+          3904,
+          25,
+          607,
+          8,
+          1464,
+          1759,
+          17303,
+          10343,
+          262,
+          4210,
+          5571,
+          311,
+          419,
+          729,
+          374,
+          264,
+          914,
+          8482,
+          5248,
+          5203,
+          315,
+          24034,
+          73975,
+          13,
+          4615,
+          5795,
+          374,
+          311,
+          198,
+          262,
+          8651,
+          1846,
+          1874,
+          1119,
+          8651,
+          9069,
+          323,
+          470,
+          279,
+          1140,
+          315,
+          1846,
+          624,
+          262,
+          76140,
+          5203,
+          525,
+          23831,
+          320,
+          9547,
+          1787,
+          32864,
+          374,
+          10277,
+          7877,
+          8,
+          323,
+          537,
+          24034,
+          2878,
+          1817,
+          1008,
+          198,
+          262,
+          38971,
+          894,
+          12621,
+          304,
+          279,
+          1946,
+          914,
+          624,
+          262,
+          12109,
+          8651,
+          620,
+          9151,
+          21148,
+          69963,
+          873,
+          1781,
+          11985,
+          1781,
+          40612,
+          11985,
+          1305,
+          262,
+          2509,
+          61413,
+          22022,
+          2140,
+          516,
+          364,
+          5065,
+          2140,
+          4432,
+          262,
+          3190,
+          262,
+          1102,
+          284,
+          4167,
+          262,
+          1482,
+          3904,
+          284,
+          4167,
+          262,
+          1482,
+          19061,
+          284,
+          220,
+          15,
+          271,
+          262,
+          369,
+          272,
+          304,
+          37940,
+          3904,
+          510,
+          286,
+          421,
+          272,
+          621,
+          37880,
+          510,
+          310,
+          1482,
+          19061,
+          1421,
+          220,
+          16,
+          198
+        ],
+        "stage": "A",
+        "suffix_ids": [
+          286,
+          4409,
+          272,
+          621,
+          16667,
+          3646,
+          310,
+          1482,
+          19061,
+          5982,
+          220,
+          16,
+          198,
+          310,
+          1482,
+          3904,
+          2057,
+          1337,
+          692,
+          310,
+          421,
+          1482,
+          19061,
+          621,
+          220,
+          15,
+          510,
+          394,
+          1102,
+          2057,
+          492,
+          4427,
+          5987,
+          8762,
+          3904,
+          1171,
+          394,
+          1482,
+          3904,
+          7426,
+          2822,
+          262,
+          470,
+          1102,
+          198,
+          151643
+        ],
+        "task_id": "SingleLineInfilling/HumanEval/1/L7"
+      },
+      "new_final_token_ids": [
+        310,
+        1482,
+        3904,
+        2057,
+        1337,
+        340
+      ],
+      "old_final_token_ids": [
+        310,
+        1482,
+        3904,
+        2057,
+        1337,
+        340
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              146,
+              310
+            ],
+            [
+              147,
+              1482
+            ],
+            [
+              148,
+              3904
+            ],
+            [
+              149,
+              2057
+            ]
+          ]
+        },
+        {
+          "canvas_length": 6,
+          "delete_indices": [
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209
+          ],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              150,
+              1337
+            ],
+            [
+              151,
+              340
+            ],
+            [
+              152,
+              151643
+            ]
+          ]
+        }
+      ],
+      "stable_id": "A::left_to_right_frontier::A::SingleLineInfilling/HumanEval/1/L7"
+    },
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 4,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [
+            {
+              "final": 421,
+              "left": 217,
+              "local_seed": 8591155489318044479,
+              "predecessor_final": 286,
+              "raw": 421,
+              "right": 218
+            },
+            {
+              "final": 1629,
+              "left": 218,
+              "local_seed": 8591155489318054487,
+              "predecessor_final": 421,
+              "raw": 1629,
+              "right": 219
+            },
+            {
+              "final": 861,
+              "left": 219,
+              "local_seed": 8591155489318064495,
+              "predecessor_final": 1629,
+              "raw": 861,
+              "right": 220
+            }
+          ],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 4,
+          "positions": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              217,
+              286
+            ],
+            [
+              218,
+              421
+            ],
+            [
+              219,
+              1629
+            ],
+            [
+              220,
+              861
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              217,
+              286
+            ],
+            [
+              218,
+              421
+            ],
+            [
+              219,
+              1629
+            ],
+            [
+              220,
+              861
+            ]
+          ],
+          "tokens": [
+            286,
+            421,
+            1629,
+            861
+          ]
+        },
+        {
+          "actual_submitted_count": 4,
+          "barrier": [
+            7,
+            151643
+          ],
+          "budget_clipped_positions": [],
+          "chain_edges": [
+            {
+              "final": 15,
+              "left": 221,
+              "local_seed": 8591155489319084514,
+              "predecessor_final": 220,
+              "raw": 15,
+              "right": 222
+            },
+            {
+              "final": 510,
+              "left": 222,
+              "local_seed": 8591155489319094522,
+              "predecessor_final": 15,
+              "raw": 510,
+              "right": 223
+            }
+          ],
+          "corrected_stop": false,
+          "delete": 57,
+          "deleted_absolute": [
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 3,
+          "positions": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "selected_count": 4,
+          "selected_raw_absolute": [
+            [
+              221,
+              220
+            ],
+            [
+              222,
+              15
+            ],
+            [
+              223,
+              510
+            ],
+            [
+              224,
+              151643
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "original_structure_barrier",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              221,
+              220
+            ],
+            [
+              222,
+              15
+            ],
+            [
+              223,
+              510
+            ],
+            [
+              224,
+              151643
+            ]
+          ],
+          "tokens": [
+            220,
+            15,
+            510,
+            151643
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          198,
+          750,
+          18093,
+          31725,
+          3679,
+          982,
+          262,
+          11166,
+          262,
+          4230,
+          264,
+          729,
+          429,
+          4990,
+          264,
+          897,
+          320,
+          917,
+          8,
+          14064,
+          264,
+          1372,
+          198,
+          262,
+          323,
+          4675,
+          279,
+          18093,
+          7546,
+          311,
+          432,
+          13,
+          1416,
+          279,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          4778,
+          432,
+          3123,
+          504,
+          7168,
+          382,
+          262,
+          25311,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          15,
+          1138,
+          262,
+          220,
+          16,
+          15,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          20,
+          13,
+          18,
+          1138,
+          262,
+          220,
+          16,
+          20,
+          271,
+          262,
+          7036,
+          510,
+          262,
+          431,
+          13586,
+          3123,
+          504,
+          7168,
+          3363,
+          429,
+          421,
+          279,
+          2661,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          279,
+          825,
+          498,
+          1265,
+          470,
+          374,
+          279,
+          825,
+          429,
+          374,
+          279,
+          198,
+          262,
+          3041,
+          60843,
+          504,
+          7168,
+          13,
+          1752,
+          3110,
+          18093,
+          31725,
+          445,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          198,
+          262,
+          470,
+          220,
+          16,
+          20,
+          323,
+          18093,
+          31725,
+          13645,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          470,
+          481,
+          16,
+          20,
+          624,
+          262,
+          11166,
+          262,
+          504,
+          6888,
+          1159,
+          6422,
+          11,
+          28481,
+          271,
+          262,
+          421,
+          897,
+          6501,
+          79268,
+          621,
+          220,
+          16,
+          510,
+          286,
+          671,
+          4057,
+          27748,
+          17516,
+          198,
+          286,
+          1393,
+          320,
+          957,
+          7609,
+          16,
+          60,
+          621,
+          364,
+          15,
+          11043,
+          310,
+          897,
+          284,
+          897,
+          26049,
+          16,
+          2533,
+          262,
+          1629,
+          284,
+          2224,
+          3679,
+          340,
+          262,
+          421,
+          897,
+          7609,
+          17,
+          28283,
+          621,
+          6256,
+          20,
+          3646
+        ],
+        "stage": "A",
+        "suffix_ids": [
+          310,
+          592,
+          284,
+          28481,
+          8068,
+          340,
+          286,
+          770,
+          510,
+          310,
+          592,
+          284,
+          6422,
+          8068,
+          340,
+          262,
+          4409,
+          2422,
+          3679,
+          8,
+          861,
+          220,
+          15,
+          510,
+          286,
+          592,
+          284,
+          526,
+          32356,
+          8068,
+          1171,
+          262,
+          770,
+          510,
+          286,
+          592,
+          284,
+          220,
+          15,
+          271,
+          262,
+          470,
+          592,
+          271,
+          151643
+        ],
+        "task_id": "SingleLineInfilling/HumanEval/99/L9"
+      },
+      "new_final_token_ids": [
+        286,
+        421,
+        1629,
+        861,
+        220,
+        15,
+        510
+      ],
+      "old_final_token_ids": [
+        286,
+        421,
+        1629,
+        861,
+        220,
+        15,
+        510
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              217,
+              286
+            ],
+            [
+              218,
+              421
+            ],
+            [
+              219,
+              1629
+            ],
+            [
+              220,
+              861
+            ]
+          ]
+        },
+        {
+          "canvas_length": 7,
+          "delete_indices": [
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280
+          ],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              221,
+              220
+            ],
+            [
+              222,
+              15
+            ],
+            [
+              223,
+              510
+            ],
+            [
+              224,
+              151643
+            ]
+          ]
+        }
+      ],
+      "stable_id": "A::left_to_right_frontier::D::SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "method": "all6198 CPU full canvas replay plus unchanged native Base module and native reference regression; no unnecessary Base GPU model loaded",
+      "stable_id": "B::global_confidence::A::SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "method": "all6198 CPU full canvas replay plus unchanged native Base module and native reference regression; no unnecessary Base GPU model loaded",
+      "stable_id": "B::left_to_right_frontier::A::SingleLineInfilling/HumanEval/0/L0"
+    },
+    {
+      "method": "all6198 CPU full canvas replay plus unchanged native Base module and native reference regression; no unnecessary Base GPU model loaded",
+      "stable_id": "B::left_to_right_frontier::D::SingleLineInfilling/HumanEval/99/L9"
+    },
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            0
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              119,
+              262
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              119,
+              262
+            ]
+          ],
+          "tokens": [
+            262
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            1
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              120,
+              369
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              120,
+              369
+            ]
+          ],
+          "tokens": [
+            369
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            2
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              121,
+              7187
+            ]
+          ],
+          "step": 2,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              121,
+              7187
+            ]
+          ],
+          "tokens": [
+            7187
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            3
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              122,
+              11
+            ]
+          ],
+          "step": 3,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              122,
+              11
+            ]
+          ],
+          "tokens": [
+            11
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            4
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              123,
+              11750
+            ]
+          ],
+          "step": 4,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              123,
+              11750
+            ]
+          ],
+          "tokens": [
+            11750
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            5
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              124,
+              304
+            ]
+          ],
+          "step": 5,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              124,
+              304
+            ]
+          ],
+          "tokens": [
+            304
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            6
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              125,
+              13252
+            ]
+          ],
+          "step": 6,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              125,
+              13252
+            ]
+          ],
+          "tokens": [
+            13252
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            7
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              126,
+              47207
+            ]
+          ],
+          "step": 7,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              126,
+              47207
+            ]
+          ],
+          "tokens": [
+            47207
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            8
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              127,
+              982
+            ]
+          ],
+          "step": 8,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              127,
+              982
+            ]
+          ],
+          "tokens": [
+            982
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 55,
+          "deleted_absolute": [
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 0,
+          "positions": [
+            9
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              128,
+              151643
+            ]
+          ],
+          "step": 9,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              128,
+              151643
+            ]
+          ],
+          "tokens": [
+            151643
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          1499,
+          19496,
+          1159,
+          1759,
+          1406,
+          750,
+          702,
+          12704,
+          22801,
+          47207,
+          25,
+          1759,
+          95381,
+          1125,
+          12171,
+          25,
+          2224,
+          8,
+          1464,
+          1807,
+          510,
+          262,
+          4210,
+          4248,
+          421,
+          304,
+          2661,
+          1140,
+          315,
+          5109,
+          11,
+          525,
+          894,
+          1378,
+          5109,
+          12128,
+          311,
+          1817,
+          1008,
+          1091,
+          198,
+          262,
+          2661,
+          12171,
+          624,
+          262,
+          12109,
+          702,
+          12704,
+          22801,
+          2561,
+          16,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          15,
+          11,
+          220,
+          18,
+          13,
+          15,
+          1125,
+          220,
+          15,
+          13,
+          20,
+          340,
+          262,
+          3557,
+          198,
+          262,
+          12109,
+          702,
+          12704,
+          22801,
+          2561,
+          16,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          23,
+          11,
+          220,
+          18,
+          13,
+          15,
+          11,
+          220,
+          19,
+          13,
+          15,
+          11,
+          220,
+          20,
+          13,
+          15,
+          11,
+          220,
+          17,
+          13,
+          15,
+          1125,
+          220,
+          15,
+          13,
+          18,
+          340,
+          262,
+          3007,
+          198,
+          262,
+          12431
+        ],
+        "stage": "C",
+        "suffix_ids": [
+          286,
+          369,
+          7187,
+          17,
+          11,
+          11750,
+          17,
+          304,
+          13252,
+          47207,
+          982,
+          310,
+          421,
+          7187,
+          961,
+          7187,
+          17,
+          510,
+          394,
+          6010,
+          284,
+          3647,
+          28880,
+          481,
+          11750,
+          17,
+          340,
+          394,
+          421,
+          6010,
+          366,
+          12171,
+          510,
+          503,
+          470,
+          3007,
+          271,
+          262,
+          470,
+          3557,
+          198,
+          151643
+        ],
+        "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+      },
+      "new_final_token_ids": [
+        262,
+        369,
+        7187,
+        11,
+        11750,
+        304,
+        13252,
+        47207,
+        982
+      ],
+      "old_final_token_ids": [
+        262,
+        369,
+        7187,
+        11,
+        11750,
+        304,
+        13252,
+        47207,
+        982
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              119,
+              262
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              120,
+              369
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 2,
+          "submitted": [
+            [
+              121,
+              7187
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 3,
+          "submitted": [
+            [
+              122,
+              11
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 4,
+          "submitted": [
+            [
+              123,
+              11750
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 5,
+          "submitted": [
+            [
+              124,
+              304
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 6,
+          "submitted": [
+            [
+              125,
+              13252
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 7,
+          "submitted": [
+            [
+              126,
+              47207
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 8,
+          "submitted": [
+            [
+              127,
+              982
+            ]
+          ]
+        },
+        {
+          "canvas_length": 9,
+          "delete_indices": [
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182
+          ],
+          "full_canvas_equal": true,
+          "step": 9,
+          "submitted": [
+            [
+              128,
+              151643
+            ]
+          ]
+        }
+      ],
+      "stable_id": "C::global_confidence::A::MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            2,
+            3
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              210,
+              621
+            ],
+            [
+              209,
+              421
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              209,
+              421
+            ],
+            [
+              210,
+              621
+            ]
+          ],
+          "tokens": [
+            421,
+            621
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            0,
+            1
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              208,
+              262
+            ],
+            [
+              207,
+              198
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              207,
+              198
+            ],
+            [
+              208,
+              262
+            ]
+          ],
+          "tokens": [
+            198,
+            262
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            4,
+            5
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              212,
+              15
+            ],
+            [
+              211,
+              220
+            ]
+          ],
+          "step": 2,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              211,
+              220
+            ],
+            [
+              212,
+              15
+            ]
+          ],
+          "tokens": [
+            220,
+            15
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            8,
+            6
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              215,
+              592
+            ],
+            [
+              213,
+              510
+            ]
+          ],
+          "step": 3,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              215,
+              592
+            ],
+            [
+              213,
+              510
+            ]
+          ],
+          "tokens": [
+            592,
+            510
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            9,
+            7
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              216,
+              284
+            ],
+            [
+              214,
+              286
+            ]
+          ],
+          "step": 4,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              216,
+              284
+            ],
+            [
+              214,
+              286
+            ]
+          ],
+          "tokens": [
+            284,
+            286
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            12,
+            13
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              220,
+              340
+            ],
+            [
+              219,
+              340
+            ]
+          ],
+          "step": 5,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              219,
+              340
+            ],
+            [
+              220,
+              340
+            ]
+          ],
+          "tokens": [
+            340,
+            340
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 50,
+          "deleted_absolute": [
+            221,
+            222,
+            223,
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            14,
+            11
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              221,
+              151643
+            ],
+            [
+              218,
+              8068
+            ]
+          ],
+          "step": 6,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              221,
+              151643
+            ],
+            [
+              218,
+              8068
+            ]
+          ],
+          "tokens": [
+            151643,
+            8068
+          ]
+        },
+        {
+          "actual_submitted_count": 1,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            10
+          ],
+          "selected_count": 1,
+          "selected_raw_absolute": [
+            [
+              217,
+              28481
+            ]
+          ],
+          "step": 7,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              217,
+              28481
+            ]
+          ],
+          "tokens": [
+            28481
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          198,
+          750,
+          18093,
+          31725,
+          3679,
+          982,
+          262,
+          11166,
+          262,
+          4230,
+          264,
+          729,
+          429,
+          4990,
+          264,
+          897,
+          320,
+          917,
+          8,
+          14064,
+          264,
+          1372,
+          198,
+          262,
+          323,
+          4675,
+          279,
+          18093,
+          7546,
+          311,
+          432,
+          13,
+          1416,
+          279,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          4778,
+          432,
+          3123,
+          504,
+          7168,
+          382,
+          262,
+          25311,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          15,
+          1138,
+          262,
+          220,
+          16,
+          15,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          20,
+          13,
+          18,
+          1138,
+          262,
+          220,
+          16,
+          20,
+          271,
+          262,
+          7036,
+          510,
+          262,
+          431,
+          13586,
+          3123,
+          504,
+          7168,
+          3363,
+          429,
+          421,
+          279,
+          2661,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          279,
+          825,
+          498,
+          1265,
+          470,
+          374,
+          279,
+          825,
+          429,
+          374,
+          279,
+          198,
+          262,
+          3041,
+          60843,
+          504,
+          7168,
+          13,
+          1752,
+          3110,
+          18093,
+          31725,
+          445,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          198,
+          262,
+          470,
+          220,
+          16,
+          20,
+          323,
+          18093,
+          31725,
+          13645,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          470,
+          481,
+          16,
+          20,
+          624,
+          262,
+          11166,
+          262,
+          504,
+          6888,
+          1159,
+          6422,
+          11,
+          28481,
+          271,
+          262,
+          421,
+          897,
+          6501,
+          79268,
+          621,
+          220,
+          16,
+          510,
+          286,
+          671,
+          4057,
+          27748,
+          17516,
+          198,
+          286,
+          1393,
+          320,
+          957,
+          7609,
+          16,
+          60,
+          621,
+          364,
+          15,
+          11043,
+          310,
+          897,
+          284,
+          897,
+          26049,
+          16,
+          2533,
+          262,
+          1629,
+          284,
+          2224,
+          3679,
+          340
+        ],
+        "stage": "C",
+        "suffix_ids": [
+          262,
+          4409,
+          2422,
+          3679,
+          8,
+          861,
+          220,
+          15,
+          510,
+          286,
+          592,
+          284,
+          526,
+          32356,
+          8068,
+          1171,
+          262,
+          770,
+          510,
+          286,
+          592,
+          284,
+          220,
+          15,
+          271,
+          262,
+          470,
+          592,
+          271,
+          151643
+        ],
+        "task_id": "MultiLineInfilling/HumanEval/99/L8_L12"
+      },
+      "new_final_token_ids": [
+        198,
+        262,
+        421,
+        621,
+        220,
+        15,
+        510,
+        286,
+        592,
+        284,
+        28481,
+        8068,
+        340,
+        340
+      ],
+      "old_final_token_ids": [
+        198,
+        262,
+        421,
+        621,
+        220,
+        15,
+        510,
+        286,
+        592,
+        284,
+        28481,
+        8068,
+        340,
+        340
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              209,
+              421
+            ],
+            [
+              210,
+              621
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              207,
+              198
+            ],
+            [
+              208,
+              262
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 2,
+          "submitted": [
+            [
+              211,
+              220
+            ],
+            [
+              212,
+              15
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 3,
+          "submitted": [
+            [
+              215,
+              592
+            ],
+            [
+              213,
+              510
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 4,
+          "submitted": [
+            [
+              216,
+              284
+            ],
+            [
+              214,
+              286
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 5,
+          "submitted": [
+            [
+              219,
+              340
+            ],
+            [
+              220,
+              340
+            ]
+          ]
+        },
+        {
+          "canvas_length": 14,
+          "delete_indices": [
+            221,
+            222,
+            223,
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270
+          ],
+          "full_canvas_equal": true,
+          "step": 6,
+          "submitted": [
+            [
+              221,
+              151643
+            ],
+            [
+              218,
+              8068
+            ]
+          ]
+        },
+        {
+          "canvas_length": 14,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 7,
+          "submitted": [
+            [
+              217,
+              28481
+            ]
+          ]
+        }
+      ],
+      "stable_id": "C::global_confidence::B::MultiLineInfilling/HumanEval/99/L8_L12"
+    },
+    {
+      "action_trace": [
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [
+            {
+              "final": 421,
+              "left": 217,
+              "local_seed": 5025588327018317534,
+              "predecessor_final": 286,
+              "raw": 421,
+              "right": 218
+            }
+          ],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            0,
+            1
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              218,
+              421
+            ],
+            [
+              217,
+              286
+            ]
+          ],
+          "step": 0,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              217,
+              286
+            ],
+            [
+              218,
+              421
+            ]
+          ],
+          "tokens": [
+            286,
+            421
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [
+            {
+              "final": 861,
+              "left": 219,
+              "local_seed": 5025588327019337553,
+              "predecessor_final": 1629,
+              "raw": 861,
+              "right": 220
+            }
+          ],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            2,
+            3
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              220,
+              861
+            ],
+            [
+              219,
+              1629
+            ]
+          ],
+          "step": 1,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              219,
+              1629
+            ],
+            [
+              220,
+              861
+            ]
+          ],
+          "tokens": [
+            1629,
+            861
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": null,
+          "budget_clipped_positions": [],
+          "chain_edges": [
+            {
+              "final": 15,
+              "left": 221,
+              "local_seed": 5025588327020357572,
+              "predecessor_final": 220,
+              "raw": 15,
+              "right": 222
+            }
+          ],
+          "corrected_stop": false,
+          "delete": 0,
+          "deleted_absolute": [],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 2,
+          "positions": [
+            4,
+            5
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              222,
+              15
+            ],
+            [
+              221,
+              220
+            ]
+          ],
+          "step": 2,
+          "stop_reason": "selected_committed",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              221,
+              220
+            ],
+            [
+              222,
+              15
+            ]
+          ],
+          "tokens": [
+            220,
+            15
+          ]
+        },
+        {
+          "actual_submitted_count": 2,
+          "barrier": [
+            7,
+            151643
+          ],
+          "budget_clipped_positions": [],
+          "chain_edges": [],
+          "corrected_stop": false,
+          "delete": 57,
+          "deleted_absolute": [
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280
+          ],
+          "expand": 0,
+          "expand_budget_remaining": 64,
+          "expanded_absolute": [],
+          "normal": 1,
+          "positions": [
+            6,
+            7
+          ],
+          "selected_count": 2,
+          "selected_raw_absolute": [
+            [
+              224,
+              151643
+            ],
+            [
+              223,
+              510
+            ]
+          ],
+          "step": 3,
+          "stop_reason": "original_structure_barrier",
+          "structural_coordinate_version": "pre_expand_delete_provenance_v2",
+          "submitted_absolute": [
+            [
+              223,
+              510
+            ],
+            [
+              224,
+              151643
+            ]
+          ],
+          "tokens": [
+            510,
+            151643
+          ]
+        }
+      ],
+      "input": {
+        "prefix_ids": [
+          151665,
+          198,
+          750,
+          18093,
+          31725,
+          3679,
+          982,
+          262,
+          11166,
+          262,
+          4230,
+          264,
+          729,
+          429,
+          4990,
+          264,
+          897,
+          320,
+          917,
+          8,
+          14064,
+          264,
+          1372,
+          198,
+          262,
+          323,
+          4675,
+          279,
+          18093,
+          7546,
+          311,
+          432,
+          13,
+          1416,
+          279,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          4778,
+          432,
+          3123,
+          504,
+          7168,
+          382,
+          262,
+          25311,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          15,
+          1138,
+          262,
+          220,
+          16,
+          15,
+          198,
+          262,
+          12109,
+          18093,
+          31725,
+          445,
+          16,
+          20,
+          13,
+          18,
+          1138,
+          262,
+          220,
+          16,
+          20,
+          271,
+          262,
+          7036,
+          510,
+          262,
+          431,
+          13586,
+          3123,
+          504,
+          7168,
+          3363,
+          429,
+          421,
+          279,
+          2661,
+          1372,
+          374,
+          3232,
+          307,
+          11202,
+          198,
+          262,
+          504,
+          1378,
+          25780,
+          11,
+          279,
+          825,
+          498,
+          1265,
+          470,
+          374,
+          279,
+          825,
+          429,
+          374,
+          279,
+          198,
+          262,
+          3041,
+          60843,
+          504,
+          7168,
+          13,
+          1752,
+          3110,
+          18093,
+          31725,
+          445,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          198,
+          262,
+          470,
+          220,
+          16,
+          20,
+          323,
+          18093,
+          31725,
+          13645,
+          16,
+          19,
+          13,
+          20,
+          899,
+          1265,
+          470,
+          481,
+          16,
+          20,
+          624,
+          262,
+          11166,
+          262,
+          504,
+          6888,
+          1159,
+          6422,
+          11,
+          28481,
+          271,
+          262,
+          421,
+          897,
+          6501,
+          79268,
+          621,
+          220,
+          16,
+          510,
+          286,
+          671,
+          4057,
+          27748,
+          17516,
+          198,
+          286,
+          1393,
+          320,
+          957,
+          7609,
+          16,
+          60,
+          621,
+          364,
+          15,
+          11043,
+          310,
+          897,
+          284,
+          897,
+          26049,
+          16,
+          2533,
+          262,
+          1629,
+          284,
+          2224,
+          3679,
+          340,
+          262,
+          421,
+          897,
+          7609,
+          17,
+          28283,
+          621,
+          6256,
+          20,
+          3646
+        ],
+        "stage": "C",
+        "suffix_ids": [
+          310,
+          592,
+          284,
+          28481,
+          8068,
+          340,
+          286,
+          770,
+          510,
+          310,
+          592,
+          284,
+          6422,
+          8068,
+          340,
+          262,
+          4409,
+          2422,
+          3679,
+          8,
+          861,
+          220,
+          15,
+          510,
+          286,
+          592,
+          284,
+          526,
+          32356,
+          8068,
+          1171,
+          262,
+          770,
+          510,
+          286,
+          592,
+          284,
+          220,
+          15,
+          271,
+          262,
+          470,
+          592,
+          271,
+          151643
+        ],
+        "task_id": "MultiLineInfilling/HumanEval/99/L9_L9"
+      },
+      "new_final_token_ids": [
+        286,
+        421,
+        1629,
+        861,
+        220,
+        15,
+        510
+      ],
+      "old_final_token_ids": [
+        286,
+        421,
+        1629,
+        861,
+        220,
+        15,
+        510
+      ],
+      "round_assertions": [
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 0,
+          "submitted": [
+            [
+              217,
+              286
+            ],
+            [
+              218,
+              421
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 1,
+          "submitted": [
+            [
+              219,
+              1629
+            ],
+            [
+              220,
+              861
+            ]
+          ]
+        },
+        {
+          "canvas_length": 64,
+          "delete_indices": [],
+          "full_canvas_equal": true,
+          "step": 2,
+          "submitted": [
+            [
+              221,
+              220
+            ],
+            [
+              222,
+              15
+            ]
+          ]
+        },
+        {
+          "canvas_length": 7,
+          "delete_indices": [
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280
+          ],
+          "full_canvas_equal": true,
+          "step": 3,
+          "submitted": [
+            [
+              223,
+              510
+            ],
+            [
+              224,
+              151643
+            ]
+          ]
+        }
+      ],
+      "stable_id": "C::global_confidence::D::MultiLineInfilling/HumanEval/99/L9_L9"
+    }
+  ],
+  "status": "passed"
+}

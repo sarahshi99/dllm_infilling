@@ -1,0 +1,11 @@
+stage,policy,population,N,base_tasks
+A,global_confidence,all,1033,164
+A,left_to_right_frontier,all,1033,164
+B,global_confidence,all,1033,164
+B,left_to_right_frontier,all,1033,164
+C,global_confidence,all,5815,164
+C,global_confidence,single_span_1,1033,164
+C,global_confidence,cross_line_2plus,4782,127
+C,global_confidence,span_2_3,1511,127
+C,global_confidence,span_4_7,1870,108
+C,global_confidence,span_8plus,1401,60

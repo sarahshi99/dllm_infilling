@@ -24,8 +24,10 @@
     "scripts/prepare_structure_coordinate_fix.py": "aee159b50cdf6f7c767ed5bb9ffe8ab3a4b1787b",
     "scripts/run_structure_coordinate_queue.py": "462875a784eb7b22bc2866d01e3d68aa588105b3"
   },
+  "completed": 126,
   "edge_seed": "(row_seed + 1000003*step + 10007*left_absolute + right_absolute) % (2**63-1)",
   "encoded_inputs_sha256": "607d56258daffe9386fe86974f5d53e7036ee6c7d3d8a790ac813049f86f1a5f",
+  "ended_utc": "2026-10-15T13:09:05Z",
   "evaluator": {
     "evaluator_enabled_source_sha256": "06c25200bd38da7938c70f1115c36215940868cf57fd089a9a0326d29efb2359",
     "evaluator_mode": "upstream_documented_local_enablement_overlay",
@@ -33,6 +35,7 @@
     "evaluator_source_sha256": "b96a5b82c45ed0a8a275b1988965b6e0d8fab872a2d4bdc0e26ab8b8fec6d7cb"
   },
   "evaluator_timeout_sec": 3.0,
+  "first_started_utc": "2026-10-15T13:06:37Z",
   "fix_commit": "560e98aa84667fbaad7ee0caae99e76fdca01275",
   "frozen": true,
   "full_logical_rows": 37722,
@@ -93,8 +96,10 @@
   "scorer": "unchanged experiments/run_k4_multiline_stage.py::official_evaluate and k4_official_eval_worker.py; identical Python/bwrap/concatenation/3s",
   "seed": 42,
   "source_revision": "8a0a54918412eda9402a327646f7f067f7160ec8",
-  "status": "prepared",
+  "started_utc": "2026-10-15T13:06:37Z",
+  "status": "completed",
   "technical_smoke": "14 affected formal rows, original pass/fail coverage per affected arm; six unaffected DreamOn GPU controls; Base CPU proof only",
   "timing": "only affected-subset shared GPU observation; CUDA boundaries exclude loading/evaluation/writes; never mix old/new wall time for full-population acceleration",
-  "version": "structure coordinate v2"
+  "version": "structure coordinate v2",
+  "worker_pid": 1171098
 }
