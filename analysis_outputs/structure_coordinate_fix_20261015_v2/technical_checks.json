@@ -1,0 +1,9 @@
+{
+  "command": "python -m unittest tests.test_structure_coordinate_fix tests.test_k4_multiline_batch tests.test_dreamon_order_parallelism tests.test_dreamon_markov_k2 tests.test_dreamon_markov_k2_diagnosis tests.test_dreamcoder_fixed_transfer_adapter -q",
+  "cpu_tests": 77,
+  "full_replay": "37722/37722 old final token/prefix/suffix and round count matches;126 first divergence,37596 round equality,unknown0",
+  "gpu_technical": "automatic after capacity then fixed smoke, no quality gate",
+  "inputs_outputs": "minimal_counterexamples.json and tests/test_structure_coordinate_fix.py",
+  "reviewer_gate_disabled": true,
+  "status": "passed"
+}

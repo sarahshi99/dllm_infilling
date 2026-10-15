@@ -46,3 +46,12 @@ analysis_outputs/k4_multiline_20261014_v1/**/progress.json
 analysis_outputs/k4_multiline_20261014_v1/queue_status.json
 analysis_outputs/k4_multiline_20261014_v1/queue_failure.json
 analysis_outputs/k4_multiline_20261014_v1/publication_status.json
+
+# Coordinate v2 correction: local persistence/runtime, portable evidence published.
+analysis_outputs/structure_coordinate_fix_20261015_v2/*.sqlite*
+analysis_outputs/structure_coordinate_fix_20261015_v2/*.log
+analysis_outputs/structure_coordinate_fix_20261015_v2/*.lock
+analysis_outputs/structure_coordinate_fix_20261015_v2/progress.json
+analysis_outputs/structure_coordinate_fix_20261015_v2/queue_status.json
+analysis_outputs/structure_coordinate_fix_20261015_v2/publication_status.json
+analysis_outputs/structure_coordinate_fix_20261015_v2/failure_retry_log.jsonl

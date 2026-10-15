@@ -1,0 +1,114 @@
+{
+  "Base_control": "CPU full6198 reconstruction/native regression; no Base GPU reload",
+  "affected_smoke": [
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/101/L12",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/105/L14",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/21/L2",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/66/L1",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/99/L3",
+    "C::global_confidence::B::MultiLineInfilling/HumanEval/101/L3_L9",
+    "C::global_confidence::B::MultiLineInfilling/HumanEval/145/L0_L0",
+    "C::global_confidence::C::MultiLineInfilling/HumanEval/101/L3_L9",
+    "C::global_confidence::C::MultiLineInfilling/HumanEval/101/L6_L12",
+    "C::global_confidence::C::MultiLineInfilling/HumanEval/145/L0_L0",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/1/L5_L9",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/108/L0_L0",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/145/L0_L0",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/99/L2_L3"
+  ],
+  "formal_rows_reused_in_final": true,
+  "old_label_coverage": [
+    {
+      "available": 28,
+      "configuration": [
+        "A",
+        "global_confidence",
+        "A"
+      ],
+      "historical_passed": false,
+      "selected_minimum_stable_id": "A::global_confidence::A::SingleLineInfilling/HumanEval/105/L14"
+    },
+    {
+      "available": 9,
+      "configuration": [
+        "A",
+        "global_confidence",
+        "A"
+      ],
+      "historical_passed": true,
+      "selected_minimum_stable_id": "A::global_confidence::A::SingleLineInfilling/HumanEval/101/L12"
+    },
+    {
+      "available": 25,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "B"
+      ],
+      "historical_passed": false,
+      "selected_minimum_stable_id": "C::global_confidence::B::MultiLineInfilling/HumanEval/101/L3_L9"
+    },
+    {
+      "available": 3,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "B"
+      ],
+      "historical_passed": true,
+      "selected_minimum_stable_id": "C::global_confidence::B::MultiLineInfilling/HumanEval/145/L0_L0"
+    },
+    {
+      "available": 25,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "C"
+      ],
+      "historical_passed": false,
+      "selected_minimum_stable_id": "C::global_confidence::C::MultiLineInfilling/HumanEval/101/L3_L9"
+    },
+    {
+      "available": 3,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "C"
+      ],
+      "historical_passed": true,
+      "selected_minimum_stable_id": "C::global_confidence::C::MultiLineInfilling/HumanEval/145/L0_L0"
+    },
+    {
+      "available": 30,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "D"
+      ],
+      "historical_passed": false,
+      "selected_minimum_stable_id": "C::global_confidence::D::MultiLineInfilling/HumanEval/1/L5_L9"
+    },
+    {
+      "available": 3,
+      "configuration": [
+        "C",
+        "global_confidence",
+        "D"
+      ],
+      "historical_passed": true,
+      "selected_minimum_stable_id": "C::global_confidence::D::MultiLineInfilling/HumanEval/145/L0_L0"
+    }
+  ],
+  "rule": "after freezing outcome-blind influence: quantiles plus first original pass/fail per affected configuration; no expected repair gain considered",
+  "unaffected_controls": [
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/0/L0",
+    "A::left_to_right_frontier::A::SingleLineInfilling/HumanEval/1/L7",
+    "A::left_to_right_frontier::D::SingleLineInfilling/HumanEval/99/L9",
+    "B::global_confidence::A::SingleLineInfilling/HumanEval/0/L0",
+    "B::left_to_right_frontier::A::SingleLineInfilling/HumanEval/0/L0",
+    "B::left_to_right_frontier::D::SingleLineInfilling/HumanEval/99/L9",
+    "C::global_confidence::A::MultiLineInfilling/HumanEval/0/L0_L0",
+    "C::global_confidence::B::MultiLineInfilling/HumanEval/99/L8_L12",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/99/L9_L9"
+  ]
+}

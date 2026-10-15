@@ -185,6 +185,13 @@ def _apply_one_expand(x: torch.Tensor, index: int, mask_id: int) -> torch.Tensor
     )
 
 
+def _expand_delete_eligibility(eligible: torch.Tensor, index: int, maximum: int) -> torch.Tensor:
+    """Move pre-insertion deletion provenance; new masks are never old EOS."""
+    return torch.cat((eligible[:, :index],
+                      torch.zeros((1, 2), dtype=torch.bool, device=eligible.device),
+                      eligible[:, index + 1:]), dim=1)[:, :maximum]
+
+
 def _apply_one_delete(x: torch.Tensor, index: int, mask_id: int) -> torch.Tensor:
     return torch.cat(
         (x[:, :index], x[:, index + 1 :], torch.tensor([[mask_id]], device=x.device)),
@@ -867,6 +874,8 @@ def decode_with_policy(
         x[mask_index] = committed_tokens
         normal_count = sum(proposal.token_type == "normal" for proposal in committed)
         expand_count = delete_count = 0
+        expand_indices = []
+        delete_indices = []
         broadcast_delete = (policy == GLOBAL_CONFIDENCE and not sequential_pair and not k4_sequential) or (
             barrier_action is not None and barrier_action.token_type == "delete"
         )
@@ -877,17 +886,25 @@ def decode_with_policy(
                 tail = torch.arange(x_seq.size(0), device=x.device) >= int(first_eos[0].item())
                 x_seq.masked_fill_(tail & mask_index[0], eos_id)
                 x = x_seq.unsqueeze(0)
+        # Freeze eligible EOS BEFORE expansion. In parallel rounds insertion can
+        # move EOS outside the old mask_index; carry provenance with the canvas.
+        delete_eligible = ((x == eos_id) & mask_index) if broadcast_delete else None
         if policy == GLOBAL_CONFIDENCE and not sequential_pair and not k4_sequential:
             expand_indices = (x[0] == expand_id).nonzero(as_tuple=False).squeeze(1).tolist()
             for index in sorted(expand_indices, reverse=True):
                 x = _apply_one_expand(x, int(index), mask_id)
+                if delete_eligible is not None:
+                    delete_eligible = _expand_delete_eligibility(delete_eligible, int(index), maximum)
                 dynamic_length += 1
                 expand_budget -= 1
                 if x.shape[1] > maximum:
                     x = x[:, :maximum]
             expand_count = len(expand_indices)
         elif barrier_action is not None and barrier_action.token_type == "expand":
+            expand_indices = [barrier_action.position]
             x = _apply_one_expand(x, barrier_action.position, mask_id)
+            if delete_eligible is not None:
+                delete_eligible = _expand_delete_eligibility(delete_eligible, barrier_action.position, maximum)
             dynamic_length += 1
             expand_budget -= 1
             if x.shape[1] > maximum:
@@ -895,7 +912,7 @@ def decode_with_policy(
             expand_count = 1
         if broadcast_delete:
             delete_indices = (
-                ((x[0] == eos_id) & mask_index[0])
+                delete_eligible[0]
                 .nonzero(as_tuple=False)
                 .squeeze(1)
                 .tolist()
@@ -1122,6 +1139,8 @@ def decode_with_policy(
                 "step": step, "selected_raw_absolute": raw_selected, "chain_edges": chain_edges,
                 "selected_count": len(selected_ranks), "actual_submitted_count": sum(p.token_type != "mask_noop" for p in committed_by_position.values()),
                 "budget_clipped_positions": budget_clipped_positions,
+                "expanded_absolute": expand_indices, "deleted_absolute": delete_indices,
+                "structural_coordinate_version": "pre_expand_delete_provenance_v2",
                 "submitted_absolute": [[p.position, p.token_id] for p in committed_by_position.values() if p.token_type != "mask_noop"],
                 "stop_reason": "corrected_special_refresh" if corrected_structural_stop else
                     ("original_structure_barrier" if barrier_action is not None else "selected_committed"),

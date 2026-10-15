@@ -1,0 +1,28 @@
+{
+  "by_configuration": {
+    "A/global_confidence/A": 37,
+    "C/global_confidence/B": 28,
+    "C/global_confidence/C": 28,
+    "C/global_confidence/D": 33
+  },
+  "counts": {
+    "first_divergence": 126,
+    "proved_equivalent": 37596
+  },
+  "paired_union_sizes": {
+    "A": 37,
+    "C": 38
+  },
+  "regenerate_count": 126,
+  "smoke_ids": [
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/101/L12",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/21/L2",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/66/L1",
+    "A::global_confidence::A::SingleLineInfilling/HumanEval/99/L3",
+    "C::global_confidence::B::MultiLineInfilling/HumanEval/101/L3_L9",
+    "C::global_confidence::C::MultiLineInfilling/HumanEval/101/L6_L12",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/108/L0_L0",
+    "C::global_confidence::D::MultiLineInfilling/HumanEval/99/L2_L3"
+  ],
+  "unknown": []
+}
