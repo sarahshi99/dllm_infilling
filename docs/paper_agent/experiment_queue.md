@@ -328,3 +328,5 @@ Status: `completed_external_test_opened`. TV pilot/full=`True/True`; KL pilot/fu
 ## 2026-10-15 并行扩删坐标修补 v2（追加）
 
 基线dbdd0bd，独立分支codex/dreamon-structure-coordinate-fix-20261015-v1，旧v1输出不动。CPU完整重放37722行：37596逐轮画布等价，126首分歧（A/global原生37；C/global链无头B28、零头C28、训练头D33），未知0，多行配对并集38。冻结清单筛选不看passed；技术smoke在冻结后按预定规则覆盖旧通过/失败。CPU77项含最小反例、预算/截断、边界、旧K1/链K4/frontier/Base原生回归及分组bootstrap公式通过。下一步一次可恢复队列，GPU0等待32GiB空闲，smoke→126行补验→全人口表/修补与学习分开配对→归档推送退出。恢复analysis_outputs/structure_coordinate_fix_20261015_v2/recovery.zh.md。无思维导图修改、新采样适配器或候选四头实现/训练。
+
+2026-10-15 已实际启动唯一后台队列dreamon_structure_coordinate_fix_20261015_v1，queue PID1171091、worker PID1171098；正式修正560e98a，状态running_affected_full。smoke→126行补验→v2合并分析→提交推送全自动，无需用户触发下一阶段。

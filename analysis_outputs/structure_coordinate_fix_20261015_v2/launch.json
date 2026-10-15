@@ -1,0 +1,13 @@
+{
+  "time_utc": "2026-10-15T13:07:18Z",
+  "tmux_session": "dreamon_structure_coordinate_fix_20261015_v1",
+  "queue_pid": 1171091,
+  "worker_pid": 1171098,
+  "command": "bash scripts/launch_structure_coordinate_queue.sh",
+  "recovery": "analysis_outputs/structure_coordinate_fix_20261015_v2/recovery.zh.md",
+  "formal_fix_commit": "560e98aa84667fbaad7ee0caae99e76fdca01275",
+  "observed_status": "running_affected_full",
+  "authorized_new_rows": 126,
+  "old_v1_untouched": true,
+  "no_mindmap_or_training": true
+}
