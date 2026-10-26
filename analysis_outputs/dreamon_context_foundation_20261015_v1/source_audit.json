@@ -1,0 +1,198 @@
+{
+  "audit_reuse": "Original full retokenization/decontamination audit; all prepared memberships rechecked; chosen source record hashes rederived. External test payload unused.",
+  "blind_trajectories": 8060,
+  "contract_id": "dreamon-context-v1-20261015",
+  "counts": {
+    "external_test": 9925,
+    "train": 86019,
+    "validation": 10547
+  },
+  "cross_split_groups": 0,
+  "excluded_groups": 39,
+  "excluded_intersection": 0,
+  "excluded_records": 559,
+  "prepared_split_manifest_sha256": "02c333a5cf0dc628548e75763480a413b26dd97829526fa7d092a1d2fde22839",
+  "prior_audit_sha256": {
+    "actual_bank_membership_audit_v2.json": "b6f673b88c6f8944af20a02f71a5cc33d12c2dad9c0353f25f6022ea44c195ad",
+    "humaneval_exclusion_audit.json": "2bba9fbc30587db2f6509e2102f6d32b20011387e24840bbcc9eac1f4719c64c",
+    "prepared_data_reaudit.json": "3f6712892f53e72274ede75f89afb39eba000451c34c886184ef4baf774afcc1"
+  },
+  "schema_version": 1,
+  "selected_sources": 1024,
+  "source": {
+    "arrow_sha256": "bbb1bc45c3bb4a5e2bf38fa54a1d170430f0a679f5b66c51c759cbc7aba0fd6f",
+    "config": "educational_instruct",
+    "dataset_id": "OpenCoder-LLM/opc-sft-stage2",
+    "prepared_sha256": "ac46a04ed83475f7443e16ad1ffd5fede6b9548601ac5aa3cb35a6e00afe6297",
+    "revision": "7d28f40d579edd7c24402d17d0c7639f991e6f8d"
+  },
+  "source_hole_gaps": [
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "78c9fa1216de57588ad7ac450fe29fc69c985886d67661ca980b886e86ca135a",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "9967b8df2d28e84ed5952ce67e94c75b3a3c7f10e9c3e01bb923b038ca203583",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "2dd7f05ed1673de57ced4282640a9464c13e6a28e6869b1d580f30e35b769a18",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "42bf79b7d12afaf5b05ef88f5b82bc78f99bae4007773254a75dd59615e92949",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "2d8d99f601c170138ea660eceabee551951cd46cd1c1ad83498162d07d4d7d72",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "538b13b02239a4f32b3bfd21100a03a65d0b7a2eaa7448f398dbca64526ce2ca",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "98091ca06a4e29ade8312609fa84a5db3f16ce44503291b3b2cd1a1eef4e18d2",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "e683e55e3deb5009f0578372bb7c8698775591aefbfc721f18a18080e904e121",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "71af66d18ec448fe5e847062a7a405e7e49ab3782d0d4699d8eede8c6ddbd7c3",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "ce9f0b161601b0e5fd49bd7be477765373328d4ee418e921874dcba305f8b736",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "4d044b9786ac769a3e1c571badac776082b4f4f07ebcad797a27eb025b76328d",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "2978212c3481fd534b43befed551e4fbef5a8fdde00516ecce2eb7ab22e3be19",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "57004d11826a70c8cdcca45f44e3c689dd1a77a9fb86d75dd9b4f2e94041ff97",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "7843dfff37dafffea0ff185571dc2fa93488d51cba6453b1b4ed5caf40abb3c3",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "6f2b73728ad1eaa1a545fef4e7dc27bcb434b72d37be8363c15314e528330ac2",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "1ac044414999e30e89d3d026e7b34706eedd67614ac15561d937576566c14e05",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "974204f32e32bf142cd7669c2bd86eb06bf23aef6e9053ccd4ef091f9b8d7358",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "e5aea5f2e46499ae0031b2c8fcaaf51e16c432ef6045721d9ba6af944b251c6a",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "5383fec4f9416840033682a518e55942bd7f80542a8379d77149d90801b35037",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "8d7a9617229ad034082b73366b31b576e0ebddf6dde2719a1689eb89c15cafc5",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "ba6b1a89a42a52596ee6a999ad4eb2188f6fe4c7be849d93e176451c0db9128e",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "0cc927304cd267938ebd58b884a4bfffa1d2e92bb8d802a4ed0900c8997170fc",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "155c22828d6c4ba992ccb4a6331755e672a9098c70aca4b3a9d53b20143d668d",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "5c2e366fa40d1e0a6afd98fe363b79e3279936511c012c9e3c8241c3c678a780",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "2a50b2c87b670ef8bc3fed5899213d868b4196a0d46995fe5cd924054e567413",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "1f1e992fda0cbb9c9a2a4d3a50cb543fcd9fb87df22ddfd0150e4cf3f767bcb5",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "b12aaffa7055f0eee174741626b37d3d22fc82df0ca8ee01323283aa3d2766f0",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "a07af75a07ef76921a7079de42512e2f29c35757d942efb54d2c8a01d8a6ed81",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "fdb6354c3a65192c8608e16e701104219f32e869d088489b42fd88a98b0870b6",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "3942a77aac8e32eda23c57c6120597f6602503db07e537ba54ebe08c1a2ff4fd",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "e6f5662e8c91d18e986ba4be2a1ebfae11ef498cb77688abe5cece8475103cbe",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "98131b45d26816504275e74a2cd4cac51139cde72f5c196a116eb267836ee4e9",
+      "span": "crossline"
+    },
+    {
+      "reason": "no_legal_source_hole",
+      "record_id": "9d3ffabbfd05d3b23f02f82d1e9867d916e2347c5b334ef0f367597f58202c56",
+      "span": "crossline"
+    }
+  ],
+  "status": "passed",
+  "unique_records": 106491
+}

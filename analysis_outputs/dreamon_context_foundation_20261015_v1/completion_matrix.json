@@ -1,0 +1,23 @@
+{
+  "A1": {
+    "actual": 0,
+    "target": 3072
+  },
+  "A2": {
+    "actual": 0,
+    "target": 512
+  },
+  "DCD": {
+    "actual": 0,
+    "target": 256
+  },
+  "contract_id": "dreamon-context-v1-20261015",
+  "generation": {
+    "generated": 0,
+    "scored": 0,
+    "target": 4132
+  },
+  "gpu_job_sec": 0,
+  "schema_version": 1,
+  "status": "not_started"
+}

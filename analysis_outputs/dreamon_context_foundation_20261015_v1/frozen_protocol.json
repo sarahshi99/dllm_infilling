@@ -1,0 +1,91 @@
+{
+  "baseline_commit": "d39a51d494efc2a1d1661eb28622b18b3b741fa6",
+  "contract_id": "dreamon-context-v1-20261015",
+  "differences_from_history": [
+    "common-u keyed inverse-CDF sampler replaces historical categorical RNG",
+    "FP32 score addition, filtering, softmax and entropy; FP64 CDF; stable nucleus ties by ascending token ID",
+    "global confidence ties by ascending original coordinate; entropy formula retains original epsilon 1e-10",
+    "all tokenizer special and unassigned vocabulary IDs excluded from ordinary head/teacher memory"
+  ],
+  "head": {
+    "head": "kl",
+    "label": "best",
+    "phase": "full",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "head_dtype": "float32",
+  "head_lambda": 1,
+  "head_training": false,
+  "limits": {
+    "A1_A2_sec": 14400,
+    "A1_candidate_collection_sec": 7200,
+    "A3_sec": 7200,
+    "gpu_wait_scope": "cumulative across resumes; not charged as resident GPU time",
+    "gpu_wait_sec": 86400,
+    "total_gpu_job_sec": 43200
+  },
+  "metrics": "full vocabulary FP32 online KL(fresh||q), TV at T1; deployment TV/support/infinite KL explicitly; special masses included",
+  "model": {
+    "id": "Dream-org/DreamOn-v0-7B",
+    "revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "model_dtype": "bfloat16",
+  "model_index_sha256": "998a078123ffc97763690de7f2a677eb89168af5eaf8a5e12e6bc24d18e25bdb",
+  "model_runtime_sha256": {
+    "config.json": "c02a98999d7d22491e6cd43f9830fdfe241773cc0d0470f205d1850a3938e8d3",
+    "configuration_dream.py": "d25863bf1d226db166a0b58eaa64b8b1b6dafd09a5e2c59c26522c6e8aa90d9b",
+    "modeling_dream.py": "dfed63e58546ca4cb13ceb07d5eceb5cedb7e4044d7238f3a2113ac273fc5d14"
+  },
+  "model_shards": {
+    "model-00001-of-00004.safetensors": "ec8e7b0d4573a0743d4ba3fceea6e00df55ec793b3aa9f9e4dd4cf50b7982b20",
+    "model-00002-of-00004.safetensors": "bb4a3c7e0551f85cfd7e2fc42365a168b04ad9922bbc6ac00e7d4e40a8808c36",
+    "model-00003-of-00004.safetensors": "19d658d0072d366923d48cf8ebe9bb5837cdc6bc980d218b778ebc54e9a7daf2",
+    "model-00004-of-00004.safetensors": "c41d5ef0d95f243c1c44136916fd5493a096d9810a0e9d5f534312fed52b2846"
+  },
+  "new_jacobi_execution": false,
+  "official_protocol": {
+    "alg": "entropy",
+    "alg_temp": 0.0,
+    "batch_size": 1,
+    "delete_eos_token": true,
+    "device": "cuda",
+    "dtype": "bf16",
+    "eps": 0.001,
+    "mask_expansion": true,
+    "max_gen_len": 64,
+    "max_prompt_len": 2048,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "pad_eos_to_right": true,
+    "pad_to_max_len": false,
+    "show_progress": false,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "plan": "smoke -> A1/A2 -> A3 and atomic DCD publication -> 4132 global rows -> GPU process exit -> CPU scoring/analysis/archive/commit/push",
+  "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
+  "sampler": {
+    "inverse_cdf": "ascending token ID; first CDF >= u; FP64 CDF normalized by final sum",
+    "key": "[contract_id,42,case,main_round,original_position,purpose]",
+    "nucleus": "stable descending FP32 score, token ID tie; include first crossing .9, masked support exactly zero",
+    "purpose": "token",
+    "trajectory_caveat": "pairing device only; coordinates need not retain identical semantics after trajectories diverge; next round creates new keys after structure",
+    "uniform": "SHA256 first52bits / 2^52 + 2^-53"
+  },
+  "sampling": "no outcome/teacher/head-distance selection; stable hash of encountered eligible states; at most8 per group/cell; per split and source branch quotas; semantic state dedup ignores order/arm/round labels, first deterministic encounter owns provenance; <=4/group/source branch",
+  "schema_version": 1,
+  "sealed_test_opened": false,
+  "seed": 42,
+  "teacher": "chain-local fresh from X0, only actual ordinary committed prefix of this chain; fixed attention/time/selection; not full-canvas refresh, K1, answer or upper bound",
+  "tokenizer_sha256": {
+    "added_tokens.json": "67780f330ac19b969a3879a7c911ea1b9961022158dbc38219787695a6e3ab72",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "special_tokens_map.json": "bc0be97a3f816ee798932566e640feeb54a82def0848436717d651826d96f16c",
+    "tokenization_dream.py": "1d7f04104fa673831f48256e3cd42cd0bbd1bddd801b4abea5c74cc47d98bdd2",
+    "tokenizer_config.json": "cb43ebbb4f9ed93951853de9ce5d6fb5e71dcc4347a2b97f0cc63c99580ac660",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  }
+}
