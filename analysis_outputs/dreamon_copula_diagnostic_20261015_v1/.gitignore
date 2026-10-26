@@ -1,0 +1,4 @@
+*.local.*
+*.log
+publication_status.json
+*.tmp-*

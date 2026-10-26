@@ -1,0 +1,27 @@
+test_archive_push_verification_and_failed_push_preserves_commit (test_dreamon_copula_cpu.ConsumerTests) ... ok
+test_incompatible_ready_exits_without_analyzing (test_dreamon_copula_cpu.ConsumerTests) ... ok
+test_restart_deadline_is_not_reset_or_extended (test_dreamon_copula_cpu.ConsumerTests) ... ok
+test_timeout_records_blocked_archives_and_exits (test_dreamon_copula_cpu.ConsumerTests) ... ok
+test_wait_for_ready_not_tensor_existence_and_failure_exit (test_dreamon_copula_cpu.ConsumerTests) ... ok
+test_bootstrap_resamples_groups_not_states (test_dreamon_copula_cpu.PackageTests) ... ok
+test_complete_256_float32_package_all_states_and_tables (test_dreamon_copula_cpu.PackageTests) ... ok
+test_hash_manifest_and_every_shard (test_dreamon_copula_cpu.PackageTests) ... ok
+test_missing_logs_and_probability_mismatch_block (test_dreamon_copula_cpu.PackageTests) ... ok
+test_nonfinite_states_do_not_become_complete_case_main_mean (test_dreamon_copula_cpu.PackageTests) ... ok
+test_partial_requires_budget_and_missing_buckets (test_dreamon_copula_cpu.PackageTests) ... ok
+test_probability_regimes_cannot_mix (test_dreamon_copula_cpu.PackageTests) ... ok
+test_resume_idempotence_preserves_all_rows_and_provenance (test_dreamon_copula_cpu.PackageTests) ... ok
+test_resume_refuses_changed_input (test_dreamon_copula_cpu.PackageTests) ... ok
+test_already_satisfied_unchanged (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_block_vs_row_truncation_counterexample (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_chain_rule_and_limit (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_feasible_and_hall_infeasible_zero_support (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_projection_and_independent_product (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_teacher_margins_kl_pythagoras (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_wrong_marginals_hurt_concrete_counterexample (test_dreamon_copula_cpu.ProjectionTests) ... ok
+test_zero_target_and_extreme_log_support (test_dreamon_copula_cpu.ProjectionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 2.166s
+
+OK

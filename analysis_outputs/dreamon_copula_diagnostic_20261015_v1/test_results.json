@@ -1,0 +1,67 @@
+{
+  "GPU": "none",
+  "caveat": "Only synthetic CPU technical tests; not A or DreamOn empirical results.",
+  "code_sha256": {
+    "analysis/dreamon_copula_cpu.py": "cbbae6136c75fd3b7422db1eddee7487394b069929b887ab5901a7f9f1cb5b88",
+    "scripts/consume_dreamon_copula_cpu.py": "0e6639278e5b831bf9f4c721b7394c5212b57ce210ff3683f0155d6fbc93b8f6",
+    "tests/test_dreamon_copula_cpu.py": "6789ac65bd191a9899a40eb9682eee1d90fc4d5cab4116e4ea1b87eac39fca4b"
+  },
+  "command": [
+    "/home/shx/miniconda3/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_dreamon_copula_cpu.py",
+    "-v"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "exit_code": 0,
+  "finished_epoch": 1793012191.046209,
+  "numpy": "2.0.2",
+  "output_sha256": "2910f684579e17f0f4144bb379e984ce9a10e6c4454bfe0e67aef28ec6d32cc9",
+  "python": "3.9.23",
+  "started_epoch": 1793012188.7695386,
+  "status": "passed",
+  "tests_run": 22,
+  "toy_counterexample": {
+    "Q": [
+      [
+        0.8490061904034057,
+        0.05099420670330533
+      ],
+      [
+        0.050993809596594206,
+        0.0490057932966947
+      ]
+    ],
+    "R_equals_T": true,
+    "T": [
+      [
+        0.4,
+        0.1
+      ],
+      [
+        0.1,
+        0.4
+      ]
+    ],
+    "kl_T_Q": 0.6734620474294011,
+    "kl_T_R": 0.0,
+    "target_c": [
+      0.9,
+      0.1
+    ],
+    "target_r": [
+      0.9,
+      0.1
+    ]
+  }
+}
