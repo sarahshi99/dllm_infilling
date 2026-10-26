@@ -506,3 +506,5 @@
 ## 2026-10-26 第一批A context foundation 协议及有限队列实现
 
 起点d39a51d（坐标修补560e98a已完成）新建codex/dreamon-context-foundation-20261015-v1。独立common-u采样/目标对齐H0契约、合法同链teacher状态采集器、反事实/DCD和K1/Z4/H4-old/F4-chain队列已实现；原旧采样器/结果和其他worktree不动。源106491成员/split/排除关系核查，8060盲轨迹冻结；16项CPU技术测试通过，真实GPU smoke尚待资源。GPU总上限12h，A1/A2最多4h、DCD最多2h，累计等待最多24h，单H200单worker。执行与恢复bash scripts/launch_context_foundation_queue.sh；协议/报告analysis_outputs/dreamon_context_foundation_20261015_v1/，具体设计docs/paper_agent/context_foundation_20261015_v1/plan.zh.md。无新头训练、第二批、思维导图修改；reviewer_gate_disabled，本地diff review及fresh verification。
+
+2026-10-26T10:39Z 第一批A已实际启动：tmux dreamon_context_foundation_20261015_v1，controller PID470433、worker PID471126，正常等待>=32GiB显存/现有GPU锁日志已核验；当前GPU作业0h。protocol_ready已原子发布，精确恢复analysis_outputs/dreamon_context_foundation_20261015_v1/launch.zh.md；启动不是实验完成。实现a46204a、协议46e5efb，后台自动按固定顺序完成或记录预算/覆盖缺口后CPU收尾退出。

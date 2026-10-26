@@ -19,5 +19,5 @@
   },
   "gpu_job_sec": 0,
   "schema_version": 1,
-  "status": "not_started"
+  "status": "queued_waiting_gpu"
 }
