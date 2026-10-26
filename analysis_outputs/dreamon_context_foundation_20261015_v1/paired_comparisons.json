@@ -1,0 +1,153 @@
+{
+  "bootstrap": "10000 whole base-task clusters, line-weighted and equal-base-task estimates; paired common population only",
+  "comparisons": [
+    {
+      "a": "H4-old",
+      "b": "Z4",
+      "ci95": [
+        0.9407263998207003,
+        3.383093928851981
+      ],
+      "equal_group_ci95": [
+        1.1431305206214877,
+        5.412090603093448
+      ],
+      "equal_group_mean": 3.1271461236519222,
+      "groups": 164,
+      "harm": 10,
+      "help": 32,
+      "matched": 1033,
+      "mean": 2.1297192642787994,
+      "n": 1033,
+      "net": 22,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "F4-chain",
+      "b": "Z4",
+      "ci95": [
+        6.7324758068047466,
+        11.241475645942147
+      ],
+      "equal_group_ci95": [
+        6.1220933016718675,
+        13.315344172745556
+      ],
+      "equal_group_mean": 9.626864709184549,
+      "groups": 164,
+      "harm": 9,
+      "help": 101,
+      "matched": 1033,
+      "mean": 8.906098741529526,
+      "n": 1033,
+      "net": 92,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "F4-chain",
+      "b": "H4-old",
+      "ci95": [
+        4.7956041735357,
+        8.944588284248
+      ],
+      "equal_group_ci95": [
+        3.4969667831461524,
+        9.790653023385362
+      ],
+      "equal_group_mean": 6.499718585532627,
+      "groups": 164,
+      "harm": 8,
+      "help": 78,
+      "matched": 1033,
+      "mean": 6.776379477250726,
+      "n": 1033,
+      "net": 70,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "Z4",
+      "b": "K1",
+      "ci95": [
+        -15.005451120168853,
+        -10.062800044657811
+      ],
+      "equal_group_ci95": [
+        -19.30271020369331,
+        -11.690538357644453
+      ],
+      "equal_group_mean": -15.353522028829675,
+      "groups": 164,
+      "harm": 137,
+      "help": 8,
+      "matched": 1033,
+      "mean": -12.487899322362052,
+      "n": 1033,
+      "net": -129,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "H4-old",
+      "b": "K1",
+      "ci95": [
+        -12.711129943502824,
+        -8.166876550983371
+      ],
+      "equal_group_ci95": [
+        -15.895611245052809,
+        -8.911886409233942
+      ],
+      "equal_group_mean": -12.226375905177752,
+      "groups": 164,
+      "harm": 114,
+      "help": 7,
+      "matched": 1033,
+      "mean": -10.358180058083253,
+      "n": 1033,
+      "net": -107,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "F4-chain",
+      "b": "K1",
+      "ci95": [
+        -5.130687318489835,
+        -2.1237259222023765
+      ],
+      "equal_group_ci95": [
+        -8.771663126846054,
+        -3.066860751883618
+      ],
+      "equal_group_mean": -5.726657319645125,
+      "groups": 164,
+      "harm": 49,
+      "help": 12,
+      "matched": 1033,
+      "mean": -3.581800580832527,
+      "n": 1033,
+      "net": -37,
+      "replicates": 10000,
+      "seed": 20261015
+    }
+  ],
+  "population": "1033 official rows,164 base tasks,single seed42,repeated development population",
+  "pure_learning_recovery": {
+    "bootstrap_total": 10000,
+    "bootstrap_valid": 10000,
+    "ci95_positive_denominator": [
+      0.08028467153284673,
+      0.2605633802816901
+    ],
+    "denominator": 129,
+    "matched": 1033,
+    "numerator": 22,
+    "reason": "defined",
+    "value": 0.17054263565891473
+  },
+  "total_recovery": null,
+  "total_recovery_reason": "no native K4 arm under common-u; historical recovery not mixed"
+}

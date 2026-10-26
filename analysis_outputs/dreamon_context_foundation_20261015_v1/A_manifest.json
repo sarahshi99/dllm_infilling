@@ -1,0 +1,229 @@
+{
+  "contract_id": "dreamon-context-v1-20261015",
+  "data": [
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/source_hole_gaps.jsonl",
+      "rows": 33,
+      "sha256": "f8e95682ef1c2590c6242af290e2b42e346ee8bad7f0ee4dc3e4e4d0eef3e327"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_metadata.jsonl",
+      "rows": 256,
+      "sha256": "056855abdcd61f76d6c2fbf9fa517908927ea6313d97d27f435c44fad414d294"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/shared_gpu_timing.json",
+      "rows": null,
+      "sha256": "12d9b2a349471c6d0443f4dfcf21fe22dd33f9c65a58cb8f83d3f8fbf0dc8176"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/chain_coverage_summary.json",
+      "rows": null,
+      "sha256": "01792a3e07a12d9dd070f7c923bc836c10881cee56d3c5b1d9a4a42e350f6ee0"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/trajectory_coverage.jsonl.gz",
+      "rows": 8060,
+      "sha256": "df367a181360e9a16893a9c2f89ab8d9c1bb62557a734760f0012fe3d545ce94"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/gpu_smoke.json",
+      "rows": null,
+      "sha256": "76229953f839e6955cf3b8c836418ac94c637a9eec61dabf2951702fe4c458aa"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/initial_inventory.json",
+      "rows": null,
+      "sha256": "e4b7ebb7bf4d72935789b0880a93b4a3e1f8b81b1a23693057f5608fb76b7ae1"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/fresh_harms_vs_old_head.jsonl.gz",
+      "rows": 8,
+      "sha256": "ec438649af440e2579c1d9f03bca0a823e3e5d3fe1c0710eea415c4c58949a52"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/protocol_manifest.json",
+      "rows": null,
+      "sha256": "7cfab0657cbf4b4fe40e76a39bb65f83bc20e0611e56f9eefbd7def38d9e493a"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/generation_summary.csv",
+      "rows": 4,
+      "sha256": "db1103bfbadeb94a7591218a7594fa91f4674f5f0d3a93ce595d2b7cc87eec6f"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/score_infrastructure_retries.jsonl",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/protocol_schema.json",
+      "rows": null,
+      "sha256": "dc6e415048165e600f1a13537867a18191925c69e7d5ab99e10ef0f236f69cc6"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/generated_rows.jsonl.gz",
+      "rows": 4132,
+      "sha256": "7ec9ba607cd9378b60a1673dcc2eb4c1c706f97c8f66917b047361562f730655"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/completion_matrix.json",
+      "rows": null,
+      "sha256": "44621879fa3996cb1d81a8df9b1800a2f5b8aee3595bb225a3fb054eaf3ad092"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/preflight_checks.json",
+      "rows": null,
+      "sha256": "e534acc9261beb32a91ee31c954196d07c27cf89ecf15fe0176bd4cf86dc48f5"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/report.zh.md",
+      "rows": null,
+      "sha256": "7a227deff0f801846eda4cd7b84059b0ee9b278568305a2eb08fe58b03650074"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/blind_pair_parents.jsonl.gz",
+      "rows": 512,
+      "sha256": "d12c7dd1c204ec8231ce542ebbde84d248dc5462dd2a0379aeaad11ee14570ce"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/A1_coverage.csv",
+      "rows": 12,
+      "sha256": "b55f32c40e60b73fc53540fd33bee393f7292313fb57d113247e2a8a3e1b4f7e"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/A2_coverage.csv",
+      "rows": 8,
+      "sha256": "615f11d465c3ee78ddd895a3b5451249f7ad8f6ffa030d35b989de52fdf0197e"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/mechanism_statistics.json",
+      "rows": null,
+      "sha256": "0c4d1cc6bc4ac0e7a677aa7e6b10f3bc53304e12736c6c2af8e4a121777d5d2c"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/counterfactual_stratified_bootstrap.json",
+      "rows": null,
+      "sha256": "cb2e0a3b7a7c8ab0e4b51b2d175c826b6ee226ece1d1bcd28e40986a70ece377"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/timing_estimate.json",
+      "rows": null,
+      "sha256": "1567fdda67735f01d11f505aed2eef0772298f66d2a4a299bd54afa361844a7f"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/cpu_evaluator_smoke.json",
+      "rows": null,
+      "sha256": "f093a3ab1d9f764dffbf3ea20fce65ed3e5326c6da607498778f95a876250de5"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/blind_selected_states.jsonl.gz",
+      "rows": 3072,
+      "sha256": "5c27f1c3c57f17acfd9cb873dd320d8cd2de6eba68a805cb36188d449e6167c9"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/blind_trajectories.jsonl.gz",
+      "rows": 8060,
+      "sha256": "00582b08fa73a93d72e18dab1e6264c9f5540a8b6445c767d25c6bfe53faa53f"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/state_metrics.jsonl.gz",
+      "rows": 3072,
+      "sha256": "b9bb46813e6bf7404a9678a53f8cc189e13cd512627c57106f966d1c5e21ca6d"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/frozen_protocol.json",
+      "rows": null,
+      "sha256": "25780f0a79ce4dca9c10115f1e477401a8cee1007d0d2f9e4670feb2b8357d67"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/teacher_noise32.jsonl",
+      "rows": 32,
+      "sha256": "dd2b1bd80760cd8716bea20709e0d8dc5d4ccdb0d77211a128eab94ba99045de"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/per_case.jsonl.gz",
+      "rows": 4132,
+      "sha256": "ec7c6d98f0b8f0243507f992bc4708a8549aed3170ddb317bf846da81ed886dc"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/shared_gpu_observations.jsonl",
+      "rows": 443,
+      "sha256": "ab2f6782db6cb4526b1715610ca5fc5a50dd57b46bbfbb2a4f535a34dd3ae007"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/counterfactual_pairs.jsonl.gz",
+      "rows": 512,
+      "sha256": "82154b9449a4d0382114d23fe07ed1d1973eb9e5dc7c6cacc878662c78e67202"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/generation_retry_matrix.jsonl.gz",
+      "rows": 4132,
+      "sha256": "1a70a1ca23e1a48cfa055be7262cf0c4ab78ec7b6c6de0c85a65d8664c91f34b"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/mechanism_stratified.csv",
+      "rows": 48,
+      "sha256": "407ef908edb206a0733d3dc17f4cf096b788f76134b32c0a8e9262726742a6e1"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/cpu_tests.txt",
+      "rows": null,
+      "sha256": "2f986c5928fbe9549f5b611f01ebd2ab78890c2caeca3bb51a255b234bcca494"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/paired_comparisons.json",
+      "rows": null,
+      "sha256": "822a070841cfc2eb2b7635bec83f3c0c82dae77923ec88b305b27540dd828eb1"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_manifest.json",
+      "rows": null,
+      "sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/mechanism_examples.json",
+      "rows": null,
+      "sha256": "6e004308ddc53b43c55e8f356ce376773b0e3152674b3fc290e75b8030f0a7b6"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/blind_dcd_parents.jsonl.gz",
+      "rows": 256,
+      "sha256": "7cc55c967cf54d4c446bc9cd087fd394e0285633d34a1a86fdc8735519828e6b"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/tensor_manifest.json",
+      "rows": null,
+      "sha256": "463638af03679730a209a6c64f26a1192a7e3d56a07a5ebc617da0925d030536"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/launch.zh.md",
+      "rows": null,
+      "sha256": "077ba4d51ceb970679abbb05f4256b634483c59f79e5e1b626b77a361aeb7c1c"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/phase_checkpoints.jsonl",
+      "rows": 5,
+      "sha256": "e9279b786b188f084433b4fca73e8837e166b59743edfbcd5db26bbb0b7f3127"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/gpu_exit.json",
+      "rows": null,
+      "sha256": "1a9792f7d3bf5467a8c471e682d4beac442a428552bcf5b9aae9cb0a0667c25b"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/source_audit.json",
+      "rows": null,
+      "sha256": "b4e40963659a9672867be4df308b0163fd1885674c9b1c17bb0854be6576eff9"
+    },
+    {
+      "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_states.npz",
+      "rows": 256,
+      "sha256": "821d7fad4ce8ce1a430e94c3714bc17dac95f9cd19280b28b2f893ef1671946b"
+    }
+  ],
+  "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
+  "schema_version": 1,
+  "source_commit": "2e0ef1653521876572a3c14f12d7de970cbd974b",
+  "status": "partial"
+}

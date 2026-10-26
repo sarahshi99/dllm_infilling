@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-26T14:20:55Z",
+  "budget": {
+    "active_stage": "generation",
+    "heartbeat_at": "2026-10-26T14:20:55Z",
+    "heartbeat_epoch": 1793024455.0066266,
+    "pid": 471126,
+    "resident": false,
+    "stage_sec": {
+      "dcd": 89.02766675315797,
+      "generation": 725.7176314080134,
+      "mechanism": 4116.929083669558,
+      "smoke": 14.851097763050348
+    },
+    "used_sec": 4946.52547959378
+  },
+  "dcd": 256,
+  "generated": 4132,
+  "pairs": 512,
+  "states": 3072,
+  "status": "gpu_phases_finished"
+}

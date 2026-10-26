@@ -1,23 +1,37 @@
 {
   "A1": {
-    "actual": 0,
+    "actual": 3072,
+    "gap": 0,
     "target": 3072
   },
   "A2": {
-    "actual": 0,
+    "actual": 22,
+    "gap": 490,
     "target": 512
   },
   "DCD": {
-    "actual": 0,
+    "actual": 256,
     "target": 256
   },
   "contract_id": "dreamon-context-v1-20261015",
+  "cpu_technical_passed": true,
   "generation": {
-    "generated": 0,
-    "scored": 0,
+    "duplicates": 0,
+    "generated": 4132,
+    "missing": 0,
+    "scored": 4132,
     "target": 4132
   },
-  "gpu_job_sec": 0,
+  "gpu_job_sec": 4946.52547959378,
+  "gpu_technical_passed": true,
+  "infrastructure_retry_events": 0,
+  "raw_shards_verified": true,
   "schema_version": 1,
-  "status": "queued_waiting_gpu"
+  "scope": "A only; no training, second batch, native K4, frontier/multiline full runs or mindmap change",
+  "source_audit_passed": true,
+  "status": "partial",
+  "teacher_noise": {
+    "actual": 32,
+    "target": 32
+  }
 }
