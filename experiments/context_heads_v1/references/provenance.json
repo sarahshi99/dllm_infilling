@@ -1,0 +1,41 @@
+{
+  "DeepSpec": {
+    "commit": "005e03b81cec38b7da6399833d609ee89a2587f2",
+    "path": "deepspec/modeling/dspark/markov_head.py",
+    "url": "https://github.com/deepseek-ai/DeepSpec/blob/005e03b81cec38b7da6399833d609ee89a2587f2/deepspec/modeling/dspark/markov_head.py",
+    "source_sha256": "6659bcdc12d923d4fc16cc2280c03078c2110a4792305e1f3f42b5468f75ef46",
+    "license": "MIT",
+    "license_url": "https://github.com/deepseek-ai/DeepSpec/blob/005e03b81cec38b7da6399833d609ee89a2587f2/LICENSE",
+    "license_sha256": "474817ff0d848f0d44cea7f5ac0b488fe74f599f2a656476a94f215e5e4094c7",
+    "verified": true,
+    "class": "GatedMarkovHead",
+    "structure": {
+      "embedding": "V x r",
+      "output": "V x r, no bias",
+      "gate_proj": "(H+r) -> r, bias=True",
+      "formula": "W_out (e(prev) * sigmoid(gate_proj(concat(h_target,e(prev)))))"
+    },
+    "adapter_differences": [
+      "explicit target-aligned selected-set input; does not use author sampler",
+      "no-history anchor zero; explicit causal/chain/padding masks",
+      "configurable special-token delta mask; lambda=1",
+      "seeded normal(.02) initialization shared across candidates; no pretrained weights"
+    ]
+  },
+  "xPress": {
+    "version": "arXiv:2608.02438v1",
+    "url": "https://arxiv.org/html/2608.02438v1",
+    "license": "CC BY 4.0 (paper)",
+    "equations": "5-9; sequential/Jacobi causal fixed-point argument 11-12",
+    "structure": "r=256; fused target/global/shifted-token; per-channel strictly lower-triangular mixer; residual r->2r->r transform",
+    "adapter_differences": [
+      "H4 implements an inspired causal mixer, not a verbatim reproduction",
+      "query base fuses target h, global masked mean, fixed position/phase projection",
+      "unshifted visible records fuse old h at that record, global mean, token embedding",
+      "mixer uses chain-relative generation order with query-specific history mask",
+      "MLP width r=256 instead of paper intermediate 2r; no fused inference optimization",
+      "frozen DreamOn; common full-vocabulary KL only, no paper co-training/CE/TV/consistency losses",
+      "fixed per-position randomness extends the reference greedy argument for the deterministic mock sampler; ordinary tokens only"
+    ]
+  }
+}

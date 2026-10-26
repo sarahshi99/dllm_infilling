@@ -1,0 +1,90 @@
+{
+  "contract_id": "dreamon-context-v1-20261015",
+  "schema_version": 1,
+  "branch": "codex/dreamon-context-heads-20261015-v1",
+  "base_commit": "d39a51d494efc2a1d1661eb28622b18b3b741fa6",
+  "status": "CPU-only implementation complete",
+  "scope": "seven heads; ordinary-support reference executors; no training/GPU/backbone/answers",
+  "data": [
+    {
+      "path": "experiments/context_heads_v1/README.zh.md",
+      "sha256": "1393cc48bee89d0d5a524c31122014564d0b2a8e38a8ef14e00c05a4bec2dd1e"
+    },
+    {
+      "path": "experiments/context_heads_v1/__init__.py",
+      "sha256": "4c9b0448f8eb972b3ec4f114faa00f2774128f4b6a3604718c4d745c2b603d98"
+    },
+    {
+      "path": "experiments/context_heads_v1/accounting.py",
+      "sha256": "28182fbb8ec237545d07c7332c4f7d4c92548145fc3972199550b64e77c8339a"
+    },
+    {
+      "path": "experiments/context_heads_v1/adapter_example.py",
+      "sha256": "6ab54b9e6796b26a0846e6d93ab16e216b85872945155fece803e0a5802df2fb"
+    },
+    {
+      "path": "experiments/context_heads_v1/api_contract.json",
+      "sha256": "2dadce5f81b7fdefcacba559b5858505588b910d5b659c801155dbb8b014bdc1"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/accounting.json",
+      "sha256": "00cc1712291aa7cdbd0bf0112ca9d820d995c643120ea2a4f61ca5a7c0cac82f"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/accounting_tokenizer_support.json",
+      "sha256": "ec24308ef8898a62bd4d190e34463489fcee9301ba1b5ce4b2d61ca54053a962"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/dreamon_metadata.json",
+      "sha256": "8c37da3edea2ae12db41d8428d9915ca5ef03ba558bb72b9040d2e2070d26056"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/legacy_compatibility.json",
+      "sha256": "a527d6df09a40dd5a10a285141e940064d036afd16fa00db95aebcd706aee673"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/tests.log",
+      "sha256": "8ea7944b0bd15be5855b9c3f502a9f8f2b88f2d6cd05ba39581dae8438399ad6"
+    },
+    {
+      "path": "experiments/context_heads_v1/artifacts/verification.json",
+      "sha256": "2b77f5718d1aad428299d773705d6249e4c86ab4434d0fbd15917f6011841be5"
+    },
+    {
+      "path": "experiments/context_heads_v1/contract.py",
+      "sha256": "7a4365b76e6641821ff995d9a7d339730ffdd24051cb25881227ad05ba9c42a6"
+    },
+    {
+      "path": "experiments/context_heads_v1/execution.py",
+      "sha256": "28a6c2671d9ca1318b7ab3be9fbe9bbba8b3ba762f07c64274e9dd3474eef35a"
+    },
+    {
+      "path": "experiments/context_heads_v1/heads.py",
+      "sha256": "5ec01045a91337027dabb3636077ce79a4bd892a13c53917da6507f4974543d4"
+    },
+    {
+      "path": "experiments/context_heads_v1/loss.py",
+      "sha256": "a58bd78215f31893fee8464c762bf9e05ffba70552e7a032e7402eeed3fc00a8"
+    },
+    {
+      "path": "experiments/context_heads_v1/publish_ready.py",
+      "sha256": "e39cd0b64aaffa21c084a6c0106fed572eb800fa15ce8b8bb98d917d42f75898"
+    },
+    {
+      "path": "experiments/context_heads_v1/references/DeepSpec-LICENSE.txt",
+      "sha256": "474817ff0d848f0d44cea7f5ac0b488fe74f599f2a656476a94f215e5e4094c7"
+    },
+    {
+      "path": "experiments/context_heads_v1/references/provenance.json",
+      "sha256": "1c4b66c5516b551c30e2cb1201fbd65ca667ea1a0cb43772b84562b0fe2fb3c9"
+    },
+    {
+      "path": "experiments/context_heads_v1/test_cpu.py",
+      "sha256": "8945d689a13c8a257ca2642bd47421e0e9bd206b95a12592102cc6a736d5824a"
+    },
+    {
+      "path": "experiments/context_heads_v1/verify_cpu.py",
+      "sha256": "e811082ba9163bfc09e12c8e9b3c0ebf0a76038af564c0ecacccf7a2db9925bd"
+    }
+  ]
+}

@@ -502,3 +502,12 @@
 ## 2026-10-15 并行扩删坐标补验 v2 自动完成记录
 
 状态complete；新生成126，有证明复用37596；修补评分救回/改错5/2。证据analysis_outputs/structure_coordinate_fix_20261015_v2/report.zh.md。旧v1表不改，旧单行K2仅历史参照，修补贡献与学习贡献分开；无思维导图修改或后续四头训练。
+
+## 2026-10-26 Context heads 首批 B（20261015 契约，CPU-only）
+
+- 从已核验 d39a51d 独立 worktree/分支 `codex/dreamon-context-heads-20261015-v1` 实现 H0/Hctx/Hgated/H1–H4；只拥有 `experiments/context_heads_v1/`，未合并/修改 A、旧 decoder、旧训练脚本或思维导图。已查更晚同项分支/报告与用户修改，保留其他会话工作；单会话，无子智能体。
+- `dreamon-context-v1-20261015` / schema 1 的类型与 api_contract.json、显式 forward/step/reset、普通词 sequential/Jacobi、屏障接口、统一 T1 full-vocab teacher-KL 接口完成，未训练/采集/加载主模型/使用 GPU/生成 HumanEval 答案。
+- CPU 23 项单测通过；含七头有限梯度、严格 zero、旧公式/实际旧 KL checkpoint 映射一致、gamma1、官方门控 adapter 公式、因果/padding/reset、Hctx 无新词输入、单历史权重1、固定 u 的 H3/H4 Jacobi3 等价与一二轮/重抽 u/长链反例。不同 GEMM 行数差最大 4.768e-7，容差明示；同形状旧公式差0。
+- DeepSpec 固定 005e03b81cec38b7da6399833d609ee89a2587f2，MIT 来源/尺寸/差异已记录；H4 明示参考 xPress arXiv:2608.02438v1，未称原样复现或新贡献。仅普通词 CPU 等价，实际临时结构候选调度仍须 A 单独验证。
+- 本地 tokenizer len151668、模型 logit V152064/H3584 均核验，分别有 meta 参数/MAC/激活表；模型支持下两表77,856,768参数，Jacobi3投影9位置对sequential3位置，无伪造GPU ms或速度承诺。
+- 复现：`CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 /home/shx/miniconda3/envs/dllm_env/bin/python -m experiments.context_heads_v1.verify_cpu`。说明与证据 `experiments/context_heads_v1/README.zh.md`、`artifacts/`、manifest.json；提交推送/远端核验后由 publish_ready.py 在真实 git common dir 发布 B_done.json，其他 ready/锁保留。reviewer_gate_disabled；已完成本地代码/diff review 与 fresh CPU verification。交付后退出，后续统一新训练与真实生成未启动。

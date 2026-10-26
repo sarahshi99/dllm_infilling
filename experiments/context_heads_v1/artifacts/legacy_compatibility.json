@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+  "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+  "compared_queries": 3,
+  "V": 152064,
+  "rank": 256,
+  "structural_mask_ids": [
+    151643,
+    151666,
+    151667
+  ],
+  "max_absolute_difference": 0.0,
+  "different_GEMM_rows_max_absolute_difference": 4.76837158203125e-07,
+  "equality": "same-shape CPU float32 legacy formula bitwise; differing GEMM rows atol=1e-6 rtol=1e-5; meta+assign+mmap, one legacy head",
+  "use": "compatibility check only; no candidate initialized from trained weights"
+}

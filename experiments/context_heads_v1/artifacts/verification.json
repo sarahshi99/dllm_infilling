@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "tests_run": 23,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "executable": "/home/shx/miniconda3/envs/dllm_env/bin/python",
+  "torch": "2.5.1+cu121",
+  "transformers": "4.38.2",
+  "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+  "cpu_threads": 1,
+  "CUDA_VISIBLE_DEVICES": "",
+  "gpu_used": false,
+  "training_started": false,
+  "backbone_loaded": false,
+  "human_eval_answers_generated": false,
+  "missing": [],
+  "seeds": {
+    "head": 20261015,
+    "fixture": 61,
+    "deterministic_test_seeds": [
+      17,
+      43,
+      71
+    ]
+  },
+  "tolerance": "float32: exact zeros/masks/legacy formulas and token equality; step-vs-batch atol=1e-6 rtol=1e-5; attention sums atol=rtol=1e-6. No near-tie equivalence claim across kernels/hardware."
+}

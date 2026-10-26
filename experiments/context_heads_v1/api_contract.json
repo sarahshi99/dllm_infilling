@@ -1,0 +1,87 @@
+{
+  "contract_id": "dreamon-context-v1-20261015",
+  "schema_version": 1,
+  "dimensions": {
+    "B": "batch, can be 1",
+    "K": "<=4 first protocol; explicit max_slots extension for boundary tests",
+    "Q": "queries, may be 0",
+    "H": "fixed DreamOn hidden dimension",
+    "V": "fixed model logit support, checked against tokenizer; may include padded rows",
+    "rank": 256,
+    "heads": 4,
+    "lambda": 1
+  },
+  "inputs": {
+    "old_hidden": {
+      "shape": "float[B,K,H]",
+      "meaning": "整个选中集合的目标对齐H0；调用方按DreamOn真实预测位置对齐，本模块不shift"
+    },
+    "position_ids": {
+      "shape": "int64[B,K]",
+      "meaning": "X0原坐标"
+    },
+    "chain_ids": {
+      "shape": "int64[B,K]",
+      "meaning": "链编号，结构屏障和间隔reset"
+    },
+    "selected_mask": {
+      "shape": "bool[B,K]",
+      "meaning": "有效普通槽位；屏障槽位不入集合"
+    },
+    "query_indices": {
+      "shape": "int64[B,Q]",
+      "meaning": "要修正的目标在选中集合中的槽位"
+    },
+    "old_logits": {
+      "shape": "float[B,Q,V]",
+      "meaning": "这些目标的旧分数，仅adapter相加/采样时必需，可为null"
+    },
+    "token_ids": {
+      "shape": "int64[B,K]",
+      "meaning": "记录或猜测；不可见值不用于判断可见性"
+    },
+    "token_state": {
+      "shape": "int64[B,K]",
+      "meaning": "0未知、1committed已确定、2provisional仅迭代猜测"
+    },
+    "history_mask": {
+      "shape": "bool[B,Q,K]",
+      "meaning": "该query可读的同链更早有效槽位；不能靠padding/token值推断可见性"
+    }
+  },
+  "outputs": {
+    "latent": "float[B,Q,256]",
+    "delta_logits": "optional float[B,Q,V]",
+    "attention_weights": "optional float[B,Q,4,K] for H3"
+  },
+  "semantics": [
+    "whole selected set frozen old_hidden/coordinates/chains/valid mask must be retained",
+    "old_hidden is already target-aligned by A; repository previous-position convention is not applied a second time",
+    "no reference answers, tests, passed flags, or future actual tokens",
+    "history is explicit, same chain, strictly earlier, valid, committed ordinary tokens",
+    "provisional is only readable by explicit H3/H4 Jacobi mode; never teacher committed or actual A generation",
+    "no-history anchor has exactly zero correction; zero_override exactly zeros latent and delta including biases",
+    "special token candidates cause structural barrier; excluded from ordinary history",
+    "fixed selected-set summary is masked mean of old h only; no token guesses",
+    "full-set old h may affect H4 fixed summary; future token identities may not affect earlier queries",
+    "no persistent case/chain/round state; reset returns a new explicit prefix",
+    "cross-gap mode explicit and OFF by default",
+    "Jacobi equivalence limited to ordinary support, fixed old information, fixed selected set, deterministic sampler and fixed per-position u",
+    "A must validate provisional structural-candidate scheduling and pre-barrier prefixes separately before full generation"
+  ],
+  "interfaces": {
+    "forward": "head(batch, project=True, zero_override=False, allow_provisional=False) -> HeadOutput",
+    "step": "same, Q=1; prefix explicit; H2 state rebuilt from supplied history",
+    "reset": "head.reset(batch, chain_id=None) -> cleared HeadBatch; geometry unchanged; A supplies new geometry after edits",
+    "barrier": "BarrierEvent(chain_id, reason).apply(head,batch)",
+    "executors": "execute(head,batch,initial_tokens,fixed_u,sampler,mode=sequential|jacobi,rounds=n); CPU ordinary-only reference"
+  },
+  "configuration": {
+    "H": "config.hidden_size",
+    "V": "config.vocab_size, output dimension (not blindly len(tokenizer))",
+    "special_token_ids": "explicit immutable tuple; full tokenizer set for new common heads; legacy mapping must use old output mask",
+    "tokenizer_size": "len(tokenizer), excludes padded logit rows from ordinary sampling",
+    "default_init": "seed=20261015, E/W normal std .02, shared random values, H1 gamma final linear zero",
+    "legacy_init": "historical head had E normal std1 and W_out zero; loaded only for compatibility, never unequal initialization for candidates"
+  }
+}
