@@ -1,4 +1,27 @@
 {
+  "code_sha256": {
+    "analysis/analyze_context_foundation.py": "ba6bddc46529bdcbbc5e668603d2ac6fe71b07e48b4c891e3ddd403540728c92",
+    "experiments/context_foundation/__init__.py": "50954b7d04641a63f7d6dcd644b5d3c88ffb9b43af2bff5d78415155b17c583d",
+    "experiments/context_foundation/adapter.py": "f4f34e4c5dd04ee2e0353657dbe00fc6937acbeac1b617a5b2d7678a33a69ae0",
+    "experiments/context_foundation/common.py": "3167924521ae3f8230bf1faabebaf573a45f6b60bf0030c52fe5354a988b9c0a",
+    "experiments/context_foundation/evidence.py": "2a17f040ff28be5cdcc2c3cb553243763b503a7bab680c2e8fe59145625e0786",
+    "experiments/context_foundation/restore.py": "10bd91887a1dea7819740b520e0a4d9b22c15f1d7cba6e3e5453dfb69fe6356f",
+    "experiments/context_foundation/worker.py": "8626f831d4c930694d9e1949dbd9f09ff6ee49dce4193eb640e882074f49e6cb",
+    "experiments/dreamon_markov_head_training.py": "d2e55cb2aa8a9f5d3987b700176867f7bbae04c7cee060a942d87e93d959848a",
+    "experiments/dreamon_singleline_adapter.py": "1612807557edea186a6f33160dc62cb942de3048ef6fdae36f95c03d8a5ea8e9",
+    "experiments/dreamon_singleline_order_parallel.py": "426cbd4e16512fbab8399604d7bb6d80bc6af309b4fe5f8eef16443a7e6f19f6",
+    "experiments/k4_batch_common.py": "8761c4bfbb9003ec7448ff990c81b587601dea8496a80a0fb0a5a652680a8da9",
+    "experiments/k4_official_eval_worker.py": "45f9664654808f6b8c3e63d1708cca72721b42d7de929b019f0424dd8a6d3e75",
+    "experiments/lrdllm_dreamcoder_adapter.py": "00d8fbe4ecad26b84cde0ee49bae24b79859c9824fc35d5e39316205c2385b5a",
+    "experiments/run_k4_multiline_stage.py": "5f0139ed8fdf6ee42cf9fac0c6f44c89129b7867713d8b59b781c8a215a703cc",
+    "experiments/train_dreamon_markov_head.py": "fdf955f8b9eb4a99ed3f4f6d8edf22ec83b5a181bda7e10d8ca3d70eb4560b94",
+    "scripts/launch_context_foundation_queue.sh": "484696dca77be6d0e55ccbf95fd2dae4bd0033ae4c4f125e48e642f50c67b65d",
+    "scripts/prepare_context_foundation.py": "b0c08597d03508806aabc55b47817b1170707564ba6cf5449826563adf46f26f",
+    "scripts/run_context_foundation_queue.py": "9940ab22f7d97b1ae0c898feed590ec063af0604949f435963aacce0460a20a3",
+    "tests/context_foundation/test_adapter.py": "2063cdb348b4ab5b0b8294f9ed667a0c54b3d71a49cbaa6290a955000b94ce54",
+    "tests/context_foundation/test_evidence.py": "80b4e08184b76d0ec94d7ce7a3462a1a0f25c237af3d0617688a0b2548173191",
+    "tests/context_foundation/test_pipeline.py": "1216e20a99aacb6af6c1b6bca79eda28cd68f5d8a6070d563ddf656321376559"
+  },
   "contract_id": "dreamon-context-v1-20261015",
   "data": [
     {
@@ -29,6 +52,6 @@
   ],
   "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
   "schema_version": 1,
-  "source_commit": "d39a51d494efc2a1d1661eb28622b18b3b741fa6",
+  "source_commit": "a46204a987ab691db81d251ab71293c84949a515",
   "status": "frozen"
 }
