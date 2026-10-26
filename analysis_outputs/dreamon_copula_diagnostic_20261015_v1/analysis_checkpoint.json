@@ -1,0 +1,12 @@
+{
+  "completed": 256,
+  "identity": {
+    "analysis_sha256": "cbbae6136c75fd3b7422db1eddee7487394b069929b887ab5901a7f9f1cb5b88",
+    "bootstrap_reps": 2000,
+    "input_manifest_sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92",
+    "max_iter": 1000,
+    "seed": 20261015,
+    "tol": 1e-06
+  },
+  "status": "analyzed"
+}

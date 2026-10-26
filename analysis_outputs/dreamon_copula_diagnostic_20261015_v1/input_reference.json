@@ -1,0 +1,91 @@
+{
+  "manifest": {
+    "T": 1,
+    "adapter_sha256": "f4f34e4c5dd04ee2e0353657dbe00fc6937acbeac1b617a5b2d7678a33a69ae0",
+    "causal_anchor": "first position distribution is old p1",
+    "contract_id": "dreamon-context-v1-20261015",
+    "count": 256,
+    "coverage_gap": 0,
+    "data": [
+      {
+        "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_states.npz",
+        "rows": 256,
+        "sha256": "821d7fad4ce8ce1a430e94c3714bc17dac95f9cd19280b28b2f893ef1671946b"
+      },
+      {
+        "path": "analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_metadata.jsonl",
+        "rows": 256,
+        "sha256": "056855abdcd61f76d6c2fbf9fa517908927ea6313d97d27f435c44fad414d294"
+      }
+    ],
+    "expected": 256,
+    "head": {
+      "head": "kl",
+      "label": "best",
+      "phase": "full",
+      "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+      "size": 934907317
+    },
+    "interpretation": "truncated K2-style diagnostic derived from K4 A1; not full-vocabulary joint or actual K2 generation; no candidate renormalization",
+    "model": {
+      "id": "Dream-org/DreamOn-v0-7B",
+      "revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+    },
+    "model_shards_sha256": {
+      "model-00001-of-00004.safetensors": "ec8e7b0d4573a0743d4ba3fceea6e00df55ec793b3aa9f9e4dd4cf50b7982b20",
+      "model-00002-of-00004.safetensors": "bb4a3c7e0551f85cfd7e2fc42365a168b04ad9922bbc6ac00e7d4e40a8808c36",
+      "model-00003-of-00004.safetensors": "19d658d0072d366923d48cf8ebe9bb5837cdc6bc980d218b778ebc54e9a7daf2",
+      "model-00004-of-00004.safetensors": "c41d5ef0d95f243c1c44136916fd5493a096d9810a0e9d5f534312fed52b2846"
+    },
+    "probability_authority": "full-vocabulary log_softmax FP32 before extraction; log fields are numerical authority",
+    "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
+    "schema_version": 1,
+    "source_commit": "aff0e18fd56ac05f668ec00187b6aa782e4c8fff",
+    "status": "complete",
+    "tokenizer_sha256": {
+      "added_tokens.json": "67780f330ac19b969a3879a7c911ea1b9961022158dbc38219787695a6e3ab72",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "special_tokens_map.json": "bc0be97a3f816ee798932566e640feeb54a82def0848436717d651826d96f16c",
+      "tokenization_dream.py": "1d7f04104fa673831f48256e3cd42cd0bbd1bddd801b4abea5c74cc47d98bdd2",
+      "tokenizer_config.json": "cb43ebbb4f9ed93951853de9ce5d6fb5e71dcc4347a2b97f0cc63c99580ac660",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "numeric_audit": {
+    "fresh_cond2": {
+      "authority": "producer full-vocabulary log_softmax",
+      "extracted_fp64_underflow": 0,
+      "probability_underflow": 0,
+      "structural_zeros": 0
+    },
+    "head_cond2": {
+      "authority": "producer full-vocabulary log_softmax",
+      "extracted_fp64_underflow": 0,
+      "probability_underflow": 0,
+      "structural_zeros": 0
+    },
+    "old_p1": {
+      "authority": "producer full-vocabulary log_softmax",
+      "extracted_fp64_underflow": 0,
+      "probability_underflow": 0,
+      "structural_zeros": 0
+    },
+    "old_p2": {
+      "authority": "producer full-vocabulary log_softmax",
+      "extracted_fp64_underflow": 0,
+      "probability_underflow": 0,
+      "structural_zeros": 0
+    }
+  },
+  "ready": {
+    "contract_id": "dreamon-context-v1-20261015",
+    "created_at": "2026-10-26T14:08:49Z",
+    "manifest_absolute_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-foundation-20261015-v1/analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_manifest.json",
+    "manifest_sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92",
+    "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
+    "schema_version": 1,
+    "source_commit": "2e0ef1653521876572a3c14f12d7de970cbd974b",
+    "status": "complete"
+  },
+  "ready_path": "/home/shx/projects/dllm_infilling/git_workspace/.git/research_runs/dreamon_context_20261015_v1/dcd_ready.json"
+}

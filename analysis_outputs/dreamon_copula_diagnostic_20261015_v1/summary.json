@@ -1,0 +1,3850 @@
+{
+  "actual_n": 256,
+  "audit": {
+    "Q_T_failures": 0,
+    "Q_failures": 0,
+    "convergence": {
+      "Q_T_cpu_seconds": {
+        "available": 256,
+        "mean": 0.0002972528203124998,
+        "minimum": 0.0001025439999999822,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0001025439999999822,
+          0.00010480750000008143,
+          0.00013683550000001543,
+          0.00014451850000002375,
+          0.00026918624999992813,
+          0.00047537950000003937,
+          0.00550529700000002
+        ]
+      },
+      "Q_T_iterations": {
+        "available": 256,
+        "mean": 6.78125,
+        "minimum": 1,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.0,
+          1.0,
+          2.0,
+          2.0,
+          6.0,
+          12.0,
+          165.0
+        ]
+      },
+      "Q_T_max_margin_error": {
+        "available": 256,
+        "mean": 3.057749527120941e-07,
+        "minimum": 1.0902390101819037e-13,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.0902390101819037e-13,
+          8.51546333446862e-11,
+          4.1725223276500856e-09,
+          2.0357910701651605e-07,
+          5.369197345940908e-07,
+          8.639650254105291e-07,
+          9.854126186148449e-07
+        ]
+      },
+      "Q_cpu_seconds": {
+        "available": 256,
+        "mean": 0.0002596195000000022,
+        "minimum": 8.101399999999037e-05,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          8.101399999999037e-05,
+          0.0001285810000000165,
+          0.00016283900000001184,
+          0.0001962910000000151,
+          0.0002501972500000005,
+          0.0003990765000000118,
+          0.004171959999999975
+        ]
+      },
+      "Q_iterations": {
+        "available": 256,
+        "mean": 4.83984375,
+        "minimum": 0,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.25,
+          8.5,
+          124.0
+        ]
+      },
+      "Q_max_margin_error": {
+        "available": 256,
+        "mean": 2.642997598772005e-07,
+        "minimum": 9.82880443700651e-13,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          9.82880443700651e-13,
+          2.962377565474128e-10,
+          1.3093294642940734e-08,
+          1.3038871038428823e-07,
+          4.4181592243064394e-07,
+          7.833149691660601e-07,
+          9.908848093154177e-07
+        ]
+      }
+    },
+    "coverage": {
+      "R_col_target_tv": {
+        "available": 256,
+        "mean": 0.06515232185703615,
+        "minimum": 1.0001910231539537e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.0001910231539537e-06,
+          0.00034674715561125555,
+          0.0013795956426122969,
+          0.009465629276828725,
+          0.059757699865622335,
+          0.20431312828357728,
+          0.6944420839054919
+        ]
+      },
+      "R_raw_mass": {
+        "available": 256,
+        "mean": 0.8615370529136179,
+        "minimum": 0.0004833348404191821,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0004833348404191821,
+          0.2287191139265247,
+          0.9367853527708364,
+          0.9938776136494512,
+          0.9975767529939711,
+          0.9986047048468649,
+          0.9999873679837065
+        ]
+      },
+      "R_raw_mass_tail": {
+        "available": 256,
+        "mean": 0.1384629470863821,
+        "minimum": 1.2632016293534498e-05,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.2632016293534498e-05,
+          0.0013952951531350233,
+          0.0024232470060289446,
+          0.006122386350548903,
+          0.06321464722916362,
+          0.7712808860734752,
+          0.9995166651595808
+        ]
+      },
+      "R_row_target_tv": {
+        "available": 256,
+        "mean": 0.006160770615946456,
+        "minimum": 3.929635790635332e-11,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          3.929635790635332e-11,
+          2.551243836378496e-07,
+          1.1953815410855322e-06,
+          1.1877449168026109e-05,
+          0.0010897467629868434,
+          0.012508982794760468,
+          0.1962661200282487
+        ]
+      },
+      "T_col_target_tv": {
+        "available": 256,
+        "mean": 0.08917632268223832,
+        "minimum": 6.298117757107954e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          6.298117757107954e-06,
+          0.0005980704781317937,
+          0.001781347370799918,
+          0.01290784996240605,
+          0.10328219445248052,
+          0.27892489953859095,
+          0.8576174528731644
+        ]
+      },
+      "T_raw_mass": {
+        "available": 256,
+        "mean": 0.8647183866150032,
+        "minimum": 0.0005874055763467161,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0005874055763467161,
+          0.38341330061810086,
+          0.941369497659524,
+          0.9928056427561348,
+          0.9970622635806735,
+          0.9980212347544504,
+          0.9999716680457178
+        ]
+      },
+      "T_raw_mass_tail": {
+        "available": 256,
+        "mean": 0.13528161338499683,
+        "minimum": 2.8331954282201366e-05,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          2.8331954282201366e-05,
+          0.0019787652455496296,
+          0.0029377364193264865,
+          0.00719435724386519,
+          0.05863050234047598,
+          0.6165866993818991,
+          0.9994125944236533
+        ]
+      },
+      "T_row_target_tv": {
+        "available": 256,
+        "mean": 0.04426334228502044,
+        "minimum": 1.0427521398545208e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.0427521398545208e-06,
+          2.9522602742167612e-05,
+          8.784427789727616e-05,
+          0.000495327771152802,
+          0.006004677149693242,
+          0.0725789774261634,
+          0.957877975563542
+        ]
+      },
+      "fresh_candidate_mass_r_weighted": {
+        "available": 256,
+        "mean": 0.8837403955178278,
+        "minimum": 0.0005880657529254463,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0005880657529254463,
+          0.508261491543419,
+          0.9712645944221843,
+          0.9957541769245197,
+          0.99835836933244,
+          0.9990664847908861,
+          0.9999812755832006
+        ]
+      },
+      "fresh_special_mass_r_weighted": {
+        "available": 256,
+        "mean": 0.1026258505612575,
+        "minimum": 1.774232745546719e-08,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.774232745546719e-08,
+          6.79508569916022e-06,
+          1.4930523241169272e-05,
+          6.235898015514912e-05,
+          0.0006750655370472358,
+          0.47712847060575714,
+          0.9993451840371712
+        ]
+      },
+      "fresh_tail_r_weighted": {
+        "available": 256,
+        "mean": 0.11625960448217236,
+        "minimum": 1.872441679939829e-05,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.872441679939829e-05,
+          0.0009335152091139443,
+          0.0016416306675599568,
+          0.004245823075480215,
+          0.028735405577815704,
+          0.49173850845658096,
+          0.9994119342470745
+        ]
+      },
+      "head_candidate_mass_r_weighted": {
+        "available": 256,
+        "mean": 0.8796995543577413,
+        "minimum": 0.00048376425752730853,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.00048376425752730853,
+          0.4249719513494914,
+          0.9688153436859942,
+          0.9967106942518159,
+          0.9989787998205741,
+          0.9995500348533843,
+          0.9999962442269299
+        ]
+      },
+      "head_special_mass_r_weighted": {
+        "available": 256,
+        "mean": 0.10593367265602877,
+        "minimum": 6.8047099215926695e-09,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          6.8047099215926695e-09,
+          5.9554307983102155e-06,
+          1.4495927602590997e-05,
+          6.144494824886871e-05,
+          0.0004725936383886457,
+          0.5709019859022328,
+          0.999374045454696
+        ]
+      },
+      "head_tail_r_weighted": {
+        "available": 256,
+        "mean": 0.12030044564225871,
+        "minimum": 3.7557730701021086e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          3.7557730701021086e-06,
+          0.00044996514661566067,
+          0.0010212001794258907,
+          0.0032893057481840904,
+          0.03118465631400577,
+          0.5750280486505086,
+          0.9995162357424727
+        ]
+      },
+      "old_mass1": {
+        "available": 256,
+        "mean": 0.9759322201129011,
+        "minimum": 0.5277115046004388,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.5277115046004388,
+          0.9441202798324724,
+          0.9935763632113993,
+          0.9981344375231731,
+          0.9989481862721319,
+          0.999309963701446,
+          0.9999958098460165
+        ]
+      },
+      "old_mass1_tail": {
+        "available": 256,
+        "mean": 0.024067779887098902,
+        "minimum": 4.190153983452127e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          4.190153983452127e-06,
+          0.0006900362985539643,
+          0.0010518137278680562,
+          0.0018655624768268986,
+          0.006423636788600723,
+          0.05587972016752768,
+          0.4722884953995612
+        ]
+      },
+      "old_mass2": {
+        "available": 256,
+        "mean": 0.8798539845582857,
+        "minimum": 0.0016045865315515255,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          0.0016045865315515255,
+          0.4353806114105975,
+          0.9649954471777574,
+          0.9953327494370958,
+          0.9984047689469107,
+          0.9991244474785361,
+          0.9999949661762356
+        ]
+      },
+      "old_mass2_tail": {
+        "available": 256,
+        "mean": 0.12014601544171431,
+        "minimum": 5.033823764377665e-06,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          5.033823764377665e-06,
+          0.0008755525214638737,
+          0.0015952310530892855,
+          0.004667250562904179,
+          0.035004552822242546,
+          0.5646193885894025,
+          0.9983954134684485
+        ]
+      },
+      "old_special_mass1": {
+        "available": 256,
+        "mean": 0.01002158889087277,
+        "minimum": 9.258670274903125e-09,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          9.258670274903125e-09,
+          4.377962341095554e-06,
+          9.667111271483009e-06,
+          3.50809859810397e-05,
+          0.00017378697157255374,
+          0.0011299009784124792,
+          0.4710688591003418
+        ]
+      },
+      "old_special_mass2": {
+        "available": 256,
+        "mean": 0.10475457122352785,
+        "minimum": 1.174632568989864e-08,
+        "n": 256,
+        "quantiles_p0_p10_p25_p50_p75_p90_p100": [
+          1.174632568989864e-08,
+          1.1930787877645344e-05,
+          2.2987326246948214e-05,
+          9.81604061962571e-05,
+          0.0006055937556084245,
+          0.5516946613788605,
+          0.9981951117515564
+        ]
+      }
+    },
+    "cpu_seconds": 0.4671669650000001,
+    "invocation_cpu_seconds_including_aggregation": 1.478775276,
+    "invocation_wall_seconds_including_aggregation": 1.831882975064218,
+    "numeric_input": {
+      "fresh_cond2": {
+        "authority": "producer full-vocabulary log_softmax",
+        "extracted_fp64_underflow": 0,
+        "probability_underflow": 0,
+        "structural_zeros": 0
+      },
+      "head_cond2": {
+        "authority": "producer full-vocabulary log_softmax",
+        "extracted_fp64_underflow": 0,
+        "probability_underflow": 0,
+        "structural_zeros": 0
+      },
+      "old_p1": {
+        "authority": "producer full-vocabulary log_softmax",
+        "extracted_fp64_underflow": 0,
+        "probability_underflow": 0,
+        "structural_zeros": 0
+      },
+      "old_p2": {
+        "authority": "producer full-vocabulary log_softmax",
+        "extracted_fp64_underflow": 0,
+        "probability_underflow": 0,
+        "structural_zeros": 0
+      }
+    },
+    "oracle_applicable": 256,
+    "oracle_violations": 0,
+    "support_failure_states": [],
+    "wall_seconds": 0.4679387714713812
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261015,
+    "unit": "source group"
+  },
+  "contract_id": "dreamon-context-v1-20261015",
+  "counts": {
+    "frontier/crossline": 64,
+    "frontier/single": 64,
+    "global/crossline": 64,
+    "global/single": 64
+  },
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "gpu": "none",
+    "numpy": "2.0.2",
+    "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+    "python": "3.9.23"
+  },
+  "expected_n": 256,
+  "groups": 220,
+  "high_coverage": {
+    "groups": 170,
+    "n": 190,
+    "status": "达到预声明样本下限",
+    "table": {
+      "R_col_target_tv": {
+        "available": 190,
+        "ci95": [
+          0.014040713800724264,
+          0.025705024412698764
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.019354028579490187,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 190,
+        "ci95": [
+          0.00013545923226659945,
+          0.0004939761938047407
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.00029930208999553835,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 190,
+        "ci95": [
+          0.02072108252511958,
+          0.035877343935623085
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.02787397111596917,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 190,
+        "ci95": [
+          0.0009711498406993534,
+          0.00237028330186684
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.001594255566205812,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 190,
+        "ci95": [
+          0.05733146482726028,
+          0.11839815807220133
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.08555243042348618,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 190,
+        "ci95": [
+          0.03302434414960147,
+          0.07353063200008714
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.05104931264685863,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 190,
+        "ci95": [
+          0.015367648217884685,
+          0.041562679546310106
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.027151833910584414,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 190,
+        "ci95": [
+          0.031622746257771846,
+          0.07281406788208833
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.0497710723869202,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 190,
+        "ci95": [
+          -0.002911147485646069,
+          0.006019130193246968
+        ],
+        "groups": 170,
+        "losses": 82,
+        "mean": 0.0012782402599384273,
+        "n": 190,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 107
+      },
+      "delta_kl_Q_R": {
+        "available": 190,
+        "ci95": [
+          -0.0029018165499394536,
+          0.006030355526985
+        ],
+        "groups": 170,
+        "losses": 83,
+        "mean": 0.0012958724610826276,
+        "n": 190,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 106
+      },
+      "delta_row_kl_Q_R": {
+        "available": 190,
+        "ci95": [
+          -2.583471760681061e-06,
+          4.4868424669812145e-05
+        ],
+        "groups": 170,
+        "losses": 138,
+        "mean": 1.7632201144206322e-05,
+        "n": 190,
+        "ties": 20,
+        "unavailable": 0,
+        "wins": 32
+      },
+      "delta_tv_Q_R": {
+        "available": 190,
+        "ci95": [
+          0.0018765373435235782,
+          0.008344349563638675
+        ],
+        "groups": 170,
+        "losses": 128,
+        "mean": 0.004912678181704321,
+        "n": 190,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 61
+      },
+      "kl_I": {
+        "available": 190,
+        "ci95": [
+          0.058234793048300766,
+          0.11912164664743931
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.08654778046790555,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 190,
+        "ci95": [
+          0.03401757401175347,
+          0.07459736134756771
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.05204469285979307,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 190,
+        "ci95": [
+          0.015367648761087796,
+          0.04156267970723638
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.02715183428114361,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 190,
+        "ci95": [
+          0.032706532665301664,
+          0.07400604539503246
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.05074882039871044,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 190,
+        "ci95": [
+          0.0369384390180597,
+          0.06892461745389473
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.052538409166504624,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 190,
+        "ci95": [
+          0.027290793090307353,
+          0.04978822005715318
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.037617152533333954,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 190,
+        "ci95": [
+          0.009216177167999879,
+          0.025378222584137054
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.016541895720383643,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 190,
+        "ci95": [
+          0.02242843502028855,
+          0.04449730321825091
+        ],
+        "groups": 170,
+        "losses": null,
+        "mean": 0.032704474351629625,
+        "n": 190,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    }
+  },
+  "input_manifest_sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92",
+  "input_status": "complete",
+  "main": {
+    "R_col_target_tv": {
+      "available": 256,
+      "ci95": [
+        0.05082857157862206,
+        0.08126614381672427
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.06515232185703615,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "R_row_target_tv": {
+      "available": 256,
+      "ci95": [
+        0.003664412550688413,
+        0.009229936737611298
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.006160770615946456,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "T_col_target_tv": {
+      "available": 256,
+      "ci95": [
+        0.07077916655373158,
+        0.11002439425137155
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.08917632268223832,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "T_row_target_tv": {
+      "available": 256,
+      "ci95": [
+        0.027896700757535565,
+        0.06285948295526335
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.04426334228502044,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "conditional_kl_I": {
+      "available": 256,
+      "ci95": [
+        0.2167500248029938,
+        0.3582157223555199
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.2822616497829119,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "conditional_kl_Q": {
+      "available": 256,
+      "ci95": [
+        0.1787129052014469,
+        0.3147080685022043
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.24125905728312053,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "conditional_kl_Q_T": {
+      "available": 256,
+      "ci95": [
+        0.05767376605439091,
+        0.10361355294330182
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.07954823384924756,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "conditional_kl_R": {
+      "available": 256,
+      "ci95": [
+        0.1349265765376574,
+        0.2278476060990371
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.1791679956610719,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "delta_conditional_kl_Q_R": {
+      "available": 256,
+      "ci95": [
+        0.03369805779539639,
+        0.0962194727095245
+      ],
+      "groups": 220,
+      "losses": 124,
+      "mean": 0.06209106162204863,
+      "n": 256,
+      "ties": 1,
+      "unavailable": 0,
+      "wins": 131
+    },
+    "delta_kl_Q_R": {
+      "available": 256,
+      "ci95": [
+        0.06125231854073996,
+        0.17678845324306003
+      ],
+      "groups": 220,
+      "losses": 125,
+      "mean": 0.11275067378513351,
+      "n": 256,
+      "ties": 1,
+      "unavailable": 0,
+      "wins": 130
+    },
+    "delta_row_kl_Q_R": {
+      "available": 256,
+      "ci95": [
+        0.018662430140809753,
+        0.09239106410890961
+      ],
+      "groups": 220,
+      "losses": 181,
+      "mean": 0.05065961216308491,
+      "n": 256,
+      "ties": 20,
+      "unavailable": 0,
+      "wins": 55
+    },
+    "delta_tv_Q_R": {
+      "available": 256,
+      "ci95": [
+        0.010419762250099577,
+        0.029510361025289932
+      ],
+      "groups": 220,
+      "losses": 175,
+      "mean": 0.01943753057467021,
+      "n": 256,
+      "ties": 1,
+      "unavailable": 0,
+      "wins": 80
+    },
+    "kl_I": {
+      "available": 256,
+      "ci95": [
+        0.30371194262844736,
+        0.5467439884039829
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.4157240198107232,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "kl_Q": {
+      "available": 256,
+      "ci95": [
+        0.26545466768847703,
+        0.5084233908670449
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.37471902830656956,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "kl_Q_T": {
+      "available": 256,
+      "ci95": [
+        0.057673766496238864,
+        0.10361355324820291
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.0795482341261681,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "kl_R": {
+      "available": 256,
+      "ci95": [
+        0.19357232060246116,
+        0.33909004675760795
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.261968354521436,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "tv_I": {
+      "available": 256,
+      "ci95": [
+        0.12603619159754978,
+        0.18800586561321325
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.15551659978479782,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "tv_Q": {
+      "available": 256,
+      "ci95": [
+        0.11132371860378547,
+        0.16927039278204364
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.138373676581091,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "tv_Q_T": {
+      "available": 256,
+      "ci95": [
+        0.03671999388981441,
+        0.06265366747259493
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.04917512835441244,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    },
+    "tv_R": {
+      "available": 256,
+      "ci95": [
+        0.09484286980324973,
+        0.14487960851318693
+      ],
+      "groups": 220,
+      "losses": null,
+      "mean": 0.11893614600642081,
+      "n": 256,
+      "ties": null,
+      "unavailable": 0,
+      "wins": null
+    }
+  },
+  "schema_version": 1,
+  "strata": {
+    "order/span=frontier/crossline": {
+      "R_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.03742454142692389,
+          0.08215675930276387
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.05880676154419791,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.0012768029439286965,
+          0.009427059805163666
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.004600139437203507,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.05817032415746987,
+          0.13705178794156445
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.09459016196506367,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.010786556711867207,
+          0.06962144493179312
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.03606914148379088,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 64,
+        "ci95": [
+          0.17165151164672468,
+          0.47535734645608857
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.308055388790182,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.12021625846042314,
+          0.41646921575039075
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.2532852454828056,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.036783150465237426,
+          0.10271136694395616
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.06606678455192946,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 64,
+        "ci95": [
+          0.09253053486133193,
+          0.2883752242480022
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.18103425375928844,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.016961492333222503,
+          0.14821713701817896
+        ],
+        "groups": 62,
+        "losses": 34,
+        "mean": 0.07225099172351715,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 30
+      },
+      "delta_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.015758808354887435,
+          0.1539369771900704
+        ],
+        "groups": 62,
+        "losses": 33,
+        "mean": 0.07545658952653128,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 31
+      },
+      "delta_row_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          -0.004730062936599544,
+          0.01085893999312572
+        ],
+        "groups": 62,
+        "losses": 49,
+        "mean": 0.0032055978030141926,
+        "n": 64,
+        "ties": 3,
+        "unavailable": 0,
+        "wins": 12
+      },
+      "delta_tv_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.005155232118877032,
+          0.035249028912672
+        ],
+        "groups": 62,
+        "losses": 42,
+        "mean": 0.018797670227013334,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 22
+      },
+      "kl_I": {
+        "available": 64,
+        "ci95": [
+          0.19422256689154674,
+          0.596838862402368
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.37894286534059485,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.14388768235107008,
+          0.5449833241729524
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.3241726114879,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.03678315053319391,
+          0.10271136705394678
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.06606678473072879,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 64,
+        "ci95": [
+          0.11774012665674759,
+          0.4078769045080128
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.24871602196136874,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 64,
+        "ci95": [
+          0.10299584921943666,
+          0.2202664590924191
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.15993901009798028,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 64,
+        "ci95": [
+          0.08261359721988751,
+          0.18550492745968927
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.13224707499148136,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.02503874531803699,
+          0.06952780163119575
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.04510775039705951,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 64,
+        "ci95": [
+          0.06729734142346569,
+          0.1639587647345055
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.11344940476446802,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "order/span=frontier/single": {
+      "R_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.028185684375088272,
+          0.08759093082706054
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.05455389734377039,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.0009901257556903858,
+          0.0072285841176237
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.0035476667135863693,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.038475376564613153,
+          0.09934997473302763
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.06559913852678768,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.006054353563847042,
+          0.058590925581067745
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.02801788678199229,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 64,
+        "ci95": [
+          0.07872406007655969,
+          0.25480699855402866
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.15403418132888808,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.05548039870200829,
+          0.22465012990206748
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.1273910256360858,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.015936228746191848,
+          0.056699419302849066
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.03321991538115199,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 64,
+        "ci95": [
+          0.047306503212928785,
+          0.14775692413881067
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.08862672360057053,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          -0.0010621653328401581,
+          0.08901319604564646
+        ],
+        "groups": 60,
+        "losses": 34,
+        "mean": 0.03876430203551526,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 30
+      },
+      "delta_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.00029016560655976785,
+          0.2061168797956115
+        ],
+        "groups": 60,
+        "losses": 34,
+        "mean": 0.08616385735106097,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 30
+      },
+      "delta_row_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          -0.0009982938179762416,
+          0.13354470875325927
+        ],
+        "groups": 60,
+        "losses": 43,
+        "mean": 0.04739955531554573,
+        "n": 64,
+        "ties": 5,
+        "unavailable": 0,
+        "wins": 16
+      },
+      "delta_tv_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.003350444991610911,
+          0.03847821167465979
+        ],
+        "groups": 60,
+        "losses": 43,
+        "mean": 0.01923117248814821,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 21
+      },
+      "kl_I": {
+        "available": 64,
+        "ci95": [
+          0.09461457896740054,
+          0.4752548641922363
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.25151069134724546,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.07120953101181382,
+          0.446110592050507
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.22486741921830047,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.015936229387668307,
+          0.056699419860016316
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.033219916033375534,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 64,
+        "ci95": [
+          0.062164371093210755,
+          0.24876540474408704
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.1387035618672395,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 64,
+        "ci95": [
+          0.06359599957892718,
+          0.15492581480262652
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.1035578774456968,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 64,
+        "ci95": [
+          0.05633001135715755,
+          0.14643992143678988
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.09553332248398566,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.010341559967989192,
+          0.036291142596941536
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.021614901473977145,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 64,
+        "ci95": [
+          0.045293872851627344,
+          0.11519589694854528
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.07630214999583745,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "order/span=global/crossline": {
+      "R_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.04833958659599645,
+          0.12118227650287922
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.08407479355534309,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.0036774926638025985,
+          0.016762152777278053
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.0093650042622184,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.06642272997322195,
+          0.149760127910422
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.10544117180760021,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.03218110025315848,
+          0.12673600971073065
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.07565619542972739,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 64,
+        "ci95": [
+          0.22868687264969326,
+          0.5389038514273468
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.372571124505058,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.1880592824881042,
+          0.4817633367782538
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.32235781876757075,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.06964344720496893,
+          0.19862447192552493
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.13124372784313845,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 64,
+        "ci95": [
+          0.1418546214188762,
+          0.3818327697325382
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.2557499006426813,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.016125733354658583,
+          0.12386788474355583
+        ],
+        "groups": 62,
+        "losses": 34,
+        "mean": 0.06660791812488936,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 30
+      },
+      "delta_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.03462054987970072,
+          0.30471938941251653
+        ],
+        "groups": 62,
+        "losses": 35,
+        "mean": 0.15804206841313245,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 29
+      },
+      "delta_row_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.010048337249158453,
+          0.19077815032420153
+        ],
+        "groups": 62,
+        "losses": 43,
+        "mean": 0.09143415028824312,
+        "n": 64,
+        "ties": 6,
+        "unavailable": 0,
+        "wins": 15
+      },
+      "delta_tv_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.003112851299723857,
+          0.04503618752411837
+        ],
+        "groups": 62,
+        "losses": 44,
+        "mean": 0.022438030185177683,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 20
+      },
+      "kl_I": {
+        "available": 64,
+        "ci95": [
+          0.33118652373200796,
+          0.9488303592095422
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.6221508466520721,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.2896403578959499,
+          0.904279350615122
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.5719289694430774,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.06964344734717547,
+          0.1986244719983748
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.13124372793819356,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 64,
+        "ci95": [
+          0.2336028884653294,
+          0.6163363116105871
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.4138869010299449,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 64,
+        "ci95": [
+          0.13886908165412976,
+          0.28148580293777464
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.21100222222310222,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 64,
+        "ci95": [
+          0.12195609982536883,
+          0.25697862546239736
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.1893037816848373,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.04403532633550462,
+          0.11476648793054109
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.07693901695084417,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 64,
+        "ci95": [
+          0.10584303931630415,
+          0.23105297277197726
+        ],
+        "groups": 62,
+        "losses": null,
+        "mean": 0.16686575149965965,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "order/span=global/single": {
+      "R_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.036414745213961666,
+          0.09814473488564575
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.06317383498483317,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.0010909245580008186,
+          0.015978140663394928
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.007130272050777546,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.05338185383371398,
+          0.13647347160569734
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.09107481842950171,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.011802793498024877,
+          0.07534737106401099
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.0373101454445712,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 64,
+        "ci95": [
+          0.1617673246915605,
+          0.47093635249444
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.2943859045075192,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.135786979648422,
+          0.4282795956569091
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.26200213924602,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.046245926664386164,
+          0.13667890373927516
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.08766250762077032,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 64,
+        "ci95": [
+          0.11411547827592688,
+          0.2830943053639493
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.19126110464174723,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.007205621918477335,
+          0.16139593344245778
+        ],
+        "groups": 60,
+        "losses": 22,
+        "mean": 0.07074103460427275,
+        "n": 64,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 41
+      },
+      "delta_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.020130291383882955,
+          0.2864729811786564
+        ],
+        "groups": 60,
+        "losses": 23,
+        "mean": 0.1313401798498093,
+        "n": 64,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 40
+      },
+      "delta_row_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.004354303845421058,
+          0.15948678357086393
+        ],
+        "groups": 60,
+        "losses": 46,
+        "mean": 0.06059914524553661,
+        "n": 64,
+        "ties": 6,
+        "unavailable": 0,
+        "wins": 12
+      },
+      "delta_tv_Q_R": {
+        "available": 64,
+        "ci95": [
+          -0.004574798527852131,
+          0.041746565745912755
+        ],
+        "groups": 60,
+        "losses": 46,
+        "mean": 0.01728324939834161,
+        "n": 64,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 17
+      },
+      "kl_I": {
+        "available": 64,
+        "ci95": [
+          0.1999748668936219,
+          0.6915504596800205
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.41029167590298055,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.16744505995666598,
+          0.666804858940154
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.3779071130770002,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.04624592688192488,
+          0.13667890403981697
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.08766250780237454,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 64,
+        "ci95": [
+          0.1360559532558662,
+          0.38770118379013496
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.24656693322719092,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 64,
+        "ci95": [
+          0.08902766962131312,
+          0.21896764580671485
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.14756728937241198,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 64,
+        "ci95": [
+          0.07974506737784998,
+          0.2037432002807664
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.13641052716405977,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.02750647489235955,
+          0.08138946580793407
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.05303884459576892,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 64,
+        "ci95": [
+          0.0726773260331496,
+          0.17186319570497627
+        ],
+        "groups": 60,
+        "losses": null,
+        "mean": 0.11912727776571816,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "order=frontier": {
+      "R_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.03868481521838592,
+          0.07646674424028177
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.056680329443984157,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.0017362488232258663,
+          0.006851201171395989
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.004073903075394938,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.05555995947744966,
+          0.10674250577066337
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.08009465024592569,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.014103282727099573,
+          0.05405314349445915
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.03204351413289158,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 128,
+        "ci95": [
+          0.14849923088865227,
+          0.32505849111808316
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.23104478505953507,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.1094631703345431,
+          0.28084799292092955
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.19033813555944568,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.03215758217257324,
+          0.07094524859529844
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.049643349966540726,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 128,
+        "ci95": [
+          0.08456984306111703,
+          0.19469605196927503
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.1348304886799295,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.01774900234203441,
+          0.0981751620635744
+        ],
+        "groups": 118,
+        "losses": 68,
+        "mean": 0.05550764687951619,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 60
+      },
+      "delta_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.022969084868203395,
+          0.14525885159098523
+        ],
+        "groups": 118,
+        "losses": 67,
+        "mean": 0.08081022343879612,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 61
+      },
+      "delta_row_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          -0.0003605685406157085,
+          0.06593549695742627
+        ],
+        "groups": 118,
+        "losses": 92,
+        "mean": 0.025302576559279963,
+        "n": 128,
+        "ties": 8,
+        "unavailable": 0,
+        "wins": 28
+      },
+      "delta_tv_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.008151387766839921,
+          0.030584712224170783
+        ],
+        "groups": 118,
+        "losses": 85,
+        "mean": 0.019014421357580774,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 43
+      },
+      "kl_I": {
+        "available": 128,
+        "ci95": [
+          0.18429849676618046,
+          0.4603873543362051
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.31522677834392016,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.14586230696948008,
+          0.4209426867382629
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.2745200153531002,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.03215758288813123,
+          0.07094524930602161
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.049643350382052163,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 128,
+        "ci95": [
+          0.1135365439910642,
+          0.28883837311887456
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.1937097919143041,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 128,
+        "ci95": [
+          0.09619104228307664,
+          0.16917198697969513
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.13174844377183853,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 128,
+        "ci95": [
+          0.08021796824305935,
+          0.14919288118910065
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.11389019873773351,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.021506382439435267,
+          0.047336530125110375
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.03336132593551833,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 128,
+        "ci95": [
+          0.06635742002045648,
+          0.1250618404066089
+        ],
+        "groups": 118,
+        "losses": null,
+        "mean": 0.09487577738015274,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "order=global": {
+      "R_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.050257886034883535,
+          0.09820409633169445
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.07362431427008813,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.004059571427568127,
+          0.013504328800787516
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.008247638156497974,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.07036567271583342,
+          0.1274565085610979
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.09825799511855095,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.030294410477579647,
+          0.08696432148460626
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.05648317043714929,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 128,
+        "ci95": [
+          0.2289432211094002,
+          0.4445493394588051
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.3334785145062886,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.19453970008928995,
+          0.3969511915923574
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.2921799790067954,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.07129527244742306,
+          0.15243641054889792
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.1094531177319544,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 128,
+        "ci95": [
+          0.15090291041249757,
+          0.302786835461157
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.22350550264221428,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.026689134608835936,
+          0.11803428110470587
+        ],
+        "groups": 119,
+        "losses": 56,
+        "mean": 0.06867447636458107,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 71
+      },
+      "delta_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.06042193187283419,
+          0.24657962035367859
+        ],
+        "groups": 119,
+        "losses": 58,
+        "mean": 0.1446911241314709,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 69
+      },
+      "delta_row_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.021401247839554157,
+          0.1442863734613851
+        ],
+        "groups": 119,
+        "losses": 89,
+        "mean": 0.07601664776688986,
+        "n": 128,
+        "ties": 12,
+        "unavailable": 0,
+        "wins": 27
+      },
+      "delta_tv_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.005228865233180612,
+          0.03518562319551429
+        ],
+        "groups": 119,
+        "losses": 90,
+        "mean": 0.019860639791759647,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 37
+      },
+      "kl_I": {
+        "available": 128,
+        "ci95": [
+          0.3264968169123648,
+          0.7201107588914583
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.5162212612775263,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.2874537795657454,
+          0.6816057291172266
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.4749180412600388,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.07129527261399705,
+          0.15243641067169317
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.10945311787028403,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 128,
+        "ci95": [
+          0.21720712377982346,
+          0.4485587603940318
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.3302269171285679,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 128,
+        "ci95": [
+          0.13167964730732548,
+          0.2275931778163112
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.17928475579775713,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 128,
+        "ci95": [
+          0.11779568252860347,
+          0.20974184073230287
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.16285715442444854,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.04337779131635174,
+          0.08814790691588974
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.06498893077330654,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 128,
+        "ci95": [
+          0.10284681094642546,
+          0.18595796760184194
+        ],
+        "groups": 119,
+        "losses": null,
+        "mean": 0.1429965146326889,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "span=crossline": {
+      "R_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.05015825148751367,
+          0.09393841162501944
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.07144077754977049,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.0034771137083275437,
+          0.011230063772038033
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.006982571849710953,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.07204557022731309,
+          0.1297034255031808
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.10001566688633193,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.029402560142961297,
+          0.08606220999862814
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.055862668456759135,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 128,
+        "ci95": [
+          0.2349047932520075,
+          0.4613910815421075
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.34031325664762013,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.1870323604389981,
+          0.40290489509532385
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.28782153212518813,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.0652330559643166,
+          0.140469674235594
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.09865525619753399,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 128,
+        "ci95": [
+          0.14573306514390386,
+          0.303064931674876
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.2183920772009849,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.030200284619499793,
+          0.11563081996760172
+        ],
+        "groups": 117,
+        "losses": 68,
+        "mean": 0.06942945492420324,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 60
+      },
+      "delta_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.04665988783690404,
+          0.1964050829382604
+        ],
+        "groups": 117,
+        "losses": 68,
+        "mean": 0.11674932896983185,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 60
+      },
+      "delta_row_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.006618354687278139,
+          0.09845358629698528
+        ],
+        "groups": 117,
+        "losses": 92,
+        "mean": 0.047319874045628665,
+        "n": 128,
+        "ties": 9,
+        "unavailable": 0,
+        "wins": 27
+      },
+      "delta_tv_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.008689278931639021,
+          0.03387136300016794
+        ],
+        "groups": 117,
+        "losses": 86,
+        "mean": 0.02061785020609551,
+        "n": 128,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 42
+      },
+      "kl_I": {
+        "available": 128,
+        "ci95": [
+          0.3241519895227244,
+          0.6927188757116197
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.5005468559963335,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.274026186355899,
+          0.645581465823767
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.4480507904654887,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.06523305603107989,
+          0.14046967446772823
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.09865525633446115,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 128,
+        "ci95": [
+          0.21565343336158607,
+          0.4616231357479679
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.33130146149565676,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 128,
+        "ci95": [
+          0.14165878291645545,
+          0.23119966708080875
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.18547061616054122,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 128,
+        "ci95": [
+          0.11880849396658809,
+          0.20414557858204682
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.16077542833815933,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.04149558543673776,
+          0.0842703045592288
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.06102338367395184,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 128,
+        "ci95": [
+          0.10182384952152158,
+          0.18178313697058845
+        ],
+        "groups": 117,
+        "losses": null,
+        "mean": 0.1401575781320638,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "span=single": {
+      "R_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.039925736630863774,
+          0.08093946669936705
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.05886386616430179,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.0018326332870558983,
+          0.009768562708210074
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.005338969382181958,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.054603497673050415,
+          0.10509325160885588
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.07833697847814469,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 128,
+        "ci95": [
+          0.013829864862439189,
+          0.05720407757893274
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.03266401611328175,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 128,
+        "ci95": [
+          0.14693242099538859,
+          0.31495264306182347
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.22421004291820368,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.12086716465974102,
+          0.28059726974965143
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.19469658244105287,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.037416613018143655,
+          0.08646447491435971
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.060441211500961156,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 128,
+        "ci95": [
+          0.0935281536460928,
+          0.18922906185088983
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.13994391412115886,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.017326500110865783,
+          0.10188155096650638
+        ],
+        "groups": 116,
+        "losses": 56,
+        "mean": 0.054752668319894005,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 71
+      },
+      "delta_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.03315093709968669,
+          0.20222604453383974
+        ],
+        "groups": 116,
+        "losses": 57,
+        "mean": 0.10875201860043515,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 70
+      },
+      "delta_row_kl_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.007221237874393818,
+          0.12115690424627465
+        ],
+        "groups": 116,
+        "losses": 89,
+        "mean": 0.05399935028054117,
+        "n": 128,
+        "ties": 11,
+        "unavailable": 0,
+        "wins": 28
+      },
+      "delta_tv_Q_R": {
+        "available": 128,
+        "ci95": [
+          0.004897913461428552,
+          0.033153278268949087
+        ],
+        "groups": 116,
+        "losses": 89,
+        "mean": 0.018257210943244912,
+        "n": 128,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 38
+      },
+      "kl_I": {
+        "available": 128,
+        "ci95": [
+          0.18940393375310358,
+          0.5002554244840135
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.330901183625113,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 128,
+        "ci95": [
+          0.16249535084846575,
+          0.4689712605428303
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.3013872661476503,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.03741661370785845,
+          0.08646447515006966
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.06044121191787504,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 128,
+        "ci95": [
+          0.11956334001183017,
+          0.27711638366433655
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.1926352475472152,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 128,
+        "ci95": [
+          0.08842875621816516,
+          0.16516678982293434
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.12556258340905438,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 128,
+        "ci95": [
+          0.08023194693953106,
+          0.15510908979355717
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.1159719248240227,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 128,
+        "ci95": [
+          0.023537295178983418,
+          0.053154420302099645
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.03732687303487303,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 128,
+        "ci95": [
+          0.0684828540262028,
+          0.12949367562885866
+        ],
+        "groups": 116,
+        "losses": null,
+        "mean": 0.0977147138807778,
+        "n": 128,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "split=train": {
+      "R_col_target_tv": {
+        "available": 192,
+        "ci95": [
+          0.04900514356389608,
+          0.08201514948526618
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.06462097474998507,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 192,
+        "ci95": [
+          0.004079335728403587,
+          0.011208190298504724
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.007437857862921717,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 192,
+        "ci95": [
+          0.07154539362569216,
+          0.11739225929791701
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.09272752096824761,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 192,
+        "ci95": [
+          0.02634717449153961,
+          0.07002484077262112
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.046132785683164236,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 192,
+        "ci95": [
+          0.22238945041494032,
+          0.39622259436197027
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.30388525708308683,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 192,
+        "ci95": [
+          0.18467012474493746,
+          0.34911792971284045
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.2603293074379184,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 192,
+        "ci95": [
+          0.0629969826168161,
+          0.11747861353127481
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.08867285846124455,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 192,
+        "ci95": [
+          0.14918761652130602,
+          0.26694341321626736
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.20461465876210125,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 192,
+        "ci95": [
+          0.022707948407548122,
+          0.09377683131002178
+        ],
+        "groups": 166,
+        "losses": 89,
+        "mean": 0.055714648675817165,
+        "n": 192,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 102
+      },
+      "delta_kl_Q_R": {
+        "available": 192,
+        "ci95": [
+          0.04714269614265378,
+          0.1838010097013242
+        ],
+        "groups": 166,
+        "losses": 90,
+        "mean": 0.11002163096183926,
+        "n": 192,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 101
+      },
+      "delta_row_kl_Q_R": {
+        "available": 192,
+        "ci95": [
+          0.015176166003242385,
+          0.10523919718686149
+        ],
+        "groups": 166,
+        "losses": 132,
+        "mean": 0.054306982286022126,
+        "n": 192,
+        "ties": 14,
+        "unavailable": 0,
+        "wins": 46
+      },
+      "delta_tv_Q_R": {
+        "available": 192,
+        "ci95": [
+          0.005664182071318265,
+          0.02492573062764448
+        ],
+        "groups": 166,
+        "losses": 129,
+        "mean": 0.015285918679274452,
+        "n": 192,
+        "ties": 1,
+        "unavailable": 0,
+        "wins": 62
+      },
+      "kl_I": {
+        "available": 192,
+        "ci95": [
+          0.29572593230238664,
+          0.5900151891711571
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.43355797278500985,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 192,
+        "ci95": [
+          0.25288824736955934,
+          0.5472721347156377
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.3900016043408083,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 192,
+        "ci95": [
+          0.06299698288979677,
+          0.11747861368696166
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.08867285877771168,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 192,
+        "ci95": [
+          0.19804277432445438,
+          0.37043854527356296
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.279979973378969,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 192,
+        "ci95": [
+          0.1274269560536346,
+          0.1988207706183798
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.16164194570505833,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 192,
+        "ci95": [
+          0.11286805941377472,
+          0.1809614625602935
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.14613811547188574,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 192,
+        "ci95": [
+          0.03973576978297409,
+          0.07048940872093494
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.054420029984028395,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 192,
+        "ci95": [
+          0.10144342885126485,
+          0.16228329467571467
+        ],
+        "groups": 166,
+        "losses": null,
+        "mean": 0.1308521967926113,
+        "n": 192,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    },
+    "split=validation": {
+      "R_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.03296114726943838,
+          0.10346471474419877
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.06674636317818934,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "R_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.0009602453941765848,
+          0.003963852456130106
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.002329508875020674,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_col_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.043368381335149024,
+          0.11426396906131368
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.07852272782421044,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "T_row_target_tv": {
+        "available": 64,
+        "ci95": [
+          0.012408684496899169,
+          0.07266598799114739
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.03865501209058905,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_I": {
+        "available": 64,
+        "ci95": [
+          0.11784384253238238,
+          0.3228120989021249
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.21739082788238692,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.08590819271664221,
+          0.2992183388617696
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.1840483068187269,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.023049925584738222,
+          0.08893182553318615
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.05217436001325662,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "conditional_kl_R": {
+        "available": 64,
+        "ci95": [
+          0.04984883388085022,
+          0.1626547258504042
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.10282800635798385,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "delta_conditional_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.024382506493924698,
+          0.14341947978158423
+        ],
+        "groups": 54,
+        "losses": 35,
+        "mean": 0.08122030046074302,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 29
+      },
+      "delta_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.03367628942632078,
+          0.22366615032364118
+        ],
+        "groups": 54,
+        "losses": 35,
+        "mean": 0.12093780225501627,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 29
+      },
+      "delta_row_kl_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.003755007373618327,
+          0.09861754752504798
+        ],
+        "groups": 54,
+        "losses": 49,
+        "mean": 0.0397175017942733,
+        "n": 64,
+        "ties": 6,
+        "unavailable": 0,
+        "wins": 9
+      },
+      "delta_tv_Q_R": {
+        "available": 64,
+        "ci95": [
+          0.010845061444209533,
+          0.05776931279508522
+        ],
+        "groups": 54,
+        "losses": 46,
+        "mean": 0.03189236626085748,
+        "n": 64,
+        "ties": 0,
+        "unavailable": 0,
+        "wins": 18
+      },
+      "kl_I": {
+        "available": 64,
+        "ci95": [
+          0.16718119268609957,
+          0.5808296998128267
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.3622221608878633,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q": {
+        "available": 64,
+        "ci95": [
+          0.13001997717831976,
+          0.5649096102901078
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.3288713002038532,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.023049925800590485,
+          0.08893182562969744
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.052174360171537384,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "kl_R": {
+        "available": 64,
+        "ci95": [
+          0.08558892999796437,
+          0.356568843186187
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.20793349794883692,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_I": {
+        "available": 64,
+        "ci95": [
+          0.08122290706237298,
+          0.19284962460369282
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.13714056202401625,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q": {
+        "available": 64,
+        "ci95": [
+          0.06464490434555342,
+          0.16751903298890977
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.1150803599087068,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_Q_T": {
+        "available": 64,
+        "ci95": [
+          0.014721953295596177,
+          0.05609157048009506
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.033440423465564556,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      },
+      "tv_R": {
+        "available": 64,
+        "ci95": [
+          0.046100682469203784,
+          0.12430286736959854
+        ],
+        "groups": 54,
+        "losses": null,
+        "mean": 0.08318799364784932,
+        "n": 64,
+        "ties": null,
+        "unavailable": 0,
+        "wins": null
+      }
+    }
+  },
+  "verdict": "Q在整体与高覆盖均更差：强保旧边缘在这些状态不合适；这不否定所有依赖建模。软约束等留下一批决定。"
+}

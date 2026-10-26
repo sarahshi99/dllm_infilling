@@ -1,0 +1,74 @@
+{
+  "blocked_reason": null,
+  "contract_id": "dreamon-context-v1-20261015",
+  "created_at": "2026-10-26T14:09:34Z",
+  "data": [
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/.gitignore",
+      "sha256": "b9299204beef85c2cb6dc18a191fb7ba61e78232a9a4f82cee516e166a4f542e"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/analysis_checkpoint.json",
+      "sha256": "98429f4493a3781ec68dc9a42dd9c86c62457fa10d2709690f8733c290886ab2"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/high_coverage_table.csv",
+      "sha256": "de33d4a7866d03b382d6b895904802a9949e75c900784b742ae8cd2245169c25"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/input_reference.json",
+      "sha256": "2fd4c7faff7af4868438bee141c4441434eef8901f4a857d489ba389d2917e00"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/main_table.csv",
+      "sha256": "0b31225531a5d55483a2ab56631b752f35bd17e4c50b5764f8346d21a8cf23ee"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/per_state.csv",
+      "sha256": "79fbe1bfe38ca39fe9e758aa0f70657756989b437517de1e601505c8c15f46b4"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/per_state.jsonl",
+      "sha256": "84fce7a51997888cf43309c73e6787f34d672667de697b77a5088703ca8d22e6"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/probability_audit.json",
+      "sha256": "74ae9dd0a04f92c98b0934ecc5c301f717ccf475b688d15da89b9cc283a6792e"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/report.zh.md",
+      "sha256": "a6f319882f0f4ee1c6fecb68fe91f3a3aed90d4e93eb22898f3e7e5f2ef3d1eb"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/stratified_table.csv",
+      "sha256": "0d348efc10b50c0c65133b66a5c275ae582c3fbef5fc84f307bd81d3b90c287b"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/summary.json",
+      "sha256": "c66c672945c5c72aad4eb86eda8fd5719c1464948f54b3de1bb45daa749fc63b"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/test_results.json",
+      "sha256": "01dfd1664c4b77f857b53c8b7fa37303900a6cd5d6c3f05e72825ab629859f14"
+    },
+    {
+      "path": "analysis_outputs/dreamon_copula_diagnostic_20261015_v1/test_results.txt",
+      "sha256": "2910f684579e17f0f4144bb379e984ce9a10e6c4454bfe0e67aef28ec6d32cc9"
+    }
+  ],
+  "input_manifest_sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92",
+  "input_ready": {
+    "contract_id": "dreamon-context-v1-20261015",
+    "created_at": "2026-10-26T14:08:49Z",
+    "manifest_absolute_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-foundation-20261015-v1/analysis_outputs/dreamon_context_foundation_20261015_v1/dcd_manifest.json",
+    "manifest_sha256": "7e5805495bc26a7dbfa35a14a54808f32d6e4d4125e4f1d9768b434048d4fb92",
+    "producer_branch": "codex/dreamon-context-foundation-20261015-v1",
+    "schema_version": 1,
+    "source_commit": "2e0ef1653521876572a3c14f12d7de970cbd974b",
+    "status": "complete"
+  },
+  "producer_branch": "codex/dreamon-copula-diagnostic-20261015-v1",
+  "schema_version": 1,
+  "source_commit": "4b7a48f9b6b953e0009708aa4fe631f05687b3b3",
+  "status": "complete"
+}
