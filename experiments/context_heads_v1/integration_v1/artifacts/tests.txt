@@ -1,0 +1,37 @@
+test_dense_h3_h4_fixed_u_stochastic_three_round_equality (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_h4_nonzero_one_two_round_counterexamples_three_exact (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_long_chain_needs_length_minus_one_rounds (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_multichain_short_long_empty_and_barrier_support (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_padding_and_tokenizer_padding_support (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_redrawing_random_input_breaks_equivalence (experiments.context_heads_v1.test_cpu.ExecutorsCPU) ... ok
+test_empty_queries_no_history_singleton_long_and_unsorted (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_full_vocab_kl_direction_temperature_mask_and_softmax_special (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_future_tokens_and_query_specific_invisibility (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_gated_matches_pinned_author_adapter_formula_with_bias (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_gru_modes_and_k2_single_record (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_h0_legacy_formula_key_mapping (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_h1_gamma_one_is_static_and_old_h_prev_is_explicit (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_h3_single_record_weight_one_and_modes (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_hctx_never_uses_new_tokens_or_has_embedding (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_mask_validation_provisional_and_structure_barriers (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_padding_nan_hidden_and_invalid_token_have_no_contribution (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_sampler_adapter_example_uses_full_aligned_set (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_shapes_finite_gradients_frozen_inputs_and_latent_only (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_shared_initial_tables_seed_rng_and_meta (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_split_chains_gap_and_barrier_and_explicit_opt_in (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_step_teacher_force_same_prefix_and_reset_round_chain (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_zero_override_anchor_and_special_delta_exact (experiments.context_heads_v1.test_cpu.HeadCPU) ... ok
+test_actual_a_sampler_fixed_u_h3_h4_jacobi3_and_chain_resets (experiments.context_heads_v1.integration_v1.test_cpu.ActualACPU) ... ok
+test_actual_a_sampler_requires_three_rounds_for_nonzero_propagation (experiments.context_heads_v1.integration_v1.test_cpu.ActualACPU) ... ok
+test_actual_a_sampler_ties_and_padded_support_are_deterministic (experiments.context_heads_v1.integration_v1.test_cpu.ActualACPU) ... ok
+test_h0_matches_real_a_frozen_head_adapter (experiments.context_heads_v1.integration_v1.test_cpu.ActualACPU) ... ok
+test_real_engine_correction_boundary_without_engine_or_model_execution (experiments.context_heads_v1.integration_v1.test_cpu.ActualACPU) ... ok
+test_all_seven_kwargs_dict_scores_gradients_and_counting (experiments.context_heads_v1.integration_v1.test_cpu.BridgeCPU) ... ok
+test_missing_legacy_zero_is_explicit_and_never_candidate_initialization (experiments.context_heads_v1.integration_v1.test_cpu.BridgeCPU) ... ok
+test_provisional_is_rejected_without_counter_mutation (experiments.context_heads_v1.integration_v1.test_cpu.BridgeCPU) ... ok
+test_schema_uses_padded_rows_as_special_verbatim (experiments.context_heads_v1.integration_v1.test_cpu.BridgeCPU) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 1.279s
+
+OK

@@ -511,3 +511,11 @@
 - DeepSpec 固定 005e03b81cec38b7da6399833d609ee89a2587f2，MIT 来源/尺寸/差异已记录；H4 明示参考 xPress arXiv:2608.02438v1，未称原样复现或新贡献。仅普通词 CPU 等价，实际临时结构候选调度仍须 A 单独验证。
 - 本地 tokenizer len151668、模型 logit V152064/H3584 均核验，分别有 meta 参数/MAC/激活表；模型支持下两表77,856,768参数，Jacobi3投影9位置对sequential3位置，无伪造GPU ms或速度承诺。
 - 复现：`CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 /home/shx/miniconda3/envs/dllm_env/bin/python -m experiments.context_heads_v1.verify_cpu`。说明与证据 `experiments/context_heads_v1/README.zh.md`、`artifacts/`、manifest.json；提交推送/远端核验后由 publish_ready.py 在真实 git common dir 发布 B_done.json，其他 ready/锁保留。reviewer_gate_disabled；已完成本地代码/diff review 与 fresh CPU verification。交付后退出，后续统一新训练与真实生成未启动。
+
+## 2026-10-27 B 与已发布 A 接口的有界 CPU 补验
+
+- 延续原仅CPU/不训练/不跑大模型/不生成答案/不改图/不修改A的范围；只新增 `experiments/context_heads_v1/integration_v1/` 与本日期日志。原B提交ec8b159的20个manifest payload、manifest及公共B_done.json字节保持不变；无子智能体。
+- 对齐已发布A f521bd3的keyword/dict调用方式，新增B侧包装器；为A现有零对照显式引用其已加载旧静态头，Hctx不添加embedding、不继承训练权重。配置按A schema保留全部400个特殊/补齐行，与V152064、tokenizer len151668一致。
+- 32项CPU单测通过（原23+新9，0 skip/error/failure），含A实际FrozenHeadAdapter/Engine.correction入口及T=.2/top-p=.9采样函数下固定u的H3/H4普通词Jacobi3等价、非零传播需三轮反例、多链/tie/zero/provisional拒绝。没有初始化模型Engine或执行decode。
+- 仅读取A已有索引前12个状态包的九个公共tensor字段，核对既有hash并验证类型/形状/合法committed前缀；不读x0、teacher数组、答案/测试/passed，不采集新状态。该抽查不代替全状态库审计；A状态仍为partial。
+- 复现：`CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 /home/shx/miniconda3/envs/dllm_env/bin/python -m experiments.context_heads_v1.integration_v1.verify_cpu`。报告与小型证据在新增目录README.zh.md、artifacts/；新manifest和B_integration_done.json仅补充B_done，其他ready/锁不动。提交推送并核验远端后发布补充标记。GPU/完整生成/临时结构候选调度/训练仍未验证或启动。本地diff review，无子智能体。

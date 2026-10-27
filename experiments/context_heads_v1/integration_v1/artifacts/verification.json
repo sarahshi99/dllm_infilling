@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "tests_run": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "original_payload": {
+    "manifest_sha256": "1e626eb7713d72e7eadff8442117b46605a2668f0f43960d6ed99b95d47cbecb",
+    "entries_unchanged": 20,
+    "source_commit": "ec8b159ce276c7a919a924c1b6991ffb64a5b8bf"
+  },
+  "B_done_sha256_unchanged": "232352db3a5deb76583ef6435aab4528f8a484c4ba291dcfe9b5669fdb01c5da",
+  "a_commit": "f521bd3f91719c40a1fcfda7c39f977fdd48b5be",
+  "a_status": "partial",
+  "a_adapter_sha256": "f4f34e4c5dd04ee2e0353657dbe00fc6937acbeac1b617a5b2d7678a33a69ae0",
+  "a_schema_sha256": "dc6e415048165e600f1a13537867a18191925c69e7d5ab99e10ef0f236f69cc6",
+  "a_manifest_sha256": "de73ef001d7b91f3f6943d054b64de1e62c22b524c1c61170bf9461e4f7861ea",
+  "a_H": 3584,
+  "a_V": 152064,
+  "tokenizer_size": 151668,
+  "a_special_count": 400,
+  "padded_rows_excluded": {
+    "start": 151668,
+    "stop_exclusive": 152064
+  },
+  "dependency_sha256": "426cbd4e16512fbab8399604d7bb6d80bc6af309b4fe5f8eef16443a7e6f19f6",
+  "existing_states_checked": 12,
+  "actual_A_functions_tested": [
+    "sample_key",
+    "uniform",
+    "distribution",
+    "inverse_cdf",
+    "FrozenHeadAdapter.forward",
+    "Engine.correction"
+  ],
+  "actual_A_sampler": {
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "fixed_u": true,
+    "ordinary_support_only": true
+  },
+  "not_tested": [
+    "Engine.__init__/decode or any real generation",
+    "GPU execution/performance",
+    "provisional expand/EOS scheduling and pre-barrier sequential equivalence",
+    "training, teacher quality or answer correctness"
+  ],
+  "gpu_used": false,
+  "backbone_loaded": false,
+  "training_started": false,
+  "human_eval_answers_generated": false,
+  "CUDA_VISIBLE_DEVICES": "",
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+  "torch": "2.5.1+cu121",
+  "numpy": "2.2.6",
+  "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+  "cpu_threads": 1,
+  "tolerance": "same-shape adapter formulas/zero/token results exact; inherited CPU float32 rules retained"
+}

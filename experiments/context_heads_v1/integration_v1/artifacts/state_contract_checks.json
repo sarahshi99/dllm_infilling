@@ -1,0 +1,760 @@
+{
+  "checked": 12,
+  "fields_read": [
+    "old_hidden",
+    "position_ids",
+    "chain_ids",
+    "selected_mask",
+    "query_indices",
+    "old_logits",
+    "token_ids",
+    "token_state",
+    "history_mask"
+  ],
+  "states": [
+    {
+      "state_id": "00019f24f14a02302eb133bdf54ea315b019b5829367dfd89330bd63514982f4",
+      "sha256": "34a58583daea57e459e95935088e89e97a7fec12d27dc2c130b4eaf09eb5139e",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          2
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "0002695a37d4a2e680342b66f5ae1492deb361077d25a87ec0a6f0f7cd3307dc",
+      "sha256": "1b6a7fe4216dfe96a9e9d220014ff4f90809d97a25416940c4ed9c348bfc76c3",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          1
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "00055995f7536542380f274ee4ecfa5d72dde53fb338e2f1ca62408076d26651",
+      "sha256": "36e5cc61447df4e217e5511e357f65b85419e6cba85c4a6860ba3b765ff792dc",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          2
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "00059559d19aa8efc8c346f2ec53ad92bf911582c6a3f979775f90461326f10b",
+      "sha256": "3eb4c6f479c4537212363968086b1b7495ad7d5d5cd2594b0c8ad325c08c1bbe",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          1
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "00069e83f38f8829daa5e753c8a26ed872aa8ebc64d1026b26d4d68603735ddf",
+      "sha256": "d8acca59c5c75752cbb85ae0f7421f57f968db7c46856e1578d0d6760e341a0e",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          3
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "0006ef2b30148e12ae21ec96b215ae87cff8d6ab02872f7078d4d09273c859f4",
+      "sha256": "8024fd2c533c234c56863cd40d6ca22faa743be522e41a5dad52725a0898a670",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          2
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "000864ffa853976125a77170e5cb313aafd985acef200584d0fbf09d31bb39db",
+      "sha256": "46dcc23bea79a900d059f20b3d9e32a4faf757e65156322d56f82c32f4a8f392",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          3
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "00146178e006d7bc47e863aaedf4220bcbddd0612b2b5e65a43dcce96e1f3559",
+      "sha256": "7db25eee2f5c79260c4adc8ab7f9a4a4ba4cc39676cea512805091b70cf17f8b",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          2
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "001a86e4e55376217f212fff8f04b2d33ab125a0360e1ddc9558871292a6facb",
+      "sha256": "9ec1aa013870b4df70706aa2ac86b133995aa5c5a2b8be3b7aa6b38392bb617c",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          2
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "00203bf35a97dd579045d56d150155364daddb674a9f336be19dcf22b9befa0f",
+      "sha256": "9adfe5c707ea4437df5fdf99abe63270827813d4904576389d5e57e4cee32d32",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          1
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "0020d69f6ef15c037a6f5f889630a636ef6dc81708e75f71f0a3c30b3b0967c1",
+      "sha256": "a7086edfd491f03a56ea7ac3afdb8136b1fc9c8be540ad35e0487647cb3ab741",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          3
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    },
+    {
+      "state_id": "0022eb0d3ce7e3bfd1d14cb7c6ca6d2dfeb873644517e0335a5141bf6345ca76",
+      "sha256": "38b9ab90781e3af446d521325603a884b551ac9546a3228201bb80072314c53a",
+      "shapes": {
+        "old_hidden": [
+          1,
+          4,
+          3584
+        ],
+        "position_ids": [
+          1,
+          4
+        ],
+        "chain_ids": [
+          1,
+          4
+        ],
+        "selected_mask": [
+          1,
+          4
+        ],
+        "query_indices": [
+          1,
+          1
+        ],
+        "old_logits": [
+          1,
+          1,
+          152064
+        ],
+        "token_ids": [
+          1,
+          4
+        ],
+        "token_state": [
+          1,
+          4
+        ],
+        "history_mask": [
+          1,
+          1,
+          4
+        ]
+      },
+      "dtypes": {
+        "old_hidden": "torch.float32",
+        "position_ids": "torch.int64",
+        "chain_ids": "torch.int64",
+        "selected_mask": "torch.bool",
+        "query_indices": "torch.int64",
+        "old_logits": "torch.float32",
+        "token_ids": "torch.int64",
+        "token_state": "torch.int64",
+        "history_mask": "torch.bool"
+      },
+      "history_lengths": [
+        [
+          3
+        ]
+      ],
+      "validation": "passed; committed ordinary prefix; no hidden alignment transform"
+    }
+  ]
+}
