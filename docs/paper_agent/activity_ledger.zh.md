@@ -512,3 +512,7 @@
 ## 2026-10-26 第一批A context foundation 自动收尾
 
 状态partial；A1=3072/3072、A2=22/512、DCD=256/256、评分=4132/4132。证据analysis_outputs/dreamon_context_foundation_20261015_v1/report.zh.md；单H200有限预算，无训练/第二批/思维导图修改。
+
+## 2026-10-27 第一批A继续：CPU交付审计与A2缺口澄清
+
+原队列已退出并推送f521bd3；A1=3072、DCD=256、评分4132均完整，GPU累计1.3740h。F4/旧头/零头/K1通过912/842/820/949，F4−旧头救回78/改错8、净+70。CPU重核6422原始分片hash、完整逐行/配对计数/DCD数值字段及16测试通过。A2封存512母状态中最早干预词490为单词支持，合法已计算22对均来自frontier（21源组）；允许其它更早槽位也仅32母状态可干预，其中额外10未运行。保持partial，不补造、升温、扩大top-p或替换母状态；本次0 GPU/0模型调用。原协议、DCD、结果报告不改，追加新报告analysis_outputs/dreamon_context_foundation_20261015_v1/continuation_audit_20261027/report.zh.md；不启动第二批或训练、不改思维导图。
