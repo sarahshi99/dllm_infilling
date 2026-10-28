@@ -519,3 +519,10 @@
 - 32项CPU单测通过（原23+新9，0 skip/error/failure），含A实际FrozenHeadAdapter/Engine.correction入口及T=.2/top-p=.9采样函数下固定u的H3/H4普通词Jacobi3等价、非零传播需三轮反例、多链/tie/zero/provisional拒绝。没有初始化模型Engine或执行decode。
 - 仅读取A已有索引前12个状态包的九个公共tensor字段，核对既有hash并验证类型/形状/合法committed前缀；不读x0、teacher数组、答案/测试/passed，不采集新状态。该抽查不代替全状态库审计；A状态仍为partial。
 - 复现：`CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 /home/shx/miniconda3/envs/dllm_env/bin/python -m experiments.context_heads_v1.integration_v1.verify_cpu`。报告与小型证据在新增目录README.zh.md、artifacts/；新manifest和B_integration_done.json仅补充B_done，其他ready/锁不动。提交推送并核验远端后发布补充标记。GPU/完整生成/临时结构候选调度/训练仍未验证或启动。本地diff review，无子智能体。
+
+## 2026-10-28 B 启动统一 teacher-KL 小规模训练
+
+- 用户明确要求B开始训练，随后明确允许使用GPU，并允许共用本机GPU0剩余显存；单worker依次训练七种头。原“不训练/仅CPU”对此次pilot解除；不修改A/C、不改旧decoder/训练脚本或思维导图，不采新teacher、不加载DreamOn、不生成HumanEval答案，无子智能体。
+- 固定pilot：A已有3072合法状态（train2304/validation768，源题组690/233，交集0）；同数据/同seed排列/同随机E与W_out初始张量，rank256/lambda1，单epoch、batch16、AdamW lr3e-4、clip1、T1 full-vocab KL；无CE/DCD/多种子/ablation grid。H2 full-memory、H3 learned attention、H4严格因果teacher force。
+- 所有状态与教师原hash、公共字段/类型/完整committed前缀通过CPU整理，FP32 memmap约3.91GB；4项CPU训练管线检查通过，含KL下降、Adam checkpoint恢复逐位一致、组隔离与只读数据。原B的20个payload及接入补验不修改。
+- 训练计划、exact command、kill criteria与恢复入口：experiments/context_heads_v1/training_v1/README.zh.md。单H200 GPU0共享（其他进程保留），allocator上限8GiB、CPU线程4、worker墙时上限3600s；每64步保存last，每头比较initial/final验证KL并保存best。代码提交后启动tmux dreamon_context_heads_train_20261028_v1，实际PID/step/完成情况以外部cache的status.json/summary.json/exit.json为准，不能把计划当已完成。

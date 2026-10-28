@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "gpu_used": false,
+  "checks": [
+    "actual KL decreases on synthetic teacher distribution",
+    "CPU optimizer checkpoint resume equals continuous updates exactly",
+    "source-group split and duplicate/external-test rejection",
+    "only common input arrays read; complete committed prefix and hashes enforced",
+    "read-only memmap isolation and validation aggregation"
+  ],
+  "original_B_payload": {
+    "manifest_sha256": "1e626eb7713d72e7eadff8442117b46605a2668f0f43960d6ed99b95d47cbecb",
+    "entries_unchanged": 20,
+    "source_commit": "ec8b159ce276c7a919a924c1b6991ffb64a5b8bf"
+  }
+}
