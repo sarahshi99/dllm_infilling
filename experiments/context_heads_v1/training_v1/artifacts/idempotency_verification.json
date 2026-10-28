@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "runtime_records_unchanged": true,
+  "files_checked": [
+    "summary.json",
+    "status.json",
+    "environment.json",
+    "exit.json",
+    "train.log",
+    "gpu_at_launch.txt"
+  ],
+  "CUDA_VISIBLE_DEVICES": "",
+  "direct_run_output": "pilot already complete; no GPU initialized or result overwritten",
+  "launcher_output": "Pilot already has a completion summary; no relaunch or output overwrite"
+}

@@ -4,6 +4,10 @@ task_source_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 task_repo_root=$(git -C "$task_source_dir" rev-parse --show-toplevel)
 task_run_dir=/home/shx/.cache/dllm_infilling/context_heads_training_20261028_v1
 mkdir -p "$task_run_dir"
+if [ -f "$task_run_dir/summary.json" ]; then
+    echo 'Pilot already has a completion summary; no relaunch or output overwrite'
+    exit 0
+fi
 exec 9>"$task_run_dir/worker.lock"
 flock -n 9 || { echo 'This pilot already has a worker'; exit 1; }
 cd "$task_repo_root"

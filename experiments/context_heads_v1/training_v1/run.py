@@ -193,6 +193,12 @@ def main():
     if args.batch_size < 1 or args.checkpoint_every < 1 or args.max_wall_seconds <= 0:
         raise ValueError("invalid pilot schedule")
     args.run_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = args.run_dir/"summary.json"
+    if not args.prepare_only and summary_path.exists():
+        if json.loads(summary_path.read_text())["status"] == "complete":
+            print("pilot already complete; no GPU initialized or result overwritten", flush=True)
+            return
+        raise ValueError("existing non-complete summary needs inspection")
     torch.set_num_threads(args.threads)
     manifest = prepare(args.a_output, args.run_dir/"data")
     if args.prepare_only:

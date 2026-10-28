@@ -87,3 +87,6 @@ checkpoints/、summary.json 与 exit.json 是真实状态入口。旧 A/B/C read
 原B及接入补验的payload文件保留；代码和新说明仅在本 training_v1/，项目日志只追加日期项。
 提交推送后启动真实训练，source_commit由worker记录。完成后再归档小型结果，不提交checkpoint/
 memmap或原始长日志。任何“已启动/已完成”的判断必须来自PID/实际step或summary，不能把此计划当结果。
+
+完成结果见 report.zh.md 与 artifacts/training_summary.json；已完成运行重复调用直接返回，
+不会重新初始化GPU或覆盖原summary/environment/耗时记录。该行为已在无可见GPU下实际复调两种入口并核验六份运行记录保持不变。

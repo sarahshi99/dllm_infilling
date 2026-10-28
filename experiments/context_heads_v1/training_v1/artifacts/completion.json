@@ -1,0 +1,25 @@
+{
+  "status": "complete",
+  "models": 7,
+  "optimizer_steps": 1008,
+  "train_rows": 2304,
+  "validation_rows": 768,
+  "source_groups": {
+    "train": 690,
+    "validation": 233
+  },
+  "group_overlap": 0,
+  "training_source_commit": "a6541f6d0907cd10a8e98b826927fdaf1bc4d47f",
+  "exit_code": 0,
+  "worker_wall_seconds": 89.13224835507572,
+  "gpu_worker_exited": true,
+  "original_B_payload": {
+    "manifest_sha256": "1e626eb7713d72e7eadff8442117b46605a2668f0f43960d6ed99b95d47cbecb",
+    "entries_unchanged": 20,
+    "source_commit": "ec8b159ce276c7a919a924c1b6991ffb64a5b8bf"
+  },
+  "checkpoint_files_verified": 14,
+  "human_eval_answers_generated": false,
+  "backbone_loaded": false,
+  "teacher_collection_started": false
+}

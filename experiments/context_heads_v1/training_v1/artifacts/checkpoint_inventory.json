@@ -1,0 +1,147 @@
+{
+  "checkpoints": [
+    {
+      "model": "H0-static",
+      "kind": "last",
+      "path": "checkpoints/H0-static/last.pt",
+      "size_bytes": 934896700,
+      "sha256": "2a71646e14732fdcc2eef2de8000d7ce62ccbd3a55160cab45e91c333ed75520",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H0-static",
+      "kind": "best",
+      "path": "checkpoints/H0-static/best.pt",
+      "size_bytes": 312040980,
+      "sha256": "f0642b41001797098ec7c32f97b57f00ec9754cf85016337c73add1589c0489c",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "Hctx-old-context-only",
+      "kind": "last",
+      "path": "checkpoints/Hctx-old-context-only/last.pt",
+      "size_bytes": 480362687,
+      "sha256": "441a161a662624581a4ea0c06883f311dd500a37d8a21be985af32bda7b27c1c",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "Hctx-old-context-only",
+      "kind": "best",
+      "path": "checkpoints/Hctx-old-context-only/best.pt",
+      "size_bytes": 160528896,
+      "sha256": "a4b950195320d04df0785a3ff72b87d025e2e7b9e413c35085f9f2c80cbd7971",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "Hgated-author-family",
+      "kind": "last",
+      "path": "checkpoints/Hgated-author-family/last.pt",
+      "size_bytes": 946698211,
+      "sha256": "ac8db30c23336f0f53c6be78350f553fff3f418017812ab612058c1daa3720a7",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "Hgated-author-family",
+      "kind": "best",
+      "path": "checkpoints/Hgated-author-family/best.pt",
+      "size_bytes": 315974540,
+      "sha256": "4a5072bbdee1bd7b2a6cd3f0a68824b291eab672b671cbc83b8323e6b761549a",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H1-context-prev",
+      "kind": "last",
+      "path": "checkpoints/H1-context-prev/last.pt",
+      "size_bytes": 948287667,
+      "sha256": "28a1643b630613d985f8345310b5b2ac9c1437f04b5a5ca58afaec5ebc6ab78e",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H1-context-prev",
+      "kind": "best",
+      "path": "checkpoints/H1-context-prev/best.pt",
+      "size_bytes": 316503740,
+      "sha256": "1824022ee413f1cb44955c8a63f5e4f8e4fc3eee1eb67dbf322a76032c1aaf39",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H2-GRU",
+      "kind": "last",
+      "path": "checkpoints/H2-GRU/last.pt",
+      "size_bytes": 954616427,
+      "sha256": "71cca604c23f70cc740f1654be4c149a829b4a2e64c593c4b917e2faacb7761a",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H2-GRU",
+      "kind": "best",
+      "path": "checkpoints/H2-GRU/best.pt",
+      "size_bytes": 318612649,
+      "sha256": "4ba5099bd438c5a97d5e08ee2973add3e5ea72a71a2cc0877670f838e41c0614",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H3-short-attention",
+      "kind": "last",
+      "path": "checkpoints/H3-short-attention/last.pt",
+      "size_bytes": 952251271,
+      "sha256": "76989588b829ea50307003328517360554a4e6db97b75edaf16e31583e3599ae",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H3-short-attention",
+      "kind": "best",
+      "path": "checkpoints/H3-short-attention/best.pt",
+      "size_bytes": 317824032,
+      "sha256": "41d7d6eaf20c2ccc7a372195e4bd684f1c00bb96f7171551a169f79bda9a13af",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H4-causal-mixer",
+      "kind": "last",
+      "path": "checkpoints/H4-causal-mixer/last.pt",
+      "size_bytes": 963304263,
+      "sha256": "0d8bfaeacc355898e4ccd8c2ee095430ffebf9501aade9fb20d2eccd5e69471e",
+      "step": 144,
+      "trained": true,
+      "tensors_finite": true
+    },
+    {
+      "model": "H4-causal-mixer",
+      "kind": "best",
+      "path": "checkpoints/H4-causal-mixer/best.pt",
+      "size_bytes": 321508384,
+      "sha256": "2caf329d5e72952217201b4fcdedcd4d550a2367f8507f662ede4e008a43bc69",
+      "step": 0,
+      "trained": false,
+      "tensors_finite": true
+    }
+  ],
+  "verification": "CPU mmap, exact shapes/FP32/finite head tensors and Adam moments; plan/cursors checked",
+  "storage": "external run cache; weights and optimizer states are not in git",
+  "reason_for_hashes": "Git tracks code, not these external best/last files. Same-shaped checkpoints at a reused path cannot identify exact trained weights without a payload digest."
+}
