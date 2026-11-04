@@ -1,0 +1,197 @@
+{
+  "complete": true,
+  "execution_versions": [
+    "660f2960ff65fb216f762a1eca0183835de2afbb"
+  ],
+  "expected_execution_version": "660f2960ff65fb216f762a1eca0183835de2afbb",
+  "invalid": [],
+  "per_config": {
+    "global_k1_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_nohead_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_nohead_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_nohead_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_trained_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_trained_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_trained_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k2_trained_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_nohead_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_nohead_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_nohead_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_trained_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_trained_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_trained_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "global_k4_trained_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k1_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_nohead_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_nohead_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_nohead_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_trained_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_trained_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_trained_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k2_trained_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_nohead_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_nohead_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_nohead_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_nohead_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_trained_080": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_trained_090": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_trained_095": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    },
+    "left_k4_trained_off": {
+      "generated": 1033,
+      "scored": 1033,
+      "timed": 492
+    }
+  },
+  "quality_actual": 35122,
+  "quality_duplicates": 0,
+  "quality_expected": 35122,
+  "quality_missing": [],
+  "quality_unexpected": [],
+  "quality_unique": 35122,
+  "scored": 35122,
+  "sealed_external_test_opened": false,
+  "timing_actual": 16728,
+  "timing_duplicates": 0,
+  "timing_expected": 16728,
+  "timing_missing": [],
+  "timing_output_divergences": [],
+  "timing_population_separate": true,
+  "timing_unexpected": [],
+  "timing_unique": 16728,
+  "version_mixing": false
+}

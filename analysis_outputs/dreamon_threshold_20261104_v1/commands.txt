@@ -1,0 +1,5 @@
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.threshold_eval.runner --phase smoke
+bash /home/shx/projects/dllm_infilling/threshold_eval_20261104_v1/start_worker.sh --role nohead
+bash /home/shx/projects/dllm_infilling/threshold_eval_20261104_v1/start_worker.sh --role trained
+/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.threshold_eval.runner --phase pipeline
+tmux new-session -d -s dreamon_threshold_20261104_v1_pipeline -c /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-threshold-eval-20261104-v1 "env OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -u -m experiments.threshold_eval.runner --phase pipeline > /home/shx/projects/dllm_infilling/threshold_eval_20261104_v1/pipeline.log 2>&1"

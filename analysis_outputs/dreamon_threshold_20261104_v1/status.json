@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-04T10:50:49Z",
+  "integrity": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-threshold-eval-20261104-v1/analysis_outputs/dreamon_threshold_20261104_v1/integrity_audit.json",
+  "quality_completed": 35122,
+  "quality_scored": 35122,
+  "status": "completed",
+  "task_id": "dreamon_threshold_20261104_v1",
+  "timing_completed": 16728
+}
