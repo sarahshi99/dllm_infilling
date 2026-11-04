@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-04T06:25:46Z",
+  "commands": [
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest discover -s tests/threshold_eval -v",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m unittest discover -s tests/context_foundation -v",
+    "bash -n scripts/start_threshold_worker.sh",
+    "git diff --check"
+  ],
+  "compact_path_verified": true,
+  "cpu_reference_tests": 16,
+  "cpu_threshold_tests": 14,
+  "local_review": "decoder diff against historical source; legal memory, first-slot-only exemption, chain rejection, masking probability, SQLite resume, stage sequencing reviewed",
+  "reference_token_canvas_structure_verified": true,
+  "residual_risk": "no independent reviewer; full population execution and timing still pending",
+  "reviewer_gate_disabled": true,
+  "smoke_fixed_cases": 16,
+  "status": "passed"
+}
