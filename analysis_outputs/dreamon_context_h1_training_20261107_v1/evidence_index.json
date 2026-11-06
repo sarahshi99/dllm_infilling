@@ -1,0 +1,13 @@
+{
+  "bank": "queue.sqlite rows.kind=state -> data/*.npz offsets; full selected-set FP32 tensors",
+  "checkpoints": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints",
+  "code_commit": "bac2b3d9add68a8ac9dca9922441199da1be0886",
+  "disk_bytes": 33138672,
+  "exit": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/exit.json",
+  "generated": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/generated_rows.jsonl.gz",
+  "logs": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/pipeline.log",
+  "progress": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/progress.json",
+  "resume": "bash experiments/context_h1_training_v1/launch.sh",
+  "run": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1",
+  "scored": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/per_case.jsonl.gz"
+}

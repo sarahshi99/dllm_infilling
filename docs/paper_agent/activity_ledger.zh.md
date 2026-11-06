@@ -541,3 +541,8 @@
 ## 2026-10-27 第一批A继续：CPU交付审计与A2缺口澄清
 
 原队列已退出并推送f521bd3；A1=3072、DCD=256、评分4132均完整，GPU累计1.3740h。F4/旧头/零头/K1通过912/842/820/949，F4−旧头救回78/改错8、净+70。CPU重核6422原始分片hash、完整逐行/配对计数/DCD数值字段及16测试通过。A2封存512母状态中最早干预词490为单词支持，合法已计算22对均来自frontier（21源组）；允许其它更早槽位也仅32母状态可干预，其中额外10未运行。保持partial，不补造、升温、扩大top-p或替换母状态；本次0 GPU/0模型调用。原协议、DCD、结果报告不改，追加新报告analysis_outputs/dreamon_context_foundation_20261015_v1/continuation_audit_20261027/report.zh.md；不启动第二批或训练、不改思维导图。
+
+
+## 2026-11-07 H1 formal 20261107 archive ready_for_background
+
+数据4/220000；结果analysis_outputs/dreamon_context_h1_training_20261107_v1/；只H1；共享cuda:0，其他路线不启动。

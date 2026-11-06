@@ -1,0 +1,15 @@
+{
+  "batch_step_consistent": true,
+  "finite_nonzero_gradient_norms": [
+    0.007067840080708265,
+    0.007051648106426001,
+    0.00724463677033782
+  ],
+  "future_chain_barrier_checks": "CPU unittest evidence; head and A teacher tests",
+  "original_target_alignment_exact": true,
+  "real_fp32_full_vocab": true,
+  "smoke_optimizer_discarded": true,
+  "status": "passed",
+  "validation_improvement_gate": false,
+  "zero_residual_exact": true
+}

@@ -1,0 +1,111 @@
+{
+  "caveat": "Only H1 retrained; no same-data retrained H0/Hctx/Hgated comparison. Shared GPU times are observations, not fair speedups.",
+  "comparisons": [
+    {
+      "a": "H1",
+      "b": "Z4",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    },
+    {
+      "a": "H1",
+      "b": "H4-old",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    },
+    {
+      "a": "H1",
+      "b": "K1",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    }
+  ],
+  "expected_base_groups": 164,
+  "generation_technical_failures": [],
+  "paired_interval": "10000 base-task cluster bootstrap; 1033 lines are not independent tasks",
+  "pure_learning_recovery": {
+    "denominator": 0,
+    "matched": 0,
+    "numerator": 0,
+    "reason": "nonpositive denominator",
+    "value": null
+  },
+  "score_technical_failures": [],
+  "status": "ready_for_background",
+  "table": [
+    {
+      "N": 0,
+      "actual_submitted_count": 0,
+      "arm": "H1",
+      "delete_count": 0,
+      "duplicates": 0,
+      "expand_count": 0,
+      "forward_count": 0,
+      "head_calls": 0,
+      "missing": 1033,
+      "passed": 0,
+      "rate": null,
+      "shared_gpu_sec": 0
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12863,
+      "arm": "Z4",
+      "delete_count": 58854,
+      "duplicates": 0,
+      "expand_count": 2186,
+      "forward_count": 5396,
+      "head_calls": 5680,
+      "missing": 0,
+      "passed": 820,
+      "rate": 0.7938044530493708,
+      "shared_gpu_sec": 132.96285511972383
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12217,
+      "arm": "H4-old",
+      "delete_count": 58345,
+      "duplicates": 0,
+      "expand_count": 1624,
+      "forward_count": 4812,
+      "head_calls": 5691,
+      "missing": 0,
+      "passed": 842,
+      "rate": 0.8151016456921588,
+      "shared_gpu_sec": 120.63779841829091
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 10166,
+      "arm": "K1",
+      "delete_count": 57003,
+      "duplicates": 0,
+      "expand_count": 2,
+      "forward_count": 10166,
+      "head_calls": 0,
+      "missing": 0,
+      "passed": 949,
+      "rate": 0.9186834462729913,
+      "shared_gpu_sec": 234.24770310986787
+    }
+  ]
+}

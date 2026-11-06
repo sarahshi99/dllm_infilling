@@ -152,7 +152,9 @@ class Engine:
         return adapter(**{k: state[k] for k in fields})['delta_logits'][0, 0]
 
     @torch.inference_mode()
-    def decode(self, prefix_ids, suffix_ids, case, arm, order='global', observer=None, detailed=False):
+    def decode(self, prefix_ids, suffix_ids, case, arm, order='global', observer=None, detailed=False, requested_k=None):
+        if requested_k is not None and requested_k not in (1, 2, 4):
+            raise ValueError('requested_k must be 1, 2 or 4')
         p = len(prefix_ids)
         mask, eos, expand = self.tokenizer.mask_id, self.tokenizer.eos_id, self.tokenizer.expand_id
         maximum = min(2048, p + 64 + len(suffix_ids))
@@ -181,7 +183,7 @@ class Engine:
             deploy = distribution(full_old)
             probability = deploy.exp()
             confidence = (probability * torch.log(probability + 1e-10)).sum(-1)
-            selected_positions = select_positions(allpos.tolist(), confidence.tolist(), requested_k=1 if arm == 'K1' else 4,
+            selected_positions = select_positions(allpos.tolist(), confidence.tolist(), requested_k=requested_k or (1 if arm == 'K1' else 4),
                 policy=GLOBAL_CONFIDENCE if order == 'global' else LEFT_TO_RIGHT_FRONTIER)
             selected_positions.sort()
             ranks = [allpos.tolist().index(v) for v in selected_positions]

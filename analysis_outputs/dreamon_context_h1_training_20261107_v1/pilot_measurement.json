@@ -1,0 +1,11 @@
+{
+  "bytes": 5108164,
+  "caveat": "small fixed first trajectory; shared GPU load, lengths and bucket scarcity vary",
+  "decode_shared_sec": 0.7340526124462485,
+  "projected_cache_bytes": 280949020000,
+  "projected_collection_shared_hours": 13.738621883870413,
+  "read_sec": 0.00426215585321188,
+  "states": 4,
+  "teacher_shared_sec": 0.15167584735900164,
+  "write_sec": 0.013526790775358677
+}
