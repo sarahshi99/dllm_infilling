@@ -1,0 +1,8 @@
+{
+  "dcd_max_sec": 7200,
+  "forecast": "rough conservative factor8 includes K1/F4 relative to chain Z4; shared load and prompt lengths uncertain",
+  "mechanism_max_sec": 14400,
+  "plan_unchanged": true,
+  "rough_generation_sec": 744.8562733754516,
+  "smoke_zero_median_sec": 0.09013265650719404
+}

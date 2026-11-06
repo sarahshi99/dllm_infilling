@@ -1,0 +1,21 @@
+test_alignment_including_boundary (test_adapter.AdapterTest) ... ok
+test_corrected_structure_refresh_never_commits_guess (test_adapter.AdapterTest) ... ok
+test_finite_vocab_inverse_cdf_and_ties (test_adapter.AdapterTest) ... ok
+test_key_reproducible_independent_of_other_cases (test_adapter.AdapterTest) ... ok
+test_masks_no_future_other_chain_or_provisional (test_adapter.AdapterTest) ... ok
+test_restart_idempotence (test_adapter.AdapterTest) ... ok
+test_structure_barrier (test_adapter.AdapterTest) ... ok
+test_teacher_copy_and_no_future_leak (test_adapter.AdapterTest) ... ok
+test_teacher_never_writes_other_chain_commits (test_adapter.AdapterTest) ... ok
+test_zero_nohead_every_token_and_canvas (test_adapter.AdapterTest) ... ok
+test_budget_never_refills_and_stage_cap (test_evidence.EvidenceTest) ... ok
+test_deploy_infinite_kl_is_not_epsilon_hidden (test_evidence.EvidenceTest) ... ok
+test_group_bootstrap_and_nonpositive_recovery (test_evidence.EvidenceTest) ... ok
+test_lossless_state_dcd_log_authority_and_counterfactual (test_evidence.EvidenceTest) ... ok
+test_special_zero_delta_can_change_special_probability (test_evidence.EvidenceTest) ... ok
+test_empty_partial_export_is_auditable_and_does_not_invent_rows (test_pipeline.PipelineTest) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.292s
+
+OK

@@ -1,0 +1,9 @@
+order,history_length,span,target,actual,gap
+global,2,single,64,0,64
+global,2,crossline,64,0,64
+global,3,single,64,0,64
+global,3,crossline,64,0,64
+frontier,2,single,64,3,61
+frontier,2,crossline,64,4,60
+frontier,3,single,64,9,55
+frontier,3,crossline,64,6,58

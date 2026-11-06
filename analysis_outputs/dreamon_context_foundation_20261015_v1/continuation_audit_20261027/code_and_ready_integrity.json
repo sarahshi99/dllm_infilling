@@ -1,0 +1,11 @@
+{
+  "additional_GPU_process_started": false,
+  "frozen_code_files_verified": 21,
+  "inference_and_queue_code_changed": false,
+  "original_result_commit": "f521bd3f91719c40a1fcfda7c39f977fdd48b5be",
+  "protocol_and_DCD_ready_sha256": {
+    "dcd_ready.json": "4b76a30be267e39b8422868e2db7fe731694792fb81579083001a0b110783310",
+    "protocol_ready.json": "5d0768db39b4194aba8e5453ef32c9b7ff7e64d608f6719aa8d22149490aace2"
+  },
+  "status": "passed"
+}

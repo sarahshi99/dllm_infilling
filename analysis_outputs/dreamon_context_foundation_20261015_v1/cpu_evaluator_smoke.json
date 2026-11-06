@@ -1,0 +1,42 @@
+{
+  "assertion_failure": {
+    "cpu_load": [
+      2.7529296875,
+      3.11962890625,
+      3.205078125
+    ],
+    "evaluation_end_utc": "2026-10-26T10:36:25Z",
+    "evaluation_start_utc": "2026-10-26T10:36:25Z",
+    "evaluator_interpreter": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "evaluator_sec": 0.07700945995748043,
+    "failure_reason": "failed: ",
+    "official_evaluation": {
+      "completion_id": 0,
+      "passed": false,
+      "result": "failed: ",
+      "task_id": "BatchA/technical_cpu"
+    },
+    "passed": false
+  },
+  "correct": {
+    "cpu_load": [
+      2.7529296875,
+      3.11962890625,
+      3.205078125
+    ],
+    "evaluation_end_utc": "2026-10-26T10:36:25Z",
+    "evaluation_start_utc": "2026-10-26T10:36:25Z",
+    "evaluator_interpreter": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "evaluator_sec": 0.11013094894587994,
+    "failure_reason": "passed",
+    "official_evaluation": {
+      "completion_id": 0,
+      "passed": true,
+      "result": "passed",
+      "task_id": "BatchA/technical_cpu"
+    },
+    "passed": true
+  },
+  "status": "passed",
+  "synthetic_only": true
+}

@@ -1,0 +1,14 @@
+{
+  "cpu_technical_tests": 16,
+  "existing_dedicated_queue_detected": false,
+  "frozen_model_shards_verified": 4,
+  "frozen_tokenizer_files_verified": 6,
+  "max_eval_canvas": 620,
+  "max_source_canvas": 744,
+  "no_gpu_model_loaded_at_launch": true,
+  "normal_wait_log_verified": true,
+  "official_evaluator_synthetic_pass_failure": true,
+  "population": 1033,
+  "protocol_manifest_sha256": "7cfab0657cbf4b4fe40e76a39bb65f83bc20e0611e56f9eefbd7def38d9e493a",
+  "status": "passed"
+}

@@ -1,0 +1,13 @@
+{
+  "gpu": "single H200, GPU0",
+  "gpu_job_sec": 4946.52547959378,
+  "gpu_wait_sec": 8364.753344673198,
+  "inference": "shared GPU observations only; no F4 speedup or fair-hardware acceleration claim",
+  "policy": "cooperative existing global flock plus dedicated A lock; external processes need not honor either",
+  "stage_sec": {
+    "dcd": 89.02766675315797,
+    "generation": 725.7176314080134,
+    "mechanism": 4116.929083669558,
+    "smoke": 14.851097763050348
+  }
+}

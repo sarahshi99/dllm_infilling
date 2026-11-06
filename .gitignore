@@ -56,3 +56,14 @@ analysis_outputs/structure_coordinate_fix_20261015_v2/queue_status.json
 analysis_outputs/structure_coordinate_fix_20261015_v2/publication_status.json
 analysis_outputs/structure_coordinate_fix_20261015_v2/failure_retry_log.jsonl
 analysis_outputs/structure_coordinate_fix_20261015_v2/.*.tmp-*
+
+# Batch A context foundation: compact portable evidence only.
+analysis_outputs/dreamon_context_foundation_20261015_v1/*.log
+analysis_outputs/dreamon_context_foundation_20261015_v1/*.sqlite*
+analysis_outputs/dreamon_context_foundation_20261015_v1/*.local.json
+analysis_outputs/dreamon_context_foundation_20261015_v1/*.local.jsonl
+analysis_outputs/dreamon_context_foundation_20261015_v1/*.tmp-*
+analysis_outputs/dreamon_context_foundation_20261015_v1/queue_status.json
+analysis_outputs/dreamon_context_foundation_20261015_v1/queue_failure.json
+analysis_outputs/dreamon_context_foundation_20261015_v1/publication_status.json
+analysis_outputs/dreamon_context_foundation_20261015_v1/launch.json

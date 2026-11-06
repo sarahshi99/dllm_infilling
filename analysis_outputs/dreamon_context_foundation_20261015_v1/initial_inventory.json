@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-26T10:37:25Z",
+  "baseline_commit": "d39a51d494efc2a1d1661eb28622b18b3b741fa6",
+  "branch": "codex/dreamon-context-foundation-20261015-v1",
+  "contract_id": "dreamon-context-v1-20261015",
+  "existing_same_protocol_result": false,
+  "existing_same_queue": false,
+  "gpu": "single H200, existing external processes, free25GiB<32GiB; finite waiting required",
+  "multiline_old_counts": {
+    "B": 3087,
+    "C": 3087,
+    "D": 3114,
+    "D_minus_C": 27,
+    "K1": 3414
+  },
+  "old_completion": {
+    "equivalent_reused": 37596,
+    "logical_rows": 37722,
+    "new_generated": 126
+  },
+  "other_session": "context-heads branch observed; no files read/edited or tasks started there",
+  "primary_workspace_dirty": "untracked user artifacts preserved; isolated worktree used",
+  "remote_start_verified": "d39a51d494efc2a1d1661eb28622b18b3b741fa6",
+  "repair_commit": "560e98aa84667fbaad7ee0caae99e76fdca01275",
+  "schema_version": 1
+}

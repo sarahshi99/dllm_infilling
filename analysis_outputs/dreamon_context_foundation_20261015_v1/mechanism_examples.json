@@ -1,0 +1,970 @@
+[
+  {
+    "arm": "H4-old",
+    "case": "f589d2e494273447fafa8304e1bc954d50ff0ba6ad7ed807da07f8211174e13e:single",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "f589d2e494273447fafa8304e1bc954d50ff0ba6ad7ed807da07f8211174e13e",
+    "head": {
+      "kl_T1": 0.09984913468360901,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0002842564426828176,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 4.003541562269675e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.00028389005456119776,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.55211295754998e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 8.770794646117963e-10,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.1370338004468294e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.09579198807477951,
+      "tv_deploy": 0.0
+    },
+    "history_length": 3,
+    "hole_end_line": 10,
+    "hole_start_line": 9,
+    "maximum": 256,
+    "order": "frontier",
+    "prefix_length": 126,
+    "raw_bytes": 891906,
+    "raw_path": "states/1338cabccfd1414a1cfd31a7edec5e06939f9a85684741391485bb5a90f15400.npz",
+    "raw_sha256": "a98679e132fc5612ca3fee10c5f487f89e36336751b101dc25adfa2699fc5b1c",
+    "record_id": "f589d2e494273447fafa8304e1bc954d50ff0ba6ad7ed807da07f8211174e13e",
+    "round_index": 0,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "f589d2e494273447fafa8304e1bc954d50ff0ba6ad7ed807da07f8211174e13e:single",
+      0,
+      129,
+      "token"
+    ],
+    "selected_positions": [
+      126,
+      127,
+      128,
+      129
+    ],
+    "source_policy": "H4-old",
+    "source_seq_id": 14803987562,
+    "span": "single",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.39454832673072815,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0005585686303675175,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 4.003541562269675e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.000557882827706635,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.55211295754998e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 1.723581277701669e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.1370338004468294e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.3270041048526764,
+      "tv_deploy": 0.0
+    },
+    "state_id": "1338cabccfd1414a1cfd31a7edec5e06939f9a85684741391485bb5a90f15400",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 3,
+    "teacher_path": "teachers/1338cabccfd1414a1cfd31a7edec5e06939f9a85684741391485bb5a90f15400.npz",
+    "teacher_sha256": "cbcc23c189797b86630e9fe9c7a857ac2bbfb9d51ded1929f38b1b696c69601a",
+    "trajectory_id": "c93a9fde8a86877accefb7698547489977ca7f71150be57bf634c440a8fbf03a"
+  },
+  {
+    "arm": "Z4",
+    "case": "d29b774aaa2a04be492488a55b1c8135712a9b1219150be9cbe716ce4371eb5f:crossline",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "d29b774aaa2a04be492488a55b1c8135712a9b1219150be9cbe716ce4371eb5f",
+    "head": {
+      "kl_T1": 0.4877876341342926,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.004501669201999903,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 5.0265521167602856e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.004496657755225897,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 4.199665909254691e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 8.969634812672211e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 2.0821151469618826e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.3946279287338257,
+      "tv_deploy": 0.0
+    },
+    "history_length": 3,
+    "hole_end_line": 3,
+    "hole_start_line": 1,
+    "maximum": 161,
+    "order": "global",
+    "prefix_length": 86,
+    "raw_bytes": 973599,
+    "raw_path": "states/1ae3382c82f9af8bf4e0d257751dbdc96586a39e45ebf7d65ddb8470df4ebd4e.npz",
+    "raw_sha256": "accbe4994a8c56d04e7ff72258e8f8dbc574397b46d6804ccb29ee7fc9fc43e0",
+    "record_id": "d29b774aaa2a04be492488a55b1c8135712a9b1219150be9cbe716ce4371eb5f",
+    "round_index": 3,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "d29b774aaa2a04be492488a55b1c8135712a9b1219150be9cbe716ce4371eb5f:crossline",
+      3,
+      101,
+      "token"
+    ],
+    "selected_positions": [
+      98,
+      99,
+      100,
+      101
+    ],
+    "source_policy": "Z4",
+    "source_seq_id": 24442513016,
+    "span": "crossline",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.6284214854240417,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.004810375161468983,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 5.0265521167602856e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0048064859583973885,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 4.199665909254691e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 9.58765511427373e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 2.0821151469618826e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.47264668345451355,
+      "tv_deploy": 0.0
+    },
+    "state_id": "1ae3382c82f9af8bf4e0d257751dbdc96586a39e45ebf7d65ddb8470df4ebd4e",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 3,
+    "teacher_path": "teachers/1ae3382c82f9af8bf4e0d257751dbdc96586a39e45ebf7d65ddb8470df4ebd4e.npz",
+    "teacher_sha256": "753644b820e471cbeeb6c56c2f6cc74bbed58884848e8ff394f9f34991032783",
+    "trajectory_id": "ac9e77ff07cc84ecd840e5f0c8164cac612f36a764d134eed3923188a7c3590c"
+  },
+  {
+    "arm": "Z4",
+    "case": "acbde5de506184e6582a691acfb5956f96a353bfe059d3e42de8ec0ae8622796:single",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "acbde5de506184e6582a691acfb5956f96a353bfe059d3e42de8ec0ae8622796",
+    "head": {
+      "kl_T1": 0.0028955419547855854,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.00015423865988850594,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 4.339255974628031e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.00015372753841802478,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 4.26471269747708e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 1.7646230032752896e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.8766088683008775e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.0104745514690876,
+      "tv_deploy": 0.0
+    },
+    "history_length": 1,
+    "hole_end_line": 6,
+    "hole_start_line": 5,
+    "maximum": 181,
+    "order": "global",
+    "prefix_length": 84,
+    "raw_bytes": 889277,
+    "raw_path": "states/0f1481b5d23d378e8b9ff380f127e2e8a1aa6c332128a3a31f989cebf32a7828.npz",
+    "raw_sha256": "64b4c9915d30ae699dca4c5ae24e564f98a8018b20dac8e018ad9a34f1d126d4",
+    "record_id": "acbde5de506184e6582a691acfb5956f96a353bfe059d3e42de8ec0ae8622796",
+    "round_index": 2,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "acbde5de506184e6582a691acfb5956f96a353bfe059d3e42de8ec0ae8622796:single",
+      2,
+      93,
+      "token"
+    ],
+    "selected_positions": [
+      92,
+      93,
+      94,
+      95
+    ],
+    "source_policy": "Z4",
+    "source_seq_id": 25467484287,
+    "span": "single",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.003295871429145336,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0001266599865630269,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 4.339255974628031e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.00012608458928298205,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 4.26471269747708e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 1.447312381053223e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.8766088683008775e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.020378587767481804,
+      "tv_deploy": 0.0
+    },
+    "state_id": "0f1481b5d23d378e8b9ff380f127e2e8a1aa6c332128a3a31f989cebf32a7828",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 1,
+    "teacher_path": "teachers/0f1481b5d23d378e8b9ff380f127e2e8a1aa6c332128a3a31f989cebf32a7828.npz",
+    "teacher_sha256": "002757c48761404dd6d13dca07736813ed27d2c2b2631d1246a0729b7cce279a",
+    "trajectory_id": "7e2905d9ab1db9229d51dbda82e24f2ee47b639b28f0f915e361f319effd7fe1"
+  },
+  {
+    "arm": "Z4",
+    "case": "87e8476342c0eb5c8696980827bafa734b0a31eed695a88e5e3f39e427dcd744:single",
+    "chain_ids": [
+      0,
+      1,
+      1,
+      2
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "4c6591a65dc81e392044c39ce4aa862c2f5d51531d738781e21488577ee117a9",
+    "head": {
+      "kl_T1": 0.19161300361156464,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0012012450024485588,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 1.6278758266707882e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0011787019902840257,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.3548545211961027e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 7.786093902950597e-08,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 6.876418101597892e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.18650157749652863,
+      "tv_deploy": 0.0
+    },
+    "history_length": 1,
+    "hole_end_line": 21,
+    "hole_start_line": 20,
+    "maximum": 382,
+    "order": "global",
+    "prefix_length": 277,
+    "raw_bytes": 956348,
+    "raw_path": "states/107ef1021653a4e436d94f6df49af499c7d3ba4d8cf29123513e62f577353934.npz",
+    "raw_sha256": "de411e76b5de5d5a2c69ed4a94e26e27a4bf96900c022d5c80010d50e198c932",
+    "record_id": "87e8476342c0eb5c8696980827bafa734b0a31eed695a88e5e3f39e427dcd744",
+    "round_index": 0,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "87e8476342c0eb5c8696980827bafa734b0a31eed695a88e5e3f39e427dcd744:single",
+      0,
+      280,
+      "token"
+    ],
+    "selected_positions": [
+      277,
+      279,
+      280,
+      282
+    ],
+    "source_policy": "Z4",
+    "source_seq_id": 5035405305,
+    "span": "single",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.39878568053245544,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0011302559869363904,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 1.6278758266707882e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0011013603070750833,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.3548545211961027e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 7.275205149426256e-08,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 6.876418101597892e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.3400423228740692,
+      "tv_deploy": 0.0
+    },
+    "state_id": "107ef1021653a4e436d94f6df49af499c7d3ba4d8cf29123513e62f577353934",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 2,
+    "teacher_path": "teachers/107ef1021653a4e436d94f6df49af499c7d3ba4d8cf29123513e62f577353934.npz",
+    "teacher_sha256": "8168050d2d340b7fb68ab8108eb29cdb3f3884c1fca26aa274f6463cfdbd84d6",
+    "trajectory_id": "4a695540c57165e938d6e425dd6c443f111673ec7be99eaedfdcaab58cad0377"
+  },
+  {
+    "arm": "H4-old",
+    "case": "2f5b5a6ea1d705e873bbc33d2e3eaf50f706330fec61c410714007330f54a6d4:crossline",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "2f5b5a6ea1d705e873bbc33d2e3eaf50f706330fec61c410714007330f54a6d4",
+    "head": {
+      "kl_T1": 0.16749358177185059,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0005286888917908072,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 3.985822695540264e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0005276133888401091,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.9331156585831195e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 3.241771961981499e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.3269686460759544e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.15585803985595703,
+      "tv_deploy": 0.0
+    },
+    "history_length": 2,
+    "hole_end_line": 4,
+    "hole_start_line": 2,
+    "maximum": 236,
+    "order": "frontier",
+    "prefix_length": 73,
+    "raw_bytes": 906471,
+    "raw_path": "states/10b677ca3ecff80267ccf4739fc173d81c49cace9e4c4f7961023561adea9788.npz",
+    "raw_sha256": "a3524e83d153af38eda72fe2e89047b57371fe971041a4f979c5099e526b7e5e",
+    "record_id": "2f5b5a6ea1d705e873bbc33d2e3eaf50f706330fec61c410714007330f54a6d4",
+    "round_index": 1,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "2f5b5a6ea1d705e873bbc33d2e3eaf50f706330fec61c410714007330f54a6d4:crossline",
+      1,
+      79,
+      "token"
+    ],
+    "selected_positions": [
+      77,
+      78,
+      79,
+      80
+    ],
+    "source_policy": "H4-old",
+    "source_seq_id": 6113131889,
+    "span": "crossline",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.16120651364326477,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0005154632381163538,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 3.985822695540264e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0005142050795257092,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.9331156585831195e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 3.159388306528399e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 1.3269686460759544e-09,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.15072590112686157,
+      "tv_deploy": 0.0
+    },
+    "state_id": "10b677ca3ecff80267ccf4739fc173d81c49cace9e4c4f7961023561adea9788",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 2,
+    "teacher_path": "teachers/10b677ca3ecff80267ccf4739fc173d81c49cace9e4c4f7961023561adea9788.npz",
+    "teacher_sha256": "e98a62ea874e7481517dede266848a14ca8016db43d6112fe78cb0bedc577c8a",
+    "trajectory_id": "82f00b1f479a80911a74ca4d28fc33940f120d0bd630ed64c5a2fb8acdbfcf14"
+  },
+  {
+    "arm": "Z4",
+    "case": "48aae5d06f81009e3705ee12d844034332a3a722470e7ca3574c2b6a2d7c2895:single",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "48aae5d06f81009e3705ee12d844034332a3a722470e7ca3574c2b6a2d7c2895",
+    "head": {
+      "kl_T1": 0.11054050177335739,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.00029705913038924336,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 2.3893753677839413e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0002965618623420596,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 2.3513717678724788e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 1.1402654376269084e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 9.569197656489337e-10,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.10588914901018143,
+      "tv_deploy": 0.0
+    },
+    "history_length": 3,
+    "hole_end_line": 14,
+    "hole_start_line": 13,
+    "maximum": 312,
+    "order": "global",
+    "prefix_length": 147,
+    "raw_bytes": 979733,
+    "raw_path": "states/0191a7167006c1328cafebf71683d922961b02a3f5d2c7004170846613d2a034.npz",
+    "raw_sha256": "736c6bed3357a1b1c4606d977007afc686459d483e0ab542474ff39ec7147034",
+    "record_id": "48aae5d06f81009e3705ee12d844034332a3a722470e7ca3574c2b6a2d7c2895",
+    "round_index": 1,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "48aae5d06f81009e3705ee12d844034332a3a722470e7ca3574c2b6a2d7c2895:single",
+      1,
+      154,
+      "token"
+    ],
+    "selected_positions": [
+      151,
+      152,
+      153,
+      154
+    ],
+    "source_policy": "Z4",
+    "source_seq_id": 35066876287,
+    "span": "single",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.4261679947376251,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.0005578739219345152,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 2.3893753677839413e-05,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 0.0005570205394178629,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 2.3513717678724788e-05,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 2.1417159157266497e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 9.569197656489337e-10,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.34839457273483276,
+      "tv_deploy": 0.0
+    },
+    "state_id": "0191a7167006c1328cafebf71683d922961b02a3f5d2c7004170846613d2a034",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 3,
+    "teacher_path": "teachers/0191a7167006c1328cafebf71683d922961b02a3f5d2c7004170846613d2a034.npz",
+    "teacher_sha256": "55030a1d4f0bf21f1e7462626e63d8d3eae7a8b0a2e9d1405c68b24a8925a94a",
+    "trajectory_id": "1d5fce8597f77132f2c77be24828c279ab0078e1e2112b6cc618c75e918a8402"
+  },
+  {
+    "arm": "H4-old",
+    "case": "a47eeec00e54275f80750209ebd40e3c59492fad57bcfbeb08d87be430f23af5:single",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_length": 64,
+    "expand_masked": true,
+    "group": "8f37c7cbd9fdfa856b53d9419c1e01165e29e09e4b85100e5795def9b2dc2b58",
+    "head": {
+      "kl_T1": 0.0008980058482848108,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 7.05403508618474e-05,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 7.76345405029133e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 7.030780398054048e-05,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 7.63805383030558e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 5.722885498826713e-10,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.1573504921666995e-10,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.0014845883706584573,
+      "tv_deploy": 0.0
+    },
+    "history_length": 1,
+    "hole_end_line": 6,
+    "hole_start_line": 5,
+    "maximum": 167,
+    "order": "frontier",
+    "prefix_length": 87,
+    "raw_bytes": 869177,
+    "raw_path": "states/09037de82500b3fa15cc24f319b210de9b557c5f13494edbc1517ceffdfb0ab0.npz",
+    "raw_sha256": "cdc67de1f10e68257dc9a44216c5c9822ae94cda54b9662ffe99a61ade7b4d4e",
+    "record_id": "a47eeec00e54275f80750209ebd40e3c59492fad57bcfbeb08d87be430f23af5",
+    "round_index": 0,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "a47eeec00e54275f80750209ebd40e3c59492fad57bcfbeb08d87be430f23af5:single",
+      0,
+      88,
+      "token"
+    ],
+    "selected_positions": [
+      87,
+      88,
+      89,
+      90
+    ],
+    "source_policy": "H4-old",
+    "source_seq_id": 70926858402,
+    "span": "single",
+    "split": "train",
+    "stage": "early",
+    "stale": {
+      "kl_T1": 0.0008263176423497498,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 5.833488830830902e-05,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 7.76345405029133e-06,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 5.8146582887275144e-05,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 7.63805383030558e-06,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 4.732987335387406e-10,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 3.1573504921666995e-10,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.0,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.0,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.0014268647646531463,
+      "tv_deploy": 0.0
+    },
+    "state_id": "09037de82500b3fa15cc24f319b210de9b557c5f13494edbc1517ceffdfb0ab0",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 1,
+    "teacher_path": "teachers/09037de82500b3fa15cc24f319b210de9b557c5f13494edbc1517ceffdfb0ab0.npz",
+    "teacher_sha256": "f9bd860209ce7421e5ff902e7bc4b3bb9ad75bca6a1e2ca886ec2e41f8097b48",
+    "trajectory_id": "4e85528f56ba3fa09d4e7da77eaa7010882d0a1dec2852913af03dd337329fa0"
+  },
+  {
+    "arm": "Z4",
+    "case": "99cd440f381b1882d909b9fa8bc30e590cd7d2c32fdef6c653a16fddcc1604de:single",
+    "chain_ids": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "dynamic_length": 33,
+    "expand_masked": false,
+    "group": "0276e7af427679066b40310e3f88395cdc172e3bc9bad151d44e6a7d337acd4f",
+    "head": {
+      "kl_T1": 0.2842289209365845,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.24667155742645264,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 0.00012339575914666057,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 3.489102482490125e-07,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 7.348218145075691e-10,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 9.20639953161384e-10,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 6.982297986318775e-12,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.24667075276374817,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.00012339226668700576,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.24816587567329407,
+      "tv_deploy": 0.0
+    },
+    "history_length": 2,
+    "hole_end_line": 9,
+    "hole_start_line": 8,
+    "maximum": 332,
+    "order": "global",
+    "prefix_length": 230,
+    "raw_bytes": 920224,
+    "raw_path": "states/18eb1d1c7460a09f11fb6d75937bc0391f640787db602ac86276a678fc812361.npz",
+    "raw_sha256": "67904f9c47925fea56889bdf791e4f7d6930ee3d7aac901b27d85738cf9a004f",
+    "record_id": "99cd440f381b1882d909b9fa8bc30e590cd7d2c32fdef6c653a16fddcc1604de",
+    "round_index": 54,
+    "sampling_key": [
+      "dreamon-context-v1-20261015",
+      42,
+      "99cd440f381b1882d909b9fa8bc30e590cd7d2c32fdef6c653a16fddcc1604de:single",
+      54,
+      256,
+      "token"
+    ],
+    "selected_positions": [
+      254,
+      255,
+      256,
+      258
+    ],
+    "source_policy": "Z4",
+    "source_seq_id": 3088610045,
+    "span": "single",
+    "split": "train",
+    "stage": "late",
+    "stale": {
+      "kl_T1": 0.3878173232078552,
+      "kl_deploy": 0.0,
+      "special_estimate_T1": 0.3201175630092621,
+      "special_estimate_deploy": 0.0,
+      "special_teacher_T1": 0.00012339575914666057,
+      "special_teacher_deploy": 0.0,
+      "structural_token_probabilities": {
+        "151643": {
+          "estimate_T1": 4.527980763668893e-07,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 7.348218145075691e-10,
+          "teacher_deploy": 0.0
+        },
+        "151666": {
+          "estimate_T1": 1.1947600686568194e-09,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 6.982297986318775e-12,
+          "teacher_deploy": 0.0
+        },
+        "151667": {
+          "estimate_T1": 0.32011663913726807,
+          "estimate_deploy": 0.0,
+          "teacher_T1": 0.00012339226668700576,
+          "teacher_deploy": 0.0
+        }
+      },
+      "support_estimate_only": 0,
+      "support_estimate_only_mass": 0.0,
+      "support_estimate_size": 1,
+      "support_teacher_only": 0,
+      "support_teacher_only_mass": 0.0,
+      "support_teacher_size": 1,
+      "tv_T1": 0.32217085361480713,
+      "tv_deploy": 0.0
+    },
+    "state_id": "18eb1d1c7460a09f11fb6d75937bc0391f640787db602ac86276a678fc812361",
+    "storage": "FP32 logits, lossless npz; exact BF16 hidden converted to FP32; no quantization",
+    "target_slot": 2,
+    "teacher_path": "teachers/18eb1d1c7460a09f11fb6d75937bc0391f640787db602ac86276a678fc812361.npz",
+    "teacher_sha256": "e6cab0baebfb556702ab9ba0b2f064eb539adacb063f154f4fc5e4af33d0a5ed",
+    "trajectory_id": "d2e7b9ac7b6a8550aef9a0872cf7d27a9433f500b00a12f916038c72c5ecd47b"
+  }
+]

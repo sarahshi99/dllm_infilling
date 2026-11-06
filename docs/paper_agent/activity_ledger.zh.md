@@ -528,3 +528,16 @@
 - 训练计划、exact command、kill criteria与恢复入口：experiments/context_heads_v1/training_v1/README.zh.md。单H200 GPU0共享（其他进程保留），allocator上限8GiB、CPU线程4、worker墙时上限3600s；每64步保存last，每头比较initial/final验证KL并保存best。代码提交后启动tmux dreamon_context_heads_train_20261028_v1，实际PID/step/完成情况以外部cache的status.json/summary.json/exit.json为准，不能把计划当已完成。
 
 2026-10-28 B pilot实际完成：训练源码a6541f6，GPU worker PID405195于07:33:33Z启动、07:35:03Z正常退出；七头各144步/1epoch，总1008步，worker墙时89.13秒（含验证/写盘，不是推理测速）。旧logits验证KL0.373785；新训H0/Hctx/Hgated/H1/H2/H3/H4末点KL分别0.370023/0.350822/0.370229/0.367397/0.346641/0.349393/0.421928。H4退化，best_step=0未训练初始权重保留，已训练last144步仍保存；未追加轮次或调参。14个checkpoint的模型/计划/步数/有限FP32参数与Adam状态核验通过，GPU已释放，其他进程保留。结果和完整分桶见training_v1/report.zh.md、artifacts/training_summary.json，外部权重不进git。完成后重复调用已实测不初始化GPU、不覆盖六份运行记录；无新训练。原B20项payload与接入补验9项payload保持不变；新manifest和B_training_done仅单独交付本训练pilot。不是代码通过率或端到端加速结论。
+## 2026-10-26 第一批A context foundation 协议及有限队列实现
+
+起点d39a51d（坐标修补560e98a已完成）新建codex/dreamon-context-foundation-20261015-v1。独立common-u采样/目标对齐H0契约、合法同链teacher状态采集器、反事实/DCD和K1/Z4/H4-old/F4-chain队列已实现；原旧采样器/结果和其他worktree不动。源106491成员/split/排除关系核查，8060盲轨迹冻结；16项CPU技术测试通过，真实GPU smoke尚待资源。GPU总上限12h，A1/A2最多4h、DCD最多2h，累计等待最多24h，单H200单worker。执行与恢复bash scripts/launch_context_foundation_queue.sh；协议/报告analysis_outputs/dreamon_context_foundation_20261015_v1/，具体设计docs/paper_agent/context_foundation_20261015_v1/plan.zh.md。无新头训练、第二批、思维导图修改；reviewer_gate_disabled，本地diff review及fresh verification。
+
+2026-10-26T10:39Z 第一批A已实际启动：tmux dreamon_context_foundation_20261015_v1，controller PID470433、worker PID471126，正常等待>=32GiB显存/现有GPU锁日志已核验；当前GPU作业0h。protocol_ready已原子发布，精确恢复analysis_outputs/dreamon_context_foundation_20261015_v1/launch.zh.md；启动不是实验完成。实现a46204a、协议46e5efb，后台自动按固定顺序完成或记录预算/覆盖缺口后CPU收尾退出。
+
+## 2026-10-26 第一批A context foundation 自动收尾
+
+状态partial；A1=3072/3072、A2=22/512、DCD=256/256、评分=4132/4132。证据analysis_outputs/dreamon_context_foundation_20261015_v1/report.zh.md；单H200有限预算，无训练/第二批/思维导图修改。
+
+## 2026-10-27 第一批A继续：CPU交付审计与A2缺口澄清
+
+原队列已退出并推送f521bd3；A1=3072、DCD=256、评分4132均完整，GPU累计1.3740h。F4/旧头/零头/K1通过912/842/820/949，F4−旧头救回78/改错8、净+70。CPU重核6422原始分片hash、完整逐行/配对计数/DCD数值字段及16测试通过。A2封存512母状态中最早干预词490为单词支持，合法已计算22对均来自frontier（21源组）；允许其它更早槽位也仅32母状态可干预，其中额外10未运行。保持partial，不补造、升温、扩大top-p或替换母状态；本次0 GPU/0模型调用。原协议、DCD、结果报告不改，追加新报告analysis_outputs/dreamon_context_foundation_20261015_v1/continuation_audit_20261027/report.zh.md；不启动第二批或训练、不改思维导图。

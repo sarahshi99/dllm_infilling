@@ -1,0 +1,13 @@
+order,history_length,span,target,actual,train,validation,train_target,validation_target,zero_origin,old_head_origin,max_per_group,gap
+global,1,single,256,256,192,64,192,64,128,128,4,0
+global,1,crossline,256,256,192,64,192,64,128,128,5,0
+global,2,single,256,256,192,64,192,64,128,128,5,0
+global,2,crossline,256,256,192,64,192,64,128,128,4,0
+global,3,single,256,256,192,64,192,64,128,128,4,0
+global,3,crossline,256,256,192,64,192,64,128,128,3,0
+frontier,1,single,256,256,192,64,192,64,128,128,4,0
+frontier,1,crossline,256,256,192,64,192,64,128,128,4,0
+frontier,2,single,256,256,192,64,192,64,128,128,3,0
+frontier,2,crossline,256,256,192,64,192,64,128,128,3,0
+frontier,3,single,256,256,192,64,192,64,128,128,5,0
+frontier,3,crossline,256,256,192,64,192,64,128,128,3,0

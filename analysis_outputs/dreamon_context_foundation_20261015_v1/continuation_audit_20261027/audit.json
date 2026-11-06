@@ -1,0 +1,139 @@
+{
+  "A1": {
+    "actual": 3072,
+    "old_head_origin": 1536,
+    "train": 2304,
+    "validation": 768,
+    "zero_origin": 1536
+  },
+  "A2": {
+    "any_earlier_slot_feasible": 32,
+    "cells": {
+      "frontier|2|crossline": {
+        "any_earlier_slot_feasible": 4,
+        "earliest_slot_feasible": 4,
+        "earliest_slot_singleton": 60,
+        "parents": 64
+      },
+      "frontier|2|single": {
+        "any_earlier_slot_feasible": 3,
+        "earliest_slot_feasible": 3,
+        "earliest_slot_singleton": 61,
+        "parents": 64
+      },
+      "frontier|3|crossline": {
+        "any_earlier_slot_feasible": 12,
+        "earliest_slot_feasible": 6,
+        "earliest_slot_singleton": 58,
+        "parents": 64
+      },
+      "frontier|3|single": {
+        "any_earlier_slot_feasible": 13,
+        "earliest_slot_feasible": 9,
+        "earliest_slot_singleton": 55,
+        "parents": 64
+      },
+      "global|2|crossline": {
+        "any_earlier_slot_feasible": 0,
+        "earliest_slot_feasible": 0,
+        "earliest_slot_singleton": 64,
+        "parents": 64
+      },
+      "global|2|single": {
+        "any_earlier_slot_feasible": 0,
+        "earliest_slot_feasible": 0,
+        "earliest_slot_singleton": 64,
+        "parents": 64
+      },
+      "global|3|crossline": {
+        "any_earlier_slot_feasible": 0,
+        "earliest_slot_feasible": 0,
+        "earliest_slot_singleton": 64,
+        "parents": 64
+      },
+      "global|3|single": {
+        "any_earlier_slot_feasible": 0,
+        "earliest_slot_feasible": 0,
+        "earliest_slot_singleton": 64,
+        "parents": 64
+      }
+    },
+    "complete": 22,
+    "decision": "no temperature/top-p changes, parent replacement, copied pairs or new GPU work; retain partial",
+    "distinction": "22 is feasible under the sealed earliest-token rule; 32 is a CPU support audit only, not 32 computed intervention pairs",
+    "earliest_slot_no_alternative": 490,
+    "fixed_parents": 512,
+    "gap_reason": "normal deployment T=.2/top-p=.9 ordinary support is singleton at frozen earliest intervention slot",
+    "not_run_other_slot_interventions": 10
+  },
+  "DCD": {
+    "candidate_and_special_mass_consistent": true,
+    "cells": {
+      "frontier|crossline|train": 48,
+      "frontier|crossline|validation": 16,
+      "frontier|single|train": 48,
+      "frontier|single|validation": 16,
+      "global|crossline|train": 48,
+      "global|crossline|validation": 16,
+      "global|single|train": 48,
+      "global|single|validation": 16
+    },
+    "log_fields_finite": true,
+    "object_arrays": false,
+    "probability_log_agreement": true,
+    "rows": 256,
+    "status": "passed"
+  },
+  "additional_gpu_sec": 0,
+  "additional_model_calls": 0,
+  "at": "2026-10-27T14:08:28Z",
+  "contract_id": "dreamon-context-v1-20261015",
+  "generation": {
+    "arms": {
+      "F4-chain": {
+        "passed": 912,
+        "scored": 1033
+      },
+      "H4-old": {
+        "passed": 842,
+        "scored": 1033
+      },
+      "K1": {
+        "passed": 949,
+        "scored": 1033
+      },
+      "Z4": {
+        "passed": 820,
+        "scored": 1033
+      }
+    },
+    "detailed_cases_per_arm": 32,
+    "duplicates": 0,
+    "fresh_harm_failure_reasons": {
+      "failed: ": 3,
+      "failed: Test 3": 1,
+      "failed: expected 'else' after 'if' expression (<string>, line 12)": 1,
+      "failed: invalid syntax (<string>, line 18)": 1,
+      "failed: invalid syntax (<string>, line 20)": 1,
+      "failed: name 'new' is not defined": 1
+    },
+    "generated_and_scored_outputs_equal": true,
+    "logical_rows": 4132,
+    "missing": 0,
+    "paired_counts_recomputed": true,
+    "status": "passed"
+  },
+  "gpu_budget_used_sec": 4946.52547959378,
+  "manifest_files_verified": {
+    "A_manifest.json": 44,
+    "dcd_manifest.json": 2,
+    "protocol_manifest.json": 5
+  },
+  "mechanism_budget_used_sec": 4116.929083669558,
+  "original_inference_code_and_artifacts_unchanged": true,
+  "original_result_commit": "f521bd3f91719c40a1fcfda7c39f977fdd48b5be",
+  "raw_shards_verified": 6422,
+  "schema_version": 1,
+  "source_commit": "f521bd3f91719c40a1fcfda7c39f977fdd48b5be",
+  "status": "verified_partial"
+}

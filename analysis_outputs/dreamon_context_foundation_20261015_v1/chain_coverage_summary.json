@@ -1,0 +1,50 @@
+{
+  "frontier": {
+    "actually_visited_prefix_opportunities": {
+      "base_structure": 4027,
+      "candidate_duplicate_other_origin_or_order": 10432,
+      "candidate_hash_or_group_quota_not_retained": 23320,
+      "candidate_ineligible_history_length": 15105,
+      "candidate_retained_by_blind_hash": 4960,
+      "corrected_structure_refresh_only": 71,
+      "eligible_prefix_0": 15105,
+      "eligible_prefix_1": 13850,
+      "eligible_prefix_2": 12942,
+      "eligible_prefix_3": 11920
+    },
+    "all_selected_slots": 60420,
+    "chain_length_counts": {
+      "4": 15105
+    },
+    "potential_correction_slots": 45315,
+    "scope": "all encountered rounds, including barriers/gaps; distinct from selected long-chain subset",
+    "slots_in_chains_at_least2": 60420,
+    "trajectory_count": 4030
+  },
+  "global": {
+    "actually_visited_prefix_opportunities": {
+      "base_structure": 8799,
+      "candidate_duplicate_other_origin_or_order": 9852,
+      "candidate_hash_or_group_quota_not_retained": 20920,
+      "candidate_ineligible_history_length": 24765,
+      "candidate_retained_by_blind_hash": 4672,
+      "corrected_structure_refresh_only": 53,
+      "eligible_prefix_0": 24765,
+      "eligible_prefix_1": 14601,
+      "eligible_prefix_2": 11738,
+      "eligible_prefix_3": 9105,
+      "round_with_gaps": 5964
+    },
+    "all_selected_slots": 78644,
+    "chain_length_counts": {
+      "1": 6726,
+      "2": 4040,
+      "3": 3438,
+      "4": 13381
+    },
+    "potential_correction_slots": 51059,
+    "scope": "all encountered rounds, including barriers/gaps; distinct from selected long-chain subset",
+    "slots_in_chains_at_least2": 71918,
+    "trajectory_count": 4030
+  }
+}
