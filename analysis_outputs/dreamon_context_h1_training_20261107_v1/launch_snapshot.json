@@ -1,0 +1,22 @@
+{
+  "tmux": "dreamon_h1_20261107_v1",
+  "launch_command": "tmux new-session -d -s dreamon_h1_20261107_v1 -c /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-training-20261107-v1 'bash experiments/context_h1_training_v1/launch.sh'",
+  "progress_snapshot": {
+    "at": "2026-11-06T20:00:26Z",
+    "completed": 415,
+    "last_decode_shared_sec": 0.1919018868356943,
+    "last_teacher_shared_sec": 0.0,
+    "last_trajectory_states": 0,
+    "observed_seconds_per_state": 0.23968600997230016,
+    "pid": 1893907,
+    "rough_remaining_shared_hours": 14.619847916602092,
+    "stage": "collection",
+    "target": 220000,
+    "trajectories": 163
+  },
+  "code_commit": "b09e678b7d45225f2db9a9cceae527933231460b",
+  "log": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/pipeline.log",
+  "run": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1",
+  "resume_command": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-training-20261107-v1 && tmux new-session -d -s dreamon_h1_20261107_v1 'bash experiments/context_h1_training_v1/launch.sh'",
+  "note": "Observed collection ETA only; not total completion forecast. One GPU worker shares physical GPU0; no other processes modified."
+}

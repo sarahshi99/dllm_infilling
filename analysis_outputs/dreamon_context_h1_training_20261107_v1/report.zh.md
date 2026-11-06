@@ -39,3 +39,6 @@ H1−K1：配对0，救回0、改错0；差值百分点评估区间None。
 本轮没有训练H0/Hctx/Hgated/H2/H3/H4，没有自身轨迹补训、超参搜索或多seed。
 
 代码提交：bac2b3d9add68a8ac9dca9922441199da1be0886；恢复：`bash experiments/context_h1_training_v1/launch.sh`。
+
+
+后台启动确认：tmux dreamon_h1_20261107_v1；PID 1893907，采集415/220000，轨迹163；当前采集线性外推14.62h，不含训练/评测，稀缺桶和共享负载可能延长。47项CPU检查、真实FP32学习/对齐检查和官方评分器复测均通过。代码b09e678已推送。启动快照与完整恢复命令见launch_snapshot.json。尚未开始正式优化器训练，不声称足额/提升/最终生成结果。

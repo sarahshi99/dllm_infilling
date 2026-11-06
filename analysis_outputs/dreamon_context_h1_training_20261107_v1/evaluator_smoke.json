@@ -1,0 +1,24 @@
+{
+  "reference_outcome_agrees": true,
+  "result": {
+    "cpu_load": [
+      3.5087890625,
+      3.17529296875,
+      2.9619140625
+    ],
+    "evaluation_end_utc": "2026-11-06T19:59:46Z",
+    "evaluation_start_utc": "2026-11-06T19:59:46Z",
+    "evaluator_interpreter": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "evaluator_sec": 0.08149993140250444,
+    "failure_reason": "passed",
+    "official_evaluation": {
+      "completion_id": 0,
+      "passed": true,
+      "result": "passed",
+      "task_id": "SingleLineInfilling/HumanEval/0/L0"
+    },
+    "passed": true
+  },
+  "status": "passed",
+  "task_id": "SingleLineInfilling/HumanEval/0/L0"
+}
