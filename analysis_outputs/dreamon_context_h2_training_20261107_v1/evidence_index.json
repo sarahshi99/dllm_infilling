@@ -1,6 +1,6 @@
 {
   "checkpoints": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/checkpoints",
-  "code_commit": "9aff4553c3ec955b96704e8f404a0cd785a5a272",
+  "code_commit": "5e8f5533ca98dda4af495c2909a9498faa3f7d8f",
   "exit": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/exit.json",
   "gpu": "single worker, shared cuda:0",
   "implementation": "B fca5775 heads.py H2-GRU unchanged",

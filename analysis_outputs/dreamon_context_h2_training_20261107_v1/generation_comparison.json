@@ -4,41 +4,71 @@
     {
       "a": "H2",
       "b": "Z4",
-      "ci95": null,
-      "groups": 0,
-      "harm": 0,
-      "help": 0,
-      "matched": 0,
-      "mean": null,
-      "n": 0,
-      "net": 0
+      "ci95": [
+        1.1473920740381969,
+        4.875775311290397
+      ],
+      "equal_group_ci95": [
+        0.23727364669277423,
+        7.365583709143159
+      ],
+      "equal_group_mean": 3.6788320882512155,
+      "groups": 164,
+      "harm": 25,
+      "help": 56,
+      "matched": 1033,
+      "mean": 3.000968054211036,
+      "n": 1033,
+      "net": 31,
+      "replicates": 10000,
+      "seed": 20261015
     },
     {
       "a": "H2",
       "b": "H4-old",
-      "ci95": null,
-      "groups": 0,
-      "harm": 0,
-      "help": 0,
-      "matched": 0,
-      "mean": null,
-      "n": 0,
-      "net": 0
+      "ci95": [
+        -0.7554296506137866,
+        2.480940699574508
+      ],
+      "equal_group_ci95": [
+        -2.363114201003183,
+        3.5451265420397204
+      ],
+      "equal_group_mean": 0.5516859645992929,
+      "groups": 164,
+      "harm": 29,
+      "help": 38,
+      "matched": 1033,
+      "mean": 0.8712487899322362,
+      "n": 1033,
+      "net": 9,
+      "replicates": 10000,
+      "seed": 20261015
     },
     {
       "a": "H2",
       "b": "K1",
-      "ci95": null,
-      "groups": 0,
-      "harm": 0,
-      "help": 0,
-      "matched": 0,
-      "mean": null,
-      "n": 0,
-      "net": 0
+      "ci95": [
+        -11.883253996046985,
+        -7.283429234807189
+      ],
+      "equal_group_ci95": [
+        -15.15915499542829,
+        -8.538379901415444
+      ],
+      "equal_group_mean": -11.674689940578459,
+      "groups": 164,
+      "harm": 106,
+      "help": 8,
+      "matched": 1033,
+      "mean": -9.486931268151016,
+      "n": 1033,
+      "net": -98,
+      "replicates": 10000,
+      "seed": 20261015
     }
   ],
-  "complete_population": false,
+  "complete_population": true,
   "generation_technical_failures": [],
   "h1": {
     "reason": "H1 has 6/1033 scored lines; H1 generation dtype failures require separate H1 repair",
@@ -46,30 +76,38 @@
   },
   "paired_interval": "10000 paired cluster bootstrap by 164 base tasks",
   "pure_learning_recovery": {
-    "matched": 0,
-    "reason": "no_matched_triples",
-    "value": null
+    "bootstrap_total": 10000,
+    "bootstrap_valid": 10000,
+    "ci95_positive_denominator": [
+      0.1,
+      0.36943021323733033
+    ],
+    "denominator": 129,
+    "matched": 1033,
+    "numerator": 31,
+    "reason": "defined",
+    "value": 0.24031007751937986
   },
   "score_technical_failures": [],
-  "status": "ready_for_background",
+  "status": "complete",
   "table": [
     {
-      "N": 0,
-      "actual_submitted_count": 0,
+      "N": 1033,
+      "actual_submitted_count": 11694,
       "arm": "H2",
-      "base_groups": 0,
-      "delete_count": 0,
+      "base_groups": 164,
+      "delete_count": 58250,
       "duplicates": 0,
-      "expand_count": 0,
-      "forward_count": 0,
-      "generation_shared_gpu_sec": 0,
-      "gru_active_record_updates": 0,
-      "gru_cell_calls": 0,
-      "gru_executed_rows": 0,
-      "head_calls": 0,
-      "missing": 1033,
-      "passed": 0,
-      "rate": null
+      "expand_count": 1324,
+      "forward_count": 4499,
+      "generation_shared_gpu_sec": 219.4201810695231,
+      "gru_active_record_updates": 10046,
+      "gru_cell_calls": 22354,
+      "gru_executed_rows": 22354,
+      "head_calls": 5608,
+      "missing": 0,
+      "passed": 851,
+      "rate": 0.8238141335914811
     },
     {
       "N": 1033,

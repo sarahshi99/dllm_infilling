@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-07T18:46:21Z",
+  "exit_code": 0,
+  "phase": "evaluation",
+  "reason": null,
+  "resume": "bash experiments/context_h2_training_v1/launch.sh",
+  "status": "complete",
+  "training_complete": true
+}

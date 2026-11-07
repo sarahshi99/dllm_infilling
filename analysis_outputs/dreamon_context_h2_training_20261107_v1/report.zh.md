@@ -1,6 +1,6 @@
 # H2 上下文＋GRU多词记忆头正式训练
 
-状态：ready_for_background；完整1033评测：False。
+状态：complete；完整1033评测：True。
 
 公共库：H1 formal 20261107（9aff455），原地只读，不采集、不复制。实际规模、源组及32桶见data_summary.json。
 
@@ -20,7 +20,7 @@
 
 |---|---:|---:|---:|
 
-|H2|0/0|None|1033|
+|H2|851/1033|0.8238141335914811|0|
 
 |Z4|820/1033|0.7938044530493708|0|
 
@@ -28,13 +28,15 @@
 
 |K1|949/1033|0.9186834462729913|0|
 
-H2−Z4：配对0；救回0、改错0，净差0；百分点区间None。
+best epoch=4，初始权重=False；last epoch=5；第5轮仍明显改善=False，未加轮。曲线见curve.json；完整分桶、源等权、T1 KL/TV、部署TV及固定随机采样变化见validation_epoch_*.json。
 
-H2−H4-old：配对0；救回0、改错0，净差0；百分点区间None。
+H2−Z4：配对1033；救回56、改错25，净差31；百分点区间[1.1473920740381969, 4.875775311290397]。
 
-H2−K1：配对0；救回0、改错0，净差0；百分点区间None。
+H2−H4-old：配对1033；救回38、改错29，净差9；百分点区间[-0.7554296506137866, 2.480940699574508]。
 
-纯学习恢复比例：{'matched': 0, 'value': None, 'reason': 'no_matched_triples'}（分母非正不报告）。
+H2−K1：配对1033；救回8、改错106，净差-98；百分点区间[-11.883253996046985, -7.283429234807189]。
+
+纯学习恢复比例：{'matched': 1033, 'numerator': 31, 'denominator': 129, 'value': 0.24031007751937986, 'reason': 'defined', 'ci95_positive_denominator': [0.1, 0.36943021323733033], 'bootstrap_valid': 10000, 'bootstrap_total': 10000}（分母非正不报告）。
 
 H1配对：{'status': 'pending', 'reason': 'H1 has 6/1033 scored lines; H1 generation dtype failures require separate H1 repair'}。
 
@@ -42,11 +44,6 @@ H1配对：{'status': 'pending', 'reason': 'H1 has 6/1033 scored lines; H1 gener
 
 No same-data retrained Hctx control: H2 improvements alone do not establish multi-token memory causality. Shared GPU times are observations only.
 
-代码：9aff4553c3ec955b96704e8f404a0cd785a5a272；服务器证据：/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1；精确路径见evidence_index.json。
+代码：5e8f5533ca98dda4af495c2909a9498faa3f7d8f；服务器证据：/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1；精确路径见evidence_index.json。
 
 恢复（保留checkpoint及数据游标，不重训已完成阶段）：`bash experiments/context_h2_training_v1/launch.sh`。
-
-
-## 后台启动记录（2026-11-08 北京时间）
-
-代码980f743已推送；tmux dreamon_h2_20261107_v1，PID93850，公共库已就绪，正式训练流程启动。启动快照见launch_snapshot.json。单GPU进程，共享cuda:0；训练未加载DreamOn。52项CPU、真实库和真实DreamOn零头检查通过；3个控制3099行已复用。短测训练更新外推约1.85小时，不含完整验证/生成/评分，共享负载不稳定，不作为整批完成承诺。
