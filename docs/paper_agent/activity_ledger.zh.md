@@ -551,3 +551,8 @@
 ## 2026-11-07 H1 formal background launched
 
 独立分支codex/dreamon-context-h1-training-20261107-v1，代码b09e678已推送。tmux dreamon_h1_20261107_v1，PID 1893907，确认采集415/220000；只H1；后续自动5轮/固定best 1033生成/评分/归档退出。启动/恢复命令见本次launch_snapshot.json。47 CPU、真实DreamOn和官方评分smoke通过；不驻留监督，不启动其他头，不改思维导图。
+
+
+## 2026-11-07 H1 formal 20261107 archive partial_technical_failures
+
+数据220000/220000；结果analysis_outputs/dreamon_context_h1_training_20261107_v1/；只H1；共享cuda:0，其他路线不启动。

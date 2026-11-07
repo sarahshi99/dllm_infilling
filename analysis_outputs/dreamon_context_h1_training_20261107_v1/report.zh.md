@@ -1,8 +1,8 @@
 # H1正式训练（2026-11-07）
 
-状态：ready_for_background。数据实际4/220000；源程序组train/validation={'train': 1, 'validation': 0}。
+状态：partial_technical_failures。数据实际220000/220000；源程序组train/validation={'train': 10384, 'validation': 1054}。
 
-缺口总计219996，详见data_summary.json；保留真实K2/K4及32桶，原分组隔离，external_test未打开。
+缺口总计0，详见data_summary.json；保留真实K2/K4及32桶，原分组隔离，external_test未打开。
 
 FP32全词表KL，rank256，强度1；seed20261107，W_out=0、gamma=1；AdamW lr3e-4，有效batch128，最多5轮。
 
@@ -12,7 +12,7 @@ FP32全词表KL，rank256，强度1；seed20261107，W_out=0、gamma=1；AdamW l
 
 |---|---:|---:|---:|
 
-|H1|0/0|N/A|1033|
+|H1|4/6|0.6666666666666666|1027|
 
 |Z4|820/1033|0.7938044530493708|0|
 
@@ -20,13 +20,15 @@ FP32全词表KL，rank256，强度1；seed20261107，W_out=0、gamma=1；AdamW l
 
 |K1|949/1033|0.9186834462729913|0|
 
-H1−Z4：配对0，救回0、改错0；差值百分点评估区间None。
+best epoch=5；last epoch=5。best为未训练初始权重=False。第5轮仍明显改善=True，不追加轮次。
 
-H1−H4-old：配对0，救回0、改错0；差值百分点评估区间None。
+H1−Z4：配对6，救回0、改错0；差值百分点评估区间[0.0, 0.0]。
 
-H1−K1：配对0，救回0、改错0；差值百分点评估区间None。
+H1−H4-old：配对6，救回0、改错0；差值百分点评估区间[0.0, 0.0]。
 
-纯学习恢复比例：{'matched': 0, 'numerator': 0, 'denominator': 0, 'value': None, 'reason': 'nonpositive denominator'}。
+H1−K1：配对6，救回0、改错0；差值百分点评估区间[0.0, 0.0]。
+
+纯学习恢复比例：{'matched': 6, 'numerator': 0, 'denominator': 0, 'value': None, 'reason': 'nonpositive denominator'}。
 
 
 
@@ -38,7 +40,4 @@ H1−K1：配对0，救回0、改错0；差值百分点评估区间None。
 
 本轮没有训练H0/Hctx/Hgated/H2/H3/H4，没有自身轨迹补训、超参搜索或多seed。
 
-代码提交：bac2b3d9add68a8ac9dca9922441199da1be0886；恢复：`bash experiments/context_h1_training_v1/launch.sh`。
-
-
-后台启动确认：tmux dreamon_h1_20261107_v1；PID 1893907，采集415/220000，轨迹163；当前采集线性外推14.62h，不含训练/评测，稀缺桶和共享负载可能延长。47项CPU检查、真实FP32学习/对齐检查和官方评分器复测均通过。代码b09e678已推送。启动快照与完整恢复命令见launch_snapshot.json。尚未开始正式优化器训练，不声称足额/提升/最终生成结果。
+代码提交：c56c4a00a3f69a684e5a8cf8b0d49b687200ec0d；恢复：`bash experiments/context_h1_training_v1/launch.sh`。

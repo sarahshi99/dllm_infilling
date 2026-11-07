@@ -1,8 +1,8 @@
 {
   "bank": "queue.sqlite rows.kind=state -> data/*.npz offsets; full selected-set FP32 tensors",
   "checkpoints": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints",
-  "code_commit": "bac2b3d9add68a8ac9dca9922441199da1be0886",
-  "disk_bytes": 33138672,
+  "code_commit": "c56c4a00a3f69a684e5a8cf8b0d49b687200ec0d",
+  "disk_bytes": 282921055831,
   "exit": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/exit.json",
   "generated": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/generated_rows.jsonl.gz",
   "logs": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/pipeline.log",

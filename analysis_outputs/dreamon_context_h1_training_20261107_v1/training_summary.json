@@ -1,0 +1,54 @@
+{
+  "best": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints/best.pt",
+  "best_epoch": 5,
+  "best_is_untrained_initial": false,
+  "curve": [
+    {
+      "epoch": 0,
+      "step": 0,
+      "train_kl": null,
+      "validation_kl": 0.2901485031733232
+    },
+    {
+      "epoch": 1,
+      "step": 1563,
+      "train_kl": 0.21302959690868856,
+      "validation_kl": 0.16203971357111815
+    },
+    {
+      "epoch": 2,
+      "step": 3126,
+      "train_kl": 0.14860391162872313,
+      "validation_kl": 0.13969173166402488
+    },
+    {
+      "epoch": 3,
+      "step": 4689,
+      "train_kl": 0.12397094784170389,
+      "validation_kl": 0.13117842302458274
+    },
+    {
+      "epoch": 4,
+      "step": 6252,
+      "train_kl": 0.10996399598106742,
+      "validation_kl": 0.12652854054180587
+    },
+    {
+      "epoch": 5,
+      "step": 7815,
+      "train_kl": 0.10088788709059357,
+      "validation_kl": 0.1243776989282186
+    }
+  ],
+  "effective_batch": 128,
+  "epochs": 5,
+  "extra_epochs_started": false,
+  "last": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints/last.pt",
+  "last_epoch": 5,
+  "micro": 32,
+  "not_fully_converged_at_epoch5": true,
+  "peak_allocated_bytes": 16465723904,
+  "peak_reserved_bytes": 21267218432,
+  "status": "complete",
+  "steps": 7815
+}
