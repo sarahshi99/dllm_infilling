@@ -17,8 +17,8 @@ from experiments.context_foundation.adapter import distribution,inverse_cdf,unif
 from .bank import RUN,SEED,Bank,config,cell,progress,atomic_json
 
 
-def initialize(cfg):
-    head=ContextHead('H1-context-prev',cfg).float()
+def initialize(cfg, head_name='H1-context-prev'):
+    head=ContextHead(head_name,cfg).float()
     # Existing H1 gamma=1+tanh(g) starts at 1. All other internal layers keep
     # normal random initialization. Only residual vocabulary output is zeroed.
     torch.nn.init.zeros_(head.output.weight)
@@ -54,7 +54,8 @@ def accumulated_update(head,opt,bank,selected,device,micro):
 
 
 @torch.inference_mode()
-def evaluate(head,bank,store,epoch,device,micro):
+def evaluate(head,bank,store,epoch,device,micro,*,run=RUN,progress_fn=progress):
+    RUN=run;progress=progress_fn
     head.eval()
     indices=bank.indices('validation')
     kind=f'validation_{epoch}'
@@ -102,10 +103,11 @@ def evaluate(head,bank,store,epoch,device,micro):
     return result
 
 
-def train(store):
+def train(store,*,run=RUN,head_name='H1-context-prev',bank=None,progress_fn=progress):
+    RUN=run;progress=progress_fn
     if (RUN/'training_summary.json').exists(): return
-    cfg=config();bank=Bank(store,cfg);device='cuda:0'
-    plan=dict(head='H1-context-prev',seed=SEED,config=vars(cfg),initialization='W_out=0; gamma=1; remaining internal parameters random',
+    cfg=config();bank=bank if bank is not None else Bank(store,cfg);device='cuda:0'
+    plan=dict(head=head_name,seed=SEED,config=vars(cfg),initialization=('W_out=0; gamma=1; remaining internal parameters random' if head_name=='H1-context-prev' else 'W_out=0; GRU h0=0; remaining internal parameters random'),
         optimizer='AdamW',lr=3e-4,betas=[.9,.999],eps=1e-8,weight_decay=0,clip_norm=1,
         effective_batch=128,epochs=5,head_dtype='FP32',loss='full-vocab T1 mean KL(fresh||old+delta)',
         train_states=len(bank.indices('train')),validation_states=len(bank.indices('validation')),
@@ -124,7 +126,7 @@ def train(store):
     while True:
         head=opt=None
         try:
-            head=initialize(cfg).to(device)
+            head=initialize(cfg,head_name).to(device)
             opt=torch.optim.AdamW(head.parameters(),lr=3e-4,betas=(.9,.999),eps=1e-8,weight_decay=0)
             path=RUN/'checkpoints/last.pt'
             state=dict(epoch=0,cursor=0,step=0,stage='validation',best_kl=float('inf'),best_epoch=0,curve=[],train_loss_sum=0.,train_seen=0)
@@ -133,16 +135,16 @@ def train(store):
                 head.load_state_dict(ck['head']);opt.load_state_dict(ck['optimizer']);state=ck['state'];restore_rng(ck['rng'])
                 del ck
             def save():
-                save_checkpoint(path,dict(model='H1-context-prev',config=vars(cfg),head=head.state_dict(),optimizer=opt.state_dict(),state=state,rng=rng_state(),micro=micro))
+                save_checkpoint(path,dict(model=head_name,config=vars(cfg),head=head.state_dict(),optimizer=opt.state_dict(),state=state,rng=rng_state(),micro=micro))
             if not path.exists(): save()
             while state['epoch']<=5:
                 epoch=state['epoch']
                 if state['stage']=='validation':
-                    result=evaluate(head,bank,store,epoch,device,micro)
+                    result=evaluate(head,bank,store,epoch,device,micro,run=run,progress_fn=progress_fn)
                     kl=result['by_bucket']['all']['kl_T1']
                     if kl<state['best_kl']:
                         state['best_kl']=kl;state['best_epoch']=epoch
-                        save_checkpoint(RUN/'checkpoints/best.pt',dict(model='H1-context-prev',config=vars(cfg),head=head.state_dict(),epoch=epoch,step=state['step'],validation=result))
+                        save_checkpoint(RUN/'checkpoints/best.pt',dict(model=head_name,config=vars(cfg),head=head.state_dict(),epoch=epoch,step=state['step'],validation=result))
                     if not any(r['epoch']==epoch for r in state['curve']):
                         state['curve'].append(dict(epoch=epoch,step=state['step'],validation_kl=kl,
                             train_kl=state['train_loss_sum']/state['train_seen'] if state['train_seen'] else None))

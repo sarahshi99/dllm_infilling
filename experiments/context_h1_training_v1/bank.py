@@ -134,7 +134,8 @@ def trajectories(tokenizer, store=None):
 
 
 class Bank:
-    def __init__(self, store, cfg):
+    def __init__(self, store, cfg, root=RUN):
+        self.root = Path(root)
         self.rows = store.rows('state')
         self.config = cfg
         self.cached_path, self.cached = None, None
@@ -151,7 +152,7 @@ class Bank:
             bypath[r['shard']].append((j,r['offset']))
         ordered = {}
         for path,items in bypath.items():
-            with np.load(RUN/path,allow_pickle=False) as z:
+            with np.load(self.root/path,allow_pickle=False) as z:
                 for name in (*FIELDS,'teacher_logits'):
                     if name not in ordered:
                         ordered[name] = np.empty((len(indices),*z[name].shape[1:]),dtype=z[name].dtype)

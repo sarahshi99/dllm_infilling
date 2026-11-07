@@ -53,7 +53,8 @@ class KeywordHeadAdapter(nn.Module):
 
     def forward(self, *, old_hidden, position_ids, chain_ids, selected_mask,
                 query_indices, old_logits, token_ids, token_state, history_mask):
-        batch = HeadBatch(old_hidden=old_hidden, position_ids=position_ids, chain_ids=chain_ids,
+        # DreamOn emits BF16; the formal head and cached training inputs are FP32.
+        batch = HeadBatch(old_hidden=old_hidden.float(), position_ids=position_ids, chain_ids=chain_ids,
                           selected_mask=selected_mask, query_indices=query_indices,
                           old_logits=old_logits, token_ids=token_ids, token_state=token_state,
                           history_mask=history_mask)

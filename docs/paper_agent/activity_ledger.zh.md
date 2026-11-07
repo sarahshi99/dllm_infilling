@@ -556,3 +556,12 @@
 ## 2026-11-07 H1 formal 20261107 archive partial_technical_failures
 
 数据220000/220000；结果analysis_outputs/dreamon_context_h1_training_20261107_v1/；只H1；共享cuda:0，其他路线不启动。
+
+## 2026-11-08 H2 formal preparation (Asia/Shanghai)
+
+单会话串行，无subagent；分支codex/dreamon-context-h2-training-20261107-v1基于H1 9aff455。
+复用已完整220000状态的公共只读库（train/validation源组10384/1054，交叉0），不改H1工作区。
+52项CPU检查、真实三长度学习/step检查、真实DreamOn零H2与A精确输出及官方评分检查通过。
+复用共同对照3099行；H1自身评测6/1033且有dtype技术失败，H1对齐待补。
+H2仅W_out零初始化，full-memory；共享H1正式train.py；结果和恢复入口见
+analysis_outputs/dreamon_context_h2_training_20261107_v1/。不改思维导图，不训练其他头。

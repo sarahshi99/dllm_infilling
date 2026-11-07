@@ -1,0 +1,27 @@
+{
+  "aligned_hidden": "reuse H1 exact real-model audit; same cached target-aligned old_hidden, no additional shift",
+  "batch_step_consistent": true,
+  "bf16_live_adapter_matches_fp32_training": true,
+  "cpu_causality_padding_reset_checks": "see cpu_checks.txt",
+  "finite_losses": [
+    0.13007630380646637,
+    0.1264579298052316,
+    0.11134743554672846
+  ],
+  "finite_nonzero_gradient_norms": [
+    0.48401129245758057,
+    0.47377005219459534,
+    1.148009181022644
+  ],
+  "head": "H2-GRU",
+  "history_lengths": [
+    1,
+    2,
+    3
+  ],
+  "internal_random_initialization": true,
+  "shared_gpu_sec": 3.7628401713445783,
+  "smoke_optimizer_discarded": true,
+  "status": "passed",
+  "zero_residual_exact": true
+}

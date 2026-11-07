@@ -1,0 +1,14 @@
+{
+  "F4_rerun": false,
+  "arms": [
+    "K1",
+    "Z4",
+    "H4-old"
+  ],
+  "differences": [],
+  "head_sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+  "model_revision": "8ccc74750e43177327f29dab9e91882ba759e194",
+  "reused": true,
+  "rows": 3099,
+  "semantics": "A common-u FP32 sampler, identical source population/scoring/default K4 decoder; only optional K2 argument added"
+}

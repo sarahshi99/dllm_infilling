@@ -1,0 +1,18 @@
+{
+  "compared_keys": [
+    "output",
+    "completion_token_ids",
+    "forward_count",
+    "head_calls",
+    "actual_submitted_count",
+    "expand_count",
+    "delete_count",
+    "sampling_key_sha256"
+  ],
+  "head_calls": 6,
+  "model_released_before_training": true,
+  "official_scoring_matches": true,
+  "status": "passed",
+  "task_id": "SingleLineInfilling/HumanEval/0/L0",
+  "zero_head_exact_a_z4": true
+}

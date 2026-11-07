@@ -1,0 +1,19 @@
+{
+  "checkpoints": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/checkpoints",
+  "code_commit": "9aff4553c3ec955b96704e8f404a0cd785a5a272",
+  "exit": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/exit.json",
+  "gpu": "single worker, shared cuda:0",
+  "implementation": "B fca5775 heads.py H2-GRU unchanged",
+  "incomplete_results_are_not_1033_final": true,
+  "log": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/pipeline.log",
+  "progress": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/progress.json",
+  "public_code_base": "9aff4553c3ec955b96704e8f404a0cd785a5a272",
+  "public_root": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1",
+  "raw_generations": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/generated_rows.jsonl.gz",
+  "resources": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/resource_observations.jsonl",
+  "resume": "bash experiments/context_h2_training_v1/launch.sh",
+  "run": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1",
+  "scored": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/per_case.jsonl.gz",
+  "shell_exit": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/shell_exit.json",
+  "sqlite": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/queue.sqlite"
+}

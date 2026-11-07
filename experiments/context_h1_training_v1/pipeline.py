@@ -24,7 +24,8 @@ from .bank import RUN,OUT,AOUT,config,collect,progress,capacity,cell,Bank
 from .train import initialize,train
 
 
-def load_engine():
+def load_engine(*,progress_fn=progress):
+    progress=progress_fn
     free,total=torch.cuda.mem_get_info()
     if free<18*2**30:
         raise torch.cuda.OutOfMemoryError('shared GPU has less than minimum unquantized model budget; no exclusive waiting')
@@ -102,8 +103,9 @@ def technical_checks(engine,store):
     gc.collect();torch.cuda.empty_cache()
 
 
-def controls_reuse(store):
+def controls_reuse(store,*,run=RUN):
     """A uses precisely this model, population, sampler, structure and evaluator."""
+    RUN=run
     audit_path=RUN/'control_reuse.json'
     if audit_path.exists(): return json.loads(audit_path.read_text())['reused']
     reference='43a52fd5fb43392e2ede7b6be659d3261dd6818a'
@@ -177,7 +179,8 @@ def generate(store):
         release(engine)
 
 
-def score(store):
+def score(store,*,progress_fn=progress):
+    progress=progress_fn
     from experiments.run_k4_multiline_stage import official_evaluate
     contexts={r['task_id']:r for r in read_jsonl(REPO/'analysis_outputs/k4_multiline_20261014_v1/single-line_contexts.jsonl.gz')}
     for r in store.rows('generated'):
