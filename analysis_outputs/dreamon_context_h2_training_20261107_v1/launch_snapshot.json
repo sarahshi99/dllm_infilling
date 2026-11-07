@@ -1,0 +1,33 @@
+{
+  "tmux": "dreamon_h2_20261107_v1",
+  "pid": 93850,
+  "code_commit": "980f743",
+  "command": "tmux new-session -d -s dreamon_h2_20261107_v1 -c /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h2-training-20261107-v1 'bash experiments/context_h2_training_v1/launch.sh'",
+  "resume_command": "tmux new-session -d -s dreamon_h2_20261107_v1 -c /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h2-training-20261107-v1 'bash experiments/context_h2_training_v1/launch.sh'",
+  "progress_snapshot": {
+    "at": "2026-11-07T16:08:16Z",
+    "completed": 1056,
+    "epoch": 0,
+    "pid": 93850,
+    "stage": "validation",
+    "target": 20000
+  },
+  "public_data_ready": true,
+  "public_states": 220000,
+  "log": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/pipeline.log",
+  "checkpoints": "/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1/checkpoints",
+  "status": "running",
+  "h1_untouched": true,
+  "measurement": {
+    "caveat": "two disposable-head updates only; shared GPU load and shard access vary",
+    "effective_batch": 128,
+    "excludes_full_validation_and_generation": true,
+    "includes_shard_io": true,
+    "micro": 32,
+    "projected_7815_train_steps_hours": 1.8463054471920866,
+    "step_shared_seconds": [
+      2.3215717300772667,
+      0.8505053883418441
+    ]
+  }
+}

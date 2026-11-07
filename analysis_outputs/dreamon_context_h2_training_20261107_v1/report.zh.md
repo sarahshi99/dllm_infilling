@@ -45,3 +45,8 @@ No same-data retrained Hctx control: H2 improvements alone do not establish mult
 代码：9aff4553c3ec955b96704e8f404a0cd785a5a272；服务器证据：/home/shx/.cache/dllm_infilling/context_h2_training_20261107_v1；精确路径见evidence_index.json。
 
 恢复（保留checkpoint及数据游标，不重训已完成阶段）：`bash experiments/context_h2_training_v1/launch.sh`。
+
+
+## 后台启动记录（2026-11-08 北京时间）
+
+代码980f743已推送；tmux dreamon_h2_20261107_v1，PID93850，公共库已就绪，正式训练流程启动。启动快照见launch_snapshot.json。单GPU进程，共享cuda:0；训练未加载DreamOn。52项CPU、真实库和真实DreamOn零头检查通过；3个控制3099行已复用。短测训练更新外推约1.85小时，不含完整验证/生成/评分，共享负载不稳定，不作为整批完成承诺。

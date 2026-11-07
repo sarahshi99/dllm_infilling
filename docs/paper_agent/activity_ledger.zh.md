@@ -565,3 +565,8 @@
 复用共同对照3099行；H1自身评测6/1033且有dtype技术失败，H1对齐待补。
 H2仅W_out零初始化，full-memory；共享H1正式train.py；结果和恢复入口见
 analysis_outputs/dreamon_context_h2_training_20261107_v1/。不改思维导图，不训练其他头。
+
+
+## 2026-11-08 H2 formal background launched (Asia/Shanghai)
+
+代码980f743已推送；tmux dreamon_h2_20261107_v1，PID93850，公共数据已就绪。阶段为正式训练流程/初始完整验证；只一个GPU进程、训练不加载DreamOn。后台自动接续5轮/固定best1033行/评分/归档后退出。准确恢复命令见本次launch_snapshot.json。H1工作区干净未改。不驻留轮询，不启动其它路线。
