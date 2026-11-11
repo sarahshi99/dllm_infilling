@@ -101,3 +101,13 @@ class IntegrityTests(unittest.TestCase):
             audit=analyze.audit([row],timing)
             self.assertFalse(audit['complete'])
             self.assertEqual(audit['timing_output_divergences'],[[c['id'],key,1]])
+
+class PublicationTests(unittest.TestCase):
+    def test_csv_does_not_block_git_whitespace_verification(self):
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from experiments.threshold_eval import analyze
+        with tempfile.TemporaryDirectory() as td,patch.object(analyze,'OUT',Path(td)):
+            analyze.write_csv('test.csv',[dict(config='c',passed=1)])
+            self.assertNotIn(b'\r',(Path(td)/'test.csv').read_bytes())

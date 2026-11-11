@@ -19,7 +19,7 @@ def write_csv(name,rows):
     tmp=OUT/(name+'.tmp')
     with tmp.open('w') as f:
         if rows:
-            w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+            w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
     tmp.replace(OUT/name)
 
 
