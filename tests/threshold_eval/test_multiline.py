@@ -81,3 +81,23 @@ class PipelineTests(unittest.TestCase):
             self.assertIn('timing',commands[1])
             self.assertIn('--publish',commands[2])
             run.assert_not_called()
+
+class IntegrityTests(unittest.TestCase):
+    def test_complete_requires_matching_timing_tokens(self):
+        import json,tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from experiments.threshold_eval import analyze
+        c=common.configs()[0];key='MultiLineInfilling/HumanEval/3/L0_L1'
+        row=dict(config=c['id'],task_id=key,method='nohead',execution_commit='v',passed=True,
+            completion_token_ids=[0],forward_count=1,head_calls=0,normal_token_count=1,
+            normal_submissions_histogram={'1':1},statistics=dict(extra_ordinary_attempted=0,extra_ordinary_accepted=0,extra_ordinary_rejected=0))
+        timing=[dict(row,repetition=i,generation_sec=.1) for i in range(3)]
+        sp=dict(configs=[c],cases=[key],timing_cases=[key],expected_quality=1,expected_timing=3)
+        with tempfile.TemporaryDirectory() as td,patch.object(analyze,'OUT',Path(td)),patch.object(analyze,'SHARED',Path(td)),patch.object(analyze,'spec',return_value=sp):
+            (Path(td)/'READY.json').write_text(json.dumps(dict(execution_commit='v')))
+            self.assertTrue(analyze.audit([row],timing)['complete'])
+            timing[1]['completion_token_ids']=[1]
+            audit=analyze.audit([row],timing)
+            self.assertFalse(audit['complete'])
+            self.assertEqual(audit['timing_output_divergences'],[[c['id'],key,1]])

@@ -1,0 +1,41 @@
+{
+  "at": "2026-11-11T13:19:15Z",
+  "base_tasks": 164,
+  "crossline_base_tasks": 127,
+  "crossline_cases": 4782,
+  "dataset": "HumanEval-MultiLineInfilling",
+  "loader": "experiments.k4_batch_common.population -> pinned read_problems(multi-line)",
+  "note": "Same 164 HumanEval base tasks as SingleLine; not an independent unseen-task benchmark. Counts only; no GPU generation or scoring performed.",
+  "official_source": {
+    "dataset_repository": "loubnabnl/humaneval_infilling",
+    "dataset_revision": "ad46002f24b153968a3d0949e6fa9576780530ba",
+    "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "official_loader_files_clean": true
+  },
+  "population": 5815,
+  "sealed_external_test_opened": false,
+  "single_span_output_reuse": false,
+  "single_span_same_input_as_singleline": 1033,
+  "span_layers": {
+    "1": {
+      "base_tasks": 164,
+      "cases": 1033
+    },
+    "2-3": {
+      "base_tasks": 127,
+      "cases": 1511
+    },
+    "4-7": {
+      "base_tasks": 108,
+      "cases": 1870
+    },
+    "8+": {
+      "base_tasks": 60,
+      "cases": 1401
+    }
+  },
+  "status": "execution_loader_verified",
+  "unique_cases": 5815,
+  "official_arrow_all_fields_equal": true,
+  "outputs_reused": false
+}

@@ -1,0 +1,6 @@
+{
+  "external_pids": [],
+  "limitation": "Nonexclusive H200; 30s load snapshots do not eliminate short external contention. Exploratory speed flag cannot establish definitive attainment.",
+  "shared_environment": true,
+  "timing_observations": 0
+}

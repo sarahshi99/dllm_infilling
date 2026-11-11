@@ -1,0 +1,1404 @@
+{
+  "complete": false,
+  "crossline_quality_actual": 187,
+  "crossline_timing_actual": 0,
+  "execution_versions": [
+    "ae0283e60fbd60603c3587f2c7394a3b6081a18d"
+  ],
+  "expected_execution_version": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
+  "invalid": [],
+  "missing_list_note": "First 100 missing keys shown; full missing set reproducible from run_spec configs/cases/timing_cases minus per_case keys.",
+  "per_config": {
+    "global_k1_nohead_off": {
+      "crossline_generated": 84,
+      "crossline_timed": 0,
+      "generated": 101,
+      "scored": 0,
+      "span_counts": {
+        "1": 17,
+        "2-3": 23,
+        "4-7": 31,
+        "8+": 30
+      },
+      "timed": 0
+    },
+    "global_k2_nohead_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_nohead_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_nohead_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_nohead_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_trained_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_trained_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_trained_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k2_trained_off": {
+      "crossline_generated": 103,
+      "crossline_timed": 0,
+      "generated": 122,
+      "scored": 0,
+      "span_counts": {
+        "1": 19,
+        "2-3": 28,
+        "4-7": 40,
+        "8+": 35
+      },
+      "timed": 0
+    },
+    "global_k4_nohead_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_nohead_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_nohead_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_nohead_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_trained_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_trained_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_trained_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "global_k4_trained_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k1_nohead_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_nohead_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_nohead_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_nohead_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_nohead_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_trained_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_trained_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_trained_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k2_trained_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_nohead_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_nohead_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_nohead_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_nohead_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_trained_080": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_trained_090": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_trained_095": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    },
+    "left_k4_trained_off": {
+      "crossline_generated": 0,
+      "crossline_timed": 0,
+      "generated": 0,
+      "scored": 0,
+      "span_counts": {
+        "1": 0,
+        "2-3": 0,
+        "4-7": 0,
+        "8+": 0
+      },
+      "timed": 0
+    }
+  },
+  "population": {
+    "base_tasks": 164,
+    "cases": 5815,
+    "crossline_base_tasks": 127,
+    "crossline_cases": 4782,
+    "span_layers": {
+      "1": {
+        "base_tasks": 164,
+        "cases": 1033
+      },
+      "2-3": {
+        "base_tasks": 127,
+        "cases": 1511
+      },
+      "4-7": {
+        "base_tasks": 108,
+        "cases": 1870
+      },
+      "8+": {
+        "base_tasks": 60,
+        "cases": 1401
+      }
+    }
+  },
+  "quality_actual": 223,
+  "quality_by_role": {
+    "nohead": 101,
+    "trained": 122
+  },
+  "quality_duplicates": 0,
+  "quality_expected": 197710,
+  "quality_missing": [
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L5_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L5_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L10"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L13"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L14"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L16"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L6_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L10"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L13"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L14"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L16"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L7_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L10"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L13"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L14"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L16"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L8_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L10"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L13"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L14"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L16"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L9_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L0"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L1"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L1_L1"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L1_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L1_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L1_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L1_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L3_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L3_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L3_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L3_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L5_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L5_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L5_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L6_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L6_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L8_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/100/L0_L0"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L0"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L1"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L0_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L11_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L11_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L12_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L1"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L1_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L3"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L5"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L5_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L6"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L7"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L8"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L6_L9"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L7_L11"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L7_L12"
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L7_L7"
+    ]
+  ],
+  "quality_missing_count": 197487,
+  "quality_unexpected": [],
+  "quality_unique": 223,
+  "scored": 0,
+  "sealed_external_test_opened": false,
+  "timing_actual": 0,
+  "timing_duplicates": 0,
+  "timing_expected": 16728,
+  "timing_missing": [
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/0/L4_L7",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/0/L4_L7",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/0/L4_L7",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L1_L4",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L1_L4",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/1/L1_L4",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L3",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L3",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/10/L0_L3",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/100/L0_L0",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/100/L0_L0",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/100/L0_L0",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L9",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L9",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/101/L3_L9",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/102/L4_L5",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/102/L4_L5",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/102/L4_L5",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/103/L1_L3",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/103/L1_L3",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/103/L1_L3",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/104/L1_L4",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/104/L1_L4",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/104/L1_L4",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/105/L1_L9",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/105/L1_L9",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/105/L1_L9",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/106/L1_L10",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/106/L1_L10",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/106/L1_L10",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/107/L3_L8",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/107/L3_L8",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/107/L3_L8",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/108/L0_L2",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/108/L0_L2",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/108/L0_L2",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/109/L0_L10",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/109/L0_L10",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/109/L0_L10",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/11/L4_L6",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/11/L4_L6",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/11/L4_L6",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/110/L9_L10",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/110/L9_L10",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/110/L9_L10",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/111/L1_L2",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/111/L1_L2",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/111/L1_L2",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/112/L0_L1",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/112/L0_L1",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/112/L0_L1",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/113/L0_L3",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/113/L0_L3",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/113/L0_L3",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/114/L1_L10",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/114/L1_L10",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/114/L1_L10",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/115/L0_L0",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/115/L0_L0",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/115/L0_L0",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/116/L0_L0",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/116/L0_L0",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/116/L0_L0",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/117/L3_L4",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/117/L3_L4",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/117/L3_L4",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/118/L1_L7",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/118/L1_L7",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/118/L1_L7",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/119/L1_L4",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/119/L1_L4",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/119/L1_L4",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/12/L1_L5",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/12/L1_L5",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/12/L1_L5",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/120/L1_L2",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/120/L1_L2",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/120/L1_L2",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/121/L0_L0",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/121/L0_L0",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/121/L0_L0",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/122/L0_L0",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/122/L0_L0",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/122/L0_L0",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/123/L4_L13",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/123/L4_L13",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/123/L4_L13",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/124/L8_L11",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/124/L8_L11",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/124/L8_L11",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/125/L1_L3",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/125/L1_L3",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/125/L1_L3",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/126/L4_L6",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/126/L4_L6",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/126/L4_L6",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/127/L0_L11",
+      0
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/127/L0_L11",
+      1
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/127/L0_L11",
+      2
+    ],
+    [
+      "global_k1_nohead_off",
+      "MultiLineInfilling/HumanEval/128/L1_L2",
+      0
+    ]
+  ],
+  "timing_missing_count": 16728,
+  "timing_output_divergences": [],
+  "timing_population_separate": true,
+  "timing_unexpected": [],
+  "timing_unique": 0,
+  "version_mixing": false
+}

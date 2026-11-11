@@ -301,10 +301,18 @@ def charts(summary,label='all'):
 
 def report(summary,comparisons,integrity,nearest):
     def fmt(v):return '未完成' if v is None else f'{v:.2f}'
+    runtime={}
+    for role in ('nohead','trained','timing'):
+        path=SHARED/f'{role}.status.json'
+        if path.exists():runtime[role]=json.loads(path.read_text())
+    atomic_json(OUT/'execution_status.json',runtime)
     lines=[f'# {TASK} 官方阈值评测','',
         f"状态：{'完整完成' if integrity['complete'] else '未完成，不能作完整实验结论'}。质量生成 {integrity['quality_actual']}/{integrity.get('quality_expected',35122)}，评分 {integrity['scored']}/{integrity.get('quality_expected',35122)}；计时 {integrity['timing_actual']}/{integrity['timing_expected']}。",
         '',f"实际生成版本 `{integrity['expected_execution_version']}`。34配置，DreamOn revision8ccc747，bf16；旧rank256 v2 KL/full/best头float32、λ=1。seed42、T=.2、top-p=.9、batch1、entropy/alg_temp0、初始mask64、steps256、原扩删/EOS规则；不复用旧single-line生成或评分。",
         '', '阈值使用实际抽到的普通词在合法完整词表T=1 FP32概率；全轮首个空间候选唯一豁免，拒绝不重抽、不写前驱并停止当前连续链。共同随机键沿用原contract/seed/真实case/round/original_position/purpose。']
+    for role,state in runtime.items():
+        lines.append(f"角色{role}：{state.get('status')}，{state.get('completed',0)}/{state.get('expected','?')}，PID {state.get('pid')}，UTC {state.get('at')}。")
+        if state.get('error'):lines.append('具体阻塞：`'+state['error'].splitlines()[-1][:1200]+'`')
     labels=[('all','完整官方人口'),('crossline','真正跨行人口（至少2行）')]
     for label,title in labels:
         rows=[s for s in summary if s['population']==label]
@@ -327,6 +335,11 @@ def report(summary,comparisons,integrity,nearest):
         for p in comparisons:
             if p['population']==label and p['relation']=='vs_other_method_same_threshold' and '_trained_' in p['config'] and p['matched']==n:
                 lines.append(f"- {p['config']}相对无头同阈值：救回{p['rescued']}、改错{p['harmed']}、净{p['net']:+d}；逐例差{fmt(p['line_delta_pp'])}pp，整题bootstrap95%区间{p['line_ci95']}。")
+        head_pairs=[p for p in comparisons if p['population']==label and p['relation']=='vs_other_method_same_threshold' and '_trained_' in p['config'] and p['matched']==n]
+        if head_pairs:
+            positive=sum(p['net']>0 for p in head_pairs);negative=sum(p['net']<0 for p in head_pairs)
+            lines.append(f"头的额外价值：同阈值配对共{len(head_pairs)}点，净正向{positive}点、净负向{negative}点、持平{len(head_pairs)-positive-negative}点；逐点区间与时间开销见表和CSV，不把任一最好点外推到全部跨度。")
+        else:lines.append('本人口尚无完整同阈值配对，不能判断无头阈值有效性或头的额外价值。')
         for field,title_flag in [('exploratory_engineering_flag','历史题等权'),('exploratory_case_engineering_flag','逐例')]:
             flags=[r['config'] for r in rows if r[field]]
             lines.append(f"{title_flag}预设标记（下降≤1pp且减时≥20%）：{', '.join(flags) or '暂无完整实测点满足'}。共享争用下不作确定达标判断。")

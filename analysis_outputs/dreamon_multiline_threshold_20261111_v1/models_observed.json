@@ -1,0 +1,78 @@
+[
+  {
+    "at": "2026-11-11T13:11:10Z",
+    "cuda_logical_device": 0,
+    "cuda_version": "12.1",
+    "cuda_visible_devices": null,
+    "device_name": "NVIDIA H200 NVL",
+    "device_uuid": "c55d478c-6944-066f-7e9a-8af248e4f6f1",
+    "head_loaded": true,
+    "observation": {
+      "at": "2026-11-11T13:11:10Z",
+      "compute_processes": [
+        "2453998, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 17930",
+        "4008736, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 2732",
+        "908981, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 65178",
+        "1457811, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 15516"
+      ],
+      "cuda_visible_devices": null,
+      "devices": [
+        "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 143771, 101384, 89"
+      ]
+    },
+    "pid": 1457811,
+    "torch_version": "2.5.1+cu121"
+  },
+  {
+    "at": "2026-11-11T13:17:20Z",
+    "cuda_logical_device": 0,
+    "cuda_version": "12.1",
+    "cuda_visible_devices": null,
+    "device_name": "NVIDIA H200 NVL",
+    "device_uuid": "c55d478c-6944-066f-7e9a-8af248e4f6f1",
+    "head_loaded": false,
+    "observation": {
+      "at": "2026-11-11T13:17:20Z",
+      "compute_processes": [
+        "2453998, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 17930",
+        "4008736, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 2732",
+        "908981, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 65178",
+        "1475780, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 15216",
+        "1475777, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 15216",
+        "1475815, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 1118"
+      ],
+      "cuda_visible_devices": null,
+      "devices": [
+        "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 143771, 117429, 71"
+      ]
+    },
+    "pid": 1475777,
+    "torch_version": "2.5.1+cu121"
+  },
+  {
+    "at": "2026-11-11T13:17:21Z",
+    "cuda_logical_device": 0,
+    "cuda_version": "12.1",
+    "cuda_visible_devices": null,
+    "device_name": "NVIDIA H200 NVL",
+    "device_uuid": "c55d478c-6944-066f-7e9a-8af248e4f6f1",
+    "head_loaded": true,
+    "observation": {
+      "at": "2026-11-11T13:17:21Z",
+      "compute_processes": [
+        "2453998, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 17930",
+        "4008736, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 2732",
+        "908981, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 65178",
+        "1475780, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 15516",
+        "1475777, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 15216",
+        "1475815, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 1118"
+      ],
+      "cuda_visible_devices": null,
+      "devices": [
+        "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 143771, 117729, 100"
+      ]
+    },
+    "pid": 1475780,
+    "torch_version": "2.5.1+cu121"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "nohead": {
+    "at": "2026-11-11T13:20:55Z",
+    "case_key": "MultiLineInfilling/HumanEval/1/L5_L6",
+    "completed": 100,
+    "config": "global_k1_nohead_off",
+    "execution_commit": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
+    "expected": 104670,
+    "pid": 1475777,
+    "role": "nohead",
+    "status": "generating",
+    "task_id": "dreamon_multiline_threshold_20261111_v1"
+  },
+  "trained": {
+    "at": "2026-11-11T13:20:53Z",
+    "case_key": "MultiLineInfilling/HumanEval/1/L7_L9",
+    "completed": 120,
+    "config": "global_k2_trained_off",
+    "execution_commit": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
+    "expected": 93040,
+    "pid": 1475780,
+    "role": "trained",
+    "status": "generating",
+    "task_id": "dreamon_multiline_threshold_20261111_v1"
+  }
+}
