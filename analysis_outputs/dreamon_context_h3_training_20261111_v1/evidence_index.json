@@ -1,6 +1,6 @@
 {
   "checkpoints": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/checkpoints",
-  "code_commit": "a8c3088318b3b8ee118f2de06075d410f6810e3d",
+  "code_commit": "5c4fe23c6f42bb071b6e5e2a18b538feb3558d3b",
   "exit": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/exit.json",
   "generic_adapter_base": "9302a1e0027076836de35068ddd2cc1f829cc118",
   "gpu": "single worker, shared cuda:0",

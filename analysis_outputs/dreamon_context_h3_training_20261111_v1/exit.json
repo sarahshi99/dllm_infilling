@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-11T21:21:36Z",
+  "exit_code": 0,
+  "phase": "evaluation",
+  "reason": null,
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h3-training-20261111-v1 && bash experiments/context_h3_training_v1/launch.sh",
+  "status": "complete",
+  "training_complete": true
+}
