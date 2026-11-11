@@ -107,7 +107,7 @@ def train(store,*,run=RUN,head_name='H1-context-prev',bank=None,progress_fn=prog
     RUN=run;progress=progress_fn
     if (RUN/'training_summary.json').exists(): return
     cfg=config();bank=bank if bank is not None else Bank(store,cfg);device='cuda:0'
-    plan=dict(head=head_name,seed=SEED,config=vars(cfg),initialization=('W_out=0; gamma=1; remaining internal parameters random' if head_name=='H1-context-prev' else 'W_out=0; GRU h0=0; remaining internal parameters random'),
+    plan=dict(head=head_name,seed=SEED,config=vars(cfg),initialization=('W_out=0; gamma=1; remaining internal parameters random' if head_name=='H1-context-prev' else 'W_out=0; learned-attention; remaining internal parameters random' if head_name=='H3-short-attention' else 'W_out=0; GRU h0=0; remaining internal parameters random'),
         optimizer='AdamW',lr=3e-4,betas=[.9,.999],eps=1e-8,weight_decay=0,clip_norm=1,
         effective_batch=128,epochs=5,head_dtype='FP32',loss='full-vocab T1 mean KL(fresh||old+delta)',
         train_states=len(bank.indices('train')),validation_states=len(bank.indices('validation')),
