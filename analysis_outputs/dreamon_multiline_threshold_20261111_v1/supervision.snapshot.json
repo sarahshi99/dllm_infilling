@@ -1,0 +1,33 @@
+{
+  "at": "2026-11-11T13:25:01Z",
+  "attempts_by_role": {
+    "nohead": 0,
+    "trained": 0
+  },
+  "execution_commit": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
+  "gpu": {
+    "at": "2026-11-11T13:25:01Z",
+    "compute_processes": [
+      "2453998, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 17930",
+      "4008736, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 2732",
+      "908981, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 65178",
+      "1475780, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 16930",
+      "1475777, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 16368",
+      "1479879, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 1170"
+    ],
+    "cuda_visible_devices": null,
+    "devices": [
+      "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 143771, 120347, 100"
+    ]
+  },
+  "quality_by_role": {
+    "nohead": 275,
+    "trained": 309
+  },
+  "quality_completed": 584,
+  "quality_expected": 197710,
+  "scored": 0,
+  "status": "quality_generation",
+  "task_id": "dreamon_multiline_threshold_20261111_v1",
+  "timing_completed": 0
+}
