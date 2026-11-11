@@ -1,0 +1,11 @@
+{
+  "threshold_tests": 22,
+  "context_foundation_tests": 16,
+  "smoke_cases": 16,
+  "old_singleline_regressions": 4,
+  "official_bwrap_canonical_answer_passed": true,
+  "reviewer_gate_disabled": true,
+  "decoder_diff": "unchanged vs 6491f56 and 660f296 generation decoder",
+  "source_plan": "6491f56",
+  "status": "passed"
+}

@@ -52,7 +52,7 @@ def load_engine(with_head):
 
 def data(engine):
     from experiments.k4_batch_common import population
-    rows=sorted(population('single-line'),key=lambda r:r['task_id'])
+    rows=sorted(population(spec().get('dataset','single-line')),key=lambda r:r['task_id'])
     assert [r['task_id'] for r in rows]==spec()['cases']
     for r in rows:
         r['prefix_ids']=engine.tokenizer.encode(r['prompt'],add_bos=True,add_eos=False)
@@ -69,8 +69,8 @@ def generate(engine,r,c,trace=False,detailed=False):
                          detailed=detailed,record_trace=trace)
     torch.cuda.synchronize()
     result.update(generation_sec=time.perf_counter()-begin,peak_memory_allocated_bytes=torch.cuda.max_memory_allocated(),
-        peak_memory_reserved_bytes=torch.cuda.max_memory_reserved(),task_id=r['task_id'],base_task_id=r['task_id'].split('/')[2],
-        config=c['id'],execution_commit=(os.environ.get('THRESHOLD_EXECUTION_COMMIT') or commit()),
+        peak_memory_reserved_bytes=torch.cuda.max_memory_reserved(),task_id=r['task_id'],
+        **case_metadata(r['task_id']),config=c['id'],execution_commit=(os.environ.get('THRESHOLD_EXECUTION_COMMIT') or commit()),
         seed=42,method=c['method'],order=c['order'],k=c['k'],threshold=c['threshold'])
     if not trace:
         result.pop('action_trace',None)
@@ -90,7 +90,7 @@ def smoke():
     from experiments.context_foundation.adapter import Engine as Reference
     e=load_engine(True)
     byid={r['task_id']:r for r in data(e)}
-    checks=[]
+    checks=[];measurement=[]
     raw=SHARED/f'smoke_traces.{os.getpid()}.jsonl.gz'
     with gzip.open(raw,'wt') as traces:
         for i,key in enumerate(spec()['smoke_cases']):
@@ -115,6 +115,7 @@ def smoke():
                 for method in ('nohead','trained','zero'):
                     c=dict(id='smoke',method=method,order=order,k=k,threshold=.90)
                     values[method]=generate(e,r,c,trace=True,detailed=True)
+                    if method!='zero':measurement.append(dict(config=c,case_key=key,span_bucket=case_metadata(key)['span_bucket'],generation_sec=values[method]['generation_sec']))
                     assert max(len(t['selected']) for t in values[method]['action_trace'])<=k
                 for method in ('nohead','trained'):
                     c=dict(id='smoke',method=method,order=order,k=k,threshold=.90)
@@ -127,20 +128,41 @@ def smoke():
                 assert a['head_calls']==0
                 checks.append(dict(case_key=key,order=order,k=k,off_matches_reference=True,zero_matches_nohead=True,
                     nohead_calls=a['head_calls'],zero_calls=b['head_calls'],trained_calls=values['trained']['head_calls'],
-                    delete_count=sum(v['delete_count'] for v in values.values()),expand_count=sum(v['expand_count'] for v in values.values())))
+                    **case_metadata(key),delete_count=sum(v['delete_count'] for v in values.values()),expand_count=sum(v['expand_count'] for v in values.values())))
                 traces.write(json.dumps(dict(case_key=key,values=values),ensure_ascii=False)+'\n')
                 set_status('smoke','running',completed=i+1,expected=16)
             finally:
                 ref.hook.remove()
     assert sum(c['zero_calls'] for c in checks)>0 and sum(c['trained_calls'] for c in checks)>0
     assert sum(c['delete_count'] for c in checks)>0
+    # Parameterization must also preserve real old SingleLine trajectories.
+    from experiments.k4_batch_common import population
+    old_keys=json.loads((REPO/'analysis_outputs/dreamon_threshold_20261104_v1/run_spec.json').read_text())['smoke_cases']
+    old_rows={r['task_id']:r for r in population('single-line')}
+    regressions=[]
+    if MULTILINE:
+        ref=Reference(e.model,e.tokenizer,e.head,e.special)
+        try:
+            for i,key in enumerate(old_keys[:4]):
+                r=old_rows[key]
+                r['prefix_ids']=e.tokenizer.encode(r['prompt'],add_bos=True,add_eos=False)
+                r['suffix_ids']=e.tokenizer.encode(r['suffix'],add_bos=False,add_eos=True)
+                order=('global','left')[i%2];method=('nohead','trained')[(i//2)%2]
+                v=generate(e,r,dict(id='singleline_regression',method=method,order=order,k=4,threshold=None),trace=True,detailed=True)
+                w=ref.decode(r['prefix_ids'],r['suffix_ids'],key,'nohead' if method=='nohead' else 'H4-old',order,detailed=True)
+                assert v['completion_token_ids']==w['completion_token_ids']
+                assert [[t[f] for f in ('x_after','submitted','expand','delete','barrier')] for t in v['action_trace']]==[[t[f] for f in ('x_after','submitted','expand','delete','barrier')] for t in w['action_trace']]
+                regressions.append(dict(case_key=key,method=method,order=order,passed=True))
+        finally:ref.hook.remove()
     # Evaluate known canonical answer with the official evaluator; quality outcomes do not gate smoke.
     from experiments.run_k4_multiline_stage import official_evaluate
     sample=byid[spec()['smoke_cases'][0]]
     evaluator_check=official_evaluate(sample,sample['canonical_solution'])
     assert evaluator_check['passed'],evaluator_check
     atomic_json(OUT/'smoke.json',dict(status='passed',checks=checks,evaluator_check=evaluator_check,
-        raw_traces=str(raw),quality_selection=False,fixed_cases=spec()['smoke_cases']))
+        raw_traces=str(raw),old_singleline_regressions=regressions,measurements=measurement,
+        rough_quality_gpu_hours=sum(m['generation_sec'] for m in measurement)/len(measurement)*spec()['expected_quality']/3600,
+        estimate_limitation='fixed stratified smoke mixture; config and length costs vary; shared contention not a completion deadline',quality_selection=False,fixed_cases=spec()['smoke_cases']))
     e.hook.remove()
     set_status('smoke','passed',completed=16,model_released_on_process_exit=True)
 
@@ -148,13 +170,13 @@ def smoke():
 def quality(role):
     import torch
     version=json.loads((SHARED/'READY.json').read_text())['execution_commit']
-    assert commit()==version,'execute only published commit'
+    verify_execution(version)
     os.environ['THRESHOLD_EXECUTION_COMMIT']=version
     db=Ledger(role)
     assigned=[c for c in spec()['configs'] if c['method']==role]
     # Resume never combines executable versions.
     assert all(r['execution_commit']==version for r in db.rows('quality'))
-    expected=len(assigned)*1033
+    expected=len(assigned)*len(spec()['cases'])
     if db.count('quality')==expected:
         set_status(role,'generation_complete',completed=expected,expected=expected)
         return
@@ -167,9 +189,10 @@ def quality(role):
         for c in assigned:
             for r in rows:
                 if db.has('quality',c['id'],r['task_id']):continue
+                progress.update(config=c['id'],case_key=r['task_id'])
                 result=generate(e,r,c)
                 db.put('quality',c['id'],r['task_id'],result)
-                progress.update(completed=db.count('quality'),config=c['id'],case_key=r['task_id'])
+                progress.update(completed=progress['completed']+1,config=c['id'],case_key=r['task_id'])
                 if progress['completed']%10==0:set_status(role,'generating',**progress)
             set_status(role,'config_complete',**progress)
         assert db.count('quality')==expected
@@ -179,10 +202,10 @@ def quality(role):
         db.attempt('oom',progress.get('config','load')+'::'+progress.get('case_key',''),traceback.format_exc())
         set_status(role,'oom_process_exit',**progress)
         return 42
-    except Exception:
-        db.attempt('generation_infrastructure',progress.get('config','load')+'::'+progress.get('case_key',''),traceback.format_exc())
+    except Exception as error:
+        db.attempt('generation_infrastructure' if isinstance(error,(OSError,TimeoutError,subprocess.TimeoutExpired)) else 'generation_code_error',progress.get('config','load')+'::'+progress.get('case_key',''),traceback.format_exc())
         set_status(role,'generation_failed',error=traceback.format_exc(),**progress)
-        return 2
+        return 75 if isinstance(error,(OSError,TimeoutError,subprocess.TimeoutExpired)) else 2
     finally:
         stop.set();thread.join(timeout=3);db.db.close()
     return 0
@@ -192,7 +215,7 @@ def timing():
     import torch
     role='timing';db=Ledger(role)
     version=json.loads((SHARED/'READY.json').read_text())['execution_commit']
-    assert commit()==version
+    verify_execution(version)
     os.environ['THRESHOLD_EXECUTION_COMMIT']=version
     expected=spec()['expected_timing']
     if db.count('timing')==expected:return 0
@@ -213,17 +236,17 @@ def timing():
                 for c in order:
                     if db.has('timing',c['id'],key,rep):continue
                     result=generate(e,byid[key],c)
-                    result.update(repetition=rep,population='timing_164_per_base_task',schedule_offset=offset)
+                    result.update(repetition=rep,population='timing_per_base_task_mixed_crossline_and_single_fallback' if MULTILINE else 'timing_164_per_base_task',schedule_offset=offset)
                     db.put('timing',c['id'],key,result,rep)
-                    progress.update(completed=db.count('timing'),repetition=rep,case_key=key)
+                    progress.update(completed=progress['completed']+1,repetition=rep,case_key=key)
                 set_status(role,'timing',**progress)
         e.hook.remove()
         assert db.count('timing')==expected
         set_status(role,'timing_complete',**progress)
     except torch.cuda.OutOfMemoryError:
         db.attempt('oom','timing',traceback.format_exc());set_status(role,'oom_process_exit',**progress);return 42
-    except Exception:
-        db.attempt('timing_infrastructure','timing',traceback.format_exc());set_status(role,'timing_failed',error=traceback.format_exc(),**progress);return 2
+    except Exception as error:
+        db.attempt('timing_infrastructure' if isinstance(error,(OSError,TimeoutError,subprocess.TimeoutExpired)) else 'timing_code_error','timing',traceback.format_exc());set_status(role,'timing_failed',error=traceback.format_exc(),**progress);return 75 if isinstance(error,(OSError,TimeoutError,subprocess.TimeoutExpired)) else 2
     finally:
         stop.set();thread.join(timeout=3);db.db.close()
     return 0
@@ -243,13 +266,22 @@ def pipeline():
     with (SHARED/'pipeline.lock').open('a') as lock:
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return 0
+        # Attach to existing roles; start only missing unfinished roles without a recorded failure.
+        for role in ('nohead','trained'):
+            ledger=Ledger(role);count=ledger.count('quality');ledger.db.close()
+            expected=sum(c['method']==role for c in spec()['configs'])*len(spec()['cases'])
+            exit_path=SHARED/f'{role}.exit.json'
+            failed=exit_path.exists() and json.loads(exit_path.read_text())['exit_code']!=0
+            if count<expected and not role_running(role) and not failed:
+                command=f'bash {SHARED}/start_worker.sh --role {role}'
+                subprocess.run(['tmux','new-session','-d','-s',f'{TASK}_{role}','-c',str(REPO),command],check=True)
         while True:
             counts={}
             for role in ('nohead','trained'):
                 ledger=Ledger(role);counts[role]=ledger.count('quality');ledger.db.close()
             atomic_json(SHARED/'status.json',dict(task_id=TASK,status='quality_generation',quality_completed=sum(counts.values()),quality_by_role=counts,
                 timing_completed=0,at=utc(),pid=os.getpid()))
-            if counts==dict(nohead=18594,trained=16528) and not any(role_running(r) for r in counts):break
+            if counts=={r:sum(c['method']==r for c in spec()['configs'])*len(spec()['cases']) for r in counts} and not any(role_running(r) for r in counts):break
             failures=[]
             for role in counts:
                 p=SHARED/f'{role}.exit.json'
@@ -261,12 +293,12 @@ def pipeline():
                     subprocess.run([PYTHON,'-m','experiments.threshold_eval.analyze','--partial','--publish'],cwd=REPO)
                     return 2
             time.sleep(15)
-        atomic_json(SHARED/'status.json',dict(status='official_scoring',quality_completed=35122,at=utc()))
+        atomic_json(SHARED/'status.json',dict(status='official_scoring',quality_completed=spec()['expected_quality'],at=utc()))
         code=subprocess.call([PYTHON,'-m','experiments.threshold_eval.analyze','--score-only'],cwd=REPO)
         if code:
             subprocess.call([PYTHON,'-m','experiments.threshold_eval.analyze','--partial','--publish'],cwd=REPO)
             return code
-        atomic_json(SHARED/'status.json',dict(status='unified_timing',quality_completed=35122,at=utc()))
+        atomic_json(SHARED/'status.json',dict(status='unified_timing',quality_completed=spec()['expected_quality'],at=utc()))
         code=subprocess.call(['bash',str(SHARED/'start_worker.sh'),'--role','timing'],cwd=REPO)
         # Even failed timing yields honest partial audit/report.
         analysis_code=subprocess.call([PYTHON,'-m','experiments.threshold_eval.analyze']+(['--partial','--publish'] if code else ['--publish']),cwd=REPO)
@@ -282,4 +314,7 @@ def main():
     return pipeline()
 
 
-if __name__=='__main__':raise SystemExit(main())
+if __name__=='__main__':
+    try:raise SystemExit(main())
+    except Exception:
+        traceback.print_exc();raise SystemExit(2)

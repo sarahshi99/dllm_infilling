@@ -1,0 +1,6 @@
+# dreamon_multiline_threshold_20261111_v1 实施说明
+
+按固定任务书执行。选择集中参数化已有入口；不重写采样、阈值和结构解码器，不修改旧结果。数据为官方multi-line，5815案例；冻结DreamOn与rank256头。baseline为本轮同策略K1、同方法off及同阈值另一方法。
+CPU边界与事务测试→四跨度层固定16例真实模型smoke及旧单行回归→执行版本提交与READY→两个角色同卡并发→自然退出→官方bwrap每例3秒评分→独立164×34×3计时→整题bootstrap10000次→报告与push核实。
+GPU使用实时映射；不抢占、不等待外部任务空闲、不设GPU锁。OOM仅失败进程退出后恢复一次；基础设施至多重试3次。普通代码失败和超时保留。成功条件：197710质量唯一行与16728独立计时行，跨行及跨度分母一致，零重复、非法行、混合生成版本与计时token分歧。风险：固定64预算及外部GPU争用；不能声称独立新题泛化或确定加速达标。
+reviewer_gate_disabled：本地diff review与fresh verification；不调用subagent。

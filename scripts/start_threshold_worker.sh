@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SHARED=/home/shx/projects/dllm_infilling/threshold_eval_20261104_v1
+SHARED=${THRESHOLD_SHARED:-/home/shx/projects/dllm_infilling/threshold_eval_20261104_v1}
 ROLE=""
 if [[ ${1:-} == --role ]]; then ROLE=${2:-}; fi
 case "$ROLE" in nohead|trained|timing) ;; *) echo 'usage: start_worker.sh --role nohead|trained|timing' >&2; exit 2;; esac
@@ -9,7 +9,7 @@ if [[ ! -f "$SHARED/READY.json" ]]; then echo 'public code not READY' >&2; exit 
 exec 9>"$SHARED/$ROLE.lock"
 if ! flock -n 9; then echo "$ROLE already running; no second model loaded"; exit 0; fi
 PYTHON=/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python
-WORKTREE="$($PYTHON -c 'import json;print(json.load(open("/home/shx/projects/dllm_infilling/threshold_eval_20261104_v1/READY.json"))["worktree"])')"
+WORKTREE="$($PYTHON -c 'import json,sys;print(json.load(open(sys.argv[1]))["worktree"])' "$SHARED/READY.json")"
 cd "$WORKTREE"
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false
 # Preserve CUDA_VISIBLE_DEVICES exactly as inherited. cuda:0 is logical only.
@@ -25,6 +25,8 @@ while :; do
   CODE=$?
   set -e
   if [[ "$CODE" == 0 ]]; then break; fi
+  # Runner uses 2 for code/contract errors; those are not infrastructure retries.
+  if [[ "$CODE" == 2 ]]; then break; fi
   if [[ "$CODE" == 42 && "$OOM_RETRIES" -lt 1 ]]; then
     OOM_RETRIES=$((OOM_RETRIES+1))
   elif [[ "$CODE" != 42 && "$INFRA_RETRIES" -lt 3 ]]; then
