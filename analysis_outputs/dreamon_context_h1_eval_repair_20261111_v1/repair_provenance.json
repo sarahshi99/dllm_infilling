@@ -1,0 +1,13 @@
+{
+  "best_epoch": 5,
+  "checkpoint": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints/best.pt",
+  "checkpoint_unchanged": true,
+  "correction": "published H2 KeywordHeadAdapter promotes cached/live old_hidden to FP32",
+  "model_memory_reserve_gib": 4,
+  "old_results_preserved": true,
+  "original_dtype_failures": 1027,
+  "original_successes_reused": 6,
+  "protocol": "A SingleLine/global/K4/1033/seed42/T=.2/top_p=.9/batch1; no semantic changes",
+  "source_run": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1",
+  "training_started": false
+}

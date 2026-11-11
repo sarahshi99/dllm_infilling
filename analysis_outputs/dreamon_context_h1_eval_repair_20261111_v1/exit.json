@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-11T11:13:48Z",
+  "exit_code": 0,
+  "phase": "scoring",
+  "reason": null,
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-eval-repair-20261111-v1 && bash experiments/context_h1_eval_repair_v1/launch.sh",
+  "status": "complete",
+  "training_started": false
+}

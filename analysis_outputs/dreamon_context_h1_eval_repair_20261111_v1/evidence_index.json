@@ -1,0 +1,11 @@
+{
+  "checkpoint": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints/best.pt",
+  "code_commit": "aa9293826f390feea61c61fb03f4f35ed9aa5d03",
+  "log": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/pipeline.log",
+  "per_case": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/per_case.jsonl.gz",
+  "raw_generations": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/generated_rows.jsonl.gz",
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-eval-repair-20261111-v1 && bash experiments/context_h1_eval_repair_v1/launch.sh",
+  "run": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1",
+  "source_training": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/training_summary.json",
+  "sqlite": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/queue.sqlite"
+}

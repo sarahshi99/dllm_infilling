@@ -1,0 +1,176 @@
+{
+  "comparisons": [
+    {
+      "a": "H1",
+      "b": "Z4",
+      "ci95": [
+        0.4844610156162229,
+        4.011741682974559
+      ],
+      "equal_group_ci95": [
+        -0.07280899727144935,
+        6.429194272422771
+      ],
+      "equal_group_mean": 3.066587260265053,
+      "groups": 164,
+      "harm": 24,
+      "help": 47,
+      "matched": 1033,
+      "mean": 2.2265246853823815,
+      "n": 1033,
+      "net": 23,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "H1",
+      "b": "H4-old",
+      "ci95": [
+        -1.3850735531308085,
+        1.5384985563041382
+      ],
+      "equal_group_ci95": [
+        -3.0125095663494528,
+        2.974167407416198
+      ],
+      "equal_group_mean": -0.060558863386870235,
+      "groups": 164,
+      "harm": 25,
+      "help": 26,
+      "matched": 1033,
+      "mean": 0.0968054211035818,
+      "n": 1033,
+      "net": 1,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "H1",
+      "b": "K1",
+      "ci95": [
+        -12.707320580248757,
+        -8.04385117947763
+      ],
+      "equal_group_ci95": [
+        -16.26452576444761,
+        -8.564886813547092
+      ],
+      "equal_group_mean": -12.286934768564622,
+      "groups": 164,
+      "harm": 114,
+      "help": 8,
+      "matched": 1033,
+      "mean": -10.26137463697967,
+      "n": 1033,
+      "net": -106,
+      "replicates": 10000,
+      "seed": 20261015
+    },
+    {
+      "a": "H1",
+      "b": "H2",
+      "ci95": [
+        -2.4317412463103376,
+        0.8983388644397932
+      ],
+      "equal_group_ci95": [
+        -3.4638601496652686,
+        2.221871322631512
+      ],
+      "equal_group_mean": -0.6122448279861631,
+      "groups": 164,
+      "harm": 37,
+      "help": 29,
+      "matched": 1033,
+      "mean": -0.7744433688286544,
+      "n": 1033,
+      "net": -8,
+      "replicates": 10000,
+      "seed": 20261015
+    }
+  ],
+  "complete_population": true,
+  "duplicate_generated": 0,
+  "duplicate_scored": 0,
+  "generation_technical_failures": [],
+  "missing_generated": [],
+  "missing_scored": [],
+  "paired_interval": "10000 paired bootstrap replicates grouped by 164 base tasks",
+  "pure_learning_recovery": {
+    "bootstrap_total": 10000,
+    "bootstrap_valid": 10000,
+    "ci95_positive_denominator": [
+      0.04132231404958678,
+      0.3035747354497354
+    ],
+    "denominator": 129,
+    "matched": 1033,
+    "numerator": 23,
+    "reason": "defined",
+    "value": 0.17829457364341086
+  },
+  "score_technical_failures": [],
+  "status": "complete",
+  "table": [
+    {
+      "N": 1033,
+      "actual_submitted_count": 12132,
+      "arm": "H1",
+      "delete_count": 58396,
+      "expand_count": 1608,
+      "forward_count": 4794,
+      "generation_shared_gpu_sec": 3741.6200358057395,
+      "head_calls": 5643,
+      "passed": 843,
+      "rate": 0.8160696999031946
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 11694,
+      "arm": "H2",
+      "delete_count": 58250,
+      "expand_count": 1324,
+      "forward_count": 4499,
+      "generation_shared_gpu_sec": 219.4201810695231,
+      "head_calls": 5608,
+      "passed": 851,
+      "rate": 0.8238141335914811
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12863,
+      "arm": "Z4",
+      "delete_count": 58854,
+      "expand_count": 2186,
+      "forward_count": 5396,
+      "generation_shared_gpu_sec": 132.96285511972383,
+      "head_calls": 5680,
+      "passed": 820,
+      "rate": 0.7938044530493708
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12217,
+      "arm": "H4-old",
+      "delete_count": 58345,
+      "expand_count": 1624,
+      "forward_count": 4812,
+      "generation_shared_gpu_sec": 120.63779841829091,
+      "head_calls": 5691,
+      "passed": 842,
+      "rate": 0.8151016456921588
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 10166,
+      "arm": "K1",
+      "delete_count": 57003,
+      "expand_count": 2,
+      "forward_count": 10166,
+      "generation_shared_gpu_sec": 234.24770310986787,
+      "head_calls": 0,
+      "passed": 949,
+      "rate": 0.9186834462729913
+    }
+  ]
+}
