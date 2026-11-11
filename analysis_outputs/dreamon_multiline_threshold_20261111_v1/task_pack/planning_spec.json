@@ -1,0 +1,386 @@
+{
+  "at": "2026-11-11T10:35:15Z",
+  "code_modified": false,
+  "configs": [
+    {
+      "id": "global_k1_nohead_off",
+      "k": 1,
+      "method": "nohead",
+      "order": "global",
+      "threshold": null
+    },
+    {
+      "id": "global_k2_nohead_off",
+      "k": 2,
+      "method": "nohead",
+      "order": "global",
+      "threshold": null
+    },
+    {
+      "id": "global_k2_nohead_080",
+      "k": 2,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.8
+    },
+    {
+      "id": "global_k2_nohead_090",
+      "k": 2,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.9
+    },
+    {
+      "id": "global_k2_nohead_095",
+      "k": 2,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.95
+    },
+    {
+      "id": "global_k2_trained_off",
+      "k": 2,
+      "method": "trained",
+      "order": "global",
+      "threshold": null
+    },
+    {
+      "id": "global_k2_trained_080",
+      "k": 2,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.8
+    },
+    {
+      "id": "global_k2_trained_090",
+      "k": 2,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.9
+    },
+    {
+      "id": "global_k2_trained_095",
+      "k": 2,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.95
+    },
+    {
+      "id": "global_k4_nohead_off",
+      "k": 4,
+      "method": "nohead",
+      "order": "global",
+      "threshold": null
+    },
+    {
+      "id": "global_k4_nohead_080",
+      "k": 4,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.8
+    },
+    {
+      "id": "global_k4_nohead_090",
+      "k": 4,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.9
+    },
+    {
+      "id": "global_k4_nohead_095",
+      "k": 4,
+      "method": "nohead",
+      "order": "global",
+      "threshold": 0.95
+    },
+    {
+      "id": "global_k4_trained_off",
+      "k": 4,
+      "method": "trained",
+      "order": "global",
+      "threshold": null
+    },
+    {
+      "id": "global_k4_trained_080",
+      "k": 4,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.8
+    },
+    {
+      "id": "global_k4_trained_090",
+      "k": 4,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.9
+    },
+    {
+      "id": "global_k4_trained_095",
+      "k": 4,
+      "method": "trained",
+      "order": "global",
+      "threshold": 0.95
+    },
+    {
+      "id": "left_k1_nohead_off",
+      "k": 1,
+      "method": "nohead",
+      "order": "left",
+      "threshold": null
+    },
+    {
+      "id": "left_k2_nohead_off",
+      "k": 2,
+      "method": "nohead",
+      "order": "left",
+      "threshold": null
+    },
+    {
+      "id": "left_k2_nohead_080",
+      "k": 2,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.8
+    },
+    {
+      "id": "left_k2_nohead_090",
+      "k": 2,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.9
+    },
+    {
+      "id": "left_k2_nohead_095",
+      "k": 2,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.95
+    },
+    {
+      "id": "left_k2_trained_off",
+      "k": 2,
+      "method": "trained",
+      "order": "left",
+      "threshold": null
+    },
+    {
+      "id": "left_k2_trained_080",
+      "k": 2,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.8
+    },
+    {
+      "id": "left_k2_trained_090",
+      "k": 2,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.9
+    },
+    {
+      "id": "left_k2_trained_095",
+      "k": 2,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.95
+    },
+    {
+      "id": "left_k4_nohead_off",
+      "k": 4,
+      "method": "nohead",
+      "order": "left",
+      "threshold": null
+    },
+    {
+      "id": "left_k4_nohead_080",
+      "k": 4,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.8
+    },
+    {
+      "id": "left_k4_nohead_090",
+      "k": 4,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.9
+    },
+    {
+      "id": "left_k4_nohead_095",
+      "k": 4,
+      "method": "nohead",
+      "order": "left",
+      "threshold": 0.95
+    },
+    {
+      "id": "left_k4_trained_off",
+      "k": 4,
+      "method": "trained",
+      "order": "left",
+      "threshold": null
+    },
+    {
+      "id": "left_k4_trained_080",
+      "k": 4,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.8
+    },
+    {
+      "id": "left_k4_trained_090",
+      "k": 4,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.9
+    },
+    {
+      "id": "left_k4_trained_095",
+      "k": 4,
+      "method": "trained",
+      "order": "left",
+      "threshold": 0.95
+    }
+  ],
+  "crossline_quality_subset": 162588,
+  "dataset": {
+    "base_tasks": 164,
+    "crossline_base_tasks": 127,
+    "crossline_population": 4782,
+    "loader_argument": "multi-line",
+    "name": "HumanEval-MultiLineInfilling",
+    "population": 5815,
+    "span_layers": {
+      "1": {
+        "base_tasks": 164,
+        "cases": 1033
+      },
+      "2-3": {
+        "base_tasks": 127,
+        "cases": 1511
+      },
+      "4-7": {
+        "base_tasks": 108,
+        "cases": 1870
+      },
+      "8+": {
+        "base_tasks": 60,
+        "cases": 1401
+      }
+    }
+  },
+  "execution_started": false,
+  "gpu_plan": {
+    "capacity_blocker_policy": "record exact resource blocker; CPU implementation can proceed; no automatic long idle waiting or serialization",
+    "observed_index": 0,
+    "observed_uuid": "GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1",
+    "planning_observed_free_mib": 4487,
+    "planning_observed_total_mib": 143771,
+    "planning_observed_used_mib": 139284,
+    "policy": "two quality roles concurrent on inherited single visible GPU, no GPU mutex, no idle queue, no interference",
+    "recheck_at_execution": true
+  },
+  "head": {
+    "exists": true,
+    "head": "kl",
+    "label": "best",
+    "path": "/home/shx/.cache/dllm_infilling/markov_heads/dreamon_markov_head_training_20260910_v2/checkpoints/kl/full/best.pt",
+    "phase": "full",
+    "resume_command": "python experiments/train_dreamon_markov_head.py run-head --kind kl --common arguments from commands.log",
+    "sha256": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+    "size": 934907317
+  },
+  "head_dtype": "float32",
+  "head_lambda": 1,
+  "model": {
+    "id": "Dream-org/DreamOn-v0-7B",
+    "revision": "8ccc74750e43177327f29dab9e91882ba759e194"
+  },
+  "model_dtype": "bfloat16",
+  "official_source": {
+    "dataset_repository": "loubnabnl/humaneval_infilling",
+    "dataset_revision": "ad46002f24b153968a3d0949e6fa9576780530ba",
+    "evaluator_revision": "88062ff9859c875d04db115b698ed4b0f0395170",
+    "official_loader_files_clean": true
+  },
+  "protocol": {
+    "alg": "entropy",
+    "alg_temp": 0.0,
+    "batch_size": 1,
+    "delete_eos_token": true,
+    "device": "cuda",
+    "dtype": "bf16",
+    "eps": 0.001,
+    "mask_expansion": true,
+    "max_gen_len": 64,
+    "max_prompt_len": 2048,
+    "max_tokens": 2048,
+    "min_gen_len": 64,
+    "pad_eos_to_right": true,
+    "pad_to_max_len": false,
+    "show_progress": false,
+    "steps": 256,
+    "temperature": 0.2,
+    "top_k": null,
+    "top_p": 0.9
+  },
+  "quality_expected": 197710,
+  "ready_published": false,
+  "report_directory": "analysis_outputs/dreamon_multiline_threshold_20261111_v1",
+  "reporting": {
+    "all_configurations_and_off_required": true,
+    "auxiliary": "base-task-equal mean",
+    "bootstrap_repetitions": 10000,
+    "bootstrap_unit": "base task, restricted to tasks actually present in population",
+    "primary": [
+      "passed/5815",
+      "passed/4782"
+    ],
+    "primary_statistic": "case-averaged pass rate, not base-task-equal rate"
+  },
+  "repository": "/home/shx/projects/dllm_infilling/git_workspace",
+  "roles": {
+    "nohead": {
+      "configs": 18,
+      "quality_expected": 104670
+    },
+    "trained": {
+      "configs": 16,
+      "quality_expected": 93040
+    }
+  },
+  "sampler": {
+    "inverse_cdf": "ascending token ID; first CDF >= u; FP64 CDF normalized by final sum",
+    "key": "[contract_id,42,case,main_round,original_position,purpose]",
+    "nucleus": "stable descending FP32 score, token ID tie; include first crossing .9, masked support exactly zero",
+    "purpose": "token",
+    "trajectory_caveat": "pairing device only; coordinates need not retain identical semantics after trajectories diverge; next round creates new keys after structure",
+    "uniform": "SHA256 first52bits / 2^52 + 2^-53"
+  },
+  "seed": 42,
+  "shared_directory": "/home/shx/projects/dllm_infilling/threshold_multiline_eval_20261111_v1",
+  "source_generation_commit": "660f2960ff65fb216f762a1eca0183835de2afbb",
+  "source_results_commit": "285f8f1462481d7c73e1e6659822f45fe7b59a5e",
+  "status": "planned_not_launched",
+  "suggested_execution_branch": "codex/dreamon-multiline-threshold-eval-20261111-v1",
+  "suggested_execution_worktree": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-multiline-threshold-eval-20261111-v1",
+  "task_id": "dreamon_multiline_threshold_20261111_v1",
+  "timing": {
+    "by_span": {
+      "1": 37,
+      "2-3": 69,
+      "4-7": 45,
+      "8+": 13
+    },
+    "cases": 164,
+    "crossline_cases": 127,
+    "crossline_expected": 12954,
+    "crossline_per_config": 381,
+    "expected": 16728,
+    "per_config": 492,
+    "repetitions": 3,
+    "sample_file": "timing_cases.planned.json",
+    "selection": "per base task: crossline candidates if any, otherwise all single-span; choose min stable(['multiline_timing_v1',case_key])",
+    "single_span_expected": 3774,
+    "single_span_fallback_cases": 37
+  }
+}
