@@ -1,0 +1,12 @@
+{
+  "caveat": "two disposable-head updates only; shared GPU load and shard access vary",
+  "effective_batch": 128,
+  "excludes_full_validation_and_generation": true,
+  "includes_shard_io": true,
+  "micro": 32,
+  "projected_7815_train_steps_hours": 1.967106270083847,
+  "step_shared_seconds": [
+    1.1075153183192015,
+    0.9061526004225016
+  ]
+}

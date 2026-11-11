@@ -1,0 +1,32 @@
+{
+  "aligned_hidden": "reuse H1 exact real-model audit; same cached target-aligned old_hidden, no additional shift",
+  "attention_mode": "learned-attention",
+  "batch_step_consistent": true,
+  "bf16_live_adapter_matches_fp32_training": true,
+  "cpu_causality_padding_reset_checks": "see cpu_checks.txt",
+  "finite_losses": [
+    0.13007630380646637,
+    0.12658560912435254,
+    0.1112747771355013
+  ],
+  "finite_nonzero_gradient_norms": [
+    0.4697216749191284,
+    0.46035611629486084,
+    1.1599621772766113
+  ],
+  "head": "H3-short-attention",
+  "history_lengths": [
+    1,
+    2,
+    3
+  ],
+  "internal_random_initialization": true,
+  "invisible_attention_zero": true,
+  "parameter_count": 79301636,
+  "shared_gpu_sec": 2.6630129739642143,
+  "single_history_weight_one": true,
+  "smoke_optimizer_discarded": true,
+  "status": "passed",
+  "valid_attention_normalized": true,
+  "zero_residual_exact": true
+}

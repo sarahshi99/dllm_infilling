@@ -1,0 +1,20 @@
+{
+  "checkpoints": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/checkpoints",
+  "code_commit": "a8c3088318b3b8ee118f2de06075d410f6810e3d",
+  "exit": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/exit.json",
+  "generic_adapter_base": "9302a1e0027076836de35068ddd2cc1f829cc118",
+  "gpu": "single worker, shared cuda:0",
+  "implementation": "B fca5775 heads.py H3-short-attention unchanged",
+  "incomplete_results_are_not_1033_final": true,
+  "log": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/pipeline.log",
+  "progress": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/progress.json",
+  "public_code_base": "9aff4553c3ec955b96704e8f404a0cd785a5a272",
+  "public_root": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1",
+  "raw_generations": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/generated_rows.jsonl.gz",
+  "resources": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/resource_observations.jsonl",
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h3-training-20261111-v1 && bash experiments/context_h3_training_v1/launch.sh",
+  "run": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1",
+  "scored": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/per_case.jsonl.gz",
+  "shell_exit": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/shell_exit.json",
+  "sqlite": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/queue.sqlite"
+}

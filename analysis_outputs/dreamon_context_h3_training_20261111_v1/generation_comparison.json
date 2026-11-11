@@ -1,0 +1,133 @@
+{
+  "caveat": "缺少同数据Hctx及必要消融，不能宣称多词信息有效或选择性注意力优于简单平均。单历史权重为1；注意力权重不能直接作为因果解释。共享GPU时间仅为观测。",
+  "comparisons": [
+    {
+      "a": "H3",
+      "b": "Z4",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    },
+    {
+      "a": "H3",
+      "b": "H4-old",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    },
+    {
+      "a": "H3",
+      "b": "K1",
+      "ci95": null,
+      "groups": 0,
+      "harm": 0,
+      "help": 0,
+      "matched": 0,
+      "mean": null,
+      "n": 0,
+      "net": 0
+    }
+  ],
+  "complete_population": false,
+  "generation_technical_failures": [],
+  "h1": {
+    "reason": "H1 has 6/1033 scored lines; separate repair needed",
+    "status": "pending"
+  },
+  "h2": {
+    "reason": "H3 training not started",
+    "status": "pending"
+  },
+  "paired_interval": "10000 paired cluster bootstrap by 164 base tasks",
+  "pure_learning_recovery": {
+    "matched": 0,
+    "reason": "no_matched_triples",
+    "value": null
+  },
+  "score_technical_failures": [],
+  "status": "ready_for_background",
+  "table": [
+    {
+      "N": 0,
+      "actual_submitted_count": 0,
+      "arm": "H3",
+      "attention_calls": 0,
+      "attention_query_rows": 0,
+      "attention_visible_records": 0,
+      "base_groups": 0,
+      "delete_count": 0,
+      "duplicates": 0,
+      "expand_count": 0,
+      "forward_count": 0,
+      "generation_shared_gpu_sec": 0,
+      "head_calls": 0,
+      "missing": 1033,
+      "passed": 0,
+      "rate": null
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12863,
+      "arm": "Z4",
+      "attention_calls": 0,
+      "attention_query_rows": 0,
+      "attention_visible_records": 0,
+      "base_groups": 164,
+      "delete_count": 58854,
+      "duplicates": 0,
+      "expand_count": 2186,
+      "forward_count": 5396,
+      "generation_shared_gpu_sec": 132.96285511972383,
+      "head_calls": 5680,
+      "missing": 0,
+      "passed": 820,
+      "rate": 0.7938044530493708
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 12217,
+      "arm": "H4-old",
+      "attention_calls": 0,
+      "attention_query_rows": 0,
+      "attention_visible_records": 0,
+      "base_groups": 164,
+      "delete_count": 58345,
+      "duplicates": 0,
+      "expand_count": 1624,
+      "forward_count": 4812,
+      "generation_shared_gpu_sec": 120.63779841829091,
+      "head_calls": 5691,
+      "missing": 0,
+      "passed": 842,
+      "rate": 0.8151016456921588
+    },
+    {
+      "N": 1033,
+      "actual_submitted_count": 10166,
+      "arm": "K1",
+      "attention_calls": 0,
+      "attention_query_rows": 0,
+      "attention_visible_records": 0,
+      "base_groups": 164,
+      "delete_count": 57003,
+      "duplicates": 0,
+      "expand_count": 2,
+      "forward_count": 10166,
+      "generation_shared_gpu_sec": 234.24770310986787,
+      "head_calls": 0,
+      "missing": 0,
+      "passed": 949,
+      "rate": 0.9186834462729913
+    }
+  ]
+}
