@@ -53,4 +53,3 @@ def generate(store):
         if engine is not None: shared.release(engine)
         del engine,candidate,adapter
         gc.collect();torch.cuda.empty_cache()
-
