@@ -1,0 +1,35 @@
+{
+  "h2": 851,
+  "zero": 820,
+  "old_static": 842,
+  "chain_fresh": 912,
+  "k1": 949,
+  "N": 1033,
+  "h2_vs_chain_fresh": {
+    "a": "H2",
+    "b": "F4-chain",
+    "matched": 1033,
+    "help": 10,
+    "harm": 71,
+    "net": -61,
+    "n": 1033,
+    "groups": 164,
+    "mean": -5.90513068731849,
+    "ci95": [
+      -8.224021860993838,
+      -3.8043059341346805
+    ],
+    "equal_group_mean": -5.9480326209333345,
+    "equal_group_ci95": [
+      -9.294085844293202,
+      -2.6092746443757355
+    ],
+    "replicates": 10000,
+    "seed": 20261015
+  },
+  "note": "Existing A same-protocol exact current-chain fresh recomputation reference; no generation rerun. Numerical gaps are not a causal decomposition.",
+  "gap_h2_to_fresh": 61,
+  "gap_fresh_to_k1": 37,
+  "learning_recovery_vs_k1": 0.24031007751937986,
+  "learning_recovery_vs_chain_fresh": 0.33695652173913043
+}

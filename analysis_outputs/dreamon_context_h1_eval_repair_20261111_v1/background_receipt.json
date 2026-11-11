@@ -1,0 +1,20 @@
+{
+  "at": "2026-11-11T10:11:34.010280+00:00",
+  "session": "dreamon_h1_eval_repair_20261111_v1",
+  "progress": {
+    "at": "2026-11-11T10:11:32Z",
+    "completed": 38,
+    "expected": 1033,
+    "last_shared_sec": 2.0974157862365246,
+    "pid": 533171,
+    "stage": "generation",
+    "task_id": "SingleLineInfilling/HumanEval/5/L1"
+  },
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-eval-repair-20261111-v1 && bash experiments/context_h1_eval_repair_v1/launch.sh",
+  "log": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/pipeline.log",
+  "worktree": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h1-eval-repair-20261111-v1",
+  "checkpoint": "/home/shx/.cache/dllm_infilling/context_h1_training_20261107_v1/checkpoints/best.pt",
+  "evaluation_only": true,
+  "original_h1_h2_h3_outputs_preserved": true,
+  "gpu_processes": "2453998, 17930 MiB\n4008736, 2732 MiB\n485051, 16936 MiB\n525326, 62662 MiB\n533171, 16680 MiB\n536548, 1000 MiB\n541139, 2404 MiB\n"
+}
