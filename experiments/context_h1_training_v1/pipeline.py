@@ -24,13 +24,13 @@ from .bank import RUN,OUT,AOUT,config,collect,progress,capacity,cell,Bank
 from .train import initialize,train
 
 
-def load_engine(*,progress_fn=progress):
+def load_engine(*,progress_fn=progress,memory_reserve_gib=8):
     progress=progress_fn
     free,total=torch.cuda.mem_get_info()
     if free<18*2**30:
         raise torch.cuda.OutOfMemoryError('shared GPU has less than minimum unquantized model budget; no exclusive waiting')
-    torch.cuda.set_per_process_memory_fraction(min(.90,(free-8*2**30)/total))
-    progress('loading_model',free_bytes=free,reserve_bytes=8*2**30)
+    torch.cuda.set_per_process_memory_fraction(min(.90,(free-memory_reserve_gib*2**30)/total))
+    progress('loading_model',free_bytes=free,reserve_bytes=memory_reserve_gib*2**30)
     from experiments.dreamon_singleline_adapter import OfficialHFTokenizerWrapper,ensure_modeling_rope_utils_available
     ensure_modeling_rope_utils_available()
     from transformers import AutoModel,AutoTokenizer

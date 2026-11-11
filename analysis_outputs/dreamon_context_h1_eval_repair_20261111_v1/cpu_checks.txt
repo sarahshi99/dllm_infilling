@@ -1,0 +1,21 @@
+test_h1_live_bf16_matches_trained_fp32_definition (experiments.context_h1_eval_repair_v1.test_cpu.RepairTests) ... ok
+test_accumulation_and_optimizer_resume (experiments.context_h1_training_v1.test_cpu.FormalTests) ... ok
+test_batch_step_future_chain_barrier (experiments.context_h1_training_v1.test_cpu.FormalTests) ... ok
+test_quota_32_each_split (experiments.context_h1_training_v1.test_cpu.FormalTests) ... ok
+test_real_k2_and_alignment (experiments.context_h1_training_v1.test_cpu.FormalTests) ... ok
+test_zero_then_nonzero_finite_signal (experiments.context_h1_training_v1.test_cpu.FormalTests) ... ok
+test_alignment_including_boundary (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_corrected_structure_refresh_never_commits_guess (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_finite_vocab_inverse_cdf_and_ties (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_key_reproducible_independent_of_other_cases (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_masks_no_future_other_chain_or_provisional (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_restart_idempotence (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_structure_barrier (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_teacher_copy_and_no_future_leak (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_teacher_never_writes_other_chain_commits (tests.context_foundation.test_adapter.AdapterTest) ... ok
+test_zero_nohead_every_token_and_canvas (tests.context_foundation.test_adapter.AdapterTest) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.484s
+
+OK
