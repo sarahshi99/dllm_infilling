@@ -1,0 +1,46 @@
+{
+  "at": "2026-11-11T06:40:00.900084+00:00",
+  "session": "dreamon_h3_20261111_v1",
+  "pid": 4008736,
+  "progress": {
+    "at": "2026-11-11T06:39:54Z",
+    "completed": 4128,
+    "epoch": 0,
+    "pid": 4008736,
+    "stage": "validation",
+    "target": 20000
+  },
+  "durable_row_counts": {
+    "scored": 3099,
+    "validation_0": 4896
+  },
+  "command": "bash experiments/context_h3_training_v1/launch.sh",
+  "worktree": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h3-training-20261111-v1",
+  "branch": "codex/dreamon-context-h3-training-20261111-v1",
+  "runtime_start_commit": "d60f72ab1507c1df5b1a9e421ae4abaf1fc732dc",
+  "run": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1",
+  "log": "/home/shx/.cache/dllm_infilling/context_h3_training_20261111_v1/pipeline.log",
+  "resume": "cd /home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-context-h3-training-20261111-v1 && bash experiments/context_h3_training_v1/launch.sh",
+  "gpu_processes": "2453998, 17930 MiB, /home/lwt/so101-lerobot-runtime/.venv/bin/python\n4008736, 1492 MiB, /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python",
+  "estimate": {
+    "caveat": "two disposable-head updates only; shared GPU load and shard access vary",
+    "effective_batch": 128,
+    "excludes_full_validation_and_generation": true,
+    "includes_shard_io": true,
+    "micro": 32,
+    "projected_7815_train_steps_hours": 1.967106270083847,
+    "step_shared_seconds": [
+      1.1075153183192015,
+      0.9061526004225016
+    ]
+  },
+  "h1_h2_worktrees_clean": true,
+  "automatic_stages": [
+    "training with 6 complete validations",
+    "fixed best 1033 generation",
+    "official scoring",
+    "grouped comparisons",
+    "archive commit push",
+    "exit"
+  ]
+}
