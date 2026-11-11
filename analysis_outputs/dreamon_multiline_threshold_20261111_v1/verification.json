@@ -4,9 +4,10 @@
   "decoder_diff": "unchanged vs 6491f56 and 660f296 generation decoder",
   "official_bwrap_canonical_answer_passed": true,
   "old_singleline_regressions": 4,
+  "publication_retry_failure_test": "passed",
   "reviewer_gate_disabled": true,
   "smoke_cases": 16,
   "source_plan": "6491f56",
   "status": "passed",
-  "threshold_tests": 24
+  "threshold_tests": 25
 }

@@ -403,11 +403,25 @@ def publish():
         if subprocess.run(['git','diff','--cached','--quiet'],cwd=REPO).returncode:
             subprocess.run(['git','commit','-m','results: report DreamOn multiline threshold matrix and timing audit' if MULTILINE else 'results: report DreamOn threshold matrix and timing audit'],cwd=REPO,stdout=log,stderr=subprocess.STDOUT,check=True)
         branch=subprocess.check_output(['git','branch','--show-current'],cwd=REPO,text=True).strip()
-        pushed=subprocess.run(['git','push','-u','origin',branch],cwd=REPO,stdout=log,stderr=subprocess.STDOUT,timeout=120)
-        if pushed.returncode:
-            atomic_json(SHARED/'publication.status.json',dict(status='push_failed',commit=commit(),at=utc()));return
-        remote=subprocess.check_output(['git','ls-remote','origin','refs/heads/'+branch],cwd=REPO,text=True,timeout=60).split()[0]
-        atomic_json(SHARED/'publication.status.json',dict(status='verified' if remote==commit() else 'remote_mismatch',commit=commit(),remote_commit=remote,at=utc()))
+        push_and_verify(branch,log)
+
+
+def push_and_verify(branch,log):
+    for attempt in range(4):
+        try:
+            subprocess.run(['git','push','-u','origin',branch],cwd=REPO,stdout=log,stderr=subprocess.STDOUT,timeout=120,check=True)
+            remote=subprocess.check_output(['git','ls-remote','origin','refs/heads/'+branch],cwd=REPO,text=True,timeout=60).split()[0]
+            if remote!=commit():raise RuntimeError('remote commit mismatch')
+            atomic_json(SHARED/'publication.status.json',dict(status='verified',commit=commit(),remote_commit=remote,attempts=attempt+1,at=utc()))
+            return
+        except (subprocess.SubprocessError,OSError,RuntimeError,IndexError) as error:
+            log.write(f'{utc()} publication attempt {attempt+1}: {error}\n');log.flush()
+            atomic_json(SHARED/'publication.status.json',dict(status='retrying' if attempt<3 else 'push_failed',commit=commit(),attempts=attempt+1,error=str(error),at=utc()))
+    status=json.loads((SHARED/'status.json').read_text()) if (SHARED/'status.json').exists() else {}
+    status.update(status='publication_blocked',at=utc())
+    atomic_json(SHARED/'status.json',status)
+    raise RuntimeError('Publication failed after initial attempt plus 3 infrastructure retries; see publication.log')
+
 
 
 def main():

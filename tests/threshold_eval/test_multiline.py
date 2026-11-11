@@ -111,3 +111,15 @@ class PublicationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td,patch.object(analyze,'OUT',Path(td)):
             analyze.write_csv('test.csv',[dict(config='c',passed=1)])
             self.assertNotIn(b'\r',(Path(td)/'test.csv').read_bytes())
+
+    def test_failed_push_is_bounded_and_never_reports_completed(self):
+        import io,json,subprocess,tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from experiments.threshold_eval import analyze
+        with tempfile.TemporaryDirectory() as td,patch.object(analyze,'SHARED',Path(td)),patch.object(analyze,'commit',return_value='v'),patch.object(analyze.subprocess,'run',side_effect=subprocess.CalledProcessError(1,['git','push'])) as run:
+            with self.assertRaisesRegex(RuntimeError,'Publication failed'):
+                analyze.push_and_verify('branch',io.StringIO())
+            self.assertEqual(run.call_count,4)
+            self.assertEqual(json.loads((Path(td)/'status.json').read_text())['status'],'publication_blocked')
+            self.assertEqual(json.loads((Path(td)/'publication.status.json').read_text())['status'],'push_failed')

@@ -1,0 +1,7 @@
+{
+  "cases": 5815,
+  "max_canvas_tokens": 620,
+  "over_2048": 0,
+  "all_fit_frozen_budget": true,
+  "answer_lengths_not_used": true
+}
