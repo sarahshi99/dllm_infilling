@@ -1,0 +1,46 @@
+{
+  "baseline_reuse_audits_match": true,
+  "h1_source": "/home/shx/.cache/dllm_infilling/context_h1_eval_repair_20261111_v1/per_case.jsonl.gz",
+  "original_h1_failure_archive_preserved": true,
+  "protocol_fields_checked": [
+    "seed",
+    "config",
+    "optimizer",
+    "lr",
+    "betas",
+    "eps",
+    "weight_decay",
+    "clip_norm",
+    "effective_batch",
+    "epochs",
+    "head_dtype",
+    "loss",
+    "train_states",
+    "validation_states",
+    "best"
+  ],
+  "result": {
+    "a": "H3",
+    "b": "H1",
+    "ci95": [
+      -0.48083897485493227,
+      3.8273045561044174
+    ],
+    "equal_group_ci95": [
+      -3.9018456246759965,
+      1.6589298655971358
+    ],
+    "equal_group_mean": -1.0887644234856617,
+    "groups": 164,
+    "harm": 25,
+    "help": 41,
+    "matched": 1033,
+    "mean": 1.5488867376573088,
+    "n": 1033,
+    "net": 16,
+    "replicates": 10000,
+    "seed": 20261015
+  },
+  "status": "complete",
+  "training_or_generation_started": false
+}
