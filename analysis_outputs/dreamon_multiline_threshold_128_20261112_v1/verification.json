@@ -1,11 +1,14 @@
 {
-  "status": "cpu_verified_gpu_pending",
+  "status": "cpu_verified_blocked_resources",
   "threshold_tests": 31,
   "context_foundation_tests": 16,
   "budget_tests": "128 expands beyond64 and caps at128; defaults64 and parent regression",
   "protocol_comparison": "all frozen fields/configurations/cases/timing cases equal parent; max_gen_len64->128, expansion_budget128",
   "reviewer_gate_disabled": true,
-  "gpu_smoke": "not_run_resource_capacity",
+  "gpu_smoke": "not_started_free619MiB",
   "old_task_worktree_modified": false,
-  "parent_64_reference_regression": "passed four order/method combinations against unmodified parent Git source"
+  "parent_64_reference_regression": "passed four order/method combinations against unmodified parent Git source",
+  "implementation_commit": "4f098d686d59738f407caf4879de12b327257ce1",
+  "launch_exit_code": 4,
+  "parent64_generation_paths": "verified unchanged against ae0283e60fbd60603c3587f2c7394a3b6081a18d"
 }

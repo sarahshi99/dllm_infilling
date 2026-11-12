@@ -2,3 +2,4 @@ THRESHOLD_TASK_ID=dreamon_multiline_threshold_128_20261112_v1 /home/shx/projects
 bash /home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/start_worker.sh --role nohead
 bash /home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/start_worker.sh --role trained
 THRESHOLD_TASK_ID=dreamon_multiline_threshold_128_20261112_v1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.threshold_eval.runner --phase pipeline
+bash /home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/start.sh
