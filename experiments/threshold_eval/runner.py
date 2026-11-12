@@ -41,7 +41,7 @@ def load_engine(with_head):
         assert next(head.parameters()).dtype==torch.float32
         h=FrozenHeadAdapter(head)
     special=json.loads((REPO/'analysis_outputs/dreamon_context_foundation_20261015_v1/protocol_schema.json').read_text())['special_token_ids']
-    e=Engine(model,tokenizer,h,special)
+    e=Engine(model,tokenizer,h,special,max_gen_len=frozen['protocol']['max_gen_len'])
     properties=torch.cuda.get_device_properties(0)
     atomic_json(SHARED/f'model_{os.getpid()}.json',dict(pid=os.getpid(),at=utc(),cuda_logical_device=0,
         cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),device_name=properties.name,
@@ -71,7 +71,7 @@ def generate(engine,r,c,trace=False,detailed=False):
     result.update(generation_sec=time.perf_counter()-begin,peak_memory_allocated_bytes=torch.cuda.max_memory_allocated(),
         peak_memory_reserved_bytes=torch.cuda.max_memory_reserved(),task_id=r['task_id'],
         **case_metadata(r['task_id']),config=c['id'],execution_commit=(os.environ.get('THRESHOLD_EXECUTION_COMMIT') or commit()),
-        seed=42,method=c['method'],order=c['order'],k=c['k'],threshold=c['threshold'])
+        seed=42,method=c['method'],order=c['order'],k=c['k'],threshold=c['threshold'],max_gen_len=engine.max_gen_len)
     if not trace:
         result.pop('action_trace',None)
         result.pop('sampling_key_sha256',None)
@@ -95,7 +95,7 @@ def smoke():
     with gzip.open(raw,'wt') as traces:
         for i,key in enumerate(spec()['smoke_cases']):
             r=byid[key];order=('global','left')[i%2];k=(2,4)[(i//2)%2]
-            ref=Reference(e.model,e.tokenizer,e.head,e.special)
+            ref=Reference(e.model,e.tokenizer,e.head,e.special,max_gen_len=e.max_gen_len)
             try:
                 values={}
                 for kk,method,arm in [(1,'nohead','K1'),(4,'nohead','nohead'),(4,'trained','H4-old')]:
@@ -141,6 +141,8 @@ def smoke():
     old_rows={r['task_id']:r for r in population('single-line')}
     regressions=[]
     if MULTILINE:
+        budget=e.max_gen_len
+        e.max_gen_len=64
         ref=Reference(e.model,e.tokenizer,e.head,e.special)
         try:
             for i,key in enumerate(old_keys[:4]):
@@ -153,7 +155,9 @@ def smoke():
                 assert v['completion_token_ids']==w['completion_token_ids']
                 assert [[t[f] for f in ('x_after','submitted','expand','delete','barrier')] for t in v['action_trace']]==[[t[f] for f in ('x_after','submitted','expand','delete','barrier')] for t in w['action_trace']]
                 regressions.append(dict(case_key=key,method=method,order=order,passed=True))
-        finally:ref.hook.remove()
+        finally:
+            ref.hook.remove()
+            e.max_gen_len=budget
     # Evaluate known canonical answer with the official evaluator; quality outcomes do not gate smoke.
     from experiments.run_k4_multiline_stage import official_evaluate
     sample=byid[spec()['smoke_cases'][0]]

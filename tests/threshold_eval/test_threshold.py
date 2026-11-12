@@ -28,11 +28,11 @@ class Toy(torch.nn.Module):
         return SimpleNamespace(logits=logits)
 
 
-def engine(cls=Engine,with_head=True):
+def engine(cls=Engine,with_head=True,**kwargs):
     model=Toy()
     tok=SimpleNamespace(mask_id=4,eos_id=5,expand_id=6,decode=lambda ids,**kw:str(ids))
     h=MarkovHead(vocab_size=7,rank=256,structural_token_ids=[4,5,6])
-    return cls(model,tok,FrozenHeadAdapter(h) if with_head else None,[4,5,6])
+    return cls(model,tok,FrozenHeadAdapter(h) if with_head else None,[4,5,6],**kwargs)
 
 
 class ThresholdTests(unittest.TestCase):

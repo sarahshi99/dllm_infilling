@@ -1,0 +1,1150 @@
+[
+  {
+    "base_task_id": "0",
+    "case_key": "MultiLineInfilling/HumanEval/0/L4_L7",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "1",
+    "case_key": "MultiLineInfilling/HumanEval/1/L1_L4",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "2",
+    "case_key": "MultiLineInfilling/HumanEval/2/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "3",
+    "case_key": "MultiLineInfilling/HumanEval/3/L0_L7",
+    "hole_span_lines": 8,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "4",
+    "case_key": "MultiLineInfilling/HumanEval/4/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "5",
+    "case_key": "MultiLineInfilling/HumanEval/5/L3_L7",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "6",
+    "case_key": "MultiLineInfilling/HumanEval/6/L10_L12",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "7",
+    "case_key": "MultiLineInfilling/HumanEval/7/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "8",
+    "case_key": "MultiLineInfilling/HumanEval/8/L1_L5",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "9",
+    "case_key": "MultiLineInfilling/HumanEval/9/L4_L7",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "10",
+    "case_key": "MultiLineInfilling/HumanEval/10/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "11",
+    "case_key": "MultiLineInfilling/HumanEval/11/L4_L6",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "12",
+    "case_key": "MultiLineInfilling/HumanEval/12/L1_L5",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "13",
+    "case_key": "MultiLineInfilling/HumanEval/13/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "14",
+    "case_key": "MultiLineInfilling/HumanEval/14/L2_L3",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "15",
+    "case_key": "MultiLineInfilling/HumanEval/15/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "16",
+    "case_key": "MultiLineInfilling/HumanEval/16/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "17",
+    "case_key": "MultiLineInfilling/HumanEval/17/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "18",
+    "case_key": "MultiLineInfilling/HumanEval/18/L3_L6",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "19",
+    "case_key": "MultiLineInfilling/HumanEval/19/L6_L7",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "20",
+    "case_key": "MultiLineInfilling/HumanEval/20/L1_L4",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "21",
+    "case_key": "MultiLineInfilling/HumanEval/21/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "22",
+    "case_key": "MultiLineInfilling/HumanEval/22/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "23",
+    "case_key": "MultiLineInfilling/HumanEval/23/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "24",
+    "case_key": "MultiLineInfilling/HumanEval/24/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "25",
+    "case_key": "MultiLineInfilling/HumanEval/25/L7_L12",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "26",
+    "case_key": "MultiLineInfilling/HumanEval/26/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "27",
+    "case_key": "MultiLineInfilling/HumanEval/27/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "28",
+    "case_key": "MultiLineInfilling/HumanEval/28/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "29",
+    "case_key": "MultiLineInfilling/HumanEval/29/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "30",
+    "case_key": "MultiLineInfilling/HumanEval/30/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "31",
+    "case_key": "MultiLineInfilling/HumanEval/31/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "32",
+    "case_key": "MultiLineInfilling/HumanEval/32/L0_L9",
+    "hole_span_lines": 10,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "33",
+    "case_key": "MultiLineInfilling/HumanEval/33/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "34",
+    "case_key": "MultiLineInfilling/HumanEval/34/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "35",
+    "case_key": "MultiLineInfilling/HumanEval/35/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "36",
+    "case_key": "MultiLineInfilling/HumanEval/36/L3_L5",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "37",
+    "case_key": "MultiLineInfilling/HumanEval/37/L6_L8",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "38",
+    "case_key": "MultiLineInfilling/HumanEval/38/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "39",
+    "case_key": "MultiLineInfilling/HumanEval/39/L7_L14",
+    "hole_span_lines": 8,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "40",
+    "case_key": "MultiLineInfilling/HumanEval/40/L3_L4",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "41",
+    "case_key": "MultiLineInfilling/HumanEval/41/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "42",
+    "case_key": "MultiLineInfilling/HumanEval/42/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "43",
+    "case_key": "MultiLineInfilling/HumanEval/43/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "44",
+    "case_key": "MultiLineInfilling/HumanEval/44/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "45",
+    "case_key": "MultiLineInfilling/HumanEval/45/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "46",
+    "case_key": "MultiLineInfilling/HumanEval/46/L1_L8",
+    "hole_span_lines": 8,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "47",
+    "case_key": "MultiLineInfilling/HumanEval/47/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "48",
+    "case_key": "MultiLineInfilling/HumanEval/48/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "49",
+    "case_key": "MultiLineInfilling/HumanEval/49/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "50",
+    "case_key": "MultiLineInfilling/HumanEval/50/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "51",
+    "case_key": "MultiLineInfilling/HumanEval/51/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "52",
+    "case_key": "MultiLineInfilling/HumanEval/52/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "53",
+    "case_key": "MultiLineInfilling/HumanEval/53/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "54",
+    "case_key": "MultiLineInfilling/HumanEval/54/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "55",
+    "case_key": "MultiLineInfilling/HumanEval/55/L2_L3",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "56",
+    "case_key": "MultiLineInfilling/HumanEval/56/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "57",
+    "case_key": "MultiLineInfilling/HumanEval/57/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "58",
+    "case_key": "MultiLineInfilling/HumanEval/58/L1_L5",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "59",
+    "case_key": "MultiLineInfilling/HumanEval/59/L2_L11",
+    "hole_span_lines": 10,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "60",
+    "case_key": "MultiLineInfilling/HumanEval/60/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "61",
+    "case_key": "MultiLineInfilling/HumanEval/61/L0_L4",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "62",
+    "case_key": "MultiLineInfilling/HumanEval/62/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "63",
+    "case_key": "MultiLineInfilling/HumanEval/63/L0_L5",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "64",
+    "case_key": "MultiLineInfilling/HumanEval/64/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "65",
+    "case_key": "MultiLineInfilling/HumanEval/65/L3_L4",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "66",
+    "case_key": "MultiLineInfilling/HumanEval/66/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "67",
+    "case_key": "MultiLineInfilling/HumanEval/67/L0_L4",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "68",
+    "case_key": "MultiLineInfilling/HumanEval/68/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "69",
+    "case_key": "MultiLineInfilling/HumanEval/69/L5_L7",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "70",
+    "case_key": "MultiLineInfilling/HumanEval/70/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "71",
+    "case_key": "MultiLineInfilling/HumanEval/71/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "72",
+    "case_key": "MultiLineInfilling/HumanEval/72/L3_L8",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "73",
+    "case_key": "MultiLineInfilling/HumanEval/73/L2_L3",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "74",
+    "case_key": "MultiLineInfilling/HumanEval/74/L1_L5",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "75",
+    "case_key": "MultiLineInfilling/HumanEval/75/L12_L13",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "76",
+    "case_key": "MultiLineInfilling/HumanEval/76/L3_L5",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "77",
+    "case_key": "MultiLineInfilling/HumanEval/77/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "78",
+    "case_key": "MultiLineInfilling/HumanEval/78/L4_L5",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "79",
+    "case_key": "MultiLineInfilling/HumanEval/79/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "80",
+    "case_key": "MultiLineInfilling/HumanEval/80/L0_L5",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "81",
+    "case_key": "MultiLineInfilling/HumanEval/81/L8_L16",
+    "hole_span_lines": 9,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "82",
+    "case_key": "MultiLineInfilling/HumanEval/82/L1_L5",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "83",
+    "case_key": "MultiLineInfilling/HumanEval/83/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "84",
+    "case_key": "MultiLineInfilling/HumanEval/84/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "85",
+    "case_key": "MultiLineInfilling/HumanEval/85/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "86",
+    "case_key": "MultiLineInfilling/HumanEval/86/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "87",
+    "case_key": "MultiLineInfilling/HumanEval/87/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "88",
+    "case_key": "MultiLineInfilling/HumanEval/88/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "89",
+    "case_key": "MultiLineInfilling/HumanEval/89/L2_L3",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "90",
+    "case_key": "MultiLineInfilling/HumanEval/90/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "91",
+    "case_key": "MultiLineInfilling/HumanEval/91/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "92",
+    "case_key": "MultiLineInfilling/HumanEval/92/L3_L4",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "93",
+    "case_key": "MultiLineInfilling/HumanEval/93/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "94",
+    "case_key": "MultiLineInfilling/HumanEval/94/L5_L7",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "95",
+    "case_key": "MultiLineInfilling/HumanEval/95/L16_L19",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "96",
+    "case_key": "MultiLineInfilling/HumanEval/96/L1_L6",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "97",
+    "case_key": "MultiLineInfilling/HumanEval/97/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "98",
+    "case_key": "MultiLineInfilling/HumanEval/98/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "99",
+    "case_key": "MultiLineInfilling/HumanEval/99/L0_L13",
+    "hole_span_lines": 14,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "100",
+    "case_key": "MultiLineInfilling/HumanEval/100/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "101",
+    "case_key": "MultiLineInfilling/HumanEval/101/L3_L9",
+    "hole_span_lines": 7,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "102",
+    "case_key": "MultiLineInfilling/HumanEval/102/L4_L5",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "103",
+    "case_key": "MultiLineInfilling/HumanEval/103/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "104",
+    "case_key": "MultiLineInfilling/HumanEval/104/L1_L4",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "105",
+    "case_key": "MultiLineInfilling/HumanEval/105/L1_L9",
+    "hole_span_lines": 9,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "106",
+    "case_key": "MultiLineInfilling/HumanEval/106/L1_L10",
+    "hole_span_lines": 10,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "107",
+    "case_key": "MultiLineInfilling/HumanEval/107/L3_L8",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "108",
+    "case_key": "MultiLineInfilling/HumanEval/108/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "109",
+    "case_key": "MultiLineInfilling/HumanEval/109/L0_L10",
+    "hole_span_lines": 11,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "110",
+    "case_key": "MultiLineInfilling/HumanEval/110/L9_L10",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "111",
+    "case_key": "MultiLineInfilling/HumanEval/111/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "112",
+    "case_key": "MultiLineInfilling/HumanEval/112/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "113",
+    "case_key": "MultiLineInfilling/HumanEval/113/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "114",
+    "case_key": "MultiLineInfilling/HumanEval/114/L1_L10",
+    "hole_span_lines": 10,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "115",
+    "case_key": "MultiLineInfilling/HumanEval/115/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "116",
+    "case_key": "MultiLineInfilling/HumanEval/116/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "117",
+    "case_key": "MultiLineInfilling/HumanEval/117/L3_L4",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "118",
+    "case_key": "MultiLineInfilling/HumanEval/118/L1_L7",
+    "hole_span_lines": 7,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "119",
+    "case_key": "MultiLineInfilling/HumanEval/119/L1_L4",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "120",
+    "case_key": "MultiLineInfilling/HumanEval/120/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "121",
+    "case_key": "MultiLineInfilling/HumanEval/121/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "122",
+    "case_key": "MultiLineInfilling/HumanEval/122/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "123",
+    "case_key": "MultiLineInfilling/HumanEval/123/L4_L13",
+    "hole_span_lines": 10,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "124",
+    "case_key": "MultiLineInfilling/HumanEval/124/L8_L11",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "125",
+    "case_key": "MultiLineInfilling/HumanEval/125/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "126",
+    "case_key": "MultiLineInfilling/HumanEval/126/L4_L6",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "127",
+    "case_key": "MultiLineInfilling/HumanEval/127/L0_L11",
+    "hole_span_lines": 12,
+    "selection": "crossline_preferred",
+    "span_bucket": "8+"
+  },
+  {
+    "base_task_id": "128",
+    "case_key": "MultiLineInfilling/HumanEval/128/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "129",
+    "case_key": "MultiLineInfilling/HumanEval/129/L7_L12",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "130",
+    "case_key": "MultiLineInfilling/HumanEval/130/L3_L8",
+    "hole_span_lines": 6,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "131",
+    "case_key": "MultiLineInfilling/HumanEval/131/L2_L4",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "132",
+    "case_key": "MultiLineInfilling/HumanEval/132/L4_L10",
+    "hole_span_lines": 7,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "133",
+    "case_key": "MultiLineInfilling/HumanEval/133/L0_L4",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "134",
+    "case_key": "MultiLineInfilling/HumanEval/134/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "135",
+    "case_key": "MultiLineInfilling/HumanEval/135/L4_L6",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "136",
+    "case_key": "MultiLineInfilling/HumanEval/136/L1_L2",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "137",
+    "case_key": "MultiLineInfilling/HumanEval/137/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "138",
+    "case_key": "MultiLineInfilling/HumanEval/138/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "139",
+    "case_key": "MultiLineInfilling/HumanEval/139/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "140",
+    "case_key": "MultiLineInfilling/HumanEval/140/L3_L6",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "141",
+    "case_key": "MultiLineInfilling/HumanEval/141/L1_L7",
+    "hole_span_lines": 7,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "142",
+    "case_key": "MultiLineInfilling/HumanEval/142/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "143",
+    "case_key": "MultiLineInfilling/HumanEval/143/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "144",
+    "case_key": "MultiLineInfilling/HumanEval/144/L3_L6",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "145",
+    "case_key": "MultiLineInfilling/HumanEval/145/L5_L6",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "146",
+    "case_key": "MultiLineInfilling/HumanEval/146/L5_L9",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "147",
+    "case_key": "MultiLineInfilling/HumanEval/147/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "148",
+    "case_key": "MultiLineInfilling/HumanEval/148/L2_L6",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "149",
+    "case_key": "MultiLineInfilling/HumanEval/149/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "150",
+    "case_key": "MultiLineInfilling/HumanEval/150/L2_L5",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "151",
+    "case_key": "MultiLineInfilling/HumanEval/151/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "152",
+    "case_key": "MultiLineInfilling/HumanEval/152/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "153",
+    "case_key": "MultiLineInfilling/HumanEval/153/L5_L6",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "154",
+    "case_key": "MultiLineInfilling/HumanEval/154/L0_L2",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "155",
+    "case_key": "MultiLineInfilling/HumanEval/155/L2_L6",
+    "hole_span_lines": 5,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "156",
+    "case_key": "MultiLineInfilling/HumanEval/156/L3_L6",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  },
+  {
+    "base_task_id": "157",
+    "case_key": "MultiLineInfilling/HumanEval/157/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "158",
+    "case_key": "MultiLineInfilling/HumanEval/158/L0_L0",
+    "hole_span_lines": 1,
+    "selection": "single_span_only_fallback",
+    "span_bucket": "1"
+  },
+  {
+    "base_task_id": "159",
+    "case_key": "MultiLineInfilling/HumanEval/159/L1_L3",
+    "hole_span_lines": 3,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "160",
+    "case_key": "MultiLineInfilling/HumanEval/160/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "161",
+    "case_key": "MultiLineInfilling/HumanEval/161/L12_L13",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "162",
+    "case_key": "MultiLineInfilling/HumanEval/162/L0_L1",
+    "hole_span_lines": 2,
+    "selection": "crossline_preferred",
+    "span_bucket": "2-3"
+  },
+  {
+    "base_task_id": "163",
+    "case_key": "MultiLineInfilling/HumanEval/163/L0_L3",
+    "hole_span_lines": 4,
+    "selection": "crossline_preferred",
+    "span_bucket": "4-7"
+  }
+]

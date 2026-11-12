@@ -1,7 +1,18 @@
-# 2026-10-14 单会话K4/多行批次
+# 官方 MultiLine 阈值实验：补充128预算
 
-用户已授权A DreamOn单行K4(8264)、B DreamCoder Base固定64单行K4(6198)、C DreamOn多行global K2(23260)；seed42，冻结bf16主模型/float32 rank256 v2 KL best lambda1。当前阶段CPU修补→K4实现→合成测试→固定16行技术smoke→自动全量队列。reviewer_gate_disabled，当前会话本地diff审阅与fresh verification。
+用户于2026-11-12明确授权直接补充128实验，其他设置与正在运行的64实验相同。计划版本128-v1；不重新训练、不修改64任务工作区及账本。
 
-推荐在现有decoder上新增K4空间连续链路径，保留K1/K2；不采用直接仅改K或多模型并发。理由：第三/第四词必须依赖前驱最终词，结构动作使本轮其它坐标失效。Base保持原生固定画布EOS/完整画布topk及64步时钟。对比B-A提交规则、C-B局部重采样、D-C已学偏置。GPU0共享H200，一次一个worker，加载前至少32GiB空闲；不抢占。官方timeout3s，普通失败是有效结果。
+候选：继续只用64；另跑96；另跑128。采用128：能检验64容量限制，并与DreamOn论文最大长度口径衔接，避免增加未经请求的预算点。baseline是本任务重新生成的global/left K1及同方法off；同数据、同模型、同硬件共享环境。
 
-输出analysis_outputs/k4_multiline_20261014_v1；逐行SQLite事务和gzip证据、唯一上下文、manifest、配对表、逐轮离散轨迹、匿名资源记录。技术错误暂停受影响阶段，其它独立阶段继续；无任意全量时间上限。成功：集合精确1033/5815与164基础题、头调用/实际提交/NFE/官方评测可复算，提交推送并核验远端。风险：同164题开发人口、共享GPU观测耗时、Base跨K64步时间表混杂、旧无轨迹不可倒推机制。本轮不训练或下载其它模型，不读取旧封存标签。
+官方5815案例（跨行4782）；完整34配置，197710质量行。固定164计时案例、每配置3次，共16728；跨行计时12954。模型DreamOn revision8ccc747、bf16；原rank256 KL/full/best头FP32、lambda1；seed42和共同随机键不变。初始mask64、最大长度128、扩展次数预算128、steps256。阈值、链、结构、评分3秒、统计/分母和报告口径沿用64任务。
+
+修改experiments/threshold_eval/{common,adapter,runner,analyze}.py及参考decoder的预算参数，默认64以保留原行为。先验证128扩展能力、64回归、事务/数据/统计，再固定16案例真实模型smoke；smoke释放后启动两个角色同卡并发。reviewer_gate_disabled：本地diff review和fresh verification，无subagent。
+
+GPU使用实时映射cuda:0；不抢占外部任务、不终止64任务。显存不足记录blocked_resources，不创建空闲轮询器，不擅自改成两个角色串行。OOM仅失败进程退出后原口径重试一次，基础设施最多重试3次。启动时实际资源是当前可能阻塞；共享负载下速度仅探索证据。
+
+任务ID：dreamon_multiline_threshold_128_20261112_v1。
+共享目录：/home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1。
+报告目录：analysis_outputs/dreamon_multiline_threshold_128_20261112_v1。
+命令：THRESHOLD_TASK_ID=dreamon_multiline_threshold_128_20261112_v1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -u -m experiments.threshold_eval.runner --phase smoke；通过后bash共享目录/start_worker.sh --role nohead / trained，并持久运行--phase pipeline。
+
+成功：全部事务唯一、版本统一、质量/评分/独立计时完成，跨行及跨度层分母正确；输出report.zh.md、CSV、integrity、attempts、checkpoint与恢复入口。失败/停止条件：代码或smoke不一致、资源不足、限定次数重试失败；不按得分删案例或重抽。当前只获授权补充实验，尚无质量结论；128不会自动提高所有方法的通过率。

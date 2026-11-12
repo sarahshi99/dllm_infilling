@@ -10,9 +10,15 @@ from experiments.context_foundation.common import atomic_json, utc, sha, read_js
 
 REPO = Path(__file__).resolve().parents[2]
 TASK = os.environ.get('THRESHOLD_TASK_ID', 'dreamon_threshold_20261104_v1')
-assert TASK in ('dreamon_threshold_20261104_v1', 'dreamon_multiline_threshold_20261111_v1')
-MULTILINE = TASK == 'dreamon_multiline_threshold_20261111_v1'
-SHARED = Path('/home/shx/projects/dllm_infilling') / ('threshold_multiline_eval_20261111_v1' if MULTILINE else 'threshold_eval_20261104_v1')
+TASK_DIRECTORIES = {
+    'dreamon_threshold_20261104_v1': 'threshold_eval_20261104_v1',
+    'dreamon_multiline_threshold_20261111_v1': 'threshold_multiline_eval_20261111_v1',
+    'dreamon_multiline_threshold_128_20261112_v1': 'threshold_multiline128_eval_20261112_v1',
+}
+assert TASK in TASK_DIRECTORIES
+MULTILINE = TASK != 'dreamon_threshold_20261104_v1'
+MAX_GEN_LEN = 128 if TASK == 'dreamon_multiline_threshold_128_20261112_v1' else 64
+SHARED = Path('/home/shx/projects/dllm_infilling') / TASK_DIRECTORIES[TASK]
 OUT = REPO/'analysis_outputs'/TASK
 PYTHON = '/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python'
 DATASET = 'multi-line' if MULTILINE else 'single-line'
@@ -107,7 +113,8 @@ GENERATION_PATHS=['experiments/threshold_eval/adapter.py','experiments/threshold
     'experiments/threshold_eval/runner.py','experiments/context_foundation/adapter.py',
     'experiments/dreamon_singleline_order_parallel.py','experiments/dreamon_singleline_adapter.py',
     'experiments/train_dreamon_markov_head.py','experiments/dreamon_markov_head_training.py',
-    'experiments/k4_batch_common.py','scripts/start_threshold_worker.sh']
+    'experiments/k4_batch_common.py','scripts/start_threshold_worker.sh',
+    'scripts/launch_multiline_threshold128.sh']
 
 
 def verify_execution(version):
@@ -122,6 +129,7 @@ def prepare():
     SHARED.mkdir(parents=True,exist_ok=True)
     if (SHARED/'run_spec.json').exists():
         assert spec()['task_id']==TASK
+        assert spec()['protocol']['max_gen_len']==MAX_GEN_LEN
         return
     frozen = json.loads((REPO/'analysis_outputs/dreamon_context_foundation_20261015_v1/frozen_protocol.json').read_text())
     registry_path = REPO/'analysis_outputs/dreamon_markov_head_training_20260910_v2/checkpoint_registry.json'
@@ -145,10 +153,11 @@ def prepare():
     else:
         old=json.loads((REPO/'analysis_outputs/k4_multiline_20261014_v1/A/run_manifest.json').read_text())
         smoke=old['smoke_ids']
+    protocol = dict(frozen['official_protocol'], max_gen_len=MAX_GEN_LEN)
     record = dict(task_id=TASK,created_at=utc(),source_commit=commit(),reference_commit='43a52fd5fb43392e2ede7b6be659d3261dd6818a',
         worktree=str(REPO),report_directory=str(OUT),shared_directory=str(SHARED),python=PYTHON,
         model=frozen['model'],snapshot=str(SNAPSHOT),model_dtype='bfloat16',head_dtype='float32',head_lambda=1,
-        head=matches[0],head_registry=str(registry_path),protocol=frozen['official_protocol'],seed=42,
+        head=matches[0],head_registry=str(registry_path),protocol=protocol,expansion_budget=MAX_GEN_LEN,seed=42,
         sampler=frozen['sampler'],configs=configs(),cases=[r['task_id'] for r in rows],
         smoke_cases=smoke,timing_cases=timing,timing_repetitions=3,
         dataset=DATASET,population=counts,expected_quality=len(configs())*len(rows),expected_timing=len(configs())*len(timing)*3,base_tasks=164,
@@ -167,7 +176,7 @@ def prepare():
 
 按固定任务书执行。选择集中参数化已有入口；不重写采样、阈值和结构解码器，不修改旧结果。数据为官方{DATASET}，{len(rows)}案例；冻结DreamOn与rank256头。baseline为本轮同策略K1、同方法off及同阈值另一方法。
 CPU边界与事务测试→四跨度层固定16例真实模型smoke及旧单行回归→执行版本提交与READY→两个角色同卡并发→自然退出→官方bwrap每例3秒评分→独立164×34×3计时→整题bootstrap10000次→报告与push核实。
-GPU使用实时映射；不抢占、不等待外部任务空闲、不设GPU锁。OOM仅失败进程退出后恢复一次；基础设施至多重试3次。普通代码失败和超时保留。成功条件：{record['expected_quality']}质量唯一行与{record['expected_timing']}独立计时行，跨行及跨度分母一致，零重复、非法行、混合生成版本与计时token分歧。风险：固定64预算及外部GPU争用；不能声称独立新题泛化或确定加速达标。
+GPU使用实时映射；不抢占、不等待外部任务空闲、不设GPU锁。OOM仅失败进程退出后恢复一次；基础设施至多重试3次。普通代码失败和超时保留。成功条件：{record['expected_quality']}质量唯一行与{record['expected_timing']}独立计时行，跨行及跨度分母一致，零重复、非法行、混合生成版本与计时token分歧。风险：固定{MAX_GEN_LEN}预算及外部GPU争用；不能声称独立新题泛化或确定加速达标。
 reviewer_gate_disabled：本地diff review与fresh verification；不调用subagent。
 """)
 

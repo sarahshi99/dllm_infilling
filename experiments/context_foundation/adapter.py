@@ -104,7 +104,10 @@ class FrozenHeadAdapter(torch.nn.Module):
 
 
 class Engine:
-    def __init__(self, model, tokenizer, head, special_ids, check=lambda: None):
+    def __init__(self, model, tokenizer, head, special_ids, check=lambda: None, max_gen_len=64):
+        if max_gen_len not in (64, 128):
+            raise ValueError('max_gen_len must be 64 or 128')
+        self.max_gen_len = max_gen_len
         self.model, self.tokenizer, self.head = model, tokenizer, head
         self.zero = FrozenHeadAdapter(head.head, zero_override=True)
         self.special = set(special_ids)
@@ -155,12 +158,12 @@ class Engine:
     def decode(self, prefix_ids, suffix_ids, case, arm, order='global', observer=None, detailed=False):
         p = len(prefix_ids)
         mask, eos, expand = self.tokenizer.mask_id, self.tokenizer.eos_id, self.tokenizer.expand_id
-        maximum = min(2048, p + 64 + len(suffix_ids))
+        maximum = min(2048, p + self.max_gen_len + len(suffix_ids))
         ids = list(prefix_ids) + [mask]*64 + list(suffix_ids)
         if len(ids) > maximum:
             raise ValueError('input exceeds frozen canvas maximum')
-        x = torch.tensor([ids], dtype=torch.long, device=self.device)
-        dynamic, expansion_budget = 64, 64
+        x = torch.tensor([ids + [mask]*(maximum-len(ids))], dtype=torch.long, device=self.device)
+        dynamic, expansion_budget = 64, self.max_gen_len
         start_nfe = self.nfe
         head_calls = self.head.calls + self.zero.calls
         traces, total_normal, total_expand, total_delete = [], 0, 0, 0

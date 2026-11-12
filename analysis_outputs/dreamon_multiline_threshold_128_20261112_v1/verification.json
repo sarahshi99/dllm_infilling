@@ -1,0 +1,11 @@
+{
+  "status": "cpu_verified_gpu_pending",
+  "threshold_tests": 31,
+  "context_foundation_tests": 16,
+  "budget_tests": "128 expands beyond64 and caps at128; defaults64 and parent regression",
+  "protocol_comparison": "all frozen fields/configurations/cases/timing cases equal parent; max_gen_len64->128, expansion_budget128",
+  "reviewer_gate_disabled": true,
+  "gpu_smoke": "not_run_resource_capacity",
+  "old_task_worktree_modified": false,
+  "parent_64_reference_regression": "passed four order/method combinations against unmodified parent Git source"
+}

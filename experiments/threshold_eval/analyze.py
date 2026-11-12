@@ -89,6 +89,7 @@ def audit(quality,timing):
     invalid=[]
     configuration={c['id']:c for c in sp['configs']}
     for r in quality:
+        if r.get('max_gen_len',64)!=sp.get('protocol',{}).get('max_gen_len',64):invalid.append([r['config'],r['task_id'],'generation_budget'])
         if not isinstance(r.get('completion_token_ids'),list) or r.get('forward_count',0)<=0:invalid.append([r['config'],r['task_id'],'generation_schema'])
         if 'passed' in r and type(r['passed']) is not bool:invalid.append([r['config'],r['task_id'],'score_schema'])
         if r['method']=='nohead' and r['head_calls']!=0:invalid.append([r['config'],r['task_id'],'nohead_called_head'])
@@ -102,6 +103,7 @@ def audit(quality,timing):
             invalid.append([r['config'],r['task_id'],'threshold_accounting'])
     timing_divergences=[]
     for r in timing:
+        if r.get('max_gen_len',64)!=sp.get('protocol',{}).get('max_gen_len',64):invalid.append([r['config'],r['task_id'],'timing_budget'])
         if not isinstance(r.get('completion_token_ids'),list) or r.get('generation_sec',0)<=0:
             invalid.append([r['config'],r['task_id'],'timing_schema'])
         q=quality_bykey.get((r['config'],r['task_id']))
@@ -308,7 +310,7 @@ def report(summary,comparisons,integrity,nearest):
     atomic_json(OUT/'execution_status.json',runtime)
     lines=[f'# {TASK} 官方阈值评测','',
         f"状态：{'完整完成' if integrity['complete'] else '未完成，不能作完整实验结论'}。质量生成 {integrity['quality_actual']}/{integrity.get('quality_expected',35122)}，评分 {integrity['scored']}/{integrity.get('quality_expected',35122)}；计时 {integrity['timing_actual']}/{integrity['timing_expected']}。",
-        '',f"实际生成版本 `{integrity['expected_execution_version']}`。34配置，DreamOn revision8ccc747，bf16；旧rank256 v2 KL/full/best头float32、λ=1。seed42、T=.2、top-p=.9、batch1、entropy/alg_temp0、初始mask64、steps256、原扩删/EOS规则；不复用旧single-line生成或评分。",
+        '',f"实际生成版本 `{integrity['expected_execution_version']}`。34配置，DreamOn revision8ccc747，bf16；旧rank256 v2 KL/full/best头float32、λ=1。seed42、T=.2、top-p=.9、batch1、entropy/alg_temp0、初始mask64、最大长度{MAX_GEN_LEN}、扩展次数预算{MAX_GEN_LEN}、steps256、原扩删/EOS规则；各预算独立生成与评分。",
         '', '阈值使用实际抽到的普通词在合法完整词表T=1 FP32概率；全轮首个空间候选唯一豁免，拒绝不重抽、不写前驱并停止当前连续链。共同随机键沿用原contract/seed/真实case/round/original_position/purpose。']
     for role,state in runtime.items():
         lines.append(f"角色{role}：{state.get('status')}，{state.get('completed',0)}/{state.get('expected','?')}，PID {state.get('pid')}，UTC {state.get('at')}。")
@@ -349,7 +351,7 @@ def report(summary,comparisons,integrity,nearest):
         for r in span:lines.append(f"|{r['config']}|{r['population'][5:]}|{r['base_tasks']}|{r['success']}/{r['expected']}|{r['scored']}|{fmt(r['line_pass_pct'])}|")
     lines+=['', '## 解释边界与证据', '',
         'MultiLine名称不等于实际跨行；跨度由task_id原始Lstart_Lend端点定义。全5815=1033+4782；跨行分1511/1870/1401。37基础题无跨行。总体最高点不自动是跨行最高点。single-line与multi-line共享164基础题及部分输入，本轮是任务形态迁移，不是独立新题泛化，不能拼接独立样本。未打开封存external test或旧test lock。',
-        '', '固定64预算可能限制长孔洞。summary与span_summary保存生成长度、剩余mask、step-budget耗尽、未完成率、NFE、普通提交分布、额外接受/拒绝、链跳过、结构/no-op、头调用和峰值显存；不按答案或早期通过率改预算、阈值或删样本。K1额外接受率N/A。',
+        '', f'最大长度{MAX_GEN_LEN}仍可能限制长孔洞。summary与span_summary保存生成长度、剩余mask、step-budget耗尽、未完成率、NFE、普通提交分布、额外接受/拒绝、链跳过、结构/no-op、头调用和峰值显存；不按答案或早期通过率改预算、阈值或删样本。K1额外接受率N/A。',
         '', '配对救回/改错/净变化见paired_comparisons.csv，覆盖对应K1、同方法off、同阈值另一方法及全部跨度层。10000次整题bootstrap只重采样当前人口真实存在基础题（164/127/164/127/108/60），缺席题不补0。逐例通过率为主，题等权仅辅助。nearest_quality.csv按已测逐例率寻找另一方法相近点；不假定头与无头置信度校准。',
         '', '统一计时164固定例×34×3=16728；127跨行题12954次，37单行回退3774次。每次恢复预热、CUDA同步、稳定轮换配置；包括模型/头/阈值/选位/采样/结构，排除加载、测试、写盘和重型轨迹。质量双worker阶段时延仅负载观测。H200非独占，timing_environment与GPU日志记外部争用，不能宣称确定速度达标。',
         '', '可复算证据per_case.jsonl.gz、timing_per_case.jsonl.gz；attempts.json保存基础设施尝试。普通失败和3秒超时不重抽。完整性、缺失、重复、无效、版本和计时token分歧见integrity_audit.json。reviewer_gate_disabled：本地diff review + fresh tests；原始日志、权重和重型trace不进Git。',
