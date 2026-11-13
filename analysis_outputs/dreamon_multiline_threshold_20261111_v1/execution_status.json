@@ -1,26 +1,35 @@
 {
   "nohead": {
-    "at": "2026-11-11T13:20:55Z",
-    "case_key": "MultiLineInfilling/HumanEval/1/L5_L6",
-    "completed": 100,
-    "config": "global_k1_nohead_off",
+    "at": "2026-11-12T23:43:22Z",
+    "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+    "completed": 104670,
+    "config": "left_k4_nohead_095",
     "execution_commit": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
     "expected": 104670,
     "pid": 1475777,
     "role": "nohead",
-    "status": "generating",
+    "status": "generation_complete",
+    "task_id": "dreamon_multiline_threshold_20261111_v1"
+  },
+  "timing": {
+    "at": "2026-11-13T06:05:56Z",
+    "completed": 0,
+    "expected": 16728,
+    "pid": 1970826,
+    "role": "timing",
+    "status": "oom_process_exit",
     "task_id": "dreamon_multiline_threshold_20261111_v1"
   },
   "trained": {
-    "at": "2026-11-11T13:20:53Z",
-    "case_key": "MultiLineInfilling/HumanEval/1/L7_L9",
-    "completed": 120,
-    "config": "global_k2_trained_off",
+    "at": "2026-11-12T23:20:20Z",
+    "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+    "completed": 93040,
+    "config": "left_k4_trained_095",
     "execution_commit": "ae0283e60fbd60603c3587f2c7394a3b6081a18d",
     "expected": 93040,
     "pid": 1475780,
     "role": "trained",
-    "status": "generating",
+    "status": "generation_complete",
     "task_id": "dreamon_multiline_threshold_20261111_v1"
   }
 }
