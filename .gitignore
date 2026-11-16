@@ -67,3 +67,6 @@ analysis_outputs/dreamon_context_foundation_20261015_v1/queue_status.json
 analysis_outputs/dreamon_context_foundation_20261015_v1/queue_failure.json
 analysis_outputs/dreamon_context_foundation_20261015_v1/publication_status.json
 analysis_outputs/dreamon_context_foundation_20261015_v1/launch.json
+
+# Threshold replay diagnostics: raw trajectories, snapshots, local ledger.
+analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/local/
