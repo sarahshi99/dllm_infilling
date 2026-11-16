@@ -1,0 +1,4154 @@
+[
+  {
+    "case": "SingleLineInfilling/HumanEval/139/L5",
+    "canonical_solution": "    return special_fact\n",
+    "configurations": [
+      {
+        "config": "global_k2_nohead_090",
+        "forward_count": 4,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 59,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "ordinary_accepted",
+                "p": 0.9336155652999878,
+                "score": 0.9336155652999878,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              134,
+              135
+            ],
+            "s2": [
+              134,
+              135
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "exempt",
+                "p": 0.9955741167068481,
+                "score": 0.9955741167068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "threshold_rejected",
+                "p": 0.8007878065109253,
+                "score": 0.8007878065109253,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              135,
+              136
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "exempt",
+                "p": 0.8852225542068481,
+                "score": 0.8852225542068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "threshold_rejected",
+                "p": 0.7217472791671753,
+                "score": 0.7217472791671753,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              136,
+              137
+            ],
+            "s2": [
+              136,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "exempt",
+                "p": 0.7333608269691467,
+                "score": 0.7333608269691467,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.9528279900550842,
+                "score": 0.9528279900550842,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          }
+        ]
+      },
+      {
+        "config": "global_k2_nohead_095",
+        "forward_count": 4,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 59,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "threshold_rejected",
+                "p": 0.9336155652999878,
+                "score": 0.9336155652999878,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              133,
+              134
+            ],
+            "s2": [
+              133,
+              134
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "exempt",
+                "p": 0.9981256127357483,
+                "score": 0.9981256127357483,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "ordinary_accepted",
+                "p": 0.9949331879615784,
+                "score": 0.9949331879615784,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              135,
+              136
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "exempt",
+                "p": 0.8852225542068481,
+                "score": 0.8852225542068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "threshold_rejected",
+                "p": 0.7217472791671753,
+                "score": 0.7217472791671753,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              136,
+              137
+            ],
+            "s2": [
+              136,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "exempt",
+                "p": 0.7333608269691467,
+                "score": 0.7333608269691467,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.9528279900550842,
+                "score": 0.9528279900550842,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_090",
+        "forward_count": 3,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 59,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133,
+              134,
+              135
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "ordinary_accepted",
+                "p": 0.9336155652999878,
+                "score": 0.9336155652999878,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "ordinary_accepted",
+                "p": 0.9568320512771606,
+                "score": 0.9568320512771606,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "threshold_rejected",
+                "p": 0.3440120220184326,
+                "score": 0.3440120220184326,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              135,
+              136,
+              137,
+              138
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "exempt",
+                "p": 0.8852225542068481,
+                "score": 0.8852225542068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "threshold_rejected",
+                "p": 0.7217472791671753,
+                "score": 0.7217472791671753,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              136,
+              137,
+              138,
+              139
+            ],
+            "s2": [
+              136,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "exempt",
+                "p": 0.7333608269691467,
+                "score": 0.7333608269691467,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.9528279900550842,
+                "score": 0.9528279900550842,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_095",
+        "forward_count": 63,
+        "head_calls": 0,
+        "expand_count": 59,
+        "delete_count": 118,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133,
+              134,
+              135
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "threshold_rejected",
+                "p": 0.9336155652999878,
+                "score": 0.9336155652999878,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              133,
+              134,
+              135,
+              137
+            ],
+            "s2": [
+              133,
+              134
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "exempt",
+                "p": 0.9981256127357483,
+                "score": 0.9981256127357483,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "ordinary_accepted",
+                "p": 0.9949331879615784,
+                "score": 0.9949331879615784,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "threshold_rejected",
+                "p": 0.5025200247764587,
+                "score": 0.5025200247764587,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.48691526055336,
+                "score": 0.48691526055336,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          },
+          {
+            "round": 2,
+            "selected": [
+              135,
+              136
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.7396442294120789,
+                "score": 0.7396442294120789,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              135
+            ],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              135,
+              136,
+              137
+            ],
+            "s2": [
+              135,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.7811737656593323,
+                "score": 0.7811737656593323,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              135
+            ],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_090",
+        "forward_count": 3,
+        "head_calls": 4,
+        "expand_count": 0,
+        "delete_count": 59,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133,
+              134,
+              135
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "ordinary_accepted",
+                "p": 0.9336155652999878,
+                "score": 0.9635788202285767,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "ordinary_accepted",
+                "p": 0.9568320512771606,
+                "score": 0.9693469405174255,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "threshold_rejected",
+                "p": 0.3440120220184326,
+                "score": 0.3693896234035492,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              135,
+              136,
+              137,
+              138
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "exempt",
+                "p": 0.8852225542068481,
+                "score": 0.8852225542068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "threshold_rejected",
+                "p": 0.7217472791671753,
+                "score": 0.8379940390586853,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              136,
+              137,
+              138,
+              139
+            ],
+            "s2": [
+              136,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "exempt",
+                "p": 0.7333608269691467,
+                "score": 0.7333608269691467,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.9528279900550842,
+                "score": 0.9528279900550842,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_095",
+        "forward_count": 3,
+        "head_calls": 4,
+        "expand_count": 0,
+        "delete_count": 59,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              132,
+              133,
+              134,
+              135
+            ],
+            "s2": [
+              132,
+              133
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 132,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9596112966537476,
+                "score": 0.9596112966537476,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 133,
+                "raw": 470,
+                "raw_text": " return",
+                "final": 470,
+                "final_text": " return",
+                "reason": "ordinary_accepted",
+                "p": 0.9336155652999878,
+                "score": 0.9635788202285767,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 134,
+                "raw": 3281,
+                "raw_text": " special",
+                "final": 3281,
+                "final_text": " special",
+                "reason": "ordinary_accepted",
+                "p": 0.9568320512771606,
+                "score": 0.9693469405174255,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "threshold_rejected",
+                "p": 0.3440120220184326,
+                "score": 0.3693896234035492,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              135,
+              136,
+              137,
+              138
+            ],
+            "s2": [
+              135,
+              136
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 135,
+                "raw": 47805,
+                "raw_text": "_fact",
+                "final": 47805,
+                "final_text": "_fact",
+                "reason": "exempt",
+                "p": 0.8852225542068481,
+                "score": 0.8852225542068481,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "threshold_rejected",
+                "p": 0.7217472791671753,
+                "score": 0.8379940390586853,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              136,
+              137,
+              138,
+              139
+            ],
+            "s2": [
+              136,
+              137
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 136,
+                "raw": 198,
+                "raw_text": "\n",
+                "final": 198,
+                "final_text": "\n",
+                "reason": "exempt",
+                "p": 0.7333608269691467,
+                "score": 0.7333608269691467,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 137,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.9528279900550842,
+                "score": 0.9528279900550842,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "case": "SingleLineInfilling/HumanEval/126/L0",
+    "canonical_solution": "    count_digit = dict([(i, 0) for i in lst])\n",
+    "configurations": [
+      {
+        "config": "global_k2_nohead_090",
+        "forward_count": 15,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 44,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "ordinary_accepted",
+                "p": 0.9297705888748169,
+                "score": 0.9297705888748169,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              247,
+              248
+            ],
+            "s2": [
+              247,
+              248
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "exempt",
+                "p": 0.9937752485275269,
+                "score": 0.9937752485275269,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.8335739970207214,
+                "score": 0.8335739970207214,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              248,
+              249
+            ],
+            "s2": [
+              248,
+              249
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.8012617230415344,
+                "score": 0.8012617230415344,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 249,
+                "raw": 5613,
+                "raw_text": " {}\n",
+                "final": 5613,
+                "final_text": " {}\n",
+                "reason": "threshold_rejected",
+                "p": 0.3362869620323181,
+                "score": 0.3362869620323181,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              249,
+              250
+            ],
+            "s2": [
+              249,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 249,
+                "raw": 5613,
+                "raw_text": " {}\n",
+                "final": 5613,
+                "final_text": " {}\n",
+                "reason": "exempt",
+                "p": 0.7605285048484802,
+                "score": 0.7605285048484802,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 250,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.3271353244781494,
+                "score": 0.3271353244781494,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k2_nohead_095",
+        "forward_count": 17,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 44,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "threshold_rejected",
+                "p": 0.9297705888748169,
+                "score": 0.9297705888748169,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              246,
+              247
+            ],
+            "s2": [
+              246,
+              247
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "exempt",
+                "p": 0.8550100326538086,
+                "score": 0.8550100326538086,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "threshold_rejected",
+                "p": 0.948225200176239,
+                "score": 0.948225200176239,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              247,
+              248
+            ],
+            "s2": [
+              247,
+              248
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "exempt",
+                "p": 0.9937752485275269,
+                "score": 0.9937752485275269,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.8335739970207214,
+                "score": 0.8335739970207214,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              248,
+              249
+            ],
+            "s2": [
+              248,
+              249
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.8012617230415344,
+                "score": 0.8012617230415344,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 249,
+                "raw": 5613,
+                "raw_text": " {}\n",
+                "final": 5613,
+                "final_text": " {}\n",
+                "reason": "threshold_rejected",
+                "p": 0.3362869620323181,
+                "score": 0.3362869620323181,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_090",
+        "forward_count": 73,
+        "head_calls": 0,
+        "expand_count": 64,
+        "delete_count": 119,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246,
+              247,
+              248
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "ordinary_accepted",
+                "p": 0.9297705888748169,
+                "score": 0.9297705888748169,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "threshold_rejected",
+                "p": 0.8428663611412048,
+                "score": 0.8428663611412048,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              247,
+              248,
+              253,
+              257
+            ],
+            "s2": [
+              247,
+              248
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "exempt",
+                "p": 0.9937752485275269,
+                "score": 0.9937752485275269,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.8335739970207214,
+                "score": 0.8335739970207214,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 253,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.18687373399734497,
+                "score": 0.18687373399734497,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 257,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.2510944902896881,
+                "score": 0.2510944902896881,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              257,
+              258,
+              259,
+              260,
+              261,
+              262,
+              263,
+              264,
+              265,
+              266,
+              267,
+              268,
+              269,
+              270,
+              271,
+              272,
+              273,
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283,
+              284,
+              285,
+              286,
+              287,
+              288,
+              289,
+              290,
+              291,
+              292,
+              293,
+              294,
+              295,
+              296,
+              297,
+              298,
+              299,
+              300,
+              301,
+              302,
+              303,
+              304,
+              305,
+              306,
+              307,
+              308
+            ]
+          },
+          {
+            "round": 2,
+            "selected": [
+              248,
+              250,
+              251,
+              255
+            ],
+            "s2": [
+              248,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.5512080192565918,
+                "score": 0.5512080192565918,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 250,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.2233744114637375,
+                "score": 0.2233744114637375,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              250
+            ],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              249,
+              250,
+              251,
+              255
+            ],
+            "s2": [
+              249,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 249,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.4918098747730255,
+                "score": 0.4918098747730255,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              249
+            ],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_095",
+        "forward_count": 71,
+        "head_calls": 0,
+        "expand_count": 64,
+        "delete_count": 122,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246,
+              247,
+              248
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "threshold_rejected",
+                "p": 0.9297705888748169,
+                "score": 0.9297705888748169,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              246,
+              247,
+              248,
+              250
+            ],
+            "s2": [
+              246,
+              247
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "exempt",
+                "p": 0.8550100326538086,
+                "score": 0.8550100326538086,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "threshold_rejected",
+                "p": 0.948225200176239,
+                "score": 0.948225200176239,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 250,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.1870943009853363,
+                "score": 0.1870943009853363,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              247,
+              248,
+              253,
+              257
+            ],
+            "s2": [
+              247,
+              248
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "exempt",
+                "p": 0.9937752485275269,
+                "score": 0.9937752485275269,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.8335739970207214,
+                "score": 0.8335739970207214,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 253,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.18687373399734497,
+                "score": 0.18687373399734497,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 257,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.2510944902896881,
+                "score": 0.2510944902896881,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              257,
+              258,
+              259,
+              260,
+              261,
+              262,
+              263,
+              264,
+              265,
+              266,
+              267,
+              268,
+              269,
+              270,
+              271,
+              272,
+              273,
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283,
+              284,
+              285,
+              286,
+              287,
+              288,
+              289,
+              290,
+              291,
+              292,
+              293,
+              294,
+              295,
+              296,
+              297,
+              298,
+              299,
+              300,
+              301,
+              302,
+              303,
+              304,
+              305,
+              306,
+              307,
+              308
+            ]
+          },
+          {
+            "round": 3,
+            "selected": [
+              248,
+              250,
+              251,
+              255
+            ],
+            "s2": [
+              248,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.5512080192565918,
+                "score": 0.5512080192565918,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 250,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.2233744114637375,
+                "score": 0.2233744114637375,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              250
+            ],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_090",
+        "forward_count": 73,
+        "head_calls": 7,
+        "expand_count": 64,
+        "delete_count": 119,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246,
+              247,
+              248
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "ordinary_accepted",
+                "p": 0.9297705888748169,
+                "score": 0.9465548992156982,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "threshold_rejected",
+                "p": 0.8428663611412048,
+                "score": 0.8062865138053894,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              247,
+              248,
+              253,
+              257
+            ],
+            "s2": [
+              247,
+              248
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "exempt",
+                "p": 0.9937752485275269,
+                "score": 0.9937752485275269,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.8335739970207214,
+                "score": 0.8822252750396729,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 253,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.18687373399734497,
+                "score": 0.18687373399734497,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 257,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.2510944902896881,
+                "score": 0.2510944902896881,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              257,
+              258,
+              259,
+              260,
+              261,
+              262,
+              263,
+              264,
+              265,
+              266,
+              267,
+              268,
+              269,
+              270,
+              271,
+              272,
+              273,
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283,
+              284,
+              285,
+              286,
+              287,
+              288,
+              289,
+              290,
+              291,
+              292,
+              293,
+              294,
+              295,
+              296,
+              297,
+              298,
+              299,
+              300,
+              301,
+              302,
+              303,
+              304,
+              305,
+              306,
+              307,
+              308
+            ]
+          },
+          {
+            "round": 2,
+            "selected": [
+              248,
+              250,
+              251,
+              255
+            ],
+            "s2": [
+              248,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.5512080192565918,
+                "score": 0.5512080192565918,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 250,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.2233744114637375,
+                "score": 0.2233744114637375,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              250
+            ],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              249,
+              250,
+              251,
+              255
+            ],
+            "s2": [
+              249,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 249,
+                "raw": 151667,
+                "raw_text": "<|expand|>",
+                "final": 151667,
+                "final_text": "<|expand|>",
+                "reason": "base_structure",
+                "p": 0.4918098747730255,
+                "score": 0.4918098747730255,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [
+              249
+            ],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_095",
+        "forward_count": 78,
+        "head_calls": 11,
+        "expand_count": 64,
+        "delete_count": 111,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              245,
+              246,
+              247,
+              248
+            ],
+            "s2": [
+              245,
+              246
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 245,
+                "raw": 262,
+                "raw_text": "   ",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "exempt",
+                "p": 0.9734905362129211,
+                "score": 0.9734905362129211,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "threshold_rejected",
+                "p": 0.9297705888748169,
+                "score": 0.9465548992156982,
+                "eligible": true,
+                "called": true
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              246,
+              247,
+              248,
+              250
+            ],
+            "s2": [
+              246,
+              247
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 246,
+                "raw": 1760,
+                "raw_text": " count",
+                "final": 1760,
+                "final_text": " count",
+                "reason": "exempt",
+                "p": 0.8550100326538086,
+                "score": 0.8550100326538086,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 247,
+                "raw": 48403,
+                "raw_text": "_digit",
+                "final": 48403,
+                "final_text": "_digit",
+                "reason": "ordinary_accepted",
+                "p": 0.948225200176239,
+                "score": 0.9501250982284546,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "threshold_rejected",
+                "p": 0.6643165946006775,
+                "score": 0.7822487354278564,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 250,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.1870943009853363,
+                "score": 0.1870943009853363,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              248,
+              249,
+              253,
+              254
+            ],
+            "s2": [
+              248,
+              249
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 248,
+                "raw": 284,
+                "raw_text": " =",
+                "final": 284,
+                "final_text": " =",
+                "reason": "exempt",
+                "p": 0.8012617230415344,
+                "score": 0.8012617230415344,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 249,
+                "raw": 5613,
+                "raw_text": " {}\n",
+                "final": 5613,
+                "final_text": " {}\n",
+                "reason": "threshold_rejected",
+                "p": 0.3362869620323181,
+                "score": 0.5752434730529785,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 253,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 15,
+                "final_text": "0",
+                "reason": "threshold_rejected",
+                "p": 0.16927900910377502,
+                "score": 0.16927900910377502,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              249,
+              250,
+              255,
+              256
+            ],
+            "s2": [
+              249,
+              250
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 249,
+                "raw": 5613,
+                "raw_text": " {}\n",
+                "final": 5613,
+                "final_text": " {}\n",
+                "reason": "exempt",
+                "p": 0.7605285048484802,
+                "score": 0.7605285048484802,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 250,
+                "raw": 15,
+                "raw_text": "0",
+                "final": 262,
+                "final_text": "   ",
+                "reason": "threshold_rejected",
+                "p": 0.3271353244781494,
+                "score": 0.43021437525749207,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 255,
+                "raw": 151643,
+                "raw_text": "<|endoftext|>",
+                "final": 151643,
+                "final_text": "<|endoftext|>",
+                "reason": "base_structure",
+                "p": 0.2612501084804535,
+                "score": 0.2612501084804535,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": [
+              255,
+              256,
+              257,
+              258,
+              259,
+              260,
+              261,
+              262,
+              263,
+              264,
+              265,
+              266,
+              267,
+              268,
+              269,
+              270,
+              271,
+              272,
+              273,
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283,
+              284,
+              285,
+              286,
+              287,
+              288,
+              289,
+              290,
+              291,
+              292,
+              293,
+              294,
+              295,
+              296,
+              297,
+              298,
+              299,
+              300,
+              301,
+              302,
+              303,
+              304,
+              305,
+              306,
+              307,
+              308
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "case": "SingleLineInfilling/HumanEval/80/L5",
+    "canonical_solution": "      if s[i] == s[i+1] or s[i+1] == s[i+2] or s[i] == s[i+2]:\n",
+    "configurations": [
+      {
+        "config": "global_k2_nohead_090",
+        "forward_count": 18,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 41,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "ordinary_accepted",
+                "p": 0.9236783981323242,
+                "score": 0.9236783981323242,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              145,
+              146
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.6038107872009277,
+                "score": 0.6038107872009277,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              146,
+              148
+            ],
+            "s2": [
+              146,
+              148
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "exempt",
+                "p": 0.9877787232398987,
+                "score": 0.9877787232398987,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.3442809581756592,
+                "score": 0.3442809581756592,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              148,
+              149
+            ],
+            "s2": [
+              148,
+              149
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "exempt",
+                "p": 0.33329012989997864,
+                "score": 0.33329012989997864,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.34040334820747375,
+                "score": 0.34040334820747375,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k2_nohead_095",
+        "forward_count": 19,
+        "head_calls": 0,
+        "expand_count": 0,
+        "delete_count": 41,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "threshold_rejected",
+                "p": 0.9236783981323242,
+                "score": 0.9236783981323242,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              144,
+              145
+            ],
+            "s2": [
+              144,
+              145
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "exempt",
+                "p": 0.9503505229949951,
+                "score": 0.9503505229949951,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.5446090698242188,
+                "score": 0.5446090698242188,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              145,
+              146
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.6038107872009277,
+                "score": 0.6038107872009277,
+                "eligible": true,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              146,
+              148
+            ],
+            "s2": [
+              146,
+              148
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "exempt",
+                "p": 0.9877787232398987,
+                "score": 0.9877787232398987,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.3442809581756592,
+                "score": 0.3442809581756592,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_090",
+        "forward_count": 38,
+        "head_calls": 0,
+        "expand_count": 12,
+        "delete_count": 39,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144,
+              145,
+              149
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "ordinary_accepted",
+                "p": 0.9236783981323242,
+                "score": 0.9236783981323242,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.3342692255973816,
+                "score": 0.3342692255973816,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.24443791806697845,
+                "score": 0.24443791806697845,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              145,
+              146,
+              147,
+              150
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.6038107872009277,
+                "score": 0.6038107872009277,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 150,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.34708765149116516,
+                "score": 0.34708765149116516,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              146,
+              148,
+              149,
+              150
+            ],
+            "s2": [
+              146,
+              148
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "exempt",
+                "p": 0.9877787232398987,
+                "score": 0.9877787232398987,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.3442809581756592,
+                "score": 0.3442809581756592,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              148,
+              149,
+              150,
+              155
+            ],
+            "s2": [
+              148,
+              149
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "exempt",
+                "p": 0.33329012989997864,
+                "score": 0.33329012989997864,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.34040334820747375,
+                "score": 0.34040334820747375,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 155,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.18423119187355042,
+                "score": 0.18423119187355042,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_nohead_095",
+        "forward_count": 41,
+        "head_calls": 0,
+        "expand_count": 12,
+        "delete_count": 39,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144,
+              145,
+              149
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "threshold_rejected",
+                "p": 0.9236783981323242,
+                "score": 0.9236783981323242,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.24443791806697845,
+                "score": 0.24443791806697845,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              144,
+              145,
+              146,
+              148
+            ],
+            "s2": [
+              144,
+              145
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "exempt",
+                "p": 0.9503505229949951,
+                "score": 0.9503505229949951,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.5446090698242188,
+                "score": 0.5446090698242188,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.22583070397377014,
+                "score": 0.22583070397377014,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              145,
+              146,
+              147,
+              150
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.6038107872009277,
+                "score": 0.6038107872009277,
+                "eligible": true,
+                "called": false
+              },
+              {
+                "slot": 3,
+                "position": 150,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.34708765149116516,
+                "score": 0.34708765149116516,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              146,
+              148,
+              149,
+              150
+            ],
+            "s2": [
+              146,
+              148
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "exempt",
+                "p": 0.9877787232398987,
+                "score": 0.9877787232398987,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.3442809581756592,
+                "score": 0.3442809581756592,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_090",
+        "forward_count": 30,
+        "head_calls": 23,
+        "expand_count": 12,
+        "delete_count": 39,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144,
+              145,
+              149
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "ordinary_accepted",
+                "p": 0.9236783981323242,
+                "score": 0.9139406681060791,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.3342692255973816,
+                "score": 0.4253067672252655,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.24443791806697845,
+                "score": 0.24443791806697845,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              145,
+              146,
+              147,
+              150
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "ordinary_accepted",
+                "p": 0.6038107872009277,
+                "score": 0.9519995450973511,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 147,
+                "raw": 14665,
+                "raw_text": ":i",
+                "final": 14665,
+                "final_text": ":i",
+                "reason": "threshold_rejected",
+                "p": 0.4298606812953949,
+                "score": 0.5579165816307068,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 150,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.34708765149116516,
+                "score": 0.34708765149116516,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              148,
+              149,
+              150,
+              155
+            ],
+            "s2": [
+              148,
+              149
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "exempt",
+                "p": 0.33329012989997864,
+                "score": 0.33329012989997864,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.34040334820747375,
+                "score": 0.46152833104133606,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 155,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.18423119187355042,
+                "score": 0.18423119187355042,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              147,
+              149,
+              150,
+              152
+            ],
+            "s2": [
+              147,
+              149
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 147,
+                "raw": 60,
+                "raw_text": "]",
+                "final": 60,
+                "final_text": "]",
+                "reason": "exempt",
+                "p": 0.9991445541381836,
+                "score": 0.9991445541381836,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "ordinary_accepted",
+                "p": 0.9957822561264038,
+                "score": 0.9957822561264038,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 2,
+                "position": 150,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "ordinary_accepted",
+                "p": 0.9880982041358948,
+                "score": 0.9952795505523682,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 152,
+                "raw": 220,
+                "raw_text": " ",
+                "final": 220,
+                "final_text": " ",
+                "reason": "threshold_rejected",
+                "p": 0.4504464268684387,
+                "score": 0.4504464268684387,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      },
+      {
+        "config": "global_k4_trained_095",
+        "forward_count": 35,
+        "head_calls": 24,
+        "expand_count": 12,
+        "delete_count": 39,
+        "first_rounds": [
+          {
+            "round": 0,
+            "selected": [
+              143,
+              144,
+              145,
+              149
+            ],
+            "s2": [
+              143,
+              144
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 143,
+                "raw": 414,
+                "raw_text": "     ",
+                "final": 414,
+                "final_text": "     ",
+                "reason": "exempt",
+                "p": 0.9912664294242859,
+                "score": 0.9912664294242859,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "threshold_rejected",
+                "p": 0.9236783981323242,
+                "score": 0.9139406681060791,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.24443791806697845,
+                "score": 0.24443791806697845,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 1,
+            "selected": [
+              144,
+              145,
+              146,
+              148
+            ],
+            "s2": [
+              144,
+              145
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 144,
+                "raw": 421,
+                "raw_text": " if",
+                "final": 421,
+                "final_text": " if",
+                "reason": "exempt",
+                "p": 0.9503505229949951,
+                "score": 0.9503505229949951,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.5446090698242188,
+                "score": 0.6111082434654236,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "threshold_rejected",
+                "p": 0.22583070397377014,
+                "score": 0.22583070397377014,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 2,
+            "selected": [
+              145,
+              146,
+              147,
+              150
+            ],
+            "s2": [
+              145,
+              146
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 145,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "exempt",
+                "p": 0.7302748560905457,
+                "score": 0.7302748560905457,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 146,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "ordinary_accepted",
+                "p": 0.6038107872009277,
+                "score": 0.9519995450973511,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 2,
+                "position": 147,
+                "raw": 14665,
+                "raw_text": ":i",
+                "final": 14665,
+                "final_text": ":i",
+                "reason": "threshold_rejected",
+                "p": 0.4298606812953949,
+                "score": 0.5579165816307068,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 150,
+                "raw": 989,
+                "raw_text": "[i",
+                "final": 989,
+                "final_text": "[i",
+                "reason": "threshold_rejected",
+                "p": 0.34708765149116516,
+                "score": 0.34708765149116516,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          },
+          {
+            "round": 3,
+            "selected": [
+              148,
+              149,
+              150,
+              155
+            ],
+            "s2": [
+              148,
+              149
+            ],
+            "events": [
+              {
+                "slot": 0,
+                "position": 148,
+                "raw": 621,
+                "raw_text": " ==",
+                "final": 621,
+                "final_text": " ==",
+                "reason": "exempt",
+                "p": 0.33329012989997864,
+                "score": 0.33329012989997864,
+                "eligible": false,
+                "called": false
+              },
+              {
+                "slot": 1,
+                "position": 149,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.34040334820747375,
+                "score": 0.46152833104133606,
+                "eligible": true,
+                "called": true
+              },
+              {
+                "slot": 3,
+                "position": 155,
+                "raw": 274,
+                "raw_text": " s",
+                "final": 274,
+                "final_text": " s",
+                "reason": "threshold_rejected",
+                "p": 0.18423119187355042,
+                "score": 0.18423119187355042,
+                "eligible": false,
+                "called": false
+              }
+            ],
+            "expand": [],
+            "delete": []
+          }
+        ]
+      }
+    ]
+  }
+]

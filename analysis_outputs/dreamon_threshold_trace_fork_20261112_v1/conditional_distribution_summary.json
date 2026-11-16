@@ -1,0 +1,11 @@
+{
+  "candidate_changed": 0,
+  "kl_closer": 48,
+  "mean_kl_p": 0.1481054643081734,
+  "mean_kl_q": 0.08913093104501968,
+  "mean_tv_p": 0.13226943313566153,
+  "mean_tv_q": 0.0832539170551172,
+  "score_crossed_same_candidate": 11,
+  "states": 64,
+  "tv_closer": 47
+}

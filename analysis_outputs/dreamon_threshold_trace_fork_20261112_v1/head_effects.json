@@ -1,0 +1,1052 @@
+[
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "row_mean": -60.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "task_mean": -60.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "row_mean": -60.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "task_mean": -60.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "row_mean": -60.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        -60.0,
+        -60.0
+      ],
+      "task_mean": -60.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "row_mean": -15.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "task_mean": -15.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 32,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 32,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "row_mean": -15.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "task_mean": -15.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 32,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4,
+    "wins": 0
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 32,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4,
+    "wins": 0
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "row_mean": -15.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        -15.0,
+        -15.0
+      ],
+      "task_mean": -15.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 32,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 8,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "efficiency": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.2222222222222222,
+        -0.0634672619047618
+      ],
+      "row_mean": -0.140625,
+      "rows": 512,
+      "task_cluster_ci95": [
+        -0.2169811320754717,
+        -0.05660377358490566
+      ],
+      "task_mean": -0.1320754716981132
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 512,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "efficiency": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 512,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.2222222222222222,
+        -0.0634672619047618
+      ],
+      "row_mean": -0.140625,
+      "rows": 512,
+      "task_cluster_ci95": [
+        -0.2169811320754717,
+        -0.05660377358490566
+      ],
+      "task_mean": -0.1320754716981132
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 512,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64,
+    "wins": 0
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 512,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64,
+    "wins": 0
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.2222222222222222,
+        -0.0634672619047618
+      ],
+      "row_mean": -0.140625,
+      "rows": 512,
+      "task_cluster_ci95": [
+        -0.2169811320754717,
+        -0.05660377358490566
+      ],
+      "task_mean": -0.1320754716981132
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 512,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 32,
+    "comparison": "PQ",
+    "efficiency": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -6.388888888888889,
+        -0.05182291666666572
+      ],
+      "row_mean": -2.225,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -6.5,
+        -0.1597222222222222
+      ],
+      "task_mean": -2.5347222222222223
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 80,
+    "losses": 6,
+    "quality": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.0625,
+        0.45454545454545453
+      ],
+      "row_mean": 0.1625,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -0.06944444444444445,
+        0.5277777777777778
+      ],
+      "task_mean": 0.18055555555555555
+    },
+    "sample_group": "quality_flip",
+    "states": 10,
+    "wins": 19
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "efficiency": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 80,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "quality_flip",
+    "states": 10,
+    "wins": 0
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 32,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -6.388888888888889,
+        -0.05182291666666572
+      ],
+      "row_mean": -2.225,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -6.5,
+        -0.1597222222222222
+      ],
+      "task_mean": -2.5347222222222223
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 80,
+    "losses": 6,
+    "quality": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.0625,
+        0.45454545454545453
+      ],
+      "row_mean": 0.1625,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -0.06944444444444445,
+        0.5277777777777778
+      ],
+      "task_mean": 0.18055555555555555
+    },
+    "sample_group": "quality_flip",
+    "states": 10,
+    "wins": 19
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 80,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "quality_flip",
+    "states": 10,
+    "wins": 0
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 32,
+    "comparison": "QQ",
+    "efficiency": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -6.388888888888889,
+        -0.05182291666666572
+      ],
+      "row_mean": -2.225,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -6.5,
+        -0.1597222222222222
+      ],
+      "task_mean": -2.5347222222222223
+    },
+    "incomplete_comparisons": 0,
+    "kind": "head",
+    "logical_pairs": 80,
+    "losses": 6,
+    "quality": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.0625,
+        0.45454545454545453
+      ],
+      "row_mean": 0.1625,
+      "rows": 80,
+      "task_cluster_ci95": [
+        -0.06944444444444445,
+        0.5277777777777778
+      ],
+      "task_mean": 0.18055555555555555
+    },
+    "sample_group": "quality_flip",
+    "states": 10,
+    "wins": 19
+  }
+]

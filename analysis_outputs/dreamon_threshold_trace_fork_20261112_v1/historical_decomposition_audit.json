@@ -1,0 +1,11 @@
+{
+  "provenance": "historical archive only; current replay verification pending",
+  "delta_k4_minus_k2": {
+    "R": 815,
+    "O": -85,
+    "S": 109,
+    "Z": 1009
+  },
+  "increased_cases": 105,
+  "increased_sum_delta_R": 1491
+}

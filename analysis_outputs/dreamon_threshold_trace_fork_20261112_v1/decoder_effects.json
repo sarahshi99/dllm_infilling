@@ -1,0 +1,212 @@
+[
+  {
+    "baseline": "original",
+    "changed_tokens": 32,
+    "comparison": "defer",
+    "efficiency": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -29.0,
+        5.8125
+      ],
+      "row_mean": -15.0625,
+      "rows": 48,
+      "task_cluster_ci95": [
+        -29.0,
+        5.8125
+      ],
+      "task_mean": -15.0625
+    },
+    "incomplete_comparisons": 0,
+    "kind": "delete",
+    "logical_pairs": 48,
+    "losses": 16,
+    "quality": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -1.0,
+        1.0
+      ],
+      "row_mean": 0.0,
+      "rows": 48,
+      "task_cluster_ci95": [
+        -1.0,
+        1.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "decoder",
+    "states": 6,
+    "wins": 16
+  },
+  {
+    "baseline": "original",
+    "changed_tokens": 32,
+    "comparison": "veto",
+    "efficiency": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -29.0,
+        5.8125
+      ],
+      "row_mean": -15.0625,
+      "rows": 48,
+      "task_cluster_ci95": [
+        -29.0,
+        5.8125
+      ],
+      "task_mean": -15.0625
+    },
+    "incomplete_comparisons": 0,
+    "kind": "delete",
+    "logical_pairs": 48,
+    "losses": 16,
+    "quality": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -1.0,
+        1.0
+      ],
+      "row_mean": 0.0,
+      "rows": 48,
+      "task_cluster_ci95": [
+        -1.0,
+        1.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "decoder",
+    "states": 6,
+    "wins": 16
+  },
+  {
+    "baseline": "original",
+    "changed_tokens": 16,
+    "comparison": "defer",
+    "efficiency": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -2.375,
+        1.0
+      ],
+      "row_mean": -0.425,
+      "rows": 40,
+      "task_cluster_ci95": [
+        -2.375,
+        1.0
+      ],
+      "task_mean": -0.1875
+    },
+    "incomplete_comparisons": 0,
+    "kind": "expand",
+    "logical_pairs": 40,
+    "losses": 4,
+    "quality": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.25,
+        0.0
+      ],
+      "row_mean": -0.1,
+      "rows": 40,
+      "task_cluster_ci95": [
+        -0.25,
+        0.0
+      ],
+      "task_mean": -0.08333333333333333
+    },
+    "sample_group": "decoder",
+    "states": 5,
+    "wins": 0
+  },
+  {
+    "baseline": "original",
+    "changed_tokens": 19,
+    "comparison": "veto",
+    "efficiency": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -59.0,
+        2.5625
+      ],
+      "row_mean": -11.725,
+      "rows": 40,
+      "task_cluster_ci95": [
+        -59.0,
+        2.5625
+      ],
+      "task_mean": -19.604166666666668
+    },
+    "incomplete_comparisons": 0,
+    "kind": "expand",
+    "logical_pairs": 40,
+    "losses": 4,
+    "quality": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.25,
+        0.0
+      ],
+      "row_mean": -0.1,
+      "rows": 40,
+      "task_cluster_ci95": [
+        -0.25,
+        0.0
+      ],
+      "task_mean": -0.08333333333333333
+    },
+    "sample_group": "decoder",
+    "states": 5,
+    "wins": 0
+  },
+  {
+    "baseline": "original",
+    "changed_tokens": 0,
+    "comparison": "no_propagation",
+    "efficiency": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -29.5,
+        0.0
+      ],
+      "row_mean": -9.833333333333334,
+      "rows": 48,
+      "task_cluster_ci95": [
+        -29.5,
+        0.0
+      ],
+      "task_mean": -9.833333333333334
+    },
+    "incomplete_comparisons": 0,
+    "kind": "no_propagation",
+    "logical_pairs": 48,
+    "losses": 0,
+    "quality": {
+      "base_tasks": 3,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 48,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "decoder",
+    "states": 6,
+    "wins": 0
+  }
+]

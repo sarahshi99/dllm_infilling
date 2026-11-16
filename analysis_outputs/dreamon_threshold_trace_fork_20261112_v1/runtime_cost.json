@@ -1,0 +1,980 @@
+{
+  "fork_actual_forwards": 31456,
+  "fork_actual_head_calls": 4300,
+  "logical_forks": 2920,
+  "prefix_replay": [
+    {
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.2400302700698376,
+      "prefix_replay_forwards": 2,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 3.3379819663241506,
+      "prefix_replay_forwards": 10,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/110/L4",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.4106652038171887,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.201825219206512,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/119/L12",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 3.7512689772993326,
+      "prefix_replay_forwards": 13,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 47.95370462536812,
+      "prefix_replay_forwards": 286,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 3
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/135/L6",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.8308040583506227,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.8564756950363517,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 2
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/14/L2",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.2116493470966816,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.6533924899995327,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/141/L1",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.9942833976820111,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/144/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.7007395392283797,
+      "prefix_replay_forwards": 8,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/158/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 7.279115233570337,
+      "prefix_replay_forwards": 38,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/16/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.563062877394259,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/161/L6",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.086214234121144,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/17/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 4.315287810750306,
+      "prefix_replay_forwards": 16,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 9.357507528737187,
+      "prefix_replay_forwards": 45,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 3.835570774972439,
+      "prefix_replay_forwards": 14,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.43995657004416,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/39/L5",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 14.883078414015472,
+      "prefix_replay_forwards": 98,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/41/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.66274056956172,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 8.02127022948116,
+      "prefix_replay_forwards": 39,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/6/L3",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.425505720078945,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/63/L3",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.755544395186007,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 4.534865407273173,
+      "prefix_replay_forwards": 19,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/74/L2",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 1.6664451863616705,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 23.97754131630063,
+      "prefix_replay_forwards": 132,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 3
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/9/L0",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 2.665950364433229,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "config": "global_k4_nohead_090",
+      "elapsed_sec": 4.349578850902617,
+      "prefix_replay_forwards": 18,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/113/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.0145276794210076,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 47.18365419935435,
+      "prefix_replay_forwards": 276,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 3
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/131/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 1.443945943377912,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/138/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 3.7304425071924925,
+      "prefix_replay_forwards": 16,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 46.76241684239358,
+      "prefix_replay_forwards": 307,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 4
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/145/L1",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.263964233919978,
+      "prefix_replay_forwards": 8,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/15/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 5.463682873174548,
+      "prefix_replay_forwards": 23,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/25/L8",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 1.8868568297475576,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L10",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 3.080332426354289,
+      "prefix_replay_forwards": 11,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/41/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 3.4414674658328295,
+      "prefix_replay_forwards": 17,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/54/L0",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.869758597575128,
+      "prefix_replay_forwards": 10,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/6/L2",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.580193360336125,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/65/L1",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.5167064061388373,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/67/L4",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 3.1417901162058115,
+      "prefix_replay_forwards": 12,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/69/L1",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 1.732148309238255,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/70/L1",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 1.5373016335070133,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 26.575097107328475,
+      "prefix_replay_forwards": 143,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 3
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/94/L11",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 2.483055030927062,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/96/L6",
+      "config": "global_k4_nohead_095",
+      "elapsed_sec": 0.9927194314077497,
+      "prefix_replay_forwards": 1,
+      "prefix_replay_head_calls": 0,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/10/L1",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.7407869594171643,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 5,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.1893504746258259,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 4,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 2.8420873023569584,
+      "prefix_replay_forwards": 8,
+      "prefix_replay_head_calls": 10,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 2.1113054705783725,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 9,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/119/L4",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 2.1864994037896395,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 8,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/121/L0",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 7.715740266256034,
+      "prefix_replay_forwards": 23,
+      "prefix_replay_head_calls": 45,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.767318713478744,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 7,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/142/L4",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 3.0974687188863754,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 13,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/143/L10",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 2.442755355499685,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 5,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/149/L1",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.7563619343563914,
+      "prefix_replay_forwards": 2,
+      "prefix_replay_head_calls": 5,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/152/L0",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 5.190508706495166,
+      "prefix_replay_forwards": 20,
+      "prefix_replay_head_calls": 17,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/156/L6",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 2.1051600091159344,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 4,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/31/L5",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.4711385369300842,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 4,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L0",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 3.7915239706635475,
+      "prefix_replay_forwards": 13,
+      "prefix_replay_head_calls": 12,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 13.772212512791157,
+      "prefix_replay_forwards": 65,
+      "prefix_replay_head_calls": 34,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 3.1702863248065114,
+      "prefix_replay_forwards": 10,
+      "prefix_replay_head_calls": 13,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.8020133497193456,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 7,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/47/L4",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 5.403968762606382,
+      "prefix_replay_forwards": 18,
+      "prefix_replay_head_calls": 34,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/48/L3",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.7312286142259836,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 4,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/52/L1",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.7734095435589552,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 10,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 3.2701055547222495,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 13,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 5.215676320716739,
+      "prefix_replay_forwards": 17,
+      "prefix_replay_head_calls": 23,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/85/L0",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 9.156321492046118,
+      "prefix_replay_forwards": 59,
+      "prefix_replay_head_calls": 11,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/95/L9",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.391145445406437,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 6,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/99/L13",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 20.279528571292758,
+      "prefix_replay_forwards": 123,
+      "prefix_replay_head_calls": 3,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "config": "global_k4_trained_090",
+      "elapsed_sec": 1.8720033122226596,
+      "prefix_replay_forwards": 6,
+      "prefix_replay_head_calls": 7,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/101/L12",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 2.6386060332879424,
+      "prefix_replay_forwards": 9,
+      "prefix_replay_head_calls": 9,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/125/L1",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 2.3102974221110344,
+      "prefix_replay_forwards": 7,
+      "prefix_replay_head_calls": 9,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/135/L4",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.9123820001259446,
+      "prefix_replay_forwards": 5,
+      "prefix_replay_head_calls": 6,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 4.31655459292233,
+      "prefix_replay_forwards": 10,
+      "prefix_replay_head_calls": 14,
+      "snapshots": 4
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/14/L4",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.8293517557904124,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 6,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/144/L6",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.9694287683814764,
+      "prefix_replay_forwards": 4,
+      "prefix_replay_head_calls": 3,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/147/L2",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 2.7083248775452375,
+      "prefix_replay_forwards": 6,
+      "prefix_replay_head_calls": 9,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/153/L1",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 3.7784667406231165,
+      "prefix_replay_forwards": 15,
+      "prefix_replay_head_calls": 9,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/16/L0",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 3.4963691644370556,
+      "prefix_replay_forwards": 11,
+      "prefix_replay_head_calls": 12,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/22/L0",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 3.5743522588163614,
+      "prefix_replay_forwards": 10,
+      "prefix_replay_head_calls": 15,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/40/L4",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.6505480436608195,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 6,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/43/L0",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 3.0716410437598825,
+      "prefix_replay_forwards": 12,
+      "prefix_replay_head_calls": 15,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/45/L0",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 3.647817362099886,
+      "prefix_replay_forwards": 16,
+      "prefix_replay_head_calls": 17,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/48/L1",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 4.443252492696047,
+      "prefix_replay_forwards": 18,
+      "prefix_replay_head_calls": 16,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/55/L2",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.6568067781627178,
+      "prefix_replay_forwards": 3,
+      "prefix_replay_head_calls": 7,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/63/L2",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 1.7629484282806516,
+      "prefix_replay_forwards": 2,
+      "prefix_replay_head_calls": 7,
+      "snapshots": 1
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/67/L3",
+      "config": "global_k4_trained_095",
+      "elapsed_sec": 2.2816416854038835,
+      "prefix_replay_forwards": 6,
+      "prefix_replay_head_calls": 8,
+      "snapshots": 1
+    }
+  ],
+  "replay_forwards": 34715,
+  "scores_executed": 1175,
+  "shadow": [
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    },
+    {
+      "shadow_head_calls": 1
+    }
+  ],
+  "teacher_forwards": 64
+}
