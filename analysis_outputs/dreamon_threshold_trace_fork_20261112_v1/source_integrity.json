@@ -1,0 +1,19 @@
+{
+  "archived_and_actual_shared_spec_equal": true,
+  "differing_spec_keys": [],
+  "decoder_git_blobs": {
+    "experiments/threshold_eval/adapter.py": {
+      "285f8f1462481d7c73e1e6659822f45fe7b59a5e": "46fe67334a01dafe49c5fe2612f6d34489a5fcd4",
+      "660f2960ff65fb216f762a1eca0183835de2afbb": "46fe67334a01dafe49c5fe2612f6d34489a5fcd4"
+    },
+    "experiments/context_foundation/adapter.py": {
+      "285f8f1462481d7c73e1e6659822f45fe7b59a5e": "5db399a4c5d776e1331cbf195e48ee455f926632",
+      "660f2960ff65fb216f762a1eca0183835de2afbb": "5db399a4c5d776e1331cbf195e48ee455f926632"
+    }
+  },
+  "actual_spec_path": "/home/shx/projects/dllm_infilling/threshold_eval_20261104_v1/run_spec.json",
+  "head_sha256_verified_by_original_loader": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
+  "snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
+  "execution_source_commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146",
+  "original_reference_execution": "660f2960ff65fb216f762a1eca0183835de2afbb"
+}

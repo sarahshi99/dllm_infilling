@@ -30,7 +30,13 @@ def events(v):
 
 
 def action(e):
-    return (e.get('final'),e.get('committed',False),e.get('rejected',False),e.get('reason')=='base_structure',e.get('reason')=='corrected_structure_refresh_only')
+    if not e.get('processed',True):return ('unprocessed',e.get('reason'))
+    if e.get('rejected'):return ('reject',e['chain'])
+    if e.get('reason')=='corrected_structure_refresh_only':return ('head_refresh',)
+    if e.get('reason')=='base_structure':return ('native_structure',e['final'])
+    if e.get('reason')=='mask_noop':return ('mask_noop',)
+    if e.get('committed'):return ('commit',e['final'])
+    return ('none',)
 
 
 def first_action_difference(a,b):
@@ -243,6 +249,14 @@ def teacher(e,db,v,s):
 
 
 def run_forks(e,byid,db):
+    # Replay and fork selection are separate stages. The decoder blob stays
+    # unchanged; pin the selection/orchestration revision before any fork.
+    from experiments.threshold_eval.common import commit
+    from experiments.threshold_trace_fork.run import verify_phase_versions
+    verify_phase_versions(db,commit())
+    if db.get('meta','fork_execution_version') is None:
+        db.put('meta','fork_execution_version',dict(execution_commit=commit()))
+    atomic_json(OUT/'phase_versions.json',dict(replay=db.get('meta','execution_version'),forks=db.get('meta','fork_execution_version'),decoder_unchanged_from_replay=True))
     panel=choose_panel(db)
     manifest=OUT/'special_state_manifest.json'
     if manifest.exists():

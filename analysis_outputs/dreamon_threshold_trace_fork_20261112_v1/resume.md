@@ -13,3 +13,5 @@ SQLite local/results.sqlite按(kind,key)去重。已完成案例不重复累计�
 状态completed才表示全阶段完成；smoke_passed只表示技术检查。scientific_validity_blocked先诊断，不能改历史算法迎合数字。OOM限一次进程释放/恢复，基础设施限三次；attempts.log保留退出记录。普通失败与3秒超时不补抽。
 
 若只需重建报告：`/home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -m experiments.threshold_trace_fork.analyze`，无模型加载。
+
+分叉前已修正专项“首次实际动作”定位：不同候选都拒绝不算实际动作差异。回放解码器仍为418e73e；分叉编排的阶段版本见phase_versions.json和SQLite meta。恢复命令会分别验证阶段来源，不重新生成已完成回放；不能用旧编排版本接着生成新分叉。

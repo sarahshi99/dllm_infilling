@@ -176,16 +176,35 @@ def replay(e,byid,db):
     status('replay_passed',completed=len(allrows))
 
 
+def verify_phase_versions(db,version):
+    # A diagnostic selection correction must not invalidate faithful replay.
+    # Compare the actual decoder/dependency files, and separately preserve the
+    # fork-stage source revision once any continuation can have been generated.
+    replay_version=db.get('meta','execution_version')
+    decoder_paths=['experiments/threshold_trace_fork/engine.py',
+        'experiments/threshold_eval/adapter.py','experiments/threshold_eval/common.py',
+        'experiments/context_foundation','experiments/dreamon_singleline_order_parallel.py',
+        'experiments/dreamon_singleline_adapter.py','experiments/k4_batch_common.py']
+    if replay_version and replay_version['execution_commit']!=version:
+        changed=subprocess.check_output(['git','diff',replay_version['execution_commit'],version,'--',*decoder_paths],cwd=ROOT,text=True)
+        if changed:raise RuntimeError('resume cannot mix replay decoder versions')
+    fork_version=db.get('meta','fork_execution_version')
+    if fork_version and fork_version['execution_commit']!=version:
+        paths=decoder_paths+['experiments/threshold_trace_fork/forks.py','experiments/threshold_trace_fork/run.py','experiments/threshold_trace_fork/analyze.py']
+        changed=subprocess.check_output(['git','diff',fork_version['execution_commit'],version,'--',*paths],cwd=ROOT,text=True)
+        if changed:raise RuntimeError('resume cannot mix fork executable versions')
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--phase',choices=['smoke','all'],default='all');args=parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True);LOCAL.mkdir(exist_ok=True)
     db=Ledger();version=commit();old=db.get('meta','execution_version' if args.phase=='all' else 'development_version')
     if old is None:db.put('meta','execution_version' if args.phase=='all' else 'development_version',dict(execution_commit=version))
-    elif old['execution_commit']!=version:
-        changed=subprocess.check_output(['git','diff',old['execution_commit'],version,'--','experiments/threshold_trace_fork','experiments/threshold_eval','experiments/context_foundation'],cwd=ROOT,text=True)
-        if changed:raise RuntimeError('resume cannot mix executable versions')
+    else:verify_phase_versions(db,version)
     start=time.perf_counter()
-    atomic_json(LOCAL/'environment.json',dict(at=utc(),commit=version,devices=gpu_observation(),torch=torch.__version__,cuda=torch.version.cuda))
+    environment=dict(at=utc(),commit=version,devices=gpu_observation(),torch=torch.__version__,cuda=torch.version.cuda)
+    atomic_json(LOCAL/f'environment_{os.getpid()}.json',environment)
+    if not (LOCAL/'environment.json').exists():atomic_json(LOCAL/'environment.json',environment)
     try:
         status('loading',execution_commit=version)
         e,byid=load();smoke(e,byid,db)
