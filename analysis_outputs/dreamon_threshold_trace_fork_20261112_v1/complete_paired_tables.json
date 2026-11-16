@@ -1,0 +1,128 @@
+[
+  {
+    "baseline": "global_k2_nohead_095",
+    "comparison": "global_k4_nohead_095",
+    "tables": {
+      "text": {
+        "all_pairs": {
+          "different_decrease": 31,
+          "different_equal": 15,
+          "different_increase": 32,
+          "same_decrease": 471,
+          "same_equal": 411,
+          "same_increase": 73
+        },
+        "both_passed_complete": {
+          "different_decrease": 21,
+          "different_equal": 12,
+          "different_increase": 13,
+          "same_decrease": 455,
+          "same_equal": 386,
+          "same_increase": 57
+        }
+      },
+      "tokens": {
+        "all_pairs": {
+          "different_decrease": 31,
+          "different_equal": 15,
+          "different_increase": 32,
+          "same_decrease": 471,
+          "same_equal": 411,
+          "same_increase": 73
+        },
+        "both_passed_complete": {
+          "different_decrease": 21,
+          "different_equal": 12,
+          "different_increase": 13,
+          "same_decrease": 455,
+          "same_equal": 386,
+          "same_increase": 57
+        }
+      }
+    }
+  },
+  {
+    "baseline": "global_k4_nohead_090",
+    "comparison": "global_k4_trained_090",
+    "tables": {
+      "text": {
+        "all_pairs": {
+          "different_decrease": 27,
+          "different_equal": 7,
+          "different_increase": 7,
+          "same_decrease": 452,
+          "same_equal": 513,
+          "same_increase": 27
+        },
+        "both_passed_complete": {
+          "different_decrease": 19,
+          "different_equal": 5,
+          "different_increase": 3,
+          "same_decrease": 418,
+          "same_equal": 477,
+          "same_increase": 25
+        }
+      },
+      "tokens": {
+        "all_pairs": {
+          "different_decrease": 27,
+          "different_equal": 7,
+          "different_increase": 7,
+          "same_decrease": 452,
+          "same_equal": 513,
+          "same_increase": 27
+        },
+        "both_passed_complete": {
+          "different_decrease": 19,
+          "different_equal": 5,
+          "different_increase": 3,
+          "same_decrease": 418,
+          "same_equal": 477,
+          "same_increase": 25
+        }
+      }
+    }
+  },
+  {
+    "baseline": "global_k4_nohead_095",
+    "comparison": "global_k4_trained_095",
+    "tables": {
+      "text": {
+        "all_pairs": {
+          "different_decrease": 15,
+          "different_equal": 8,
+          "different_increase": 9,
+          "same_decrease": 404,
+          "same_equal": 571,
+          "same_increase": 26
+        },
+        "both_passed_complete": {
+          "different_decrease": 11,
+          "different_equal": 6,
+          "different_increase": 5,
+          "same_decrease": 379,
+          "same_equal": 527,
+          "same_increase": 24
+        }
+      },
+      "tokens": {
+        "all_pairs": {
+          "different_decrease": 15,
+          "different_equal": 8,
+          "different_increase": 9,
+          "same_decrease": 404,
+          "same_equal": 571,
+          "same_increase": 26
+        },
+        "both_passed_complete": {
+          "different_decrease": 11,
+          "different_equal": 6,
+          "different_increase": 5,
+          "same_decrease": 379,
+          "same_equal": 527,
+          "same_increase": 24
+        }
+      }
+    }
+  }
+]

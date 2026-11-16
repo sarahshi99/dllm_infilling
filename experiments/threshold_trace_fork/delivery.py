@@ -16,6 +16,34 @@ def exported(name):
         return [json.loads(line) for line in stream]
 
 
+def score_numeric_check(forks):
+    """Keep initial CPU metadata; attach the actual GPU decision probabilities."""
+    probes = []
+    for r in forks:
+        if r['kind'] != 'head' or r['continuation_seed'] != 42:
+            continue
+        file = LOCAL / ('fork__' + hashlib.sha256(r['actual_execution'].encode()).hexdigest()[:24] + '.json.gz')
+        with gzip.open(file, 'rt') as stream:
+            trace = json.load(stream)
+        event = next(e for e in trace['action_trace'][r['intervention_round']]['events']
+                     if e['slot'] == r['intervention_slot'] and e.get('processed'))
+        field = dict(PP='p_yp', PQ='q_yp', QP='p_yq', QQ='q_yq')[r['intervention']]
+        actual, metadata = event['candidate_probability'], r[field]
+        assert event['final'] == r['y_p' if r['intervention'] in ('PP', 'PQ') else 'y_q']
+        probes.append(dict(state=r['state'], sample_group=r['sample_group'], arm=r['intervention'],
+            score_field=field, metadata_score=metadata, actual_score=actual, difference=actual-metadata,
+            threshold=r['threshold'], threshold_flag_changed=(actual >= r['threshold']) != (metadata >= r['threshold'])))
+    assert len(probes) == 320 and not any(r['threshold_flag_changed'] for r in probes)
+    summary = dict(logical_state_arms=len(probes), max_abs_difference=max(abs(r['difference']) for r in probes),
+        threshold_flags_changed=0, current_candidates_match=True,
+        actual_generation_scores='unchanged GPU FP32 softmax of T1 full legal logits',
+        metadata_scores='initial CPU FP32 softmax in fork tables; retained without overwrite',
+        seed_scope='current candidates/logits are fixed across eight continuations; seed42 reads each state/arm once',
+        records=probes)
+    atomic_json(OUT / 'score_numeric_audit.json', summary)
+    return {k: v for k, v in summary.items() if k != 'records'}
+
+
 def main():
     db = Ledger()
     expected = dict(smoke=114, replay=5168, fork=2920, multiseed=54,
@@ -97,6 +125,7 @@ def main():
     assert numeric['states'] == 64 and numeric['new_states'] == 0
     assert numeric['extra_teacher_forwards'] == 64 and not numeric['used_in_branch_decisions']
     assert len(exported('teacher_logspace_per_state.jsonl.gz')) == 64
+    score_numeric = score_numeric_check(rows['fork'])
     mapping = exported('raw_trace_index.jsonl.gz')
     assert len(mapping) == 2920
     assert Counter(r['actual_execution'] for r in mapping) == Counter(r['actual_execution'] for r in rows['fork'])
@@ -124,11 +153,23 @@ def main():
         score_executions=len(scores), score_reuse_logical_rows=sum(r['score_reused'] for rr in rows.values() for r in rr),
         phase_versions=json.loads((OUT / 'phase_versions.json').read_text()),
         original_validation_version=orig['execution_version'], teacher_numeric_validation=numeric,
+        actual_score_numeric_check=score_numeric,
         unresolved_required_experiment_items=[], not_applicable=special['not_applicable'],
         interpretation_limits=['candidate factor not activated in selected states; interaction unidentified',
             'three focal cases and conditional seeds are not independent tasks',
             'repeated development population, not independent test data',
             'no deployment controller or logged-runtime speedup claim'])
+    summary['forward_cost'] = cost
+    summary['raw_data_local_path'] = str(LOCAL)
+    for name, field in [('fresh_cpu_checks.json', 'cpu_checks'),
+                        ('complete_head_call_accounting.json', 'physical_head_cost')]:
+        if (OUT / name).exists():
+            summary[field] = json.loads((OUT / name).read_text())
+    if 'physical_head_cost' in summary:
+        h = summary['physical_head_cost']
+        assert h['branch_actual_head_calls'] == sum(r['actual_head_calls'] for r in rows['fork'])
+        assert h['branch_logical_remaining_head_calls'] == sum(r['remaining_head_calls'] for r in rows['fork'])
+        assert h['branch_logical_remaining_head_calls'] - h['branch_actual_head_calls'] == 80 * 8 * 3
     atomic_json(OUT / 'delivery_verification.json', summary)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 

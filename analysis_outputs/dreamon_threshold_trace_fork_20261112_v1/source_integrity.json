@@ -15,5 +15,13 @@
   "head_sha256_verified_by_original_loader": "58fd352ef12ff57fa0eec47a94047559f9dfd84b5ba4478dca3395089c87265a",
   "snapshot": "/home/shx/.cache/huggingface/hub/models--Dream-org--DreamOn-v0-7B/snapshots/8ccc74750e43177327f29dab9e91882ba759e194",
   "execution_source_commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146",
-  "original_reference_execution": "660f2960ff65fb216f762a1eca0183835de2afbb"
+  "original_reference_execution": "660f2960ff65fb216f762a1eca0183835de2afbb",
+  "additional_runtime_paths_identical_between_report_and_execution_commits": [
+    "experiments/threshold_eval",
+    "experiments/context_foundation",
+    "experiments/dreamon_singleline_order_parallel.py",
+    "experiments/dreamon_singleline_adapter.py",
+    "experiments/k4_batch_common.py",
+    "experiments/run_k4_multiline_stage.py"
+  ]
 }

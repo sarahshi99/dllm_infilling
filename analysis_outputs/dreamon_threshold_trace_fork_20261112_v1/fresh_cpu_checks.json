@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "tests": 28,
+  "elapsed_sec": 3.392,
+  "completed_at": "2026-11-16T13:24:14.259011+00:00",
+  "modules": [
+    "tests.threshold_trace_fork.test_engine",
+    "tests.threshold_trace_fork.test_structure",
+    "tests.threshold_trace_fork.test_event_selection",
+    "tests.threshold_trace_fork.test_teacher_numeric",
+    "tests.threshold_eval.test_threshold",
+    "tests.threshold_eval.test_analysis"
+  ],
+  "log": "local/tests_final.log",
+  "review": "local diff review; no independent reviewer per AGENTS.md"
+}

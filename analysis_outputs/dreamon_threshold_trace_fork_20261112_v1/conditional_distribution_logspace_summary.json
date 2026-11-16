@@ -1,0 +1,14 @@
+{
+  "candidate_changed": 0,
+  "fixed_yp_score_crossed": 11,
+  "kl_closer": 48,
+  "mean_kl_p": 0.1481613776791164,
+  "mean_kl_q": 0.08917743843312564,
+  "mean_tv_p": 0.13228032163124226,
+  "mean_tv_q": 0.08326601706858128,
+  "method": "FP32 full legal log_softmax; no probability floor",
+  "original_numeric_evidence_retained": "teacher_per_state.jsonl.gz",
+  "primary_numeric_evidence": "teacher_logspace_per_state.jsonl.gz",
+  "states": 64,
+  "tv_closer": 47
+}

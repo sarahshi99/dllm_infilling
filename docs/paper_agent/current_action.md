@@ -1,16 +1,13 @@
-# 当前动作：完成有限轨迹分叉和技术复核
+# 已完成：有限阈值轨迹回放与受控分叉
 
-2026-11-16。用户已授权清单，不训练、不搜索阈值、不扩面板、不合并。
+2026-11-16，用户固定清单已完成，status=delivery_completed、交付验收passed。
 
-实际工作区：/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-threshold-trace-fork-20261112-v1。
-分支codex/dreamon-threshold-trace-fork-20261112-v1；回放418e73e、分叉4e48940、复核工具b743a41。
+专用分支codex/dreamon-threshold-trace-fork-20261112-v1；实际工作区/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-threshold-trace-fork-20261112-v1。来源285f8f1/660f296；回放418e73e、分叉4e48940、原入口技术复核b743a41。
 
-主流水线已完成：5168自然轨迹（5165+3）、2920分叉（2048面板+512头专项+360规则）、64主教师、54从头种子。28CPU测试重新通过；114组初步原入口/日志/恢复、106快照、11共同控制状态均通过。未修改原入口5168详细对照正在执行（最新见status.json），随后同64状态log空间数值校验；尚不能宣布最终交付。
+- 5168自然路径（5165+3）、2920分叉（2048面板+512头专项+360规则）、64主教师、54从头种子全部完成。
+- 114初步技术对照、106快照恢复、11共同状态、5168原入口详细对照、同64状态log空间复核、28CPU测试与交付审计全部通过。
+- 139首个return同词评分跨.95，单次干预总63→3，八延续稳定；其余3事实调用取消无生成效果。
+- 80个头状态当前候选均不变：候选变化/交互未识别。126延后删除救回但更贵；80同类操作省计算却全部改错，反对统一结构禁令。
+- 总主模型前向108241、物理头计算33570；记录耗时6.335小时，共享H200 GPU0、单模型顺序，无重试，不作为端到端加速结论。
 
-主模型流水线已退出成功，耗时14935.54秒，无OOM或基础设施重试；日志local/run.log。
-持久后续tmux threshold_trace_fork_finish_20261112 正在单模型执行verify_all，随后enrich；日志local/{finish,verify_all,enrich}.log。
-输出与状态：analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/{status.json,resume.md}。
-单模型cuda:0当前映射H200共享资源；不干预其它任务。
-
-139/L5第一调用因果评分效果已验证，单次取消恢复长路径，单次加头恢复短路径，配对8种子稳定；候选不变。面板64当前候选均未变，评分跨阈值11，不能识别词变化场景的交互。保留质量退化/零效应/不适用，不将其替换为有利样本。
-reviewer_gate_disabled；采用本地diff审查和fresh验证。最终还须解释A—E、统计所有成本、交付核验、提交推送。
+报告与恢复：[report](../../analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/report.zh.md)、[resume](../../analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/resume.md)、同目录delivery_verification.json。原始数据留local，不入普通Git。本任务模型与tmux均退出；不扩展研究方向，不训练/搜索/合并。reviewer_gate_disabled，本地diff review与fresh verification。

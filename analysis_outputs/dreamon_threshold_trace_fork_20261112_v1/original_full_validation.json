@@ -1,0 +1,28 @@
+{
+  "actual_original_forwards": 34715,
+  "actual_original_head_calls": 13752,
+  "completed": 5168,
+  "elapsed_sec": 7868.750508430414,
+  "execution_version": {
+    "execution_commit": "b743a41fcbe459b823d2ebc2e87a086667347c23"
+  },
+  "expected": 5168,
+  "extra_numeric_teacher_forwards": 64,
+  "fields": [
+    "tokens",
+    "round canvases",
+    "selected",
+    "submitted",
+    "barrier",
+    "expand/delete",
+    "counts",
+    "histograms",
+    "sampling digest",
+    "stop reason"
+  ],
+  "numeric_validation_states": 64,
+  "original_validation_elapsed_sec": 7853.964168289676,
+  "provenance": "present unchanged-original run vs instrumented archive; not historical detailed traces",
+  "recorded_case_elapsed_sec": 7825.316275131889,
+  "status": "passed"
+}

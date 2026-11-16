@@ -1,0 +1,197 @@
+{
+  "actual_score_numeric_check": {
+    "actual_generation_scores": "unchanged GPU FP32 softmax of T1 full legal logits",
+    "current_candidates_match": true,
+    "logical_state_arms": 320,
+    "max_abs_difference": 0.00019568204879760742,
+    "metadata_scores": "initial CPU FP32 softmax in fork tables; retained without overwrite",
+    "seed_scope": "current candidates/logits are fixed across eight continuations; seed42 reads each state/arm once",
+    "threshold_flags_changed": 0
+  },
+  "all_conservation_checks_passed": true,
+  "at": "2026-11-16T15:27:11Z",
+  "common_state_checks": 11,
+  "counts": {
+    "capture_cost": 91,
+    "fork": 2920,
+    "multiseed": 54,
+    "original_full_validation": 5168,
+    "replay": 5168,
+    "shadow_cost": 80,
+    "smoke": 114,
+    "teacher": 64,
+    "teacher_logspace_validation": 64
+  },
+  "cpu_checks": {
+    "completed_at": "2026-11-16T13:24:14.259011+00:00",
+    "elapsed_sec": 3.392,
+    "log": "local/tests_final.log",
+    "modules": [
+      "tests.threshold_trace_fork.test_engine",
+      "tests.threshold_trace_fork.test_structure",
+      "tests.threshold_trace_fork.test_event_selection",
+      "tests.threshold_trace_fork.test_teacher_numeric",
+      "tests.threshold_eval.test_threshold",
+      "tests.threshold_eval.test_analysis"
+    ],
+    "passed": true,
+    "review": "local diff review; no independent reviewer per AGENTS.md",
+    "tests": 28
+  },
+  "exported_evidence_matches_ledger": true,
+  "factual_seed42_compact_fields_match": true,
+  "forward_cost": {
+    "all_recorded_forwards": 108241,
+    "branch_actual_forwards": 31456,
+    "extra_original_validation_forwards": 34715,
+    "fork_execution_version": {
+      "execution_commit": "4e4894089767e67065aa168256b30d913f9ddf68"
+    },
+    "logical_fork_count": 2920,
+    "original_validation_rows": 5168,
+    "prefix_rebuild_and_restore_validation_forwards": 2280,
+    "replay_execution_version": {
+      "execution_commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146"
+    },
+    "replay_forwards": 34715,
+    "scratch_forwards": 1752,
+    "scratch_rows": 54,
+    "smoke_original_logged_restore_and_fallback_forwards": 3195,
+    "teacher_forwards": 64,
+    "teacher_numeric_validation_forwards": 64
+  },
+  "incomplete_cases": {
+    "fork": 0,
+    "multiseed": 0,
+    "replay": 0
+  },
+  "interpretation_limits": [
+    "candidate factor not activated in selected states; interaction unidentified",
+    "three focal cases and conditional seeds are not independent tasks",
+    "repeated development population, not independent test data",
+    "no deployment controller or logged-runtime speedup claim"
+  ],
+  "logical_branch_groups": 97,
+  "logical_generated_rows": 8142,
+  "not_applicable": [
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "expand",
+      "reason": "native action absent"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    }
+  ],
+  "original_validation_version": {
+    "execution_commit": "b743a41fcbe459b823d2ebc2e87a086667347c23"
+  },
+  "phase_versions": {
+    "decoder_unchanged_from_replay": true,
+    "forks": {
+      "execution_commit": "4e4894089767e67065aa168256b30d913f9ddf68"
+    },
+    "replay": {
+      "execution_commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146"
+    }
+  },
+  "physical_head_cost": {
+    "all_recorded_physical_head_calls": 33570,
+    "all_smoke_snapshot_cursors_zero": true,
+    "branch_actual_head_calls": 4300,
+    "branch_logical_remaining_head_calls": 6220,
+    "numeric_validation_shadow_calls": 64,
+    "original_validation_head_calls": 13752,
+    "prefix_rebuild_and_restore_head_calls": 481,
+    "replay_head_calls": 13752,
+    "scratch_head_calls": 210,
+    "shadow_head_calls": 144,
+    "smoke_derivation": "3*final_head_calls - heads_before_snapshot + optional one-round fallback heads; restored current-round heads are recomputed",
+    "smoke_original_logged_restore_and_fallback_head_calls": 867
+  },
+  "quality_counts": {
+    "fork": {
+      "failed": 490,
+      "passed": 2430,
+      "timed_out": 34
+    },
+    "multiseed": {
+      "failed": 15,
+      "passed": 39,
+      "timed_out": 0
+    },
+    "replay": {
+      "failed": 402,
+      "passed": 4766,
+      "timed_out": 7
+    }
+  },
+  "raw_data_local_path": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-threshold-trace-fork-20261112-v1/analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/local",
+  "raw_trace_and_snapshot_mapping_complete": true,
+  "score_executions": 1175,
+  "score_reuse_logical_rows": 6968,
+  "status": "passed",
+  "stop_reasons": {
+    "fork": {
+      "complete": 2920
+    },
+    "multiseed": {
+      "complete": 54
+    },
+    "replay": {
+      "complete": 5168
+    }
+  },
+  "teacher_numeric_validation": {
+    "extra_shadow_head_calls": 64,
+    "extra_teacher_forwards": 64,
+    "kl_closeness_flags_changed": 0,
+    "max_abs_difference": {
+      "kl_fresh_p": 0.00015078485012054443,
+      "kl_fresh_q": 0.00020277127623558044,
+      "tv_fresh_p": 5.860626697540283e-05,
+      "tv_fresh_q": 9.554252028465271e-05
+    },
+    "new_states": 0,
+    "states": 64,
+    "tv_closeness_flags_changed": 0,
+    "used_in_branch_decisions": false
+  },
+  "unchanged_historical_source": true,
+  "unique_snapshots": 106,
+  "unresolved_required_experiment_items": []
+}

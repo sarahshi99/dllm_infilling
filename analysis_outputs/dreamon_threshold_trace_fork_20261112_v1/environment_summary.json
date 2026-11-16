@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-16T08:57:52Z",
+  "commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146",
+  "cuda": "12.1",
+  "devices": {
+    "at": "2026-11-16T08:57:52Z",
+    "compute_processes": [
+      "2453998, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 17932",
+      "1201839, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 22214",
+      "1201840, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, 22100"
+    ],
+    "cuda_visible_devices": null,
+    "devices": [
+      "0, GPU-c55d478c-6944-066f-7e9a-8af248e4f6f1, NVIDIA H200 NVL, 143771, 62272, 100"
+    ]
+  },
+  "torch": "2.5.1+cu121"
+}

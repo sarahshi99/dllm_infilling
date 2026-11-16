@@ -1,0 +1,20 @@
+{
+  "all_recorded_forwards": 108241,
+  "branch_actual_forwards": 31456,
+  "extra_original_validation_forwards": 34715,
+  "fork_execution_version": {
+    "execution_commit": "4e4894089767e67065aa168256b30d913f9ddf68"
+  },
+  "logical_fork_count": 2920,
+  "original_validation_rows": 5168,
+  "prefix_rebuild_and_restore_validation_forwards": 2280,
+  "replay_execution_version": {
+    "execution_commit": "418e73e88b9cdce5f89f2675ea6a9ac99aa4d146"
+  },
+  "replay_forwards": 34715,
+  "scratch_forwards": 1752,
+  "scratch_rows": 54,
+  "smoke_original_logged_restore_and_fallback_forwards": 3195,
+  "teacher_forwards": 64,
+  "teacher_numeric_validation_forwards": 64
+}

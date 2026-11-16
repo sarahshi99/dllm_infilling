@@ -1,0 +1,60 @@
+[
+  {
+    "case_counts": {
+      "calls": 1027,
+      "candidate_changed": 122,
+      "candidate_unchanged": 1026,
+      "destination_corrected_structure_refresh_only": 36,
+      "destination_ordinary_accepted": 999,
+      "destination_threshold_rejected": 864,
+      "same_word_both_pass": 959,
+      "same_word_both_reject": 847,
+      "same_word_demoted": 76,
+      "same_word_promoted": 695
+    },
+    "caveat": "same-word probability crossings are descriptive events; four-arm branches are needed for path effects",
+    "config": "global_k4_trained_090",
+    "event_counts": {
+      "calls": 6769,
+      "candidate_changed": 132,
+      "candidate_unchanged": 6637,
+      "destination_corrected_structure_refresh_only": 36,
+      "destination_ordinary_accepted": 4000,
+      "destination_threshold_rejected": 2733,
+      "same_word_both_pass": 2677,
+      "same_word_both_reject": 2557,
+      "same_word_demoted": 82,
+      "same_word_promoted": 1321
+    },
+    "population": "full repeated-development 1033 cases"
+  },
+  {
+    "case_counts": {
+      "calls": 1027,
+      "candidate_changed": 110,
+      "candidate_unchanged": 1026,
+      "destination_corrected_structure_refresh_only": 39,
+      "destination_ordinary_accepted": 971,
+      "destination_threshold_rejected": 952,
+      "same_word_both_pass": 909,
+      "same_word_both_reject": 950,
+      "same_word_demoted": 61,
+      "same_word_promoted": 618
+    },
+    "caveat": "same-word probability crossings are descriptive events; four-arm branches are needed for path effects",
+    "config": "global_k4_trained_095",
+    "event_counts": {
+      "calls": 6983,
+      "candidate_changed": 125,
+      "candidate_unchanged": 6858,
+      "destination_corrected_structure_refresh_only": 39,
+      "destination_ordinary_accepted": 3284,
+      "destination_threshold_rejected": 3660,
+      "same_word_both_pass": 2227,
+      "same_word_both_reject": 3507,
+      "same_word_demoted": 68,
+      "same_word_promoted": 1056
+    },
+    "population": "full repeated-development 1033 cases"
+  }
+]

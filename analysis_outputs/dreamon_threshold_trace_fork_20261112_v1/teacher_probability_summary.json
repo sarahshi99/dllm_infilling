@@ -1,0 +1,27 @@
+{
+  "states": 64,
+  "method": "validated GPU FP32 log_softmax; same current y_p=y_q in all states",
+  "means": {
+    "p": {
+      "y_p": 0.81822220236063,
+      "y_q": 0.81822220236063,
+      "structural_mass": 0.0034482445984060917
+    },
+    "q": {
+      "y_p": 0.87783013144508,
+      "y_q": 0.87783013144508,
+      "structural_mass": 0.002983636909863918
+    },
+    "fresh": {
+      "y_p": 0.9002221563496278,
+      "y_q": 0.9002221563496278,
+      "structural_mass": 0.0037325739342612962
+    }
+  },
+  "interpretation": "descriptive probabilities, not empirical code correctness calibration",
+  "structural_mass_abs_error": {
+    "p": 0.0021818896530163556,
+    "q": 0.0018845142772505596
+  },
+  "structural_mass_q_closer": 40
+}

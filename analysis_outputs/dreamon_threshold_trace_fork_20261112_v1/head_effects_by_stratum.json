@@ -1,0 +1,742 @@
+[
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "config": "global_k4_nohead_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "config": "global_k4_nohead_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "config": "global_k4_nohead_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "config": "global_k4_nohead_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_nohead_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "row_mean": -0.125,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.3125,
+        0.0
+      ],
+      "task_mean": -0.125
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "config": "global_k4_trained_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "row_mean": -0.0625,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "task_mean": -0.0625
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "config": "global_k4_trained_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "row_mean": -0.0625,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "task_mean": -0.0625
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_090",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "row_mean": -0.0625,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.1875,
+        0.0
+      ],
+      "task_mean": -0.0625
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "PQ",
+    "config": "global_k4_trained_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "row_mean": -0.25,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "task_mean": -0.25
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QP",
+    "config": "global_k4_trained_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "row_mean": -0.25,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "task_mean": -0.25
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "PQ",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  },
+  {
+    "baseline": "QP",
+    "changed_tokens": 0,
+    "comparison": "QQ",
+    "config": "global_k4_trained_095",
+    "efficiency": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "row_mean": -0.25,
+      "rows": 128,
+      "task_cluster_ci95": [
+        -0.4375,
+        -0.0625
+      ],
+      "task_mean": -0.25
+    },
+    "logical_pairs": 128,
+    "quality": {
+      "base_tasks": 16,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 128,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    }
+  }
+]

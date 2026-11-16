@@ -1,0 +1,34 @@
+[
+  {
+    "config": "global_k4_nohead_090",
+    "kl_closer": 14,
+    "mean_kl_change": -0.0628697253014252,
+    "mean_tv_change": -0.05422929616179317,
+    "states": 16,
+    "tv_closer": 13
+  },
+  {
+    "config": "global_k4_nohead_095",
+    "kl_closer": 13,
+    "mean_kl_change": -0.0668963885109406,
+    "mean_tv_change": -0.0591282833047444,
+    "states": 16,
+    "tv_closer": 13
+  },
+  {
+    "config": "global_k4_trained_090",
+    "kl_closer": 10,
+    "mean_kl_change": -0.05032464340911247,
+    "mean_tv_change": -0.0367734744977497,
+    "states": 16,
+    "tv_closer": 9
+  },
+  {
+    "config": "global_k4_trained_095",
+    "kl_closer": 11,
+    "mean_kl_change": -0.055844999762484804,
+    "mean_tv_change": -0.04592616428635665,
+    "states": 16,
+    "tv_closer": 12
+  }
+]

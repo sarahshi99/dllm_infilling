@@ -1,7 +1,26 @@
 {
-  "at": "2026-11-16T13:24:04Z",
-  "completed": 775,
-  "expected": 5168,
-  "phase": "original_full_validation",
-  "pid": 2715945
+  "at": "2026-11-16T15:26:23Z",
+  "phase": "delivery_completed",
+  "branch": "codex/dreamon-threshold-trace-fork-20261112-v1",
+  "counts": {
+    "capture_cost": 91,
+    "fork": 2920,
+    "multiseed": 54,
+    "original_full_validation": 5168,
+    "replay": 5168,
+    "shadow_cost": 80,
+    "smoke": 114,
+    "teacher": 64,
+    "teacher_logspace_validation": 64
+  },
+  "generated_logical_rows": 8142,
+  "all_recorded_main_forwards": 108241,
+  "all_recorded_physical_head_calls": 33570,
+  "original_detailed_matches": 5168,
+  "completed_model_processes": true,
+  "unresolved_execution_items": [],
+  "not_applicable_count": 7,
+  "unidentified": "candidate-change effect and interaction outside selected same-candidate states",
+  "verification": "delivery_verification.json",
+  "report": "report.zh.md"
 }

@@ -35,3 +35,11 @@
 主阶段教师距离保留初始FP32记录；相同64状态再用log_softmax复核，避免概率下溢后固定极小值截断KL。旧证据不覆盖，新表teacher_logspace_per_state.jsonl.gz与teacher_numeric_integrity.json记录差异。额外64教师前向/64影子头调用独立记账；不新增状态、不改变候选、评分或任何分叉。所有最终条件分布结论采用复核后的数值。数值单元测试覆盖零质量合法支持与极小概率下溢反例。
 
 实际持久后续命令：`bash experiments/threshold_trace_fork/finish.sh`，等待主tmux结束后运行`python -m experiments.threshold_trace_fork.verify_all`再运行`python -m experiments.threshold_trace_fork.enrich`。主生成/分叉成功不是最终交付完成；报告解释、完整性核验与最终提交推送随后完成。
+
+## 实际完成与交付核验
+
+2026-11-16全部有限清单完成：5168自然路径、2920逻辑分叉、64主教师、54从头种子；114初步对照、106快照恢复、11完整共同状态、5168未修改原入口详细复核全部通过。额外64教师仅同状态数值复核，非新样本；总主模型前向108241、物理头计算33570，记录耗时22804.29秒。无OOM/基础设施重试，普通失败和超时保留。
+
+初始头分叉概率元数据在CPU计算softmax；实际生成一直使用GPU的原T1完整合法词表评分。320状态组的实际概率对照发现最大.000196数值差、0个阈值标记改变，见score_numeric_audit.json。教师最终采用GPU FP32 log_softmax无概率截断；相对初始CPU记录最大KL差.000203，KL/TV更接近方向0改变。未覆盖初始证据，不以此改候选或分叉结果。28CPU测试通过，交付CPU审计通过。
+
+无顺序2×2触发事件的六条路径和139 .90无扩展为预定N/A。所有80头状态当前候选均相同，因此候选变化与交互未识别；没有替换样本或扩大面板。最终结论、反例、费用与五问回答见report.zh.md/case_studies.zh.md；最终验收delivery_verification.json，完成状态status.json。

@@ -1,0 +1,14 @@
+{
+  "all_recorded_physical_head_calls": 33570,
+  "branch_actual_head_calls": 4300,
+  "branch_logical_remaining_head_calls": 6220,
+  "numeric_validation_shadow_calls": 64,
+  "original_validation_head_calls": 13752,
+  "prefix_rebuild_and_restore_head_calls": 481,
+  "replay_head_calls": 13752,
+  "scratch_head_calls": 210,
+  "shadow_head_calls": 144,
+  "smoke_derivation": "3*final_head_calls - heads_before_snapshot + optional one-round fallback heads; restored current-round heads are recomputed",
+  "smoke_original_logged_restore_and_fallback_head_calls": 867,
+  "all_smoke_snapshot_cursors_zero": true
+}

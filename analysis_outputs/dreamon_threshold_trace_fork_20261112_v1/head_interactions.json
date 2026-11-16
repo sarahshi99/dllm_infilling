@@ -1,0 +1,182 @@
+[
+  {
+    "definition": "QQ - QP - PQ + PP; conditional path total effects under paired seeds, not additive factor shares",
+    "logical_state_seeds": 8,
+    "nfe_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "pass_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_common_reverse",
+    "states": 1
+  },
+  {
+    "definition": "QQ - QP - PQ + PP; conditional path total effects under paired seeds, not additive factor shares",
+    "logical_state_seeds": 32,
+    "nfe_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "pass_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 32,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_factual_head",
+    "states": 4
+  },
+  {
+    "definition": "QQ - QP - PQ + PP; conditional path total effects under paired seeds, not additive factor shares",
+    "logical_state_seeds": 8,
+    "nfe_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "pass_interaction": {
+      "base_tasks": 1,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 8,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "139_pre_expand",
+    "states": 1
+  },
+  {
+    "definition": "QQ - QP - PQ + PP; conditional path total effects under paired seeds, not additive factor shares",
+    "logical_state_seeds": 512,
+    "nfe_interaction": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "pass_interaction": {
+      "base_tasks": 53,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 512,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "panel",
+    "states": 64
+  },
+  {
+    "definition": "QQ - QP - PQ + PP; conditional path total effects under paired seeds, not additive factor shares",
+    "logical_state_seeds": 80,
+    "nfe_interaction": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "pass_interaction": {
+      "base_tasks": 9,
+      "bootstrap_repetitions": 3000,
+      "row_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "row_mean": 0.0,
+      "rows": 80,
+      "task_cluster_ci95": [
+        0.0,
+        0.0
+      ],
+      "task_mean": 0.0
+    },
+    "sample_group": "quality_flip",
+    "states": 10
+  }
+]

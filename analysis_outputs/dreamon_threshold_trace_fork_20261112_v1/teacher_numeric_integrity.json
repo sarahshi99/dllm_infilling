@@ -1,0 +1,15 @@
+{
+  "extra_shadow_head_calls": 64,
+  "extra_teacher_forwards": 64,
+  "kl_closeness_flags_changed": 0,
+  "max_abs_difference": {
+    "kl_fresh_p": 0.00015078485012054443,
+    "kl_fresh_q": 0.00020277127623558044,
+    "tv_fresh_p": 5.860626697540283e-05,
+    "tv_fresh_q": 9.554252028465271e-05
+  },
+  "new_states": 0,
+  "states": 64,
+  "tv_closeness_flags_changed": 0,
+  "used_in_branch_decisions": false
+}
