@@ -1,0 +1,617 @@
+{
+  "candidate_pool": "state_candidate_pool.json.gz",
+  "rule": "threshold x K4 host; sort base-task, then case, then eligible event by stable seeded ordering; one per base task; select before forks",
+  "selected": [
+    {
+      "base_task_id": "74",
+      "case": "SingleLineInfilling/HumanEval/74/L2",
+      "config": "global_k4_nohead_090",
+      "position": 205,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "119",
+      "case": "SingleLineInfilling/HumanEval/119/L12",
+      "config": "global_k4_nohead_090",
+      "position": 242,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "39",
+      "case": "SingleLineInfilling/HumanEval/39/L5",
+      "config": "global_k4_nohead_090",
+      "position": 123,
+      "round": 3,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "9",
+      "case": "SingleLineInfilling/HumanEval/9/L0",
+      "config": "global_k4_nohead_090",
+      "position": 96,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "41",
+      "case": "SingleLineInfilling/HumanEval/41/L0",
+      "config": "global_k4_nohead_090",
+      "position": 149,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "161",
+      "case": "SingleLineInfilling/HumanEval/161/L6",
+      "config": "global_k4_nohead_090",
+      "position": 154,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "144",
+      "case": "SingleLineInfilling/HumanEval/144/L0",
+      "config": "global_k4_nohead_090",
+      "position": 156,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "63",
+      "case": "SingleLineInfilling/HumanEval/63/L3",
+      "config": "global_k4_nohead_090",
+      "position": 166,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "141",
+      "case": "SingleLineInfilling/HumanEval/141/L1",
+      "config": "global_k4_nohead_090",
+      "position": 228,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "16",
+      "case": "SingleLineInfilling/HumanEval/16/L0",
+      "config": "global_k4_nohead_090",
+      "position": 70,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "14",
+      "case": "SingleLineInfilling/HumanEval/14/L2",
+      "config": "global_k4_nohead_090",
+      "position": 63,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "158",
+      "case": "SingleLineInfilling/HumanEval/158/L0",
+      "config": "global_k4_nohead_090",
+      "position": 126,
+      "round": 7,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "17",
+      "case": "SingleLineInfilling/HumanEval/17/L0",
+      "config": "global_k4_nohead_090",
+      "position": 187,
+      "round": 11,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "6",
+      "case": "SingleLineInfilling/HumanEval/6/L3",
+      "config": "global_k4_nohead_090",
+      "position": 131,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "135",
+      "case": "SingleLineInfilling/HumanEval/135/L6",
+      "config": "global_k4_nohead_090",
+      "position": 136,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "110",
+      "case": "SingleLineInfilling/HumanEval/110/L4",
+      "config": "global_k4_nohead_090",
+      "position": 222,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "149",
+      "case": "SingleLineInfilling/HumanEval/149/L1",
+      "config": "global_k4_trained_090",
+      "position": 191,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "119",
+      "case": "SingleLineInfilling/HumanEval/119/L4",
+      "config": "global_k4_trained_090",
+      "position": 192,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "121",
+      "case": "SingleLineInfilling/HumanEval/121/L0",
+      "config": "global_k4_trained_090",
+      "position": 108,
+      "round": 4,
+      "sample_group": "panel",
+      "slot": 3
+    },
+    {
+      "base_task_id": "85",
+      "case": "SingleLineInfilling/HumanEval/85/L0",
+      "config": "global_k4_trained_090",
+      "position": 57,
+      "round": 52,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "143",
+      "case": "SingleLineInfilling/HumanEval/143/L10",
+      "config": "global_k4_trained_090",
+      "position": 235,
+      "round": 4,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "99",
+      "case": "SingleLineInfilling/HumanEval/99/L13",
+      "config": "global_k4_trained_090",
+      "position": 241,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "95",
+      "case": "SingleLineInfilling/HumanEval/95/L9",
+      "config": "global_k4_trained_090",
+      "position": 224,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 3
+    },
+    {
+      "base_task_id": "10",
+      "case": "SingleLineInfilling/HumanEval/10/L1",
+      "config": "global_k4_trained_090",
+      "position": 145,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "48",
+      "case": "SingleLineInfilling/HumanEval/48/L3",
+      "config": "global_k4_trained_090",
+      "position": 96,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "156",
+      "case": "SingleLineInfilling/HumanEval/156/L6",
+      "config": "global_k4_trained_090",
+      "position": 221,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "52",
+      "case": "SingleLineInfilling/HumanEval/52/L1",
+      "config": "global_k4_trained_090",
+      "position": 87,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "152",
+      "case": "SingleLineInfilling/HumanEval/152/L0",
+      "config": "global_k4_trained_090",
+      "position": 233,
+      "round": 3,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "142",
+      "case": "SingleLineInfilling/HumanEval/142/L4",
+      "config": "global_k4_trained_090",
+      "position": 202,
+      "round": 4,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L0",
+      "config": "global_k4_trained_090",
+      "position": 265,
+      "round": 4,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "31",
+      "case": "SingleLineInfilling/HumanEval/31/L5",
+      "config": "global_k4_trained_090",
+      "position": 142,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 3
+    },
+    {
+      "base_task_id": "47",
+      "case": "SingleLineInfilling/HumanEval/47/L4",
+      "config": "global_k4_trained_090",
+      "position": 125,
+      "round": 9,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "41",
+      "case": "SingleLineInfilling/HumanEval/41/L0",
+      "config": "global_k4_nohead_095",
+      "position": 150,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "145",
+      "case": "SingleLineInfilling/HumanEval/145/L1",
+      "config": "global_k4_nohead_095",
+      "position": 125,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "6",
+      "case": "SingleLineInfilling/HumanEval/6/L2",
+      "config": "global_k4_nohead_095",
+      "position": 123,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "69",
+      "case": "SingleLineInfilling/HumanEval/69/L1",
+      "config": "global_k4_nohead_095",
+      "position": 181,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "65",
+      "case": "SingleLineInfilling/HumanEval/65/L1",
+      "config": "global_k4_nohead_095",
+      "position": 91,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "67",
+      "case": "SingleLineInfilling/HumanEval/67/L4",
+      "config": "global_k4_nohead_095",
+      "position": 251,
+      "round": 3,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L10",
+      "config": "global_k4_nohead_095",
+      "position": 359,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "54",
+      "case": "SingleLineInfilling/HumanEval/54/L0",
+      "config": "global_k4_nohead_095",
+      "position": 144,
+      "round": 5,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "94",
+      "case": "SingleLineInfilling/HumanEval/94/L11",
+      "config": "global_k4_nohead_095",
+      "position": 399,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "138",
+      "case": "SingleLineInfilling/HumanEval/138/L0",
+      "config": "global_k4_nohead_095",
+      "position": 76,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "131",
+      "case": "SingleLineInfilling/HumanEval/131/L0",
+      "config": "global_k4_nohead_095",
+      "position": 75,
+      "round": 4,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "96",
+      "case": "SingleLineInfilling/HumanEval/96/L6",
+      "config": "global_k4_nohead_095",
+      "position": 197,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "113",
+      "case": "SingleLineInfilling/HumanEval/113/L0",
+      "config": "global_k4_nohead_095",
+      "position": 179,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "15",
+      "case": "SingleLineInfilling/HumanEval/15/L0",
+      "config": "global_k4_nohead_095",
+      "position": 67,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "25",
+      "case": "SingleLineInfilling/HumanEval/25/L8",
+      "config": "global_k4_nohead_095",
+      "position": 174,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "70",
+      "case": "SingleLineInfilling/HumanEval/70/L1",
+      "config": "global_k4_nohead_095",
+      "position": 131,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "14",
+      "case": "SingleLineInfilling/HumanEval/14/L4",
+      "config": "global_k4_trained_095",
+      "position": 78,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "22",
+      "case": "SingleLineInfilling/HumanEval/22/L0",
+      "config": "global_k4_trained_095",
+      "position": 99,
+      "round": 7,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "125",
+      "case": "SingleLineInfilling/HumanEval/125/L1",
+      "config": "global_k4_trained_095",
+      "position": 146,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "101",
+      "case": "SingleLineInfilling/HumanEval/101/L12",
+      "config": "global_k4_trained_095",
+      "position": 164,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "153",
+      "case": "SingleLineInfilling/HumanEval/153/L1",
+      "config": "global_k4_trained_095",
+      "position": 282,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 2
+    },
+    {
+      "base_task_id": "48",
+      "case": "SingleLineInfilling/HumanEval/48/L1",
+      "config": "global_k4_trained_095",
+      "position": 78,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "40",
+      "case": "SingleLineInfilling/HumanEval/40/L4",
+      "config": "global_k4_trained_095",
+      "position": 207,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "16",
+      "case": "SingleLineInfilling/HumanEval/16/L0",
+      "config": "global_k4_trained_095",
+      "position": 67,
+      "round": 0,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "144",
+      "case": "SingleLineInfilling/HumanEval/144/L6",
+      "config": "global_k4_trained_095",
+      "position": 211,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "135",
+      "case": "SingleLineInfilling/HumanEval/135/L4",
+      "config": "global_k4_trained_095",
+      "position": 128,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "147",
+      "case": "SingleLineInfilling/HumanEval/147/L2",
+      "config": "global_k4_trained_095",
+      "position": 193,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "43",
+      "case": "SingleLineInfilling/HumanEval/43/L0",
+      "config": "global_k4_trained_095",
+      "position": 155,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "63",
+      "case": "SingleLineInfilling/HumanEval/63/L2",
+      "config": "global_k4_trained_095",
+      "position": 163,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "45",
+      "case": "SingleLineInfilling/HumanEval/45/L0",
+      "config": "global_k4_trained_095",
+      "position": 46,
+      "round": 3,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "55",
+      "case": "SingleLineInfilling/HumanEval/55/L2",
+      "config": "global_k4_trained_095",
+      "position": 68,
+      "round": 2,
+      "sample_group": "panel",
+      "slot": 1
+    },
+    {
+      "base_task_id": "67",
+      "case": "SingleLineInfilling/HumanEval/67/L3",
+      "config": "global_k4_trained_095",
+      "position": 244,
+      "round": 1,
+      "sample_group": "panel",
+      "slot": 1
+    }
+  ],
+  "selection_seed": 20261112,
+  "strata": [
+    {
+      "config": "global_k4_nohead_090",
+      "eligible_base_tasks": 164,
+      "pool_events": 7006,
+      "selected": 16,
+      "shortfall": 0,
+      "shortfall_reason": null
+    },
+    {
+      "config": "global_k4_trained_090",
+      "eligible_base_tasks": 164,
+      "pool_events": 6769,
+      "selected": 16,
+      "shortfall": 0,
+      "shortfall_reason": null
+    },
+    {
+      "config": "global_k4_nohead_095",
+      "eligible_base_tasks": 164,
+      "pool_events": 7020,
+      "selected": 16,
+      "shortfall": 0,
+      "shortfall_reason": null
+    },
+    {
+      "config": "global_k4_trained_095",
+      "eligible_base_tasks": 164,
+      "pool_events": 6983,
+      "selected": 16,
+      "shortfall": 0,
+      "shortfall_reason": null
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "smoke_elapsed_sec": 446.11320363450795,
+  "smoke_actual_model_forwards_including_original_and_restore": 3195,
+  "smoke_seconds_per_forward_including_diagnostic_overhead": 0.13962854573850014,
+  "initial_replay_estimate_sec": 6737.352914538695,
+  "fixed_manifest_head_branches": 2560,
+  "fixed_manifest_decoder_branches": 360,
+  "factual_continuation_forward_proxy_head": 15328,
+  "factual_continuation_forward_proxy_decoder": 16904,
+  "estimated_fork_generation_sec_from_smoke": 4500.507286243336,
+  "caveat": "host factual remaining forwards extrapolation only; interventions change paths; shared GPU; scoring, capture, teacher, scratch and I/O separate; no performance claim"
+}

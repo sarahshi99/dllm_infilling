@@ -1,0 +1,67 @@
+{
+  "baseline": "global_k4_nohead_095",
+  "comparison": "global_k4_trained_095",
+  "delta_totals": {
+    "O": 41,
+    "R": -624,
+    "S": 687,
+    "Z": 22,
+    "delete": -141,
+    "expand": -100
+  },
+  "efficiency": {
+    "base_tasks": 164,
+    "bootstrap_repetitions": 3000,
+    "row_cluster_ci95": [
+      -0.8479294950738916,
+      -0.3906589466302053
+    ],
+    "row_mean": -0.6040658276863504,
+    "rows": 1033,
+    "task_cluster_ci95": [
+      -0.9748696791433044,
+      0.018883574660612936
+    ],
+    "task_mean": -0.5656277365856125
+  },
+  "head_destinations": {
+    "corrected_structure_refresh_only": 39,
+    "ordinary_accepted": 3284,
+    "threshold_rejected": 3660
+  },
+  "head_events": {
+    "changed_candidate": 125,
+    "head_calls": 6983,
+    "same_candidate": 6858,
+    "same_word_both_pass": 2227,
+    "same_word_both_reject": 3507,
+    "same_word_demoted": 68,
+    "same_word_promoted": 1056
+  },
+  "losses": 1,
+  "paired_table": {
+    "different_decrease": 15,
+    "different_equal": 8,
+    "different_increase": 9,
+    "same_decrease": 404,
+    "same_equal": 571,
+    "same_increase": 26
+  },
+  "quality": {
+    "base_tasks": 164,
+    "bootstrap_repetitions": 3000,
+    "row_cluster_ci95": [
+      -0.001894029239261687,
+      0.005964363075279666
+    ],
+    "row_mean": 0.001936108422071636,
+    "rows": 1033,
+    "task_cluster_ci95": [
+      -0.0019357336430507162,
+      0.003726287262872628
+    ],
+    "task_mean": 0.000992063492063492
+  },
+  "trained_passed": 955,
+  "wins": 3
+}

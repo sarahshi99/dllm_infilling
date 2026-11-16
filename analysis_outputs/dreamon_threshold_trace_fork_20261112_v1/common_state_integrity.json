@@ -1,0 +1,222 @@
+[
+  {
+    "a": {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "position": 133,
+      "round": 0,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "position": 133,
+      "round": 0,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "139_common_reverse"
+  },
+  {
+    "a": {
+      "base_task_id": "105",
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "config": "global_k4_nohead_090",
+      "position": 379,
+      "round": 1,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "105",
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "config": "global_k4_trained_090",
+      "position": 379,
+      "round": 1,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "109",
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "config": "global_k4_nohead_090",
+      "position": 352,
+      "round": 1,
+      "slot": 3
+    },
+    "b": {
+      "base_task_id": "109",
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "config": "global_k4_trained_090",
+      "position": 352,
+      "round": 1,
+      "slot": 3
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "114",
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "config": "global_k4_nohead_090",
+      "position": 111,
+      "round": 0,
+      "slot": 2
+    },
+    "b": {
+      "base_task_id": "114",
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "config": "global_k4_trained_090",
+      "position": 111,
+      "round": 0,
+      "slot": 2
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "140",
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "config": "global_k4_nohead_090",
+      "position": 230,
+      "round": 1,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "140",
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "config": "global_k4_trained_090",
+      "position": 230,
+      "round": 1,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "config": "global_k4_nohead_090",
+      "position": 308,
+      "round": 8,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "config": "global_k4_trained_090",
+      "position": 308,
+      "round": 8,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "config": "global_k4_nohead_090",
+      "position": 321,
+      "round": 3,
+      "slot": 2
+    },
+    "b": {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "config": "global_k4_trained_090",
+      "position": 321,
+      "round": 3,
+      "slot": 2
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "37",
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "config": "global_k4_nohead_090",
+      "position": 139,
+      "round": 0,
+      "slot": 2
+    },
+    "b": {
+      "base_task_id": "37",
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "config": "global_k4_trained_090",
+      "position": 139,
+      "round": 0,
+      "slot": 2
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "6",
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "config": "global_k4_nohead_090",
+      "position": 117,
+      "round": 4,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "6",
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "config": "global_k4_trained_090",
+      "position": 117,
+      "round": 4,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "66",
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "config": "global_k4_nohead_090",
+      "position": 133,
+      "round": 6,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "66",
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "config": "global_k4_trained_090",
+      "position": 133,
+      "round": 6,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  },
+  {
+    "a": {
+      "base_task_id": "99",
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "config": "global_k4_nohead_090",
+      "position": 203,
+      "round": 1,
+      "slot": 1
+    },
+    "b": {
+      "base_task_id": "99",
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "config": "global_k4_trained_090",
+      "position": 203,
+      "round": 1,
+      "slot": 1
+    },
+    "complete_pre_action_state_equal": true,
+    "group": "quality_flip"
+  }
+]

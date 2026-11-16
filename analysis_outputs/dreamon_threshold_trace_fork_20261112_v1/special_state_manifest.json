@@ -1,0 +1,627 @@
+{
+  "common_state_checks": [
+    {
+      "a": {
+        "base_task_id": "139",
+        "case": "SingleLineInfilling/HumanEval/139/L5",
+        "config": "global_k4_nohead_095",
+        "position": 133,
+        "round": 0,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "139",
+        "case": "SingleLineInfilling/HumanEval/139/L5",
+        "config": "global_k4_trained_095",
+        "position": 133,
+        "round": 0,
+        "slot": 1
+      },
+      "group": "139_common_reverse"
+    },
+    {
+      "a": {
+        "base_task_id": "105",
+        "case": "SingleLineInfilling/HumanEval/105/L16",
+        "config": "global_k4_nohead_090",
+        "position": 379,
+        "round": 1,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "105",
+        "case": "SingleLineInfilling/HumanEval/105/L16",
+        "config": "global_k4_trained_090",
+        "position": 379,
+        "round": 1,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "109",
+        "case": "SingleLineInfilling/HumanEval/109/L8",
+        "config": "global_k4_nohead_090",
+        "position": 352,
+        "round": 1,
+        "slot": 3
+      },
+      "b": {
+        "base_task_id": "109",
+        "case": "SingleLineInfilling/HumanEval/109/L8",
+        "config": "global_k4_trained_090",
+        "position": 352,
+        "round": 1,
+        "slot": 3
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "114",
+        "case": "SingleLineInfilling/HumanEval/114/L4",
+        "config": "global_k4_nohead_090",
+        "position": 111,
+        "round": 0,
+        "slot": 2
+      },
+      "b": {
+        "base_task_id": "114",
+        "case": "SingleLineInfilling/HumanEval/114/L4",
+        "config": "global_k4_trained_090",
+        "position": 111,
+        "round": 0,
+        "slot": 2
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "140",
+        "case": "SingleLineInfilling/HumanEval/140/L16",
+        "config": "global_k4_nohead_090",
+        "position": 230,
+        "round": 1,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "140",
+        "case": "SingleLineInfilling/HumanEval/140/L16",
+        "config": "global_k4_trained_090",
+        "position": 230,
+        "round": 1,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "32",
+        "case": "SingleLineInfilling/HumanEval/32/L4",
+        "config": "global_k4_nohead_090",
+        "position": 308,
+        "round": 8,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "32",
+        "case": "SingleLineInfilling/HumanEval/32/L4",
+        "config": "global_k4_trained_090",
+        "position": 308,
+        "round": 8,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "32",
+        "case": "SingleLineInfilling/HumanEval/32/L5",
+        "config": "global_k4_nohead_090",
+        "position": 321,
+        "round": 3,
+        "slot": 2
+      },
+      "b": {
+        "base_task_id": "32",
+        "case": "SingleLineInfilling/HumanEval/32/L5",
+        "config": "global_k4_trained_090",
+        "position": 321,
+        "round": 3,
+        "slot": 2
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "37",
+        "case": "SingleLineInfilling/HumanEval/37/L2",
+        "config": "global_k4_nohead_090",
+        "position": 139,
+        "round": 0,
+        "slot": 2
+      },
+      "b": {
+        "base_task_id": "37",
+        "case": "SingleLineInfilling/HumanEval/37/L2",
+        "config": "global_k4_trained_090",
+        "position": 139,
+        "round": 0,
+        "slot": 2
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "6",
+        "case": "SingleLineInfilling/HumanEval/6/L0",
+        "config": "global_k4_nohead_090",
+        "position": 117,
+        "round": 4,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "6",
+        "case": "SingleLineInfilling/HumanEval/6/L0",
+        "config": "global_k4_trained_090",
+        "position": 117,
+        "round": 4,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "66",
+        "case": "SingleLineInfilling/HumanEval/66/L1",
+        "config": "global_k4_nohead_090",
+        "position": 133,
+        "round": 6,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "66",
+        "case": "SingleLineInfilling/HumanEval/66/L1",
+        "config": "global_k4_trained_090",
+        "position": 133,
+        "round": 6,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    },
+    {
+      "a": {
+        "base_task_id": "99",
+        "case": "SingleLineInfilling/HumanEval/99/L7",
+        "config": "global_k4_nohead_090",
+        "position": 203,
+        "round": 1,
+        "slot": 1
+      },
+      "b": {
+        "base_task_id": "99",
+        "case": "SingleLineInfilling/HumanEval/99/L7",
+        "config": "global_k4_trained_090",
+        "position": 203,
+        "round": 1,
+        "slot": 1
+      },
+      "group": "quality_flip"
+    }
+  ],
+  "decoder": [
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "no_propagation",
+      "position": 136,
+      "round": 1,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "delete",
+      "position": 137,
+      "round": 2,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "no_propagation",
+      "position": 133,
+      "round": 0,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "expand",
+      "position": 135,
+      "round": 2,
+      "sample_group": "decoder",
+      "slot": 0
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "delete",
+      "position": 137,
+      "round": 1,
+      "sample_group": "decoder",
+      "slot": 3
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "kind": "no_propagation",
+      "position": 247,
+      "round": 0,
+      "sample_group": "decoder",
+      "slot": 2
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "kind": "expand",
+      "position": 250,
+      "round": 2,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "kind": "delete",
+      "position": 257,
+      "round": 1,
+      "sample_group": "decoder",
+      "slot": 3
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "kind": "no_propagation",
+      "position": 246,
+      "round": 0,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "kind": "expand",
+      "position": 250,
+      "round": 3,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "126",
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "kind": "delete",
+      "position": 257,
+      "round": 2,
+      "sample_group": "decoder",
+      "slot": 3
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "no_propagation",
+      "position": 146,
+      "round": 1,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "expand",
+      "position": 164,
+      "round": 11,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "delete",
+      "position": 169,
+      "round": 5,
+      "sample_group": "decoder",
+      "slot": 3
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "no_propagation",
+      "position": 144,
+      "round": 0,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "expand",
+      "position": 164,
+      "round": 12,
+      "sample_group": "decoder",
+      "slot": 1
+    },
+    {
+      "base_task_id": "80",
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "delete",
+      "position": 169,
+      "round": 6,
+      "sample_group": "decoder",
+      "slot": 3
+    }
+  ],
+  "head": [
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "position": 133,
+      "round": 0,
+      "sample_group": "139_factual_head",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "position": 134,
+      "round": 0,
+      "sample_group": "139_factual_head",
+      "slot": 2
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "position": 135,
+      "round": 0,
+      "sample_group": "139_factual_head",
+      "slot": 3
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_trained_095",
+      "position": 136,
+      "round": 1,
+      "sample_group": "139_factual_head",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "position": 133,
+      "round": 0,
+      "sample_group": "139_common_reverse",
+      "slot": 1
+    },
+    {
+      "base_task_id": "139",
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "position": 135,
+      "round": 1,
+      "sample_group": "139_pre_expand",
+      "slot": 2
+    },
+    {
+      "base_task_id": "105",
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "config": "global_k4_trained_090",
+      "position": 379,
+      "round": 1,
+      "sample_group": "quality_flip",
+      "slot": 1
+    },
+    {
+      "base_task_id": "109",
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "config": "global_k4_trained_090",
+      "position": 352,
+      "round": 1,
+      "sample_group": "quality_flip",
+      "slot": 3
+    },
+    {
+      "base_task_id": "114",
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "config": "global_k4_trained_090",
+      "position": 111,
+      "round": 0,
+      "sample_group": "quality_flip",
+      "slot": 2
+    },
+    {
+      "base_task_id": "140",
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "config": "global_k4_trained_090",
+      "position": 230,
+      "round": 1,
+      "sample_group": "quality_flip",
+      "slot": 1
+    },
+    {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "config": "global_k4_trained_090",
+      "position": 308,
+      "round": 8,
+      "sample_group": "quality_flip",
+      "slot": 1
+    },
+    {
+      "base_task_id": "32",
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "config": "global_k4_trained_090",
+      "position": 321,
+      "round": 3,
+      "sample_group": "quality_flip",
+      "slot": 2
+    },
+    {
+      "base_task_id": "37",
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "config": "global_k4_trained_090",
+      "position": 139,
+      "round": 0,
+      "sample_group": "quality_flip",
+      "slot": 2
+    },
+    {
+      "base_task_id": "6",
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "config": "global_k4_trained_090",
+      "position": 117,
+      "round": 4,
+      "sample_group": "quality_flip",
+      "slot": 1
+    },
+    {
+      "base_task_id": "66",
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "config": "global_k4_trained_090",
+      "position": 133,
+      "round": 6,
+      "sample_group": "quality_flip",
+      "slot": 1
+    },
+    {
+      "base_task_id": "99",
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "config": "global_k4_trained_090",
+      "position": 203,
+      "round": 1,
+      "sample_group": "quality_flip",
+      "slot": 1
+    }
+  ],
+  "not_applicable": [
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "expand",
+      "reason": "native action absent"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/139/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/126/L0",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_090",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/80/L5",
+      "config": "global_k4_nohead_095",
+      "kind": "order",
+      "reason": "no a2 != a4 with a2 in S4"
+    }
+  ],
+  "quality_flips": [
+    {
+      "case": "SingleLineInfilling/HumanEval/105/L16",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/109/L8",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/114/L4",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/140/L16",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L4",
+      "nohead_passed": true,
+      "trained_passed": false
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/32/L5",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/37/L2",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/6/L0",
+      "nohead_passed": true,
+      "trained_passed": false
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/66/L1",
+      "nohead_passed": false,
+      "trained_passed": true
+    },
+    {
+      "case": "SingleLineInfilling/HumanEval/99/L7",
+      "nohead_passed": false,
+      "trained_passed": true
+    }
+  ]
+}

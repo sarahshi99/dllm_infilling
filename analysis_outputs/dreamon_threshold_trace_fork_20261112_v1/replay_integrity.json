@@ -1,0 +1,38 @@
+{
+  "global_k2_nohead_090": {
+    "completed": 3,
+    "expected": 3,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  },
+  "global_k2_nohead_095": {
+    "completed": 1033,
+    "expected": 1033,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  },
+  "global_k4_nohead_090": {
+    "completed": 1033,
+    "expected": 1033,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  },
+  "global_k4_nohead_095": {
+    "completed": 1033,
+    "expected": 1033,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  },
+  "global_k4_trained_090": {
+    "completed": 1033,
+    "expected": 1033,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  },
+  "global_k4_trained_095": {
+    "completed": 1033,
+    "expected": 1033,
+    "historical_mismatches": [],
+    "score_mismatches": []
+  }
+}

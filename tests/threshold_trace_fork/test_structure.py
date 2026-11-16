@@ -38,4 +38,22 @@ class StructureInterventions(unittest.TestCase):
         self.assertLess(ev['candidate_probability'],.01)
         self.assertEqual(r['action_trace'][0]['delete'],[])
 
+    def test_head_structural_candidate_refreshes_without_native_structure(self):
+        from experiments.threshold_trace_fork.forks import distributions
+        e=engine(Engine);saved=[]
+        e.head.head.embedding.weight.data.fill_(1)
+        e.head.head.output.weight.data[:2].fill_(-1)
+        e.decode([0],[1],'case','trained','left',4,.95,
+            capture=lambda s:saved.append(clone_state(s)) if s['slot']==1 and not saved else None)
+        state=saved[0];p,q,yp,yq=distributions(e,state)
+        self.assertIn(yq,(5,6))
+        for label in ('QP','QQ'):
+            result=e.decode(snapshot=state,intervention=dict(kind='head',candidate=yq,
+                score_logits=p if label=='QP' else q,candidate_source='q',score_source=label[1].lower()))
+            t=result['action_trace'][0]
+            self.assertEqual(t['barrier']['reason'],'corrected_structure_refresh_only')
+            self.assertEqual(t['delete'],[])
+            self.assertEqual(t['expand'],[])
+            self.assertEqual(len(t['submitted']),1)
+
 if __name__=='__main__':unittest.main()
