@@ -523,3 +523,9 @@
 - 用户授权同设置完整128矩阵；实现提交4f098d686d59738f407caf4879de12b327257ce1。47项CPU测试及本地审查通过。
 - 单次tmux启动退出4：H200只余619 MiB，新角色需要约40,000 MiB；真实smoke/生成未开始，0样本。无GPU空闲轮询，原64进程未改。
 - 恢复入口：bash /home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/start.sh；新worktree和报告路径见128 checkpoint。
+
+
+## 2026-11-16 恢复128实验
+
+- 用户明确要求现在启动。GPU空闲63289 MiB、无重复128进程，已通过唯一入口在tmux启动；固定smoke PID1574978。
+- 无生成代码改动；既定完整34配置和后处理流水线继续，保留11月12日资源阻塞历史。

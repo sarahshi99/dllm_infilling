@@ -1,18 +1,11 @@
-# 官方 MultiLine 阈值实验：补充128预算
+# 128预算补充实验
 
-用户于2026-11-12明确授权直接补充128实验，其他设置与正在运行的64实验相同。计划版本128-v1；不重新训练、不修改64任务工作区及账本。
+状态：smoke_running。2026-11-16用户授权恢复启动；启动时空闲63289 MiB，显存阻塞已解除。质量0/197710、评分0、独立计时0/16728；当前先执行固定16例真实模型smoke，通过且模型自然退出后自动发布READY并启动两个质量角色。
 
-候选：继续只用64；另跑96；另跑128。采用128：能检验64容量限制，并与DreamOn论文最大长度口径衔接，避免增加未经请求的预算点。baseline是本任务重新生成的global/left K1及同方法off；同数据、同模型、同硬件共享环境。
+运行：tmux dreamon_multiline128_20261116_v1；smoke PID1574978；启动时间UTC 2026-11-16T09:08:59.202227+00:00。执行提交ad0f9013a0be84aa109abdf83e06f8ff9fc8a4ab。启动日志/home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/launch.log；smoke日志/home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/smoke.log；实时状态以共享目录角色status和SQLite账本为准。
 
-官方5815案例（跨行4782）；完整34配置，197710质量行。固定164计时案例、每配置3次，共16728；跨行计时12954。模型DreamOn revision8ccc747、bf16；原rank256 KL/full/best头FP32、lambda1；seed42和共同随机键不变。初始mask64、最大长度128、扩展次数预算128、steps256。阈值、链、结构、评分3秒、统计/分母和报告口径沿用64任务。
+设置：初始mask64、最大长度128、扩展次数预算128、steps256；其余34配置、模型/冻结头、seed42/共同采样、官方5815案例和独立计时子集沿用原任务。47项CPU测试已通过；未修改生成代码。新任务独立保存197710质量行及16728独立计时行，不与64预算账本混用。
 
-修改experiments/threshold_eval/{common,adapter,runner,analyze}.py及参考decoder的预算参数，默认64以保留原行为。先验证128扩展能力、64回归、事务/数据/统计，再固定16案例真实模型smoke；smoke释放后启动两个角色同卡并发。reviewer_gate_disabled：本地diff review和fresh verification，无subagent。
+入口：bash /home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/start.sh。已有启动器正常运行时不要重复启动。启动器通过smoke后自动串起完整生成→模型自然释放→官方bwrap每例3秒评分→统一计时→审计/报告→focused commit/push与远端核实。未干预其它GPU任务；GPU共享计时不声称独占加速。
 
-GPU使用实时映射cuda:0；不抢占外部任务、不终止64任务。显存不足记录blocked_resources，不创建空闲轮询器，不擅自改成两个角色串行。OOM仅失败进程退出后原口径重试一次，基础设施最多重试3次。启动时实际资源是当前可能阻塞；共享负载下速度仅探索证据。
-
-任务ID：dreamon_multiline_threshold_128_20261112_v1。
-共享目录：/home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1。
-报告目录：analysis_outputs/dreamon_multiline_threshold_128_20261112_v1。
-命令：THRESHOLD_TASK_ID=dreamon_multiline_threshold_128_20261112_v1 /home/shx/projects/dllm_infilling/.venvs/dreamon-repro/bin/python -u -m experiments.threshold_eval.runner --phase smoke；通过后bash共享目录/start_worker.sh --role nohead / trained，并持久运行--phase pipeline。
-
-成功：全部事务唯一、版本统一、质量/评分/独立计时完成，跨行及跨度层分母正确；输出report.zh.md、CSV、integrity、attempts、checkpoint与恢复入口。失败/停止条件：代码或smoke不一致、资源不足、限定次数重试失败；不按得分删案例或重抽。当前只获授权补充实验，尚无质量结论；128不会自动提高所有方法的通过率。
+本轮启动记录launch_snapshot.json；前次资源失败的退出状态保存在共享launch.exit.20261112T073858Z，旧日志保留。当前没有质量结论。
