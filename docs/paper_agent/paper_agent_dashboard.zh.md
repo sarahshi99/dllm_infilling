@@ -494,3 +494,5 @@ DLLM 代码 infilling 的 inference-time length control 不能简化为单一长
 
 114/114技术核验已通过；完整回放与分叉尚未完成，不能据此宣布机制结论。来源285f8f1/660f296，专用分支codex/dreamon-threshold-trace-fork-20261112-v1。
 进度与恢复：[本轮入口](../../analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/resume.md)，状态status.json，日志local/run.log。仅执行用户固定清单，无训练/搜索/合并。
+
+2026-11-16阈值诊断阶段进度：两个无头.95配置各1033行已精确复现（952/953通过）。K4相对K2总前向+815，分解为-85-109+1009；105例增加，其中73例最终词元相同。当前进入有头配置；分叉未完成，机制结论待检验。紧凑证据analysis_outputs/dreamon_threshold_trace_fork_20261112_v1/k2_k4_replay_verified.json。

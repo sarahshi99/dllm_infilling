@@ -1,0 +1,57 @@
+{
+  "baseline": "global_k2_nohead_095",
+  "comparison": "global_k4_nohead_095",
+  "delta_totals": {
+    "O": -85,
+    "R": 815,
+    "S": 109,
+    "Z": 1009,
+    "delete": 1476,
+    "expand": 1391
+  },
+  "efficiency": {
+    "base_tasks": 164,
+    "bootstrap_repetitions": 3000,
+    "row_cluster_ci95": [
+      0.3222280693602867,
+      1.306613107306357
+    ],
+    "row_mean": 0.7889641819941917,
+    "rows": 1033,
+    "task_cluster_ci95": [
+      0.49209764740416806,
+      2.501519364939328
+    ],
+    "task_mean": 1.421170823975453
+  },
+  "increase_count": 105,
+  "increase_positive_delta_expansion": 81,
+  "increase_same_final_tokens": 73,
+  "increase_with_delete_before_first_expand": 81,
+  "increase_with_rejection_before_first_expand": 81,
+  "losses": 8,
+  "paired_table": {
+    "different_decrease": 31,
+    "different_equal": 15,
+    "different_increase": 32,
+    "same_decrease": 471,
+    "same_equal": 411,
+    "same_increase": 73
+  },
+  "quality": {
+    "base_tasks": 164,
+    "bootstrap_repetitions": 3000,
+    "row_cluster_ci95": [
+      -0.006796447055268029,
+      0.008908685968819599
+    ],
+    "row_mean": 0.000968054211035818,
+    "rows": 1033,
+    "task_cluster_ci95": [
+      -0.016704016658886683,
+      0.02006168370968998
+    ],
+    "task_mean": 0.001522202123935115
+  },
+  "wins": 9
+}
