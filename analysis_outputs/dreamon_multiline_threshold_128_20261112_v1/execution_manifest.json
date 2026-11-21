@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-16T09:23:53Z",
+  "execution_commit": "ad0f9013a0be84aa109abdf83e06f8ff9fc8a4ab",
+  "smoke_passed": true,
+  "smoke_process_exited": true,
+  "task_id": "dreamon_multiline_threshold_128_20261112_v1",
+  "worktree": "/home/shx/projects/dllm_infilling/git_workspace/.worktrees/dreamon-multiline-threshold-128-20261112-v1"
+}

@@ -1,0 +1,714 @@
+{
+  "checks": [
+    {
+      "base_task_id": "0",
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L0",
+      "crossline": false,
+      "delete_count": 330,
+      "expand_count": 0,
+      "hole_span_lines": 1,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "1",
+      "trained_calls": 7,
+      "zero_calls": 8,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "137",
+      "case_key": "MultiLineInfilling/HumanEval/137/L1_L1",
+      "crossline": false,
+      "delete_count": 528,
+      "expand_count": 384,
+      "hole_span_lines": 1,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "1",
+      "trained_calls": 38,
+      "zero_calls": 40,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "46",
+      "case_key": "MultiLineInfilling/HumanEval/46/L2_L2",
+      "crossline": false,
+      "delete_count": 354,
+      "expand_count": 0,
+      "hole_span_lines": 1,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "1",
+      "trained_calls": 3,
+      "zero_calls": 3,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "99",
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+      "crossline": false,
+      "delete_count": 352,
+      "expand_count": 10,
+      "hole_span_lines": 1,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "1",
+      "trained_calls": 4,
+      "zero_calls": 5,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "0",
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L1",
+      "crossline": true,
+      "delete_count": 264,
+      "expand_count": 0,
+      "hole_span_lines": 2,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "2-3",
+      "trained_calls": 15,
+      "zero_calls": 16,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "135",
+      "case_key": "MultiLineInfilling/HumanEval/135/L1_L2",
+      "crossline": true,
+      "delete_count": 333,
+      "expand_count": 15,
+      "hole_span_lines": 2,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "2-3",
+      "trained_calls": 8,
+      "zero_calls": 9,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "43",
+      "case_key": "MultiLineInfilling/HumanEval/43/L0_L2",
+      "crossline": true,
+      "delete_count": 186,
+      "expand_count": 0,
+      "hole_span_lines": 3,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "2-3",
+      "trained_calls": 31,
+      "zero_calls": 31,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "99",
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L11",
+      "crossline": true,
+      "delete_count": 289,
+      "expand_count": 1,
+      "hole_span_lines": 3,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "2-3",
+      "trained_calls": 15,
+      "zero_calls": 15,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "0",
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L3",
+      "crossline": true,
+      "delete_count": 274,
+      "expand_count": 128,
+      "hole_span_lines": 4,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "4-7",
+      "trained_calls": 23,
+      "zero_calls": 29,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "131",
+      "case_key": "MultiLineInfilling/HumanEval/131/L5_L9",
+      "crossline": true,
+      "delete_count": 216,
+      "expand_count": 6,
+      "hole_span_lines": 5,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "4-7",
+      "trained_calls": 22,
+      "zero_calls": 27,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "39",
+      "case_key": "MultiLineInfilling/HumanEval/39/L3_L6",
+      "crossline": true,
+      "delete_count": 446,
+      "expand_count": 246,
+      "hole_span_lines": 4,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "4-7",
+      "trained_calls": 16,
+      "zero_calls": 16,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "99",
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L15",
+      "crossline": true,
+      "delete_count": 361,
+      "expand_count": 187,
+      "hole_span_lines": 7,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "4-7",
+      "trained_calls": 20,
+      "zero_calls": 20,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "0",
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L7",
+      "crossline": true,
+      "delete_count": 217,
+      "expand_count": 68,
+      "hole_span_lines": 8,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "8+",
+      "trained_calls": 29,
+      "zero_calls": 33,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "129",
+      "case_key": "MultiLineInfilling/HumanEval/129/L9_L18",
+      "crossline": true,
+      "delete_count": 60,
+      "expand_count": 83,
+      "hole_span_lines": 10,
+      "k": 2,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "8+",
+      "trained_calls": 52,
+      "zero_calls": 62,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "75",
+      "case_key": "MultiLineInfilling/HumanEval/75/L2_L10",
+      "crossline": true,
+      "delete_count": 104,
+      "expand_count": 86,
+      "hole_span_lines": 9,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "global",
+      "span_bucket": "8+",
+      "trained_calls": 47,
+      "zero_calls": 48,
+      "zero_matches_nohead": true
+    },
+    {
+      "base_task_id": "99",
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L18",
+      "crossline": true,
+      "delete_count": 339,
+      "expand_count": 121,
+      "hole_span_lines": 10,
+      "k": 4,
+      "nohead_calls": 0,
+      "off_matches_reference": true,
+      "order": "left",
+      "span_bucket": "8+",
+      "trained_calls": 20,
+      "zero_calls": 20,
+      "zero_matches_nohead": true
+    }
+  ],
+  "estimate_limitation": "fixed stratified smoke mixture; config and length costs vary; shared contention not a completion deadline",
+  "evaluator_check": {
+    "cpu_load": [
+      9.546875,
+      10.38916015625,
+      10.423828125
+    ],
+    "evaluation_end_utc": "2026-11-16T09:23:52Z",
+    "evaluation_start_utc": "2026-11-16T09:23:52Z",
+    "evaluator_interpreter": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+    "evaluator_sec": 0.11500435043126345,
+    "failure_reason": "passed",
+    "official_evaluation": {
+      "completion_id": 0,
+      "passed": true,
+      "result": "passed",
+      "task_id": "MultiLineInfilling/HumanEval/0/L0_L0"
+    },
+    "passed": true
+  },
+  "fixed_cases": [
+    "MultiLineInfilling/HumanEval/0/L0_L0",
+    "MultiLineInfilling/HumanEval/137/L1_L1",
+    "MultiLineInfilling/HumanEval/46/L2_L2",
+    "MultiLineInfilling/HumanEval/99/L9_L9",
+    "MultiLineInfilling/HumanEval/0/L0_L1",
+    "MultiLineInfilling/HumanEval/135/L1_L2",
+    "MultiLineInfilling/HumanEval/43/L0_L2",
+    "MultiLineInfilling/HumanEval/99/L9_L11",
+    "MultiLineInfilling/HumanEval/0/L0_L3",
+    "MultiLineInfilling/HumanEval/131/L5_L9",
+    "MultiLineInfilling/HumanEval/39/L3_L6",
+    "MultiLineInfilling/HumanEval/99/L9_L15",
+    "MultiLineInfilling/HumanEval/0/L0_L7",
+    "MultiLineInfilling/HumanEval/129/L9_L18",
+    "MultiLineInfilling/HumanEval/75/L2_L10",
+    "MultiLineInfilling/HumanEval/99/L9_L18"
+  ],
+  "measurements": [
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L0",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.5196889704093337,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L0",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.569703958928585,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/137/L1_L1",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 11.460482468828559,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/137/L1_L1",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 11.299108130857348,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/46/L2_L2",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 0.8392403051257133,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/46/L2_L2",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.0872957156971097,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.4654926266521215,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.0856218999251723,
+      "span_bucket": "1"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L1",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.5123881781473756,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L1",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.434524342417717,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/135/L1_L2",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.6921955849975348,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/135/L1_L2",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.677861644886434,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/43/L0_L2",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 4.2809787495061755,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/43/L0_L2",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 4.166703504510224,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L11",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.7645248090848327,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L11",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 1.7172786770388484,
+      "span_bucket": "2-3"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L3",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 2.7135946517810225,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L3",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.2084531635046005,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/131/L5_L9",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 4.110283955000341,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/131/L5_L9",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.7340432861819863,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/39/L3_L6",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 4.230069872923195,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/39/L3_L6",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.5146836368367076,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L15",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 5.28549837693572,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L15",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.101665588095784,
+      "span_bucket": "4-7"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L7",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.1549106212332845,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/0/L0_L7",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 3.1172538958489895,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/129/L9_L18",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 6.45357134193182,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/129/L9_L18",
+      "config": {
+        "id": "smoke",
+        "k": 2,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 8.74898753222078,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/75/L2_L10",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 5.796858482994139,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/75/L2_L10",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "global",
+        "threshold": 0.9
+      },
+      "generation_sec": 8.272534447722137,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L18",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "nohead",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 5.387054707854986,
+      "span_bucket": "8+"
+    },
+    {
+      "case_key": "MultiLineInfilling/HumanEval/99/L9_L18",
+      "config": {
+        "id": "smoke",
+        "k": 4,
+        "method": "trained",
+        "order": "left",
+        "threshold": 0.9
+      },
+      "generation_sec": 5.10724485013634,
+      "span_bucket": "8+"
+    }
+  ],
+  "old_singleline_regressions": [
+    {
+      "case_key": "SingleLineInfilling/HumanEval/0/L0",
+      "method": "nohead",
+      "order": "global",
+      "passed": true
+    },
+    {
+      "case_key": "SingleLineInfilling/HumanEval/105/L3",
+      "method": "nohead",
+      "order": "left",
+      "passed": true
+    },
+    {
+      "case_key": "SingleLineInfilling/HumanEval/111/L5",
+      "method": "trained",
+      "order": "global",
+      "passed": true
+    },
+    {
+      "case_key": "SingleLineInfilling/HumanEval/123/L1",
+      "method": "trained",
+      "order": "left",
+      "passed": true
+    }
+  ],
+  "quality_selection": false,
+  "raw_traces": "/home/shx/projects/dllm_infilling/threshold_multiline128_eval_20261112_v1/smoke_traces.1574978.jsonl.gz",
+  "rough_quality_gpu_hours": 213.68777915167422,
+  "status": "passed"
+}

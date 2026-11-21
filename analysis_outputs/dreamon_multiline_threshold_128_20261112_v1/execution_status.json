@@ -1,0 +1,37 @@
+{
+  "nohead": {
+    "at": "2026-11-21T02:24:23Z",
+    "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+    "completed": 104670,
+    "config": "left_k4_nohead_095",
+    "execution_commit": "ad0f9013a0be84aa109abdf83e06f8ff9fc8a4ab",
+    "expected": 104670,
+    "pid": 1957797,
+    "role": "nohead",
+    "status": "generation_complete",
+    "task_id": "dreamon_multiline_threshold_128_20261112_v1"
+  },
+  "timing": {
+    "at": "2026-11-21T16:05:18Z",
+    "case_key": "MultiLineInfilling/HumanEval/163/L0_L3",
+    "completed": 16728,
+    "expected": 16728,
+    "pid": 3470427,
+    "repetition": 2,
+    "role": "timing",
+    "status": "timing_complete",
+    "task_id": "dreamon_multiline_threshold_128_20261112_v1"
+  },
+  "trained": {
+    "at": "2026-11-20T23:48:41Z",
+    "case_key": "MultiLineInfilling/HumanEval/99/L9_L9",
+    "completed": 93040,
+    "config": "left_k4_trained_095",
+    "execution_commit": "ad0f9013a0be84aa109abdf83e06f8ff9fc8a4ab",
+    "expected": 93040,
+    "pid": 1957802,
+    "role": "trained",
+    "status": "generation_complete",
+    "task_id": "dreamon_multiline_threshold_128_20261112_v1"
+  }
+}
